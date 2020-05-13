@@ -1,0 +1,52 @@
+mult_0_r (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+plus_n_Sm (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+plus_comm (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+plus_assoc (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+double_plus (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+plus_comm_informal (advanced, manually graded)
+Score: Ungraded / 2.0
+
+mult_comm (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+binary_commute (standard, manually graded)
+Score: Ungraded / 3.0
+
+binary_inverse_a (advanced, manually graded)
+Score: Ungraded / 4.0
+
+binary_inverse_b (advanced, manually graded)
+Score: Ungraded / 2.0
+
+binary_inverse_c (advanced, manually graded)
+Score: Ungraded / 4.0
+
+Points possible - standard: 10
+Points possible - advanced: 22
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 /  7.0 so far
+                and  3.0 ungraded
+
+   Advanced:  0.0 /  7.0 so far
+                and 15.0 ungraded
+

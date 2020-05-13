@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>HoareAsLogic: Hoare Logic as a Logic</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/plf.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 2: Programming Language Foundations</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">HoareAsLogic<span class="subtitle">Hoare Logic as a Logic</span></h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ The presentation of Hoare logic in chapter <a href="Hoare.html"><span class="inlineref">Hoare</span></a> could be
+    described as "model-theoretic": the proof rules for each of the
+    constructors were presented as <i>theorems</i> about the evaluation
+    behavior of programs, and proofs of program correctness (validity
+    of Hoare triples) were constructed by combining these theorems
+    directly in Coq.
+
+<div class="paragraph"> </div>
+
+    Another way of presenting Hoare logic is to define a completely
+    separate proof system -- a set of axioms and inference rules that
+    talk about commands, Hoare triples, etc. -- and then say that a
+    proof of a Hoare triple is a valid derivation in <i>that</i> logic.  We
+    can do this by giving an inductive definition of <i>valid
+    derivations</i> in this new logic.
+
+<div class="paragraph"> </div>
+
+    This chapter is optional.  Before reading it, you'll want to read
+    the <a href="https://softwarefoundations.cis.upenn.edu/lf-current/ProofObjects.html"><span class="inlineref">ProofObjects</span></a> chapter in <i>Logical
+    Foundations</i> (<i>Software Foundations</i>, volume 1). 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Imp</span>.<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Hoare.html#"><span class="id" title="library">Hoare</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab129"></a><h1 class="section">Definitions</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="inductive">com</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <a name="H_Skip"><span class="id" title="constructor">H_Skip</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> (<span class="id" title="notation">SKIP</span>) <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a><br/>
+&nbsp;&nbsp;| <a name="H_Asgn"><span class="id" title="constructor">H_Asgn</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">Q</span> <span class="id" title="var">V</span> <span class="id" title="var">a</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> (<a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">[</span></a><a class="idref" href="HoareAsLogic.html#V"><span class="id" title="variable">V</span></a> <a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <a class="idref" href="HoareAsLogic.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">]</span></a>) (<a class="idref" href="HoareAsLogic.html#V"><span class="id" title="variable">V</span></a> <span class="id" title="notation"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <a class="idref" href="HoareAsLogic.html#a"><span class="id" title="variable">a</span></a>) <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><br/>
+&nbsp;&nbsp;| <a name="H_Seq"><span class="id" title="constructor">H_Seq</span></a>  : <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span> <span class="id" title="var">c</span> <span class="id" title="var">Q</span> <span class="id" title="var">d</span> <span class="id" title="var">R</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="HoareAsLogic.html#d"><span class="id" title="variable">d</span></a> <a class="idref" href="HoareAsLogic.html#R"><span class="id" title="variable">R</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> (<a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a><span class="id" title="notation">;;</span><a class="idref" href="HoareAsLogic.html#d"><span class="id" title="variable">d</span></a>) <a class="idref" href="HoareAsLogic.html#R"><span class="id" title="variable">R</span></a><br/>
+&nbsp;&nbsp;| <a name="H_If"><span class="id" title="constructor">H_If</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">b</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">c<sub>2</sub></span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">st</span> ⇒ <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a>) <a class="idref" href="HoareAsLogic.html#c<sub>1</sub>"><span class="id" title="variable">c<sub>1</sub></span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">st</span> ⇒ <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">~(</span></a><a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">)</span></a>) <a class="idref" href="HoareAsLogic.html#c<sub>2</sub>"><span class="id" title="variable">c<sub>2</sub></span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> (<span class="id" title="notation">TEST</span> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <span class="id" title="notation">THEN</span> <a class="idref" href="HoareAsLogic.html#c<sub>1</sub>"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">ELSE</span> <a class="idref" href="HoareAsLogic.html#c<sub>2</sub>"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">FI</span>) <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><br/>
+&nbsp;&nbsp;| <a name="H_While"><span class="id" title="constructor">H_While</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">st</span> ⇒ <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a>) <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> (<span class="id" title="notation">WHILE</span> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <span class="id" title="notation">DO</span> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <span class="id" title="notation">END</span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">st</span> ⇒ <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">(</span></a><a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;| <a name="H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>  : <span class="id" title="keyword">∀</span> (<span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">P'</span> <span class="id" title="var">Q'</span> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <span class="id" title="var">c</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P'"><span class="id" title="variable">P'</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q'"><span class="id" title="variable">Q'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">st</span>, <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#P'"><span class="id" title="variable">P'</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">st</span>, <a class="idref" href="HoareAsLogic.html#Q'"><span class="id" title="variable">Q'</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+</div>
+
+<div class="doc">
+We don't need to include axioms corresponding to
+    <span class="inlinecode"><span class="id" title="var">hoare_consequence_pre</span></span> or <span class="inlinecode"><span class="id" title="var">hoare_consequence_post</span></span>, because
+    these can be proven easily from <span class="inlinecode"><span class="id" title="var">H_Consequence</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">P'</span>: <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <span class="id" title="var">c</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P'"><span class="id" title="variable">P'</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">st</span>, <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#P'"><span class="id" title="variable">P'</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+<div class="togglescript" id="proofcontrol1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')"><span class="show"></span></div>
+<div class="proofscript" id="proof1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')">
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">X</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="H_Consequence_post"><span class="id" title="lemma">H_Consequence_post</span></a>  : <span class="id" title="keyword">∀</span> (<span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">Q'</span> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <span class="id" title="var">c</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q'"><span class="id" title="variable">Q'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">st</span>, <a class="idref" href="HoareAsLogic.html#Q'"><span class="id" title="variable">Q'</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+<div class="togglescript" id="proofcontrol2" onclick="toggleDisplay('proof2');toggleDisplay('proofcontrol2')"><span class="show"></span></div>
+<div class="proofscript" id="proof2" onclick="toggleDisplay('proof2');toggleDisplay('proofcontrol2')">
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">X</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div class="doc">
+As an example, let's construct a proof object representing a
+    derivation for the hoare triple
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{(<span class="id" title="var">X</span>=3) [<span class="id" title="var">X</span> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span> <span class="id" title="var">X</span> + 2] [<span class="id" title="var">X</span> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span> <span class="id" title="var">X</span> + 1]<span style='letter-spacing:-.4em;'>}</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span><span class="id" title="var">X</span>+1 ;; <span class="id" title="var">X</span><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span><span class="id" title="var">X</span>+2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span>=3<span style='letter-spacing:-.4em;'>}</span>}.
+<div class="paragraph"> </div>
+
+</span>    We can use Coq's tactics to help us construct the proof object. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Example</span> <a name="sample_proof"><span class="id" title="definition">sample_proof</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <span class="id" title="var">st</span>:<span class="id" title="definition">state</span> ⇒ <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <span class="id" title="definition">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 3<a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">)</span></a> <a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">[</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 2<a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">]</span></a> <a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">[</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<a class="idref" href="Hoare.html#a170f7798b39e506ea0b403bc6a474cf"><span class="id" title="notation">]</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="definition">X</span> <span class="id" title="notation"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<span class="id" title="notation">;;</span> <span class="id" title="definition">X</span> <span class="id" title="notation"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 2)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">st</span>:<span class="id" title="definition">state</span> ⇒ <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <span class="id" title="definition">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> 3).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Seq"><span class="id" title="constructor">H_Seq</span></a>; <span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_Asgn"><span class="id" title="constructor">H_Asgn</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="HoareAsLogic.html#sample_proof"><span class="id" title="definition">sample_proof</span></a>.<br/>
+<span class="comment">(*<br/>
+====&gt;<br/>
+&nbsp;&nbsp;H_Seq<br/>
+&nbsp;&nbsp;(((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;st&nbsp;X&nbsp;=&nbsp;3)&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span>)&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span>)<br/>
+&nbsp;&nbsp;(X&nbsp;<span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>&nbsp;X&nbsp;+&nbsp;1)<br/>
+&nbsp;&nbsp;((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;st&nbsp;X&nbsp;=&nbsp;3)&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span>)<br/>
+&nbsp;&nbsp;(X&nbsp;<span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>&nbsp;X&nbsp;+&nbsp;2)<br/>
+&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;st&nbsp;X&nbsp;=&nbsp;3)<br/>
+&nbsp;&nbsp;(H_Asgn<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;st&nbsp;X&nbsp;=&nbsp;3)&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;(X&nbsp;+&nbsp;1))<br/>
+&nbsp;&nbsp;(H_Asgn<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;st&nbsp;X&nbsp;=&nbsp;3)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;(X&nbsp;+&nbsp;2))<br/>
+*)</span><br/>
+</div>
+
+<div class="doc">
+<a name="lab130"></a><h1 class="section">Properties</h1>
+
+<div class="paragraph"> </div>
+
+<a name="lab131"></a><h4 class="section">Exercise: 2 stars, standard (hoare_proof_sound)</h4>
+ Prove that derivations constructed with <span class="inlinecode"><span class="id" title="var">hoare_proof</span></span> correspond
+    to valid Hoare triples. In other words, <span class="inlinecode"><span class="id" title="var">hoare_proof</span></span> derivations
+    are <i>sound</i>. Hint: We already proved the soundness of each
+    individual proof rule in <a href="Hoare.html"><span class="inlineref">Hoare</span></a> as theorems <span class="inlinecode"><span class="id" title="var">hoare_skip</span></span>,
+    <span class="inlinecode"><span class="id" title="var">hoare_asgn</span></span>, etc.; leverage those proofs. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="hoare_proof_sound"><span class="id" title="lemma">hoare_proof_sound</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span> <span class="id" title="var">c</span> <span class="id" title="var">Q</span>,<br/>
+&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ We can also use Coq's reasoning facilities to prove metatheorems
+    about Hoare Logic.  For example, here are the analogs of two
+    theorems we saw in chapter <a href="Hoare.html"><span class="inlineref">Hoare</span></a> -- this time expressed in terms
+    of the syntax of Hoare Logic derivations (provability) rather than
+    directly in terms of the semantics of Hoare triples.
+
+<div class="paragraph"> </div>
+
+    The first one says that, for every <span class="inlinecode"><span class="id" title="var">P</span></span> and <span class="inlinecode"><span class="id" title="var">c</span></span>, the assertion
+    <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">True</span><span style='letter-spacing:-.4em;'>}</span>}</span> is <i>provable</i> in Hoare Logic.  Note that the
+    proof is more complex than the semantic proof in <span class="inlinecode"><span class="id" title="var">Hoare</span></span>: we
+    actually need to perform an induction over the structure of the
+    command <span class="inlinecode"><span class="id" title="var">c</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="H_Post_True_deriv"><span class="id" title="lemma">H_Post_True_deriv</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">c</span> <span class="id" title="var">P</span>, <a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">c</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">c</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">P</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;SKIP&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_Skip"><span class="id" title="constructor">H_Skip</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Proof&nbsp;of&nbsp;True&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#I"><span class="id" title="constructor">I</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;<span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_Asgn"><span class="id" title="constructor">H_Asgn</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#I"><span class="id" title="constructor">I</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;;;&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Seq"><span class="id" title="constructor">H_Seq</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">IHc1</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHc2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#I"><span class="id" title="constructor">I</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;TEST&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_If"><span class="id" title="constructor">H_If</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHc1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHc2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#I"><span class="id" title="constructor">I</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;WHILE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_While"><span class="id" title="constructor">H_While</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHc</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#I"><span class="id" title="constructor">I</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#I"><span class="id" title="constructor">I</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Similarly, we can show that <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">False</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Q</span><span style='letter-spacing:-.4em;'>}</span>}</span> is provable for
+    any <span class="inlinecode"><span class="id" title="var">c</span></span> and <span class="inlinecode"><span class="id" title="var">Q</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="False_and_P_imp"><span class="id" title="lemma">False_and_P_imp</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> [<span class="id" title="var">CONTRA</span> <span class="id" title="var">HP</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">CONTRA</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Tactic Notation</span> "pre_false_helper" <span class="id" title="keyword">constr</span>(<span class="id" title="var">CONSTR</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="tactic">eapply</span> <span class="id" title="var">CONSTR</span> | <span class="id" title="tactic">intros</span> ? <span class="id" title="var">CONTRA</span>; <span class="id" title="tactic">destruct</span> <span class="id" title="var">CONTRA</span>].<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <a name="H_Pre_False_deriv"><span class="id" title="lemma">H_Pre_False_deriv</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">c</span> <span class="id" title="var">Q</span>, <a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>) <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">c</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">c</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">Q</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;SKIP&nbsp;*)</span> <span class="id" title="var">pre_false_helper</span> <a class="idref" href="HoareAsLogic.html#H_Skip"><span class="id" title="constructor">H_Skip</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;<span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>&nbsp;*)</span> <span class="id" title="var">pre_false_helper</span> <a class="idref" href="HoareAsLogic.html#H_Asgn"><span class="id" title="constructor">H_Asgn</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;;;&nbsp;*)</span> <span class="id" title="var">pre_false_helper</span> <a class="idref" href="HoareAsLogic.html#H_Seq"><span class="id" title="constructor">H_Seq</span></a>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHc1</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHc2</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;TEST&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_If"><span class="id" title="constructor">H_If</span></a>; <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHc1</span>. <span class="id" title="tactic">intro</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#False_and_P_imp"><span class="id" title="lemma">False_and_P_imp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHc2</span>. <span class="id" title="tactic">intro</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#False_and_P_imp"><span class="id" title="lemma">False_and_P_imp</span></a>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;WHILE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_post"><span class="id" title="lemma">H_Consequence_post</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_While"><span class="id" title="constructor">H_While</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence_pre"><span class="id" title="lemma">H_Consequence_pre</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHc</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#False_and_P_imp"><span class="id" title="lemma">False_and_P_imp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#False_and_P_imp"><span class="id" title="lemma">False_and_P_imp</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+As a last step, we can show that the set of <span class="inlinecode"><span class="id" title="var">hoare_proof</span></span> axioms
+    is sufficient to prove any true fact about (partial) correctness.
+    More precisely, any semantic Hoare triple that we can prove can
+    also be proved from these axioms.  Such a set of axioms is said to
+    be <i>relatively complete</i>.  That is, the axioms are complete <i>relative
+    to</i> what we can prove in the underlying assertion language.  If there
+    are gaps in what can be proved in that language, then we blame it,
+    not the Hoare logic axioms.
+
+<div class="paragraph"> </div>
+
+    Our proof is inspired by this one:
+
+<div class="paragraph"> </div>
+
+      <a href="https://www.ps.uni-saarland.de/courses/sem-ws<sub>11</sub>/script/Hoare.html"><span class="inlineref">https://www.ps.uni-saarland.de/courses/sem-ws<sub>11</sub>/script/Hoare.html</span></a>
+
+<div class="paragraph"> </div>
+
+    To carry out the proof, we need to invent some intermediate
+    assertions using a technical device known as <i>weakest
+    preconditions</i> (which are also discussed in <a href="Hoare2.html"><span class="inlineref">Hoare2</span></a>).
+    Given a command <span class="inlinecode"><span class="id" title="var">c</span></span> and a desired postcondition
+    assertion <span class="inlinecode"><span class="id" title="var">Q</span></span>, the weakest precondition <span class="inlinecode"><span class="id" title="var">wp</span></span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is an assertion
+    <span class="inlinecode"><span class="id" title="var">P</span></span> such that <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Q</span><span style='letter-spacing:-.4em;'>}</span>}</span> holds, and moreover, for any other
+    assertion <span class="inlinecode"><span class="id" title="var">P'</span></span>, if <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P'</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Q</span><span style='letter-spacing:-.4em;'>}</span>}</span> holds then <span class="inlinecode"><span class="id" title="var">P'</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">P</span></span>.  We can
+    more directly define this as follows: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="wp"><span class="id" title="definition">wp</span></a> (<span class="id" title="var">c</span>:<span class="id" title="inductive">com</span>) (<span class="id" title="var">Q</span>:<a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">s</span> ⇒ <span class="id" title="keyword">∀</span> <span class="id" title="var">s'</span>, <a class="idref" href="HoareAsLogic.html#s"><span class="id" title="variable">s</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="HoareAsLogic.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="HoareAsLogic.html#s'"><span class="id" title="variable">s'</span></a>.<br/>
+</div>
+
+<div class="doc">
+To get accustomed to this definition of <span class="inlinecode"><span class="id" title="var">wp</span></span>, prove the
+    next two simple theorems. 
+<div class="paragraph"> </div>
+
+<a name="lab132"></a><h4 class="section">Exercise: 1 star, standard (wp_is_precondition)</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="wp_is_precondition"><span class="id" title="lemma">wp_is_precondition</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">c</span> <span class="id" title="var">Q</span>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#wp"><span class="id" title="definition">wp</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab133"></a><h4 class="section">Exercise: 1 star, standard (wp_is_weakest)</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="wp_is_weakest"><span class="id" title="lemma">wp_is_weakest</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">c</span> <span class="id" title="var">Q</span> <span class="id" title="var">P'</span>,<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#P'"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">∀</span> <span class="id" title="var">st</span>, <a class="idref" href="HoareAsLogic.html#P'"><span class="id" title="variable">P'</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#wp"><span class="id" title="definition">wp</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab134"></a><h4 class="section">Exercise: 2 stars, standard (wp_invariant)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove that for any <span class="inlinecode"><span class="id" title="var">Q</span></span>, assertion <span class="inlinecode"><span class="id" title="var">wp</span></span> <span class="inlinecode">(<span class="id" title="var">WHILE</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">DO</span></span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">END</span>)</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is an
+    invariant of <span class="inlinecode"><span class="id" title="var">WHILE</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">DO</span></span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">END</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="wp_invariant"><span class="id" title="lemma">wp_invariant</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">Inv</span> <span class="id" title="var">Q</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="HoareAsLogic.html#Inv"><span class="id" title="variable">Inv</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="HoareAsLogic.html#wp"><span class="id" title="definition">wp</span></a> (<span class="id" title="notation">WHILE</span> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <span class="id" title="notation">DO</span> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <span class="id" title="notation">END</span>) <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <span class="id" title="keyword">fun</span> <span class="id" title="var">st</span> ⇒ <a class="idref" href="HoareAsLogic.html#Inv"><span class="id" title="variable">Inv</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <a class="idref" href="HoareAsLogic.html#Inv"><span class="id" title="variable">Inv</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ The following utility lemma will be useful in the next exercise. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="bassn_eval_false"><span class="id" title="lemma">bassn_eval_false</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span> <span class="id" title="var">st</span>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">¬</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="definition">beval</span> <a class="idref" href="HoareAsLogic.html#st"><span class="id" title="variable">st</span></a> <a class="idref" href="HoareAsLogic.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">st</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> (<span class="id" title="definition">beval</span> <span class="id" title="var">st</span> <span class="id" title="var">b</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">exfalso</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab135"></a><h4 class="section">Exercise: 4 stars, standard (hoare_proof_complete)</h4>
+ Complete the proof of the theorem. Hint for the <span class="inlinecode"><span class="id" title="var">WHILE</span></span> case: you
+    need to invent a loop invariant. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="hoare_proof_complete"><span class="id" title="lemma">hoare_proof_complete</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">P</span> <span class="id" title="var">c</span> <span class="id" title="var">Q</span>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#47a538aa0f71279ef07667c02ffb368f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="HoareAsLogic.html#hoare_proof"><span class="id" title="inductive">hoare_proof</span></a> <a class="idref" href="HoareAsLogic.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="HoareAsLogic.html#c"><span class="id" title="variable">c</span></a> <a class="idref" href="HoareAsLogic.html#Q"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">c</span>. <span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">P</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">c</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">HT</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;SKIP&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Skip"><span class="id" title="constructor">H_Skip</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">eassumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">st</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">HT</span>. <span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Skip</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;<span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Consequence"><span class="id" title="constructor">H_Consequence</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="HoareAsLogic.html#H_Asgn"><span class="id" title="constructor">H_Asgn</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">st</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">HT</span>. <span class="id" title="tactic">constructor</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>; <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;;;&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="HoareAsLogic.html#H_Seq"><span class="id" title="constructor">H_Seq</span></a> <span class="id" title="keyword">with</span> (<a class="idref" href="HoareAsLogic.html#wp"><span class="id" title="definition">wp</span></a> <span class="id" title="var">c<sub>2</sub></span> <span class="id" title="var">Q</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHc1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">st</span> <span class="id" title="var">st'</span> <span class="id" title="var">E<sub>1</sub></span> <span class="id" title="var">H</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="HoareAsLogic.html#wp"><span class="id" title="definition">wp</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">st''</span> <span class="id" title="var">E<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">HT</span>. <span class="id" title="tactic">econstructor</span>; <span class="id" title="var">eassumption</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHc2</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">st</span> <span class="id" title="var">st'</span> <span class="id" title="var">E<sub>1</sub></span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ Finally, we might hope that our axiomatic Hoare logic is
+    <i>decidable</i>; that is, that there is an (terminating) algorithm (a
+    <i>decision procedure</i>) that can determine whether or not a given
+    Hoare triple is valid (derivable).  But such a decision procedure
+    cannot exist!
+
+<div class="paragraph"> </div>
+
+    Consider the triple <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">True</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">c</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">False</span><span style='letter-spacing:-.4em;'>}</span>}</span>. This triple is valid
+    if and only if <span class="inlinecode"><span class="id" title="var">c</span></span> is non-terminating.  So any algorithm that
+    could determine validity of arbitrary triples could solve the
+    Halting Problem.
+
+<div class="paragraph"> </div>
+
+    Similarly, the triple <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">True</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">SKIP</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>}</span> is valid if and only if
+    <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">s</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> is valid, where <span class="inlinecode"><span class="id" title="var">P</span></span> is an arbitrary assertion of
+    Coq's logic. But it is known that there can be no decision
+    procedure for this logic.
+
+<div class="paragraph"> </div>
+
+    Overall, this axiomatic style of presentation gives a clearer
+    picture of what it means to "give a proof in Hoare logic."
+    However, it is not entirely satisfactory from the point of view of
+    writing down such proofs in practice: it is quite verbose.  The
+    section of chapter <a href="Hoare2.html"><span class="inlineref">Hoare2</span></a> on formalizing decorated programs
+    shows how we can do even better. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;2020-05-13&nbsp;20:22:43&nbsp;(UTC+00)&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

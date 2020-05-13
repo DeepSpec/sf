@@ -1,0 +1,42 @@
+STLCProp.progress' (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+STLCProp.afi (standard, manually graded)
+Score: Ungraded / 1.0
+
+STLCProp.subject_expansion_stlc (standard, manually graded)
+Score: Ungraded / 2.0
+
+STLCProp.unique_types (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+STLCProp.progress_preservation_statement (standard, manually graded)
+Score: Ungraded / 1.0
+
+STLCProp.stlc_variation1 (standard, manually graded)
+Score: Ungraded / 2.0
+
+STLCProp.stlc_variation2 (standard, manually graded)
+Score: Ungraded / 2.0
+
+STLCProp.stlc_variation3 (standard, manually graded)
+Score: Ungraded / 2.0
+
+STLCArith.stlc_arith (standard, manually graded)
+Score: Ungraded / 10.0
+
+Points possible - standard: 23
+Points possible - advanced: 26
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 /  3.0 so far
+                and 20.0 ungraded
+
+   Advanced:  0.0 /  6.0 so far
+                and 20.0 ungraded
+

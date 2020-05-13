@@ -1,0 +1,59 @@
+rev_exercise1 (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+injection_ex3 (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+discriminate_ex3 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+eqb_true (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+informal_proof (advanced, manually graded)
+Score: Ungraded / 2.0
+
+plus_n_n_injective (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+nth_error_after_last (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+bool_fn_applied_thrice (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+eqb_sym (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+split_combine (advanced, manually graded)
+Score: Ungraded / 3.0
+
+filter_exercise (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+existsb_existsb' (advanced, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+Points possible - standard: 20
+Points possible - advanced: 34
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 20.0 so far
+                and  0.0 ungraded
+
+   Advanced:  0.0 / 29.0 so far
+                and  5.0 ungraded
+

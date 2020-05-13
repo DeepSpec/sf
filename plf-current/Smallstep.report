@@ -1,0 +1,62 @@
+SimpleArith1.test_step_2 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+step_deterministic (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+Temp4.smallstep_bools (standard, manually graded)
+Score: Ungraded / 1.0
+
+Temp4.Temp5.bool_step_prop4_holds (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+test_multistep_4 (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+multistep_congr_2 (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+eval__multistep (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+eval__multistep_inf (advanced, manually graded)
+Score: Ungraded / 3.0
+
+step__eval (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+multistep__eval (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+combined_properties (standard, manually graded)
+Score: Ungraded / 6.0
+
+compiler_is_correct (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+normalize_ex (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Points possible - standard: 27
+Points possible - advanced: 33
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 20.0 so far
+                and  7.0 ungraded
+
+   Advanced:  0.0 / 23.0 so far
+                and 10.0 ungraded
+
