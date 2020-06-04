@@ -1,0 +1,70 @@
+---
+version: 2.1
+
+jobs:
+  build:
+    parameters:
+      coq:
+        type: string
+    docker:
+      - image: ysli/quickchick:<<parameters.coq>>
+    resource_class: medium
+    environment:
+      OPAMJOBS: 2
+      OPAMVERBOSE: 1
+      OPAMYES: true
+      TERM: xterm
+    steps:
+      - checkout
+      - run:
+          name: Configure environment
+          command: echo . ~/.profile >> $BASH_ENV
+      - run:
+          name: List installed packages
+          command: opam list
+      - run:
+          name: Logical Foundations
+          command: make
+          working_directory: lf-current
+      - run:
+          name: Programming Language Foundations
+          command: make
+          working_directory: plf-current
+      - run:
+          name: Verified Functional Algorithms
+          command: make
+          working_directory: vfa-current
+      - run:
+          name: QuickChick
+          command: make
+          working_directory: qc-current
+      - run:
+          name: Tarballs
+          command: |
+            for v in lf plf vfa qc
+            do tar -xf $v-current/$v.tgz
+            make -C $v
+            done
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build:
+          name: Coq 8.8
+          coq: '8.8'
+      - build:
+          name: Coq 8.9
+          coq: '8.9'
+      - build:
+          name: Coq 8.10
+          coq: '8.10'
+      - build:
+          name: Coq 8.11
+          coq: '8.11'
+      - build:
+          name: Coq 8.12
+          coq: '8.12'
+      - build:
+          name: Coq dev
+          coq: 'latest'
