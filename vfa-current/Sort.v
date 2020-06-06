@@ -249,4 +249,4 @@ Theorem sort_sorted': forall l, sorted' (sort l).
    [sorted_sorted']. *)
 
 
-(* 2020-06-03 12:15:19 (UTC+00) *)
+(* 2020-06-06 17:36:23 (UTC+00) *)

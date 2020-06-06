@@ -670,4 +670,4 @@ Proof. info_eauto. Qed.
     ordinary variants don't do the job. *)
 
 
-(* 2020-06-03 12:10:56 (UTC+00) *)
+(* 2020-06-06 17:29:14 (UTC+00) *)
