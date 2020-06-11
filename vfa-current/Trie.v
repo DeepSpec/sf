@@ -414,7 +414,7 @@ Goal   10%positive = xO (xI (xO xH)).
 Proof. reflexivity. Qed.
 
 (** Given a [positive] number such as ten, we will go left to right in
-   the [xO/xI/ constructors (which is from the low-order bit to the high-order bit),
+   the [xO]/[xI] constructors (which is from the low-order bit to the high-order bit),
    using [xO] as a signal to go left, [xI] as a signal to go right,
    and [xH] as a signal to stop. *)
 
@@ -703,4 +703,4 @@ try (apply empty_relate).
   but [FMaps] uses different names for the functions [insert] and [lookup],
   and also provides several other operations on maps.  *)
 
-(* 2020-06-09 15:45:58 (UTC+00) *)
+(* 2020-06-11 14:34:15 (UTC+00) *)

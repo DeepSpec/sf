@@ -461,4 +461,4 @@ Example eg2 : parse "
       "x" ::= "z")%imp.
 Proof. cbv. reflexivity. Qed.
 
-(* 2020-06-09 15:40:24 (UTC+00) *)
+(* 2020-06-11 14:29:24 (UTC+00) *)

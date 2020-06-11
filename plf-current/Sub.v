@@ -1646,4 +1646,4 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 Definition manual_grade_for_products : option (nat*string) := None.
 (** [] *)
 
-(* 2020-06-09 15:42:12 (UTC+00) *)
+(* 2020-06-11 14:30:56 (UTC+00) *)
