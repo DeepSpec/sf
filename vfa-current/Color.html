@@ -116,6 +116,7 @@
 
 <br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Setoids.Setoid.html#"><span class="id" title="library">Setoid</span></a>. <span class="comment">(*&nbsp;Generalized&nbsp;rewriting&nbsp;*)</span><br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.FSets.FSets.html#"><span class="id" title="library">FSets</span></a>. <span class="comment">(*&nbsp;Efficient&nbsp;functional&nbsp;sets&nbsp;*)</span><br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.FSets.FMaps.html#"><span class="id" title="library">FMaps</span></a>. <span class="comment">(*&nbsp;Efficient&nbsp;functional&nbsp;maps&nbsp;*)</span><br/>
 <span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>. <span class="comment">(*&nbsp;to&nbsp;use&nbsp;&lt;?&nbsp;notation&nbsp;and&nbsp;<span class="inlinecode"><span class="id" title="var">bdestruct</span></span>&nbsp;tactic&nbsp;*)</span><br/>
@@ -203,7 +204,7 @@ And similarly for functional maps over positives
 </div>
 
 <div class="doc">
-The domain of a map is the set of elements that map to Some(_).  To calculate
+The domain of a map is the set of elements that map to <span class="inlinecode"><span class="id" title="var">Some</span>(<span class="id" title="var">_</span>)</span>.  To calculate
    the domain, we can use <span class="inlinecode"><span class="id" title="var">M.fold</span></span>, an operation that comes with the <span class="inlinecode"><span class="id" title="var">FMaps</span></span> 
    abstract data type.  It takes a map <span class="inlinecode"><span class="id" title="var">m</span></span>, function <span class="inlinecode"><span class="id" title="var">f</span></span> and base value <span class="inlinecode"><span class="id" title="var">b</span></span>, and calculates 
    <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">y<sub>1</sub></span></span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span></span> <span class="inlinecode"><span class="id" title="var">y<sub>2</sub></span></span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x<sub>3</sub></span></span> <span class="inlinecode"><span class="id" title="var">y<sub>3</sub></span></span> <span class="inlinecode">(...</span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">xn</span></span> <span class="inlinecode"><span class="id" title="var">yn</span></span> <span class="inlinecode"><span class="id" title="var">b</span>)...)))</span>, where <span class="inlinecode">(<span class="id" title="var">xi</span>,<span class="id" title="var">yi</span>)</span> are the individual elements
@@ -690,7 +691,8 @@ Look at the proof of <span class="inlinecode"><span class="id" title="var">Sremo
 </div>
 
 <div class="doc">
-This seems so obvious!  But I didn't find a really simple proof of it. 
+To reason about <span class="inlinecode"><span class="id" title="var">M.fold</span></span>, used in the definition of <span class="inlinecode"><span class="id" title="var">Mdomain</span></span>,
+    a useful theorem is <span class="inlinecode"><span class="id" title="var">WP.fold_rec_bis</span></span>. 
 </div>
 <div class="code">
 
@@ -883,7 +885,7 @@ That is our graph coloring:  Node <span class="inlinecode">4</span> is colored w
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-06-11&nbsp;15:51:49&nbsp;(UTC+00)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-06-17&nbsp;15:10:39&nbsp;(UTC+00)&nbsp;*)</span><br/>
 </div>
 </div>
 

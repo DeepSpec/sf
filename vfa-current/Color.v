@@ -57,8 +57,9 @@
    implementation is a bit more efficient. *)
 
 Require Import List.
-Require Import FSets.    (* Efficient functional sets *)
-Require Import FMaps.  (* Efficient functional maps *)
+Require Import Setoid.  (* Generalized rewriting *)
+Require Import FSets.   (* Efficient functional sets *)
+Require Import FMaps.   (* Efficient functional maps *)
 From VFA Require Import Perm.   (* to use <? notation and [bdestruct] tactic *)
 
 (** The nodes in our graph will be named by positive numbers.
@@ -118,7 +119,7 @@ Proof. exact M.ME.MO.IsTO.lt_strorder. Qed.
 Lemma lt_proper: Proper (eq ==> eq ==> iff) E.lt.
 Proof. exact M.ME.MO.IsTO.lt_compat. Qed.
 
-(** The domain of a map is the set of elements that map to Some(_).  To calculate
+(** The domain of a map is the set of elements that map to [Some(_)].  To calculate
    the domain, we can use [M.fold], an operation that comes with the [FMaps] 
    abstract data type.  It takes a map [m], function [f] and base value [b], and calculates 
    [f x1 y1 (f x2 y2 (f x3 y3 (... (f xn yn b)...)))], where [(xi,yi)] are the individual elements
@@ -456,7 +457,8 @@ Lemma Snot_in_empty: forall n, ~ S.In n S.empty.
 (** **** Exercise: 3 stars, standard (Sin_domain)  *)
 Lemma Sin_domain: forall A n (g: M.t A), S.In n (Mdomain g) <-> M.In n g.
 
-(** This seems so obvious!  But I didn't find a really simple proof of it. *)
+(** To reason about [M.fold], used in the definition of [Mdomain],
+    a useful theorem is [WP.fold_rec_bis]. *)
 
 (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -596,4 +598,4 @@ Compute (M.elements (color palette G)). (* = [(4, 1); (2, 3); (6, 2); (1, 2); (5
   nodes [6] and [1] with [2], and node [5] with color [1]. *)
 
 
-(* 2020-06-11 15:51:49 (UTC+00) *)
+(* 2020-06-17 15:10:39 (UTC+00) *)
