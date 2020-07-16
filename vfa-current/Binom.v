@@ -21,7 +21,7 @@
 (* ################################################################# *)
 (** * The Program *)
 
-From Coq Require Import Strings.String.
+From Coq Require Import Strings.String. (* for manual grading *)
 From VFA Require Import Perm.
 From VFA Require Import Priqueue.
 
@@ -397,4 +397,4 @@ End BinomQueue.
 *)
 (** [] *)
 
-(* 2020-07-16 15:49:46 (UTC+00) *)
+(* 2020-07-16 16:32:33 (UTC+00) *)

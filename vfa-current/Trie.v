@@ -67,7 +67,7 @@
 (* ################################################################# *)
 (** * A Simple Program That's Waaaaay Too Slow. *)
 
-From Coq Require Import Strings.String.
+From Coq Require Import Strings.String.  (* for manual grading *)
 From VFA Require Import Perm.
 From VFA Require Import Maps.
 Import FunctionalExtensionality.
@@ -703,4 +703,4 @@ try (apply empty_relate).
   but [FMaps] uses different names for the functions [insert] and [lookup],
   and also provides several other operations on maps.  *)
 
-(* 2020-07-16 15:49:45 (UTC+00) *)
+(* 2020-07-16 16:32:32 (UTC+00) *)

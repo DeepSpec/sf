@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>BagPerm: Insertion Sort With Bags</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vfa.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 3: Verified Functional Algorithms</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">BagPerm<span class="subtitle">Insertion Sort With Bags</span></h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ We have seen how to specify algorithms on "collections", such as
+    sorting algorithms, using <span class="inlinecode"><span class="id" title="var">Permutation</span></span>s.  Instead of using
+    permutations, another way to specify these algorithms is to use
+    <i>bags</i> (also called <i>multisets</i>), which we introduced in <a href="Lists.html"><span class="inlineref">Lists</span></a>.
+    A <i>set</i> of values is like a list with no repeats where
+    the order does not matter.  A <i>multiset</i> is like a list, possibly
+    with repeats, where the order does not matter.  Whereas the principal
+    query on a set is whether a given element appears in it, the
+    principal query on a bag is <i>how many</i> times a given element appears 
+    in it. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>. <span class="comment">(*&nbsp;for&nbsp;manual&nbsp;grading&nbsp;*)</span><br/>
+<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Setoids.Setoid.html#"><span class="id" title="library">Setoid</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a>.<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Sort.html#"><span class="id" title="library">Sort</span></a>.<br/>
+</div>
+
+<div class="doc">
+To keep this chapter more self-contained, 
+we restate the critical definitions from <a href="Lists.html"><span class="inlineref">Lists</span></a>.  
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="bag"><span class="id" title="definition">bag</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Fixpoint</span> <a name="count"><span class="id" title="definition">count</span></a> (<span class="id" title="var">v</span>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<span class="id" title="var">s</span>:<a class="idref" href="BagPerm.html#bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="BagPerm.html#s"><span class="id" title="variable">s</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ 0<br/>
+&nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <span class="id" title="var">t</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">(</span></a><span class="id" title="keyword">if</span> <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <a class="idref" href="BagPerm.html#v"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">then</span> 1 <span class="id" title="keyword">else</span> 0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#v"><span class="id" title="variable">v</span></a> <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+
+<div class="doc">
+We will say two bags are <i>equivalent</i> if they have the same number
+    of copies of every possible element. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="bag_eqv"><span class="id" title="definition">bag_eqv</span></a> (<span class="id" title="var">b<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span>: <a class="idref" href="BagPerm.html#bag"><span class="id" title="definition">bag</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span>, <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab58"></a><h4 class="section">Exercise: 2 stars, standard (bag_eqv_properties)</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;It&nbsp;is&nbsp;easy&nbsp;to&nbsp;prove&nbsp;<span class="inlinecode"><span class="id" title="var">bag_eqv</span></span>&nbsp;is&nbsp;an&nbsp;equivalence&nbsp;relation.&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a name="bag_eqv_refl"><span class="id" title="lemma">bag_eqv_refl</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="BagPerm.html#b"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a name="bag_eqv_sym"><span class="id" title="lemma">bag_eqv_sym</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">b<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a name="bag_eqv_trans"><span class="id" title="lemma">bag_eqv_trans</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">b<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span> <span class="id" title="var">b<sub>3</sub></span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>3</sub>"><span class="id" title="variable">b<sub>3</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>3</sub>"><span class="id" title="variable">b<sub>3</sub></span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+The following little lemma is handy in a couple of places. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="bag_eqv_cons"><span class="id" title="lemma">bag_eqv_cons</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">b<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> (<a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a><a class="idref" href="BagPerm.html#b<sub>1</sub>"><span class="id" title="variable">b<sub>1</sub></span></a>) (<a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a><a class="idref" href="BagPerm.html#b<sub>2</sub>"><span class="id" title="variable">b<sub>2</sub></span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab59"></a><h1 class="section">Correctness</h1>
+
+<div class="paragraph"> </div>
+
+ A sorting algorithm must rearrange the elements into a list that
+    is totally ordered.  But let's say that a different way: the
+    algorithm must produce a list <i>with the same multiset of values</i>,
+    and this list must be totally ordered. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> (<span class="id" title="var">f</span>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> (<a class="idref" href="BagPerm.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Sort.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="BagPerm.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a>).<br/>
+</div>
+
+<div class="doc">
+<a name="lab60"></a><h4 class="section">Exercise: 3 stars, standard (insert_bag)</h4>
+ First, prove the auxiliary lemma <span class="inlinecode"><span class="id" title="var">insert_bag</span></span>, which will be
+    useful for proving <span class="inlinecode"><span class="id" title="var">sort_bag</span></span> below.  Your proof will be by
+    induction.  
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="insert_bag"><span class="id" title="lemma">insert_bag</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">l</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> (<a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a><a class="idref" href="BagPerm.html#l"><span class="id" title="variable">l</span></a>) (<a class="idref" href="Sort.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="BagPerm.html#l"><span class="id" title="variable">l</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab61"></a><h4 class="section">Exercise: 2 stars, standard (sort_bag)</h4>
+ Now prove that sort preserves bag contents. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <a name="sort_bag"><span class="id" title="lemma">sort_bag</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#l"><span class="id" title="variable">l</span></a> (<a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a> <a class="idref" href="BagPerm.html#l"><span class="id" title="variable">l</span></a>).<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ Now we wrap it all up.  
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="insertion_sort_correct"><span class="id" title="lemma">insertion_sort_correct</span></a>:<br/>
+&nbsp;&nbsp;<a class="idref" href="BagPerm.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">split</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="BagPerm.html#sort_bag"><span class="id" title="axiom">sort_bag</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="Sort.html#sort_sorted"><span class="id" title="axiom">sort_sorted</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab62"></a><h4 class="section">Exercise: 1 star, standard (permutations_vs_multiset)</h4>
+ Compare your proofs of <span class="inlinecode"><span class="id" title="var">insert_perm</span>,</span> <span class="inlinecode"><span class="id" title="var">sort_perm</span></span> with your proofs
+    of <span class="inlinecode"><span class="id" title="var">insert_bag</span>,</span> <span class="inlinecode"><span class="id" title="var">sort_bag</span></span>.  Which proofs are simpler?
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> easier with permutations,
+
+</li>
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> easier with multisets
+
+</li>
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> about the same.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+   Regardless of "difficulty", which do you prefer / find easier to
+   think about?
+<ul class="doclist">
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> permutations or
+
+</li>
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> multisets
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+   Put an X in one box in each list. 
+</div>
+<div class="code">
+<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
+<span class="id" title="keyword">Definition</span> <a name="manual_grade_for_permutations_vs_multiset"><span class="id" title="definition">manual_grade_for_permutations_vs_multiset</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b<sub>5</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab63"></a><h1 class="section">Permutations and Multisets</h1>
+
+<div class="paragraph"> </div>
+
+ The two specifications of insertion sort are equivalent.  One
+    reason is that permutations and multisets are closely related.
+    We're going to prove:
+
+<div class="paragraph"> </div>
+
+       <span class="inlinecode"><span class="id" title="var">Permutation</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span> <span class="inlinecode">↔</span> <span class="inlinecode"><span class="id" title="var">bag_eqv</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span>.</span> 
+<div class="paragraph"> </div>
+
+<a name="lab64"></a><h4 class="section">Exercise: 3 stars, standard (perm_bag)</h4>
+ The forward direction is straighforward, by induction on the evidence for
+    <span class="inlinecode"><span class="id" title="var">Permutation</span></span>: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="perm_bag"><span class="id" title="lemma">perm_bag</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="BagPerm.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="BagPerm.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ The other direction,
+    <span class="inlinecode"><span class="id" title="var">bag_eqv</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Permutation</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span>,
+    is surprisingly difficult.  
+    This proof approach is due to Zhong Sheng Hu.
+    The first three lemmas are used to prove the fourth one. 
+<div class="paragraph"> </div>
+
+<a name="lab65"></a><h4 class="section">Exercise: 2 stars, advanced (bag_nil_inv)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bag_nil_inv"><span class="id" title="lemma">bag_nil_inv</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a> <a class="idref" href="BagPerm.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab66"></a><h4 class="section">Exercise: 3 stars, advanced (bag_cons_inv)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bag_cons_inv"><span class="id" title="lemma">bag_cons_inv</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span> <span class="id" title="var">x</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="BagPerm.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="BagPerm.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d<sub>8</sub>"><span class="id" title="notation">∃</span></a> <span class="id" title="var">l<sub>1</sub></span> <span class="id" title="var">l<sub>2</sub></span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d<sub>8</sub>"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="BagPerm.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="BagPerm.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="BagPerm.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a> (<a class="idref" href="BagPerm.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="BagPerm.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="BagPerm.html#n"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab67"></a><h4 class="section">Exercise: 2 stars, advanced (count_insert_other)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="count_insert_other"><span class="id" title="lemma">count_insert_other</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">l<sub>1</sub></span> <span class="id" title="var">l<sub>2</sub></span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="BagPerm.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc<sub>9</sub>"><span class="id" title="notation">≠</span></a> <a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#y"><span class="id" title="variable">y</span></a> (<a class="idref" href="BagPerm.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="BagPerm.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="BagPerm.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#y"><span class="id" title="variable">y</span></a> (<a class="idref" href="BagPerm.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="BagPerm.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab68"></a><h4 class="section">Exercise: 3 stars, advanced (bag_perm)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bag_perm"><span class="id" title="lemma">bag_perm</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="BagPerm.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="BagPerm.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab69"></a><h1 class="section">The Main Theorem: Equivalence of Multisets and Permutations</h1>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Theorem</span> <a name="bag_eqv_iff_perm"><span class="id" title="lemma">bag_eqv_iff_perm</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="BagPerm.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="BagPerm.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="BagPerm.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">split</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="BagPerm.html#bag_perm"><span class="id" title="axiom">bag_perm</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="BagPerm.html#perm_bag"><span class="id" title="axiom">perm_bag</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Therefore, it doesn't matter whether you prove your sorting
+    algorithm using the Permutations method or the multiset method. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Corollary</span> <a name="sort_specifications_equivalent"><span class="id" title="lemma">sort_specifications_equivalent</span></a>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">sort</span>, <a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a> <a class="idref" href="BagPerm.html#sort"><span class="id" title="variable">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a>  <a class="idref" href="BagPerm.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="BagPerm.html#sort"><span class="id" title="variable">sort</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a>, <a class="idref" href="BagPerm.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">H</span> <span class="id" title="var">al</span>); <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="BagPerm.html#bag_eqv_iff_perm"><span class="id" title="lemma">bag_eqv_iff_perm</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;2020-07-16&nbsp;16:32:31&nbsp;(UTC+00)&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

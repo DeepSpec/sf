@@ -1,3 +1,11 @@
+insert_sorted (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+sort_sorted (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
 insert_perm (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
@@ -6,24 +14,28 @@ sort_perm (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-insert_sorted (standard, automatically graded)
+insertion_sort_correct (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+sorted_sorted' (advanced, automatically graded)
 Score: 0.0 / 6.0
 Reason: Admitted proof.
 
-sort_sorted (standard, automatically graded)
-Score: 0.0 / 2.0
+sorted'_sorted (advanced, automatically graded)
+Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-Points possible - standard: 14
-Points possible - advanced: 14
+Points possible - standard: 12
+Points possible - advanced: 21
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 / 14.0 so far
+   Standard:  0.0 / 12.0 so far
                 and  0.0 ungraded
 
-   Advanced:  0.0 / 14.0 so far
+   Advanced:  0.0 / 21.0 so far
                 and  0.0 ungraded
 

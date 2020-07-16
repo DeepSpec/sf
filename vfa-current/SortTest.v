@@ -32,6 +32,31 @@ Import Check.
 
 Goal True.
 
+idtac "-------------------  insert_sorted  --------------------".
+idtac " ".
+
+idtac "#> insert_sorted".
+idtac "Possible points: 3".
+check_type @insert_sorted (
+(forall (a : nat) (l : list nat), sorted l -> sorted (insert a l))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions insert_sorted.
+Goal True.
+idtac " ".
+
+idtac "-------------------  sort_sorted  --------------------".
+idtac " ".
+
+idtac "#> sort_sorted".
+idtac "Possible points: 2".
+check_type @sort_sorted ((forall l : list nat, sorted (sort l))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions sort_sorted.
+Goal True.
+idtac " ".
+
 idtac "-------------------  insert_perm  --------------------".
 idtac " ".
 
@@ -58,48 +83,67 @@ Print Assumptions sort_perm.
 Goal True.
 idtac " ".
 
-idtac "-------------------  insert_sorted  --------------------".
+idtac "-------------------  insertion_sort_correct  --------------------".
 idtac " ".
 
-idtac "#> insert_sorted".
+idtac "#> insertion_sort_correct".
+idtac "Possible points: 1".
+check_type @insertion_sort_correct ((is_a_sorting_algorithm sort)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions insertion_sort_correct.
+Goal True.
+idtac " ".
+
+idtac "-------------------  sorted_sorted'  --------------------".
+idtac " ".
+
+idtac "#> sorted_sorted'".
+idtac "Advanced".
 idtac "Possible points: 6".
-check_type @insert_sorted (
-(forall (a : nat) (l : list nat), sorted l -> sorted (insert a l))).
+check_type @sorted_sorted' ((forall al : list nat, sorted al -> sorted' al)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions insert_sorted.
+Print Assumptions sorted_sorted'.
 Goal True.
 idtac " ".
 
-idtac "-------------------  sort_sorted  --------------------".
+idtac "-------------------  sorted'_sorted  --------------------".
 idtac " ".
 
-idtac "#> sort_sorted".
-idtac "Possible points: 2".
-check_type @sort_sorted ((forall l : list nat, sorted (sort l))).
+idtac "#> sorted'_sorted".
+idtac "Advanced".
+idtac "Possible points: 3".
+check_type @sorted'_sorted ((forall al : list nat, sorted' al -> sorted al)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions sort_sorted.
+Print Assumptions sorted'_sorted.
 Goal True.
 idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 14".
-idtac "Max points - advanced: 14".
+idtac "Max points - standard: 12".
+idtac "Max points - advanced: 21".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "functional_extensionality_dep".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
 idtac "int".
-idtac "int2Z".
-idtac "ltb_lt".
+idtac "Abs".
+idtac "Abs_inj".
 idtac "ltb".
+idtac "ltb_lt".
+idtac "leb".
+idtac "leb_le".
 idtac "Extract.int".
-idtac "Extract.int2Z".
-idtac "Extract.ltb_lt".
+idtac "Extract.Abs".
+idtac "Extract.Abs_inj".
 idtac "Extract.ltb".
+idtac "Extract.ltb_lt".
+idtac "Extract.leb".
+idtac "Extract.leb_le".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -113,16 +157,22 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
-idtac "---------- insert_perm ---------".
-Print Assumptions insert_perm.
-idtac "---------- sort_perm ---------".
-Print Assumptions sort_perm.
 idtac "---------- insert_sorted ---------".
 Print Assumptions insert_sorted.
 idtac "---------- sort_sorted ---------".
 Print Assumptions sort_sorted.
+idtac "---------- insert_perm ---------".
+Print Assumptions insert_perm.
+idtac "---------- sort_perm ---------".
+Print Assumptions sort_perm.
+idtac "---------- insertion_sort_correct ---------".
+Print Assumptions insertion_sort_correct.
 idtac "".
 idtac "********** Advanced **********".
+idtac "---------- sorted_sorted' ---------".
+Print Assumptions sorted_sorted'.
+idtac "---------- sorted'_sorted ---------".
+Print Assumptions sorted'_sorted.
 Abort.
 
-(* 2020-07-16 15:49:51 (UTC+00) *)
+(* 2020-07-16 16:32:38 (UTC+00) *)

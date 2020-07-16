@@ -1,0 +1,37 @@
+split_perm (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+sorted_merge1 (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+sorted_merge (standard, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+mergesort_sorts (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+merge_perm (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+mergesort_perm (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+Points possible - standard: 13
+Points possible - advanced: 19
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 13.0 so far
+                and  0.0 ungraded
+
+   Advanced:  0.0 / 19.0 so far
+                and  0.0 ungraded
+

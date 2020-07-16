@@ -1,0 +1,60 @@
+bag_eqv_refl (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+bag_eqv_sym (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+bag_eqv_trans (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+bag_eqv_cons (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+insert_bag (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+sort_bag (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+permutations_vs_multiset (standard, manually graded)
+Score: Ungraded / 1.0
+
+perm_bag (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+bag_nil_inv (advanced, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+bag_cons_inv (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+count_insert_other (advanced, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+bag_perm (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+Points possible - standard: 11
+Points possible - advanced: 21
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 10.0 so far
+                and  1.0 ungraded
+
+   Advanced:  0.0 / 20.0 so far
+                and  1.0 ungraded
+

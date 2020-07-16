@@ -1,7 +1,7 @@
 -include CONFIGURE
 COQMFFLAGS := -Q . VFA 
 
-ALLVFILES := Maps.v Preface.v Perm.v Sort.v Multiset.v Selection.v SearchTree.v ADT.v Extract.v Redblack.v Trie.v Priqueue.v Binom.v Decide.v Color.v  MapsTest.v  PrefaceTest.v  PermTest.v  SortTest.v  MultisetTest.v  SelectionTest.v  SearchTreeTest.v  ADTTest.v  ExtractTest.v  RedblackTest.v  TrieTest.v  PriqueueTest.v  BinomTest.v  DecideTest.v  ColorTest.v
+ALLVFILES := Maps.v Preface.v Perm.v Sort.v Multiset.v BagPerm.v Selection.v Merge.v SearchTree.v ADT.v Extract.v Redblack.v Trie.v Priqueue.v Binom.v Decide.v Color.v  MapsTest.v  PrefaceTest.v  PermTest.v  SortTest.v  MultisetTest.v  BagPermTest.v  SelectionTest.v  MergeTest.v  SearchTreeTest.v  ADTTest.v  ExtractTest.v  RedblackTest.v  TrieTest.v  PriqueueTest.v  BinomTest.v  DecideTest.v  ColorTest.v
 
 build: Makefile.coq
 	$(MAKE) -f Makefile.coq

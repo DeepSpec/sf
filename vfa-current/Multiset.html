@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="common/css/sf.css" rel="stylesheet" type="text/css" />
-<title>Multiset: Insertion Sort With Multisets</title>
+<title>Multiset: Insertion Sort Verified With Multisets</title>
 <link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
 <script src="common/jquery-ui/external/jquery/jquery.js"></script>
 <script src="common/jquery-ui/jquery-ui.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
 
-<h1 class="libtitle">Multiset<span class="subtitle">Insertion Sort With Multisets</span></h1>
+<h1 class="libtitle">Multiset<span class="subtitle">Insertion Sort Verified With Multisets</span></h1>
 
 <div class="code">
 </div>
@@ -38,29 +38,61 @@
 
 <div class="paragraph"> </div>
 
- We have seen how to specify algorithms on "collections", such as
-    sorting algorithms, using permutations.  Instead of using
-    permutations, another way to specify these algorithms is to use
-    multisets.  A <i>set</i> of values is like a list with no repeats where
-    the order does not matter.  A <i>multiset</i> is like a list, possibly
-    with repeats, where the order does not matter.  One simple
-    representation of a multiset is a function from values to <span class="inlinecode"><span class="id" title="var">nat</span></span>. 
-</div>
-<div class="code">
+ Our specification of <span class="inlinecode"><span class="id" title="var">sorted</span></span> in <a href="Sort.html"><span class="inlineref">Sort</span></a> was based in
+    part on permutations, which enabled us to express the idea that
+    sorting rearranges list elements but does not add or remove any.
 
-<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Sort.html#"><span class="id" title="library">Sort</span></a>.<br/>
-<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Logic.FunctionalExtensionality.html#"><span class="id" title="library">FunctionalExtensionality</span></a>.<br/>
+<div class="paragraph"> </div>
+
+    Another way to express that idea is to use multisets, aka bags.  A
+    <i>set</i> is like a list in which element order is irrelevant, and in
+    which no duplicate elements are permitted. That is, an element can
+    either be <i>in</i> the set or not in the set, but it can't be in the
+    set multiple times.  A <i>multiset</i> relaxes that restriction: an
+    element can be in the multiset multiple times.  The number of
+    times the element occurs in the multiset is the element's
+    <i>multiplicity</i>. 
+<div class="paragraph"> </div>
+
+ For example:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode">{1,</span> <span class="inlinecode">2}</span> is a set, and is the same as set <span class="inlinecode">{2,</span> <span class="inlinecode">1}</span>.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode">[1;</span> <span class="inlinecode">1;</span> <span class="inlinecode">2]</span> is a list, and is different than list <span class="inlinecode">[2;</span> <span class="inlinecode">1;</span> <span class="inlinecode">1]</span>.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode">{1,</span> <span class="inlinecode">1,</span> <span class="inlinecode">2}</span> is a multiset and the same as multiset <span class="inlinecode">{2,</span> <span class="inlinecode">1,</span> <span class="inlinecode">1}</span>.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    In this chapter we'll explore using multisets to specify
+    sortedness. 
 </div>
 
 <div class="doc">
-In this chapter we will be using natural numbers for two different
-    purposes: the values in the lists that we sort, and the
-    multiplicity (number of times occurring) of those values.  To keep
-    things straight, we'll use the <span class="inlinecode"><span class="id" title="var">value</span></span> type for values, and <span class="inlinecode"><span class="id" title="var">nat</span></span>
-    for multiplicities. 
+<a name="lab37"></a><h1 class="section">Multisets</h1>
+
+<div class="paragraph"> </div>
+
+ We will represent multisets as functions: if <span class="inlinecode"><span class="id" title="var">m</span></span> is a
+    multiset, then <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> will be the multiplicity of <span class="inlinecode"><span class="id" title="var">n</span></span> in <span class="inlinecode"><span class="id" title="var">m</span></span>.
+    Since we are sorting lists of natural numbers, the type of
+    multisets would be <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">nat</span></span>. The input is the value, the output is
+    its multiplicity.  To help avoid confusion between those two uses
+    of <span class="inlinecode"><span class="id" title="var">nat</span></span>, we'll introduce a synonym, <span class="inlinecode"><span class="id" title="var">value</span></span>. 
 </div>
 <div class="code">
 
@@ -70,35 +102,58 @@ In this chapter we will be using natural numbers for two different
 </div>
 
 <div class="doc">
-Just like sets, multisets have operators for <span class="inlinecode"><span class="id" title="var">union</span></span>, for the
-    <span class="inlinecode"><span class="id" title="var">empty</span></span> multiset, and the multiset with just a single element. 
+The <span class="inlinecode"><span class="id" title="var">empty</span></span> multiset has multiplicity <span class="inlinecode">0</span> for every value. 
 </div>
 <div class="code">
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a name="empty"><span class="id" title="definition">empty</span></a> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a> :=<br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ 0.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a name="union"><span class="id" title="definition">union</span></a> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>) : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a> :=<br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a name="singleton"><span class="id" title="definition">singleton</span></a> (<span class="id" title="var">v</span>: <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a> :=<br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="keyword">if</span> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">then</span> 1 <span class="id" title="keyword">else</span> 0.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ 0.<br/>
 </div>
 
 <div class="doc">
-<a name="lab38"></a><h4 class="section">Exercise: 1 star, standard (union_assoc)</h4>
- Since multisets are represented as functions, to prove that one
-    multiset equals another we must use the axiom of functional
-    extensionality. 
+Multiset <span class="inlinecode"><span class="id" title="var">singleton</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> contains only <span class="inlinecode"><span class="id" title="var">v</span></span>, and exactly once. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Lemma</span> <a name="union_assoc"><span class="id" title="lemma">union_assoc</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>, <span class="comment">(*&nbsp;assoc&nbsp;stands&nbsp;for&nbsp;"associative"&nbsp;*)</span><br/>
+<span class="id" title="keyword">Definition</span> <a name="singleton"><span class="id" title="definition">singleton</span></a> (<span class="id" title="var">v</span>: <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="keyword">if</span> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">then</span> 1 <span class="id" title="keyword">else</span> 0.<br/>
+</div>
+
+<div class="doc">
+The union of two multisets is their <i>pointwise</i> sum. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="union"><span class="id" title="definition">union</span></a> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>) : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#b3eea360671e1b32b18a26e15b3aace3"><span class="id" title="notation">+</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a name="lab38"></a><h4 class="section">Exercise: 1 star, standard (union_assoc)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove that multiset union is associative.
+
+<div class="paragraph"> </div>
+
+    To prove that one multiset equals another we use the axiom of
+    functional extensionality, which was introduced in
+    <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Logic.html"><span class="inlineref">Logic</span></a>. We begin the proof below by using Coq's tactic
+    <span class="inlinecode"><span class="id" title="tactic">extensionality</span></span>, which applies that axiom.
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="union_assoc"><span class="id" title="lemma">union_assoc</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> (<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Multiset.html#c"><span class="id" title="variable">c</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a>) <a class="idref" href="Multiset.html#c"><span class="id" title="variable">c</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">extensionality</span> <span class="id" title="var">x</span>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -107,148 +162,206 @@ Just like sets, multisets have operators for <span class="inlinecode"><span clas
 
 <a name="lab39"></a><h4 class="section">Exercise: 1 star, standard (union_comm)</h4>
 
+<div class="paragraph"> </div>
+
+ Prove that multiset union is commutative. 
 </div>
 <div class="code">
-<span class="id" title="keyword">Lemma</span> <a name="union_comm"><span class="id" title="lemma">union_comm</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>,  <span class="comment">(*&nbsp;comm&nbsp;stands&nbsp;for&nbsp;"commutative"&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="union_comm"><span class="id" title="lemma">union_comm</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 <div class="doc"> 
 <div class="paragraph"> </div>
 
- Remark on efficiency:  These multisets aren't very efficient.  If
-  you wrote programs with them, the programs would run slowly. However,
-  we're using them for <i>specifications</i>, not for <i>programs</i>.  Our
-  multisets built with <span class="inlinecode"><span class="id" title="var">union</span></span> and <span class="inlinecode"><span class="id" title="var">singleton</span></span> will never really
-  <i>execute</i> on any large-scale inputs; they're only used in the proof
-  of correctness of algorithms such as <span class="inlinecode"><span class="id" title="var">sort</span></span>.  Therefore, their
-  inefficiency is not a problem. 
+<a name="lab40"></a><h4 class="section">Exercise: 2 stars, standard (union_swap)</h4>
+
 <div class="paragraph"> </div>
 
- Contents of a list, as a multiset: 
+ Prove that the multisets in a nested union can be swapped.
+    You do not need <span class="inlinecode"><span class="id" title="tactic">extensionality</span></span> if you use the previous
+    two lemmas. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="union_swap"><span class="id" title="lemma">union_swap</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> (<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="Multiset.html#c"><span class="id" title="variable">c</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> (<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#c"><span class="id" title="variable">c</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ Note that this is not an efficient implementation of multisets.
+    We wouldn't want to use it for programs with high performance
+    requirements.  But we are using multisets for specifications, not
+    for programs.  We don't intend to build large multisets, only to
+    use them in verifying algorithms such as insertion sort.  So this
+    inefficiency is not a problem. 
+<div class="paragraph"> </div>
+
+<a name="lab41"></a><h1 class="section">Specification of Sorting</h1>
+
+<div class="paragraph"> </div>
+
+ A sorting algorithm must rearrange the elements into a list
+    that is totally ordered.  Using multisets, we can restate that as:
+    the algorithm must produce a list <i>with the same multiset of
+    values</i>, and this list must be totally ordered. Let's formalize
+    that idea. 
+<div class="paragraph"> </div>
+
+ The <i>contents</i> of a list are the elements it contains, without
+    any notion of order. Function <span class="inlinecode"><span class="id" title="var">contents</span></span> extracts the contents
+    of a list as a multiset. 
 </div>
 <div class="code">
 
 <br/>
 <span class="id" title="keyword">Fixpoint</span> <a name="contents"><span class="id" title="definition">contents</span></a> (<span class="id" title="var">al</span>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) : <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="Multiset.html#empty"><span class="id" title="definition">empty</span></a><br/>
 &nbsp;&nbsp;| <span class="id" title="var">a</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <span class="id" title="var">bl</span> ⇒ <a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="Multiset.html#singleton"><span class="id" title="definition">singleton</span></a> <span class="id" title="var">a</span>) (<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <span class="id" title="var">bl</span>)<br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="Multiset.html#empty"><span class="id" title="definition">empty</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 </div>
 
 <div class="doc">
-Recall the insertion-sort program from <span class="inlinecode"><span class="id" title="var">Sort.v</span></span>.  Note that it
-    handles lists with repeated elements just fine. 
+The insertion-sort program <span class="inlinecode"><span class="id" title="var">sort</span></span> from <a href="Sort.html"><span class="inlineref">Sort</span></a> preserves
+    the contents of a list.  Here's an example of that: 
 </div>
 <div class="code">
-
-<br/>
-<span class="id" title="keyword">Example</span> <a name="sort_pi"><span class="id" title="definition">sort_pi</span></a>: <a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">[</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>9<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>9<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">]</span></a>.<br/>
-<div class="togglescript" id="proofcontrol1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')"><span class="show"></span></div>
-<div class="proofscript" id="proof1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')">
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
-</div>
 
 <br/>
 <span class="id" title="keyword">Example</span> <a name="sort_pi_same_contents"><span class="id" title="definition">sort_pi_same_contents</span></a>:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">[</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>9<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">[</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>9<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">]</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">[</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>9<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">[</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>9<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#f83abbde7679bdbfec6afddd39d41e<sub>15</sub>"><span class="id" title="notation">]</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-<span class="id" title="tactic">extensionality</span> <span class="id" title="var">x</span>.<br/>
-<span class="id" title="tactic">do</span> 10 (<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">reflexivity</span>).<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;Why&nbsp;does&nbsp;this&nbsp;work?&nbsp;Try&nbsp;it&nbsp;step&nbsp;by&nbsp;step,&nbsp;without&nbsp;<span class="inlinecode"><span class="id" title="tactic">do</span></span> <span class="inlinecode">10</span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">extensionality</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">reflexivity</span>).<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Why&nbsp;does&nbsp;this&nbsp;work?&nbsp;Try&nbsp;it&nbsp;step&nbsp;by&nbsp;step,&nbsp;without&nbsp;<span class="inlinecode"><span class="id" title="tactic">repeat</span></span>.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a name="lab40"></a><h1 class="section">Correctness</h1>
-
-<div class="paragraph"> </div>
-
- A sorting algorithm must rearrange the elements into a list that
-    is totally ordered.  But let's say that a different way: the
-    algorithm must produce a list <i>with the same multiset of values</i>,
-    and this list must be totally ordered. 
+A sorting algorithm must preserve contents and totally order the
+    list. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a name="is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> (<span class="id" title="var">f</span>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span>, <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Sort.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="Multiset.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a>).<br/>
+<span class="id" title="keyword">Definition</span> <a name="is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> (<span class="id" title="var">f</span>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) := <span class="id" title="keyword">∀</span> <span class="id" title="var">al</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Sort.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="Multiset.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a>).<br/>
 </div>
 
 <div class="doc">
-<a name="lab41"></a><h4 class="section">Exercise: 3 stars, standard (insert_contents)</h4>
- First, prove the auxiliary lemma <span class="inlinecode"><span class="id" title="var">insert_contents</span></span>, which will be
-    useful for proving <span class="inlinecode"><span class="id" title="var">sort_contents</span></span> below.  Your proof will be by
-    induction.  You do not need to use <span class="inlinecode"><span class="id" title="tactic">extensionality</span></span>. 
+That definition is similar to <span class="inlinecode"><span class="id" title="var">is_a_sorting_algorithm</span></span> from <a href="Sort.html"><span class="inlineref">Sort</span></a>,
+    except that we're now using <span class="inlinecode"><span class="id" title="var">contents</span></span> instead of <span class="inlinecode"><span class="id" title="var">Permutation</span></span>. 
+<div class="paragraph"> </div>
+
+<a name="lab42"></a><h1 class="section">Verification of Insertion Sort</h1>
+
+<div class="paragraph"> </div>
+
+ The following series of exercises will take you through a
+    verification of insertion sort using multisets. 
+<div class="paragraph"> </div>
+
+<a name="lab43"></a><h4 class="section">Exercise: 3 stars, standard (insert_contents)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove that insertion sort's <span class="inlinecode"><span class="id" title="var">insert</span></span> function produces the same
+    contents as merely prepending the inserted element to the front of
+    the list.
+
+<div class="paragraph"> </div>
+
+    Proceed by induction.  You do not need <span class="inlinecode"><span class="id" title="tactic">extensionality</span></span> if you
+    make use of the above lemmas about <span class="inlinecode"><span class="id" title="var">union</span></span>. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Lemma</span> <a name="insert_contents"><span class="id" title="lemma">insert_contents</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">l</span>, <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a><a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Sort.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a>).<br/>
+<span class="id" title="keyword">Lemma</span> <a name="insert_contents"><span class="id" title="lemma">insert_contents</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Sort.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab42"></a><h4 class="section">Exercise: 3 stars, standard (sort_contents)</h4>
- Now prove that sort preserves contents. 
+<a name="lab44"></a><h4 class="section">Exercise: 2 stars, standard (sort_contents)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove that insertion sort preserves contents. Proceed by
+    induction.  Make use of <span class="inlinecode"><span class="id" title="var">insert_contents</span></span>. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="sort_contents"><span class="id" title="lemma">sort_contents</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span>, <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a>).<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<span class="id" title="keyword">Theorem</span> <a name="sort_contents"><span class="id" title="lemma">sort_contents</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 <div class="doc"> 
 <div class="paragraph"> </div>
 
- Now we wrap it all up.  
+<a name="lab45"></a><h4 class="section">Exercise: 1 star, standard (insertion_sort_correct)</h4>
+
+<div class="paragraph"> </div>
+
+ Finish the proof of correctness! 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a name="insertion_sort_correct"><span class="id" title="lemma">insertion_sort_correct</span></a>:<br/>
+<span class="id" title="keyword">Theorem</span> <a name="insertion_sort_correct"><span class="id" title="lemma">insertion_sort_correct</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Multiset.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-<span class="id" title="tactic">split</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="Multiset.html#sort_contents"><span class="id" title="axiom">sort_contents</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="Sort.html#sort_sorted"><span class="id" title="axiom">sort_sorted</span></a>.<br/>
-<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
 </div>
 
-<div class="doc">
-<a name="lab43"></a><h4 class="section">Exercise: 1 star, standard (permutations_vs_multiset)</h4>
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab46"></a><h4 class="section">Exercise: 1 star, standard (permutations_vs_multiset)</h4>
  Compare your proofs of <span class="inlinecode"><span class="id" title="var">insert_perm</span>,</span> <span class="inlinecode"><span class="id" title="var">sort_perm</span></span> with your proofs
     of <span class="inlinecode"><span class="id" title="var">insert_contents</span>,</span> <span class="inlinecode"><span class="id" title="var">sort_contents</span></span>.  Which proofs are simpler?
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> <span class="inlinecode"></span> <span class="inlinecode"></span> easier with permutations,
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> easier with permutations
 
 </li>
 <li> <span class="inlinecode"></span> <span class="inlinecode"></span> easier with multisets
 
 </li>
-<li> <span class="inlinecode"></span> <span class="inlinecode"></span> about the same.
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> about the same
 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-   Regardless of "difficulty", which do you prefer / find easier to
+   Regardless of "difficulty", which do you prefer or find easier to
    think about?
 <ul class="doclist">
-<li> <span class="inlinecode"></span> <span class="inlinecode"></span> permutations or
+<li> <span class="inlinecode"></span> <span class="inlinecode"></span> permutations
 
 </li>
 <li> <span class="inlinecode"></span> <span class="inlinecode"></span> multisets
@@ -261,6 +374,8 @@ Recall the insertion-sort program from <span class="inlinecode"><span class="id"
    Put an X in one box in each list. 
 </div>
 <div class="code">
+
+<br/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a name="manual_grade_for_permutations_vs_multiset"><span class="id" title="definition">manual_grade_for_permutations_vs_multiset</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b<sub>5</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
 <font size=-2>&#9744;</font>
@@ -269,69 +384,52 @@ Recall the insertion-sort program from <span class="inlinecode"><span class="id"
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab44"></a><h1 class="section">Permutations and Multisets</h1>
+<a name="lab47"></a><h1 class="section">Equivalence of Permutation and Multiset Specifications</h1>
 
 <div class="paragraph"> </div>
 
- The two specifications of insertion sort are equivalent.  One
-    reason is that permutations and multisets are closely related.
-    We're going to prove:
+ We have developed two specifications of sorting, one based
+    on permutations (<span class="inlinecode"><span class="id" title="var">is_a_sorting_algorithm</span></span>) and one based on
+    multisets (<span class="inlinecode"><span class="id" title="var">is_a_sorting_algorithm'</span></span>).  These two specifications
+    are actually equivalent, which will be the final theorem in this
+    chapter.
 
 <div class="paragraph"> </div>
 
-       <span class="inlinecode"><span class="id" title="var">Permutation</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span> <span class="inlinecode">↔</span> <span class="inlinecode"><span class="id" title="var">contents</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">contents</span></span> <span class="inlinecode"><span class="id" title="var">bl</span>.</span> 
+    One reason for that equivalence is that permutations and multisets
+    are closely related.  We'll begin by proving:
+
 <div class="paragraph"> </div>
 
-<a name="lab45"></a><h4 class="section">Exercise: 3 stars, standard (perm_contents)</h4>
- The forward direction is easy, by induction on the evidence for
-    <span class="inlinecode"><span class="id" title="var">Permutation</span></span>: 
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Permutation</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span> ↔ <span class="id" title="var">contents</span> <span class="id" title="var">al</span> = <span class="id" title="var">contents</span> <span class="id" title="var">bl</span>
+<div class="paragraph"> </div>
+
+</span>
+<div class="paragraph"> </div>
+
+    The forward direction is relatively easy, but the backward
+    direction is surprisingly difficult.
+ 
+<div class="paragraph"> </div>
+
+<a name="lab48"></a><h2 class="section">The Forward Direction</h2>
+
+<div class="paragraph"> </div>
+
+<a name="lab49"></a><h4 class="section">Exercise: 3 stars, standard (perm_contents)</h4>
+
+<div class="paragraph"> </div>
+
+ The forward direction is the easier one. Proceed by induction on
+    the evidence for <span class="inlinecode"><span class="id" title="var">Permutation</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span>: 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Lemma</span> <a name="perm_contents"><span class="id" title="lemma">perm_contents</span></a>:<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
-&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="doc"> 
-<div class="paragraph"> </div>
-
- The other direction,
-    <span class="inlinecode"><span class="id" title="var">contents</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">contents</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Permutation</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span>,
-    is surprisingly difficult.  (Or maybe there's an easy way
-    that I didn't find.) 
-</div>
-<div class="code">
-
-<br/>
-<span class="id" title="keyword">Fixpoint</span> <a name="list_delete"><span class="id" title="definition">list_delete</span></a> (<span class="id" title="var">al</span>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) (<span class="id" title="var">v</span>: <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <span class="id" title="var">x</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a><span class="id" title="var">bl</span> ⇒ <span class="id" title="keyword">if</span> <span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">then</span> <span class="id" title="var">bl</span> <span class="id" title="keyword">else</span> <span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="Multiset.html#list_delete"><span class="id" title="definition">list_delete</span></a> <span class="id" title="var">bl</span> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a name="multiset_delete"><span class="id" title="definition">multiset_delete</span></a> (<span class="id" title="var">m</span>: <a class="idref" href="Multiset.html#multiset"><span class="id" title="definition">multiset</span></a>) (<span class="id" title="var">v</span>: <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) :=<br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="keyword">if</span> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#pred"><span class="id" title="abbreviation">pred</span></a>(<a class="idref" href="Multiset.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a>) <span class="id" title="keyword">else</span> <a class="idref" href="Multiset.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a>.<br/>
-</div>
-
-<div class="doc">
-<a name="lab46"></a><h4 class="section">Exercise: 3 stars, standard (delete_contents)</h4>
-
-</div>
-<div class="code">
-<span class="id" title="keyword">Lemma</span> <a name="delete_contents"><span class="id" title="lemma">delete_contents</span></a>:<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">v</span> <span class="id" title="var">al</span>,<br/>
-&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#list_delete"><span class="id" title="definition">list_delete</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#multiset_delete"><span class="id" title="definition">multiset_delete</span></a> (<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a>) <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a name="perm_contents"><span class="id" title="lemma">perm_contents</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">extensionality</span> <span class="id" title="var">x</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">al</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Multiset.html#empty"><span class="id" title="definition">empty</span></a>, <a class="idref" href="Multiset.html#multiset_delete"><span class="id" title="definition">multiset_delete</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">bdestruct</span> (<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <span class="id" title="var">v</span>); <span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">bdestruct</span> (<span class="id" title="var">a</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#97a8d8c92e88d1d68fb55a13a4fcfc6d"><span class="id" title="notation">=?</span></a> <span class="id" title="var">v</span>).<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -339,77 +437,23 @@ Recall the insertion-sort program from <span class="inlinecode"><span class="id"
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab47"></a><h4 class="section">Exercise: 2 stars, standard (contents_perm_aux)</h4>
+<a name="lab50"></a><h2 class="section">The Backward Direction (Advanced)</h2>
 
-</div>
-<div class="code">
-<span class="id" title="keyword">Lemma</span> <a name="contents_perm_aux"><span class="id" title="lemma">contents_perm_aux</span></a>:<br/>
-&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">v</span> <span class="id" title="var">b</span>, <a class="idref" href="Multiset.html#empty"><span class="id" title="definition">empty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="Multiset.html#singleton"><span class="id" title="definition">singleton</span></a> <a class="idref" href="Multiset.html#v"><span class="id" title="variable">v</span></a>) <a class="idref" href="Multiset.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab48"></a><h4 class="section">Exercise: 2 stars, standard (contents_in)</h4>
-
-</div>
-<div class="code">
-<span class="id" title="keyword">Lemma</span> <a name="contents_in"><span class="id" title="lemma">contents_in</span></a>:<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span>: <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) (<span class="id" title="var">bl</span>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Multiset.html#value"><span class="id" title="definition">value</span></a>) , <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#19ab5cfd7e4f60fa14f22b576013bd<sub>96</sub>"><span class="id" title="notation">&gt;</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#In"><span class="id" title="definition">In</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="doc"> 
+ The backward direction is surprisingly difficult.  This proof
+    approach is due to Zhong Sheng Hu.  The first three lemmas are
+    used to prove the fourth one.  Don't forget that <span class="inlinecode"><span class="id" title="var">union</span></span>,
+    <span class="inlinecode"><span class="id" title="var">singleton</span></span>, and <span class="inlinecode"><span class="id" title="var">empty</span></span> must be explicitly unfolded to access
+    their definitions. 
 <div class="paragraph"> </div>
 
-<a name="lab49"></a><h4 class="section">Exercise: 2 stars, standard (in_perm_delete)</h4>
+<a name="lab51"></a><h4 class="section">Exercise: 2 stars, advanced (contents_nil_inv)</h4>
 
 </div>
 <div class="code">
-<span class="id" title="keyword">Lemma</span> <a name="in_perm_delete"><span class="id" title="lemma">in_perm_delete</span></a>:<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">a</span> <span class="id" title="var">bl</span>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#In"><span class="id" title="definition">In</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> (<a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="Multiset.html#list_delete"><span class="id" title="definition">list_delete</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="Multiset.html#a"><span class="id" title="variable">a</span></a>) <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a name="contents_nil_inv"><span class="id" title="lemma">contents_nil_inv</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">x</span>, 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="doc"> 
-<div class="paragraph"> </div>
-
-<a name="lab50"></a><h4 class="section">Exercise: 4 stars, standard (contents_perm)</h4>
-
-</div>
-<div class="code">
-<span class="id" title="keyword">Lemma</span> <a name="contents_perm"><span class="id" title="lemma">contents_perm</span></a>:<br/>
-&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span>, <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">al</span>; <span class="id" title="tactic">destruct</span> <span class="id" title="var">bl</span>; <span class="id" title="tactic">intro</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">contradiction</span> (<a class="idref" href="Multiset.html#contents_perm_aux"><span class="id" title="axiom">contents_perm_aux</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">H</span>).<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">symmetry</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">contradiction</span> (<a class="idref" href="Multiset.html#contents_perm_aux"><span class="id" title="axiom">contents_perm_aux</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">H</span>).<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">IHal</span> (<a class="idref" href="Multiset.html#list_delete"><span class="id" title="definition">list_delete</span></a> (<span class="id" title="var">v</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <span class="id" title="var">bl</span>) <span class="id" title="var">a</span>)).<br/>
-&nbsp;&nbsp;<span class="id" title="var">remember</span> (<span class="id" title="var">v</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a><span class="id" title="var">bl</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">cl</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">v</span> <span class="id" title="var">bl</span> <span class="id" title="var">Heqcl</span>.<br/>
-</div>
-
-<div class="doc">
-From this point on, you don't need induction.
-    Use the lemmas <span class="inlinecode"><span class="id" title="var">perm_trans</span></span>, <span class="inlinecode"><span class="id" title="var">delete_contents</span></span>,
-     <span class="inlinecode"><span class="id" title="var">in_perm_delete</span></span>, <span class="inlinecode"><span class="id" title="var">contents_in</span></span>.   At <i>certain points</i>
-     you'll need to unfold the definitions of
-     <span class="inlinecode"><span class="id" title="var">multiset_delete</span></span>, <span class="inlinecode"><span class="id" title="var">union</span></span>, <span class="inlinecode"><span class="id" title="var">singleton</span></span>. 
-</div>
-<div class="code">
-
-<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -417,33 +461,110 @@ From this point on, you don't need induction.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab51"></a><h1 class="section">The Main Theorem: Equivalence of Multisets and Permutations</h1>
+<a name="lab52"></a><h4 class="section">Exercise: 3 stars, advanced (contents_cons_inv)</h4>
 
 </div>
 <div class="code">
-<span class="id" title="keyword">Theorem</span> <a name="same_contents_iff_perm"><span class="id" title="lemma">same_contents_iff_perm</span></a>:<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span>, <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a name="contents_cons_inv"><span class="id" title="lemma">contents_cons_inv</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">l</span> <span class="id" title="var">x</span> <span class="id" title="var">n</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Multiset.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d<sub>8</sub>"><span class="id" title="notation">∃</span></a> <span class="id" title="var">l<sub>1</sub></span> <span class="id" title="var">l<sub>2</sub></span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d<sub>8</sub>"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="Multiset.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Multiset.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#n"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">split</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="Multiset.html#contents_perm"><span class="id" title="axiom">contents_perm</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="Multiset.html#perm_contents"><span class="id" title="axiom">perm_contents</span></a>.<br/>
-<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
 </div>
 
-<div class="doc">
-Therefore, it doesn't matter whether you prove your sorting
-    algorithm using the Permutations method or the multiset method. 
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab53"></a><h4 class="section">Exercise: 2 stars, advanced (contents_insert_other)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="contents_insert_other"><span class="id" title="lemma">contents_insert_other</span></a> : <span class="id" title="keyword">∀</span> <span class="id" title="var">l<sub>1</sub></span> <span class="id" title="var">l<sub>2</sub></span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#32263a1c8b01baecdff9deb038955bc<sub>9</sub>"><span class="id" title="notation">≠</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed<sub>5</sub>"><span class="id" title="notation">::</span></a> <a class="idref" href="Multiset.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="Multiset.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Multiset.html#l<sub>1</sub>"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e<sub>36</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Multiset.html#l<sub>2</sub>"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="Multiset.html#y"><span class="id" title="variable">y</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab54"></a><h4 class="section">Exercise: 3 stars, advanced (contents_perm)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="contents_perm"><span class="id" title="lemma">contents_perm</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span> <span class="id" title="var">H<sub>0</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span>, <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <span class="id" title="var">al</span> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <span class="id" title="var">bl</span> <a class="idref" href="Multiset.html#x"><span class="id" title="variable">x</span></a>).<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="tactic">auto</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">H<sub>0</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">bl</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a name="lab55"></a><h2 class="section">The Main Theorem</h2>
+
+<div class="paragraph"> </div>
+
+ With both directions proved, we can establish the correspondence
+    between multisets and permutations. 
+<div class="paragraph"> </div>
+
+<a name="lab56"></a><h4 class="section">Exercise: 1 star, standard (same_contents_iff_perm)</h4>
+
+<div class="paragraph"> </div>
+
+ Use <span class="inlinecode"><span class="id" title="var">contents_perm</span></span> (even if you haven't proved it) and
+    <span class="inlinecode"><span class="id" title="var">perm_contents</span></span> to quickly prove the next theorem. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Corollary</span> <a name="sort_specifications_equivalent"><span class="id" title="lemma">sort_specifications_equivalent</span></a>:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">sort</span>, <a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a> <a class="idref" href="Multiset.html#sort"><span class="id" title="variable">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a>  <a class="idref" href="Multiset.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="Multiset.html#sort"><span class="id" title="variable">sort</span></a>.<br/>
+<span class="id" title="keyword">Theorem</span> <a name="same_contents_iff_perm"><span class="id" title="lemma">same_contents_iff_perm</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">al</span> <span class="id" title="var">bl</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Multiset.html#al"><span class="id" title="variable">al</span></a> <a class="idref" href="Multiset.html#bl"><span class="id" title="variable">bl</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a>, <a class="idref" href="Multiset.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span>;<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">H</span> <span class="id" title="var">al</span>); <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>;<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Multiset.html#same_contents_iff_perm"><span class="id" title="lemma">same_contents_iff_perm</span></a>; <span class="id" title="tactic">auto</span>.<br/>
-<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2020-07-16&nbsp;15:49:45&nbsp;(UTC+00)&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ Therefore the two specifications are equivalent. 
+<div class="paragraph"> </div>
+
+<a name="lab57"></a><h4 class="section">Exercise: 2 stars, standard (sort_specifications_equivalent)</h4>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <a name="sort_specifications_equivalent"><span class="id" title="lemma">sort_specifications_equivalent</span></a>: <span class="id" title="keyword">∀</span> <span class="id" title="var">sort</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a> <a class="idref" href="Multiset.html#sort"><span class="id" title="variable">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="Multiset.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="Multiset.html#sort"><span class="id" title="variable">sort</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ That means we can verify sorting algorithms using either
+    permutations or multisets, whichever we find more convenient. 
+</div>
+<div class="code">
+
+<br/>
+<span class="comment">(*&nbsp;2020-07-16&nbsp;16:32:31&nbsp;(UTC+00)&nbsp;*)</span><br/>
 </div>
 </div>
 

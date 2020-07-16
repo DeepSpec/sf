@@ -279,4 +279,4 @@ idtac "---------- Himp.p3_p4_inequiv ---------".
 Print Assumptions Himp.p3_p4_inequiv.
 Abort.
 
-(* 2020-07-16 15:47:00 (UTC+00) *)
+(* 2020-07-16 16:29:57 (UTC+00) *)

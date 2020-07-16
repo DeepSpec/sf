@@ -1,53 +1,68 @@
-ins_SearchTree (standard, automatically graded)
+balanceP (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Incorrect type. Admitted proof.
 
-empty_tree_SearchTree (standard, automatically graded)
-Score: 0.0 / 1.0
+insP (standard, automatically graded)
+Score: 0.0 / 2.0
 Reason: Incorrect type. Admitted proof.
 
-insert_SearchTree (standard, automatically graded)
-Score: 0.0 / 1.0
-Reason: Incorrect type. Admitted proof.
-
-lookup_relate (standard, automatically graded)
+ins_BST (standard, automatically graded)
 Score: 0.0 / 3.0
-Reason: Admitted proof.
+Reason: Incorrect type. Admitted proof.
 
-balance_relate (standard, automatically graded)
+insert_BST (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+balance_lookup (standard, automatically graded)
 Score: 0.0 / 6.0
 Reason: Admitted proof.
 
-ins_relate (standard, automatically graded)
+lookup_ins_eq (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-is_redblack_toblack (standard, automatically graded)
-Score: 0.0 / 1.5
+lookup_ins_neq (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+lookup_insert_eq (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+lookup_insert_neq (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+RB_blacken_parent (standard, automatically graded)
+Score: 0.0 / 2.0
 Reason: Incorrect type. Admitted proof.
 
-makeblack_fiddle (standard, automatically graded)
-Score: 0.0 / 1.5
+RB_blacken_root (standard, automatically graded)
+Score: 0.0 / 2.0
 Reason: Incorrect type. Admitted proof.
 
-ins_is_redblack (standard, automatically graded)
-Score: 0.0 / 1.5
+ins_RB (standard, automatically graded)
+Score: 0.0 / 10.0
 Reason: Incorrect type. Admitted proof.
 
-insert_is_redblack (standard, automatically graded)
-Score: 0.0 / 1.5
+insert_RB (standard, automatically graded)
+Score: 0.0 / 2.0
 Reason: Incorrect type. Admitted proof.
 
-Points possible - standard: 22
-Points possible - advanced: 22
+redblack_bound (advanced, manually graded)
+Score: Ungraded / 6.0
+
+Points possible - standard: 40
+Points possible - advanced: 46
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 / 22.0 so far
+   Standard:  0.0 / 40.0 so far
                 and  0.0 ungraded
 
-   Advanced:  0.0 / 22.0 so far
-                and  0.0 ungraded
+   Advanced:  0.0 / 40.0 so far
+                and  6.0 ungraded
 

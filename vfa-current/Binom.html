@@ -48,7 +48,7 @@
   Read the <a href="Extract.html"><span class="inlineref">Extract</span></a> chapter to see what can be done about that.) 
 <div class="paragraph"> </div>
 
-<a name="lab155"></a><h1 class="section">Required Reading</h1>
+<a name="lab238"></a><h1 class="section">Required Reading</h1>
 
 <div class="paragraph"> </div>
 
@@ -64,13 +64,13 @@
 
 <div class="paragraph"> </div>
 
-<a name="lab156"></a><h1 class="section">The Program</h1>
+<a name="lab239"></a><h1 class="section">The Program</h1>
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>. <span class="comment">(*&nbsp;for&nbsp;manual&nbsp;grading&nbsp;*)</span><br/>
 <span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
 <span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Priqueue.html#"><span class="id" title="library">Priqueue</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a name="BinomQueue"><span class="id" title="module">BinomQueue</span></a> &lt;: <a class="idref" href="Priqueue.html#PRIQUEUE"><span class="id" title="module">PRIQUEUE</span></a>.<br/><hr class='doublespaceincode'/>
@@ -185,7 +185,7 @@ A priority queue (using the binomial queues data structure) is a
 </div>
 
 <div class="doc">
-<a name="lab157"></a><h1 class="section">Characterization Predicates</h1>
+<a name="lab240"></a><h1 class="section">Characterization Predicates</h1>
 
 <div class="paragraph"> </div>
 
@@ -240,11 +240,11 @@ A priority queue (using the binomial queues data structure) is a
 </div>
 
 <div class="doc">
-<a name="lab158"></a><h1 class="section">Proof of Algorithm Correctness</h1>
+<a name="lab241"></a><h1 class="section">Proof of Algorithm Correctness</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab159"></a><h2 class="section">Various Functions Preserve the Representation Invariant</h2>
+<a name="lab242"></a><h2 class="section">Various Functions Preserve the Representation Invariant</h2>
 
 <div class="paragraph"> </div>
 
@@ -252,7 +252,7 @@ A priority queue (using the binomial queues data structure) is a
 
 <div class="paragraph"> </div>
 
-<a name="lab160"></a><h4 class="section">Exercise: 1 star, standard (empty_priq)</h4>
+<a name="lab243"></a><h4 class="section">Exercise: 1 star, standard (empty_priq)</h4>
 
 </div>
 <div class="code">
@@ -264,7 +264,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab161"></a><h4 class="section">Exercise: 2 stars, standard (smash_valid)</h4>
+<a name="lab244"></a><h4 class="section">Exercise: 2 stars, standard (smash_valid)</h4>
 
 </div>
 <div class="code">
@@ -277,7 +277,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab162"></a><h4 class="section">Exercise: 3 stars, standard (carry_valid)</h4>
+<a name="lab245"></a><h4 class="section">Exercise: 3 stars, standard (carry_valid)</h4>
 
 </div>
 <div class="code">
@@ -291,7 +291,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab163"></a><h4 class="section">Exercise: 2 stars, standard, optional (insert_valid)</h4>
+<a name="lab246"></a><h4 class="section">Exercise: 2 stars, standard, optional (insert_valid)</h4>
 
 </div>
 <div class="code">
@@ -303,7 +303,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab164"></a><h4 class="section">Exercise: 3 stars, standard, optional (join_valid)</h4>
+<a name="lab247"></a><h4 class="section">Exercise: 3 stars, standard, optional (join_valid)</h4>
 
 </div>
 <div class="code">
@@ -324,7 +324,7 @@ A priority queue (using the binomial queues data structure) is a
 </div>
 
 <div class="doc">
-<a name="lab165"></a><h4 class="section">Exercise: 5 stars, standard, optional (delete_max_Some_priq)</h4>
+<a name="lab248"></a><h4 class="section">Exercise: 5 stars, standard, optional (delete_max_Some_priq)</h4>
 
 </div>
 <div class="code">
@@ -337,7 +337,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab166"></a><h2 class="section">The Abstraction Relation</h2>
+<a name="lab249"></a><h2 class="section">The Abstraction Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -357,7 +357,7 @@ A priority queue (using the binomial queues data structure) is a
 </div>
 
 <div class="doc">
-<a name="lab167"></a><h4 class="section">Exercise: 3 stars, standard (priqueue_elems)</h4>
+<a name="lab250"></a><h4 class="section">Exercise: 3 stars, standard (priqueue_elems)</h4>
  Make an inductive definition, similar to <span class="inlinecode"><span class="id" title="var">tree_elems</span></span>, to relate
   a priority queue  "l"  to a list of all its elements.
 
@@ -387,11 +387,11 @@ A priority queue (using the binomial queues data structure) is a
 </div>
 
 <div class="doc">
-<a name="lab168"></a><h2 class="section">Sanity Checks on the Abstraction Relation</h2>
+<a name="lab251"></a><h2 class="section">Sanity Checks on the Abstraction Relation</h2>
 
 <div class="paragraph"> </div>
 
-<a name="lab169"></a><h4 class="section">Exercise: 2 stars, standard (tree_elems_ext)</h4>
+<a name="lab252"></a><h4 class="section">Exercise: 2 stars, standard (tree_elems_ext)</h4>
  Extensionality theorem for the tree_elems relation 
 </div>
 <div class="code">
@@ -406,7 +406,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab170"></a><h4 class="section">Exercise: 2 stars, standard (tree_perm)</h4>
+<a name="lab253"></a><h4 class="section">Exercise: 2 stars, standard (tree_perm)</h4>
 
 </div>
 <div class="code">
@@ -419,7 +419,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab171"></a><h4 class="section">Exercise: 2 stars, standard (priqueue_elems_ext)</h4>
+<a name="lab254"></a><h4 class="section">Exercise: 2 stars, standard (priqueue_elems_ext)</h4>
  To prove <span class="inlinecode"><span class="id" title="var">priqueue_elems_ext</span></span>, you should almost be able to cut-and-paste the
    proof of <span class="inlinecode"><span class="id" title="var">tree_elems_ext</span></span>, with just a few edits.  
 </div>
@@ -435,7 +435,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab172"></a><h4 class="section">Exercise: 2 stars, standard (abs_perm)</h4>
+<a name="lab255"></a><h4 class="section">Exercise: 2 stars, standard (abs_perm)</h4>
 
 </div>
 <div class="code">
@@ -449,7 +449,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab173"></a><h4 class="section">Exercise: 2 stars, standard (can_relate)</h4>
+<a name="lab256"></a><h4 class="section">Exercise: 2 stars, standard (can_relate)</h4>
 
 </div>
 <div class="code">
@@ -465,8 +465,8 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab174"></a><h2 class="section">Various Functions Preserve the Abstraction Relation</h2>
-<a name="lab175"></a><h4 class="section">Exercise: 1 star, standard (empty_relate)</h4>
+<a name="lab257"></a><h2 class="section">Various Functions Preserve the Abstraction Relation</h2>
+<a name="lab258"></a><h4 class="section">Exercise: 1 star, standard (empty_relate)</h4>
 
 </div>
 <div class="code">
@@ -479,7 +479,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab176"></a><h4 class="section">Exercise: 3 stars, standard (smash_elems)</h4>
+<a name="lab259"></a><h4 class="section">Exercise: 3 stars, standard (smash_elems)</h4>
   Warning:  This proof is rather long. 
 </div>
 <div class="code">
@@ -496,14 +496,14 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab177"></a><h2 class="section">Optional Exercises</h2>
+<a name="lab260"></a><h2 class="section">Optional Exercises</h2>
 
 <div class="paragraph"> </div>
 
   Some of these proofs are quite long, but they're not especially tricky. 
 <div class="paragraph"> </div>
 
-<a name="lab178"></a><h4 class="section">Exercise: 4 stars, standard, optional (carry_elems)</h4>
+<a name="lab261"></a><h4 class="section">Exercise: 4 stars, standard, optional (carry_elems)</h4>
 
 </div>
 <div class="code">
@@ -520,7 +520,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab179"></a><h4 class="section">Exercise: 2 stars, standard, optional (insert_elems)</h4>
+<a name="lab262"></a><h4 class="section">Exercise: 2 stars, standard, optional (insert_elems)</h4>
 
 </div>
 <div class="code">
@@ -533,7 +533,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab180"></a><h4 class="section">Exercise: 4 stars, standard, optional (join_elems)</h4>
+<a name="lab263"></a><h4 class="section">Exercise: 4 stars, standard, optional (join_elems)</h4>
 
 </div>
 <div class="code">
@@ -554,7 +554,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab181"></a><h4 class="section">Exercise: 2 stars, standard, optional (merge_relate)</h4>
+<a name="lab264"></a><h4 class="section">Exercise: 2 stars, standard, optional (merge_relate)</h4>
 
 </div>
 <div class="code">
@@ -571,7 +571,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab182"></a><h4 class="section">Exercise: 5 stars, standard, optional (delete_max_None_relate)</h4>
+<a name="lab265"></a><h4 class="section">Exercise: 5 stars, standard, optional (delete_max_None_relate)</h4>
 
 </div>
 <div class="code">
@@ -584,7 +584,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab183"></a><h4 class="section">Exercise: 5 stars, standard, optional (delete_max_Some_relate)</h4>
+<a name="lab266"></a><h4 class="section">Exercise: 5 stars, standard, optional (delete_max_Some_relate)</h4>
 
 </div>
 <div class="code">
@@ -613,11 +613,11 @@ A priority queue (using the binomial queues data structure) is a
 </div>
 
 <div class="doc">
-<a name="lab184"></a><h1 class="section">Measurement.</h1>
+<a name="lab267"></a><h1 class="section">Measurement.</h1>
 
 <div class="paragraph"> </div>
 
-<a name="lab185"></a><h4 class="section">Exercise: 5 stars, standard, optional (binom_measurement)</h4>
+<a name="lab268"></a><h4 class="section">Exercise: 5 stars, standard, optional (binom_measurement)</h4>
  Adapt the program (but not necessarily the proof) to use Ocaml integers
   as keys, in the style shown in <a href="Extract.html"><span class="inlineref">Extract</span></a>.   Write an ML program to
   exercise it with random inputs.  Compare the runtime to the implementation
@@ -627,7 +627,7 @@ A priority queue (using the binomial queues data structure) is a
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-07-16&nbsp;15:49:46&nbsp;(UTC+00)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-07-16&nbsp;16:32:33&nbsp;(UTC+00)&nbsp;*)</span><br/>
 </div>
 </div>
 

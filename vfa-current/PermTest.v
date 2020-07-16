@@ -35,34 +35,34 @@ Goal True.
 idtac "-------------------  Permutation_properties  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: Exploration1.Permutation_properties".
+idtac "#> Manually graded: Permutation_properties".
 idtac "Possible points: 2".
-print_manual_grade Exploration1.manual_grade_for_Permutation_properties.
+print_manual_grade manual_grade_for_Permutation_properties.
 idtac " ".
 
 idtac "-------------------  permut_example  --------------------".
 idtac " ".
 
-idtac "#> Exploration1.permut_example".
+idtac "#> permut_example".
 idtac "Possible points: 3".
-check_type @Exploration1.permut_example (
+check_type @permut_example (
 (forall a b : list nat,
  @Permutation nat (5 :: 6 :: a ++ b) ((5 :: b) ++ 6 :: a ++ []))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions Exploration1.permut_example.
+Print Assumptions permut_example.
 Goal True.
 idtac " ".
 
 idtac "-------------------  not_a_permutation  --------------------".
 idtac " ".
 
-idtac "#> Exploration1.not_a_permutation".
-idtac "Possible points: 1".
-check_type @Exploration1.not_a_permutation ((~ @Permutation nat [1; 1] [1; 2])).
+idtac "#> not_a_permutation".
+idtac "Possible points: 2".
+check_type @not_a_permutation ((~ @Permutation nat [1; 1] [1; 2])).
 idtac "Assumptions:".
 Abort.
-Print Assumptions Exploration1.not_a_permutation.
+Print Assumptions not_a_permutation.
 Goal True.
 idtac " ".
 
@@ -70,7 +70,7 @@ idtac "-------------------  Forall_perm  --------------------".
 idtac " ".
 
 idtac "#> Forall_perm".
-idtac "Possible points: 2".
+idtac "Possible points: 3".
 check_type @Forall_perm (
 (forall (A : Type) (f : A -> Prop) (al bl : list A),
  @Permutation A al bl -> @Forall A f al -> @Forall A f bl)).
@@ -82,21 +82,27 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 8".
-idtac "Max points - advanced: 8".
+idtac "Max points - standard: 10".
+idtac "Max points - advanced: 10".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "functional_extensionality_dep".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
 idtac "int".
-idtac "int2Z".
-idtac "ltb_lt".
+idtac "Abs".
+idtac "Abs_inj".
 idtac "ltb".
+idtac "ltb_lt".
+idtac "leb".
+idtac "leb_le".
 idtac "Extract.int".
-idtac "Extract.int2Z".
-idtac "Extract.ltb_lt".
+idtac "Extract.Abs".
+idtac "Extract.Abs_inj".
 idtac "Extract.ltb".
+idtac "Extract.ltb_lt".
+idtac "Extract.leb".
+idtac "Extract.leb_le".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -112,14 +118,14 @@ idtac "".
 idtac "********** Standard **********".
 idtac "---------- Permutation_properties ---------".
 idtac "MANUAL".
-idtac "---------- Exploration1.permut_example ---------".
-Print Assumptions Exploration1.permut_example.
-idtac "---------- Exploration1.not_a_permutation ---------".
-Print Assumptions Exploration1.not_a_permutation.
+idtac "---------- permut_example ---------".
+Print Assumptions permut_example.
+idtac "---------- not_a_permutation ---------".
+Print Assumptions not_a_permutation.
 idtac "---------- Forall_perm ---------".
 Print Assumptions Forall_perm.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-07-16 15:49:50 (UTC+00) *)
+(* 2020-07-16 16:32:36 (UTC+00) *)

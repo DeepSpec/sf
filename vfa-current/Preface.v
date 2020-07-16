@@ -8,7 +8,7 @@
       (the Gallina language embedded in Coq's logic).
  - Prove it correct in Coq.
  - Compile it with an optimizing ML compiler.
- 
+
  Since you want your programs to be _efficient_, you'll want to
  implement sophisticated data structures and algorithms.  Since
  Gallina is a _purely functional_ language, it helps to have
@@ -50,12 +50,12 @@
 
     In this volume, the core path is:
 
-    [Preface] -> [Perm] -> [Sort] -> [SearchTree] -> [Redblack]
+    [Preface] -> [Perm] -> [Sort] -> [SearchTree] -> [Extract] -> [Redblack]
 
     with many optional chapters whose dependencies are,
 
     - [Sort] -> [Multiset] or [Selection] or [Decide]
-    - [SearchTree] -> [ADT] or [Extract]
+    - [SearchTree] -> [ADT]
     - [Perm] -> [Trie]
     - [Sort] -> [Selection] -> [SearchTree] -> [ADT] -> [Priqueue] -> [Binom]
 
@@ -161,4 +161,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2020-07-16 15:49:44 (UTC+00) *)
+(* 2020-07-16 16:32:31 (UTC+00) *)

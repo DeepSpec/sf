@@ -38,7 +38,7 @@
 
 <div class="paragraph"> </div>
 
-<a name="lab119"></a><h1 class="section">LogN Penalties in Functional Programming</h1>
+<a name="lab202"></a><h1 class="section">LogN Penalties in Functional Programming</h1>
 
 <div class="paragraph"> </div>
 
@@ -119,13 +119,13 @@
    with logN-time addition, subtraction, and comparison. 
 <div class="paragraph"> </div>
 
-<a name="lab120"></a><h1 class="section">A Simple Program That's Waaaaay Too Slow.</h1>
+<a name="lab203"></a><h1 class="section">A Simple Program That's Waaaaay Too Slow.</h1>
 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
+<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>. <span class="comment">(*&nbsp;for&nbsp;manual&nbsp;grading&nbsp;*)</span><br/>
 <span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
 <span class="id" title="var">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">FunctionalExtensionality</span>.<br/><hr class='doublespaceincode'/>
@@ -181,7 +181,7 @@ Remember, <span class="inlinecode"><span class="id" title="var">nat</span></span
 </div>
 
 <div class="doc">
-<a name="lab121"></a><h1 class="section">Efficient Positive Numbers</h1>
+<a name="lab204"></a><h1 class="section">Efficient Positive Numbers</h1>
  We can do better; we <i>must</i> do better.  In fact, Coq's integer type,
      called <span class="inlinecode"><span class="id" title="var">Z</span></span>, is a binary representation (not unary), so that operations
      such as <span class="inlinecode"><span class="id" title="var">plus</span></span> and <span class="inlinecode"><span class="id" title="var">leq</span></span> take time linear in the number of bits, that is,
@@ -334,7 +334,7 @@ To add binary numbers, we work from low-order to high-order,
 </div>
 
 <div class="doc">
-<a name="lab122"></a><h4 class="section">Exercise: 2 stars, standard (succ_correct)</h4>
+<a name="lab205"></a><h4 class="section">Exercise: 2 stars, standard (succ_correct)</h4>
 
 </div>
 <div class="code">
@@ -348,7 +348,7 @@ To add binary numbers, we work from low-order to high-order,
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab123"></a><h4 class="section">Exercise: 3 stars, standard (addc_correct)</h4>
+<a name="lab206"></a><h4 class="section">Exercise: 3 stars, standard (addc_correct)</h4>
  You may use <span class="inlinecode"><span class="id" title="tactic">omega</span></span> in this proof if you want, along with induction
     of course.  But really, using <span class="inlinecode"><span class="id" title="tactic">omega</span></span> is an anachronism in a sense:
     Coq's <span class="inlinecode"><span class="id" title="tactic">omega</span></span> uses theorems about <span class="inlinecode"><span class="id" title="var">Z</span></span> that are proved from theorems about
@@ -406,7 +406,7 @@ To add binary numbers, we work from low-order to high-order,
 </div>
 
 <div class="doc">
-<a name="lab124"></a><h4 class="section">Exercise: 5 stars, standard (compare_correct)</h4>
+<a name="lab207"></a><h4 class="section">Exercise: 5 stars, standard (compare_correct)</h4>
 
 </div>
 <div class="code">
@@ -445,7 +445,7 @@ To add binary numbers, we work from low-order to high-order,
      Proof: it's structurally inductive on the height of <span class="inlinecode"><span class="id" title="var">x</span></span>. 
 <div class="paragraph"> </div>
 
-<a name="lab125"></a><h2 class="section">Coq's Integer Type, <span class="inlinecode"><span class="id" title="var">Z</span></span></h2>
+<a name="lab208"></a><h2 class="section">Coq's Integer Type, <span class="inlinecode"><span class="id" title="var">Z</span></span></h2>
  Coq's integer type is constructed from positive numbers: 
 </div>
 <div class="code">
@@ -492,7 +492,7 @@ These types, <span class="inlinecode"><span class="id" title="var">positive</spa
 </div>
 
 <div class="doc">
-<a name="lab126"></a><h2 class="section">From <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">N</span>×<span class="id" title="var">N</span></span> to <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">N</span>×<span class="id" title="var">logN</span></span></h2>
+<a name="lab209"></a><h2 class="section">From <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">N</span>×<span class="id" title="var">N</span></span> to <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">N</span>×<span class="id" title="var">logN</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -523,7 +523,7 @@ These types, <span class="inlinecode"><span class="id" title="var">positive</spa
 </div>
 
 <div class="doc">
-<a name="lab127"></a><h2 class="section">From <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">N</span>×<span class="id" title="var">logN</span></span> to <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">logN</span>×<span class="id" title="var">logN</span></span></h2>
+<a name="lab210"></a><h2 class="section">From <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">N</span>×<span class="id" title="var">logN</span></span> to <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">logN</span>×<span class="id" title="var">logN</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -533,7 +533,7 @@ These types, <span class="inlinecode"><span class="id" title="var">positive</spa
    Overall, the asymptotic run time is <span class="inlinecode"><span class="id" title="var">N</span>*(<span class="id" title="var">logN</span>)^2</span>. 
 <div class="paragraph"> </div>
 
-<a name="lab128"></a><h1 class="section">Tries: Efficient Lookup Tables on Positive Binary Numbers</h1>
+<a name="lab211"></a><h1 class="section">Tries: Efficient Lookup Tables on Positive Binary Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -640,7 +640,7 @@ Given a <span class="inlinecode"><span class="id" title="var">positive</span></s
 </div>
 
 <div class="doc">
-<a name="lab129"></a><h2 class="section">From <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">logN</span>×<span class="id" title="var">logN</span></span> to <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">logN</span></span></h2>
+<a name="lab212"></a><h2 class="section">From <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">logN</span>×<span class="id" title="var">logN</span></span> to <span class="inlinecode"><span class="id" title="var">N</span>×<span class="id" title="var">logN</span></span></h2>
 
 </div>
 <div class="code">
@@ -671,7 +671,7 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
     constant time. 
 <div class="paragraph"> </div>
 
-<a name="lab130"></a><h4 class="section">Exercise: 2 stars, standard (successor_of_Z_constant_time)</h4>
+<a name="lab213"></a><h4 class="section">Exercise: 2 stars, standard (successor_of_Z_constant_time)</h4>
  Explain why the average-case time for successor of a binary
      integer, with carry, is constant time.  Assume that the input integer
      is random (uniform distribution from 1 to N), or assume that
@@ -691,7 +691,7 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab131"></a><h1 class="section">Proving the Correctness of Trie Tables</h1>
+<a name="lab214"></a><h1 class="section">Proving the Correctness of Trie Tables</h1>
 
 <div class="paragraph"> </div>
 
@@ -710,11 +710,11 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
      relation between the <span class="inlinecode"><span class="id" title="var">lookup</span></span> and the <span class="inlinecode"><span class="id" title="var">insert</span></span> operators. 
 <div class="paragraph"> </div>
 
-<a name="lab132"></a><h2 class="section">Lemmas About the Relation Between <span class="inlinecode"><span class="id" title="var">lookup</span></span> and <span class="inlinecode"><span class="id" title="var">insert</span></span></h2>
+<a name="lab215"></a><h2 class="section">Lemmas About the Relation Between <span class="inlinecode"><span class="id" title="var">lookup</span></span> and <span class="inlinecode"><span class="id" title="var">insert</span></span></h2>
 
 <div class="paragraph"> </div>
 
-<a name="lab133"></a><h4 class="section">Exercise: 1 star, standard (look_leaf)</h4>
+<a name="lab216"></a><h4 class="section">Exercise: 1 star, standard (look_leaf)</h4>
 
 </div>
 <div class="code">
@@ -727,7 +727,7 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab134"></a><h4 class="section">Exercise: 2 stars, standard (look_ins_same)</h4>
+<a name="lab217"></a><h4 class="section">Exercise: 2 stars, standard (look_ins_same)</h4>
  This is a rather simple induction. 
 </div>
 <div class="code">
@@ -741,7 +741,7 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab135"></a><h4 class="section">Exercise: 3 stars, standard (look_ins_same)</h4>
+<a name="lab218"></a><h4 class="section">Exercise: 3 stars, standard (look_ins_same)</h4>
  Induction on j? Induction on t?   Do you feel lucky? 
 </div>
 <div class="code">
@@ -756,7 +756,7 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab136"></a><h2 class="section">Bijection Between <span class="inlinecode"><span class="id" title="var">positive</span></span> and <span class="inlinecode"><span class="id" title="var">nat</span></span>.</h2>
+<a name="lab219"></a><h2 class="section">Bijection Between <span class="inlinecode"><span class="id" title="var">positive</span></span> and <span class="inlinecode"><span class="id" title="var">nat</span></span>.</h2>
 
 <div class="paragraph"> </div>
 
@@ -790,7 +790,7 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
 Now, use those two lemmas to prove that it's really a bijection! 
 <div class="paragraph"> </div>
 
-<a name="lab137"></a><h4 class="section">Exercise: 2 stars, standard (pos2nat_bijective)</h4>
+<a name="lab220"></a><h4 class="section">Exercise: 2 stars, standard (pos2nat_bijective)</h4>
 
 </div>
 <div class="code">
@@ -804,7 +804,7 @@ Now, use those two lemmas to prove that it's really a bijection!
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab138"></a><h2 class="section">Proving That Tries are a "Table" ADT.</h2>
+<a name="lab221"></a><h2 class="section">Proving That Tries are a "Table" ADT.</h2>
 
 <div class="paragraph"> </div>
 
@@ -837,7 +837,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 </div>
 
 <div class="doc">
-<a name="lab139"></a><h4 class="section">Exercise: 2 stars, standard (is_trie)</h4>
+<a name="lab222"></a><h4 class="section">Exercise: 2 stars, standard (is_trie)</h4>
  If you picked a <i>really simple</i> representation invariant, these should be easy.
     Later, if you need to change the representation invariant in order to
     get the <span class="inlinecode"><span class="id" title="var">_relate</span></span> proofs to work, then you'll need to fix these proofs. 
@@ -856,7 +856,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab140"></a><h4 class="section">Exercise: 2 stars, standard (empty_relate)</h4>
+<a name="lab223"></a><h4 class="section">Exercise: 2 stars, standard (empty_relate)</h4>
  Just unfold a bunch of definitions, use <span class="inlinecode"><span class="id" title="tactic">extensionality</span></span>, and
     use one of the lemmas you proved above, in the section
     "Lemmas about the relation between <span class="inlinecode"><span class="id" title="var">lookup</span></span> and <span class="inlinecode"><span class="id" title="var">insert</span></span>." 
@@ -874,7 +874,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab141"></a><h4 class="section">Exercise: 2 stars, standard (lookup_relate)</h4>
+<a name="lab224"></a><h4 class="section">Exercise: 2 stars, standard (lookup_relate)</h4>
  Given the abstraction relation we've chosen, this one should be really simple. 
 </div>
 <div class="code">
@@ -889,7 +889,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab142"></a><h4 class="section">Exercise: 3 stars, standard (insert_relate)</h4>
+<a name="lab225"></a><h4 class="section">Exercise: 3 stars, standard (insert_relate)</h4>
  Given the abstraction relation we've chosen, this one should NOT be simple.
    However, you've already done the heavy lifting, with the lemmas
   <span class="inlinecode"><span class="id" title="var">look_ins_same</span></span> and <span class="inlinecode"><span class="id" title="var">look_ins_other</span></span>.   You will not need induction here.
@@ -911,7 +911,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a name="lab143"></a><h2 class="section">Sanity Check</h2>
+<a name="lab226"></a><h2 class="section">Sanity Check</h2>
 
 </div>
 <div class="code">
@@ -930,7 +930,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 </div>
 
 <div class="doc">
-<a name="lab144"></a><h1 class="section">Conclusion</h1>
+<a name="lab227"></a><h1 class="section">Conclusion</h1>
  Efficient functional maps with (positive) integer keys are one of the most
    important data structures in functional programming.  They are used for
   symbol tables in compilers and static analyzers; to represent directed graphs
@@ -950,7 +950,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-07-16&nbsp;15:49:45&nbsp;(UTC+00)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-07-16&nbsp;16:32:32&nbsp;(UTC+00)&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -83,13 +83,19 @@ idtac "functional_extensionality".
 idtac "functional_extensionality_dep".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
 idtac "int".
-idtac "int2Z".
-idtac "ltb_lt".
+idtac "Abs".
+idtac "Abs_inj".
 idtac "ltb".
+idtac "ltb_lt".
+idtac "leb".
+idtac "leb_le".
 idtac "Extract.int".
-idtac "Extract.int2Z".
-idtac "Extract.ltb_lt".
+idtac "Extract.Abs".
+idtac "Extract.Abs_inj".
 idtac "Extract.ltb".
+idtac "Extract.ltb_lt".
+idtac "Extract.leb".
+idtac "Extract.leb_le".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -113,4 +119,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-07-16 15:49:47 (UTC+00) *)
+(* 2020-07-16 16:32:34 (UTC+00) *)

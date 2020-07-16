@@ -1,21 +1,120 @@
-TreeTable.gso (standard, automatically graded)
-Score: 0.0 / 3.0
+StringListsTableExamples.StringListsTable.get_empty_default (standard, automatically graded)
+Score: 0.0 / 0.5
 Reason: Admitted proof.
 
-TreeTable2.gso (standard, automatically graded)
-Score: 0.0 / 3.0
+StringListsTableExamples.StringListsTable.get_set_same (standard, automatically graded)
+Score: 0.0 / 0.5
 Reason: Admitted proof.
 
-Points possible - standard: 6
-Points possible - advanced: 6
+StringListsTableExamples.StringListsTable.get_set_other (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListsTableExamples.ex1 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListsTableExamples.ex2 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListsTableExamples.ex3 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListETableAbs.empty_ok (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListETableAbs.set_ok (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListETableAbs.empty_relate (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListETableAbs.bound_relate (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+StringListETableAbs.lookup_relate (standard, automatically graded)
+Score: 0.0 / 1.5
+Reason: Admitted proof.
+
+StringListETableAbs.insert_relate (standard, automatically graded)
+Score: 0.0 / 1.5
+Reason: Admitted proof.
+
+StringListETableAbs.elements_relate (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+ListQueue.is_empty_empty (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+ListQueue.is_empty_nonempty (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+ListQueue.peek_empty (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+ListQueue.peek_nonempty (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+ListQueue.deq_empty (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+ListQueue.deq_nonempty (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+TwoListQueueAbs.empty_relate (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+TwoListQueueAbs.enq_relate (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+TwoListQueueAbs.peek_relate (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+TwoListQueueAbs.deq_relate (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+a_vector (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+vector_cons_correct (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+vector_app_correct (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+ListsETable (advanced, manually graded)
+Score: Ungraded / 6.0
+
+Points possible - standard: 20
+Points possible - advanced: 26
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 /  6.0 so far
+   Standard:  0.0 / 20.0 so far
                 and  0.0 ungraded
 
-   Advanced:  0.0 /  6.0 so far
-                and  0.0 ungraded
+   Advanced:  0.0 / 20.0 so far
+                and  6.0 ungraded
 

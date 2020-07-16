@@ -1,52 +1,69 @@
-example_map (standard, automatically graded)
-Score: 0.0 / 2.0
-Reason: Admitted proof.
-
-check_example_map (standard, automatically graded)
-Score: 0.0 / 3.0
-Reason: Admitted proof.
-
-lookup_relate (standard, automatically graded)
-Score: 0.0 / 3.0
-Reason: Admitted proof.
-
-insert_relate (standard, automatically graded)
-Score: 0.0 / 6.0
-Reason: Admitted proof.
-
-elements_relate_informal (standard, manually graded)
-Score: Ungraded / 3.0
-
-not_elements_relate (standard, automatically graded)
-Score: 0.0 / 6.0
-Reason: Admitted proof.
-
-empty_tree_SearchTree (standard, automatically graded)
+empty_tree_BST (standard, automatically graded)
 Score: 0.0 / 1.0
 Reason: Admitted proof.
 
-insert_SearchTree (standard, automatically graded)
+ForallT_insert (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-can_relate (standard, automatically graded)
+insert_BST (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+elements_complete (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+elements_preserves_forall (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 
-unrealistically_strong_can_relate (standard, automatically graded)
+elements_preserves_relation (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 
-Points possible - standard: 31
-Points possible - advanced: 31
+elements_correct (standard, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+elements_complete_inverse (advanced, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+bound_value (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+elements_complete_inverse (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+sorted_app (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+sorted_elements (advanced, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+fast_elements_tr_helper (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+fast_elements_eq_elements (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Points possible - standard: 23
+Points possible - advanced: 40
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 / 28.0 so far
-                and  3.0 ungraded
+   Standard:  0.0 / 23.0 so far
+                and  0.0 ungraded
 
-   Advanced:  0.0 / 28.0 so far
-                and  3.0 ungraded
+   Advanced:  0.0 / 40.0 so far
+                and  0.0 ungraded
 
