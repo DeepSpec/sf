@@ -131,8 +131,8 @@ check_type @STLCExtended.Examples.FixTest2.reduces (
 (STLCExtended.multistep
    (STLCExtended.app
       (STLCExtended.app STLCExtended.Examples.FixTest2.map
-         (STLCExtended.abs "a" STLCExtended.Nat
-            (STLCExtended.scc (STLCExtended.var "a"))))
+         (STLCExtended.abs STLCExtended.Examples.a STLCExtended.Nat
+            (STLCExtended.scc (STLCExtended.var STLCExtended.Examples.a))))
       (STLCExtended.tcons (STLCExtended.const 1)
          (STLCExtended.tcons (STLCExtended.const 2)
             (STLCExtended.tnil STLCExtended.Nat))))
@@ -286,4 +286,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-07-19 03:51:39 (UTC+00) *)
+(* 2020-07-21 19:32:00 (UTC+00) *)

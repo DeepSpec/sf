@@ -2245,4 +2245,4 @@ Definition manual_grade_for_preservation : option (nat*string) := None.
 
 End STLCExtended.
 
-(* 2020-07-19 03:50:55 (UTC+00) *)
+(* 2020-07-21 19:31:23 (UTC+00) *)

@@ -94,9 +94,11 @@ idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.ex2 (
 (StringListsTableExamples.StringListsTable.get 0
    (StringListsTableExamples.StringListsTable.set 0
-      (String.String "A" String.EmptyString)
-      StringListsTableExamples.StringListsTable.empty) =
- String.String "A" String.EmptyString)).
+      (String.String
+         (Ascii.Ascii true false false false false false true false)
+         String.EmptyString) StringListsTableExamples.StringListsTable.empty) =
+ String.String (Ascii.Ascii true false false false false false true false)
+   String.EmptyString)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.ex2.
@@ -108,8 +110,10 @@ idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.ex3 (
 (StringListsTableExamples.StringListsTable.get 1
    (StringListsTableExamples.StringListsTable.set 0
-      (String.String "A" String.EmptyString)
-      StringListsTableExamples.StringListsTable.empty) = String.EmptyString)).
+      (String.String
+         (Ascii.Ascii true false false false false false true false)
+         String.EmptyString) StringListsTableExamples.StringListsTable.empty) =
+ String.EmptyString)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.ex3.
@@ -465,4 +469,4 @@ idtac "---------- ListsETable ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2020-07-19 03:53:59 (UTC+00) *)
+(* 2020-07-21 19:34:14 (UTC+00) *)

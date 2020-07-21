@@ -313,4 +313,4 @@ Proof.
     section of chapter [Hoare2] on formalizing decorated programs
     shows how we can do even better. *)
 
-(* 2020-07-19 03:50:54 (UTC+00) *)
+(* 2020-07-21 19:31:22 (UTC+00) *)
