@@ -4840,4 +4840,4 @@ End LibTacticsCompatibility.
 Open Scope nat_scope.
 
 
-(* 2020-07-21 19:31:25 (UTC+00) *)
+(* 2020-07-22 22:37:13 (UTC+00) *)

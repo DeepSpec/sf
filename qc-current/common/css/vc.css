@@ -1,9 +1,9 @@
 /*   Styles for SF: V5: Verifiable C     */
 
 /*   Background   */
-body { 	background-image: url('../media/image/verified_bg.jpg');   }
-#header { background-color: rgba(52, 173, 46, 0.54);
+body { 	background-image: url('../media/image/vc_bg.jpg');   }
+#header { background-color: rgb(89, 48, 53);
 }
 /*   This volume's color   */
-.section, ul#menu li.section_name, div.button  { background-color: #4CCD45; }
+.section, ul#menu li.section_name, div.button  { background-color: rgb(89,48,53); }
 
