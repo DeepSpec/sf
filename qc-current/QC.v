@@ -1656,4 +1656,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2020-07-22 22:43:29 (UTC+00) *)
+(* 2020-07-24 23:05:40 (UTC+00) *)
