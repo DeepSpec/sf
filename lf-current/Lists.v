@@ -1126,4 +1126,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2020-07-24 22:58:38 (UTC+00) *)
+(* 2020-07-24 23:10:21 (UTC+00) *)
