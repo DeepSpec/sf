@@ -148,7 +148,8 @@ h2.section {
     padding-left: 0px; 
     padding-top: 0px;  
     padding-bottom: 0px; 
-    margin-top: 0px;
+    /* margin-top: 0px; */
+    margin-top: 9px; /* BCP 2/20 */
     font-size : 135%; }
 
 h3.section {
@@ -161,7 +162,8 @@ h3.section {
     /* padding-bottom: 0px; */
     padding-bottom: 0.5em; 
     /* margin-top: 9px; */
-    margin-top: 4px;
+    /* margin-top: 4px;  (BCP 2/20) */
+    margin-top: 9px;   /* BCP 2/20 */
     font-size : 115%;
     color:black;
 }
