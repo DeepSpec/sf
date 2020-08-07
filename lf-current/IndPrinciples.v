@@ -916,4 +916,4 @@ Qed.
     scratch.  Only lemmas whose proofs pass the type-checker can be
     used in further proof developments.  *)
 
-(* 2020-08-01 17:36 *)
+(* 2020-08-07 17:51 *)

@@ -1666,4 +1666,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-08-01 17:38 *)
+(* 2020-08-07 17:52 *)
