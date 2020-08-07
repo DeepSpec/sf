@@ -7,7 +7,7 @@ jobs:
       coq:
         type: string
     docker:
-      - image: ysli/quickchick:<<parameters.coq>>
+      - image: ysli/sfdev:<<parameters.coq>>
     resource_class: medium
     environment:
       OPAMJOBS: 2
@@ -50,18 +50,6 @@ workflows:
   version: 2
   test:
     jobs:
-      - build:
-          name: Coq 8.8
-          coq: '8.8'
-      - build:
-          name: Coq 8.9
-          coq: '8.9'
-      - build:
-          name: Coq 8.10
-          coq: '8.10'
-      - build:
-          name: Coq 8.11
-          coq: '8.11'
       - build:
           name: Coq 8.12
           coq: '8.12'
