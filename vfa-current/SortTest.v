@@ -175,4 +175,4 @@ idtac "---------- sorted'_sorted ---------".
 Print Assumptions sorted'_sorted.
 Abort.
 
-(* 2020-08-07 17:55 *)
+(* 2020-08-08 00:36 *)

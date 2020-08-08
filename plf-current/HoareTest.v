@@ -129,9 +129,9 @@ check_type @if_minus_plus (
    (Imp.CAss Imp.Y (Imp.APlus (Imp.AId Imp.X) (Imp.AId Imp.Z)))
  {{fun st : Imp.state =>
    Aexp_of_aexp (Imp.AId Imp.Y) st =
-   (mkAexp
-      (fun st0 : Imp.state =>
-       (Aexp_of_aexp (Imp.AId Imp.X) st0 + Aexp_of_aexp (Imp.AId Imp.Z) st0)%nat))
+   mkAexp
+     (fun st0 : Imp.state =>
+      (Aexp_of_aexp (Imp.AId Imp.X) st0 + Aexp_of_aexp (Imp.AId Imp.Z) st0)%nat)
      st}})).
 idtac "Assumptions:".
 Abort.
@@ -231,4 +231,4 @@ idtac "---------- hoare_repeat ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2020-08-07 17:52 *)
+(* 2020-08-08 00:33 *)

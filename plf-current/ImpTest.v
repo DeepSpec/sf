@@ -111,7 +111,7 @@ idtac "#> s_execute1".
 idtac "Possible points: 0.5".
 check_type @s_execute1 (
 (s_execute empty_st (@nil nat)
-   (SPush 5 :: (SPush 3 :: SPush 1 :: SMinus :: @nil sinstr)%list) =
+   (SPush 5 :: SPush 3 :: SPush 1 :: SMinus :: @nil sinstr) =
  (2 :: 5 :: @nil nat)%list)).
 idtac "Assumptions:".
 Abort.
@@ -122,8 +122,8 @@ idtac " ".
 idtac "#> s_execute2".
 idtac "Possible points: 0.5".
 check_type @s_execute2 (
-(s_execute (X !-> 3) (3 :: (4 :: @nil nat)%list)
-   (SPush 4 :: (SLoad X :: SMult :: SPlus :: @nil sinstr)%list) =
+(s_execute (X !-> 3) (3 :: 4 :: @nil nat)
+   (SPush 4 :: SLoad X :: SMult :: SPlus :: @nil sinstr) =
  (15 :: 4 :: @nil nat)%list)).
 idtac "Assumptions:".
 Abort.
@@ -249,4 +249,4 @@ idtac "---------- BreakImp.while_stops_on_break ---------".
 Print Assumptions BreakImp.while_stops_on_break.
 Abort.
 
-(* 2020-08-07 17:52 *)
+(* 2020-08-08 00:33 *)

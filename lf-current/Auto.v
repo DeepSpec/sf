@@ -670,4 +670,4 @@ Proof. info_eauto. Qed.
     ordinary variants don't do the job. *)
 
 
-(* 2020-08-07 17:51 *)
+(* 2020-08-08 00:31 *)

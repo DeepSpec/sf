@@ -1,14 +1,14 @@
 StringListsTableExamples.StringListsTable.get_empty_default (standard, automatically graded)
 Score: 0.0 / 0.5
-Reason: Admitted proof. Disallowed axiom forall. Disallowed axiom StringListsTableExamples.StringListsTable.get. Disallowed axiom StringListsTableExamples.StringListsTable.default.
+Reason: Admitted proof.
 
 StringListsTableExamples.StringListsTable.get_set_same (standard, automatically graded)
 Score: 0.0 / 0.5
-Reason: Admitted proof. Disallowed axiom forall. Disallowed axiom StringListsTableExamples.StringListsTable.get.
+Reason: Admitted proof.
 
 StringListsTableExamples.StringListsTable.get_set_other (standard, automatically graded)
 Score: 0.0 / 0.5
-Reason: Admitted proof. Disallowed axiom forall. Disallowed axiom k. Disallowed axiom StringListsTableExamples.StringListsTable.get. Disallowed axiom StringListsTableExamples.StringListsTable.get.
+Reason: Admitted proof.
 
 StringListsTableExamples.ex1 (standard, automatically graded)
 Score: 0.0 / 0.5

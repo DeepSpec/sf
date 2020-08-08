@@ -38,7 +38,7 @@
 
 <div class="paragraph"> </div>
 
-<a name="lab393"></a><h1 class="section">Basic Extraction</h1>
+<a id="lab393"></a><h1 class="section">Basic Extraction</h1>
 
 <div class="paragraph"> </div>
 
@@ -65,10 +65,10 @@ Now we load up the Coq environment with some definitions, either
 <div class="code">
 
 <br/>
-<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="ImpCEvalFun.html#"><span class="id" title="library">ImpCEvalFun</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="ImpCEvalFun.html#"><span class="id" title="library">ImpCEvalFun</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -89,7 +89,7 @@ When Coq processes this command, it generates a file <span class="inlinecode"><s
 </div>
 
 <div class="doc">
-<a name="lab394"></a><h1 class="section">Controlling Extraction of Specific Types</h1>
+<a id="lab394"></a><h1 class="section">Controlling Extraction of Specific Types</h1>
 
 <div class="paragraph"> </div>
 
@@ -159,7 +159,7 @@ Have a look at the file <span class="inlinecode"><span class="id" title="var">im
 </div>
 
 <div class="doc">
-<a name="lab395"></a><h1 class="section">A Complete Example</h1>
+<a id="lab395"></a><h1 class="section">A Complete Example</h1>
 
 <div class="paragraph"> </div>
 
@@ -201,9 +201,9 @@ The extraction is the same as always.
 <div class="code">
 
 <br/>
-<span class="id" title="var">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Imp.html#"><span class="id" title="library">Imp</span></a>.<br/>
-<span class="id" title="var">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="ImpParser.html#"><span class="id" title="library">ImpParser</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Maps.html#"><span class="id" title="library">Maps</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Imp.html#"><span class="id" title="library">Imp</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="ImpParser.html#"><span class="id" title="library">ImpParser</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Maps.html#"><span class="id" title="library">Maps</span></a>.<br/>
 <span class="id" title="keyword">Extraction</span> "imp.ml" <span class="id" title="var">empty_st</span> <span class="id" title="var">ceval_step</span> <span class="id" title="var">parse</span>.<br/>
 </div>
 
@@ -224,7 +224,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 </div>
 
 <div class="doc">
-<a name="lab396"></a><h1 class="section">Discussion</h1>
+<a id="lab396"></a><h1 class="section">Discussion</h1>
 
 <div class="paragraph"> </div>
 
@@ -236,7 +236,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 </div>
 
 <div class="doc">
-<a name="lab397"></a><h1 class="section">Going Further</h1>
+<a id="lab397"></a><h1 class="section">Going Further</h1>
 
 <div class="paragraph"> </div>
 
@@ -247,7 +247,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-08-07&nbsp;17:51&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-08-08&nbsp;00:31&nbsp;*)</span><br/>
 </div>
 </div>
 
