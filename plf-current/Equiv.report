@@ -2,7 +2,7 @@ skip_right (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 
-TEST_false (standard, automatically graded)
+if_false (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 
@@ -10,7 +10,7 @@ swap_if_branches (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-WHILE_true (standard, automatically graded)
+while_true (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 

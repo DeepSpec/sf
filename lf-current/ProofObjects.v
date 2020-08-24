@@ -3,7 +3,8 @@
 Set Warnings "-notation-overridden,-parsing".
 From LF Require Export IndProp.
 
-(** "_Algorithms are the computational content of proofs_."  --Robert Harper *)
+(** "_Algorithms are the computational content of proofs_."
+    --Robert Harper *)
 
 (** We have seen that Coq has mechanisms both for _programming_,
     using inductive data types like [nat] or [list] and functions over
@@ -267,7 +268,7 @@ Definition ev_plus2 : Prop :=
 Definition ev_plus2' : Prop :=
   forall n, forall (_ : ev n), ev (n + 2).
 
-(** Or, equivalently, we can write it in more familiar notation: *)
+(** Or, equivalently, we can write it in a more familiar way: *)
 
 Definition ev_plus2'' : Prop :=
   forall n, ev n -> ev (n + 2).
@@ -336,7 +337,9 @@ Module And.
 Inductive and (P Q : Prop) : Prop :=
 | conj : P -> Q -> and P Q.
 
-End And.
+Arguments conj [P] [Q].
+
+Notation "P /\ Q" := (and P Q) : type_scope.
 
 (** Notice the similarity with the definition of the [prod] type,
     given in chapter [Poly]; the only difference is that [prod] takes
@@ -350,9 +353,16 @@ Print prod.
 (** This similarity should clarify why [destruct] and [intros]
     patterns can be used on a conjunctive hypothesis.  Case analysis
     allows us to consider all possible ways in which [P /\ Q] was
-    proved -- here just one (the [conj] constructor).
+    proved -- here just one (the [conj] constructor). *)
 
-    Similarly, the [split] tactic actually works for any inductively
+Theorem proj1' : forall P Q,
+    P /\ Q -> P.
+Proof.
+  intros P Q HPQ. destruct HPQ as [HP HQ]. apply HP.
+  Show Proof.
+Qed.
+
+(** Similarly, the [split] tactic actually works for any inductively
     defined proposition with exactly one constructor.  In particular,
     it works for [and]: *)
 
@@ -367,6 +377,8 @@ Proof.
     + apply HQ.
 Qed.
 
+End And.
+
 (** This shows why the inductive definition of [and] can be
     manipulated by tactics as we've been doing.  We can also use it to
     build proofs directly, using pattern-matching.  For instance: *)
@@ -379,9 +391,9 @@ Definition and_comm'_aux P Q (H : P /\ Q) : Q /\ P :=
 Definition and_comm' P Q : P /\ Q <-> Q /\ P :=
   conj (and_comm'_aux P Q) (and_comm'_aux Q P).
 
-(** **** Exercise: 2 stars, standard, optional (conj_fact) 
+(** **** Exercise: 2 stars, standard (conj_fact) 
 
-    Construct a proof object demonstrating the following proposition. *)
+    Construct a proof object for the following proposition. *)
 
 Definition conj_fact : forall P Q R, P /\ Q -> Q /\ R -> P /\ R
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -399,7 +411,10 @@ Inductive or (P Q : Prop) : Prop :=
 | or_introl : P -> or P Q
 | or_intror : Q -> or P Q.
 
-End Or.
+Arguments or_introl [P] [Q].
+Arguments or_intror [P] [Q].
+
+Notation "P \/ Q" := (or P Q) : type_scope.
 
 (** This declaration explains the behavior of the [destruct] tactic on
     a disjunctive hypothesis, since the generated subgoals match the
@@ -408,12 +423,36 @@ End Or.
     Once again, we can also directly write proof objects for theorems
     involving [or], without resorting to tactics. *)
 
-(** **** Exercise: 2 stars, standard, optional (or_commut'') 
+Definition inj_l : forall (P Q : Prop), P -> P \/ Q :=
+  fun P Q HP => or_introl HP.
 
-    Try to write down an explicit proof object for [or_commut] (without
-    using [Print] to peek at the ones we already defined!). *)
+Theorem inj_l' : forall (P Q : Prop), P -> P \/ Q.
+Proof.
+  intros P Q HP. left. apply HP.
+Qed.
 
-Definition or_comm : forall P Q, P \/ Q -> Q \/ P
+Definition or_elim : forall (P Q R : Prop), (P \/ Q) -> (P -> R) -> (Q -> R) -> R :=
+  fun P Q R HPQ HPR HQR =>
+    match HPQ with
+    | or_introl HP => HPR HP
+    | or_intror HQ => HQR HQ
+    end.
+
+Theorem or_elim' : forall (P Q R : Prop), (P \/ Q) -> (P -> R) -> (Q -> R) -> R.
+Proof.
+  intros P Q R HPQ HPR HQR.
+  destruct HPQ as [HP | HQ].
+  - apply HPR. apply HP.
+  - apply HQR. apply HQ.
+Qed.
+
+End Or.
+
+(** **** Exercise: 2 stars, standard (or_commut') 
+
+    Construct a proof object for the following proposition. *)
+
+Definition or_commut' : forall P Q, P \/ Q -> Q \/ P
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 (** [] *)
 
@@ -429,6 +468,10 @@ Module Ex.
 Inductive ex {A : Type} (P : A -> Prop) : Prop :=
 | ex_intro : forall x : A, P x -> ex P.
 
+Notation "'exists' x , p" :=
+  (ex (fun x => p))
+    (at level 200, right associativity) : type_scope.
+
 End Ex.
 
 (** This may benefit from a little unpacking.  The core definition is
@@ -436,7 +479,10 @@ End Ex.
     the form [ex P], where [P] itself is a _function_ from witness
     values in the type [A] to propositions.  The [ex_intro]
     constructor then offers a way of constructing evidence for [ex P],
-    given a witness [x] and a proof of [P x]. *)
+    given a witness [x] and a proof of [P x].
+
+    The notation in the standard library is a slight variant of
+    the above, enabling syntactic forms such as [exists x y, P x y]. *)
 
 (** The more familiar form [exists x, P x] desugars to an expression
     involving [ex]: *)
@@ -448,9 +494,9 @@ Check ex (fun n => ev n) : Prop.
 Definition some_nat_is_even : exists n, ev n :=
   ex_intro ev 4 (ev_SS 2 (ev_SS 0 ev_0)).
 
-(** **** Exercise: 2 stars, standard, optional (ex_ev_Sn) 
+(** **** Exercise: 2 stars, standard (ex_ev_Sn) 
 
-    Complete the definition of the following proof object: *)
+    Construct a proof object for the following proposition. *)
 
 Definition ex_ev_Sn : ex (fun n => ev (S n))
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -467,23 +513,56 @@ Inductive True : Prop :=
 (** It has one constructor (so every proof of [True] is the same, so
     being given a proof of [True] is not informative.) *)
 
+(** **** Exercise: 1 star, standard (p_implies_true) 
+
+    Construct a proof object for the following proposition. *)
+
+Definition p_implies_true : forall P, P -> True
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
+
 (** [False] is equally simple -- indeed, so simple it may look
     syntactically wrong at first glance! *)
 
 Inductive False : Prop := .
 
 (** That is, [False] is an inductive type with _no_ constructors --
-    i.e., no way to build evidence for it. *)
+    i.e., no way to build evidence for it. For example, there is
+    no way to complete the following definition such that it
+    succeeds (rather than fails). *)
+
+Fail Definition contra : False :=
+  0 = 1.
+
+(** But it is possible to destruct [False] by pattern matching. There can
+    be no patterns that match it, since it has no constructors.  So
+    the pattern match also is so simple it may look syntactically
+    wrong at first glance. *)
+
+Definition false_implies_zero_eq_one : False -> 0 = 1 :=
+  fun contra => match contra with end.
+
+(** Since there are no branches to evaluate, the [match] expression
+    can be considered to have any type we want, including [0 = 1].
+    Indeed, it's impossible to ever cause the [match] to be evaluated,
+    because we can never construct a value of type [False] to pass to
+    the function. *)
+
+(** **** Exercise: 1 star, standard (ex_falso_quodlibet') 
+
+    Construct a proof object for the following proposition. *)
+
+Definition ex_falso_quodlibet' : forall P, False -> P
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
 
 End Props.
 
 (* ################################################################# *)
 (** * Equality *)
 
-(** Even Coq's equality relation is not built in.  It has the
-    following inductive definition.  (Actually, the definition in the
-    standard library is a slight variant of this, which gives an
-    induction principle that is slightly easier to use.) *)
+(** Even Coq's equality relation is not built in.  We can define
+    it ourselves: *)
 
 Module MyEquality.
 
@@ -491,15 +570,16 @@ Inductive eq {X:Type} : X -> X -> Prop :=
 | eq_refl : forall x, eq x x.
 
 Notation "x == y" := (eq x y)
-                    (at level 70, no associativity)
-                    : type_scope.
+                       (at level 70, no associativity)
+                     : type_scope.
 
-(** The way to think about this definition is that, given a set [X],
-    it defines a _family_ of propositions "[x] is equal to [y],"
-    indexed by pairs of values ([x] and [y]) from [X].  There is just
-    one way of constructing evidence for members of this family:
-    applying the constructor [eq_refl] to a type [X] and a single
-    value [x : X], which yields evidence that [x] is equal to [x].
+(** The way to think about this definition (which is just a slight
+    variant of the standard library's) is that, given a set [X], it
+    defines a _family_ of propositions "[x] is equal to [y]," indexed
+    by pairs of values ([x] and [y]) from [X].  There is just one way
+    of constructing evidence for members of this family: applying the
+    constructor [eq_refl] to a type [X] and a single value [x : X],
+    which yields evidence that [x] is equal to [x].
 
     Other types of the form [eq x y] where [x] and [y] are not the
     same are thus uninhabited. *)
@@ -520,8 +600,9 @@ Proof.
   apply eq_refl.
 Qed.
 
-(** The [reflexivity] tactic that we have used to prove equalities up
-    to now is essentially just shorthand for [apply eq_refl].
+(** The [reflexivity] tactic that we have used to prove
+    equalities up to now is essentially just shorthand for [apply
+    eq_refl].
 
     In tactic-based proofs of equality, the conversion rules are
     normally hidden in uses of [simpl] (either explicit or implicit in
@@ -548,10 +629,12 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, optional (leibniz_equality__equality) 
+(** **** Exercise: 3 stars, standard, optional (leibniz_equality__equality) 
 
     Show that, in fact, the inductive definition of equality is
-    _equivalent_ to Leibniz equality: *)
+    _equivalent_ to Leibniz equality.  Hint: the proof is quite short;
+    about all you need to do is to invent a clever property [P] to
+    instantiate the antecedent.*)
 
 Lemma leibniz_equality__equality : forall (X : Type) (x y: X),
   (forall P:X->Prop, P x -> P y) -> x == y.
@@ -614,5 +697,72 @@ End MyEquality.
     must be the same!  The [inversion] tactic adds this fact to the
     context. *)
 
+(* ################################################################# *)
+(** * The Coq Trusted Computing Base *)
 
-(* 2020-08-08 00:31 *)
+(** One issue that arises with any automated proof assistant is
+    "why trust it?": what if there is a bug in the implementation that
+    renders all its reasoning suspect?
+
+    While it is impossible to allay such concerns completely, the fact
+    that Coq is based on the Curry-Howard correspondence gives it a
+    strong foundation. Because propositions are just types and proofs
+    are just terms, checking that an alleged proof of a proposition is
+    valid just amounts to _type-checking_ the term.  Type checkers are
+    relatively small and straightforward programs, so the "trusted
+    computing base" for Coq -- the part of the code that we have to
+    believe is operating correctly -- is small too.
+
+    What must a typechecker do?  Its primary job is to make sure that
+    in each function application the expected and actual argument
+    types match, that the arms of a [match] expression are constructor
+    patterns belonging to the inductive type being matched over and
+    all arms of the [match] return the same type, and so on. *)
+
+(** There are a few additional wrinkles:
+
+    First, since Coq types can themselves be expressions, the checker
+    must normalize these (by using the computation rules) before
+    comparing them.
+
+    Second, the checker must make sure that [match] expressions are
+    _exhaustive_.  That is, there must be an arm for every possible
+    constructor.  To see why, consider the following alleged proof
+    object: *)
+
+Fail Definition or_bogus : forall P Q, P \/ Q -> P :=
+  fun (P Q : Prop) (A : P \/ Q) =>
+    match A with
+    | or_introl H => H
+    end.
+
+(** All the types here match correctly, but the [match] only
+    considers one of the possible constructors for [or].  Coq's
+    exhaustiveness check will reject this definition.
+
+    Third, the checker must make sure that each recursive function
+    terminates.  It does this using a syntactic check to make sure
+    that each recursive call is on a subexpression of the original
+    argument.  To see why this is essential, consider this alleged
+    proof: *)
+
+Fail Fixpoint infinite_loop {X : Type} (n : nat) {struct n} : X :=
+  infinite_loop n.
+Fail Definition falso : False := infinite_loop 0.
+
+(** Recursive function [infinite_loop] purports to return a
+    value of any type [X] that you would like.  (The [struct]
+    annotation on the function tells Coq that it recurses on argument
+    [n], not [X].)  Were Coq to allow [infinite_loop], then [falso]
+    would be definable, thus giving evidence for [False].  So Coq rejects
+    [infinite_loop]. *)
+
+(** Note that the soundness of Coq depends only on the
+    correctness of this typechecking engine, not on the tactic
+    machinery.  If there is a bug in a tactic implementation (and this
+    certainly does happen!), that tactic might construct an invalid
+    proof term.  But when you type [Qed], Coq checks the term for
+    validity from scratch.  Only theorems whose proofs pass the
+    type-checker can be used in further proof developments.  *)
+
+(* 2020-08-24 19:40 *)

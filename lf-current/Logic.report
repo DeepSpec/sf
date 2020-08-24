@@ -48,11 +48,7 @@ In_app_iff (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 
-All (standard, automatically graded)
-Score: 0.0 / 3.0
-Reason: Admitted proof.
-
-combine_odd_even (standard, automatically graded)
+All_In (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
@@ -76,7 +72,7 @@ eqb_neq (standard, automatically graded)
 Score: 0.0 / 1.0
 Reason: Admitted proof.
 
-eqb_list (standard, automatically graded)
+eqb_list_true_iff (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
@@ -92,16 +88,16 @@ not_exists_dist (advanced, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-Points possible - standard: 46
-Points possible - advanced: 52
+Points possible - standard: 43
+Points possible - advanced: 49
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 / 46.0 so far
+   Standard:  0.0 / 43.0 so far
                 and  0.0 ungraded
 
-   Advanced:  0.0 / 49.0 so far
+   Advanced:  0.0 / 46.0 so far
                 and  3.0 ungraded
 

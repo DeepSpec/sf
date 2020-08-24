@@ -7,8 +7,8 @@
     We will see:
     - how to use auxiliary lemmas in both "forward-" and
       "backward-style" proofs;
-    - how to reason about data constructors -- in particular, how to use
-      the fact that they are injective and disjoint;
+    - how to reason about data constructors -- in particular, how to
+      use the fact that they are injective and disjoint;
     - how to strengthen an induction hypothesis, and when such
       strengthening is required; and
     - more details on how to reason by case analysis. *)
@@ -72,7 +72,7 @@ Proof.
 
 Theorem silly_ex :
      (forall n, evenb n = true -> oddb (S n) = true) ->
-     evenb 4 = true ->
+     evenb 2 = true ->
      oddb 3 = true.
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -100,9 +100,12 @@ Proof.
 
 (** **** Exercise: 3 stars, standard (apply_exercise1) 
 
-    (_Hint_: You can use [apply] with previously defined lemmas, not
-    just hypotheses in the context.  Remember that [Search] is
-    your friend.) *)
+    _Hint_: You can use [apply] with previously defined lemmas, not
+    just hypotheses in the context.  You may find earlier lemmas like
+    [app_nil_r], [app_assoc], [rev_app_distr], [rev_involutive],
+    etc. helpful.  Also, remember that [Search] is your friend
+    (though it may not find earlier lemmas if they were posed as
+    optional problems and you chose not to finish the proofs). *)
 
 Theorem rev_exercise1 : forall (l l' : list nat),
      l = rev l' ->
@@ -171,7 +174,20 @@ Proof.
     variable we are instantiating. We could instead write [apply
     trans_eq with [c;d]].) *)
 
-(** **** Exercise: 3 stars, standard, optional (apply_with_exercise)  *)
+(** Coq also has a tactic [transitivity] that accomplishes the
+    same purpose as applying [trans_eq]. The tactic requires us to
+    state the instantiation we want, just like [apply with] does. *)
+
+Example trans_eq_example'' : forall (a b c d e f : nat),
+     [a;b] = [c;d] ->
+     [c;d] = [e;f] ->
+     [a;b] = [e;f].
+Proof.
+  intros a b c d e f eq1 eq2.
+  transitivity [c;d].
+  apply eq1. apply eq2.   Qed.
+
+(** **** Exercise: 3 stars, standard, optional (trans_eq_exercise)  *)
 Example trans_eq_exercise : forall (n m o p : nat),
      m = (minustwo o) ->
      (n + p) = m ->
@@ -353,8 +369,6 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-
-
 (** The injectivity of constructors allows us to reason that
     [forall (n m : nat), S n = S m -> n = m].  The converse of this
     implication is an instance of a more general fact about both
@@ -404,7 +418,7 @@ Proof.
 
     In other words, [apply L in H] gives us a form of "forward
     reasoning": from [X -> Y] and a hypothesis matching [X], it
-    produces a hypothesis matching [X].  By contrast, [apply L] is
+    produces a hypothesis matching [Y].  By contrast, [apply L] is
     "backward reasoning": it says that if we know [X -> Y] and we
     are trying to prove [Y], it suffices to prove [X].
 
@@ -556,12 +570,11 @@ Proof.
     [n], we also need a case analysis on [m] to keep the two "in sync." *)
 
     destruct m as [| m'] eqn:E.
-    + (* m = O *) simpl.
+    + (* m = O *)
 
 (** The 0 case is trivial: *)
 
-      discriminate eq.
-
+    discriminate eq.
     + (* m = S m' *)
       apply f_equal.
 
@@ -573,7 +586,7 @@ Proof.
     performed automatically by the [apply] in the next step), then
     [IHn'] gives us exactly what we need to finish the proof. *)
 
-      apply IHn'. injection eq as goal. apply goal. Qed.
+      apply IHn'. simpl in eq. injection eq as goal. apply goal. Qed.
 
 (** What you should take away from all this is that we need to be
     careful, when using induction, that we are not trying to prove
@@ -601,7 +614,7 @@ Proof.
 Definition manual_grade_for_informal_proof : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, recommended (plus_n_n_injective) 
+(** **** Exercise: 3 stars, standard, especially useful (plus_n_n_injective) 
 
     In addition to being careful about how you use [intros], practice
     using "in" variants in this proof.  (Hint: use [plus_n_Sm].) *)
@@ -609,7 +622,6 @@ Theorem plus_n_n_injective : forall n m,
      n + n = m + m ->
      n = m.
 Proof.
-  intros n. induction n as [| n'].
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -709,19 +721,7 @@ Proof.
         that [S n' = S m'].  Since [S n' = n] and [S m' = m], this is just
         what we wanted to show. [] *)
 
-(** Before we close this section, let's digress briefly and use
-    [eqb_true] to prove a similar property of identifiers that we'll
-    need in later chapters: *)
-
-Theorem eqb_id_true : forall x y,
-  eqb_id x y = true -> x = y.
-Proof.
-  intros [m] [n]. simpl. intros H.
-  assert (H' : m = n). { apply eqb_true. apply H. }
-  rewrite H'. reflexivity.
-Qed.
-
-(** **** Exercise: 3 stars, standard, recommended (gen_dep_practice) 
+(** **** Exercise: 3 stars, standard, especially useful (gen_dep_practice) 
 
     Prove this by induction on [l]. *)
 
@@ -750,9 +750,9 @@ Proof.
 
 (** ... we appear to be stuck: [simpl] doesn't simplify anything, and
     since we haven't proved any other facts about [square], there is
-    nothing we can [apply] or [rewrite] with.
+    nothing we can [apply] or [rewrite] with. *)
 
-    To make progress, we can manually [unfold] the definition of
+(**  To make progress, we can manually [unfold] the definition of
     [square]: *)
 
   unfold square.
@@ -892,7 +892,7 @@ Proof.
     in which all occurrences of [e] (in the goal and in the context)
     are replaced by [c]. *)
 
-(** **** Exercise: 3 stars, standard, optional (combine_split) 
+(** **** Exercise: 3 stars, standard (combine_split) 
 
     Here is an implementation of the [split] function mentioned in
     chapter [Poly]: *)
@@ -950,7 +950,7 @@ Abort.
 (** ... then we are stuck at this point because the context does
     not contain enough information to prove the goal!  The problem is
     that the substitution performed by [destruct] is quite brutal --
-    in this case, it thows away every occurrence of [n =? 3], but we
+    in this case, it throws away every occurrence of [n =? 3], but we
     need to keep some memory of this expression and how it was
     destructed, because we need to be able to reason that, since [n =?
     3 = true] in this branch of the case analysis, it must be that [n
@@ -1030,6 +1030,9 @@ Proof.
       - [symmetry in H]: changes a hypothesis of the form [t=u] into
         [u=t]
 
+      - [transitivity y]: prove a goal [x=z] by proving two new subgoals,
+        [x=y] and [y=z]
+
       - [unfold]: replace a defined constant by its right-hand side in
         the goal
 
@@ -1056,7 +1059,9 @@ Proof.
 
       - [generalize dependent x]: move the variable [x] (and anything
         else that depends on it) from the context back to an explicit
-        hypothesis in the goal formula *)
+        hypothesis in the goal formula
+
+      - [f_equal]: change a goal of the form [f x = f y] into [x = y] *)
 
 (* ################################################################# *)
 (** * Additional Exercises *)
@@ -1129,7 +1134,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced, recommended (forall_exists_challenge) 
+(** **** Exercise: 4 stars, advanced, especially useful (forall_exists_challenge) 
 
     Define two recursive [Fixpoints], [forallb] and [existsb].  The
     first checks whether every element in a list satisfies a given
@@ -1200,6 +1205,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-
-
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

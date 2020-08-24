@@ -1,7 +1,8 @@
 (** * AltAuto: More Automation *)
 
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Import omega.Omega.
+From Coq Require Import Lia
+                        Arith.
 From LF Require Import IndProp.
 
 (** Up to now, we've used the more manual part of Coq's tactic
@@ -495,6 +496,10 @@ Ltac impl_and_try c := simpl; try c.
 (* ################################################################# *)
 (** * Decision Procedures *)
 
+(** _Note to readers_: The [omega] tactic described here is now
+    superseded by a more powerful tactic called [lia]. For the moment,
+    you'll see uses of both in the text. *)
+
 (** So far, the automation we have considered has primarily been
     useful for removing repetition. Another important category of
     automation consists of built-in decision procedures for specific
@@ -528,7 +533,7 @@ Example silly_presburger_example : forall m n o p,
   m + n <= n + o /\ o + 3 = p + 3 ->
   m <= p.
 Proof.
-  intros. omega.
+  intros. lia.
 Qed.
 
 (* ################################################################# *)
@@ -654,7 +659,7 @@ Qed.
     application of [auto] by writing "[auto using ...]". *)
 
 Lemma le_antisym : forall n m: nat, (n <= m /\ m <= n) -> n = m.
-Proof. intros. omega. Qed.
+Proof. intros. lia. Qed.
 
 Example auto_example_6 : forall n m p : nat,
   (n <= p -> (n <= m /\ m <= n)) ->
@@ -669,20 +674,20 @@ Qed.
     some specific constructors and lemmas that are used very often in
     proofs.  We can add these to the global hint database by writing
 
-      Hint Resolve T.
+      Hint Resolve T : core.
 
     at the top level, where [T] is a top-level theorem or a
     constructor of an inductively defined proposition (i.e., anything
     whose type is an implication).  As a shorthand, we can write
 
-      Hint Constructors c.
+      Hint Constructors c : core.
 
     to tell Coq to do a [Hint Resolve] for _all_ of the constructors
     from the inductive definition of [c].
 
     It is also sometimes necessary to add
 
-      Hint Unfold d.
+      Hint Unfold d : core.
 
     where [d] is a defined symbol, so that [auto] knows to expand uses
     of [d], thus enabling further possibilities for applying lemmas that
@@ -692,7 +697,7 @@ Qed.
     be activated only when needed.  See the Coq reference manual for
     more. *)
 
-Hint Resolve le_antisym.
+Hint Resolve le_antisym : core.
 
 Example auto_example_6' : forall n m p : nat,
   (n<= p -> (n <= m /\ m <= n)) ->
@@ -711,7 +716,7 @@ Proof.
   auto.  (* does nothing *)
 Abort.
 
-Hint Unfold is_fortytwo.
+Hint Unfold is_fortytwo : core.
 
 Example auto_example_7' : forall x,
   (x <= 42 /\ 42 <= x) -> is_fortytwo x.
@@ -720,7 +725,7 @@ Proof. info_auto. Qed.
 
 (** **** Exercise: 3 stars, advanced (pumping_redux) 
 
-    Use [auto], [omega], and any other useful tactics from this chapter to
+    Use [auto], [lia], and any other useful tactics from this chapter to
     shorten your proof (or the "official" solution proof) of the weak Pumping
     Lemma exercise from [IndProp]. *)
 Import Pumping.
@@ -739,7 +744,7 @@ Definition manual_grade_for_pumping_redux : option (nat*string) := None.
 
 (** **** Exercise: 3 stars, advanced, optional (pumping_redux_strong) 
 
-    Use [auto], [omega], and any other useful tactics from this chapter to
+    Use [auto], [lia], and any other useful tactics from this chapter to
     shorten your proof (or the "official" solution proof) of the stronger
     Pumping Lemma exercise from [IndProp]. *)
 Import Pumping.
@@ -841,5 +846,4 @@ Qed.
     [auto] most of the time, only switching to the [e] variants when
     the ordinary variants don't do the job. *)
 
-
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

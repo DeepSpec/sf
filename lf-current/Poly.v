@@ -92,7 +92,7 @@ Check nil : forall X : Type, list X.
 
 Check cons : forall X : Type, X -> list X -> list X.
 
-(** (Side note on notation: In .v files, the "forall" quantifier
+(** (A side note on notations: In .v files, the "forall" quantifier
     is spelled out in letters.  In the generated HTML files and in the
     way various IDEs show .v files, depending on the settings of their
     display controls, [forall] is usually typeset as the usual
@@ -130,7 +130,6 @@ Proof. reflexivity. Qed.
 Example test_repeat2 :
   repeat bool false 1 = cons bool false (nil bool).
 Proof. reflexivity. Qed.
-
 
 (** **** Exercise: 2 stars, standard (mumble_grumble) 
 
@@ -494,7 +493,7 @@ Fixpoint combine {X Y : Type} (lx : list X) (ly : list Y)
 
     [] *)
 
-(** **** Exercise: 2 stars, standard, recommended (split) 
+(** **** Exercise: 2 stars, standard, especially useful (split) 
 
     The function [split] is the right inverse of [combine]: it takes a
     list of pairs and returns a pair of lists.  In many functional
@@ -539,8 +538,11 @@ End OptionPlayground.
 Fixpoint nth_error {X : Type} (l : list X) (n : nat)
                    : option X :=
   match l with
-  | [] => None
-  | a :: l' => if n =? O then Some a else nth_error l' (pred n)
+  | nil => None
+  | a :: l' => match n with
+               | O => Some a
+               | S n' => nth_error l' n'
+               end
   end.
 
 Example test_nth_error1 : nth_error [4;5;6;7] 0 = Some 4.
@@ -608,12 +610,12 @@ Proof. reflexivity. Qed.
     and "filtering" the list, returning a new list containing just
     those elements for which the predicate returns [true]. *)
 
-Fixpoint filter {X:Type} (test: X->bool) (l:list X)
-                : (list X) :=
+Fixpoint filter {X:Type} (test: X->bool) (l:list X) : (list X) :=
   match l with
-  | []     => []
-  | h :: t => if test h then h :: (filter test t)
-                        else       filter test t
+  | [] => []
+  | h :: t =>
+    if test h then h :: (filter test t)
+    else filter test t
   end.
 
 (** For example, if we apply [filter] to the predicate [evenb]
@@ -772,7 +774,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, recommended (flat_map) 
+(** **** Exercise: 2 stars, standard, especially useful (flat_map) 
 
     The function [map] maps a [list X] to a [list Y] using a function
     of type [X -> Y].  We can define a similar function, [flat_map],
@@ -1157,8 +1159,6 @@ Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 End Church.
-
 End Exercises.
 
-
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

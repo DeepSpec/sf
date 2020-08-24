@@ -6,59 +6,64 @@
 From LF Require Export Basics.
 
 (** For the [Require Export] to work, Coq needs to be able to
-    find a compiled version of [Basics.v], called [Basics.vo], in a directory
-    associated with the prefix [LF].  This file is analogous to the [.class]
-    files compiled from [.java] source files and the [.o] files compiled from
-    [.c] files.
+    find a compiled version of [Basics.v], called [Basics.vo], in a
+    directory associated with the prefix [LF].  This file is analogous
+    to the [.class] files compiled from [.java] source files and the
+    [.o] files compiled from [.c] files.
 
-    First create a file named [_CoqProject] containing the following line
-    (if you obtained the whole volume "Logical Foundations" as a single
-    archive, a [_CoqProject] should already exist and you can skip this step):
+    First create a file named [_CoqProject] containing the following
+    line (if you obtained the whole volume "Logical Foundations" as a
+    single archive, a [_CoqProject] should already exist and you can
+    skip this step):
 
       [-Q . LF]
 
     This maps the current directory ("[.]", which contains [Basics.v],
-    [Induction.v], etc.) to the prefix (or "logical directory") "[LF]".
-    PG and CoqIDE read [_CoqProject] automatically, so they know to where to
-    look for the file [Basics.vo] corresponding to the library [LF.Basics].
+    [Induction.v], etc.) to the prefix (or "logical directory")
+    "[LF]".  PG and CoqIDE read [_CoqProject] automatically, so they
+    know to where to look for the file [Basics.vo] corresponding to
+    the library [LF.Basics].
 
-    Once [_CoqProject] is thus created, there are various ways to build
-    [Basics.vo]:
+    Once [_CoqProject] is thus created, there are various ways to
+    build [Basics.vo]:
 
-     - In Proof General: The compilation can be made to happen automatically
-       when you submit the [Require] line above to PG, by setting the emacs
-       variable [coq-compile-before-require] to [t].
+     - In Proof General: The compilation can be made to happen
+       automatically when you submit the [Require] line above to PG,
+       by setting the emacs variable [coq-compile-before-require] to
+       [t]. You can also use the menu option "Coq -> Auto
+       Compilation -> Compile Before Require".
 
      - In CoqIDE: Open [Basics.v]; then, in the "Compile" menu, click
        on "Compile Buffer".
 
-     - From the command line: Generate a [Makefile] using the [coq_makefile]
-       utility, that comes installed with Coq (if you obtained the whole
-       volume as a single archive, a [Makefile] should already exist
-       and you can skip this step):
+     - From the command line: Generate a [Makefile] using the
+       [coq_makefile] utility, that comes installed with Coq (if you
+       obtained the whole volume as a single archive, a [Makefile]
+       should already exist and you can skip this step):
 
          [coq_makefile -f _CoqProject *.v -o Makefile]
 
-       Note: You should rerun that command whenever you add or remove Coq files
-       to the directory.
+       Note: You should rerun that command whenever you add or remove
+       Coq files to the directory.
 
-       Then you can compile [Basics.v] by running [make] with the corresponding
-       [.vo] file as a target:
+       Then you can compile [Basics.v] by running [make] with the
+       corresponding [.vo] file as a target:
 
          [make Basics.vo]
 
-       All files in the directory can be compiled by giving no arguments:
+       All files in the directory can be compiled by giving no
+       arguments:
 
          [make]
 
-       Under the hood, [make] uses the Coq compiler, [coqc].  You can also
-       run [coqc] directly:
+       Under the hood, [make] uses the Coq compiler, [coqc].  You can
+       also run [coqc] directly:
 
          [coqc -Q . LF Basics.v]
 
-       But [make] also calculates dependencies between source files to compile
-       them in the right order, so [make] should generally be prefered over
-       explicit [coqc].
+       But [make] also calculates dependencies between source files to
+       compile them in the right order, so [make] should generally be
+       prefered over explicit [coqc].
 
     If you have trouble (e.g., if you get complaints about missing
     identifiers later in the file), it may be because the "load path"
@@ -70,15 +75,15 @@ From LF Require Export Basics.
         [Compiled library Foo makes inconsistent assumptions over
         library Bar]
 
-    check whether you have multiple installations of Coq on your machine.
-    It may be that commands (like [coqc]) that you execute in a terminal
-    window are getting a different version of Coq than commands executed by
-    Proof General or CoqIDE.
+    check whether you have multiple installations of Coq on your
+    machine.  It may be that commands (like [coqc]) that you execute
+    in a terminal window are getting a different version of Coq than
+    commands executed by Proof General or CoqIDE.
 
     - Another common reason is that the library [Bar] was modified and
-      recompiled without also recompiling [Foo] which depends on it.  Recompile
-      [Foo], or everything if too many files are affected.  (Using the third
-      solution above: [make clean; make].)
+      recompiled without also recompiling [Foo] which depends on it.
+      Recompile [Foo], or everything if too many files are
+      affected.  (Using the third solution above: [make clean; make].)
 
     One more tip for CoqIDE users: If you see messages like [Error:
     Unable to locate library Basics], a likely reason is
@@ -93,10 +98,9 @@ From LF Require Export Basics.
 (* ################################################################# *)
 (** * Proof by Induction *)
 
-(** We proved in the last chapter that [0] is a neutral element
-    for [+] on the left, using an easy argument based on
-    simplification.  We also observed that proving the fact that it is
-    also a neutral element on the _right_... *)
+(** We can prove that [0] is a neutral element for [+] on the left
+    using just [reflexivity].  But the proof that it is also a neutral
+    element on the _right_ ... *)
 
 Theorem plus_n_O_firsttry : forall n:nat,
   n = n + 0.
@@ -189,7 +193,7 @@ Proof.
     variables, the [induction] tactic will automatically move them
     into the context as needed.) *)
 
-(** **** Exercise: 2 stars, standard, recommended (basic_induction) 
+(** **** Exercise: 2 stars, standard, especially useful (basic_induction) 
 
     Prove the following using induction. You might need previously
     proven results. *)
@@ -269,10 +273,7 @@ Definition manual_grade_for_destruct_induction : option (nat*string) := None.
     interest to bother giving it its own top-level name.  In such
     cases, it is convenient to be able to simply state and prove the
     needed "sub-theorem" right at the point where it is used.  The
-    [assert] tactic allows us to do this.  For example, our earlier
-    proof of the [mult_0_plus] theorem referred to a previous theorem
-    named [plus_O_n].  We could instead use [assert] to state and
-    prove [plus_O_n] in-line: *)
+    [assert] tactic allows us to do this. *)
 
 Theorem mult_0_plus' : forall n m : nat,
   (0 + n) * m = n * m.
@@ -449,7 +450,7 @@ Proof.
     whereas the informal proof reminds the reader several times where
     things stand). *)
 
-(** **** Exercise: 2 stars, advanced, recommended (plus_comm_informal) 
+(** **** Exercise: 2 stars, advanced, especially useful (plus_comm_informal) 
 
     Translate your solution for [plus_comm] into an informal proof:
 
@@ -477,10 +478,10 @@ Definition manual_grade_for_plus_comm_informal : option (nat*string) := None.
 (* ################################################################# *)
 (** * More Exercises *)
 
-(** **** Exercise: 3 stars, standard, recommended (mult_comm) 
+(** **** Exercise: 3 stars, standard, especially useful (mult_comm) 
 
-    Use [assert] to help prove this theorem.  You shouldn't need to
-    use induction on [plus_swap]. *)
+    Use [assert] to help prove [plus_swap].  You don't need to
+    use induction yet. *)
 
 Theorem plus_swap : forall n m p : nat,
   n + (m + p) = m + (n + p).
@@ -558,13 +559,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (eqb_refl) 
-
-    Prove the following theorem.  (Putting the [true] on the left-hand
-    side of the equality may look odd, but this is how the theorem is
-    stated in the Coq standard library, so we follow suit.  Rewriting
-    works equally well in either direction, so we will have no problem
-    using the theorem no matter which way we state it.) *)
+(** **** Exercise: 2 stars, standard, optional (eqb_refl)  *)
 
 Theorem eqb_refl : forall n : nat,
   true = (n =? n).
@@ -581,7 +576,7 @@ Proof.
    useful when a plain [rewrite] acts on the wrong part of the goal.
 
    Use the [replace] tactic to do a proof of [plus_swap'], just like
-   [plus_swap] but without needing [assert (n + m = m + n)]. *)
+   [plus_swap] but without needing [assert]. *)
 
 Theorem plus_swap' : forall n m p : nat,
   n + (m + p) = m + (n + p).
@@ -589,7 +584,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, recommended (binary_commute) 
+(** **** Exercise: 3 stars, standard, especially useful (binary_commute) 
 
     Recall the [incr] and [bin_to_nat] functions that you
     wrote for the [binary] exercise in the [Basics] chapter.  Prove
@@ -609,11 +604,11 @@ Proof.
     it to a natural number and then incrementing.
     Name your theorem [bin_to_nat_pres_incr] ("pres" for "preserves").
 
-    Before you start working on this exercise, copy the definitions
-    from your solution to the [binary] exercise here so that this file
-    can be graded on its own.  If you want to change your original
-    definitions to make the property easier to prove, feel free to
-    do so! *)
+    Before you start working on this exercise, copy the definitions of
+    [incr] and [bin_to_nat] from your solution to the [binary]
+    exercise here so that this file can be graded on its own.  If you
+    want to change your original definitions to make the property
+    easier to prove, feel free to do so! *)
 
 (* FILL IN HERE *)
 
@@ -675,4 +670,4 @@ Definition manual_grade_for_binary_inverse_b : option (nat*string) := None.
 Definition manual_grade_for_binary_inverse_c : option (nat*string) := None.
 (** [] *)
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

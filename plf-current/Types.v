@@ -16,7 +16,7 @@ From PLF Require Import Maps.
 From PLF Require Import Imp.
 From PLF Require Import Smallstep.
 
-Hint Constructors multi.
+Hint Constructors multi : core.
 
 (* ################################################################# *)
 (** * Typed Arithmetic Expressions *)
@@ -68,9 +68,8 @@ Inductive nvalue : tm -> Prop :=
 
 Definition value (t : tm) := bvalue t \/ nvalue t.
 
-Hint Constructors bvalue nvalue.
-Hint Unfold value.
-Hint Unfold update.
+Hint Constructors bvalue nvalue : core.
+Hint Unfold value : core.
 
 (* ================================================================= *)
 (** ** Operational Semantics *)
@@ -94,9 +93,9 @@ Hint Unfold update.
                            ---------------                           (ST_PrdZro)
                            prd zro --> zro
 
-                         numeric value v1
+                         numeric value v
                         -------------------                          (ST_PrdScc)
-                        prd (scc v1) --> v1
+                        prd (scc v) --> v
 
                               t1 --> t1'
                          ------------------                             (ST_Prd)
@@ -105,9 +104,9 @@ Hint Unfold update.
                           -----------------                        (ST_IszroZro)
                           iszro zro --> tru
 
-                         numeric value v1
-                      ----------------------                       (ST_IszroScc)
-                      iszro (scc v1) --> fls
+                         numeric value v
+                      ---------------------                       (ST_IszroScc)
+                      iszro (scc v) --> fls
 
                             t1 --> t1'
                        ----------------------                         (ST_Iszro)
@@ -116,7 +115,7 @@ Hint Unfold update.
 
 (** ... and then formally: *)
 
-Reserved Notation "t1 '-->' t2" (at level 40).
+Reserved Notation "t '-->' t'" (at level 40).
 
 Inductive step : tm -> tm -> Prop :=
   | ST_TestTru : forall t1 t2,
@@ -131,24 +130,24 @@ Inductive step : tm -> tm -> Prop :=
       (scc t1) --> (scc t1')
   | ST_PrdZro :
       (prd zro) --> zro
-  | ST_PrdScc : forall t1,
-      nvalue t1 ->
-      (prd (scc t1)) --> t1
+  | ST_PrdScc : forall v,
+      nvalue v ->
+      (prd (scc v)) --> v
   | ST_Prd : forall t1 t1',
       t1 --> t1' ->
       (prd t1) --> (prd t1')
   | ST_IszroZro :
       (iszro zro) --> tru
-  | ST_IszroScc : forall t1,
-       nvalue t1 ->
-      (iszro (scc t1)) --> fls
+  | ST_IszroScc : forall v,
+       nvalue v ->
+      (iszro (scc v)) --> fls
   | ST_Iszro : forall t1 t1',
       t1 --> t1' ->
       (iszro t1) --> (iszro t1')
 
-where "t1 '-->' t2" := (step t1 t2).
+where "t '-->' t'" := (step t t').
 
-Hint Constructors step.
+Hint Constructors step : core.
 
 (** Notice that the [step] relation doesn't care about whether the
     expression being stepped makes global sense -- it just checks that
@@ -175,7 +174,7 @@ Notation step_normal_form := (normal_form step).
 Definition stuck (t : tm) : Prop :=
   step_normal_form t /\ ~ value t.
 
-Hint Unfold stuck.
+Hint Unfold stuck : core.
 
 (** **** Exercise: 2 stars, standard (some_term_is_stuck)  *)
 Example some_term_is_stuck :
@@ -290,16 +289,15 @@ Inductive has_type : tm -> ty -> Prop :=
 
 where "'|-' t '\in' T" := (has_type t T).
 
-Hint Constructors has_type.
+Hint Constructors has_type : core.
 
 Example has_type_1 :
   |- test fls zro (scc zro) \in Nat.
 Proof.
   apply T_Test.
-    - apply T_Fls.
-    - apply T_Zro.
-    - apply T_Scc.
-       + apply T_Zro.
+  - apply T_Fls.
+  - apply T_Zro.
+  - apply T_Scc. apply T_Zro.
 Qed.
 
 (** (Since we've included all the constructors of the typing relation
@@ -336,7 +334,9 @@ Lemma bool_canonical : forall t,
 Proof.
   intros t HT [Hb | Hn].
   - assumption.
-  - induction Hn; inversion HT; auto.
+  - destruct Hn as [ | Hs].
+    + inversion HT.
+    + inversion HT.
 Qed.
 
 Lemma nat_canonical : forall t,
@@ -364,21 +364,21 @@ Theorem progress : forall t T,
     you understand the parts we've given of the informal proof in the
     following exercise before starting -- this will save you a lot of
     time.) *)
-Proof with auto.
+Proof.
   intros t T HT.
-  induction HT...
+  induction HT; auto.
   (* The cases that were obviously values, like T_Tru and
      T_Fls, were eliminated immediately by auto *)
   - (* T_Test *)
-    right. inversion IHHT1; clear IHHT1.
+    right. destruct IHHT1.
     + (* t1 is a value *)
     apply (bool_canonical t1 HT1) in H.
-    inversion H; subst; clear H.
-      exists t2...
-      exists t3...
+    destruct H.
+      * exists t2. auto.
+      * exists t3. auto.
     + (* t1 can take a step *)
-      inversion H as [t1' H1].
-      exists (test t1' t2 t3)...
+      destruct H as [t1' H1].
+      exists (test t1' t2 t3). auto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -434,7 +434,7 @@ Theorem preservation : forall t t' T,
     make sure you understand the informal proof fragment in the
     following exercise first.) *)
 
-Proof with auto.
+Proof.
   intros t t' T HT HE.
   generalize dependent t'.
   induction HT;
@@ -523,14 +523,16 @@ Corollary soundness : forall t t' T,
   ~(stuck t').
 Proof.
   intros t t' T HT P. induction P; intros [R S].
-  destruct (progress x T HT); auto.
-  apply IHP.  apply (preservation x y T HT H).
-  unfold stuck. split; auto.   Qed.
+  - apply progress in HT. destruct HT; auto.
+  - apply IHP.
+    + apply preservation with (t := x); auto.
+    + unfold stuck. split; auto.
+Qed.
 
 (* ================================================================= *)
 (** ** Additional Exercises *)
 
-(** **** Exercise: 2 stars, standard, recommended (subject_expansion) 
+(** **** Exercise: 2 stars, standard, especially useful (subject_expansion) 
 
     Having seen the subject reduction property, one might
     wonder whether the opposity property -- subject _expansion_ --
@@ -677,6 +679,4 @@ Definition manual_grade_for_remove_predzro : option (nat*string) := None.
 Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 
-
-
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:42 *)

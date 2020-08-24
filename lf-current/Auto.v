@@ -1,7 +1,7 @@
 (** * Auto: More Automation *)
 
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Import omega.Omega.
+From Coq Require Import Lia.
 From LF Require Import Maps.
 From LF Require Import Imp.
 
@@ -19,7 +19,7 @@ From LF Require Import Imp.
 
     There's another major category of automation we haven't discussed
     much yet, namely built-in decision procedures for specific kinds
-    of problems: [omega] is one example, but there are others.  This
+    of problems: [lia] is one example, but there are others.  This
     topic will be deferred for a while longer.
 
     Our motivating example will be this proof, repeated with just a
@@ -37,9 +37,7 @@ Proof.
   - (* E_Skip *) reflexivity.
   - (* E_Ass *) reflexivity.
   - (* E_Seq *)
-    assert (st' = st'0) as EQ1.
-    { (* Proof of assertion *) apply IHE1_1; apply H1. }
-    subst st'0.
+    rewrite (IHE1_1 st'0 H1) in *.
     apply IHE1_2. assumption.
   (* E_IfTrue *)
   - (* b evaluates to true *)
@@ -60,9 +58,7 @@ Proof.
   - (* b evaluates to false (contradiction) *)
     rewrite H in H4. discriminate.
   - (* b evaluates to true *)
-    assert (st' = st'0) as EQ1.
-    { (* Proof of assertion *) apply IHE1_1; assumption. }
-    subst st'0.
+    rewrite (IHE1_1 st'0 H3) in *.
     apply IHE1_2. assumption.  Qed.
 
 (* ################################################################# *)
@@ -150,7 +146,7 @@ Qed.
     application of [auto] by writing "[auto using ...]". *)
 
 Lemma le_antisym : forall n m: nat, (n <= m /\ m <= n) -> n = m.
-Proof. intros. omega. Qed.
+Proof. intros. lia. Qed.
 
 Example auto_example_6 : forall n m p : nat,
   (n <= p -> (n <= m /\ m <= n)) ->
@@ -164,20 +160,20 @@ Qed.
     some specific constructors and lemmas that are used very often in
     proofs.  We can add these to the global hint database by writing
 
-      Hint Resolve T.
+      Hint Resolve T : core.
 
     at the top level, where [T] is a top-level theorem or a
     constructor of an inductively defined proposition (i.e., anything
     whose type is an implication).  As a shorthand, we can write
 
-      Hint Constructors c.
+      Hint Constructors c : core.
 
     to tell Coq to do a [Hint Resolve] for _all_ of the constructors
     from the inductive definition of [c].
 
     It is also sometimes necessary to add
 
-      Hint Unfold d.
+      Hint Unfold d : core.
 
     where [d] is a defined symbol, so that [auto] knows to expand uses
     of [d], thus enabling further possibilities for applying lemmas that
@@ -187,14 +183,13 @@ Qed.
     be activated only when needed.  See the Coq reference manual for
     details. *)
 
-Hint Resolve le_antisym.
+Hint Resolve le_antisym : core.
 
 Example auto_example_6' : forall n m p : nat,
   (n<= p -> (n <= m /\ m <= n)) ->
   n <= p ->
   n = m.
 Proof.
-  intros.
   auto. (* picks up hint from database *)
 Qed.
 
@@ -206,7 +201,7 @@ Proof.
   auto.  (* does nothing *)
 Abort.
 
-Hint Unfold is_fortytwo.
+Hint Unfold is_fortytwo : core.
 
 Example auto_example_7' : forall x,
   (x <= 42 /\ 42 <= x) -> is_fortytwo x.
@@ -226,8 +221,7 @@ Proof.
   generalize dependent st2;
        induction E1; intros st2 E2; inversion E2; subst; auto.
   - (* E_Seq *)
-    assert (st' = st'0) as EQ1 by auto.
-    subst st'0.
+    rewrite (IHE1_1 st'0 H1) in *.
     auto.
   - (* E_IfTrue *)
     + (* b evaluates to false (contradiction) *)
@@ -242,8 +236,7 @@ Proof.
   - (* b evaluates to false (contradiction) *)
     rewrite H in H4. discriminate.
   - (* b evaluates to true *)
-    assert (st' = st'0) as EQ1 by auto.
-    subst st'0.
+    rewrite (IHE1_1 st'0 H3) in *.
     auto.
 Qed.
 
@@ -264,8 +257,7 @@ Proof with auto.
   induction E1;
            intros st2 E2; inversion E2; subst...
   - (* E_Seq *)
-    assert (st' = st'0) as EQ1...
-    subst st'0...
+    rewrite (IHE1_1 st'0 H1) in *...
   - (* E_IfTrue *)
     + (* b evaluates to false (contradiction) *)
       rewrite H in H5. discriminate.
@@ -279,8 +271,7 @@ Proof with auto.
   - (* b evaluates to false (contradiction) *)
     rewrite H in H4. discriminate.
   - (* b evaluates to true *)
-    assert (st' = st'0) as EQ1...
-    subst st'0...
+    rewrite (IHE1_1 st'0 H3) in *...
 Qed.
 
 (* ################################################################# *)
@@ -320,8 +311,7 @@ Proof.
   generalize dependent st2;
   induction E1; intros st2 E2; inversion E2; subst; auto.
   - (* E_Seq *)
-    assert (st' = st'0) as EQ1 by auto.
-    subst st'0.
+    rewrite (IHE1_1 st'0 H1) in *.
     auto.
   - (* E_IfTrue *)
     + (* b evaluates to false (contradiction) *)
@@ -336,8 +326,7 @@ Proof.
   - (* b evaluates to false (contradiction) *)
     rwd H H4.
   - (* b evaluates to true *)
-    assert (st' = st'0) as EQ1 by auto.
-    subst st'0.
+    rewrite (IHE1_1 st'0 H3) in *.
     auto. Qed.
 
 (** That was a bit better, but we really want Coq to discover the
@@ -369,38 +358,17 @@ Proof.
   generalize dependent st2;
   induction E1; intros st2 E2; inversion E2; subst; try find_rwd; auto.
   - (* E_Seq *)
-    assert (st' = st'0) as EQ1 by auto.
-    subst st'0.
+    rewrite (IHE1_1 st'0 H1) in *.
     auto.
   - (* E_WhileTrue *)
     + (* b evaluates to true *)
-      assert (st' = st'0) as EQ1 by auto.
-      subst st'0.
+      rewrite (IHE1_1 st'0 H3) in *.
       auto. Qed.
 
 (** Let's see about the remaining cases. Each of them involves
-    applying a conditional hypothesis to extract an equality.
-    Currently we have phrased these as assertions, so that we have to
-    predict what the resulting equality will be (although we can then
-    use [auto] to prove it).  An alternative is to pick the relevant
-    hypotheses to use and then [rewrite] with them, as follows: *)
-
-Theorem ceval_deterministic'''': forall c st st1 st2,
-    st =[ c ]=> st1  ->
-    st =[ c ]=> st2 ->
-    st1 = st2.
-Proof.
-  intros c st st1 st2 E1 E2.
-  generalize dependent st2;
-  induction E1; intros st2 E2; inversion E2; subst; try find_rwd; auto.
-  - (* E_Seq *)
-    rewrite (IHE1_1 st'0 H1) in *. auto.
-  - (* E_WhileTrue *)
-    + (* b evaluates to true *)
-      rewrite (IHE1_1 st'0 H3) in *. auto. Qed.
-
-(** Now we can automate the task of finding the relevant hypotheses to
-    rewrite with. *)
+    applying rewrting an hypothesis after feeding it with the required
+    condition. We can automate the task of finding the relevant 
+    hypotheses to rewrite with. *)
 
 Ltac find_eqn :=
   match goal with
@@ -418,19 +386,9 @@ Ltac find_eqn :=
     evidence that [P] holds for some concrete [X].  If both patterns
     succeed, we apply the [rewrite] tactic (instantiating the
     quantified [x] with [X] and providing [H2] as the required
-    evidence for [P X]) in all hypotheses and the goal.
+    evidence for [P X]) in all hypotheses and the goal. *)
 
-    One problem remains: in general, there may be several pairs of
-    hypotheses that have the right general form, and it seems tricky
-    to pick out the ones we actually need.  A key trick is to realize
-    that we can _try them all_!  Here's how this works:
 
-    - each execution of [match goal] will keep trying to find a valid
-      pair of hypotheses until the tactic on the RHS of the match
-      succeeds; if there are no such pairs, it fails;
-    - [rewrite] will fail given a trivial equation of the form [X = X];
-    - we can wrap the whole thing in a [repeat], which will keep doing
-      useful rewrites until only trivial ones are left. *)
 
 Theorem ceval_deterministic''''': forall c st st1 st2,
     st =[ c ]=> st1  ->
@@ -440,7 +398,7 @@ Proof.
   intros c st st1 st2 E1 E2.
   generalize dependent st2;
   induction E1; intros st2 E2; inversion E2; subst; try find_rwd;
-    repeat find_eqn; auto.
+    try find_eqn; auto.
 Qed.
 
 (** The big payoff in this approach is that our proof script should be
@@ -457,62 +415,70 @@ Inductive com : Type :=
   | CWhile (b : bexp) (c : com)
   | CRepeat (c : com) (b : bexp).
 
-(** [REPEAT] behaves like [WHILE], except that the loop guard is
+(** [REPEAT] behaves like [while], except that the loop guard is
     checked _after_ each execution of the body, with the loop
     repeating as long as the guard stays _false_.  Because of this,
     the body will always execute at least once. *)
 
-Notation "'SKIP'" :=
-   CSkip.
-Notation "x '::=' a" :=
-  (CAss x a) (at level 60).
-Notation "c1 ;; c2" :=
-  (CSeq c1 c2) (at level 80, right associativity).
-Notation "'WHILE' b 'DO' c 'END'" :=
-  (CWhile b c) (at level 80, right associativity).
-Notation "'TEST' c1 'THEN' c2 'ELSE' c3 'FI'" :=
-  (CIf c1 c2 c3) (at level 80, right associativity).
-Notation "'REPEAT' c 'UNTIL' b 'END'" :=
-  (CRepeat c b) (at level 80, right associativity).
+Notation "'repeat' x 'until' y 'end'" :=
+         (CRepeat x y)
+            (in custom com at level 0, 
+             x at level 99, y at level 99).
+Notation "'skip'"  :=
+         CSkip (in custom com at level 0).
+Notation "x := y"  :=
+         (CAss x y)
+            (in custom com at level 0, x constr at level 0,
+             y at level 85, no associativity).
+Notation "x ; y" :=
+         (CSeq x y)
+           (in custom com at level 90, right associativity).
+Notation "'if' x 'then' y 'else' z 'end'" :=
+         (CIf x y z)
+           (in custom com at level 89, x at level 99,
+            y at level 99, z at level 99).
+Notation "'while' x 'do' y 'end'" :=
+         (CWhile x y)
+            (in custom com at level 89, x at level 99, y at level 99).
 
 Reserved Notation "st '=[' c ']=>' st'"
-                  (at level 40).
+         (at level 40, c custom com at level 99, st' constr at next level).
 
 Inductive ceval : com -> state -> state -> Prop :=
   | E_Skip : forall st,
-      st =[ SKIP ]=> st
+      st =[ skip ]=> st
   | E_Ass  : forall st a1 n x,
       aeval st a1 = n ->
-      st =[ x ::= a1 ]=> (x !-> n ; st)
+      st =[ x := a1 ]=> (x !-> n ; st)
   | E_Seq : forall c1 c2 st st' st'',
       st  =[ c1 ]=> st'  ->
       st' =[ c2 ]=> st'' ->
-      st  =[ c1 ;; c2 ]=> st''
+      st  =[ c1 ; c2 ]=> st''
   | E_IfTrue : forall st st' b c1 c2,
       beval st b = true ->
       st =[ c1 ]=> st' ->
-      st =[ TEST b THEN c1 ELSE c2 FI ]=> st'
+      st =[ if b then c1 else c2 end ]=> st'
   | E_IfFalse : forall st st' b c1 c2,
       beval st b = false ->
       st =[ c2 ]=> st' ->
-      st =[ TEST b THEN c1 ELSE c2 FI ]=> st'
+      st =[ if b then c1 else c2 end ]=> st'
   | E_WhileFalse : forall b st c,
       beval st b = false ->
-      st =[ WHILE b DO c END ]=> st
+      st =[ while b do c end ]=> st
   | E_WhileTrue : forall st st' st'' b c,
       beval st b = true ->
       st  =[ c ]=> st' ->
-      st' =[ WHILE b DO c END ]=> st'' ->
-      st  =[ WHILE b DO c END ]=> st''
+      st' =[ while b do c end ]=> st'' ->
+      st  =[ while b do c end ]=> st''
   | E_RepeatEnd : forall st st' b c,
       st  =[ c ]=> st' ->
       beval st' b = true ->
-      st  =[ REPEAT c UNTIL b END ]=> st'
+      st  =[ repeat c until b end ]=> st'
   | E_RepeatLoop : forall st st' st'' b c,
       st  =[ c ]=> st' ->
       beval st' b = false ->
-      st' =[ REPEAT c UNTIL b END ]=> st'' ->
-      st  =[ REPEAT c UNTIL b END ]=> st''
+      st' =[ repeat c until b end ]=> st'' ->
+      st  =[ repeat c until b end ]=> st''
 
   where "st =[ c ]=> st'" := (ceval c st st').
 
@@ -528,7 +494,7 @@ Proof.
   intros c st st1 st2 E1 E2.
   generalize dependent st2;
   induction E1;
-    intros st2 E2; inversion E2; subst; try find_rwd; repeat find_eqn; auto.
+    intros st2 E2; inversion E2; subst; try find_rwd; try find_eqn; auto.
   - (* E_RepeatEnd *)
     + (* b evaluates to false (contradiction) *)
        find_rwd.
@@ -550,7 +516,7 @@ Proof.
   intros c st st1 st2 E1 E2.
   generalize dependent st2;
   induction E1;
-    intros st2 E2; inversion E2; subst; repeat find_eqn; try find_rwd; auto.
+    intros st2 E2; inversion E2; subst; try find_eqn; try find_rwd; auto.
 Qed.
 
 End Repeat.
@@ -561,8 +527,8 @@ End Repeat.
     pleasant).  But it is well worth adding at least simple uses to
     your proofs, both to avoid tedium and to "future proof" them. *)
 
-(* ================================================================= *)
-(** ** The [eapply] and [eauto] variants *)
+(* ################################################################# *)
+(** * Tactics [eapply] and [eauto] *)
 
 (** To close the chapter, we'll introduce one more convenient feature
     of Coq: its ability to delay instantiation of quantifiers.  To
@@ -571,11 +537,11 @@ End Repeat.
 
 Example ceval_example1:
   empty_st =[
-    X ::= 2;;
-    TEST X <= 1
-      THEN Y ::= 3
-      ELSE Z ::= 4
-    FI
+    X := 2;
+    if (X <= 1)
+      then Y := 3
+      else Z := 4
+    end
   ]=> (Z !-> 4 ; X !-> 2).
 Proof.
   (* We supply the intermediate state [st']... *)
@@ -583,6 +549,7 @@ Proof.
   - apply E_Ass. reflexivity.
   - apply E_IfFalse. reflexivity. apply E_Ass. reflexivity.
 Qed.
+
 
 (** In the first step of the proof, we had to explicitly provide a
     longish expression to help Coq instantiate a "hidden" argument to
@@ -608,11 +575,11 @@ Qed.
 
 Example ceval'_example1:
   empty_st =[
-    X ::= 2;;
-    TEST X <= 1
-      THEN Y ::= 3
-      ELSE Z ::= 4
-    FI
+    X := 2;
+    if (X <= 1)
+      then Y := 3
+      else Z := 4
+    end
   ]=> (Z !-> 4 ; X !-> 2).
 Proof.
   eapply E_Seq. (* 1 *)
@@ -639,35 +606,122 @@ Qed.
     during the first subgoal. *)
 
 (** Several of the tactics that we've seen so far, including [exists],
-    [constructor], and [auto], have similar variants.  For example,
-    here's a proof using [eauto]: *)
+    [constructor], and [auto], have similar variants. The [eauto]
+    tactic works like [auto], except that it uses [eapply] instead of
+    [apply].  Tactic [info_eauto] shows us which tactics [eauto] uses
+    in its proof search.
 
-Hint Constructors ceval.
-Hint Transparent state.
-Hint Transparent total_map.
+    Below is an example of [eauto].  Before using it, we need to give
+    some hints to [auto] about using the constructors of [ceval]
+    and the definitions of [state] and [total_map] as part of its
+    proof search.
+*)
 
-Definition st12 := (Y !-> 2 ; X !-> 1).
-Definition st21 := (Y !-> 1 ; X !-> 2).
+Hint Constructors ceval : core.
+Hint Transparent state total_map : core.
 
 Example eauto_example : exists s',
-  st21 =[
-    TEST X <= Y
-      THEN Z ::= Y - X
-      ELSE Y ::= X + Z
-    FI
+  (Y !-> 1 ; X !-> 2) =[
+    if (X <= Y)
+      then Z := Y - X
+      else Y := X + Z
+    end
   ]=> s'.
 Proof. info_eauto. Qed.
 
 (** The [eauto] tactic works just like [auto], except that it uses
     [eapply] instead of [apply]; [info_eauto] shows us which facts
-    [auto] uses. *)
+    [eauto] uses. *)
 
-(** Pro tip: One might think that, since [eapply] and [eauto] are more
-    powerful than [apply] and [auto], we should just use them all the
-    time.  Unfortunately, they are also significantly slower --
-    especially [eauto].  Coq experts tend to use [apply] and [auto]
+(** Pro tip: One might think that, since [eapply] and [eauto]
+    are more powerful than [apply] and [auto], we should just use them
+    all the time.  Unfortunately, they are also significantly slower
+    -- especially [eauto].  Coq experts tend to use [apply] and [auto]
     most of the time, only switching to the [e] variants when the
     ordinary variants don't do the job. *)
 
+(* ################################################################# *)
+(** * Constraints on Existential Variables *)
 
-(* 2020-08-08 00:31 *)
+(** In order for [Qed] to succeed, all existential variables need to
+    be determined by the end of the proof. Otherwise Coq
+    will (rightly) refuse to accept the proof. Remember that the Coq
+    tactics build proof objects, and proof objects containing
+    existential variables are not complete. *)
+
+Lemma silly1 : forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
+  (forall x y : nat, P x y) ->
+  (forall x y : nat, P x y -> Q x) ->
+  Q 42.
+Proof.
+  intros P Q HP HQ. eapply HQ. apply HP.
+Fail Qed.
+(** Coq gives a warning after [apply HP].  ("All the remaining goals
+    are on the shelf," means that we've finished all our top-level
+    proof obligations but along the way we've put some aside to be
+    done later, and we have not finished those.)  Trying to close the
+    proof with [Qed] gives an error. *)
+Abort.
+
+(** An additional constraint is that existential variables cannot be
+    instantiated with terms containing ordinary variables that did not
+    exist at the time the existential variable was created.  (The
+    reason for this technical restriction is that allowing such
+    instantiation would lead to inconsistency of Coq's logic.) *)
+
+Lemma silly2 :
+  forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
+  (exists y, P 42 y) ->
+  (forall x y : nat, P x y -> Q x) ->
+  Q 42.
+Proof.
+  intros P Q HP HQ. eapply HQ. destruct HP as [y HP'].
+  Fail apply HP'.
+
+(** The error we get, with some details elided, is:
+
+      cannot instantiate "?y" because "y" is not in its scope
+
+    In this case there is an easy fix: doing [destruct HP] _before_
+    doing [eapply HQ]. *)
+Abort.
+
+Lemma silly2_fixed :
+  forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
+  (exists y, P 42 y) ->
+  (forall x y : nat, P x y -> Q x) ->
+  Q 42.
+Proof.
+  intros P Q HP HQ. destruct HP as [y HP'].
+  eapply HQ. apply HP'.
+Qed.
+
+(** The [apply HP'] in the last step unifies the existential variable
+    in the goal with the variable [y].
+
+    Note that the [assumption] tactic doesn't work in this case, since
+    it cannot handle existential variables.  However, Coq also
+    provides an [eassumption] tactic that solves the goal if one of
+    the premises matches the goal up to instantiations of existential
+    variables. We can use it instead of [apply HP'] if we like. *)
+
+Lemma silly2_eassumption : forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
+  (exists y, P 42 y) ->
+  (forall x y : nat, P x y -> Q x) ->
+  Q 42.
+Proof.
+  intros P Q HP HQ. destruct HP as [y HP']. eapply HQ. eassumption.
+Qed.
+
+(** The [eauto] tactic will use [eapply] and [eassumption], streamlining
+    the proof even further. *)
+
+Lemma silly2_eauto : forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
+  (exists y, P 42 y) ->
+  (forall x y : nat, P x y -> Q x) ->
+  Q 42.
+Proof.
+  intros P Q HP HQ. destruct HP as [y HP']. eauto.
+Qed.
+
+(* 2020-08-24 19:40 *)

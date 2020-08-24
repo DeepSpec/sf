@@ -194,7 +194,9 @@ h4.section {
     color: black;
     /* text-align: justify; */
     border-style: plain;
-    padding-top: 18px;
+    /* This might work better after changing back to standard coqdoc: */
+    padding-top: 10px;
+    /* padding-top: 18px; */
 }
 
 .quote { 

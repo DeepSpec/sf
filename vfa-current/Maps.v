@@ -200,7 +200,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, recommended (t_update_permute) 
+(** **** Exercise: 3 stars, standard, especially useful (t_update_permute) 
 
     Use [eqb_idP] to prove one final property of the [update]
     function: If we update a map [m] at two distinct keys, it doesn't
@@ -281,4 +281,4 @@ Proof.
   apply t_update_permute.
 Qed.
 
-(* 2020-08-08 00:36 *)
+(* 2020-08-24 19:46 *)

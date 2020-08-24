@@ -38,7 +38,8 @@
 
 <br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing".<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.omega.Omega.html#"><span class="id" title="library">omega.Omega</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="IndProp.html#"><span class="id" title="library">IndProp</span></a>.<br/>
 </div>
 
@@ -107,7 +108,7 @@ One direction of this equivalence looks like this (the other is similar).
 </div>
 
 <div class="doc">
-<a id="lab401"></a><h1 class="section">Coq Automation</h1>
+<a id="lab406"></a><h1 class="section">Coq Automation</h1>
 
 <div class="paragraph"> </div>
 
@@ -130,7 +131,7 @@ One direction of this equivalence looks like this (the other is similar).
 </div>
 
 <div class="doc">
-<a id="lab402"></a><h1 class="section">Tacticals</h1>
+<a id="lab407"></a><h1 class="section">Tacticals</h1>
 
 <div class="paragraph"> </div>
 
@@ -139,7 +140,7 @@ One direction of this equivalence looks like this (the other is similar).
 </div>
 
 <div class="doc">
-<a id="lab403"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">try</span></span> Tactical</h3>
+<a id="lab408"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">try</span></span> Tactical</h3>
 
 <div class="paragraph"> </div>
 
@@ -168,7 +169,7 @@ There is no real reason to use <span class="inlinecode"><span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab404"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (Simple Form)</h3>
+<a id="lab409"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (Simple Form)</h3>
 
 <div class="paragraph"> </div>
 
@@ -251,7 +252,7 @@ Using <span class="inlinecode"><span class="id" title="tactic">try</span></span>
 </div>
 
 <div class="doc">
-<a id="lab405"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (General Form)</h3>
+<a id="lab410"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (General Form)</h3>
 
 <div class="paragraph"> </div>
 
@@ -309,7 +310,7 @@ of&nbsp;our&nbsp;optimization&nbsp;proof:&nbsp;*)</span><br/><hr class='doublesp
 </div>
 
 <div class="doc">
-<a id="lab406"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> Tactical</h3>
+<a id="lab411"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> Tactical</h3>
 
 <div class="paragraph"> </div>
 
@@ -354,7 +355,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
     construct a proof, not that we have constructed a wrong one. 
 <div class="paragraph"> </div>
 
-<a id="lab407"></a><h4 class="section">Exercise: 3 stars, standard (re_opt)</h4>
+<a id="lab412"></a><h4 class="section">Exercise: 3 stars, standard (re_opt)</h4>
 
 <div class="paragraph"> </div>
 
@@ -554,7 +555,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 
 
 <div class="doc">
-<a id="lab408"></a><h2 class="section">A Few More Handy Tactics</h2>
+<a id="lab413"></a><h2 class="section">A Few More Handy Tactics</h2>
 
 <div class="paragraph"> </div>
 
@@ -602,7 +603,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 </div>
 
 <div class="doc">
-<a id="lab409"></a><h2 class="section">Defining New Tactics</h2>
+<a id="lab414"></a><h2 class="section">Defining New Tactics</h2>
 
 <div class="paragraph"> </div>
 
@@ -649,8 +650,13 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab410"></a><h1 class="section">Decision Procedures</h1>
+<a id="lab415"></a><h1 class="section">Decision Procedures</h1>
 
+<div class="paragraph"> </div>
+
+ <i>Note to readers</i>: The <span class="inlinecode"><span class="id" title="tactic">omega</span></span> tactic described here is now
+    superseded by a more powerful tactic called <span class="inlinecode"><span class="id" title="var">lia</span></span>. For the moment,
+    you'll see uses of both in the text. 
 <div class="paragraph"> </div>
 
  So far, the automation we have considered has primarily been
@@ -660,7 +666,7 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
     tactic is the most important to start with. 
 <div class="paragraph"> </div>
 
-<a id="lab411"></a><h2 class="section">The Omega Tactic</h2>
+<a id="lab416"></a><h2 class="section">The Omega Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -710,12 +716,12 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
 &nbsp;&nbsp;<a class="idref" href="AltAuto.html#m:28"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="AltAuto.html#n:29"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#n:29"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="AltAuto.html#o:30"><span class="id" title="variable">o</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="AltAuto.html#o:30"><span class="id" title="variable">o</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 3 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="AltAuto.html#p:31"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 3 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="AltAuto.html#m:28"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#p:31"><span class="id" title="variable">p</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">omega</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">lia</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab412"></a><h1 class="section">Search Tactics</h1>
+<a id="lab417"></a><h1 class="section">Search Tactics</h1>
 
 <div class="paragraph"> </div>
 
@@ -732,7 +738,7 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
     <span class="inlinecode"><span class="id" title="var">UseAuto</span></span> chapter in <i>Programming Language Foundations</i>. 
 <div class="paragraph"> </div>
 
-<a id="lab413"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> tactic.</h2>
+<a id="lab418"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> tactic.</h2>
 
 <div class="paragraph"> </div>
 
@@ -761,7 +767,7 @@ This saves us from needing to remember the names of our constructors.
     which is not necessarily the one we want! 
 <div class="paragraph"> </div>
 
-<a id="lab414"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> Tactic</h2>
+<a id="lab419"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -889,7 +895,7 @@ We can extend the hint database just for the purposes of one
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="le_antisym" class="idref" href="#le_antisym"><span class="id" title="lemma">le_antisym</span></a> : <span class="id" title="keyword">∀</span> <a id="n:54" class="idref" href="#n:54"><span class="id" title="binder">n</span></a> <a id="m:55" class="idref" href="#m:55"><span class="id" title="binder">m</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="AltAuto.html#n:54"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#m:55"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="AltAuto.html#m:55"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#n:54"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="AltAuto.html#n:54"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="AltAuto.html#m:55"><span class="id" title="variable">m</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">omega</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="var">lia</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="auto_example_6" class="idref" href="#auto_example_6"><span class="id" title="definition">auto_example_6</span></a> : <span class="id" title="keyword">∀</span> <a id="n:56" class="idref" href="#n:56"><span class="id" title="binder">n</span></a> <a id="m:57" class="idref" href="#m:57"><span class="id" title="binder">m</span></a> <a id="p:58" class="idref" href="#p:58"><span class="id" title="binder">p</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="AltAuto.html#n:56"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#p:58"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="AltAuto.html#n:56"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#m:57"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="AltAuto.html#m:57"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#n:56"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="AltAuto.html#n:56"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#p:58"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -905,14 +911,14 @@ Of course, in any given development there will probably be
     some specific constructors and lemmas that are used very often in
     proofs.  We can add these to the global hint database by writing
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">T</span>.
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">T</span> : <span class="id" title="var">core</span>.
 <div class="paragraph"> </div>
 
 </span>    at the top level, where <span class="inlinecode"><span class="id" title="var">T</span></span> is a top-level theorem or a
     constructor of an inductively defined proposition (i.e., anything
     whose type is an implication).  As a shorthand, we can write
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Constructors</span> <span class="id" title="var">c</span>.
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Constructors</span> <span class="id" title="var">c</span> : <span class="id" title="var">core</span>.
 <div class="paragraph"> </div>
 
 </span>    to tell Coq to do a <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Resolve</span></span> for <i>all</i> of the constructors
@@ -922,7 +928,7 @@ Of course, in any given development there will probably be
 
     It is also sometimes necessary to add
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Unfold</span> <span class="id" title="var">d</span>.
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Unfold</span> <span class="id" title="var">d</span> : <span class="id" title="var">core</span>.
 <div class="paragraph"> </div>
 
 </span>    where <span class="inlinecode"><span class="id" title="var">d</span></span> is a defined symbol, so that <span class="inlinecode"><span class="id" title="tactic">auto</span></span> knows to expand uses
@@ -937,7 +943,7 @@ Of course, in any given development there will probably be
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">le_antisym</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">le_antisym</span> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="auto_example_6'" class="idref" href="#auto_example_6'"><span class="id" title="definition">auto_example_6'</span></a> : <span class="id" title="keyword">∀</span> <a id="n:59" class="idref" href="#n:59"><span class="id" title="binder">n</span></a> <a id="m:60" class="idref" href="#m:60"><span class="id" title="binder">m</span></a> <a id="p:61" class="idref" href="#p:61"><span class="id" title="binder">p</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="AltAuto.html#n:59"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#p:61"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="AltAuto.html#n:59"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#m:60"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="AltAuto.html#m:60"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#n:59"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="AltAuto.html#n:59"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#p:61"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -952,15 +958,15 @@ Of course, in any given development there will probably be
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="comment">(*&nbsp;does&nbsp;nothing&nbsp;*)</span><br/>
 <span class="id" title="keyword">Abort</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="AltAuto.html#is_fortytwo"><span class="id" title="definition">is_fortytwo</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="AltAuto.html#is_fortytwo"><span class="id" title="definition">is_fortytwo</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="auto_example_7'" class="idref" href="#auto_example_7'"><span class="id" title="definition">auto_example_7'</span></a> : <span class="id" title="keyword">∀</span> <a id="x:64" class="idref" href="#x:64"><span class="id" title="binder">x</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="AltAuto.html#x:64"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> 42 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> 42 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="AltAuto.html#x:64"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="AltAuto.html#is_fortytwo"><span class="id" title="definition">is_fortytwo</span></a> <a class="idref" href="AltAuto.html#x:64"><span class="id" title="variable">x</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">info_auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab415"></a><h4 class="section">Exercise: 3 stars, advanced (pumping_redux)</h4>
- Use <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="tactic">omega</span></span>, and any other useful tactics from this chapter to
+<a id="lab420"></a><h4 class="section">Exercise: 3 stars, advanced (pumping_redux)</h4>
+ Use <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="var">lia</span></span>, and any other useful tactics from this chapter to
     shorten your proof (or the "official" solution proof) of the weak Pumping
     Lemma exercise from <a href="IndProp.html"><span class="inlineref">IndProp</span></a>. 
 </div>
@@ -983,8 +989,8 @@ Of course, in any given development there will probably be
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab416"></a><h4 class="section">Exercise: 3 stars, advanced, optional (pumping_redux_strong)</h4>
- Use <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="tactic">omega</span></span>, and any other useful tactics from this chapter to
+<a id="lab421"></a><h4 class="section">Exercise: 3 stars, advanced, optional (pumping_redux_strong)</h4>
+ Use <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="var">lia</span></span>, and any other useful tactics from this chapter to
     shorten your proof (or the "official" solution proof) of the stronger
     Pumping Lemma exercise from <a href="IndProp.html"><span class="inlineref">IndProp</span></a>. 
 </div>
@@ -1008,7 +1014,7 @@ Of course, in any given development there will probably be
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab417"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> and <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> variants</h2>
+<a id="lab422"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> and <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> variants</h2>
 
 <div class="paragraph"> </div>
 
@@ -1118,7 +1124,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-08-08&nbsp;00:31&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-08-24&nbsp;19:40&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -32,10 +32,38 @@ Import Check.
 
 Goal True.
 
+idtac "-------------------  plus_one_r'  --------------------".
 idtac " ".
 
-idtac "Max points - standard: 0".
-idtac "Max points - advanced: 0".
+idtac "#> plus_one_r'".
+idtac "Possible points: 2".
+check_type @plus_one_r' ((forall n : nat, n + 1 = S n)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions plus_one_r'.
+Goal True.
+idtac " ".
+
+idtac "-------------------  booltree_ind  --------------------".
+idtac " ".
+
+idtac "#> Manually graded: booltree_ind".
+idtac "Possible points: 1".
+print_manual_grade manual_grade_for_booltree_ind.
+idtac " ".
+
+idtac "-------------------  toy_ind  --------------------".
+idtac " ".
+
+idtac "#> Manually graded: toy_ind".
+idtac "Possible points: 1".
+print_manual_grade manual_grade_for_toy_ind.
+idtac " ".
+
+idtac " ".
+
+idtac "Max points - standard: 4".
+idtac "Max points - advanced: 4".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -53,8 +81,14 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
+idtac "---------- plus_one_r' ---------".
+Print Assumptions plus_one_r'.
+idtac "---------- booltree_ind ---------".
+idtac "MANUAL".
+idtac "---------- toy_ind ---------".
+idtac "MANUAL".
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

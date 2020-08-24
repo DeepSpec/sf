@@ -87,9 +87,9 @@ idtac " ".
 idtac "#> STLCRef.RefsAndNontermination.factorial_type".
 idtac "Possible points: 3".
 check_type @STLCRef.RefsAndNontermination.factorial_type (
-(STLCRef.has_type (@Maps.empty STLCRef.ty) (@nil STLCRef.ty)
+(STLCRef.has_type (@nil STLCRef.ty) (@Maps.empty STLCRef.ty)
    STLCRef.RefsAndNontermination.factorial
-   (STLCRef.Arrow STLCRef.Nat STLCRef.Nat))).
+   (STLCRef.Ty_Arrow STLCRef.Ty_Nat STLCRef.Ty_Nat))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions STLCRef.RefsAndNontermination.factorial_type.
@@ -135,4 +135,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-08-08 00:34 *)
+(* 2020-08-24 19:43 *)

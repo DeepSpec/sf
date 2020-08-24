@@ -257,7 +257,7 @@
 (** Coq runs on Windows, Linux, and macOS.  You will need:
 
     - A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.9.1.
+      These files have been tested with Coq 8.12.
 
     - An IDE for interacting with Coq.  Currently, there are two
       choices:
@@ -279,7 +279,8 @@
           Users who like CoqIDE should consider running it with the
           "asynchronous" and "error resilience" modes disabled:
 
-  coqide -async-proofs off -async-proofs-command-error-resilience off Foo.v &
+              coqide -async-proofs off \
+                     -async-proofs-command-error-resilience off Foo.v &
 *)
 
 (* ================================================================= *)
@@ -437,4 +438,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

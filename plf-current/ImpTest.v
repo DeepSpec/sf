@@ -64,7 +64,7 @@ idtac " ".
 idtac "#> ceval_example2".
 idtac "Possible points: 2".
 check_type @ceval_example2 (
-(empty_st =[ X ::= ANum 0;; Y ::= ANum 1;; Z ::= ANum 2
+(empty_st =[ X := (ANum 0); Y := (ANum 1); Z := (ANum 2)
  ]=> @Maps.t_update nat (@Maps.t_update nat (X !-> 0) Y 1) Z 2)).
 idtac "Assumptions:".
 Abort.
@@ -108,7 +108,7 @@ idtac "-------------------  stack_compiler  --------------------".
 idtac " ".
 
 idtac "#> s_execute1".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @s_execute1 (
 (s_execute empty_st (@nil nat)
    (SPush 5 :: SPush 3 :: SPush 1 :: SMinus :: @nil sinstr) =
@@ -132,9 +132,9 @@ Goal True.
 idtac " ".
 
 idtac "#> s_compile1".
-idtac "Possible points: 2".
+idtac "Possible points: 1.5".
 check_type @s_compile1 (
-(s_compile (AId X - ANum 2 * AId Y) =
+(s_compile <{ (AId X) - (ANum 2) * (AId Y) }> =
  (SLoad X :: SPush 2 :: SLoad Y :: SMult :: SMinus :: @nil sinstr)%list)).
 idtac "Assumptions:".
 Abort.
@@ -142,12 +142,36 @@ Print Assumptions s_compile1.
 Goal True.
 idtac " ".
 
+idtac "-------------------  execute_app  --------------------".
+idtac " ".
+
+idtac "#> execute_app".
+idtac "Possible points: 3".
+check_type @execute_app (
+(forall (st : state) (p1 p2 : list sinstr) (stack : list nat),
+ s_execute st stack (p1 ++ p2) = s_execute st (s_execute st stack p1) p2)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions execute_app.
+Goal True.
+idtac " ".
+
 idtac "-------------------  stack_compiler_correct  --------------------".
 idtac " ".
 
+idtac "#> s_compile_correct_aux".
+idtac "Possible points: 2.5".
+check_type @s_compile_correct_aux (
+(forall (st : state) (e : aexp) (stack : list nat),
+ s_execute st stack (s_compile e) = (aeval st e :: stack)%list)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions s_compile_correct_aux.
+Goal True.
+idtac " ".
+
 idtac "#> s_compile_correct".
-idtac "Advanced".
-idtac "Possible points: 6".
+idtac "Possible points: 0.5".
 check_type @s_compile_correct (
 (forall (st : state) (e : aexp),
  s_execute st (@nil nat) (s_compile e) = (aeval st e :: @nil nat)%list)).
@@ -200,7 +224,7 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 23".
+idtac "Max points - standard: 29".
 idtac "Max points - advanced: 35".
 idtac "".
 idtac "Allowed Axioms:".
@@ -237,10 +261,14 @@ idtac "---------- s_execute2 ---------".
 Print Assumptions s_execute2.
 idtac "---------- s_compile1 ---------".
 Print Assumptions s_compile1.
-idtac "".
-idtac "********** Advanced **********".
+idtac "---------- execute_app ---------".
+Print Assumptions execute_app.
+idtac "---------- s_compile_correct_aux ---------".
+Print Assumptions s_compile_correct_aux.
 idtac "---------- s_compile_correct ---------".
 Print Assumptions s_compile_correct.
+idtac "".
+idtac "********** Advanced **********".
 idtac "---------- BreakImp.break_ignore ---------".
 Print Assumptions BreakImp.break_ignore.
 idtac "---------- BreakImp.while_continue ---------".
@@ -249,4 +277,4 @@ idtac "---------- BreakImp.while_stops_on_break ---------".
 Print Assumptions BreakImp.while_stops_on_break.
 Abort.
 
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:42 *)

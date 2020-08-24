@@ -54,7 +54,7 @@ NatList.test_member2 (standard, automatically graded)
 Score: 0.0 / 0.5
 Reason: Admitted proof.
 
-NatList.bag_theorem (standard, manually graded)
+NatList.add_inc_count (standard, manually graded)
 Score: Ungraded / 2.0
 
 NatList.app_nil_r (standard, automatically graded)
@@ -89,11 +89,16 @@ NatList.remove_does_not_increase_count (advanced, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
-NatList.rev_injective (advanced, manually graded)
-Score: Ungraded / 6.0
+NatList.rev_injective (advanced, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
 
-NatList.hd_error (standard, automatically graded)
-Score: 0.0 / 2.0
+NatList.test_hd_error1 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+NatList.test_hd_error2 (standard, automatically graded)
+Score: 0.0 / 1.0
 Reason: Admitted proof.
 
 eqb_id_refl (standard, automatically graded)
@@ -108,19 +113,16 @@ PartialMap.update_neq (standard, automatically graded)
 Score: 0.0 / 1.0
 Reason: Admitted proof.
 
-baz_num_elts (standard, manually graded)
-Score: Ungraded / 2.0
-
-Points possible - standard: 21
-Points possible - advanced: 33
+Points possible - standard: 19
+Points possible - advanced: 31
 
    ###########################
    ##### Grading Results #####
    ###########################
 
    Standard:  0.0 / 17.0 so far
-                and  4.0 ungraded
+                and  2.0 ungraded
 
-   Advanced:  0.0 / 23.0 so far
-                and 10.0 ungraded
+   Advanced:  0.0 / 29.0 so far
+                and  2.0 ungraded
 

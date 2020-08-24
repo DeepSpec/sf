@@ -6,20 +6,40 @@ ev_8' (standard, automatically graded)
 Score: 0.0 / 1.0
 Reason: Admitted proof.
 
+Props.conj_fact (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+Props.or_commut' (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+Props.ex_ev_Sn (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+Props.p_implies_true (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Props.ex_falso_quodlibet' (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
 MyEquality.equality__leibniz_equality (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
 
-Points possible - standard: 4
-Points possible - advanced: 4
+Points possible - standard: 12
+Points possible - advanced: 12
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 /  4.0 so far
+   Standard:  0.0 / 12.0 so far
                 and  0.0 ungraded
 
-   Advanced:  0.0 /  4.0 so far
+   Advanced:  0.0 / 12.0 so far
                 and  0.0 ungraded
 

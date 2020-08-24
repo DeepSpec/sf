@@ -56,11 +56,11 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Imp</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#"><span class="id" title="library">Smallstep</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#multi"><span class="id" title="inductive">multi</span></a>.<br/>
+<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#multi"><span class="id" title="inductive">multi</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab176"></a><h1 class="section">Typed Arithmetic Expressions</h1>
+<a id="lab187"></a><h1 class="section">Typed Arithmetic Expressions</h1>
 
 <div class="paragraph"> </div>
 
@@ -79,7 +79,7 @@
 </div>
 
 <div class="doc">
-<a id="lab177"></a><h2 class="section">Syntax</h2>
+<a id="lab188"></a><h2 class="section">Syntax</h2>
 
 <div class="paragraph"> </div>
 
@@ -122,13 +122,12 @@
 &nbsp;&nbsp;| <a id="nv_zro" class="idref" href="#nv_zro"><span class="id" title="constructor">nv_zro</span></a> : <a class="idref" href="Types.html#nvalue:5"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#zro"><span class="id" title="constructor">zro</span></a><br/>
 &nbsp;&nbsp;| <a id="nv_scc" class="idref" href="#nv_scc"><span class="id" title="constructor">nv_scc</span></a> : <span class="id" title="keyword">∀</span> <a id="t:7" class="idref" href="#t:7"><span class="id" title="binder">t</span></a>, <a class="idref" href="Types.html#nvalue:5"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#t:7"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Types.html#nvalue:5"><span class="id" title="inductive">nvalue</span></a> (<a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#t:7"><span class="id" title="variable">t</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="value" class="idref" href="#value"><span class="id" title="definition">value</span></a> (<a id="t:8" class="idref" href="#t:8"><span class="id" title="binder">t</span></a> : <a class="idref" href="Types.html#tm"><span class="id" title="inductive">tm</span></a>) := <a class="idref" href="Types.html#bvalue"><span class="id" title="inductive">bvalue</span></a> <a class="idref" href="Types.html#t:8"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#t:8"><span class="id" title="variable">t</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#bvalue"><span class="id" title="inductive">bvalue</span></a> <a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a>.<br/>
-<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Types.html#value"><span class="id" title="definition">value</span></a>.<br/>
-<span class="id" title="keyword">Hint Unfold</span> <span class="id" title="definition">update</span>.<br/>
+<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#bvalue"><span class="id" title="inductive">bvalue</span></a> <a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a> : <span class="id" title="var">core</span>.<br/>
+<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Types.html#value"><span class="id" title="definition">value</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab178"></a><h2 class="section">Operational Semantics</h2>
+<a id="lab189"></a><h2 class="section">Operational Semantics</h2>
 
 <div class="paragraph"> </div>
 
@@ -202,7 +201,7 @@
 </td>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
-  <td class="infrule">numeric value v<sub>1</sub></td>
+  <td class="infrule">numeric value v</td>
   <td class="infrulenamecol" rowspan="3">
     (ST_PrdScc) &nbsp;
   </td></tr>
@@ -210,7 +209,7 @@
   <td class="infrule"><hr /></td>
 </tr>
 <tr class="infruleassumption">
-  <td class="infrule">prd (scc v<sub>1</sub>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> v<sub>1</sub></td>
+  <td class="infrule">prd (scc v) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> v</td>
   <td></td>
 </td>
 </table></center><center><table class="infrule">
@@ -241,7 +240,7 @@
 </td>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
-  <td class="infrule">numeric value v<sub>1</sub></td>
+  <td class="infrule">numeric value v</td>
   <td class="infrulenamecol" rowspan="3">
     (ST_IszroScc) &nbsp;
   </td></tr>
@@ -249,7 +248,7 @@
   <td class="infrule"><hr /></td>
 </tr>
 <tr class="infruleassumption">
-  <td class="infrule">iszro (scc v<sub>1</sub>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> fls</td>
+  <td class="infrule">iszro (scc v) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> fls</td>
   <td></td>
 </td>
 </table></center><center><table class="infrule">
@@ -273,7 +272,7 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Reserved Notation</span> &quot;t<sub>1</sub> '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t<sub>2</sub>" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Reserved Notation</span> &quot;t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t'" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="step" class="idref" href="#step"><span class="id" title="inductive">step</span></a> : <a class="idref" href="Types.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Types.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="ST_TestTru" class="idref" href="#ST_TestTru"><span class="id" title="constructor">ST_TestTru</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:11" class="idref" href="#t<sub>1</sub>:11"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:12" class="idref" href="#t<sub>2</sub>:12"><span class="id" title="binder">t<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#test"><span class="id" title="constructor">test</span></a> <a class="idref" href="Types.html#tru"><span class="id" title="constructor">tru</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:11"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Types.html#t<sub>2</sub>:12"><span class="id" title="variable">t<sub>2</sub></span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#t<sub>1</sub>:11"><span class="id" title="variable">t<sub>1</sub></span></a><br/>
@@ -287,23 +286,23 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:19"><span class="id" title="variable">t<sub>1</sub></span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#t<sub>1</sub>':20"><span class="id" title="variable">t<sub>1</sub>'</span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;| <a id="ST_PrdZro" class="idref" href="#ST_PrdZro"><span class="id" title="constructor">ST_PrdZro</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#prd"><span class="id" title="constructor">prd</span></a> <a class="idref" href="Types.html#zro"><span class="id" title="constructor">zro</span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#zro"><span class="id" title="constructor">zro</span></a><br/>
-&nbsp;&nbsp;| <a id="ST_PrdScc" class="idref" href="#ST_PrdScc"><span class="id" title="constructor">ST_PrdScc</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:21" class="idref" href="#t<sub>1</sub>:21"><span class="id" title="binder">t<sub>1</sub></span></a>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:21"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#prd"><span class="id" title="constructor">prd</span></a> (<a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:21"><span class="id" title="variable">t<sub>1</sub></span></a>)<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#t<sub>1</sub>:21"><span class="id" title="variable">t<sub>1</sub></span></a><br/>
+&nbsp;&nbsp;| <a id="ST_PrdScc" class="idref" href="#ST_PrdScc"><span class="id" title="constructor">ST_PrdScc</span></a> : <span class="id" title="keyword">∀</span> <a id="v:21" class="idref" href="#v:21"><span class="id" title="binder">v</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#v:21"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#prd"><span class="id" title="constructor">prd</span></a> (<a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#v:21"><span class="id" title="variable">v</span></a>)<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#v:21"><span class="id" title="variable">v</span></a><br/>
 &nbsp;&nbsp;| <a id="ST_Prd" class="idref" href="#ST_Prd"><span class="id" title="constructor">ST_Prd</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:22" class="idref" href="#t<sub>1</sub>:22"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>1</sub>':23" class="idref" href="#t<sub>1</sub>':23"><span class="id" title="binder">t<sub>1</sub>'</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#t<sub>1</sub>:22"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#t<sub>1</sub>':23"><span class="id" title="variable">t<sub>1</sub>'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#prd"><span class="id" title="constructor">prd</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:22"><span class="id" title="variable">t<sub>1</sub></span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#prd"><span class="id" title="constructor">prd</span></a> <a class="idref" href="Types.html#t<sub>1</sub>':23"><span class="id" title="variable">t<sub>1</sub>'</span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;| <a id="ST_IszroZro" class="idref" href="#ST_IszroZro"><span class="id" title="constructor">ST_IszroZro</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#iszro"><span class="id" title="constructor">iszro</span></a> <a class="idref" href="Types.html#zro"><span class="id" title="constructor">zro</span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#tru"><span class="id" title="constructor">tru</span></a><br/>
-&nbsp;&nbsp;| <a id="ST_IszroScc" class="idref" href="#ST_IszroScc"><span class="id" title="constructor">ST_IszroScc</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:24" class="idref" href="#t<sub>1</sub>:24"><span class="id" title="binder">t<sub>1</sub></span></a>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:24"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#iszro"><span class="id" title="constructor">iszro</span></a> (<a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:24"><span class="id" title="variable">t<sub>1</sub></span></a>)<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#fls"><span class="id" title="constructor">fls</span></a><br/>
+&nbsp;&nbsp;| <a id="ST_IszroScc" class="idref" href="#ST_IszroScc"><span class="id" title="constructor">ST_IszroScc</span></a> : <span class="id" title="keyword">∀</span> <a id="v:24" class="idref" href="#v:24"><span class="id" title="binder">v</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#nvalue"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#v:24"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#iszro"><span class="id" title="constructor">iszro</span></a> (<a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#v:24"><span class="id" title="variable">v</span></a>)<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#fls"><span class="id" title="constructor">fls</span></a><br/>
 &nbsp;&nbsp;| <a id="ST_Iszro" class="idref" href="#ST_Iszro"><span class="id" title="constructor">ST_Iszro</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:25" class="idref" href="#t<sub>1</sub>:25"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>1</sub>':26" class="idref" href="#t<sub>1</sub>':26"><span class="id" title="binder">t<sub>1</sub>'</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#t<sub>1</sub>:25"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#t<sub>1</sub>':26"><span class="id" title="variable">t<sub>1</sub>'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#iszro"><span class="id" title="constructor">iszro</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:25"><span class="id" title="variable">t<sub>1</sub></span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Types.html#iszro"><span class="id" title="constructor">iszro</span></a> <a class="idref" href="Types.html#t<sub>1</sub>':26"><span class="id" title="variable">t<sub>1</sub>'</span></a><a class="idref" href="Types.html#:::x_'--&gt;'_x"><span class="id" title="notation">)</span></a><br/>
 <br/>
-<span class="id" title="keyword">where</span> <a id=":::x_'--&gt;'_x" class="idref" href="#:::x_'--&gt;'_x"><span class="id" title="notation">&quot;</span></a>t<sub>1</sub> '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t<sub>2</sub>" := (<a class="idref" href="Types.html#step:10"><span class="id" title="inductive">step</span></a> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#step"><span class="id" title="inductive">step</span></a>.<br/>
+<span class="id" title="keyword">where</span> <a id=":::x_'--&gt;'_x" class="idref" href="#:::x_'--&gt;'_x"><span class="id" title="notation">&quot;</span></a>t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t'" := (<a class="idref" href="Types.html#step:10"><span class="id" title="inductive">step</span></a> <span class="id" title="var">t</span> <span class="id" title="var">t'</span>).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#step"><span class="id" title="inductive">step</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
@@ -320,7 +319,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 </div>
 
 <div class="doc">
-<a id="lab179"></a><h2 class="section">Normal Forms and Values</h2>
+<a id="lab190"></a><h2 class="section">Normal Forms and Values</h2>
 
 <div class="paragraph"> </div>
 
@@ -337,11 +336,11 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 <span class="id" title="keyword">Notation</span> <a id="step_normal_form" class="idref" href="#step_normal_form"><span class="id" title="abbreviation">step_normal_form</span></a> := (<a class="idref" href="Smallstep.html#normal_form"><span class="id" title="definition">normal_form</span></a> <a class="idref" href="Types.html#step"><span class="id" title="inductive">step</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="stuck" class="idref" href="#stuck"><span class="id" title="definition">stuck</span></a> (<a id="t:27" class="idref" href="#t:27"><span class="id" title="binder">t</span></a> : <a class="idref" href="Types.html#tm"><span class="id" title="inductive">tm</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Types.html#step_normal_form"><span class="id" title="abbreviation">step_normal_form</span></a> <a class="idref" href="Types.html#t:27"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="Types.html#value"><span class="id" title="definition">value</span></a> <a class="idref" href="Types.html#t:27"><span class="id" title="variable">t</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Types.html#stuck"><span class="id" title="definition">stuck</span></a>.<br/>
+<span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Types.html#stuck"><span class="id" title="definition">stuck</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab180"></a><h4 class="section">Exercise: 2 stars, standard (some_term_is_stuck)</h4>
+<a id="lab191"></a><h4 class="section">Exercise: 2 stars, standard (some_term_is_stuck)</h4>
 
 </div>
 <div class="code">
@@ -361,7 +360,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
     define things so that some value could still take a step. 
 <div class="paragraph"> </div>
 
-<a id="lab181"></a><h4 class="section">Exercise: 3 stars, standard (value_is_nf)</h4>
+<a id="lab192"></a><h4 class="section">Exercise: 3 stars, standard (value_is_nf)</h4>
 
 </div>
 <div class="code">
@@ -384,7 +383,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
     exercise, try to complete the proof both ways.)  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab182"></a><h4 class="section">Exercise: 3 stars, standard, optional (step_deterministic)</h4>
+<a id="lab193"></a><h4 class="section">Exercise: 3 stars, standard, optional (step_deterministic)</h4>
  Use <span class="inlinecode"><span class="id" title="var">value_is_nf</span></span> to show that the <span class="inlinecode"><span class="id" title="var">step</span></span> relation is also
     deterministic. 
 </div>
@@ -400,7 +399,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 
 
 <div class="doc">
-<a id="lab183"></a><h2 class="section">Typing</h2>
+<a id="lab194"></a><h2 class="section">Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -545,15 +544,14 @@ In informal notation, the typing relation is often written
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Types.html#iszro"><span class="id" title="constructor">iszro</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:40"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Types.html#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">\</span></a><a class="idref" href="Types.html#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">in</span></a> <a class="idref" href="Types.html#Bool"><span class="id" title="constructor">Bool</span></a><br/>
 <br/>
 <span class="id" title="keyword">where</span> <a id="46525c5c9c73f3cc121f6ba0c58fa00e" class="idref" href="#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">&quot;</span></a>'&#x22A2;' t '&#x2208;' T" := (<a class="idref" href="Types.html#has_type:33"><span class="id" title="inductive">has_type</span></a> <span class="id" title="var">t</span> <span class="id" title="var">T</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#has_type"><span class="id" title="inductive">has_type</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Types.html#has_type"><span class="id" title="inductive">has_type</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="has_type_1" class="idref" href="#has_type_1"><span class="id" title="definition">has_type_1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Types.html#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Types.html#test"><span class="id" title="constructor">test</span></a> <a class="idref" href="Types.html#fls"><span class="id" title="constructor">fls</span></a> <a class="idref" href="Types.html#zro"><span class="id" title="constructor">zro</span></a> (<a class="idref" href="Types.html#scc"><span class="id" title="constructor">scc</span></a> <a class="idref" href="Types.html#zro"><span class="id" title="constructor">zro</span></a>) <a class="idref" href="Types.html#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">\</span></a><a class="idref" href="Types.html#46525c5c9c73f3cc121f6ba0c58fa00e"><span class="id" title="notation">in</span></a> <a class="idref" href="Types.html#Nat"><span class="id" title="constructor">Nat</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Test"><span class="id" title="constructor">T_Test</span></a>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Fls"><span class="id" title="constructor">T_Fls</span></a>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Zro"><span class="id" title="constructor">T_Zro</span></a>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Scc"><span class="id" title="constructor">T_Scc</span></a>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Zro"><span class="id" title="constructor">T_Zro</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Fls"><span class="id" title="constructor">T_Fls</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Zro"><span class="id" title="constructor">T_Zro</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Scc"><span class="id" title="constructor">T_Scc</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#T_Zro"><span class="id" title="constructor">T_Zro</span></a>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -581,7 +579,7 @@ In informal notation, the typing relation is often written
 </div>
 
 <div class="doc">
-<a id="lab184"></a><h4 class="section">Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat)</h4>
+<a id="lab195"></a><h4 class="section">Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat)</h4>
 
 </div>
 <div class="code">
@@ -595,7 +593,7 @@ In informal notation, the typing relation is often written
 
 
 <div class="doc">
-<a id="lab185"></a><h3 class="section">Canonical forms</h3>
+<a id="lab196"></a><h3 class="section">Canonical forms</h3>
 
 <div class="paragraph"> </div>
 
@@ -613,7 +611,9 @@ In informal notation, the typing relation is often written
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">HT</span> [<span class="id" title="var">Hb</span> | <span class="id" title="var">Hn</span>].<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">induction</span> <span class="id" title="var">Hn</span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">HT</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> <span class="id" title="var">Hn</span> <span class="id" title="keyword">as</span> [ | <span class="id" title="var">Hs</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">inversion</span> <span class="id" title="var">HT</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">inversion</span> <span class="id" title="var">HT</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -631,7 +631,7 @@ In informal notation, the typing relation is often written
 </div>
 
 <div class="doc">
-<a id="lab186"></a><h2 class="section">Progress</h2>
+<a id="lab197"></a><h2 class="section">Progress</h2>
 
 <div class="paragraph"> </div>
 
@@ -641,7 +641,7 @@ In informal notation, the typing relation is often written
     least one step.  We call this <i>progress</i>. 
 <div class="paragraph"> </div>
 
-<a id="lab187"></a><h4 class="section">Exercise: 3 stars, standard (finish_progress)</h4>
+<a id="lab198"></a><h4 class="section">Exercise: 3 stars, standard (finish_progress)</h4>
 
 </div>
 <div class="code">
@@ -659,21 +659,21 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="code">
 <div class="togglescript" id="proofcontrol5" onclick="toggleDisplay('proof5');toggleDisplay('proofcontrol5')"><span class="show"></span></div>
 <div class="proofscript" id="proof5" onclick="toggleDisplay('proof5');toggleDisplay('proofcontrol5')">
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">with</span> <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">HT</span>...<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">HT</span>; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;The&nbsp;cases&nbsp;that&nbsp;were&nbsp;obviously&nbsp;values,&nbsp;like&nbsp;T_Tru&nbsp;and<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T_Fls,&nbsp;were&nbsp;eliminated&nbsp;immediately&nbsp;by&nbsp;auto&nbsp;*)</span><br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;T_Test&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">right</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">IHHT1</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">IHHT1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">right</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">IHHT1</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;t<sub>1</sub>&nbsp;is&nbsp;a&nbsp;value&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="Types.html#bool_canonical"><span class="id" title="lemma">bool_canonical</span></a> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">HT<sub>1</sub></span>) <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">t<sub>2</sub></span>...<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">t<sub>3</sub></span>...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">∃</span> <span class="id" title="var">t<sub>2</sub></span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">∃</span> <span class="id" title="var">t<sub>3</sub></span>. <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;t<sub>1</sub>&nbsp;can&nbsp;take&nbsp;a&nbsp;step&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">t<sub>1</sub>'</span> <span class="id" title="var">H<sub>1</sub></span>].<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="Types.html#test"><span class="id" title="constructor">test</span></a> <span class="id" title="var">t<sub>1</sub>'</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>)...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">t<sub>1</sub>'</span> <span class="id" title="var">H<sub>1</sub></span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="Types.html#test"><span class="id" title="constructor">test</span></a> <span class="id" title="var">t<sub>1</sub>'</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>). <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 </div>
 </div>
@@ -682,7 +682,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab188"></a><h4 class="section">Exercise: 3 stars, advanced (finish_progress_informal)</h4>
+<a id="lab199"></a><h4 class="section">Exercise: 3 stars, advanced (finish_progress_informal)</h4>
  Complete the corresponding informal proof: 
 <div class="paragraph"> </div>
 
@@ -747,7 +747,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab189"></a><h2 class="section">Type Preservation</h2>
+<a id="lab200"></a><h2 class="section">Type Preservation</h2>
 
 <div class="paragraph"> </div>
 
@@ -755,7 +755,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
     term takes a step, the result is also a well-typed term. 
 <div class="paragraph"> </div>
 
-<a id="lab190"></a><h4 class="section">Exercise: 2 stars, standard (finish_preservation)</h4>
+<a id="lab201"></a><h4 class="section">Exercise: 2 stars, standard (finish_preservation)</h4>
 
 </div>
 <div class="code">
@@ -775,7 +775,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <br/>
 <div class="togglescript" id="proofcontrol6" onclick="toggleDisplay('proof6');toggleDisplay('proofcontrol6')"><span class="show"></span></div>
 <div class="proofscript" id="proof6" onclick="toggleDisplay('proof6');toggleDisplay('proofcontrol6')">
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">with</span> <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">t'</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span> <span class="id" title="var">HE</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">t'</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">HT</span>;<br/>
@@ -797,7 +797,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab191"></a><h4 class="section">Exercise: 3 stars, advanced (finish_preservation_informal)</h4>
+<a id="lab202"></a><h4 class="section">Exercise: 3 stars, advanced (finish_preservation_informal)</h4>
  Complete the following informal proof: 
 <div class="paragraph"> </div>
 
@@ -864,7 +864,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab192"></a><h4 class="section">Exercise: 3 stars, standard (preservation_alternate_proof)</h4>
+<a id="lab203"></a><h4 class="section">Exercise: 3 stars, standard (preservation_alternate_proof)</h4>
  Now prove the same property again by induction on the
     <i>evaluation</i> derivation instead of on the typing derivation.
     Begin by carefully reading and thinking about the first few
@@ -895,7 +895,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab193"></a><h2 class="section">Type Soundness</h2>
+<a id="lab204"></a><h2 class="section">Type Soundness</h2>
 
 <div class="paragraph"> </div>
 
@@ -915,18 +915,20 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="proofscript" id="proof7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')">
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">t'</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span> <span class="id" title="var">P</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">P</span>; <span class="id" title="tactic">intros</span> [<span class="id" title="var">R</span> <span class="id" title="var">S</span>].<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="Types.html#progress"><span class="id" title="axiom">progress</span></a> <span class="id" title="var">x</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span>); <span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHP</span>. <span class="id" title="tactic">apply</span> (<a class="idref" href="Types.html#preservation"><span class="id" title="axiom">preservation</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span> <span class="id" title="var">H</span>).<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Types.html#stuck"><span class="id" title="definition">stuck</span></a>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#progress"><span class="id" title="axiom">progress</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">HT</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">HT</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">IHP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Types.html#preservation"><span class="id" title="axiom">preservation</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">t</span> := <span class="id" title="var">x</span>); <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">unfold</span> <a class="idref" href="Types.html#stuck"><span class="id" title="definition">stuck</span></a>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
 
 <div class="doc">
-<a id="lab194"></a><h2 class="section">Additional Exercises</h2>
+<a id="lab205"></a><h2 class="section">Additional Exercises</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab195"></a><h4 class="section">Exercise: 2 stars, standard, recommended (subject_expansion)</h4>
+<a id="lab206"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (subject_expansion)</h4>
  Having seen the subject reduction property, one might
     wonder whether the opposity property -- subject <i>expansion</i> --
     also holds.  That is, is it always the case that, if <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">t'</span></span>
@@ -948,7 +950,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab196"></a><h4 class="section">Exercise: 2 stars, standard (variation1)</h4>
+<a id="lab207"></a><h4 class="section">Exercise: 2 stars, standard (variation1)</h4>
  Suppose that we add this new rule to the typing relation:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_SccBool</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t</span>,<br/>
@@ -985,7 +987,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab197"></a><h4 class="section">Exercise: 2 stars, standard (variation2)</h4>
+<a id="lab208"></a><h4 class="section">Exercise: 2 stars, standard (variation2)</h4>
  Suppose, instead, that we add this new rule to the <span class="inlinecode"><span class="id" title="var">step</span></span> relation:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny1</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>,<br/>
@@ -1006,7 +1008,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab198"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation3)</h4>
+<a id="lab209"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation3)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny2</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>2</sub>'</span> <span class="id" title="var">t<sub>3</sub></span>,<br/>
@@ -1020,7 +1022,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab199"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation4)</h4>
+<a id="lab210"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation4)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny3</span> :<br/>
@@ -1033,7 +1035,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab200"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation5)</h4>
+<a id="lab211"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation5)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_Funny4</span> :<br/>
@@ -1046,7 +1048,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab201"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation6)</h4>
+<a id="lab212"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation6)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_Funny5</span> :<br/>
@@ -1059,7 +1061,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab202"></a><h4 class="section">Exercise: 3 stars, standard, optional (more_variations)</h4>
+<a id="lab213"></a><h4 class="section">Exercise: 3 stars, standard, optional (more_variations)</h4>
  Make up some exercises of your own along the same lines as
     the ones above.  Try to find ways of selectively breaking
     properties -- i.e., ways of changing the definitions that
@@ -1074,7 +1076,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab203"></a><h4 class="section">Exercise: 1 star, standard (remove_prdzro)</h4>
+<a id="lab214"></a><h4 class="section">Exercise: 1 star, standard (remove_prdzro)</h4>
  The reduction rule <span class="inlinecode"><span class="id" title="var">ST_PrdZro</span></span> is a bit counter-intuitive: we
     might feel that it makes more sense for the predecessor of <span class="inlinecode"><span class="id" title="var">zro</span></span> to
     be undefined, rather than being defined to be <span class="inlinecode"><span class="id" title="var">zro</span></span>.  Can we
@@ -1095,7 +1097,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab204"></a><h4 class="section">Exercise: 4 stars, advanced (prog_pres_bigstep)</h4>
+<a id="lab215"></a><h4 class="section">Exercise: 4 stars, advanced (prog_pres_bigstep)</h4>
  Suppose our evaluation relation is defined in the big-step style.
     State appropriate analogs of the progress and preservation
     properties. (You do not need to prove them.)
@@ -1120,7 +1122,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-08-08&nbsp;00:33&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-08-24&nbsp;19:42&nbsp;*)</span><br/>
 </div>
 </div>
 

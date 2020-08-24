@@ -194,7 +194,7 @@
     both software and hardware.  It also sponsors workshops and summer
     schools.
       - Website: https://deepspec.org/
-      - Overview presentations: 
+      - Overview presentations:
           - https://deepspec.org/page/About/
           - https://www.youtube.com/watch?v=IPNdsnRWBkk *)
 
@@ -204,8 +204,8 @@
     _REMS_ is a european project on Rigorous Engineering of Mainstream
     Systems.  It has produced detailed formal specifications of a wide
     range of critical real-world interfaces, protocols, and APIs,
-    including 
-      the C language, 
+    including
+      the C language,
       the ELF linker format,
       the ARM, Power, MIPS, CHERI, and RISC-V instruction sets,
       the weak memory models of ARM and Power processors, and
@@ -275,7 +275,7 @@
           appears in current research papers.  The collection has
           at least Progress and Preservation theorems for a number
           of variants of STLC and the polymorphic
-          lambda-calculus (System F). 
+          lambda-calculus (System F).
 
        - Finally, here are some of the main conferences on programming
          languages and formal verification:
@@ -287,9 +287,9 @@
             - Certified Programs and Proofs (CPP)
             - SPLASH/OOPSLA conferences
             - Principles in Practice workshop (PiP)
-            - CoqPL workshop 
+            - CoqPL workshop
 *)
 
 (** $Date$ *)
 
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:42 *)

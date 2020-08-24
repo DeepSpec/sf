@@ -284,7 +284,7 @@ Proof. reflexivity.  Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Exercises *)
 
-(** **** Exercise: 2 stars, standard, recommended (list_funs) 
+(** **** Exercise: 2 stars, standard, especially useful (list_funs) 
 
     Complete the definitions of [nonzeros], [oddmembers], and
     [countoddmembers] below. Have a look at the tests to understand
@@ -363,7 +363,7 @@ Example test_alternate4:
 
 Definition bag := natlist.
 
-(** **** Exercise: 3 stars, standard, recommended (bag_functions) 
+(** **** Exercise: 3 stars, standard, especially useful (bag_functions) 
 
     Complete the following definitions for the functions
     [count], [sum], [add], and [member] for bags. *)
@@ -464,15 +464,10 @@ Example test_subset2:              subset [1;2;2] [2;1;4;1] = false.
  (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, recommended (bag_theorem) 
+(** **** Exercise: 2 stars, standard, especially useful (add_inc_count) 
 
-    Write down an interesting theorem [bag_theorem] about bags
-    involving the functions [count] and [add], and prove it.  Note
-    that, since this problem is somewhat open-ended, it's possible
-    that you may come up with a theorem that is true but whose proof
-    requires techniques you haven't learned yet.  Ask for help if you
-    get stuck! *)
-
+    Adding a value to a bag should increase the value's count by one.
+    State that as a theorem and prove it. *)
 (*
 Theorem bag_theorem : ...
 Proof.
@@ -481,7 +476,7 @@ Qed.
 *)
 
 (* Do not modify the following line: *)
-Definition manual_grade_for_bag_theorem : option (nat*string) := None.
+Definition manual_grade_for_add_inc_count : option (nat*string) := None.
 (** [] *)
 
 (* ################################################################# *)
@@ -775,20 +770,40 @@ Qed.
     to remember what theorems have been proven, much less what they
     are called.
 
-    Coq's [Search] command is quite helpful with this.  Typing [Search
-    foo] into your .v file and evaluating this line will cause Coq to
-    display a list of all theorems involving [foo].  For example, try
-    uncommenting the following line to see a list of theorems that we
-    have proved about [rev]: *)
+    Coq's [Search] command is quite helpful with this.  Let's say
+    you've forgotten the name of a theorem about [rev].  The command
+    [Search rev] will cause Coq to display a list of all theorems
+    involving [rev]. *)
 
-(*  Search rev. *)
+Search rev.
+
+(** Or say you've forgotten the name of the theorem showing that plus
+    is commutative.  You can use a pattern to search for all theorems
+    involving the equality of two additions. *)
+
+Search (_ + _ = _ + _).
+
+(** You'll see a lot of results there, nearly all of them from the
+    standard library.  To restrict the results, you can search inside
+    a particular module: *)
+
+Search (_ + _ = _ + _) inside Induction.
+
+(** You can also make the search more precise by using variables in
+    the search pattern instead of wildcards: *)
+
+Search (?x + ?y = ?y + ?x).
+
+(** The question mark in front of the variable is needed to indicate
+    that it is a variable in the search pattern, rather than a
+    variable that is expected to be in scope currently. *)
 
 (** Keep [Search] in mind as you do the following exercises and
     throughout the rest of the book; it can save you a lot of time!
 
-    If you are using ProofGeneral, you can run [Search] with
-    [C-c C-a C-a]. Pasting its response into your buffer can be
-    accomplished with [C-c C-;]. *)
+    Your IDE likely has its own functionality to help with searching.
+    For example, in ProofGeneral, you can run [Search] with [C-c C-a
+    C-a], and paste its response into your buffer with [C-c C-;]. *)
 
 (* ================================================================= *)
 (** ** List Exercises, Part 1 *)
@@ -901,16 +916,13 @@ Proof.
 
 (** **** Exercise: 4 stars, advanced (rev_injective) 
 
-    Prove that the [rev] function is injective -- that is,
+    Prove that the [rev] function is injective. There is a hard way
+    and an easy way to do this. *)
 
-    forall (l1 l2 : natlist), rev l1 = rev l2 -> l1 = l2.
-
-    (There is a hard way and an easy way to do this.) *)
-
-(* FILL IN HERE *)
-
-(* Do not modify the following line: *)
-Definition manual_grade_for_rev_injective : option (nat*string) := None.
+Theorem rev_injective : forall (l1 l2 : natlist),
+    rev l1 = rev l2 -> l1 = l2.
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (* ################################################################# *)
@@ -1009,6 +1021,7 @@ Example test_hd_error2 : hd_error [1] = Some 1.
 
 Example test_hd_error3 : hd_error [5;6] = Some 5.
  (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (** **** Exercise: 1 star, standard, optional (option_elim_hd) 
@@ -1109,7 +1122,7 @@ Proof.
 (** [] *)
 End PartialMap.
 
-(** **** Exercise: 2 stars, standard (baz_num_elts) 
+(** **** Exercise: 2 stars, standard, optional (baz_num_elts) 
 
     Consider the following inductive definition: *)
 
@@ -1126,4 +1139,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

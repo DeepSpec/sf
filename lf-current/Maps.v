@@ -39,7 +39,19 @@ Import ListNotations.
     https://coq.inria.fr/library/.
 
     The [Search] command is a good way to look for theorems involving
-    objects of specific types.  Take a minute now to experiment with it. *)
+    objects of specific types. See [Lists] for a reminder of how
+    to use it. *)
+
+(** If you want to find out how or where a notation is defined, the
+    [Locate] command is useful.  For example, where is the natural
+    addition operation defined in the standard library? *)
+
+Locate "+".
+
+(** There are several uses for that notation, but only one for
+    naturals. *)
+
+Print Init.Nat.add.
 
 (* ################################################################# *)
 (** * Identifiers *)
@@ -52,7 +64,6 @@ Import ListNotations.
 (** To compare strings, we define the function [eqb_string], which
     internally uses the function [string_dec] from Coq's string
     library. *)
-
 
 Definition eqb_string (x y : string) : bool :=
   if string_dec x y then true else false.
@@ -89,7 +100,7 @@ Proof.
    - rewrite Hs_eq. split. reflexivity. reflexivity.
    - split.
      + intros contra. discriminate contra.
-     + intros H. rewrite H in Hs_not_eq. destruct Hs_not_eq. reflexivity.
+     + intros H. exfalso. apply Hs_not_eq. apply H.
 Qed.
 
 (** Similarly: *)
@@ -291,7 +302,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, recommended (t_update_permute) 
+(** **** Exercise: 3 stars, standard, especially useful (t_update_permute) 
 
     Use [eqb_stringP] to prove one final property of the [update]
     function: If we update a map [m] at two distinct keys, it doesn't
@@ -383,4 +394,33 @@ Proof.
   apply t_update_permute.
 Qed.
 
-(* 2020-08-08 00:31 *)
+(** Finally, for partial maps we introduce a notion of map inclusion,
+    stating that one map includes another:  *)
+
+Definition inclusion {A : Type} (m m' : partial_map A) :=
+  forall x v, m x = Some v -> m' x = Some v.
+  
+(** We show that map update preserves map inclusion, that is: *)
+
+Lemma inclusion_update : forall (A : Type) (m m': partial_map A)
+                              x vx,
+  inclusion m m' ->
+  inclusion (x |-> vx ; m) (x |-> vx ; m').
+Proof.
+  unfold inclusion.
+  intros A m m' x vx H.
+  intros y vy.
+  destruct (eqb_stringP x y) as [Hxy | Hxy].
+  - rewrite Hxy. 
+    rewrite update_eq. rewrite update_eq. intro H1. apply H1.
+  - rewrite update_neq. rewrite update_neq.
+    + apply H.
+    + apply Hxy.
+    + apply Hxy.
+Qed.
+
+(** This property is useful for reasoning about the lambda-calculus, 
+where maps are used to keep track of which program variables are 
+defined at a given point. *)
+
+(* 2020-08-24 19:40 *)

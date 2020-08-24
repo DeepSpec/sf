@@ -38,8 +38,8 @@ idtac " ".
 idtac "#> SimpleArith1.test_step_2".
 idtac "Possible points: 1".
 check_type @SimpleArith1.test_step_2 (
-(SimpleArith1.step (P (C 0) (P (C 2) (P (C 0) (C 3))))
-   (P (C 0) (P (C 2) (C (0 + 3)))))).
+(SimpleArith1.step (P (C 0) (P (C 2) (P (C 1) (C 3))))
+   (P (C 0) (P (C 2) (C 4))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions SimpleArith1.test_step_2.
@@ -234,4 +234,4 @@ idtac "---------- compiler_is_correct ---------".
 Print Assumptions compiler_is_correct.
 Abort.
 
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:43 *)

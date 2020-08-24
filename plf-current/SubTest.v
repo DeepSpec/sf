@@ -127,8 +127,8 @@ idtac "#> sub_inversion_arrow".
 idtac "Possible points: 3".
 check_type @sub_inversion_arrow (
 (forall U V1 V2 : ty,
- U <: Arrow V1 V2 ->
- exists U1 U2 : ty, U = Arrow U1 U2 /\ V1 <: U1 /\ U2 <: V2)).
+ U <: <{ V1 -> V2 }> ->
+ exists U1 U2 : ty, U = <{ U1 -> U2 }> /\ V1 <: U1 /\ U2 <: V2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sub_inversion_arrow.
@@ -204,4 +204,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:43 *)

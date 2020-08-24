@@ -19,7 +19,7 @@ Score: 0.0 / 1.0
 Reason: Admitted proof.
 
 mult_n_1 (standard, automatically graded)
-Score: 0.0 / 2.0
+Score: 0.0 / 1.0
 Reason: Admitted proof.
 
 andb_true_elim2 (standard, automatically graded)
@@ -61,16 +61,16 @@ test_bin_incr6 (standard, automatically graded)
 Score: 0.0 / 0.5
 Reason: Admitted proof.
 
-Points possible - standard: 15
-Points possible - advanced: 15
+Points possible - standard: 14
+Points possible - advanced: 14
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 / 14.0 so far
+   Standard:  0.0 / 13.0 so far
                 and  1.0 ungraded
 
-   Advanced:  0.0 / 14.0 so far
+   Advanced:  0.0 / 13.0 so far
                 and  1.0 ungraded
 

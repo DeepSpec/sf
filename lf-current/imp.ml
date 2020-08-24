@@ -650,7 +650,7 @@ let rec list_of_string = function
 
 (** val string_of_list : char list -> char list **)
 
-let rec string_of_list xs =
+let string_of_list xs =
   fold_right (fun x x0 -> x::x0) [] xs
 
 type token = char list
@@ -1494,7 +1494,7 @@ let rec many_helper p acc steps xs =
 
 (** val many : 'a1 parser0 -> int -> 'a1 list parser0 **)
 
-let rec many p steps =
+let many p steps =
   many_helper p [] steps
 
 (** val firstExpect : token -> 'a1 parser0 -> 'a1 parser0 **)
@@ -1704,36 +1704,36 @@ let rec parseSimpleCommand steps xs =
     (fun _ -> NoneE
     ('T'::('o'::('o'::(' '::('m'::('a'::('n'::('y'::(' '::('r'::('e'::('c'::('u'::('r'::('s'::('i'::('v'::('e'::(' '::('c'::('a'::('l'::('l'::('s'::[])))))))))))))))))))))))))
     (fun steps' ->
-    match expect ('S'::('K'::('I'::('P'::[])))) xs with
+    match expect ('s'::('k'::('i'::('p'::[])))) xs with
     | SomeE x -> let (_, rest) = x in SomeE (CSkip, rest)
     | NoneE _ ->
-      (match firstExpect ('T'::('E'::('S'::('T'::[])))) (parseBExp steps') xs with
+      (match firstExpect ('i'::('f'::[])) (parseBExp steps') xs with
        | SomeE x ->
          let (e, rest) = x in
-         (match firstExpect ('T'::('H'::('E'::('N'::[]))))
+         (match firstExpect ('t'::('h'::('e'::('n'::[]))))
                   (parseSequencedCommand steps') rest with
           | SomeE x0 ->
             let (c, rest') = x0 in
-            (match firstExpect ('E'::('L'::('S'::('E'::[]))))
+            (match firstExpect ('e'::('l'::('s'::('e'::[]))))
                      (parseSequencedCommand steps') rest' with
              | SomeE x1 ->
                let (c', rest'') = x1 in
-               (match expect ('E'::('N'::('D'::[]))) rest'' with
+               (match expect ('e'::('n'::('d'::[]))) rest'' with
                 | SomeE x2 ->
                   let (_, rest''') = x2 in SomeE ((CIf (e, c, c')), rest''')
                 | NoneE err -> NoneE err)
              | NoneE err -> NoneE err)
           | NoneE err -> NoneE err)
        | NoneE _ ->
-         (match firstExpect ('W'::('H'::('I'::('L'::('E'::[])))))
+         (match firstExpect ('w'::('h'::('i'::('l'::('e'::[])))))
                   (parseBExp steps') xs with
           | SomeE x ->
             let (e, rest) = x in
-            (match firstExpect ('D'::('O'::[]))
+            (match firstExpect ('d'::('o'::[]))
                      (parseSequencedCommand steps') rest with
              | SomeE x0 ->
                let (c, rest') = x0 in
-               (match expect ('E'::('N'::('D'::[]))) rest' with
+               (match expect ('e'::('n'::('d'::[]))) rest' with
                 | SomeE x1 ->
                   let (_, rest'') = x1 in SomeE ((CWhile (e, c)), rest'')
                 | NoneE err -> NoneE err)
@@ -1742,8 +1742,7 @@ let rec parseSimpleCommand steps xs =
             (match parseIdentifier xs with
              | SomeE x ->
                let (i, rest) = x in
-               (match firstExpect (':'::(':'::('='::[]))) (parseAExp steps')
-                        rest with
+               (match firstExpect (':'::('='::[])) (parseAExp steps') rest with
                 | SomeE x0 ->
                   let (e, rest') = x0 in SomeE ((CAss (i, e)), rest')
                 | NoneE err -> NoneE err)
@@ -1764,7 +1763,7 @@ and parseSequencedCommand steps xs =
     match parseSimpleCommand steps' xs with
     | SomeE x ->
       let (c, rest) = x in
-      (match firstExpect (';'::(';'::[])) (parseSequencedCommand steps') rest with
+      (match firstExpect (';'::[]) (parseSequencedCommand steps') rest with
        | SomeE x0 -> let (c', rest') = x0 in SomeE ((CSeq (c, c')), rest')
        | NoneE _ -> SomeE (c, rest))
     | NoneE err -> NoneE err)

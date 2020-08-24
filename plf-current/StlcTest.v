@@ -52,7 +52,17 @@ idtac " ".
 idtac "#> STLC.step_example5".
 idtac "Possible points: 2".
 check_type @STLC.step_example5 (
-(STLC.multistep (STLC.app (STLC.app STLC.idBBBB STLC.idBB) STLC.idB) STLC.idB)).
+(STLC.multistep
+   (STLC.tm_app
+      (STLC.tm_app
+         (STLC.tm_abs STLC.x
+            (STLC.Ty_Arrow (STLC.Ty_Arrow STLC.Ty_Bool STLC.Ty_Bool)
+               (STLC.Ty_Arrow STLC.Ty_Bool STLC.Ty_Bool))
+            (STLC.tm_var STLC.x))
+         (STLC.tm_abs STLC.x (STLC.Ty_Arrow STLC.Ty_Bool STLC.Ty_Bool)
+            (STLC.tm_var STLC.x)))
+      (STLC.tm_abs STLC.x STLC.Ty_Bool (STLC.tm_var STLC.x)))
+   (STLC.tm_abs STLC.x STLC.Ty_Bool (STLC.tm_var STLC.x)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions STLC.step_example5.
@@ -67,11 +77,12 @@ idtac "Possible points: 2".
 check_type @STLC.typing_example_3 (
 (exists T : STLC.ty,
    STLC.has_type (@Maps.empty STLC.ty)
-     (STLC.abs STLC.x (STLC.Arrow STLC.Bool STLC.Bool)
-        (STLC.abs STLC.y (STLC.Arrow STLC.Bool STLC.Bool)
-           (STLC.abs STLC.z STLC.Bool
-              (STLC.app (STLC.var STLC.y)
-                 (STLC.app (STLC.var STLC.x) (STLC.var STLC.z)))))) T)).
+     (STLC.tm_abs STLC.x (STLC.Ty_Arrow STLC.Ty_Bool STLC.Ty_Bool)
+        (STLC.tm_abs STLC.y (STLC.Ty_Arrow STLC.Ty_Bool STLC.Ty_Bool)
+           (STLC.tm_abs STLC.z STLC.Ty_Bool
+              (STLC.tm_app (STLC.tm_var STLC.y)
+                 (STLC.tm_app (STLC.tm_var STLC.x) (STLC.tm_var STLC.z))))))
+     T)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions STLC.typing_example_3.
@@ -109,4 +120,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:43 *)

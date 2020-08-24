@@ -54,7 +54,7 @@ Require Import List.
   Lemma test : forall b, b = false.
   time eauto 7. (* takes over 4 seconds  to fail! *) *)
 
-Remove Hints Bool.trans_eq_bool.
+Remove Hints Bool.trans_eq_bool : core.
 
 (* ################################################################# *)
 (** * Tools for Programming with Ltac *)
@@ -159,7 +159,7 @@ Ltac intro_until_mark :=
 (** A datatype of type [list Boxer] is used to manipulate list of
     Coq values in ltac. Notation is [>> v1 v2 ... vN] for building
     a list containing the values [v1] through [vN]. *)
-
+(* NOTATION : LATER -- IY : Perhaps we can clean this up with '...' syntax ? *)
 Notation "'>>'" :=
   (@nil Boxer)
   (at level 0)
@@ -610,7 +610,7 @@ Tactic Notation "protects" constr(E) "do" tactic(Tac) "/" :=
 
 Definition eq' := @eq.
 
-Hint Unfold eq'.
+Hint Unfold eq' : core.
 
 Notation "x '='' y" := (@eq' _ x y)
   (at level 70, y at next level).
@@ -2993,7 +2993,7 @@ Ltac find_head_match T :=
 Ltac destruct_head_match_core cont :=
   match goal with
   | |- ?T1 = ?T2 => first [ let E := find_head_match T1 in cont E
-		          | let E := find_head_match T2 in cont E ]
+                          | let E := find_head_match T2 in cont E ]
   | |- ?T1 => let E := find_head_match T1 in cont E
   end;
   destruct_if_post.
@@ -3137,14 +3137,14 @@ Tactic Notation "induction_wf" ":" constr(E) ident(X) :=
     (see LibTacticsDemos for an example) *)
 
 From Coq Require Import Arith.Compare_dec.
-From Coq Require Import omega.Omega.
+From Coq Require Import Lia.
 
 Lemma induct_height_max2 : forall n1 n2 : nat,
   exists n, n1 < n /\ n2 < n.
 Proof using.
   intros. destruct (lt_dec n1 n2).
-  exists (S n2). omega.
-  exists (S n1). omega.
+  exists (S n2). lia.
+  exists (S n1). lia.
 Qed.
 
 Ltac induct_height_step x :=
@@ -3181,8 +3181,8 @@ Ltac clear_coind :=
 
 (** Tactic [abstracts tac] is like [abstract tac] except that
     it clears the coinduction hypotheses so that the productivity
-    check will be happy. For example, one can use [abstracts omega]
-    to obtain the same behavior as [omega] but with an auxiliary
+    check will be happy. For example, one can use [abstracts lia]
+    to obtain the same behavior as [lia] but with an auxiliary
     lemma being generated. *)
 
 Tactic Notation "abstracts" tactic(tac) :=
@@ -4075,13 +4075,13 @@ Tactic Notation "exists" "~" constr(T1) "," constr(T2) :=
   exists T1 T2; auto_tilde.
 Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) :=
   exists T1 T2 T3; auto_tilde.
-Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) "," 
+Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) ","
  constr(T4) :=
   exists T1 T2 T3 T4; auto_tilde.
-Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) "," 
+Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) ","
  constr(T4) "," constr(T5) :=
   exists T1 T2 T3 T4 T5; auto_tilde.
-Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) "," 
+Tactic Notation "exists" "~" constr(T1) "," constr(T2) "," constr(T3) ","
  constr(T4) "," constr(T5) "," constr(T6) :=
   exists T1 T2 T3 T4 T5 T6; auto_tilde.
 
@@ -4467,13 +4467,13 @@ Tactic Notation "exists" "*" constr(T1) "," constr(T2) :=
   exists T1 T2; auto_star.
 Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) :=
   exists T1 T2 T3; auto_star.
-Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) "," 
+Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) ","
   constr(T4) :=
   exists T1 T2 T3 T4; auto_star.
-Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) "," 
+Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) ","
  constr(T4) "," constr(T5) :=
   exists T1 T2 T3 T4 T5; auto_star.
-Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) "," 
+Tactic Notation "exists" "*" constr(T1) "," constr(T2) "," constr(T3) ","
  constr(T4) "," constr(T5) ","  constr(T6) :=
   exists T1 T2 T3 T4 T5 T6; auto_star.
 
@@ -4839,5 +4839,4 @@ End LibTacticsCompatibility.
 
 Open Scope nat_scope.
 
-
-(* 2020-08-08 00:33 *)
+(* 2020-08-24 19:42 *)

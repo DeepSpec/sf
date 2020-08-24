@@ -119,6 +119,20 @@ Print Assumptions nth_error_after_last.
 Goal True.
 idtac " ".
 
+idtac "-------------------  combine_split  --------------------".
+idtac " ".
+
+idtac "#> combine_split".
+idtac "Possible points: 3".
+check_type @combine_split (
+(forall (X Y : Type) (l : list (X * Y)) (l1 : list X) (l2 : list Y),
+ @split X Y l = (l1, l2) -> @combine X Y l1 l2 = l)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions combine_split.
+Goal True.
+idtac " ".
+
 idtac "-------------------  destruct_eqn_practice  --------------------".
 idtac " ".
 
@@ -185,8 +199,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 20".
-idtac "Max points - advanced: 34".
+idtac "Max points - standard: 23".
+idtac "Max points - advanced: 37".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -216,6 +230,8 @@ idtac "---------- plus_n_n_injective ---------".
 Print Assumptions plus_n_n_injective.
 idtac "---------- nth_error_after_last ---------".
 Print Assumptions nth_error_after_last.
+idtac "---------- combine_split ---------".
+Print Assumptions combine_split.
 idtac "---------- bool_fn_applied_thrice ---------".
 Print Assumptions bool_fn_applied_thrice.
 idtac "---------- eqb_sym ---------".
@@ -232,4 +248,4 @@ idtac "---------- existsb_existsb' ---------".
 Print Assumptions existsb_existsb'.
 Abort.
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

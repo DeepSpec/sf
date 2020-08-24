@@ -288,4 +288,4 @@ idtac "---------- contents_perm ---------".
 Print Assumptions contents_perm.
 Abort.
 
-(* 2020-08-08 00:36 *)
+(* 2020-08-24 19:47 *)

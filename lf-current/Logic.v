@@ -73,8 +73,8 @@ Definition is_three (n : nat) : Prop :=
 Check is_three : nat -> Prop.
 
 (** In Coq, functions that return propositions are said to define
-    _properties_ of their arguments.For instance, here's
-    a (polymorphic) property defining the familiar notion of an
+    _properties_ of their arguments. For instance, here's a
+    (polymorphic) property defining the familiar notion of an
     _injective function_. *)
 
 Definition injective {A B} (f : A -> B) :=
@@ -165,7 +165,7 @@ Lemma and_example2 :
 Proof.
   (* WORKED IN CLASS *)
   intros n m H.
-  destruct H as [Hn Hm] eqn:HE.
+  destruct H as [Hn Hm].
   rewrite Hn. rewrite Hm.
   reflexivity.
 Qed.
@@ -204,9 +204,8 @@ Lemma and_example3 :
 Proof.
   (* WORKED IN CLASS *)
   intros n m H.
-  assert (H' : n = 0 /\ m = 0).
-  { apply and_exercise. apply H. }
-  destruct H' as [Hn Hm] eqn:HE.
+  apply and_exercise in H.
+  destruct H as [Hn Hm].
   rewrite Hn. reflexivity.
 Qed.
 
@@ -399,19 +398,14 @@ Proof.
       [~(0 = 1)], that is [not (0 = 1)], which unfolds to
       [(0 = 1) -> False]. (We use [unfold not] explicitly here
       to illustrate that point, but generally it can be omitted.) *)
-
   unfold not.
-
   (** To prove an inequality, we may assume the opposite
       equality... *)
-
   intros contra.
-
   (** ... and deduce a contradiction from it. Here, the
       equality [O = S O] contradicts the disjointness of
       constructors [O] and [S], so [discriminate] takes care
       of it. *)
-
   discriminate contra.
 Qed.
 
@@ -451,7 +445,7 @@ Proof.
 Definition manual_grade_for_double_neg_inf : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, recommended (contrapositive)  *)
+(** **** Exercise: 2 stars, standard, especially useful (contrapositive)  *)
 Theorem contrapositive : forall (P Q : Prop),
   (P -> Q) -> (~Q -> ~P).
 Proof.
@@ -623,7 +617,7 @@ Proof.
   - apply eq_mult_0.
 Qed.
 
-Lemma or_assoc :
+Theorem or_assoc :
   forall P Q R : Prop, P \/ (Q \/ R) <-> (P \/ Q) \/ R.
 Proof.
   intros P Q R. split.
@@ -652,7 +646,7 @@ Qed.
 
 (** The [apply] tactic can also be used with [<->]. When given an
     equivalence as its argument, [apply] tries to guess which direction of
-    the equivalence will be useful.. *)
+    the equivalence will be useful. *)
 
 Lemma apply_iff_example :
   forall n m : nat, n * m = 0 -> n = 0 \/ m = 0.
@@ -697,7 +691,7 @@ Proof.
   exists (2 + m).
   apply Hm.  Qed.
 
-(** **** Exercise: 1 star, standard, recommended (dist_not_exists) 
+(** **** Exercise: 1 star, standard, especially useful (dist_not_exists) 
 
     Prove that "[P] holds for all [x]" implies "there is no [x] for
     which [P] does not hold."  (Hint: [destruct H as [x E]] works on
@@ -772,7 +766,7 @@ Qed.
     Note, in the first, how [In] starts out applied to a variable and
     only gets expanded when we do case analysis on this variable: *)
 
-Lemma In_map :
+Theorem In_map :
   forall (A B : Type) (f : A -> B) (l : list A) (x : A),
     In x l ->
     In (f x) (map f l).
@@ -796,7 +790,7 @@ Qed.
     of strengths and limitations. *)
 
 (** **** Exercise: 3 stars, standard (In_map_iff)  *)
-Lemma In_map_iff :
+Theorem In_map_iff :
   forall (A B : Type) (f : A -> B) (l : list A) (y : B),
     In y (map f l) <->
     exists x, f x = y /\ In x l.
@@ -806,14 +800,14 @@ Proof.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (In_app_iff)  *)
-Lemma In_app_iff : forall A l l' (a:A),
+Theorem In_app_iff : forall A l l' (a:A),
   In a (l++l') <-> In a l \/ In a l'.
 Proof.
   intros A l. induction l as [|a' l' IH].
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, recommended (All) 
+(** **** Exercise: 3 stars, standard, especially useful (All) 
 
     Recall that functions returning propositions can be seen as
     _properties_ of their arguments. For instance, if [P] has type
@@ -828,7 +822,7 @@ Proof.
 Fixpoint All {T : Type} (P : T -> Prop) (l : list T) : Prop
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Lemma All_In :
+Theorem All_In :
   forall T (P : T -> Prop) (l : list T),
     (forall x, In x l -> P x) <->
     All P l.
@@ -836,7 +830,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (combine_odd_even) 
+(** **** Exercise: 2 stars, standard, optional (combine_odd_even) 
 
     Complete the definition of the [combine_odd_even] function below.
     It takes as arguments two properties of numbers, [Podd] and
@@ -872,6 +866,7 @@ Theorem combine_odd_even_elim_even :
     Peven n.
 Proof.
   (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (* ################################################################# *)
@@ -896,13 +891,12 @@ Check plus_comm : forall n m : nat, n + m = m + n.
 (** Coq checks the _statement_ of the [plus_comm] theorem (or prints
     it for us, if we leave off the part beginning with the colon) in
     the same way that it checks the _type_ of any term that we ask it
-    to [Check].Why? *)
+    to [Check]. Why? *)
 
 (** The reason is that the identifier [plus_comm] actually refers to a
-    _proof object_ -- a data structure that represents a logical
-    derivation establishing of the truth of the statement [forall n m
-    : nat, n + m = m + n].  The type of this object is the proposition
-    that it is a proof of. *)
+    _proof object_, which represents a logical derivation establishing
+    of the truth of the statement [forall n m : nat, n + m = m + n].  The
+    type of this object is the proposition which it is a proof of. *)
 
 (** Intuitively, this makes sense because the statement of a
     theorem tells us what we can use that theorem for, just as the
@@ -965,15 +959,16 @@ Proof.
 Qed.
 
 (** Let's see another example of using a theorem like a
-    function.The following theorem says: any list [l]
+    function. The following theorem says: any list [l]
     containing some element must be nonempty. *)
 
 Theorem in_not_nil :
   forall A (x : A) (l : list A), In x l -> l <> [].
 Proof.
-  intros A x l H. unfold not. intro Hl. destruct l eqn:HE.
-  - simpl in H. destruct H.
-  - discriminate Hl.
+  intros A x l H. unfold not. intro Hl.
+  rewrite Hl in H.
+  simpl in H.
+  apply H.
 Qed.
 
 (** What makes this interesting is that one quantified variable
@@ -1181,7 +1176,7 @@ Definition tr_rev {X} (l : list X) : list X :=
 
     Prove that the two definitions are indeed equivalent. *)
 
-Lemma tr_rev_correct : forall X, @tr_rev X = @rev X.
+Theorem tr_rev_correct : forall X, @tr_rev X = @rev X.
 Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1355,7 +1350,7 @@ Proof.
 Qed.
 
 (** Equality provides a complementary example, where it is sometimes
-    easier to work in the propositional world.Knowing that
+    easier to work in the propositional world. Knowing that
     [n =? m = true] is generally of little direct help in the middle of a
     proof involving [n] and [m]; however, if we convert the statement
     to the equivalent form [n = m], we can rewrite with it. *)
@@ -1379,15 +1374,15 @@ Qed.
 
 (** **** Exercise: 2 stars, standard (logical_connectives) 
 
-    The following lemmas relate the propositional connectives studied
+    The following theorems relate the propositional connectives studied
     in this chapter to the corresponding boolean operations. *)
 
-Lemma andb_true_iff : forall b1 b2:bool,
+Theorem andb_true_iff : forall b1 b2:bool,
   b1 && b2 = true <-> b1 = true /\ b2 = true.
 Proof.
   (* FILL IN HERE *) Admitted.
 
-Lemma orb_true_iff : forall b1 b2,
+Theorem orb_true_iff : forall b1 b2,
   b1 || b2 = true <-> b1 = true \/ b2 = true.
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -1396,8 +1391,8 @@ Proof.
 (** **** Exercise: 1 star, standard (eqb_neq) 
 
     The following theorem is an alternate "negative" formulation of
-    [eqb_eq] that is more convenient in certain situations (we'll see
-    examples in later chapters). *)
+    [eqb_eq] that is more convenient in certain situations.  (We'll see
+    examples in later chapters.)  Hint: [not_true_iff_false]. *)
 
 Theorem eqb_neq : forall x y : nat,
   x =? y = false <-> x <> y.
@@ -1417,15 +1412,16 @@ Fixpoint eqb_list {A : Type} (eqb : A -> A -> bool)
                   (l1 l2 : list A) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Lemma eqb_list_true_iff :
+Theorem eqb_list_true_iff :
   forall A (eqb : A -> A -> bool),
     (forall a1 a2, eqb a1 a2 = true <-> a1 = a2) ->
     forall l1 l2, eqb_list eqb l1 l2 = true <-> l1 = l2.
 Proof.
 (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, recommended (All_forallb) 
+(** **** Exercise: 2 stars, standard, especially useful (All_forallb) 
 
     Recall the function [forallb], from the exercise
     [forall_exists_challenge] in chapter [Tactics]: *)
@@ -1576,11 +1572,18 @@ Qed.
     would have both [~ (P \/ ~P)] and [~ ~ (P \/ ~P)] (since [P]
     implies [~ ~ P], by lemma [double_neg], which we proved above),
     which would be a  contradiction.  But since we can't, it is safe
-    to add [P \/ ~P] as an axiom. *)
+    to add [P \/ ~P] as an axiom.
+
+    Succinctly: for any proposition P,
+       [Coq is consistent ==> (Coq + P \/ ~P) is consistent].
+
+    (Hint: you will need to come up with a clever assertion as the
+    next step in the proof.) *)
 
 Theorem excluded_middle_irrefutable: forall (P:Prop),
   ~ ~ (P \/ ~ P).
 Proof.
+  unfold not. intros P H.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -1619,8 +1622,7 @@ Proof.
 
     Hint: Rather than considering all pairs of statements pairwise,
     prove a single circular chain of implications that connects them
-    all.
-*)
+    all. *)
 
 Definition peirce := forall P Q: Prop,
   ((P->Q)->P)->P.
@@ -1638,4 +1640,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

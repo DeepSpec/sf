@@ -174,6 +174,11 @@ Proof. simpl. reflexivity.  Qed.
         useful lemmas, etc.) in your solutions.  You can put these
         between the exercise header and the theorem you are asked to
         prove.
+      - If you introduce a helper lemma that you end up being unable
+        to prove, hence end it with [Admitted], then make sure to also
+        end the main theorem in which you use it with [Admitted], not
+        [Qed].  That will help you get partial credit, in case you
+        use that main theorem to solve a later exercise.
 
     You will also notice that each chapter (like [Basics.v]) is
     accompanied by a _test script_ ([BasicsTest.v]) that automatically
@@ -186,6 +191,9 @@ Proof. simpl. reflexivity.  Qed.
 
        coqc -Q . LF Basics.v
        coqc -Q . LF BasicsTest.v
+
+    See the end of this chapter for more information about how to interpret
+    the output of test scripts.
 
     There is no need to hand in [BasicsTest.v] itself (or [Preface.v]).
 
@@ -446,7 +454,30 @@ Definition isred (c : color) : bool :=
     variable [p] in the definition of [monochrome].) *)
 
 (* ================================================================= *)
+(** ** Modules *)
+
+(** Coq provides a _module system_ to aid in organizing large
+    developments.  We won't need most of its features,
+    but one is useful: If we enclose a collection of declarations
+    between [Module X] and [End X] markers, then, in the remainder of
+    the file after the [End], these definitions are referred to by
+    names like [X.foo] instead of just [foo].  We will use this
+    feature to limit the scope of definitions, so that we are free to
+    reuse names. *)
+
+Module Playground.
+  Definition b : rgb := blue.
+End Playground.
+
+Definition b : bool := true.
+
+Check Playground.b : rgb.
+Check b : bool.
+
+(* ================================================================= *)
 (** ** Tuples *)
+
+Module TuplePlayground.
 
 (** A single constructor with multiple parameters can be used
     to create a tuple type. As an example, consider representing
@@ -483,24 +514,17 @@ Compute (all_zero (bits B1 B0 B1 B0)).
 Compute (all_zero (bits B0 B0 B0 B0)).
 (* ===> true : bool *)
 
-(* ================================================================= *)
-(** ** Modules *)
-
-(** Coq provides a _module system_ to aid in organizing large
-    developments.  In this course we won't need most of its features,
-    but one is useful: If we enclose a collection of declarations
-    between [Module X] and [End X] markers, then, in the remainder of
-    the file after the [End], these definitions are referred to by
-    names like [X.foo] instead of just [foo].  We will use this
-    feature to introduce the definition of the type [nat] in an inner
-    module, so that it does not interfere with the one from the
-    standard library (which we want to use in the rest of the book
-    because it comes with some convenient special notation).  *)
-
-Module NatPlayground.
+End TuplePlayground.
 
 (* ================================================================= *)
 (** ** Numbers *)
+
+(** We put this section in a module so that our own definition of
+    natural numbers does not interfere with the one from the
+    standard library.  In the rest of the book, we'll want to use
+    the standard library's. *)
+
+Module NatPlayground.
 
 (** All the types we have defined so far -- both "enumerated
     types" such as [day], [bool], and [bit] and tuple types such as
@@ -828,6 +852,15 @@ Notation "x <=? y" := (leb x y) (at level 70) : nat_scope.
 Example test_leb3': (4 <=? 2) = false.
 Proof. simpl. reflexivity.  Qed.
 
+(** There are now two symbols that look like equality: [=] and
+    [=?].  We'll have much more to say about the differences and
+    similarities between them later.  For now, bear in mind that [=]
+    is already available in Coq itself, whereas [=?] is a notation we
+    defined for [nat] and implemented ourselves as the function [eqb].
+    The standard library also defines and implements it in a similar
+    way.  As [=], equality is something we can attempt to _prove_; but
+    as [=?], it is something that Coq can _compute_. *)
+
 (** **** Exercise: 1 star, standard (ltb) 
 
     The [ltb] function tests natural numbers for [l]ess-[t]han,
@@ -1036,17 +1069,21 @@ Check mult_n_Sm.
     example below, Coq tries to instantiate them by matching with the
     current goal. *)
 
-Theorem mult_n_0_m_0 : forall n m : nat,
-  (n * 0) + (m * 0) = 0.
+Theorem mult_n_0_m_0 : forall p q : nat,
+  (p * 0) + (q * 0) = 0.
 Proof.
-  intros n m.
+  intros p q.
   rewrite <- mult_n_O.
   rewrite <- mult_n_O.
   reflexivity. Qed.
 
-(** **** Exercise: 2 stars, standard (mult_n_1)  *)
-Theorem mult_n_1 : forall n : nat,
-  n * 1 = n.
+(** **** Exercise: 1 star, standard (mult_n_1) 
+
+    Use those two lemmas about multiplication that we just checked to
+    prove the following theorem.  Hint: recall that [1] is [S O]. *)
+
+Theorem mult_n_1 : forall p : nat,
+  p * 1 = p.
 Proof.
   (* FILL IN HERE *) Admitted.
 
@@ -1231,6 +1268,18 @@ Proof.
       - reflexivity. }
 Qed.
 
+(** **** Exercise: 2 stars, standard (andb_true_elim2) 
+
+    Prove the following claim, marking cases (and subcases) with
+    bullets when you use [destruct]. Hint: delay introducing the
+    hypothesis until after you have an opportunity to simplify it. *)
+
+Theorem andb_true_elim2 : forall b c : bool,
+  andb b c = true -> c = true.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
 (** Before closing the chapter, let's mention one final
     convenience.  As you may have noticed, many proofs perform case
     analysis on a variable right after introducing it:
@@ -1264,17 +1313,6 @@ Proof.
   - reflexivity.
   - reflexivity.
 Qed.
-
-(** **** Exercise: 2 stars, standard (andb_true_elim2) 
-
-    Prove the following claim, marking cases (and subcases) with
-    bullets when you use [destruct]. *)
-
-Theorem andb_true_elim2 : forall b c : bool,
-  andb b c = true -> c = true.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
 
 (** **** Exercise: 1 star, standard (zero_nbeq_plus_1)  *)
 Theorem zero_nbeq_plus_1 : forall n : nat,
@@ -1371,11 +1409,6 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
 (* ################################################################# *)
 (** * More Exercises *)
 
-(** Each SF chapter comes with a tester file (e.g.  [BasicsTest.v]),
-    containing scripts that check most of the exercises. You can run
-    [make BasicsTest.vo] in a terminal and check its output to make
-    sure you didn't miss anything. *)
-
 (** **** Exercise: 1 star, standard (identity_fn_applied_twice) 
 
     Use the tactics you have learned so far to prove the following
@@ -1424,7 +1457,7 @@ Proof.
 
     We can generalize our unary representation of natural numbers to
     the more efficient binary representation by treating a binary
-    number as a sequence of constructors [A] and [B] (representing 0s
+    number as a sequence of constructors [B0] and [B1] (representing 0s
     and 1s), terminated by a [Z]. For comparison, in the unary
     representation, a number is a sequence of [S] constructors terminated
     by an [O].
@@ -1432,15 +1465,15 @@ Proof.
     For example:
 
         decimal            binary                           unary
-           0                   Z                              O
-           1                 B Z                            S O
-           2              A (B Z)                        S (S O)
-           3              B (B Z)                     S (S (S O))
-           4           A (A (B Z))                 S (S (S (S O)))
-           5           B (A (B Z))              S (S (S (S (S O))))
-           6           A (B (B Z))           S (S (S (S (S (S O)))))
-           7           B (B (B Z))        S (S (S (S (S (S (S O))))))
-           8        A (A (A (B Z)))    S (S (S (S (S (S (S (S O)))))))
+           0                       Z                              O
+           1                    B1 Z                            S O
+           2                B0 (B1 Z)                        S (S O)
+           3                B1 (B1 Z)                     S (S (S O))
+           4            B0 (B0 (B1 Z))                 S (S (S (S O)))
+           5            B1 (B0 (B1 Z))              S (S (S (S (S O))))
+           6            B0 (B1 (B1 Z))           S (S (S (S (S (S O)))))
+           7            B1 (B1 (B1 Z))        S (S (S (S (S (S (S O))))))
+           8        B0 (B0 (B0 (B1 Z)))    S (S (S (S (S (S (S (S O)))))))
 
     Note that the low-order bit is on the left and the high-order bit
     is on the right -- the opposite of the way binary numbers are
@@ -1448,8 +1481,8 @@ Proof.
 
 Inductive bin : Type :=
   | Z
-  | A (n : bin)
-  | B (n : bin).
+  | B0 (n : bin)
+  | B1 (n : bin).
 
 (** Complete the definitions below of an increment function [incr]
     for binary numbers, and a function [bin_to_nat] to convert
@@ -1467,26 +1500,84 @@ Fixpoint bin_to_nat (m:bin) : nat
     your functions!  We'll return to that thought at the end of the
     next chapter. *)
 
-Example test_bin_incr1 : (incr (B Z)) = A (B Z).
+Example test_bin_incr1 : (incr (B1 Z)) = B0 (B1 Z).
 (* FILL IN HERE *) Admitted.
 
-Example test_bin_incr2 : (incr (A (B Z))) = B (B Z).
+Example test_bin_incr2 : (incr (B0 (B1 Z))) = B1 (B1 Z).
 (* FILL IN HERE *) Admitted.
 
-Example test_bin_incr3 : (incr (B (B Z))) = A (A (B Z)).
+Example test_bin_incr3 : (incr (B1 (B1 Z))) = B0 (B0 (B1 Z)).
 (* FILL IN HERE *) Admitted.
 
-Example test_bin_incr4 : bin_to_nat (A (B Z)) = 2.
+Example test_bin_incr4 : bin_to_nat (B0 (B1 Z)) = 2.
 (* FILL IN HERE *) Admitted.
 
 Example test_bin_incr5 :
-        bin_to_nat (incr (B Z)) = 1 + bin_to_nat (B Z).
+        bin_to_nat (incr (B1 Z)) = 1 + bin_to_nat (B1 Z).
 (* FILL IN HERE *) Admitted.
 
 Example test_bin_incr6 :
-        bin_to_nat (incr (incr (B Z))) = 2 + bin_to_nat (B Z).
+        bin_to_nat (incr (incr (B1 Z))) = 2 + bin_to_nat (B1 Z).
 (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2020-08-08 00:31 *)
+(* ################################################################# *)
+(** * Testing Your Solutions *)
+
+(** Each SF chapter comes with a test file containing scripts that
+    check whether you have solved the required exercises. You can use
+    these test files, if you like, to make sure you haven't missed
+    anything.  And if you're using SF as part of a course, your
+    instructors will likely be running these test files to autograde
+    your solutions.
+
+    The test file for this chapter is [BasicsTest.v]. To run it, make
+    sure you have saved [Basics.v] to disk.  Then run [make
+    BasicsTest.vo] in a terminal.  If you accidentally deleted an
+    exercise or changed its name, then [make BasicsTest.vo] will fail
+    with an error that tells you the name of the missing exercise.
+    Otherwise, you will get a lot of useful output:
+
+    - First will be all the output produced by [Basics.v] itself.  At
+      the end of that you will see [COQC BasicsTest.v].
+
+    - Second, for each required exercise, there is a report that tells
+      you its point value (the number of stars or some fraction
+      thereof if there are multiple parts to the exercise), whether
+      its type is ok, and what assumptions it relies upon.
+
+      If the _type_ is not [ok], it means you proved the wrong thing:
+      most likely, you accidentally modified the theorem statement
+      while you were proving it.  The autograder won't give you any
+      points for that, so make sure to correct the theorem.
+
+      The _assumptions_ are any unproved theorems which your solution
+      relies upon.  "Closed under the global context" is a fancy way
+      of saying "none": you have solved the exercise. (Hooray!)  On
+      the other hand, a list of axioms means you haven't fully solved
+      the exercise. (But see below regarding "Allowed Axioms.") If
+      the exercise name itself is in the list, that means you haven't
+      solved it; probably you have [Admitted] it.
+
+    - Third, you will see the maximum number of points in standard and
+      advanced versions of the assignment.  That number is based on
+      the number of stars in the non-optional exercises.
+
+    - Fourth, you will see a list of "Allowed Axioms".  These are
+      unproved theorems that your solution is permitted to depend
+      upon.  You'll probably see something about
+      [functional_extensionality] for this chapter; we'll cover what
+      that means in a later chapter.
+
+    - Finally, you will see a summary of whether you have solved each
+      exercise.  Note that summary does not include the critical
+      information of whether the type is ok (that is, whether you
+      accidentally changed the theorem statement): you have to look
+      above for that information.
+
+    Exercises that are manually graded will also show up in the
+    output.  But since they have to be graded by a human, the test
+    script won't be able to tell you much about them.  *)
+
+(* 2020-08-24 19:40 *)

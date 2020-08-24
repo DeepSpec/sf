@@ -25,6 +25,10 @@ nth_error_after_last (standard, automatically graded)
 Score: 0.0 / 3.0
 Reason: Admitted proof.
 
+combine_split (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
 bool_fn_applied_thrice (standard, automatically graded)
 Score: 0.0 / 2.0
 Reason: Admitted proof.
@@ -44,16 +48,16 @@ existsb_existsb' (advanced, automatically graded)
 Score: 0.0 / 6.0
 Reason: Admitted proof.
 
-Points possible - standard: 20
-Points possible - advanced: 34
+Points possible - standard: 23
+Points possible - advanced: 37
 
    ###########################
    ##### Grading Results #####
    ###########################
 
-   Standard:  0.0 / 20.0 so far
+   Standard:  0.0 / 23.0 so far
                 and  0.0 ungraded
 
-   Advanced:  0.0 / 29.0 so far
+   Advanced:  0.0 / 32.0 so far
                 and  5.0 ungraded
 

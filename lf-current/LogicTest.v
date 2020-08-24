@@ -194,24 +194,14 @@ idtac " ".
 idtac "-------------------  All  --------------------".
 idtac " ".
 
-idtac "#> All".
+idtac "#> All_In".
 idtac "Possible points: 3".
-check_type @All ((forall T : Type, (T -> Prop) -> list T -> Prop)).
+check_type @All_In (
+(forall (T : Type) (P : T -> Prop) (l : list T),
+ (forall x : T, @In T x l -> P x) <-> @All T P l)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions All.
-Goal True.
-idtac " ".
-
-idtac "-------------------  combine_odd_even  --------------------".
-idtac " ".
-
-idtac "#> combine_odd_even".
-idtac "Possible points: 3".
-check_type @combine_odd_even (((nat -> Prop) -> (nat -> Prop) -> nat -> Prop)).
-idtac "Assumptions:".
-Abort.
-Print Assumptions combine_odd_even.
+Print Assumptions All_In.
 Goal True.
 idtac " ".
 
@@ -279,12 +269,15 @@ idtac " ".
 idtac "-------------------  eqb_list  --------------------".
 idtac " ".
 
-idtac "#> eqb_list".
+idtac "#> eqb_list_true_iff".
 idtac "Possible points: 3".
-check_type @eqb_list ((forall A : Type, (A -> A -> bool) -> list A -> list A -> bool)).
+check_type @eqb_list_true_iff (
+(forall (A : Type) (eqb : A -> A -> bool),
+ (forall a1 a2 : A, eqb a1 a2 = true <-> a1 = a2) ->
+ forall l1 l2 : list A, @eqb_list A eqb l1 l2 = true <-> l1 = l2)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions eqb_list.
+Print Assumptions eqb_list_true_iff.
 Goal True.
 idtac " ".
 
@@ -332,8 +325,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 46".
-idtac "Max points - advanced: 52".
+idtac "Max points - standard: 43".
+idtac "Max points - advanced: 49".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -373,10 +366,8 @@ idtac "---------- In_map_iff ---------".
 Print Assumptions In_map_iff.
 idtac "---------- In_app_iff ---------".
 Print Assumptions In_app_iff.
-idtac "---------- All ---------".
-Print Assumptions All.
-idtac "---------- combine_odd_even ---------".
-Print Assumptions combine_odd_even.
+idtac "---------- All_In ---------".
+Print Assumptions All_In.
 idtac "---------- tr_rev_correct ---------".
 Print Assumptions tr_rev_correct.
 idtac "---------- evenb_double_conv ---------".
@@ -387,8 +378,8 @@ idtac "---------- orb_true_iff ---------".
 Print Assumptions orb_true_iff.
 idtac "---------- eqb_neq ---------".
 Print Assumptions eqb_neq.
-idtac "---------- eqb_list ---------".
-Print Assumptions eqb_list.
+idtac "---------- eqb_list_true_iff ---------".
+Print Assumptions eqb_list_true_iff.
 idtac "---------- forallb_true_iff ---------".
 Print Assumptions forallb_true_iff.
 idtac "---------- excluded_middle_irrefutable ---------".
@@ -403,4 +394,4 @@ idtac "---------- not_exists_dist ---------".
 Print Assumptions not_exists_dist.
 Abort.
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)

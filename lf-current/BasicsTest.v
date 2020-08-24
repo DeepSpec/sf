@@ -96,8 +96,8 @@ idtac "-------------------  mult_n_1  --------------------".
 idtac " ".
 
 idtac "#> mult_n_1".
-idtac "Possible points: 2".
-check_type @mult_n_1 ((forall n : nat, n * 1 = n)).
+idtac "Possible points: 1".
+check_type @mult_n_1 ((forall p : nat, p * 1 = p)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions mult_n_1.
@@ -155,7 +155,7 @@ idtac " ".
 
 idtac "#> test_bin_incr1".
 idtac "Possible points: 0.5".
-check_type @test_bin_incr1 ((incr (B Z) = A (B Z))).
+check_type @test_bin_incr1 ((incr (B1 Z) = B0 (B1 Z))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_bin_incr1.
@@ -164,7 +164,7 @@ idtac " ".
 
 idtac "#> test_bin_incr2".
 idtac "Possible points: 0.5".
-check_type @test_bin_incr2 ((incr (A (B Z)) = B (B Z))).
+check_type @test_bin_incr2 ((incr (B0 (B1 Z)) = B1 (B1 Z))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_bin_incr2.
@@ -173,7 +173,7 @@ idtac " ".
 
 idtac "#> test_bin_incr3".
 idtac "Possible points: 0.5".
-check_type @test_bin_incr3 ((incr (B (B Z)) = A (A (B Z)))).
+check_type @test_bin_incr3 ((incr (B1 (B1 Z)) = B0 (B0 (B1 Z)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_bin_incr3.
@@ -182,7 +182,7 @@ idtac " ".
 
 idtac "#> test_bin_incr4".
 idtac "Possible points: 0.5".
-check_type @test_bin_incr4 ((bin_to_nat (A (B Z)) = 2)).
+check_type @test_bin_incr4 ((bin_to_nat (B0 (B1 Z)) = 2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_bin_incr4.
@@ -191,7 +191,7 @@ idtac " ".
 
 idtac "#> test_bin_incr5".
 idtac "Possible points: 0.5".
-check_type @test_bin_incr5 ((bin_to_nat (incr (B Z)) = 1 + bin_to_nat (B Z))).
+check_type @test_bin_incr5 ((bin_to_nat (incr (B1 Z)) = 1 + bin_to_nat (B1 Z))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_bin_incr5.
@@ -200,7 +200,7 @@ idtac " ".
 
 idtac "#> test_bin_incr6".
 idtac "Possible points: 0.5".
-check_type @test_bin_incr6 ((bin_to_nat (incr (incr (B Z))) = 2 + bin_to_nat (B Z))).
+check_type @test_bin_incr6 ((bin_to_nat (incr (incr (B1 Z))) = 2 + bin_to_nat (B1 Z))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_bin_incr6.
@@ -209,8 +209,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 15".
-idtac "Max points - advanced: 15".
+idtac "Max points - standard: 14".
+idtac "Max points - advanced: 14".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -264,4 +264,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2020-08-08 00:31 *)
+(* 2020-08-24 19:40 *)
