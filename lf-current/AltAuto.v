@@ -846,4 +846,4 @@ Qed.
     [auto] most of the time, only switching to the [e] variants when
     the ordinary variants don't do the job. *)
 
-(* 2020-08-24 19:40 *)
+(* 2020-08-28 19:53 *)
