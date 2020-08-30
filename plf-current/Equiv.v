@@ -391,7 +391,7 @@ Proof.
 
     _Note: Coq 8.12.0 has a printing bug that makes both sides of this
     theorem look the same in the Goals buffer. This should be fixed in
-    8.12.1._ *)
+    8.12.1_. *)
 Theorem seq_assoc : forall c1 c2 c3,
   cequiv <{(c1;c2);c3}> <{c1;(c2;c3)}>.
 Proof.   (* FILL IN HERE *) Admitted.
@@ -1660,4 +1660,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-08-28 19:54 *)
+(* 2020-08-30 11:07 *)
