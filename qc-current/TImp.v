@@ -84,7 +84,6 @@ Proof. dec_eq. Defined.
     we can take advantage of the [Show] instance of [nat] to print 
     them. *)
 
-(* BCP: Print them as "A", "B", etc.  Or maybe "X1", "X2", etc. *)
 Instance show_id : Show id :=
   { show x := let '(Id n) := x in show n }.
 
@@ -507,9 +506,8 @@ Print GOpt.
          : Type -> Type
 *)
 
-(* Check Monad_GOpt.
-
-    
+Check Monad_GOpt. 
+(** 
     Monad_GOpt
          : Monad GOpt
 *)
@@ -525,14 +523,18 @@ Print GOpt.
     demonstrate how to build up complex generators for typed
     expressions from smaller parts. *)
 
-Inductive has_type_1 : context -> exp -> ty -> Prop := 
-  | Ty_Var1 : forall x T Gamma, 
-      bound_to Gamma x T -> has_type_1 Gamma (EVar x) T.
+Module TypePlayground1.
 
-(** To generate [e] such that [has_type_1 Gamma e T] holds, we need to
+Inductive has_type : context -> exp -> ty -> Prop := 
+  | Ty_Var : forall x T Gamma, 
+      bound_to Gamma x T -> has_type Gamma (EVar x) T.
+
+End TypePlayground1.
+
+(** To generate [e] such that [has_type Gamma e T] holds, we need to
     pick one of its constructors (there is only one choice, here) and
     then try to satisfy its preconditions by generating more things.
-    To satisfy [Ty_Var1] (given [Gamma] and [T]), we need to generate
+    To satisfy [Ty_Var] (given [Gamma] and [T]), we need to generate
     [x] such that [bound_to Gamma x T]. But we already have such a
     generator!  We just need to wrap it in an [EVar].  *)
 
@@ -542,20 +544,24 @@ Definition gen_typed_evar (Gamma : context) (T : ty) : GOpt exp :=
 
 (** (Note that this is the [ret] of the [GOpt] monad.) *)
 
-(** Now let's consider a typing relation [has_type_2], extending
-    [has_type_1] with all of the constructors of [has_type] that do
+(** Now let's consider an extended typing relation, extending the 
+    previous one with all of the constructors of [has_type] that do
     not recursively require [has_type] as a side-condition. These will
     be the _base cases_ for our final generator. *)
-  
-Inductive has_type_2 : context -> exp -> ty -> Prop :=
-| Ty_Var2 : forall x T Gamma, 
-    bound_to Gamma x T -> has_type_2 Gamma (EVar x) T
-| Ty_Num2 : forall Gamma n, 
-    has_type_2 Gamma  (ENum n) TNat
-| Ty_True2 : forall Gamma, has_type_2 Gamma ETrue TBool
-| Ty_False2 : forall Gamma, has_type_2 Gamma EFalse TBool.
 
-(** We can already generate values satisfying [Ty_Var2] using
+Module TypePlayground2.
+
+Inductive has_type : context -> exp -> ty -> Prop :=
+| Ty_Var : forall x T Gamma, 
+    bound_to Gamma x T -> has_type Gamma (EVar x) T
+| Ty_Num : forall Gamma n, 
+    has_type Gamma  (ENum n) TNat
+| Ty_True : forall Gamma, has_type Gamma ETrue TBool
+| Ty_False : forall Gamma, has_type Gamma EFalse TBool.
+
+End TypePlayground2.
+
+(** We can already generate values satisfying [Ty_Var] using
     [gen_typed_evar].  For the rest of the rules, we will need to
     pattern match on the input [T], since [Ty_Num] can only be used if
     [T = TNat], while [Ty_True] and [Ty_False] can only be used if [T
@@ -597,12 +603,16 @@ Definition gen_has_type_2 Gamma T := backtrack (base Gamma T).
 (** To see how we handle recursive rules, let's consider a third
     sub-relation, [has_type_3], with just variables and addition: *)
 
-Inductive has_type_3 : context -> exp -> ty -> Prop :=
- | Ty_Var3 : forall x T Gamma, 
-     bound_to Gamma x T -> has_type_3 Gamma (EVar x) T
- | Ty_Plus3 : forall Gamma e1 e2, 
-    has_type_3 Gamma e1 TNat -> has_type_3 Gamma e2 TNat ->
-    has_type_3 Gamma (EPlus e1 e2) TNat.
+Module TypePlayground3.
+  
+Inductive has_type : context -> exp -> ty -> Prop :=
+ | Ty_Var : forall x T Gamma, 
+     bound_to Gamma x T -> has_type Gamma (EVar x) T
+ | Ty_Plus : forall Gamma e1 e2, 
+    has_type Gamma e1 TNat -> has_type Gamma e2 TNat ->
+    has_type Gamma (EPlus e1 e2) TNat.
+
+End TypePlayground3.
 
 (** Typing derivations involving [EPlus] nodes are binary trees, so we
     need to add a [size] parameter to enforce termination. The base
@@ -1405,4 +1415,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2020-08-30 11:19 *)
+(* 2020-08-31 20:55 *)

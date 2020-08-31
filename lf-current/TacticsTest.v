@@ -248,4 +248,4 @@ idtac "---------- existsb_existsb' ---------".
 Print Assumptions existsb_existsb'.
 Abort.
 
-(* 2020-08-30 11:05 *)
+(* 2020-08-31 20:44 *)

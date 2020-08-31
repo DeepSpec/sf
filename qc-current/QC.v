@@ -104,7 +104,7 @@ Print ChoosableFromInterval.
 
 (* Sample (choose (0,10)).
 
-     ===> [ 1, 2, 1, 9, 8, 1, 3, 6, 2, 1, 8, 0, 1, 1, 3, 5, 4, 10, 4, 6 ] 
+     ===> [ 1, 2, 1, 9, 8, 10, 3, 6, 0, 1, 8 ]
 *)
 
 (** **** Exercise: 1 star, standard, optional (cfi) 
@@ -354,8 +354,8 @@ Check oneOf_.
     the _expected_ size of the generated trees is actually
     infinite! *)
 
-(** The solution is to use the standard "fuel" idiom that all Coq
-    users know.  We add a natural number [sz] as a parameter.  We
+(** The solution is to use the standard "fuel" idiom that Coq users
+    are familiar with.  We add a natural number [sz] as a parameter.  We
     decrease this size in each recursive call, and when it reaches
     [O], we always generate [Leaf].  Thus, the initial [sz] parameter
     serves as a bound on the depth of the tree. *)
@@ -669,8 +669,11 @@ Definition forAll {A B : Type} `{Checkable B}
 
 End CheckerPlayground3.
 
-(** Let's try this out.  We can define a boolean test that returns [true]
-    for [Red] and [false] for other colors. *)
+(** Let's try this out!
+
+    First, let's revisit our color example to execute a simple check. 
+    We can define a boolean test that returns [true] for [Red] and 
+    [false] for other colors. *)
 
 Definition isRed c := 
   match c with
@@ -693,7 +696,7 @@ Definition isRed c :=
 
     Good to know. *)
 
-(** Now, what about [mirrorP]? *)
+(** Now back to a more realistic example. What about [mirrorP]? *)
 
 (*
 Sample (CheckerPlayground3.forAll
@@ -1412,7 +1415,20 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
 *)
 
 (** This generates far fewer tiny examples, likely leading to more
-    efficient testing of interesting properties. *)
+    efficient testing of interesting properties. However, there are 
+    still a lot of empty trees being generated.  Can we do something
+    about that? 
+ *)
+
+(** **** Exercise: 2 stars, standard (genTreeSized'') 
+
+    Write a generator [genTreeSized''] that generates fewer empty 
+    trees. Check your results using [collect].
+*)
+
+(* FILL IN HERE
+
+    [] *)
 
 (* ################################################################# *)
 (** * Dealing with Preconditions *)
@@ -1449,10 +1465,15 @@ Fixpoint insert (x : nat) (l : list nat) :=
 Definition insert_spec (x : nat) (l : list nat) :=
   sorted l ==> sorted (insert x l).
 
-(* QuickChick insert_spec.
+Definition test_insert_spec :=
+  forAll (choose (0,10)) (fun x =>
+  forAll (listOf (choose (0,10))) (fun l =>                            
+  insert_spec x l)).
+
+(* QuickChick test_insert_spec.
 
      ===> 
-       QuickChecking insert_spec 
+       QuickChecking test_insert_spec 
        +++ Passed 10000 tests (17325 discards) 
 *)
 
@@ -1472,21 +1493,33 @@ Definition insert_spec (x : nat) (l : list nat) :=
 Definition insert_spec' (x : nat) (l : list nat) :=
   collect (List.length l) (insert_spec x l).
 
-(* QuickChick insert_spec'.
+Definition test_insert_spec' :=
+  forAll (choose (0,10)) (fun x =>
+  forAll (listOf (choose (0,10))) (fun l =>                            
+  insert_spec' x l)).
+
+(* QuickChick test_insert_spec'.
 
      ===> 
    QuickChecking insert_spec' 
-   3447 : 0 
-   3446 : 1 
-   1929 : 2 
-   788 : 3 
-   271 : 4 
-   96 : 5 
-   19 : 6 
-   4 : 7 
-   +++ Passed 10000 tests (17263 discards) 
+   3652 : (Discarded) 7
+   3582 : 0
+   3568 : (Discarded) 6
+   3542 : 1
+   3469 : (Discarded) 5
+   3200 : (Discarded) 4
+   2830 : (Discarded) 3
+   1842 : 2
+   1606 : (Discarded) 2
+   716 : 3
+   248 : 4
+   61 : 5
+   8 : 6
+   1 : 7
+   +++ Passed 10000 tests (18325 discards)
 *)
-(** The vast majority of inputs have length 2 or less!
+(** The vast majority of inputs have length 2 or less, while the larger
+    lists are almost always discarded!
 
     (This explains something you might have found suspicious in the
     previous statistics: that 1/3 of the randomly generated lists were
@@ -1656,4 +1689,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2020-08-30 11:19 *)
+(* 2020-08-31 20:55 *)
