@@ -39,9 +39,13 @@ jobs:
           command: make
           working_directory: qc-current
       - run:
+          name: Verified C
+          command: make
+          working_directory: vc-current
+      - run:
           name: Tarballs
           command: |
-            for v in lf plf vfa qc
+            for v in lf plf vfa qc vc
             do tar -xf $v-current/$v.tgz
             make -C $v
             done
