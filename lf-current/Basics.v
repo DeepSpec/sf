@@ -852,14 +852,12 @@ Notation "x <=? y" := (leb x y) (at level 70) : nat_scope.
 Example test_leb3': (4 <=? 2) = false.
 Proof. simpl. reflexivity.  Qed.
 
-(** There are now two symbols that look like equality: [=] and
+(** We now have two symbols that look like equality: [=] and
     [=?].  We'll have much more to say about the differences and
-    similarities between them later.  For now, bear in mind that [=]
-    is already available in Coq itself, whereas [=?] is a notation we
-    defined for [nat] and implemented ourselves as the function [eqb].
-    The standard library also defines and implements it in a similar
-    way.  As [=], equality is something we can attempt to _prove_; but
-    as [=?], it is something that Coq can _compute_. *)
+    similarities between them later. For now, the main thing to notice
+    is that [x = y] is a logical _claim_ -- a "proposition" -- that we
+    can try to prove, while [x =? y] is an _expression_ whose
+    value (either [true] or [false]) we can compute. *)
 
 (** **** Exercise: 1 star, standard (ltb) 
 
@@ -1580,4 +1578,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2020-09-01 14:21 *)
+(* 2020-09-01 15:50 *)
