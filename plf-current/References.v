@@ -1880,4 +1880,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2020-09-01 15:51 *)
+(* 2020-09-01 18:50 *)

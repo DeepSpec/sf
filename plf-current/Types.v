@@ -679,4 +679,4 @@ Definition manual_grade_for_remove_predzro : option (nat*string) := None.
 Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 
-(* 2020-09-01 15:51 *)
+(* 2020-09-01 18:50 *)
