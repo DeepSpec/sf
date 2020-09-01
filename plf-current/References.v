@@ -257,7 +257,7 @@ Hint Constructors value : core.
     straightforward.  *)
 
 Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
-Fixpoint subst (x : string) (s : tm) (t : tm) : tm := 
+Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   (* pure STLC *)
   | tm_var y =>
@@ -334,7 +334,7 @@ Hint Unfold y : core.
 Hint Unfold z : core.
 
 Definition tseq t1 t2 :=
-  <{ (\ x : Unit, t2)  t1 }>. 
+  <{ (\ x : Unit, t2)  t1 }>.
 
 Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
 
@@ -1880,4 +1880,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2020-08-31 20:46 *)
+(* 2020-09-01 14:23 *)

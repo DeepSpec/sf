@@ -1392,7 +1392,7 @@ The proof of preservation for <span class="inlinecode"><span class="id" title="v
 &nbsp;&nbsp;<span class="id" title="var">remember</span> <span class="id" title="definition">empty</span> <span class="id" title="keyword">as</span> <span class="id" title="var">Gamma</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Ht</span>. <span class="id" title="var">gen</span> <span class="id" title="var">t'</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Ht</span>; <span class="id" title="var">introv</span> <span class="id" title="var">HST</span> <span class="id" title="var">Hstep</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;old:&nbsp;<span class="inlinecode"><span class="id" title="tactic">subst</span>;</span> <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="var">solve_by_invert</span>;</span> <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> <span class="inlinecode"><span class="id" title="var">Hstep</span>;</span> <span class="inlinecode"><span class="id" title="tactic">subst</span>;</span>
            <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode">(<span class="id" title="tactic">eauto</span></span> <span class="inlinecode"><span class="id" title="keyword">using</span></span> <span class="inlinecode"><span class="id" title="var">store_weakening</span>,</span> <span class="inlinecode"><span class="id" title="var">extends_refl</span>)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new:&nbsp;<span class="inlinecode"><span class="id" title="tactic">subst</span></span> <span class="inlinecode"><span class="id" title="var">Gamma</span>;</span> <span class="inlinecode"><span class="id" title="var">inverts</span></span> <span class="inlinecode"><span class="id" title="var">Hstep</span>;</span> <span class="inlinecode"><span class="id" title="tactic">eauto</span>.</span><br/>
@@ -2311,8 +2311,7 @@ Another example: if <span class="inlinecode"><span class="id" title="var">z</spa
 </div>
 
 <div class="doc">
-<div style="background-color:lightgray; color:red; margin:10px; padding:10px; "> Ori: lia behaves different than omega? 
-</div>  One can proof <span class="inlinecode"><span class="id" title="var">False</span></span> using <span class="inlinecode"><span class="id" title="tactic">omega</span></span> if the mathematical facts
+One can proof <span class="inlinecode"><span class="id" title="var">False</span></span> using <span class="inlinecode"><span class="id" title="tactic">omega</span></span> if the mathematical facts
     from the context are contradictory. In the following example,
     the constraints on the values <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> cannot be all
     satisfied in the same time. 
@@ -2560,7 +2559,7 @@ One of the strengths of <span class="inlinecode"><span class="id" title="tactic"
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-08-31&nbsp;20:46&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-09-01&nbsp;14:23&nbsp;*)</span><br/>
 </div>
 </div>
 

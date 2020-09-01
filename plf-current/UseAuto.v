@@ -924,7 +924,7 @@ Qed.
 Theorem progress' : forall t T,
   empty |- t \in T ->
   value t \/ exists t', t --> t'.
-Proof.  
+Proof.
   (* FILL IN HERE *) admit.
 Admitted.
 
@@ -1038,7 +1038,7 @@ Proof.
   remember empty as Gamma.
   introv Ht. gen t'.
   induction Ht; introv HST Hstep;
-    
+
   (* old: [subst; try solve_by_invert; inversion Hstep; subst;
            try (eauto using store_weakening, extends_refl)]
      new: [subst Gamma; inverts Hstep; eauto.]
@@ -1296,7 +1296,7 @@ Proof with eauto.
   destruct Hty as [S2 [Hsub Hty1]].
   apply sub_inversion_arrow in Hsub.
   destruct Hsub as [U1 [U2 [Heq [Hsub1 Hsub2]]]].
-  injection Heq as Heq; subst...  
+  injection Heq as Heq; subst...
 Qed.
 
 (** Exercise: optimize the proof script, using
@@ -1771,9 +1771,7 @@ Lemma lia_demo_2 : forall (x y z : nat),
   (x - z <= 2).
 Proof. intros. lia. Qed.
 
-(**  Ori: lia behaves different than omega? 
-
-    One can proof [False] using [omega] if the mathematical facts
+(** One can proof [False] using [omega] if the mathematical facts
     from the context are contradictory. In the following example,
     the constraints on the values [x] and [y] cannot be all
     satisfied in the same time. *)
@@ -1924,4 +1922,4 @@ Proof. congruence. Qed.
     some investment, however this investment will pay off very quickly.
 *)
 
-(* 2020-08-31 20:46 *)
+(* 2020-09-01 14:23 *)
