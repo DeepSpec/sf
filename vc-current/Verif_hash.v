@@ -1095,4 +1095,4 @@ erewrite (wand_slice_array h (h+1) N _ (tptr tcell))
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-09-01 18:58 *)
+(* 2020-09-09 01:33 *)

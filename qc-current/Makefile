@@ -1,4 +1,4 @@
-COQMFFLAGS := -Q . QC 
+COQMFFLAGS := -Q . QC  
 
 ALLVFILES := Preface.v Introduction.v Typeclasses.v QC.v TImp.v QuickChickTool.v QuickChickInterface.v Postscript.v Bib.v
 

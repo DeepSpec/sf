@@ -1,4 +1,4 @@
-COQMFFLAGS := -Q . VC 
+COQMFFLAGS := -Q . VC  
 
 ALLVFILES := sumarray.v reverse.v append.v stack.v strlib.v hash.v hints.v Preface.v Verif_sumarray.v Verif_reverse.v Verif_stack.v Verif_triang.v Verif_append1.v Verif_append2.v Verif_strlib.v Hashfun.v Verif_hash.v Postscript.v Bib.v
 

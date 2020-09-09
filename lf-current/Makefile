@@ -1,4 +1,4 @@
-COQMFFLAGS := -Q . LF 
+COQMFFLAGS := -Q . LF  
 
 ALLVFILES := Preface.v Basics.v Induction.v Lists.v Poly.v Tactics.v Logic.v IndProp.v Maps.v ProofObjects.v IndPrinciples.v Rel.v Imp.v ImpParser.v ImpCEvalFun.v Extraction.v Auto.v AltAuto.v Postscript.v Bib.v  PrefaceTest.v  BasicsTest.v  InductionTest.v  ListsTest.v  PolyTest.v  TacticsTest.v  LogicTest.v  IndPropTest.v  MapsTest.v  ProofObjectsTest.v  IndPrinciplesTest.v  RelTest.v  ImpTest.v  ImpParserTest.v  ImpCEvalFunTest.v  ExtractionTest.v  AutoTest.v  AltAutoTest.v  PostscriptTest.v  BibTest.v
 
