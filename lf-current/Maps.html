@@ -56,7 +56,7 @@
 </div>
 
 <div class="doc">
-<a id="lab256"></a><h1 class="section">The Coq Standard Library</h1>
+<a id="lab257"></a><h1 class="section">The Coq Standard Library</h1>
 
 <div class="paragraph"> </div>
 
@@ -116,7 +116,7 @@ There are several uses for that notation, but only one for
 </div>
 
 <div class="doc">
-<a id="lab257"></a><h1 class="section">Identifiers</h1>
+<a id="lab258"></a><h1 class="section">Identifiers</h1>
 
 <div class="paragraph"> </div>
 
@@ -205,7 +205,7 @@ Similarly:
 </div>
 
 <div class="doc">
-<a id="lab258"></a><h1 class="section">Total Maps</h1>
+<a id="lab259"></a><h1 class="section">Total Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -336,7 +336,7 @@ To use maps in later chapters, we'll need several fundamental
     which is discussed in the <a href="Logic.html"><span class="inlineref">Logic</span></a> chapter.) 
 <div class="paragraph"> </div>
 
-<a id="lab259"></a><h4 class="section">Exercise: 1 star, standard, optional (t_apply_empty)</h4>
+<a id="lab260"></a><h4 class="section">Exercise: 1 star, standard, optional (t_apply_empty)</h4>
  First, the empty map returns its default element for all keys: 
 </div>
 <div class="code">
@@ -352,7 +352,7 @@ To use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab260"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_eq)</h4>
+<a id="lab261"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_eq)</h4>
  Next, if we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at a key <span class="inlinecode"><span class="id" title="var">x</span></span> with a new value <span class="inlinecode"><span class="id" title="var">v</span></span>
     and then look up <span class="inlinecode"><span class="id" title="var">x</span></span> in the map resulting from the <span class="inlinecode"><span class="id" title="var">update</span></span>, we
     get back <span class="inlinecode"><span class="id" title="var">v</span></span>: 
@@ -370,7 +370,7 @@ To use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab261"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_neq)</h4>
+<a id="lab262"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_neq)</h4>
  On the other hand, if we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at a key <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> and then
     look up a <i>different</i> key <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span></span> in the resulting map, we get the
     same result that <span class="inlinecode"><span class="id" title="var">m</span></span> would have given: 
@@ -389,7 +389,7 @@ To use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab262"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_shadow)</h4>
+<a id="lab263"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_shadow)</h4>
  If we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at a key <span class="inlinecode"><span class="id" title="var">x</span></span> with a value <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> and then
     update again with the same key <span class="inlinecode"><span class="id" title="var">x</span></span> and another value <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span>, the
     resulting map behaves the same (gives the same result when applied
@@ -415,7 +415,7 @@ To use maps in later chapters, we'll need several fundamental
     proposition on strings with the boolean function <span class="inlinecode"><span class="id" title="var">eqb_string</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab263"></a><h4 class="section">Exercise: 2 stars, standard, optional (eqb_stringP)</h4>
+<a id="lab264"></a><h4 class="section">Exercise: 2 stars, standard, optional (eqb_stringP)</h4>
  Use the proof of <span class="inlinecode"><span class="id" title="var">eqbP</span></span> in chapter <a href="IndProp.html"><span class="inlineref">IndProp</span></a> as a template to
     prove the following: 
 </div>
@@ -439,7 +439,7 @@ To use maps in later chapters, we'll need several fundamental
     and <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab264"></a><h4 class="section">Exercise: 2 stars, standard (t_update_same)</h4>
+<a id="lab265"></a><h4 class="section">Exercise: 2 stars, standard (t_update_same)</h4>
  With the example in chapter <a href="IndProp.html"><span class="inlineref">IndProp</span></a> as a template, use
     <span class="inlinecode"><span class="id" title="var">eqb_stringP</span></span> to prove the following theorem, which states that
     if we update a map to assign key <span class="inlinecode"><span class="id" title="var">x</span></span> the same value as it already
@@ -458,7 +458,7 @@ To use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab265"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (t_update_permute)</h4>
+<a id="lab266"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (t_update_permute)</h4>
  Use <span class="inlinecode"><span class="id" title="var">eqb_stringP</span></span> to prove one final property of the <span class="inlinecode"><span class="id" title="var">update</span></span>
     function: If we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at two distinct keys, it doesn't
     matter in which order we do the updates. 
@@ -479,7 +479,7 @@ To use maps in later chapters, we'll need several fundamental
 
 
 <div class="doc">
-<a id="lab266"></a><h1 class="section">Partial maps</h1>
+<a id="lab267"></a><h1 class="section">Partial maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -639,7 +639,7 @@ defined at a given point.
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-09-09&nbsp;01:23&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-09-10&nbsp;14:08&nbsp;*)</span><br/>
 </div>
 </div>
 

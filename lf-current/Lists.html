@@ -42,7 +42,7 @@
 </div>
 
 <div class="doc">
-<a id="lab66"></a><h1 class="section">Pairs of Numbers</h1>
+<a id="lab67"></a><h1 class="section">Pairs of Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -123,12 +123,11 @@ The new notation can be used both in expressions and in pattern
 
 <div class="doc">
 Note that pattern-matching on a pair (with parentheses: <span class="inlinecode">(<span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">y</span>)</span>)
-    is not to be confused with the "multiple pattern" syntax
-    (with no parentheses: <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">y</span></span>) that we have seen previously.
-    The above examples illustrate pattern matching on a pair with
-    elements <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span>, whereas, for example, the definition of <span class="inlinecode"><span class="id" title="var">minus</span></span> in
-    <a href="Basics.html"><span class="inlineref">Basics</span></a> performs pattern matching on the values <span class="inlinecode"><span class="id" title="var">n</span></span>
-    and <span class="inlinecode"><span class="id" title="var">m</span></span>:
+    is not to be confused with the "multiple pattern" syntax (with no
+    parentheses: <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">y</span></span>) that we have seen previously.  The above
+    examples illustrate pattern matching on a pair with elements <span class="inlinecode"><span class="id" title="var">x</span></span>
+    and <span class="inlinecode"><span class="id" title="var">y</span></span>, whereas, for example, the definition of <span class="inlinecode"><span class="id" title="var">minus</span></span> in
+    <a href="Basics.html"><span class="inlineref">Basics</span></a> performs pattern matching on the values <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">m</span></span>:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">minus</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span>, <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
@@ -212,7 +211,7 @@ Notice that, unlike its behavior with <span class="inlinecode"><span class="id" 
     way. 
 <div class="paragraph"> </div>
 
-<a id="lab67"></a><h4 class="section">Exercise: 1 star, standard (snd_fst_is_swap)</h4>
+<a id="lab68"></a><h4 class="section">Exercise: 1 star, standard (snd_fst_is_swap)</h4>
 
 </div>
 <div class="code">
@@ -226,7 +225,7 @@ Notice that, unlike its behavior with <span class="inlinecode"><span class="id" 
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab68"></a><h4 class="section">Exercise: 1 star, standard, optional (fst_swap_is_snd)</h4>
+<a id="lab69"></a><h4 class="section">Exercise: 1 star, standard, optional (fst_swap_is_snd)</h4>
 
 </div>
 <div class="code">
@@ -239,7 +238,7 @@ Notice that, unlike its behavior with <span class="inlinecode"><span class="id" 
 
 
 <div class="doc">
-<a id="lab69"></a><h1 class="section">Lists of Numbers</h1>
+<a id="lab70"></a><h1 class="section">Lists of Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -326,7 +325,7 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
     constructors. 
 <div class="paragraph"> </div>
 
-<a id="lab70"></a><h3 class="section">Repeat</h3>
+<a id="lab71"></a><h3 class="section">Repeat</h3>
 
 <div class="paragraph"> </div>
 
@@ -346,7 +345,7 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 
 <div class="doc">
-<a id="lab71"></a><h3 class="section">Length</h3>
+<a id="lab72"></a><h3 class="section">Length</h3>
 
 <div class="paragraph"> </div>
 
@@ -363,7 +362,7 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 
 <div class="doc">
-<a id="lab72"></a><h3 class="section">Append</h3>
+<a id="lab73"></a><h3 class="section">Append</h3>
 
 <div class="paragraph"> </div>
 
@@ -397,7 +396,7 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 
 <div class="doc">
-<a id="lab73"></a><h3 class="section">Head and Tail</h3>
+<a id="lab74"></a><h3 class="section">Head and Tail</h3>
 
 <div class="paragraph"> </div>
 
@@ -410,12 +409,12 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a id="NatList.hd" class="idref" href="#NatList.hd"><span class="id" title="definition">hd</span></a> (<a id="default:36" class="idref" href="#default:36"><span class="id" title="binder">default</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:37" class="idref" href="#l:37"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="NatList.hd" class="idref" href="#NatList.hd"><span class="id" title="definition">hd</span></a> (<a id="default:36" class="idref" href="#default:36"><span class="id" title="binder">default</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:37" class="idref" href="#l:37"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:37"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="Lists.html#default:36"><span class="id" title="variable">default</span></a><br/>
 &nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">h</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="NatList.tl" class="idref" href="#NatList.tl"><span class="id" title="definition">tl</span></a> (<a id="l:39" class="idref" href="#l:39"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="NatList.tl" class="idref" href="#NatList.tl"><span class="id" title="definition">tl</span></a> (<a id="l:39" class="idref" href="#l:39"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:39"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a><br/>
 &nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">t</span><br/>
@@ -429,11 +428,11 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 
 <div class="doc">
-<a id="lab74"></a><h3 class="section">Exercises</h3>
+<a id="lab75"></a><h3 class="section">Exercises</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab75"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (list_funs)</h4>
+<a id="lab76"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (list_funs)</h4>
  Complete the definitions of <span class="inlinecode"><span class="id" title="var">nonzeros</span></span>, <span class="inlinecode"><span class="id" title="var">oddmembers</span></span>, and
     <span class="inlinecode"><span class="id" title="var">countoddmembers</span></span> below. Have a look at the tests to understand
     what these functions should do. 
@@ -468,7 +467,7 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab76"></a><h4 class="section">Exercise: 3 stars, advanced (alternate)</h4>
+<a id="lab77"></a><h4 class="section">Exercise: 3 stars, advanced (alternate)</h4>
  Complete the following definition of <span class="inlinecode"><span class="id" title="var">alternate</span></span>, which
     interleaves two lists into one, alternating between elements taken
     from the first list and elements from the second.  See the tests
@@ -505,7 +504,7 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 
 
 <div class="doc">
-<a id="lab77"></a><h3 class="section">Bags via Lists</h3>
+<a id="lab78"></a><h3 class="section">Bags via Lists</h3>
 
 <div class="paragraph"> </div>
 
@@ -520,14 +519,14 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 
 <div class="doc">
-<a id="lab78"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (bag_functions)</h4>
+<a id="lab79"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (bag_functions)</h4>
  Complete the following definitions for the functions
     <span class="inlinecode"><span class="id" title="var">count</span></span>, <span class="inlinecode"><span class="id" title="var">sum</span></span>, <span class="inlinecode"><span class="id" title="var">add</span></span>, and <span class="inlinecode"><span class="id" title="var">member</span></span> for bags. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Fixpoint</span> <a id="NatList.count" class="idref" href="#NatList.count"><span class="id" title="definition">count</span></a> (<a id="v:49" class="idref" href="#v:49"><span class="id" title="binder">v</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:50" class="idref" href="#s:50"><span class="id" title="binder">s</span></a>:<a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="NatList.count" class="idref" href="#NatList.count"><span class="id" title="definition">count</span></a> (<a id="v:49" class="idref" href="#v:49"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:50" class="idref" href="#s:50"><span class="id" title="binder">s</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 </div>
 
@@ -563,13 +562,13 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_sum1" class="idref" href="#NatList.test_sum1"><span class="id" title="definition">test_sum1</span></a>:              <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 1 (<a class="idref" href="Lists.html#NatList.sum"><span class="id" title="axiom">sum</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="NatList.add" class="idref" href="#NatList.add"><span class="id" title="definition">add</span></a> (<a id="v:52" class="idref" href="#v:52"><span class="id" title="binder">v</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:53" class="idref" href="#s:53"><span class="id" title="binder">s</span></a>:<a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a><br/>
+<span class="id" title="keyword">Definition</span> <a id="NatList.add" class="idref" href="#NatList.add"><span class="id" title="definition">add</span></a> (<a id="v:52" class="idref" href="#v:52"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:53" class="idref" href="#s:53"><span class="id" title="binder">s</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_add1" class="idref" href="#NatList.test_add1"><span class="id" title="definition">test_add1</span></a>:                <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 1 (<a class="idref" href="Lists.html#NatList.add"><span class="id" title="axiom">add</span></a> 1 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_add2" class="idref" href="#NatList.test_add2"><span class="id" title="definition">test_add2</span></a>:                <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 5 (<a class="idref" href="Lists.html#NatList.add"><span class="id" title="axiom">add</span></a> 1 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="NatList.member" class="idref" href="#NatList.member"><span class="id" title="definition">member</span></a> (<a id="v:54" class="idref" href="#v:54"><span class="id" title="binder">v</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:55" class="idref" href="#s:55"><span class="id" title="binder">s</span></a>:<a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+<span class="id" title="keyword">Definition</span> <a id="NatList.member" class="idref" href="#NatList.member"><span class="id" title="definition">member</span></a> (<a id="v:54" class="idref" href="#v:54"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:55" class="idref" href="#s:55"><span class="id" title="binder">s</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_member1" class="idref" href="#NatList.test_member1"><span class="id" title="definition">test_member1</span></a>:             <a class="idref" href="Lists.html#NatList.member"><span class="id" title="axiom">member</span></a> 1 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -581,7 +580,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab79"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_more_functions)</h4>
+<a id="lab80"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_more_functions)</h4>
  Here are some more <span class="inlinecode"><span class="id" title="var">bag</span></span> functions for you to practice with. 
 <div class="paragraph"> </div>
 
@@ -594,7 +593,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Fixpoint</span> <a id="NatList.remove_one" class="idref" href="#NatList.remove_one"><span class="id" title="definition">remove_one</span></a> (<a id="v:56" class="idref" href="#v:56"><span class="id" title="binder">v</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:57" class="idref" href="#s:57"><span class="id" title="binder">s</span></a>:<a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="NatList.remove_one" class="idref" href="#NatList.remove_one"><span class="id" title="definition">remove_one</span></a> (<a id="v:56" class="idref" href="#v:56"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:57" class="idref" href="#s:57"><span class="id" title="binder">s</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_remove_one1" class="idref" href="#NatList.test_remove_one1"><span class="id" title="definition">test_remove_one1</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 5 (<a class="idref" href="Lists.html#NatList.remove_one"><span class="id" title="axiom">remove_one</span></a> 5 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>5<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
@@ -618,7 +617,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_remove_all4" class="idref" href="#NatList.test_remove_all4"><span class="id" title="definition">test_remove_all4</span></a>:  <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 5 (<a class="idref" href="Lists.html#NatList.remove_all"><span class="id" title="axiom">remove_all</span></a> 5 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>5<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>5<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>5<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Fixpoint</span> <a id="NatList.subset" class="idref" href="#NatList.subset"><span class="id" title="definition">subset</span></a> (<a id="s<sub>1</sub>:62" class="idref" href="#s<sub>1</sub>:62"><span class="id" title="binder">s<sub>1</sub></span></a>:<a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) (<a id="s<sub>2</sub>:63" class="idref" href="#s<sub>2</sub>:63"><span class="id" title="binder">s<sub>2</sub></span></a>:<a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="NatList.subset" class="idref" href="#NatList.subset"><span class="id" title="definition">subset</span></a> (<a id="s<sub>1</sub>:62" class="idref" href="#s<sub>1</sub>:62"><span class="id" title="binder">s<sub>1</sub></span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) (<a id="s<sub>2</sub>:63" class="idref" href="#s<sub>2</sub>:63"><span class="id" title="binder">s<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_subset1" class="idref" href="#NatList.test_subset1"><span class="id" title="definition">test_subset1</span></a>:              <a class="idref" href="Lists.html#NatList.subset"><span class="id" title="axiom">subset</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -630,7 +629,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab80"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (add_inc_count)</h4>
+<a id="lab81"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (add_inc_count)</h4>
  Adding a value to a bag should increase the value's count by one.
     State that as a theorem and prove it. 
 </div>
@@ -648,7 +647,7 @@ Qed.<br/>
 
 
 <div class="doc">
-<a id="lab81"></a><h1 class="section">Reasoning About Lists</h1>
+<a id="lab82"></a><h1 class="section">Reasoning About Lists</h1>
 
 <div class="paragraph"> </div>
 
@@ -660,7 +659,7 @@ Qed.<br/>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Theorem</span> <a id="NatList.nil_app" class="idref" href="#NatList.nil_app"><span class="id" title="lemma">nil_app</span></a> : <span class="id" title="keyword">∀</span> <a id="l:65" class="idref" href="#l:65"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
+<span class="id" title="keyword">Theorem</span> <a id="NatList.nil_app" class="idref" href="#NatList.nil_app"><span class="id" title="lemma">nil_app</span></a> : <span class="id" title="keyword">∀</span> <a id="l:65" class="idref" href="#l:65"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#f5cee4f22b9033d1d704f9d537452cd<sub>0</sub>"><span class="id" title="notation">[]</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l:65"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#l:65"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -710,7 +709,7 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
 </div>
 
 <div class="doc">
-<a id="lab82"></a><h2 class="section">Induction on Lists</h2>
+<a id="lab83"></a><h2 class="section">Induction on Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -834,7 +833,7 @@ Notice that, as when doing induction on natural numbers, the
 
 <div class="paragraph"> </div>
 
-<a id="lab83"></a><h3 class="section">Reversing a List</h3>
+<a id="lab84"></a><h3 class="section">Reversing a List</h3>
 
 <div class="paragraph"> </div>
 
@@ -1050,7 +1049,7 @@ For comparison, here are informal proofs of these two theorems:
 </div>
 
 <div class="doc">
-<a id="lab84"></a><h2 class="section"><span class="inlinecode"><span class="id" title="keyword">Search</span></span></h2>
+<a id="lab85"></a><h2 class="section"><span class="inlinecode"><span class="id" title="keyword">Search</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1122,11 +1121,11 @@ The question mark in front of the variable is needed to indicate
 </div>
 
 <div class="doc">
-<a id="lab85"></a><h2 class="section">List Exercises, Part 1</h2>
+<a id="lab86"></a><h2 class="section">List Exercises, Part 1</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab86"></a><h4 class="section">Exercise: 3 stars, standard (list_exercises)</h4>
+<a id="lab87"></a><h4 class="section">Exercise: 3 stars, standard (list_exercises)</h4>
  More practice with lists: 
 </div>
 <div class="code">
@@ -1176,7 +1175,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab87"></a><h4 class="section">Exercise: 2 stars, standard (eqblist)</h4>
+<a id="lab88"></a><h4 class="section">Exercise: 2 stars, standard (eqblist)</h4>
  Fill in the definition of <span class="inlinecode"><span class="id" title="var">eqblist</span></span>, which compares
     lists of numbers for equality.  Prove that <span class="inlinecode"><span class="id" title="var">eqblist</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span>
     yields <span class="inlinecode"><span class="id" title="var">true</span></span> for every list <span class="inlinecode"><span class="id" title="var">l</span></span>. 
@@ -1204,7 +1203,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 
 
 <div class="doc">
-<a id="lab88"></a><h2 class="section">List Exercises, Part 2</h2>
+<a id="lab89"></a><h2 class="section">List Exercises, Part 2</h2>
 
 <div class="paragraph"> </div>
 
@@ -1212,7 +1211,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
     definitions about bags above. 
 <div class="paragraph"> </div>
 
-<a id="lab89"></a><h4 class="section">Exercise: 1 star, standard (count_member_nonzero)</h4>
+<a id="lab90"></a><h4 class="section">Exercise: 1 star, standard (count_member_nonzero)</h4>
 
 </div>
 <div class="code">
@@ -1243,7 +1242,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 
 <div class="doc">
 Before doing the next exercise, make sure you've filled in the
-   definition of <span class="inlinecode"><span class="id" title="var">remove_one</span></span> above. <a id="lab90"></a><h4 class="section">Exercise: 3 stars, advanced (remove_does_not_increase_count)</h4>
+   definition of <span class="inlinecode"><span class="id" title="var">remove_one</span></span> above. <a id="lab91"></a><h4 class="section">Exercise: 3 stars, advanced (remove_does_not_increase_count)</h4>
 
 </div>
 <div class="code">
@@ -1257,7 +1256,7 @@ Before doing the next exercise, make sure you've filled in the
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab91"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_count_sum)</h4>
+<a id="lab92"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_count_sum)</h4>
  Write down an interesting theorem <span class="inlinecode"><span class="id" title="var">bag_count_sum</span></span> about bags
     involving the functions <span class="inlinecode"><span class="id" title="var">count</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span>, and prove it using
     Coq.  (You may find that the difficulty of the proof depends on
@@ -1271,7 +1270,7 @@ Before doing the next exercise, make sure you've filled in the
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab92"></a><h4 class="section">Exercise: 4 stars, advanced (rev_injective)</h4>
+<a id="lab93"></a><h4 class="section">Exercise: 4 stars, advanced (rev_injective)</h4>
  Prove that the <span class="inlinecode"><span class="id" title="var">rev</span></span> function is injective. There is a hard way
     and an easy way to do this. 
 </div>
@@ -1287,7 +1286,7 @@ Before doing the next exercise, make sure you've filled in the
 
 
 <div class="doc">
-<a id="lab93"></a><h1 class="section">Options</h1>
+<a id="lab94"></a><h1 class="section">Options</h1>
 
 <div class="paragraph"> </div>
 
@@ -1329,7 +1328,8 @@ We can then change the above definition of <span class="inlinecode"><span class=
     return <span class="inlinecode"><span class="id" title="var">None</span></span> when the list is too short and <span class="inlinecode"><span class="id" title="var">Some</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> when the
     list has enough members and <span class="inlinecode"><span class="id" title="var">a</span></span> appears at position <span class="inlinecode"><span class="id" title="var">n</span></span>. We call
     this new function <span class="inlinecode"><span class="id" title="var">nth_error</span></span> to indicate that it may result in an
-    error. 
+    error. As we see here, constructors of inductive definitions can
+    be capitalized. 
 </div>
 <div class="code">
 
@@ -1404,7 +1404,7 @@ Coq's conditionals are exactly like those found in any other
 </div>
 
 <div class="doc">
-<a id="lab94"></a><h4 class="section">Exercise: 2 stars, standard (hd_error)</h4>
+<a id="lab95"></a><h4 class="section">Exercise: 2 stars, standard (hd_error)</h4>
  Using the same idea, fix the <span class="inlinecode"><span class="id" title="var">hd</span></span> function from earlier so we don't
     have to pass a default element for the <span class="inlinecode"><span class="id" title="var">nil</span></span> case.  
 </div>
@@ -1425,7 +1425,7 @@ Coq's conditionals are exactly like those found in any other
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab95"></a><h4 class="section">Exercise: 1 star, standard, optional (option_elim_hd)</h4>
+<a id="lab96"></a><h4 class="section">Exercise: 1 star, standard, optional (option_elim_hd)</h4>
  This exercise relates your new <span class="inlinecode"><span class="id" title="var">hd_error</span></span> to the old <span class="inlinecode"><span class="id" title="var">hd</span></span>. 
 </div>
 <div class="code">
@@ -1445,7 +1445,7 @@ Coq's conditionals are exactly like those found in any other
 </div>
 
 <div class="doc">
-<a id="lab96"></a><h1 class="section">Partial Maps</h1>
+<a id="lab97"></a><h1 class="section">Partial Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -1483,7 +1483,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 
 <div class="doc">
-<a id="lab97"></a><h4 class="section">Exercise: 1 star, standard (eqb_id_refl)</h4>
+<a id="lab98"></a><h4 class="section">Exercise: 1 star, standard (eqb_id_refl)</h4>
 
 </div>
 <div class="code">
@@ -1549,7 +1549,7 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 </div>
 
 <div class="doc">
-<a id="lab98"></a><h4 class="section">Exercise: 1 star, standard (update_eq)</h4>
+<a id="lab99"></a><h4 class="section">Exercise: 1 star, standard (update_eq)</h4>
 
 </div>
 <div class="code">
@@ -1564,7 +1564,7 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab99"></a><h4 class="section">Exercise: 1 star, standard (update_neq)</h4>
+<a id="lab100"></a><h4 class="section">Exercise: 1 star, standard (update_neq)</h4>
 
 </div>
 <div class="code">
@@ -1581,7 +1581,7 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 </div>
 
 <div class="doc">
-<a id="lab100"></a><h4 class="section">Exercise: 2 stars, standard, optional (baz_num_elts)</h4>
+<a id="lab101"></a><h4 class="section">Exercise: 2 stars, standard, optional (baz_num_elts)</h4>
  Consider the following inductive definition: 
 </div>
 <div class="code">
@@ -1608,7 +1608,7 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-09-09&nbsp;01:23&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-09-10&nbsp;14:08&nbsp;*)</span><br/>
 </div>
 </div>
 

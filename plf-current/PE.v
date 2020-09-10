@@ -46,7 +46,6 @@ Import ListNotations.
 
 From PLF Require Import Smallstep.
 From PLF Require Import Imp.
-
 (* ################################################################# *)
 (** * Generalizing Constant Folding *)
 
@@ -172,20 +171,20 @@ Fixpoint pe_aexp (pe_st : pe_state) (a : aexp) : aexp :=
              | Some n => ANum n
              | None => AId i
              end
-  | APlus a1 a2 =>
+  | <{ a1 + a2 }> =>
       match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
       | (ANum n1, ANum n2) => ANum (n1 + n2)
-      | (a1', a2') => APlus a1' a2'
+      | (a1', a2') => <{ a1' + a2' }>
       end
-  | AMinus a1 a2 =>
+  | <{ a1 - a2 }> =>
       match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
       | (ANum n1, ANum n2) => ANum (n1 - n2)
-      | (a1', a2') => AMinus a1' a2'
+      | (a1', a2') => <{ a1' - a2' }>
       end
-  | AMult a1 a2 =>
+  | <{ a1 * a2 }> =>
       match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
       | (ANum n1, ANum n2) => ANum (n1 * n2)
-      | (a1', a2') => AMult a1' a2'
+      | (a1', a2') => <{ a1' * a2' }>
       end
   end.
 
@@ -346,31 +345,31 @@ Qed.
 
 Fixpoint pe_bexp (pe_st : pe_state) (b : bexp) : bexp :=
   match b with
-  | BTrue        => BTrue
-  | BFalse       => BFalse
-  | BEq a1 a2 =>
+  | <{ true }>        => <{ true }>
+  | <{ false }>      => <{ false }>
+  | <{ a1 = a2 }> =>
       match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
-      | (ANum n1, ANum n2) => if n1 =? n2 then BTrue else BFalse
-      | (a1', a2') => BEq a1' a2'
+      | (ANum n1, ANum n2) => if n1 =? n2 then <{ true }> else <{ false }>
+      | (a1', a2') => <{ a1' = a2' }>
       end
-  | BLe a1 a2 =>
+  | <{ a1 <= a2 }> =>
       match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
-      | (ANum n1, ANum n2) => if n1 <=? n2 then BTrue else BFalse
-      | (a1', a2') => BLe a1' a2'
+      | (ANum n1, ANum n2) => if n1 <=? n2 then <{ true }> else <{ false }>
+      | (a1', a2') => <{ a1' <= a2' }>
       end
-  | BNot b1 =>
+  | <{ ~ b1 }> =>
       match (pe_bexp pe_st b1) with
-      | BTrue => BFalse
-      | BFalse => BTrue
-      | b1' => BNot b1'
+      | <{ true }> => <{ false }>
+      | <{ false }> => <{ true }>
+      | b1' => <{ ~ b1' }>
       end
-  | BAnd b1 b2 =>
+  | <{ b1 && b2 }> =>
       match (pe_bexp pe_st b1, pe_bexp pe_st b2) with
-      | (BTrue, BTrue) => BTrue
-      | (BTrue, BFalse) => BFalse
-      | (BFalse, BTrue) => BFalse
-      | (BFalse, BFalse) => BFalse
-      | (b1', b2') => BAnd b1' b2'
+      | (<{ true }>, <{ true }>) => <{ true }>
+      | (<{ true }>, <{ false }>) => <{ false }>
+      | (<{ false }>, <{ true }>) => <{ false }>
+      | (<{ false }>, <{ false }>) => <{ false }>
+      | (b1', b2') => <{ b1' && b2' }>
       end
   end.
 
@@ -778,19 +777,19 @@ Reserved Notation "c1 '/' st '==>' c1' '/' st'"
 Inductive pe_com : com -> pe_state -> com -> pe_state -> Prop :=
   | PE_Skip : forall pe_st,
       <{skip}> / pe_st ==> <{skip}> / pe_st
-  | PE_AssStatic : forall pe_st a1 n1 l,
-      pe_aexp pe_st a1 = ANum n1 ->
+  | PE_AssStatic : forall pe_st a1 (n1 : nat) l,
+      pe_aexp pe_st a1 = <{ n1 }> ->
       <{l := a1}> / pe_st ==> <{skip}> / pe_add pe_st l n1
   | PE_AssDynamic : forall pe_st a1 a1' l,
       pe_aexp pe_st a1 = a1' ->
-      (forall n, a1' <> ANum n) ->
+      (forall n : nat , a1' <> <{ n }>) ->
       <{l := a1}> / pe_st ==> <{l := a1'}> / pe_remove pe_st l
   | PE_Seq : forall pe_st pe_st' pe_st'' c1 c2 c1' c2',
       c1 / pe_st  ==> c1' / pe_st' ->
       c2 / pe_st' ==> c2' / pe_st'' ->
       <{c1 ; c2}> / pe_st ==> <{c1' ; c2'}> / pe_st''
   | PE_IfTrue : forall pe_st pe_st' b1 c1 c2 c1',
-      pe_bexp pe_st b1 = BTrue ->
+      pe_bexp pe_st b1 = <{ true }> ->
       c1 / pe_st ==> c1' / pe_st' ->
       <{if b1 then c1 else c2 end}> / pe_st ==> c1' / pe_st'
   | PE_IfFalse : forall pe_st pe_st' b1 c1 c2 c2',
@@ -798,8 +797,8 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> Prop :=
       c2 / pe_st ==> c2' / pe_st' ->
       <{if b1 then c1 else c2 end}> / pe_st ==> c2' / pe_st'
   | PE_If : forall pe_st pe_st1 pe_st2 b1 c1 c2 c1' c2',
-      pe_bexp pe_st b1 <> BTrue ->
-      pe_bexp pe_st b1 <> BFalse ->
+      pe_bexp pe_st b1 <> <{ true }> ->
+      pe_bexp pe_st b1 <> <{ false }> ->
       c1 / pe_st ==> c1' / pe_st1 ->
       c2 / pe_st ==> c2' / pe_st2 ->
       <{if b1 then c1 else c2 end}> / pe_st
@@ -1018,28 +1017,28 @@ Reserved Notation "c1 '/' st '==>' c1' '/' st' '/' c''"
 Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
   | PE_Skip : forall pe_st,
       <{ skip }> / pe_st ==> <{ skip }> / pe_st / <{skip}>
-  | PE_AssStatic : forall pe_st a1 n1 l,
-      pe_aexp pe_st a1 = ANum n1 ->
+  | PE_AssStatic : forall pe_st a1 (n1 : nat) l,
+      pe_aexp pe_st a1 = <{ n1 }> ->
       <{ l := a1 }> / pe_st ==> <{ skip }> / pe_add pe_st l n1 / <{skip}>
   | PE_AssDynamic : forall pe_st a1 a1' l,
       pe_aexp pe_st a1 = a1' ->
-      (forall n, a1' <> ANum n) ->
+      (forall n : nat, a1' <> <{ n }> ) ->
       <{l := a1}> / pe_st ==> <{l := a1'}> / pe_remove pe_st l / <{skip}>
   | PE_Seq : forall pe_st pe_st' pe_st'' c1 c2 c1' c2' c'',
       c1 / pe_st  ==> c1' / pe_st' / <{skip}> ->
       c2 / pe_st' ==> c2' / pe_st'' / c'' ->
       <{c1 ; c2}> / pe_st ==> <{c1' ; c2'}> / pe_st'' / c''
   | PE_IfTrue : forall pe_st pe_st' b1 c1 c2 c1' c'',
-      pe_bexp pe_st b1 = BTrue ->
+      pe_bexp pe_st b1 = <{ true }> ->
       c1 / pe_st ==> c1' / pe_st' / c'' ->
       <{if b1 then c1 else c2 end}> / pe_st ==> c1' / pe_st' / c''
   | PE_IfFalse : forall pe_st pe_st' b1 c1 c2 c2' c'',
-      pe_bexp pe_st b1 = BFalse ->
+      pe_bexp pe_st b1 = <{ false }> ->
       c2 / pe_st ==> c2' / pe_st' / c'' ->
       <{if b1 then c1 else c2 end}> / pe_st ==> c2' / pe_st' / c''
   | PE_If : forall pe_st pe_st1 pe_st2 b1 c1 c2 c1' c2' c'',
-      pe_bexp pe_st b1 <> BTrue ->
-      pe_bexp pe_st b1 <> BFalse ->
+      pe_bexp pe_st b1 <> <{ true }> ->
+      pe_bexp pe_st b1 <> <{ false }> ->
       c1 / pe_st ==> c1' / pe_st1 / c'' ->
       c2 / pe_st ==> c2' / pe_st2 / c'' ->
       <{if b1 then c1 else c2 end}> / pe_st
@@ -1052,14 +1051,14 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
       pe_bexp pe_st b1 = BFalse ->
       <{while b1 do c1 end}> / pe_st ==> <{skip}> / pe_st / <{skip}>
   | PE_WhileTrue : forall pe_st pe_st' pe_st'' b1 c1 c1' c2' c2'',
-      pe_bexp pe_st b1 = BTrue ->
+      pe_bexp pe_st b1 = <{ true }> ->
       c1 / pe_st ==> c1' / pe_st' / <{skip}> ->
       <{while b1 do c1 end}> / pe_st' ==> c2' / pe_st'' / c2'' ->
       pe_compare pe_st pe_st'' <> [] ->
       <{while b1 do c1 end}> / pe_st ==> <{c1';c2'}> / pe_st'' / c2''
   | PE_While : forall pe_st pe_st' pe_st'' b1 c1 c1' c2' c2'',
-      pe_bexp pe_st b1 <> BFalse ->
-      pe_bexp pe_st b1 <> BTrue ->
+      pe_bexp pe_st b1 <> <{ false }> ->
+      pe_bexp pe_st b1 <> <{ true }> ->
       c1 / pe_st ==> c1' / pe_st' / <{skip}> ->
       <{while b1 do c1 end}> / pe_st' ==> c2' / pe_st'' / c2'' ->
       pe_compare pe_st pe_st'' <> [] ->
@@ -1071,10 +1070,10 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
             / pe_removes pe_st (pe_compare pe_st pe_st'')
             / c2''
   | PE_WhileFixedEnd : forall pe_st b1 c1,
-      pe_bexp pe_st b1 <> BFalse ->
+      pe_bexp pe_st b1 <> <{ false }> ->
       <{while b1 do c1 end}> / pe_st ==> <{skip}> / pe_st / <{while b1 do c1 end}>
   | PE_WhileFixedLoop : forall pe_st pe_st' pe_st'' b1 c1 c1' c2',
-      pe_bexp pe_st b1 = BTrue ->
+      pe_bexp pe_st b1 = <{ true }> ->
       c1 / pe_st ==> c1' / pe_st' / <{skip}> ->
       <{while b1 do c1 end}> / pe_st'
         ==> c2' / pe_st'' / <{while b1 do c1 end}>->
@@ -1086,8 +1085,8 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
          (while b1 do c1 end) / pe_st
          ==> skip / pe_st / (while BTrue do skip end) *)
   | PE_WhileFixed : forall pe_st pe_st' pe_st'' b1 c1 c1' c2',
-      pe_bexp pe_st b1 <> BFalse ->
-      pe_bexp pe_st b1 <> BTrue ->
+      pe_bexp pe_st b1 <> <{ false }> ->
+      pe_bexp pe_st b1 <> <{ true }> ->
       c1 / pe_st ==> c1' / pe_st' / <{skip}> ->
       <{while b1 do c1 end}> / pe_st'
         ==> c2' / pe_st'' / <{while b1 do c1 end}> ->
@@ -1660,4 +1659,4 @@ Proof. intros.
       eapply E_Some; eauto. apply pe_block_correct. apply Hkeval.
 Qed.
 
-(* 2020-09-09 01:25 *)
+(* 2020-09-10 14:10 *)

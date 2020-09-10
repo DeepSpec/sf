@@ -95,10 +95,10 @@ Check cons : forall X : Type, X -> list X -> list X.
 (** (A side note on notations: In .v files, the "forall" quantifier
     is spelled out in letters.  In the generated HTML files and in the
     way various IDEs show .v files, depending on the settings of their
-    display controls, [forall] is usually typeset as the usual
+    display controls, [forall] is usually typeset as the standard
     mathematical "upside down A," though you'll still see the
     spelled-out "forall" in a few places.  This is just a quirk of
-    typesetting: there is no difference in meaning.) *)
+    typesetting -- there is no difference in meaning.) *)
 
 (** Having to supply a type argument for every single use of a
     list constructor would be rather burdensome; we will soon see ways
@@ -1161,4 +1161,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2020-09-09 01:23 *)
+(* 2020-09-10 14:08 *)

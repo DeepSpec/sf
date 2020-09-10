@@ -1415,4 +1415,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2020-09-09 01:34 *)
+(* 2020-09-10 14:19 *)

@@ -365,9 +365,8 @@ Check negb
 
 (** The types we have defined so far are examples of "enumerated
     types": their definitions explicitly enumerate a finite set of
-    elements, each of which is just a bare constructor.  Here is a
-    more interesting type definition, where one of the constructors
-    takes an argument: *)
+    elements, called _constructors_.  Here is a more interesting type
+    definition, where one of the constructors takes an argument: *)
 
 Inductive rgb : Type :=
   | red
@@ -379,45 +378,37 @@ Inductive color : Type :=
   | white
   | primary (p : rgb).
 
-(** Atomic identifiers like [red], [green], [blue], [black], [white],
-    and [primary] (and [true], [false], [monday], etc.) are
+(** Let's look at this in a little more detail.
+
+    Every inductively defined type ([day], [bool], [rgb], [color],
+    etc.) describes a set of _constructor expressions_ built from
     _constructors_.
-
-    From these, we build _constructor expressions_, each of which is
-    either a simple constructor or a constructor applied to one or
-    more arguments (each of which is in turn a constructor
-    expression). *)
-
-(** Let's look at this in a little more detail.  Every inductively
-    defined type ([day], [bool], [rgb], [color], etc.) describes a set
-    of _constructor expressions_ built from _constructors_
 
     - We start with an infinite set of _constructors_. E.g., [red],
       [primary], [true], [false], [monday], etc. are constructors.
 
-    - _Constructor expressions_ are formed by applying constructors to
-      zero or more constructor expressions.  E.g.,
-         [red],
-         [true],
-         [primary],
-         [primary red],
-         [red primary],
-         [red true],
-         [primary (primary primary)],
-         etc.
+    - _Constructor expressions_ are formed by applying a constructor
+      to zero or more other constructors or constructor expressions.
+      E.g.,
+         - [red]
+         - [true]
+         - [primary]
+         - [primary red]
+         - [red primary]
+         - [red true]
+         - [primary (primary primary)]
+         - etc.
 
-    - Each [Inductive] definition carves out a subset of these constructor
-      expressions and gives it a name, like [bool], [rgb], or [color].
-*)
+    - An [Inductive] definition carves out a subset of the whole space
+      of constructor expressions and gives it a name, like [bool],
+      [rgb], or [color]. *)
 
-(** In particular, the definitions of [rgb] and [color] say how
-    constructor expressions belonging to the sets [rgb] and [color]
-    can be built:
+(** In particular, the definitions of [rgb] and [color] say
+    which constructor expressions belong to the sets [rgb] and
+    [color]:
 
-    - the constructor expression [red] belongs to the set [rgb], as do
-      the constructor expressions [green] and [blue];
-    - the constructor expressions [black] and [white] belong to the
-      set [color];
+    - [red], [green], and [blue] belong to the set [rgb];
+    - [black] and [white] belong to the set [color];
     - if [p] is a constructor expression belonging to the set [rgb],
       then [primary p] (pronounced "the constructor [primary] applied
       to the argument [p]") is a constructor expression belonging to
@@ -715,17 +706,17 @@ Compute (plus 3 2).
 (** The steps of simplification that Coq performs can be
     visualized as follows: *)
 
-(*   [plus 3 2]
-i.e. [plus (S (S (S O))) (S (S O))]
- ==> [S (plus (S (S O)) (S (S O)))]
-       by the second clause of the [match]
- ==> [S (S (plus (S O) (S (S O))))]
-       by the second clause of the [match]
- ==> [S (S (S (plus O (S (S O)))))]
-       by the second clause of the [match]
- ==> [S (S (S (S (S O))))]
-       by the first clause of the [match]
-i.e. [5]  *)
+(*      [plus 3 2]
+   i.e. [plus (S (S (S O))) (S (S O))]
+    ==> [S (plus (S (S O)) (S (S O)))]
+          by the second clause of the [match]
+    ==> [S (S (plus (S O) (S (S O))))]
+          by the second clause of the [match]
+    ==> [S (S (S (plus O (S (S O)))))]
+          by the second clause of the [match]
+    ==> [S (S (S (S (S O))))]
+          by the first clause of the [match]
+   i.e. [5]  *)
 
 (** As a notational convenience, if two or more arguments have
     the same type, they can be written together.  In the following
@@ -949,8 +940,7 @@ Proof.
     [intros n], which moves [n] from the quantifier in the goal to a
     _context_ of current assumptions. Note that we could have used
     another identifier instead of [n] in the [intros] clause, (though
-    of course this might be confusing to human readers of the proof):
-*)
+    of course this might be confusing to human readers of the proof): *)
 
 Theorem plus_O_n'' : forall n : nat, 0 + n = n.
 Proof.
@@ -991,8 +981,8 @@ Theorem plus_id_example : forall n m:nat,
   n + n = m + m.
 
 (** Instead of making a universal claim about all numbers [n] and [m],
-    it talks about a more specialized property that only holds when [n
-    = m].  The arrow symbol is pronounced "implies."
+    it talks about a more specialized property that only holds when
+    [n = m].  The arrow symbol is pronounced "implies."
 
     As before, we need to be able to reason by assuming we are given such
     numbers [n] and [m].  We also need to assume the hypothesis
@@ -1524,18 +1514,26 @@ Example test_bin_incr6 :
 (** * Testing Your Solutions *)
 
 (** Each SF chapter comes with a test file containing scripts that
-    check whether you have solved the required exercises. You can use
-    these test files, if you like, to make sure you haven't missed
-    anything.  And if you're using SF as part of a course, your
-    instructors will likely be running these test files to autograde
-    your solutions.
+    check whether you have solved the required exercises. If you're
+    using SF as part of a course, your instructors will likely be
+    running these test files to autograde your solutions. You can also
+    use these test files, if you like, to make sure you haven't missed
+    anything.
+
+    Important: This step is _optional_: if you've completed all the
+    non-optional exercises and Coq accepts your answers, this already
+    shows that you are in good shape.
 
     The test file for this chapter is [BasicsTest.v]. To run it, make
-    sure you have saved [Basics.v] to disk.  Then run [make
-    BasicsTest.vo] in a terminal.  If you accidentally deleted an
-    exercise or changed its name, then [make BasicsTest.vo] will fail
-    with an error that tells you the name of the missing exercise.
-    Otherwise, you will get a lot of useful output:
+    sure you have saved [Basics.v] to disk.  Then do this:
+
+       coqc -Q . LF Basics.v
+       coqc -Q . LF BasicsTest.v
+
+    If you accidentally deleted an exercise or changed its name, then
+    [make BasicsTest.vo] will fail with an error that tells you the
+    name of the missing exercise.  Otherwise, you will get a lot of
+    useful output:
 
     - First will be all the output produced by [Basics.v] itself.  At
       the end of that you will see [COQC BasicsTest.v].
@@ -1554,8 +1552,8 @@ Example test_bin_incr6 :
       relies upon.  "Closed under the global context" is a fancy way
       of saying "none": you have solved the exercise. (Hooray!)  On
       the other hand, a list of axioms means you haven't fully solved
-      the exercise. (But see below regarding "Allowed Axioms.") If
-      the exercise name itself is in the list, that means you haven't
+      the exercise. (But see below regarding "Allowed Axioms.") If the
+      exercise name itself is in the list, that means you haven't
       solved it; probably you have [Admitted] it.
 
     - Third, you will see the maximum number of points in standard and
@@ -1578,4 +1576,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2020-09-09 01:23 *)
+(* 2020-09-10 14:08 *)

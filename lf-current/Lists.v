@@ -63,12 +63,11 @@ Definition swap_pair (p : natprod) : natprod :=
   end.
 
 (** Note that pattern-matching on a pair (with parentheses: [(x, y)])
-    is not to be confused with the "multiple pattern" syntax
-    (with no parentheses: [x, y]) that we have seen previously.
-    The above examples illustrate pattern matching on a pair with
-    elements [x] and [y], whereas, for example, the definition of [minus] in
-    [Basics] performs pattern matching on the values [n]
-    and [m]:
+    is not to be confused with the "multiple pattern" syntax (with no
+    parentheses: [x, y]) that we have seen previously.  The above
+    examples illustrate pattern matching on a pair with elements [x]
+    and [y], whereas, for example, the definition of [minus] in
+    [Basics] performs pattern matching on the values [n] and [m]:
 
        Fixpoint minus (n m : nat) : nat :=
          match n, m with
@@ -105,7 +104,7 @@ Definition swap_pair (p : natprod) : natprod :=
 Theorem surjective_pairing' : forall (n m : nat),
   (n,m) = (fst (n,m), snd (n,m)).
 Proof.
-  reflexivity.  Qed.
+  reflexivity. Qed.
 
 (** But [reflexivity] is not enough if we state the lemma in a more
     natural way: *)
@@ -123,7 +122,7 @@ Abort.
 Theorem surjective_pairing : forall (p : natprod),
   p = (fst p, snd p).
 Proof.
-  intros p.  destruct p as [n m].  simpl.  reflexivity.  Qed.
+  intros p. destruct p as [n m]. simpl. reflexivity. Qed.
 
 (** Notice that, unlike its behavior with [nat]s, where it
     generates two subgoals, [destruct] generates just one subgoal
@@ -247,11 +246,11 @@ Notation "x ++ y" := (app x y)
                      (right associativity, at level 60).
 
 Example test_app1:             [1;2;3] ++ [4;5] = [1;2;3;4;5].
-Proof. reflexivity.  Qed.
+Proof. reflexivity. Qed.
 Example test_app2:             nil ++ [4;5] = [4;5].
-Proof. reflexivity.  Qed.
+Proof. reflexivity. Qed.
 Example test_app3:             [1;2;3] ++ nil = [1;2;3].
-Proof. reflexivity.  Qed.
+Proof. reflexivity. Qed.
 
 (* ----------------------------------------------------------------- *)
 (** *** Head and Tail *)
@@ -262,24 +261,24 @@ Proof. reflexivity.  Qed.
     "tail").  Since the empty list has no first element, we pass
     a default value to be returned in that case.  *)
 
-Definition hd (default:nat) (l:natlist) : nat :=
+Definition hd (default : nat) (l : natlist) : nat :=
   match l with
   | nil => default
   | h :: t => h
   end.
 
-Definition tl (l:natlist) : natlist :=
+Definition tl (l : natlist) : natlist :=
   match l with
   | nil => nil
   | h :: t => t
   end.
 
 Example test_hd1:             hd 0 [1;2;3] = 1.
-Proof. reflexivity.  Qed.
+Proof. reflexivity. Qed.
 Example test_hd2:             hd 0 [] = 0.
-Proof. reflexivity.  Qed.
+Proof. reflexivity. Qed.
 Example test_tl:              tl [1;2;3] = [2;3].
-Proof. reflexivity.  Qed.
+Proof. reflexivity. Qed.
 
 (* ----------------------------------------------------------------- *)
 (** *** Exercises *)
@@ -368,7 +367,7 @@ Definition bag := natlist.
     Complete the following definitions for the functions
     [count], [sum], [add], and [member] for bags. *)
 
-Fixpoint count (v:nat) (s:bag) : nat
+Fixpoint count (v : nat) (s : bag) : nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 (** All these proofs can be done just by [reflexivity]. *)
@@ -396,7 +395,7 @@ Definition sum : bag -> bag -> bag
 Example test_sum1:              count 1 (sum [1;2;3] [1;4;1]) = 3.
  (* FILL IN HERE *) Admitted.
 
-Definition add (v:nat) (s:bag) : bag
+Definition add (v : nat) (s : bag) : bag
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Example test_add1:                count 1 (add 1 [1;4;1]) = 3.
@@ -404,7 +403,7 @@ Example test_add1:                count 1 (add 1 [1;4;1]) = 3.
 Example test_add2:                count 5 (add 1 [1;4;1]) = 0.
  (* FILL IN HERE *) Admitted.
 
-Definition member (v:nat) (s:bag) : bool
+Definition member (v : nat) (s : bag) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Example test_member1:             member 1 [1;4;1] = true.
@@ -424,7 +423,7 @@ Example test_member2:             member 2 [1;4;1] = false.
     to fill in the definition of [remove_one] for a later
     exercise.) *)
 
-Fixpoint remove_one (v:nat) (s:bag) : bag
+Fixpoint remove_one (v : nat) (s : bag) : bag
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Example test_remove_one1:
@@ -455,7 +454,7 @@ Example test_remove_all3:  count 4 (remove_all 5 [2;1;4;5;1;4]) = 2.
 Example test_remove_all4:  count 5 (remove_all 5 [2;1;5;4;5;1;4;5;1;4]) = 0.
  (* FILL IN HERE *) Admitted.
 
-Fixpoint subset (s1:bag) (s2:bag) : bool
+Fixpoint subset (s1 : bag) (s2 : bag) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Example test_subset1:              subset [1;2] [2;1;4;1] = true.
@@ -487,7 +486,7 @@ Definition manual_grade_for_add_inc_count : option (nat*string) := None.
     example, just the simplification performed by [reflexivity] is
     enough for this theorem... *)
 
-Theorem nil_app : forall l:natlist,
+Theorem nil_app : forall l : natlist,
   [] ++ l = l.
 Proof. reflexivity. Qed.
 
@@ -956,7 +955,8 @@ Inductive natoption : Type :=
     return [None] when the list is too short and [Some a] when the
     list has enough members and [a] appears at position [n]. We call
     this new function [nth_error] to indicate that it may result in an
-    error. *)
+    error. As we see here, constructors of inductive definitions can
+    be capitalized. *)
 
 Fixpoint nth_error (l:natlist) (n:nat) : natoption :=
   match l with
@@ -1071,7 +1071,7 @@ Proof.
 
 Module PartialMap.
 Export NatList.
-  
+
 Inductive partial_map : Type :=
   | empty
   | record (i : id) (v : nat) (m : partial_map).
@@ -1139,4 +1139,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2020-09-09 01:23 *)
+(* 2020-09-10 14:08 *)

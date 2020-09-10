@@ -1,15 +1,18 @@
 (** * Induction: Proof by Induction *)
 
-(** Before getting started, we need to import all of our
-    definitions from the previous chapter: *)
+(* ################################################################# *)
+(** * Separate Compilation *)
+
+(** Before getting started on this chapter, we need to import
+    all of our definitions from the previous chapter: *)
 
 From LF Require Export Basics.
 
-(** For the [Require Export] to work, Coq needs to be able to
-    find a compiled version of [Basics.v], called [Basics.vo], in a
-    directory associated with the prefix [LF].  This file is analogous
-    to the [.class] files compiled from [.java] source files and the
-    [.o] files compiled from [.c] files.
+(** For this [Require Export] command to work, Coq needs to be
+    able to find a compiled version of [Basics.v], called [Basics.vo],
+    in a directory associated with the prefix [LF].  This file is
+    analogous to the [.class] files compiled from [.java] source files
+    and the [.o] files compiled from [.c] files.
 
     First create a file named [_CoqProject] containing the following
     line (if you obtained the whole volume "Logical Foundations" as a
@@ -46,7 +49,7 @@ From LF Require Export Basics.
        Note: You should rerun that command whenever you add or remove
        Coq files to the directory.
 
-       Then you can compile [Basics.v] by running [make] with the
+       Now you can compile [Basics.v] by running [make] with the
        corresponding [.vo] file as a target:
 
          [make Basics.vo]
@@ -131,12 +134,12 @@ Proof.
 Abort.
 
 (** We could use [destruct n'] to get one step further, but,
-    since [n] can be arbitrarily large, if we just go on like this
-    we'll never finish. *)
+    since [n] can be arbitrarily large, we'll never get all the there
+    if we just go on like this. *)
 
 (** To prove interesting facts about numbers, lists, and other
-    inductively defined sets, we usually need a more powerful
-    reasoning principle: _induction_.
+    inductively defined sets, we often need a more powerful reasoning
+    principle: _induction_.
 
     Recall (from high school, a discrete math course, etc.) the
     _principle of induction over natural numbers_: If [P(n)] is some
@@ -178,7 +181,7 @@ Proof.
     in this case becomes [S n' = (S n') + 0], which simplifies to
     [S n' = S (n' + 0)], which in turn follows from [IHn']. *)
 
-Theorem minus_diag : forall n,
+Theorem minus_n_n : forall n,
   minus n n = 0.
 Proof.
   (* WORKED IN CLASS *)
@@ -298,8 +301,6 @@ Proof.
     make progress on whatever we were trying to prove in the first
     place. *)
 
-(** Another example of [assert]... *)
-
 (** For example, suppose we want to prove that [(n + m) + (p + q)
     = (m + n) + (p + q)]. The only difference between the two sides of
     the [=] is that the arguments [m] and [n] to the first inner [+]
@@ -321,7 +322,7 @@ Proof.
 Abort.
 
 (** To use [plus_comm] at the point where we need it, we can introduce
-    a local lemma stating that [n + m = m + n] (for the particular [m]
+    a local lemma stating that [n + m = m + n] (for the _particular_ [m]
     and [n] that we are talking about here), prove this lemma using
     [plus_comm], and then use it to do the desired rewrite. *)
 
@@ -419,7 +420,7 @@ Proof.
 
     _Proof_: By induction on [n].
 
-    - First, suppose [n = 0].  We must show
+    - First, suppose [n = 0].  We must show that
 
         0 + (m + p) = (0 + m) + p.
 
@@ -429,7 +430,7 @@ Proof.
 
         n' + (m + p) = (n' + m) + p.
 
-      We must show
+      We must now show that
 
         (S n') + (m + p) = ((S n') + m) + p.
 
@@ -670,4 +671,4 @@ Definition manual_grade_for_binary_inverse_b : option (nat*string) := None.
 Definition manual_grade_for_binary_inverse_c : option (nat*string) := None.
 (** [] *)
 
-(* 2020-09-09 01:23 *)
+(* 2020-09-10 14:08 *)
