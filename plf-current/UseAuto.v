@@ -1922,4 +1922,4 @@ Proof. congruence. Qed.
     some investment, however this investment will pay off very quickly.
 *)
 
-(* 2020-09-10 14:10 *)
+(* 2020-09-18 14:57 *)

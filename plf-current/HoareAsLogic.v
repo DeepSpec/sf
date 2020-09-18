@@ -391,4 +391,4 @@ Proof.
     logic. But it is known that there can be no decision procedure for
     this logic. *)
 
-(* 2020-09-10 14:10 *)
+(* 2020-09-18 14:57 *)
