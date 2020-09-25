@@ -369,14 +369,69 @@ Hypothesis <span class="inlinecode"><span class="id" title="var">H<sub>0</sub></
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">(</span><span class="id" title="definition">readable_share</span> <a class="idref" href="Verif_strlib.html#sh:15"><span class="id" title="variable">sh</span></a><span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PARAMS</span> <span class="id" title="notation">(</span><a class="idref" href="Verif_strlib.html#str:17"><span class="id" title="variable">str</span></a><span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><span class="id" title="definition">cstring</span> <a class="idref" href="Verif_strlib.html#sh:15"><span class="id" title="variable">sh</span></a> <a class="idref" href="Verif_strlib.html#s:16"><span class="id" title="variable">s</span></a> <a class="idref" href="Verif_strlib.html#str:17"><span class="id" title="variable">str</span></a><span class="id" title="notation">)</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tuint</span> <span class="id" title="notation">]</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">size_t</span> <span class="id" title="notation">]</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">()</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><span class="id" title="definition">Vptrofs</span> (<span class="id" title="definition">Ptrofs.repr</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <a class="idref" href="Verif_strlib.html#s:19"><span class="id" title="variable">s</span></a>))<span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><span class="id" title="definition">cstring</span> <a class="idref" href="Verif_strlib.html#sh:18"><span class="id" title="variable">sh</span></a> <a class="idref" href="Verif_strlib.html#s:19"><span class="id" title="variable">s</span></a> <a class="idref" href="Verif_strlib.html#str:20"><span class="id" title="variable">str</span></a><span class="id" title="notation">)</span>.<br/>
 </div>
 
 <div class="doc">
-<span class="inlinecode"><span class="id" title="var">strcpy</span>(<span class="id" title="var">dest</span>,<span class="id" title="var">src</span>)</span> copies the string <span class="inlinecode"><span class="id" title="var">src</span></span> to the array <span class="inlinecode"><span class="id" title="var">dest</span></span>. 
+<a id="lab107"></a><h2 class="section">A digression about size_t</h2>
+ Vptrofs?  Ptrofs.repr?  What's that?
+
+<div class="paragraph"> </div>
+
+  Programmers use <span class="inlinecode"><span class="id" title="var">size_t</span></span> when writing C programs that are 
+  portable to 64-bit and 32-bit installations; this typedef stands for
+  whatever size of unsigned (long) integer is the same size as a pointer.
+  In Verifiable C, size_t is the corresponding C unsigned type: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Print</span> <span class="id" title="definition">size_t</span>.<br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;if&nbsp;Archi.ptr64&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;Tlong&nbsp;Unsigned&nbsp;noattr&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;Tint&nbsp;I<sub>32</sub>&nbsp;Unsigned&nbsp;noattr&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+Then, in the RETURN clause, instead of returning the value
+    <span class="inlinecode"><span class="id" title="var">Vlong</span></span> <span class="inlinecode">(<span class="id" title="var">Int64.repr</span></span> <span class="inlinecode">(<span class="id" title="var">Zlength</span></span> <span class="inlinecode"><span class="id" title="var">s</span>))</span> or  <span class="inlinecode"><span class="id" title="var">Vint</span></span> <span class="inlinecode">(<span class="id" title="var">Int.repr</span></span> <span class="inlinecode">(<span class="id" title="var">Zlength</span></span> <span class="inlinecode"><span class="id" title="var">s</span>))</span>,
+   which would not be portable, we use Vptrofs, which stands
+   for either Vlong or Vint, depending: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Print</span> <span class="id" title="definition">Vptrofs</span>.<br/>
+<span class="comment">(*&nbsp;&nbsp;=&nbsp;&nbsp;fun&nbsp;n&nbsp;:&nbsp;ptrofs&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;Archi.ptr64<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then&nbsp;Vlong&nbsp;(Ptrofs.to_int64&nbsp;n)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;Vint&nbsp;(Ptrofs.to_int&nbsp;n)&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+The unpronounceable "ptrofs" stands for "pointer offset".  
+    It's a CompCert thing.  Don't ask.  
+    The argument of Vptrofs is a <span class="inlinecode"><span class="id" title="var">ptrofs</span></span>, that is <span class="inlinecode"><span class="id" title="var">Ptrofs.int</span></span>.
+    The module Ptrofs is isomorphic to Int64 in a 64-bit configuration,
+    and isomorphic to Int in a 32-bit configuration.  Isomorphic,
+    but not identical; there are lemmas relating them: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Search</span> <span class="id" title="record">Ptrofs.int</span> <span class="id" title="record">Int64.int</span>.<br/>
+<span class="id" title="keyword">Search</span> <span class="id" title="record">Ptrofs.int</span> <span class="id" title="record">Int.int</span>.<br/>
+</div>
+
+<div class="doc">
+ VST-Floyd has proof automation tactics that try to help you
+      by applying these lemmas where appropriate.  For example,
+      in the proofs in this chapter, you don't have to do much
+      special to deal with the Vptrofs.  
+<div class="paragraph"> </div>
+
+<a id="lab108"></a><h3 class="section">End of digression about size_t</h3>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" title="var">strcpy</span>(<span class="id" title="var">dest</span>,<span class="id" title="var">src</span>)</span> copies the string <span class="inlinecode"><span class="id" title="var">src</span></span> to the array <span class="inlinecode"><span class="id" title="var">dest</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a id="strcpy_spec" class="idref" href="#strcpy_spec"><span class="id" title="definition">strcpy_spec</span></a> :=<br/>
@@ -415,11 +470,11 @@ Hypothesis <span class="inlinecode"><span class="id" title="var">H<sub>0</sub></
 </div>
 
 <div class="doc">
-<a id="lab107"></a><h1 class="section">Proof of the <span class="inlinecode"><span class="id" title="var">strlen</span></span> function</h1>
+<a id="lab109"></a><h1 class="section">Proof of the <span class="inlinecode"><span class="id" title="var">strlen</span></span> function</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab108"></a><h4 class="section">Exercise: 2 stars, standard (body_strlen)</h4>
+<a id="lab110"></a><h4 class="section">Exercise: 2 stars, standard (body_strlen)</h4>
 
 </div>
 <div class="code">
@@ -585,11 +640,11 @@ Now it's time to prove all the subgoals of <span class="inlinecode"><span class=
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab109"></a><h1 class="section">Proof of the <span class="inlinecode"><span class="id" title="var">strcpy</span></span> function</h1>
+<a id="lab111"></a><h1 class="section">Proof of the <span class="inlinecode"><span class="id" title="var">strcpy</span></span> function</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab110"></a><h4 class="section">Exercise: 2 stars, standard (strcpy_then_clause)</h4>
+<a id="lab112"></a><h4 class="section">Exercise: 2 stars, standard (strcpy_then_clause)</h4>
  The next lemma, or some variation of it, will be useful in the proof of
  the <span class="inlinecode"><span class="id" title="var">strcpy</span></span> function (in the <i>then</i> clause of the <i>if</i> statement). 
 </div>
@@ -623,7 +678,7 @@ Now it's time to prove all the subgoals of <span class="inlinecode"><span class=
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab111"></a><h4 class="section">Exercise: 2 stars, standard (strcpy_else_clause)</h4>
+<a id="lab113"></a><h4 class="section">Exercise: 2 stars, standard (strcpy_else_clause)</h4>
 
 </div>
 <div class="code">
@@ -657,7 +712,7 @@ list_repeat_app', app_Znth1, map_app, app_ass, sublist_len_1.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab112"></a><h2 class="section">data_at is not injective!</h2>
+<a id="lab114"></a><h2 class="section">data_at is not injective!</h2>
  The <span class="inlinecode"><span class="id" title="var">Vundef</span></span> value means <i>uninitialized</i> or <i>undefined</i> or
    <i>defined but don't care</i>.  Consider this lemma: 
 </div>
@@ -798,7 +853,7 @@ The moral of the story is:  When proving
 </span>   but if a is strictly more defined than b, then derives_refl' is not appropriate. 
 <div class="paragraph"> </div>
 
-<a id="lab113"></a><h4 class="section">Exercise: 3 stars, standard (body_strcpy)</h4>
+<a id="lab115"></a><h4 class="section">Exercise: 3 stars, standard (body_strcpy)</h4>
 
 </div>
 <div class="code">
@@ -817,7 +872,7 @@ Because this function subscripts the strings, it does <i>not</i>
 <span class="id" title="var">Intros</span>.<br/>
 <span class="id" title="var">forward_loop</span> (<span class="id" title="notation">EX</span> <a id="i:73" class="idref" href="#i:73"><span class="id" title="binder">i</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span><br/>
 &nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">(</span>0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#bdb3edde5f841a282ce8fc1b00e3d211"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_strlib.html#i:72"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#bdb3edde5f841a282ce8fc1b00e3d211"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <span class="id" title="var">s</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> 1<span class="id" title="notation">)</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">LOCAL</span> <span class="id" title="notation">(</span><span class="id" title="constructor">temp</span> <span class="id" title="definition">_i</span> (<span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_strlib.html#i:72"><span class="id" title="variable">i</span></a>))<span class="id" title="notation">;</span> <span class="id" title="constructor">temp</span> <span class="id" title="definition">_dest</span> <span class="id" title="var">dest</span><span class="id" title="notation">;</span> <span class="id" title="constructor">temp</span> <span class="id" title="definition">_src</span> <span class="id" title="var">src</span><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">LOCAL</span> <span class="id" title="notation">(</span><span class="id" title="constructor">temp</span> <span class="id" title="definition">_i</span> (<span class="id" title="definition">Vptrofs</span> (<span class="id" title="definition">Ptrofs.repr</span> <a class="idref" href="Verif_strlib.html#i:72"><span class="id" title="variable">i</span></a>))<span class="id" title="notation">;</span> <span class="id" title="constructor">temp</span> <span class="id" title="definition">_dest</span> <span class="id" title="var">dest</span><span class="id" title="notation">;</span> <span class="id" title="constructor">temp</span> <span class="id" title="definition">_src</span> <span class="id" title="var">src</span><span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <span class="id" title="var">wsh</span> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tschar</span> <span class="id" title="var">n</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Vbyte</span> (<span class="id" title="definition">sublist</span> 0 <a class="idref" href="Verif_strlib.html#i:72"><span class="id" title="variable">i</span></a> <span class="id" title="var">s</span>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <span class="id" title="definition">list_repeat</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.to_nat"><span class="id" title="definition">Z.to_nat</span></a> (<span class="id" title="var">n</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'-'_x"><span class="id" title="notation">-</span></a> <a class="idref" href="Verif_strlib.html#i:72"><span class="id" title="variable">i</span></a>)) <span class="id" title="constructor">Vundef</span>) <span class="id" title="var">dest</span><span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">data_at</span> <span class="id" title="var">rsh</span> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tschar</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <span class="id" title="var">s</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> 1)) (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Vbyte</span> (<span class="id" title="var">s</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">Byte.zero</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>)) <span class="id" title="var">src</span><span class="id" title="notation">)</span>).<br/>
@@ -840,7 +895,7 @@ In the <span class="inlinecode"><span class="id" title="keyword">then</span></sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab114"></a><h4 class="section">Exercise: 3 stars, standard (example_call_strcpy)</h4>
+<a id="lab116"></a><h4 class="section">Exercise: 3 stars, standard (example_call_strcpy)</h4>
  Prove the correctness of a function that calls <span class="inlinecode"><span class="id" title="var">strcpy</span></span>.
 <pre>
   int example_call_strcpy(void) {
@@ -891,7 +946,7 @@ This proof is fairly straightforward.  First, figure out what WITH
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab115"></a><h4 class="section">Exercise: 4 stars, standard, optional (body_strcmp)</h4>
+<a id="lab117"></a><h4 class="section">Exercise: 4 stars, standard, optional (body_strcmp)</h4>
 
 </div>
 <div class="code">
@@ -903,7 +958,7 @@ This proof is fairly straightforward.  First, figure out what WITH
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-09-18&nbsp;15:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-09-25&nbsp;13:37&nbsp;*)</span><br/>
 </div>
 </div>
 

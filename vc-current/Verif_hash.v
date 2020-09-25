@@ -662,18 +662,25 @@ void incr_list (struct cell **r0, char *s) {
 
   data_at Ews tcell (x,y,q) p
 
-  into three separate conjuncts:
+  into four separate conjuncts:
 
   field_at Ews tcell [StructField _key] x p *
   field_at Ews tcell [StructField _count] y p *
+  spacer Ews (nested_field_offset tcell [StructField _count] + sizeof tuint)
+                       (nested_field_offset tcell [StructField _next]) p *
   field_at Ews tcell [StructField _next] q p
 
-  and then we must rewrite the third conjunct into
+  and then we must rewrite the last conjunct into
 
   data_at Ews (tptr tcell) q (field_address tcell [StructField _next] p)
 
   where the [(field_address _ _ _)] is an "address arithmetic" expression
   that describes the offset, in bytes, from [p] to [&(p->next)].
+
+  The "spacer" accounts for the padding between fields.  This particular
+  one, on a 32-bit-integer, 32-bit pointer configuration, simplifies
+   down to [emp].  But on a 32-bit-integer, 64-bit pointer configuration,
+   the spacer amounts to 4 bytes of Vundef-padding.
 
   The [listboxrep_traverse] lemma illustrates the situation at
   the end of the loop body.  Look at the left-hand side of the [|--]
@@ -698,6 +705,8 @@ Lemma listboxrep_traverse:
      malloc_token Ews (tarray tschar (Zlength key + 1)) kp *
      field_at Ews tcell [StructField _key] kp p *
      field_at Ews tcell [StructField _count] (Vint (Int.repr count)) p *
+     spacer Ews (nested_field_offset tcell [StructField _count] + sizeof tuint)
+                       (nested_field_offset tcell [StructField _next]) p *
      malloc_token Ews tcell p *
      data_at Ews (tptr tcell) p r 
    |-- 
@@ -706,6 +715,7 @@ Lemma listboxrep_traverse:
        -* listboxrep ((key, count) :: dl) r.
 Proof.
   intros.
+  simpl spacer.
  apply allp_right; intro dl.
  apply -> wand_sepcon_adjoint.
    (** Sometime during the proof below, you will have
@@ -733,6 +743,29 @@ Eval simpl in (nested_field_type tcell [StructField _next]).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
+(**  In a 32-bit configuration, where the spacer is equivalent to emp,
+    this specialized version of listboxrep_traverse is useful. *)
+Lemma listboxrep_traverse32:
+  forall p kp key count r, 
+     Archi.ptr64 = false ->
+     cstring Ews key kp * 
+     malloc_token Ews (tarray tschar (Zlength key + 1)) kp *
+     field_at Ews tcell [StructField _key] kp p *
+     field_at Ews tcell [StructField _count] (Vint (Int.repr count)) p *
+     malloc_token Ews tcell p *
+     data_at Ews (tptr tcell) p r 
+   |-- 
+     ALL dl: list (list byte * Z), 
+       listboxrep dl (field_address tcell [StructField _next] p)
+       -* listboxrep ((key, count) :: dl) r.
+Proof.
+intros.
+inv H;  (* Solve the goal if we are in 64-bit mode *)
+(* otherwise we are in 32-bit mode *)
+eapply derives_trans; [ | apply (listboxrep_traverse p kp key count r)];
+unfold spacer; simpl; cancel.
+Qed.
+
 (** **** Exercise: 4 stars, standard (body_incr_list)  *)
 Lemma body_incr_list: semax_body Vprog Gprog f_incr_list incr_list_spec.
 Proof.
@@ -746,7 +779,8 @@ Proof.
 
   The key lemmas to use are, [wand_refl_cancel_right],
    [wand_frame_elim'], and [wand_frame_ver].  When using
-   [wand_frame_ver], you will find [listboxrep_traverse] to be useful. *)
+   [wand_frame_ver], you will find [listboxrep_traverse] 
+  or [listboxrep_traverse32] to be useful. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -764,11 +798,14 @@ Lemma example_split_struct:
       data_at Ews tcell (x,(y,z)) p
    =   (field_at Ews tcell [StructField _key] x p
      * field_at Ews tcell [StructField _count] y p
-     * field_at Ews tcell [StructField _next] z p)%logic.
+     * spacer Ews (nested_field_offset tcell [StructField _count] + sizeof tuint)
+                       (nested_field_offset tcell [StructField _next]) p
+      * field_at Ews tcell [StructField _next] z p)%logic.
 Proof.
 intros.
 unfold_data_at (data_at _ _ _ p).
-rewrite sepcon_assoc.
+unfold spacer; simpl; rewrite ?sepcon_emp. (* This line needed in 32-bit mode, harmless in 64-bit mode *)
+rewrite !sepcon_assoc.
 reflexivity.
 Qed.
 
@@ -798,7 +835,7 @@ Lemma example_field_at_data_at':
  forall p (z: val),
    field_at Ews tcell [StructField _next] z p |--
    data_at Ews (tptr tcell) z 
-    (offset_val (2 * sizeof tint) p).
+    (offset_val (2 * sizeof size_t) p).
 Proof.
 intros.
  rewrite field_at_data_at.
@@ -814,7 +851,7 @@ Qed.
 Lemma example_field_at_data_at'':
  forall p (z: val),
    data_at Ews (tptr tcell) z 
-    (offset_val (2 * sizeof tint) p)
+    (offset_val (2 * sizeof size_t) p)
  |-- field_at Ews tcell [StructField _next] z p.
 Proof.
  intros.
@@ -832,7 +869,7 @@ Lemma example_field_at_data_at''':
  forall p (z: val),
   field_compatible tcell [StructField _next] p ->
    data_at Ews (tptr tcell) z 
-    (offset_val (2 * sizeof tint) p)
+    (offset_val (2 * sizeof size_t) p)
  |-- field_at Ews tcell [StructField _next] z p.
 Proof.
  intros.
@@ -1095,4 +1132,4 @@ erewrite (wand_slice_array h (h+1) N _ (tptr tcell))
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-09-18 15:05 *)
+(* 2020-09-25 13:37 *)

@@ -224,10 +224,50 @@ Definition strlen_spec :=
     PROP (readable_share sh)
     PARAMS (str)
     SEP (cstring sh s str)
-  POST [ tuint ]
+  POST [ size_t ]
     PROP ()
     RETURN (Vptrofs (Ptrofs.repr (Zlength s)))
     SEP (cstring sh s str).
+
+(* ================================================================= *)
+(** ** A digression about size_t
+
+    Vptrofs?  Ptrofs.repr?  What's that?
+
+  Programmers use [size_t] when writing C programs that are 
+  portable to 64-bit and 32-bit installations; this typedef stands for
+  whatever size of unsigned (long) integer is the same size as a pointer.
+  In Verifiable C, size_t is the corresponding C unsigned type: *)
+Print size_t.
+(*   = if Archi.ptr64 
+         then Tlong Unsigned noattr 
+         else Tint I32 Unsigned noattr
+
+    Then, in the RETURN clause, instead of returning the value
+    [Vlong (Int64.repr (Zlength s))] or  [Vint (Int.repr (Zlength s))],
+   which would not be portable, we use Vptrofs, which stands
+   for either Vlong or Vint, depending: *)
+Print Vptrofs.
+(*  =  fun n : ptrofs =>
+          if Archi.ptr64
+          then Vlong (Ptrofs.to_int64 n)
+          else Vint (Ptrofs.to_int n)
+
+    The unpronounceable "ptrofs" stands for "pointer offset".  
+    It's a CompCert thing.  Don't ask.  
+    The argument of Vptrofs is a [ptrofs], that is [Ptrofs.int].
+    The module Ptrofs is isomorphic to Int64 in a 64-bit configuration,
+    and isomorphic to Int in a 32-bit configuration.  Isomorphic,
+    but not identical; there are lemmas relating them: *)
+Search Ptrofs.int Int64.int.
+Search Ptrofs.int Int.int.
+(**  VST-Floyd has proof automation tactics that try to help you
+      by applying these lemmas where appropriate.  For example,
+      in the proofs in this chapter, you don't have to do much
+      special to deal with the Vptrofs.  *)
+
+(* ----------------------------------------------------------------- *)
+(** *** End of digression about size_t *)
 
 (** [strcpy(dest,src)] copies the string [src] to the array [dest]. *)
 Definition strcpy_spec :=
@@ -529,7 +569,7 @@ forward.
 Intros.
 forward_loop (EX i : Z,
   PROP (0 <= i < Zlength s + 1)
-  LOCAL (temp _i (Vint (Int.repr i)); temp _dest dest; temp _src src)
+  LOCAL (temp _i (Vptrofs (Ptrofs.repr i)); temp _dest dest; temp _src src)
   SEP (data_at wsh (tarray tschar n)
         (map Vbyte (sublist 0 i s) ++ list_repeat (Z.to_nat (n - i)) Vundef) dest;
        data_at rsh (tarray tschar (Zlength s + 1)) (map Vbyte (s ++ [Byte.zero])) src)).
@@ -588,4 +628,4 @@ Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-09-18 15:05 *)
+(* 2020-09-25 13:37 *)

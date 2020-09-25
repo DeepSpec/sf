@@ -8,7 +8,7 @@ extern int strcmp(const char *str1, const char *str2);
 
 unsigned int hash (char *s) {
   unsigned int n=0;
-  unsigned int i=0;
+  size_t i=0;
   int c=s[i];
   while (c) {
     n = n*65599u+(unsigned)c;
@@ -31,7 +31,7 @@ struct hashtable {
 };
 
 char *copy_string (char *s) {
-  int i,n = strlen(s)+1;
+  size_t n = strlen(s)+1;
   char *p = malloc(n);
   if (!p) exit(1);
   strcpy(p,s);
