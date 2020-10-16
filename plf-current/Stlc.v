@@ -427,7 +427,7 @@ Check <{[x:=true] x}>.
     to define substitution as a _function_.  Suppose, instead, we
     wanted to define substitution as an inductive _relation_ [substi].
     We've begun the definition by providing the [Inductive] header and
-    one of the construectors; your job is to fill in the rest of the
+    one of the constructors; your job is to fill in the rest of the
     constructors and prove that the relation you've defined coincides
     with the function given above. *)
 
@@ -844,4 +844,4 @@ Proof.
 
 End STLC.
 
-(* 2020-09-25 13:25 *)
+(* 2020-10-16 14:55 *)
