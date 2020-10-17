@@ -4,4 +4,5 @@ RUN opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
  && opam update \
  && opam install \
          coq-quickchick \
+         coq-compcert.3.7+8.12~coq_platform \
          coq-vst
