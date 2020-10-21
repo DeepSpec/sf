@@ -193,7 +193,7 @@ Proof.
     perform case analysis on [n] using [destruct] or [induction],
     generating separate subgoals for the case where [n = O] and the
     case where [n = S n'] for some [n'].  But for some proofs we may
-    instead want to analyze the evidence that [ev n] _directly_. As
+    instead want to analyze the evidence of [ev n] _directly_. As
     a tool, we can prove our characterization of evidence for
     [ev n], using [destruct]. *)
 
@@ -2235,4 +2235,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-10-21 15:30 *)
+(* 2020-10-21 15:50 *)
