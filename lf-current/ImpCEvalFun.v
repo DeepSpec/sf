@@ -186,15 +186,17 @@ Definition test_ceval (st:state) (c:com) :=
   | Some st => Some (st X, st Y, st Z)
   end.
 
-(* Compute
-     (test_ceval empty_st
-         (X ::= 2;;
-          TEST (X <= 1)
-            THEN Y ::= 3
-            ELSE Z ::= 4
-          FI)).
-   ====>
-      Some (2, 0, 4)   *)
+Example example_test_ceval :
+     test_ceval empty_st
+
+     <{ X := 2;
+        if (X <= 1)
+        then Y := 3
+        else Z := 4
+        end }>
+
+     = Some (2, 0, 4).
+Proof. reflexivity. Qed.
 
 (** **** Exercise: 2 stars, standard, especially useful (pup_to_n) 
 
@@ -388,4 +390,4 @@ Proof.
   rewrite E1 in E2. inversion E2. reflexivity.
   lia. lia.  Qed.
 
-(* 2020-10-16 14:53 *)
+(* 2020-10-21 15:30 *)
