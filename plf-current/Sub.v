@@ -1544,4 +1544,4 @@ Definition manual_grade_for_products : option (nat*string) := None.
 (** [] *)
 
 
-(* 2020-10-21 16:13 *)
+(* 2020-10-21 16:34 *)

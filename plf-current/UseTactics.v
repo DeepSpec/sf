@@ -451,13 +451,8 @@ Abort.
     prove [y] to be equal to [z]. So, we could call the tactic
     [assert_rewrite (y = z)] and change the goal to [P x z], but
     this would require copy-pasting the values of [y] and [z].
-    With the tactic [applys_eq], we can call [applys_eq H 1], which
-    proves the goal and leaves only the subgoal [y = z]. The value [1]
-    given as argument to [applys_eq] indicates that we want an equality
-    to be introduced for the first argument of [P x y] counting from
-    the right. The three following examples illustrate the behavior
-    of a call to [applys_eq H 1], a call to [applys_eq H 2], and a
-    call to [applys_eq H 1 2]. *)
+    With the tactic [applys_eq], we can call [applys_eq H], which
+    proves the goal and leaves only the subgoal [y = z]. *)
 
 Axiom big_expression_using : nat->nat. (* Used in the example *)
 
@@ -473,31 +468,20 @@ Proof.
   rewrite Eq. apply H.
 
   (* The new proof: *)
-  applys_eq H 1.
+  applys_eq H.
     admit. (* Assume we can prove this equality somehow. *)
 Abort.
 
-(** If the mismatch was on the first argument of [P] instead of
-    the second, we would have written [applys_eq H 2]. Recall
-    that the occurences are counted from the right. *)
-
-Lemma demo_applys_eq_2 : forall (P:nat->nat->Prop) x y z,
-  P (big_expression_using z) x ->
-  P (big_expression_using y) x.
-Proof.
-  introv H. applys_eq H 2.
-Abort.
-
 (** When we have a mismatch on two arguments, we want to produce
-    two equalities. To achieve this, we may call [applys_eq H 1 2].
+    two equalities. To achieve this, we may call [applys_eq H].
     More generally, the tactic [applys_eq] expects a lemma and a
     sequence of natural numbers as arguments. *)
 
-Lemma demo_applys_eq_3 : forall (P:nat->nat->Prop) x1 x2 y1 y2,
+Lemma demo_applys_eq_2 : forall (P:nat->nat->Prop) x1 x2 y1 y2,
   P (big_expression_using x2) (big_expression_using y2) ->
   P (big_expression_using x1) (big_expression_using y1).
 Proof.
-  introv H. applys_eq H 1 2.
+  introv H. applys_eq H.
   (* produces two subgoals:
      [big_expression_using x1 = big_expression_using x2]
      [big_expression_using y1 = big_expression_using y2] *)
@@ -955,4 +939,4 @@ End ExamplesLets.
 
 *)
 
-(* 2020-10-21 16:13 *)
+(* 2020-10-21 16:34 *)

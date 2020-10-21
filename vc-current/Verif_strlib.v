@@ -628,4 +628,4 @@ Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-10-21 16:22 *)
+(* 2020-10-21 16:42 *)

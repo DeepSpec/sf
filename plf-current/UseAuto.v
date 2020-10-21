@@ -1118,21 +1118,20 @@ Proof.
       apply extends_app.
     (* For the second subgoal, we use the tactic [applys_eq] to avoid
        a manual [replace] before [T_loc] can be applied. *)
-      applys_eq T_Loc 1.
+      applys_eq T_Loc.
+    (* The next proof case is hard to polish because it relies on the
+       lemma [app_nth2] whose statement is not automation-friendly.
+       We'll come back to this proof case further on. *)
+        unfold store_Tlookup. rewrite <- H. rewrite* app_nth2.
+    (* Last, we replace [apply ..; assumption] with [apply* ..] *)
+        rewrite minus_diag. simpl. reflexivity.
     (* To justify the inequality, there is no need to call [rewrite <- H],
        because the tactic [lia] is able to exploit [H] on its own.
        So, only the rewriting of [app_length] and the call to the
        tactic [lia] remain, with a call to [simpl] to unfold the
        definition of [app]. *)
         rewrite app_length. simpl. lia.
-    (* The next proof case is hard to polish because it relies on the
-       lemma [app_nth1] whose statement is not automation-friendly.
-       We'll come back to this proof case further on. *)
-      unfold store_Tlookup. rewrite <- H. rewrite* app_nth2.
-    (* Last, we replace [apply ..; assumption] with [apply* ..] *)
-    rewrite minus_diag. simpl. reflexivity.
-    apply* store_well_typed_app.
-
+      apply* store_well_typed_app.
   - forwards*: IHHt.
 
   - (* T_Deref *)
@@ -1149,7 +1148,7 @@ Proof.
   lets [_ Hsty]: HST.
   (* new: then we use the tactic [applys_eq] to avoid the need to
      perform a manual [replace] before applying [Hsty]. *)
-  applys_eq* Hsty 1.
+  applys_eq* Hsty.
   (* new: we then can call [inverts] in place of [inversion;subst] *)
   inverts* Ht.
 
@@ -1225,13 +1224,13 @@ Proof.
   - forwards*: IHHt1.
   - exists (ST ++ T1::nil). inverts keep HST. splits.
     apply extends_app.
-    applys_eq T_Loc 1.
-      rewrite app_length. simpl. lia.
+    applys_eq T_Loc.
       unfold store_Tlookup. rewrite* nth_eq_last'.
+      rewrite app_length. simpl. lia.
     apply* store_well_typed_app.
   - forwards*: IHHt.
   - exists ST. splits*. lets [_ Hsty]: HST.
-    applys_eq* Hsty 1. inverts* Ht.
+    applys_eq* Hsty. inverts* Ht.
   - forwards*: IHHt.
   - exists ST. splits*. applys* assign_pres_store_typing. inverts* Ht1.
   - forwards*: IHHt1.
@@ -1922,4 +1921,4 @@ Proof. congruence. Qed.
     some investment, however this investment will pay off very quickly.
 *)
 
-(* 2020-10-21 16:13 *)
+(* 2020-10-21 16:34 *)
