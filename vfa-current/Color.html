@@ -362,7 +362,7 @@ And therefore, <span class="inlinecode"><span class="id" title="var">eqlistA</sp
 <span class="id" title="keyword">Lemma</span> <a id="eqlistA_Eeq_eq" class="idref" href="#eqlistA_Eeq_eq"><span class="id" title="lemma">eqlistA_Eeq_eq</span></a>: <span class="id" title="keyword">∀</span> <a id="al:7" class="idref" href="#al:7"><span class="id" title="binder">al</span></a> <a id="bl:8" class="idref" href="#bl:8"><span class="id" title="binder">bl</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.SetoidList.html#eqlistA"><span class="id" title="inductive">eqlistA</span></a> <a class="idref" href="Color.html#eq"><span class="id" title="definition">E.eq</span></a> <a class="idref" href="Color.html#al:7"><span class="id" title="variable">al</span></a> <a class="idref" href="Color.html#bl:8"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Color.html#al:7"><span class="id" title="variable">al</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><a class="idref" href="Color.html#bl:8"><span class="id" title="variable">bl</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="id" title="tactic">split</span>; <span class="id" title="tactic">intro</span>.<br/>
-× <span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Color.html#eq"><span class="id" title="definition">E.eq</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+× <span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Color.html#eq"><span class="id" title="definition">E.eq</span></a> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
 × <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">bl</span>. <span class="id" title="tactic">constructor</span>. <span class="id" title="tactic">constructor</span>.<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Color.html#eq"><span class="id" title="definition">E.eq</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
@@ -605,7 +605,7 @@ Hint:  To prove this theorem, I used these lemmas.
 <span class="id" title="tactic">apply</span> <a class="idref" href="Color.html#ltk_strorder"><span class="id" title="instance">M.ltk_strorder</span></a>.<br/>
 <span class="id" title="tactic">clear</span>.<br/>
 <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">intro</span>.<br/>
-<span class="id" title="tactic">unfold</span> <a class="idref" href="Color.html#lt_key"><span class="id" title="definition">M.lt_key</span></a>, <a class="idref" href="Color.html#eq_key_elt"><span class="id" title="definition">M.eq_key_elt</span></a> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="tactic">unfold</span> <a class="idref" href="Color.html#lt_key"><span class="id" title="definition">M.lt_key</span></a>, <a class="idref" href="Color.html#eq_key_elt"><span class="id" title="definition">M.eq_key_elt</span></a> <span class="id" title="keyword">in</span> ×.<br/>
 <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>, <span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span>,<span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="Proper_eq_key_elt" class="idref" href="#Proper_eq_key_elt"><span class="id" title="lemma">Proper_eq_key_elt</span></a>: <br/>
@@ -885,7 +885,7 @@ That is our graph coloring:  Node <span class="inlinecode">4</span> is colored w
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-10-21&nbsp;15:56&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-10-21&nbsp;16:16&nbsp;*)</span><br/>
 </div>
 </div>
 

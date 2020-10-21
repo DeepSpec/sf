@@ -503,4 +503,4 @@ simpl.
    it does.   Either of these two methods is a reasonable way of programming
    with proof.  *)
 
-(* 2020-10-21 15:56 *)
+(* 2020-10-21 16:16 *)

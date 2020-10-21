@@ -390,7 +390,7 @@ A <span class="inlinecode"><span class="id" title="var">listbox</span></span> is
 <span class="id" title="keyword">Lemma</span> <a id="body_hash" class="idref" href="#body_hash"><span class="id" title="lemma">body_hash</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="Verif_hash.html#Vprog"><span class="id" title="definition">Vprog</span></a> <a class="idref" href="Verif_hash.html#Gprog"><span class="id" title="definition">Gprog</span></a> <span class="id" title="definition">f_hash</span> <a class="idref" href="Verif_hash.html#hash_spec"><span class="id" title="definition">hash_spec</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="id" title="var">start_function</span>.<br/>
-<span class="id" title="tactic">unfold</span> <span class="id" title="definition">cstring</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="tactic">unfold</span> <span class="id" title="definition">cstring</span> <span class="id" title="keyword">in</span> ×.<br/>
 </div>
 
 <div class="doc">
@@ -666,7 +666,7 @@ Hint: use <span class="inlinecode"><span class="id" title="var">sep_apply</span>
 <span class="id" title="var">start_function</span>.<br/>
 <span class="id" title="tactic">rename</span> <span class="id" title="var">p</span> <span class="id" title="var">into</span> <span class="id" title="var">table</span>.<br/>
 <span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> (<a class="idref" href="Hashfun.html#hashfun_inrange"><span class="id" title="axiom">hashfun_inrange</span></a> <span class="id" title="var">sigma</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="tactic">unfold</span> <span class="id" title="definition">abbreviate</span> <span class="id" title="tactic">in</span> <span class="id" title="var">MORE_COMMANDS</span>; <span class="id" title="tactic">subst</span> <span class="id" title="var">MORE_COMMANDS</span>.<br/>
+<span class="id" title="tactic">unfold</span> <span class="id" title="definition">abbreviate</span> <span class="id" title="keyword">in</span> <span class="id" title="var">MORE_COMMANDS</span>; <span class="id" title="tactic">subst</span> <span class="id" title="var">MORE_COMMANDS</span>.<br/>
 </div>
 
 <div class="doc">
@@ -749,7 +749,7 @@ Where did this proof goal come from?  <span class="inlinecode"><span class="id" 
 <div class="code">
 &nbsp;{  <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">admit</span>.<br/>
 &nbsp;}<br/>
-<span class="id" title="tactic">set</span> (<span class="id" title="var">h</span> := <a class="idref" href="Hashfun.html#hashfun"><span class="id" title="definition">hashfun</span></a> <span class="id" title="var">sigma</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'mod'_x"><span class="id" title="notation">mod</span></a> <a class="idref" href="Hashfun.html#N"><span class="id" title="definition">N</span></a>) <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="tactic">set</span> (<span class="id" title="var">h</span> := <a class="idref" href="Hashfun.html#hashfun"><span class="id" title="definition">hashfun</span></a> <span class="id" title="var">sigma</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'mod'_x"><span class="id" title="notation">mod</span></a> <a class="idref" href="Hashfun.html#N"><span class="id" title="definition">N</span></a>) <span class="id" title="keyword">in</span> ×.<br/>
 </div>
 
 <div class="doc">
@@ -1057,7 +1057,7 @@ Sometime during the proof below, you will have
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field_at&nbsp;Ews&nbsp;tcell&nbsp;<span class="inlinecode"><span class="id" title="var">StructField</span></span> <span class="inlinecode"><span class="id" title="var">_next</span></span>&nbsp;v&nbsp;p&nbsp;=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data_at&nbsp;Ews&nbsp;(nested_field_type&nbsp;tcell&nbsp;<span class="inlinecode"><span class="id" title="var">StructField</span></span> <span class="inlinecode"><span class="id" title="var">_next</span></span>)&nbsp;v<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(field_address&nbsp;tcell&nbsp;<span class="inlinecode"><span class="id" title="var">StructField</span></span> <span class="inlinecode"><span class="id" title="var">_next</span></span>&nbsp;p).&nbsp;*)</span><br/>
-<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> (<span class="id" title="definition">nested_field_type</span> <a class="idref" href="Verif_hash.html#tcell"><span class="id" title="definition">tcell</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><span class="id" title="constructor">StructField</span> <span class="id" title="definition">_next</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> (<span class="id" title="definition">nested_field_type</span> <a class="idref" href="Verif_hash.html#tcell"><span class="id" title="definition">tcell</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><span class="id" title="constructor">StructField</span> <span class="id" title="definition">_next</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>).<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;=&nbsp;tptr&nbsp;(Tstruct&nbsp;_cell&nbsp;noattr)&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -1611,9 +1611,9 @@ The next two lines would not be part of an ordinary Verifiable C
 <br/>
 <span class="id" title="var">Intros</span> <span class="id" title="var">cts</span>.<br/>
 <span class="id" title="tactic">subst</span> <span class="id" title="var">contents</span>.<br/>
-<span class="id" title="tactic">unfold</span> <a class="idref" href="Hashfun.html#hashtable_get"><span class="id" title="definition">hashtable_get</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hmax</span>.<br/>
-<span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">Zlength_map</span>, <span class="id" title="var">H<sub>1</sub></span> <span class="id" title="tactic">in</span> <span class="id" title="var">Hmax</span>.<br/>
-<span class="id" title="tactic">set</span> (<span class="id" title="var">h</span> := <a class="idref" href="Hashfun.html#hashfun"><span class="id" title="definition">hashfun</span></a> <span class="id" title="var">sigma</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'mod'_x"><span class="id" title="notation">mod</span></a> <a class="idref" href="Hashfun.html#N"><span class="id" title="definition">N</span></a>) <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="tactic">unfold</span> <a class="idref" href="Hashfun.html#hashtable_get"><span class="id" title="definition">hashtable_get</span></a> <span class="id" title="keyword">in</span> <span class="id" title="var">Hmax</span>.<br/>
+<span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">Zlength_map</span>, <span class="id" title="var">H<sub>1</sub></span> <span class="id" title="keyword">in</span> <span class="id" title="var">Hmax</span>.<br/>
+<span class="id" title="tactic">set</span> (<span class="id" title="var">h</span> := <a class="idref" href="Hashfun.html#hashfun"><span class="id" title="definition">hashfun</span></a> <span class="id" title="var">sigma</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'mod'_x"><span class="id" title="notation">mod</span></a> <a class="idref" href="Hashfun.html#N"><span class="id" title="definition">N</span></a>) <span class="id" title="keyword">in</span> ×.<br/>
 <span class="id" title="var">erewrite</span> (<span class="id" title="lemma">wand_slice_array</span> <span class="id" title="var">h</span> (<span class="id" title="var">h</span><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1) <a class="idref" href="Hashfun.html#N"><span class="id" title="definition">N</span></a> <span class="id" title="var">_</span> (<span class="id" title="definition">tptr</span> <a class="idref" href="Verif_hash.html#tcell"><span class="id" title="definition">tcell</span></a>))<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">first</span> [<span class="id" title="var">rep_lia</span> | <span class="id" title="var">list_solve</span> ].<br/>
 </div>
@@ -1635,7 +1635,7 @@ For the remainder of the proof, here are some useful lemmas:
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-10-21&nbsp;16:01&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2020-10-21&nbsp;16:22&nbsp;*)</span><br/>
 </div>
 </div>
 

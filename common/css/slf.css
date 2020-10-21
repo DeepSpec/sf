@@ -2,12 +2,11 @@
 
 /*   Background   */
 body {  background-image: url('../media/image/slf-bg.jpg');   }
-/* #header { background-color: rgba(199, 149, 88, 0.33); } */
-#header { background-color: rgba(75, 95, 77, 0.53);
-/*   or maybe rgba(95, 70, 20, 0.53); */
+
+#header { background-color: rgba(75, 95, 77, 0.53); }
 
 /*   This volume's color   */
-.section, ul#menu li.section_name, div.button  {
+.section, ul#menu li.section_name, div.button, td.logical_tab, .ui-state-active {
     background-color: #dbb27f;
 }
 
@@ -15,7 +14,17 @@ h2.section, h3.section {
     color: #6e4d25;
 }
 
-.slide img {
-   border: 2px solid gray;
-   margin: 1em;
+/* Quoted pieces of OCaml code */
+
+.inlinecode-ocaml {
+    display: block;
+    font-family: monospace;
+    font-weight: bold;
+    background-color: #FEFEDD;
+    padding: 8px;
+    font-size: 100%;
+    border: 1px dotted gray; }
+
+.inlinecode-ocaml keyword {
+  color: #697f2f;
 }
