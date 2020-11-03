@@ -713,4 +713,4 @@ End QcDoNotation.
 
 End QuickChickSig.
 
-(* 2020-10-21 16:44 *)
+(* 2020-11-03 12:38 *)

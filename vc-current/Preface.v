@@ -71,7 +71,7 @@
    version of VST installed.
 
    _IF YOU USE OPAM_, the following opam commands may be useful:
-   - opam repo add coq-released
+   - opam repo add coq-released https://coq.inria.fr/opam/released
    - opam pin coq 8.12.0
    - opam install coq-vst.2.6 (_this will take 30 minutes or more_)
    - (to use coqide:) opam pin lablgtk3 3.0.beta5
@@ -169,4 +169,4 @@ Goal release = "2.6".
 reflexivity || fail "The wrong version of VST is installed".
 Abort.
 
-(* 2020-10-21 16:42 *)
+(* 2020-11-03 12:36 *)
