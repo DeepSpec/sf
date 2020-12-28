@@ -1,6 +1,6 @@
-FROM coqorg/coq:dev-ocaml-4.09-flambda
+FROM coqorg/coq:dev-ocaml-4.11-flambda
 ENV OPAMYES true
 RUN opam update \
- && opam install \
+ && opam install -j `nproc` \
          coq-quickchick \
          coq-vst

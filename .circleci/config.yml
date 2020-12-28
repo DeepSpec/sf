@@ -6,6 +6,9 @@ jobs:
     parameters:
       coq:
         type: string
+      vc:
+        type: boolean
+        default: false
     docker:
       - image: ysli/sfdev:<<parameters.coq>>
     resource_class: medium
@@ -39,16 +42,24 @@ jobs:
           command: make
           working_directory: qc-current
       - run:
-          name: Verified C
-          command: make
-          working_directory: vc-current
-      - run:
           name: Tarballs
           command: |
-            for v in lf plf vfa qc vc
+            for v in lf plf vfa qc
             do tar -xf $v-current/$v.tgz
             make -C $v
             done
+      - when:
+          condition: vc
+          steps:
+            - run:
+                name: Verified C
+                command: make
+                working_directory: vc-current
+            - run:
+                name: Verified C Tarball
+                command: |
+                    tar -xf vc-current/vc.tgz
+                    make -C vc
 
 workflows:
   version: 2
@@ -57,6 +68,9 @@ workflows:
       - build:
           name: Coq 8.12
           coq: '8.12'
+      - build:
+          name: Coq 8.13
+          coq: '8.13'
       - build:
           name: Coq dev
           coq: 'latest'
