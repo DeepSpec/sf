@@ -32,6 +32,7 @@
 
 From Coq Require Import String.
 From Coq Require Import Logic.FunctionalExtensionality.
+From Coq Require Import ZArith.
 From VFA Require Import Perm.
 From VFA Require Import Extract.
 Open Scope Z_scope.
@@ -291,12 +292,12 @@ Section ValueType.
 
       + simpl in *. repeat split.
         (* The intro pattern [?] means to let Coq choose the name. *)
-        destruct PR as [? _]. omega.
+        destruct PR as [? _]. lia.
 
       + simpl in *. repeat split.
-        * inv BR. simpl in *. destruct H5 as [? _]. omega.
-        * inv BR. simpl in *. destruct H5 as [_ [? _]]. auto.
-        * inv BR. simpl in *. destruct H5 as [_ [_ ?]]. auto.
+        * inv BR. simpl in *. destruct H5 as [? _]. lia.
+        * inv BR. simpl in *. destruct H5 as [_ [? _]]. auto. 
+        * inv BR. simpl in *. destruct H5 as [_ [_ ?]]. auto. 
 
       + constructor; auto.
 
@@ -324,7 +325,7 @@ Section ValueType.
       we can simplify then destruct it.  Actually, the simplification
       is optional -- Coq will do the destruct without needing the
       simplification.  Anything else seems able to be finished with
-      [constructor], [auto], and [omega].  Let's see how far that can
+      [constructor], [auto], and [lia].  Let's see how far that can
       take us...
    *)
 
@@ -346,7 +347,7 @@ Section ValueType.
        |  H: ForallT _ (T _ _ _ _ _) |- _ => destruct H as [? [? ?] ]
        |  H: BST (T _ _ _ _ _) |- _ => inv H
        end;
-       (try constructor; auto; try omega)).
+       (try constructor; auto; try lia)).
 
   (** 41 cases remain.  It's a little disappointing that we didn't clear
       more of them.  Let's look at why are we stuck.
@@ -381,7 +382,7 @@ Section ValueType.
       ForallT (fun k' _ => Abs k' > Abs k0) t.
   Proof.
     intros. eapply ForallT_imp; eauto.
-    intros. simpl in H1. omega.
+    intros. simpl in H1. lia.
   Qed.
 
   Lemma ForallT_less : forall t k k0,
@@ -390,7 +391,7 @@ Section ValueType.
       ForallT (fun k' _ => Abs k' < Abs k0) t.
   Proof.
     intros; eapply ForallT_imp; eauto.
-    intros. simpl in H1. omega.
+    intros. simpl in H1. lia.
   Qed.
 
   (** Now we can return to automating the proof. *)
@@ -412,13 +413,13 @@ Section ValueType.
        |  H: ForallT _ (T _ _ _ _ _) |- _ => destruct H as [? [? ?] ]
        |  H: BST (T _ _ _ _ _) |- _ => inv H
        end;
-       (try constructor; auto; try omega)).
+       (try constructor; auto; try lia)).
 
     (* [all: t] applies [t] to every subgoal. *)
-    all: try eapply ForallT_greater; try eapply ForallT_less; eauto; try omega.
+    all: try eapply ForallT_greater; try eapply ForallT_less; eauto; try lia.
   Qed.
 
-    (** **** Exercise: 2 stars, standard (balanceP)  *)
+    (** **** Exercise: 2 stars, standard (balanceP) *)
 
   (** Prove that [balance] preserves [ForallT P]. Use proof automation
       with [match goal] and/or [all:].*)
@@ -433,10 +434,12 @@ Section ValueType.
 
   (** [] *)
 
-  (** **** Exercise: 2 stars, standard (insP)  *)
+  (** **** Exercise: 2 stars, standard (insP) *)
 
   (** Prove that [ins] preserves [ForallT P]. Hint: proceed by induction on [t].
       Use the previous lemma. There's no need for automated case analysis. *)
+
+
 
   Lemma insP : forall (P : key -> V -> Prop) (t : tree) (k : key) (v : V),
       ForallT P t ->
@@ -447,7 +450,7 @@ Section ValueType.
 
   (** [] *)
 
-  (** **** Exercise: 3 stars, standard (ins_BST)  *)
+  (** **** Exercise: 3 stars, standard (ins_BST) *)
 
   (** Prove that [ins] maintains [BST].  Proceed by induction on the evidence
       that [t] is a BST.  You don't need any automated case analysis. *)
@@ -462,7 +465,7 @@ Section ValueType.
 
   
   
-  (** **** Exercise: 2 stars, standard (insert_BST)  *)
+  (** **** Exercise: 2 stars, standard (insert_BST) *)
 
   (** Prove the main theorem: [insert] preserves [BST]. *)
 
@@ -490,7 +493,7 @@ Section ValueType.
 
   (** The next two equations are more challenging because of [balance]. *)
 
-    (** **** Exercise: 4 stars, standard (balance_lookup)  *)
+    (** **** Exercise: 4 stars, standard (balance_lookup) *)
 
   (** Prove that [balance] preserves the result of [lookup] on
       non-empty trees. Hint: automate the case analysis similarly to
@@ -512,7 +515,7 @@ Section ValueType.
 
   (** [] *)
 
-  (** **** Exercise: 3 stars, standard (lookup_ins_eq)  *)
+  (** **** Exercise: 3 stars, standard (lookup_ins_eq) *)
 
   (** Verify the second equation, though for [ins] rather than
       [insert].  Proceed by induction on the evidence that [t] is a
@@ -530,7 +533,7 @@ Section ValueType.
 
   (** [] *)
 
-  (** **** Exercise: 3 stars, standard (lookup_ins_neq)  *)
+  (** **** Exercise: 3 stars, standard (lookup_ins_neq) *)
 
   (** Verify the third equation, again for [ins] instead of [insert].
       The same hints as for the second equation hold.  *)
@@ -549,7 +552,7 @@ Section ValueType.
 
   
   
-  (** **** Exercise: 3 stars, standard (lookup_insert)  *)
+  (** **** Exercise: 3 stars, standard (lookup_insert) *)
 
   Theorem lookup_insert_eq : forall (t : tree) (k : key) (v : V),
       BST t ->
@@ -650,7 +653,7 @@ Section ValueType.
       RB r Black n ->
       RB (T Black l k v r) c (S n).
 
-    (** **** Exercise: 2 stars, standard (RB_blacken_parent)  *)
+    (** **** Exercise: 2 stars, standard (RB_blacken_parent) *)
 
   (** Prove that blackening a parent would preserve the red-black
       invariants. *)
@@ -662,7 +665,7 @@ Section ValueType.
 
   (** [] *)
 
-  (** **** Exercise: 2 stars, standard (RB_blacken_root)  *)
+  (** **** Exercise: 2 stars, standard (RB_blacken_root) *)
 
   (** Prove that blackening a subtree root (whose hypothetical parent
       is black) would preserve the red-black invariants, though the
@@ -691,7 +694,7 @@ Section ValueType.
       RB r Black n ->
       NearlyRB (T Black l k v r) (S n).
 
-  (** **** Exercise: 5 stars, standard (ins_RB)  *)
+  (** **** Exercise: 5 stars, standard (ins_RB) *)
 
   (** Prove that [ins] creates a tree that is either red-black or
       nearly so, depending on what the parent's color was.  You will
@@ -725,7 +728,7 @@ Section ValueType.
   Qed.
   
   
-  (** **** Exercise: 2 stars, standard (insert_RB)  *)
+  (** **** Exercise: 2 stars, standard (insert_RB) *)
 
   (** Prove that [insert] produces a red-black tree when given one as
       input.  This can be done entirely with lemmas already proved. *)
@@ -739,7 +742,7 @@ Section ValueType.
 
   (** [] *)
 
-    (** **** Exercise: 4 stars, advanced (redblack_bound)  *)
+    (** **** Exercise: 4 stars, advanced (redblack_bound) *)
 
   (** To confirm that red-black trees are approximately balanced,
       define functions to compute the height (i.e., maximum depth) and
@@ -749,12 +752,7 @@ Section ValueType.
       - Prove two auxiliary lemmas, one about height and the other
         about mindepth, and then combine them to get the result.  The
         lemma about height will need a slightly complicated induction
-        hypothesis for the proof to go through.
-
-      - Depending on how you defined [height] and [mindepth], the
-        tactic [zify] (defined in the standard library
-        [Coq.omega.PreOmega]) may be useful as a preliminary to using
-        [omega] when proving these lemmas. *)
+        hypothesis for the proof to go through. *)
 
   Fixpoint height (t : tree) : nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -822,4 +820,4 @@ On the same machine that prints,
     - Red-black trees are about as fast on consecutive insertions as
       on random. *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

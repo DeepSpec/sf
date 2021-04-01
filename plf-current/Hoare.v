@@ -1,6 +1,6 @@
 (** * Hoare: Hoare Logic, Part I *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From PLF Require Import Maps.
 From Coq Require Import Bool.Bool.
 From Coq Require Import Arith.Arith.
@@ -97,7 +97,7 @@ Definition Assertion := state -> Prop.
 
     - [fun st => False] never holds. *)
 
-(** **** Exercise: 1 star, standard, optional (assertions) 
+(** **** Exercise: 1 star, standard, optional (assertions)
 
     Paraphrase the following assertions in English (or your favorite
     natural language). *)
@@ -162,11 +162,17 @@ Open Scope hoare_spec_scope.
 Notation "P <<->> Q" :=
   (P ->> Q /\ Q ->> P) (at level 80) : hoare_spec_scope.
 
-(** Our convention can be implemented uses Coq coercions and anotation
-    scopes (much as we did with [%imp] in [Imp]) to automatically
-    lift [aexp]s, numbers, and [Prop]s into [Assertion]s when they appear
-    in the [%assertion] scope or when Coq knows the type of an
-    expression is [Assertion]. *)
+(* ================================================================= *)
+(** ** Notations for Assertions *)
+
+(** The convention described above can be implemented with a little
+    Coq syntax magic, using coercions and annotation scopes, much as
+    we did with [%imp] in [Imp], to automatically lift [aexp]s,
+    numbers, and [Prop]s into [Assertion]s when they appear in the
+    [%assertion] scope or when Coq knows the type of an expression is
+    [Assertion].
+
+    There is no need to understand the details. *)
 
 Definition Aexp : Type := state -> nat.
 
@@ -247,25 +253,27 @@ End ExPrettyAssertions.
     Assertion [P] is called the _precondition_ of the triple, and [Q] is
     the _postcondition_.
 
-    Because single braces are already used in other ways in Coq, we'll write
+    Because single braces are already used for other things in Coq, we'll write
     Hoare triples with double braces:
 
        {{P}} c {{Q}}
 *)
-(**
-    For example,
+(** For example,
 
     - [{{X = 0}} X := X + 1 {{X = 1}}] is a valid Hoare triple,
-      stating that command [X := X + 1] would transform a state in which
-      [X = 0] to a state in which [X = 1].
+      stating that command [X := X + 1] would transform a state in
+      which [X = 0] to a state in which [X = 1].
 
-    - [{{X = m}} X := X + 1 {{X = m + 1}}], is also a valid Hoare triple.
-      It's even more descriptive of the exact behavior of that command than
-      the previous example. *)
+    - [forall m, {{X = m}} X := X + 1 {{X = m + 1}}], is a
+      _proposition_ stating that the Hoare triple [{{X = m}} X := X +
+      m {{X = m * 2}}]) is valid for any choice of [m].  Note that [m]
+      in the two assertions and the command in the middle is a
+      reference to the Coq variable [m], which is bound outside the
+      Hoare triple, not to an Imp variable. *)
 
-(** **** Exercise: 1 star, standard, optional (triples) 
+(** **** Exercise: 1 star, standard, optional (triples)
 
-    Paraphrase the following Hoare triples in English.
+    Paraphrase the following in English.
 
      1) {{True}} c {{X = 5}}
 
@@ -289,7 +297,7 @@ End ExPrettyAssertions.
 
     [] *)
 
-(** **** Exercise: 1 star, standard, optional (valid_triples) 
+(** **** Exercise: 1 star, standard, optional (valid_triples)
 
     Which of the following Hoare triples are _valid_ -- i.e., the
     claimed relation between [P], [c], and [Q] is true?
@@ -337,7 +345,7 @@ Notation "{{ P }}  c  {{ Q }}" :=
   : hoare_spec_scope.
 Check ({{True}} X := 0 {{True}}).
 
-(** **** Exercise: 1 star, standard (hoare_post_true)  *)
+(** **** Exercise: 1 star, standard (hoare_post_true) *)
 
 (** Prove that if [Q] holds in every state, then any triple with [Q]
     as its postcondition is valid. *)
@@ -349,7 +357,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (hoare_pre_false)  *)
+(** **** Exercise: 1 star, standard (hoare_pre_false) *)
 
 (** Prove that if [P] holds in no state, then any triple with [P] as
     its precondition is valid. *)
@@ -401,8 +409,8 @@ Proof.
     assignment statement with the right-hand side---we get the
     precondition, [Y = 1]. *)
 
-(** That same technique works in more complicated cases.  For
-    example,
+(** That same idea works in more complicated cases.  For
+    example:
 
        {{ ??? }}  X := X + Y  {{ X = 1 }}
 
@@ -418,20 +426,21 @@ Proof.
     guarantees that property will hold of [X].  Such a precondition
     must ensure that the same property holds of _whatever is being
     assigned to_ [X].  So, in the example, we need "equals [1]" to
-    hold of [X + Y].  That's exactly what the technique guarantees.
-*)
+    hold of [X + Y].  That's exactly what the technique guarantees. *)
 
 
 (** In general, the postcondition could be some arbitrary assertion
     [Q], and the right-hand side of the assignment could be some
-    arithmetic expression [a]:
+    arbitrary arithmetic expression [a]:
 
        {{ ??? }}  X := a  {{ Q }}
 
     The precondition would then be [Q], but with any occurrences of
-    [X] in it replaced by [a].  Let's introduce a notation for this
-    idea of replacing occurrences: Define [Q [X |-> a]] to mean "[Q]
-    where [a] is substituted in place of [X]".
+    [X] in it replaced by [a].
+
+    Let's introduce a notation for this idea of replacing occurrences:
+    Define [Q [X |-> a]] to mean "[Q] where [a] is substituted in
+    place of [X]".
 
     That yields the Hoare logic rule for assignment:
 
@@ -564,14 +573,14 @@ Proof.
   (* WORKED IN CLASS *)
   apply hoare_asgn.  Qed.
 
-(** (Of course, what would be even more helpful is to prove this
+(** (Of course, what we'd probably prefer is to prove this
     simpler triple:
 
       {{X < 4}} X := X + 1 {{X < 5}}
 
    We will see how to do so in the next section. *)
 
-(** **** Exercise: 2 stars, standard, optional (hoare_asgn_examples) 
+(** **** Exercise: 2 stars, standard, optional (hoare_asgn_examples)
 
     Complete these Hoare triples...
 
@@ -593,10 +602,10 @@ Proof.
 Definition manual_grade_for_hoare_asgn_examples : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, especially useful (hoare_asgn_wrong) 
+(** **** Exercise: 2 stars, standard, especially useful (hoare_asgn_wrong)
 
     The assignment rule looks backward to almost everyone the first
-    time they see it.  If it still seems puzzling, it may help
+    time they see it.  If it still seems puzzling to you, it may help
     to think a little about alternative "forward" rules.  Here is a
     seemingly natural one:
 
@@ -615,7 +624,7 @@ Definition manual_grade_for_hoare_asgn_examples : option (nat*string) := None.
 Definition manual_grade_for_hoare_asgn_wrong : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (hoare_asgn_fwd) 
+(** **** Exercise: 3 stars, advanced (hoare_asgn_fwd)
 
     However, by using a _parameter_ [m] (a Coq number) to remember the
     original value of [X] we can define a Hoare rule for assignment
@@ -630,8 +639,7 @@ Definition manual_grade_for_hoare_asgn_wrong : option (nat*string) := None.
     Note that we use the original value of [X] to reconstruct the
     state [st'] before the assignment took place. Prove that this rule
     is correct.  (Also note that this rule is more complicated than
-    [hoare_asgn].)
-*)
+    [hoare_asgn].) *)
 
 Theorem hoare_asgn_fwd :
   forall m a P,
@@ -643,7 +651,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced, optional (hoare_asgn_fwd_exists) 
+(** **** Exercise: 2 stars, advanced, optional (hoare_asgn_fwd_exists)
 
     Another way to define a forward rule for assignment is to
     existentially quantify over the previous value of the assigned
@@ -938,7 +946,7 @@ Qed.
 (** The other example of using consequence that we did earlier,
     [hoare_asgn_example2], requires a little more work to automate.
     We can streamline the first line with [eapply], but we can't just use
-    [auto] for the final bullet, since it needs [omega]. *)
+    [auto] for the final bullet, since it needs [lia]. *)
 
 Example assn_sub_example2' :
   {{X < 4}}
@@ -984,7 +992,7 @@ Qed.
     everything we could possibly want to know about assertions --
     there's no magic here! But it's good enough so far. *)
 
-(** **** Exercise: 2 stars, standard (hoare_asgn_examples_2) 
+(** **** Exercise: 2 stars, standard (hoare_asgn_examples_2)
 
     Prove these triples.  Try to make your proof scripts as nicely automated
     as those above. *)
@@ -1059,9 +1067,10 @@ Qed.
     [eapply] tactic. *)
 
 Example hoare_asgn_example3 : forall (a:aexp) (n:nat),
-  {{a = n}}
-  X := a; skip
-  {{X = n}}.
+    {{a = n}}
+  X := a;
+  skip
+    {{X = n}}.
 Proof.
   intros a n. eapply hoare_seq.
   - (* right part of seq *)
@@ -1083,7 +1092,7 @@ Qed.
       {{ X = n }}
 *)
 
-(** **** Exercise: 2 stars, standard, especially useful (hoare_asgn_example4) 
+(** **** Exercise: 2 stars, standard, especially useful (hoare_asgn_example4)
 
     Translate this "decorated program" into a formal proof:
 
@@ -1102,16 +1111,17 @@ Qed.
    explicitly identifies [X = 1] as the intermediate assertion. *)
 
 Example hoare_asgn_example4 :
-  {{ True }}
-  X := 1; Y := 2
-  {{ X = 1 /\ Y = 2 }}.
+    {{ True }}
+  X := 1;
+  Y := 2
+    {{ X = 1 /\ Y = 2 }}.
 Proof.
   apply hoare_seq with (Q := (X = 1)%assertion).
   (* The annotation [%assertion] is needed here to help Coq parse correctly. *)
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (swap_exercise) 
+(** **** Exercise: 3 stars, standard (swap_exercise)
 
     Write an Imp program [c] that swaps the values of [X] and [Y] and
     show that it satisfies the following specification:
@@ -1135,7 +1145,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (invalid_triple) 
+(** **** Exercise: 4 stars, standard (invalid_triple)
 
     Show that
 
@@ -1225,13 +1235,8 @@ Definition bassn b : Assertion :=
 Coercion bassn : bexp >-> Assertion.
 
 Arguments bassn /.
-Hint Unfold bassn : core.
 
-(** A couple of useful facts about [bassn]: *)
-
-Lemma bexp_eval_true : forall b st,
-  beval st b = true -> (bassn b) st.
-Proof. auto. Qed.
+(** A useful fact about [bassn]: *)
 
 Lemma bexp_eval_false : forall b st,
   beval st b = false -> ~ ((bassn b) st).
@@ -1350,7 +1355,7 @@ Ltac assn_auto'' :=
   try rewrite -> leb_le in *;  (* for inequalities *)
   auto; try lia.
 
-(** **** Exercise: 2 stars, standard (if_minus_plus) 
+(** **** Exercise: 2 stars, standard (if_minus_plus)
 
     Prove the theorem below using [hoare_if].  Do not use [unfold
     hoare_triple]. *)
@@ -1387,7 +1392,7 @@ Module If1.
 
 Inductive com : Type :=
   | CSkip : com
-  | CAss : string -> aexp -> com
+  | CAsgn : string -> aexp -> com
   | CSeq : com -> com -> com
   | CIf : bexp -> com -> com -> com
   | CWhile : bexp -> com -> com
@@ -1399,7 +1404,7 @@ Notation "'if1' x 'then' y 'end'" :=
 Notation "'skip'"  :=
          CSkip (in custom com at level 0).
 Notation "x := y"  :=
-         (CAss x y)
+         (CAsgn x y)
             (in custom com at level 0, x constr at level 0,
              y at level 85, no associativity).
 Notation "x ; y" :=
@@ -1413,7 +1418,7 @@ Notation "'while' x 'do' y 'end'" :=
          (CWhile x y)
             (in custom com at level 89, x at level 99, y at level 99).
 
-(** **** Exercise: 2 stars, standard (if1_ceval)  *)
+(** **** Exercise: 2 stars, standard (if1_ceval) *)
 
 (** Add two new evaluation rules to relation [ceval], below, for
     [if1]. Let the rules for [if] guide you.*)
@@ -1425,7 +1430,7 @@ Reserved Notation "st '=[' c ']=>'' st'"
 Inductive ceval : com -> state -> state -> Prop :=
   | E_Skip : forall st,
       st =[ skip ]=> st
-  | E_Ass  : forall st a1 n x,
+  | E_Asgn  : forall st a1 n x,
       aeval st a1 = n ->
       st =[ x := a1 ]=> (x !-> n ; st)
   | E_Seq : forall c1 c2 st st' st'',
@@ -1483,7 +1488,7 @@ Notation "{{ P }}  c  {{ Q }}" := (hoare_triple P c Q)
                                   (at level 90, c custom com at level 99)
                                   : hoare_spec_scope.
 
-(** **** Exercise: 2 stars, standard (hoare_if1)  *)
+(** **** Exercise: 2 stars, standard (hoare_if1) *)
 
 (** Invent a Hoare logic proof rule for [if1].  State and prove a
     theorem named [hoare_if1] that shows the validity of your rule.
@@ -1534,7 +1539,7 @@ Proof.
   auto.
 Qed.
 
-(** **** Exercise: 2 stars, standard (hoare_if1_good)  *)
+(** **** Exercise: 2 stars, standard (hoare_if1_good) *)
 
 (** Prove that your [if1] rule is complete enough for the following
     valid Hoare triple.
@@ -1550,7 +1555,6 @@ Lemma hoare_if1_good :
   end
   {{ X = Z }}.
 Proof. (* FILL IN HERE *) Admitted.
-
 (** [] *)
 
 End If1.
@@ -1682,7 +1686,7 @@ Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Exercise: [REPEAT] *)
 
-(** **** Exercise: 4 stars, advanced (hoare_repeat) 
+(** **** Exercise: 4 stars, advanced (hoare_repeat)
 
     In this exercise, we'll add a new command to our language of
     commands: [REPEAT] c [until] b [end]. You will write the
@@ -1695,7 +1699,7 @@ Module RepeatExercise.
 
 Inductive com : Type :=
   | CSkip : com
-  | CAss : string -> aexp -> com
+  | CAsgn : string -> aexp -> com
   | CSeq : com -> com -> com
   | CIf : bexp -> com -> com -> com
   | CWhile : bexp -> com -> com
@@ -1713,7 +1717,7 @@ Notation "'repeat' e1 'until' b2 'end'" :=
 Notation "'skip'"  :=
          CSkip (in custom com at level 0).
 Notation "x := y"  :=
-         (CAss x y)
+         (CAsgn x y)
             (in custom com at level 0, x constr at level 0,
              y at level 85, no associativity).
 Notation "x ; y" :=
@@ -1735,7 +1739,7 @@ Notation "'while' x 'do' y 'end'" :=
 Inductive ceval : state -> com -> state -> Prop :=
   | E_Skip : forall st,
       st =[ skip ]=> st
-  | E_Ass  : forall st a1 n x,
+  | E_Asgn  : forall st a1 n x,
       aeval st a1 = n ->
       st =[ x := a1 ]=> (x !-> n ; st)
   | E_Seq : forall c1 c2 st st' st'',
@@ -1844,7 +1848,8 @@ Definition manual_grade_for_hoare_repeat : option (nat*string) := None.
                 {{P}} c {{Q}}
 
     In the next chapter, we'll see how these rules are used to prove
-    that programs satisfy specifications of their behavior. *)
+    that more interesting programs satisfy interesting specifications of
+    their behavior. *)
 
 (* ################################################################# *)
 (** * Additional Exercises *)
@@ -1863,7 +1868,7 @@ Module Himp.
 
 Inductive com : Type :=
   | CSkip : com
-  | CAss : string -> aexp -> com
+  | CAsgn : string -> aexp -> com
   | CSeq : com -> com -> com
   | CIf : bexp -> com -> com -> com
   | CWhile : bexp -> com -> com
@@ -1874,7 +1879,7 @@ Notation "'havoc' l" := (CHavoc l)
 Notation "'skip'"  :=
          CSkip (in custom com at level 0).
 Notation "x := y"  :=
-         (CAss x y)
+         (CAsgn x y)
             (in custom com at level 0, x constr at level 0,
              y at level 85, no associativity).
 Notation "x ; y" :=
@@ -1891,7 +1896,7 @@ Notation "'while' x 'do' y 'end'" :=
 Inductive ceval : com -> state -> state -> Prop :=
   | E_Skip : forall st,
       st =[ skip ]=> st
-  | E_Ass  : forall st a1 n x,
+  | E_Asgn  : forall st a1 n x,
       aeval st a1 = n ->
       st =[ x := a1 ]=> (x !-> n ; st)
   | E_Seq : forall c1 c2 st st' st'',
@@ -1940,7 +1945,7 @@ Theorem hoare_consequence_pre : forall (P P' Q : Assertion) c,
   {{P}} c {{Q}}.
 Proof. eauto. Qed.
 
-(** **** Exercise: 3 stars, standard (hoare_havoc)  *)
+(** **** Exercise: 3 stars, standard (hoare_havoc) *)
 
 (** Complete the Hoare rule for [HAVOC] commands below by defining
     [havoc_pre], and prove that the resulting rule is correct. *)
@@ -1955,7 +1960,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (havoc_post)  *)
+(** **** Exercise: 3 stars, standard (havoc_post) *)
 
 (** Complete the following proof without changing any of the provided
     commands. If you find that it can't be completed, your definition of
@@ -1979,7 +1984,7 @@ End Himp.
 (* ================================================================= *)
 (** ** Assert and Assume *)
 
-(** **** Exercise: 4 stars, standard, optional (assert_vs_assume)  *)
+(** **** Exercise: 4 stars, standard, optional (assert_vs_assume) *)
 
 Module HoareAssertAssume.
 
@@ -1999,7 +2004,7 @@ Module HoareAssertAssume.
 
 Inductive com : Type :=
   | CSkip : com
-  | CAss : string -> aexp -> com
+  | CAsgn : string -> aexp -> com
   | CSeq : com -> com -> com
   | CIf : bexp -> com -> com -> com
   | CWhile : bexp -> com -> com
@@ -2013,7 +2018,7 @@ Notation "'assume' l" := (CAssume l)
 Notation "'skip'"  :=
          CSkip (in custom com at level 0).
 Notation "x := y"  :=
-         (CAss x y)
+         (CAsgn x y)
             (in custom com at level 0, x constr at level 0,
              y at level 85, no associativity).
 Notation "x ; y" :=
@@ -2044,7 +2049,7 @@ Inductive ceval : com -> state -> result -> Prop :=
   (* Old rules, several modified *)
   | E_Skip : forall st,
       st =[ skip ]=> RNormal st
-  | E_Ass  : forall st a1 n x,
+  | E_Asgn  : forall st a1 n x,
       aeval st a1 = n ->
       st =[ x := a1 ]=> RNormal (x !-> n ; st)
   | E_SeqNormal : forall c1 c2 st st' r,
@@ -2200,8 +2205,7 @@ Proof.
   - (* b is true *)
     apply (HTrue st st').
       assumption.
-      split. assumption.
-      apply bexp_eval_true. assumption.
+      split. assumption. assumption.
   - (* b is false *)
     apply (HFalse st st').
       assumption.
@@ -2251,4 +2255,4 @@ End HoareAssertAssume.
 
 
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

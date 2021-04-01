@@ -385,11 +385,12 @@
     later lectures. *)
 
 (* ################################################################# *)
-(** * Note for Instructors *)
+(** * Note for Instructors and Contributors *)
 
-(** If you plan to use these materials in your own course, you will
-    undoubtedly find things you'd like to change, improve, or add.
-    Your contributions are welcome!
+(** If you plan to use these materials in your own teaching, or if you
+    are using software foundations for self study and are finding
+    things you'd like to help add or improve, your contributions are
+    welcome!
 
     In order to keep the legalities simple and to have a single point
     of responsibility in case the need should ever arise to adjust the
@@ -407,11 +408,11 @@
         2016 as (respectively) "Logical Foundations" and "Programming
         Foundations," and for Volume 4, "QuickChick: Property-Based
         Testing in Coq," the Author of Record is Benjamin C. Pierce.
-        For Volume 3, "Verified Functional Algorithms", the Author of
-        Record is Andrew W. Appel. For components outside of
-        designated volumes (e.g., typesetting and grading tools and
-        other software infrastructure), the Author of Record is
-        Benjamin Pierce.
+        For Volume 3, "Verified Functional Algorithms," and volume 5,
+        "Verifiable C," the Author of Record is Andrew W. Appel. For
+        components outside of designated volumes (e.g., typesetting
+        and grading tools and other software infrastructure), the
+        Author of Record is Benjamin Pierce.
 
     To get started, please send an email to Benjamin Pierce,
     describing yourself and how you plan to use the materials and
@@ -419,8 +420,8 @@
     github username.
 
     We'll set you up with access to the git repository and developers'
-    mailing lists.  In the repository you'll find a file [INSTRUCTORS]
-    with further instructions. *)
+    mailing lists.  In the repository you'll find the files
+    [INSTRUCTORS] and [CONTRIBUTING] with further instructions. *)
 
 (* ################################################################# *)
 (** * Translations *)
@@ -438,4 +439,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2020-11-05 12:33 *)
+(* 2021-04-01 19:59 *)

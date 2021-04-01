@@ -37,7 +37,7 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing".<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Types.html#"><span class="id" title="library">Types</span></a>.<br/>
@@ -46,7 +46,7 @@
 </div>
 
 <div class="doc">
-<a id="lab299"></a><h1 class="section">Concepts</h1>
+<a id="lab295"></a><h1 class="section">Concepts</h1>
 
 <div class="paragraph"> </div>
 
@@ -55,7 +55,7 @@
 </div>
 
 <div class="doc">
-<a id="lab300"></a><h2 class="section">A Motivating Example</h2>
+<a id="lab296"></a><h2 class="section">A Motivating Example</h2>
 
 <div class="paragraph"> </div>
 
@@ -121,7 +121,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab301"></a><h2 class="section">Subtyping and Object-Oriented Languages</h2>
+<a id="lab297"></a><h2 class="section">Subtyping and Object-Oriented Languages</h2>
 
 <div class="paragraph"> </div>
 
@@ -165,7 +165,7 @@
 
     Of course, real object-oriented languages include many other
     features besides these.  For example, fields can be updated.
-    Fields and methods can be declared <span class="inlinecode"><span class="id" title="var">private</span></span>.  Classes can give
+    Fields and methods can be declared "private".  Classes can give
     <i>initializers</i> that are used when constructing objects.  Code in
     subclasses can cooperate with code in superclasses via
     <i>inheritance</i>.  Classes can have static methods and fields.  Etc.,
@@ -181,7 +181,7 @@
     setting of the STLC. 
 <div class="paragraph"> </div>
 
-<a id="lab302"></a><h2 class="section">The Subsumption Rule</h2>
+<a id="lab298"></a><h2 class="section">The Subsumption Rule</h2>
 
 <div class="paragraph"> </div>
 
@@ -230,7 +230,7 @@
     function that requires just a single-field record. 
 <div class="paragraph"> </div>
 
-<a id="lab303"></a><h2 class="section">The Subtype Relation</h2>
+<a id="lab299"></a><h2 class="section">The Subtype Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -239,7 +239,7 @@
     definition.  
 <div class="paragraph"> </div>
 
-<a id="lab304"></a><h3 class="section">Structural Rules</h3>
+<a id="lab300"></a><h3 class="section">Structural Rules</h3>
 
 <div class="paragraph"> </div>
 
@@ -279,7 +279,7 @@
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab305"></a><h3 class="section">Products</h3>
+<a id="lab301"></a><h3 class="section">Products</h3>
 
 <div class="paragraph"> </div>
 
@@ -302,7 +302,7 @@
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab306"></a><h3 class="section">Arrows</h3>
+<a id="lab302"></a><h3 class="section">Arrows</h3>
 
 <div class="paragraph"> </div>
 
@@ -393,7 +393,7 @@
     viewed as having type <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span>→<span class="id" title="var">T<sub>2</sub></span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab307"></a><h3 class="section">Records</h3>
+<a id="lab303"></a><h3 class="section">Records</h3>
 
 <div class="paragraph"> </div>
 
@@ -509,10 +509,10 @@
 <div class="paragraph"> </div>
 
  Third, subtyping can reorder fields.  For example, we
-    want <span class="inlinecode">{<span class="id" title="var">name</span>:<span class="id" title="var">String</span>,</span> <span class="inlinecode"><span class="id" title="var">gpa</span>:<span class="id" title="var">Nat</span>,</span> <span class="inlinecode"><span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>}</span> <span class="inlinecode">&lt;:</span> <span class="inlinecode"><span class="id" title="var">Person</span></span>.  (We
+    want <span class="inlinecode">{<span class="id" title="var">name</span>:<span class="id" title="var">String</span>,</span> <span class="inlinecode"><span class="id" title="var">gpa</span>:<span class="id" title="var">Nat</span>,</span> <span class="inlinecode"><span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>}</span> <span class="inlinecode">&lt;:</span> <span class="inlinecode"><span class="id" title="var">Person</span></span>, but we
     haven't quite achieved this yet: using just <span class="inlinecode"><span class="id" title="var">S_RcdDepth</span></span> and
     <span class="inlinecode"><span class="id" title="var">S_RcdWidth</span></span> we can only drop fields from the <i>end</i> of a record
-    type.)  So we add:
+    type.  So we add:
 <center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...in:Sn} is a permutation of {j<sub>1</sub>:T<sub>1</sub>...jn:Tn}</td>
@@ -560,7 +560,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab308"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (arrow_sub_wrong)</h4>
+<a id="lab304"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (arrow_sub_wrong)</h4>
  Suppose we had incorrectly defined subtyping as covariant on both
     the right and the left of arrow types:
 <center><table class="infrule">
@@ -602,7 +602,7 @@
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab309"></a><h3 class="section">Top</h3>
+<a id="lab305"></a><h3 class="section">Top</h3>
 
 <div class="paragraph"> </div>
 
@@ -629,7 +629,7 @@
 </div>
 
 <div class="doc">
-<a id="lab310"></a><h3 class="section">Summary</h3>
+<a id="lab306"></a><h3 class="section">Summary</h3>
 
 <div class="paragraph"> </div>
 
@@ -777,11 +777,11 @@
 </div>
 
 <div class="doc">
-<a id="lab311"></a><h2 class="section">Exercises</h2>
+<a id="lab307"></a><h2 class="section">Exercises</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab312"></a><h4 class="section">Exercise: 1 star, standard, optional (subtype_instances_tf_1)</h4>
+<a id="lab308"></a><h4 class="section">Exercise: 1 star, standard, optional (subtype_instances_tf_1)</h4>
  Suppose we have types <span class="inlinecode"><span class="id" title="var">S</span></span>, <span class="inlinecode"><span class="id" title="var">T</span></span>, <span class="inlinecode"><span class="id" title="var">U</span></span>, and <span class="inlinecode"><span class="id" title="var">V</span></span> with <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">&lt;:</span> <span class="inlinecode"><span class="id" title="var">T</span></span>
     and <span class="inlinecode"><span class="id" title="var">U</span></span> <span class="inlinecode">&lt;:</span> <span class="inlinecode"><span class="id" title="var">V</span></span>.  Which of the following subtyping assertions
     are then true?  Write <i>true</i> or <i>false</i> after each one.
@@ -836,7 +836,7 @@
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab313"></a><h4 class="section">Exercise: 2 stars, standard (subtype_order)</h4>
+<a id="lab309"></a><h4 class="section">Exercise: 2 stars, standard (subtype_order)</h4>
  The following types happen to form a linear order with respect to subtyping:
 <ul class="doclist">
 <li> <span class="inlinecode"><span class="id" title="var">Top</span></span>
@@ -878,7 +878,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab314"></a><h4 class="section">Exercise: 1 star, standard (subtype_instances_tf_2)</h4>
+<a id="lab310"></a><h4 class="section">Exercise: 1 star, standard (subtype_instances_tf_2)</h4>
  Which of the following statements are true?  Write <i>true</i> or
     <i>false</i> after each one.
 <br/>
@@ -921,7 +921,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab315"></a><h4 class="section">Exercise: 1 star, standard (subtype_concepts_tf)</h4>
+<a id="lab311"></a><h4 class="section">Exercise: 1 star, standard (subtype_concepts_tf)</h4>
  Which of the following statements are true, and which are false?
 <ul class="doclist">
 <li> There exists a type that is a supertype of every other type.
@@ -996,7 +996,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab316"></a><h4 class="section">Exercise: 2 stars, standard (proper_subtypes)</h4>
+<a id="lab312"></a><h4 class="section">Exercise: 2 stars, standard (proper_subtypes)</h4>
  Is the following statement true or false?  Briefly explain your
     answer.  (Here <span class="inlinecode"><span class="id" title="var">Base</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> stands for a base type, where <span class="inlinecode"><span class="id" title="var">n</span></span> is
     a string standing for the name of the base type.  See the
@@ -1021,7 +1021,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab317"></a><h4 class="section">Exercise: 2 stars, standard (small_large_1)</h4>
+<a id="lab313"></a><h4 class="section">Exercise: 2 stars, standard (small_large_1)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1059,7 +1059,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab318"></a><h4 class="section">Exercise: 2 stars, standard (small_large_2)</h4>
+<a id="lab314"></a><h4 class="section">Exercise: 2 stars, standard (small_large_2)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1095,7 +1095,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab319"></a><h4 class="section">Exercise: 2 stars, standard, optional (small_large_3)</h4>
+<a id="lab315"></a><h4 class="section">Exercise: 2 stars, standard, optional (small_large_3)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1121,7 +1121,7 @@ of the five types above. It may be unrelated to some of them.
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab320"></a><h4 class="section">Exercise: 2 stars, standard (small_large_4)</h4>
+<a id="lab316"></a><h4 class="section">Exercise: 2 stars, standard (small_large_4)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1159,7 +1159,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab321"></a><h4 class="section">Exercise: 2 stars, standard (smallest_1)</h4>
+<a id="lab317"></a><h4 class="section">Exercise: 2 stars, standard (smallest_1)</h4>
  What is the <i>smallest</i> type <span class="inlinecode"><span class="id" title="var">T</span></span> (if one exists) that makes
     the following assertion true?
 <br/>
@@ -1180,7 +1180,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab322"></a><h4 class="section">Exercise: 2 stars, standard (smallest_2)</h4>
+<a id="lab318"></a><h4 class="section">Exercise: 2 stars, standard (smallest_2)</h4>
  What is the <i>smallest</i> type <span class="inlinecode"><span class="id" title="var">T</span></span> that makes the following
     assertion true?
 <br/>
@@ -1200,7 +1200,7 @@ of the five types above. It may be unrelated to some of them.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab323"></a><h4 class="section">Exercise: 3 stars, standard, optional (count_supertypes)</h4>
+<a id="lab319"></a><h4 class="section">Exercise: 3 stars, standard, optional (count_supertypes)</h4>
  How many supertypes does the record type <span class="inlinecode">{<span class="id" title="var">x</span>:<span class="id" title="var">A</span>,</span> <span class="inlinecode"><span class="id" title="var">y</span>:<span class="id" title="var">C</span>→<span class="id" title="var">C</span>}</span> have?  That is,
     how many different types <span class="inlinecode"><span class="id" title="var">T</span></span> are there such that <span class="inlinecode">{<span class="id" title="var">x</span>:<span class="id" title="var">A</span>,</span> <span class="inlinecode"><span class="id" title="var">y</span>:<span class="id" title="var">C</span>→<span class="id" title="var">C</span>}</span> <span class="inlinecode">&lt;:</span>
     <span class="inlinecode"><span class="id" title="var">T</span></span>?  (We consider two types to be different if they are written
@@ -1212,7 +1212,7 @@ of the five types above. It may be unrelated to some of them.
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab324"></a><h4 class="section">Exercise: 2 stars, standard (pair_permutation)</h4>
+<a id="lab320"></a><h4 class="section">Exercise: 2 stars, standard (pair_permutation)</h4>
  The subtyping rule for product types
 <center><table class="infrule">
 <tr class="infruleassumption">
@@ -1258,7 +1258,7 @@ of the five types above. It may be unrelated to some of them.
 
 
 <div class="doc">
-<a id="lab325"></a><h1 class="section">Formal Definitions</h1>
+<a id="lab321"></a><h1 class="section">Formal Definitions</h1>
 
 <div class="paragraph"> </div>
 
@@ -1271,12 +1271,12 @@ of the five types above. It may be unrelated to some of them.
 </div>
 
 <div class="doc">
-<a id="lab326"></a><h2 class="section">Core Definitions</h2>
+<a id="lab322"></a><h2 class="section">Core Definitions</h2>
 
 </div>
 
 <div class="doc">
-<a id="lab327"></a><h3 class="section">Syntax</h3>
+<a id="lab323"></a><h3 class="section">Syntax</h3>
 
 <div class="paragraph"> </div>
 
@@ -1338,7 +1338,7 @@ of the five types above. It may be unrelated to some of them.
 </div>
 
 <div class="doc">
-<a id="lab328"></a><h3 class="section">Substitution</h3>
+<a id="lab324"></a><h3 class="section">Substitution</h3>
 
 <div class="paragraph"> </div>
 
@@ -1370,7 +1370,7 @@ of the five types above. It may be unrelated to some of them.
 </div>
 
 <div class="doc">
-<a id="lab329"></a><h3 class="section">Reduction</h3>
+<a id="lab325"></a><h3 class="section">Reduction</h3>
 
 <div class="paragraph"> </div>
 
@@ -1414,7 +1414,7 @@ of the five types above. It may be unrelated to some of them.
 </div>
 
 <div class="doc">
-<a id="lab330"></a><h2 class="section">Subtyping</h2>
+<a id="lab326"></a><h2 class="section">Subtyping</h2>
 
 <div class="paragraph"> </div>
 
@@ -1472,7 +1472,7 @@ Note that we don't need any special rules for base types (<span class="inlinecod
 </div>
 
 <div class="doc">
-<a id="lab331"></a><h4 class="section">Exercise: 2 stars, standard, optional (subtyping_judgements)</h4>
+<a id="lab327"></a><h4 class="section">Exercise: 2 stars, standard, optional (subtyping_judgements)</h4>
  (Leave this exercise <span class="inlinecode"><span class="id" title="var">Admitted</span></span> until after you have finished adding product
     types to the language -- see exercise <span class="inlinecode"><span class="id" title="var">products</span></span> -- at least up to
     this point in the file).
@@ -1525,7 +1525,7 @@ Now use the definition of the subtype relation to prove the following:
     understand how to prove them on paper! 
 <div class="paragraph"> </div>
 
-<a id="lab332"></a><h4 class="section">Exercise: 1 star, standard, optional (subtyping_example_1)</h4>
+<a id="lab328"></a><h4 class="section">Exercise: 1 star, standard, optional (subtyping_example_1)</h4>
 
 </div>
 <div class="code">
@@ -1539,7 +1539,7 @@ Now use the definition of the subtype relation to prove the following:
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab333"></a><h4 class="section">Exercise: 1 star, standard, optional (subtyping_example_2)</h4>
+<a id="lab329"></a><h4 class="section">Exercise: 1 star, standard, optional (subtyping_example_2)</h4>
 
 </div>
 <div class="code">
@@ -1557,7 +1557,7 @@ Now use the definition of the subtype relation to prove the following:
 </div>
 
 <div class="doc">
-<a id="lab334"></a><h2 class="section">Typing</h2>
+<a id="lab330"></a><h2 class="section">Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -1612,7 +1612,7 @@ Do the following exercises after you have added product types to
     formal statement in Coq and prove it. 
 <div class="paragraph"> </div>
 
-<a id="lab335"></a><h4 class="section">Exercise: 1 star, standard, optional (typing_example_0)</h4>
+<a id="lab331"></a><h4 class="section">Exercise: 1 star, standard, optional (typing_example_0)</h4>
 
 </div>
 <div class="code">
@@ -1625,7 +1625,7 @@ Do the following exercises after you have added product types to
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab336"></a><h4 class="section">Exercise: 2 stars, standard, optional (typing_example_1)</h4>
+<a id="lab332"></a><h4 class="section">Exercise: 2 stars, standard, optional (typing_example_1)</h4>
 
 </div>
 <div class="code">
@@ -1638,7 +1638,7 @@ Do the following exercises after you have added product types to
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab337"></a><h4 class="section">Exercise: 2 stars, standard, optional (typing_example_2)</h4>
+<a id="lab333"></a><h4 class="section">Exercise: 2 stars, standard, optional (typing_example_2)</h4>
 
 </div>
 <div class="code">
@@ -1656,7 +1656,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab338"></a><h1 class="section">Properties</h1>
+<a id="lab334"></a><h1 class="section">Properties</h1>
 
 <div class="paragraph"> </div>
 
@@ -1669,7 +1669,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab339"></a><h2 class="section">Inversion Lemmas for Subtyping</h2>
+<a id="lab335"></a><h2 class="section">Inversion Lemmas for Subtyping</h2>
 
 <div class="paragraph"> </div>
 
@@ -1695,7 +1695,7 @@ Do the following exercises after you have added product types to
     <span class="inlinecode"><span class="id" title="var">T</span></span> and the existence of subtype relations between their parts. 
 <div class="paragraph"> </div>
 
-<a id="lab340"></a><h4 class="section">Exercise: 2 stars, standard, optional (sub_inversion_Bool)</h4>
+<a id="lab336"></a><h4 class="section">Exercise: 2 stars, standard, optional (sub_inversion_Bool)</h4>
 
 </div>
 <div class="code">
@@ -1718,7 +1718,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab341"></a><h4 class="section">Exercise: 3 stars, standard (sub_inversion_arrow)</h4>
+<a id="lab337"></a><h4 class="section">Exercise: 3 stars, standard (sub_inversion_arrow)</h4>
 
 </div>
 <div class="code">
@@ -1741,7 +1741,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab342"></a><h2 class="section">Canonical Forms</h2>
+<a id="lab338"></a><h2 class="section">Canonical Forms</h2>
 
 <div class="paragraph"> </div>
 
@@ -1774,7 +1774,7 @@ Do the following exercises after you have added product types to
     type. 
 <div class="paragraph"> </div>
 
-<a id="lab343"></a><h4 class="section">Exercise: 3 stars, standard, optional (canonical_forms_of_arrow_types)</h4>
+<a id="lab339"></a><h4 class="section">Exercise: 3 stars, standard, optional (canonical_forms_of_arrow_types)</h4>
 
 </div>
 <div class="code">
@@ -1817,7 +1817,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab344"></a><h2 class="section">Progress</h2>
+<a id="lab340"></a><h2 class="section">Progress</h2>
 
 <div class="paragraph"> </div>
 
@@ -1957,7 +1957,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab345"></a><h2 class="section">Inversion Lemmas for Typing</h2>
+<a id="lab341"></a><h2 class="section">Inversion Lemmas for Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -2047,7 +2047,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab346"></a><h4 class="section">Exercise: 3 stars, standard, optional (typing_inversion_var)</h4>
+<a id="lab342"></a><h4 class="section">Exercise: 3 stars, standard, optional (typing_inversion_var)</h4>
 
 </div>
 <div class="code">
@@ -2063,7 +2063,7 @@ Do the following exercises after you have added product types to
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab347"></a><h4 class="section">Exercise: 3 stars, standard, optional (typing_inversion_app)</h4>
+<a id="lab343"></a><h4 class="section">Exercise: 3 stars, standard, optional (typing_inversion_app)</h4>
 
 </div>
 <div class="code">
@@ -2104,7 +2104,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab348"></a><h2 class="section">Weakening</h2>
+<a id="lab344"></a><h2 class="section">Weakening</h2>
 
 <div class="paragraph"> </div>
 
@@ -2133,7 +2133,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab349"></a><h2 class="section">Substitution</h2>
+<a id="lab345"></a><h2 class="section">Substitution</h2>
 
 <div class="paragraph"> </div>
 
@@ -2163,7 +2163,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab350"></a><h2 class="section">Preservation</h2>
+<a id="lab346"></a><h2 class="section">Preservation</h2>
 
 <div class="paragraph"> </div>
 
@@ -2255,9 +2255,9 @@ Do the following exercises after you have added product types to
        is a type <span class="inlinecode"><span class="id" title="var">S</span></span> such that <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">&lt;:</span> <span class="inlinecode"><span class="id" title="var">T</span></span> and <span class="inlinecode"><span class="id" title="var">empty</span></span> <span class="inlinecode">&#x22A2;</span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">\<span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="var">S</span></span>.  The
        result is immediate by the induction hypothesis for the typing
        subderivation and an application of <span class="inlinecode"><span class="id" title="var">T_Sub</span></span>.  <font size=-2>&#9744;</font> 
+
 </li>
 </ul>
-
 </div>
 <div class="code">
 
@@ -2286,7 +2286,7 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab351"></a><h2 class="section">Records, via Products and Top</h2>
+<a id="lab347"></a><h2 class="section">Records, via Products and Top</h2>
 
 <div class="paragraph"> </div>
 
@@ -2320,11 +2320,11 @@ Do the following exercises after you have added product types to
 </div>
 
 <div class="doc">
-<a id="lab352"></a><h2 class="section">Exercises</h2>
+<a id="lab348"></a><h2 class="section">Exercises</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab353"></a><h4 class="section">Exercise: 2 stars, standard (variations)</h4>
+<a id="lab349"></a><h4 class="section">Exercise: 2 stars, standard (variations)</h4>
  Each part of this problem suggests a different way of changing the
     definition of the STLC with Unit and subtyping.  (These changes
     are not cumulative: each part starts from the original language.)
@@ -2498,11 +2498,11 @@ Do the following exercises after you have added product types to
 
 
 <div class="doc">
-<a id="lab354"></a><h1 class="section">Exercise: Adding Products</h1>
+<a id="lab350"></a><h1 class="section">Exercise: Adding Products</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab355"></a><h4 class="section">Exercise: 5 stars, standard (products)</h4>
+<a id="lab351"></a><h4 class="section">Exercise: 5 stars, standard (products)</h4>
  Adding pairs, projections, and product types to the system we have
     defined is a relatively straightforward matter.  Carry out this
     extension by modifying the definitions and proofs above:
@@ -2593,7 +2593,7 @@ Do the following exercises after you have added product types to
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:35&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:00&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -5,11 +5,13 @@ ALLVFILES := Preface.v Introduction.v Typeclasses.v QC.v TImp.v QuickChickTool.v
 build: Makefile.coq
 	$(MAKE) -f Makefile.coq
 
-clean:
+clean::
 	if [ -e Makefile.coq ]; then $(MAKE) -f Makefile.coq cleanall; fi
 	$(RM) $(wildcard Makefile.coq Makefile.coq.conf) 
 
 Makefile.coq:
 	coq_makefile $(COQMFFLAGS) -o Makefile.coq $(ALLVFILES)
+
+-include Makefile.coq
 
 .PHONY: build clean

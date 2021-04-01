@@ -9,17 +9,20 @@ type sumbool =
 | Left
 | Right
 
-val add : int -> int -> int
-
-val mul : int -> int -> int
-
-val sub : int -> int -> int
-
-val eqb : int -> int -> bool
-
-val leb : int -> int -> bool
-
 val bool_dec : bool -> bool -> sumbool
+
+module Nat :
+ sig
+  val add : int -> int -> int
+
+  val mul : int -> int -> int
+
+  val sub : int -> int -> int
+
+  val eqb : int -> int -> bool
+
+  val leb : int -> int -> bool
+ end
 
 type ascii =
 | Ascii of bool * bool * bool * bool * bool * bool * bool * bool
@@ -61,7 +64,7 @@ val beval : state -> bexp -> bool
 
 type com =
 | CSkip
-| CAss of string * aexp
+| CAsgn of string * aexp
 | CSeq of com * com
 | CIf of bexp * com * com
 | CWhile of bexp * com

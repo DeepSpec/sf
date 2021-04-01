@@ -55,14 +55,14 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing".<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#"><span class="id" title="library">Smallstep</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab216"></a><h1 class="section">Overview</h1>
+<a id="lab217"></a><h1 class="section">Overview</h1>
 
 <div class="paragraph"> </div>
 
@@ -111,7 +111,7 @@
 </span>
 <div class="paragraph"> </div>
 
- The <span class="inlinecode">\</span> symbol in a function abstraction <span class="inlinecode">\<span class="id" title="var">x</span>:<span class="id" title="var">T</span>,<span class="id" title="var">t</span></span> is generally
+ The <span class="inlinecode">\</span> symbol in a function abstraction <span class="inlinecode">\<span class="id" title="var">x</span>:<span class="id" title="var">T</span>,<span class="id" title="var">t</span></span> is usually
     written as a Greek letter "lambda" (hence the name of the
     calculus).  The variable <span class="inlinecode"><span class="id" title="var">x</span></span> is called the <i>parameter</i> to the
     function; the term <span class="inlinecode"><span class="id" title="var">t</span></span> is its <i>body</i>.  The annotation <span class="inlinecode">:<span class="id" title="var">T</span></span>
@@ -119,10 +119,10 @@
     to. 
 <div class="paragraph"> </div>
 
- If you've seen lambda-calculus notation before, you might be
+ If you've seen lambda-calculus notation elsewhere, you might be
     wondering why abstraction is written here as <span class="inlinecode">\<span class="id" title="var">x</span>:<span class="id" title="var">T</span>,<span class="id" title="var">t</span></span> instead of
     the usual "<span class="inlinecode">\<span class="id" title="var">x</span>:<span class="id" title="var">T.t</span></span>". The reason is that some front ends for
-    interacting with Coq use period to separate a file into
+    interacting with Coq use periods to separate a file into
     "sentences" to be passed separately to the Coq top level. 
 <div class="paragraph"> </div>
 
@@ -169,6 +169,9 @@
         <span class="inlinecode"><span class="id" title="var">true</span></span>. 
 </li>
 </ul>
+
+<div class="paragraph"> </div>
+
 
 <div class="paragraph"> </div>
 
@@ -288,13 +291,13 @@
 
 </li>
 <li> <span class="inlinecode">(\<span class="id" title="var">x</span>:<span class="id" title="var">Bool</span>,</span> <span class="inlinecode">\<span class="id" title="var">y</span>:<span class="id" title="var">Bool</span>,</span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> <span class="inlinecode"><span class="id" title="var">false</span></span> <span class="inlinecode"><span class="id" title="var">true</span></span> has type <span class="inlinecode"><span class="id" title="var">Bool</span></span> 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
-<a id="lab217"></a><h1 class="section">Syntax</h1>
+<a id="lab218"></a><h1 class="section">Syntax</h1>
 
 <div class="paragraph"> </div>
 
@@ -307,7 +310,7 @@
 </div>
 
 <div class="doc">
-<a id="lab218"></a><h2 class="section">Types</h2>
+<a id="lab219"></a><h2 class="section">Types</h2>
 
 </div>
 <div class="code">
@@ -319,7 +322,7 @@
 </div>
 
 <div class="doc">
-<a id="lab219"></a><h2 class="section">Terms</h2>
+<a id="lab220"></a><h2 class="section">Terms</h2>
 
 </div>
 <div class="code">
@@ -401,7 +404,7 @@ Note that an abstraction <span class="inlinecode">\<span class="id" title="var">
 </div>
 
 <div class="doc">
-<a id="lab220"></a><h1 class="section">Operational Semantics</h1>
+<a id="lab221"></a><h1 class="section">Operational Semantics</h1>
 
 <div class="paragraph"> </div>
 
@@ -413,7 +416,7 @@ Note that an abstraction <span class="inlinecode">\<span class="id" title="var">
 </div>
 
 <div class="doc">
-<a id="lab221"></a><h2 class="section">Values</h2>
+<a id="lab222"></a><h2 class="section">Values</h2>
 
 <div class="paragraph"> </div>
 
@@ -506,7 +509,7 @@ Finally, we must consider what constitutes a <i>complete</i> program.
 </div>
 
 <div class="doc">
-<a id="lab222"></a><h2 class="section">Substitution</h2>
+<a id="lab223"></a><h2 class="section">Substitution</h2>
 
 <div class="paragraph"> </div>
 
@@ -696,7 +699,7 @@ Note on notations: You might be wondering why we need curly braces
     of this issue. 
 <div class="paragraph"> </div>
 
-<a id="lab223"></a><h4 class="section">Exercise: 3 stars, standard (substi_correct)</h4>
+<a id="lab224"></a><h4 class="section">Exercise: 3 stars, standard (substi_correct)</h4>
  The definition that we gave above uses Coq's <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span> facility
     to define substitution as a <i>function</i>.  Suppose, instead, we
     wanted to define substitution as an inductive <i>relation</i> <span class="inlinecode"><span class="id" title="var">substi</span></span>.
@@ -723,7 +726,7 @@ Note on notations: You might be wondering why we need curly braces
 
 
 <div class="doc">
-<a id="lab224"></a><h2 class="section">Reduction</h2>
+<a id="lab225"></a><h2 class="section">Reduction</h2>
 
 <div class="paragraph"> </div>
 
@@ -860,7 +863,7 @@ Note on notations: You might be wondering why we need curly braces
 </div>
 
 <div class="doc">
-<a id="lab225"></a><h2 class="section">Examples</h2>
+<a id="lab226"></a><h2 class="section">Examples</h2>
 
 <div class="paragraph"> </div>
 
@@ -1003,7 +1006,7 @@ We can use the <span class="inlinecode"><span class="id" title="var">normalize</
 </div>
 
 <div class="doc">
-<a id="lab226"></a><h4 class="section">Exercise: 2 stars, standard (step_example5)</h4>
+<a id="lab227"></a><h4 class="section">Exercise: 2 stars, standard (step_example5)</h4>
  Try to do this one both with and without <span class="inlinecode"><span class="id" title="var">normalize</span></span>. 
 </div>
 <div class="code">
@@ -1024,7 +1027,7 @@ We can use the <span class="inlinecode"><span class="id" title="var">normalize</
 
 
 <div class="doc">
-<a id="lab227"></a><h1 class="section">Typing</h1>
+<a id="lab228"></a><h1 class="section">Typing</h1>
 
 <div class="paragraph"> </div>
 
@@ -1032,7 +1035,7 @@ We can use the <span class="inlinecode"><span class="id" title="var">normalize</
 </div>
 
 <div class="doc">
-<a id="lab228"></a><h2 class="section">Contexts</h2>
+<a id="lab229"></a><h2 class="section">Contexts</h2>
 
 <div class="paragraph"> </div>
 
@@ -1066,7 +1069,7 @@ We can use the <span class="inlinecode"><span class="id" title="var">normalize</
 </div>
 
 <div class="doc">
-<a id="lab229"></a><h2 class="section">Typing Relation</h2>
+<a id="lab230"></a><h2 class="section">Typing Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1161,8 +1164,9 @@ We can use the <span class="inlinecode"><span class="id" title="var">normalize</
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Reserved Notation</span> &quot;Gamma '&#x22A2;' t '&#x2208;' T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 101,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Reserved Notation</span> &quot;Gamma '&#x22A2;' t '&#x2208;' T"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 101,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="STLC.has_type" class="idref" href="#STLC.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="Stlc.html#STLC.context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Stlc.html#STLC.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Stlc.html#STLC.ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="STLC.T_Var" class="idref" href="#STLC.T_Var"><span class="id" title="constructor">T_Var</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:45" class="idref" href="#Gamma:45"><span class="id" title="binder">Gamma</span></a> <a id="x:46" class="idref" href="#x:46"><span class="id" title="binder">x</span></a> <a id="T<sub>1</sub>:47" class="idref" href="#T<sub>1</sub>:47"><span class="id" title="binder">T<sub>1</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Stlc.html#Gamma:45"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="Stlc.html#x:46"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Stlc.html#T<sub>1</sub>:47"><span class="id" title="variable">T<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1189,7 +1193,7 @@ We can use the <span class="inlinecode"><span class="id" title="var">normalize</
 </div>
 
 <div class="doc">
-<a id="lab230"></a><h2 class="section">Examples</h2>
+<a id="lab231"></a><h2 class="section">Examples</h2>
 
 </div>
 <div class="code">
@@ -1244,7 +1248,7 @@ More examples:
 </div>
 
 <div class="doc">
-<a id="lab231"></a><h4 class="section">Exercise: 2 stars, standard, optional (typing_example_2_full)</h4>
+<a id="lab232"></a><h4 class="section">Exercise: 2 stars, standard, optional (typing_example_2_full)</h4>
  Prove the same result without using <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>, or
     <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> (or <span class="inlinecode">...</span>). 
 </div>
@@ -1265,7 +1269,7 @@ More examples:
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab232"></a><h4 class="section">Exercise: 2 stars, standard (typing_example_3)</h4>
+<a id="lab233"></a><h4 class="section">Exercise: 2 stars, standard (typing_example_3)</h4>
  Formally prove the following typing derivation holds:  <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">empty</span> &#x22A2; \<span class="id" title="var">x</span>:<span class="id" title="var">Bool</span>→<span class="id" title="var">B</span>, \<span class="id" title="var">y</span>:<span class="id" title="var">Bool</span>→<span class="id" title="var">Bool</span>, \<span class="id" title="var">z</span>:<span class="id" title="var">Bool</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">y</span> (<span class="id" title="var">x</span> <span class="id" title="var">z</span>)<br/>
@@ -1329,7 +1333,7 @@ More examples:
 </div>
 
 <div class="doc">
-<a id="lab233"></a><h4 class="section">Exercise: 3 stars, standard, optional (typing_nonexample_3)</h4>
+<a id="lab234"></a><h4 class="section">Exercise: 3 stars, standard, optional (typing_nonexample_3)</h4>
  Another nonexample:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;¬(<span class="id" title="tactic">∃</span> <span class="id" title="var">S</span> <span class="id" title="var">T</span>,<br/>
@@ -1354,7 +1358,7 @@ More examples:
 
 <br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:35&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:00&nbsp;*)</span><br/>
 </div>
 </div>
 

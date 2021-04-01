@@ -33,7 +33,7 @@ Fixpoint count (v:nat) (s:bag) : nat :=
 Definition bag_eqv (b1 b2: bag) : Prop :=
   forall n, count n b1 = count n b2. 
 
-(** **** Exercise: 2 stars, standard (bag_eqv_properties)  *)
+(** **** Exercise: 2 stars, standard (bag_eqv_properties) *)
 
 (* It is easy to prove [bag_eqv] is an equivalence relation. *)
 
@@ -67,7 +67,7 @@ Proof.
 Definition is_a_sorting_algorithm' (f: list nat -> list nat) :=
   forall al, bag_eqv al (f al) /\ sorted (f al).
 
-(** **** Exercise: 3 stars, standard (insert_bag) 
+(** **** Exercise: 3 stars, standard (insert_bag)
 
     First, prove the auxiliary lemma [insert_bag], which will be
     useful for proving [sort_bag] below.  Your proof will be by
@@ -78,7 +78,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (sort_bag) 
+(** **** Exercise: 2 stars, standard (sort_bag)
 
     Now prove that sort preserves bag contents. *)
 Theorem sort_bag: forall l, bag_eqv l (sort l).
@@ -93,7 +93,7 @@ Proof.
 split. apply sort_bag. apply sort_sorted.
 Qed.
 
-(** **** Exercise: 1 star, standard (permutations_vs_multiset) 
+(** **** Exercise: 1 star, standard (permutations_vs_multiset)
 
     Compare your proofs of [insert_perm, sort_perm] with your proofs
     of [insert_bag, sort_bag].  Which proofs are simpler?
@@ -121,7 +121,7 @@ Definition manual_grade_for_permutations_vs_multiset : option (nat*string) := No
 
        [Permutation al bl <-> bag_eqv al bl.] *)
 
-(** **** Exercise: 3 stars, standard (perm_bag) 
+(** **** Exercise: 3 stars, standard (perm_bag)
 
     The forward direction is straighforward, by induction on the evidence for
     [Permutation]: *)
@@ -137,13 +137,13 @@ Lemma perm_bag:
     This proof approach is due to Zhong Sheng Hu.
     The first three lemmas are used to prove the fourth one. *)
 
-(** **** Exercise: 2 stars, advanced (bag_nil_inv)  *)
+(** **** Exercise: 2 stars, advanced (bag_nil_inv) *)
 Lemma bag_nil_inv : forall b, bag_eqv [] b -> b = []. 
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (bag_cons_inv)  *)
+(** **** Exercise: 3 stars, advanced (bag_cons_inv) *)
 Lemma bag_cons_inv : forall l x n,
     S n = count x l ->
     exists l1 l2,
@@ -153,14 +153,14 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced (count_insert_other)  *)
+(** **** Exercise: 2 stars, advanced (count_insert_other) *)
 Lemma count_insert_other : forall l1 l2 x y,
     y <> x -> count y (l1 ++ x :: l2) = count y (l1 ++ l2).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (bag_perm)  *)
+(** **** Exercise: 3 stars, advanced (bag_perm) *)
 Lemma bag_perm:
   forall al bl, bag_eqv al bl -> Permutation al bl.
 Proof.
@@ -189,4 +189,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

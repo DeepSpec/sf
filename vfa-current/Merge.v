@@ -66,7 +66,7 @@ Lemma split_len_first_try: forall {X} (l:list X) (l1 l2: list X),
     length l2 <= length l.
 Proof.
   induction l; intros. 
-  - inv H. simpl. omega. 
+  - inv H. simpl. lia. 
   - destruct l as [| x l'].
     + inv H. 
       split; simpl; auto.
@@ -104,11 +104,11 @@ Lemma split_len': list_ind2_principle ->
 Proof.
   unfold list_ind2_principle; intro IP.
   induction l using IP; intros.
-  - inv H. omega.
-  - inv H. simpl; omega.
+  - inv H. lia.
+  - inv H. simpl; lia.
   - inv H. destruct (split l) as [l1' l2']. inv H1. 
     simpl. 
-    destruct (IHl l1' l2') as [P1 P2]; auto; omega.
+    destruct (IHl l1' l2') as [P1 P2]; auto; lia.
 Qed.
 
 (** We still need to prove [list_ind2_principle].  There are several
@@ -153,7 +153,7 @@ Proof.
  apply (@split_len' list_ind2).
 Qed.
 
-(** **** Exercise: 3 stars, standard (split_perm)  *)
+(** **** Exercise: 3 stars, standard (split_perm) *)
 
 (** Here's another fact about [split] that we will find useful later on.  
 *)
@@ -274,13 +274,13 @@ Proof.
       is known. *)
   bdestruct (x1 <=? x2).
   - auto.
-  - (* Since [H] and [H0] are contradictory, this case follows by [omega].
+  - (* Since [H] and [H0] are contradictory, this case follows by [lia].
        But (ignoring that for the moment), note that we can get further 
        simplification to occur if we give some structure to [l2]: *)
     simpl. (* does nothing *)
     destruct r2; simpl.  (* makes some progress *)
-    + omega.
-    + omega. 
+    + lia.
+    + lia. 
 Qed.  
 
 Lemma merge_nil_l : forall l, merge [] l = l. 
@@ -375,14 +375,14 @@ Function mergesort (l: list nat) {measure length l} :  list nat :=
 Proof.
   - (* recursive call on l1 *)
     intros.
-    simpl in *.  destruct (split l1) as [l1' l2'] eqn:E. inv teq1. 
+    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. simpl. 
     destruct (split_len _ _ _ E).
-    simpl. omega.
+    lia.
   - (* recursive call on l2 *)
     intros.
-    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. 
+    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. simpl. 
     destruct (split_len _ _ _ E).
-    simpl. omega.
+    lia.
 Defined.
 
 (** Notice that the [Proof] must end with the keyword [Defined] rather
@@ -457,7 +457,7 @@ Check mergesort_ind.
     It is perhaps easiest to break out a sub-lemma first:
 *)
 
-(** **** Exercise: 2 stars, standard (sorted_merge1)  *)
+(** **** Exercise: 2 stars, standard (sorted_merge1) *)
 Lemma sorted_merge1 : forall x x1 l1 x2 l2,
     x <= x1 -> x <= x2 -> 
     sorted (merge (x1::l1) (x2::l2)) ->
@@ -466,7 +466,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (sorted_merge)  *)
+(** **** Exercise: 4 stars, standard (sorted_merge) *)
 Lemma sorted_merge : forall l1, sorted l1 ->
                      forall l2, sorted l2 ->
                      sorted (merge l1 l2).
@@ -477,7 +477,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (mergesort_sorts)  *)
+(** **** Exercise: 2 stars, standard (mergesort_sorts) *)
 Lemma mergesort_sorts: forall l, sorted (mergesort l).
 Proof. 
   apply mergesort_ind; intros. (* Note that we use the special induction principle. *)
@@ -497,7 +497,7 @@ Proof.
     (I'm not sure!)
 *)
 
-(** **** Exercise: 3 stars, advanced (merge_perm)  *)
+(** **** Exercise: 3 stars, advanced (merge_perm) *)
 Lemma merge_perm: forall (l1 l2: list nat),
     Permutation (l1 ++ l2) (merge l1 l2).
 Proof. 
@@ -505,7 +505,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (mergesort_perm)  *)
+(** **** Exercise: 3 stars, advanced (mergesort_perm) *)
 Lemma mergesort_perm: forall l, Permutation l (mergesort l).
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -523,4 +523,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

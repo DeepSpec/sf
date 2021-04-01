@@ -188,8 +188,8 @@ idtac " ".
 idtac "#> If1.if1true_test".
 idtac "Possible points: 1".
 check_type @If1.if1true_test (
-(If1.ceval (If1.CIf1 <{ (AId X) = (ANum 0) }> (If1.CAss X (ANum 1))) empty_st
-   (X !-> 1))).
+(If1.ceval (If1.CIf1 <{ (AId X) = (ANum 0) }> (If1.CAsgn X (ANum 1)))
+   empty_st (X !-> 1))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions If1.if1true_test.
@@ -199,7 +199,7 @@ idtac " ".
 idtac "#> If1.if1false_test".
 idtac "Possible points: 1".
 check_type @If1.if1false_test (
-(If1.ceval (If1.CIf1 <{ (AId X) = (ANum 0) }> (If1.CAss X (ANum 1)))
+(If1.ceval (If1.CIf1 <{ (AId X) = (ANum 0) }> (If1.CAsgn X (ANum 1)))
    (X !-> 2) (X !-> 2))).
 idtac "Assumptions:".
 Abort.
@@ -227,7 +227,7 @@ check_type @If1.hoare_if1_good (
       (fun st0 : state =>
        (Aexp_of_aexp (AId X) st0 + Aexp_of_aexp (AId Y) st0)%nat) st =
     Aexp_of_aexp (AId Z) st)
-   (If1.CIf1 <{ ~ (AId Y) = (ANum 0) }> (If1.CAss X <{ (AId X) + (AId Y) }>))
+   (If1.CIf1 <{ ~ (AId Y) = (ANum 0) }> (If1.CAsgn X <{ (AId X) + (AId Y) }>))
    (fun st : state => Aexp_of_aexp (AId X) st = Aexp_of_aexp (AId Z) st))).
 idtac "Assumptions:".
 Abort.
@@ -266,7 +266,7 @@ idtac "Possible points: 3".
 check_type @Himp.havoc_post (
 (forall (P : Assertion) (X : String.string),
  Himp.hoare_triple P (Himp.CHavoc X)
-   (fun st : state => exists n : nat, (P [X |-> ANum n]) st))).
+   (fun st : state => exists n : nat, (P [X |-> (ANum n)]) st))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Himp.havoc_post.
@@ -332,4 +332,6 @@ idtac "---------- hoare_repeat ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2020-11-05 12:36 *)
+(* 2021-04-01 20:01 *)
+
+(* 2021-04-01 20:01 *)

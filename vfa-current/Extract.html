@@ -173,9 +173,9 @@ Of course, for that extraction to be meaningful, we would need
       dangerous! If our axioms are inconsistent, we can prove anything
       at all. If they are not faithful to OCaml, our proofs will be
       meaningless. 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
@@ -333,7 +333,7 @@ Now we upgrade <span class="inlinecode"><span class="id" title="var">bdall</span
 &nbsp;&nbsp;| &#x22A2; <span class="id" title="keyword">context</span> [ <span class="id" title="keyword">if</span> <a class="idref" href="Extract.html#leb"><span class="id" title="axiom">leb</span></a> ?<span class="id" title="var">X</span> ?<span class="id" title="var">Y</span> <span class="id" title="keyword">then</span> <span class="id" title="var">_</span> <span class="id" title="keyword">else</span> <span class="id" title="var">_</span>] ⇒ <span class="id" title="var">bdestruct</span> (<a class="idref" href="Extract.html#leb"><span class="id" title="axiom">leb</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>)<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">bdall</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">simpl</span>; <span class="id" title="var">bdestruct_guard</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">omega</span>; <span class="id" title="tactic">auto</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">simpl</span>; <span class="id" title="var">bdestruct_guard</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">lia</span>; <span class="id" title="tactic">auto</span>).<br/>
 </div>
 
 <div class="doc">
@@ -362,7 +362,7 @@ Now we upgrade <span class="inlinecode"><span class="id" title="var">bdall</span
 <div class="doc">
 Again, for that extraction to be meaningful, we need to prove that
     <span class="inlinecode"><span class="id" title="var">sort_int</span></span> is a sorting algorithm.  We can do that with the same
-    techniques we used in <a href="Sort.html"><span class="inlineref">Sort</span></a>.  In particular, <span class="inlinecode"><span class="id" title="tactic">omega</span></span> works
+    techniques we used in <a href="Sort.html"><span class="inlineref">Sort</span></a>.  In particular, <span class="inlinecode"><span class="id" title="var">lia</span></span> works
     with <span class="inlinecode"><span class="id" title="var">Z</span></span>, so we can enjoy automation without having to do any
     unnecessary work axiomatizing and proving lemmas about <span class="inlinecode"><span class="id" title="var">int</span></span>. 
 </div>
@@ -556,7 +556,7 @@ Insert and lookup 20000 consecutive integers in 0.387535 seconds.
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:39&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:04&nbsp;*)</span><br/>
 </div>
 </div>
 

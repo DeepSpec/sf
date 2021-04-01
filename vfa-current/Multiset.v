@@ -58,7 +58,7 @@ Definition singleton (v: value) : multiset :=
 Definition union (a b : multiset) : multiset :=
   fun x => a x + b x.
 
-(** **** Exercise: 1 star, standard (union_assoc)  *)
+(** **** Exercise: 1 star, standard (union_assoc) *)
 
 (** Prove that multiset union is associative.
 
@@ -76,7 +76,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (union_comm)  *)
+(** **** Exercise: 1 star, standard (union_comm) *)
 
 (** Prove that multiset union is commutative. *)
 
@@ -86,7 +86,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (union_swap)  *)
+(** **** Exercise: 2 stars, standard (union_swap) *)
 
 (** Prove that the multisets in a nested union can be swapped.
     You do not need [extensionality] if you use the previous
@@ -151,7 +151,7 @@ Definition is_a_sorting_algorithm' (f: list nat -> list nat) := forall al,
 (** The following series of exercises will take you through a
     verification of insertion sort using multisets. *)
 
-(** **** Exercise: 3 stars, standard (insert_contents)  *)
+(** **** Exercise: 3 stars, standard (insert_contents) *)
 
 (** Prove that insertion sort's [insert] function produces the same
     contents as merely prepending the inserted element to the front of
@@ -167,7 +167,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (sort_contents)  *)
+(** **** Exercise: 2 stars, standard (sort_contents) *)
 
 (** Prove that insertion sort preserves contents. Proceed by
     induction.  Make use of [insert_contents]. *)
@@ -179,7 +179,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (insertion_sort_correct)  *)
+(** **** Exercise: 1 star, standard (insertion_sort_correct) *)
 
 (** Finish the proof of correctness! *)
 
@@ -190,7 +190,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (permutations_vs_multiset) 
+(** **** Exercise: 1 star, standard (permutations_vs_multiset)
 
     Compare your proofs of [insert_perm, sort_perm] with your proofs
     of [insert_contents, sort_contents].  Which proofs are simpler?
@@ -232,7 +232,7 @@ Definition manual_grade_for_permutations_vs_multiset : option (nat*string) := No
 (* ================================================================= *)
 (** ** The Forward Direction *)
 
-(** **** Exercise: 3 stars, standard (perm_contents)  *)
+(** **** Exercise: 3 stars, standard (perm_contents) *)
 
 (** The forward direction is the easier one. Proceed by induction on
     the evidence for [Permutation al bl]: *)
@@ -253,13 +253,13 @@ Proof.
     [singleton], and [empty] must be explicitly unfolded to access
     their definitions. *)
 
-(** **** Exercise: 2 stars, advanced (contents_nil_inv)  *)
+(** **** Exercise: 2 stars, advanced (contents_nil_inv) *)
 Lemma contents_nil_inv : forall l, (forall x, 0 = contents l x) -> l = nil.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (contents_cons_inv)  *)
+(** **** Exercise: 3 stars, advanced (contents_cons_inv) *)
 Lemma contents_cons_inv : forall l x n,
     S n = contents l x ->
     exists l1 l2,
@@ -269,14 +269,14 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced (contents_insert_other)  *)
+(** **** Exercise: 2 stars, advanced (contents_insert_other) *)
 Lemma contents_insert_other : forall l1 l2 x y,
     y <> x -> contents (l1 ++ x :: l2) y = contents (l1 ++ l2) y.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (contents_perm)  *)
+(** **** Exercise: 3 stars, advanced (contents_perm) *)
 Lemma contents_perm: forall al bl,
     contents al = contents bl -> Permutation al bl.
 Proof.
@@ -294,7 +294,7 @@ Proof.
 (** With both directions proved, we can establish the correspondence
     between multisets and permutations. *)
 
-(** **** Exercise: 1 star, standard (same_contents_iff_perm)  *)
+(** **** Exercise: 1 star, standard (same_contents_iff_perm) *)
 
 (** Use [contents_perm] (even if you haven't proved it) and
     [perm_contents] to quickly prove the next theorem. *)
@@ -308,7 +308,7 @@ Proof.
 
 (** Therefore the two specifications are equivalent. *)
 
-(** **** Exercise: 2 stars, standard (sort_specifications_equivalent)  *)
+(** **** Exercise: 2 stars, standard (sort_specifications_equivalent) *)
 
 Theorem sort_specifications_equivalent: forall sort,
     is_a_sorting_algorithm sort <-> is_a_sorting_algorithm' sort.
@@ -320,4 +320,4 @@ Proof.
 (** That means we can verify sorting algorithms using either
     permutations or multisets, whichever we find more convenient. *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

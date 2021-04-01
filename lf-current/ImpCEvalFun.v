@@ -12,6 +12,9 @@
 
 From Coq Require Import Lia.
 From Coq Require Import Arith.Arith.
+From Coq Require Import Arith.PeanoNat.
+Import Nat.
+From Coq Require Import Arith.EqNat.
 From LF Require Import Imp Maps.
 
 (** Here was our first try at an evaluation function for commands,
@@ -198,7 +201,7 @@ Example example_test_ceval :
      = Some (2, 0, 4).
 Proof. reflexivity. Qed.
 
-(** **** Exercise: 2 stars, standard, especially useful (pup_to_n) 
+(** **** Exercise: 2 stars, standard, especially useful (pup_to_n)
 
     Write an Imp program that sums the numbers from [1] to
    [X] (inclusive: [1 + 2 + ... + X]) in the variable [Y].  Make sure
@@ -207,16 +210,16 @@ Proof. reflexivity. Qed.
 Definition pup_to_n : com
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-(* 
-
 Example pup_to_n_1 :
   test_ceval (X !-> 5) pup_to_n
   = Some (0, 15, 0).
+(* FILL IN HERE *) Admitted.
+(* 
 Proof. reflexivity. Qed.
 *)
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (peven) 
+(** **** Exercise: 2 stars, standard, optional (peven)
 
     Write an [Imp] program that sets [Z] to [0] if [X] is even and
     sets [Z] to [1] otherwise.  Use [test_ceval] to test your
@@ -254,7 +257,7 @@ Proof.
     destruct c;
            simpl in H; inversion H; subst; clear H.
       + (* skip *) apply E_Skip.
-      + (* := *) apply E_Ass. reflexivity.
+      + (* := *) apply E_Asgn. reflexivity.
 
       + (* ; *)
         destruct (ceval_step st c1 i') eqn:Heqr1.
@@ -287,7 +290,7 @@ Proof.
           injection H1 as H2. rewrite <- H2.
           apply E_WhileFalse. apply Heqr. Qed.
 
-(** **** Exercise: 4 stars, standard (ceval_step__ceval_inf) 
+(** **** Exercise: 4 stars, standard (ceval_step__ceval_inf)
 
     Write an informal proof of [ceval_step__ceval], following the
     usual template.  (The template for case analysis on an inductively
@@ -346,7 +349,7 @@ induction i1 as [|i1']; intros i2 st st' c Hle Hceval.
       * (* i1'o = None *)
         simpl in Hceval. discriminate Hceval.  Qed.
 
-(** **** Exercise: 3 stars, standard, especially useful (ceval__ceval_step) 
+(** **** Exercise: 3 stars, standard, especially useful (ceval__ceval_step)
 
     Finish the following proof.  You'll need [ceval_step_more] in a
     few places, as well as some basic facts about [<=] and [plus]. *)
@@ -390,4 +393,4 @@ Proof.
   rewrite E1 in E2. inversion E2. reflexivity.
   lia. lia.  Qed.
 
-(* 2020-11-05 12:33 *)
+(* 2021-04-01 19:59 *)

@@ -7,7 +7,7 @@
     presentation here is somewhat terse.  We just comment where things
     are nonstandard. *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
@@ -293,7 +293,7 @@ Qed.
     benefit, make sure you also understand how to prove them on
     paper! *)
 
-(** **** Exercise: 2 stars, standard (subtyping_example_1)  *)
+(** **** Exercise: 2 stars, standard (subtyping_example_1) *)
 Example subtyping_example_1 :
   TRcd_kj <: TRcd_j.
 (* {k:A->A,j:B->B} <: {j:B->B} *)
@@ -301,7 +301,7 @@ Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (subtyping_example_2)  *)
+(** **** Exercise: 1 star, standard (subtyping_example_2) *)
 Example subtyping_example_2 :
   <{{ Top -> TRcd_kj }}> <:
           <{{ (C -> C) -> TRcd_j }}>.
@@ -309,7 +309,7 @@ Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (subtyping_example_3)  *)
+(** **** Exercise: 1 star, standard (subtyping_example_3) *)
 Example subtyping_example_3 :
   <{{ nil -> (j : A :: nil) }}> <:
           <{{ (k : B :: nil) -> nil }}>.
@@ -318,7 +318,7 @@ Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (subtyping_example_4)  *)
+(** **** Exercise: 2 stars, standard (subtyping_example_4) *)
 Example subtyping_example_4 :
   <{{ x : A :: y : B :: z : C :: nil }}> <:
   <{{ z : C :: y : B :: x : A :: nil }}>.
@@ -404,7 +404,7 @@ Proof with (eauto using wf_rcd_lookup).
     + (* subtype *)
       inversion H. subst. inversion H5. subst...  Qed.
 
-(** **** Exercise: 3 stars, standard (rcd_types_match_informal) 
+(** **** Exercise: 3 stars, standard (rcd_types_match_informal)
 
     Write a careful informal proof of the [rcd_types_match]
     lemma. *)
@@ -418,7 +418,7 @@ Definition manual_grade_for_rcd_types_match_informal : option (nat*string) := No
 (* ----------------------------------------------------------------- *)
 (** *** Inversion Lemmas *)
 
-(** **** Exercise: 3 stars, standard, optional (sub_inversion_arrow)  *)
+(** **** Exercise: 3 stars, standard, optional (sub_inversion_arrow) *)
 Lemma sub_inversion_arrow : forall U V1 V2,
      U <: <{{ V1 -> V2 }}> ->
      exists U1 U2,
@@ -480,7 +480,7 @@ Hint Constructors has_type : core.
 Module Examples2.
 Import Examples.
 
-(** **** Exercise: 1 star, standard (typing_example_0)  *)
+(** **** Exercise: 1 star, standard (typing_example_0) *)
 Definition trcd_kj :=
   <{ k := (\z : A, z) :: j := (\z : B, z) :: nil }>.
 
@@ -491,7 +491,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (typing_example_1)  *)
+(** **** Exercise: 2 stars, standard (typing_example_1) *)
 Example typing_example_1 :
   empty |- (\x : TRcd_j, x --> j) trcd_kj \in (B -> B).
 (* empty |- (\x:{k:A->A,j:B->B}. x.j)
@@ -501,7 +501,7 @@ Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (typing_example_2)  *)
+(** **** Exercise: 2 stars, standard, optional (typing_example_2) *)
 Example typing_example_2 :
   empty |- (\ z : (C -> C) -> TRcd_j, (z (\ x : C, x) ) --> j )
             ( \z : (C -> C), trcd_kj ) \in (B -> B).
@@ -572,7 +572,7 @@ Proof with eauto.
 (* ----------------------------------------------------------------- *)
 (** *** Progress *)
 
-(** **** Exercise: 3 stars, standard (canonical_forms_of_arrow_types)  *)
+(** **** Exercise: 3 stars, standard (canonical_forms_of_arrow_types) *)
 Lemma canonical_forms_of_arrow_types : forall Gamma s T1 T2,
      Gamma |- s \in (T1 -> T2) ->
      value s ->
@@ -871,4 +871,4 @@ Proof with eauto.
 
 End RecordSub.
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

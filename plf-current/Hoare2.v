@@ -1,8 +1,6 @@
 (** * Hoare2: Hoare Logic, Part II *)
 
-
-
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From Coq Require Import Bool.Bool.
@@ -19,10 +17,10 @@ From PLF Require Import Hoare.
 (** The beauty of Hoare Logic is that it is _compositional_: the
     structure of proofs exactly follows the structure of programs.
 
-    It follows that, as we saw in [Hoare], we can record the
-    essential ideas of a proof (informally, and leaving out some
-    low-level calculational details) by "decorating" a program with
-    appropriate assertions on each of its commands.
+    As we saw in [Hoare], we can record the essential ideas of a
+    proof (informally, and leaving out some low-level calculational
+    details) by "decorating" a program with appropriate assertions on
+    each of its commands.
 
     Such a _decorated program_ carries within it an argument for its
     own correctness. *)
@@ -257,7 +255,7 @@ These decorations were constructed as follows:
     arbitrary natural numbers [n] and [m] (for example, [3 - 5 + 5 =
     5]). *)
 
-(** **** Exercise: 2 stars, standard (if_minus_plus_reloaded) 
+(** **** Exercise: 2 stars, standard (if_minus_plus_reloaded)
 
     Fill in valid decorations for the following program:
 
@@ -319,11 +317,11 @@ Definition manual_grade_for_decorations_in_if_minus_plus_reloaded : option (nat*
    Finally we check that the implications do hold; both are trivial. *)
 
 (** From an informal proof in the form of a decorated program, it is
-    easy to read off a formal proof using the Coq versions of the
-    Hoare rules.  Note that we do _not_ unfold the definition of
-    [hoare_triple] anywhere in this proof -- the idea is to use the
-    Hoare rules as a self-contained logic for reasoning about
-    programs. *)
+    easy to read off a formal proof using the Coq theorems
+    corresponding to the Hoare Logic rules.  Note that we do _not_
+    unfold the definition of [hoare_triple] anywhere in this proof:
+    the point of the game is to use the Hoare rules as a
+    self-contained logic for reasoning about programs. *)
 
 Definition reduce_to_zero' : com :=
   <{ while ~(X = 0) do
@@ -378,7 +376,7 @@ Abort.
     You don't need to understand the details of it. Briefly, it uses
     [split] repeatedly to turn all the conjunctions into separate
     subgoals, tries to use several theorems about booleans
-    and (in)equalities, then uses [eauto] and [omega] to finish off as
+    and (in)equalities, then uses [eauto] and [lia] to finish off as
     many subgoals as possible. What's left after [verify] does its
     thing is just the "interesting parts" of checking that the
     assertions correct --which might be nothing. *)
@@ -538,7 +536,7 @@ Qed.
 
     This leads to the following skeleton:
 
-        (1)      {{ X = m /\ Y = n }}  ->>             (a)
+        (1)      {{ X = m /\ Y = n }}  ->>               (a)
         (2)      {{ Inv }}
                while ~(X = 0) do
         (3)        {{ Inv /\ X <> 0 }}  ->>              (c)
@@ -661,7 +659,7 @@ Qed.
 (* ================================================================= *)
 (** ** Exercise: Slow Assignment *)
 
-(** **** Exercise: 2 stars, standard (slow_assignment) 
+(** **** Exercise: 2 stars, standard (slow_assignment)
 
     A roundabout way of assigning a number currently stored in [X] to
     the variable [Y] is to start [Y] at [0], then decrement [X] until
@@ -688,7 +686,7 @@ Definition manual_grade_for_decorations_in_slow_assignment : option (nat*string)
 (* ================================================================= *)
 (** ** Exercise: Slow Addition *)
 
-(** **** Exercise: 3 stars, standard, optional (add_slowly_decoration) 
+(** **** Exercise: 3 stars, standard, optional (add_slowly_decoration)
 
     The following program adds the variable X into the variable Z
     by repeatedly decrementing X and incrementing Z.
@@ -756,7 +754,7 @@ Fixpoint parity x :=
     [parity]).  For verifying (c), we observe that, when [2 <= X], we
     have [parity X = parity (X-2)]. *)
 
-(** **** Exercise: 3 stars, standard, optional (parity_formal) 
+(** **** Exercise: 3 stars, standard, optional (parity_formal)
 
     Translate the above informal decorated program into a formal proof
     in Coq. Your proof should use the Hoare logic rules and should not
@@ -837,7 +835,7 @@ Proof.
     Looking at condition (c), we see that the second conjunct of (4)
     is almost the same as the first conjunct of (5), except that (4)
     mentions [X] while (5) mentions [m]. But note that [X] is never
-    assigned in this program, so we should always have [X=m]; we
+    assigned in this program, so we should always have [X=m]. We
     didn't propagate this information from (1) into the loop
     invariant, but we could!
 
@@ -945,7 +943,7 @@ Proof.
 (* ================================================================= *)
 (** ** Exercise: Factorial *)
 
-(** **** Exercise: 3 stars, standard (factorial) 
+(** **** Exercise: 3 stars, standard (factorial)
 
     Recall that [n!] denotes the factorial of [n] (i.e., [n! =
     1*2*...*n]).  Here is an Imp program that calculates the factorial
@@ -991,7 +989,7 @@ Definition manual_grade_for_decorations_in_factorial : option (nat*string) := No
 (* ================================================================= *)
 (** ** Exercise: Min *)
 
-(** **** Exercise: 3 stars, standard (Min_Hoare)  *)
+(** **** Exercise: 3 stars, standard (Min_Hoare) *)
 
 (** Fill in valid decorations for the following program, and justify
     the uses of [->>].  As in [factorial], be careful about natural
@@ -1034,7 +1032,7 @@ Definition manual_grade_for_decorations_in_factorial : option (nat*string) := No
 Definition manual_grade_for_decorations_in_Min_Hoare : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (two_loops) 
+(** **** Exercise: 3 stars, standard (two_loops)
 
     Here is a very inefficient way of adding 3 numbers:
 
@@ -1090,7 +1088,7 @@ Definition manual_grade_for_decorations_in_two_loops : option (nat*string) := No
 (* ================================================================= *)
 (** ** Exercise: Power Series *)
 
-(** **** Exercise: 4 stars, standard, optional (dpow2_down) 
+(** **** Exercise: 4 stars, standard, optional (dpow2_down)
 
     Here is a program that computes the series:
     [1 + 2 + 2^2 + ... + 2^m = 2^(m+1) - 1]
@@ -1163,7 +1161,7 @@ Definition is_wp P c Q :=
   {{P}} c {{Q}} /\
   forall P', {{P'}} c {{Q}} -> (P' ->> P).
 
-(** **** Exercise: 1 star, standard, optional (wp) 
+(** **** Exercise: 1 star, standard, optional (wp)
 
     What are weakest preconditions of the following commands
     for the following postconditions?
@@ -1190,7 +1188,7 @@ Definition is_wp P c Q :=
 
     [] *)
 
-(** **** Exercise: 3 stars, advanced, optional (is_wp_formal) 
+(** **** Exercise: 3 stars, advanced, optional (is_wp_formal)
 
     Prove formally, using the definition of [hoare_triple], that [Y <= 4]
     is indeed a weakest precondition of [X ::= Y + 1] with respect to
@@ -1202,7 +1200,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced, optional (hoare_asgn_weakest) 
+(** **** Exercise: 2 stars, advanced, optional (hoare_asgn_weakest)
 
     Show that the precondition in the rule [hoare_asgn] is in fact the
     weakest precondition. *)
@@ -1213,7 +1211,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced, optional (hoare_havoc_weakest) 
+(** **** Exercise: 2 stars, advanced, optional (hoare_havoc_weakest)
 
     Show that your [havoc_pre] function from the [himp_hoare] exercise
     in the [Hoare] chapter returns a weakest precondition. *)
@@ -1391,7 +1389,7 @@ Fixpoint extract (d : dcom) : com :=
   match d with
   | DCSkip _           => CSkip
   | DCSeq d1 d2        => CSeq (extract d1) (extract d2)
-  | DCAsgn X a _       => CAss X a
+  | DCAsgn X a _       => CAsgn X a
   | DCIf b _ d1 _ d2 _ => CIf b (extract d1) (extract d2)
   | DCWhile b _ d _    => CWhile b (extract d)
   | DCPre _ d          => extract d
@@ -1416,12 +1414,12 @@ Qed.
 Fixpoint post (d : dcom) : Assertion :=
   match d with
   | DCSkip P                => P
-  | DCSeq d1 d2             => post d2
-  | DCAsgn X a Q            => Q
-  | DCIf  _ _ d1 _ d2 Q     => Q
-  | DCWhile b Pbody c Ppost => Ppost
+  | DCSeq _ d2              => post d2
+  | DCAsgn _ _ Q            => Q
+  | DCIf  _ _ _ _ _ Q       => Q
+  | DCWhile _ _ _ Q         => Q
   | DCPre _ d               => post d
-  | DCPost c Q              => Q
+  | DCPost _ Q              => Q
   end.
 
 Definition pre_dec (dec : decorated) : Assertion :=
@@ -1562,16 +1560,25 @@ Qed.
     big, and they contain many conjuncts that are essentially trivial.
     Our [verify_assn] can often take care of them. *)
 
-Example vc_dec_while :
-  verification_conditions_dec dec_while =
-    ((((fun _ : state => True) ->> (fun _ : state => True)) /\
-    ((fun st : state => True /\ negb (st X =? 0) = true) ->>
-     (fun st : state => True /\ st X <> 0)) /\
-    ((fun st : state => True /\ negb (st X =? 0) <> true) ->>
-     (fun st : state => True /\ st X = 0)) /\
-    (fun st : state => True /\ st X <> 0) ->> (fun _ : state => True) [X |-> X - 1]) /\
-   (fun st : state => True /\ st X = 0) ->> (fun st : state => st X = 0)).
-Proof. verify_assn. Qed.
+Eval simpl in verification_conditions_dec dec_while. 
+
+(* ==> 
+  =  (((fun _ : state => True) ->> 
+              (fun _ : state => True)) /\
+     ((fun st : state => True /\ negb (st X =? 0) = true) ->> 
+              (fun st : state => True /\ st X <> 0)) /\
+     ((fun st : state => True /\ negb (st X =? 0) <> true) ->> 
+              (fun st : state => True /\ st X = 0)) /\
+     (fun st : state => True /\ st X <> 0) ->> 
+              (fun _ : state => True) [X |-> X - 1]) /\
+      (fun st : state => True /\ st X = 0) ->> 
+              (fun st : state => st X = 0)
+   : Prop
+
+*)
+
+Example vc_dec_while : verification_conditions_dec dec_while. 
+Proof.  verify_assn. Qed.
 
 (* ================================================================= *)
 (** ** Automation *)
@@ -1588,8 +1595,8 @@ Theorem Dec_while_correct :
   dec_correct dec_while.
 Proof. verify. Qed.
 
-(** Let's use that automation to verify formal decorated programs
-    corresponding to informal ones we have seen. *)
+(** Let's use all this automation to verify formal decorated programs
+    corresponding to some of the informal ones we have seen. *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Slow Subtraction *)
@@ -1703,7 +1710,7 @@ Proof. intros. lia. Qed.
 Lemma l2 : forall m,
   ev m ->
   ev (m + 2).
-Proof. intros. rewrite plus_comm. simpl. constructor. assumption. Qed.
+Proof. intros. rewrite add_comm. simpl. constructor. assumption. Qed.
 
 Lemma l3' : forall m,
   ev m ->
@@ -1988,7 +1995,7 @@ Proof.
   - (* 1 *)
     rewrite pow2_plus_1. rewrite <- H0. reflexivity.
   - (* 2 *)
-    rewrite <- plus_n_O.
+    rewrite -> add_0_r.
     rewrite <- pow2_plus_1. remember (st X) as x.
     replace (pow2 (x + 1) - 1 + pow2 (x + 1))
        with (pow2 (x + 1) + pow2 (x + 1) - 1) by lia.
@@ -1996,7 +2003,7 @@ Proof.
     replace (x + 1 + 1) with (x + 2) by lia.
     reflexivity.
   - (* 3 *)
-    rewrite <- plus_n_O. rewrite <- pow2_plus_1.
+    rewrite -> add_0_r. rewrite <- pow2_plus_1.
     reflexivity.
   - (* 4 *)
     replace (st X + 1 + 1) with (st X + 2) by lia.
@@ -2006,7 +2013,7 @@ Qed.
 (* ================================================================= *)
 (** ** Further Exercises *)
 
-(** **** Exercise: 3 stars, advanced (slow_assignment_dec) 
+(** **** Exercise: 3 stars, advanced (slow_assignment_dec)
 
     Transform the informal decorated program your wrote for
     [slow_assignment] into a formal decorated program.  If all goes
@@ -2039,7 +2046,7 @@ Proof. (* FILL IN HERE *) Admitted.
 Definition manual_grade_for_check_defn_of_slow_assignment_dec : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced (factorial_dec)  
+(** **** Exercise: 4 stars, advanced (factorial_dec) 
 
     The factorial function is defined recursively in the Coq standard
     library in a way that is equivalent to the following:
@@ -2076,7 +2083,7 @@ Compute fact 5. (* ==> 120 *)
 Definition manual_grade_for_factorial_dec : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced, optional (fib_eqn) 
+(** **** Exercise: 2 stars, advanced, optional (fib_eqn)
 
     The Fibonacci function is usually written like this:
 
@@ -2109,7 +2116,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced, optional (fib) 
+(** **** Exercise: 4 stars, advanced, optional (fib)
 
     The following Imp program leaves the value of [fib n] in the
     variable [Y] when it terminates:
@@ -2143,7 +2150,7 @@ Theorem dfib_correct : forall n,
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced, optional (improve_dcom) 
+(** **** Exercise: 5 stars, advanced, optional (improve_dcom)
 
     The formal decorated programs defined in this section are intended
     to look as similar as possible to the informal ones defined earlier
@@ -2158,4 +2165,4 @@ Theorem dfib_correct : forall n,
 
     [] *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

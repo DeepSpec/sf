@@ -37,7 +37,7 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing".<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
 </div>
 
@@ -52,9 +52,9 @@
 
 </li>
 <li> booleans (<span class="inlinecode"><span class="id" title="var">bool</span></span>) such as <span class="inlinecode"><span class="id" title="var">a</span>&lt;?<span class="id" title="var">b</span></span> (which is Notation for <span class="inlinecode"><span class="id" title="var">ltb</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span>). 
+
 </li>
 </ul>
-
 </div>
 <div class="code">
 
@@ -226,8 +226,8 @@ Let's consider <span class="inlinecode"><span class="id" title="var">sumbool</sp
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="ScratchPad.t1" class="idref" href="#ScratchPad.t1"><span class="id" title="definition">t<sub>1</sub></span></a> := <a class="idref" href="Decide.html#ScratchPad.sumbool"><span class="id" title="inductive">sumbool</span></a> (3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a>7) (3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a>2).<br/>
-<span class="id" title="keyword">Lemma</span> <a id="ScratchPad.less37" class="idref" href="#ScratchPad.less37"><span class="id" title="lemma">less37</span></a>: 3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a>7. <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">omega</span>. <span class="id" title="keyword">Qed</span>.<br/>
-<span class="id" title="keyword">Lemma</span> <a id="ScratchPad.greater23" class="idref" href="#ScratchPad.greater23"><span class="id" title="lemma">greater23</span></a>: 3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a>2. <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">omega</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="ScratchPad.less37" class="idref" href="#ScratchPad.less37"><span class="id" title="lemma">less37</span></a>: 3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a>7. <span class="id" title="keyword">Proof</span>. <span class="id" title="var">lia</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="ScratchPad.greater23" class="idref" href="#ScratchPad.greater23"><span class="id" title="lemma">greater23</span></a>: 3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a>2. <span class="id" title="keyword">Proof</span>. <span class="id" title="var">lia</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="ScratchPad.v1a" class="idref" href="#ScratchPad.v1a"><span class="id" title="definition">v1a</span></a>: <a class="idref" href="Decide.html#ScratchPad.t1"><span class="id" title="definition">t<sub>1</sub></span></a> := <a class="idref" href="Decide.html#ScratchPad.left"><span class="id" title="constructor">left</span></a> (3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a>7) (3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a>2) <a class="idref" href="Decide.html#ScratchPad.less37"><span class="id" title="lemma">less37</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="ScratchPad.v1b" class="idref" href="#ScratchPad.v1b"><span class="id" title="definition">v1b</span></a>: <a class="idref" href="Decide.html#ScratchPad.t1"><span class="id" title="definition">t<sub>1</sub></span></a> := <a class="idref" href="Decide.html#ScratchPad.right"><span class="id" title="constructor">right</span></a> (3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a>7) (3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a>2) <a class="idref" href="Decide.html#ScratchPad.greater23"><span class="id" title="lemma">greater23</span></a>.<br/>
 </div>
@@ -577,7 +577,7 @@ This <span class="inlinecode"><span class="id" title="tactic">compute</span></sp
 *)</span><br/>
 <span class="id" title="tactic">destruct</span> (<a class="idref" href="Decide.html#ScratchPad2.lt_dec_axiom_2"><span class="id" title="axiom">lt_dec_axiom_2</span></a> 3 7).<br/>
 <span class="id" title="tactic">reflexivity</span>.<br/>
-<span class="id" title="var">contradiction</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">omega</span>.<br/>
+<span class="id" title="var">contradiction</span> <span class="id" title="var">n</span>. <span class="id" title="var">lia</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -769,7 +769,7 @@ The type of <span class="inlinecode"><span class="id" title="var">list_eq_dec</s
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:39&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:04&nbsp;*)</span><br/>
 </div>
 </div>
 

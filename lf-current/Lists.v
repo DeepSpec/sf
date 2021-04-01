@@ -11,7 +11,7 @@ Module NatList.
     with [S]), or more than one (as with [nybble], and here): *)
 
 Inductive natprod : Type :=
-| pair (n1 n2 : nat).
+  | pair (n1 n2 : nat).
 
 (** This declaration can be read: "The one and only way to
     construct a pair of numbers is by applying the constructor [pair]
@@ -129,14 +129,14 @@ Proof.
     here.  That's because [natprod]s can only be constructed in one
     way. *)
 
-(** **** Exercise: 1 star, standard (snd_fst_is_swap)  *)
+(** **** Exercise: 1 star, standard (snd_fst_is_swap) *)
 Theorem snd_fst_is_swap : forall (p : natprod),
   (snd p, fst p) = swap_pair p.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard, optional (fst_swap_is_snd)  *)
+(** **** Exercise: 1 star, standard, optional (fst_swap_is_snd) *)
 Theorem fst_swap_is_snd : forall (p : natprod),
   fst (swap_pair p) = snd p.
 Proof.
@@ -283,7 +283,7 @@ Proof. reflexivity. Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Exercises *)
 
-(** **** Exercise: 2 stars, standard, especially useful (list_funs) 
+(** **** Exercise: 2 stars, standard, especially useful (list_funs)
 
     Complete the definitions of [nonzeros], [oddmembers], and
     [countoddmembers] below. Have a look at the tests to understand
@@ -319,7 +319,7 @@ Example test_countoddmembers3:
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (alternate) 
+(** **** Exercise: 3 stars, advanced (alternate)
 
     Complete the following definition of [alternate], which
     interleaves two lists into one, alternating between elements taken
@@ -362,7 +362,7 @@ Example test_alternate4:
 
 Definition bag := natlist.
 
-(** **** Exercise: 3 stars, standard, especially useful (bag_functions) 
+(** **** Exercise: 3 stars, standard, especially useful (bag_functions)
 
     Complete the following definitions for the functions
     [count], [sum], [add], and [member] for bags. *)
@@ -413,7 +413,7 @@ Example test_member2:             member 2 [1;4;1] = false.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (bag_more_functions) 
+(** **** Exercise: 3 stars, standard, optional (bag_more_functions)
 
     Here are some more [bag] functions for you to practice with. *)
 
@@ -463,7 +463,7 @@ Example test_subset2:              subset [1;2;2] [2;1;4;1] = false.
  (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, especially useful (add_inc_count) 
+(** **** Exercise: 2 stars, standard, especially useful (add_inc_count)
 
     Adding a value to a bag should increase the value's count by one.
     State that as a theorem and prove it. *)
@@ -680,7 +680,7 @@ Proof.
     reflexivity.
   - (* l = cons *)
     simpl. rewrite -> app_length.
-    simpl. rewrite -> IHl'. rewrite plus_comm.
+    simpl. rewrite -> IHl'. rewrite add_comm.
     reflexivity.
 Qed.
 
@@ -807,7 +807,7 @@ Search (?x + ?y = ?y + ?x).
 (* ================================================================= *)
 (** ** List Exercises, Part 1 *)
 
-(** **** Exercise: 3 stars, standard (list_exercises) 
+(** **** Exercise: 3 stars, standard (list_exercises)
 
     More practice with lists: *)
 
@@ -843,7 +843,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (eqblist) 
+(** **** Exercise: 2 stars, standard (eqblist)
 
     Fill in the definition of [eqblist], which compares
     lists of numbers for equality.  Prove that [eqblist l l]
@@ -876,14 +876,15 @@ Proof.
 (** Here are a couple of little theorems to prove about your
     definitions about bags above. *)
 
-(** **** Exercise: 1 star, standard (count_member_nonzero)  *)
+(** **** Exercise: 1 star, standard (count_member_nonzero) *)
 Theorem count_member_nonzero : forall (s : bag),
   1 <=? (count 1 (1 :: s)) = true.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** The following lemma about [leb] might help you in the next exercise. *)
+(** The following lemma about [leb] might help you in the next
+    exercise (it will also be useful in later chapters). *)
 
 Theorem leb_n_Sn : forall n,
   n <=? (S n) = true.
@@ -896,30 +897,33 @@ Proof.
 
 (** Before doing the next exercise, make sure you've filled in the
    definition of [remove_one] above. *)
-(** **** Exercise: 3 stars, advanced (remove_does_not_increase_count)  *)
+(** **** Exercise: 3 stars, advanced (remove_does_not_increase_count) *)
 Theorem remove_does_not_increase_count: forall (s : bag),
   (count 0 (remove_one 0 s)) <=? (count 0 s) = true.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (bag_count_sum) 
+(** **** Exercise: 3 stars, standard, optional (bag_count_sum)
 
     Write down an interesting theorem [bag_count_sum] about bags
     involving the functions [count] and [sum], and prove it using
     Coq.  (You may find that the difficulty of the proof depends on
-    how you defined [count]!) *)
+    how you defined [count]!  Hint: If you defined [count] using
+    [=?] you may find it useful to know that [destruct] works on 
+    arbitrary expressions, not just simple identifiers.)
+*)
 (* FILL IN HERE
 
     [] *)
 
-(** **** Exercise: 4 stars, advanced (rev_injective) 
+(** **** Exercise: 4 stars, advanced (rev_injective)
 
     Prove that the [rev] function is injective. There is a hard way
     and an easy way to do this. *)
 
 Theorem rev_injective : forall (l1 l2 : natlist),
-    rev l1 = rev l2 -> l1 = l2.
+  rev l1 = rev l2 -> l1 = l2.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -976,25 +980,7 @@ Proof. reflexivity. Qed.
 
 (** (In the HTML version, the boilerplate proofs of these
     examples are elided.  Click on a box if you want to see one.)
-
-    This example is also an opportunity to introduce one more small
-    feature of Coq's programming language: conditional
-    expressions... *)
-
-Fixpoint nth_error' (l:natlist) (n:nat) : natoption :=
-  match l with
-  | nil => None
-  | a :: l' => if n =? O then Some a
-               else nth_error' l' (pred n)
-  end.
-
-(** Coq's conditionals are exactly like those found in any other
-    language, with one small generalization.  Since the [bool] type
-    is not built in, Coq actually supports conditional expressions over
-    _any_ inductively defined type with exactly two constructors.  The
-    guard is considered true if it evaluates to the first constructor
-    in the [Inductive] definition and false if it evaluates to the
-    second. *)
+*)
 
 (** The function below pulls the [nat] out of a [natoption], returning
     a supplied default in the [None] case. *)
@@ -1005,7 +991,7 @@ Definition option_elim (d : nat) (o : natoption) : nat :=
   | None => d
   end.
 
-(** **** Exercise: 2 stars, standard (hd_error) 
+(** **** Exercise: 2 stars, standard (hd_error)
 
     Using the same idea, fix the [hd] function from earlier so we don't
     have to pass a default element for the [nil] case.  *)
@@ -1024,7 +1010,7 @@ Example test_hd_error3 : hd_error [5;6] = Some 5.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard, optional (option_elim_hd) 
+(** **** Exercise: 1 star, standard, optional (option_elim_hd)
 
     This exercise relates your new [hd_error] to the old [hd]. *)
 
@@ -1061,8 +1047,8 @@ Definition eqb_id (x1 x2 : id) :=
   | Id n1, Id n2 => n1 =? n2
   end.
 
-(** **** Exercise: 1 star, standard (eqb_id_refl)  *)
-Theorem eqb_id_refl : forall x, true = eqb_id x x.
+(** **** Exercise: 1 star, standard (eqb_id_refl) *)
+Theorem eqb_id_refl : forall x, eqb_id x x = true.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1105,7 +1091,7 @@ Fixpoint find (x : id) (d : partial_map) : natoption :=
                      else find x d'
   end.
 
-(** **** Exercise: 1 star, standard (update_eq)  *)
+(** **** Exercise: 1 star, standard (update_eq) *)
 Theorem update_eq :
   forall (d : partial_map) (x : id) (v: nat),
     find x (update d x v) = Some v.
@@ -1113,7 +1099,7 @@ Proof.
  (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (update_neq)  *)
+(** **** Exercise: 1 star, standard (update_neq) *)
 Theorem update_neq :
   forall (d : partial_map) (x y : id) (o: nat),
     eqb_id x y = false -> find x (update d y o) = find x d.
@@ -1122,7 +1108,7 @@ Proof.
 (** [] *)
 End PartialMap.
 
-(** **** Exercise: 2 stars, standard, optional (baz_num_elts) 
+(** **** Exercise: 2 stars, standard, optional (baz_num_elts)
 
     Consider the following inductive definition: *)
 
@@ -1139,4 +1125,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2020-11-05 12:33 *)
+(* 2021-04-01 19:59 *)

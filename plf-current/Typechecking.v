@@ -16,7 +16,7 @@
 (** This short chapter constructs such a function and proves it
     correct. *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Bool.Bool.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
@@ -244,7 +244,7 @@ End STLCChecker.
 (* ################################################################# *)
 (** * Exercises *)
 
-(** **** Exercise: 5 stars, standard (typechecker_extensions) 
+(** **** Exercise: 5 stars, standard (typechecker_extensions)
 
     In this exercise we'll extend the typechecker to deal with the
     extended features discussed in chapter [MoreStlc].  Your job
@@ -354,7 +354,7 @@ Fixpoint type_check (Gamma : context) (t : tm) : option ty :=
           match type_check Gamma t1,
                 type_check (x21 |-> T ; x22 |-> <{{List T}}> ; Gamma) t2 with
           | Some T1', Some T2' =>
-              if eqb_ty T1' T2' then Some T1' else None
+              if eqb_ty T1' T2' then return T1' else fail
           | _,_ => None
           end
       | _ => None
@@ -461,7 +461,7 @@ Qed. (* ... and uncomment this one *)
 End TypecheckerExtensions.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, optional (stlc_step_function) 
+(** **** Exercise: 5 stars, standard, optional (stlc_step_function)
 
     Above, we showed how to write a typechecking function and prove it
     sound and complete for the typing relation.  Do the same for the
@@ -490,7 +490,7 @@ Proof. (* FILL IN HERE *) Admitted.
 End StepFunction.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, optional (stlc_impl) 
+(** **** Exercise: 5 stars, standard, optional (stlc_impl)
 
     Using the Imp parser described in the [ImpParser] chapter
     of _Logical Foundations_ as a guide, build a parser for extended
@@ -505,4 +505,4 @@ Import StepFunction.
 End StlcImpl.
 (** [] *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

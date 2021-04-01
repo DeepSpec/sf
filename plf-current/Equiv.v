@@ -1,6 +1,6 @@
 (** * Equiv: Program Equivalence *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From PLF Require Import Maps.
 From Coq Require Import Bool.Bool.
 From Coq Require Import Arith.Arith.
@@ -143,7 +143,7 @@ Proof.
     assumption.
 Qed.
 
-(** **** Exercise: 2 stars, standard (skip_right) 
+(** **** Exercise: 2 stars, standard (skip_right)
 
     Prove that adding a [skip] after a command results in an
     equivalent program *)
@@ -222,7 +222,7 @@ Proof.
   intros b c1 c2 Hb.
   split; intros H.
   - (* -> *)
-    inversion H; subst.
+    inversion H. subst.
     + (* b evaluates to true *)
       assumption.
     + (* b evaluates to false (contradiction) *)
@@ -234,7 +234,7 @@ Proof.
     unfold bequiv in Hb. simpl in Hb.
     apply Hb. Qed.
 
-(** **** Exercise: 2 stars, standard, especially useful (if_false)  *)
+(** **** Exercise: 2 stars, standard, especially useful (if_false) *)
 Theorem if_false : forall b c1 c2,
   bequiv b <{false}> ->
   cequiv
@@ -244,7 +244,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (swap_if_branches) 
+(** **** Exercise: 3 stars, standard (swap_if_branches)
 
     Show that we can swap the branches of an [if] if we also negate its
     guard. *)
@@ -271,17 +271,17 @@ Theorem while_false : forall b c,
 Proof.
   intros b c Hb. split; intros H.
   - (* -> *)
-    inversion H; subst.
+    inversion H. subst.
     + (* E_WhileFalse *)
       apply E_Skip.
     + (* E_WhileTrue *)
       rewrite Hb in H2. discriminate.
   - (* <- *)
-    inversion H; subst.
+    inversion H. subst.
     apply E_WhileFalse.
     apply Hb.  Qed.
 
-(** **** Exercise: 2 stars, advanced, optional (while_false_informal) 
+(** **** Exercise: 2 stars, advanced, optional (while_false_informal)
 
     Write an informal proof of [while_false].
 
@@ -337,7 +337,7 @@ Proof.
   - (* E_WhileTrue *) (* immediate from the IH *)
     apply IHceval2. reflexivity.  Qed.
 
-(** **** Exercise: 2 stars, standard, optional (while_true_nonterm_informal) 
+(** **** Exercise: 2 stars, standard, optional (while_true_nonterm_informal)
 
     Explain what the lemma [while_true_nonterm] means in English.
 
@@ -345,7 +345,7 @@ Proof.
 *)
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, especially useful (while_true) 
+(** **** Exercise: 2 stars, standard, especially useful (while_true)
 
     Prove the following theorem. _Hint_: You'll want to use
     [while_true_nonterm] here. *)
@@ -361,7 +361,8 @@ Proof.
 
 (** A more interesting fact about [while] commands is that any number
     of copies of the body can be "unrolled" without changing meaning.
-    Loop unrolling is a common transformation in real compilers. *)
+
+    Loop unrolling is an important transformation in real compilers! *)
 
 Theorem loop_unrolling : forall b c,
   cequiv
@@ -387,14 +388,11 @@ Proof.
     + (* loop doesn't run *)
       inversion H5; subst. apply E_WhileFalse. assumption.  Qed.
 
-(** **** Exercise: 2 stars, standard, optional (seq_assoc) 
-
-    _Note: Coq 8.12.0 has a printing bug that makes both sides of this
-    theorem look the same in the Goals buffer. This should be fixed in
-    8.12.1_. *)
+(** **** Exercise: 2 stars, standard, optional (seq_assoc) *)
 Theorem seq_assoc : forall c1 c2 c3,
   cequiv <{(c1;c2);c3}> <{c1;(c2;c3)}>.
-Proof.   (* FILL IN HERE *) Admitted.
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** Proving program properties involving assignments is one place
@@ -414,12 +412,12 @@ Proof.
     apply E_Skip.
   - (* <- *)
     assert (Hx : st' =[ x := x ]=> (x !-> st' x ; st')).
-    { apply E_Ass. reflexivity. }
+    { apply E_Asgn. reflexivity. }
     rewrite t_update_same in Hx.
     apply Hx.
 Qed.
 
-(** **** Exercise: 2 stars, standard, especially useful (assign_aequiv)  *)
+(** **** Exercise: 2 stars, standard, especially useful (assign_aequiv) *)
 Theorem assign_aequiv : forall (x : string) a,
   aequiv x a ->
   cequiv <{ skip }> <{ x := a }>.
@@ -427,7 +425,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (equiv_classes)  *)
+(** **** Exercise: 2 stars, standard (equiv_classes) *)
 
 (** Given the following programs, group together those that are
     equivalent in Imp. Your answer should be given as a list of lists,
@@ -588,17 +586,17 @@ Qed.
     i.e., the "proof burden" of a small change to a large program is
     proportional to the size of the change, not the program. *)
 
-Theorem CAss_congruence : forall x a a',
+Theorem CAsgn_congruence : forall x a a',
   aequiv a a' ->
   cequiv <{x := a}> <{x := a'}>.
 Proof.
   intros x a a' Heqv st st'.
   split; intros Hceval.
   - (* -> *)
-    inversion Hceval. subst. apply E_Ass.
+    inversion Hceval. subst. apply E_Asgn.
     rewrite Heqv. reflexivity.
   - (* <- *)
-    inversion Hceval. subst. apply E_Ass.
+    inversion Hceval. subst. apply E_Asgn.
     rewrite Heqv. reflexivity.  Qed.
 
 (** The congruence property for loops is a little more interesting,
@@ -673,7 +671,7 @@ Proof.
     + apply sym_cequiv. assumption.
 Qed.
 
-(** **** Exercise: 3 stars, standard, optional (CSeq_congruence)  *)
+(** **** Exercise: 3 stars, standard, optional (CSeq_congruence) *)
 Theorem CSeq_congruence : forall c1 c1' c2 c2',
   cequiv c1 c1' -> cequiv c2 c2' ->
   cequiv <{ c1;c2 }> <{ c1';c2' }>.
@@ -681,7 +679,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (CIf_congruence)  *)
+(** **** Exercise: 3 stars, standard (CIf_congruence) *)
 Theorem CIf_congruence : forall b b' c1 c1' c2 c2',
   bequiv b b' -> cequiv c1 c1' -> cequiv c2 c2' ->
   cequiv <{ if b then c1 else c2 end }>
@@ -716,12 +714,12 @@ Proof.
   - apply refl_cequiv.
   - apply CIf_congruence.
     + apply refl_bequiv.
-    + apply CAss_congruence. unfold aequiv. simpl.
+    + apply CAsgn_congruence. unfold aequiv. simpl.
       symmetry. apply minus_diag.
     + apply refl_cequiv.
 Qed.
 
-(** **** Exercise: 3 stars, advanced, optional (not_congr) 
+(** **** Exercise: 3 stars, advanced, optional (not_congr)
 
     We've shown that the [cequiv] relation is both an equivalence and
     a congruence on commands.  Can you think of a relation on commands
@@ -929,7 +927,7 @@ Proof.
          destruct (fold_constants_aexp a2);
          rewrite IHa1; rewrite IHa2; reflexivity). Qed.
 
-(** **** Exercise: 3 stars, standard, optional (fold_bexp_Eq_informal) 
+(** **** Exercise: 3 stars, standard, optional (fold_bexp_Eq_informal)
 
     Here is an informal proof of the [BEq] case of the soundness
     argument for boolean expression constant folding.  Read it
@@ -1057,7 +1055,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (fold_constants_com_sound) 
+(** **** Exercise: 3 stars, standard (fold_constants_com_sound)
 
     Complete the [while] case of the following proof. *)
 
@@ -1067,7 +1065,7 @@ Proof.
   unfold ctrans_sound. intros c.
   induction c; simpl.
   - (* skip *) apply refl_cequiv.
-  - (* := *) apply CAss_congruence.
+  - (* := *) apply CAsgn_congruence.
               apply fold_constants_aexp_sound.
   - (* ; *) apply CSeq_congruence; assumption.
   - (* if *)
@@ -1091,7 +1089,7 @@ Proof.
 (* ----------------------------------------------------------------- *)
 (** *** Soundness of (0 + n) Elimination, Redux *)
 
-(** **** Exercise: 4 stars, advanced, optional (optimize_0plus) 
+(** **** Exercise: 4 stars, advanced, optional (optimize_0plus)
 
     Recall the definition [optimize_0plus] from the [Imp] chapter
     of _Logical Foundations_:
@@ -1176,11 +1174,9 @@ Fixpoint subst_aexp (x : string) (u : aexp) (a : aexp) : aexp :=
   end.
 
 Example subst_aexp_ex :
-  subst_aexp X (42 + 53) <{ Y + X}>
+  subst_aexp X <{42 + 53}> <{Y + X}>
   = <{ Y + (42 + 53)}>.
-Proof. simpl. (* KK: For some reason this fails... Is it an associativity issue? *)
-       Admitted.
-       (* reflexivity.  Qed. *)
+Proof. simpl. reflexivity. Qed.
 
 (** And here is the property we are interested in, expressing the
     claim that commands [c1] and [c2] as described above are
@@ -1230,7 +1226,7 @@ Proof.
   assert (H2 : empty_st =[ c2 ]=> st2);
   try (subst;
        apply E_Seq with (st' := (X !-> 1));
-       apply E_Ass; reflexivity).
+       apply E_Asgn; reflexivity).
   clear Heqc1 Heqc2.
 
   apply H in H1.
@@ -1246,7 +1242,7 @@ Proof.
     by (rewrite Hcontra; reflexivity).
   subst. discriminate. Qed.
 
-(** **** Exercise: 4 stars, standard, optional (better_subst_equiv) 
+(** **** Exercise: 4 stars, standard, optional (better_subst_equiv)
 
     The equivalence we had in mind above was not complete nonsense --
     it was actually almost right.  To make it correct, we just need to
@@ -1282,7 +1278,7 @@ Proof.
 
     [] *)
 
-(** **** Exercise: 3 stars, standard (inequiv_exercise) 
+(** **** Exercise: 3 stars, standard (inequiv_exercise)
 
     Prove that an infinite loop is not equivalent to [skip] *)
 
@@ -1344,7 +1340,7 @@ Module Himp.
 
 Inductive com : Type :=
   | CSkip : com
-  | CAss : string -> aexp -> com
+  | CAsgn : string -> aexp -> com
   | CSeq : com -> com -> com
   | CIf : bexp -> com -> com -> com
   | CWhile : bexp -> com -> com
@@ -1355,7 +1351,7 @@ Notation "'havoc' l" := (CHavoc l)
 Notation "'skip'"  :=
          CSkip (in custom com at level 0).
 Notation "x := y"  :=
-         (CAss x y)
+         (CAsgn x y)
             (in custom com at level 0, x constr at level 0,
              y at level 85, no associativity).
 Notation "x ; y" :=
@@ -1369,7 +1365,7 @@ Notation "'while' x 'do' y 'end'" :=
          (CWhile x y)
             (in custom com at level 89, x at level 99, y at level 99).
 
-(** **** Exercise: 2 stars, standard (himp_ceval) 
+(** **** Exercise: 2 stars, standard (himp_ceval)
 
     Now, we must extend the operational semantics. We have provided
    a template for the [ceval] relation below, specifying the big-step
@@ -1383,9 +1379,9 @@ Reserved Notation "st '=[' c ']=>' st'"
 Inductive ceval : com -> state -> state -> Prop :=
   | E_Skip : forall st,
       st =[ skip ]=> st
-  | E_Ass  : forall st a1 n x,
-      aeval st a1 = n ->
-      st =[ x := a1 ]=> (x !-> n ; st)
+  | E_Asgn  : forall st a n x,
+      aeval st a = n ->
+      st =[ x := a ]=> (x !-> n ; st)
   | E_Seq : forall c1 c2 st st' st'',
       st  =[ c1 ]=> st'  ->
       st' =[ c2 ]=> st'' ->
@@ -1434,11 +1430,10 @@ Definition cequiv (c1 c2 : com) : Prop := forall st st' : state,
 (** Let's apply this definition to prove some nondeterministic
     programs equivalent / inequivalent. *)
 
-(** **** Exercise: 3 stars, standard (havoc_swap) 
+(** **** Exercise: 3 stars, standard (havoc_swap)
 
     Are the following two programs equivalent? *)
 
-(* KK: The hack we did for variables bites back *)
 Definition pXY :=
   <{ havoc X ; havoc Y }>.
 
@@ -1453,7 +1448,7 @@ Theorem pXY_cequiv_pYX :
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, standard, optional (havoc_copy) 
+(** **** Exercise: 4 stars, standard, optional (havoc_copy)
 
     Are the following two programs equivalent? *)
 
@@ -1483,7 +1478,7 @@ Proof. (* FILL IN HERE *) Admitted.
     phenomenon.
 *)
 
-(** **** Exercise: 4 stars, advanced (p1_p2_term) 
+(** **** Exercise: 4 stars, advanced (p1_p2_term)
 
     Consider the following commands: *)
 
@@ -1513,7 +1508,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced (p1_p2_equiv) 
+(** **** Exercise: 4 stars, advanced (p1_p2_equiv)
 
     Use these two lemmas to prove that [p1] and [p2] are actually
     equivalent. *)
@@ -1522,7 +1517,7 @@ Theorem p1_p2_equiv : cequiv p1 p2.
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced (p3_p4_inequiv) 
+(** **** Exercise: 4 stars, advanced (p3_p4_inequiv)
 
     Prove that the following programs are _not_ equivalent.  (Hint:
     What should the value of [Z] be when [p3] terminates?  What about
@@ -1543,7 +1538,7 @@ Theorem p3_p4_inequiv : ~ cequiv p3 p4.
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced, optional (p5_p6_equiv) 
+(** **** Exercise: 5 stars, advanced, optional (p5_p6_equiv)
 
     Prove that the following commands are equivalent.  (Hint: As
     mentioned above, our definition of [cequiv] for Himp only takes
@@ -1570,7 +1565,7 @@ End Himp.
 (* ################################################################# *)
 (** * Additional Exercises *)
 
-(** **** Exercise: 4 stars, standard, optional (for_while_equiv) 
+(** **** Exercise: 4 stars, standard, optional (for_while_equiv)
 
     This exercise extends the optional [add_for_loop] exercise from
     the [Imp] chapter, where you were asked to extend the language
@@ -1592,7 +1587,7 @@ End Himp.
 
     [] *)
 
-(** **** Exercise: 3 stars, standard, optional (swap_noninterfering_assignments) 
+(** **** Exercise: 3 stars, standard, optional (swap_noninterfering_assignments)
 
     (Hint: You'll need [functional_extensionality] for this one.) *)
 
@@ -1607,7 +1602,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced, optional (capprox) 
+(** **** Exercise: 4 stars, advanced, optional (capprox)
 
     In this exercise we define an asymmetric variant of program
     equivalence we call _program approximation_. We say that a
@@ -1660,4 +1655,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

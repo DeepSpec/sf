@@ -1,6 +1,6 @@
 (** * MoreStlc: More on the Simply Typed Lambda-Calculus *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From PLF Require Import Maps.
 From PLF Require Import Types.
 From PLF Require Import Smallstep.
@@ -270,7 +270,7 @@ From PLF Require Import Stlc.
       div \in Nat -> Nat -> (Nat + Unit)
       div =
         \x:Nat, \y:Nat,
-          test iszero y then
+          if iszero y then
             inr unit
           else
             inl ...
@@ -289,8 +289,9 @@ From PLF Require Import Stlc.
       \x:Nat+Bool,
         case x of
           inl n => n
-        | inr b => test b then 1 else 0
+        | inr b => if b then 1 else 0
 *)
+
 (** More formally... *)
 
 (** Syntax:
@@ -403,6 +404,7 @@ From PLF Require Import Stlc.
                | a::x' => case x' of nil    => a
                                     | b::x'' => a+b
 *)
+
 (**
     Syntax:
 
@@ -472,7 +474,7 @@ From PLF Require Import Stlc.
     this:
 
       fact = \x:Nat,
-                test x=0 then 1 else x * (fact (pred x)))
+                if x=0 then 1 else x * (fact (pred x)))
 
    Note that the right-hand side of this binder mentions the variable
    being bound -- something that is not allowed by our formalization of
@@ -493,7 +495,7 @@ From PLF Require Import Stlc.
     For example, instead of
 
       fact = \x:Nat,
-                test x=0 then 1 else x * (fact (pred x)))
+                if x=0 then 1 else x * (fact (pred x)))
 
     we will write:
 
@@ -501,8 +503,9 @@ From PLF Require Import Stlc.
           fix
             (\f:Nat->Nat,
                \x:Nat,
-                  test x=0 then 1 else x * (f (pred x)))
+                  if x=0 then 1 else x * (f (pred x)))
 *)
+
 (** We can derive the latter from the former as follows:
 
       - In the right-hand side of the definition of [fact], replace
@@ -563,7 +566,7 @@ From PLF Require Import Stlc.
 (** Let's see how [ST_FixAbs] works by reducing [fact 3 = fix F 3],
     where
 
-    F = (\f. \x. test x=0 then 1 else x * (f (pred x)))
+    F = (\f. \x. if x=0 then 1 else x * (f (pred x)))
 
     (type annotations are omitted for brevity).
 
@@ -571,61 +574,61 @@ From PLF Require Import Stlc.
 
 [-->] [ST_FixAbs] + [ST_App1]
 
-    (\x. test x=0 then 1 else x * (fix F (pred x))) 3
+    (\x. if x=0 then 1 else x * (fix F (pred x))) 3
 
 [-->] [ST_AppAbs]
 
-    test 3=0 then 1 else 3 * (fix F (pred 3))
+    if 3=0 then 1 else 3 * (fix F (pred 3))
 
-[-->] [ST_Test0_Nonzero]
+[-->] [ST_If0_Nonzero]
 
     3 * (fix F (pred 3))
 
 [-->] [ST_FixAbs + ST_Mult2]
 
-    3 * ((\x. test x=0 then 1 else x * (fix F (pred x))) (pred 3))
+    3 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 3))
 
 [-->] [ST_PredNat + ST_Mult2 + ST_App2]
 
-    3 * ((\x. test x=0 then 1 else x * (fix F (pred x))) 2)
+    3 * ((\x. if x=0 then 1 else x * (fix F (pred x))) 2)
 
 [-->] [ST_AppAbs + ST_Mult2]
 
-    3 * (test 2=0 then 1 else 2 * (fix F (pred 2)))
+    3 * (if 2=0 then 1 else 2 * (fix F (pred 2)))
 
-[-->] [ST_Test0_Nonzero + ST_Mult2]
+[-->] [ST_If0_Nonzero + ST_Mult2]
 
     3 * (2 * (fix F (pred 2)))
 
 [-->] [ST_FixAbs + 2 x ST_Mult2]
 
-    3 * (2 * ((\x. test x=0 then 1 else x * (fix F (pred x))) (pred 2)))
+    3 * (2 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 2)))
 
 [-->] [ST_PredNat + 2 x ST_Mult2 + ST_App2]
 
-    3 * (2 * ((\x. test x=0 then 1 else x * (fix F (pred x))) 1))
+    3 * (2 * ((\x. if x=0 then 1 else x * (fix F (pred x))) 1))
 
 [-->] [ST_AppAbs + 2 x ST_Mult2]
 
-    3 * (2 * (test 1=0 then 1 else 1 * (fix F (pred 1))))
+    3 * (2 * (if 1=0 then 1 else 1 * (fix F (pred 1))))
 
-[-->] [ST_Test0_Nonzero + 2 x ST_Mult2]
+[-->] [ST_If0_Nonzero + 2 x ST_Mult2]
 
     3 * (2 * (1 * (fix F (pred 1))))
 
 [-->] [ST_FixAbs + 3 x ST_Mult2]
 
-    3 * (2 * (1 * ((\x. test x=0 then 1 else x * (fix F (pred x))) (pred 1))))
+    3 * (2 * (1 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 1))))
 
 [-->] [ST_PredNat + 3 x ST_Mult2 + ST_App2]
 
-    3 * (2 * (1 * ((\x. test x=0 then 1 else x * (fix F (pred x))) 0)))
+    3 * (2 * (1 * ((\x. if x=0 then 1 else x * (fix F (pred x))) 0)))
 
 [-->] [ST_AppAbs + 3 x ST_Mult2]
 
-    3 * (2 * (1 * (test 0=0 then 1 else 0 * (fix F (pred 0)))))
+    3 * (2 * (1 * (if 0=0 then 1 else 0 * (fix F (pred 0)))))
 
-[-->] [ST_Test0Zero + 3 x ST_Mult2]
+[-->] [ST_If0Zero + 3 x ST_Mult2]
 
     3 * (2 * (1 * 1))
 
@@ -646,21 +649,21 @@ From PLF Require Import Stlc.
     definitions in Coq, there is nothing to prevent functions defined
     using [fix] from diverging. *)
 
-(** **** Exercise: 1 star, standard, optional (halve_fix) 
+(** **** Exercise: 1 star, standard, optional (halve_fix)
 
     Translate this informal recursive definition into one using [fix]:
 
       halve =
         \x:Nat,
-           test x=0 then 0
-           else test (pred x)=0 then 0
+           if x=0 then 0
+           else if (pred x)=0 then 0
            else 1 + (halve (pred (pred x)))
 
-(* FILL IN HERE *)
+    (* FILL IN HERE *)
 *)
 (** [] *)
 
-(** **** Exercise: 1 star, standard, optional (fact_steps) 
+(** **** Exercise: 1 star, standard, optional (fact_steps)
 
     Write down the sequence of steps that the term [fact 1] goes
     through to reduce to a normal form (assuming the usual reduction
@@ -688,8 +691,8 @@ From PLF Require Import Stlc.
       fix
         (\eq:Nat->Nat->Bool,
            \m:Nat, \n:Nat,
-             test m=0 then iszero n
-             else test n=0 then fls
+             if m=0 then iszero n
+             else if n=0 then fls
              else eq (pred m) (pred n))
 *)
 (** And finally, here is an example where [fix] is used to define a
@@ -699,8 +702,8 @@ From PLF Require Import Stlc.
       evenodd =
         fix
           (\eo: (Nat->Bool * Nat->Bool),
-             let e = \n:Nat, test n=0 then tru else eo,snd (pred n) in
-             let o = \n:Nat, test n=0 then fls else eo,fst (pred n) in
+             let e = \n:Nat, if n=0 then tru else eo,snd (pred n) in
+             let o = \n:Nat, if n=0 then fls else eo,fst (pred n) in
              (e,o))
 
       even = evenodd.fst
@@ -755,14 +758,14 @@ From PLF Require Import Stlc.
                       -------------------------                    (ST_ProjRcd)
                       {..., i=vi, ...}.i --> vi
 *)
-(** Again, these rules are a bit informal.  For example, the first rule
-   is intended to be read "if [ti] is the leftmost field that is not a
-   value and if [ti] steps to [ti'], then the whole record steps..."
-   In the last rule, the intention is that there should be only one
-   field called [i], and that all the other fields must contain values. *)
 
-(**
-   The typing rules are also simple:
+(** Again, these rules are a bit informal.  For example, the first rule
+    is intended to be read "if [ti] is the leftmost field that is not a
+    value and if [ti] steps to [ti'], then the whole record steps..."
+    In the last rule, the intention is that there should be only one
+    field called [i], and that all the other fields must contain values. *)
+
+(** The typing rules are also simple:
 
             Gamma |- t1 \in T1     ...     Gamma |- tn \in Tn
           ----------------------------------------------------          (T_Rcd)
@@ -900,14 +903,14 @@ From PLF Require Import Stlc.
 
 Module STLCExtended.
 
-(** **** Exercise: 3 stars, standard (STLCE_definitions) 
+(** **** Exercise: 3 stars, standard (STLCE_definitions)
 
     In this series of exercises, you will formalize some of the
     extensions described in this chapter.  We've provided the
     necessary additions to the syntax of terms and types, and we've
-    included a few examples that you can test your definitions with
-    to make sure they are working as expected.  You'll fill in the
-    rest of the definitions and extend all the proofs accordingly.
+    included a few examples that you can test your definitions with to
+    make sure they are working as expected.  You'll fill in the rest
+    of the definitions and extend all the proofs accordingly.
 
     To get you started, we've provided implementations for:
      - numbers
@@ -920,12 +923,13 @@ Module STLCExtended.
      - let (which involves binding)
      - [fix]
 
-    A good strategy is to work on the extensions one at a time, in two
-    passes, rather than trying to work through the file from start to
-    finish in a single pass.  For each definition or proof, begin by
-    reading carefully through the parts that are provided for you,
-    referring to the text in the [Stlc] chapter for high-level
-    intuitions and the embedded comments for detailed mechanics. *)
+    A good strategy is to work on the extensions one at a time, in
+    separate passes, rather than trying to work through the file from
+    start to finish in a single pass.  For each definition or proof,
+    begin by reading carefully through the parts that are provided for
+    you, referring to the text in the [Stlc] chapter for
+    high-level intuitions and the embedded comments for detailed
+    mechanics. *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Syntax *)
@@ -992,7 +996,6 @@ Definition z : string := "z".
 Hint Unfold x : core.
 Hint Unfold y : core.
 Hint Unfold z : core.
-
 
 Declare Custom Entry stlc_ty.
 
@@ -1074,8 +1077,6 @@ Notation "'let' x '=' t1 'in' t2" :=
   (tm_let x t1 t2) (in custom stlc at level 0).
 
 Notation "'fix' t" := (tm_fix t) (in custom stlc at level 0).
-
-
 
 (* ----------------------------------------------------------------- *)
 (** *** Substitution *)
@@ -1356,7 +1357,7 @@ Definition manual_grade_for_extensions_definition : option (nat*string) := None.
 (* ================================================================= *)
 (** ** Examples *)
 
-(** **** Exercise: 3 stars, standard (STLCE_examples) 
+(** **** Exercise: 3 stars, standard (STLCE_examples)
 
     This section presents formalized versions of the examples from
     above (plus several more).
@@ -1763,7 +1764,7 @@ End Examples.
 (* ----------------------------------------------------------------- *)
 (** *** Progress *)
 
-(** **** Exercise: 3 stars, standard (STLCE_progress) 
+(** **** Exercise: 3 stars, standard (STLCE_progress)
 
     Complete the proof of [progress].
 
@@ -1956,7 +1957,7 @@ Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Substitution *)
 
-(** **** Exercise: 2 stars, standard (STLCE_subst_preserves_typing) 
+(** **** Exercise: 2 stars, standard (STLCE_subst_preserves_typing)
 
     Complete the proof of [substitution_preserves_typing]. *)
 
@@ -2045,7 +2046,7 @@ Definition manual_grade_for_substitution_preserves_typing : option (nat*string) 
 (* ----------------------------------------------------------------- *)
 (** *** Preservation *)
 
-(** **** Exercise: 3 stars, standard (STLCE_preservation) 
+(** **** Exercise: 3 stars, standard (STLCE_preservation)
 
     Complete the proof of [preservation]. *)
 
@@ -2096,4 +2097,4 @@ Definition manual_grade_for_preservation : option (nat*string) := None.
 
 End STLCExtended.
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

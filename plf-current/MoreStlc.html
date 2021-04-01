@@ -37,7 +37,7 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing".<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Types.html#"><span class="id" title="library">Types</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#"><span class="id" title="library">Smallstep</span></a>.<br/>
@@ -45,7 +45,7 @@
 </div>
 
 <div class="doc">
-<a id="lab263"></a><h1 class="section">Simple Extensions to STLC</h1>
+<a id="lab259"></a><h1 class="section">Simple Extensions to STLC</h1>
 
 <div class="paragraph"> </div>
 
@@ -60,7 +60,7 @@
     straightforward treatments at the level of typing. 
 <div class="paragraph"> </div>
 
-<a id="lab264"></a><h2 class="section">Numbers</h2>
+<a id="lab260"></a><h2 class="section">Numbers</h2>
 
 <div class="paragraph"> </div>
 
@@ -73,7 +73,7 @@
     numeric primitives become more fiddly. 
 <div class="paragraph"> </div>
 
-<a id="lab265"></a><h2 class="section">Let Bindings</h2>
+<a id="lab261"></a><h2 class="section">Let Bindings</h2>
 
 <div class="paragraph"> </div>
 
@@ -158,7 +158,7 @@
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab266"></a><h2 class="section">Pairs</h2>
+<a id="lab262"></a><h2 class="section">Pairs</h2>
 
 <div class="paragraph"> </div>
 
@@ -369,7 +369,7 @@
     this pair are <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">T<sub>2</sub></span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab267"></a><h2 class="section">Unit</h2>
+<a id="lab263"></a><h2 class="section">Unit</h2>
 
 <div class="paragraph"> </div>
 
@@ -428,7 +428,7 @@
     evaluated only for its effect. 
 <div class="paragraph"> </div>
 
-<a id="lab268"></a><h2 class="section">Sums</h2>
+<a id="lab264"></a><h2 class="section">Sums</h2>
 
 <div class="paragraph"> </div>
 
@@ -472,7 +472,7 @@
       div &#x2208; Nat <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> Nat <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> (Nat + Unit)
       div =
         \x:Nat, \y:Nat,
-          test iszero y then
+          if iszero y then
             inr unit
           else
             inl ...
@@ -494,8 +494,11 @@
       \x:Nat+Bool,
         case x of
           inl n =&gt; n
-        | inr b =&gt; test b then 1 else 0
+        | inr b =&gt; if b then 1 else 0
 </pre>
+
+<div class="paragraph"> </div>
+
  More formally... 
 <div class="paragraph"> </div>
 
@@ -681,7 +684,7 @@
     formalize. 
 <div class="paragraph"> </div>
 
-<a id="lab269"></a><h2 class="section">Lists</h2>
+<a id="lab265"></a><h2 class="section">Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -716,6 +719,9 @@
                | a::x' =&gt; case x' of nil    =&gt; a
                                     | b::x'' =&gt; a+b
 </pre>
+
+<div class="paragraph"> </div>
+
 
 <div class="paragraph"> </div>
 
@@ -872,7 +878,7 @@
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab270"></a><h2 class="section">General Recursion</h2>
+<a id="lab266"></a><h2 class="section">General Recursion</h2>
 
 <div class="paragraph"> </div>
 
@@ -882,7 +888,7 @@
     this:
 <pre>
       fact = \x:Nat,
-                test x=0 then 1 else x * (fact (pred x)))
+                if x=0 then 1 else x * (fact (pred x)))
 </pre>
    Note that the right-hand side of this binder mentions the variable
    being bound -- something that is not allowed by our formalization of
@@ -908,7 +914,7 @@
     For example, instead of
 <pre>
       fact = \x:Nat,
-                test x=0 then 1 else x * (fact (pred x)))
+                if x=0 then 1 else x * (fact (pred x)))
 </pre>
     we will write:
 <pre>
@@ -916,8 +922,11 @@
           fix
             (\f:Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Nat,
                \x:Nat,
-                  test x=0 then 1 else x * (f (pred x)))
+                  if x=0 then 1 else x * (f (pred x)))
 </pre>
+
+<div class="paragraph"> </div>
+
  We can derive the latter from the former as follows:
 
 <div class="paragraph"> </div>
@@ -1028,7 +1037,7 @@
  Let's see how <span class="inlinecode"><span class="id" title="var">ST_FixAbs</span></span> works by reducing <span class="inlinecode"><span class="id" title="var">fact</span></span> <span class="inlinecode">3</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="keyword">fix</span></span> <span class="inlinecode"><span class="id" title="var">F</span></span> <span class="inlinecode">3</span>,
     where
 <pre>
-    F = (\f. \x. test x=0 then 1 else x * (f (pred x)))
+    F = (\f. \x. if x=0 then 1 else x * (f (pred x)))
 </pre>
     (type annotations are omitted for brevity).
 <pre>
@@ -1036,61 +1045,61 @@
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_FixAbs</span></span> + <span class="inlinecode"><span class="id" title="var">ST_App1</span></span>
 <pre>
-    (\x. test x=0 then 1 else x * (fix F (pred x))) 3
+    (\x. if x=0 then 1 else x * (fix F (pred x))) 3
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_AppAbs</span></span>
 <pre>
-    test 3=0 then 1 else 3 * (fix F (pred 3))
+    if 3=0 then 1 else 3 * (fix F (pred 3))
 </pre>
-<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_Test0_Nonzero</span></span>
+<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_If0_Nonzero</span></span>
 <pre>
     3 * (fix F (pred 3))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_FixAbs</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
-    3 * ((\x. test x=0 then 1 else x * (fix F (pred x))) (pred 3))
+    3 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 3))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_PredNat</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_App2</span></span>
 <pre>
-    3 * ((\x. test x=0 then 1 else x * (fix F (pred x))) 2)
+    3 * ((\x. if x=0 then 1 else x * (fix F (pred x))) 2)
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_AppAbs</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
-    3 * (test 2=0 then 1 else 2 * (fix F (pred 2)))
+    3 * (if 2=0 then 1 else 2 * (fix F (pred 2)))
 </pre>
-<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_Test0_Nonzero</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
+<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_If0_Nonzero</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
     3 * (2 * (fix F (pred 2)))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_FixAbs</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
-    3 * (2 * ((\x. test x=0 then 1 else x * (fix F (pred x))) (pred 2)))
+    3 * (2 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 2)))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_PredNat</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_App2</span></span>
 <pre>
-    3 * (2 * ((\x. test x=0 then 1 else x * (fix F (pred x))) 1))
+    3 * (2 * ((\x. if x=0 then 1 else x * (fix F (pred x))) 1))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_AppAbs</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
-    3 * (2 * (test 1=0 then 1 else 1 * (fix F (pred 1))))
+    3 * (2 * (if 1=0 then 1 else 1 * (fix F (pred 1))))
 </pre>
-<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_Test0_Nonzero</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
+<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_If0_Nonzero</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
     3 * (2 * (1 * (fix F (pred 1))))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_FixAbs</span></span> <span class="inlinecode">+</span> <span class="inlinecode">3</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
-    3 * (2 * (1 * ((\x. test x=0 then 1 else x * (fix F (pred x))) (pred 1))))
+    3 * (2 * (1 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 1))))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_PredNat</span></span> <span class="inlinecode">+</span> <span class="inlinecode">3</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">ST_App2</span></span>
 <pre>
-    3 * (2 * (1 * ((\x. test x=0 then 1 else x * (fix F (pred x))) 0)))
+    3 * (2 * (1 * ((\x. if x=0 then 1 else x * (fix F (pred x))) 0)))
 </pre>
 <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_AppAbs</span></span> <span class="inlinecode">+</span> <span class="inlinecode">3</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
-    3 * (2 * (1 * (test 0=0 then 1 else 0 * (fix F (pred 0)))))
+    3 * (2 * (1 * (if 0=0 then 1 else 0 * (fix F (pred 0)))))
 </pre>
-<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_Test0Zero</span></span> <span class="inlinecode">+</span> <span class="inlinecode">3</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
+<span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">ST_If0Zero</span></span> <span class="inlinecode">+</span> <span class="inlinecode">3</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">ST_Mult2</span></span>
 <pre>
     3 * (2 * (1 * 1))
 </pre>
@@ -1114,20 +1123,20 @@
     using <span class="inlinecode"><span class="id" title="keyword">fix</span></span> from diverging. 
 <div class="paragraph"> </div>
 
-<a id="lab271"></a><h4 class="section">Exercise: 1 star, standard, optional (halve_fix)</h4>
+<a id="lab267"></a><h4 class="section">Exercise: 1 star, standard, optional (halve_fix)</h4>
  Translate this informal recursive definition into one using <span class="inlinecode"><span class="id" title="keyword">fix</span></span>:
 <pre>
       halve =
         \x:Nat,
-           test x=0 then 0
-           else test (pred x)=0 then 0
+           if x=0 then 0
+           else if (pred x)=0 then 0
            else 1 + (halve (pred (pred x)))
 </pre>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+    <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab272"></a><h4 class="section">Exercise: 1 star, standard, optional (fact_steps)</h4>
+<a id="lab268"></a><h4 class="section">Exercise: 1 star, standard, optional (fact_steps)</h4>
  Write down the sequence of steps that the term <span class="inlinecode"><span class="id" title="var">fact</span></span> <span class="inlinecode">1</span> goes
     through to reduce to a normal form (assuming the usual reduction
     rules for arithmetic operations).
@@ -1159,8 +1168,8 @@
       fix
         (\eq:Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool,
            \m:Nat, \n:Nat,
-             test m=0 then iszero n
-             else test n=0 then fls
+             if m=0 then iszero n
+             else if n=0 then fls
              else eq (pred m) (pred n))
 </pre>
  And finally, here is an example where <span class="inlinecode"><span class="id" title="keyword">fix</span></span> is used to define a
@@ -1170,8 +1179,8 @@
       evenodd =
         fix
           (\eo: (Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool * Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool),
-             let e = \n:Nat, test n=0 then tru else eo,snd (pred n) in
-             let o = \n:Nat, test n=0 then fls else eo,fst (pred n) in
+             let e = \n:Nat, if n=0 then tru else eo,snd (pred n) in
+             let o = \n:Nat, if n=0 then fls else eo,fst (pred n) in
              (e,o))
 
       even = evenodd.fst
@@ -1181,7 +1190,7 @@
 </div>
 
 <div class="doc">
-<a id="lab273"></a><h2 class="section">Records</h2>
+<a id="lab269"></a><h2 class="section">Records</h2>
 
 <div class="paragraph"> </div>
 
@@ -1266,17 +1275,17 @@
   <td class="infrule">{..., i=vi, ...}.i <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> vi</td>
   <td></td>
 </td>
-</table></center> Again, these rules are a bit informal.  For example, the first rule
-   is intended to be read "if <span class="inlinecode"><span class="id" title="var">ti</span></span> is the leftmost field that is not a
-   value and if <span class="inlinecode"><span class="id" title="var">ti</span></span> steps to <span class="inlinecode"><span class="id" title="var">ti'</span></span>, then the whole record steps..."
-   In the last rule, the intention is that there should be only one
-   field called <span class="inlinecode"><span class="id" title="var">i</span></span>, and that all the other fields must contain values. 
+</table></center>
 <div class="paragraph"> </div>
 
-
+ Again, these rules are a bit informal.  For example, the first rule
+    is intended to be read "if <span class="inlinecode"><span class="id" title="var">ti</span></span> is the leftmost field that is not a
+    value and if <span class="inlinecode"><span class="id" title="var">ti</span></span> steps to <span class="inlinecode"><span class="id" title="var">ti'</span></span>, then the whole record steps..."
+    In the last rule, the intention is that there should be only one
+    field called <span class="inlinecode"><span class="id" title="var">i</span></span>, and that all the other fields must contain values. 
 <div class="paragraph"> </div>
 
-   The typing rules are also simple:
+ The typing rules are also simple:
 <center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> &#x2208; T<sub>1</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gamma &#x22A2; tn &#x2208; Tn</td>
@@ -1350,13 +1359,13 @@
         informal shorthands for more complex expressions involving
         pairs and product types.  We sketch this approach in the next
         section. 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
-<a id="lab274"></a><h3 class="section">Encoding Records (Optional)</h3>
+<a id="lab270"></a><h3 class="section">Encoding Records (Optional)</h3>
 
 <div class="paragraph"> </div>
 
@@ -1435,7 +1444,7 @@
     compilers that essentially do this! 
 <div class="paragraph"> </div>
 
-<a id="lab275"></a><h3 class="section">Variants (Optional)</h3>
+<a id="lab271"></a><h3 class="section">Variants (Optional)</h3>
 
 <div class="paragraph"> </div>
 
@@ -1456,7 +1465,7 @@
 </div>
 
 <div class="doc">
-<a id="lab276"></a><h1 class="section">Exercise: Formalizing the Extensions</h1>
+<a id="lab272"></a><h1 class="section">Exercise: Formalizing the Extensions</h1>
 
 </div>
 <div class="code">
@@ -1466,13 +1475,13 @@
 </div>
 
 <div class="doc">
-<a id="lab277"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_definitions)</h4>
+<a id="lab273"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_definitions)</h4>
  In this series of exercises, you will formalize some of the
     extensions described in this chapter.  We've provided the
     necessary additions to the syntax of terms and types, and we've
-    included a few examples that you can test your definitions with
-    to make sure they are working as expected.  You'll fill in the
-    rest of the definitions and extend all the proofs accordingly.
+    included a few examples that you can test your definitions with to
+    make sure they are working as expected.  You'll fill in the rest
+    of the definitions and extend all the proofs accordingly.
 
 <div class="paragraph"> </div>
 
@@ -1509,16 +1518,17 @@
 
 <div class="paragraph"> </div>
 
-    A good strategy is to work on the extensions one at a time, in two
-    passes, rather than trying to work through the file from start to
-    finish in a single pass.  For each definition or proof, begin by
-    reading carefully through the parts that are provided for you,
-    referring to the text in the <a href="Stlc.html"><span class="inlineref">Stlc</span></a> chapter for high-level
-    intuitions and the embedded comments for detailed mechanics. 
+    A good strategy is to work on the extensions one at a time, in
+    separate passes, rather than trying to work through the file from
+    start to finish in a single pass.  For each definition or proof,
+    begin by reading carefully through the parts that are provided for
+    you, referring to the text in the <a href="Stlc.html"><span class="inlineref">Stlc</span></a> chapter for
+    high-level intuitions and the embedded comments for detailed
+    mechanics. 
 </div>
 
 <div class="doc">
-<a id="lab278"></a><h3 class="section">Syntax</h3>
+<a id="lab274"></a><h3 class="section">Syntax</h3>
 
 </div>
 <div class="code">
@@ -1664,7 +1674,7 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 
 <div class="doc">
-<a id="lab279"></a><h3 class="section">Substitution</h3>
+<a id="lab275"></a><h3 class="section">Substitution</h3>
 
 </div>
 <div class="code">
@@ -1731,7 +1741,7 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 
 <div class="doc">
-<a id="lab280"></a><h3 class="section">Reduction</h3>
+<a id="lab276"></a><h3 class="section">Reduction</h3>
 
 <div class="paragraph"> </div>
 
@@ -1861,7 +1871,7 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 
 <div class="doc">
-<a id="lab281"></a><h3 class="section">Typing</h3>
+<a id="lab277"></a><h3 class="section">Typing</h3>
 
 </div>
 <div class="code">
@@ -1954,11 +1964,11 @@ Next we define the typing rules.  These are nearly direct
 
 
 <div class="doc">
-<a id="lab282"></a><h2 class="section">Examples</h2>
+<a id="lab278"></a><h2 class="section">Examples</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab283"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_examples)</h4>
+<a id="lab279"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_examples)</h4>
  This section presents formalized versions of the examples from
     above (plus several more).
 
@@ -1985,7 +1995,7 @@ Next we define the typing rules.  These are nearly direct
 </div>
 
 <div class="doc">
-<a id="lab284"></a><h3 class="section">Preliminaries</h3>
+<a id="lab280"></a><h3 class="section">Preliminaries</h3>
 
 <div class="paragraph"> </div>
 
@@ -2045,7 +2055,7 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab285"></a><h3 class="section">Numbers</h3>
+<a id="lab281"></a><h3 class="section">Numbers</h3>
 
 </div>
 <div class="code">
@@ -2081,7 +2091,7 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab286"></a><h3 class="section">Products</h3>
+<a id="lab282"></a><h3 class="section">Products</h3>
 
 </div>
 <div class="code">
@@ -2107,7 +2117,7 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab287"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">let</span></span></h3>
+<a id="lab283"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">let</span></span></h3>
 
 </div>
 <div class="code">
@@ -2134,7 +2144,7 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab288"></a><h3 class="section">Sums</h3>
+<a id="lab284"></a><h3 class="section">Sums</h3>
 
 </div>
 <div class="code">
@@ -2187,7 +2197,7 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab289"></a><h3 class="section">Lists</h3>
+<a id="lab285"></a><h3 class="section">Lists</h3>
 
 </div>
 <div class="code">
@@ -2217,7 +2227,7 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab290"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">fix</span></span></h3>
+<a id="lab286"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">fix</span></span></h3>
 
 </div>
 <div class="code">
@@ -2362,7 +2372,7 @@ Next, a bit of Coq hackery to automate searching for typing
 
 
 <div class="doc">
-<a id="lab291"></a><h2 class="section">Properties of Typing</h2>
+<a id="lab287"></a><h2 class="section">Properties of Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -2372,11 +2382,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab292"></a><h3 class="section">Progress</h3>
+<a id="lab288"></a><h3 class="section">Progress</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab293"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_progress)</h4>
+<a id="lab289"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_progress)</h4>
  Complete the proof of <span class="inlinecode"><span class="id" title="tactic">progress</span></span>.
 
 <div class="paragraph"> </div>
@@ -2551,7 +2561,7 @@ Next, a bit of Coq hackery to automate searching for typing
 
 
 <div class="doc">
-<a id="lab294"></a><h2 class="section">Weakening</h2>
+<a id="lab290"></a><h2 class="section">Weakening</h2>
 
 <div class="paragraph"> </div>
 
@@ -2582,11 +2592,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab295"></a><h3 class="section">Substitution</h3>
+<a id="lab291"></a><h3 class="section">Substitution</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab296"></a><h4 class="section">Exercise: 2 stars, standard (STLCE_subst_preserves_typing)</h4>
+<a id="lab292"></a><h4 class="section">Exercise: 2 stars, standard (STLCE_subst_preserves_typing)</h4>
  Complete the proof of <span class="inlinecode"><span class="id" title="var">substitution_preserves_typing</span></span>. 
 </div>
 <div class="code">
@@ -2678,11 +2688,11 @@ Next, a bit of Coq hackery to automate searching for typing
 
 
 <div class="doc">
-<a id="lab297"></a><h3 class="section">Preservation</h3>
+<a id="lab293"></a><h3 class="section">Preservation</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab298"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_preservation)</h4>
+<a id="lab294"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_preservation)</h4>
  Complete the proof of <span class="inlinecode"><span class="id" title="var">preservation</span></span>. 
 </div>
 <div class="code">
@@ -2740,7 +2750,7 @@ Next, a bit of Coq hackery to automate searching for typing
 
 <br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended"><span class="id" title="module">STLCExtended</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:35&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:00&nbsp;*)</span><br/>
 </div>
 </div>
 

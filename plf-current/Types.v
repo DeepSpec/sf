@@ -10,7 +10,7 @@
     of every modern functional programming language (including
     Coq!). *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Arith.Arith.
 From PLF Require Import Maps.
 From PLF Require Import Imp.
@@ -55,6 +55,9 @@ Inductive tm : Type :=
   | scc : tm -> tm
   | prd : tm -> tm
   | iszro : tm -> tm.
+
+(** (Since it is so simple, we will not bother introducing custom
+    concrete syntax for this language.) *)
 
 (** _Values_ are [tru], [fls], and numeric values... *)
 
@@ -163,11 +166,11 @@ Hint Constructors step : core.
 (** ** Normal Forms and Values *)
 
 (** The first interesting thing to notice about this [step] relation
-    is that the strong progress theorem from the [Smallstep] chapter
-    fails here.  That is, there are terms that are normal forms (they
-    can't take a step) but not values (because we have not included
-    them in our definition of possible "results of reduction").  Such
-    terms are _stuck_. *)
+    is that the strong progress theorem from the [Smallstep]
+    chapter fails here.  That is, there are terms that are normal
+    forms (they can't take a step) but not values (they are not
+    included in our definition of possible "results of reduction").
+    Such terms are said to be _stuck_. *)
 
 Notation step_normal_form := (normal_form step).
 
@@ -176,7 +179,7 @@ Definition stuck (t : tm) : Prop :=
 
 Hint Unfold stuck : core.
 
-(** **** Exercise: 2 stars, standard (some_term_is_stuck)  *)
+(** **** Exercise: 2 stars, standard (some_term_is_stuck) *)
 Example some_term_is_stuck :
   exists t, stuck t.
 Proof.
@@ -188,7 +191,7 @@ Proof.
     forms.  This is important because it shows we did not accidentally
     define things so that some value could still take a step. *)
 
-(** **** Exercise: 3 stars, standard (value_is_nf)  *)
+(** **** Exercise: 3 stars, standard (value_is_nf) *)
 Lemma value_is_nf : forall t,
   value t -> step_normal_form t.
 Proof.
@@ -204,7 +207,7 @@ Proof.
 
     [] *)
 
-(** **** Exercise: 3 stars, standard, optional (step_deterministic) 
+(** **** Exercise: 3 stars, standard, optional (step_deterministic)
 
     Use [value_is_nf] to show that the [step] relation is also
     deterministic. *)
@@ -314,7 +317,7 @@ Example has_type_not :
 Proof.
   intros Contra. solve_by_inverts 2.  Qed.
 
-(** **** Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat)  *)
+(** **** Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat) *)
 Example scc_hastype_nat__hastype_nat : forall t,
   |- scc t \in Nat ->
   |- t \in Nat.
@@ -355,7 +358,7 @@ Qed.
     term is well typed, then either it is a value or it can take at
     least one step.  We call this _progress_. *)
 
-(** **** Exercise: 3 stars, standard (finish_progress)  *)
+(** **** Exercise: 3 stars, standard (finish_progress) *)
 Theorem progress : forall t T,
   |- t \in T ->
   value t \/ exists t', t --> t'.
@@ -368,7 +371,7 @@ Proof.
   intros t T HT.
   induction HT; auto.
   (* The cases that were obviously values, like T_Tru and
-     T_Fls, were eliminated immediately by auto *)
+     T_Fls, are eliminated immediately by auto *)
   - (* T_Test *)
     right. destruct IHHT1.
     + (* t1 is a value *)
@@ -382,7 +385,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (finish_progress_informal) 
+(** **** Exercise: 3 stars, advanced (finish_progress_informal)
 
     Complete the corresponding informal proof: *)
 
@@ -422,9 +425,9 @@ Definition manual_grade_for_finish_progress_informal : option (nat*string) := No
 (** ** Type Preservation *)
 
 (** The second critical property of typing is that, when a well-typed
-    term takes a step, the result is also a well-typed term. *)
+    term takes a step, the result is a well-typed term (of the same type). *)
 
-(** **** Exercise: 2 stars, standard (finish_preservation)  *)
+(** **** Exercise: 2 stars, standard (finish_preservation) *)
 Theorem preservation : forall t t' T,
   |- t \in T ->
   t --> t' ->
@@ -451,7 +454,7 @@ Proof.
     (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (finish_preservation_informal) 
+(** **** Exercise: 3 stars, advanced (finish_preservation_informal)
 
     Complete the following informal proof: *)
 
@@ -485,7 +488,7 @@ Proof.
 Definition manual_grade_for_finish_preservation_informal : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (preservation_alternate_proof) 
+(** **** Exercise: 3 stars, standard (preservation_alternate_proof)
 
     Now prove the same property again by induction on the
     _evaluation_ derivation instead of on the typing derivation.
@@ -532,7 +535,7 @@ Qed.
 (* ================================================================= *)
 (** ** Additional Exercises *)
 
-(** **** Exercise: 2 stars, standard, especially useful (subject_expansion) 
+(** **** Exercise: 2 stars, standard, especially useful (subject_expansion)
 
     Having seen the subject reduction property, one might
     wonder whether the opposity property -- subject _expansion_ --
@@ -547,7 +550,7 @@ Qed.
 Definition manual_grade_for_subject_expansion : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (variation1) 
+(** **** Exercise: 2 stars, standard (variation1)
 
     Suppose that we add this new rule to the typing relation:
 
@@ -570,7 +573,7 @@ Definition manual_grade_for_subject_expansion : option (nat*string) := None.
 Definition manual_grade_for_variation1 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (variation2) 
+(** **** Exercise: 2 stars, standard (variation2)
 
     Suppose, instead, that we add this new rule to the [step] relation:
 
@@ -585,7 +588,7 @@ Definition manual_grade_for_variation1 : option (nat*string) := None.
 Definition manual_grade_for_variation2 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (variation3) 
+(** **** Exercise: 2 stars, standard, optional (variation3)
 
     Suppose instead that we add this rule:
 
@@ -599,7 +602,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 *)
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (variation4) 
+(** **** Exercise: 2 stars, standard, optional (variation4)
 
     Suppose instead that we add this rule:
 
@@ -612,7 +615,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 *)
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (variation5) 
+(** **** Exercise: 2 stars, standard, optional (variation5)
 
     Suppose instead that we add this rule:
 
@@ -625,7 +628,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 *)
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (variation6) 
+(** **** Exercise: 2 stars, standard, optional (variation6)
 
     Suppose instead that we add this rule:
 
@@ -638,7 +641,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 *)
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (more_variations) 
+(** **** Exercise: 3 stars, standard, optional (more_variations)
 
     Make up some exercises of your own along the same lines as
     the ones above.  Try to find ways of selectively breaking
@@ -649,7 +652,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 
     [] *)
 
-(** **** Exercise: 1 star, standard (remove_prdzro) 
+(** **** Exercise: 1 star, standard (remove_prdzro)
 
     The reduction rule [ST_PrdZro] is a bit counter-intuitive: we
     might feel that it makes more sense for the predecessor of [zro] to
@@ -663,14 +666,14 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 Definition manual_grade_for_remove_predzro : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced (prog_pres_bigstep) 
+(** **** Exercise: 4 stars, advanced (prog_pres_bigstep)
 
     Suppose our evaluation relation is defined in the big-step style.
     State appropriate analogs of the progress and preservation
     properties. (You do not need to prove them.)
 
     Can you see any limitations of either of your properties?  Do they
-    allow for nonterminating commands?  Why might we prefer the
+    allow for nonterminating programs?  Why might we prefer the
     small-step semantics for stating preservation and progress?
 
 (* FILL IN HERE *)
@@ -679,4 +682,4 @@ Definition manual_grade_for_remove_predzro : option (nat*string) := None.
 Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

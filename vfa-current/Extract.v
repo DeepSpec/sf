@@ -11,6 +11,7 @@
     not required reading. This chapter starts from scratch and goes
     deeper. *)
 
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
 Require Extraction.
 
@@ -220,7 +221,7 @@ Ltac bdestruct_guard:=
   end.
 
 Ltac bdall :=
-  repeat (simpl; bdestruct_guard; try omega; auto).
+  repeat (simpl; bdestruct_guard; try lia; auto).
 
 (* ################################################################# *)
 (** * Insertion Sort, Extracted *)
@@ -243,7 +244,7 @@ Recursive Extraction sort_int.
 
 (** Again, for that extraction to be meaningful, we need to prove that
     [sort_int] is a sorting algorithm.  We can do that with the same
-    techniques we used in [Sort].  In particular, [omega] works
+    techniques we used in [Sort].  In particular, [lia] works
     with [Z], so we can enjoy automation without having to do any
     unnecessary work axiomatizing and proving lemmas about [int]. *)
 
@@ -257,7 +258,7 @@ Inductive sorted : list int -> Prop :=
 
 Hint Constructors sorted.
 
-(** **** Exercise: 3 stars, standard (sort_int_correct)  *)
+(** **** Exercise: 3 stars, standard (sort_int_correct) *)
 
 (** Prove the correctness of [sort_int] by adapting your solution to
     [insertion_sort_correct] from [Sort]. *)
@@ -315,7 +316,7 @@ Theorem lookup_empty : forall (V : Type) (default : V) (k : key),
     lookup default k empty_tree = default.
 Proof. auto. Qed.
 
-(** **** Exercise: 2 stars, standard (lookup_insert_eq)  *)
+(** **** Exercise: 2 stars, standard (lookup_insert_eq) *)
 Theorem lookup_insert_eq :
   forall (V : Type) (default : V) (t : tree V) (k : key) (v : V),
     lookup default k (insert k v t) = v.
@@ -323,7 +324,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (lookup_insert_neq)  *)
+(** **** Exercise: 3 stars, standard (lookup_insert_neq) *)
 Theorem lookup_insert_neq :
   forall (V : Type) (default : V) (t : tree V) (k k' : key) (v : V),
     k <> k' -> lookup default k' (insert k v t) = lookup default k' t.
@@ -331,7 +332,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, optional (int_elements)  *)
+(** **** Exercise: 5 stars, standard, optional (int_elements) *)
 
 (** Port the definition of [BST] and re-prove the properties of
     [elements] for [int]-keyed trees. Send us your solution so
@@ -385,4 +386,4 @@ Insert and lookup 20000 consecutive integers in 0.387535 seconds.
     balanced search trees to achieve logarithmic.  [Redblack]
     will do that. *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

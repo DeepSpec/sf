@@ -10,7 +10,7 @@
     various reasons, are not yet available by default in Coq.  These
     tactics are defined in the [LibTactics.v] file. *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 
 From Coq Require Import Arith.Arith.
 
@@ -189,7 +189,7 @@ Proof.
   induction E1; intros st2 E2;
     inverts E2 as.
   - (* E_Skip *) reflexivity.
-  - (* E_Ass *)
+  - (* E_Asgn *)
     (* Observe that the variable [n] is not automatically
        substituted because, contrary to [inversion E2; subst],
        the tactic [inverts E2] does not substitute the equalities
@@ -374,7 +374,7 @@ Proof.
   intros n m.
   asserts_rewrite (0 + n = n).
     reflexivity. (* subgoal [0+n = n] *)
-    reflexivity. (* subgoal [n*m = m*n] *)
+    reflexivity. (* subgoal [n*m = n*m] *)
 Qed.
 
 (** Remark: the syntax [asserts_rewrite (E1 = E2) in H] allows
@@ -496,12 +496,12 @@ End EqualityExamples.
     that help make proof scripts shorter and more readable:
     - [unfolds] (without argument) for unfolding the head definition,
     - [false] for replacing the goal with [False],
-    - [gen] as a shorthand for [dependent generalize],
-    - [admits] for naming an addmited fact,
+    - [gen] as a shorthand for [generalize dependent],
+    - [admits] for naming an admitted fact,
     - [admit_rewrite] for rewriting using an admitted equality,
     - [admit_goal] to set up a proof by induction by skipping the
       justification that some order decreases,
-    - [sort] for re-ordering the proof context by moving moving all
+    - [sort] for re-ordering the proof context by moving all
       propositions at the bottom. *)
 
 (* ================================================================= *)
@@ -677,7 +677,7 @@ Proof.
   introv E1 E2. gen st2.
   induction E1; introv E2; inverts E2 as.
   - (* E_Skip *) reflexivity.
-  - (* E_Ass *)
+  - (* E_Asgn *)
     subst n.
     reflexivity.
   - (* E_Seq *)
@@ -722,7 +722,7 @@ End SortExamples.
 (** * Tactics for Advanced Lemma Instantiation *)
 
 (** This last section describes a mechanism for instantiating a lemma
-    by providing some of its arguments and leaving other implicit.
+    by providing some of its arguments and leaving others implicit.
     Variables whose instantiation is not provided are turned into
     existentential variables, and facts whose instantiation is not
     provided are turned into subgoals.
@@ -926,7 +926,7 @@ End ExamplesLets.
       of very conveniently instantiating lemmas.
 
     - [applys_eq] can save the need to perform manual rewriting steps
-      before being able to apply lemma.
+      before being able to apply a lemma.
 
     - [admits], [admit_rewrite] and [admit_goal] give the flexibility to
       choose which subgoals to try and discharge first.
@@ -939,4 +939,4 @@ End ExamplesLets.
 
 *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

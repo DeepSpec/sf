@@ -689,7 +689,7 @@ Proof.
   generalize dependent st2.
   induction E1; intros st2 E2; inversion E2; subst.
   - (* E_Skip *) reflexivity.
-  - (* E_Ass *) reflexivity.
+  - (* E_Asgn *) reflexivity.
   - (* E_Seq *)
     assert (st' = st'0) as EQ1.
     { (* Proof of assertion *) apply IHE1_1; assumption. }
@@ -828,7 +828,7 @@ End DeterministicImp.
 (** To investigate how to automate the proof of the lemma [preservation],
     let us first import the definitions required to state that lemma. *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From PLF Require StlcProp.
 Module PreservationProgressStlc.
 Import Stlc.
@@ -1106,7 +1106,7 @@ Proof.
         { replace <{ Ref T1 }>
             with <{ Ref {store_Tlookup (length st) (ST ++ T1::nil)} }>.
           { apply T_Loc.
-            rewrite <- H. rewrite app_length, plus_comm. simpl. lia. }
+            rewrite <- H. rewrite app_length, add_comm. simpl. lia. }
           unfold store_Tlookup. rewrite <- H. rewrite nth_eq_last.
           reflexivity. }
         apply store_well_typed_app; assumption. *)
@@ -1921,4 +1921,4 @@ Proof. congruence. Qed.
     some investment, however this investment will pay off very quickly.
 *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

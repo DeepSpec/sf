@@ -1,6 +1,6 @@
 (** * Records: Adding Records to STLC *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
@@ -401,7 +401,7 @@ Hint Constructors has_type : core.
 (* ================================================================= *)
 (** ** Examples *)
 
-(** **** Exercise: 2 stars, standard (examples) 
+(** **** Exercise: 2 stars, standard (examples)
 
     Finish the proofs below.  Feel free to use Coq's automation
     features in this proof.  However, if you are not confident about
@@ -735,4 +735,4 @@ Qed.
 
 End STLCExtendedRecords.
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

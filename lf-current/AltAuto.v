@@ -1,6 +1,6 @@
 (** * AltAuto: More Automation *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Lia
                         Arith.
 From LF Require Import IndProp.
@@ -33,7 +33,7 @@ One direction of this equivalence looks like this (the other is similar).
 *)
 
 Lemma re_opt_e_match : forall T (re: reg_exp T) s,
-    s =~ re -> s =~ re_opt_e re.
+  s =~ re -> s =~ re_opt_e re.
 Proof.
   intros T re s M.
   induction M
@@ -112,7 +112,7 @@ Qed.
 
 (** For example, consider the following trivial lemma: *)
 
-Lemma foo : forall n, 0 <=? n = true.
+Lemma foo : forall n,  n+1 =? 0 = false.
 Proof.
   intros.
   destruct n eqn:E.
@@ -123,7 +123,7 @@ Qed.
 
 (** We can simplify this proof using the [;] tactical: *)
 
-Lemma foo' : forall n, 0 <=? n = true.
+Lemma foo' : forall n, n+1 =? 0 = false.
 Proof.
   intros.
   (* [destruct] the current goal *)
@@ -138,7 +138,7 @@ Qed.
     the proof that was bothering us a little while ago. *)
 
 Lemma re_opt_e_match' : forall T (re: reg_exp T) s,
-    s =~ re -> s =~ re_opt_e re.
+  s =~ re -> s =~ re_opt_e re.
 Proof.
   intros T re s M.
   induction M
@@ -195,7 +195,7 @@ Qed.
 of our optimization proof: *)
 
 Lemma re_opt_e_match'' : forall T (re: reg_exp T) s,
-    s =~ re -> s =~ re_opt_e re.
+  s =~ re -> s =~ re_opt_e re.
 Proof.
   intros T re s M.
   induction M
@@ -221,8 +221,8 @@ Qed.
 (** *** The [repeat] Tactical *)
 
 (** The [repeat] tactical takes another tactic and keeps applying this
-    tactic until it fails. Here is an example showing that [10] is in
-    a long list using repeat. *)
+    tactic until it fails or stops making progress. Here is an example 
+    showing that [10] is in a long list using repeat. *)
 
 Theorem In10 : In 10 [1;2;3;4;5;6;7;8;9;10].
 Proof.
@@ -250,7 +250,7 @@ Qed.
     process diverges, this simply means that we have failed to
     construct a proof, not that we have constructed a wrong one. *)
 
-(** **** Exercise: 3 stars, standard (re_opt)  *)
+(** **** Exercise: 3 stars, standard (re_opt) *)
 
 (** Consider this more powerful version of the regular expression optimizer. *)
 
@@ -274,7 +274,7 @@ Fixpoint re_opt {T:Type} (re: reg_exp T) : reg_exp T :=
 (* Here is an incredibly tedious manual proof of (one direction of) its correctness: *)
 
 Lemma re_opt_match : forall T (re: reg_exp T) s,
-    s =~ re -> s =~ re_opt re.
+  s =~ re -> s =~ re_opt re.
 Proof.
   intros T re s M.
   induction M
@@ -434,7 +434,7 @@ Qed.
 (* Use the automation tools described so far to shorten the proof. *)
 
 Lemma re_opt_match' : forall T (re: reg_exp T) s,
-    s =~ re -> s =~ re_opt re.
+  s =~ re -> s =~ re_opt re.
 Proof.
 (* FILL IN HERE *) Admitted.
 (* Do not modify the following line: *)
@@ -460,8 +460,6 @@ Definition manual_grade_for_re_opt : option (nat*string) := None.
 
      - [subst]: Substitute away _all_ assumptions of the form [x = e]
        or [e = x].
-
-
 
     We'll see examples as we go along. *)
 
@@ -496,40 +494,35 @@ Ltac impl_and_try c := simpl; try c.
 (* ################################################################# *)
 (** * Decision Procedures *)
 
-(** _Note to readers_: The [omega] tactic described here is now
-    superseded by a more powerful tactic called [lia]. For the moment,
-    you'll see uses of both in the text. *)
-
 (** So far, the automation we have considered has primarily been
     useful for removing repetition. Another important category of
     automation consists of built-in decision procedures for specific
-    kinds of problems.  There are several of these, but the [omega]
+    kinds of problems.  There are several of these, but the [lia]
     tactic is the most important to start with. *)
 
 (* ================================================================= *)
-(** ** The Omega Tactic *)
+(** ** The [lia] Tactic *)
 
-(** The [omega] tactic implements a decision procedure for a subset of
-    first-order logic called _Presburger arithmetic_.  It is based on
-    the Omega algorithm invented by William Pugh [Pugh 1991] (in Bib.v).
+(** The [lia] tactic implements a decision procedure for integer linear
+    arithmetic, a subset of propositional logic and arithmetic. 
 
-    If the goal is a universally quantified formula made out of
+    If the goal is a formula made out of
+
+      - variables and constants of type [nat] (or other integer types)
 
       - numeric constants, addition ([+] and [S]), subtraction ([-]
-        and [pred]), and multiplication by constants (this is what
-        makes it Presburger arithmetic),
+        and [pred]), and multiplication by constants 
+        (this is what makes it linear arithmetic) 
 
       - equality ([=] and [<>]) and ordering ([<=]), and
 
-      - the logical connectives [/\], [\/], [~], and [->],
+      - the logical connectives [/\], [\/], [~], [->], and [<->].
 
-    then invoking [omega] will either solve the goal or fail, meaning
+    then invoking [lia] will either solve the goal or fail, meaning
     that the goal is actually false.  (If the goal is _not_ of this
-    form, [omega] will also fail.) *)
+    form, [lia] will also fail.) *)
 
-(** Note that we needed the import [Require Import Omega] at the top of this file. *)
-
-Example silly_presburger_example : forall m n o p,
+Example silly_lia_example : forall m n o p,
   m + n <= n + o /\ o + 3 = p + 3 ->
   m <= p.
 Proof.
@@ -560,12 +553,19 @@ Qed.
     applied to solve the current goal.  If one is found, behave
     like [apply c]. *)
 
+Print ev.
+(* ===> 
+   Inductive ev : nat -> Prop :=
+    ev_0 : ev 0 
+  | ev_SS : forall n : nat, ev n -> ev (S (S n))
+*)
+
 Example constructor_example: forall (n:nat),
     ev (n+n).
 Proof.
   induction n; simpl.
   - constructor. (* applies ev_0 *)
-  - rewrite plus_comm. simpl. constructor. (* applies ev_SS *) auto.
+  - rewrite add_comm. simpl. constructor. (* applies ev_SS *) auto.
 Qed.
 
 (** This saves us from needing to remember the names of our constructors.
@@ -583,7 +583,7 @@ Example auto_example_1 : forall (P Q R: Prop),
   (P -> Q) -> (Q -> R) -> P -> R.
 Proof.
   intros P Q R H1 H2 H3.
-  apply H2. apply H1. assumption.
+  apply H2. apply H1. apply H3. 
 Qed.
 
 (** The [auto] tactic frees us from this drudgery by _searching_ for a
@@ -610,7 +610,7 @@ Example auto_example_2 : forall P Q R S T U : Prop,
   (P -> R) ->
   (T -> R) ->
   (S -> T -> U) ->
-  ((P->Q) -> (P->S)) ->
+  ((P -> Q) -> (P -> S)) ->
   T ->
   P ->
   U.
@@ -666,7 +666,6 @@ Example auto_example_6 : forall n m p : nat,
   n <= p ->
   n = m.
 Proof.
-  intros.
   auto using le_antisym.
 Qed.
 
@@ -704,7 +703,6 @@ Example auto_example_6' : forall n m p : nat,
   n <= p ->
   n = m.
 Proof.
-  intros.
   auto. (* picks up hint from database *)
 Qed.
 
@@ -723,7 +721,7 @@ Example auto_example_7' : forall x,
 Proof. info_auto. Qed.
 
 
-(** **** Exercise: 3 stars, advanced (pumping_redux) 
+(** **** Exercise: 3 stars, advanced (pumping_redux)
 
     Use [auto], [lia], and any other useful tactics from this chapter to
     shorten your proof (or the "official" solution proof) of the weak Pumping
@@ -742,7 +740,7 @@ Proof.
 Definition manual_grade_for_pumping_redux : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced, optional (pumping_redux_strong) 
+(** **** Exercise: 3 stars, advanced, optional (pumping_redux_strong)
 
     Use [auto], [lia], and any other useful tactics from this chapter to
     shorten your proof (or the "official" solution proof) of the stronger
@@ -778,7 +776,7 @@ Proof.
   intros a b c d H1 H2.
   apply le_trans with (b+ b*c).  (* <-- We must supply the intermediate value *)
   + apply H1.
-  + simpl in H2. rewrite mult_comm. apply H2.
+  + simpl in H2. rewrite mul_comm. apply H2.
 Qed.
 
 (** In the first step of the proof, we had to explicitly provide a
@@ -806,7 +804,7 @@ Proof.
   intros a b c d H1 H2.
   eapply le_trans.  (* 1 *)
   + apply H1.  (* 2 *)
-  + simpl in H2. rewrite mult_comm. apply H2.
+  + simpl in H2. rewrite mul_comm. apply H2.
 Qed.
 
 (** The [eapply H] tactic behaves just like [apply H] except
@@ -846,4 +844,4 @@ Qed.
     [auto] most of the time, only switching to the [e] variants when
     the ordinary variants don't do the job. *)
 
-(* 2020-11-05 12:33 *)
+(* 2021-04-01 19:59 *)

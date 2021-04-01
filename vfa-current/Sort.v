@@ -15,6 +15,7 @@
     - Section 2.1 of _Introduction to Algorithms, 3rd Edition_, by
       Cormen, Leiserson, and Rivest, MIT Press 2009. *)
 
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
 
 (* ################################################################# *)
@@ -136,7 +137,7 @@ Definition is_a_sorting_algorithm (f: list nat -> list nat) := forall al,
 (** In the following exercises, you will prove the correctness of
     insertion sort. *)
 
-(** **** Exercise: 3 stars, standard (insert_sorted)  *)
+(** **** Exercise: 3 stars, standard (insert_sorted) *)
 
 (* Prove that insertion maintains sortedness. Make use of tactic
    [bdestruct], defined in [Perm]. *)
@@ -149,7 +150,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (sort_sorted)  *)
+(** **** Exercise: 2 stars, standard (sort_sorted) *)
 
 (** Using [insert_sorted], prove that insertion sort makes a list
     sorted. *)
@@ -160,7 +161,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (insert_perm)  *)
+(** **** Exercise: 3 stars, standard (insert_perm) *)
 
 (** The following lemma will be useful soon as a helper. Take
     advantage of helpful theorems from the [Permutation] library. *)
@@ -172,7 +173,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (sort_perm)  *)
+(** **** Exercise: 3 stars, standard (sort_perm) *)
 
 (** Prove that [sort] is a permutation, using [insert_perm]. *)
 
@@ -182,7 +183,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (insertion_sort_correct)  *)
+(** **** Exercise: 1 star, standard (insertion_sort_correct) *)
 
 (** Finish the proof of correctness! *)
 
@@ -205,7 +206,7 @@ Proof.
     But one way to build confidence in a specification is to state it
     in two different ways, then prove they are equivalent. *)
 
-(** **** Exercise: 4 stars, advanced (sorted_sorted')  *)
+(** **** Exercise: 4 stars, advanced (sorted_sorted') *)
 Lemma sorted_sorted': forall al, sorted al -> sorted' al.
 
 (** Hint: Instead of doing induction on the list [al], do induction on
@@ -216,7 +217,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (sorted'_sorted)  *)
+(** **** Exercise: 3 stars, advanced (sorted'_sorted) *)
 Lemma sorted'_sorted : forall al, sorted' al -> sorted al.
 Proof.
 (** Here, you can't do induction on the sortedness of the list,
@@ -235,14 +236,14 @@ Proof.
     from [sorted'].
 
     Give it a try!  The best proof we know of makes essential use of
-    the auxiliary lemma [nth_default_insert], so you may want to prove
+    the auxiliary lemma [nth_error_insert], so you may want to prove
     that first.  And some other auxiliary lemmas may be needed too.
     But maybe you will find a simpler appraoch!
 
     DO NOT USE [sorted_sorted'], [sorted'_sorted], [insert_sorted], or
     [sort_sorted] in these proofs.  That would defeat the purpose! *)
 
-(** **** Exercise: 5 stars, standard, optional (insert_sorted')  *)
+(** **** Exercise: 5 stars, standard, optional (insert_sorted') *)
 
 Lemma nth_error_insert : forall l a i iv,
     nth_error (insert a l) i = Some iv ->
@@ -275,4 +276,4 @@ Qed.
     difficulty of the correctness proofs_. *)
 
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

@@ -51,7 +51,7 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing".<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Imp</span>.<br/>
@@ -60,7 +60,7 @@
 </div>
 
 <div class="doc">
-<a id="lab187"></a><h1 class="section">Typed Arithmetic Expressions</h1>
+<a id="lab188"></a><h1 class="section">Typed Arithmetic Expressions</h1>
 
 <div class="paragraph"> </div>
 
@@ -79,7 +79,7 @@
 </div>
 
 <div class="doc">
-<a id="lab188"></a><h2 class="section">Syntax</h2>
+<a id="lab189"></a><h2 class="section">Syntax</h2>
 
 <div class="paragraph"> </div>
 
@@ -110,7 +110,11 @@
 </div>
 
 <div class="doc">
-<i>Values</i> are <span class="inlinecode"><span class="id" title="var">tru</span></span>, <span class="inlinecode"><span class="id" title="var">fls</span></span>, and numeric values... 
+(Since it is so simple, we will not bother introducing custom
+    concrete syntax for this language.) 
+<div class="paragraph"> </div>
+
+ <i>Values</i> are <span class="inlinecode"><span class="id" title="var">tru</span></span>, <span class="inlinecode"><span class="id" title="var">fls</span></span>, and numeric values... 
 </div>
 <div class="code">
 
@@ -127,7 +131,7 @@
 </div>
 
 <div class="doc">
-<a id="lab189"></a><h2 class="section">Operational Semantics</h2>
+<a id="lab190"></a><h2 class="section">Operational Semantics</h2>
 
 <div class="paragraph"> </div>
 
@@ -319,16 +323,16 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 </div>
 
 <div class="doc">
-<a id="lab190"></a><h2 class="section">Normal Forms and Values</h2>
+<a id="lab191"></a><h2 class="section">Normal Forms and Values</h2>
 
 <div class="paragraph"> </div>
 
  The first interesting thing to notice about this <span class="inlinecode"><span class="id" title="var">step</span></span> relation
-    is that the strong progress theorem from the <a href="Smallstep.html"><span class="inlineref">Smallstep</span></a> chapter
-    fails here.  That is, there are terms that are normal forms (they
-    can't take a step) but not values (because we have not included
-    them in our definition of possible "results of reduction").  Such
-    terms are <i>stuck</i>. 
+    is that the strong progress theorem from the <a href="Smallstep.html"><span class="inlineref">Smallstep</span></a>
+    chapter fails here.  That is, there are terms that are normal
+    forms (they can't take a step) but not values (they are not
+    included in our definition of possible "results of reduction").
+    Such terms are said to be <i>stuck</i>. 
 </div>
 <div class="code">
 
@@ -340,7 +344,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 </div>
 
 <div class="doc">
-<a id="lab191"></a><h4 class="section">Exercise: 2 stars, standard (some_term_is_stuck)</h4>
+<a id="lab192"></a><h4 class="section">Exercise: 2 stars, standard (some_term_is_stuck)</h4>
 
 </div>
 <div class="code">
@@ -360,7 +364,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
     define things so that some value could still take a step. 
 <div class="paragraph"> </div>
 
-<a id="lab192"></a><h4 class="section">Exercise: 3 stars, standard (value_is_nf)</h4>
+<a id="lab193"></a><h4 class="section">Exercise: 3 stars, standard (value_is_nf)</h4>
 
 </div>
 <div class="code">
@@ -383,7 +387,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
     exercise, try to complete the proof both ways.)  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab193"></a><h4 class="section">Exercise: 3 stars, standard, optional (step_deterministic)</h4>
+<a id="lab194"></a><h4 class="section">Exercise: 3 stars, standard, optional (step_deterministic)</h4>
  Use <span class="inlinecode"><span class="id" title="var">value_is_nf</span></span> to show that the <span class="inlinecode"><span class="id" title="var">step</span></span> relation is also
     deterministic. 
 </div>
@@ -399,7 +403,7 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 
 
 <div class="doc">
-<a id="lab194"></a><h2 class="section">Typing</h2>
+<a id="lab195"></a><h2 class="section">Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -579,7 +583,7 @@ In informal notation, the typing relation is often written
 </div>
 
 <div class="doc">
-<a id="lab195"></a><h4 class="section">Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat)</h4>
+<a id="lab196"></a><h4 class="section">Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat)</h4>
 
 </div>
 <div class="code">
@@ -593,7 +597,7 @@ In informal notation, the typing relation is often written
 
 
 <div class="doc">
-<a id="lab196"></a><h3 class="section">Canonical forms</h3>
+<a id="lab197"></a><h3 class="section">Canonical forms</h3>
 
 <div class="paragraph"> </div>
 
@@ -631,7 +635,7 @@ In informal notation, the typing relation is often written
 </div>
 
 <div class="doc">
-<a id="lab197"></a><h2 class="section">Progress</h2>
+<a id="lab198"></a><h2 class="section">Progress</h2>
 
 <div class="paragraph"> </div>
 
@@ -641,7 +645,7 @@ In informal notation, the typing relation is often written
     least one step.  We call this <i>progress</i>. 
 <div class="paragraph"> </div>
 
-<a id="lab198"></a><h4 class="section">Exercise: 3 stars, standard (finish_progress)</h4>
+<a id="lab199"></a><h4 class="section">Exercise: 3 stars, standard (finish_progress)</h4>
 
 </div>
 <div class="code">
@@ -663,7 +667,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">HT</span>; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;The&nbsp;cases&nbsp;that&nbsp;were&nbsp;obviously&nbsp;values,&nbsp;like&nbsp;T_Tru&nbsp;and<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T_Fls,&nbsp;were&nbsp;eliminated&nbsp;immediately&nbsp;by&nbsp;auto&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T_Fls,&nbsp;are&nbsp;eliminated&nbsp;immediately&nbsp;by&nbsp;auto&nbsp;*)</span><br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;T_Test&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">right</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">IHHT1</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;t<sub>1</sub>&nbsp;is&nbsp;a&nbsp;value&nbsp;*)</span><br/>
@@ -682,7 +686,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab199"></a><h4 class="section">Exercise: 3 stars, advanced (finish_progress_informal)</h4>
+<a id="lab200"></a><h4 class="section">Exercise: 3 stars, advanced (finish_progress_informal)</h4>
  Complete the corresponding informal proof: 
 <div class="paragraph"> </div>
 
@@ -747,15 +751,15 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab200"></a><h2 class="section">Type Preservation</h2>
+<a id="lab201"></a><h2 class="section">Type Preservation</h2>
 
 <div class="paragraph"> </div>
 
  The second critical property of typing is that, when a well-typed
-    term takes a step, the result is also a well-typed term. 
+    term takes a step, the result is a well-typed term (of the same type). 
 <div class="paragraph"> </div>
 
-<a id="lab201"></a><h4 class="section">Exercise: 2 stars, standard (finish_preservation)</h4>
+<a id="lab202"></a><h4 class="section">Exercise: 2 stars, standard (finish_preservation)</h4>
 
 </div>
 <div class="code">
@@ -797,7 +801,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab202"></a><h4 class="section">Exercise: 3 stars, advanced (finish_preservation_informal)</h4>
+<a id="lab203"></a><h4 class="section">Exercise: 3 stars, advanced (finish_preservation_informal)</h4>
  Complete the following informal proof: 
 <div class="paragraph"> </div>
 
@@ -864,7 +868,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab203"></a><h4 class="section">Exercise: 3 stars, standard (preservation_alternate_proof)</h4>
+<a id="lab204"></a><h4 class="section">Exercise: 3 stars, standard (preservation_alternate_proof)</h4>
  Now prove the same property again by induction on the
     <i>evaluation</i> derivation instead of on the typing derivation.
     Begin by carefully reading and thinking about the first few
@@ -895,7 +899,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab204"></a><h2 class="section">Type Soundness</h2>
+<a id="lab205"></a><h2 class="section">Type Soundness</h2>
 
 <div class="paragraph"> </div>
 
@@ -924,11 +928,11 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab205"></a><h2 class="section">Additional Exercises</h2>
+<a id="lab206"></a><h2 class="section">Additional Exercises</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab206"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (subject_expansion)</h4>
+<a id="lab207"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (subject_expansion)</h4>
  Having seen the subject reduction property, one might
     wonder whether the opposity property -- subject <i>expansion</i> --
     also holds.  That is, is it always the case that, if <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">t'</span></span>
@@ -950,7 +954,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab207"></a><h4 class="section">Exercise: 2 stars, standard (variation1)</h4>
+<a id="lab208"></a><h4 class="section">Exercise: 2 stars, standard (variation1)</h4>
  Suppose that we add this new rule to the typing relation:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_SccBool</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t</span>,<br/>
@@ -987,7 +991,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab208"></a><h4 class="section">Exercise: 2 stars, standard (variation2)</h4>
+<a id="lab209"></a><h4 class="section">Exercise: 2 stars, standard (variation2)</h4>
  Suppose, instead, that we add this new rule to the <span class="inlinecode"><span class="id" title="var">step</span></span> relation:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny1</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>,<br/>
@@ -1008,7 +1012,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab209"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation3)</h4>
+<a id="lab210"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation3)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny2</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>2</sub>'</span> <span class="id" title="var">t<sub>3</sub></span>,<br/>
@@ -1022,7 +1026,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab210"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation4)</h4>
+<a id="lab211"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation4)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny3</span> :<br/>
@@ -1035,7 +1039,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab211"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation5)</h4>
+<a id="lab212"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation5)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_Funny4</span> :<br/>
@@ -1048,7 +1052,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab212"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation6)</h4>
+<a id="lab213"></a><h4 class="section">Exercise: 2 stars, standard, optional (variation6)</h4>
  Suppose instead that we add this rule:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_Funny5</span> :<br/>
@@ -1061,7 +1065,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab213"></a><h4 class="section">Exercise: 3 stars, standard, optional (more_variations)</h4>
+<a id="lab214"></a><h4 class="section">Exercise: 3 stars, standard, optional (more_variations)</h4>
  Make up some exercises of your own along the same lines as
     the ones above.  Try to find ways of selectively breaking
     properties -- i.e., ways of changing the definitions that
@@ -1076,7 +1080,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab214"></a><h4 class="section">Exercise: 1 star, standard (remove_prdzro)</h4>
+<a id="lab215"></a><h4 class="section">Exercise: 1 star, standard (remove_prdzro)</h4>
  The reduction rule <span class="inlinecode"><span class="id" title="var">ST_PrdZro</span></span> is a bit counter-intuitive: we
     might feel that it makes more sense for the predecessor of <span class="inlinecode"><span class="id" title="var">zro</span></span> to
     be undefined, rather than being defined to be <span class="inlinecode"><span class="id" title="var">zro</span></span>.  Can we
@@ -1097,7 +1101,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab215"></a><h4 class="section">Exercise: 4 stars, advanced (prog_pres_bigstep)</h4>
+<a id="lab216"></a><h4 class="section">Exercise: 4 stars, advanced (prog_pres_bigstep)</h4>
  Suppose our evaluation relation is defined in the big-step style.
     State appropriate analogs of the progress and preservation
     properties. (You do not need to prove them.)
@@ -1105,7 +1109,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="paragraph"> </div>
 
     Can you see any limitations of either of your properties?  Do they
-    allow for nonterminating commands?  Why might we prefer the
+    allow for nonterminating programs?  Why might we prefer the
     small-step semantics for stating preservation and progress?
 
 <div class="paragraph"> </div>
@@ -1122,7 +1126,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:35&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:00&nbsp;*)</span><br/>
 </div>
 </div>
 

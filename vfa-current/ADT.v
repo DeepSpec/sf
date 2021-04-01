@@ -167,7 +167,7 @@ Module FunTableExamples.
 
 End FunTableExamples.
 
-(** **** Exercise: 2 stars, standard, optional (NatFunTableExamples)  *)
+(** **** Exercise: 2 stars, standard, optional (NatFunTableExamples) *)
 
 (** Define a module that uses [FunTable] to implement a table mapping
     keys to values, where the values have type [nat], with a default of [0].
@@ -182,7 +182,7 @@ End NatFunTableExamples.
 (* ################################################################# *)
 (** * Implementing [Table] with Lists *)
 
-(** **** Exercise: 3 stars, standard (lists_table)  *)
+(** **** Exercise: 3 stars, standard (lists_table) *)
 
 (** Use association lists to implement [Table]. *)
 
@@ -768,7 +768,7 @@ End NicelyEncapsulatedExample.
     on the implementation code.  This is what specification comments
     in interfaces attempt to achieve in real-world code. *)
 
-(** **** Exercise: 4 stars, advanced, optional (elements_spec)  *)
+(** **** Exercise: 4 stars, advanced, optional (elements_spec) *)
 
 (** Develop a nicely-encapsulated interface and implementation of
     tree-based tables that exposes the rest of the specification of
@@ -851,7 +851,7 @@ Module Type ETableAbs.
 
 End ETableAbs.
 
-(** **** Exercise: 4 stars, standard (list_etable_abs)  *)
+(** **** Exercise: 4 stars, standard (list_etable_abs) *)
 
 (** Implement [ETableAbs] using association lists as the
     representation type. *)
@@ -929,7 +929,7 @@ Module StringListETableAbs := ListETableAbs StringVal.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (TreeTableModel) 
+(** **** Exercise: 3 stars, standard, optional (TreeTableModel)
 
     Give an implementation of [ETableAbs] using the abstraction
     function [Abs] from [SearchTree]. All the proofs of the
@@ -941,7 +941,7 @@ Definition manual_grade_for_TreeTableModel : option (nat*string) := None.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced, optional (TreeTableModel')  *)
+(** **** Exercise: 2 stars, advanced, optional (TreeTableModel') *)
 
 (** Repeat the previous exercise, this time using the alternative
     [Abs'] function from [SearchTree]. Hint: Just tweak your
@@ -996,7 +996,7 @@ Module Type Queue.
   Axiom deq_nonempty : forall q v, deq (enq q v) = if is_empty q then q else enq (deq q) v.
 End Queue.
 
-(** **** Exercise: 3 stars, standard (list_queue)  *)
+(** **** Exercise: 3 stars, standard (list_queue) *)
 
 (** Implement that interface and verify your implementation.  As the
     representation type, use [list V].  At least one operation will
@@ -1074,7 +1074,7 @@ Module Type QueueAbs.
   Axiom deq_relate : forall q, Abs (deq q) = tl (Abs q).
 End QueueAbs.
 
-(** **** Exercise: 3 stars, standard (two_list_queue)  *)
+(** **** Exercise: 3 stars, standard (two_list_queue) *)
 
 (** Below is an implementation of [QueueAbs] using two lists.  It
     achieves amortized constant-time performance, improving on the
@@ -1288,7 +1288,7 @@ Definition vector (X : Type) :=
     value of type [vector X] cannot be constructed without first
     proving that the invariant holds. *)
 
-(** **** Exercise: 1 star, standard (a_vector)  *)
+(** **** Exercise: 1 star, standard (a_vector) *)
 
 (** Construct any vector of your choice. *)
 
@@ -1298,7 +1298,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (vector_cons_correct)  *)
+(** **** Exercise: 2 stars, standard (vector_cons_correct) *)
 
 (** Define a cons operation on vectors. Remember to end with
     [Defined] rather than [Qed]. *)
@@ -1319,7 +1319,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (vector_app_correct)  *)
+(** **** Exercise: 2 stars, standard (vector_app_correct) *)
 
 (** Define an append operation on vectors. *)
 
@@ -1466,7 +1466,6 @@ Module TreeETableSubset (VT : ValType) <: ETableSubset.
     pose proof SearchTree.elements_complete as Hcomplete.
     unfold elements_complete_spec in Hcomplete.
     apply Hcomplete with default; try assumption.
-    destruct t as [t Hbst]. assumption.
   Qed.
 
   Theorem elements_correct : forall (k : key) (v : V) (t : table),
@@ -1482,7 +1481,7 @@ Module TreeETableSubset (VT : ValType) <: ETableSubset.
 
 End TreeETableSubset.
 
-(** **** Exercise: 4 stars, advanced (ListsETable)  *)
+(** **** Exercise: 4 stars, advanced (ListsETable) *)
 
 (** Implement [ETableSubset] using association lists that are not
     permitted to contain duplicate keys.  Enforce that representation
@@ -1496,4 +1495,4 @@ End TreeETableSubset.
 Definition manual_grade_for_ListsETable : option (nat*string) := None.
 (** [] *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

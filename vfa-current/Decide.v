@@ -1,6 +1,6 @@
 (** * Decide: Programming with Decision Procedures *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
 
 (* ################################################################# *)
@@ -125,8 +125,8 @@ Inductive sumbool (A B : Prop) : Set :=
 (** Let's consider [sumbool] applied to two propositions: *)
 
 Definition t1 := sumbool (3<7) (3>2).
-Lemma less37: 3<7. Proof. omega. Qed.
-Lemma greater23: 3>2. Proof. omega. Qed.
+Lemma less37: 3<7. Proof. lia. Qed.
+Lemma greater23: 3>2. Proof. lia. Qed.
 
 Definition v1a: t1 := left (3<7) (3>2) less37.
 Definition v1b: t1 := right (3<7) (3>2) greater23.
@@ -264,7 +264,7 @@ Inductive sorted: list nat -> Prop :=
 | sorted_cons: forall x y l,
    x <= y -> sorted (y::l) -> sorted (x::y::l).
 
-(** **** Exercise: 2 stars, standard (insert_sorted_le_dec)  *)
+(** **** Exercise: 2 stars, standard (insert_sorted_le_dec) *)
 Lemma insert_sorted:
   forall a l, sorted l -> sorted (insert a l).
 Proof.
@@ -365,7 +365,7 @@ try reflexivity.  (* does not do anything, reflexivity fails *)
 *)
 destruct (lt_dec_axiom_2 3 7).
 reflexivity.
-contradiction n. omega.
+contradiction n. lia.
 Qed.
 
 (** It is dangerous to add Axioms to Coq: if you add one that's inconsistent,
@@ -457,7 +457,7 @@ Eval compute in if list_nat_eq_dec [1;3;4] [1;4;3] then true else false.
 Eval compute in if list_nat_eq_dec [1;3;4] [1;3;4] then true else false.
  (* = true : bool *)
 
-(** **** Exercise: 2 stars, standard (list_nat_in) 
+(** **** Exercise: 2 stars, standard (list_nat_in)
 
     Use [in_dec] to build this function. *)
 
@@ -503,4 +503,4 @@ simpl.
    it does.   Either of these two methods is a reasonable way of programming
    with proof.  *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

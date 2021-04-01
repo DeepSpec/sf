@@ -60,6 +60,7 @@ Require Import List.
 Require Import Setoid.  (* Generalized rewriting *)
 Require Import FSets.   (* Efficient functional sets *)
 Require Import FMaps.   (* Efficient functional maps *)
+Require Import PArith.  (* Positives *)
 From VFA Require Import Perm.   (* to use <? notation and [bdestruct] tactic *)
 
 (** The nodes in our graph will be named by positive numbers.
@@ -280,7 +281,7 @@ Abort.  (* Before we prove that, there is some preliminary work to do. *)
 (** That is, if [i] is in the set [s], then the elements of [S.remove i s] is the
     list that you get by filtering [i] out of [S.elements s].  Go ahead and prove it! *)
 
-(** **** Exercise: 3 stars, standard (Sremove_elements)  *)
+(** **** Exercise: 3 stars, standard (Sremove_elements) *)
 Lemma Proper_eq_eq:
   forall f, Proper (E.eq ==> @eq bool) f.
 Proof.
@@ -323,14 +324,14 @@ Check M.elements. (*  : forall A : Type, M.t A -> list (positive * A) *)
 (** Let's start with a little lemma about lists of pairs:  Suppose [l: list (positive*A)].  
      Then [j] is in [map fst l]   iff   there is some e such that (j,e) is in l. *)
     
-(** **** Exercise: 2 stars, standard (InA_map_fst_key)  *)
+(** **** Exercise: 2 stars, standard (InA_map_fst_key) *)
 Lemma InA_map_fst_key:
  forall A j l, 
  InA E.eq j (map (@fst M.E.t A) l) <-> exists e, InA (@M.eq_key_elt A) (j,e) l.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (Sorted_lt_key) 
+(** **** Exercise: 3 stars, standard (Sorted_lt_key)
 
     The function [M.lt_key] compares two elements of an [M.elements] list,
     that is, two pairs of type [positive*A], by just comparing their first elements
@@ -351,7 +352,7 @@ Proof.
   The cardinality of a finite map is, essentially, the cardinality of 
    its domain set. *)
 
-(** **** Exercise: 4 stars, standard (cardinal_map)  *)
+(** **** Exercise: 4 stars, standard (cardinal_map) *)
 Lemma cardinal_map:  forall A B (f: A -> B) g, 
      M.cardinal (M.map f g) = M.cardinal g.
 
@@ -372,7 +373,7 @@ Check Sorted_lt_key.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (Sremove_cardinal_less)  *)
+(** **** Exercise: 4 stars, standard (Sremove_cardinal_less) *)
 Lemma Sremove_cardinal_less: forall i s,
         S.In i s ->    S.cardinal (S.remove i s) < S.cardinal s.
 Proof.
@@ -413,7 +414,7 @@ Proof.
  repeat intro. destruct H,H0. rewrite H,H0. split; auto.
 Qed.
 
-(** **** Exercise: 4 stars, standard (Mremove_elements)  *)
+(** **** Exercise: 4 stars, standard (Mremove_elements) *)
 Lemma Mremove_elements:  forall A i s, 
   M.In i s -> 
      eqlistA (@M.eq_key_elt A) (M.elements (M.remove i s)) 
@@ -433,7 +434,7 @@ Check filter_InA.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (Mremove_cardinal_less)  *)
+(** **** Exercise: 3 stars, standard (Mremove_cardinal_less) *)
 Lemma Mremove_cardinal_less: forall A i (s: M.t A), M.In i s -> 
         M.cardinal (M.remove i s) < M.cardinal s.
 
@@ -443,7 +444,7 @@ Lemma Mremove_cardinal_less: forall A i (s: M.t A), M.In i s ->
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (two_little_lemmas)  *)
+(** **** Exercise: 2 stars, standard (two_little_lemmas) *)
 
 Lemma fold_right_rev_left:
   forall (A B: Type) (f: A -> B -> A) (l: list B) (i: A),
@@ -454,7 +455,7 @@ Lemma Snot_in_empty: forall n, ~ S.In n S.empty.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (Sin_domain)  *)
+(** **** Exercise: 3 stars, standard (Sin_domain) *)
 Lemma Sin_domain: forall A n (g: M.t A), S.In n (Mdomain g) <-> M.In n g.
 
 (** To reason about [M.fold], used in the definition of [Mdomain],
@@ -499,12 +500,12 @@ Definition remove_node (n: node) (g: graph) : graph :=
     We need to prove some lemmas related to the termination of the algorithm
   before we can actually define the [Function]. *)
 
-(** **** Exercise: 3 stars, standard (subset_nodes_sub)  *)
+(** **** Exercise: 3 stars, standard (subset_nodes_sub) *)
 Lemma subset_nodes_sub:  forall P g, S.Subset (subset_nodes P g) (nodes g).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (select_terminates)  *)
+(** **** Exercise: 3 stars, standard (select_terminates) *)
 Lemma select_terminates: 
   forall (K: nat) (g : graph) (n : S.elt),
    S.choose (subset_nodes (low_deg K) g) = Some n -> 
@@ -550,18 +551,18 @@ Definition coloring_ok (palette: S.t) (g: graph) (f: coloring) :=
      (forall ci, M.find i f = Some ci -> S.In ci palette) /\
      (forall ci cj, M.find i f = Some ci -> M.find j f = Some cj -> ci<>cj).
 
-(** **** Exercise: 2 stars, standard (adj_ext)  *)
+(** **** Exercise: 2 stars, standard (adj_ext) *)
 Lemma adj_ext: forall g i j, E.eq i j -> S.eq (adj g i) (adj g j).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (in_colors_of_1)  *)
+(** **** Exercise: 3 stars, standard (in_colors_of_1) *)
 Lemma in_colors_of_1:
   forall i s f c, S.In i s -> M.find i f = Some c -> S.In c (colors_of f s).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (color_correct)  *)
+(** **** Exercise: 4 stars, standard (color_correct) *)
 Theorem color_correct:
   forall palette g, 
        no_selfloop g -> 
@@ -598,4 +599,4 @@ Compute (M.elements (color palette G)). (* = [(4, 1); (2, 3); (6, 2); (1, 2); (5
   nodes [6] and [1] with [2], and node [5] with color [1]. *)
 
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

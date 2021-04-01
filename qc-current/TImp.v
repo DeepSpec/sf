@@ -101,7 +101,7 @@ Fixpoint get_fresh_ids n l :=
   | S n' => get_fresh_ids n' ((fresh l) :: l)
   end.
 
-(** **** Exercise: 2 stars, standard (genId) 
+(** **** Exercise: 2 stars, standard (genId)
 
     Write a [Gen] instance for [id] using the [elems_]
     combinator and [get_fresh_ids].  *)
@@ -450,7 +450,7 @@ Proof with solve_sum.
   destruct (dec_bound_to Gamma i T); destruct dec; solve_sum.
 Defined.
 
-(** **** Exercise: 3 stars, standard (arbitraryExp) 
+(** **** Exercise: 3 stars, standard (arbitraryExp)
 
     Derive [Arbitrary] for expressions.  To see how good it is at
     generating _well-typed_ expressions, write a conditional property 
@@ -1087,7 +1087,7 @@ Definition expression_soundness_exec' :=
 
 Inductive com : Type :=
   | CSkip  : com
-  | CAss   : id  -> exp -> com
+  | CAsgn   : id  -> exp -> com
   | CSeq   : com -> com -> com
   | CIf    : exp -> com -> com -> com
   | CWhile : exp -> com -> com.
@@ -1095,7 +1095,7 @@ Inductive com : Type :=
 Notation "'SKIP'" :=
   CSkip.
 Notation "x '::=' a" :=
-  (CAss x a) (at level 60).
+  (CAsgn x a) (at level 60).
 Notation "c1 ;;; c2" :=
   (CSeq c1 c2) (at level 80, right associativity).
 Notation "'WHILE' b 'DO' c 'END'" :=
@@ -1109,7 +1109,7 @@ Derive Show for com.
     notations!) *)
 
 (** We can now define what it means for a command to be well typed
-    for a given context. The interesting cases are [TAss] and [TIf]/[TWhile]. 
+    for a given context. The interesting cases are [TAsgn] and [TIf]/[TWhile]. 
     The first one, ensures that the type of the variable we are 
     assigning to is the same as that of the expression. The latter,
     requires that the conditional is indeed a boolean expression.
@@ -1117,10 +1117,10 @@ Derive Show for com.
 
 Inductive well_typed_com : context -> com -> Prop :=
   | TSkip : forall Gamma, well_typed_com Gamma CSkip
-  | TAss  : forall Gamma x e T, 
+  | TAsgn  : forall Gamma x e T, 
       bound_to Gamma x T -> 
       Gamma ||- e \IN T ->
-      well_typed_com Gamma (CAss x e)
+      well_typed_com Gamma (CAsgn x e)
   | TSeq  : forall Gamma c1 c2, 
       well_typed_com Gamma c1 -> well_typed_com Gamma c2 ->
       well_typed_com Gamma (CSeq c1 c2)
@@ -1189,7 +1189,7 @@ Proof with eauto.
     destruct (dec_has_type e Gamma TBool); destruct dec; solve_sum.
 Qed.
 
-(** **** Exercise: 4 stars, standard (arbitrary_well_typed_com) 
+(** **** Exercise: 4 stars, standard (arbitrary_well_typed_com)
 
     Write a generator and a shrinker for well_typed programs given
     some context [Gamma].  Write some appropriate sanity checks and
@@ -1258,13 +1258,13 @@ Conjecture well_typed_state_never_stuck :
   forall c, well_typed_com Gamma c ->
   forall fuel, isFail (ceval fuel st c) = false.
 
-(** **** Exercise: 4 stars, standard (well_typed_state_never_stuck) 
+(** **** Exercise: 4 stars, standard (well_typed_state_never_stuck)
 
     Write a checker for the above property, find any bugs, and fix them. *)
 
 (* FILL IN HERE *)
 
-(** **** Exercise: 4 stars, standard (ty_eq_polymorphic) 
+(** **** Exercise: 4 stars, standard (ty_eq_polymorphic)
 
     In the [has_type] relation we allowed equality checks between 
     only arithmetic expressions. Introduce an additional typing 
@@ -1415,4 +1415,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2020-11-05 12:46 *)
+(* 2021-04-01 20:06 *)

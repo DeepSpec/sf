@@ -750,7 +750,7 @@ Proof. intros pe_st ids st. induction ids as [| V ids]; simpl.
   - (* V::ids *)
     remember (pe_lookup pe_st V) as lookup. destruct lookup.
     + (* Some *) eapply E_Seq. apply IHids. unfold assigned. simpl.
-      eapply ceval_extensionality. apply E_Ass. simpl. reflexivity.
+      eapply ceval_extensionality. apply E_Asgn. simpl. reflexivity.
       intros V0. unfold t_update.  compare V V0.
       * (* equal *) rewrite <- Heqlookup. rewrite <- eqb_string_refl. reflexivity.
       * (* not equal *) rewrite false_eqb_string; simpl; congruence.
@@ -767,7 +767,7 @@ Qed.
 
 (** At long last, we can define a partial evaluator for commands
     without loops, as an inductive relation!  The inequality
-    conditions in [PE_AssDynamic] and [PE_If] are just to keep the
+    conditions in [PE_AsgnDynamic] and [PE_If] are just to keep the
     partial evaluator deterministic; they are not required for
     correctness. *)
 
@@ -777,10 +777,10 @@ Reserved Notation "c1 '/' st '==>' c1' '/' st'"
 Inductive pe_com : com -> pe_state -> com -> pe_state -> Prop :=
   | PE_Skip : forall pe_st,
       <{skip}> / pe_st ==> <{skip}> / pe_st
-  | PE_AssStatic : forall pe_st a1 (n1 : nat) l,
+  | PE_AsgnStatic : forall pe_st a1 (n1 : nat) l,
       pe_aexp pe_st a1 = <{ n1 }> ->
       <{l := a1}> / pe_st ==> <{skip}> / pe_add pe_st l n1
-  | PE_AssDynamic : forall pe_st a1 a1' l,
+  | PE_AsgnDynamic : forall pe_st a1 a1' l,
       pe_aexp pe_st a1 = a1' ->
       (forall n : nat , a1' <> <{ n }>) ->
       <{l := a1}> / pe_st ==> <{l := a1'}> / pe_remove pe_st l
@@ -823,15 +823,15 @@ Hint Constructors ceval : core.
 Example pe_example1:
   <{X := 3 ; Y := Z * (X + X)}>
   / [] ==> <{skip; Y := Z * 6}> / [(X,3)].
-Proof. eapply PE_Seq. eapply PE_AssStatic. reflexivity.
-  eapply PE_AssDynamic. reflexivity. intros n H. inversion H. Qed.
+Proof. eapply PE_Seq. eapply PE_AsgnStatic. reflexivity.
+  eapply PE_AsgnDynamic. reflexivity. intros n H. inversion H. Qed.
 
 Example pe_example2:
   <{X := 3 ; if X <= 4 then X := 4 else skip end}>
   / [] ==> <{skip; skip}> / [(X,4)].
-Proof. eapply PE_Seq. eapply PE_AssStatic. reflexivity.
+Proof. eapply PE_Seq. eapply PE_AsgnStatic. reflexivity.
   eapply PE_IfTrue. reflexivity.
-  eapply PE_AssStatic. reflexivity. Qed.
+  eapply PE_AsgnStatic. reflexivity. Qed.
 
 Example pe_example3:
   <{X := 3;
@@ -845,9 +845,9 @@ Example pe_example3:
        else skip; skip end}>
       / [(X,3)].
 Proof. erewrite f_equal2 with (f := fun c st => _ / _ ==> c / st).
-  eapply PE_Seq. eapply PE_AssStatic. reflexivity.
+  eapply PE_Seq. eapply PE_AsgnStatic. reflexivity.
   eapply PE_If; intuition eauto; try solve_by_invert.
-  econstructor. eapply PE_AssStatic. reflexivity.
+  econstructor. eapply PE_AsgnStatic. reflexivity.
   eapply PE_IfFalse. reflexivity. econstructor.
   reflexivity. reflexivity. Qed.
 
@@ -882,10 +882,10 @@ Proof. intros c pe_st pe_st' c' Hpe.
        try (rewrite -> pe_bexp_correct, -> H in *; solve_by_invert);
        []);
   eauto.
-  - (* PE_AssStatic *) econstructor. econstructor.
+  - (* PE_AsgnStatic *) econstructor. econstructor.
     rewrite -> pe_aexp_correct. rewrite <- pe_update_update_add.
     rewrite -> H. reflexivity.
-  - (* PE_AssDynamic *) econstructor. econstructor. reflexivity.
+  - (* PE_AsgnDynamic *) econstructor. econstructor. reflexivity.
     rewrite -> pe_aexp_correct. rewrite <- pe_update_update_remove.
     reflexivity.
   - (* PE_Seq *)
@@ -904,7 +904,7 @@ Proof. intros c pe_st pe_st' c' Hpe.
       rewrite <- assign_removes. eassumption.
 Qed.
 
-(* NOTATION : IY -- Note : In the PE_AssDynamic/If cases, "=[ ]=>" breaks in a weird
+(* NOTATION : IY -- Note : In the PE_AsgnDynamic/If cases, "=[ ]=>" breaks in a weird
    way. *)
 Theorem pe_com_sound:
   forall c pe_st pe_st' c', c / pe_st ==> c' / pe_st' ->
@@ -915,9 +915,9 @@ Proof. intros c pe_st pe_st' c' Hpe.
   induction Hpe;
     intros st st'' [st' Heval Heq];
     try (inversion Heval; []; subst); auto.
-  - (* PE_AssStatic *) rewrite <- pe_update_update_add. apply E_Ass.
+  - (* PE_AsgnStatic *) rewrite <- pe_update_update_add. apply E_Asgn.
     rewrite -> pe_aexp_correct. rewrite -> H. reflexivity.
-  - (* PE_AssDynamic *) rewrite <- pe_update_update_remove. apply E_Ass.
+  - (* PE_AsgnDynamic *) rewrite <- pe_update_update_remove. apply E_Asgn.
     rewrite <- pe_aexp_correct. reflexivity.
   - (* PE_Seq *) eapply E_Seq; eauto.
   - (* PE_IfTrue *) apply E_IfTrue.
@@ -1017,10 +1017,10 @@ Reserved Notation "c1 '/' st '==>' c1' '/' st' '/' c''"
 Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
   | PE_Skip : forall pe_st,
       <{ skip }> / pe_st ==> <{ skip }> / pe_st / <{skip}>
-  | PE_AssStatic : forall pe_st a1 (n1 : nat) l,
+  | PE_AsgnStatic : forall pe_st a1 (n1 : nat) l,
       pe_aexp pe_st a1 = <{ n1 }> ->
       <{ l := a1 }> / pe_st ==> <{ skip }> / pe_add pe_st l n1 / <{skip}>
-  | PE_AssDynamic : forall pe_st a1 a1' l,
+  | PE_AsgnDynamic : forall pe_st a1 a1' l,
       pe_aexp pe_st a1 = a1' ->
       (forall n : nat, a1' <> <{ n }> ) ->
       <{l := a1}> / pe_st ==> <{l := a1'}> / pe_remove pe_st l / <{skip}>
@@ -1104,8 +1104,8 @@ Hint Constructors pe_com : core.
 Ltac step i :=
   (eapply i; intuition eauto; try solve_by_invert);
   repeat (try eapply PE_Seq;
-          try (eapply PE_AssStatic; simpl; reflexivity);
-          try (eapply PE_AssDynamic;
+          try (eapply PE_AsgnStatic; simpl; reflexivity);
+          try (eapply PE_AsgnDynamic;
                [ simpl; reflexivity
                | intuition eauto; solve_by_invert])).
 
@@ -1133,7 +1133,7 @@ Example pe_loop_example2:
        (Y := Y * Y; skip);
        skip}> / [(X,0)] / <{skip}>.
 Proof. erewrite f_equal2 with (f := fun c st => _ / _ ==> c / st / <{skip}>).
-  eapply PE_Seq. eapply PE_AssStatic. reflexivity.
+  eapply PE_Seq. eapply PE_AsgnStatic. reflexivity.
   step PE_WhileTrue.
   step PE_WhileTrue.
   step PE_WhileTrue.
@@ -1158,7 +1158,7 @@ Example pe_loop_example3:
          else skip; Z := 2 end; skip
        else skip; Z := 3 end}> / [] / <{skip}>.
 Proof. erewrite f_equal2 with (f := fun c st => _ / _ ==> c / st / <{skip}>).
-  eapply PE_Seq. eapply PE_AssStatic. reflexivity.
+  eapply PE_Seq. eapply PE_AsgnStatic. reflexivity.
   step PE_While.
   step PE_While.
   step PE_While.
@@ -1173,7 +1173,7 @@ Example pe_loop_example4:
      X := 1 - X
    end}> / [] ==> <{skip; while true do skip end}> / [(X,0)] / <{skip}>.
 Proof. erewrite f_equal2 with (f := fun c st => _ / _ ==> c / st / <{skip}>).
-  eapply PE_Seq. eapply PE_AssStatic. reflexivity.
+  eapply PE_Seq. eapply PE_AsgnStatic. reflexivity.
   step PE_WhileFixedLoop.
   step PE_WhileTrue.
   step PE_WhileFixedEnd.
@@ -1194,7 +1194,7 @@ Reserved Notation "c1 '/' st '==>' st' '#' n"
 Inductive ceval_count : com -> state -> state -> nat -> Prop :=
   | E'Skip : forall st,
       <{skip}> / st ==> st # 0
-  | E'Ass  : forall st a1 n l,
+  | E'Asgn  : forall st a1 n l,
       aeval st a1 = n ->
       <{l := a1}> / st ==> (t_update st l n) # 0
   | E'Seq : forall c1 c2 st st' st'' n1 n2,
@@ -1285,10 +1285,10 @@ Proof. intros c pe_st pe_st' c' c'' Hpe.
        try (rewrite -> pe_bexp_correct, -> H in *; solve_by_invert);
        []);
   eauto.
-  - (* PE_AssStatic *) econstructor. econstructor.
+  - (* PE_AsgnStatic *) econstructor. econstructor.
     rewrite -> pe_aexp_correct. rewrite <- pe_update_update_add.
     rewrite -> H. apply E'Skip. auto.
-  - (* PE_AssDynamic *) econstructor. econstructor. reflexivity.
+  - (* PE_AsgnDynamic *) econstructor. econstructor. reflexivity.
     rewrite -> pe_aexp_correct. rewrite <- pe_update_update_remove.
     apply E'Skip. auto.
   - (* PE_Seq *)
@@ -1359,9 +1359,9 @@ Proof. intros c pe_st pe_st' c' c'' Hpe.
     intros st st'' n [st' n' Heval Heval' Hle];
     try (inversion Heval; []; subst);
     try (inversion Heval'; []; subst); eauto.
-  - (* PE_AssStatic *) rewrite <- pe_update_update_add. apply E_Ass.
+  - (* PE_AsgnStatic *) rewrite <- pe_update_update_add. apply E_Asgn.
     rewrite -> pe_aexp_correct. rewrite -> H. reflexivity.
-  - (* PE_AssDynamic *) rewrite <- pe_update_update_remove. apply E_Ass.
+  - (* PE_AsgnDynamic *) rewrite <- pe_update_update_remove. apply E_Asgn.
     rewrite <- pe_aexp_correct. reflexivity.
   - (* PE_Seq *) eapply E_Seq; eauto.
   - (* PE_IfTrue *) apply E_IfTrue.
@@ -1659,4 +1659,4 @@ Proof. intros.
       eapply E_Some; eauto. apply pe_block_correct. apply Hkeval.
 Qed.
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

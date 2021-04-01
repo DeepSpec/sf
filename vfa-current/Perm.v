@@ -17,12 +17,12 @@
     In later chapters, we'll apply these proof techniques to reasoning
     about algorithms and data structures. *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.  (* for manual grading *)
 From Coq Require Export Bool.Bool.
 From Coq Require Export Arith.Arith.
 From Coq Require Export Arith.EqNat.
-From Coq Require Export Omega.
+From Coq Require Export Lia.
 From Coq Require Export Lists.List.
 Export ListNotations.
 From Coq Require Export Permutation.
@@ -64,12 +64,12 @@ Notation  "a >? b"  := (Nat.ltb b a)
                          (at level 70) : nat_scope.
 
 (* ================================================================= *)
-(** ** The Omega Tactic *)
+(** ** The Lia Tactic *)
 
 (** Reasoning about inequalities by hand can be a little painful. Luckily, Coq
-    provides a tactic called [omega] that is quite helpful. *)
+    provides a tactic called [lia] that is quite helpful. *)
 
-Theorem omega_example1:
+Theorem lia_example1:
  forall i j k,
     i < j ->
     ~ (k - 3 <= j) ->
@@ -99,10 +99,10 @@ Proof.
   inversion contra.
 Qed.
 
-(** Since subtraction is truncated, does [omega_example1] actually hold?
+(** Since subtraction is truncated, does [lia_example1] actually hold?
     It does. Let's try again, the hard way, to find the proof. *)
 
-Theorem omega_example1:
+Theorem lia_example1:
  forall i j k,
     i < j ->
     ~ (k - 3 <= j) ->
@@ -125,47 +125,36 @@ Qed.
 
 (** That was tedious.  Here's a much easier way: *)
 
-Theorem omega_example2:
+Theorem lia_example2:
  forall i j k,
     i < j ->
     ~ (k - 3 <= j) ->
    k > i.
 Proof.
   intros.
-  omega.
+  lia.
 Qed.
 
-(** Omega is a decision procedure invented in 1991 by William Pugh for
-    integer linear programming (ILP). The [omega] tactic was made
-    available by importing [Coq.omega.Omega], at the beginning of the
-    file.  It is an implementation of Pugh's algorithm.  The tactic
+(** Lia is a decision procedure for integer linear arithemetic. 
+    The [lia] tactic was made available by importing [Lia] at the 
+    beginning of the file.  The tactic 
     works with Coq types [Z] and [nat], and these operators: [<] [=] [>]
     [<=] [>=] [+] [-] [~], as well as multiplication by small integer
-    literals (such as 0,1,2,3...), and some uses of [\/] and [/\].
+    literals (such as 0,1,2,3...), and some uses of [\/], [/\], and [<->].
 
-    Omega does not "understand" other operators.  It treats
-    expressions such as [a * b] and [f x y] as variables.  That is, it
+    Lia does not "understand" other operators.  It treats
+    expressions such as [f x y] as variables.  That is, it
     can prove [f x y > a * b -> f x y + 3 >= a * b], in the same way it
-    would prove [u > v -> u + 3 >= v]. But it cannot reason about, e.g.,
-    multiplication. *)
+    would prove [u > v -> u + 3 >= v].  
+*)
 
-Theorem omega_example_3 : forall (f : nat -> nat -> nat) a b x y,
+Theorem lia_example_3 : forall (f : nat -> nat -> nat) a b x y,
     f x y > a * b -> f x y + 3 >= a * b.
 Proof.
-  intros. omega.
+  intros. lia.
 Qed.
 
-Theorem omega_example_4 : forall a b,
-    a * b = b * a.
-Proof.
-  intros. Fail omega.
-Abort.
 
-(** The Omega algorithm is NP-complete, so we might expect that
-    this tactic is exponential-time in the worst case.  Indeed,
-    if you have [N] equations, it could take [2^N] time.
-    But in the typical cases that result from reasoning about
-    programs, [omega] is much faster than that. *)
 
 (* ################################################################# *)
 (** * Swapping *)
@@ -199,17 +188,17 @@ Proof.
   - destruct (a <? b) eqn:Ha_lt_b; simpl.
     + (** Now what?  We have a contradiction in the hypotheses: it
           cannot hold that [a] is less than [b] and [b] is less than
-          [a].  Unfortunately, [omega] cannot immediately show that
+          [a].  Unfortunately, [lia] cannot immediately show that
           for us, because it reasons about comparisons in [Prop] not
           [bool]. *)
-      Fail omega.
+      Fail lia.
 Abort.
 
 (** Of course we could finish the proof by reasoning directly about
     inequalities in [bool].  But this situation is going to occur
     repeatedly in our study of sorting. *)
 
-(** Let's set up some machinery to enable using [omega] on boolean
+(** Let's set up some machinery to enable using [lia] on boolean
     tests. *)
 
 (* ================================================================= *)
@@ -221,6 +210,7 @@ Abort.
     [true], or a proof of [~ P] if [b] is [false]. *)
 
 Print reflect.
+
 (*
 Inductive reflect (P : Prop) : bool -> Set :=
   | ReflectT :   P -> reflect P true
@@ -269,8 +259,8 @@ Proof.
   assert (R: reflect (a < 5) (a <? 5)) by apply ltb_reflect.
   remember (a <? 5) as guard.
   destruct R as [H|H] eqn:HR.
-  * (* ReflectT *) omega.
-  * (* ReflectF *) omega.
+  * (* ReflectT *) lia.
+  * (* ReflectF *) lia.
 Qed.
 
 (** For the [ReflectT] constructor, the guard [a <? 5] must be equal
@@ -278,12 +268,12 @@ Qed.
     simplified to take advantage of that fact. Also, for [ReflectT] to
     have been used, there must be evidence [H] that [a < 5] holds.
     From there, all that remains is to show [a < 5] entails [a < 6].
-    The [omega] tactic, which is capable of automatically proving some
+    The [lia] tactic, which is capable of automatically proving some
     theorems about inequalities, succeeds.
 
     For the [ReflectF] constructor, the guard [a <? 5] must be equal
     to [false]. So the [if] expression simplifies to [2 < 6], which is
-    immediately provable by [omega]. *)
+    immediately provable by [lia]. *)
 
 (** A less didactic version of the above proof wouldn't do the
     [assert] and [remember]: we can directly skip to [destruct]. *)
@@ -291,7 +281,7 @@ Qed.
 Example reflect_example1': forall a,
     (if a <? 5 then a else 2) < 6.
 Proof.
-  intros a. destruct (ltb_reflect a 5); omega.
+  intros a. destruct (ltb_reflect a 5); lia.
 Qed.
 
 (** But even that proof is a little unsatisfactory. The original expression,
@@ -336,7 +326,7 @@ Example reflect_example2: forall a,
 Proof.
   intros.
   bdestruct (a <? 5);  (* instead of: [destruct (ltb_reflect a 5)]. *)
-  omega.
+  lia.
 Qed.
 
 (* ================================================================= *)
@@ -352,16 +342,16 @@ Proof.
   bdestruct (a >? b); simpl.
   (** Note how [b < a] is a hypothesis, rather than [b <? a = true]. *)
   - bdestruct (b >? a); simpl.
-    + (** [omega] can take care of the contradictory propositional inequalities. *)
-      omega.
+    + (** [lia] can take care of the contradictory propositional inequalities. *)
+      lia.
     + reflexivity.
   - bdestruct (a >? b); simpl.
-    + omega.
+    + lia.
     + reflexivity.
 Qed.
 
 (** When proving theorems about a program that uses Boolean
-    comparisons, use [bdestruct] followed by [omega], rather than
+    comparisons, use [bdestruct] followed by [lia], rather than
     [destruct] followed by application of various theorems about
     Boolean operators. *)
 
@@ -382,7 +372,7 @@ Print Permutation.
 
 (*
  Inductive Permutation {A : Type} : list A -> list A -> Prop :=
-    perm_nil : Permutation [] []
+  | perm_nil : Permutation [] []
   | perm_skip : forall (x : A) (l l' : list A),
                 Permutation l l' ->
                 Permutation (x :: l) (x :: l')
@@ -406,7 +396,7 @@ Print Permutation.
     confidence that we have the right specification, let's use it
     prove some properties that permutations ought to have. *)
 
-(** **** Exercise: 2 stars, standard (Permutation_properties) 
+(** **** Exercise: 2 stars, standard (Permutation_properties)
 
     Think of some desirable properties of the [Permutation] relation
     and write them down informally in English, or a mix of Coq and
@@ -494,7 +484,7 @@ Qed.
     - Use [Permutation_app_head] to cancel an appended head.  You can
       also use [perm_skip] to cancel a single element. *)
 
-(** **** Exercise: 3 stars, standard (permut_example) 
+(** **** Exercise: 3 stars, standard (permut_example)
 
     Use the permutation rules in the library to prove the following
     theorem.  The following [Check] commands are a hint about useful
@@ -516,7 +506,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (not_a_permutation) 
+(** **** Exercise: 2 stars, standard (not_a_permutation)
 
     Prove that [[1;1]] is not a permutation of [[1;2]].
     Hints are given as [Check] commands. *)
@@ -567,7 +557,7 @@ Proof.
   - (* WORKED IN CLASS *)
     unfold maybe_swap.
     destruct al as [ | a [ | b al]]; simpl; auto.
-    bdestruct (a >? b); simpl; omega.
+    bdestruct (a >? b); simpl; lia.
 Qed.
 
 (* ################################################################# *)
@@ -580,7 +570,7 @@ Qed.
     [maybe_swap_correct] will be applied (at a larger scale) in
     the next few chapters. *)
 
-(** **** Exercise: 3 stars, standard (Forall_perm) 
+(** **** Exercise: 3 stars, standard (Forall_perm)
 
     To close, we define a utility tactic and lemma.  First, the
     tactic. *)
@@ -609,4 +599,4 @@ Proof.
 (** [] *)
 
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

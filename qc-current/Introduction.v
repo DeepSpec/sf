@@ -59,7 +59,7 @@ Conjecture removeP : forall x l,  ~ (In x (remove x l)).
     input and 12 "shrinks" to reduce it to a minimal
     counterexample. *)
 
-(** **** Exercise: 1 star, standard (insertP) 
+(** **** Exercise: 1 star, standard (insertP)
 
     Here is a somewhat mangled definition of a function for inserting a
     new element into a sorted list of numbers: *)
@@ -78,7 +78,7 @@ Fixpoint insert x l :=
 
     [] *)
 
-(** **** Exercise: 2 stars, standard (insertP2) 
+(** **** Exercise: 2 stars, standard (insertP2)
 
     Translate the following claim into a [Conjecture] (using [In] for
     list membership): "For all numbers [x] and [y] and lists [l], if
@@ -124,4 +124,4 @@ Fixpoint insert x l :=
     Finally, the [Postscript] chapter gives some suggestions for
     further reading. *)
 
-(* 2020-11-05 12:46 *)
+(* 2021-04-01 20:06 *)

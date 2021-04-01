@@ -62,11 +62,11 @@ In real-world programming, it is often necessary to convert
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="var">showList</span></span> <span class="inlinecode">:</span> <span class="inlinecode">{<span class="id" title="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Type</span>}</span> 
+<li> <span class="inlinecode"><span class="id" title="var">showList</span></span> <span class="inlinecode">:</span> <span class="inlinecode">{<span class="id" title="var">A</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Type</span>}</span>
                      <span class="inlinecode">(<span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">string</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">A</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">string</span></span>
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="var">showPair</span></span> <span class="inlinecode">:</span> <span class="inlinecode">{<span class="id" title="var">A</span></span> <span class="inlinecode"><span class="id" title="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Type</span>}</span> 
+<li> <span class="inlinecode"><span class="id" title="var">showPair</span></span> <span class="inlinecode">:</span> <span class="inlinecode">{<span class="id" title="var">A</span></span> <span class="inlinecode"><span class="id" title="var">B</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">Type</span>}</span>
                      <span class="inlinecode">(<span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">string</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">string</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">string</span></span>
 
 </li>
@@ -101,10 +101,10 @@ In real-world programming, it is often necessary to convert
 
     The designers of Haskell addressed this clunkiness through
     <i>typeclasses</i>, a mechanism by which the typechecker is instructed
-    to automatically construct "type-driven" functions 
-    <a href="Bib.html#Wadler-and Blott 1989"><span class="inlineref">[Wadler and Blott 1989]</span></a>. (Readers not already familiar with 
-    typeclasses should note that, although the word sounds a bit like 
-    "classes" from object-oriented programming, this apparent connection 
+    to automatically construct "type-driven" functions
+    <a href="Bib.html#Wadler-and Blott 1989"><span class="inlineref">[Wadler and Blott 1989]</span></a>. (Readers not already familiar with
+    typeclasses should note that, although the word sounds a bit like
+    "classes" from object-oriented programming, this apparent connection
     is rather misleading.  A better analogy is actually with <i>interfaces</i>
     from languages like Java.  But best of all is to set aside
     object-oriented preconceptions and try to approach typeclasses
@@ -117,7 +117,7 @@ In real-world programming, it is often necessary to convert
     much richer than that of Haskell, and because typeclasses in Coq
     are used to automatically construct not only programs but also
     proofs, Coq's presentation of typeclasses is quite a bit less
-    "transparent": to use typeclasses effectively, one must have a 
+    "transparent": to use typeclasses effectively, one must have a
     fairly detailed understanding of how they are implemented.  Coq
     typeclasses are a power tool: they can make complex developments
     much more elegant and easy to manage when used properly, and they
@@ -323,7 +323,7 @@ And here are some basic instances:
 <br/>
 <span class="id" title="keyword">Instance</span> <a id="eqBool" class="idref" href="#eqBool"><span class="id" title="instance">eqBool</span></a> : <a class="idref" href="Typeclasses.html#Eq"><span class="id" title="class">Eq</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Typeclasses.html#eqb"><span class="id" title="method">eqb</span></a> := <span class="id" title="keyword">fun</span> (<a id="b:29" class="idref" href="#b:29"><span class="id" title="binder">b</span></a> <a id="c:30" class="idref" href="#c:30"><span class="id" title="binder">c</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Typeclasses.html#eqb"><span class="id" title="method">eqb</span></a> := <span class="id" title="keyword">fun</span> (<a id="b:29" class="idref" href="#b:29"><span class="id" title="binder">b</span></a> <a id="c:30" class="idref" href="#c:30"><span class="id" title="binder">c</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Typeclasses.html#b:29"><span class="id" title="variable">b</span></a>, <a class="idref" href="Typeclasses.html#c:30"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a><br/>
@@ -379,7 +379,7 @@ One possible confusion should be addressed here: Why should we
 <span class="id" title="keyword">Instance</span> <a id="showPair" class="idref" href="#showPair"><span class="id" title="instance">showPair</span></a> {<a id="A:33" class="idref" href="#A:33"><span class="id" title="binder">A</span></a> <a id="B:34" class="idref" href="#B:34"><span class="id" title="binder">B</span></a> : <span class="id" title="keyword">Type</span>} `{<a id="H:35" class="idref" href="#H:35"><span class="id" title="binder">Show</span></a> <a id="H:35" class="idref" href="#H:35"><span class="id" title="binder">A</span></a>} `{<a id="H<sub>0</sub>:36" class="idref" href="#H<sub>0</sub>:36"><span class="id" title="binder">Show</span></a> <a id="H<sub>0</sub>:36" class="idref" href="#H<sub>0</sub>:36"><span class="id" title="binder">B</span></a>} : <a class="idref" href="Typeclasses.html#Show"><span class="id" title="class">Show</span></a> (<a class="idref" href="Typeclasses.html#A:33"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Typeclasses.html#B:34"><span class="id" title="variable">B</span></a>) :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> <a id="p:37" class="idref" href="#p:37"><span class="id" title="binder">p</span></a> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="a:38" class="idref" href="#a:38"><span class="id" title="binder">a</span></a>,<a id="b:39" class="idref" href="#b:39"><span class="id" title="binder">b</span></a>) := <a class="idref" href="Typeclasses.html#p:37"><span class="id" title="variable">p</span></a> <span class="id" title="keyword">in</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="a:38" class="idref" href="#a:38"><span class="id" title="binder">a</span></a>,<a id="b:39" class="idref" href="#b:39"><span class="id" title="binder">b</span></a>) := <a class="idref" href="Typeclasses.html#p:37"><span class="id" title="variable">p</span></a> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"(" <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#169ad156fbc6036a53a0338819a2b301"><span class="id" title="notation">++</span></a> <a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> <a class="idref" href="Typeclasses.html#a:38"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#169ad156fbc6036a53a0338819a2b301"><span class="id" title="notation">++</span></a> "," <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#169ad156fbc6036a53a0338819a2b301"><span class="id" title="notation">++</span></a>  <a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> <a class="idref" href="Typeclasses.html#b:39"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#169ad156fbc6036a53a0338819a2b301"><span class="id" title="notation">++</span></a> ")"<br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>42<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>).<br/>
@@ -627,7 +627,7 @@ Coq will notice that the occurrence of <span class="inlinecode"><span class="id"
 <br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#showOne1"><span class="id" title="definition">showOne1</span></a>.<br/>
 <span class="comment">(*&nbsp;==&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;showOne1&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;showOne1&nbsp;=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(H&nbsp;:&nbsp;Show&nbsp;A)&nbsp;(a&nbsp;:&nbsp;A)&nbsp;=&gt;&nbsp;"The&nbsp;value&nbsp;is&nbsp;"&nbsp;++&nbsp;show&nbsp;a<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;Show&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;string<br/>
 <br/>
@@ -704,9 +704,9 @@ If we ask Coq to print the arguments that are normally implicit,
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#showOne2"><span class="id" title="definition">showOne2</span></a>.<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#showOne3"><span class="id" title="definition">showOne3</span></a>.<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#showOne4"><span class="id" title="definition">showOne4</span></a>.<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;showOne&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(H&nbsp;:&nbsp;Show&nbsp;A)&nbsp;(a&nbsp;:&nbsp;A)&nbsp;=&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;showOne&nbsp;=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(H&nbsp;:&nbsp;Show&nbsp;A)&nbsp;(a&nbsp;:&nbsp;A)&nbsp;=&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"The&nbsp;value&nbsp;is&nbsp;"&nbsp;++&nbsp;@show&nbsp;A&nbsp;H&nbsp;a<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;Show&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;string<br/>
 *)</span><br/>
@@ -743,12 +743,12 @@ If we print out <span class="inlinecode"><span class="id" title="var">max1</span
 <span class="id" title="keyword">Set</span> <span class="id" title="keyword">Printing</span> <span class="id" title="keyword">Implicit</span>.<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#max1"><span class="id" title="definition">max1</span></a>.<br/>
 <span class="comment">(*&nbsp;==&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max1&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max1&nbsp;=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(H&nbsp;:&nbsp;Eq&nbsp;A)&nbsp;(H<sub>0</sub>&nbsp;:&nbsp;@Ord&nbsp;A&nbsp;H)&nbsp;(x&nbsp;y&nbsp;:&nbsp;A)&nbsp;=&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;@le&nbsp;A&nbsp;H&nbsp;H<sub>0</sub>&nbsp;x&nbsp;y&nbsp;then&nbsp;y&nbsp;else&nbsp;x<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(H&nbsp;:&nbsp;Eq&nbsp;A),&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Ord&nbsp;A&nbsp;H&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(H&nbsp;:&nbsp;Eq&nbsp;A),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Ord&nbsp;A&nbsp;H&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A<br/>
 *)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Typeclasses.html#Ord"><span class="id" title="class">Ord</span></a>.<br/>
 <span class="comment">(*&nbsp;==&gt;&nbsp;Ord&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;Eq&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;Type&nbsp;*)</span><br/><hr class='doublespaceincode'/>
@@ -768,7 +768,7 @@ For completeness, a couple of final points about implicit
 <br/>
 <span class="id" title="keyword">Generalizable</span> <span class="id" title="keyword">Variables</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="commutativity_property" class="idref" href="#commutativity_property"><span class="id" title="lemma">commutativity_property</span></a> : `{<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">y</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">y</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">x</span>}.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">omega</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="var">lia</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Typeclasses.html#commutativity_property"><span class="id" title="lemma">commutativity_property</span></a>.<br/>
 </div>
 
@@ -801,8 +801,8 @@ Defining a function in this way is not very natural, however.  In
 
 <br/>
 <span class="comment">(*&nbsp;Compute&nbsp;(implicit_fun&nbsp;2&nbsp;3).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Error:&nbsp;Illegal&nbsp;application&nbsp;(Non-functional&nbsp;construction):&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Error:&nbsp;Illegal&nbsp;application&nbsp;(Non-functional&nbsp;construction):<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;expression&nbsp;"implicit_fun"&nbsp;of&nbsp;type&nbsp;"nat"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;cannot&nbsp;be&nbsp;applied&nbsp;to&nbsp;the&nbsp;term<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"2"&nbsp;:&nbsp;"nat"<br/>
@@ -847,9 +847,9 @@ Writing <span class="inlinecode">`(...)</span>, with parentheses instead of curl
 
 <div class="doc">
 Internally, this declaration is desugared into a single-field
-    inductive type, roughly like this: 
+    inductive type, roughly like this:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Point</span> : <span class="id" title="keyword">Set</span> := <br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Point</span> : <span class="id" title="keyword">Set</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Build_Point</span> : <span class="id" title="var">nat</span> → <span class="id" title="var">nat</span> → <span class="id" title="var">Point</span>.
 <div class="paragraph"> </div>
 
@@ -878,7 +878,7 @@ Or we can use more familar record syntax, which allows us to name
 </div>
 
 <div class="doc">
-We can also access fields of a record using conventional "dot notation" 
+We can also access fields of a record using conventional "dot notation"
     (with slightly clunky concrete syntax): 
 </div>
 <div class="code">
@@ -912,7 +912,7 @@ Record declarations can also be parameterized:
 
 <br/>
 <span class="id" title="keyword">Check</span> {| <a class="idref" href="Typeclasses.html#lx"><span class="id" title="projection">lx</span></a>:=2; <a class="idref" href="Typeclasses.html#ly"><span class="id" title="projection">ly</span></a>:=4; <a class="idref" href="Typeclasses.html#label"><span class="id" title="projection">label</span></a>:="hello" |}.<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|&nbsp;lx&nbsp;:=&nbsp;2;&nbsp;ly&nbsp;:=&nbsp;4;&nbsp;label&nbsp;:=&nbsp;"hello"&nbsp;|}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;LabeledPoint&nbsp;string<br/>
 *)</span><br/>
@@ -943,10 +943,10 @@ Record declarations can also be parameterized:
 <br/>
 <span class="id" title="keyword">Set Printing All</span>.<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#Show"><span class="id" title="class">Show</span></a>.<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Record&nbsp;Show&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Record&nbsp;Show&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;:&nbsp;Type&nbsp;:=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build_Show<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;show&nbsp;:&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;string&nbsp;}&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;show&nbsp;:&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;string&nbsp;}<br/>
 *)</span><br/>
 <span class="id" title="keyword">Unset Printing All</span>.<br/>
 </div>
@@ -989,12 +989,12 @@ Note that the syntax for record values is slightly different from
 <span class="id" title="keyword">Set Printing All</span>.<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a>.<br/>
 <span class="comment">(*&nbsp;==&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;show&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;show&nbsp;=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;(A&nbsp;:&nbsp;Type)&nbsp;(Show0&nbsp;:&nbsp;Show&nbsp;A)&nbsp;=&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;Show0&nbsp;with<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Build_Show&nbsp;_&nbsp;show&nbsp;=&gt;&nbsp;show<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
-&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(A&nbsp;:&nbsp;Type),&nbsp;Show&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;string&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(A&nbsp;:&nbsp;Type),&nbsp;Show&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;string<br/>
 <br/>
 &nbsp;&nbsp;&nbsp;Arguments&nbsp;A,&nbsp;Show&nbsp;are&nbsp;implicit&nbsp;and&nbsp;maximally&nbsp;inserted&nbsp;&nbsp;*)</span><br/>
 <span class="id" title="keyword">Unset Printing All</span>.<br/>
@@ -1011,7 +1011,7 @@ Note that the syntax for record values is slightly different from
     inferred (and/or constructed!) during typechecking. 
 <div class="paragraph"> </div>
 
- For example, if we write <span class="inlinecode"><span class="id" title="var">show</span></span> <span class="inlinecode">42</span>, what we actually get is 
+ For example, if we write <span class="inlinecode"><span class="id" title="var">show</span></span> <span class="inlinecode">42</span>, what we actually get is
     <span class="inlinecode">@<span class="id" title="var">show</span></span> <span class="inlinecode"><span class="id" title="var">nat</span></span> <span class="inlinecode"><span class="id" title="var">showNat</span></span> <span class="inlinecode">42</span>: 
 </div>
 <div class="code">
@@ -1147,9 +1147,9 @@ In the second line, the search procedure decides to try applying
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Class</span> <a id="EqDec" class="idref" href="#EqDec"><span class="id" title="record">EqDec</span></a> (<a id="A:108" class="idref" href="#A:108"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) {<a id="H:109" class="idref" href="#H:109"><span class="id" title="binder">H</span></a> : <a class="idref" href="Typeclasses.html#Eq"><span class="id" title="class">Eq</span></a> <a class="idref" href="Typeclasses.html#A:108"><span class="id" title="variable">A</span></a>} := <br/>
-&nbsp;&nbsp;{ <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a id="eqb_eq" class="idref" href="#eqb_eq"><span class="id" title="projection">eqb_eq</span></a> : <span class="id" title="keyword">∀</span> <a id="x:111" class="idref" href="#x:111"><span class="id" title="binder">x</span></a> <a id="y:112" class="idref" href="#y:112"><span class="id" title="binder">y</span></a>, <a class="idref" href="Typeclasses.html#x:111"><span class="id" title="variable">x</span></a> <a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">=?</span></a> <a class="idref" href="Typeclasses.html#y:112"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Typeclasses.html#x:111"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Typeclasses.html#y:112"><span class="id" title="variable">y</span></a> <br/>
+<span class="id" title="keyword">Class</span> <a id="EqDec" class="idref" href="#EqDec"><span class="id" title="record">EqDec</span></a> (<a id="A:108" class="idref" href="#A:108"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) {<a id="H:109" class="idref" href="#H:109"><span class="id" title="binder">H</span></a> : <a class="idref" href="Typeclasses.html#Eq"><span class="id" title="class">Eq</span></a> <a class="idref" href="Typeclasses.html#A:108"><span class="id" title="variable">A</span></a>} :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="eqb_eq" class="idref" href="#eqb_eq"><span class="id" title="projection">eqb_eq</span></a> : <span class="id" title="keyword">∀</span> <a id="x:111" class="idref" href="#x:111"><span class="id" title="binder">x</span></a> <a id="y:112" class="idref" href="#y:112"><span class="id" title="binder">y</span></a>, <a class="idref" href="Typeclasses.html#x:111"><span class="id" title="variable">x</span></a> <a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">=?</span></a> <a class="idref" href="Typeclasses.html#y:112"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Typeclasses.html#x:111"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Typeclasses.html#y:112"><span class="id" title="variable">y</span></a><br/>
 &nbsp;&nbsp;}.<br/>
 </div>
 
@@ -1160,7 +1160,7 @@ To build an instance of <span class="inlinecode"><span class="id" title="var">Eq
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Instance</span> <a id="eqdecNat" class="idref" href="#eqdecNat"><span class="id" title="instance">eqdecNat</span></a> : <a class="idref" href="Typeclasses.html#EqDec"><span class="id" title="class">EqDec</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> := <br/>
+<span class="id" title="keyword">Instance</span> <a id="eqdecNat" class="idref" href="#eqdecNat"><span class="id" title="instance">eqdecNat</span></a> : <a class="idref" href="Typeclasses.html#EqDec"><span class="id" title="class">EqDec</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Typeclasses.html#eqb_eq"><span class="id" title="method">eqb_eq</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.eqb_eq"><span class="id" title="lemma">Nat.eqb_eq</span></a><br/>
 &nbsp;&nbsp;}.<br/>
@@ -1222,7 +1222,7 @@ There is much more to say about how typeclasses can be used (and
 <br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Relations.Relation_Definitions.html#"><span class="id" title="library">Relations.Relation_Definitions</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Class</span> <a id="Reflexive" class="idref" href="#Reflexive"><span class="id" title="record">Reflexive</span></a> (<a id="A:120" class="idref" href="#A:120"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="R:121" class="idref" href="#R:121"><span class="id" title="binder">R</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Relations.Relation_Definitions.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Typeclasses.html#A:120"><span class="id" title="variable">A</span></a>) :=<br/>
-&nbsp;&nbsp;{ <br/>
+&nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a id="reflexivity" class="idref" href="#reflexivity"><span class="id" title="projection">reflexivity</span></a> : <span class="id" title="keyword">∀</span> <a id="x:123" class="idref" href="#x:123"><span class="id" title="binder">x</span></a>, <a class="idref" href="Typeclasses.html#R:121"><span class="id" title="variable">R</span></a> <a class="idref" href="Typeclasses.html#x:123"><span class="id" title="variable">x</span></a> <a class="idref" href="Typeclasses.html#x:123"><span class="id" title="variable">x</span></a><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Class</span> <a id="Transitive" class="idref" href="#Transitive"><span class="id" title="record">Transitive</span></a> (<a id="A:125" class="idref" href="#A:125"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="R:126" class="idref" href="#R:126"><span class="id" title="binder">R</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Relations.Relation_Definitions.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Typeclasses.html#A:125"><span class="id" title="variable">A</span></a>) :=<br/>
@@ -1230,7 +1230,7 @@ There is much more to say about how typeclasses can be used (and
 &nbsp;&nbsp;&nbsp;&nbsp;<a id="transitivity" class="idref" href="#transitivity"><span class="id" title="projection">transitivity</span></a> : <span class="id" title="keyword">∀</span> <a id="x:128" class="idref" href="#x:128"><span class="id" title="binder">x</span></a> <a id="y:129" class="idref" href="#y:129"><span class="id" title="binder">y</span></a> <a id="z:130" class="idref" href="#z:130"><span class="id" title="binder">z</span></a>, <a class="idref" href="Typeclasses.html#R:126"><span class="id" title="variable">R</span></a> <a class="idref" href="Typeclasses.html#x:128"><span class="id" title="variable">x</span></a> <a class="idref" href="Typeclasses.html#y:129"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:126"><span class="id" title="variable">R</span></a> <a class="idref" href="Typeclasses.html#y:129"><span class="id" title="variable">y</span></a> <a class="idref" href="Typeclasses.html#z:130"><span class="id" title="variable">z</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:126"><span class="id" title="variable">R</span></a> <a class="idref" href="Typeclasses.html#x:128"><span class="id" title="variable">x</span></a> <a class="idref" href="Typeclasses.html#z:130"><span class="id" title="variable">z</span></a><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Generalizable</span> <span class="id" title="keyword">Variables</span> <span class="id" title="var">z</span> <span class="id" title="var">w</span> <span class="id" title="var">R</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="trans3" class="idref" href="#trans3"><span class="id" title="lemma">trans3</span></a> : <span class="id" title="keyword">∀</span> `{<a id="H:134" class="idref" href="#H:134"><span class="id" title="binder">Transitive</span></a> <a id="H:134" class="idref" href="#H:134"><span class="id" title="binder">A</span></a> <a id="H:134" class="idref" href="#H:134"><span class="id" title="binder">R</span></a>}, <br/>
+<span class="id" title="keyword">Lemma</span> <a id="trans3" class="idref" href="#trans3"><span class="id" title="lemma">trans3</span></a> : <span class="id" title="keyword">∀</span> `{<a id="H:134" class="idref" href="#H:134"><span class="id" title="binder">Transitive</span></a> <a id="H:134" class="idref" href="#H:134"><span class="id" title="binder">A</span></a> <a id="H:134" class="idref" href="#H:134"><span class="id" title="binder">R</span></a>},<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`{<a class="idref" href="Typeclasses.html#R:133"><span class="id" title="variable">R</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:133"><span class="id" title="variable">R</span></a> <span class="id" title="var">y</span> <span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:133"><span class="id" title="variable">R</span></a> <span class="id" title="var">z</span> <span class="id" title="var">w</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:133"><span class="id" title="variable">R</span></a> <span class="id" title="var">x</span> <span class="id" title="var">w</span>}.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
@@ -1249,7 +1249,7 @@ The syntax <span class="inlinecode">:&gt;</span> indicates that each <span class
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Lemma</span> <a id="trans3_pre" class="idref" href="#trans3_pre"><span class="id" title="lemma">trans3_pre</span></a> : <span class="id" title="keyword">∀</span> `{<a id="H:146" class="idref" href="#H:146"><span class="id" title="binder">PreOrder</span></a> <a id="H:146" class="idref" href="#H:146"><span class="id" title="binder">A</span></a> <a id="H:146" class="idref" href="#H:146"><span class="id" title="binder">R</span></a>}, <br/>
+<span class="id" title="keyword">Lemma</span> <a id="trans3_pre" class="idref" href="#trans3_pre"><span class="id" title="lemma">trans3_pre</span></a> : <span class="id" title="keyword">∀</span> `{<a id="H:146" class="idref" href="#H:146"><span class="id" title="binder">PreOrder</span></a> <a id="H:146" class="idref" href="#H:146"><span class="id" title="binder">A</span></a> <a id="H:146" class="idref" href="#H:146"><span class="id" title="binder">R</span></a>},<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`{<a class="idref" href="Typeclasses.html#R:145"><span class="id" title="variable">R</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:145"><span class="id" title="variable">R</span></a> <span class="id" title="var">y</span> <span class="id" title="var">z</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:145"><span class="id" title="variable">R</span></a> <span class="id" title="var">z</span> <span class="id" title="var">w</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#R:145"><span class="id" title="variable">R</span></a> <span class="id" title="var">x</span> <span class="id" title="var">w</span>}.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="Typeclasses.html#trans3"><span class="id" title="lemma">trans3</span></a>; <span class="id" title="var">eassumption</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
@@ -1386,7 +1386,7 @@ Create an instance of <span class="inlinecode"><span class="id" title="var">Dec<
 
 <br/>
 <span class="id" title="keyword">Notation</span> <a id="835dedd06fe03518896dcafa3563a66c" class="idref" href="#835dedd06fe03518896dcafa3563a66c"><span class="id" title="notation">&quot;</span></a>P '?'" :=<br/>
-&nbsp;&nbsp;(<span class="id" title="keyword">match</span> (@<a class="idref" href="Typeclasses.html#dec"><span class="id" title="method">dec</span></a> <span class="id" title="var">P</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;(<span class="id" title="keyword">match</span> (@<a class="idref" href="Typeclasses.html#dec"><span class="id" title="method">dec</span></a> <span class="id" title="var">P</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#left"><span class="id" title="constructor">left</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
 &nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#right"><span class="id" title="constructor">right</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a><br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)<br/>
@@ -1473,7 +1473,7 @@ Now we don't need to remember that, for example, the test for
 
 <div class="paragraph"> </div>
 
-    <a href="https://github.com/coq-ext-lib/coq-ext-lib/blob/v8.5/theories/Structures/Monad.v"><span class="inlineref">https://github.com/coq-ext-lib/coq-ext-lib/blob/v8.5/theories/Structures/Monad.v</span></a>
+    <a href="https://github.com/coq-community/coq-ext-lib/blob/master/theories/Structures/Monad.v"><span class="inlineref">https://github.com/coq-community/coq-ext-lib/blob/master/theories/Structures/Monad.v</span></a>
 
 <div class="paragraph"> </div>
 
@@ -1491,7 +1491,7 @@ Now we don't need to remember that, for example, the test for
 The main definition provided by this library is the following typeclass:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Class</span> <span class="id" title="var">Monad</span> (<span class="id" title="var">M</span> : <span class="id" title="keyword">Type</span> → <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">T</span> : <span class="id" title="keyword">Type</span>}, <span class="id" title="var">T</span> → <span class="id" title="var">M</span> <span class="id" title="var">T</span> ;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">bind</span> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">T</span> <span class="id" title="var">U</span> : <span class="id" title="keyword">Type</span>}, <span class="id" title="var">M</span> <span class="id" title="var">T</span> → (<span class="id" title="var">T</span> → <span class="id" title="var">M</span> <span class="id" title="var">U</span>) → <span class="id" title="var">M</span> <span class="id" title="var">U</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}.
@@ -1599,13 +1599,13 @@ One final convenience for programming with monads is a collection
 <span class="id" title="keyword">Definition</span> <a id="liftM2" class="idref" href="#liftM2"><span class="id" title="definition">liftM2</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="m:197" class="idref" href="#m:197"><span class="id" title="binder">m</span></a> : <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="M:198" class="idref" href="#M:198"><span class="id" title="binder">M</span></a> : <span class="id" title="class">Monad</span> <a class="idref" href="Typeclasses.html#m:197"><span class="id" title="variable">m</span></a>}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="T:199" class="idref" href="#T:199"><span class="id" title="binder">T</span></a> <a id="U:200" class="idref" href="#U:200"><span class="id" title="binder">U</span></a> <a id="V:201" class="idref" href="#V:201"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:202" class="idref" href="#f:202"><span class="id" title="binder">f</span></a> : <a class="idref" href="Typeclasses.html#T:199"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#U:200"><span class="id" title="variable">U</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#V:201"><span class="id" title="variable">V</span></a>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="T:199" class="idref" href="#T:199"><span class="id" title="binder">T</span></a> <a id="U:200" class="idref" href="#U:200"><span class="id" title="binder">U</span></a> <a id="V:201" class="idref" href="#V:201"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:202" class="idref" href="#f:202"><span class="id" title="binder">f</span></a> : <a class="idref" href="Typeclasses.html#T:199"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#U:200"><span class="id" title="variable">U</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#V:201"><span class="id" title="variable">V</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Typeclasses.html#m:197"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#T:199"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#m:197"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#U:200"><span class="id" title="variable">U</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#m:197"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#V:201"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="x:203" class="idref" href="#x:203"><span class="id" title="binder">x</span></a> <a id="y:204" class="idref" href="#y:204"><span class="id" title="binder">y</span></a> ⇒ <span class="id" title="method">bind</span> <a class="idref" href="Typeclasses.html#x:203"><span class="id" title="variable">x</span></a> (<span class="id" title="keyword">fun</span> <a id="x:205" class="idref" href="#x:205"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="Typeclasses.html#liftM"><span class="id" title="definition">liftM</span></a> (<a class="idref" href="Typeclasses.html#f:202"><span class="id" title="variable">f</span></a> <a class="idref" href="Typeclasses.html#x:205"><span class="id" title="variable">x</span></a>) <a class="idref" href="Typeclasses.html#y:204"><span class="id" title="variable">y</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="liftM3" class="idref" href="#liftM3"><span class="id" title="definition">liftM3</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="m:206" class="idref" href="#m:206"><span class="id" title="binder">m</span></a> : <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="M:207" class="idref" href="#M:207"><span class="id" title="binder">M</span></a> : <span class="id" title="class">Monad</span> <a class="idref" href="Typeclasses.html#m:206"><span class="id" title="variable">m</span></a>}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="T:208" class="idref" href="#T:208"><span class="id" title="binder">T</span></a> <a id="U:209" class="idref" href="#U:209"><span class="id" title="binder">U</span></a> <a id="V:210" class="idref" href="#V:210"><span class="id" title="binder">V</span></a> <a id="W:211" class="idref" href="#W:211"><span class="id" title="binder">W</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:212" class="idref" href="#f:212"><span class="id" title="binder">f</span></a> : <a class="idref" href="Typeclasses.html#T:208"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#U:209"><span class="id" title="variable">U</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#V:210"><span class="id" title="variable">V</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#W:211"><span class="id" title="variable">W</span></a>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a id="T:208" class="idref" href="#T:208"><span class="id" title="binder">T</span></a> <a id="U:209" class="idref" href="#U:209"><span class="id" title="binder">U</span></a> <a id="V:210" class="idref" href="#V:210"><span class="id" title="binder">V</span></a> <a id="W:211" class="idref" href="#W:211"><span class="id" title="binder">W</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:212" class="idref" href="#f:212"><span class="id" title="binder">f</span></a> : <a class="idref" href="Typeclasses.html#T:208"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#U:209"><span class="id" title="variable">U</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#V:210"><span class="id" title="variable">V</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#W:211"><span class="id" title="variable">W</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Typeclasses.html#m:206"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#T:208"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#m:206"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#U:209"><span class="id" title="variable">U</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#m:206"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#V:210"><span class="id" title="variable">V</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#m:206"><span class="id" title="variable">m</span></a> <a class="idref" href="Typeclasses.html#W:211"><span class="id" title="variable">W</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="x:213" class="idref" href="#x:213"><span class="id" title="binder">x</span></a> <a id="y:214" class="idref" href="#y:214"><span class="id" title="binder">y</span></a> <a id="z:215" class="idref" href="#z:215"><span class="id" title="binder">z</span></a> ⇒ <span class="id" title="method">bind</span> <a class="idref" href="Typeclasses.html#x:213"><span class="id" title="variable">x</span></a> (<span class="id" title="keyword">fun</span> <a id="x:216" class="idref" href="#x:216"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="Typeclasses.html#liftM2"><span class="id" title="definition">liftM2</span></a> (<a class="idref" href="Typeclasses.html#f:212"><span class="id" title="variable">f</span></a> <a class="idref" href="Typeclasses.html#x:216"><span class="id" title="variable">x</span></a>) <a class="idref" href="Typeclasses.html#y:214"><span class="id" title="variable">y</span></a> <a class="idref" href="Typeclasses.html#z:215"><span class="id" title="variable">z</span></a>).<br/>
 </div>
@@ -1636,7 +1636,7 @@ For example, suppose we have two <span class="inlinecode"><span class="id" title
 
 <div class="doc">
 The <span class="inlinecode">/<span class="id" title="var">examples</span></span> directory in the <span class="inlinecode"><span class="id" title="var">ext</span>-<span class="id" title="var">lib</span></span> Github
-    repository (<a href="https://github.com/coq-ext-lib/coq-ext-lib"><span class="inlineref">https://github.com/coq-ext-lib/coq-ext-lib</span></a>) includes
+    repository (<a href="https://github.com/coq-community/coq-ext-lib/blob/master/"><span class="inlineref">https://github.com/coq-community/coq-ext-lib/blob/master/</span></a>) includes
     some further examples of using monads in Coq. 
 <div class="paragraph"> </div>
 
@@ -1702,7 +1702,7 @@ The <span class="inlinecode">/<span class="id" title="var">examples</span></span
 <span class="id" title="var">Fail</span> <span class="id" title="keyword">Check</span> (<a class="idref" href="Typeclasses.html#foo"><span class="id" title="definition">foo</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>).<br/>
 <span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;command&nbsp;has&nbsp;indeed&nbsp;failed&nbsp;with&nbsp;message:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;term&nbsp;"true"&nbsp;has&nbsp;type&nbsp;"bool"&nbsp;while&nbsp;it&nbsp;is&nbsp;expected&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;term&nbsp;"true"&nbsp;has&nbsp;type&nbsp;"bool"&nbsp;while&nbsp;it&nbsp;is&nbsp;expected<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;have&nbsp;type&nbsp;"bool&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;bool".&nbsp;*)</span><br/>
 </div>
 
@@ -1775,7 +1775,7 @@ Huh?!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> (<a class="idref" href="Typeclasses.html#Baz"><span class="id" title="constructor">Baz</span></a> 42)).<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"<span class="inlinecode">42</span> <span class="inlinecode"><span class="id" title="keyword">is</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span class="id" title="var">Baz</span></span>"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;string&nbsp;&nbsp;&nbsp;*)</span><br/>
 </div>
@@ -1796,7 +1796,7 @@ When this happens, it is unpredictable which instance will be
 <div class="paragraph"> </div>
 
  One way to deal with overlapping instances is to "curate" the hint
-    database by explicitly adding and removing specific instances.  
+    database by explicitly adding and removing specific instances.
 
 <div class="paragraph"> </div>
 
@@ -1819,7 +1819,7 @@ To add them back (or to add arbitrary constants that have the
 <br/>
 <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">baz1</span>.<br/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> (<a class="idref" href="Typeclasses.html#Baz"><span class="id" title="constructor">Baz</span></a> 42)).<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"Baz:&nbsp;42"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="var">Remove</span> <span class="id" title="var">Hints</span> <span class="id" title="var">baz1</span> : <span class="id" title="var">typeclass_instances</span>.<br/>
@@ -1847,7 +1847,7 @@ Another way of controlling which instances are chosen by proof
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> (<a class="idref" href="Typeclasses.html#Baz"><span class="id" title="constructor">Baz</span></a> 42)).<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"Use&nbsp;me&nbsp;first!&nbsp;&nbsp;42"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;string&nbsp;&nbsp;*)</span><br/>
 </div>
@@ -1871,7 +1871,7 @@ Another way of controlling which instances are chosen by proof
 <br/>
 <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">baz1</span> | 0.<br/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Typeclasses.html#show"><span class="id" title="method">show</span></a> (<a class="idref" href="Typeclasses.html#Baz"><span class="id" title="constructor">Baz</span></a> 42)).<br/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"Baz:&nbsp;42"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
 </div>
@@ -1899,7 +1899,7 @@ Another way of controlling which instances are chosen by proof
 &nbsp;&nbsp;<a id="Bar" class="idref" href="#Bar"><span class="id" title="constructor">Bar</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Typeclasses.html#bar:234"><span class="id" title="inductive">bar</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="var">Fail</span> <span class="id" title="keyword">Definition</span> <a id="eqBar" class="idref" href="#eqBar"><span class="id" title="definition">eqBar</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">(</span></a><a class="idref" href="Typeclasses.html#Bar"><span class="id" title="constructor">Bar</span></a> 42<a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">)</span></a> <a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">=?</span></a> <a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">(</span></a><a class="idref" href="Typeclasses.html#Bar"><span class="id" title="constructor">Bar</span></a> 43<a class="idref" href="Typeclasses.html#a81c4e8952ab6552a9e9bde13c42faca"><span class="id" title="notation">)</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;===&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;command&nbsp;has&nbsp;indeed&nbsp;failed&nbsp;with&nbsp;message:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Unable&nbsp;to&nbsp;satisfy&nbsp;the&nbsp;following&nbsp;constraints:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?Eq&nbsp;:&nbsp;"Eq&nbsp;bar"&nbsp;&nbsp;*)</span><br/><hr class='doublespaceincode'/>
@@ -2008,7 +2008,7 @@ Declare instances for getting from <span class="inlinecode"><span class="id" tit
 <br/>
 <span class="id" title="keyword">Instance</span> <a id="MyMap2" class="idref" href="#MyMap2"><span class="id" title="instance">MyMap2</span></a> : <a class="idref" href="Typeclasses.html#MyMap"><span class="id" title="class">MyMap</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Typeclasses.html#mymap"><span class="id" title="method">mymap</span></a> := <span class="id" title="keyword">fun</span> <a id="n:246" class="idref" href="#n:246"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Typeclasses.html#mymap"><span class="id" title="method">mymap</span></a> := <span class="id" title="keyword">fun</span> <a id="n:246" class="idref" href="#n:246"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="Typeclasses.html#le"><span class="id" title="method">le</span></a> <a class="idref" href="Typeclasses.html#n:246"><span class="id" title="variable">n</span></a> 20 <a class="idref" href="http://coq.inria.fr/library//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> "Pretty small" <a class="idref" href="http://coq.inria.fr/library//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> "Pretty big"<br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="e<sub>1</sub>" class="idref" href="#e<sub>1</sub>"><span class="id" title="definition">e<sub>1</sub></span></a> := <a class="idref" href="Typeclasses.html#mymap"><span class="id" title="method">mymap</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
@@ -2057,7 +2057,7 @@ However, although this example seemed to work, we are actually in
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;<br/>
+<span class="comment">(*<br/>
 Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;false.<br/>
 *)</span><br/>
 </div>
@@ -2090,7 +2090,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 
 <div class="paragraph"> </div>
 
- An introduction to canonical structures and 
+ An introduction to canonical structures and
     comparisons between canonical structures and typeclasses can be
     found here:
 
@@ -2194,9 +2194,9 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 
 <div class="paragraph"> </div>
 
- One thing that always gets me is that overlapping instances are 
+ One thing that always gets me is that overlapping instances are
     easy to write with no warning from Coq (unlike Haskell, which
-    ensures that resolution always pick a single instance). This 
+    ensures that resolution always pick a single instance). This
     requires me to often use:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Typeclasses</span> <span class="id" title="tactic">eauto</span> := <span class="id" title="tactic">debug</span>.
@@ -2208,7 +2208,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> Change the "priority" of the overlapping instance (something we 
+<li> Change the "priority" of the overlapping instance (something we
         cannot do in Haskell).
 
 </li>
@@ -2228,10 +2228,10 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 
 <div class="paragraph"> </div>
 
-    For example, say I write a function that uses a functor, but forget 
+    For example, say I write a function that uses a functor, but forget
     to mention the functor:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">foo</span> (<span class="id" title="var">C</span> <span class="id" title="var">D</span> : <span class="id" title="var">Category</span>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">C</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">x</span> ~&gt; <span class="id" title="var">y</span>) <br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">foo</span> (<span class="id" title="var">C</span> <span class="id" title="var">D</span> : <span class="id" title="var">Category</span>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">C</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">x</span> ~&gt; <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="var">fobj</span> <span class="id" title="var">x</span> ~&gt; <span class="id" title="var">fobj</span> <span class="id" title="var">y</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fmap</span> <span class="id" title="var">f</span>.
 <div class="paragraph"> </div>
@@ -2277,7 +2277,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 &nbsp;&nbsp;&nbsp;}.
 <div class="paragraph"> </div>
 
-</span>    <span class="inlinecode"><span class="id" title="var">Oops</span></span> refers to two <span class="inlinecode"><span class="id" title="var">Foos</span></span>, and I need explicit evidence to know when 
+</span>    <span class="inlinecode"><span class="id" title="var">Oops</span></span> refers to two <span class="inlinecode"><span class="id" title="var">Foos</span></span>, and I need explicit evidence to know when
     they are the same <span class="inlinecode"><span class="id" title="var">Foo</span></span>. I work around this using indices:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Class</span> <span class="id" title="var">Foo</span> := {<br/>
@@ -2316,7 +2316,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 &nbsp;&nbsp;&nbsp;@<span class="id" title="var">method</span> <span class="id" title="var">F</span> <span class="id" title="var">A</span> = @<span class="id" title="var">method</span> <span class="id" title="var">F</span> <span class="id" title="var">B</span>
 <div class="paragraph"> </div>
 
-</span>    You can't apply here without simplying in H. However, what you see at 
+</span>    You can't apply here without simplying in H. However, what you see at
     first is:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">A</span>, <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span><br/>
@@ -2428,7 +2428,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 <ul class="doclist">
 <li> Matthieu Sozeau and Nicolas Oury. First-Class Type
         Classes. TPHOLs 2008.
-        <a href="https://link.springer.com/chapter/10.1007%2F978-3-540-71067-7_23"><span class="inlineref">https://link.springer.com/chapter/10.1007%2F978-3-540-71067-7_23</span></a> 
+        <a href="https://link.springer.com/chapter/10.1007%2F978-3-540-71067-7_23"><span class="inlineref">https://link.springer.com/chapter/10.1007%2F978-3-540-71067-7_23</span></a>
 
 </li>
 </ul>
@@ -2468,7 +2468,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:46&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-04-01&nbsp;20:06&nbsp;*)</span><br/>
 </div>
 </div>
 

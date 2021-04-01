@@ -21,49 +21,6 @@ type sumbool =
 | Left
 | Right
 
-(** val add : nat -> nat -> nat **)
-
-let rec add n m =
-  match n with
-  | O -> m
-  | S p -> S (add p m)
-
-(** val mul : nat -> nat -> nat **)
-
-let rec mul n m =
-  match n with
-  | O -> O
-  | S p -> add m (mul p m)
-
-(** val sub : nat -> nat -> nat **)
-
-let rec sub n m =
-  match n with
-  | O -> n
-  | S k -> (match m with
-            | O -> n
-            | S l -> sub k l)
-
-(** val eqb : nat -> nat -> bool **)
-
-let rec eqb n m =
-  match n with
-  | O -> (match m with
-          | O -> True
-          | S _ -> False)
-  | S n' -> (match m with
-             | O -> False
-             | S m' -> eqb n' m')
-
-(** val leb : nat -> nat -> bool **)
-
-let rec leb n m =
-  match n with
-  | O -> True
-  | S n' -> (match m with
-             | O -> False
-             | S m' -> leb n' m')
-
 (** val bool_dec : bool -> bool -> sumbool **)
 
 let bool_dec b1 b2 =
@@ -74,6 +31,52 @@ let bool_dec b1 b2 =
   | False -> (match b2 with
               | True -> Right
               | False -> Left)
+
+module Nat =
+ struct
+  (** val add : nat -> nat -> nat **)
+
+  let rec add n m =
+    match n with
+    | O -> m
+    | S p -> S (add p m)
+
+  (** val mul : nat -> nat -> nat **)
+
+  let rec mul n m =
+    match n with
+    | O -> O
+    | S p -> add m (mul p m)
+
+  (** val sub : nat -> nat -> nat **)
+
+  let rec sub n m =
+    match n with
+    | O -> n
+    | S k -> (match m with
+              | O -> n
+              | S l -> sub k l)
+
+  (** val eqb : nat -> nat -> bool **)
+
+  let rec eqb n m =
+    match n with
+    | O -> (match m with
+            | O -> True
+            | S _ -> False)
+    | S n' -> (match m with
+               | O -> False
+               | S m' -> eqb n' m')
+
+  (** val leb : nat -> nat -> bool **)
+
+  let rec leb n m =
+    match n with
+    | O -> True
+    | S n' -> (match m with
+               | O -> False
+               | S m' -> leb n' m')
+ end
 
 type ascii =
 | Ascii of bool * bool * bool * bool * bool * bool * bool * bool
@@ -162,17 +165,17 @@ type bexp =
 let rec aeval st = function
 | ANum n -> n
 | AId x -> st x
-| APlus (a1, a2) -> add (aeval st a1) (aeval st a2)
-| AMinus (a1, a2) -> sub (aeval st a1) (aeval st a2)
-| AMult (a1, a2) -> mul (aeval st a1) (aeval st a2)
+| APlus (a1, a2) -> Nat.add (aeval st a1) (aeval st a2)
+| AMinus (a1, a2) -> Nat.sub (aeval st a1) (aeval st a2)
+| AMult (a1, a2) -> Nat.mul (aeval st a1) (aeval st a2)
 
 (** val beval : state -> bexp -> bool **)
 
 let rec beval st = function
 | BTrue -> True
 | BFalse -> False
-| BEq (a1, a2) -> eqb (aeval st a1) (aeval st a2)
-| BLe (a1, a2) -> leb (aeval st a1) (aeval st a2)
+| BEq (a1, a2) -> Nat.eqb (aeval st a1) (aeval st a2)
+| BLe (a1, a2) -> Nat.leb (aeval st a1) (aeval st a2)
 | BNot b1 -> negb (beval st b1)
 | BAnd (b1, b2) ->
   (match beval st b1 with
@@ -181,7 +184,7 @@ let rec beval st = function
 
 type com =
 | CSkip
-| CAss of string * aexp
+| CAsgn of string * aexp
 | CSeq of com * com
 | CIf of bexp * com * com
 | CWhile of bexp * com
@@ -193,7 +196,7 @@ let rec ceval_step st c = function
 | S i' ->
   (match c with
    | CSkip -> Some st
-   | CAss (l, a1) -> Some (t_update st l (aeval st a1))
+   | CAsgn (l, a1) -> Some (t_update st l (aeval st a1))
    | CSeq (c1, c2) ->
      (match ceval_step st c1 i' with
       | Some st' -> ceval_step st' c2 i'

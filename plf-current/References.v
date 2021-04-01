@@ -29,9 +29,12 @@
     the refinement we need to make to the statement of the type
     preservation theorem. *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.
+From Coq Require Import Init.Nat.
 From Coq Require Import Arith.Arith.
+From Coq Require Import Arith.PeanoNat.
+Import Nat.
 From Coq Require Import Lia.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
@@ -436,7 +439,7 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
       r2  // yields 1, not 2!
 *)
 
-(** **** Exercise: 1 star, standard, optional (store_draw) 
+(** **** Exercise: 1 star, standard, optional (store_draw)
 
     Draw (on paper) the contents of the store at the point in
     execution where the first two [let]s have finished and the third
@@ -491,7 +494,7 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
     useful, allowing us to define data structures such as mutable
     lists and trees. *)
 
-(** **** Exercise: 2 stars, standard, especially useful (compact_update) 
+(** **** Exercise: 2 stars, standard, especially useful (compact_update)
 
     If we defined [update] more compactly like this
 
@@ -553,7 +556,7 @@ Definition manual_grade_for_compact_update : option (nat*string) := None.
     names for the same storage cell -- one with type [Ref Natural] and the
     other with type [Ref Bool]. *)
 
-(** **** Exercise: 2 stars, standard (type_safety_violation) 
+(** **** Exercise: 2 stars, standard (type_safety_violation)
 
     Show how this can lead to a violation of type safety. *)
 
@@ -993,7 +996,7 @@ Definition context := partial_map ty.
    [\x:Natural. (!(loc 1)) x, \x:Natural. (!(loc 0)) x]
 *)
 
-(** **** Exercise: 2 stars, standard (cyclic_store) 
+(** **** Exercise: 2 stars, standard (cyclic_store)
 
     Can you find a term whose reduction will create this particular
     cyclic store? *)
@@ -1204,7 +1207,7 @@ Definition store_well_typed (ST:store_ty) (st:store) :=
     typing to the typing relation.  This allows us to type circular
     stores like the one we saw above. *)
 
-(** **** Exercise: 2 stars, standard (store_not_unique) 
+(** **** Exercise: 2 stars, standard (store_not_unique)
 
     Can you find a store [st], and two
     different store typings [ST1] and [ST2] such that both
@@ -1353,7 +1356,7 @@ Lemma weakening : forall Gamma Gamma' ST t T,
      Gamma  ; ST |- t \in T  ->
      Gamma' ; ST |- t \in T.
 Proof.
-  intros Gamma Gamma' ST t T H Ht. 
+  intros Gamma Gamma' ST t T H Ht.
   generalize dependent Gamma'.
   induction Ht; eauto using inclusion_update.
 Qed.
@@ -1374,7 +1377,7 @@ Lemma substitution_preserves_typing : forall Gamma ST x U t v T,
 Proof.
   intros Gamma ST x U t v T Ht Hv.
   generalize dependent Gamma. generalize dependent T.
-  induction t; intros T Gamma H; 
+  induction t; intros T Gamma H;
   (* in each case, we'll want to get at the derivation of H *)
     inversion H; clear H; subst; simpl; eauto.
   - (* var *)
@@ -1386,7 +1389,7 @@ Proof.
     + (* x<>y *)
       apply T_Var. rewrite update_neq in H2; auto.
   - (* abs *)
-    rename s into y, t into T.
+    rename s into y.
     destruct (eqb_stringP x y); subst; apply T_Abs.
     + (* x=y *)
       rewrite update_shadow in H5. assumption.
@@ -1462,8 +1465,8 @@ Proof with auto.
   intros.
   unfold store_well_typed in *.
   destruct H as [Hlen Hmatch].
-  rewrite app_length, plus_comm. simpl.
-  rewrite app_length, plus_comm. simpl.
+  rewrite app_length, add_comm. simpl.
+  rewrite app_length, add_comm. simpl.
   split...
   - (* types match. *)
     intros l Hl.
@@ -1563,7 +1566,7 @@ Proof with eauto using store_weakening, extends_refl.
     { replace <{ Ref T1 }>
         with <{ Ref {store_Tlookup (length st) (ST ++ T1::nil)} }>.
       { apply T_Loc.
-        rewrite <- H. rewrite app_length, plus_comm. simpl. lia. }
+        rewrite <- H. rewrite app_length, add_comm. simpl. lia. }
       unfold store_Tlookup. rewrite <- H. rewrite nth_eq_last.
       reflexivity. }
     apply store_well_typed_app; assumption.
@@ -1597,7 +1600,7 @@ Proof with eauto using store_weakening, extends_refl.
     exists ST'...
 Qed.
 
-(** **** Exercise: 3 stars, standard (preservation_informal) 
+(** **** Exercise: 3 stars, standard (preservation_informal)
 
     Write a careful informal proof of the preservation theorem,
     concentrating on the [T_App], [T_Deref], [T_Assign], and [T_Ref]
@@ -1764,7 +1767,7 @@ Definition loop :=
 
 Lemma loop_typeable : exists T, empty; nil |- loop \in T.
 Proof with eauto.
-  eexists. unfold loop. unfold loop_fun. 
+  eexists. unfold loop. unfold loop_fun.
   eapply T_App...
   eapply T_Abs...
   eapply T_App...
@@ -1838,7 +1841,7 @@ Proof with eauto.
   eapply sc_one. compute. apply ST_AppAbs...
 Qed.
 
-(** **** Exercise: 4 stars, standard (factorial_ref) 
+(** **** Exercise: 4 stars, standard (factorial_ref)
 
     Use the above ideas to implement a factorial function in STLC with
     references.  (There is no need to prove formally that it really
@@ -1869,7 +1872,7 @@ Qed.
 (* ################################################################# *)
 (** * Additional Exercises *)
 
-(** **** Exercise: 5 stars, standard, optional (garabage_collector) 
+(** **** Exercise: 5 stars, standard, optional (garabage_collector)
 
     Challenge problem: modify our formalization to include an account
     of garbage collection, and prove that it satisfies whatever nice
@@ -1880,4 +1883,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

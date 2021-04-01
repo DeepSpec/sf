@@ -3,4 +3,4 @@ ENV OPAMYES true
 RUN opam update \
  && opam install -j `nproc` \
          coq-quickchick \
-         coq-vst
+         coq-vst-32

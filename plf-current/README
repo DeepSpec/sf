@@ -3,7 +3,8 @@
 #########################################################################
 
 This directory contains both Coq scripts (.v files) and more readable
-HTML files for the Software Foundations electronic textbook.
+HTML files for Volume 2 of the Software Foundations electronic
+textbook series.
 
   - Preface.v or Preface.html
     The place to start reading, including details on how to install

@@ -21,6 +21,7 @@
     - Chapter 12 of _Introduction to Algorithms, 3rd Edition_, by
       Cormen, Leiserson, and Rivest, MIT Press 2009. *)
 
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import String.  (* for an example, and manual grading *)
 From Coq Require Import Logic.FunctionalExtensionality.
 From VFA Require Import Perm.
@@ -188,17 +189,17 @@ Example is_BST_ex :
   BST ex_tree.
 Proof.
   unfold ex_tree.
-  repeat (constructor; try omega).
+  repeat (constructor; try lia).
 Qed.
 
 Example not_BST_ex :
   ~ BST NotBst.t.
 Proof.
   unfold NotBst.t. intros contra.
-  inv contra. inv H3. omega.
+  inv contra. inv H3. lia.
 Qed.
 
-(** **** Exercise: 1 star, standard (empty_tree_BST)  *)
+(** **** Exercise: 1 star, standard (empty_tree_BST) *)
 
 (** Prove that the empty tree is a BST. *)
 
@@ -209,7 +210,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (insert_BST)  *)
+(** **** Exercise: 4 stars, standard (insert_BST) *)
 
 (** Prove that [insert] produces a BST, assuming it is given one.
 
@@ -296,15 +297,15 @@ Theorem lookup_insert_eq : forall (V : Type) (t : tree V) (d : V) (k : key) (v :
     lookup d k (insert k v t)  = v.
 Proof.
   induction t; intros; simpl.
-  - bdestruct (k <? k); try omega; auto.
-  - bdestruct (k <? k0); bdestruct (k0 <? k); simpl; try omega; auto.
-    + bdestruct (k <? k0); bdestruct (k0 <? k); try omega; auto.
-    + bdestruct (k <? k0); bdestruct (k0 <? k); try omega; auto.
-    + bdestruct (k0 <? k0); try omega; auto.
+  - bdestruct (k <? k); try lia; auto.
+  - bdestruct (k <? k0); bdestruct (k0 <? k); simpl; try lia; auto.
+    + bdestruct (k <? k0); bdestruct (k0 <? k); try lia; auto.
+    + bdestruct (k <? k0); bdestruct (k0 <? k); try lia; auto.
+    + bdestruct (k0 <? k0); try lia; auto.
 Qed.
 
 (** The basic method of that proof is to repeatedly [bdestruct]
-    everything in sight, followed by generous use of [omega] and
+    everything in sight, followed by generous use of [lia] and
     [auto]. Let's automate that. *)
 
 Ltac bdestruct_guard :=
@@ -315,7 +316,7 @@ Ltac bdestruct_guard :=
   end.
 
 Ltac bdall :=
-  repeat (simpl; bdestruct_guard; try omega; auto).
+  repeat (simpl; bdestruct_guard; try lia; auto).
 
 Theorem lookup_insert_eq' :
   forall (V : Type) (t : tree V) (d : V) (k : key) (v : V),
@@ -340,7 +341,7 @@ Qed.
     even if nodes are in the "wrong" place, they are consistently
     "wrong". *)
 
-(** **** Exercise: 3 stars, standard, optional (bound_correct)  *)
+(** **** Exercise: 3 stars, standard, optional (bound_correct) *)
 
 (** Specify and prove the correctness of [bound]. State and prove
     three theorems, inspired by those we just proved for [lookup]. If
@@ -353,7 +354,7 @@ Qed.
 Definition manual_grade_for_bound_correct : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (bound_default)  *)
+(** **** Exercise: 3 stars, standard, optional (bound_default) *)
 
 (** Prove that if [bound] returns [false], then [lookup] returns
     the default value. Proceed by induction on the tree. *)
@@ -424,7 +425,7 @@ Check t_update_permute :
     [insert], or [lookup].  Instead, use [lookup_insert_eq] and
     [lookup_insert_neq]. *)
 
-(** **** Exercise: 2 stars, standard, optional (lookup_insert_shadow)  *)
+(** **** Exercise: 2 stars, standard, optional (lookup_insert_shadow) *)
 
 Lemma lookup_insert_shadow :
   forall (V : Type) (t : tree V) (v v' d: V) (k k' : key),
@@ -435,7 +436,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (lookup_insert_same)  *)
+(** **** Exercise: 2 stars, standard, optional (lookup_insert_same) *)
 
 Lemma lookup_insert_same :
   forall (V : Type) (k k' : key) (d : V) (t : tree V),
@@ -445,7 +446,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (lookup_insert_permute)  *)
+(** **** Exercise: 2 stars, standard, optional (lookup_insert_permute) *)
 
 Lemma lookup_insert_permute :
   forall (V : Type) (v1 v2 d : V) (k1 k2 k': key) (t : tree V),
@@ -480,7 +481,7 @@ Qed.
 (** But the other two direct equalities on BSTs do not necessarily
     hold. *)
 
-(** **** Exercise: 3 stars, standard, optional (direct_equalities_break)  *)
+(** **** Exercise: 3 stars, standard, optional (direct_equalities_break) *)
 
 (** Prove that the other equalities do not hold.  Hint: find a counterexample
     first on paper, then use the [exists] tactic to instantiate the theorem
@@ -527,7 +528,7 @@ Proof. reflexivity. Qed.
 
     2. The list is sorted by keys.
 
-    3. The list contains no duplicates.
+    3. The list contains no duplicate keys.
 
     Let's formally specify and verify them. *)
 
@@ -573,12 +574,11 @@ Abort.
 
 Definition elements_complete_spec :=
   forall (V : Type) (k : key) (v d : V) (t : tree V),
-    BST t ->
     bound k t = true ->
     lookup d k t = v ->
     In (k, v) (elements t).
 
-(** **** Exercise: 3 stars, standard (elements_complete)  *)
+(** **** Exercise: 3 stars, standard (elements_complete) *)
 
 (** Prove that [elements] is complete. Proceed by induction on [t]. *)
 
@@ -605,16 +605,11 @@ Definition elements_correct_spec :=
     property, to [Forall], which expresses that all list elements
     satisfy a property.
 
-    We begin with this lemma about [Forall], which is missing from the
-    standard library. *)
+    The standard library contains a helpful lemma about [Forall]: *)
 
-Lemma Forall_app : forall (A: Type) (P : A -> Prop) (l1 l2 : list A),
-    Forall P l1 -> Forall P l2 -> Forall P (l1 ++ l2).
-Proof.
-  induction l1; intros; simpl; auto; inv H; constructor; auto.
-Qed.
+Check Forall_app. 
 
-(** **** Exercise: 2 stars, standard (elements_preserves_forall)  *)
+(** **** Exercise: 2 stars, standard (elements_preserves_forall) *)
 
 (** Prove that if a property [P] holds of every node in a tree [t],
     then that property holds of every pair in [elements t]. Proceed
@@ -639,7 +634,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (elements_preserves_relation)  *)
+(** **** Exercise: 2 stars, standard (elements_preserves_relation) *)
 
 (** Prove that if all the keys in [t] are in a relation [R] with a
     distinguished key [k'], then any key [k] in [elements t] is also
@@ -662,7 +657,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (elements_correct)  *)
+(** **** Exercise: 4 stars, standard (elements_correct) *)
 
 (** Prove that [elements] is correct. Proceed by induction on the
     evidence that [t] is a BST. *)
@@ -683,14 +678,14 @@ Proof.
 
     Let's prove that they do. *)
 
-(** **** Exercise: 2 stars, advanced (elements_complete_inverse)  *)
+(** **** Exercise: 2 stars, advanced (elements_complete_inverse) *)
 
 (** This inverse doesn't require induction.  Look for a way to use
     [elements_correct] to quickly prove the result. *)
 
 Theorem elements_complete_inverse :
   forall (V : Type) (k : key) (v : V) (t : tree V),
-    BST t ->
+    BST t -> 
     bound k t = false ->
     ~ In (k, v) (elements t).
 Proof.
@@ -698,7 +693,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced (elements_correct_inverse)  *)
+(** **** Exercise: 4 stars, advanced (elements_correct_inverse) *)
 
 (** Prove the inverse.  First, prove this helper lemma by induction on
     [t]. *)
@@ -712,7 +707,6 @@ Proof.
 
 Theorem elements_correct_inverse :
   forall (V : Type) (k : key) (t : tree V),
-    BST t ->
     (forall v, ~ In (k, v) (elements t)) ->
     bound k t = false.
 Proof.
@@ -726,7 +720,7 @@ Proof.
 (** We want to show that [elements] is sorted by keys.  We follow a
     proof technique contributed by Lydia Symmons et al.*)
 
-(** **** Exercise: 3 stars, advanced (sorted_app)  *)
+(** **** Exercise: 3 stars, advanced (sorted_app) *)
 
 (** Prove that inserting an intermediate value between two lists
     maintains sortedness. Proceed by induction on the evidence
@@ -741,7 +735,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced (sorted_elements)  *)
+(** **** Exercise: 4 stars, advanced (sorted_elements) *)
 
 (** The keys in an association list are the first elements of every
     pair: *)
@@ -763,7 +757,7 @@ Proof.
 (** ** Part 3: No Duplicates (Advanced and Optional) *)
 
 (** We want to show that [elements t] contains no duplicate
-    bindings. Tree [t] itself cannot contain any duplicates, so the
+    key bindings. Tree [t] itself cannot contain any duplicates, so the
     list that [elements] produces shouldn't either. The standard
     library already contains a helpful inductive proposition,
     [NoDup]. *)
@@ -777,7 +771,7 @@ Print NoDup.
 Definition disjoint {X:Type} (l1 l2: list X) := forall (x : X),
     In x l1 -> ~ In x l2.
 
-(** **** Exercise: 3 stars, advanced, optional (NoDup_append)  *)
+(** **** Exercise: 3 stars, advanced, optional (NoDup_append) *)
 
 (** Prove that if two lists are disjoint, appending them preserves
     [NoDup].  Hint: You might already have proved this theorem in an
@@ -790,7 +784,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced, optional (elements_nodup_keys)  *)
+(** **** Exercise: 4 stars, advanced, optional (elements_nodup_keys) *)
 
 (** Prove that there are no duplicate keys in the list returned
     by [elements]. Proceed by induction on the evidence that [t] is a
@@ -826,7 +820,7 @@ Fixpoint fast_elements_tr {V : Type} (t : tree V)
 Definition fast_elements {V : Type} (t : tree V) : list (key * V) :=
   fast_elements_tr t [].
 
-(** **** Exercise: 3 stars, standard (fast_elements_eq_elements)  *)
+(** **** Exercise: 3 stars, standard (fast_elements_eq_elements) *)
 
 (** Prove that [fast_elements] and [elements] compute the same
     function. *)
@@ -903,7 +897,7 @@ Fixpoint kvs_insert {V : Type} (k : key) (v : V) (kvs : list (key * V)) :=
     for a given tree [t].  Nonetheless, we can proceed with a rather
     ugly verification. *)
 
-(** **** Exercise: 3 stars, standard, optional (kvs_insert_split)  *)
+(** **** Exercise: 3 stars, standard, optional (kvs_insert_split) *)
 Lemma kvs_insert_split :
   forall (V : Type) (v v0 : V) (e1 e2 : list (key * V)) (k k0 : key),
     Forall (fun '(k',_) => k' < k0) e1 ->
@@ -919,7 +913,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (kvs_insert_elements)  *)
+(** **** Exercise: 3 stars, standard, optional (kvs_insert_elements) *)
 Lemma kvs_insert_elements : forall (V : Type) (t : tree V),
     BST t ->
     forall (k : key) (v : V),
@@ -1037,14 +1031,14 @@ Definition map_bound {V : Type} (k : key) (m : partial_map V) : bool :=
 (** The following lemmas will be useful, though you are not required
     to prove them. They can all be proved by induction on the list. *)
 
-(** **** Exercise: 2 stars, standard, optional (in_fst)  *)
+(** **** Exercise: 2 stars, standard, optional (in_fst) *)
 Lemma in_fst : forall (X Y : Type) (lst : list (X * Y)) (x : X) (y : Y),
     In (x, y) lst -> In x (map fst lst).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (in_map_of_list)  *)
+(** **** Exercise: 2 stars, standard, optional (in_map_of_list) *)
 Lemma in_map_of_list : forall (V : Type) (el : list (key * V)) (k : key) (v : V),
     NoDup (map fst el) ->
     In (k,v) el -> (map_of_list el) k = Some v.
@@ -1052,7 +1046,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (not_in_map_of_list)  *)
+(** **** Exercise: 2 stars, standard, optional (not_in_map_of_list) *)
 Lemma not_in_map_of_list : forall (V : Type) (el : list (key * V)) (k : key),
     ~ In k (map fst el) -> (map_of_list el) k = None.
 Proof.
@@ -1065,7 +1059,7 @@ Proof.
   reflexivity.
 Qed.
 
-(** **** Exercise: 3 stars, standard, optional (bound_relate)  *)
+(** **** Exercise: 3 stars, standard, optional (bound_relate) *)
 
 Theorem bound_relate : forall (V : Type) (t : tree V) (k : key),
     BST t ->
@@ -1075,7 +1069,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (lookup_relate)  *)
+(** **** Exercise: 3 stars, standard, optional (lookup_relate) *)
 
 Lemma lookup_relate : forall (V : Type) (t : tree V) (d : V) (k : key),
     BST t -> find d k (Abs t) = lookup d k t.
@@ -1083,7 +1077,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (insert_relate)  *)
+(** **** Exercise: 3 stars, standard, optional (insert_relate) *)
 Lemma insert_relate : forall (V : Type) (t : tree V) (k : key) (v : V),
   BST t -> Abs (insert k v t) = update (Abs t) k v.
 Proof.
@@ -1169,7 +1163,7 @@ Definition union {X} (m1 m2: partial_map X) : partial_map X :=
 (** We can prove some simple properties of lookup and update on unions,
     which will prove useful later. *)
 
-(** **** Exercise: 2 stars, standard, optional (union_collapse)  *)
+(** **** Exercise: 2 stars, standard, optional (union_collapse) *)
 Lemma union_left : forall {X} (m1 m2: partial_map X) k,
     m2 k = None -> union m1 m2 k = m1 k.
 Proof.
@@ -1189,7 +1183,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (union_update)  *)
+(** **** Exercise: 3 stars, standard, optional (union_update) *)
 Lemma union_update_right : forall {X} (m1 m2: partial_map X) k v,
     m1 k = None ->
     update (union m1 m2) k v = union m1 (update m2 k v).
@@ -1213,7 +1207,7 @@ Fixpoint map_of_tree {V : Type} (t: tree V) : partial_map V :=
   | T l k v r => update (union (map_of_tree l) (map_of_tree r)) k v
   end.
 
-(** **** Exercise: 3 stars, advanced, optional (map_of_tree_prop)  *)
+(** **** Exercise: 3 stars, advanced, optional (map_of_tree_prop) *)
 Lemma map_of_tree_prop : forall (V : Type) (P : key -> V -> Prop) (t : tree V),
     ForallT P t ->
     forall k v, (map_of_tree t) k = Some v ->
@@ -1234,7 +1228,7 @@ Proof.
   reflexivity.
 Qed.
 
-(** **** Exercise: 3 stars, advanced, optional (bound_relate')  *)
+(** **** Exercise: 3 stars, advanced, optional (bound_relate') *)
 Theorem bound_relate' : forall (V : Type) (t : tree V) (k : key),
     BST t ->
     map_bound k (Abs' t) = bound k t.
@@ -1242,14 +1236,14 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced, optional (lookup_relate')  *)
+(** **** Exercise: 3 stars, advanced, optional (lookup_relate') *)
 Lemma lookup_relate' : forall (V : Type) (d : V) (t : tree V) (k : key),
     BST t -> find d k (Abs' t) = lookup d k t.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced, optional (insert_relate')  *)
+(** **** Exercise: 4 stars, advanced, optional (insert_relate') *)
 Lemma insert_relate' : forall (V : Type) (k : key) (v : V) (t : tree V),
    BST t -> Abs' (insert k v t) = update (Abs' t) k v.
 Proof.
@@ -1260,7 +1254,7 @@ Proof.
     function, is considerably harder this time.  We suggest starting with
     an auxiliary lemma. *)
 
-(** **** Exercise: 3 stars, advanced, optional (map_of_list_app)  *)
+(** **** Exercise: 3 stars, advanced, optional (map_of_list_app) *)
 Lemma map_of_list_app : forall (V : Type) (el1 el2: list (key * V)),
    disjoint (map fst el1) (map fst el2) ->
    map_of_list (el1 ++ el2) = union (map_of_list el1) (map_of_list el2).
@@ -1268,7 +1262,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, advanced, optional (elements_relate')  *)
+(** **** Exercise: 4 stars, advanced, optional (elements_relate') *)
 Lemma elements_relate' : forall (V : Type) (t : tree V),
   BST t ->
   map_of_list (elements t) = Abs' t.
@@ -1328,4 +1322,4 @@ Proof.
 	   efficiently inside Coq.  We'll explore [extraction] in a
 	   [Extract]. *)
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:10 *)

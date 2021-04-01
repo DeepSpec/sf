@@ -24,6 +24,7 @@
       this video for a definitive statement:
         https://www.youtube.com/watch?v=k4RRi_ntQc8&t=34 *)
 
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
 Hint Constructors Permutation.
 From Coq Require Export Lists.List.  (* for exercise involving [List.length] *)
@@ -143,7 +144,7 @@ Proof.
   intros. destruct (select x l) eqn:E. auto.
 Qed.
 
-(** **** Exercise: 3 stars, standard (select_perm)  *)
+(** **** Exercise: 3 stars, standard (select_perm) *)
 
 (** Prove that [select] returns a permutation of its
     input. Proceed by induction on [l].  The [inv] tactic defined at
@@ -156,7 +157,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (selsort_perm)  *)
+(** **** Exercise: 3 stars, standard (selsort_perm) *)
 
 (** Prove that if you provide sufficient fuel, [selsort] produces a
     permutation.  Proceed by induction on [n]. *)
@@ -168,7 +169,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (selection_sort_perm)  *)
+(** **** Exercise: 1 star, standard (selection_sort_perm) *)
 
 (** Prove that [selection_sort] produces a permutation. *)
 
@@ -179,7 +180,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (select_rest_length)  *)
+(** **** Exercise: 2 stars, standard (select_rest_length) *)
 
 (** Prove that [select] returns a list that has the correct
     length. You can do this without induction if you make use of
@@ -192,7 +193,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (select_fst_leq)  *)
+(** **** Exercise: 3 stars, standard (select_fst_leq) *)
 
 (** Prove that the first component of [select x _] is no bigger than
     [x]. Proceed by induction on [al]. *)
@@ -205,7 +206,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (select_smallest)  *)
+(** **** Exercise: 3 stars, standard (select_smallest) *)
 
 (** Prove that the first component of [select _ _] is no bigger
     than any of the elements in the second component. To represent
@@ -225,7 +226,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (select_in)  *)
+(** **** Exercise: 3 stars, standard (select_in) *)
 
 (** Prove that the element returned by [select] must be one of the
     elements in its input. Proceed by induction on [al]. *)
@@ -238,7 +239,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (cons_of_small_maintains_sort)  *)
+(** **** Exercise: 3 stars, standard (cons_of_small_maintains_sort) *)
 
 (** Prove that adding an element to the beginning of a
     selection-sorted list maintains sortedness, as long as the element
@@ -255,7 +256,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (selsort_sorted)  *)
+(** **** Exercise: 3 stars, standard (selsort_sorted) *)
 
 (** Prove that [selsort] produced a sorted list when given
     sufficient fuel.  Proceed by induction on [n].  This proof
@@ -268,7 +269,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (selection_sort_sorted)  *)
+(** **** Exercise: 1 star, standard (selection_sort_sorted) *)
 
 (** Prove that [selection_sort] produces a sorted list. *)
 
@@ -279,7 +280,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (selection_sort_is_correct)  *)
+(** **** Exercise: 1 star, standard (selection_sort_is_correct) *)
 
 (** Finish the proof of correctness! *)
 
@@ -290,7 +291,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced, optional (selection_sort_is_correct_multiset)  *)
+(** **** Exercise: 5 stars, advanced, optional (selection_sort_is_correct_multiset) *)
 
 (** Uncomment the next line, and prove the correctness of
     [selection_sort] using multisets instead of permutations.  We
@@ -343,7 +344,7 @@ Proof.
   assert (Hperm: Permutation (x :: r) (y :: r')).
   { apply select_perm. auto. }
   apply Permutation_length in Hperm.
-  inv Hperm. simpl. omega.
+  inv Hperm. simpl. lia.
 Defined.
 
 (** The proof must end with [Defined] instead of [Qed].  That
@@ -368,7 +369,7 @@ Print selsort'_terminate.
 
 Check selsort'_equation.
 
-(** **** Exercise: 2 stars, standard (selsort'_perm)  *)
+(** **** Exercise: 2 stars, standard (selsort'_perm) *)
 
 (** Hint: Follow the same strategy as [selsort_perm]. In our solution,
     there was only a one-line change. *)
@@ -380,7 +381,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced, optional (selsort'_correct)  *)
+(** **** Exercise: 5 stars, advanced, optional (selsort'_correct) *)
 
 (** Prove the correctness of [selsort']. We haven't tried this yet!
     Send us your proof so we can add it as a solution. *)
@@ -389,4 +390,4 @@ Proof.
 
 
 
-(* 2020-11-05 12:39 *)
+(* 2021-04-01 20:04 *)

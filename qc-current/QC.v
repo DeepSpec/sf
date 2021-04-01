@@ -107,7 +107,7 @@ Print ChoosableFromInterval.
      ===> [ 1, 2, 1, 9, 8, 10, 3, 6, 0, 1, 8 ]
 *)
 
-(** **** Exercise: 1 star, standard, optional (cfi) 
+(** **** Exercise: 1 star, standard, optional (cfi)
 
     Print out the full definition of [ChoosableFromInterval].  Can you
     understand what it means?
@@ -466,7 +466,7 @@ Fixpoint genTreeSized' {A} (sz : nat) (g : G A) : G (Tree A) :=
 
 (** This looks better. *)
 
-(** **** Exercise: 2 stars, standard (genListSized) 
+(** **** Exercise: 2 stars, standard (genListSized)
 
     Write a sized generator for lists, following [genTreeSized']. *)
 
@@ -474,7 +474,7 @@ Fixpoint genTreeSized' {A} (sz : nat) (g : G A) : G (Tree A) :=
 
     [] *)
 
-(** **** Exercise: 3 stars, standard (genColorOption) 
+(** **** Exercise: 3 stars, standard (genColorOption)
 
     Write a custom generator for values of type [option color].  Make
     it generate [None] about 1/10th of the time, and make it generate
@@ -1005,7 +1005,7 @@ Fixpoint tern_mirror {A : Type} (t : TernaryTree A) : TernaryTree A :=
     | TNode x l m r => TNode x (tern_mirror r) m (tern_mirror l)
   end.
 
-(** **** Exercise: 1 star, standard (show_tern_tree) 
+(** **** Exercise: 1 star, standard (show_tern_tree)
 
     Write a [Show] instance for Ternary Trees. *)
 
@@ -1013,7 +1013,7 @@ Fixpoint tern_mirror {A : Type} (t : TernaryTree A) : TernaryTree A :=
 
     [] *)
 
-(** **** Exercise: 2 stars, standard (gen_tern_tree) 
+(** **** Exercise: 2 stars, standard (gen_tern_tree)
 
     Write a generator for ternary trees. *)
 
@@ -1024,7 +1024,7 @@ Fixpoint tern_mirror {A : Type} (t : TernaryTree A) : TernaryTree A :=
 
     [] *)
 
-(** **** Exercise: 2 stars, standard (shrink_tern_tree) 
+(** **** Exercise: 2 stars, standard (shrink_tern_tree)
 
     Write a shrinker for ternary trees. *)
 
@@ -1124,7 +1124,7 @@ Definition genPath : G path :=
 
 Instance shrinkPath : Shrink path := shrinkList.
 
-(** **** Exercise: 4 stars, standard (bug_finding_tern_tree) 
+(** **** Exercise: 4 stars, standard (bug_finding_tern_tree)
 
     Using [genTernTreeSized] and [shrinkTernTree] find (and fix!) any
     bugs in [tern_mirror]. *)
@@ -1263,7 +1263,7 @@ Instance genTree {A} `{Gen A} : GenSized (Tree A) :=
 
 (* QuickChick faultyMirrorP. *)
 
-(** **** Exercise: 2 stars, standard (tern_tree_typeclasses) 
+(** **** Exercise: 2 stars, standard (tern_tree_typeclasses)
 
     Add typeclass instances for [GenSized] and [Shrink] so that you
     can [QuickChick tern_mirror_reverse] directly. *)
@@ -1420,7 +1420,7 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
     about that? 
  *)
 
-(** **** Exercise: 2 stars, standard (genTreeSized'') 
+(** **** Exercise: 2 stars, standard (genTreeSized'')
 
     Write a generator [genTreeSized''] that generates fewer empty 
     trees. Check your results using [collect].
@@ -1589,7 +1589,7 @@ QuickChick insert_spec_sorted.
 *)
 (** Does this mean we are happy? *)
 
-(** **** Exercise: 5 stars, standard, optional (uniform_sorted) 
+(** **** Exercise: 5 stars, standard, optional (uniform_sorted)
 
     Using "collect", find out whether generating a sorted list of
     numbers between 0 and 5 is uniform in the frequencies with which
@@ -1680,7 +1680,7 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 *)
 (** ... we see that 90%% of tests are being discarded. *)
 
-(** **** Exercise: 4 stars, standard (gen_bst) 
+(** **** Exercise: 4 stars, standard (gen_bst)
 
     Write a generator that produces binary search trees directly, so
     that you run 10000 tests with 0 discards. *)
@@ -1689,4 +1689,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2020-11-05 12:46 *)
+(* 2021-04-01 20:06 *)

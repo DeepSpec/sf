@@ -18,6 +18,7 @@
     the [ProofObjects] chapter in _Logical
     Foundations_ (_Software Foundations_, volume 1). *)
 
+Set Warnings "-deprecated-hint-without-locality,-deprecated-hint-without-locality".
 From PLF Require Import Maps.
 From PLF Require Import Imp.
 Hint Constructors ceval : core.
@@ -230,7 +231,7 @@ Qed.
     of the proof tree: at the root there is a use of the sequence rule; and
     at the leaves, the assignment rule. *)
 
-(** **** Exercise: 3 stars, standard (provable_true_post)  *)
+(** **** Exercise: 3 stars, standard (provable_true_post) *)
 
 (** Show that any Hoare triple whose postcondition is [True] is derivable. Proceed
     by induction on [c]. *)
@@ -242,7 +243,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (provable_false_pre)  *)
+(** **** Exercise: 3 stars, standard (provable_false_pre) *)
 
 (** Show that any Hoare triple whose precondition is [False] is derivable. Again,
     proceed by induction on [c]. *)
@@ -278,7 +279,7 @@ Proof.
 
 *)
 
-(** **** Exercise: 3 stars, standard (hoare_sound)  *)
+(** **** Exercise: 3 stars, standard (hoare_sound) *)
 
 (** Prove that if a Hoare triple is derivable, then it is valid.
     Nearly all the work for this was already done in [Hoare] as
@@ -324,7 +325,7 @@ Proof. eauto. Qed.
     identify assertions that otherwise would require clever thinking.
     The next two lemmas show that in action. *)
 
-(** **** Exercise: 1 star, standard (wp_seq)  *)
+(** **** Exercise: 1 star, standard (wp_seq) *)
 
 (** What if we have a sequence [c1;; c2], but not an intermediate assertion for
     what should hold in between [c1] and [c2]?  No problem.  Prove that [wp c2 Q]
@@ -337,7 +338,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (wp_invariant)  *)
+(** **** Exercise: 2 stars, standard (wp_invariant) *)
 
 (** What if we have a while loop, but not an invariant for it?  No
     problem.  Prove that for any [Q], assertion [wp (while b do c end)
@@ -350,7 +351,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (hoare_complete)  *)
+(** **** Exercise: 4 stars, standard (hoare_complete) *)
 
 (** Now we are ready to prove the completeness of Hoare logic.  Finish
     the proof of the theorem below.
@@ -391,4 +392,4 @@ Proof.
     logic. But it is known that there can be no decision procedure for
     this logic. *)
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

@@ -1,6 +1,6 @@
 (** * Sub: Subtyping *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Types.
@@ -97,7 +97,7 @@ From PLF Require Import MoreStlc.
 
     Of course, real object-oriented languages include many other
     features besides these.  For example, fields can be updated.
-    Fields and methods can be declared [private].  Classes can give
+    Fields and methods can be declared "private".  Classes can give
     _initializers_ that are used when constructing objects.  Code in
     subclasses can cooperate with code in superclasses via
     _inheritance_.  Classes can have static methods and fields.  Etc.,
@@ -310,10 +310,10 @@ From PLF Require Import MoreStlc.
     show that [{y:Student, x:Nat} <: {y:Person}]. *)
 
 (** Third, subtyping can reorder fields.  For example, we
-    want [{name:String, gpa:Nat, age:Nat} <: Person].  (We
+    want [{name:String, gpa:Nat, age:Nat} <: Person], but we
     haven't quite achieved this yet: using just [S_RcdDepth] and
     [S_RcdWidth] we can only drop fields from the _end_ of a record
-    type.)  So we add:
+    type.  So we add:
 
          {i1:S1...in:Sn} is a permutation of {j1:T1...jn:Tn}
          ---------------------------------------------------        (S_RcdPerm)
@@ -336,7 +336,7 @@ From PLF Require Import MoreStlc.
       depth subtyping or no arrow subtyping, depending how you look at
       it). *)
 
-(** **** Exercise: 2 stars, standard, especially useful (arrow_sub_wrong) 
+(** **** Exercise: 2 stars, standard, especially useful (arrow_sub_wrong)
 
     Suppose we had incorrectly defined subtyping as covariant on both
     the right and the left of arrow types:
@@ -428,7 +428,7 @@ Definition manual_grade_for_arrow_sub_wrong : option (nat*string) := None.
 (* ================================================================= *)
 (** ** Exercises *)
 
-(** **** Exercise: 1 star, standard, optional (subtype_instances_tf_1) 
+(** **** Exercise: 1 star, standard, optional (subtype_instances_tf_1)
 
     Suppose we have types [S], [T], [U], and [V] with [S <: T]
     and [U <: V].  Which of the following subtyping assertions
@@ -451,7 +451,7 @@ Definition manual_grade_for_arrow_sub_wrong : option (nat*string) := None.
 
     [] *)
 
-(** **** Exercise: 2 stars, standard (subtype_order) 
+(** **** Exercise: 2 stars, standard (subtype_order)
 
     The following types happen to form a linear order with respect to subtyping:
     - [Top]
@@ -471,7 +471,7 @@ of the five types above. It may be unrelated to some of them.
 Definition manual_grade_for_subtype_order : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (subtype_instances_tf_2) 
+(** **** Exercise: 1 star, standard (subtype_instances_tf_2)
 
     Which of the following statements are true?  Write _true_ or
     _false_ after each one.
@@ -506,7 +506,7 @@ Definition manual_grade_for_subtype_order : option (nat*string) := None.
 Definition manual_grade_for_subtype_instances_tf_2 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (subtype_concepts_tf) 
+(** **** Exercise: 1 star, standard (subtype_concepts_tf)
 
     Which of the following statements are true, and which are false?
     - There exists a type that is a supertype of every other type.
@@ -541,7 +541,7 @@ Definition manual_grade_for_subtype_instances_tf_2 : option (nat*string) := None
 Definition manual_grade_for_subtype_concepts_tf : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (proper_subtypes) 
+(** **** Exercise: 2 stars, standard (proper_subtypes)
 
     Is the following statement true or false?  Briefly explain your
     answer.  (Here [Base n] stands for a base type, where [n] is
@@ -558,7 +558,7 @@ Definition manual_grade_for_subtype_concepts_tf : option (nat*string) := None.
 Definition manual_grade_for_proper_subtypes : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (small_large_1) 
+(** **** Exercise: 2 stars, standard (small_large_1)
    - What is the _smallest_ type [T] ("smallest" in the subtype
      relation) that makes the following assertion true?  (Assume we
      have [Unit] among the base types and [unit] as a constant of this
@@ -574,7 +574,7 @@ Definition manual_grade_for_proper_subtypes : option (nat*string) := None.
 Definition manual_grade_for_small_large_1 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (small_large_2) 
+(** **** Exercise: 2 stars, standard (small_large_2)
    - What is the _smallest_ type [T] that makes the following
      assertion true?
 
@@ -588,7 +588,7 @@ Definition manual_grade_for_small_large_1 : option (nat*string) := None.
 Definition manual_grade_for_small_large_2 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (small_large_3) 
+(** **** Exercise: 2 stars, standard, optional (small_large_3)
    - What is the _smallest_ type [T] that makes the following
      assertion true?
 
@@ -598,7 +598,9 @@ Definition manual_grade_for_small_large_2 : option (nat*string) := None.
 
     [] *)
 
-(** **** Exercise: 2 stars, standard (small_large_4) 
+
+
+(** **** Exercise: 2 stars, standard (small_large_4)
    - What is the _smallest_ type [T] (if one exists) that makes the
      following assertion true?
 
@@ -614,7 +616,7 @@ Definition manual_grade_for_small_large_2 : option (nat*string) := None.
 Definition manual_grade_for_small_large_4 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (smallest_1) 
+(** **** Exercise: 2 stars, standard (smallest_1)
 
     What is the _smallest_ type [T] (if one exists) that makes
     the following assertion true?
@@ -627,7 +629,7 @@ Definition manual_grade_for_small_large_4 : option (nat*string) := None.
 Definition manual_grade_for_smallest_1 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (smallest_2) 
+(** **** Exercise: 2 stars, standard (smallest_2)
 
     What is the _smallest_ type [T] that makes the following
     assertion true?
@@ -639,7 +641,7 @@ Definition manual_grade_for_smallest_1 : option (nat*string) := None.
 Definition manual_grade_for_smallest_2 : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (count_supertypes) 
+(** **** Exercise: 3 stars, standard, optional (count_supertypes)
 
     How many supertypes does the record type [{x:A, y:C->C}] have?  That is,
     how many different types [T] are there such that [{x:A, y:C->C} <:
@@ -649,7 +651,7 @@ Definition manual_grade_for_smallest_2 : option (nat*string) := None.
 
     [] *)
 
-(** **** Exercise: 2 stars, standard (pair_permutation) 
+(** **** Exercise: 2 stars, standard (pair_permutation)
 
     The subtyping rule for product types
 
@@ -868,7 +870,7 @@ Example subtyping_example_0 :
   <{C->Bool}> <: <{C->Top}>.
 Proof. auto. Qed.
 
-(** **** Exercise: 2 stars, standard, optional (subtyping_judgements) 
+(** **** Exercise: 2 stars, standard, optional (subtyping_judgements)
 
     (Leave this exercise [Admitted] until after you have finished adding product
     types to the language -- see exercise [products] -- at least up to
@@ -907,14 +909,14 @@ Proof.
     full benefit from the exercises, make sure you also
     understand how to prove them on paper! *)
 
-(** **** Exercise: 1 star, standard, optional (subtyping_example_1)  *)
+(** **** Exercise: 1 star, standard, optional (subtyping_example_1) *)
 Example subtyping_example_1 :
   <{Top->Student}> <:  <{(C->C)->Person}>.
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard, optional (subtyping_example_2)  *)
+(** **** Exercise: 1 star, standard, optional (subtyping_example_2) *)
 Example subtyping_example_2 :
   <{Top->Person}> <: <{Person->Top}>.
 Proof with eauto.
@@ -975,21 +977,21 @@ Import Examples.
     the language.  For each informal typing judgement, write it as a
     formal statement in Coq and prove it. *)
 
-(** **** Exercise: 1 star, standard, optional (typing_example_0)  *)
+(** **** Exercise: 1 star, standard, optional (typing_example_0) *)
 (* empty |- ((\z:A.z), (\z:B.z))
          \in (A->A * B->B) *)
 (* FILL IN HERE
 
     [] *)
 
-(** **** Exercise: 2 stars, standard, optional (typing_example_1)  *)
+(** **** Exercise: 2 stars, standard, optional (typing_example_1) *)
 (* empty |- (\x:(Top * B->B). x.snd) ((\z:A.z), (\z:B.z))
          \in B->B *)
 (* FILL IN HERE
 
     [] *)
 
-(** **** Exercise: 2 stars, standard, optional (typing_example_2)  *)
+(** **** Exercise: 2 stars, standard, optional (typing_example_2) *)
 (* empty |- (\z:(C->C)->(Top * B->B). (z (\x:C.x)).snd)
               (\z:C->C. ((\z:A.z), (\z:B.z)))
          \in B->B *)
@@ -1026,7 +1028,7 @@ End Examples2.
     look like to tell us something further about the shapes of [S] and
     [T] and the existence of subtype relations between their parts. *)
 
-(** **** Exercise: 2 stars, standard, optional (sub_inversion_Bool)  *)
+(** **** Exercise: 2 stars, standard, optional (sub_inversion_Bool) *)
 Lemma sub_inversion_Bool : forall U,
      U <: <{Bool}> ->
      U = <{Bool}>.
@@ -1036,7 +1038,7 @@ Proof with auto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (sub_inversion_arrow)  *)
+(** **** Exercise: 3 stars, standard (sub_inversion_arrow) *)
 Lemma sub_inversion_arrow : forall U V1 V2,
      U <: <{V1->V2}> ->
      exists U1 U2,
@@ -1075,7 +1077,7 @@ Proof with eauto.
     tells us the possible "canonical forms" (i.e., values) of function
     type. *)
 
-(** **** Exercise: 3 stars, standard, optional (canonical_forms_of_arrow_types)  *)
+(** **** Exercise: 3 stars, standard, optional (canonical_forms_of_arrow_types) *)
 Lemma canonical_forms_of_arrow_types : forall Gamma s T1 T2,
   Gamma |- s \in (T1->T2) ->
   value s ->
@@ -1247,7 +1249,7 @@ Proof with eauto.
     destruct IHhas_type as [S2 [Hsub Hty]]...
   Qed.
 
-(** **** Exercise: 3 stars, standard, optional (typing_inversion_var)  *)
+(** **** Exercise: 3 stars, standard, optional (typing_inversion_var) *)
 Lemma typing_inversion_var : forall Gamma (x:string) T,
   Gamma |- x \in T ->
   exists S,
@@ -1256,7 +1258,7 @@ Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (typing_inversion_app)  *)
+(** **** Exercise: 3 stars, standard, optional (typing_inversion_app) *)
 Lemma typing_inversion_app : forall Gamma t1 t2 T2,
   Gamma |- t1 t2 \in T2 ->
   exists T1,
@@ -1436,7 +1438,7 @@ Qed.
 (* ================================================================= *)
 (** ** Exercises *)
 
-(** **** Exercise: 2 stars, standard (variations) 
+(** **** Exercise: 2 stars, standard (variations)
 
     Each part of this problem suggests a different way of changing the
     definition of the STLC with Unit and subtyping.  (These changes
@@ -1495,7 +1497,7 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 (* ################################################################# *)
 (** * Exercise: Adding Products *)
 
-(** **** Exercise: 5 stars, standard (products) 
+(** **** Exercise: 5 stars, standard (products)
 
     Adding pairs, projections, and product types to the system we have
     defined is a relatively straightforward matter.  Carry out this
@@ -1543,5 +1545,4 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 Definition manual_grade_for_products : option (nat*string) := None.
 (** [] *)
 
-
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)

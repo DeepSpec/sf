@@ -281,7 +281,30 @@ Proof. simpl. reflexivity. Qed.
     separate from the surrounding text.  In the HTML version of the
     files, these pieces of text appear in a [different font]. *)
 
-(** **** Exercise: 1 star, standard (nandb) 
+(** These examples are also an opportunity to introduce one more small
+    feature of Coq's programming language: conditional expressions... *)
+
+Definition negb' (b:bool) : bool :=
+  if b then false
+  else true.
+
+Definition andb' (b1:bool) (b2:bool) : bool :=
+  if b1 then b2
+  else false.
+
+Definition orb' (b1:bool) (b2:bool) : bool :=
+  if b1 then true
+  else b2.
+
+(** Coq's conditionals are exactly like those found in any other
+    language, with one small generalization.  Since the [bool] type
+    is not built in, Coq actually supports conditional expressions over
+    _any_ inductively defined type with exactly two constructors.  The
+    guard is considered true if it evaluates to the first constructor
+    in the [Inductive] definition and false if it evaluates to the
+    second. *)
+
+(** **** Exercise: 1 star, standard (nandb)
 
     The command [Admitted] can be used as a placeholder for an
     incomplete proof.  We use it in exercises to indicate the parts
@@ -308,7 +331,7 @@ Example test_nandb4:               (nandb true true) = false.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (andb3) 
+(** **** Exercise: 1 star, standard (andb3)
 
     Do the same for the [andb3] function below. This function should
     return [true] when all of its inputs are [true], and [false]
@@ -342,16 +365,16 @@ Check true.
     type and halt with an error if not. *)
 
 Check true
-    : bool.
+  : bool.
 Check (negb true)
-    : bool.
+  : bool.
 
 (** Functions like [negb] itself are also data values, just like
     [true] and [false].  Their types are called _function types_, and
     they are written with arrows. *)
 
 Check negb
-    : bool -> bool.
+  : bool -> bool.
 
 (** The type of [negb], written [bool -> bool] and pronounced
     "[bool] arrow [bool]," can be read, "Given an input of type
@@ -380,28 +403,28 @@ Inductive color : Type :=
 
 (** Let's look at this in a little more detail.
 
-    Every inductively defined type ([day], [bool], [rgb], [color],
-    etc.) describes a set of _constructor expressions_ built from
-    _constructors_.
+    An [Inductive] definition does two things:
 
-    - We start with an infinite set of _constructors_. E.g., [red],
+    - It defines a set of new _constructors_. E.g., [red],
       [primary], [true], [false], [monday], etc. are constructors.
 
-    - _Constructor expressions_ are formed by applying a constructor
-      to zero or more other constructors or constructor expressions.
-      E.g.,
-         - [red]
-         - [true]
-         - [primary]
-         - [primary red]
-         - [red primary]
-         - [red true]
-         - [primary (primary primary)]
-         - etc.
+    - It groups them into a new named type, like [bool], [rgb], or
+      [color].
 
-    - An [Inductive] definition carves out a subset of the whole space
-      of constructor expressions and gives it a name, like [bool],
-      [rgb], or [color]. *)
+    _Constructor expressions_ are formed by applying a constructor
+    to zero or more other constructors or constructor expressions,
+    obeying the declared number and types of the constructor arguments.
+    E.g.,
+        - [red]
+        - [true]
+        - [primary red]
+        - etc.
+    But not
+        - [red primary]
+        - [true red]
+        - [primary (primary red)]
+        - etc.
+*)
 
 (** In particular, the definitions of [rgb] and [color] say
     which constructor expressions belong to the sets [rgb] and
@@ -486,7 +509,7 @@ Inductive nybble : Type :=
   | bits (b0 b1 b2 b3 : bit).
 
 Check (bits B1 B0 B1 B0)
-    : nybble.
+  : nybble.
 
 (** The [bits] constructor acts as a wrapper for its contents.
     Unwrapping can be done by pattern-matching, as in the [all_zero]
@@ -496,8 +519,8 @@ Check (bits B1 B0 B1 B0)
 
 Definition all_zero (nb : nybble) : bool :=
   match nb with
-    | (bits B0 B0 B0 B0) => true
-    | (bits _ _ _ _) => false
+  | (bits B0 B0 B0 B0) => true
+  | (bits _ _ _ _) => false
   end.
 
 Compute (all_zero (bits B1 B0 B1 B0)).
@@ -602,8 +625,8 @@ Inductive nat' : Type :=
 
 Definition pred (n : nat) : nat :=
   match n with
-    | O => O
-    | S n' => n'
+  | O => O
+  | S n' => n'
   end.
 
 (** The second branch can be read: "if [n] has the form [S n']
@@ -627,9 +650,9 @@ Check (S (S (S (S O)))).
 
 Definition minustwo (n : nat) : nat :=
   match n with
-    | O => O
-    | S O => O
-    | S (S n') => n'
+  | O => O
+  | S O => O
+  | S (S n') => n'
   end.
 
 Compute (minustwo 4).
@@ -638,9 +661,9 @@ Compute (minustwo 4).
 (** The constructor [S] has the type [nat -> nat], just like functions
     such as [pred] and [minustwo]: *)
 
-Check S        : nat->nat.
-Check pred     : nat->nat.
-Check minustwo : nat->nat.
+Check S        : nat -> nat.
+Check pred     : nat -> nat.
+Check minustwo : nat -> nat.
 
 (** These are all things that can be applied to a number to yield a
     number.  However, there is a fundamental difference between [S]
@@ -665,22 +688,22 @@ Check minustwo : nat->nat.
     recursively check whether [n-2] is even.  Such functions are
     introduced with the keyword [Fixpoint] instead of [Definition]. *)
 
-Fixpoint evenb (n:nat) : bool :=
+Fixpoint even (n:nat) : bool :=
   match n with
   | O        => true
   | S O      => false
-  | S (S n') => evenb n'
+  | S (S n') => even n'
   end.
 
-(** We could define [oddb] by a similar [Fixpoint] declaration, but
+(** We could define [odd] by a similar [Fixpoint] declaration, but
     here is a simpler way: *)
 
-Definition oddb (n:nat) : bool :=
-  negb (evenb n).
+Definition odd (n:nat) : bool :=
+  negb (even n).
 
-Example test_oddb1:    oddb 1 = true.
+Example test_odd1:    odd 1 = true.
 Proof. simpl. reflexivity.  Qed.
-Example test_oddb2:    oddb 4 = false.
+Example test_odd2:    odd 4 = false.
 Proof. simpl. reflexivity.  Qed.
 
 (** (You may notice if you step through these proofs that
@@ -694,8 +717,8 @@ Module NatPlayground2.
 
 Fixpoint plus (n : nat) (m : nat) : nat :=
   match n with
-    | O => m
-    | S n' => S (plus n' m)
+  | O => m
+  | S n' => S (plus n' m)
   end.
 
 (** Adding three to two now gives us five, as we'd expect. *)
@@ -725,8 +748,8 @@ Compute (plus 3 2).
 
 Fixpoint mult (n m : nat) : nat :=
   match n with
-    | O => O
-    | S n' => plus m (mult n' m)
+  | O => O
+  | S n' => plus m (mult n' m)
   end.
 
 Example test_mult1: (mult 3 3) = 9.
@@ -746,11 +769,11 @@ End NatPlayground2.
 
 Fixpoint exp (base power : nat) : nat :=
   match power with
-    | O => S O
-    | S p => mult base (exp base p)
+  | O => S O
+  | S p => mult base (exp base p)
   end.
 
-(** **** Exercise: 1 star, standard (factorial) 
+(** **** Exercise: 1 star, standard (factorial)
 
     Recall the standard mathematical factorial function:
 
@@ -850,7 +873,7 @@ Proof. simpl. reflexivity.  Qed.
     can try to prove, while [x =? y] is an _expression_ whose
     value (either [true] or [false]) we can compute. *)
 
-(** **** Exercise: 1 star, standard (ltb) 
+(** **** Exercise: 1 star, standard (ltb)
 
     The [ltb] function tests natural numbers for [l]ess-[t]han,
     yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
@@ -1014,13 +1037,18 @@ Proof.
 
     (The arrow symbol in the [rewrite] has nothing to do with
     implication: it tells Coq to apply the rewrite from left to right.
-    To rewrite from right to left, you can use [rewrite <-].  Try
-    making this change in the above proof and see what difference it
-    makes.) *)
+    In fact, you can omit the arrow, and Coq will default to rewriting
+    in this direction.  To rewrite from right to left, you can use 
+    [rewrite <-].  Try making this change in the above proof and see 
+    what difference it makes.) *)
 
-(** **** Exercise: 1 star, standard (plus_id_exercise) 
+(** **** Exercise: 1 star, standard (plus_id_exercise)
 
     Remove "[Admitted.]" and fill in the proof. *)
+
+(* SOOMER: KK: [plus_id_exercise] contains multiple hypotheses, and at
+   least one student was confused about this. Maybe we can talk about
+   [->] being right-associative before it. *)
 
 Theorem plus_id_exercise : forall n m o : nat,
   n = m -> m = o -> n + m = m + o.
@@ -1065,7 +1093,7 @@ Proof.
   rewrite <- mult_n_O.
   reflexivity. Qed.
 
-(** **** Exercise: 1 star, standard (mult_n_1) 
+(** **** Exercise: 1 star, standard (mult_n_1)
 
     Use those two lemmas about multiplication that we just checked to
     prove the following theorem.  Hint: recall that [1] is [S O]. *)
@@ -1256,7 +1284,7 @@ Proof.
       - reflexivity. }
 Qed.
 
-(** **** Exercise: 2 stars, standard (andb_true_elim2) 
+(** **** Exercise: 2 stars, standard (andb_true_elim2)
 
     Prove the following claim, marking cases (and subcases) with
     bullets when you use [destruct]. Hint: delay introducing the
@@ -1302,7 +1330,7 @@ Proof.
   - reflexivity.
 Qed.
 
-(** **** Exercise: 1 star, standard (zero_nbeq_plus_1)  *)
+(** **** Exercise: 1 star, standard (zero_nbeq_plus_1) *)
 Theorem zero_nbeq_plus_1 : forall n : nat,
   0 =? (n + 1) = false.
 Proof.
@@ -1380,7 +1408,7 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
     "decreasing analysis" is not very sophisticated, it is sometimes
     necessary to write functions in slightly unnatural ways. *)
 
-(** **** Exercise: 2 stars, standard, optional (decreasing) 
+(** **** Exercise: 2 stars, standard, optional (decreasing)
 
     To get a concrete sense of this, find a way to write a sensible
     [Fixpoint] definition (of a simple function on numbers, say) that
@@ -1397,7 +1425,7 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
 (* ################################################################# *)
 (** * More Exercises *)
 
-(** **** Exercise: 1 star, standard (identity_fn_applied_twice) 
+(** **** Exercise: 1 star, standard (identity_fn_applied_twice)
 
     Use the tactics you have learned so far to prove the following
     theorem about boolean functions. *)
@@ -1411,7 +1439,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 1 star, standard (negation_fn_applied_twice) 
+(** **** Exercise: 1 star, standard (negation_fn_applied_twice)
 
     Now state and prove a theorem [negation_fn_applied_twice] similar
     to the previous one but where the second hypothesis says that the
@@ -1425,7 +1453,7 @@ Definition manual_grade_for_negation_fn_applied_twice : option (nat*string) := N
 
     [] *)
 
-(** **** Exercise: 3 stars, standard, optional (andb_eq_orb) 
+(** **** Exercise: 3 stars, standard, optional (andb_eq_orb)
 
     Prove the following theorem.  (Hint: This one can be a bit tricky,
     depending on how you approach it.  You will probably need both
@@ -1441,7 +1469,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (binary) 
+(** **** Exercise: 3 stars, standard (binary)
 
     We can generalize our unary representation of natural numbers to
     the more efficient binary representation by treating a binary
@@ -1576,4 +1604,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2020-11-05 12:33 *)
+(* 2021-04-01 19:59 *)

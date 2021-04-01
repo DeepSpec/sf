@@ -1,6 +1,6 @@
 (** * Norm: Normalization of STLC *)
 
-Set Warnings "-notation-overridden,-parsing".
+Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Lists.List.
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
@@ -49,7 +49,7 @@ Hint Constructors multi : core.
     entirely trivial to prove, since each reduction of a term can
     duplicate redexes in subterms. *)
 
-(** **** Exercise: 2 stars, standard (norm_fail) 
+(** **** Exercise: 2 stars, standard (norm_fail)
 
     Where do we fail if we attempt to prove normalization by a
     straightforward induction on the size of a well-typed term? *)
@@ -60,7 +60,7 @@ Hint Constructors multi : core.
 Definition manual_grade_for_norm_fail : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, especially useful (norm) 
+(** **** Exercise: 5 stars, standard, especially useful (norm)
 
     The best ways to understand an intricate proof like this is
     are (1) to help fill it in and (2) to extend it.  We've left out some
@@ -1170,4 +1170,4 @@ Proof.
   eapply V_nil.
 Qed.
 
-(* 2020-11-05 12:35 *)
+(* 2021-04-01 20:00 *)
