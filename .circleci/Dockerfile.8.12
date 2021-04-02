@@ -4,4 +4,5 @@ RUN opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
  && opam update \
  && opam install -j `nproc` \
          coq-quickchick \
+         menhir.20210310 \
          coq-vst-32
