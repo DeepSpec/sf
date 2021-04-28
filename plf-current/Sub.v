@@ -715,8 +715,6 @@ Inductive tm : Type :=
   | tm_unit : tm 
 .
 
-Declare Custom Entry stlc.
-
 Notation "<{ e }>" := e (e custom stlc at level 99).
 Notation "( x )" := x (in custom stlc, x at level 99).
 Notation "x" := x (in custom stlc at level 0, x constr at level 0).
