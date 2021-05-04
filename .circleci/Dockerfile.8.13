@@ -1,8 +1,9 @@
 FROM coqorg/coq:8.13-ocaml-4.11-flambda
 ENV OPAMYES true
+ENV VST_NEEDED 2.7
 RUN opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
  && opam update \
  && opam install -j `nproc` \
+         --ignore-constraints-on=coq \
          coq-quickchick \
-         menhir.20210310 \
-         coq-vst-32
+         coq-vst.$VST_NEEDED

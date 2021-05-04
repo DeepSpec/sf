@@ -49,7 +49,7 @@ jobs:
             make -C $v
             done
       - when:
-          condition: vc
+          condition: <<parameters.vc>>
           steps:
             - run:
                 name: Verified C
@@ -68,9 +68,11 @@ workflows:
       - build:
           name: Coq 8.12
           coq: '8.12'
+          vc: true
       - build:
           name: Coq 8.13
           coq: '8.13'
+          vc: true
       - build:
           name: Coq dev
           coq: 'latest'
