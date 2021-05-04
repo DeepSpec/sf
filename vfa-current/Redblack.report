@@ -1,0 +1,68 @@
+balanceP (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+insP (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+ins_BST (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Incorrect type. Admitted proof.
+
+insert_BST (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+balance_lookup (standard, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+lookup_ins_eq (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+lookup_ins_neq (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+lookup_insert_eq (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+lookup_insert_neq (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+RB_blacken_parent (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+RB_blacken_root (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+ins_RB (standard, automatically graded)
+Score: 0.0 / 10.0
+Reason: Incorrect type. Admitted proof.
+
+insert_RB (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Incorrect type. Admitted proof.
+
+redblack_bound (advanced, manually graded)
+Score: Ungraded / 6.0
+
+Points possible - standard: 40
+Points possible - advanced: 46
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 40.0 so far
+                and  0.0 ungraded
+
+   Advanced:  0.0 / 40.0 so far
+                and  6.0 ungraded
+

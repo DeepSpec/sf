@@ -166,13 +166,13 @@ Definition hashtable_incr (s: list byte) (contents: hashtable_contents)
   in let al := Znth h contents
   in upd_Znth h contents (list_incr s al).
 
-(** **** Exercise: 2 stars, standard (hashfun_inrange)  *)
+(** **** Exercise: 2 stars, standard (hashfun_inrange) *)
 Lemma hashfun_inrange: forall s, 0 <= hashfun s <= Int.max_unsigned.
 Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (hashfun_get_unfold)  *)
+(** **** Exercise: 1 star, standard (hashfun_get_unfold) *)
 Lemma hashtable_get_unfold:
  forall sigma (cts: list (list (list byte * Z) * val)),
  hashtable_get sigma (map fst cts) =
@@ -181,7 +181,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (Zlength_hashtable_incr)  *)
+(** **** Exercise: 2 stars, standard (Zlength_hashtable_incr) *)
 Lemma Zlength_hashtable_incr:
  forall sigma cts, 
       0 < Zlength cts -> 
@@ -191,7 +191,7 @@ Proof.
 Hint Rewrite Zlength_hashtable_incr using list_solve : sublist.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (hashfun_snoc)  *)
+(** **** Exercise: 3 stars, standard (hashfun_snoc) *)
 
 Lemma Int_repr_eq_mod:
    forall a,  Int.repr (a mod Int.modulus) = Int.repr a.
@@ -254,7 +254,7 @@ End COUNT_TABLE.
 (* ----------------------------------------------------------------- *)
 (** *** A "reference" implementation of COUNT_TABLE *)
 
-(** **** Exercise: 2 stars, standard (FunTable) 
+(** **** Exercise: 2 stars, standard (FunTable)
 
      It's easy to make a slow implementation of [COUNT_TABLE], 
   using functions. *)
@@ -278,7 +278,7 @@ End FunTable.
 (* ----------------------------------------------------------------- *)
 (** *** Demonstration that hash tables implement COUNT_TABLE *)
 
-(** **** Exercise: 3 stars, standard (IntHashTable) 
+(** **** Exercise: 3 stars, standard (IntHashTable)
 
      Now we make a "fast" implementation using hash tables.  We
   put "fast" in quotes because, unlike the imperative implementation,
@@ -328,4 +328,4 @@ Proof.
 
 End IntHashTable.
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

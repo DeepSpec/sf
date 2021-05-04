@@ -474,7 +474,7 @@ Therefore <span class="inlinecode"><span class="id" title="var">H</span></span> 
 Now we add this lemma to the Hint database called <span class="inlinecode"><span class="id" title="var">saturate_local</span></span> 
 </div>
 <div class="code">
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">listrep_local_facts</span> : <span class="id" title="var">saturate_local</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">listrep_local_facts</span> : <span class="id" title="var">saturate_local</span>.<br/>
 </div>
 
 <div class="doc">
@@ -581,7 +581,7 @@ Now this solves using the Hint database <span class="inlinecode"><span class="id
 Now we add this lemma to the Hint database 
 </div>
 <div class="code">
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">listrep_valid_pointer</span> : <span class="id" title="var">valid_pointer</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">listrep_valid_pointer</span> : <span class="id" title="var">valid_pointer</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1232,7 +1232,7 @@ When C programs manipulate pointer data structures (or slices of arrays),
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2020-11-05&nbsp;12:44&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-04&nbsp;19:16&nbsp;*)</span><br/>
 </div>
 </div>
 

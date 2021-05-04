@@ -1,0 +1,76 @@
+test_nandb4 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_andb34 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_factorial2 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_ltb3 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+plus_id_exercise (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+mult_n_1 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+andb_true_elim2 (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+zero_nbeq_plus_1 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+identity_fn_applied_twice (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+negation_fn_applied_twice (standard, manually graded)
+Score: Ungraded / 1.0
+
+test_bin_incr1 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+test_bin_incr2 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+test_bin_incr3 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+test_bin_incr4 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+test_bin_incr5 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+test_bin_incr6 (standard, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Points possible - standard: 14
+Points possible - advanced: 14
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 13.0 so far
+                and  1.0 ungraded
+
+   Advanced:  0.0 / 13.0 so far
+                and  1.0 ungraded
+

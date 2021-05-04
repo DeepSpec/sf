@@ -1,0 +1,37 @@
+provable_true_post (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+provable_false_pre (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+hoare_sound (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+wp_seq (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+wp_invariant (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+hoare_complete (standard, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+Points possible - standard: 18
+Points possible - advanced: 18
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 18.0 so far
+                and  0.0 ungraded
+
+   Advanced:  0.0 / 18.0 so far
+                and  0.0 ungraded
+

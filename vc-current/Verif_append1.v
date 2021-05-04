@@ -108,7 +108,7 @@ Arguments lseg contents x z : simpl never.
 
 (** Now, we can prove some useful properties about [lseg]. *)
 
-(** **** Exercise: 1 star, standard (singleton_lseg)  *)
+(** **** Exercise: 1 star, standard (singleton_lseg) *)
 Lemma singleton_lseg: forall (a: val) (x y: val),
   data_at Tsh t_list (a, y) x |-- lseg [a] x y.
 Proof.
@@ -168,14 +168,14 @@ Qed.
 (** Now we can prove the following theorems about partial linked
  lists and complete linked lists. *)
 
-(** **** Exercise: 1 star, standard (lseg_lseg)  *)
+(** **** Exercise: 1 star, standard (lseg_lseg) *)
 Lemma lseg_lseg: forall (s1 s2: list val) (x y z: val),
   lseg s1 x y * lseg s2 y z |-- lseg (s1 ++ s2) x z.
 Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (lseg_list)  *)
+(** **** Exercise: 1 star, standard (lseg_list) *)
 Lemma lseg_list: forall (s1 s2: list val) (x y: val),
   lseg s1 x y * listrep s2 y |-- listrep (s1 ++ s2) x.
 Proof.
@@ -200,14 +200,14 @@ Lemma listrep_local_facts:
    !! (is_pointer_or_null p /\ (p=nullval <-> sigma=nil)).
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_local_facts : saturate_local.
+#[export] Hint Resolve listrep_local_facts : saturate_local.
 
 Lemma listrep_valid_pointer:
   forall sigma p,
    listrep sigma p |-- valid_pointer p.
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_valid_pointer : valid_pointer.
+#[export] Hint Resolve listrep_valid_pointer : valid_pointer.
 
 (** (End of the material repeated from Verif_reverse.v) *)
 
@@ -218,7 +218,7 @@ Hint Resolve listrep_valid_pointer : valid_pointer.
  following two lemmas state such correlation. They will be used several
  times in the C function [append]'s correctness proof. *)
 
-(** **** Exercise: 1 star, standard (listrep_null)  *)
+(** **** Exercise: 1 star, standard (listrep_null) *)
 Lemma listrep_null: forall contents x,
   x = nullval ->
   listrep contents x = !! (contents=nil) && emp.
@@ -228,7 +228,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard (listrep_nonnull)  *)
+(** **** Exercise: 1 star, standard (listrep_nonnull) *)
 Lemma listrep_nonnull: forall contents x,
   x <> nullval ->
   listrep contents x =
@@ -241,7 +241,7 @@ Proof.
 
 (** Now, let's prove this [append] function correct. *)
 
-(** **** Exercise: 3 stars, standard (body_append)  *)
+(** **** Exercise: 3 stars, standard (body_append) *)
 Lemma body_append: semax_body Vprog Gprog f_append append_spec.
 Proof.
 start_function.
@@ -343,14 +343,14 @@ forward_if. (* if (x == NULL) *)
  and [lseg_list]. The following exercises are other important properties
  of [lseg]. *)
 
-(** **** Exercise: 1 star, standard: (lseg2listrep)  *)
+(** **** Exercise: 1 star, standard: (lseg2listrep) *)
 Lemma lseg2listrep: forall s x,
   lseg s x nullval |-- listrep s x.
 Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, standard: (listrep2lseg)  *)
+(** **** Exercise: 1 star, standard: (listrep2lseg) *)
 Lemma listrep2lseg: forall s x,
   listrep s x |-- lseg s x nullval.
 Proof.
@@ -366,14 +366,14 @@ Proof.
   + apply listrep2lseg.
 Qed.
 
-(** **** Exercise: 2 stars, standard: (lseg_lseg_inv)  *)
+(** **** Exercise: 2 stars, standard: (lseg_lseg_inv) *)
 Lemma lseg_lseg_inv: forall s1 s2 x z,
   lseg (s1 ++ s2) x z |-- EX y: val, lseg s1 x y * lseg s2 y z.
 Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard: (loopy_lseg_no_connection)  *)
+(** **** Exercise: 2 stars, standard: (loopy_lseg_no_connection) *)
 Lemma loopy_lseg_no_connection: forall s1 s2 x y z,
   s1 <> nil ->
   s2 <> nil ->
@@ -434,7 +434,7 @@ Arguments nt_lseg contents x z : simpl never.
 
 (** For [nt_lseg], the following proof rules are useful. *)
 
-(** **** Exercise: 2 stars, standard, optional (nt_lseg)  *) 
+(** **** Exercise: 2 stars, standard, optional (nt_lseg) *) 
 Lemma singleton_nt_lseg: forall (contents: list val) (a x y: val),
   data_at Tsh t_list (a, y) x * listrep contents y |--
   nt_lseg [a] x y * listrep contents y.
@@ -442,7 +442,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (singleton_nt_lseg')  *) 
+(** **** Exercise: 2 stars, standard, optional (singleton_nt_lseg') *) 
 Lemma singleton_nt_lseg': forall (a b x y z: val),
   data_at Tsh t_list (a, y) x * data_at Tsh t_list (b, z) y |--
   nt_lseg [a] x y * data_at Tsh t_list (b, z) y.
@@ -450,7 +450,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (nt_lseg_nt_lseg)  *) 
+(** **** Exercise: 2 stars, standard, optional (nt_lseg_nt_lseg) *) 
 Lemma nt_lseg_nt_lseg: forall (s1 s2: list val) (a x y z u: val),
   nt_lseg s1 x y * nt_lseg s2 y z * data_at Tsh t_list (a, u) z |--
   nt_lseg (s1 ++ s2) x z * data_at Tsh t_list (a, u) z.
@@ -461,7 +461,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (nt_lseg_list)  *) 
+(** **** Exercise: 2 stars, standard, optional (nt_lseg_list) *) 
 Lemma nt_lseg_list: forall (s1 s2: list val) (x y: val),
   nt_lseg s1 x y * listrep s2 y |-- listrep (s1 ++ s2) x.
 Proof.
@@ -471,7 +471,7 @@ Proof.
 (** Now, we will use [nt_lseg] instead of [lseg] in the loop invariant to
 prove [body_append]. *)
 
-(** **** Exercise: 3 stars, standard, optional (body_append_alter1)  *) 
+(** **** Exercise: 3 stars, standard, optional (body_append_alter1) *) 
 Lemma body_append_alter1: semax_body Vprog Gprog f_append append_spec.
 Proof.
 start_function.
@@ -491,4 +491,4 @@ forward_if. (* if (x == NULL) *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

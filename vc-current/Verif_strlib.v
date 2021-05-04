@@ -304,7 +304,7 @@ Definition Gprog : funspecs := [ strlen_spec; strcpy_spec; strcmp_spec ].
 (* ################################################################# *)
 (** * Proof of the [strlen] function *)
 
-(** **** Exercise: 2 stars, standard (body_strlen)  *)
+(** **** Exercise: 2 stars, standard (body_strlen) *)
 Lemma body_strlen: semax_body Vprog Gprog f_strlen strlen_spec.
 Proof.
 start_function.
@@ -405,7 +405,7 @@ all:  auto.
 (* ################################################################# *)
 (** * Proof of the [strcpy] function *)
 
-(** **** Exercise: 2 stars, standard (strcpy_then_clause) 
+(** **** Exercise: 2 stars, standard (strcpy_then_clause)
 
     The next lemma, or some variation of it, will be useful in the proof of
  the [strcpy] function (in the _then_ clause of the _if_ statement). *)
@@ -434,7 +434,7 @@ Check Znth_0_cons.       (* Hint: this lemma will be useful. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (strcpy_else_clause)  *)
+(** **** Exercise: 2 stars, standard (strcpy_else_clause) *)
 Lemma strcpy_else_clause: forall wsh dest n s i,
   Zlength s < n ->
   ~ In Byte.zero s ->
@@ -558,7 +558,7 @@ Qed.
 
    but if a is strictly more defined than b, then derives_refl' is not appropriate. *)
 
-(** **** Exercise: 3 stars, standard (body_strcpy)  *)
+(** **** Exercise: 3 stars, standard (body_strcpy) *)
 Lemma body_strcpy: semax_body Vprog Gprog f_strcpy strcpy_spec.
 Proof.
 start_function.
@@ -584,7 +584,7 @@ forward_loop (EX i : Z,
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (example_call_strcpy) 
+(** **** Exercise: 3 stars, standard (example_call_strcpy)
 
     Prove the correctness of a function that calls [strcpy].
 
@@ -623,9 +623,9 @@ start_function.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 4 stars, standard, optional (body_strcmp)  *)
+(** **** Exercise: 4 stars, standard, optional (body_strcmp) *)
 Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

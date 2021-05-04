@@ -5,7 +5,6 @@ From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Types.
 From PLF Require Import Smallstep.
-From PLF Require Import MoreStlc.
 
 (* ################################################################# *)
 (** * Concepts *)
@@ -978,8 +977,7 @@ Import Examples.
     formal statement in Coq and prove it. *)
 
 (** **** Exercise: 1 star, standard, optional (typing_example_0) *)
-(* empty |- ((\z:A.z), (\z:B.z))
-         \in (A->A * B->B) *)
+(* empty |- ((\z:A.z), (\z:B.z)) \in (A->A * B->B) *)
 (* FILL IN HERE
 
     [] *)
@@ -1545,4 +1543,4 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 Definition manual_grade_for_products : option (nat*string) := None.
 (** [] *)
 
-(* 2021-04-01 20:00 *)
+(* 2021-05-04 19:07 *)

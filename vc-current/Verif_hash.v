@@ -123,14 +123,14 @@ Definition list_cell (key: list byte) (count: Z) (next: val) (p: val): mpred :=
 Definition list_cell_local_facts: 
   forall key count next p, list_cell key count next p |-- !! isptr p.
 Proof. intros. unfold list_cell. Intros kp. entailer!. Qed.
-Hint Resolve list_cell_local_facts: saturate_local.
+#[export] Hint Resolve list_cell_local_facts: saturate_local.
 
 Definition list_cell_valid_pointer:
   forall key count next p, list_cell key count next p |-- valid_pointer p.
 Proof. intros. unfold list_cell. Intros kp. entailer!. Qed.
-Hint Resolve list_cell_valid_pointer: valid_pointer.
+#[export] Hint Resolve list_cell_valid_pointer: valid_pointer.
 
-(** **** Exercise: 1 star, standard (listcell_fold)  *)
+(** **** Exercise: 1 star, standard (listcell_fold) *)
 Lemma listcell_fold: forall key kp count p' p,
     cstring Ews key kp
     * malloc_token Ews (tarray tschar (Zlength key + 1)) kp
@@ -148,19 +148,19 @@ Fixpoint listrep (sigma: list (list byte * Z)) (x: val) : mpred :=
     !! (x = nullval) && emp
  end.
 
-(** **** Exercise: 2 stars, standard (listrep_hints)  *)
+(** **** Exercise: 2 stars, standard (listrep_hints) *)
 Lemma listrep_local_prop: forall sigma p, listrep sigma p |--
         !! (is_pointer_or_null p  /\ (p=nullval <-> sigma=nil)).
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_local_prop : saturate_local.
+#[export] Hint Resolve listrep_local_prop : saturate_local.
 
 Lemma listrep_valid_pointer:
   forall sigma p,
    listrep sigma p |-- valid_pointer p.
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_valid_pointer : valid_pointer.
+#[export] Hint Resolve listrep_valid_pointer : valid_pointer.
 (** [] *)
 
 Lemma listrep_fold: forall key count p' p al, 
@@ -178,19 +178,34 @@ Definition hashtable_rep (contents: hashtable_contents) (p: val) : mpred :=
   EX bl: list (list (list byte * Z) * val),
     !! (contents = map fst bl) &&
     malloc_token Ews thashtable p * 
-    field_at Ews thashtable [StructField _buckets] (map snd bl) p 
+    data_at Ews thashtable (map snd bl) p 
     * iter_sepcon (uncurry listrep) bl.
 
-(** **** Exercise: 2 stars, standard (hashtable_rep_hints)  *)
+(** **** Exercise: 2 stars, standard (hashtable_rep_hints) *)
 Lemma hashtable_rep_local_facts: forall contents p,
  hashtable_rep contents p |-- !! (isptr p /\ Zlength contents = N).
+Proof.
+intros.
+unfold hashtable_rep.
+Intros bl.
+(** If you look at [struct hashtable], you'll see that it has just one field, 
+  which is the array of bucket-pointers.    Therefore, 
+  [data_at Ews thashtable (map snd bl)] should be synonymous with
+  [field_at  Ews thashtable (DOT _buckets) (map snd bl) p].
+  Here and elsewhere in the proof  of lemmas in Verif_hash, we'll want
+ to "unfold" the [data_at] into a [field_at], which we can do as follows: *)
+unfold_data_at (data_at _ _ _ p).
+(** The argument of [unfold_data_at] is a _pattern_ specifying which
+  of the [data_at]s in the current proof goal to unfold.  In this case,
+  there's just one, so we can leave most of the pattern-arguments
+  as underscores (wildcards).*)
 (* FILL IN HERE *) Admitted.
-Hint Resolve hashtable_rep_local_facts : saturate_local.
+#[export] Hint Resolve hashtable_rep_local_facts : saturate_local.
 
 Lemma hashtable_rep_valid_pointer: forall contents p,
  hashtable_rep contents p |-- valid_pointer p.
 (* FILL IN HERE *) Admitted.
-Hint Resolve hashtable_rep_valid_pointer : valid_pointer.
+#[export] Hint Resolve hashtable_rep_valid_pointer : valid_pointer.
 (** [] *)
 
 (* ----------------------------------------------------------------- *)
@@ -274,7 +289,7 @@ Definition Gprog : funspecs :=
 (** Before attempting to prove [body_hash], do [Verif_strlib] at
     least through [body_strlen]. *) 
 
-(** **** Exercise: 3 stars, standard (body_hash)  *)
+(** **** Exercise: 3 stars, standard (body_hash) *)
 Lemma body_hash: semax_body Vprog Gprog f_hash hash_spec.
 Proof.
 start_function.
@@ -299,7 +314,7 @@ unfold cstring in *.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_copy_string)  *)
+(** **** Exercise: 3 stars, standard (body_copy_string) *)
 Lemma body_copy_string: semax_body Vprog Gprog f_copy_string copy_string_spec.
 Proof.
 start_function.
@@ -307,7 +322,7 @@ assert_PROP (Zlength sigma + 1 <= Ptrofs.max_unsigned) by entailer!.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_new_cell)  *)
+(** **** Exercise: 3 stars, standard (body_new_cell) *)
 Lemma body_new_cell: semax_body Vprog Gprog f_new_cell new_cell_spec.
 Proof.
 (* FILL IN HERE *) Admitted.
@@ -319,7 +334,7 @@ Proof.
 (* ================================================================= *)
 (** ** Auxiliary lemmas about data-structure predicates *)
 
-(** **** Exercise: 2 stars, standard (iter_sepcon_hints)  *)
+(** **** Exercise: 2 stars, standard (iter_sepcon_hints) *)
 Lemma iter_sepcon_listrep_local_facts:
  forall bl, iter_sepcon (uncurry listrep) bl
                     |-- !! Forall is_pointer_or_null (map snd bl).
@@ -327,10 +342,10 @@ Proof.
 (* Hint: use [induction] and [sep_apply]. *)
 (* FILL IN HERE *) Admitted.
 
-Hint Resolve iter_sepcon_listrep_local_facts : saturate_local.
+#[export] Hint Resolve iter_sepcon_listrep_local_facts : saturate_local.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (iter_sepcon_split3)  *)
+(** **** Exercise: 2 stars, standard (iter_sepcon_split3) *)
 Lemma iter_sepcon_split3: 
   forall {A}{d: Inhabitant A} (i: Z) (al: list A) (f: A -> mpred),
    0 <= i < Zlength al   -> 
@@ -348,17 +363,12 @@ rewrite <- (sublist_same 0 (Zlength al) al) at 1 by auto.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_new_table)  *)
+(** **** Exercise: 3 stars, standard (body_new_table) *)
 Lemma body_new_table_helper: 
  (* This lemma is useful as the very last thing to do in body_new_table *)
- forall p, 
-  data_at Ews thashtable (list_repeat (Z.to_nat N) nullval) p
-  |-- field_at Ews thashtable [StructField _buckets]
-       (list_repeat (Z.to_nat N) nullval) p *
-         iter_sepcon (uncurry listrep) (list_repeat (Z.to_nat N) ([], nullval)).
+  emp
+  |-- iter_sepcon (uncurry listrep) (list_repeat (Z.to_nat N) ([], nullval)).
 Proof.
-intros.
-unfold_data_at (data_at _ _ _ p).
 (* FILL IN HERE *) Admitted.
 
 Lemma body_new_table: semax_body Vprog Gprog f_new_table new_table_spec.
@@ -391,7 +401,7 @@ Proof.
 (* ################################################################# *)
 (** * Proof of the [get] function *)
 
-(** **** Exercise: 2 stars, standard (listrep_traverse)  *)
+(** **** Exercise: 2 stars, standard (listrep_traverse) *)
 
 (** Consider this loop in the [get] function:
 
@@ -465,7 +475,7 @@ Lemma listrep_traverse_finish:
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_get)  *)
+(** **** Exercise: 3 stars, standard (body_get) *)
 
 (** Use the [listrep_traverse_*] lemmas as appropriate. *)
 Lemma body_get: semax_body Vprog Gprog f_get get_spec.
@@ -698,7 +708,7 @@ void incr_list (struct cell **r0, char *s) {
   the freedom for the program to modify the contents of [p->next],
   or of any [_next] field later in the sequence. *)
 
-(** **** Exercise: 3 stars, standard (listboxrep_traverse)  *)
+(** **** Exercise: 3 stars, standard (listboxrep_traverse) *)
 Lemma listboxrep_traverse:
   forall p kp key count r, 
      cstring Ews key kp * 
@@ -762,11 +772,11 @@ Proof.
 intros.
 inv H;  (* Solve the goal if we are in 64-bit mode *)
 (* otherwise we are in 32-bit mode *)
-eapply derives_trans; [ | apply (listboxrep_traverse p kp key count r)];
-unfold spacer; simpl; cancel.
+(eapply derives_trans; [ | apply (listboxrep_traverse p kp key count r)];
+unfold spacer; simpl; cancel).
 Qed.
 
-(** **** Exercise: 4 stars, standard (body_incr_list)  *)
+(** **** Exercise: 4 stars, standard (body_incr_list) *)
 Lemma body_incr_list: semax_body Vprog Gprog f_incr_list incr_list_spec.
 Proof.
 (** This proof uses "magic wand as frame" to traverse _and update_ a
@@ -1099,7 +1109,7 @@ Proof.
   autorewrite with norm. auto.
 Qed.
 
-(** **** Exercise: 4 stars, standard (body_incr)  *)
+(** **** Exercise: 4 stars, standard (body_incr) *)
 Lemma body_incr: semax_body Vprog Gprog f_incr incr_spec.
 Proof.
 start_function.
@@ -1132,4 +1142,4 @@ erewrite (wand_slice_array h (h+1) N _ (tptr tcell))
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:17 *)

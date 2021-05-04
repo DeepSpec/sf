@@ -112,7 +112,7 @@ lia.
 Defined.  (* Terminate your [Function] declarations with [Defined] instead 
  of [Qed], so that Coq will be able to use your function in computations. *)
 
-(** **** Exercise: 2 stars, standard (Zinduction) 
+(** **** Exercise: 2 stars, standard (Zinduction)
 
     Coq's standard induction principle for Z is not the one we usually
    want, so let us define a more natural induction scheme: *)
@@ -134,7 +134,7 @@ Print Z.succ.  (* Hint!  [Z.succ(x)] unfolds to [x+1] *)
 
 Definition add_list: list Z -> Z := fold_right Z.add 0.
 
-(** **** Exercise: 2 stars, standard (add_list_decreasing)  *)
+(** **** Exercise: 2 stars, standard (add_list_decreasing) *)
 
 (** Theorem:  the sum of the list  [(n)::(n-1):: ... :: 2::1] is [n*(n+1)/2]. *)
 
@@ -208,14 +208,14 @@ split; intros. subst.
 eapply field_compatible_nullval; eauto.
 inversion H3.
 Qed.
-Hint Resolve listrep_local_prop : saturate_local.
+#[export] Hint Resolve listrep_local_prop : saturate_local.
 
 Lemma listrep_valid_pointer:
   forall il p,
    listrep il p |-- valid_pointer p.
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_valid_pointer : valid_pointer.
+#[export] Hint Resolve listrep_valid_pointer : valid_pointer.
 
 (** Specification of stack data structure *)
 
@@ -227,14 +227,14 @@ Definition stack (il: list Z) (p: val) :=
 Lemma stack_local_prop: forall il p, stack il p |--  !! (isptr p).
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve stack_local_prop : saturate_local.
+#[export] Hint Resolve stack_local_prop : saturate_local.
 
 Lemma stack_valid_pointer:
   forall il p,
    stack il p |-- valid_pointer p.
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Resolve stack_valid_pointer : valid_pointer.
+#[export] Hint Resolve stack_valid_pointer : valid_pointer.
 
 Definition newstack_spec : ident * funspec :=
  DECLARE _newstack
@@ -315,13 +315,13 @@ Definition Gprog : funspecs :=
 (* ================================================================= *)
 (** ** Proofs of the stack-client function-bodies *)
 
-(** **** Exercise: 3 stars, standard (body_push_increasing)  *)
+(** **** Exercise: 3 stars, standard (body_push_increasing) *)
 Lemma body_push_increasing: semax_body Vprog Gprog
                          f_push_increasing push_increasing_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (add_list_lemmas)  *)
+(** **** Exercise: 2 stars, standard (add_list_lemmas) *)
 Lemma add_list_app:
   forall al bl, add_list (al++bl) = add_list al + add_list bl.
 (* FILL IN HERE *) Admitted.
@@ -333,7 +333,7 @@ Lemma add_list_nonneg:
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (add_list_sublist_bounds)  *)
+(** **** Exercise: 2 stars, standard (add_list_sublist_bounds) *)
 Lemma add_list_sublist_bounds:
  forall lo hi K il,
   0 <= lo <= hi ->
@@ -348,7 +348,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (add_another) 
+(** **** Exercise: 3 stars, standard (add_another)
 
     Suppose we have a list [il] of integers, [il = [5;4;3;2;1]],
    with [Znth 0 il = 5], [Znth 4 il = 1], and [Zlength il = 5],
@@ -408,7 +408,7 @@ rep_lia.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_pop_and_add)  *)
+(** **** Exercise: 3 stars, standard (body_pop_and_add) *)
 Lemma body_pop_and_add: semax_body Vprog Gprog f_pop_and_add pop_and_add_spec.
 Proof.
 start_function.
@@ -464,7 +464,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_main)  *)
+(** **** Exercise: 3 stars, standard (body_main) *)
 Lemma body_main: semax_body Vprog Gprog f_main main_spec.
 Proof.
 start_function.
@@ -482,4 +482,4 @@ sep_apply (create_mem_mgr gv).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

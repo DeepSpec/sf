@@ -72,8 +72,8 @@
 
    _IF YOU USE OPAM_, the following opam commands may be useful:
    - opam repo add coq-released https://coq.inria.fr/opam/released
-   - opam pin coq 8.12.0
-   - opam install coq-vst.2.6 (_this will take 30 minutes or more_)
+   - opam pin coq 8.13.0
+   - opam install coq-vst.2.7 (_this will take 30 minutes or more_)
    - (to use coqide:) opam pin lablgtk3 3.0.beta5
    - (to use coqide:) opam install coqide
 
@@ -165,8 +165,8 @@ Open Scope string.
 Require Import VST.veric.version.  (* If this line fails, it means
   you don't have a VST installed. *)
 
-Goal release = "2.6".
+Goal release = "2.7".
 reflexivity || fail "The wrong version of VST is installed".
 Abort.
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

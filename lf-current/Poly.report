@@ -1,0 +1,117 @@
+mumble_grumble (standard, manually graded)
+Score: Ungraded / 2.0
+
+split (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_split (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_filter_even_gt7_1 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_filter_even_gt7_2 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+partition (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_partition1 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_partition2 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+map_rev (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+flat_map (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+test_flat_map1 (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+fold_types_different (advanced, manually graded)
+Score: Ungraded / 1.0
+
+Exercises.fold_length_correct (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+Exercises.fold_map (standard, manually graded)
+Score: Ungraded / 3.0
+
+Exercises.uncurry_curry (advanced, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Exercises.curry_uncurry (advanced, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Exercises.informal_proof (advanced, manually graded)
+Score: Ungraded / 2.0
+
+Exercises.Church.succ_2 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.succ_3 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.plus_2 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.plus_3 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.mult_1 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.mult_2 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.mult_3 (advanced, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Exercises.Church.exp_1 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.exp_2 (advanced, automatically graded)
+Score: 0.0 / 0.5
+Reason: Admitted proof.
+
+Exercises.Church.exp_3 (advanced, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+Points possible - standard: 19
+Points possible - advanced: 30
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 14.0 so far
+                and  5.0 ungraded
+
+   Advanced:  0.0 / 22.0 so far
+                and  8.0 ungraded
+

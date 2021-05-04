@@ -503,8 +503,8 @@ Given a context <span class="inlinecode"><span class="id" title="var">Gamma</spa
 <span class="id" title="keyword">Definition</span> <a id="gen_typed_id_from_context" class="idref" href="#gen_typed_id_from_context"><span class="id" title="definition">gen_typed_id_from_context</span></a> (<a id="Gamma:70" class="idref" href="#Gamma:70"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) (<a id="T:71" class="idref" href="#T:71"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="axiom">oneOf_</span> (<span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">List.map</span></a> (<span class="id" title="keyword">fun</span> '<a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">(</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">x</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">,</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">T'</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">)</span></a> ⇒ <span class="id" title="method">ret</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="TImp.html#x:76"><span class="id" title="variable">x</span></a>))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#filter"><span class="id" title="definition">List.filter</span></a> (<span class="id" title="keyword">fun</span> '<a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">(</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">x</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">,</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">T'</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">)</span></a> ⇒ <a class="idref" href="TImp.html#T:71"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#T':72"><span class="id" title="variable">T'</span></a><span class="id" title="notation">?</span>) <a class="idref" href="TImp.html#Gamma:70"><span class="id" title="variable">Gamma</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">List.map</span></a> (<span class="id" title="keyword">fun</span> <a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">'(</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">x</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">,</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">T'</span></a><a id="pat:77" class="idref" href="#pat:77"><span class="id" title="binder">)</span></a> ⇒ <span class="id" title="method">ret</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="TImp.html#x:76"><span class="id" title="variable">x</span></a>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#filter"><span class="id" title="definition">List.filter</span></a> (<span class="id" title="keyword">fun</span> <a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">'(</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">x</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">,</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">T'</span></a><a id="pat:74" class="idref" href="#pat:74"><span class="id" title="binder">)</span></a> ⇒ <a class="idref" href="TImp.html#T:71"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#T':72"><span class="id" title="variable">T'</span></a><span class="id" title="notation">?</span>) <a class="idref" href="TImp.html#Gamma:70"><span class="id" title="variable">Gamma</span></a>)).<br/>
 </div>
 
 <div class="doc">
@@ -1105,7 +1105,7 @@ We introduce an inductive relation that specifies when a state is
 
 <br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="gen_well_typed_state" class="idref" href="#gen_well_typed_state"><span class="id" title="definition">gen_well_typed_state</span></a> (<a id="Gamma:223" class="idref" href="#Gamma:223"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) : <span class="id" title="axiom">G</span> <a class="idref" href="TImp.html#state"><span class="id" title="definition">state</span></a> := <br/>
-&nbsp;&nbsp;<span class="id" title="axiom">sequenceGen</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">List.map</span></a> (<span class="id" title="keyword">fun</span> '<a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">(</span></a><a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">x</span></a><a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">,</span></a> <a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">T</span></a><a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">)</span></a> ⇒<br/>
+&nbsp;&nbsp;<span class="id" title="axiom">sequenceGen</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">List.map</span></a> (<span class="id" title="keyword">fun</span> <a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">'(</span></a><a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">x</span></a><a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">,</span></a> <a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">T</span></a><a id="pat:226" class="idref" href="#pat:226"><span class="id" title="binder">)</span></a> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="v:227" class="idref" href="#v:227"><span class="id" title="binder">v</span></a> <span class="id" title="notation">&lt;-</span> <a class="idref" href="TImp.html#gen_typed_value"><span class="id" title="definition">gen_typed_value</span></a> <a class="idref" href="TImp.html#T:224"><span class="id" title="variable">T</span></a><span class="id" title="notation">;;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="TImp.html#x:225"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="TImp.html#v:227"><span class="id" title="variable">v</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) <a class="idref" href="TImp.html#Gamma:223"><span class="id" title="variable">Gamma</span></a>).<br/>
 </div>
@@ -1298,9 +1298,9 @@ To test this property, we construct an appropriate checker:
       But remember, we don't want to do both, as this would lead to an
       infinite loop in shrinking!  We choose to shrink <span class="inlinecode"><span class="id" title="var">EFalse</span></span> to
       <span class="inlinecode"><span class="id" title="var">ETrue</span></span>. 
-
 </li>
 </ul>
+
 </div>
 <div class="code">
 
@@ -1361,9 +1361,9 @@ Finally, we need to be able to shrink the recursive cases. Consider
 </li>
 <li> For faster shrinking, we can also try to shrink such expressions
         to boolean constants directly. 
-
 </li>
 </ul>
+
 </div>
 <div class="code">
 
@@ -1948,7 +1948,7 @@ A variant that takes a size,...
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;2021-04-01&nbsp;20:06&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-04&nbsp;19:19&nbsp;*)</span><br/>
 </div>
 </div>
 

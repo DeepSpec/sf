@@ -262,7 +262,7 @@ Check field_compatible_nullval.
 Qed.
 
 (** Now we add this lemma to the Hint database called [saturate_local] *)
-Hint Resolve listrep_local_facts : saturate_local.
+#[export] Hint Resolve listrep_local_facts : saturate_local.
 
 (* ----------------------------------------------------------------- *)
 (** *** Valid pointers, and the [valid_pointer] Hint database *)
@@ -319,7 +319,7 @@ Proof.
 Qed.
 
 (** Now we add this lemma to the Hint database *)
-Hint Resolve listrep_valid_pointer : valid_pointer.
+#[export] Hint Resolve listrep_valid_pointer : valid_pointer.
 
 (* ================================================================= *)
 (** ** Specification of the [reverse] function.
@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

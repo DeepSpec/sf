@@ -1,0 +1,73 @@
+STLCExtended.extensions_definition (standard, manually graded)
+Score: Ungraded / 3.0
+
+STLCExtended.Examples.Prodtest.typechecks (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.Prodtest.reduces (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.LetTest.typechecks (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.LetTest.reduces (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest1.typechecks (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest1.reduces (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest2.typechecks (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest2.reduces (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest3.typechecks (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest3.reduces (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest4.typechecks (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.Examples.FixTest4.reduces (standard, automatically graded)
+Score: 0.0 / 0.2
+Reason: Admitted proof.
+
+STLCExtended.progress (standard, manually graded)
+Score: Ungraded / 3.0
+
+STLCExtended.substitution_preserves_typing (standard, manually graded)
+Score: Ungraded / 2.0
+
+STLCExtended.preservation (standard, manually graded)
+Score: Ungraded / 3.0
+
+Points possible - standard: 14
+Points possible - advanced: 14
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 /  3.0 so far
+                and 11.0 ungraded
+
+   Advanced:  0.0 /  3.0 so far
+                and 11.0 ungraded
+

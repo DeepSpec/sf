@@ -1,0 +1,78 @@
+hoare_post_true (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+hoare_pre_false (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+hoare_asgn_wrong (standard, manually graded)
+Score: Ungraded / 2.0
+
+hoare_asgn_fwd (advanced, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+assn_sub_ex1' (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+assn_sub_ex2' (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+hoare_asgn_example4 (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+swap_exercise (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+invalid_triple (standard, automatically graded)
+Score: 0.0 / 6.0
+Reason: Admitted proof.
+
+if_minus_plus (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+If1.if1true_test (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+If1.if1false_test (standard, automatically graded)
+Score: 0.0 / 1.0
+Reason: Admitted proof.
+
+If1.hoare_if1 (standard, manually graded)
+Score: Ungraded / 2.0
+
+If1.hoare_if1_good (standard, automatically graded)
+Score: 0.0 / 2.0
+Reason: Admitted proof.
+
+hoare_repeat (advanced, manually graded)
+Score: Ungraded / 6.0
+
+Himp.hoare_havoc (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+Himp.havoc_post (standard, automatically graded)
+Score: 0.0 / 3.0
+Reason: Admitted proof.
+
+Points possible - standard: 31
+Points possible - advanced: 40
+
+   ###########################
+   ##### Grading Results #####
+   ###########################
+
+   Standard:  0.0 / 27.0 so far
+                and  4.0 ungraded
+
+   Advanced:  0.0 / 30.0 so far
+                and 10.0 ungraded
+

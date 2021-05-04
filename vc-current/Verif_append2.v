@@ -74,7 +74,7 @@ Qed.
  [modus_ponens_wand]. You can use other proof rules about [*], such as
  [sepcon_derives].  Also, the tactic [sep_apply] may be useful. *)
 
-(** **** Exercise: 2 stars, standard: (wand_derives)  *)
+(** **** Exercise: 2 stars, standard: (wand_derives) *)
 Lemma wand_derives_from_adjoint_and_modus_ponens:
   forall P P' Q Q' : mpred, 
    P' |-- P  ->  Q |-- Q'  ->  P -* Q |-- P' -* Q'.
@@ -90,7 +90,7 @@ Check wand_frame_ver.
 
 (** Prove it by [wand_sepcon_adjoint] and [sep_apply (modus_ponens_wand ...)] *)
 
-(** **** Exercise: 2 stars, standard: (wand_frame_ver)  *)
+(** **** Exercise: 2 stars, standard: (wand_frame_ver) *)
 Lemma wand_frame_ver_from_adjoint_and_modus_ponens:
   forall P Q R : mpred, (P -* Q) * (Q -* R) |-- P -* R.
 Proof.
@@ -99,7 +99,7 @@ Proof.
 
 (** More exercises: prove that [emp -* emp] and [emp] are equivalent. *)
 
-(** **** Exercise: 3 stars, standard: (emp_wand_emp)  *)
+(** **** Exercise: 3 stars, standard: (emp_wand_emp) *)
 Lemma emp_wand_emp_right: emp |-- emp -* emp.
 Proof.
 (* FILL IN HERE *) Admitted.
@@ -197,14 +197,14 @@ Qed.
  The following exercises are to prove the counterparts of
  [singleton_lseg] and [lseg_list]. *)
 
-(** **** Exercise: 2 stars, standard: (singleton_wlseg)  *)
+(** **** Exercise: 2 stars, standard: (singleton_wlseg) *)
 Lemma singleton_wlseg: forall (a: val) (x y: val),
   data_at Tsh t_list (a, y) x |-- wlseg [a] x y.
 Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard: (wlseg_list)  *)
+(** **** Exercise: 2 stars, standard: (wlseg_list) *)
 Lemma wlseg_list: forall (s1 s2: list val) (x y: val),
   wlseg s1 x y * listrep s2 y |-- listrep (s1 ++ s2) x.
 Proof.
@@ -217,7 +217,7 @@ Proof.
 (** Now, we are ready to reprove the correctness for the C program [append].  
     This time, we will use [wlseg] to write the loop invariant. *)
 
-(** **** Exercise: 3 stars, standard: (body_append_alter2)  *)
+(** **** Exercise: 3 stars, standard: (body_append_alter2) *)
 Lemma body_append_alter2: semax_body Vprog Gprog f_append append_spec.
 Proof.
 start_function.
@@ -377,7 +377,7 @@ Definition lbseg (contents: list val) (x y: val) :=
   proving [wlseg]'s properties and proving [lbseg]'s properties should be very
   similar. *)
 
-(** **** Exercise: 1 star, standard: (emp_lbseg) 
+(** **** Exercise: 1 star, standard: (emp_lbseg)
 
     Introducing a wand expression, [lbseg], from [emp]. *)
 Lemma emp_lbseg: forall (x: val),
@@ -386,7 +386,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard: (lbseg_lbseg) 
+(** **** Exercise: 2 stars, standard: (lbseg_lbseg)
 
     Merging two wand expressions. *)
 Lemma lbseg_lbseg: forall (s1 s2: list val) (x y z: val),
@@ -395,7 +395,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard: (listbox_lbseg) 
+(** **** Exercise: 2 stars, standard: (listbox_lbseg)
 
     Eliminating a wand expression. *)
 Lemma listbox_lbseg: forall (s1 s2: list val) (x y: val),
@@ -493,4 +493,4 @@ Proof.
     entailer!.
 Qed.
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

@@ -162,13 +162,13 @@ Arguments listrep il p : simpl never.
 (** As usual, we should populate the Hint databases
     [saturate_local] and [valid_pointer] *)
 
-(** **** Exercise: 1 star, standard (stack_listrep_properties)  *)
+(** **** Exercise: 1 star, standard (stack_listrep_properties) *)
 Lemma listrep_local_prop: forall il p, listrep il p |--
         !! (is_pointer_or_null p  /\ (p=nullval <-> il=nil)).
 (** See if you can remember how to prove this; or look again
   at [Verif_reverse] to see how it's done. *)
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_local_prop : saturate_local.
+#[export] Hint Resolve listrep_local_prop : saturate_local.
 
 Lemma listrep_valid_pointer:
   forall il p,
@@ -176,7 +176,7 @@ Lemma listrep_valid_pointer:
 (** See if you can remember how to prove this; or look again
   at [Verif_reverse] to see how it's done. *)
 (* FILL IN HERE *) Admitted.
-Hint Resolve listrep_valid_pointer : valid_pointer.
+#[export] Hint Resolve listrep_valid_pointer : valid_pointer.
 (** [] *)
 
 (* ================================================================= *)
@@ -201,17 +201,17 @@ Definition stack (il: list Z) (p: val) :=
   listrep il q.
 
 Arguments stack il p : simpl never.
-(** **** Exercise: 1 star, standard (stack_properties)  *)
+(** **** Exercise: 1 star, standard (stack_properties) *)
 
 Lemma stack_local_prop: forall il p, stack il p |--  !! (isptr p).
 (* FILL IN HERE *) Admitted.
-Hint Resolve stack_local_prop : saturate_local.
+#[export] Hint Resolve stack_local_prop : saturate_local.
 
 Lemma stack_valid_pointer:
   forall il p,
    stack il p |-- valid_pointer p.
 (* FILL IN HERE *) Admitted.
-Hint Resolve stack_valid_pointer : valid_pointer.
+#[export] Hint Resolve stack_valid_pointer : valid_pointer.
 (** [] *)
 
 (* ================================================================= *)
@@ -280,14 +280,14 @@ Definition Gprog : funspecs :=
   [body_newstack], the first thing you should do is
   [unfold stack in *]. *)
 
-(** **** Exercise: 2 stars, standard (body_pop)  *)
+(** **** Exercise: 2 stars, standard (body_pop) *)
 Lemma body_pop: semax_body Vprog Gprog f_pop pop_spec.
 Proof.
 start_function.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (body_push)  *)
+(** **** Exercise: 2 stars, standard (body_push) *)
 Lemma body_push: semax_body Vprog Gprog f_push push_spec.
 Proof.
 start_function.
@@ -296,11 +296,11 @@ simpl; split3; auto.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (body_newstack)  *)
+(** **** Exercise: 2 stars, standard (body_newstack) *)
 Lemma body_newstack: semax_body Vprog Gprog f_newstack newstack_spec.
 Proof.
 start_function.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2020-11-05 12:44 *)
+(* 2021-05-04 19:16 *)

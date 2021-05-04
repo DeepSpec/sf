@@ -811,11 +811,15 @@ table.vc {  background-color: rgba(159, 125, 140, 0.5); }
 table.vc tbody tr td.tab { background-color: rgb(159, 125, 140); }
 
 /* Suggested background color for next volume */
-#     #c07d62
+/*     #c07d62    */
 
 .ui-draggable, .ui-droppable {
     background-position: top;
 }
+
+/* Chapter dependencies (SVG) */
+.deps a polygon:hover { opacity: 0.6; stroke-width: 2; }
+.deps a text { pointer-events: none; }
 
 /* Google Fonts - Local Use Styles */
 

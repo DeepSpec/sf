@@ -293,6 +293,4 @@ idtac "---------- sorted_elements ---------".
 Print Assumptions sorted_elements.
 Abort.
 
-(* 2021-04-01 20:10 *)
-
-(* 2021-04-01 20:10 *)
+(* 2021-05-04 19:12 *)
