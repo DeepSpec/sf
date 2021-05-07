@@ -1625,24 +1625,32 @@ Proof.
     eauto.
 Qed.
 
-(** We say that [P] is a _loop invariant_ of [while b do c end] if [P]
-    suffices to prove [hoare_while] for that loop.  Being a loop
-    invariant is different from being an invariant of the body,
-    because it means being able to prove correctness of the loop.  For
-    example, [X = 0] is a loop invariant of
+(** We call that [P] a _loop invariant_ of [while b do c end] if
+
+      {{P /\ b}} c {{P}}
+
+    holds. This means that [P] remains true whenever the loop executes.
+    If [P] contradicts [b], this holds trivially since the precondition
+    is false. For instance, [X = 0] is a loop invariant of
 
       while X = 2 do X := 1 end
 
-    even though [X = 0] is not an invariant of [X := 1]. *)
+    since we will never enter the loop. *)
 
-(** This is a slightly (but crucially) weaker requirement.  For
-    example, if [P] is the assertion [X = 0], then [P] _is_ an
-    invariant of the loop
+(** The program  
 
-      while X = 2 do X := 1 end
+    while Y > 10 do Y := Y - 1; Z := Z + 1 end
 
-    although it is clearly _not_ preserved by the body of the
-    loop. *)
+    admits an interesting loop invariant:
+
+    X = Y + Z
+
+    Note that this doesn't contradict the loop guard but neither
+    is it an invariant of [Y := Y - 1; Z := Z + 1] -- if X = 5, 
+    Y = 0 and Z = 5, running the command will set Y + Z to 6. The 
+    loop guard [Y > 10] guarantees that this will not be the case. 
+    We will see many such loop invariants in the following chapter. 
+*)
 
 Example while_example :
     {{X <= 3}}
@@ -2255,4 +2263,4 @@ End HoareAssertAssume.
 
 
 
-(* 2021-05-04 19:07 *)
+(* 2021-05-07 14:28 *)
