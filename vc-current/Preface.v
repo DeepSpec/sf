@@ -169,4 +169,4 @@ Goal release = "2.7".
 reflexivity || fail "The wrong version of VST is installed".
 Abort.
 
-(* 2021-05-07 14:37 *)
+(* 2021-05-07 15:28 *)
