@@ -13,6 +13,13 @@ var slideSelector = 'h1.libtitle, h1.section, h2.section, h3.section, .quiz';
 /* Whether or not we are in slide mode */
 var slideMode = false;
 
+/* Keyboard navigation */
+var KEYS = {
+    next: 39,        // Right arrow
+    prev: 37,        // Left arrow
+    exit: 27         // Escape
+};
+
 /* Navigates between slides, using the current location hash to find
  * the next slide to go to */
 function slideNavigate(direction) {
@@ -97,16 +104,20 @@ function slideDeactivate() {
 /* Set up appropriate input handlers */
 $(document).keydown(function (event) {
     if (slideMode) {
-        if (event.keyCode == 37) {
+        if (event.keyCode == KEYS.prev) {
             slideNavigate('left');
-        } else if (event.keyCode == 39) {
+            event.preventDefault();
+        } else if (event.keyCode == KEYS.next) {
             slideNavigate('right');
-        } else if (event.keyCode == 27) { // escape
+            event.preventDefault();
+        } else if (event.keyCode == KEYS.exit) {
             slideDeactivate();
+            event.preventDefault();
         } else return true;
     } else {
-        if (event.keyCode == 37 || event.keyCode == 39) {
+        if (event.keyCode == KEYS.prev || event.keyCode == KEYS.next) {
             slideActivate();
+            event.preventDefault();
             return false;
         } else {
             return true;

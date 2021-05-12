@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Hoare<span class="subtitle">Hoare Logic, Part I</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Bool.Bool.html#"><span class="id" title="library">Bool.Bool</span></a>.<br/>
@@ -173,7 +170,6 @@ In the final chaper of <i>Logical Foundations</i> (<i>Software
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Assertion" class="idref" href="#Assertion"><span class="id" title="definition">Assertion</span></a> := <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>.<br/>
 </div>
 
@@ -207,7 +203,6 @@ For example,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="ExAssertions" class="idref" href="#ExAssertions"><span class="id" title="module">ExAssertions</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="ExAssertions.assn1" class="idref" href="#ExAssertions.assn1"><span class="id" title="definition">assn1</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> := <span class="id" title="keyword">fun</span> <a id="st:1" class="idref" href="#st:1"><span class="id" title="binder">st</span></a> ⇒ <a class="idref" href="Hoare.html#st:1"><span class="id" title="variable">st</span></a> <span class="id" title="definition">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Hoare.html#st:1"><span class="id" title="variable">st</span></a> <span class="id" title="definition">Y</span>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="ExAssertions.assn2" class="idref" href="#ExAssertions.assn2"><span class="id" title="definition">assn2</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> :=<br/>
@@ -262,7 +257,6 @@ For example,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="assert_implies" class="idref" href="#assert_implies"><span class="id" title="definition">assert_implies</span></a> (<a id="P:5" class="idref" href="#P:5"><span class="id" title="binder">P</span></a> <a id="Q:6" class="idref" href="#Q:6"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:7" class="idref" href="#st:7"><span class="id" title="binder">st</span></a>, <a class="idref" href="Hoare.html#P:5"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:7"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#Q:6"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#st:7"><span class="id" title="variable">st</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">hoare_spec_scope</span>.<br/>
@@ -283,7 +277,6 @@ For example,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="::hoare_spec_scope:x_'&lt;&lt;-&gt;&gt;'_x" class="idref" href="#::hoare_spec_scope:x_'&lt;&lt;-&gt;&gt;'_x"><span class="id" title="notation">&quot;</span></a>P <span class="nowrap"><span style='font-size:85%;'><span style='letter-spacing:-.2em;'><<</span><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span> Q" :=<br/>
 &nbsp;&nbsp;(<span class="id" title="var">P</span> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <span class="id" title="var">Q</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <span class="id" title="var">Q</span> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <span class="id" title="var">P</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80) : <span class="id" title="var">hoare_spec_scope</span>.<br/>
 </div>
@@ -306,7 +299,6 @@ For example,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Aexp" class="idref" href="#Aexp"><span class="id" title="definition">Aexp</span></a> : <span class="id" title="keyword">Type</span> := <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="assert_of_Prop" class="idref" href="#assert_of_Prop"><span class="id" title="definition">assert_of_Prop</span></a> (<a id="P:8" class="idref" href="#P:8"><span class="id" title="binder">P</span></a> : <span class="id" title="keyword">Prop</span>) : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> := <span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="Hoare.html#P:8"><span class="id" title="variable">P</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="Aexp_of_nat" class="idref" href="#Aexp_of_nat"><span class="id" title="definition">Aexp_of_nat</span></a> (<a id="n:9" class="idref" href="#n:9"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Hoare.html#Aexp"><span class="id" title="definition">Aexp</span></a> := <span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="Hoare.html#n:9"><span class="id" title="variable">n</span></a>.<br/><hr class='doublespaceincode'/>
@@ -347,7 +339,6 @@ One small limitation of this approach is that we don't have
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="ap" class="idref" href="#ap"><span class="id" title="definition">ap</span></a> {<a id="X:26" class="idref" href="#X:26"><span class="id" title="binder">X</span></a>} (<a id="f:27" class="idref" href="#f:27"><span class="id" title="binder">f</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#X:26"><span class="id" title="variable">X</span></a>) (<a id="x:28" class="idref" href="#x:28"><span class="id" title="binder">x</span></a> : <a class="idref" href="Hoare.html#Aexp"><span class="id" title="definition">Aexp</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="st:29" class="idref" href="#st:29"><span class="id" title="binder">st</span></a> ⇒ <a class="idref" href="Hoare.html#f:27"><span class="id" title="variable">f</span></a> (<a class="idref" href="Hoare.html#x:28"><span class="id" title="variable">x</span></a> <a class="idref" href="Hoare.html#st:29"><span class="id" title="variable">st</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="ap<sub>2</sub>" class="idref" href="#ap<sub>2</sub>"><span class="id" title="definition">ap<sub>2</sub></span></a> {<a id="X:30" class="idref" href="#X:30"><span class="id" title="binder">X</span></a>} (<a id="f:31" class="idref" href="#f:31"><span class="id" title="binder">f</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#X:30"><span class="id" title="variable">X</span></a>) (<a id="x:32" class="idref" href="#x:32"><span class="id" title="binder">x</span></a> : <a class="idref" href="Hoare.html#Aexp"><span class="id" title="definition">Aexp</span></a>) (<a id="y:33" class="idref" href="#y:33"><span class="id" title="binder">y</span></a> : <a class="idref" href="Hoare.html#Aexp"><span class="id" title="definition">Aexp</span></a>) (<a id="st:34" class="idref" href="#st:34"><span class="id" title="binder">st</span></a> : <span class="id" title="definition">state</span>) :=<br/>
@@ -505,7 +496,6 @@ One small limitation of this approach is that we don't have
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="hoare_triple" class="idref" href="#hoare_triple"><span class="id" title="definition">hoare_triple</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="P:35" class="idref" href="#P:35"><span class="id" title="binder">P</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="c:36" class="idref" href="#c:36"><span class="id" title="binder">c</span></a> : <span class="id" title="inductive">com</span>) (<a id="Q:37" class="idref" href="#Q:37"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:38" class="idref" href="#st:38"><span class="id" title="binder">st</span></a> <a id="st':39" class="idref" href="#st':39"><span class="id" title="binder">st'</span></a>,<br/>
@@ -528,7 +518,6 @@ One small limitation of this approach is that we don't have
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_post_true" class="idref" href="#hoare_post_true"><span class="id" title="lemma">hoare_post_true</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:40" class="idref" href="#P:40"><span class="id" title="binder">P</span></a> <a id="Q:41" class="idref" href="#Q:41"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:42" class="idref" href="#c:42"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="st:43" class="idref" href="#st:43"><span class="id" title="binder">st</span></a>, <a class="idref" href="Hoare.html#Q:41"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#st:43"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:40"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:42"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:41"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
@@ -549,7 +538,6 @@ One small limitation of this approach is that we don't have
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_pre_false" class="idref" href="#hoare_pre_false"><span class="id" title="lemma">hoare_pre_false</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:44" class="idref" href="#P:44"><span class="id" title="binder">P</span></a> <a id="Q:45" class="idref" href="#Q:45"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:46" class="idref" href="#c:46"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="st:47" class="idref" href="#st:47"><span class="id" title="binder">st</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">(</span></a><a class="idref" href="Hoare.html#P:44"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:47"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:44"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:46"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:45"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
@@ -711,7 +699,6 @@ One small limitation of this approach is that we don't have
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="assn_sub" class="idref" href="#assn_sub"><span class="id" title="definition">assn_sub</span></a> <a id="X:48" class="idref" href="#X:48"><span class="id" title="binder">X</span></a> <a id="a:49" class="idref" href="#a:49"><span class="id" title="binder">a</span></a> (<a id="P:50" class="idref" href="#P:50"><span class="id" title="binder">P</span></a>:<a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="st:51" class="idref" href="#st:51"><span class="id" title="binder">st</span></a> : <span class="id" title="definition">state</span>) ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#P:50"><span class="id" title="variable">P</span></a> (<a class="idref" href="Hoare.html#X:48"><span class="id" title="variable">X</span></a> <span class="id" title="notation">!<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="id" title="definition">aeval</span> <a class="idref" href="Hoare.html#st:51"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#a:49"><span class="id" title="variable">a</span></a> <span class="id" title="notation">;</span> <a class="idref" href="Hoare.html#st:51"><span class="id" title="variable">st</span></a>).<br/><hr class='doublespaceincode'/>
@@ -804,7 +791,6 @@ That is, <span class="inlinecode"><span class="id" title="var">P</span></span> <
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_asgn" class="idref" href="#hoare_asgn"><span class="id" title="lemma">hoare_asgn</span></a> : <span class="id" title="keyword">∀</span> <a id="Q:52" class="idref" href="#Q:52"><span class="id" title="binder">Q</span></a> <a id="X:53" class="idref" href="#X:53"><span class="id" title="binder">X</span></a> <a id="a:54" class="idref" href="#a:54"><span class="id" title="binder">a</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:52"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">[</span></a><a class="idref" href="Hoare.html#X:53"><span class="id" title="variable">X</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <a class="idref" href="Hoare.html#a:54"><span class="id" title="variable">a</span></a><a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">]</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#X:53"><span class="id" title="variable">X</span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Hoare.html#a:54"><span class="id" title="variable">a</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:52"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <div class="togglescript" id="proofcontrol1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')"><span class="show"></span></div>
@@ -822,7 +808,6 @@ Here's a first formal proof using this rule.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="assn_sub_example" class="idref" href="#assn_sub_example"><span class="id" title="definition">assn_sub_example</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">(</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#::assertion_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 5<a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">)</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">]</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
@@ -860,7 +845,6 @@ Here's a first formal proof using this rule.
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_hoare_asgn_examples" class="idref" href="#manual_grade_for_hoare_asgn_examples"><span class="id" title="definition">manual_grade_for_hoare_asgn_examples</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -896,7 +880,6 @@ Here's a first formal proof using this rule.
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_hoare_asgn_wrong" class="idref" href="#manual_grade_for_hoare_asgn_wrong"><span class="id" title="definition">manual_grade_for_hoare_asgn_wrong</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -942,7 +925,6 @@ Here's a first formal proof using this rule.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_asgn_fwd" class="idref" href="#hoare_asgn_fwd"><span class="id" title="lemma">hoare_asgn_fwd</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="m:55" class="idref" href="#m:55"><span class="id" title="binder">m</span></a> <a id="a:56" class="idref" href="#a:56"><span class="id" title="binder">a</span></a> <a id="P:57" class="idref" href="#P:57"><span class="id" title="binder">P</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="keyword">fun</span> <a id="st:58" class="idref" href="#st:58"><span class="id" title="binder">st</span></a> ⇒ <a class="idref" href="Hoare.html#P:57"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:58"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#st:58"><span class="id" title="variable">st</span></a> <span class="id" title="definition">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hoare.html#m:55"><span class="id" title="variable">m</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
@@ -990,7 +972,6 @@ Here's a first formal proof using this rule.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_asgn_fwd_exists" class="idref" href="#hoare_asgn_fwd_exists"><span class="id" title="lemma">hoare_asgn_fwd_exists</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="a:60" class="idref" href="#a:60"><span class="id" title="binder">a</span></a> <a id="P:61" class="idref" href="#P:61"><span class="id" title="binder">P</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="keyword">fun</span> <a id="st:62" class="idref" href="#st:62"><span class="id" title="binder">st</span></a> ⇒ <a class="idref" href="Hoare.html#P:61"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:62"><span class="id" title="variable">st</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
@@ -1097,7 +1078,6 @@ Here's a first formal proof using this rule.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence_pre" class="idref" href="#hoare_consequence_pre"><span class="id" title="lemma">hoare_consequence_pre</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:65" class="idref" href="#P:65"><span class="id" title="binder">P</span></a> <a id="P':66" class="idref" href="#P':66"><span class="id" title="binder">P'</span></a> <a id="Q:67" class="idref" href="#Q:67"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:68" class="idref" href="#c:68"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':66"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:68"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:67"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:65"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':66"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1144,7 +1124,6 @@ For example, we can use the first consequence rule like this:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="hoare_asgn_example1" class="idref" href="#hoare_asgn_example1"><span class="id" title="definition">hoare_asgn_example1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 1 <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#5ad5c240a08c2b567f422c2e12577e<sub>27</sub>"><span class="id" title="notation">=</span></a> 1<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1169,7 +1148,6 @@ We can also use it to prove the example mentioned earlier.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="assn_sub_example2" class="idref" href="#assn_sub_example2"><span class="id" title="definition">assn_sub_example2</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#::assertion_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 4<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
@@ -1198,7 +1176,6 @@ Finally, here is a combined rule of consequence that allows us to
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence" class="idref" href="#hoare_consequence"><span class="id" title="lemma">hoare_consequence</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:73" class="idref" href="#P:73"><span class="id" title="binder">P</span></a> <a id="P':74" class="idref" href="#P':74"><span class="id" title="binder">P'</span></a> <a id="Q:75" class="idref" href="#Q:75"><span class="id" title="binder">Q</span></a> <a id="Q':76" class="idref" href="#Q':76"><span class="id" title="binder">Q'</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:77" class="idref" href="#c:77"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':74"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:77"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q':76"><span class="id" title="variable">Q'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:73"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':74"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1234,7 +1211,6 @@ Finally, here is a combined rule of consequence that allows us to
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Hoare.html#assert_implies"><span class="id" title="definition">assert_implies</span></a> <a class="idref" href="Hoare.html#hoare_triple"><span class="id" title="definition">hoare_triple</span></a> <a class="idref" href="Hoare.html#assn_sub"><span class="id" title="definition">assn_sub</span></a> <span class="id" title="definition">t_update</span> : <span class="id" title="var">core</span>.<br/>
 <span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Hoare.html#assert_of_Prop"><span class="id" title="definition">assert_of_Prop</span></a> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">Aexp_of_nat</span></a> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">Aexp_of_aexp</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
@@ -1253,7 +1229,6 @@ Also recall that <span class="inlinecode"><span class="id" title="tactic">auto</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence_pre'" class="idref" href="#hoare_consequence_pre'"><span class="id" title="lemma">hoare_consequence_pre'</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:78" class="idref" href="#P:78"><span class="id" title="binder">P</span></a> <a id="P':79" class="idref" href="#P':79"><span class="id" title="binder">P'</span></a> <a id="Q:80" class="idref" href="#Q:80"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:81" class="idref" href="#c:81"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':79"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:81"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:80"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:78"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':79"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1272,7 +1247,6 @@ Merely using <span class="inlinecode"><span class="id" title="tactic">auto</span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence_pre''" class="idref" href="#hoare_consequence_pre''"><span class="id" title="lemma">hoare_consequence_pre''</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:82" class="idref" href="#P:82"><span class="id" title="binder">P</span></a> <a id="P':83" class="idref" href="#P':83"><span class="id" title="binder">P'</span></a> <a id="Q:84" class="idref" href="#Q:84"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:85" class="idref" href="#c:85"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':83"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:85"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:84"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:82"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':83"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1300,7 +1274,6 @@ The problem is the <span class="inlinecode"><span class="id" title="tactic">appl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence_pre'''" class="idref" href="#hoare_consequence_pre'''"><span class="id" title="lemma">hoare_consequence_pre'''</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:86" class="idref" href="#P:86"><span class="id" title="binder">P</span></a> <a id="P':87" class="idref" href="#P':87"><span class="id" title="binder">P'</span></a> <a id="Q:88" class="idref" href="#Q:88"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:89" class="idref" href="#c:89"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':87"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:89"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:88"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:86"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':87"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1320,7 +1293,6 @@ Tactic <span class="inlinecode"><span class="id" title="tactic">eauto</span></sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence_pre''''" class="idref" href="#hoare_consequence_pre''''"><span class="id" title="lemma">hoare_consequence_pre''''</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:90" class="idref" href="#P:90"><span class="id" title="binder">P</span></a> <a id="P':91" class="idref" href="#P':91"><span class="id" title="binder">P'</span></a> <a id="Q:92" class="idref" href="#Q:92"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:93" class="idref" href="#c:93"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':91"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:93"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:92"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:90"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':91"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1339,7 +1311,6 @@ Of course, it's hard to predict that <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_consequence_post'" class="idref" href="#hoare_consequence_post'"><span class="id" title="lemma">hoare_consequence_post'</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:94" class="idref" href="#P:94"><span class="id" title="binder">P</span></a> <a id="Q:95" class="idref" href="#Q:95"><span class="id" title="binder">Q</span></a> <a id="Q':96" class="idref" href="#Q':96"><span class="id" title="binder">Q'</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:97" class="idref" href="#c:97"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:94"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:97"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q':96"><span class="id" title="variable">Q'</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#Q':96"><span class="id" title="variable">Q'</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#Q:95"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1356,7 +1327,6 @@ We can also use <span class="inlinecode"><span class="id" title="tactic">eapply<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="hoare_asgn_example1'" class="idref" href="#hoare_asgn_example1'"><span class="id" title="definition">hoare_asgn_example1'</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 1 <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#5ad5c240a08c2b567f422c2e12577e<sub>27</sub>"><span class="id" title="notation">=</span></a> 1<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1373,7 +1343,6 @@ The final bullet of that proof also looks like a candidate for
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="hoare_asgn_example1''" class="idref" href="#hoare_asgn_example1''"><span class="id" title="definition">hoare_asgn_example1''</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 1 <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#5ad5c240a08c2b567f422c2e12577e<sub>27</sub>"><span class="id" title="notation">=</span></a> 1<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1404,7 +1373,6 @@ Now we have quite a nice proof script: it simply identifies the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="assn_sub_example2'" class="idref" href="#assn_sub_example2'"><span class="id" title="definition">assn_sub_example2'</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#::assertion_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 4<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
@@ -1424,7 +1392,6 @@ Let's introduce our own tactic to handle both that bullet and the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">assn_auto</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">auto</span>;  <span class="comment">(*&nbsp;as&nbsp;in&nbsp;example&nbsp;1,&nbsp;above&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">try</span> (<span class="id" title="tactic">unfold</span> "<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>", <a class="idref" href="Hoare.html#assn_sub"><span class="id" title="definition">assn_sub</span></a>, <span class="id" title="definition">t_update</span>;<br/>
@@ -1461,7 +1428,6 @@ Again, we have quite a nice proof script.  All the low-level
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="assn_sub_ex<sub>1</sub>'" class="idref" href="#assn_sub_ex<sub>1</sub>'"><span class="id" title="definition">assn_sub_ex<sub>1</sub>'</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#154e85acf24eb57aa8f8a0156c0ba632"><span class="id" title="notation">≤</span></a> 5 <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 2 <span class="id" title="notation">×</span> <span class="id" title="definition">X</span><br/>
@@ -1494,7 +1460,6 @@ Again, we have quite a nice proof script.  All the low-level
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_skip" class="idref" href="#hoare_skip"><span class="id" title="lemma">hoare_skip</span></a> : <span class="id" title="keyword">∀</span> <a id="P:98" class="idref" href="#P:98"><span class="id" title="binder">P</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:98"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <span class="id" title="notation">skip</span> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:98"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <div class="togglescript" id="proofcontrol5" onclick="toggleDisplay('proof5');toggleDisplay('proofcontrol5')"><span class="show"></span></div>
@@ -1535,7 +1500,6 @@ Again, we have quite a nice proof script.  All the low-level
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_seq" class="idref" href="#hoare_seq"><span class="id" title="lemma">hoare_seq</span></a> : <span class="id" title="keyword">∀</span> <a id="P:99" class="idref" href="#P:99"><span class="id" title="binder">P</span></a> <a id="Q:100" class="idref" href="#Q:100"><span class="id" title="binder">Q</span></a> <a id="R:101" class="idref" href="#R:101"><span class="id" title="binder">R</span></a> <a id="c<sub>1</sub>:102" class="idref" href="#c<sub>1</sub>:102"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:103" class="idref" href="#c<sub>2</sub>:103"><span class="id" title="binder">c<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:100"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c<sub>2</sub>:103"><span class="id" title="variable">c<sub>2</sub></span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#R:101"><span class="id" title="variable">R</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:99"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c<sub>1</sub>:102"><span class="id" title="variable">c<sub>1</sub></span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:100"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1567,7 +1531,6 @@ Note that, in the formal rule <span class="inlinecode"><span class="id" title="v
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="hoare_asgn_example3" class="idref" href="#hoare_asgn_example3"><span class="id" title="definition">hoare_asgn_example3</span></a> : <span class="id" title="keyword">∀</span> (<a id="a:104" class="idref" href="#a:104"><span class="id" title="binder">a</span></a>:<span class="id" title="inductive">aexp</span>) (<a id="n:105" class="idref" href="#n:105"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#a:104"><span class="id" title="variable">a</span></a> <a class="idref" href="Hoare.html#5ad5c240a08c2b567f422c2e12577e<sub>27</sub>"><span class="id" title="notation">=</span></a> <a class="idref" href="Hoare.html#n:105"><span class="id" title="variable">n</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <a class="idref" href="Hoare.html#a:104"><span class="id" title="variable">a</span></a><span class="id" title="notation">;</span><br/>
@@ -1621,7 +1584,6 @@ Informally, a nice way of displaying a proof using the sequencing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="hoare_asgn_example4" class="idref" href="#hoare_asgn_example4"><span class="id" title="definition">hoare_asgn_example4</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 1<span class="id" title="notation">;</span><br/>
@@ -1652,7 +1614,6 @@ Informally, a nice way of displaying a proof using the sequencing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="swap_program" class="idref" href="#swap_program"><span class="id" title="definition">swap_program</span></a> : <span class="id" title="inductive">com</span><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="swap_exercise" class="idref" href="#swap_exercise"><span class="id" title="lemma">swap_exercise</span></a> :<br/>
@@ -1697,7 +1658,6 @@ Informally, a nice way of displaying a proof using the sequencing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="invalid_triple" class="idref" href="#invalid_triple"><span class="id" title="lemma">invalid_triple</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <span class="id" title="keyword">∀</span> (<a id="a:106" class="idref" href="#a:106"><span class="id" title="binder">a</span></a> : <span class="id" title="inductive">aexp</span>) (<a id="n:107" class="idref" href="#n:107"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <a class="idref" href="Hoare.html#a:106"><span class="id" title="variable">a</span></a> <a class="idref" href="Hoare.html#5ad5c240a08c2b567f422c2e12577e<sub>27</sub>"><span class="id" title="notation">=</span></a> <a class="idref" href="Hoare.html#n:107"><span class="id" title="variable">n</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 3<span class="id" title="notation">;</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> <a class="idref" href="Hoare.html#a:106"><span class="id" title="variable">a</span></a><br/>
@@ -1797,7 +1757,6 @@ Informally, a nice way of displaying a proof using the sequencing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="bassn" class="idref" href="#bassn"><span class="id" title="definition">bassn</span></a> <a id="b:108" class="idref" href="#b:108"><span class="id" title="binder">b</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="st:109" class="idref" href="#st:109"><span class="id" title="binder">st</span></a> ⇒ (<span class="id" title="definition">beval</span> <a class="idref" href="Hoare.html#st:109"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#b:108"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="notation">true</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Coercion</span> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">:</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bexp</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">&gt;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">Assertion</span></a>.<br/><hr class='doublespaceincode'/>
@@ -1809,12 +1768,14 @@ A useful fact about <span class="inlinecode"><span class="id" title="var">bassn<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="bexp_eval_false" class="idref" href="#bexp_eval_false"><span class="id" title="lemma">bexp_eval_false</span></a> : <span class="id" title="keyword">∀</span> <a id="b:110" class="idref" href="#b:110"><span class="id" title="binder">b</span></a> <a id="st:111" class="idref" href="#st:111"><span class="id" title="binder">st</span></a>,<br/>
 &nbsp;&nbsp;<span class="id" title="definition">beval</span> <a class="idref" href="Hoare.html#st:111"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#b:110"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="notation">false</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">(</span></a>(<a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="Hoare.html#b:110"><span class="id" title="variable">b</span></a>) <a class="idref" href="Hoare.html#st:111"><span class="id" title="variable">st</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">)</span></a>.<br/>
 <div class="togglescript" id="proofcontrol7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')"><span class="show"></span></div>
 <div class="proofscript" id="proof7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')">
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">congruence</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">congruence</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<br/>
 <span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">bexp_eval_false</span> : <span class="id" title="var">core</span>.<br/>
 </div>
 
@@ -1824,20 +1785,13 @@ We mentioned the <span class="inlinecode"><span class="id" title="tactic">congru
     automatically find that both <span class="inlinecode"><span class="id" title="var">beval</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">false</span></span> and <span class="inlinecode"><span class="id" title="var">beval</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span></span>
     are being assumed, notice the contradiction, and <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span> to complete
     the proof. 
-</div>
-<div class="code">
-</div>
+<div class="paragraph"> </div>
 
-<br/>
-</div>
-
-<div class="doc">
-Now we can formalize the Hoare proof rule for conditionals
+ Now we can formalize the Hoare proof rule for conditionals
     and prove it correct. 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_if" class="idref" href="#hoare_if"><span class="id" title="lemma">hoare_if</span></a> : <span class="id" title="keyword">∀</span> <a id="P:112" class="idref" href="#P:112"><span class="id" title="binder">P</span></a> <a id="Q:113" class="idref" href="#Q:113"><span class="id" title="binder">Q</span></a> (<a id="b:114" class="idref" href="#b:114"><span class="id" title="binder">b</span></a>:<span class="id" title="inductive">bexp</span>) <a id="c<sub>1</sub>:115" class="idref" href="#c<sub>1</sub>:115"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:116" class="idref" href="#c<sub>2</sub>:116"><span class="id" title="binder">c<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <a class="idref" href="Hoare.html#P:112"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#cce4ad113420d0c25c6ce4891bbe5028"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#b:114"><span class="id" title="variable">b</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c<sub>1</sub>:115"><span class="id" title="variable">c<sub>1</sub></span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:113"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <a class="idref" href="Hoare.html#P:112"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#cce4ad113420d0c25c6ce4891bbe5028"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#90b84b70bae2a0cf52991d884e146143"><span class="id" title="notation">¬</span></a> <a class="idref" href="Hoare.html#b:114"><span class="id" title="variable">b</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c<sub>2</sub>:116"><span class="id" title="variable">c<sub>2</sub></span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:113"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1875,7 +1829,6 @@ That is (unwrapping the notations):
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="if_example" class="idref" href="#if_example"><span class="id" title="definition">if_example</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span><br/>
@@ -1901,6 +1854,7 @@ That is (unwrapping the notations):
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">assn_auto</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
+</div>
 
 <div class="doc">
 As we did earlier, it would be nice to eliminate all the low-level
@@ -1913,7 +1867,6 @@ As we did earlier, it would be nice to eliminate all the low-level
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">assn_auto'</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">unfold</span> "<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>", <a class="idref" href="Hoare.html#assn_sub"><span class="id" title="definition">assn_sub</span></a>, <span class="id" title="definition">t_update</span>, <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a>;<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> *;<br/>
@@ -1926,7 +1879,6 @@ Now the proof is quite streamlined.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="if_example''" class="idref" href="#if_example''"><span class="id" title="definition">if_example''</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<br/>
@@ -1950,7 +1902,6 @@ We can even shorten it a little bit more.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="if_example'''" class="idref" href="#if_example'''"><span class="id" title="definition">if_example'''</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<br/>
@@ -1970,7 +1921,6 @@ For later proofs, it will help to extend <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">assn_auto''</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">unfold</span> "<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>", <a class="idref" href="Hoare.html#assn_sub"><span class="id" title="definition">assn_sub</span></a>, <span class="id" title="definition">t_update</span>, <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a>;<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> *;<br/>
@@ -1986,7 +1936,6 @@ For later proofs, it will help to extend <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="if_minus_plus" class="idref" href="#if_minus_plus"><span class="id" title="lemma">if_minus_plus</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">≤</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span><br/>
@@ -2024,7 +1973,6 @@ For later proofs, it will help to extend <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="If<sub>1</sub>" class="idref" href="#If<sub>1</sub>"><span class="id" title="module">If<sub>1</sub></span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="If<sub>1</sub>.com" class="idref" href="#If<sub>1</sub>.com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="If<sub>1</sub>.CSkip" class="idref" href="#If<sub>1</sub>.CSkip"><span class="id" title="constructor">CSkip</span></a> : <a class="idref" href="Hoare.html#com:117"><span class="id" title="inductive">com</span></a><br/>
@@ -2064,7 +2012,6 @@ For later proofs, it will help to extend <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;st '=[' c ']=&gt;'' st'"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">c</span> <span class="id" title="var">custom</span> <span class="id" title="var">com</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 99,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st</span> <span class="id" title="keyword">constr</span>, <span class="id" title="var">st'</span> <span class="id" title="keyword">constr</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>).<br/><hr class='doublespaceincode'/>
@@ -2106,7 +2053,6 @@ The following unit tests should be provable simply by <span class="inlinecode"><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="If<sub>1</sub>.if1true_test" class="idref" href="#If<sub>1</sub>.if1true_test"><span class="id" title="definition">if1true_test</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty_st</span> <a class="idref" href="Hoare.html#2bd5832dff0b8e46c42539b178101547"><span class="id" title="notation">=[</span></a> <a class="idref" href="Hoare.html#If<sub>1</sub>.:com::'if<sub>1</sub>'_x_'then'_x_'end'"><span class="id" title="notation">if<sub>1</sub></span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0 <a class="idref" href="Hoare.html#If<sub>1</sub>.:com::'if<sub>1</sub>'_x_'then'_x_'end'"><span class="id" title="notation">then</span></a> <span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#7701c044b287c1aaa4e8c24829bcb1f<sub>5</sub>"><span class="id" title="notation">:=</span></a> 1 <a class="idref" href="Hoare.html#If<sub>1</sub>.:com::'if<sub>1</sub>'_x_'then'_x_'end'"><span class="id" title="notation">end</span></a> <a class="idref" href="Hoare.html#2bd5832dff0b8e46c42539b178101547"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Hoare.html#2bd5832dff0b8e46c42539b178101547"><span class="id" title="notation">(</span></a><span class="id" title="definition">X</span> <span class="id" title="notation">!<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> 1<a class="idref" href="Hoare.html#2bd5832dff0b8e46c42539b178101547"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -2124,7 +2070,6 @@ The following unit tests should be provable simply by <span class="inlinecode"><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="If<sub>1</sub>.hoare_triple" class="idref" href="#If<sub>1</sub>.hoare_triple"><span class="id" title="definition">hoare_triple</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="P:149" class="idref" href="#P:149"><span class="id" title="binder">P</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="c:150" class="idref" href="#c:150"><span class="id" title="binder">c</span></a> : <a class="idref" href="Hoare.html#If<sub>1</sub>.com"><span class="id" title="inductive">com</span></a>) (<a id="Q:151" class="idref" href="#Q:151"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:152" class="idref" href="#st:152"><span class="id" title="binder">st</span></a> <a id="st':153" class="idref" href="#st':153"><span class="id" title="binder">st'</span></a>,<br/>
@@ -2160,7 +2105,6 @@ The following unit tests should be provable simply by <span class="inlinecode"><
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
@@ -2192,7 +2136,6 @@ For full credit, prove formally <span class="inlinecode"><span class="id" title=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="If<sub>1</sub>.hoare_consequence_pre" class="idref" href="#If<sub>1</sub>.hoare_consequence_pre"><span class="id" title="lemma">hoare_consequence_pre</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:154" class="idref" href="#P:154"><span class="id" title="binder">P</span></a> <a id="P':155" class="idref" href="#P':155"><span class="id" title="binder">P'</span></a> <a id="Q:156" class="idref" href="#Q:156"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:157" class="idref" href="#c:157"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a65ed8b6644a21f0bfd19e8fe0529d<sub>92</sub>"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':155"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#a65ed8b6644a21f0bfd19e8fe0529d<sub>92</sub>"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:157"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a65ed8b6644a21f0bfd19e8fe0529d<sub>92</sub>"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:156"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a65ed8b6644a21f0bfd19e8fe0529d<sub>92</sub>"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:154"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':155"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2225,7 +2168,6 @@ For full credit, prove formally <span class="inlinecode"><span class="id" title=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="If<sub>1</sub>.hoare_if1_good" class="idref" href="#If<sub>1</sub>.hoare_if1_good"><span class="id" title="lemma">hoare_if1_good</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a65ed8b6644a21f0bfd19e8fe0529d<sub>92</sub>"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#d7f322243320be10cf04dfecd9fa5876"><span class="id" title="notation">+</span></a> <span class="id" title="definition">Y</span> <a class="idref" href="Hoare.html#5ad5c240a08c2b567f422c2e12577e<sub>27</sub>"><span class="id" title="notation">=</span></a> <span class="id" title="definition">Z</span> <a class="idref" href="Hoare.html#a65ed8b6644a21f0bfd19e8fe0529d<sub>92</sub>"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#If<sub>1</sub>.:com::'if<sub>1</sub>'_x_'then'_x_'end'"><span class="id" title="notation">if<sub>1</sub></span></a> <span class="id" title="notation">¬</span><span class="id" title="notation">(</span><span class="id" title="definition">Y</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <a class="idref" href="Hoare.html#If<sub>1</sub>.:com::'if<sub>1</sub>'_x_'then'_x_'end'"><span class="id" title="notation">then</span></a><br/>
@@ -2238,7 +2180,6 @@ For full credit, prove formally <span class="inlinecode"><span class="id" title=
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Hoare.html#If<sub>1</sub>"><span class="id" title="module">If<sub>1</sub></span></a>.<br/>
 </div>
 
@@ -2330,7 +2271,6 @@ For full credit, prove formally <span class="inlinecode"><span class="id" title=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="hoare_while" class="idref" href="#hoare_while"><span class="id" title="lemma">hoare_while</span></a> : <span class="id" title="keyword">∀</span> <a id="P:161" class="idref" href="#P:161"><span class="id" title="binder">P</span></a> (<a id="b:162" class="idref" href="#b:162"><span class="id" title="binder">b</span></a>:<span class="id" title="inductive">bexp</span>) <a id="c:163" class="idref" href="#c:163"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:161"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#cce4ad113420d0c25c6ce4891bbe5028"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#b:162"><span class="id" title="variable">b</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:163"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:161"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:161"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <span class="id" title="notation">while</span> <a class="idref" href="Hoare.html#b:162"><span class="id" title="variable">b</span></a> <span class="id" title="notation">do</span> <a class="idref" href="Hoare.html#c:163"><span class="id" title="variable">c</span></a> <span class="id" title="notation">end</span> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:161"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#cce4ad113420d0c25c6ce4891bbe5028"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hoare.html#90b84b70bae2a0cf52991d884e146143"><span class="id" title="notation">¬</span></a> <a class="idref" href="Hoare.html#b:162"><span class="id" title="variable">b</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
@@ -2386,7 +2326,6 @@ We call that <span class="inlinecode"><span class="id" title="var">P</span></spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="while_example" class="idref" href="#while_example"><span class="id" title="definition">while_example</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#154e85acf24eb57aa8f8a0156c0ba632"><span class="id" title="notation">≤</span></a> 3<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="notation">while</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">≤</span> 2<span class="id" title="notation">)</span> <span class="id" title="notation">do</span><br/>
@@ -2411,7 +2350,6 @@ If the loop never terminates, any postcondition will work.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="always_loop_hoare" class="idref" href="#always_loop_hoare"><span class="id" title="lemma">always_loop_hoare</span></a> : <span class="id" title="keyword">∀</span> <a id="Q:164" class="idref" href="#Q:164"><span class="id" title="binder">Q</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <span class="id" title="notation">while</span> <span class="id" title="notation">true</span> <span class="id" title="notation">do</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">end</span> <a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:164"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#a18cbce9fe584a9130c3f34d4f14555f"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <div class="togglescript" id="proofcontrol12" onclick="toggleDisplay('proof12');toggleDisplay('proofcontrol12')"><span class="show"></span></div>
@@ -2457,7 +2395,6 @@ Of course, this result is not surprising if we remember that
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="RepeatExercise" class="idref" href="#RepeatExercise"><span class="id" title="module">RepeatExercise</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="RepeatExercise.com" class="idref" href="#RepeatExercise.com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="RepeatExercise.CSkip" class="idref" href="#RepeatExercise.CSkip"><span class="id" title="constructor">CSkip</span></a> : <a class="idref" href="Hoare.html#com:165"><span class="id" title="inductive">com</span></a><br/>
@@ -2476,7 +2413,6 @@ Of course, this result is not surprising if we remember that
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="RepeatExercise.:com::'repeat'_x_'until'_x_'end'" class="idref" href="#RepeatExercise.:com::'repeat'_x_'until'_x_'end'"><span class="id" title="notation">&quot;</span></a>'repeat' e<sub>1</sub> 'until' b<sub>2</sub> 'end'" :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hoare.html#RepeatExercise.CRepeat"><span class="id" title="constructor">CRepeat</span></a> <span class="id" title="var">e<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">in</span> <span class="id" title="var">custom</span> <span class="id" title="var">com</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0,<br/>
@@ -2507,7 +2443,6 @@ Add new rules for <span class="inlinecode"><span class="id" title="var">REPEAT</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="RepeatExercise.ceval" class="idref" href="#RepeatExercise.ceval"><span class="id" title="inductive">ceval</span></a> : <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#RepeatExercise.com"><span class="id" title="inductive">com</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="RepeatExercise.E_Skip" class="idref" href="#RepeatExercise.E_Skip"><span class="id" title="constructor">E_Skip</span></a> : <span class="id" title="keyword">∀</span> <a id="st:169" class="idref" href="#st:169"><span class="id" title="binder">st</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#st:169"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#6fac257586d84b458187327c836ad986"><span class="id" title="notation">=[</span></a> <a class="idref" href="Hoare.html#RepeatExercise.:com::'skip'"><span class="id" title="notation">skip</span></a> <a class="idref" href="Hoare.html#6fac257586d84b458187327c836ad986"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Hoare.html#st:169"><span class="id" title="variable">st</span></a><br/>
@@ -2545,7 +2480,6 @@ A couple of definitions from above, copied here so they use the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="RepeatExercise.hoare_triple" class="idref" href="#RepeatExercise.hoare_triple"><span class="id" title="definition">hoare_triple</span></a> (<a id="P:197" class="idref" href="#P:197"><span class="id" title="binder">P</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="c:198" class="idref" href="#c:198"><span class="id" title="binder">c</span></a> : <a class="idref" href="Hoare.html#RepeatExercise.com"><span class="id" title="inductive">com</span></a>) (<a id="Q:199" class="idref" href="#Q:199"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:200" class="idref" href="#st:200"><span class="id" title="binder">st</span></a> <a id="st':201" class="idref" href="#st':201"><span class="id" title="binder">st'</span></a>, <a class="idref" href="Hoare.html#st:200"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#6fac257586d84b458187327c836ad986"><span class="id" title="notation">=[</span></a> <a class="idref" href="Hoare.html#c:198"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#6fac257586d84b458187327c836ad986"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Hoare.html#st':201"><span class="id" title="variable">st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#P:197"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:200"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#Q:199"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#st':201"><span class="id" title="variable">st'</span></a>.<br/><hr class='doublespaceincode'/>
@@ -2559,7 +2493,6 @@ To make sure you've got the evaluation rules for <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="RepeatExercise.ex1_repeat" class="idref" href="#RepeatExercise.ex1_repeat"><span class="id" title="definition">ex1_repeat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Hoare.html#RepeatExercise.:com::'repeat'_x_'until'_x_'end'"><span class="id" title="notation">repeat</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">X</span> <a class="idref" href="Hoare.html#36cabe8d358913ff5c5a00e869f6acb5"><span class="id" title="notation">:=</span></a> 1<a class="idref" href="Hoare.html#47032bba53eedb10a43a5da19a84838f"><span class="id" title="notation">;</span></a><br/>
@@ -2578,7 +2511,6 @@ Now state and prove a theorem, <span class="inlinecode"><span class="id" title="
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
@@ -2598,7 +2530,6 @@ For full credit, make sure (informally) that your rule can be used
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Hoare.html#RepeatExercise"><span class="id" title="module">RepeatExercise</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_hoare_repeat" class="idref" href="#manual_grade_for_hoare_repeat"><span class="id" title="definition">manual_grade_for_hoare_repeat</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -2732,7 +2663,6 @@ For full credit, make sure (informally) that your rule can be used
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Himp" class="idref" href="#Himp"><span class="id" title="module">Himp</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Himp.com" class="idref" href="#Himp.com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Himp.CSkip" class="idref" href="#Himp.CSkip"><span class="id" title="constructor">CSkip</span></a> : <a class="idref" href="Hoare.html#com:202"><span class="id" title="inductive">com</span></a><br/>
@@ -2797,7 +2727,6 @@ The definition of Hoare triples is exactly as before.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.hoare_triple" class="idref" href="#Himp.hoare_triple"><span class="id" title="definition">hoare_triple</span></a> (<a id="P:237" class="idref" href="#P:237"><span class="id" title="binder">P</span></a>:<a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="c:238" class="idref" href="#c:238"><span class="id" title="binder">c</span></a>:<a class="idref" href="Hoare.html#Himp.com"><span class="id" title="inductive">com</span></a>) (<a id="Q:239" class="idref" href="#Q:239"><span class="id" title="binder">Q</span></a>:<a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:240" class="idref" href="#st:240"><span class="id" title="binder">st</span></a> <a id="st':241" class="idref" href="#st':241"><span class="id" title="binder">st'</span></a>, <a class="idref" href="Hoare.html#st:240"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">=[</span></a> <a class="idref" href="Hoare.html#c:238"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Hoare.html#st':241"><span class="id" title="variable">st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#P:237"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:240"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#Q:239"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#st':241"><span class="id" title="variable">st'</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="Hoare.html#Himp.hoare_triple"><span class="id" title="definition">hoare_triple</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
@@ -2811,7 +2740,6 @@ And the precondition consequence rule is exactly as before.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Himp.hoare_consequence_pre" class="idref" href="#Himp.hoare_consequence_pre"><span class="id" title="lemma">hoare_consequence_pre</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:242" class="idref" href="#P:242"><span class="id" title="binder">P</span></a> <a id="P':243" class="idref" href="#P':243"><span class="id" title="binder">P'</span></a> <a id="Q:244" class="idref" href="#Q:244"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="c:245" class="idref" href="#c:245"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P':243"><span class="id" title="variable">P'</span></a><a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#c:245"><span class="id" title="variable">c</span></a> <a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:244"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#P:242"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span></a> <a class="idref" href="Hoare.html#P':243"><span class="id" title="variable">P'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2829,7 +2757,6 @@ And the precondition consequence rule is exactly as before.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.havoc_pre" class="idref" href="#Himp.havoc_pre"><span class="id" title="definition">havoc_pre</span></a> (<a id="X:246" class="idref" href="#X:246"><span class="id" title="binder">X</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="Q:247" class="idref" href="#Q:247"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="st:248" class="idref" href="#st:248"><span class="id" title="binder">st</span></a> : <span class="id" title="definition">total_map</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="keyword">Prop</span><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="Himp.hoare_havoc" class="idref" href="#Himp.hoare_havoc"><span class="id" title="lemma">hoare_havoc</span></a> : <span class="id" title="keyword">∀</span> (<a id="Q:249" class="idref" href="#Q:249"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="X:250" class="idref" href="#X:250"><span class="id" title="binder">X</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>),<br/>
@@ -2858,7 +2785,6 @@ And the precondition consequence rule is exactly as before.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Himp.havoc_post" class="idref" href="#Himp.havoc_post"><span class="id" title="lemma">havoc_post</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:251" class="idref" href="#P:251"><span class="id" title="binder">P</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="X:252" class="idref" href="#X:252"><span class="id" title="binder">X</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <a class="idref" href="Hoare.html#P:251"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <a class="idref" href="Hoare.html#X:252"><span class="id" title="variable">X</span></a> <a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a> <span class="id" title="keyword">fun</span> <a id="st:253" class="idref" href="#st:253"><span class="id" title="binder">st</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">(</span></a><a id="n:254" class="idref" href="#n:254"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">),</span></a> <a class="idref" href="Hoare.html#P:251"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">[</span></a><a class="idref" href="Hoare.html#X:252"><span class="id" title="variable">X</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <a class="idref" href="Hoare.html#n:254"><span class="id" title="variable">n</span></a><a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">]</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">st</span></a> <a class="idref" href="Hoare.html#fa43534376ba696f5288a24534018f6c"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -2870,7 +2796,6 @@ And the precondition consequence rule is exactly as before.
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Hoare.html#Himp"><span class="id" title="module">Himp</span></a>.<br/>
 </div>
 
@@ -2884,7 +2809,6 @@ And the precondition consequence rule is exactly as before.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="HoareAssertAssume" class="idref" href="#HoareAssertAssume"><span class="id" title="module">HoareAssertAssume</span></a>.<br/>
 </div>
 
@@ -2917,7 +2841,6 @@ In this exercise, we will extend IMP with two commands,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="HoareAssertAssume.com" class="idref" href="#HoareAssertAssume.com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="HoareAssertAssume.CSkip" class="idref" href="#HoareAssertAssume.CSkip"><span class="id" title="constructor">CSkip</span></a> : <a class="idref" href="Hoare.html#com:255"><span class="id" title="inductive">com</span></a><br/>
 &nbsp;&nbsp;| <a id="HoareAssertAssume.CAsgn" class="idref" href="#HoareAssertAssume.CAsgn"><span class="id" title="constructor">CAsgn</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#com:255"><span class="id" title="inductive">com</span></a><br/>
@@ -2958,7 +2881,6 @@ To define the behavior of <span class="inlinecode"><span class="id" title="tacti
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="HoareAssertAssume.result" class="idref" href="#HoareAssertAssume.result"><span class="id" title="inductive">result</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="HoareAssertAssume.RNormal" class="idref" href="#HoareAssertAssume.RNormal"><span class="id" title="constructor">RNormal</span></a> : <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#result:257"><span class="id" title="inductive">result</span></a><br/>
 &nbsp;&nbsp;| <a id="HoareAssertAssume.RError" class="idref" href="#HoareAssertAssume.RError"><span class="id" title="constructor">RError</span></a> : <a class="idref" href="Hoare.html#result:257"><span class="id" title="inductive">result</span></a>.<br/>
@@ -2969,7 +2891,6 @@ Now we are ready to give you the ceval relation for the new language.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="HoareAssertAssume.ceval" class="idref" href="#HoareAssertAssume.ceval"><span class="id" title="inductive">ceval</span></a> : <a class="idref" href="Hoare.html#HoareAssertAssume.com"><span class="id" title="inductive">com</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#HoareAssertAssume.result"><span class="id" title="inductive">result</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;Old&nbsp;rules,&nbsp;several&nbsp;modified&nbsp;*)</span><br/>
 &nbsp;&nbsp;| <a id="HoareAssertAssume.E_Skip" class="idref" href="#HoareAssertAssume.E_Skip"><span class="id" title="constructor">E_Skip</span></a> : <span class="id" title="keyword">∀</span> <a id="st:261" class="idref" href="#st:261"><span class="id" title="binder">st</span></a>,<br/>
@@ -3026,7 +2947,6 @@ We redefine hoare triples: Now, <span class="inlinecode"><span style='letter-spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="HoareAssertAssume.hoare_triple" class="idref" href="#HoareAssertAssume.hoare_triple"><span class="id" title="definition">hoare_triple</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="P:301" class="idref" href="#P:301"><span class="id" title="binder">P</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="c:302" class="idref" href="#c:302"><span class="id" title="binder">c</span></a> : <a class="idref" href="Hoare.html#HoareAssertAssume.com"><span class="id" title="inductive">com</span></a>) (<a id="Q:303" class="idref" href="#Q:303"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:304" class="idref" href="#st:304"><span class="id" title="binder">st</span></a> <a id="r:305" class="idref" href="#r:305"><span class="id" title="binder">r</span></a>,<br/>
@@ -3045,7 +2965,6 @@ To test your understanding of this modification, give an example
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="HoareAssertAssume.assert_assume_differ" class="idref" href="#HoareAssertAssume.assert_assume_differ"><span class="id" title="lemma">assert_assume_differ</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">(</span></a><a id="P:307" class="idref" href="#P:307"><span class="id" title="binder">P</span></a>:<a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) <a id="b:308" class="idref" href="#b:308"><span class="id" title="binder">b</span></a> (<a id="Q:309" class="idref" href="#Q:309"><span class="id" title="binder">Q</span></a>:<a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">),</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">(</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:307"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#HoareAssertAssume.:com::'assume'_x"><span class="id" title="notation">assume</span></a> <a class="idref" href="Hoare.html#b:308"><span class="id" title="variable">b</span></a> <a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:309"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">(</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#P:307"><span class="id" title="variable">P</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#HoareAssertAssume.:com::'assert'_x"><span class="id" title="notation">assert</span></a> <a class="idref" href="Hoare.html#b:308"><span class="id" title="variable">b</span></a> <a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:309"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">)</span></a>.<br/>
@@ -3069,7 +2988,6 @@ Your task is now to state Hoare rules for <span class="inlinecode"><span class="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="HoareAssertAssume.hoare_asgn" class="idref" href="#HoareAssertAssume.hoare_asgn"><span class="id" title="lemma">hoare_asgn</span></a> : <span class="id" title="keyword">∀</span> <a id="Q:313" class="idref" href="#Q:313"><span class="id" title="binder">Q</span></a> <a id="X:314" class="idref" href="#X:314"><span class="id" title="binder">X</span></a> <a id="a:315" class="idref" href="#a:315"><span class="id" title="binder">a</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:313"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">[</span></a><a class="idref" href="Hoare.html#X:314"><span class="id" title="variable">X</span></a> <a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span></a> <a class="idref" href="Hoare.html#a:315"><span class="id" title="variable">a</span></a><a class="idref" href="Hoare.html#bf32e07a6a6f21756fecc93ac97674bb"><span class="id" title="notation">]</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a> <a class="idref" href="Hoare.html#X:314"><span class="id" title="variable">X</span></a> <a class="idref" href="Hoare.html#60a9f580307c9b3c5e2be1b3b9a8ef<sub>14</sub>"><span class="id" title="notation">:=</span></a> <a class="idref" href="Hoare.html#a:315"><span class="id" title="variable">a</span></a> <a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>{</span>{</span></a><a class="idref" href="Hoare.html#Q:313"><span class="id" title="variable">Q</span></a><a class="idref" href="Hoare.html#ab05c802c6c420830babdf44d877dfd1"><span class="id" title="notation"><span style='letter-spacing:-.4em;'>}</span>}</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -3125,7 +3043,6 @@ State and prove your hoare rules, <span class="inlinecode"><span class="id" titl
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
@@ -3198,8 +3115,7 @@ Here are the other proof rules (sanity check)
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:09&nbsp;*)</span><br/>
 </div>
 </div>
 

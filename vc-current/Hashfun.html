@@ -30,15 +30,13 @@
 
 <h1 class="libtitle">Hashfun<span class="subtitle">Functional model of hash tables</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
 <div class="paragraph"> </div>
 
  This C program, <span class="inlinecode"><span class="id" title="var">hash.c</span></span>, implements a hash table with
-   external chaining.  See <a href="https://www.cs.princeton.edu/~appel/HashTables.pdf"><span class="inlineref">https://www.cs.princeton.edu/~appel/HashTables.pdf</span></a>
+   external chaining.  See <a href="https://www.cs.princeton.edu/~appel/HashTables.pdf"><span class="inlineref" <a href='https://www.cs.princeton.edu/~appel/HashTables.pdf</span></a>'>https://www.cs.princeton.edu/~appel/HashTables.pdf</span></a></a>
    for an introduction to hash tables.
 
 <div class="paragraph"> </div>
@@ -163,7 +161,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.functional_base</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Instance</span> <a id="EqDec_string" class="idref" href="#EqDec_string"><span class="id" title="instance">EqDec_string</span></a>: <span class="id" title="class">EqDec</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="abbreviation">byte</span>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#list_eq_dec"><span class="id" title="lemma">list_eq_dec</span></a> <span class="id" title="lemma">Byte.eq_dec</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Fixpoint</span> <a id="hashfun_aux" class="idref" href="#hashfun_aux"><span class="id" title="definition">hashfun_aux</span></a> (<a id="h:1" class="idref" href="#h:1"><span class="id" title="binder">h</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="s:2" class="idref" href="#s:2"><span class="id" title="binder">s</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="abbreviation">byte</span>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> :=<br/>
@@ -255,7 +252,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="Int_repr_eq_mod" class="idref" href="#Int_repr_eq_mod"><span class="id" title="lemma">Int_repr_eq_mod</span></a>:<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="a:25" class="idref" href="#a:25"><span class="id" title="binder">a</span></a>,  <span class="id" title="definition">Int.repr</span> (<a class="idref" href="Hashfun.html#a:25"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'mod'_x"><span class="id" title="notation">mod</span></a> <span class="id" title="definition">Int.modulus</span>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">Int.repr</span> <a class="idref" href="Hashfun.html#a:25"><span class="id" title="variable">a</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -269,7 +265,6 @@ Use <span class="inlinecode"><span class="id" title="var">Int_repr_eq_mod</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="hashfun_aux_snoc" class="idref" href="#hashfun_aux_snoc"><span class="id" title="lemma">hashfun_aux_snoc</span></a>:<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="sigma:26" class="idref" href="#sigma:26"><span class="id" title="binder">sigma</span></a> <a id="h:27" class="idref" href="#h:27"><span class="id" title="binder">h</span></a> <a id="lo:28" class="idref" href="#lo:28"><span class="id" title="binder">lo</span></a> <a id="i:29" class="idref" href="#i:29"><span class="id" title="binder">i</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#306329b0eca7a2b86c198702f594ad8e"><span class="id" title="notation">≤</span></a> <a class="idref" href="Hashfun.html#lo:28"><span class="id" title="variable">lo</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -308,7 +303,6 @@ Use <span class="inlinecode"><span class="id" title="var">Int_repr_eq_mod</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="COUNT_TABLE" class="idref" href="#COUNT_TABLE"><span class="id" title="module">COUNT_TABLE</span></a>.<br/>
 &nbsp;<span class="id" title="keyword">Parameter</span> <a id="COUNT_TABLE.table" class="idref" href="#COUNT_TABLE.table"><span class="id" title="axiom">table</span></a>: <span class="id" title="keyword">Type</span>.<br/>
 &nbsp;<span class="id" title="keyword">Parameter</span> <a id="COUNT_TABLE.key" class="idref" href="#COUNT_TABLE.key"><span class="id" title="axiom">key</span></a> : <span class="id" title="keyword">Type</span>.<br/>
@@ -341,7 +335,6 @@ This means:  in any <span class="inlinecode"><span class="id" title="keyword">Mo
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="FunTable" class="idref" href="#FunTable"><span class="id" title="module">FunTable</span></a> &lt;: <a class="idref" href="Hashfun.html#COUNT_TABLE"><span class="id" title="module">COUNT_TABLE</span></a>.<br/>
 &nbsp;<span class="id" title="keyword">Definition</span> <a id="FunTable.table" class="idref" href="#FunTable.table"><span class="id" title="definition">table</span></a>: <span class="id" title="keyword">Type</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>.<br/>
 &nbsp;<span class="id" title="keyword">Definition</span> <a id="FunTable.key" class="idref" href="#FunTable.key"><span class="id" title="definition">key</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
@@ -377,7 +370,6 @@ This means:  in any <span class="inlinecode"><span class="id" title="keyword">Mo
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="IntHashTable" class="idref" href="#IntHashTable"><span class="id" title="module">IntHashTable</span></a> &lt;: <a class="idref" href="Hashfun.html#COUNT_TABLE"><span class="id" title="module">COUNT_TABLE</span></a>.<br/>
 &nbsp;<span class="id" title="keyword">Definition</span> <a id="IntHashTable.hashtable_invariant" class="idref" href="#IntHashTable.hashtable_invariant"><span class="id" title="definition">hashtable_invariant</span></a> (<a id="cts:58" class="idref" href="#cts:58"><span class="id" title="binder">cts</span></a>: <a class="idref" href="Hashfun.html#hashtable_contents"><span class="id" title="definition">hashtable_contents</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <a class="idref" href="Hashfun.html#cts:58"><span class="id" title="variable">cts</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hashfun.html#N"><span class="id" title="definition">N</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a><br/>
@@ -413,9 +405,8 @@ This means:  in any <span class="inlinecode"><span class="id" title="keyword">Mo
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Hashfun.html#IntHashTable"><span class="id" title="module">IntHashTable</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:19&nbsp;*)</span><br/>
 </div>
 </div>
 

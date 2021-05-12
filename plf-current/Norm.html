@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Norm<span class="subtitle">Normalization of STLC</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
@@ -95,13 +92,12 @@ This optional chapter is based on chapter 12 of <i>Types and
     duplicate redexes in subterms. 
 <div class="paragraph"> </div>
 
-<a id="lab446"></a><h4 class="section">Exercise: 2 stars, standard (norm_fail)</h4>
+<a id="lab451"></a><h4 class="section">Exercise: 2 stars, standard (norm_fail)</h4>
  Where do we fail if we attempt to prove normalization by a
     straightforward induction on the size of a well-typed term? 
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_norm_fail" class="idref" href="#manual_grade_for_norm_fail"><span class="id" title="definition">manual_grade_for_norm_fail</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -111,7 +107,7 @@ This optional chapter is based on chapter 12 of <i>Types and
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab447"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (norm)</h4>
+<a id="lab452"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (norm)</h4>
  The best ways to understand an intricate proof like this is
     are (1) to help fill it in and (2) to extend it.  We've left out some
     parts of the following development, including some proofs of lemmas
@@ -120,7 +116,6 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_norm" class="idref" href="#manual_grade_for_norm"><span class="id" title="definition">manual_grade_for_norm</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
 <font size=-2>&#9744;</font>
@@ -128,7 +123,7 @@ This optional chapter is based on chapter 12 of <i>Types and
 
 
 <div class="doc">
-<a id="lab448"></a><h1 class="section">Language</h1>
+<a id="lab453"></a><h1 class="section">Language</h1>
 
 <div class="paragraph"> </div>
 
@@ -140,12 +135,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab449"></a><h3 class="section">Syntax and Operational Semantics</h3>
+<a id="lab454"></a><h3 class="section">Syntax and Operational Semantics</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="ty" class="idref" href="#ty"><span class="id" title="inductive">ty</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Ty_Bool" class="idref" href="#Ty_Bool"><span class="id" title="constructor">Ty_Bool</span></a> : <a class="idref" href="Norm.html#ty:1"><span class="id" title="inductive">ty</span></a><br/>
 &nbsp;&nbsp;| <a id="Ty_Arrow" class="idref" href="#Ty_Arrow"><span class="id" title="constructor">Ty_Arrow</span></a> : <a class="idref" href="Norm.html#ty:1"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#ty:1"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#ty:1"><span class="id" title="inductive">ty</span></a><br/>
@@ -198,12 +192,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab450"></a><h3 class="section">Substitution</h3>
+<a id="lab455"></a><h3 class="section">Substitution</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;'[' x ':=' s ']' t" (<span class="id" title="keyword">in</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 20, <span class="id" title="var">x</span> <span class="id" title="keyword">constr</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Fixpoint</span> <a id="subst" class="idref" href="#subst"><span class="id" title="definition">subst</span></a> (<a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="s:6" class="idref" href="#s:6"><span class="id" title="binder">s</span></a> : <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a>) (<a id="t:7" class="idref" href="#t:7"><span class="id" title="binder">t</span></a> : <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a>) : <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Norm.html#t:7"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
@@ -231,12 +224,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab451"></a><h3 class="section">Reduction</h3>
+<a id="lab456"></a><h3 class="section">Reduction</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="value" class="idref" href="#value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="v_abs" class="idref" href="#v_abs"><span class="id" title="constructor">v_abs</span></a> : <span class="id" title="keyword">∀</span> <a id="x:12" class="idref" href="#x:12"><span class="id" title="binder">x</span></a> <a id="T<sub>2</sub>:13" class="idref" href="#T<sub>2</sub>:13"><span class="id" title="binder">T<sub>2</sub></span></a> <a id="t<sub>1</sub>:14" class="idref" href="#t<sub>1</sub>:14"><span class="id" title="binder">t<sub>1</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#value:10"><span class="id" title="inductive">value</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="Norm.html#c7ca0fe7e4f2c0ef6d6958a5dc4283b<sub>7</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#x:12"><span class="id" title="variable">x</span></a><a class="idref" href="Norm.html#c7ca0fe7e4f2c0ef6d6958a5dc4283b<sub>7</sub>"><span class="id" title="notation">:</span></a><a class="idref" href="Norm.html#T<sub>2</sub>:13"><span class="id" title="variable">T<sub>2</sub></span></a><a class="idref" href="Norm.html#c7ca0fe7e4f2c0ef6d6958a5dc4283b<sub>7</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="Norm.html#t<sub>1</sub>:14"><span class="id" title="variable">t<sub>1</sub></span></a><a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a><br/>
@@ -305,12 +297,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab452"></a><h3 class="section">Typing</h3>
+<a id="lab457"></a><h3 class="section">Typing</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="context" class="idref" href="#context"><span class="id" title="definition">context</span></a> := <span class="id" title="definition">partial_map</span> <a class="idref" href="Norm.html#ty"><span class="id" title="inductive">ty</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;Gamma '&#x22A2;' t '&#x2208;' T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
@@ -354,7 +345,7 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab453"></a><h2 class="section">Weakening</h2>
+<a id="lab458"></a><h2 class="section">Weakening</h2>
 
 <div class="paragraph"> </div>
 
@@ -362,7 +353,6 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="weakening" class="idref" href="#weakening"><span class="id" title="lemma">weakening</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:87" class="idref" href="#Gamma:87"><span class="id" title="binder">Gamma</span></a> <a id="Gamma':88" class="idref" href="#Gamma':88"><span class="id" title="binder">Gamma'</span></a> <a id="t:89" class="idref" href="#t:89"><span class="id" title="binder">t</span></a> <a id="T:90" class="idref" href="#T:90"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">inclusion</span> <a class="idref" href="Norm.html#Gamma:87"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="Norm.html#Gamma':88"><span class="id" title="variable">Gamma'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#Gamma:87"><span class="id" title="variable">Gamma</span></a>  <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:89"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:90"><span class="id" title="variable">T</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -383,12 +373,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab454"></a><h3 class="section">Substitution</h3>
+<a id="lab459"></a><h3 class="section">Substitution</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="substitution_preserves_typing" class="idref" href="#substitution_preserves_typing"><span class="id" title="lemma">substitution_preserves_typing</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:94" class="idref" href="#Gamma:94"><span class="id" title="binder">Gamma</span></a> <a id="x:95" class="idref" href="#x:95"><span class="id" title="binder">x</span></a> <a id="U:96" class="idref" href="#U:96"><span class="id" title="binder">U</span></a> <a id="t:97" class="idref" href="#t:97"><span class="id" title="binder">t</span></a> <a id="v:98" class="idref" href="#v:98"><span class="id" title="binder">v</span></a> <a id="T:99" class="idref" href="#T:99"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#x:95"><span class="id" title="variable">x</span></a> <span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <a class="idref" href="Norm.html#U:96"><span class="id" title="variable">U</span></a> <span class="id" title="notation">;</span> <a class="idref" href="Norm.html#Gamma:94"><span class="id" title="variable">Gamma</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">)</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:97"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:99"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#v:98"><span class="id" title="variable">v</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#U:96"><span class="id" title="variable">U</span></a>   <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -419,12 +408,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab455"></a><h3 class="section">Preservation</h3>
+<a id="lab460"></a><h3 class="section">Preservation</h3>
 
 </div>
 <div class="code">
 
-<br/>
 &nbsp;<span class="id" title="keyword">Theorem</span> <a id="preservation" class="idref" href="#preservation"><span class="id" title="lemma">preservation</span></a> : <span class="id" title="keyword">∀</span> <a id="t:100" class="idref" href="#t:100"><span class="id" title="binder">t</span></a> <a id="t':101" class="idref" href="#t':101"><span class="id" title="binder">t'</span></a> <a id="T:102" class="idref" href="#T:102"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:100"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:102"><span class="id" title="variable">T</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#t:100"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Norm.html#t':101"><span class="id" title="variable">t'</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -447,12 +435,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab456"></a><h3 class="section">Context Invariance</h3>
+<a id="lab461"></a><h3 class="section">Context Invariance</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="appears_free_in" class="idref" href="#appears_free_in"><span class="id" title="inductive">appears_free_in</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="afi_var" class="idref" href="#afi_var"><span class="id" title="constructor">afi_var</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:105" class="idref" href="#x:105"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#appears_free_in:103"><span class="id" title="inductive">appears_free_in</span></a> <a class="idref" href="Norm.html#x:105"><span class="id" title="variable">x</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Norm.html#x:105"><span class="id" title="variable">x</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a><br/>
@@ -548,12 +535,11 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab457"></a><h3 class="section">Determinism</h3>
+<a id="lab462"></a><h3 class="section">Determinism</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="step_deterministic" class="idref" href="#step_deterministic"><span class="id" title="lemma">step_deterministic</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#deterministic"><span class="id" title="definition">deterministic</span></a> <a class="idref" href="Norm.html#step"><span class="id" title="inductive">step</span></a>.<br/>
 <div class="togglescript" id="proofcontrol5" onclick="toggleDisplay('proof5');toggleDisplay('proofcontrol5')"><span class="show"></span></div>
@@ -615,7 +601,7 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 
 <div class="doc">
-<a id="lab458"></a><h1 class="section">Normalization</h1>
+<a id="lab463"></a><h1 class="section">Normalization</h1>
 
 <div class="paragraph"> </div>
 
@@ -636,7 +622,6 @@ This optional chapter is based on chapter 12 of <i>Types and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="halts" class="idref" href="#halts"><span class="id" title="definition">halts</span></a>  (<a id="t:152" class="idref" href="#t:152"><span class="id" title="binder">t</span></a>:<a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a>) : <span class="id" title="keyword">Prop</span> :=  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t':153" class="idref" href="#t':153"><span class="id" title="binder">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Norm.html#t:152"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Norm.html#t':153"><span class="id" title="variable">t'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a>  <a class="idref" href="Norm.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Norm.html#t':153"><span class="id" title="variable">t'</span></a>.<br/>
 </div>
 
@@ -645,7 +630,6 @@ A trivial fact:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="value_halts" class="idref" href="#value_halts"><span class="id" title="lemma">value_halts</span></a> : <span class="id" title="keyword">∀</span> <a id="v:154" class="idref" href="#v:154"><span class="id" title="binder">v</span></a>, <a class="idref" href="Norm.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Norm.html#v:154"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#halts"><span class="id" title="definition">halts</span></a> <a class="idref" href="Norm.html#v:154"><span class="id" title="variable">v</span></a>.<br/>
 <div class="togglescript" id="proofcontrol6" onclick="toggleDisplay('proof6');toggleDisplay('proofcontrol6')"><span class="show"></span></div>
 <div class="proofscript" id="proof6" onclick="toggleDisplay('proof6');toggleDisplay('proofcontrol6')">
@@ -753,7 +737,6 @@ The key issue in the normalization proof (as in many proofs by
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="R" class="idref" href="#R"><span class="id" title="definition">R</span></a> (<a id="T:155" class="idref" href="#T:155"><span class="id" title="binder">T</span></a>:<a class="idref" href="Norm.html#ty"><span class="id" title="inductive">ty</span></a>) (<a id="t:156" class="idref" href="#t:156"><span class="id" title="binder">t</span></a>:<a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:156"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:155"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Norm.html#halts"><span class="id" title="definition">halts</span></a> <a class="idref" href="Norm.html#t:156"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">(</span></a><span class="id" title="keyword">match</span> <a class="idref" href="Norm.html#T:155"><span class="id" title="variable">T</span></a> <span class="id" title="keyword">with</span><br/>
@@ -772,7 +755,6 @@ As immediate consequences of this definition, we have that every
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="R_halts" class="idref" href="#R_halts"><span class="id" title="lemma">R_halts</span></a> : <span class="id" title="keyword">∀</span> {<a id="T:160" class="idref" href="#T:160"><span class="id" title="binder">T</span></a>} {<a id="t:161" class="idref" href="#t:161"><span class="id" title="binder">t</span></a>}, <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:160"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t:161"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#halts"><span class="id" title="definition">halts</span></a> <a class="idref" href="Norm.html#t:161"><span class="id" title="variable">t</span></a>.<br/>
 <div class="togglescript" id="proofcontrol7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')"><span class="show"></span></div>
 <div class="proofscript" id="proof7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')">
@@ -801,7 +783,7 @@ Now we proceed to show the main result, which is that every
 </div>
 
 <div class="doc">
-<a id="lab459"></a><h2 class="section">Membership in <span class="inlinecode"><span class="id" title="var">R_T</span></span> Is Invariant Under Reduction</h2>
+<a id="lab464"></a><h2 class="section">Membership in <span class="inlinecode"><span class="id" title="var">R_T</span></span> Is Invariant Under Reduction</h2>
 
 <div class="paragraph"> </div>
 
@@ -821,7 +803,6 @@ Now we proceed to show the main result, which is that every
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="step_preserves_halting" class="idref" href="#step_preserves_halting"><span class="id" title="lemma">step_preserves_halting</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="t:164" class="idref" href="#t:164"><span class="id" title="binder">t</span></a> <a id="t':165" class="idref" href="#t':165"><span class="id" title="binder">t'</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#t:164"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Norm.html#t':165"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#halts"><span class="id" title="definition">halts</span></a> <a class="idref" href="Norm.html#t:164"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Norm.html#halts"><span class="id" title="definition">halts</span></a> <a class="idref" href="Norm.html#t':165"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
 <div class="togglescript" id="proofcontrol9" onclick="toggleDisplay('proof9');toggleDisplay('proofcontrol9')"><span class="show"></span></div>
@@ -854,7 +835,6 @@ Now the main lemma, which comes in two parts, one for each
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="step_preserves_R" class="idref" href="#step_preserves_R"><span class="id" title="lemma">step_preserves_R</span></a> : <span class="id" title="keyword">∀</span> <a id="T:166" class="idref" href="#T:166"><span class="id" title="binder">T</span></a> <a id="t:167" class="idref" href="#t:167"><span class="id" title="binder">t</span></a> <a id="t':168" class="idref" href="#t':168"><span class="id" title="binder">t'</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#t:167"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Norm.html#t':168"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:166"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t:167"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:166"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t':168"><span class="id" title="variable">t'</span></a>.<br/>
 <div class="togglescript" id="proofcontrol10" onclick="toggleDisplay('proof10');toggleDisplay('proofcontrol10')"><span class="show"></span></div>
 <div class="proofscript" id="proof10" onclick="toggleDisplay('proof10');toggleDisplay('proofcontrol10')">
@@ -881,7 +861,6 @@ The generalization to multiple steps is trivial:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="multistep_preserves_R" class="idref" href="#multistep_preserves_R"><span class="id" title="lemma">multistep_preserves_R</span></a> : <span class="id" title="keyword">∀</span> <a id="T:169" class="idref" href="#T:169"><span class="id" title="binder">T</span></a> <a id="t:170" class="idref" href="#t:170"><span class="id" title="binder">t</span></a> <a id="t':171" class="idref" href="#t':171"><span class="id" title="binder">t'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#t:170"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Norm.html#t':171"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:169"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t:170"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:169"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t':171"><span class="id" title="variable">t'</span></a>.<br/>
 <div class="togglescript" id="proofcontrol11" onclick="toggleDisplay('proof11');toggleDisplay('proofcontrol11')"><span class="show"></span></div>
@@ -900,7 +879,6 @@ In the reverse direction, we must add the fact that <span class="inlinecode"><sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="step_preserves_R'" class="idref" href="#step_preserves_R'"><span class="id" title="lemma">step_preserves_R'</span></a> : <span class="id" title="keyword">∀</span> <a id="T:172" class="idref" href="#T:172"><span class="id" title="binder">T</span></a> <a id="t:173" class="idref" href="#t:173"><span class="id" title="binder">t</span></a> <a id="t':174" class="idref" href="#t':174"><span class="id" title="binder">t'</span></a>,<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:173"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:172"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#t:173"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Norm.html#t':174"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:172"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t':174"><span class="id" title="variable">t'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#R"><span class="id" title="definition">R</span></a> <a class="idref" href="Norm.html#T:172"><span class="id" title="variable">T</span></a> <a class="idref" href="Norm.html#t:173"><span class="id" title="variable">t</span></a>.<br/>
 <div class="togglescript" id="proofcontrol12" onclick="toggleDisplay('proof12');toggleDisplay('proofcontrol12')"><span class="show"></span></div>
@@ -925,7 +903,7 @@ In the reverse direction, we must add the fact that <span class="inlinecode"><sp
 </div>
 
 <div class="doc">
-<a id="lab460"></a><h2 class="section">Closed Instances of Terms of Type <span class="inlinecode"><span class="id" title="var">t</span></span> Belong to <span class="inlinecode"><span class="id" title="var">R_T</span></span></h2>
+<a id="lab465"></a><h2 class="section">Closed Instances of Terms of Type <span class="inlinecode"><span class="id" title="var">t</span></span> Belong to <span class="inlinecode"><span class="id" title="var">R_T</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -962,7 +940,7 @@ In the reverse direction, we must add the fact that <span class="inlinecode"><sp
 </div>
 
 <div class="doc">
-<a id="lab461"></a><h3 class="section">Multisubstitutions, Multi-Extensions, and Instantiations</h3>
+<a id="lab466"></a><h3 class="section">Multisubstitutions, Multi-Extensions, and Instantiations</h3>
 
 <div class="paragraph"> </div>
 
@@ -1004,7 +982,6 @@ In the reverse direction, we must add the fact that <span class="inlinecode"><sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="env" class="idref" href="#env"><span class="id" title="definition">env</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Fixpoint</span> <a id="msubst" class="idref" href="#msubst"><span class="id" title="definition">msubst</span></a> (<a id="ss:178" class="idref" href="#ss:178"><span class="id" title="binder">ss</span></a>:<a class="idref" href="Norm.html#env"><span class="id" title="definition">env</span></a>) (<a id="t:179" class="idref" href="#t:179"><span class="id" title="binder">t</span></a>:<a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a>) : <a class="idref" href="Norm.html#tm"><span class="id" title="inductive">tm</span></a> :=<br/>
 <span class="id" title="keyword">match</span> <a class="idref" href="Norm.html#ss:178"><span class="id" title="variable">ss</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1020,7 +997,6 @@ We need similar machinery to talk about repeated extension of a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="tass" class="idref" href="#tass"><span class="id" title="definition">tass</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Norm.html#ty"><span class="id" title="inductive">ty</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Fixpoint</span> <a id="mupdate" class="idref" href="#mupdate"><span class="id" title="definition">mupdate</span></a> (<a id="Gamma:182" class="idref" href="#Gamma:182"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="Norm.html#context"><span class="id" title="definition">context</span></a>) (<a id="xts:183" class="idref" href="#xts:183"><span class="id" title="binder">xts</span></a> : <a class="idref" href="Norm.html#tass"><span class="id" title="definition">tass</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Norm.html#xts:183"><span class="id" title="variable">xts</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1035,7 +1011,6 @@ We will need some simple operations that work uniformly on
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="lookup" class="idref" href="#lookup"><span class="id" title="definition">lookup</span></a> {<a id="X:186" class="idref" href="#X:186"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Set</span>} (<a id="k:187" class="idref" href="#k:187"><span class="id" title="binder">k</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="l:188" class="idref" href="#l:188"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Norm.html#X:186"><span class="id" title="variable">X</span></a>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Norm.html#X:186"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Norm.html#l:188"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1060,7 +1035,6 @@ An <i>instantiation</i> combines a type assignment and a value
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="instantiation" class="idref" href="#instantiation"><span class="id" title="inductive">instantiation</span></a> :  <a class="idref" href="Norm.html#tass"><span class="id" title="definition">tass</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#env"><span class="id" title="definition">env</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 | <a id="V_nil" class="idref" href="#V_nil"><span class="id" title="constructor">V_nil</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#instantiation:196"><span class="id" title="inductive">instantiation</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><br/>
@@ -1075,7 +1049,7 @@ We now proceed to prove various properties of these definitions.
 </div>
 
 <div class="doc">
-<a id="lab462"></a><h3 class="section">More Substitution Facts</h3>
+<a id="lab467"></a><h3 class="section">More Substitution Facts</h3>
 
 <div class="paragraph"> </div>
 
@@ -1083,7 +1057,6 @@ We now proceed to prove various properties of these definitions.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="vacuous_substitution" class="idref" href="#vacuous_substitution"><span class="id" title="lemma">vacuous_substitution</span></a> : <span class="id" title="keyword">∀</span>  <a id="t:203" class="idref" href="#t:203"><span class="id" title="binder">t</span></a> <a id="x:204" class="idref" href="#x:204"><span class="id" title="binder">x</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="Norm.html#appears_free_in"><span class="id" title="inductive">appears_free_in</span></a> <a class="idref" href="Norm.html#x:204"><span class="id" title="variable">x</span></a> <a class="idref" href="Norm.html#t:203"><span class="id" title="variable">t</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="t':205" class="idref" href="#t':205"><span class="id" title="binder">t'</span></a>, <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">[</span></a><a class="idref" href="Norm.html#x:204"><span class="id" title="variable">x</span></a><a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">:=</span></a><a class="idref" href="Norm.html#t':205"><span class="id" title="variable">t'</span></a><a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">]</span></a><a class="idref" href="Norm.html#t:203"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Norm.html#t:203"><span class="id" title="variable">t</span></a>.<br/>
@@ -1165,12 +1138,11 @@ We now proceed to prove various properties of these definitions.
 </div>
 
 <div class="doc">
-<a id="lab463"></a><h3 class="section">Properties of Multi-Substitutions</h3>
+<a id="lab468"></a><h3 class="section">Properties of Multi-Substitutions</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="msubst_closed" class="idref" href="#msubst_closed"><span class="id" title="lemma">msubst_closed</span></a>: <span class="id" title="keyword">∀</span> <a id="t:221" class="idref" href="#t:221"><span class="id" title="binder">t</span></a>, <a class="idref" href="Norm.html#closed"><span class="id" title="definition">closed</span></a> <a class="idref" href="Norm.html#t:221"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">∀</span> <a id="ss:222" class="idref" href="#ss:222"><span class="id" title="binder">ss</span></a>, <a class="idref" href="Norm.html#msubst"><span class="id" title="definition">msubst</span></a> <a class="idref" href="Norm.html#ss:222"><span class="id" title="variable">ss</span></a> <a class="idref" href="Norm.html#t:221"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Norm.html#t:221"><span class="id" title="variable">t</span></a>.<br/>
 <div class="togglescript" id="proofcontrol19" onclick="toggleDisplay('proof19');toggleDisplay('proofcontrol19')"><span class="show"></span></div>
 <div class="proofscript" id="proof19" onclick="toggleDisplay('proof19');toggleDisplay('proofcontrol19')">
@@ -1187,7 +1159,6 @@ Closed environments are those that contain only closed terms.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="closed_env" class="idref" href="#closed_env"><span class="id" title="definition">closed_env</span></a> (<a id="env:223" class="idref" href="#env:223"><span class="id" title="binder">env</span></a>:<a class="idref" href="Norm.html#env"><span class="id" title="definition">env</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Norm.html#env:223"><span class="id" title="variable">env</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><br/>
@@ -1201,7 +1172,6 @@ Next come a series of lemmas charcterizing how <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="subst_msubst" class="idref" href="#subst_msubst"><span class="id" title="lemma">subst_msubst</span></a>: <span class="id" title="keyword">∀</span> <a id="env:226" class="idref" href="#env:226"><span class="id" title="binder">env</span></a> <a id="x:227" class="idref" href="#x:227"><span class="id" title="binder">x</span></a> <a id="v:228" class="idref" href="#v:228"><span class="id" title="binder">v</span></a> <a id="t:229" class="idref" href="#t:229"><span class="id" title="binder">t</span></a>, <a class="idref" href="Norm.html#closed"><span class="id" title="definition">closed</span></a> <a class="idref" href="Norm.html#v:228"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#closed_env"><span class="id" title="definition">closed_env</span></a> <a class="idref" href="Norm.html#env:226"><span class="id" title="variable">env</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#msubst"><span class="id" title="definition">msubst</span></a> <a class="idref" href="Norm.html#env:226"><span class="id" title="variable">env</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">[</span></a><a class="idref" href="Norm.html#x:227"><span class="id" title="variable">x</span></a><a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">:=</span></a><a class="idref" href="Norm.html#v:228"><span class="id" title="variable">v</span></a><a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">]</span></a><a class="idref" href="Norm.html#t:229"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">[</span></a><a class="idref" href="Norm.html#x:227"><span class="id" title="variable">x</span></a><a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">:=</span></a><a class="idref" href="Norm.html#v:228"><span class="id" title="variable">v</span></a><a class="idref" href="Norm.html#83dbd6b289334c93dbc0440277d51136"><span class="id" title="notation">]</span></a>  <a class="idref" href="Norm.html#45164e50103cb4f5a6f30f892835b135"><span class="id" title="notation">{</span></a> <a class="idref" href="Norm.html#msubst"><span class="id" title="definition">msubst</span></a> (<a class="idref" href="Norm.html#drop"><span class="id" title="definition">drop</span></a> <a class="idref" href="Norm.html#x:227"><span class="id" title="variable">x</span></a> <a class="idref" href="Norm.html#env:226"><span class="id" title="variable">env</span></a>) <a class="idref" href="Norm.html#t:229"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#45164e50103cb4f5a6f30f892835b135"><span class="id" title="notation">}</span></a>  <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a> .<br/>
 <div class="togglescript" id="proofcontrol20" onclick="toggleDisplay('proof20');toggleDisplay('proofcontrol20')"><span class="show"></span></div>
@@ -1267,12 +1237,11 @@ You'll need similar functions for the other term constructors.
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
 <div class="doc">
-<a id="lab464"></a><h3 class="section">Properties of Multi-Extensions</h3>
+<a id="lab469"></a><h3 class="section">Properties of Multi-Extensions</h3>
 
 <div class="paragraph"> </div>
 
@@ -1281,7 +1250,6 @@ You'll need similar functions for the other term constructors.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="mupdate_lookup" class="idref" href="#mupdate_lookup"><span class="id" title="lemma">mupdate_lookup</span></a> : <span class="id" title="keyword">∀</span> (<a id="c:239" class="idref" href="#c:239"><span class="id" title="binder">c</span></a> : <a class="idref" href="Norm.html#tass"><span class="id" title="definition">tass</span></a>) (<a id="x:240" class="idref" href="#x:240"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#lookup"><span class="id" title="definition">lookup</span></a> <a class="idref" href="Norm.html#x:240"><span class="id" title="variable">x</span></a> <a class="idref" href="Norm.html#c:239"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="Norm.html#mupdate"><span class="id" title="definition">mupdate</span></a> <span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#c:239"><span class="id" title="variable">c</span></a>) <a class="idref" href="Norm.html#x:240"><span class="id" title="variable">x</span></a>.<br/>
 <div class="togglescript" id="proofcontrol24" onclick="toggleDisplay('proof24');toggleDisplay('proofcontrol24')"><span class="show"></span></div>
@@ -1313,7 +1281,7 @@ You'll need similar functions for the other term constructors.
 </div>
 
 <div class="doc">
-<a id="lab465"></a><h3 class="section">Properties of Instantiations</h3>
+<a id="lab470"></a><h3 class="section">Properties of Instantiations</h3>
 
 <div class="paragraph"> </div>
 
@@ -1321,7 +1289,6 @@ You'll need similar functions for the other term constructors.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="instantiation_domains_match" class="idref" href="#instantiation_domains_match"><span class="id" title="lemma">instantiation_domains_match</span></a>: <span class="id" title="keyword">∀</span> {<a id="c:245" class="idref" href="#c:245"><span class="id" title="binder">c</span></a>} {<a id="e:246" class="idref" href="#e:246"><span class="id" title="binder">e</span></a>},<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#instantiation"><span class="id" title="inductive">instantiation</span></a> <a class="idref" href="Norm.html#c:245"><span class="id" title="variable">c</span></a> <a class="idref" href="Norm.html#e:246"><span class="id" title="variable">e</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> {<a id="x:247" class="idref" href="#x:247"><span class="id" title="binder">x</span></a>} {<a id="T:248" class="idref" href="#T:248"><span class="id" title="binder">T</span></a>},<br/>
@@ -1383,7 +1350,7 @@ You'll need similar functions for the other term constructors.
 </div>
 
 <div class="doc">
-<a id="lab466"></a><h3 class="section">Congruence Lemmas on Multistep</h3>
+<a id="lab471"></a><h3 class="section">Congruence Lemmas on Multistep</h3>
 
 <div class="paragraph"> </div>
 
@@ -1391,7 +1358,6 @@ You'll need similar functions for the other term constructors.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="multistep_App2" class="idref" href="#multistep_App2"><span class="id" title="lemma">multistep_App2</span></a> : <span class="id" title="keyword">∀</span> <a id="v:260" class="idref" href="#v:260"><span class="id" title="binder">v</span></a> <a id="t:261" class="idref" href="#t:261"><span class="id" title="binder">t</span></a> <a id="t':262" class="idref" href="#t':262"><span class="id" title="binder">t'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Norm.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Norm.html#v:260"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#t:261"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Norm.html#t':262"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Norm.html#v:260"><span class="id" title="variable">v</span></a> <a class="idref" href="Norm.html#t:261"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a> <a class="idref" href="Norm.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Norm.html#v:260"><span class="id" title="variable">v</span></a> <a class="idref" href="Norm.html#t':262"><span class="id" title="variable">t'</span></a> <a class="idref" href="Norm.html#96e24cc1b3765f349012b832d1dd22ad"><span class="id" title="notation">}&gt;</span></a>.<br/>
 <div class="togglescript" id="proofcontrol30" onclick="toggleDisplay('proof30');toggleDisplay('proofcontrol30')"><span class="show"></span></div>
@@ -1409,7 +1375,7 @@ You'll need similar functions for the other term constructors.
 </div>
 
 <div class="doc">
-<a id="lab467"></a><h3 class="section">The R Lemma</h3>
+<a id="lab472"></a><h3 class="section">The R Lemma</h3>
 
 <div class="paragraph"> </div>
 
@@ -1422,7 +1388,6 @@ You'll need similar functions for the other term constructors.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="msubst_preserves_typing" class="idref" href="#msubst_preserves_typing"><span class="id" title="lemma">msubst_preserves_typing</span></a> : <span class="id" title="keyword">∀</span> <a id="c:263" class="idref" href="#c:263"><span class="id" title="binder">c</span></a> <a id="e:264" class="idref" href="#e:264"><span class="id" title="binder">e</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#instantiation"><span class="id" title="inductive">instantiation</span></a> <a class="idref" href="Norm.html#c:263"><span class="id" title="variable">c</span></a> <a class="idref" href="Norm.html#e:264"><span class="id" title="variable">e</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="Gamma:265" class="idref" href="#Gamma:265"><span class="id" title="binder">Gamma</span></a> <a id="t:266" class="idref" href="#t:266"><span class="id" title="binder">t</span></a> <a id="S:267" class="idref" href="#S:267"><span class="id" title="binder">S</span></a>, <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#mupdate"><span class="id" title="definition">mupdate</span></a> <a class="idref" href="Norm.html#Gamma:265"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="Norm.html#c:263"><span class="id" title="variable">c</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">)</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:266"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#S:267"><span class="id" title="variable">S</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1445,7 +1410,6 @@ And at long last, the main lemma.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="msubst_R" class="idref" href="#msubst_R"><span class="id" title="lemma">msubst_R</span></a> : <span class="id" title="keyword">∀</span> <a id="c:268" class="idref" href="#c:268"><span class="id" title="binder">c</span></a> <a id="env:269" class="idref" href="#env:269"><span class="id" title="binder">env</span></a> <a id="t:270" class="idref" href="#t:270"><span class="id" title="binder">t</span></a> <a id="T:271" class="idref" href="#T:271"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">(</span></a><a class="idref" href="Norm.html#mupdate"><span class="id" title="definition">mupdate</span></a> <span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#c:268"><span class="id" title="variable">c</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">)</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:270"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:271"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Norm.html#instantiation"><span class="id" title="inductive">instantiation</span></a> <a class="idref" href="Norm.html#c:268"><span class="id" title="variable">c</span></a> <a class="idref" href="Norm.html#env:269"><span class="id" title="variable">env</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1511,7 +1475,7 @@ And at long last, the main lemma.
 </div>
 
 <div class="doc">
-<a id="lab468"></a><h3 class="section">Normalization Theorem</h3>
+<a id="lab473"></a><h3 class="section">Normalization Theorem</h3>
 
 <div class="paragraph"> </div>
 
@@ -1519,7 +1483,6 @@ And at long last, the main lemma.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="normalization" class="idref" href="#normalization"><span class="id" title="lemma">normalization</span></a> : <span class="id" title="keyword">∀</span> <a id="t:274" class="idref" href="#t:274"><span class="id" title="binder">t</span></a> <a id="T:275" class="idref" href="#T:275"><span class="id" title="binder">T</span></a>, <span class="id" title="definition">empty</span> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="Norm.html#t:274"><span class="id" title="variable">t</span></a> <a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Norm.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="Norm.html#T:275"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Norm.html#halts"><span class="id" title="definition">halts</span></a> <a class="idref" href="Norm.html#t:274"><span class="id" title="variable">t</span></a>.<br/>
 <div class="togglescript" id="proofcontrol33" onclick="toggleDisplay('proof33');toggleDisplay('proofcontrol33')"><span class="show"></span></div>
 <div class="proofscript" id="proof33" onclick="toggleDisplay('proof33');toggleDisplay('proofcontrol33')">
@@ -1533,7 +1496,7 @@ And at long last, the main lemma.
 </div>
 
 <br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:09&nbsp;*)</span><br/>
 </div>
 </div>
 

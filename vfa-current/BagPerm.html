@@ -31,8 +31,6 @@
 
 <h1 class="libtitle">BagPerm<span class="subtitle">Insertion Sort With Bags</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
@@ -51,7 +49,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>. <span class="comment">(*&nbsp;for&nbsp;manual&nbsp;grading&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Setoids.Setoid.html#"><span class="id" title="library">Setoid</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
@@ -78,7 +75,6 @@ We will say two bags are <i>equivalent</i> if they have the same number
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="bag_eqv" class="idref" href="#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> (<a id="b<sub>1</sub>:5" class="idref" href="#b<sub>1</sub>:5"><span class="id" title="binder">b<sub>1</sub></span></a> <a id="b<sub>2</sub>:6" class="idref" href="#b<sub>2</sub>:6"><span class="id" title="binder">b<sub>2</sub></span></a>: <a class="idref" href="BagPerm.html#bag"><span class="id" title="definition">bag</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="n:7" class="idref" href="#n:7"><span class="id" title="binder">n</span></a>, <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#n:7"><span class="id" title="variable">n</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>:5"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="BagPerm.html#count"><span class="id" title="definition">count</span></a> <a class="idref" href="BagPerm.html#n:7"><span class="id" title="variable">n</span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>:6"><span class="id" title="variable">b<sub>2</sub></span></a>.<br/>
 </div>
@@ -89,7 +85,6 @@ We will say two bags are <i>equivalent</i> if they have the same number
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;It&nbsp;is&nbsp;easy&nbsp;to&nbsp;prove&nbsp;<span class="inlinecode"><span class="id" title="var">bag_eqv</span></span>&nbsp;is&nbsp;an&nbsp;equivalence&nbsp;relation.&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="bag_eqv_refl" class="idref" href="#bag_eqv_refl"><span class="id" title="lemma">bag_eqv_refl</span></a> : <span class="id" title="keyword">∀</span> <a id="b:8" class="idref" href="#b:8"><span class="id" title="binder">b</span></a>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b:8"><span class="id" title="variable">b</span></a> <a class="idref" href="BagPerm.html#b:8"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -107,7 +102,6 @@ The following little lemma is handy in a couple of places.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="bag_eqv_cons" class="idref" href="#bag_eqv_cons"><span class="id" title="lemma">bag_eqv_cons</span></a> : <span class="id" title="keyword">∀</span> <a id="x:14" class="idref" href="#x:14"><span class="id" title="binder">x</span></a> <a id="b<sub>1</sub>:15" class="idref" href="#b<sub>1</sub>:15"><span class="id" title="binder">b<sub>1</sub></span></a> <a id="b<sub>2</sub>:16" class="idref" href="#b<sub>2</sub>:16"><span class="id" title="binder">b<sub>2</sub></span></a>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#b<sub>1</sub>:15"><span class="id" title="variable">b<sub>1</sub></span></a> <a class="idref" href="BagPerm.html#b<sub>2</sub>:16"><span class="id" title="variable">b<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> (<a class="idref" href="BagPerm.html#x:14"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="BagPerm.html#b<sub>1</sub>:15"><span class="id" title="variable">b<sub>1</sub></span></a>) (<a class="idref" href="BagPerm.html#x:14"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="BagPerm.html#b<sub>2</sub>:16"><span class="id" title="variable">b<sub>2</sub></span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -128,7 +122,6 @@ The following little lemma is handy in a couple of places.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="is_a_sorting_algorithm'" class="idref" href="#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> (<a id="f:17" class="idref" href="#f:17"><span class="id" title="binder">f</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="al:18" class="idref" href="#al:18"><span class="id" title="binder">al</span></a>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> <a class="idref" href="BagPerm.html#al:18"><span class="id" title="variable">al</span></a> (<a class="idref" href="BagPerm.html#f:17"><span class="id" title="variable">f</span></a> <a class="idref" href="BagPerm.html#al:18"><span class="id" title="variable">al</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Sort.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="BagPerm.html#f:17"><span class="id" title="variable">f</span></a> <a class="idref" href="BagPerm.html#al:18"><span class="id" title="variable">al</span></a>).<br/>
 </div>
@@ -141,7 +134,6 @@ The following little lemma is handy in a couple of places.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="insert_bag" class="idref" href="#insert_bag"><span class="id" title="lemma">insert_bag</span></a>: <span class="id" title="keyword">∀</span> <a id="x:19" class="idref" href="#x:19"><span class="id" title="binder">x</span></a> <a id="l:20" class="idref" href="#l:20"><span class="id" title="binder">l</span></a>, <a class="idref" href="BagPerm.html#bag_eqv"><span class="id" title="definition">bag_eqv</span></a> (<a class="idref" href="BagPerm.html#x:19"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="BagPerm.html#l:20"><span class="id" title="variable">l</span></a>) (<a class="idref" href="Sort.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="BagPerm.html#x:19"><span class="id" title="variable">x</span></a> <a class="idref" href="BagPerm.html#l:20"><span class="id" title="variable">l</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -167,7 +159,6 @@ The following little lemma is handy in a couple of places.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="insertion_sort_correct" class="idref" href="#insertion_sort_correct"><span class="id" title="lemma">insertion_sort_correct</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="BagPerm.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="Sort.html#sort"><span class="id" title="definition">sort</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -330,7 +321,6 @@ Therefore, it doesn't matter whether you prove your sorting
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Corollary</span> <a id="sort_specifications_equivalent" class="idref" href="#sort_specifications_equivalent"><span class="id" title="lemma">sort_specifications_equivalent</span></a>:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="sort:38" class="idref" href="#sort:38"><span class="id" title="binder">sort</span></a>, <a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a> <a class="idref" href="BagPerm.html#sort:38"><span class="id" title="variable">sort</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a>  <a class="idref" href="BagPerm.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="BagPerm.html#sort:38"><span class="id" title="variable">sort</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -343,8 +333,7 @@ Therefore, it doesn't matter whether you prove your sorting
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:23&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:14&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Equiv<span class="subtitle">Program Equivalence</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Bool.Bool.html#"><span class="id" title="library">Bool.Bool</span></a>.<br/>
@@ -172,7 +169,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="aequiv" class="idref" href="#aequiv"><span class="id" title="definition">aequiv</span></a> (<a id="a<sub>1</sub>:1" class="idref" href="#a<sub>1</sub>:1"><span class="id" title="binder">a<sub>1</sub></span></a> <a id="a<sub>2</sub>:2" class="idref" href="#a<sub>2</sub>:2"><span class="id" title="binder">a<sub>2</sub></span></a> : <span class="id" title="inductive">aexp</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="st:3" class="idref" href="#st:3"><span class="id" title="binder">st</span></a> : <span class="id" title="definition">state</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">aeval</span> <a class="idref" href="Equiv.html#st:3"><span class="id" title="variable">st</span></a> <a class="idref" href="Equiv.html#a<sub>1</sub>:1"><span class="id" title="variable">a<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">aeval</span> <a class="idref" href="Equiv.html#st:3"><span class="id" title="variable">st</span></a> <a class="idref" href="Equiv.html#a<sub>2</sub>:2"><span class="id" title="variable">a<sub>2</sub></span></a>.<br/><hr class='doublespaceincode'/>
@@ -187,7 +183,6 @@ Here are some simple examples of equivalences of arithmetic
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="aequiv_example" class="idref" href="#aequiv_example"><span class="id" title="lemma">aequiv_example</span></a>: <a class="idref" href="Equiv.html#aequiv"><span class="id" title="definition">aequiv</span></a> <span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">X</span> <span class="id" title="notation">}&gt;</span> <span class="id" title="notation">&lt;{</span> 0 <span class="id" title="notation">}&gt;</span>.<br/>
 <div class="togglescript" id="proofcontrol1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')"><span class="show"></span></div>
 <div class="proofscript" id="proof1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')">
@@ -221,7 +216,6 @@ For commands, the situation is a little more subtle.  We can't
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="cequiv" class="idref" href="#cequiv"><span class="id" title="definition">cequiv</span></a> (<a id="c<sub>1</sub>:7" class="idref" href="#c<sub>1</sub>:7"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:8" class="idref" href="#c<sub>2</sub>:8"><span class="id" title="binder">c<sub>2</sub></span></a> : <span class="id" title="inductive">com</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="st:9" class="idref" href="#st:9"><span class="id" title="binder">st</span></a> <a id="st':10" class="idref" href="#st':10"><span class="id" title="binder">st'</span></a> : <span class="id" title="definition">state</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:9"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:7"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':10"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:9"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:8"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':10"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
@@ -237,7 +231,6 @@ For commands, the situation is a little more subtle.  We can't
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="skip_left" class="idref" href="#skip_left"><span class="id" title="lemma">skip_left</span></a> : <span class="id" title="keyword">∀</span> <a id="c:11" class="idref" href="#c:11"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">skip</span><span class="id" title="notation">;</span> <a class="idref" href="Equiv.html#c:11"><span class="id" title="variable">c</span></a> <span class="id" title="notation">}&gt;</span><br/>
@@ -264,7 +257,6 @@ For commands, the situation is a little more subtle.  We can't
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="skip_right" class="idref" href="#skip_right"><span class="id" title="lemma">skip_right</span></a> : <span class="id" title="keyword">∀</span> <a id="c:12" class="idref" href="#c:12"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#c:12"><span class="id" title="variable">c</span></a> <span class="id" title="notation">;</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">}&gt;</span><br/>
@@ -282,7 +274,6 @@ For commands, the situation is a little more subtle.  We can't
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="if_true_simple" class="idref" href="#if_true_simple"><span class="id" title="lemma">if_true_simple</span></a> : <span class="id" title="keyword">∀</span> <a id="c<sub>1</sub>:13" class="idref" href="#c<sub>1</sub>:13"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:14" class="idref" href="#c<sub>2</sub>:14"><span class="id" title="binder">c<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">if</span> <span class="id" title="notation">true</span> <span class="id" title="notation">then</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:13"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">else</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:14"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span><br/>
@@ -372,7 +363,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="if_true" class="idref" href="#if_true"><span class="id" title="lemma">if_true</span></a>: <span class="id" title="keyword">∀</span> <a id="b:15" class="idref" href="#b:15"><span class="id" title="binder">b</span></a> <a id="c<sub>1</sub>:16" class="idref" href="#c<sub>1</sub>:16"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:17" class="idref" href="#c<sub>2</sub>:17"><span class="id" title="binder">c<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#bequiv"><span class="id" title="definition">bequiv</span></a> <a class="idref" href="Equiv.html#b:15"><span class="id" title="variable">b</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">true</span><span class="id" title="notation">}&gt;</span>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
@@ -422,7 +412,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="swap_if_branches" class="idref" href="#swap_if_branches"><span class="id" title="lemma">swap_if_branches</span></a> : <span class="id" title="keyword">∀</span> <a id="b:21" class="idref" href="#b:21"><span class="id" title="binder">b</span></a> <a id="c<sub>1</sub>:22" class="idref" href="#c<sub>1</sub>:22"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:23" class="idref" href="#c<sub>2</sub>:23"><span class="id" title="binder">c<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">if</span> <a class="idref" href="Equiv.html#b:21"><span class="id" title="variable">b</span></a> <span class="id" title="notation">then</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:22"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">else</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:23"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span><br/>
@@ -443,7 +432,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="while_false" class="idref" href="#while_false"><span class="id" title="lemma">while_false</span></a> : <span class="id" title="keyword">∀</span> <a id="b:24" class="idref" href="#b:24"><span class="id" title="binder">b</span></a> <a id="c:25" class="idref" href="#c:25"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#bequiv"><span class="id" title="definition">bequiv</span></a> <a class="idref" href="Equiv.html#b:24"><span class="id" title="variable">b</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">false</span><span class="id" title="notation">}&gt;</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
@@ -524,7 +512,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="while_true_nonterm" class="idref" href="#while_true_nonterm"><span class="id" title="lemma">while_true_nonterm</span></a> : <span class="id" title="keyword">∀</span> <a id="b:26" class="idref" href="#b:26"><span class="id" title="binder">b</span></a> <a id="c:27" class="idref" href="#c:27"><span class="id" title="binder">c</span></a> <a id="st:28" class="idref" href="#st:28"><span class="id" title="binder">st</span></a> <a id="st':29" class="idref" href="#st':29"><span class="id" title="binder">st'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#bequiv"><span class="id" title="definition">bequiv</span></a> <a class="idref" href="Equiv.html#b:26"><span class="id" title="variable">b</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">true</span><span class="id" title="notation">}&gt;</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">~(</span></a> <a class="idref" href="Equiv.html#st:28"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <span class="id" title="notation">while</span> <a class="idref" href="Equiv.html#b:26"><span class="id" title="variable">b</span></a> <span class="id" title="notation">do</span> <a class="idref" href="Equiv.html#c:27"><span class="id" title="variable">c</span></a> <span class="id" title="notation">end</span> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':29"><span class="id" title="variable">st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">)</span></a>.<br/>
@@ -561,7 +548,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="while_true" class="idref" href="#while_true"><span class="id" title="lemma">while_true</span></a> : <span class="id" title="keyword">∀</span> <a id="b:30" class="idref" href="#b:30"><span class="id" title="binder">b</span></a> <a id="c:31" class="idref" href="#c:31"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#bequiv"><span class="id" title="definition">bequiv</span></a> <a class="idref" href="Equiv.html#b:30"><span class="id" title="variable">b</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">true</span><span class="id" title="notation">}&gt;</span>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
@@ -584,7 +570,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="loop_unrolling" class="idref" href="#loop_unrolling"><span class="id" title="lemma">loop_unrolling</span></a> : <span class="id" title="keyword">∀</span> <a id="b:32" class="idref" href="#b:32"><span class="id" title="binder">b</span></a> <a id="c:33" class="idref" href="#c:33"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <a class="idref" href="Equiv.html#b:32"><span class="id" title="variable">b</span></a> <span class="id" title="notation">do</span> <a class="idref" href="Equiv.html#c:33"><span class="id" title="variable">c</span></a> <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span><br/>
@@ -635,7 +620,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="identity_assignment" class="idref" href="#identity_assignment"><span class="id" title="lemma">identity_assignment</span></a> : <span class="id" title="keyword">∀</span> <a id="x:37" class="idref" href="#x:37"><span class="id" title="binder">x</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#x:37"><span class="id" title="variable">x</span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#x:37"><span class="id" title="variable">x</span></a> <span class="id" title="notation">}&gt;</span><br/>
@@ -689,7 +673,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="prog_a" class="idref" href="#prog_a"><span class="id" title="definition">prog_a</span></a> : <span class="id" title="inductive">com</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <span class="id" title="notation">¬</span><span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">≤</span> 0<span class="id" title="notation">)</span> <span class="id" title="notation">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
@@ -756,7 +739,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="refl_aequiv" class="idref" href="#refl_aequiv"><span class="id" title="lemma">refl_aequiv</span></a> : <span class="id" title="keyword">∀</span> (<a id="a:40" class="idref" href="#a:40"><span class="id" title="binder">a</span></a> : <span class="id" title="inductive">aexp</span>), <a class="idref" href="Equiv.html#aequiv"><span class="id" title="definition">aequiv</span></a> <a class="idref" href="Equiv.html#a:40"><span class="id" title="variable">a</span></a> <a class="idref" href="Equiv.html#a:40"><span class="id" title="variable">a</span></a>.<br/>
 <div class="togglescript" id="proofcontrol7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')"><span class="show"></span></div>
 <div class="proofscript" id="proof7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')">
@@ -899,7 +881,6 @@ Of course, no (human) programmer would write a conditional whose
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="CAsgn_congruence" class="idref" href="#CAsgn_congruence"><span class="id" title="lemma">CAsgn_congruence</span></a> : <span class="id" title="keyword">∀</span> <a id="x:58" class="idref" href="#x:58"><span class="id" title="binder">x</span></a> <a id="a:59" class="idref" href="#a:59"><span class="id" title="binder">a</span></a> <a id="a':60" class="idref" href="#a':60"><span class="id" title="binder">a'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#aequiv"><span class="id" title="definition">aequiv</span></a> <a class="idref" href="Equiv.html#a:59"><span class="id" title="variable">a</span></a> <a class="idref" href="Equiv.html#a':60"><span class="id" title="variable">a'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <span class="id" title="notation">&lt;{</span><a class="idref" href="Equiv.html#x:58"><span class="id" title="variable">x</span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#a:59"><span class="id" title="variable">a</span></a><span class="id" title="notation">}&gt;</span> <span class="id" title="notation">&lt;{</span><a class="idref" href="Equiv.html#x:58"><span class="id" title="variable">x</span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#a':60"><span class="id" title="variable">a'</span></a><span class="id" title="notation">}&gt;</span>.<br/>
@@ -984,7 +965,6 @@ The congruence property for loops is a little more interesting,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="CWhile_congruence" class="idref" href="#CWhile_congruence"><span class="id" title="lemma">CWhile_congruence</span></a> : <span class="id" title="keyword">∀</span> <a id="b:61" class="idref" href="#b:61"><span class="id" title="binder">b</span></a> <a id="b':62" class="idref" href="#b':62"><span class="id" title="binder">b'</span></a> <a id="c:63" class="idref" href="#c:63"><span class="id" title="binder">c</span></a> <a id="c':64" class="idref" href="#c':64"><span class="id" title="binder">c'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#bequiv"><span class="id" title="definition">bequiv</span></a> <a class="idref" href="Equiv.html#b:61"><span class="id" title="variable">b</span></a> <a class="idref" href="Equiv.html#b':62"><span class="id" title="variable">b'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <a class="idref" href="Equiv.html#c:63"><span class="id" title="variable">c</span></a> <a class="idref" href="Equiv.html#c':64"><span class="id" title="variable">c'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <a class="idref" href="Equiv.html#b:61"><span class="id" title="variable">b</span></a> <span class="id" title="notation">do</span> <a class="idref" href="Equiv.html#c:63"><span class="id" title="variable">c</span></a> <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span> <span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <a class="idref" href="Equiv.html#b':62"><span class="id" title="variable">b'</span></a> <span class="id" title="notation">do</span> <a class="idref" href="Equiv.html#c':64"><span class="id" title="variable">c'</span></a> <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span>.<br/>
@@ -1034,8 +1014,6 @@ The congruence property for loops is a little more interesting,
 <font size=-2>&#9744;</font>
 </div>
 
-<div class="code">
-</div>
 
 <br/>
 </div>
@@ -1062,7 +1040,6 @@ The congruence property for loops is a little more interesting,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="congruence_example" class="idref" href="#congruence_example"><span class="id" title="definition">congruence_example</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Program&nbsp;1:&nbsp;*)</span><br/>
@@ -1100,7 +1077,6 @@ The congruence property for loops is a little more interesting,
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1122,7 +1098,6 @@ The congruence property for loops is a little more interesting,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="atrans_sound" class="idref" href="#atrans_sound"><span class="id" title="definition">atrans_sound</span></a> (<a id="atrans:87" class="idref" href="#atrans:87"><span class="id" title="binder">atrans</span></a> : <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="inductive">aexp</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="a:88" class="idref" href="#a:88"><span class="id" title="binder">a</span></a> : <span class="id" title="inductive">aexp</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Equiv.html#aequiv"><span class="id" title="definition">aequiv</span></a> <a class="idref" href="Equiv.html#a:88"><span class="id" title="variable">a</span></a> (<a class="idref" href="Equiv.html#atrans:87"><span class="id" title="variable">atrans</span></a> <a class="idref" href="Equiv.html#a:88"><span class="id" title="variable">a</span></a>).<br/><hr class='doublespaceincode'/>
@@ -1149,7 +1124,6 @@ The congruence property for loops is a little more interesting,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="fold_constants_aexp" class="idref" href="#fold_constants_aexp"><span class="id" title="definition">fold_constants_aexp</span></a> (<a id="a:93" class="idref" href="#a:93"><span class="id" title="binder">a</span></a> : <span class="id" title="inductive">aexp</span>) : <span class="id" title="inductive">aexp</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Equiv.html#a:93"><span class="id" title="variable">a</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <span class="id" title="constructor">ANum</span> <span class="id" title="var">n</span>       ⇒ <span class="id" title="constructor">ANum</span> <span class="id" title="var">n</span><br/>
@@ -1194,7 +1168,6 @@ Note that this version of constant folding doesn't eliminate
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="fold_aexp_ex<sub>2</sub>" class="idref" href="#fold_aexp_ex<sub>2</sub>"><span class="id" title="definition">fold_aexp_ex<sub>2</sub></span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#fold_constants_aexp"><span class="id" title="definition">fold_constants_aexp</span></a> <span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="notation">((</span>0 <span class="id" title="notation">×</span> 6<span class="id" title="notation">)</span> <span class="id" title="notation">+</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span> <span class="id" title="notation">}&gt;</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="notation">(</span>0 <span class="id" title="notation">+</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span> <span class="id" title="notation">}&gt;</span>.<br/>
 <div class="togglescript" id="proofcontrol19" onclick="toggleDisplay('proof19');toggleDisplay('proofcontrol19')"><span class="show"></span></div>
@@ -1210,7 +1183,6 @@ Not only can we lift <span class="inlinecode"><span class="id" title="var">fold_
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="fold_constants_bexp" class="idref" href="#fold_constants_bexp"><span class="id" title="definition">fold_constants_bexp</span></a> (<a id="b:96" class="idref" href="#b:96"><span class="id" title="binder">b</span></a> : <span class="id" title="inductive">bexp</span>) : <span class="id" title="inductive">bexp</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Equiv.html#b:96"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <span class="id" title="notation">&lt;{</span><span class="id" title="notation">true</span><span class="id" title="notation">}&gt;</span>        ⇒ <span class="id" title="notation">&lt;{</span><span class="id" title="notation">true</span><span class="id" title="notation">}&gt;</span><br/>
@@ -1271,7 +1243,6 @@ To fold constants in a command, we apply the appropriate folding
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="fold_constants_com" class="idref" href="#fold_constants_com"><span class="id" title="definition">fold_constants_com</span></a> (<a id="c:99" class="idref" href="#c:99"><span class="id" title="binder">c</span></a> : <span class="id" title="inductive">com</span>) : <span class="id" title="inductive">com</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Equiv.html#c:99"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <span class="id" title="notation">&lt;{</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">}&gt;</span> ⇒<br/>
@@ -1333,7 +1304,6 @@ To fold constants in a command, we apply the appropriate folding
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="fold_constants_aexp_sound" class="idref" href="#fold_constants_aexp_sound"><span class="id" title="lemma">fold_constants_aexp_sound</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#atrans_sound"><span class="id" title="definition">atrans_sound</span></a> <a class="idref" href="Equiv.html#fold_constants_aexp"><span class="id" title="definition">fold_constants_aexp</span></a>.<br/>
 <div class="togglescript" id="proofcontrol23" onclick="toggleDisplay('proof23');toggleDisplay('proofcontrol23')"><span class="show"></span></div>
@@ -1482,7 +1452,6 @@ To fold constants in a command, we apply the appropriate folding
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="fold_constants_bexp_sound" class="idref" href="#fold_constants_bexp_sound"><span class="id" title="lemma">fold_constants_bexp_sound</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#btrans_sound"><span class="id" title="definition">btrans_sound</span></a> <a class="idref" href="Equiv.html#fold_constants_bexp"><span class="id" title="definition">fold_constants_bexp</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1526,7 +1495,6 @@ To fold constants in a command, we apply the appropriate folding
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="fold_constants_com_sound" class="idref" href="#fold_constants_com_sound"><span class="id" title="lemma">fold_constants_com_sound</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#ctrans_sound"><span class="id" title="definition">ctrans_sound</span></a> <a class="idref" href="Equiv.html#fold_constants_com"><span class="id" title="definition">fold_constants_com</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1620,7 +1588,6 @@ To fold constants in a command, we apply the appropriate folding
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1657,7 +1624,6 @@ To fold constants in a command, we apply the appropriate folding
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="subst_aexp" class="idref" href="#subst_aexp"><span class="id" title="definition">subst_aexp</span></a> (<a id="x:102" class="idref" href="#x:102"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="u:103" class="idref" href="#u:103"><span class="id" title="binder">u</span></a> : <span class="id" title="inductive">aexp</span>) (<a id="a:104" class="idref" href="#a:104"><span class="id" title="binder">a</span></a> : <span class="id" title="inductive">aexp</span>) : <span class="id" title="inductive">aexp</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Equiv.html#a:104"><span class="id" title="variable">a</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <span class="id" title="constructor">ANum</span> <span class="id" title="var">n</span>       ⇒<br/>
@@ -1687,7 +1653,6 @@ And here is the property we are interested in, expressing the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="subst_equiv_property" class="idref" href="#subst_equiv_property"><span class="id" title="definition">subst_equiv_property</span></a> := <span class="id" title="keyword">∀</span> <a id="x<sub>1</sub>:107" class="idref" href="#x<sub>1</sub>:107"><span class="id" title="binder">x<sub>1</sub></span></a> <a id="x<sub>2</sub>:108" class="idref" href="#x<sub>2</sub>:108"><span class="id" title="binder">x<sub>2</sub></span></a> <a id="a<sub>1</sub>:109" class="idref" href="#a<sub>1</sub>:109"><span class="id" title="binder">a<sub>1</sub></span></a> <a id="a<sub>2</sub>:110" class="idref" href="#a<sub>2</sub>:110"><span class="id" title="binder">a<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#x<sub>1</sub>:107"><span class="id" title="variable">x<sub>1</sub></span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#a<sub>1</sub>:109"><span class="id" title="variable">a<sub>1</sub></span></a><span class="id" title="notation">;</span> <a class="idref" href="Equiv.html#x<sub>2</sub>:108"><span class="id" title="variable">x<sub>2</sub></span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#a<sub>2</sub>:110"><span class="id" title="variable">a<sub>2</sub></span></a> <span class="id" title="notation">}&gt;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#x<sub>1</sub>:107"><span class="id" title="variable">x<sub>1</sub></span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#a<sub>1</sub>:109"><span class="id" title="variable">a<sub>1</sub></span></a><span class="id" title="notation">;</span> <a class="idref" href="Equiv.html#x<sub>2</sub>:108"><span class="id" title="variable">x<sub>2</sub></span></a> <span class="id" title="notation">:=</span> <a class="idref" href="Equiv.html#subst_aexp"><span class="id" title="definition">subst_aexp</span></a> <a class="idref" href="Equiv.html#x<sub>1</sub>:107"><span class="id" title="variable">x<sub>1</sub></span></a> <a class="idref" href="Equiv.html#a<sub>1</sub>:109"><span class="id" title="variable">a<sub>1</sub></span></a> <a class="idref" href="Equiv.html#a<sub>2</sub>:110"><span class="id" title="variable">a<sub>2</sub></span></a> <span class="id" title="notation">}&gt;</span>.<br/>
@@ -1712,7 +1677,6 @@ Sadly, the property does <i>not</i> always hold.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="subst_inequiv" class="idref" href="#subst_inequiv"><span class="id" title="lemma">subst_inequiv</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="Equiv.html#subst_equiv_property"><span class="id" title="definition">subst_equiv_property</span></a>.<br/>
 <div class="togglescript" id="proofcontrol25" onclick="toggleDisplay('proof25');toggleDisplay('proofcontrol25')"><span class="show"></span></div>
@@ -1765,7 +1729,6 @@ Sadly, the property does <i>not</i> always hold.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="var_not_used_in_aexp" class="idref" href="#var_not_used_in_aexp"><span class="id" title="inductive">var_not_used_in_aexp</span></a> (<a id="x:111" class="idref" href="#x:111"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) : <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="VNUNum" class="idref" href="#VNUNum"><span class="id" title="constructor">VNUNum</span></a> : <span class="id" title="keyword">∀</span> <a id="n:114" class="idref" href="#n:114"><span class="id" title="binder">n</span></a>, <a class="idref" href="Equiv.html#var_not_used_in_aexp:112"><span class="id" title="inductive">var_not_used_in_aexp</span></a> <a class="idref" href="Equiv.html#x:111"><span class="id" title="variable">x</span></a> (<span class="id" title="constructor">ANum</span> <a class="idref" href="Equiv.html#n:114"><span class="id" title="variable">n</span></a>)<br/>
 &nbsp;&nbsp;| <a id="VNUId" class="idref" href="#VNUId"><span class="id" title="constructor">VNUId</span></a> : <span class="id" title="keyword">∀</span> <a id="y:115" class="idref" href="#y:115"><span class="id" title="binder">y</span></a>, <a class="idref" href="Equiv.html#x:111"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="Equiv.html#y:115"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Equiv.html#var_not_used_in_aexp:112"><span class="id" title="inductive">var_not_used_in_aexp</span></a> <a class="idref" href="Equiv.html#x:111"><span class="id" title="variable">x</span></a> (<span class="id" title="constructor">AId</span> <a class="idref" href="Equiv.html#y:115"><span class="id" title="variable">y</span></a>)<br/>
@@ -1794,7 +1757,6 @@ Using <span class="inlinecode"><span class="id" title="var">var_not_used_in_aexp
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1807,7 +1769,6 @@ Using <span class="inlinecode"><span class="id" title="var">var_not_used_in_aexp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="inequiv_exercise" class="idref" href="#inequiv_exercise"><span class="id" title="lemma">inequiv_exercise</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <span class="id" title="notation">true</span> <span class="id" title="notation">do</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span> <span class="id" title="notation">&lt;{</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">}&gt;</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1873,7 +1834,6 @@ Using <span class="inlinecode"><span class="id" title="var">var_not_used_in_aexp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Himp" class="idref" href="#Himp"><span class="id" title="module">Himp</span></a>.<br/>
 </div>
 
@@ -1883,7 +1843,6 @@ To formalize Himp, we first add a clause to the definition of
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="Himp.com" class="idref" href="#Himp.com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Himp.CSkip" class="idref" href="#Himp.CSkip"><span class="id" title="constructor">CSkip</span></a> : <a class="idref" href="Equiv.html#com:126"><span class="id" title="inductive">com</span></a><br/>
 &nbsp;&nbsp;| <a id="Himp.CAsgn" class="idref" href="#Himp.CAsgn"><span class="id" title="constructor">CAsgn</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Equiv.html#com:126"><span class="id" title="inductive">com</span></a><br/>
@@ -1920,7 +1879,6 @@ To formalize Himp, we first add a clause to the definition of
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;st '=[' c ']=&gt;' st'"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">c</span> <span class="id" title="var">custom</span> <span class="id" title="var">com</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 99, <span class="id" title="var">st</span> <span class="id" title="keyword">constr</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st'</span> <span class="id" title="keyword">constr</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>).<br/><hr class='doublespaceincode'/>
@@ -1961,7 +1919,6 @@ As a sanity check, the following claims should be provable for
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="Himp.havoc_example1" class="idref" href="#Himp.havoc_example1"><span class="id" title="definition">havoc_example1</span></a> : <span class="id" title="definition">empty_st</span> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">=[</span></a> <a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">X</span> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">(</span></a><span class="id" title="definition">X</span> <span class="id" title="notation">!<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> 0<a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -1981,7 +1938,6 @@ As a sanity check, the following claims should be provable for
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.cequiv" class="idref" href="#Himp.cequiv"><span class="id" title="definition">cequiv</span></a> (<a id="c<sub>1</sub>:158" class="idref" href="#c<sub>1</sub>:158"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:159" class="idref" href="#c<sub>2</sub>:159"><span class="id" title="binder">c<sub>2</sub></span></a> : <a class="idref" href="Equiv.html#Himp.com"><span class="id" title="inductive">com</span></a>) : <span class="id" title="keyword">Prop</span> := <span class="id" title="keyword">∀</span> <a id="st:160" class="idref" href="#st:160"><span class="id" title="binder">st</span></a> <a id="st':161" class="idref" href="#st':161"><span class="id" title="binder">st'</span></a> : <span class="id" title="definition">state</span>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#st:160"><span class="id" title="variable">st</span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">=[</span></a> <a class="idref" href="Equiv.html#c<sub>1</sub>:158"><span class="id" title="variable">c<sub>1</sub></span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Equiv.html#st':161"><span class="id" title="variable">st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Equiv.html#st:160"><span class="id" title="variable">st</span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">=[</span></a> <a class="idref" href="Equiv.html#c<sub>2</sub>:159"><span class="id" title="variable">c<sub>2</sub></span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Equiv.html#st':161"><span class="id" title="variable">st'</span></a>.<br/>
 </div>
@@ -1996,7 +1952,6 @@ Let's apply this definition to prove some nondeterministic
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.pXY" class="idref" href="#Himp.pXY"><span class="id" title="definition">pXY</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">X</span> <a class="idref" href="Equiv.html#77cb1189aa0f77e096b5d4774eb2d829"><span class="id" title="notation">;</span></a> <a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">Y</span> <span class="id" title="notation">}&gt;</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.pYX" class="idref" href="#Himp.pYX"><span class="id" title="definition">pYX</span></a> :=<br/>
@@ -2009,7 +1964,6 @@ If you think they are equivalent, prove it. If you think they are
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Himp.pXY_cequiv_pYX" class="idref" href="#Himp.pXY_cequiv_pYX"><span class="id" title="lemma">pXY_cequiv_pYX</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#Himp.cequiv"><span class="id" title="definition">cequiv</span></a> <a class="idref" href="Equiv.html#Himp.pXY"><span class="id" title="definition">pXY</span></a> <a class="idref" href="Equiv.html#Himp.pYX"><span class="id" title="definition">pYX</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a><a class="idref" href="Equiv.html#Himp.cequiv"><span class="id" title="definition">cequiv</span></a> <a class="idref" href="Equiv.html#Himp.pXY"><span class="id" title="definition">pXY</span></a> <a class="idref" href="Equiv.html#Himp.pYX"><span class="id" title="definition">pYX</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -2024,7 +1978,6 @@ If you think they are equivalent, prove it. If you think they are
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.ptwice" class="idref" href="#Himp.ptwice"><span class="id" title="definition">ptwice</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">X</span><a class="idref" href="Equiv.html#77cb1189aa0f77e096b5d4774eb2d829"><span class="id" title="notation">;</span></a> <a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">Y</span> <span class="id" title="notation">}&gt;</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.pcopy" class="idref" href="#Himp.pcopy"><span class="id" title="definition">pcopy</span></a> :=<br/>
@@ -2038,7 +1991,6 @@ If you think they are equivalent, then prove it. If you think they
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Himp.ptwice_cequiv_pcopy" class="idref" href="#Himp.ptwice_cequiv_pcopy"><span class="id" title="lemma">ptwice_cequiv_pcopy</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#Himp.cequiv"><span class="id" title="definition">cequiv</span></a> <a class="idref" href="Equiv.html#Himp.ptwice"><span class="id" title="definition">ptwice</span></a> <a class="idref" href="Equiv.html#Himp.pcopy"><span class="id" title="definition">pcopy</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a><a class="idref" href="Equiv.html#Himp.cequiv"><span class="id" title="definition">cequiv</span></a> <a class="idref" href="Equiv.html#Himp.ptwice"><span class="id" title="definition">ptwice</span></a> <a class="idref" href="Equiv.html#Himp.pcopy"><span class="id" title="definition">pcopy</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -2065,7 +2017,6 @@ If you think they are equivalent, then prove it. If you think they
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.p1" class="idref" href="#Himp.p1"><span class="id" title="definition">p<sub>1</sub></span></a> : <a class="idref" href="Equiv.html#Himp.com"><span class="id" title="inductive">com</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#Himp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">while</span></a> <span class="id" title="notation">¬</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <a class="idref" href="Equiv.html#Himp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">do</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">Y</span><a class="idref" href="Equiv.html#77cb1189aa0f77e096b5d4774eb2d829"><span class="id" title="notation">;</span></a><br/>
@@ -2085,7 +2036,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="Himp.p1_may_diverge" class="idref" href="#Himp.p1_may_diverge"><span class="id" title="lemma">p1_may_diverge</span></a> : <span class="id" title="keyword">∀</span> <a id="st:162" class="idref" href="#st:162"><span class="id" title="binder">st</span></a> <a id="st':163" class="idref" href="#st':163"><span class="id" title="binder">st'</span></a>, <a class="idref" href="Equiv.html#st:162"><span class="id" title="variable">st</span></a> <span class="id" title="definition">X</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="Equiv.html#st:162"><span class="id" title="variable">st</span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">=[</span></a> <a class="idref" href="Equiv.html#Himp.p1"><span class="id" title="definition">p<sub>1</sub></span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Equiv.html#st':163"><span class="id" title="variable">st'</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -2105,7 +2055,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Himp.p1_p2_equiv" class="idref" href="#Himp.p1_p2_equiv"><span class="id" title="lemma">p1_p2_equiv</span></a> : <a class="idref" href="Equiv.html#Himp.cequiv"><span class="id" title="definition">cequiv</span></a> <a class="idref" href="Equiv.html#Himp.p1"><span class="id" title="definition">p<sub>1</sub></span></a> <a class="idref" href="Equiv.html#Himp.p2"><span class="id" title="definition">p<sub>2</sub></span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -2121,7 +2070,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.p3" class="idref" href="#Himp.p3"><span class="id" title="definition">p<sub>3</sub></span></a> : <a class="idref" href="Equiv.html#Himp.com"><span class="id" title="inductive">com</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="definition">Z</span> <a class="idref" href="Equiv.html#8520c4c68851dd55d33b324c83d1c4f<sub>5</sub>"><span class="id" title="notation">:=</span></a> 1<a class="idref" href="Equiv.html#77cb1189aa0f77e096b5d4774eb2d829"><span class="id" title="notation">;</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Equiv.html#Himp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">while</span></a> <span class="id" title="notation">¬</span><span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <a class="idref" href="Equiv.html#Himp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">do</span></a><br/>
@@ -2150,7 +2098,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Himp.p5" class="idref" href="#Himp.p5"><span class="id" title="definition">p<sub>5</sub></span></a> : <a class="idref" href="Equiv.html#Himp.com"><span class="id" title="inductive">com</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <a class="idref" href="Equiv.html#Himp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">while</span></a> <span class="id" title="notation">¬</span><span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 1<span class="id" title="notation">)</span> <a class="idref" href="Equiv.html#Himp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">do</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Equiv.html#Himp.:com::'havoc'_x"><span class="id" title="notation">havoc</span></a> <span class="id" title="definition">X</span><br/>
@@ -2164,7 +2111,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Equiv.html#Himp"><span class="id" title="module">Himp</span></a>.<br/>
 </div>
 
@@ -2207,7 +2153,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="swap_noninterfering_assignments" class="idref" href="#swap_noninterfering_assignments"><span class="id" title="lemma">swap_noninterfering_assignments</span></a>: <span class="id" title="keyword">∀</span> <a id="l<sub>1</sub>:166" class="idref" href="#l<sub>1</sub>:166"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:167" class="idref" href="#l<sub>2</sub>:167"><span class="id" title="binder">l<sub>2</sub></span></a> <a id="a<sub>1</sub>:168" class="idref" href="#a<sub>1</sub>:168"><span class="id" title="binder">a<sub>1</sub></span></a> <a id="a<sub>2</sub>:169" class="idref" href="#a<sub>2</sub>:169"><span class="id" title="binder">a<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#l<sub>1</sub>:166"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="Equiv.html#l<sub>2</sub>:167"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#var_not_used_in_aexp"><span class="id" title="inductive">var_not_used_in_aexp</span></a> <a class="idref" href="Equiv.html#l<sub>1</sub>:166"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Equiv.html#a<sub>2</sub>:169"><span class="id" title="variable">a<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2233,7 +2178,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="capprox" class="idref" href="#capprox"><span class="id" title="definition">capprox</span></a> (<a id="c<sub>1</sub>:170" class="idref" href="#c<sub>1</sub>:170"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:171" class="idref" href="#c<sub>2</sub>:171"><span class="id" title="binder">c<sub>2</sub></span></a> : <span class="id" title="inductive">com</span>) : <span class="id" title="keyword">Prop</span> := <span class="id" title="keyword">∀</span> (<a id="st:172" class="idref" href="#st:172"><span class="id" title="binder">st</span></a> <a id="st':173" class="idref" href="#st':173"><span class="id" title="binder">st'</span></a> : <span class="id" title="definition">state</span>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#st:172"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:170"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':173"><span class="id" title="variable">st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Equiv.html#st:172"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:171"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':173"><span class="id" title="variable">st'</span></a>.<br/>
 </div>
@@ -2257,7 +2201,6 @@ For example, the program
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="c<sub>3</sub>" class="idref" href="#c<sub>3</sub>"><span class="id" title="definition">c<sub>3</sub></span></a> : <span class="id" title="inductive">com</span><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="c<sub>4</sub>" class="idref" href="#c<sub>4</sub>"><span class="id" title="definition">c<sub>4</sub></span></a> : <span class="id" title="inductive">com</span><br/>
@@ -2271,7 +2214,6 @@ Find a program <span class="inlinecode"><span class="id" title="var">cmin</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="cmin" class="idref" href="#cmin"><span class="id" title="definition">cmin</span></a> : <span class="id" title="inductive">com</span><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="cmin_minimal" class="idref" href="#cmin_minimal"><span class="id" title="lemma">cmin_minimal</span></a> : <span class="id" title="keyword">∀</span> <a id="c:174" class="idref" href="#c:174"><span class="id" title="binder">c</span></a>, <a class="idref" href="Equiv.html#capprox"><span class="id" title="definition">capprox</span></a> <a class="idref" href="Equiv.html#cmin"><span class="id" title="axiom">cmin</span></a> <a class="idref" href="Equiv.html#c:174"><span class="id" title="variable">c</span></a>.<br/>
@@ -2284,7 +2226,6 @@ Finally, find a non-trivial property which is preserved by
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="zprop" class="idref" href="#zprop"><span class="id" title="definition">zprop</span></a> (<a id="c:175" class="idref" href="#c:175"><span class="id" title="binder">c</span></a> : <span class="id" title="inductive">com</span>) : <span class="id" title="keyword">Prop</span><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="zprop_preserving" class="idref" href="#zprop_preserving"><span class="id" title="lemma">zprop_preserving</span></a> : <span class="id" title="keyword">∀</span> <a id="c:176" class="idref" href="#c:176"><span class="id" title="binder">c</span></a> <a id="c':177" class="idref" href="#c':177"><span class="id" title="binder">c'</span></a>,<br/>
@@ -2295,8 +2236,7 @@ Finally, find a non-trivial property which is preserved by
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:09&nbsp;*)</span><br/>
 </div>
 </div>
 

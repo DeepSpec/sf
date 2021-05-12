@@ -31,8 +31,6 @@
 
 <h1 class="libtitle">ADT<span class="subtitle">Abstract Data Types</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
@@ -68,7 +66,7 @@
 <ul class="doclist">
 <li> <i>Introduction to Objective Caml</i>, chapters 12 and 13.  Jason
       Hickey, 2008.  Available from
-      <a href="https://ocaml.org/learn/books.html"><span class="inlineref">https://ocaml.org/learn/books.html</span></a>.
+      <a href="https://ocaml.org/learn/books.html"><span class="inlineref" <a href='https://ocaml.org/learn/books.html</span></a>.'>https://ocaml.org/learn/books.html</span></a>.</a>
 
 <div class="paragraph"> </div>
 
@@ -76,7 +74,7 @@
 </li>
 <li> The OCaml System Manual, chapter 2.  Xavier Leroy et al.,
       2020. Available from
-      <a href="http://caml.inria.fr/pub/docs/manual-ocaml/"><span class="inlineref">http://caml.inria.fr/pub/docs/manual-ocaml/</span></a>.  
+      <a href="http://caml.inria.fr/pub/docs/manual-ocaml/"><span class="inlineref" <a href='http://caml.inria.fr/pub/docs/manual-ocaml/</span></a>.'>http://caml.inria.fr/pub/docs/manual-ocaml/</span></a>.</a> 
 </li>
 </ul>
 
@@ -103,7 +101,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="Table" class="idref" href="#Table"><span class="id" title="module">Table</span></a>.<br/>
 </div>
 
@@ -164,7 +161,6 @@ The following three axioms are an equational specification for
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="Table.get_empty_default" class="idref" href="#Table.get_empty_default"><span class="id" title="axiom">get_empty_default</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:7" class="idref" href="#k:7"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#Table.key"><span class="id" title="definition">key</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#Table.get"><span class="id" title="axiom">get</span></a> <a class="idref" href="ADT.html#k:7"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#Table.empty"><span class="id" title="axiom">empty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ADT.html#Table.default"><span class="id" title="axiom">default</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="Table.get_set_same" class="idref" href="#Table.get_set_same"><span class="id" title="axiom">get_set_same</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:9" class="idref" href="#k:9"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#Table.key"><span class="id" title="definition">key</span></a>) (<a id="v:10" class="idref" href="#v:10"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#Table.V"><span class="id" title="axiom">V</span></a>) (<a id="t:11" class="idref" href="#t:11"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#Table.table"><span class="id" title="axiom">table</span></a>),<br/>
@@ -191,7 +187,6 @@ The following three axioms are an equational specification for
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="ValType" class="idref" href="#ValType"><span class="id" title="module">ValType</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ValType.V" class="idref" href="#ValType.V"><span class="id" title="axiom">V</span></a> : <span class="id" title="keyword">Type</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ValType.default" class="idref" href="#ValType.default"><span class="id" title="axiom">default</span></a> : <a class="idref" href="ADT.html#ValType.V"><span class="id" title="axiom">V</span></a>.<br/>
@@ -207,7 +202,6 @@ Functor <span class="inlinecode"><span class="id" title="var">FunTable</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="FunTable" class="idref" href="#FunTable"><span class="id" title="module">FunTable</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) &lt;: <a class="idref" href="ADT.html#Table"><span class="id" title="module">Table</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="FunTable.V" class="idref" href="#FunTable.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="ADT.html#VT.V"><span class="id" title="axiom">VT.V</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="FunTable.default" class="idref" href="#FunTable.default"><span class="id" title="definition">default</span></a> := <a class="idref" href="ADT.html#VT.default"><span class="id" title="axiom">VT.default</span></a>.<br/>
@@ -233,7 +227,6 @@ The implementation must prove the theorems that the interface
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <a id="FunTable.get_empty_default" class="idref" href="#FunTable.get_empty_default"><span class="id" title="lemma">get_empty_default</span></a>: <span class="id" title="keyword">∀</span> (<a id="k:26" class="idref" href="#k:26"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#FunTable.key"><span class="id" title="definition">key</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#FunTable.get"><span class="id" title="definition">get</span></a> <a class="idref" href="ADT.html#k:26"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#FunTable.empty"><span class="id" title="definition">empty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ADT.html#FunTable.default"><span class="id" title="definition">default</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="ADT.html#FunTable.get"><span class="id" title="definition">get</span></a>, <a class="idref" href="ADT.html#FunTable.empty"><span class="id" title="definition">empty</span></a>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
@@ -252,7 +245,6 @@ As an example, let's instantiate <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="StringVal" class="idref" href="#StringVal"><span class="id" title="module">StringVal</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="StringVal.V" class="idref" href="#StringVal.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="StringVal.default" class="idref" href="#StringVal.default"><span class="id" title="definition">default</span></a> := ""%<span class="id" title="var">string</span>.<br/>
@@ -281,7 +273,6 @@ As an example, let's instantiate <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="NatFunTableExamples" class="idref" href="#NatFunTableExamples"><span class="id" title="module">NatFunTableExamples</span></a>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="ADT.html#NatFunTableExamples"><span class="id" title="module">NatFunTableExamples</span></a>.<br/>
@@ -302,7 +293,6 @@ As an example, let's instantiate <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="ListsTable" class="idref" href="#ListsTable"><span class="id" title="module">ListsTable</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) &lt;: <a class="idref" href="ADT.html#Table"><span class="id" title="module">Table</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListsTable.V" class="idref" href="#ListsTable.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="ADT.html#VT.V"><span class="id" title="axiom">VT.V</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListsTable.default" class="idref" href="#ListsTable.default"><span class="id" title="definition">default</span></a> := <a class="idref" href="ADT.html#VT.default"><span class="id" title="axiom">VT.default</span></a>.<br/>
@@ -333,7 +323,6 @@ Instantiate your table and prove the following facts.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="StringListsTableExamples" class="idref" href="#StringListsTableExamples"><span class="id" title="module">StringListsTableExamples</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Module</span> <a id="StringListsTableExamples.StringListsTable" class="idref" href="#StringListsTableExamples.StringListsTable"><span class="id" title="module">StringListsTable</span></a> := <a class="idref" href="ADT.html#ListsTable"><span class="id" title="module">ListsTable</span></a> <a class="idref" href="ADT.html#StringVal"><span class="id" title="module">StringVal</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">StringListsTable</span>.<br/>
@@ -362,7 +351,6 @@ Instantiate your table and prove the following facts.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TreeTable" class="idref" href="#TreeTable"><span class="id" title="module">TreeTable</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) &lt;: <a class="idref" href="ADT.html#Table"><span class="id" title="module">Table</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="TreeTable.V" class="idref" href="#TreeTable.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="ADT.html#VT.V"><span class="id" title="axiom">VT.V</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="TreeTable.default" class="idref" href="#TreeTable.default"><span class="id" title="definition">default</span></a> := <a class="idref" href="ADT.html#VT.default"><span class="id" title="axiom">VT.default</span></a>.<br/>
@@ -383,7 +371,6 @@ The three basic equations we proved about <span class="inlinecode"><span class="
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <a id="TreeTable.get_empty_default" class="idref" href="#TreeTable.get_empty_default"><span class="id" title="lemma">get_empty_default</span></a>: <span class="id" title="keyword">∀</span> (<a id="k:53" class="idref" href="#k:53"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#TreeTable.key"><span class="id" title="definition">key</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#TreeTable.get"><span class="id" title="definition">get</span></a> <a class="idref" href="ADT.html#k:53"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#TreeTable.empty"><span class="id" title="definition">empty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ADT.html#TreeTable.default"><span class="id" title="definition">default</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
@@ -416,7 +403,6 @@ The three basic equations we proved about <span class="inlinecode"><span class="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="ETable_first_attempt" class="idref" href="#ETable_first_attempt"><span class="id" title="module">ETable_first_attempt</span></a>.<br/>
 </div>
 
@@ -447,7 +433,6 @@ We proved in <a href="SearchTree.html"><span class="inlineref">SearchTree</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TreeETable_first_attempt" class="idref" href="#TreeETable_first_attempt"><span class="id" title="module">TreeETable_first_attempt</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) &lt;: <a class="idref" href="ADT.html#ETable_first_attempt"><span class="id" title="module">ETable_first_attempt</span></a>.<br/>
 </div>
 
@@ -525,7 +510,6 @@ Again stuck because of the BST invariant.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="ETable" class="idref" href="#ETable"><span class="id" title="module">ETable</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Include</span> <a class="idref" href="ADT.html#Table"><span class="id" title="module">Table</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETable.rep_ok" class="idref" href="#ETable.rep_ok"><span class="id" title="axiom">rep_ok</span></a> : <a class="idref" href="ADT.html#ETable.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>.<br/>
@@ -538,7 +522,6 @@ Again stuck because of the BST invariant.
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETable.empty_ok" class="idref" href="#ETable.empty_ok"><span class="id" title="axiom">empty_ok</span></a> : <a class="idref" href="ADT.html#ETable.rep_ok"><span class="id" title="axiom">rep_ok</span></a> <a class="idref" href="ADT.html#ETable.empty"><span class="id" title="axiom">empty</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETable.set_ok" class="idref" href="#ETable.set_ok"><span class="id" title="axiom">set_ok</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:84" class="idref" href="#k:84"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#ETable.key"><span class="id" title="definition">key</span></a>) (<a id="v:85" class="idref" href="#v:85"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#ETable.V"><span class="id" title="axiom">V</span></a>) (<a id="t:86" class="idref" href="#t:86"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ETable.table"><span class="id" title="axiom">table</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#ETable.rep_ok"><span class="id" title="axiom">rep_ok</span></a> <a class="idref" href="ADT.html#t:86"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ETable.rep_ok"><span class="id" title="axiom">rep_ok</span></a> (<a class="idref" href="ADT.html#ETable.set"><span class="id" title="axiom">set</span></a> <a class="idref" href="ADT.html#k:84"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#v:85"><span class="id" title="variable">v</span></a> <a class="idref" href="ADT.html#t:86"><span class="id" title="variable">t</span></a>).<br/>
@@ -549,7 +532,6 @@ The specification of <span class="inlinecode"><span class="id" title="var">bound
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETable.bound_empty" class="idref" href="#ETable.bound_empty"><span class="id" title="axiom">bound_empty</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:88" class="idref" href="#k:88"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#ETable.key"><span class="id" title="definition">key</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#ETable.bound"><span class="id" title="axiom">bound</span></a> <a class="idref" href="ADT.html#k:88"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#ETable.empty"><span class="id" title="axiom">empty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETable.bound_set_same" class="idref" href="#ETable.bound_set_same"><span class="id" title="axiom">bound_set_same</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:90" class="idref" href="#k:90"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#ETable.key"><span class="id" title="definition">key</span></a>) (<a id="v:91" class="idref" href="#v:91"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#ETable.V"><span class="id" title="axiom">V</span></a>) (<a id="t:92" class="idref" href="#t:92"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ETable.table"><span class="id" title="axiom">table</span></a>),<br/>
@@ -563,7 +545,6 @@ The specification of <span class="inlinecode"><span class="id" title="var">eleme
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETable.elements_complete" class="idref" href="#ETable.elements_complete"><span class="id" title="axiom">elements_complete</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:99" class="idref" href="#k:99"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#ETable.key"><span class="id" title="definition">key</span></a>) (<a id="v:100" class="idref" href="#v:100"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#ETable.V"><span class="id" title="axiom">V</span></a>) (<a id="t:101" class="idref" href="#t:101"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ETable.table"><span class="id" title="axiom">table</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#ETable.rep_ok"><span class="id" title="axiom">rep_ok</span></a> <a class="idref" href="ADT.html#t:101"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#ETable.bound"><span class="id" title="axiom">bound</span></a> <a class="idref" href="ADT.html#k:99"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#t:101"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -635,7 +616,6 @@ Now we can use the table.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="StringTreeETableExample" class="idref" href="#StringTreeETableExample"><span class="id" title="module">StringTreeETableExample</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Module</span> <a id="StringTreeETableExample.StringTreeETable" class="idref" href="#StringTreeETableExample.StringTreeETable"><span class="id" title="module">StringTreeETable</span></a> := <a class="idref" href="ADT.html#TreeETable"><span class="id" title="module">TreeETable</span></a> <a class="idref" href="ADT.html#StringVal"><span class="id" title="module">StringVal</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">StringTreeETable</span>.<br/>
@@ -661,7 +641,6 @@ Now we can use the table.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="exposed_trees_ex" class="idref" href="#exposed_trees_ex"><span class="id" title="definition">exposed_trees_ex</span></a> :<br/>
 &nbsp;&nbsp;(<a class="idref" href="ADT.html#get"><span class="id" title="definition">StringTreeETableExample.StringTreeETable.get</span></a> 0 (<a class="idref" href="SearchTree.html#T"><span class="id" title="constructor">T</span></a> <a class="idref" href="SearchTree.html#E"><span class="id" title="constructor">E</span></a> 0 "A" <a class="idref" href="SearchTree.html#E"><span class="id" title="constructor">E</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> "A")%<span class="id" title="var">string</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -686,7 +665,6 @@ Like many languages, Coq makes it possible to <i>encapsulate</i>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TreeETableFullyEncapsulated" class="idref" href="#TreeETableFullyEncapsulated"><span class="id" title="module">TreeETableFullyEncapsulated</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) : <a class="idref" href="ADT.html#ETable"><span class="id" title="module">ETable</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Include</span> <a class="idref" href="ADT.html#TreeTable"><span class="id" title="module">TreeTable</span></a> <a class="idref" href="ADT.html#VT"><span class="id" title="module">VT</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="TreeETableFullyEncapsulated.rep_ok" class="idref" href="#TreeETableFullyEncapsulated.rep_ok"><span class="id" title="definition">rep_ok</span></a> (<a id="t:128" class="idref" href="#t:128"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#TreeETableFullyEncapsulated.table"><span class="id" title="definition">table</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
@@ -748,7 +726,6 @@ Unfortunately, the module is now too encapsulated to be useful:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="OverlyEncapsulatedExample" class="idref" href="#OverlyEncapsulatedExample"><span class="id" title="module">OverlyEncapsulatedExample</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Module</span> <a id="OverlyEncapsulatedExample.StringTreeETableFullyEncapsulated" class="idref" href="#OverlyEncapsulatedExample.StringTreeETableFullyEncapsulated"><span class="id" title="module">StringTreeETableFullyEncapsulated</span></a> := <a class="idref" href="ADT.html#TreeETableFullyEncapsulated"><span class="id" title="module">TreeETableFullyEncapsulated</span></a> <a class="idref" href="ADT.html#StringVal"><span class="id" title="module">StringVal</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">StringTreeETableFullyEncapsulated</span>.<br/>
@@ -770,7 +747,6 @@ The problem is that the module now hides not only the internal
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="ADT.html#V"><span class="id" title="axiom">OverlyEncapsulatedExample.StringTreeETableFullyEncapsulated.V</span></a>.<br/>
 </div>
 
@@ -786,7 +762,6 @@ We need to selectively expose certain implementation details.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="SimpleTable" class="idref" href="#SimpleTable"><span class="id" title="module">SimpleTable</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="SimpleTable.key" class="idref" href="#SimpleTable.key"><span class="id" title="axiom">key</span></a> : <span class="id" title="keyword">Type</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="SimpleTable.V" class="idref" href="#SimpleTable.V"><span class="id" title="axiom">V</span></a> : <span class="id" title="keyword">Type</span>.<br/>
@@ -832,7 +807,6 @@ Putting sharing constraints to use, let's expose <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TreeETableEncapsulated" class="idref" href="#TreeETableEncapsulated"><span class="id" title="module">TreeETableEncapsulated</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) : (<a class="idref" href="ADT.html#ETable"><span class="id" title="module">ETable</span></a> <span class="id" title="keyword">with</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">V</span> := <a class="idref" href="ADT.html#VT.V"><span class="id" title="axiom">VT.V</span></a> <span class="id" title="keyword">with</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">default</span> := <a class="idref" href="ADT.html#VT.default"><span class="id" title="axiom">VT.default</span></a>).<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Include</span> <a class="idref" href="ADT.html#TreeTable"><span class="id" title="module">TreeTable</span></a> <a class="idref" href="ADT.html#VT"><span class="id" title="module">VT</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="TreeETableEncapsulated.rep_ok" class="idref" href="#TreeETableEncapsulated.rep_ok"><span class="id" title="definition">rep_ok</span></a> (<a id="t:153" class="idref" href="#t:153"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#TreeETableEncapsulated.table"><span class="id" title="definition">table</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
@@ -958,7 +932,6 @@ Note what we've happily achieved: we can reason about the behavior
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="map_update" class="idref" href="#map_update"><span class="id" title="definition">map_update</span></a> {<a id="V:174" class="idref" href="#V:174"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="k:175" class="idref" href="#k:175"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:176" class="idref" href="#v:176"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a>) (<a id="m:177" class="idref" href="#m:177"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">partial_map</span> <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="definition">update</span> <a class="idref" href="ADT.html#m:177"><span class="id" title="variable">m</span></a> <a class="idref" href="ADT.html#k:175"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#v:176"><span class="id" title="variable">v</span></a>.<br/><hr class='doublespaceincode'/>
@@ -973,7 +946,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="ETableAbs" class="idref" href="#ETableAbs"><span class="id" title="module">ETableAbs</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.table" class="idref" href="#ETableAbs.table"><span class="id" title="axiom">table</span></a> : <span class="id" title="keyword">Type</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ETableAbs.key" class="idref" href="#ETableAbs.key"><span class="id" title="definition">key</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
@@ -1017,7 +989,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="ListETableAbs" class="idref" href="#ListETableAbs"><span class="id" title="module">ListETableAbs</span></a> (<span class="id" title="var">VT</span> : <a class="idref" href="ADT.html#ValType"><span class="id" title="module">ValType</span></a>) &lt;: <a class="idref" href="ADT.html#ETableAbs"><span class="id" title="module">ETableAbs</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListETableAbs.V" class="idref" href="#ListETableAbs.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="ADT.html#VT.V"><span class="id" title="axiom">VT.V</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListETableAbs.default" class="idref" href="#ListETableAbs.default"><span class="id" title="definition">default</span></a> := <a class="idref" href="ADT.html#VT.default"><span class="id" title="axiom">VT.default</span></a>.<br/>
@@ -1085,7 +1056,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_TreeTableModel" class="idref" href="#manual_grade_for_TreeTableModel"><span class="id" title="definition">manual_grade_for_TreeTableModel</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
 <font size=-2>&#9744;</font>
@@ -1170,7 +1140,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="Queue" class="idref" href="#Queue"><span class="id" title="module">Queue</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="Queue.V" class="idref" href="#Queue.V"><span class="id" title="axiom">V</span></a> : <span class="id" title="keyword">Type</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="Queue.queue" class="idref" href="#Queue.queue"><span class="id" title="axiom">queue</span></a> : <span class="id" title="keyword">Type</span>.<br/>
@@ -1200,7 +1169,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="ListQueue" class="idref" href="#ListQueue"><span class="id" title="module">ListQueue</span></a> &lt;: <a class="idref" href="ADT.html#Queue"><span class="id" title="module">Queue</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListQueue.V" class="idref" href="#ListQueue.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>. <span class="comment">(*&nbsp;for&nbsp;simplicity&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListQueue.queue" class="idref" href="#ListQueue.queue"><span class="id" title="definition">queue</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="ADT.html#ListQueue.V"><span class="id" title="definition">V</span></a>.<br/><hr class='doublespaceincode'/>
@@ -1250,7 +1218,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="QueueAbs" class="idref" href="#QueueAbs"><span class="id" title="module">QueueAbs</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="QueueAbs.V" class="idref" href="#QueueAbs.V"><span class="id" title="axiom">V</span></a> : <span class="id" title="keyword">Type</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="QueueAbs.queue" class="idref" href="#QueueAbs.queue"><span class="id" title="axiom">queue</span></a> : <span class="id" title="keyword">Type</span>.<br/>
@@ -1278,7 +1245,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TwoListQueueAbs" class="idref" href="#TwoListQueueAbs"><span class="id" title="module">TwoListQueueAbs</span></a> &lt;: <a class="idref" href="ADT.html#QueueAbs"><span class="id" title="module">QueueAbs</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="TwoListQueueAbs.V" class="idref" href="#TwoListQueueAbs.V"><span class="id" title="definition">V</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>. <span class="comment">(*&nbsp;for&nbsp;simplicity&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="TwoListQueueAbs.queue" class="idref" href="#TwoListQueueAbs.queue"><span class="id" title="definition">queue</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="ADT.html#TwoListQueueAbs.V"><span class="id" title="definition">V</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="ADT.html#TwoListQueueAbs.V"><span class="id" title="definition">V</span></a>.<br/><hr class='doublespaceincode'/>
@@ -1371,7 +1337,6 @@ Now we can define an interface for tables that includes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="even_nat" class="idref" href="#even_nat"><span class="id" title="definition">even_nat</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">{</span></a><a id="x:302" class="idref" href="#x:302"><span class="id" title="binder">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">:</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.Even"><span class="id" title="definition">Nat.Even</span></a> <a class="idref" href="ADT.html#x:302"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">}</span></a>.<br/>
 </div>
 
@@ -1381,7 +1346,6 @@ But when we try to say that <span class="inlinecode">2</span> is an <span class=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Fail</span> <span class="id" title="keyword">Definition</span> <a id="two" class="idref" href="#two"><span class="id" title="definition">two</span></a> : <a class="idref" href="ADT.html#even_nat"><span class="id" title="definition">even_nat</span></a> := 2.<br/>
 </div>
 
@@ -1391,7 +1355,6 @@ The problem is that <span class="inlinecode">2</span> is a <span class="inlineco
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="Even2" class="idref" href="#Even2"><span class="id" title="lemma">Even2</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.Even"><span class="id" title="definition">Nat.Even</span></a> 2.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">∃</span> 1. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -1403,7 +1366,6 @@ Now we can provide that proof to convince Coq <span class="inlinecode"><span cla
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#exist"><span class="id" title="constructor">exist</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:303" class="idref" href="#A:303"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} (<a id="P:304" class="idref" href="#P:304"><span class="id" title="binder">P</span></a> : <a class="idref" href="ADT.html#A:303"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) (<a id="x:305" class="idref" href="#x:305"><span class="id" title="binder">x</span></a> : <a class="idref" href="ADT.html#A:303"><span class="id" title="variable">A</span></a>), <a class="idref" href="ADT.html#P:304"><span class="id" title="variable">P</span></a> <a class="idref" href="ADT.html#x:305"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">{</span></a><a id="x:306" class="idref" href="#x:306"><span class="id" title="binder">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">:</span></a> <a class="idref" href="ADT.html#A:303"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">|</span></a> <a class="idref" href="ADT.html#P:304"><span class="id" title="variable">P</span></a> <a class="idref" href="ADT.html#x:306"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">}</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="two" class="idref" href="#two"><span class="id" title="definition">two</span></a> : <a class="idref" href="ADT.html#even_nat"><span class="id" title="definition">even_nat</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#exist"><span class="id" title="constructor">exist</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.Even"><span class="id" title="definition">Nat.Even</span></a> 2 <a class="idref" href="ADT.html#Even2"><span class="id" title="lemma">Even2</span></a>.<br/>
 </div>
@@ -1414,7 +1376,6 @@ Another way of constructing <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="two'" class="idref" href="#two'"><span class="id" title="definition">two'</span></a> : <a class="idref" href="ADT.html#even_nat"><span class="id" title="definition">even_nat</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#exist"><span class="id" title="constructor">exist</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">x</span> := 2).<br/>
@@ -1434,7 +1395,6 @@ That technique is often useful with subset types, because it
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Fail</span> <span class="id" title="keyword">Example</span> <a id="plus_two" class="idref" href="#plus_two"><span class="id" title="definition">plus_two</span></a> : 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="ADT.html#two"><span class="id" title="definition">two</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj1_sig"><span class="id" title="definition">proj1_sig</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:307" class="idref" href="#A:307"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} {<a id="P:308" class="idref" href="#P:308"><span class="id" title="binder">P</span></a> : <a class="idref" href="ADT.html#A:307"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>} (<a id="e:310" class="idref" href="#e:310"><span class="id" title="binder">e</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">{</span></a><a id="x:309" class="idref" href="#x:309"><span class="id" title="binder">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">:</span></a> <a class="idref" href="ADT.html#A:307"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">|</span></a> <a class="idref" href="ADT.html#P:308"><span class="id" title="variable">P</span></a> <a class="idref" href="ADT.html#x:309"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#6556914db359db999889decec6a4a562"><span class="id" title="notation">}</span></a>), <a class="idref" href="ADT.html#A:307"><span class="id" title="variable">A</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="plus_two" class="idref" href="#plus_two"><span class="id" title="definition">plus_two</span></a> : 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj1_sig"><span class="id" title="definition">proj1_sig</span></a> <a class="idref" href="ADT.html#two"><span class="id" title="definition">two</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
@@ -1454,7 +1414,6 @@ That technique is often useful with subset types, because it
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="SigSandbox" class="idref" href="#SigSandbox"><span class="id" title="module">SigSandbox</span></a>.<br/>
 </div>
 
@@ -1463,7 +1422,6 @@ Subset types are just a syntactic notation for <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="SigSandbox.sig" class="idref" href="#SigSandbox.sig"><span class="id" title="inductive">sig</span></a> {<a id="A:315" class="idref" href="#A:315"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} (<a id="P:316" class="idref" href="#P:316"><span class="id" title="binder">P</span></a> : <a class="idref" href="ADT.html#A:315"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="SigSandbox.exist" class="idref" href="#SigSandbox.exist"><span class="id" title="constructor">exist</span></a> (<a id="x:319" class="idref" href="#x:319"><span class="id" title="binder">x</span></a> : <a class="idref" href="ADT.html#A:315"><span class="id" title="variable">A</span></a>) : <a class="idref" href="ADT.html#P:316"><span class="id" title="variable">P</span></a> <a class="idref" href="ADT.html#x:319"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#sig:317"><span class="id" title="inductive">sig</span></a> <a class="idref" href="ADT.html#P:316"><span class="id" title="variable">P</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="757c365ebeda72306cf920069e977bf<sub>2</sub>" class="idref" href="#757c365ebeda72306cf920069e977bf<sub>2</sub>"><span class="id" title="notation">&quot;</span></a>{ x : A | P }" := (<a class="idref" href="ADT.html#SigSandbox.sig"><span class="id" title="inductive">sig</span></a> <span class="id" title="var">A</span> (<span class="id" title="keyword">fun</span> <a id="x:320" class="idref" href="#x:320"><span class="id" title="binder">x</span></a> ⇒ <span class="id" title="var">P</span>)).<br/>
@@ -1480,7 +1438,6 @@ The name <span class="inlinecode"><span class="id" title="var">sig</span></span>
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="SigSandbox.ex" class="idref" href="#SigSandbox.ex"><span class="id" title="inductive">ex</span></a> {<a id="A:321" class="idref" href="#A:321"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} (<a id="P:322" class="idref" href="#P:322"><span class="id" title="binder">P</span></a> : <a class="idref" href="ADT.html#A:321"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="SigSandbox.ex_intro" class="idref" href="#SigSandbox.ex_intro"><span class="id" title="constructor">ex_intro</span></a> (<a id="x:325" class="idref" href="#x:325"><span class="id" title="binder">x</span></a> : <a class="idref" href="ADT.html#A:321"><span class="id" title="variable">A</span></a>) : <a class="idref" href="ADT.html#P:322"><span class="id" title="variable">P</span></a> <a class="idref" href="ADT.html#x:325"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ex:323"><span class="id" title="inductive">ex</span></a> <a class="idref" href="ADT.html#P:322"><span class="id" title="variable">P</span></a>.<br/>
 </div>
@@ -1494,7 +1451,6 @@ The only difference is that <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="SigSandbox.proj1_sig" class="idref" href="#SigSandbox.proj1_sig"><span class="id" title="definition">proj1_sig</span></a> {<a id="A:326" class="idref" href="#A:326"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} {<a id="P:327" class="idref" href="#P:327"><span class="id" title="binder">P</span></a> : <a class="idref" href="ADT.html#A:326"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>} (<a id="e:328" class="idref" href="#e:328"><span class="id" title="binder">e</span></a> : <a class="idref" href="ADT.html#SigSandbox.sig"><span class="id" title="inductive">sig</span></a> <a class="idref" href="ADT.html#P:327"><span class="id" title="variable">P</span></a>) : <a class="idref" href="ADT.html#A:326"><span class="id" title="variable">A</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="ADT.html#e:328"><span class="id" title="variable">e</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="ADT.html#SigSandbox.exist"><span class="id" title="constructor">exist</span></a> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">x</span><br/>
@@ -1521,7 +1477,6 @@ The only difference is that <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="vector" class="idref" href="#vector"><span class="id" title="definition">vector</span></a> (<a id="X:338" class="idref" href="#X:338"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) :=<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#5e309b065cb3b5ae19ef8d3e8dfa153e"><span class="id" title="notation">{</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#5e309b065cb3b5ae19ef8d3e8dfa153e"><span class="id" title="notation">'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a id="xs:340" class="idref" href="#xs:340"><span class="id" title="binder">xs</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a id="n:339" class="idref" href="#n:339"><span class="id" title="binder">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#5e309b065cb3b5ae19ef8d3e8dfa153e"><span class="id" title="notation">:</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="ADT.html#X:338"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#5e309b065cb3b5ae19ef8d3e8dfa153e"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#length"><span class="id" title="abbreviation">length</span></a> <a class="idref" href="ADT.html#xs:340"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ADT.html#n:339"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#5e309b065cb3b5ae19ef8d3e8dfa153e"><span class="id" title="notation">}</span></a>.<br/>
 </div>
@@ -1540,7 +1495,6 @@ The type itself enforces the representation invariant, because a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="a_vector" class="idref" href="#a_vector"><span class="id" title="definition">a_vector</span></a> : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -1559,7 +1513,6 @@ The type itself enforces the representation invariant, because a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="vector_cons" class="idref" href="#vector_cons"><span class="id" title="definition">vector_cons</span></a> {<a id="X:341" class="idref" href="#X:341"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="x:342" class="idref" href="#x:342"><span class="id" title="binder">x</span></a> : <a class="idref" href="ADT.html#X:341"><span class="id" title="variable">X</span></a>) (<a id="v:343" class="idref" href="#v:343"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:341"><span class="id" title="variable">X</span></a>) : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:341"><span class="id" title="variable">X</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -1570,7 +1523,6 @@ Prove the correctness of your cons operation.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list_of_vector" class="idref" href="#list_of_vector"><span class="id" title="definition">list_of_vector</span></a> {<a id="X:344" class="idref" href="#X:344"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="v:345" class="idref" href="#v:345"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:344"><span class="id" title="variable">X</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="ADT.html#X:344"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj1_sig"><span class="id" title="definition">proj1_sig</span></a> <a class="idref" href="ADT.html#v:345"><span class="id" title="variable">v</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="vector_cons_correct" class="idref" href="#vector_cons_correct"><span class="id" title="lemma">vector_cons_correct</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:346" class="idref" href="#X:346"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="x:347" class="idref" href="#x:347"><span class="id" title="binder">x</span></a> : <a class="idref" href="ADT.html#X:346"><span class="id" title="variable">X</span></a>) (<a id="v:348" class="idref" href="#v:348"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:346"><span class="id" title="variable">X</span></a>),<br/>
@@ -1591,7 +1543,6 @@ Prove the correctness of your cons operation.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="vector_app" class="idref" href="#vector_app"><span class="id" title="definition">vector_app</span></a> {<a id="X:349" class="idref" href="#X:349"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="v<sub>1</sub>:350" class="idref" href="#v<sub>1</sub>:350"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:351" class="idref" href="#v<sub>2</sub>:351"><span class="id" title="binder">v<sub>2</sub></span></a> : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:349"><span class="id" title="variable">X</span></a>) : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:349"><span class="id" title="variable">X</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -1602,7 +1553,6 @@ Prove the correctness of your append operation.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="vector_app_correct" class="idref" href="#vector_app_correct"><span class="id" title="lemma">vector_app_correct</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:352" class="idref" href="#X:352"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="v<sub>1</sub>:353" class="idref" href="#v<sub>1</sub>:353"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:354" class="idref" href="#v<sub>2</sub>:354"><span class="id" title="binder">v<sub>2</sub></span></a> : <a class="idref" href="ADT.html#vector"><span class="id" title="definition">vector</span></a> <a class="idref" href="ADT.html#X:352"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#list_of_vector"><span class="id" title="definition">list_of_vector</span></a> (<a class="idref" href="ADT.html#vector_app"><span class="id" title="axiom">vector_app</span></a> <a class="idref" href="ADT.html#v<sub>1</sub>:353"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="ADT.html#v<sub>2</sub>:354"><span class="id" title="variable">v<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#list_of_vector"><span class="id" title="definition">list_of_vector</span></a> <a class="idref" href="ADT.html#v<sub>1</sub>:353"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="ADT.html#list_of_vector"><span class="id" title="definition">list_of_vector</span></a> <a class="idref" href="ADT.html#v<sub>2</sub>:354"><span class="id" title="variable">v<sub>2</sub></span></a>.<br/>
@@ -1625,7 +1575,6 @@ Prove the correctness of your append operation.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="ETableSubset" class="idref" href="#ETableSubset"><span class="id" title="module">ETableSubset</span></a>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Include</span> <a class="idref" href="ADT.html#Table"><span class="id" title="module">Table</span></a>.<br/>
 </div>
@@ -1635,7 +1584,6 @@ Note: no <span class="inlinecode"><span class="id" title="var">rep_ok</span></sp
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableSubset.bound" class="idref" href="#ETableSubset.bound"><span class="id" title="axiom">bound</span></a> : <a class="idref" href="ADT.html#ETableSubset.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ETableSubset.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableSubset.elements" class="idref" href="#ETableSubset.elements"><span class="id" title="axiom">elements</span></a> : <a class="idref" href="ADT.html#ETableSubset.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="ADT.html#ETableSubset.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="ADT.html#ETableSubset.V"><span class="id" title="axiom">V</span></a>).<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETableSubset.bound_empty" class="idref" href="#ETableSubset.bound_empty"><span class="id" title="axiom">bound_empty</span></a> : <span class="id" title="keyword">∀</span> (<a id="k:357" class="idref" href="#k:357"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#ETableSubset.key"><span class="id" title="definition">key</span></a>),<br/>
@@ -1708,7 +1656,6 @@ Now the rest of the proofs require minor modifications to
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <a id="TreeETableSubset.get_set_same" class="idref" href="#TreeETableSubset.get_set_same"><span class="id" title="lemma">get_set_same</span></a>: <span class="id" title="keyword">∀</span> (<a id="k:386" class="idref" href="#k:386"><span class="id" title="binder">k</span></a> : <a class="idref" href="ADT.html#TreeETableSubset.key"><span class="id" title="definition">key</span></a>) (<a id="v:387" class="idref" href="#v:387"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#TreeETableSubset.V"><span class="id" title="definition">V</span></a>) (<a id="t:388" class="idref" href="#t:388"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#TreeETableSubset.table"><span class="id" title="definition">table</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#TreeETableSubset.get"><span class="id" title="definition">get</span></a> <a class="idref" href="ADT.html#k:386"><span class="id" title="variable">k</span></a> (<a class="idref" href="ADT.html#TreeETableSubset.set"><span class="id" title="definition">set</span></a> <a class="idref" href="ADT.html#k:386"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#v:387"><span class="id" title="variable">v</span></a> <a class="idref" href="ADT.html#t:388"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="ADT.html#v:387"><span class="id" title="variable">v</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
@@ -1780,7 +1727,6 @@ Now the rest of the proofs require minor modifications to
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_ListsETable" class="idref" href="#manual_grade_for_ListsETable"><span class="id" title="definition">manual_grade_for_ListsETable</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
 <font size=-2>&#9744;</font>
@@ -1788,8 +1734,7 @@ Now the rest of the proofs require minor modifications to
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:23&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:14&nbsp;*)</span><br/>
 </div>
 </div>
 

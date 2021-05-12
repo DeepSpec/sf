@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">MoreStlc<span class="subtitle">More on the Simply Typed Lambda-Calculus</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Types.html#"><span class="id" title="library">Types</span></a>.<br/>
@@ -45,7 +42,7 @@
 </div>
 
 <div class="doc">
-<a id="lab259"></a><h1 class="section">Simple Extensions to STLC</h1>
+<a id="lab264"></a><h1 class="section">Simple Extensions to STLC</h1>
 
 <div class="paragraph"> </div>
 
@@ -60,7 +57,7 @@
     straightforward treatments at the level of typing. 
 <div class="paragraph"> </div>
 
-<a id="lab260"></a><h2 class="section">Numbers</h2>
+<a id="lab265"></a><h2 class="section">Numbers</h2>
 
 <div class="paragraph"> </div>
 
@@ -73,7 +70,7 @@
     numeric primitives become more fiddly. 
 <div class="paragraph"> </div>
 
-<a id="lab261"></a><h2 class="section">Let Bindings</h2>
+<a id="lab266"></a><h2 class="section">Let Bindings</h2>
 
 <div class="paragraph"> </div>
 
@@ -158,7 +155,7 @@
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab262"></a><h2 class="section">Pairs</h2>
+<a id="lab267"></a><h2 class="section">Pairs</h2>
 
 <div class="paragraph"> </div>
 
@@ -369,7 +366,7 @@
     this pair are <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">T<sub>2</sub></span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab263"></a><h2 class="section">Unit</h2>
+<a id="lab268"></a><h2 class="section">Unit</h2>
 
 <div class="paragraph"> </div>
 
@@ -428,7 +425,7 @@
     evaluated only for its effect. 
 <div class="paragraph"> </div>
 
-<a id="lab264"></a><h2 class="section">Sums</h2>
+<a id="lab269"></a><h2 class="section">Sums</h2>
 
 <div class="paragraph"> </div>
 
@@ -684,7 +681,7 @@
     formalize. 
 <div class="paragraph"> </div>
 
-<a id="lab265"></a><h2 class="section">Lists</h2>
+<a id="lab270"></a><h2 class="section">Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -878,7 +875,7 @@
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab266"></a><h2 class="section">General Recursion</h2>
+<a id="lab271"></a><h2 class="section">General Recursion</h2>
 
 <div class="paragraph"> </div>
 
@@ -1123,7 +1120,7 @@
     using <span class="inlinecode"><span class="id" title="keyword">fix</span></span> from diverging. 
 <div class="paragraph"> </div>
 
-<a id="lab267"></a><h4 class="section">Exercise: 1 star, standard, optional (halve_fix)</h4>
+<a id="lab272"></a><h4 class="section">Exercise: 1 star, standard, optional (halve_fix)</h4>
  Translate this informal recursive definition into one using <span class="inlinecode"><span class="id" title="keyword">fix</span></span>:
 <pre>
       halve =
@@ -1136,7 +1133,7 @@
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab268"></a><h4 class="section">Exercise: 1 star, standard, optional (fact_steps)</h4>
+<a id="lab273"></a><h4 class="section">Exercise: 1 star, standard, optional (fact_steps)</h4>
  Write down the sequence of steps that the term <span class="inlinecode"><span class="id" title="var">fact</span></span> <span class="inlinecode">1</span> goes
     through to reduce to a normal form (assuming the usual reduction
     rules for arithmetic operations).
@@ -1190,7 +1187,7 @@
 </div>
 
 <div class="doc">
-<a id="lab269"></a><h2 class="section">Records</h2>
+<a id="lab274"></a><h2 class="section">Records</h2>
 
 <div class="paragraph"> </div>
 
@@ -1365,7 +1362,7 @@
 </div>
 
 <div class="doc">
-<a id="lab270"></a><h3 class="section">Encoding Records (Optional)</h3>
+<a id="lab275"></a><h3 class="section">Encoding Records (Optional)</h3>
 
 <div class="paragraph"> </div>
 
@@ -1444,7 +1441,7 @@
     compilers that essentially do this! 
 <div class="paragraph"> </div>
 
-<a id="lab271"></a><h3 class="section">Variants (Optional)</h3>
+<a id="lab276"></a><h3 class="section">Variants (Optional)</h3>
 
 <div class="paragraph"> </div>
 
@@ -1465,17 +1462,16 @@
 </div>
 
 <div class="doc">
-<a id="lab272"></a><h1 class="section">Exercise: Formalizing the Extensions</h1>
+<a id="lab277"></a><h1 class="section">Exercise: Formalizing the Extensions</h1>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended" class="idref" href="#STLCExtended"><span class="id" title="module">STLCExtended</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab273"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_definitions)</h4>
+<a id="lab278"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_definitions)</h4>
  In this series of exercises, you will formalize some of the
     extensions described in this chapter.  We've provided the
     necessary additions to the syntax of terms and types, and we've
@@ -1528,12 +1524,11 @@
 </div>
 
 <div class="doc">
-<a id="lab274"></a><h3 class="section">Syntax</h3>
+<a id="lab279"></a><h3 class="section">Syntax</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="STLCExtended.ty" class="idref" href="#STLCExtended.ty"><span class="id" title="inductive">ty</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="STLCExtended.Ty_Arrow" class="idref" href="#STLCExtended.Ty_Arrow"><span class="id" title="constructor">Ty_Arrow</span></a> : <a class="idref" href="MoreStlc.html#ty:1"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MoreStlc.html#ty:1"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MoreStlc.html#ty:1"><span class="id" title="inductive">ty</span></a><br/>
 &nbsp;&nbsp;| <a id="STLCExtended.Ty_Nat" class="idref" href="#STLCExtended.Ty_Nat"><span class="id" title="constructor">Ty_Nat</span></a>  : <a class="idref" href="MoreStlc.html#ty:1"><span class="id" title="inductive">ty</span></a><br/>
@@ -1593,7 +1588,6 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.x" class="idref" href="#STLCExtended.x"><span class="id" title="definition">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "x".<br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.y" class="idref" href="#STLCExtended.y"><span class="id" title="definition">y</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "y".<br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.z" class="idref" href="#STLCExtended.z"><span class="id" title="definition">z</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "z".<br/><hr class='doublespaceincode'/>
@@ -1674,12 +1668,11 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 
 <div class="doc">
-<a id="lab275"></a><h3 class="section">Substitution</h3>
+<a id="lab280"></a><h3 class="section">Substitution</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;'[' x ':=' s ']' t" (<span class="id" title="keyword">in</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 20, <span class="id" title="var">x</span> <span class="id" title="keyword">constr</span>).<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="STLCExtended.subst" class="idref" href="#STLCExtended.subst"><span class="id" title="definition">subst</span></a> (<a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="s:6" class="idref" href="#s:6"><span class="id" title="binder">s</span></a> : <a class="idref" href="MoreStlc.html#STLCExtended.tm"><span class="id" title="inductive">tm</span></a>) (<a id="t:7" class="idref" href="#t:7"><span class="id" title="binder">t</span></a> : <a class="idref" href="MoreStlc.html#STLCExtended.tm"><span class="id" title="inductive">tm</span></a>) : <a class="idref" href="MoreStlc.html#STLCExtended.tm"><span class="id" title="inductive">tm</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MoreStlc.html#t:7"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1741,7 +1734,7 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 
 <div class="doc">
-<a id="lab276"></a><h3 class="section">Reduction</h3>
+<a id="lab281"></a><h3 class="section">Reduction</h3>
 
 <div class="paragraph"> </div>
 
@@ -1749,7 +1742,6 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="STLCExtended.value" class="idref" href="#STLCExtended.value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="MoreStlc.html#STLCExtended.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;In&nbsp;pure&nbsp;STLC,&nbsp;function&nbsp;abstractions&nbsp;are&nbsp;values:&nbsp;*)</span><br/>
 &nbsp;&nbsp;| <a id="STLCExtended.v_abs" class="idref" href="#STLCExtended.v_abs"><span class="id" title="constructor">v_abs</span></a> : <span class="id" title="keyword">∀</span> <a id="x:12" class="idref" href="#x:12"><span class="id" title="binder">x</span></a> <a id="T<sub>2</sub>:13" class="idref" href="#T<sub>2</sub>:13"><span class="id" title="binder">T<sub>2</sub></span></a> <a id="t<sub>1</sub>:14" class="idref" href="#t<sub>1</sub>:14"><span class="id" title="binder">t<sub>1</sub></span></a>,<br/>
@@ -1871,12 +1863,11 @@ Note that, for brevity, we've omitted booleans and instead
 </div>
 
 <div class="doc">
-<a id="lab277"></a><h3 class="section">Typing</h3>
+<a id="lab282"></a><h3 class="section">Typing</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.context" class="idref" href="#STLCExtended.context"><span class="id" title="definition">context</span></a> := <span class="id" title="definition">partial_map</span> <a class="idref" href="MoreStlc.html#STLCExtended.ty"><span class="id" title="inductive">ty</span></a>.<br/>
 </div>
 
@@ -1886,7 +1877,6 @@ Next we define the typing rules.  These are nearly direct
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;Gamma '&#x22A2;' t '&#x2208;' T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc_ty</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="STLCExtended.has_type" class="idref" href="#STLCExtended.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="MoreStlc.html#STLCExtended.context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;pure&nbsp;STLC&nbsp;*)</span><br/>
@@ -1964,11 +1954,11 @@ Next we define the typing rules.  These are nearly direct
 
 
 <div class="doc">
-<a id="lab278"></a><h2 class="section">Examples</h2>
+<a id="lab283"></a><h2 class="section">Examples</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab279"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_examples)</h4>
+<a id="lab284"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_examples)</h4>
  This section presents formalized versions of the examples from
     above (plus several more).
 
@@ -1990,12 +1980,11 @@ Next we define the typing rules.  These are nearly direct
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples" class="idref" href="#STLCExtended.Examples"><span class="id" title="module">Examples</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab280"></a><h3 class="section">Preliminaries</h3>
+<a id="lab285"></a><h3 class="section">Preliminaries</h3>
 
 <div class="paragraph"> </div>
 
@@ -2003,7 +1992,6 @@ Next we define the typing rules.  These are nearly direct
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string_scope</span>.<br/>
 <span class="comment">(*&nbsp;&nbsp;NOTATION:&nbsp;LATER:&nbsp;These&nbsp;can&nbsp;all&nbsp;be&nbsp;Notations&nbsp;--&nbsp;just&nbsp;make&nbsp;sure&nbsp;to&nbsp;add&nbsp;a<br/>
 &nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Unfold</span></span>&nbsp;for&nbsp;each&nbsp;one.&nbsp;*)</span><br/>
@@ -2046,7 +2034,6 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Hint Extern</span> 2 (<a class="idref" href="MoreStlc.html#STLCExtended.has_type"><span class="id" title="inductive">has_type</span></a> <span class="id" title="var">_</span> (<a class="idref" href="MoreStlc.html#STLCExtended.tm_app"><span class="id" title="constructor">tm_app</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="var">_</span>) ⇒<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MoreStlc.html#STLCExtended.T_App"><span class="id" title="constructor">T_App</span></a>; <span class="id" title="tactic">auto</span> : <span class="id" title="var">core</span>.<br/>
 <span class="id" title="keyword">Hint Extern</span> 2 (<a class="idref" href="MoreStlc.html#STLCExtended.has_type"><span class="id" title="inductive">has_type</span></a> <span class="id" title="var">_</span> (<a class="idref" href="MoreStlc.html#STLCExtended.tm_lcase"><span class="id" title="constructor">tm_lcase</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="var">_</span>) ⇒<br/>
@@ -2055,12 +2042,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab281"></a><h3 class="section">Numbers</h3>
+<a id="lab286"></a><h3 class="section">Numbers</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.Numtest" class="idref" href="#STLCExtended.Examples.Numtest"><span class="id" title="module">Numtest</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;tm_test0&nbsp;(pred&nbsp;(succ&nbsp;(pred&nbsp;(2&nbsp;*&nbsp;0)))&nbsp;then&nbsp;5&nbsp;else&nbsp;6&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.Numtest.test" class="idref" href="#STLCExtended.Examples.Numtest.test"><span class="id" title="definition">test</span></a> :=<br/>
@@ -2091,12 +2077,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab282"></a><h3 class="section">Products</h3>
+<a id="lab287"></a><h3 class="section">Products</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.Prodtest" class="idref" href="#STLCExtended.Examples.Prodtest"><span class="id" title="module">Prodtest</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;((5,6),7).fst.tm_snd&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.Prodtest.test" class="idref" href="#STLCExtended.Examples.Prodtest.test"><span class="id" title="definition">test</span></a> :=<br/>
@@ -2117,12 +2102,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab283"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">let</span></span></h3>
+<a id="lab288"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">let</span></span></h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.LetTest" class="idref" href="#STLCExtended.Examples.LetTest"><span class="id" title="module">LetTest</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;let&nbsp;x&nbsp;=&nbsp;pred&nbsp;6&nbsp;in&nbsp;succ&nbsp;x&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.LetTest.test" class="idref" href="#STLCExtended.Examples.LetTest.test"><span class="id" title="definition">test</span></a> :=<br/>
@@ -2144,12 +2128,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab284"></a><h3 class="section">Sums</h3>
+<a id="lab289"></a><h3 class="section">Sums</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.Sumtest1" class="idref" href="#STLCExtended.Examples.Sumtest1"><span class="id" title="module">Sumtest1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;case&nbsp;(inl&nbsp;Nat&nbsp;5)&nbsp;of<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inl&nbsp;x&nbsp;=&gt;&nbsp;x<br/>
@@ -2197,12 +2180,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab285"></a><h3 class="section">Lists</h3>
+<a id="lab290"></a><h3 class="section">Lists</h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.ListTest" class="idref" href="#STLCExtended.Examples.ListTest"><span class="id" title="module">ListTest</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;let&nbsp;l&nbsp;=&nbsp;cons&nbsp;5&nbsp;(cons&nbsp;6&nbsp;(nil&nbsp;Nat))&nbsp;in<br/>
 &nbsp;&nbsp;&nbsp;case&nbsp;l&nbsp;of<br/>
@@ -2227,12 +2209,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab286"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">fix</span></span></h3>
+<a id="lab291"></a><h3 class="section"><span class="inlinecode"><span class="id" title="keyword">fix</span></span></h3>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.FixTest1" class="idref" href="#STLCExtended.Examples.FixTest1"><span class="id" title="module">FixTest1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;fact&nbsp;:=&nbsp;fix<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(\f:nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>nat.<br/>
@@ -2251,7 +2232,6 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.FixTest1.typechecks" class="idref" href="#STLCExtended.Examples.FixTest1.typechecks"><span class="id" title="definition">typechecks</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest1.fact"><span class="id" title="definition">fact</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#ac6d203e510f5b00c2daaeb576a325b<sub>8</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#ac6d203e510f5b00c2daaeb576a325b<sub>8</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest1.fact"><span class="id" title="definition">fact</span></a>. <span class="id" title="tactic">auto</span> 10. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -2372,7 +2352,7 @@ Next, a bit of Coq hackery to automate searching for typing
 
 
 <div class="doc">
-<a id="lab287"></a><h2 class="section">Properties of Typing</h2>
+<a id="lab292"></a><h2 class="section">Properties of Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -2382,11 +2362,11 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab288"></a><h3 class="section">Progress</h3>
+<a id="lab293"></a><h3 class="section">Progress</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab289"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_progress)</h4>
+<a id="lab294"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_progress)</h4>
  Complete the proof of <span class="inlinecode"><span class="id" title="tactic">progress</span></span>.
 
 <div class="paragraph"> </div>
@@ -2401,7 +2381,6 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="STLCExtended.progress" class="idref" href="#STLCExtended.progress"><span class="id" title="lemma">progress</span></a> : <span class="id" title="keyword">∀</span> <a id="t:168" class="idref" href="#t:168"><span class="id" title="binder">t</span></a> <a id="T:169" class="idref" href="#T:169"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="MoreStlc.html#t:168"><span class="id" title="variable">t</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#T:169"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.value"><span class="id" title="inductive">value</span></a> <a class="idref" href="MoreStlc.html#t:168"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t':170" class="idref" href="#t':170"><span class="id" title="binder">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="MoreStlc.html#t:168"><span class="id" title="variable">t</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="MoreStlc.html#t':170"><span class="id" title="variable">t'</span></a>.<br/>
@@ -2561,7 +2540,7 @@ Next, a bit of Coq hackery to automate searching for typing
 
 
 <div class="doc">
-<a id="lab290"></a><h2 class="section">Weakening</h2>
+<a id="lab295"></a><h2 class="section">Weakening</h2>
 
 <div class="paragraph"> </div>
 
@@ -2571,7 +2550,6 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="STLCExtended.weakening" class="idref" href="#STLCExtended.weakening"><span class="id" title="lemma">weakening</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:171" class="idref" href="#Gamma:171"><span class="id" title="binder">Gamma</span></a> <a id="Gamma':172" class="idref" href="#Gamma':172"><span class="id" title="binder">Gamma'</span></a> <a id="t:173" class="idref" href="#t:173"><span class="id" title="binder">t</span></a> <a id="T:174" class="idref" href="#T:174"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">inclusion</span> <a class="idref" href="MoreStlc.html#Gamma:171"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="MoreStlc.html#Gamma':172"><span class="id" title="variable">Gamma'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#Gamma:171"><span class="id" title="variable">Gamma</span></a>  <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="MoreStlc.html#t:173"><span class="id" title="variable">t</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#T:174"><span class="id" title="variable">T</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2592,16 +2570,15 @@ Next, a bit of Coq hackery to automate searching for typing
 </div>
 
 <div class="doc">
-<a id="lab291"></a><h3 class="section">Substitution</h3>
+<a id="lab296"></a><h3 class="section">Substitution</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab292"></a><h4 class="section">Exercise: 2 stars, standard (STLCE_subst_preserves_typing)</h4>
+<a id="lab297"></a><h4 class="section">Exercise: 2 stars, standard (STLCE_subst_preserves_typing)</h4>
  Complete the proof of <span class="inlinecode"><span class="id" title="var">substitution_preserves_typing</span></span>. 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="STLCExtended.substitution_preserves_typing" class="idref" href="#STLCExtended.substitution_preserves_typing"><span class="id" title="lemma">substitution_preserves_typing</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:178" class="idref" href="#Gamma:178"><span class="id" title="binder">Gamma</span></a> <a id="x:179" class="idref" href="#x:179"><span class="id" title="binder">x</span></a> <a id="U:180" class="idref" href="#U:180"><span class="id" title="binder">U</span></a> <a id="t:181" class="idref" href="#t:181"><span class="id" title="binder">t</span></a> <a id="v:182" class="idref" href="#v:182"><span class="id" title="binder">v</span></a> <a id="T:183" class="idref" href="#T:183"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#x:179"><span class="id" title="variable">x</span></a> <span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <a class="idref" href="MoreStlc.html#U:180"><span class="id" title="variable">U</span></a> <span class="id" title="notation">;</span> <a class="idref" href="MoreStlc.html#Gamma:178"><span class="id" title="variable">Gamma</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">)</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="MoreStlc.html#t:181"><span class="id" title="variable">t</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#T:183"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="MoreStlc.html#v:182"><span class="id" title="variable">v</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#U:180"><span class="id" title="variable">U</span></a>   <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2688,16 +2665,15 @@ Next, a bit of Coq hackery to automate searching for typing
 
 
 <div class="doc">
-<a id="lab293"></a><h3 class="section">Preservation</h3>
+<a id="lab298"></a><h3 class="section">Preservation</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab294"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_preservation)</h4>
+<a id="lab299"></a><h4 class="section">Exercise: 3 stars, standard (STLCE_preservation)</h4>
  Complete the proof of <span class="inlinecode"><span class="id" title="var">preservation</span></span>. 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="STLCExtended.preservation" class="idref" href="#STLCExtended.preservation"><span class="id" title="lemma">preservation</span></a> : <span class="id" title="keyword">∀</span> <a id="t:184" class="idref" href="#t:184"><span class="id" title="binder">t</span></a> <a id="t':185" class="idref" href="#t':185"><span class="id" title="binder">t'</span></a> <a id="T:186" class="idref" href="#T:186"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="MoreStlc.html#t:184"><span class="id" title="variable">t</span></a> <a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#93ddac5fbc94395177f473c7b12aad0d"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#T:186"><span class="id" title="variable">T</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#t:184"><span class="id" title="variable">t</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="MoreStlc.html#t':185"><span class="id" title="variable">t'</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2748,9 +2724,8 @@ Next, a bit of Coq hackery to automate searching for typing
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended"><span class="id" title="module">STLCExtended</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:09&nbsp;*)</span><br/>
 </div>
 </div>
 

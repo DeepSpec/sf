@@ -30,8 +30,6 @@
 
 <h1 class="libtitle">Verif_sumarray<span class="subtitle">Introduction to Verifiable C</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
@@ -191,7 +189,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <a class="idref" href="Preface.html#"><span class="id" title="library">VC.Preface</span></a>. <span class="comment">(*&nbsp;Check&nbsp;for&nbsp;the&nbsp;right&nbsp;version&nbsp;of&nbsp;VST&nbsp;*)</span><br/>
 </div>
 
@@ -206,7 +203,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.sumarray</span>.<br/>
 <span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
@@ -230,7 +226,6 @@ The first line imports Verifiable C and its <i>Floyd</i> proof-automation
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="sum_Z" class="idref" href="#sum_Z"><span class="id" title="definition">sum_Z</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#fold_right"><span class="id" title="definition">fold_right</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.add"><span class="id" title="definition">Z.add</span></a> 0.<br/>
 </div>
 
@@ -240,7 +235,6 @@ Then we prove properties of the functional model: in this case,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="sum_Z_app" class="idref" href="#sum_Z_app"><span class="id" title="lemma">sum_Z_app</span></a>:<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="a:1" class="idref" href="#a:1"><span class="id" title="binder">a</span></a> <a id="b:2" class="idref" href="#b:2"><span class="id" title="binder">b</span></a>, <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> (<a class="idref" href="Verif_sumarray.html#a:1"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a><a class="idref" href="Verif_sumarray.html#b:2"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a>  <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#a:1"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#b:2"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -270,7 +264,6 @@ The data types used in a functional model can be any kind of mathematics
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="sumarray_spec" class="idref" href="#sumarray_spec"><span class="id" title="definition">sumarray_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
 <span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_sumarray</span><br/>
 &nbsp;<span class="id" title="notation">WITH</span> <a id="a:8" class="idref" href="#a:8"><span class="id" title="binder">a</span></a><span class="id" title="notation">:</span> <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <a id="sh:9" class="idref" href="#sh:9"><span class="id" title="binder">sh</span></a> <span class="id" title="notation">:</span> <span class="id" title="definition">share</span><span class="id" title="notation">,</span> <a id="contents:10" class="idref" href="#contents:10"><span class="id" title="binder">contents</span></a> <span class="id" title="notation">:</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span> <a id="size:11" class="idref" href="#size:11"><span class="id" title="binder">size</span></a><span class="id" title="notation">:</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><br/>
@@ -472,7 +465,6 @@ The first step is easy:
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Packaging&nbsp;the&nbsp;API&nbsp;specs&nbsp;all&nbsp;together.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="Gprog" class="idref" href="#Gprog"><span class="id" title="definition">Gprog</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="Verif_sumarray.html#sumarray_spec"><span class="id" title="definition">sumarray_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_sumarray.html#main_spec"><span class="id" title="definition">main_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/>
 </div>
@@ -489,7 +481,6 @@ What's in <span class="inlinecode"><span class="id" title="var">Gprog</span></sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Verif_sumarray.html#Vprog"><span class="id" title="definition">Vprog</span></a>.<br/>
 <span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;<span class="inlinecode">(<span class="id" title="var">_four</span>,</span> <span class="inlinecode"><span class="id" title="var">tarray</span></span> <span class="inlinecode"><span class="id" title="var">tuint</span></span> <span class="inlinecode">4)</span>&nbsp;&nbsp;:&nbsp;varspecs&nbsp;*)</span><br/>
 <span class="id" title="keyword">Print</span> <span class="id" title="definition">varspecs</span>.<br/>
@@ -526,7 +517,6 @@ Here, <span class="inlinecode"><span class="id" title="var">f_sumarray</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 </div>
 
@@ -558,7 +548,6 @@ If you are reading this as a static document, you should consider
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">start_function</span>. <span class="comment">(*&nbsp;Always&nbsp;do&nbsp;this&nbsp;at&nbsp;the&nbsp;beginning&nbsp;of&nbsp;a&nbsp;semax_body&nbsp;proof&nbsp;*)</span><br/>
 </div>
 
@@ -611,7 +600,6 @@ Let us now apply the <span class="inlinecode"><span class="id" title="var">forwa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">forward</span>. <span class="comment">(*&nbsp;i&nbsp;=&nbsp;0;&nbsp;*)</span><br/>
 </div>
 
@@ -625,7 +613,6 @@ Look at the precondition of the current proof goal, that is, the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> 0. <span class="comment">(*&nbsp;:&nbsp;Z,&nbsp;&nbsp;&nbsp;the&nbsp;mathematical&nbsp;integer&nbsp;zero.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Check</span> (<span class="id" title="definition">Int.repr</span> 0). <span class="comment">(*&nbsp;:&nbsp;int,&nbsp;&nbsp;&nbsp;the&nbsp;32-bit&nbsp;integer&nbsp;representing&nbsp;0.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Check</span> (<span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> 0)). <span class="comment">(*&nbsp;:&nbsp;val,&nbsp;&nbsp;&nbsp;the&nbsp;type&nbsp;of&nbsp;CompCert&nbsp;values&nbsp;*)</span><br/>
@@ -641,7 +628,6 @@ Look at the precondition of the current proof goal, that is, the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> @<span class="id" title="definition">abbreviate</span>.<br/>
 <span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;A&nbsp;:&nbsp;Type,&nbsp;A&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;A&nbsp;*)</span><br/>
 <span class="id" title="keyword">About</span> <span class="id" title="definition">abbreviate</span>.<br/>
@@ -657,7 +643,6 @@ We see here that <span class="inlinecode"><span class="id" title="var">abbreviat
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="tactic">unfold</span> <span class="id" title="definition">abbreviate</span> <span class="id" title="keyword">in</span> <span class="id" title="var">MORE_COMMANDS</span>.<br/>
 </div>
 
@@ -673,7 +658,6 @@ Similarly, to see the POSTCONDITION, just do,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="tactic">unfold</span> <span class="id" title="definition">abbreviate</span> <span class="id" title="keyword">in</span> <span class="id" title="var">POSTCONDITION</span>.<br/>
 </div>
 
@@ -686,7 +670,6 @@ Similarly, to see the POSTCONDITION, just do,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">hint</span>.<br/>
 </div>
 
@@ -701,7 +684,6 @@ Then delete the hints!  (They slow down replay of your proof.)
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">abbreviate_semax</span>.<br/>
 <span class="id" title="var">hint</span>.<br/>
 </div>
@@ -791,7 +773,6 @@ The first subgoal is to prove
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Nested</span> <span class="id" title="var">Proofs</span> <span class="id" title="var">Allowed</span>.<br/>
 <span class="id" title="keyword">Goal</span> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">∀</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="f:16" class="idref" href="#f:16"><span class="id" title="binder">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">→</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="x:17" class="idref" href="#x:17"><span class="id" title="binder">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">),</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)=0</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">→</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">∃</span></a> <a id="i:18" class="idref" href="#i:18"><span class="id" title="binder">i</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">,</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)=</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">i</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
@@ -827,7 +808,6 @@ Notice that <span class="inlinecode"><span class="id" title="var">i</span></span
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;<span class="id" title="var">entailer</span>!.<br/>
 </div>
 
@@ -897,7 +877,6 @@ The third subgoal of <span class="inlinecode"><span class="id" title="var">forwa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Fail</span> <span class="id" title="var">forward</span>. <span class="comment">(*&nbsp;x&nbsp;=&nbsp;a<span class="inlinecode"><span class="id" title="var">i</span></span>&nbsp;*)</span><br/>
 </div>
 
@@ -933,7 +912,6 @@ The third subgoal of <span class="inlinecode"><span class="id" title="var">forwa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">assert_PROP</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <span class="id" title="var">contents</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">size</span>). {<br/>
 <br/>
 </div>
@@ -1041,7 +1019,6 @@ After the loop, our precondition is the conjunction of the loop
 </div>
 <div class="code">
 
-<br/>
 - <span class="id" title="var">hint</span>.<br/>
 </div>
 
@@ -1052,7 +1029,6 @@ You can always go <span class="inlinecode"><span class="id" title="var">forward<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">forward</span>. <span class="comment">(*&nbsp;return&nbsp;s;&nbsp;*)</span><br/>
 </div>
 
@@ -1136,7 +1112,6 @@ The subgoal of <span class="inlinecode"><span class="id" title="var">forward_cal
 </div>
 <div class="code">
 
-<br/>
 &nbsp;<span class="id" title="var">split3</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="var">computable</span>. <span class="id" title="tactic">repeat</span> <span class="id" title="tactic">constructor</span>; <span class="id" title="var">computable</span>.<br/>
 </div>
 
@@ -1166,7 +1141,6 @@ Now we are after the function-call, and we can go forward through
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">NullExtension.Espec</span>.<br/>
 </div>
 
@@ -1184,7 +1158,6 @@ This is a <i>typeclass instance</i>.  If you're not familiar with typeclasses,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="prog_correct" class="idref" href="#prog_correct"><span class="id" title="lemma">prog_correct</span></a>: <span class="id" title="definition">semax_prog</span> <span class="id" title="definition">prog</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="Verif_sumarray.html#Vprog"><span class="id" title="definition">Vprog</span></a> <a class="idref" href="Verif_sumarray.html#Gprog"><span class="id" title="definition">Gprog</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="id" title="var">prove_semax_prog</span>.<br/><hr class='doublespaceincode'/>
@@ -1202,8 +1175,7 @@ This is a <i>typeclass instance</i>.  If you're not familiar with typeclasses,
 </div>
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:18&nbsp;*)</span><br/>
 </div>
 </div>
 

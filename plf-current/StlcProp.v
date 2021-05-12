@@ -18,9 +18,13 @@ Import STLC.
 (** As we saw for the very simple language in the [Types]
     chapter, the first step in establishing basic properties of
     reduction and types is to identify the possible _canonical
-    forms_ (i.e., well-typed closed values) belonging to each type.
-    For [Bool], these are again the boolean values [true] and [false];
-    for arrow types, they are lambda-abstractions.  *)
+    forms_ (i.e., well-typed values) belonging to each type.  For
+    [Bool], these are again the boolean values [true] and [false]; for
+    arrow types, they are lambda-abstractions.
+
+    Formally, we will need these lemmas only for terms that are not
+    only well typed but _closed_ -- well typed in the empty
+    context. *)
 
 Lemma canonical_forms_bool : forall t,
   empty |- t \in Bool ->
@@ -162,13 +166,13 @@ Proof.
         operation.  To see that this step preserves typing, we need to
         know that the substitution itself does.  So we prove a...
 
-      - _substitution lemma_, stating that substituting a (closed)
-        term [s] for a variable [x] in a term [t] preserves the type
-        of [t].  The proof goes by induction on the form of [t] and
-        requires looking at all the different cases in the definition
-        of substitition.  This time, for the variables case, we
-        discover that we need to deduce from the fact that a term
-        [s] has type S in the empty context the fact that [s] has
+      - _substitution lemma_, stating that substituting a (closed,
+        well-typed) term [s] for a variable [x] in a term [t]
+        preserves the type of [t].  The proof goes by induction on the
+        form of [t] and requires looking at all the different cases in
+        the definition of substitition.  This time, for the variables
+        case, we discover that we need to deduce from the fact that a
+        term [s] has type S in the empty context the fact that [s] has
         type S in every context. For this we prove a...
 
       - _weakening_ lemma, showing that typing is preserved under
@@ -335,9 +339,9 @@ Proof.
 (** ** Main Theorem *)
 
 (** We now have the ingredients we need to prove preservation: if a
-    closed term [t] has type [T] and takes a step to [t'], then [t']
-    is also a closed term with type [T].  In other words, the
-    small-step reduction relation preserves types. *)
+    closed, well-typed term [t] has type [T] and takes a step to [t'],
+    then [t'] is also a closed term with type [T].  In other words,
+    the small-step reduction relation preserves types. *)
 
 Theorem preservation : forall t t' T,
   empty |- t \in T  ->
@@ -457,6 +461,212 @@ Theorem unique_types : forall Gamma e T T',
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
+
+(* ################################################################# *)
+(** * Context Invariance (Optional) *)
+
+(** Another standard technical lemma associated with typed languages
+    is _context invariance_. It states that typing is preserved under
+    "inessential changes" to the context [Gamma] -- in particular,
+    changes that do not affect any of the free variables of the
+    term. In this section, we establish this property for our system,
+    introducing some other standard terminology on the way.  *)
+
+(** First, we need to define the _free variables_ in a term -- i.e.,
+    variables that are used in the term in positions that are _not_ in
+    the scope of an enclosing function abstraction binding a variable
+    of the same name.
+
+    More technically, a variable [x] _appears free in_ a term _t_ if
+    [t] contains some occurrence of [x] that is not under an
+    abstraction labeled [x]. For example:
+      - [y] appears free, but [x] does not, in [\x:T->U, x y]
+      - both [x] and [y] appear free in [(\x:T->U, x y) x]
+      - no variables appear free in [\x:T->U, \y:T, x y]
+
+      Formally: *)
+
+Inductive appears_free_in (x : string) : tm -> Prop :=
+  | afi_var : appears_free_in x <{x}>
+  | afi_app1 : forall t1 t2,
+      appears_free_in x t1 ->
+      appears_free_in x <{t1 t2}>
+  | afi_app2 : forall t1 t2,
+      appears_free_in x t2 ->
+      appears_free_in x <{t1 t2}>
+  | afi_abs : forall y T1 t1,
+      y <> x  ->
+      appears_free_in x t1 ->
+      appears_free_in x <{\y:T1, t1}>
+  | afi_if1 : forall t1 t2 t3,
+      appears_free_in x t1 ->
+      appears_free_in x <{if t1 then t2 else t3}>
+  | afi_if2 : forall t1 t2 t3,
+      appears_free_in x t2 ->
+      appears_free_in x <{if t1 then t2 else t3}>
+  | afi_if3 : forall t1 t2 t3,
+      appears_free_in x t3 ->
+      appears_free_in x <{if t1 then t2 else t3}>.
+
+Hint Constructors appears_free_in : core.
+
+(** The _free variables_ of a term are just the variables that appear
+    free in it.  This gives us another way to define _closed_ terms --
+    arguably a better one, since it applies even to ill-typed
+    terms.  Indeed, this is the standard definition of the term
+    "closed." *)
+
+Definition closed (t:tm) :=
+  forall x, ~ appears_free_in x t.
+
+(** Conversely, an _open_ term is one that may contain free
+    variables.  (I.e., every term is an open term; the closed terms
+    are a subset of the open ones.  "Open" precisely means "possibly
+    containing free variables.") *)
+
+(** **** Exercise: 1 star, standard (afi)
+
+    In the space below, write out the rules of the [appears_free_in]
+    relation in informal inference-rule notation.  (Use whatever
+    notational conventions you like -- the point of the exercise is
+    just for you to think a bit about the meaning of each rule.)
+    Although this is a rather low-level, technical definition,
+    understanding it is crucial to understanding substitution and its
+    properties, which are really the crux of the lambda-calculus. *)
+
+(* FILL IN HERE *)
+
+(* Do not modify the following line: *)
+Definition manual_grade_for_afi : option (nat*string) := None.
+(** [] *)
+
+(** Next, we show that if a variable [x] appears free in a term [t],
+    and if we know [t] is well typed in context [Gamma], then it
+    must be the case that [Gamma] assigns a type to [x]. *)
+
+Lemma free_in_context : forall x t T Gamma,
+   appears_free_in x t ->
+   Gamma |- t \in T ->
+   exists T', Gamma x = Some T'.
+
+(** _Proof_: We show, by induction on the proof that [x] appears free
+    in [t], that, for all contexts [Gamma], if [t] is well typed under
+    [Gamma], then [Gamma] assigns some type to [x].
+
+    - If the last rule used is [afi_var], then [t = x], and from the
+      assumption that [t] is well typed under [Gamma] we have
+      immediately that [Gamma] assigns a type to [x].
+
+    - If the last rule used is [afi_app1], then [t = t1 t2] and [x]
+      appears free in [t1].  Since [t] is well typed under [Gamma], we
+      can see from the typing rules that [t1] must also be, and the IH
+      then tells us that [Gamma] assigns [x] a type.
+
+    - Almost all the other cases are similar: [x] appears free in a
+      subterm of [t], and since [t] is well typed under [Gamma], we
+      know the subterm of [t] in which [x] appears is well typed under
+      [Gamma] as well, and the IH gives us exactly the conclusion we
+      want.
+
+    - The only remaining case is [afi_abs].  In this case [t =
+      \y:T1,t1] and [x] appears free in [t1], and we also know that
+      [x] is different from [y].  The difference from the previous
+      cases is that, whereas [t] is well typed under [Gamma], its body
+      [t1] is well typed under [y|->T1; Gamma], so the IH allows us
+      to conclude that [x] is assigned some type by the extended
+      context [y|->T1; Gamma].  To conclude that [Gamma] assigns a
+      type to [x], we appeal to lemma [update_neq], noting that [x]
+      and [y] are different variables. *)
+
+(** **** Exercise: 2 stars, standard (free_in_context)
+
+    Complete the following proof. *)
+
+Proof.
+  intros x t T Gamma H H0. generalize dependent Gamma.
+  generalize dependent T.
+  induction H;
+         intros; try solve [inversion H0; eauto].
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** From the [free_in_context] lemma, it immediately follows that any
+    term [t] that is well typed in the empty context is closed (it has
+    no free variables). *)
+
+(** **** Exercise: 2 stars, standard, optional (typable_empty__closed) *)
+Corollary typable_empty__closed : forall t T,
+    empty |- t \in T  ->
+    closed t.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** Finally, we establish _context_invariance_.  It is useful in cases
+    when we have a proof of some typing relation [Gamma |- t \in T],
+    and we need to replace [Gamma] by a different context [Gamma'].
+    When is it safe to do this?  Intuitively, it must at least be the
+    case that [Gamma'] assigns the same types as [Gamma] to all the
+    variables that appear free in [t]. In fact, this is the only
+    condition that is needed. *)
+
+Lemma context_invariance : forall Gamma Gamma' t T,
+     Gamma |- t \in T  ->
+     (forall x, appears_free_in x t -> Gamma x = Gamma' x) ->
+     Gamma' |- t \in T.
+
+(** _Proof_: By induction on the derivation of [Gamma |- t \in T].
+
+    - If the last rule in the derivation was [T_Var], then [t = x] and
+      [Gamma x = T].  By assumption, [Gamma' x = T] as well, and hence
+      [Gamma' |- t \in T] by [T_Var].
+
+    - If the last rule was [T_Abs], then [t = \y:T2, t1], with [T =
+      T2 -> T1] and [y|->T2; Gamma |- t1 \in T1].  The induction
+      hypothesis states that for any context [Gamma''], if [y|->T2;
+      Gamma] and [Gamma''] assign the same types to all the free
+      variables in [t1], then [t1] has type [T1] under [Gamma''].
+      Let [Gamma'] be a context which agrees with [Gamma] on the free
+      variables in [t]; we must show [Gamma' |- \y:T2, t1 \in T2 -> T1].
+
+      By [T_Abs], it suffices to show that [y|->T2; Gamma' |- t1 \in
+      T1].  By the IH (setting [Gamma'' = y|->T2;Gamma']), it
+      suffices to show that [y|->T2;Gamma] and [y|->T2;Gamma'] agree
+      on all the variables that appear free in [t1].
+
+      Any variable occurring free in [t1] must be either [y] or some
+      other variable.  [y|->T2; Gamma] and [y|->T2; Gamma'] clearly
+      agree on [y].  Otherwise, note that any variable other than [y]
+      that occurs free in [t1] also occurs free in [t = \y:T2, t1],
+      and by assumption [Gamma] and [Gamma'] agree on all such
+      variables; hence so do [y|->T2; Gamma] and [y|->T2; Gamma'].
+
+    - If the last rule was [T_App], then [t = t1 t2], with [Gamma |-
+      t1 \in T2 -> T] and [Gamma |- t2 \in T2].  One induction
+      hypothesis states that for all contexts [Gamma'], if [Gamma']
+      agrees with [Gamma] on the free variables in [t1], then [t1] has
+      type [T2 -> T] under [Gamma']; there is a similar IH for [t2].
+      We must show that [t1 t2] also has type [T] under [Gamma'],
+      given the assumption that [Gamma'] agrees with [Gamma] on all
+      the free variables in [t1 t2].  By [T_App], it suffices to show
+      that [t1] and [t2] each have the same type under [Gamma'] as
+      under [Gamma].  But all free variables in [t1] are also free in
+      [t1 t2], and similarly for [t2]; hence the desired result
+      follows from the induction hypotheses. *)
+
+(** **** Exercise: 3 stars, standard, optional (context_invariance)
+
+    Complete the following proof. *)
+Proof.
+  intros.
+  generalize dependent Gamma'.
+  induction H; intros; auto.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** The context invariance lemma can actually be used in place of the
+    weakening lemma to prove the crucial substitution lemma stated
+    earlier. *)
 
 (* ################################################################# *)
 (** * Additional Exercises *)
@@ -750,4 +960,4 @@ Definition manual_grade_for_stlc_arith : option (nat*string) := None.
 
 End STLCArith.
 
-(* 2021-05-07 15:18 *)
+(* 2021-05-12 01:09 *)

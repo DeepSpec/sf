@@ -31,8 +31,6 @@
 
 <h1 class="libtitle">Basics<span class="subtitle">Functional Programming in Coq</span></h1>
 
-<div class="code">
-</div>
 
 
 <div class="doc">
@@ -113,7 +111,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="day" class="idref" href="#day"><span class="id" title="inductive">day</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="monday" class="idref" href="#monday"><span class="id" title="constructor">monday</span></a><br/>
 &nbsp;&nbsp;| <a id="tuesday" class="idref" href="#tuesday"><span class="id" title="constructor">tuesday</span></a><br/>
@@ -135,7 +132,6 @@ The new type is called <span class="inlinecode"><span class="id" title="var">day
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="next_weekday" class="idref" href="#next_weekday"><span class="id" title="definition">next_weekday</span></a> (<a id="d:3" class="idref" href="#d:3"><span class="id" title="binder">d</span></a>:<a class="idref" href="Basics.html#day"><span class="id" title="inductive">day</span></a>) : <a class="idref" href="Basics.html#day"><span class="id" title="inductive">day</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#d:3"><span class="id" title="variable">d</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#monday"><span class="id" title="constructor">monday</span></a>    ⇒ <a class="idref" href="Basics.html#tuesday"><span class="id" title="constructor">tuesday</span></a><br/>
@@ -165,7 +161,6 @@ One point to note is that the argument and return types of
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> <a class="idref" href="Basics.html#friday"><span class="id" title="constructor">friday</span></a>).<br/>
 <span class="comment">(*&nbsp;==&gt;&nbsp;monday&nbsp;:&nbsp;day&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> <a class="idref" href="Basics.html#saturday"><span class="id" title="constructor">saturday</span></a>)).<br/>
@@ -186,7 +181,6 @@ One point to note is that the argument and return types of
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_next_weekday" class="idref" href="#test_next_weekday"><span class="id" title="definition">test_next_weekday</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> <a class="idref" href="Basics.html#saturday"><span class="id" title="constructor">saturday</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#tuesday"><span class="id" title="constructor">tuesday</span></a>.<br/>
 </div>
@@ -200,7 +194,6 @@ This declaration does two things: it makes an
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -325,7 +318,6 @@ The details are not important just now, but essentially this
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="bool" class="idref" href="#bool"><span class="id" title="inductive">bool</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="true" class="idref" href="#true"><span class="id" title="constructor">true</span></a><br/>
 &nbsp;&nbsp;| <a id="false" class="idref" href="#false"><span class="id" title="constructor">false</span></a>.<br/>
@@ -337,7 +329,6 @@ Functions over booleans can be defined in the same way as
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="negb" class="idref" href="#negb"><span class="id" title="definition">negb</span></a> (<a id="b:7" class="idref" href="#b:7"><span class="id" title="binder">b</span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#b:7"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> ⇒ <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><br/>
@@ -372,7 +363,6 @@ Functions over booleans can be defined in the same way as
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_orb1" class="idref" href="#test_orb1"><span class="id" title="definition">test_orb1</span></a>:  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>  <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 <span class="id" title="keyword">Example</span> <a id="test_orb2" class="idref" href="#test_orb2"><span class="id" title="definition">test_orb2</span></a>:  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a>.<br/>
@@ -390,7 +380,6 @@ We can also introduce some familiar infix syntax for the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id=":::x_'&amp;&amp;'_x" class="idref" href="#:::x_'&amp;&amp;'_x"><span class="id" title="notation">&quot;</span></a>x &amp;&amp; y" := (<a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/>
 <span class="id" title="keyword">Notation</span> <a id="34428c8531fd724748c0ebf19a35c764" class="idref" href="#34428c8531fd724748c0ebf19a35c764"><span class="id" title="notation">&quot;</span></a>x || y" := (<a class="idref" href="Basics.html#orb"><span class="id" title="definition">orb</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_orb5" class="idref" href="#test_orb5"><span class="id" title="definition">test_orb5</span></a>:  <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="Basics.html#34428c8531fd724748c0ebf19a35c764"><span class="id" title="notation">||</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="Basics.html#34428c8531fd724748c0ebf19a35c764"><span class="id" title="notation">||</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
@@ -410,7 +399,6 @@ We can also introduce some familiar infix syntax for the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="negb'" class="idref" href="#negb'"><span class="id" title="definition">negb'</span></a> (<a id="b:15" class="idref" href="#b:15"><span class="id" title="binder">b</span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="Basics.html#b:15"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">else</span> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/><hr class='doublespaceincode'/>
@@ -449,7 +437,6 @@ Coq's conditionals are exactly like those found in any other
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="nandb" class="idref" href="#nandb"><span class="id" title="definition">nandb</span></a> (<a id="b<sub>1</sub>:20" class="idref" href="#b<sub>1</sub>:20"><span class="id" title="binder">b<sub>1</sub></span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) (<a id="b<sub>2</sub>:21" class="idref" href="#b<sub>2</sub>:21"><span class="id" title="binder">b<sub>2</sub></span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_nandb1" class="idref" href="#test_nandb1"><span class="id" title="definition">test_nandb1</span></a>:               <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#nandb"><span class="id" title="axiom">nandb</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
@@ -473,7 +460,6 @@ Coq's conditionals are exactly like those found in any other
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="andb3" class="idref" href="#andb3"><span class="id" title="definition">andb3</span></a> (<a id="b<sub>1</sub>:22" class="idref" href="#b<sub>1</sub>:22"><span class="id" title="binder">b<sub>1</sub></span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) (<a id="b<sub>2</sub>:23" class="idref" href="#b<sub>2</sub>:23"><span class="id" title="binder">b<sub>2</sub></span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) (<a id="b<sub>3</sub>:24" class="idref" href="#b<sub>3</sub>:24"><span class="id" title="binder">b<sub>3</sub></span></a>:<a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_andb31" class="idref" href="#test_andb31"><span class="id" title="definition">test_andb31</span></a>:                 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#andb3"><span class="id" title="axiom">andb3</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
@@ -499,7 +485,6 @@ Coq's conditionals are exactly like those found in any other
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;true&nbsp;:&nbsp;bool&nbsp;*)</span><br/>
 </div>
@@ -511,7 +496,6 @@ If the expression after <span class="inlinecode"><span class="id" title="keyword
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><br/>
 &nbsp;&nbsp;: <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="Basics.html#negb"><span class="id" title="definition">negb</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>)<br/>
@@ -525,7 +509,6 @@ Functions like <span class="inlinecode"><span class="id" title="var">negb</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Basics.html#negb"><span class="id" title="definition">negb</span></a><br/>
 &nbsp;&nbsp;: <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
 </div>
@@ -551,7 +534,6 @@ The type of <span class="inlinecode"><span class="id" title="var">negb</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="rgb" class="idref" href="#rgb"><span class="id" title="inductive">rgb</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="red" class="idref" href="#red"><span class="id" title="constructor">red</span></a><br/>
 &nbsp;&nbsp;| <a id="green" class="idref" href="#green"><span class="id" title="constructor">green</span></a><br/>
@@ -654,7 +636,6 @@ Let's look at this in a little more detail.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="monochrome" class="idref" href="#monochrome"><span class="id" title="definition">monochrome</span></a> (<a id="c:30" class="idref" href="#c:30"><span class="id" title="binder">c</span></a> : <a class="idref" href="Basics.html#color"><span class="id" title="inductive">color</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#c:30"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#black"><span class="id" title="constructor">black</span></a> ⇒ <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><br/>
@@ -671,7 +652,6 @@ Since the <span class="inlinecode"><span class="id" title="var">primary</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="isred" class="idref" href="#isred"><span class="id" title="definition">isred</span></a> (<a id="c:32" class="idref" href="#c:32"><span class="id" title="binder">c</span></a> : <a class="idref" href="Basics.html#color"><span class="id" title="inductive">color</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#c:32"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#black"><span class="id" title="constructor">black</span></a> ⇒ <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><br/>
@@ -704,7 +684,6 @@ The pattern "<span class="inlinecode"><span class="id" title="var">primary</span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Playground" class="idref" href="#Playground"><span class="id" title="module">Playground</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Playground.b" class="idref" href="#Playground.b"><span class="id" title="definition">b</span></a> : <a class="idref" href="Basics.html#rgb"><span class="id" title="inductive">rgb</span></a> := <a class="idref" href="Basics.html#blue"><span class="id" title="constructor">blue</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Basics.html#Playground"><span class="id" title="module">Playground</span></a>.<br/><hr class='doublespaceincode'/>
@@ -719,7 +698,6 @@ The pattern "<span class="inlinecode"><span class="id" title="var">primary</span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TuplePlayground" class="idref" href="#TuplePlayground"><span class="id" title="module">TuplePlayground</span></a>.<br/>
 </div>
 
@@ -734,7 +712,6 @@ A single constructor with multiple parameters can be used
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="TuplePlayground.bit" class="idref" href="#TuplePlayground.bit"><span class="id" title="inductive">bit</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="TuplePlayground.B0" class="idref" href="#TuplePlayground.B0"><span class="id" title="constructor">B<sub>0</sub></span></a><br/>
 &nbsp;&nbsp;| <a id="TuplePlayground.B1" class="idref" href="#TuplePlayground.B1"><span class="id" title="constructor">B<sub>1</sub></span></a>.<br/><hr class='doublespaceincode'/>
@@ -753,7 +730,6 @@ The <span class="inlinecode"><span class="id" title="var">bits</span></span> con
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="TuplePlayground.all_zero" class="idref" href="#TuplePlayground.all_zero"><span class="id" title="definition">all_zero</span></a> (<a id="nb:42" class="idref" href="#nb:42"><span class="id" title="binder">nb</span></a> : <a class="idref" href="Basics.html#TuplePlayground.nybble"><span class="id" title="inductive">nybble</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#nb:42"><span class="id" title="variable">nb</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| (<a class="idref" href="Basics.html#TuplePlayground.bits"><span class="id" title="constructor">bits</span></a> <a class="idref" href="Basics.html#TuplePlayground.B0"><span class="id" title="constructor">B<sub>0</sub></span></a> <a class="idref" href="Basics.html#TuplePlayground.B0"><span class="id" title="constructor">B<sub>0</sub></span></a> <a class="idref" href="Basics.html#TuplePlayground.B0"><span class="id" title="constructor">B<sub>0</sub></span></a> <a class="idref" href="Basics.html#TuplePlayground.B0"><span class="id" title="constructor">B<sub>0</sub></span></a>) ⇒ <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><br/>
@@ -778,7 +754,6 @@ The <span class="inlinecode"><span class="id" title="var">bits</span></span> con
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="NatPlayground" class="idref" href="#NatPlayground"><span class="id" title="module">NatPlayground</span></a>.<br/>
 </div>
 
@@ -822,7 +797,6 @@ All the types we have defined so far -- both "enumerated
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="NatPlayground.nat" class="idref" href="#NatPlayground.nat"><span class="id" title="inductive">nat</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="NatPlayground.O" class="idref" href="#NatPlayground.O"><span class="id" title="constructor">O</span></a><br/>
 &nbsp;&nbsp;| <a id="NatPlayground.S" class="idref" href="#NatPlayground.S"><span class="id" title="constructor">S</span></a> (<a id="n:46" class="idref" href="#n:46"><span class="id" title="binder">n</span></a> : <a class="idref" href="Basics.html#nat:44"><span class="id" title="inductive">nat</span></a>).<br/>
@@ -888,7 +862,6 @@ With this definition, 0 is represented by <span class="inlinecode"><span class="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="NatPlayground.nat'" class="idref" href="#NatPlayground.nat'"><span class="id" title="inductive">nat'</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="NatPlayground.stop" class="idref" href="#NatPlayground.stop"><span class="id" title="constructor">stop</span></a><br/>
 &nbsp;&nbsp;| <a id="NatPlayground.tick" class="idref" href="#NatPlayground.tick"><span class="id" title="constructor">tick</span></a> (<a id="foo:49" class="idref" href="#foo:49"><span class="id" title="binder">foo</span></a> : <a class="idref" href="Basics.html#nat':47"><span class="id" title="inductive">nat'</span></a>).<br/>
@@ -906,7 +879,6 @@ The <i>interpretation</i> of these marks comes from how we use them to
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatPlayground.pred" class="idref" href="#NatPlayground.pred"><span class="id" title="definition">pred</span></a> (<a id="n:50" class="idref" href="#n:50"><span class="id" title="binder">n</span></a> : <a class="idref" href="Basics.html#NatPlayground.nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#NatPlayground.nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:50"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#NatPlayground.O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="Basics.html#NatPlayground.O"><span class="id" title="constructor">O</span></a><br/>
@@ -926,7 +898,6 @@ The second branch can be read: "if <span class="inlinecode"><span class="id" tit
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Basics.html#NatPlayground"><span class="id" title="module">NatPlayground</span></a>.<br/>
 </div>
 
@@ -939,7 +910,6 @@ Because natural numbers are such a pervasive form of data,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a>)))).<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;4&nbsp;:&nbsp;nat&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="minustwo" class="idref" href="#minustwo"><span class="id" title="definition">minustwo</span></a> (<a id="n:52" class="idref" href="#n:52"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
@@ -958,7 +928,6 @@ The constructor <span class="inlinecode"><span class="id" title="var">S</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a>        : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#pred"><span class="id" title="abbreviation">pred</span></a>     : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Basics.html#minustwo"><span class="id" title="definition">minustwo</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
@@ -996,7 +965,6 @@ These are all things that can be applied to a number to yield a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="even" class="idref" href="#even"><span class="id" title="definition">even</span></a> (<a id="n:54" class="idref" href="#n:54"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:54"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a>        ⇒ <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><br/>
@@ -1011,7 +979,6 @@ We could define <span class="inlinecode"><span class="id" title="var">odd</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="odd" class="idref" href="#odd"><span class="id" title="definition">odd</span></a> (<a id="n:57" class="idref" href="#n:57"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#negb"><span class="id" title="definition">negb</span></a> (<a class="idref" href="Basics.html#even"><span class="id" title="definition">even</span></a> <a class="idref" href="Basics.html#n:57"><span class="id" title="variable">n</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_odd1" class="idref" href="#test_odd1"><span class="id" title="definition">test_odd1</span></a>:    <a class="idref" href="Basics.html#odd"><span class="id" title="definition">odd</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
@@ -1032,7 +999,6 @@ We could define <span class="inlinecode"><span class="id" title="var">odd</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="NatPlayground2" class="idref" href="#NatPlayground2"><span class="id" title="module">NatPlayground2</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatPlayground2.plus" class="idref" href="#NatPlayground2.plus"><span class="id" title="definition">plus</span></a> (<a id="n:58" class="idref" href="#n:58"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="m:59" class="idref" href="#m:59"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:58"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1046,7 +1012,6 @@ Adding three to two now gives us five, as we'd expect.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#NatPlayground2.plus"><span class="id" title="definition">plus</span></a> 3 2).<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;5&nbsp;:&nbsp;nat&nbsp;*)</span><br/>
 </div>
@@ -1057,7 +1022,6 @@ The steps of simplification that Coq performs can be
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">plus</span></span> <span class="inlinecode">3</span> <span class="inlinecode">2</span><br/>
 &nbsp;&nbsp;&nbsp;i.e.&nbsp;<span class="inlinecode"><span class="id" title="var">plus</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">O</span>)))</span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">O</span>))</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;==&gt;&nbsp;<span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">plus</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">O</span>))</span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">O</span>)))</span><br/>
@@ -1079,7 +1043,6 @@ As a notational convenience, if two or more arguments have
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatPlayground2.mult" class="idref" href="#NatPlayground2.mult"><span class="id" title="definition">mult</span></a> (<a id="n:62" class="idref" href="#n:62"><span class="id" title="binder">n</span></a> <a id="m:63" class="idref" href="#m:63"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:62"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a><br/>
@@ -1095,7 +1058,6 @@ You can match two expressions at once by putting a comma
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatPlayground2.minus" class="idref" href="#NatPlayground2.minus"><span class="id" title="definition">minus</span></a> (<a id="n:66" class="idref" href="#n:66"><span class="id" title="binder">n</span></a> <a id="m:67" class="idref" href="#m:67"><span class="id" title="binder">m</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:66"><span class="id" title="variable">n</span></a>, <a class="idref" href="Basics.html#m:67"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a>   , <span class="id" title="var">_</span>    ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a><br/>
@@ -1121,7 +1083,6 @@ You can match two expressions at once by putting a comma
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="factorial" class="idref" href="#factorial"><span class="id" title="definition">factorial</span></a> (<a id="n:75" class="idref" href="#n:75"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_factorial1" class="idref" href="#test_factorial1"><span class="id" title="definition">test_factorial1</span></a>:          <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#factorial"><span class="id" title="axiom">factorial</span></a> 3<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 6.<br/>
@@ -1140,7 +1101,6 @@ You can match two expressions at once by putting a comma
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="0dacc1786c5ba797d47dd85006231633" class="idref" href="#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">&quot;</span></a>x + y" := (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="var">nat_scope</span>.<br/>
@@ -1177,7 +1137,6 @@ You can match two expressions at once by putting a comma
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="eqb" class="idref" href="#eqb"><span class="id" title="definition">eqb</span></a> (<a id="n:77" class="idref" href="#n:77"><span class="id" title="binder">n</span></a> <a id="m:78" class="idref" href="#m:78"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:77"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#m:78"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1197,7 +1156,6 @@ Similarly, the <span class="inlinecode"><span class="id" title="var">leb</span><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="leb" class="idref" href="#leb"><span class="id" title="definition">leb</span></a> (<a id="n:83" class="idref" href="#n:83"><span class="id" title="binder">n</span></a> <a id="m:84" class="idref" href="#m:84"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:83"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><br/>
@@ -1221,7 +1179,6 @@ We'll be using these (especially <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>" class="idref" href="#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">&quot;</span></a>x =? y" := (<a class="idref" href="Basics.html#eqb"><span class="id" title="definition">eqb</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70) : <span class="id" title="var">nat_scope</span>.<br/>
 <span class="id" title="keyword">Notation</span> <a id="0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>" class="idref" href="#0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>"><span class="id" title="notation">&quot;</span></a>x &lt;=? y" := (<a class="idref" href="Basics.html#leb"><span class="id" title="definition">leb</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70) : <span class="id" title="var">nat_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_leb3'" class="idref" href="#test_leb3'"><span class="id" title="definition">test_leb3'</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a>4 <a class="idref" href="Basics.html#0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>"><span class="id" title="notation">&lt;=?</span></a> 2<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a>.<br/>
@@ -1246,7 +1203,6 @@ We now have two symbols that look like equality: <span class="inlinecode">=</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="ltb" class="idref" href="#ltb"><span class="id" title="definition">ltb</span></a> (<a id="n:88" class="idref" href="#n:88"><span class="id" title="binder">n</span></a> <a id="m:89" class="idref" href="#m:89"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="6b7621b45fff0af5e2b2cbb2bc2d4e1d" class="idref" href="#6b7621b45fff0af5e2b2cbb2bc2d4e1d"><span class="id" title="notation">&quot;</span></a>x &lt;? y" := (<a class="idref" href="Basics.html#ltb"><span class="id" title="axiom">ltb</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70) : <span class="id" title="var">nat_scope</span>.<br/><hr class='doublespaceincode'/>
@@ -1284,7 +1240,6 @@ We now have two symbols that look like equality: <span class="inlinecode">=</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_O_n" class="idref" href="#plus_O_n"><span class="id" title="lemma">plus_O_n</span></a> : <span class="id" title="keyword">∀</span> <a id="n:90" class="idref" href="#n:90"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Basics.html#n:90"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#n:90"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
@@ -1311,7 +1266,6 @@ We now have two symbols that look like equality: <span class="inlinecode">=</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_O_n'" class="idref" href="#plus_O_n'"><span class="id" title="lemma">plus_O_n'</span></a> : <span class="id" title="keyword">∀</span> <a id="n:91" class="idref" href="#n:91"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Basics.html#n:91"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#n:91"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
@@ -1355,7 +1309,6 @@ Moreover, it will be useful to know that <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_O_n''" class="idref" href="#plus_O_n''"><span class="id" title="lemma">plus_O_n''</span></a> : <span class="id" title="keyword">∀</span> <a id="n:92" class="idref" href="#n:92"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Basics.html#n:92"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#n:92"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">m</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
@@ -1373,7 +1326,6 @@ The keywords <span class="inlinecode"><span class="id" title="tactic">intros</sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_1_l" class="idref" href="#plus_1_l"><span class="id" title="lemma">plus_1_l</span></a> : <span class="id" title="keyword">∀</span> <a id="n:93" class="idref" href="#n:93"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Basics.html#n:93"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Basics.html#n:93"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
@@ -1403,7 +1355,6 @@ The <span class="inlinecode"><span class="id" title="var">_l</span></span> suffi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_id_example" class="idref" href="#plus_id_example"><span class="id" title="lemma">plus_id_example</span></a> : <span class="id" title="keyword">∀</span> <a id="n:95" class="idref" href="#n:95"><span class="id" title="binder">n</span></a> <a id="m:96" class="idref" href="#m:96"><span class="id" title="binder">m</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#n:95"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#m:96"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#n:95"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Basics.html#n:95"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#m:96"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Basics.html#m:96"><span class="id" title="variable">m</span></a>.<br/>
@@ -1432,7 +1383,6 @@ Instead of making a universal claim about all numbers <span class="inlinecode"><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;move&nbsp;both&nbsp;quantifiers&nbsp;into&nbsp;the&nbsp;context:&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
@@ -1466,7 +1416,6 @@ The first line of the proof moves the universally quantified
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;SOOMER:&nbsp;KK:&nbsp;<span class="inlinecode"><span class="id" title="var">plus_id_exercise</span></span>&nbsp;contains&nbsp;multiple&nbsp;hypotheses,&nbsp;and&nbsp;at<br/>
 &nbsp;&nbsp;&nbsp;least&nbsp;one&nbsp;student&nbsp;was&nbsp;confused&nbsp;about&nbsp;this.&nbsp;Maybe&nbsp;we&nbsp;can&nbsp;talk&nbsp;about<br/>
 &nbsp;&nbsp;&nbsp;<span class="inlinecode">→</span>&nbsp;being&nbsp;right-associative&nbsp;before&nbsp;it.&nbsp;*)</span><br/><hr class='doublespaceincode'/>
@@ -1500,7 +1449,6 @@ The first line of the proof moves the universally quantified
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#mult_n_O"><span class="id" title="lemma">mult_n_O</span></a>.<br/>
 <span class="comment">(*&nbsp;===&gt;&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;0&nbsp;=&nbsp;n&nbsp;*&nbsp;0&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#mult_n_Sm"><span class="id" title="lemma">mult_n_Sm</span></a>.<br/>
@@ -1516,7 +1464,6 @@ We can use the <span class="inlinecode"><span class="id" title="tactic">rewrite<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="mult_n_0_m_0" class="idref" href="#mult_n_0_m_0"><span class="id" title="lemma">mult_n_0_m_0</span></a> : <span class="id" title="keyword">∀</span> <a id="p:100" class="idref" href="#p:100"><span class="id" title="binder">p</span></a> <a id="q:101" class="idref" href="#q:101"><span class="id" title="binder">q</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#p:100"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> 0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#q:101"><span class="id" title="variable">q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> 0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1533,7 +1480,6 @@ We can use the <span class="inlinecode"><span class="id" title="tactic">rewrite<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="mult_n_1" class="idref" href="#mult_n_1"><span class="id" title="lemma">mult_n_1</span></a> : <span class="id" title="keyword">∀</span> <a id="p:102" class="idref" href="#p:102"><span class="id" title="binder">p</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#p:102"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#p:102"><span class="id" title="variable">p</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1556,7 +1502,6 @@ We can use the <span class="inlinecode"><span class="id" title="tactic">rewrite<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_1_neq_0_firsttry" class="idref" href="#plus_1_neq_0_firsttry"><span class="id" title="lemma">plus_1_neq_0_firsttry</span></a> : <span class="id" title="keyword">∀</span> <a id="n:103" class="idref" href="#n:103"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#n:103"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 1<a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">=?</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1589,7 +1534,6 @@ The reason for this is that the definitions of both <span class="inlinecode"><sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_1_neq_0" class="idref" href="#plus_1_neq_0"><span class="id" title="lemma">plus_1_neq_0</span></a> : <span class="id" title="keyword">∀</span> <a id="n:104" class="idref" href="#n:104"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#n:104"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 1<a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">=?</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1676,7 +1620,6 @@ The <span class="inlinecode"><span class="id" title="tactic">destruct</span></sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="negb_involutive" class="idref" href="#negb_involutive"><span class="id" title="lemma">negb_involutive</span></a> : <span class="id" title="keyword">∀</span> <a id="b:105" class="idref" href="#b:105"><span class="id" title="binder">b</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#negb"><span class="id" title="definition">negb</span></a> (<a class="idref" href="Basics.html#negb"><span class="id" title="definition">negb</span></a> <a class="idref" href="Basics.html#b:105"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#b:105"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1703,7 +1646,6 @@ Note that the <span class="inlinecode"><span class="id" title="tactic">destruct<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="andb_commutative" class="idref" href="#andb_commutative"><span class="id" title="lemma">andb_commutative</span></a> : <span class="id" title="keyword">∀</span> <a id="b:106" class="idref" href="#b:106"><span class="id" title="binder">b</span></a> <a id="c:107" class="idref" href="#c:107"><span class="id" title="binder">c</span></a>, <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:106"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:107"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#c:107"><span class="id" title="variable">c</span></a> <a class="idref" href="Basics.html#b:106"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">b</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">Eb</span>.<br/>
@@ -1728,7 +1670,6 @@ Each pair of calls to <span class="inlinecode"><span class="id" title="tactic">r
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="andb_commutative'" class="idref" href="#andb_commutative'"><span class="id" title="lemma">andb_commutative'</span></a> : <span class="id" title="keyword">∀</span> <a id="b:108" class="idref" href="#b:108"><span class="id" title="binder">b</span></a> <a id="c:109" class="idref" href="#c:109"><span class="id" title="binder">c</span></a>, <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:108"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:109"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#c:109"><span class="id" title="variable">c</span></a> <a class="idref" href="Basics.html#b:108"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">b</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">Eb</span>.<br/>
@@ -1751,7 +1692,6 @@ Since curly braces mark both the beginning and the end of a proof,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="andb3_exchange" class="idref" href="#andb3_exchange"><span class="id" title="lemma">andb3_exchange</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="b:110" class="idref" href="#b:110"><span class="id" title="binder">b</span></a> <a id="c:111" class="idref" href="#c:111"><span class="id" title="binder">c</span></a> <a id="d:112" class="idref" href="#d:112"><span class="id" title="binder">d</span></a>, <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> (<a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:110"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:111"><span class="id" title="variable">c</span></a>) <a class="idref" href="Basics.html#d:112"><span class="id" title="variable">d</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> (<a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:110"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#d:112"><span class="id" title="variable">d</span></a>) <a class="idref" href="Basics.html#c:111"><span class="id" title="variable">c</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1781,7 +1721,6 @@ Since curly braces mark both the beginning and the end of a proof,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="andb_true_elim2" class="idref" href="#andb_true_elim2"><span class="id" title="lemma">andb_true_elim2</span></a> : <span class="id" title="keyword">∀</span> <a id="b:113" class="idref" href="#b:113"><span class="id" title="binder">b</span></a> <a id="c:114" class="idref" href="#c:114"><span class="id" title="binder">c</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:113"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:114"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Basics.html#c:114"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1809,7 +1748,6 @@ Since curly braces mark both the beginning and the end of a proof,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="plus_1_neq_0'" class="idref" href="#plus_1_neq_0'"><span class="id" title="lemma">plus_1_neq_0'</span></a> : <span class="id" title="keyword">∀</span> <a id="n:115" class="idref" href="#n:115"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#n:115"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 1<a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">=?</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1824,7 +1762,6 @@ If there are no constructor arguments that need names, we can just
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="andb_commutative''" class="idref" href="#andb_commutative''"><span class="id" title="lemma">andb_commutative''</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="b:116" class="idref" href="#b:116"><span class="id" title="binder">b</span></a> <a id="c:117" class="idref" href="#c:117"><span class="id" title="binder">c</span></a>, <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:116"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:117"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#c:117"><span class="id" title="variable">c</span></a> <a class="idref" href="Basics.html#b:116"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1865,7 +1802,6 @@ If there are no constructor arguments that need names, we can just
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="0dacc1786c5ba797d47dd85006231633" class="idref" href="#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">&quot;</span></a>x + y" := (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="var">nat_scope</span>.<br/>
@@ -1920,7 +1856,6 @@ For each notation symbol in Coq, we can specify its <i>precedence
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="plus'" class="idref" href="#plus'"><span class="id" title="definition">plus'</span></a> (<a id="n:119" class="idref" href="#n:119"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="m:120" class="idref" href="#m:120"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#n:119"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="Basics.html#m:120"><span class="id" title="variable">m</span></a><br/>
@@ -1957,7 +1892,6 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1974,7 +1908,6 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="identity_fn_applied_twice" class="idref" href="#identity_fn_applied_twice"><span class="id" title="lemma">identity_fn_applied_twice</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="f:123" class="idref" href="#f:123"><span class="id" title="binder">f</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="x:125" class="idref" href="#x:125"><span class="id" title="binder">x</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>), <a class="idref" href="Basics.html#f:123"><span class="id" title="variable">f</span></a> <a class="idref" href="Basics.html#x:125"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#x:125"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1994,7 +1927,6 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_negation_fn_applied_twice" class="idref" href="#manual_grade_for_negation_fn_applied_twice"><span class="id" title="definition">manual_grade_for_negation_fn_applied_twice</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -2012,7 +1944,6 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="andb_eq_orb" class="idref" href="#andb_eq_orb"><span class="id" title="lemma">andb_eq_orb</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="b:126" class="idref" href="#b:126"><span class="id" title="binder">b</span></a> <a id="c:127" class="idref" href="#c:127"><span class="id" title="binder">c</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Basics.html#b:126"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:127"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#orb"><span class="id" title="definition">orb</span></a> <a class="idref" href="Basics.html#b:126"><span class="id" title="variable">b</span></a> <a class="idref" href="Basics.html#c:127"><span class="id" title="variable">c</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2054,7 +1985,6 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="bin" class="idref" href="#bin"><span class="id" title="inductive">bin</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Z" class="idref" href="#Z"><span class="id" title="constructor">Z</span></a><br/>
 &nbsp;&nbsp;| <a id="B<sub>0</sub>" class="idref" href="#B<sub>0</sub>"><span class="id" title="constructor">B<sub>0</sub></span></a> (<a id="n:130" class="idref" href="#n:130"><span class="id" title="binder">n</span></a> : <a class="idref" href="Basics.html#bin:128"><span class="id" title="inductive">bin</span></a>)<br/>
@@ -2068,7 +1998,6 @@ Complete the definitions below of an increment function <span class="inlinecode"
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="incr" class="idref" href="#incr"><span class="id" title="definition">incr</span></a> (<a id="m:132" class="idref" href="#m:132"><span class="id" title="binder">m</span></a>:<a class="idref" href="Basics.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Basics.html#bin"><span class="id" title="inductive">bin</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Fixpoint</span> <a id="bin_to_nat" class="idref" href="#bin_to_nat"><span class="id" title="definition">bin_to_nat</span></a> (<a id="m:134" class="idref" href="#m:134"><span class="id" title="binder">m</span></a>:<a class="idref" href="Basics.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
@@ -2084,7 +2013,6 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_bin_incr1" class="idref" href="#test_bin_incr1"><span class="id" title="definition">test_bin_incr1</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#incr"><span class="id" title="axiom">incr</span></a> (<a class="idref" href="Basics.html#B<sub>1</sub>"><span class="id" title="constructor">B<sub>1</sub></span></a> <a class="idref" href="Basics.html#Z"><span class="id" title="constructor">Z</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#B<sub>0</sub>"><span class="id" title="constructor">B<sub>0</sub></span></a> (<a class="idref" href="Basics.html#B<sub>1</sub>"><span class="id" title="constructor">B<sub>1</sub></span></a> <a class="idref" href="Basics.html#Z"><span class="id" title="constructor">Z</span></a>).<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_bin_incr2" class="idref" href="#test_bin_incr2"><span class="id" title="definition">test_bin_incr2</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#incr"><span class="id" title="axiom">incr</span></a> (<a class="idref" href="Basics.html#B<sub>0</sub>"><span class="id" title="constructor">B<sub>0</sub></span></a> (<a class="idref" href="Basics.html#B<sub>1</sub>"><span class="id" title="constructor">B<sub>1</sub></span></a> <a class="idref" href="Basics.html#Z"><span class="id" title="constructor">Z</span></a>))<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#B<sub>1</sub>"><span class="id" title="constructor">B<sub>1</sub></span></a> (<a class="idref" href="Basics.html#B<sub>1</sub>"><span class="id" title="constructor">B<sub>1</sub></span></a> <a class="idref" href="Basics.html#Z"><span class="id" title="constructor">Z</span></a>).<br/>
@@ -2209,8 +2137,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:16&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:07&nbsp;*)</span><br/>
 </div>
 </div>
 

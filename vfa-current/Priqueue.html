@@ -31,8 +31,6 @@
 
 <h1 class="libtitle">Priqueue<span class="subtitle">Priority Queues</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
@@ -150,7 +148,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="PRIQUEUE" class="idref" href="#PRIQUEUE"><span class="id" title="module">PRIQUEUE</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="PRIQUEUE.priqueue" class="idref" href="#PRIQUEUE.priqueue"><span class="id" title="axiom">priqueue</span></a>: <span class="id" title="keyword">Type</span>.<br/>
@@ -200,7 +197,6 @@ Take some time to consider whether this is the right specification!
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="List_Priqueue" class="idref" href="#List_Priqueue"><span class="id" title="module">List_Priqueue</span></a> &lt;: <a class="idref" href="Priqueue.html#PRIQUEUE"><span class="id" title="module">PRIQUEUE</span></a>.<br/>
 </div>
 
@@ -215,7 +211,6 @@ Now we are responsible for providing <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;End&nbsp;List_Priqueue.&nbsp;*)</span><br/>
 </div>
 
@@ -229,7 +224,6 @@ Now we are responsible for providing <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="List_Priqueue.select" class="idref" href="#List_Priqueue.select"><span class="id" title="definition">select</span></a> (<a id="i:45" class="idref" href="#i:45"><span class="id" title="binder">i</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:46" class="idref" href="#l:46"><span class="id" title="binder">l</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 <span class="id" title="keyword">match</span> <a class="idref" href="Priqueue.html#l:46"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 |  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Priqueue.html#i:45"><span class="id" title="variable">i</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a><br/>
@@ -245,7 +239,6 @@ Now we are responsible for providing <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="List_Priqueue.select_perm" class="idref" href="#List_Priqueue.select_perm"><span class="id" title="lemma">select_perm</span></a>: <span class="id" title="keyword">∀</span> <a id="i:53" class="idref" href="#i:53"><span class="id" title="binder">i</span></a> <a id="l:54" class="idref" href="#l:54"><span class="id" title="binder">l</span></a>, <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="j:55" class="idref" href="#j:55"><span class="id" title="binder">j</span></a>,<a id="r:56" class="idref" href="#r:56"><span class="id" title="binder">r</span></a>) := <a class="idref" href="Priqueue.html#List_Priqueue.select"><span class="id" title="definition">select</span></a> <a class="idref" href="Priqueue.html#i:53"><span class="id" title="variable">i</span></a> <a class="idref" href="Priqueue.html#l:54"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> (<a class="idref" href="Priqueue.html#i:53"><span class="id" title="variable">i</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="Priqueue.html#l:54"><span class="id" title="variable">l</span></a>) (<a class="idref" href="Priqueue.html#j:55"><span class="id" title="variable">j</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="Priqueue.html#r:56"><span class="id" title="variable">r</span></a>).<br/>
@@ -281,7 +274,6 @@ Now we are responsible for providing <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="List_Priqueue.key" class="idref" href="#List_Priqueue.key"><span class="id" title="definition">key</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="List_Priqueue.priqueue" class="idref" href="#List_Priqueue.priqueue"><span class="id" title="definition">priqueue</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.key"><span class="id" title="definition">key</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="List_Priqueue.empty" class="idref" href="#List_Priqueue.empty"><span class="id" title="definition">empty</span></a> : <a class="idref" href="Priqueue.html#List_Priqueue.priqueue"><span class="id" title="definition">priqueue</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
@@ -308,7 +300,6 @@ Now we are responsible for providing <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="List_Priqueue.priq" class="idref" href="#List_Priqueue.priq"><span class="id" title="definition">priq</span></a> (<a id="p:73" class="idref" href="#p:73"><span class="id" title="binder">p</span></a>: <a class="idref" href="Priqueue.html#List_Priqueue.priqueue"><span class="id" title="definition">priqueue</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
 </div>
 
@@ -317,7 +308,6 @@ The abstraction relation is trivial too.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="List_Priqueue.Abs'" class="idref" href="#List_Priqueue.Abs'"><span class="id" title="inductive">Abs'</span></a>:  <a class="idref" href="Priqueue.html#List_Priqueue.priqueue"><span class="id" title="definition">priqueue</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> := <br/>
 <a id="List_Priqueue.Abs_intro" class="idref" href="#List_Priqueue.Abs_intro"><span class="id" title="constructor">Abs_intro</span></a>: <span class="id" title="keyword">∀</span> <a id="p:76" class="idref" href="#p:76"><span class="id" title="binder">p</span></a>, <a class="idref" href="Priqueue.html#Abs':74"><span class="id" title="inductive">Abs'</span></a> <a class="idref" href="Priqueue.html#p:76"><span class="id" title="variable">p</span></a> <a class="idref" href="Priqueue.html#p:76"><span class="id" title="variable">p</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="List_Priqueue.Abs" class="idref" href="#List_Priqueue.Abs"><span class="id" title="definition">Abs</span></a> := <a class="idref" href="Priqueue.html#List_Priqueue.Abs'"><span class="id" title="inductive">Abs'</span></a>.<br/>
@@ -329,7 +319,6 @@ The abstraction relation is trivial too.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="List_Priqueue.can_relate" class="idref" href="#List_Priqueue.can_relate"><span class="id" title="lemma">can_relate</span></a> : <span class="id" title="keyword">∀</span> <a id="p:77" class="idref" href="#p:77"><span class="id" title="binder">p</span></a>, <a class="idref" href="Priqueue.html#List_Priqueue.priq"><span class="id" title="definition">priq</span></a> <a class="idref" href="Priqueue.html#p:77"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="al:78" class="idref" href="#al:78"><span class="id" title="binder">al</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="Priqueue.html#p:77"><span class="id" title="variable">p</span></a> <a class="idref" href="Priqueue.html#al:78"><span class="id" title="variable">al</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">∃</span> <span class="id" title="var">p</span>; <span class="id" title="tactic">constructor</span>.<br/>
@@ -344,7 +333,6 @@ When the <span class="inlinecode"><span class="id" title="var">Abs</span></span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="List_Priqueue.abs_perm" class="idref" href="#List_Priqueue.abs_perm"><span class="id" title="lemma">abs_perm</span></a>: <span class="id" title="keyword">∀</span> <a id="p:79" class="idref" href="#p:79"><span class="id" title="binder">p</span></a> <a id="al:80" class="idref" href="#al:80"><span class="id" title="binder">al</span></a> <a id="bl:81" class="idref" href="#bl:81"><span class="id" title="binder">bl</span></a>, <br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="Priqueue.html#List_Priqueue.priq"><span class="id" title="definition">priq</span></a> <a class="idref" href="Priqueue.html#p:79"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="Priqueue.html#p:79"><span class="id" title="variable">p</span></a> <a class="idref" href="Priqueue.html#al:80"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="Priqueue.html#p:79"><span class="id" title="variable">p</span></a> <a class="idref" href="Priqueue.html#bl:81"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Priqueue.html#al:80"><span class="id" title="variable">al</span></a> <a class="idref" href="Priqueue.html#bl:81"><span class="id" title="variable">bl</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -359,7 +347,6 @@ When the <span class="inlinecode"><span class="id" title="var">Abs</span></span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="List_Priqueue.empty_priq" class="idref" href="#List_Priqueue.empty_priq"><span class="id" title="lemma">empty_priq</span></a>: <a class="idref" href="Priqueue.html#List_Priqueue.priq"><span class="id" title="definition">priq</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.empty"><span class="id" title="definition">empty</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">constructor</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="List_Priqueue.empty_relate" class="idref" href="#List_Priqueue.empty_relate"><span class="id" title="lemma">empty_relate</span></a>:  <a class="idref" href="Priqueue.html#List_Priqueue.Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.empty"><span class="id" title="definition">empty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
@@ -380,7 +367,6 @@ When the <span class="inlinecode"><span class="id" title="var">Abs</span></span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="List_Priqueue.delete_max_None_relate" class="idref" href="#List_Priqueue.delete_max_None_relate"><span class="id" title="lemma">delete_max_None_relate</span></a>:<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="p:90" class="idref" href="#p:90"><span class="id" title="binder">p</span></a>, <a class="idref" href="Priqueue.html#List_Priqueue.priq"><span class="id" title="definition">priq</span></a> <a class="idref" href="Priqueue.html#p:90"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Priqueue.html#List_Priqueue.Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="Priqueue.html#p:90"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Priqueue.html#List_Priqueue.delete_max"><span class="id" title="definition">delete_max</span></a> <a class="idref" href="Priqueue.html#p:90"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
@@ -409,9 +395,8 @@ When the <span class="inlinecode"><span class="id" title="var">Abs</span></span>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Priqueue.html#List_Priqueue"><span class="id" title="module">List_Priqueue</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:23&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:14&nbsp;*)</span><br/>
 </div>
 </div>
 

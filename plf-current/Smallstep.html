@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Smallstep<span class="subtitle">Small-step Operational Semantics</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
@@ -138,7 +135,6 @@ The evaluators we have seen so far (for <span class="inlinecode"><span class="id
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="tm" class="idref" href="#tm"><span class="id" title="inductive">tm</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="C" class="idref" href="#C"><span class="id" title="constructor">C</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#tm:1"><span class="id" title="inductive">tm</span></a>         <span class="comment">(*&nbsp;Constant&nbsp;*)</span><br/>
 &nbsp;&nbsp;| <a id="P" class="idref" href="#P"><span class="id" title="constructor">P</span></a> : <a class="idref" href="Smallstep.html#tm:1"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#tm:1"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#tm:1"><span class="id" title="inductive">tm</span></a>. <span class="comment">(*&nbsp;Plus&nbsp;*)</span><br/>
@@ -150,7 +146,6 @@ Here is a standard evaluator for this language, written in
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="evalF" class="idref" href="#evalF"><span class="id" title="definition">evalF</span></a> (<a id="t:3" class="idref" href="#t:3"><span class="id" title="binder">t</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Smallstep.html#t:3"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">n</span><br/>
@@ -198,7 +193,6 @@ Here is the same evaluator, written in exactly the same
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; t '==&gt;' n " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="eval" class="idref" href="#eval"><span class="id" title="inductive">eval</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="E_Const" class="idref" href="#E_Const"><span class="id" title="constructor">E_Const</span></a> : <span class="id" title="keyword">∀</span> <a id="n:8" class="idref" href="#n:8"><span class="id" title="binder">n</span></a>,<br/>
@@ -256,7 +250,6 @@ Now, here is the corresponding <i>small-step</i> evaluation relation.  <center><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t' " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="SimpleArith1.step" class="idref" href="#SimpleArith1.step"><span class="id" title="inductive">step</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="SimpleArith1.ST_PlusConstConst" class="idref" href="#SimpleArith1.ST_PlusConstConst"><span class="id" title="constructor">ST_PlusConstConst</span></a> : <span class="id" title="keyword">∀</span> <a id="n<sub>1</sub>:15" class="idref" href="#n<sub>1</sub>:15"><span class="id" title="binder">n<sub>1</sub></span></a> <a id="n<sub>2</sub>:16" class="idref" href="#n<sub>2</sub>:16"><span class="id" title="binder">n<sub>2</sub></span></a>,<br/>
@@ -308,7 +301,6 @@ Things to notice:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="SimpleArith1.test_step_1" class="idref" href="#SimpleArith1.test_step_1"><span class="id" title="definition">test_step_1</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 1) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3))<br/>
@@ -332,7 +324,6 @@ Things to notice:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="SimpleArith1.test_step_2" class="idref" href="#SimpleArith1.test_step_2"><span class="id" title="definition">test_step_2</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 0)<br/>
@@ -352,7 +343,6 @@ Things to notice:
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Smallstep.html#SimpleArith1"><span class="id" title="module">SimpleArith1</span></a>.<br/>
 </div>
 
@@ -374,7 +364,6 @@ Things to notice:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="relation" class="idref" href="#relation"><span class="id" title="definition">relation</span></a> (<a id="X:23" class="idref" href="#X:23"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) := <a class="idref" href="Smallstep.html#X:23"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#X:23"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>.<br/>
 </div>
 
@@ -441,7 +430,6 @@ Our main examples of such relations in this chapter will be
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="deterministic" class="idref" href="#deterministic"><span class="id" title="definition">deterministic</span></a> {<a id="X:24" class="idref" href="#X:24"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="R:25" class="idref" href="#R:25"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:24"><span class="id" title="variable">X</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="x:26" class="idref" href="#x:26"><span class="id" title="binder">x</span></a> <a id="y<sub>1</sub>:27" class="idref" href="#y<sub>1</sub>:27"><span class="id" title="binder">y<sub>1</sub></span></a> <a id="y<sub>2</sub>:28" class="idref" href="#y<sub>2</sub>:28"><span class="id" title="binder">y<sub>2</sub></span></a> : <a class="idref" href="Smallstep.html#X:24"><span class="id" title="variable">X</span></a>, <a class="idref" href="Smallstep.html#R:25"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:26"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y<sub>1</sub>:27"><span class="id" title="variable">y<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#R:25"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:26"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y<sub>2</sub>:28"><span class="id" title="variable">y<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#y<sub>1</sub>:27"><span class="id" title="variable">y<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Smallstep.html#y<sub>2</sub>:28"><span class="id" title="variable">y<sub>2</sub></span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="SimpleArith2" class="idref" href="#SimpleArith2"><span class="id" title="module">SimpleArith2</span></a>.<br/>
@@ -488,7 +476,6 @@ There is some annoying repetition in this proof.  Each use of
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">solve_by_inverts</span> <span class="id" title="var">n</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> | <span class="id" title="var">H</span> : ?<span class="id" title="var">T</span> &#x22A2; <span class="id" title="var">_</span> ⇒<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">type</span> <span class="id" title="keyword">of</span> <span class="id" title="var">T</span> <span class="id" title="keyword">with</span> <span class="id" title="keyword">Prop</span> ⇒<br/>
@@ -517,7 +504,6 @@ The details of how this works are not important for now, but it
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">solve_by_invert</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="var">solve_by_inverts</span> 1.<br/>
 </div>
@@ -527,7 +513,6 @@ The proof of the previous theorem can now be simplified...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="SimpleArith3" class="idref" href="#SimpleArith3"><span class="id" title="module">SimpleArith3</span></a>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">SimpleArith1</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="SimpleArith3.step_deterministic_alt" class="idref" href="#SimpleArith3.step_deterministic_alt"><span class="id" title="lemma">step_deterministic_alt</span></a>: <a class="idref" href="Smallstep.html#deterministic"><span class="id" title="definition">deterministic</span></a> <a class="idref" href="Smallstep.html#SimpleArith1.step"><span class="id" title="inductive">step</span></a>.<br/>
@@ -613,7 +598,6 @@ The proof of the previous theorem can now be simplified...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="value" class="idref" href="#value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="v_const" class="idref" href="#v_const"><span class="id" title="constructor">v_const</span></a> : <span class="id" title="keyword">∀</span> <a id="n:31" class="idref" href="#n:31"><span class="id" title="binder">n</span></a>, <a class="idref" href="Smallstep.html#value:29"><span class="id" title="inductive">value</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> <a class="idref" href="Smallstep.html#n:31"><span class="id" title="variable">n</span></a>).<br/>
 </div>
@@ -685,7 +669,6 @@ Having introduced the idea of values, we can use it in the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t' " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="step" class="idref" href="#step"><span class="id" title="inductive">step</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="ST_PlusConstConst" class="idref" href="#ST_PlusConstConst"><span class="id" title="constructor">ST_PlusConstConst</span></a> : <span class="id" title="keyword">∀</span> <a id="n<sub>1</sub>:34" class="idref" href="#n<sub>1</sub>:34"><span class="id" title="binder">n<sub>1</sub></span></a> <a id="n<sub>2</sub>:35" class="idref" href="#n<sub>2</sub>:35"><span class="id" title="binder">n<sub>2</sub></span></a>,<br/>
@@ -755,7 +738,6 @@ Having introduced the idea of values, we can use it in the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="step_deterministic" class="idref" href="#step_deterministic"><span class="id" title="lemma">step_deterministic</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#deterministic"><span class="id" title="definition">deterministic</span></a> <a class="idref" href="Smallstep.html#step"><span class="id" title="inductive">step</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -828,7 +810,6 @@ Having introduced the idea of values, we can use it in the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="strong_progress" class="idref" href="#strong_progress"><span class="id" title="lemma">strong_progress</span></a> : <span class="id" title="keyword">∀</span> <a id="t:42" class="idref" href="#t:42"><span class="id" title="binder">t</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Smallstep.html#t:42"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t':43" class="idref" href="#t':43"><span class="id" title="binder">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Smallstep.html#t:42"><span class="id" title="variable">t</span></a> <a class="idref" href="Smallstep.html#:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Smallstep.html#t':43"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <div class="togglescript" id="proofcontrol2" onclick="toggleDisplay('proof2');toggleDisplay('proofcontrol2')"><span class="show"></span></div>
@@ -871,7 +852,6 @@ This important property is called <i>strong progress</i>, because
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="normal_form" class="idref" href="#normal_form"><span class="id" title="definition">normal_form</span></a> {<a id="X:44" class="idref" href="#X:44"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="R:45" class="idref" href="#R:45"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:44"><span class="id" title="variable">X</span></a>) (<a id="t:46" class="idref" href="#t:46"><span class="id" title="binder">t</span></a> : <a class="idref" href="Smallstep.html#X:44"><span class="id" title="variable">X</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t':47" class="idref" href="#t':47"><span class="id" title="binder">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Smallstep.html#R:45"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#t:46"><span class="id" title="variable">t</span></a> <a class="idref" href="Smallstep.html#t':47"><span class="id" title="variable">t'</span></a>.<br/>
@@ -893,7 +873,6 @@ Note that this definition specifies what it is to be a normal form
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="value_is_nf" class="idref" href="#value_is_nf"><span class="id" title="lemma">value_is_nf</span></a> : <span class="id" title="keyword">∀</span> <a id="v:48" class="idref" href="#v:48"><span class="id" title="binder">v</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Smallstep.html#v:48"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#normal_form"><span class="id" title="definition">normal_form</span></a> <a class="idref" href="Smallstep.html#step"><span class="id" title="inductive">step</span></a> <a class="idref" href="Smallstep.html#v:48"><span class="id" title="variable">v</span></a>.<br/>
 <div class="togglescript" id="proofcontrol3" onclick="toggleDisplay('proof3');toggleDisplay('proofcontrol3')"><span class="show"></span></div>
@@ -956,7 +935,6 @@ Why is this interesting?
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Temp1" class="idref" href="#Temp1"><span class="id" title="module">Temp1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Temp1.value" class="idref" href="#Temp1.value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="Temp1.v_const" class="idref" href="#Temp1.v_const"><span class="id" title="constructor">v_const</span></a> : <span class="id" title="keyword">∀</span> <a id="n:55" class="idref" href="#n:55"><span class="id" title="binder">n</span></a>, <a class="idref" href="Smallstep.html#value:53"><span class="id" title="inductive">value</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> <a class="idref" href="Smallstep.html#n:55"><span class="id" title="variable">n</span></a>)<br/>
@@ -991,7 +969,6 @@ Why is this interesting?
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Temp2" class="idref" href="#Temp2"><span class="id" title="module">Temp2</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Temp2.value" class="idref" href="#Temp2.value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="Temp2.v_const" class="idref" href="#Temp2.v_const"><span class="id" title="constructor">v_const</span></a> : <span class="id" title="keyword">∀</span> <a id="n:71" class="idref" href="#n:71"><span class="id" title="binder">n</span></a>, <a class="idref" href="Smallstep.html#value:69"><span class="id" title="inductive">value</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> <a class="idref" href="Smallstep.html#n:71"><span class="id" title="variable">n</span></a>). <span class="comment">(*&nbsp;Original&nbsp;definition&nbsp;*)</span><br/><hr class='doublespaceincode'/>
@@ -1034,7 +1011,6 @@ Why is this interesting?
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Temp3" class="idref" href="#Temp3"><span class="id" title="module">Temp3</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Temp3.value" class="idref" href="#Temp3.value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="Temp3.v_const" class="idref" href="#Temp3.v_const"><span class="id" title="constructor">v_const</span></a> : <span class="id" title="keyword">∀</span> <a id="n:86" class="idref" href="#n:86"><span class="id" title="binder">n</span></a>, <a class="idref" href="Smallstep.html#value:84"><span class="id" title="inductive">value</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> <a class="idref" href="Smallstep.html#n:86"><span class="id" title="variable">n</span></a>).<br/><hr class='doublespaceincode'/>
@@ -1054,7 +1030,6 @@ Why is this interesting?
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="Temp3.value_not_same_as_normal_form" class="idref" href="#Temp3.value_not_same_as_normal_form"><span class="id" title="lemma">value_not_same_as_normal_form</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t:94" class="idref" href="#t:94"><span class="id" title="binder">t</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="Smallstep.html#Temp3.value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Smallstep.html#t:94"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Smallstep.html#normal_form"><span class="id" title="definition">normal_form</span></a> <a class="idref" href="Smallstep.html#Temp3.step"><span class="id" title="inductive">step</span></a> <a class="idref" href="Smallstep.html#t:94"><span class="id" title="variable">t</span></a>.<br/>
 <div class="togglescript" id="proofcontrol7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')"><span class="show"></span></div>
@@ -1075,7 +1050,6 @@ Why is this interesting?
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Temp4" class="idref" href="#Temp4"><span class="id" title="module">Temp4</span></a>.<br/>
 </div>
 
@@ -1086,7 +1060,6 @@ Here is another very simple language whose terms, instead of being
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="Temp4.tm" class="idref" href="#Temp4.tm"><span class="id" title="inductive">tm</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Temp4.tru" class="idref" href="#Temp4.tru"><span class="id" title="constructor">tru</span></a> : <a class="idref" href="Smallstep.html#tm:95"><span class="id" title="inductive">tm</span></a><br/>
 &nbsp;&nbsp;| <a id="Temp4.fls" class="idref" href="#Temp4.fls"><span class="id" title="constructor">fls</span></a> : <a class="idref" href="Smallstep.html#tm:95"><span class="id" title="inductive">tm</span></a><br/>
@@ -1115,7 +1088,6 @@ Here is another very simple language whose terms, instead of being
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Temp4.bool_step_prop1" class="idref" href="#Temp4.bool_step_prop1"><span class="id" title="definition">bool_step_prop1</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#Temp4.fls"><span class="id" title="constructor">fls</span></a> <a class="idref" href="Smallstep.html#Temp4.:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Smallstep.html#Temp4.fls"><span class="id" title="constructor">fls</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
@@ -1153,7 +1125,6 @@ Here is another very simple language whose terms, instead of being
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Temp4.progress_bool" class="idref" href="#Temp4.progress_bool"><span class="id" title="lemma">progress_bool</span></a> : <span class="id" title="keyword">∀</span> <a id="t:109" class="idref" href="#t:109"><span class="id" title="binder">t</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#Temp4.value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Smallstep.html#t:109"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t':110" class="idref" href="#t':110"><span class="id" title="binder">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Smallstep.html#t:109"><span class="id" title="variable">t</span></a> <a class="idref" href="Smallstep.html#Temp4.:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Smallstep.html#t':110"><span class="id" title="variable">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1177,7 +1148,6 @@ Here is another very simple language whose terms, instead of being
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Temp4.Temp5" class="idref" href="#Temp4.Temp5"><span class="id" title="module">Temp5</span></a>.<br/>
 </div>
 
@@ -1207,7 +1177,6 @@ Here is another very simple language whose terms, instead of being
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t' " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Temp4.Temp5.step" class="idref" href="#Temp4.Temp5.step"><span class="id" title="inductive">step</span></a> : <a class="idref" href="Smallstep.html#Temp4.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#Temp4.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="Temp4.Temp5.ST_IfTrue" class="idref" href="#Temp4.Temp5.ST_IfTrue"><span class="id" title="constructor">ST_IfTrue</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:113" class="idref" href="#t<sub>1</sub>:113"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:114" class="idref" href="#t<sub>2</sub>:114"><span class="id" title="binder">t<sub>2</sub></span></a>,<br/>
@@ -1258,7 +1227,6 @@ Here is another very simple language whose terms, instead of being
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
@@ -1277,7 +1245,6 @@ Here is another very simple language whose terms, instead of being
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
@@ -1304,7 +1271,6 @@ Here is another very simple language whose terms, instead of being
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Smallstep.html#Temp4.Temp5"><span class="id" title="module">Temp5</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Smallstep.html#Temp4"><span class="id" title="module">Temp4</span></a>.<br/>
 </div>
@@ -1354,7 +1320,6 @@ Since we'll want to reuse the idea of multi-step reduction many
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="multi" class="idref" href="#multi"><span class="id" title="inductive">multi</span></a> {<a id="X:121" class="idref" href="#X:121"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="R:122" class="idref" href="#R:122"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:121"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <span class="id" title="var">X</span> :=<br/>
 &nbsp;&nbsp;| <a id="multi_refl" class="idref" href="#multi_refl"><span class="id" title="constructor">multi_refl</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:125" class="idref" href="#x:125"><span class="id" title="binder">x</span></a> : <a class="idref" href="Smallstep.html#X:121"><span class="id" title="variable">X</span></a>), <a class="idref" href="Smallstep.html#multi:123"><span class="id" title="inductive">multi</span></a> <a class="idref" href="Smallstep.html#R:122"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:125"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#x:125"><span class="id" title="variable">x</span></a><br/>
 &nbsp;&nbsp;| <a id="multi_step" class="idref" href="#multi_step"><span class="id" title="constructor">multi_step</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:126" class="idref" href="#x:126"><span class="id" title="binder">x</span></a> <a id="y:127" class="idref" href="#y:127"><span class="id" title="binder">y</span></a> <a id="z:128" class="idref" href="#z:128"><span class="id" title="binder">z</span></a> : <a class="idref" href="Smallstep.html#X:121"><span class="id" title="variable">X</span></a>),<br/>
@@ -1402,7 +1367,6 @@ Full: (In the <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Rel.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="a781e4b1e2c022f0326182a9bd099911" class="idref" href="#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">&quot;</span></a> t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span>' t' " := (<a class="idref" href="Smallstep.html#multi"><span class="id" title="inductive">multi</span></a> <a class="idref" href="Smallstep.html#step"><span class="id" title="inductive">step</span></a> <span class="id" title="var">t</span> <span class="id" title="var">t'</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/>
 </div>
 
@@ -1424,7 +1388,6 @@ Terse: ***  The relation <span class="inlinecode"><span class="id" title="var">m
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="multi_R" class="idref" href="#multi_R"><span class="id" title="lemma">multi_R</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:129" class="idref" href="#X:129"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="R:130" class="idref" href="#R:130"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:129"><span class="id" title="variable">X</span></a>) (<a id="x:131" class="idref" href="#x:131"><span class="id" title="binder">x</span></a> <a id="y:132" class="idref" href="#y:132"><span class="id" title="binder">y</span></a> : <a class="idref" href="Smallstep.html#X:129"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#R:130"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:131"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y:132"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> (<a class="idref" href="Smallstep.html#multi"><span class="id" title="inductive">multi</span></a> <a class="idref" href="Smallstep.html#R:130"><span class="id" title="variable">R</span></a>) <a class="idref" href="Smallstep.html#x:131"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y:132"><span class="id" title="variable">y</span></a>.<br/>
 <div class="togglescript" id="proofcontrol8" onclick="toggleDisplay('proof8');toggleDisplay('proofcontrol8')"><span class="show"></span></div>
@@ -1441,7 +1404,6 @@ Third, <span class="inlinecode"><span class="id" title="var">multi</span></span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="multi_trans" class="idref" href="#multi_trans"><span class="id" title="lemma">multi_trans</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="X:133" class="idref" href="#X:133"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="R:134" class="idref" href="#R:134"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:133"><span class="id" title="variable">X</span></a>) (<a id="x:135" class="idref" href="#x:135"><span class="id" title="binder">x</span></a> <a id="y:136" class="idref" href="#y:136"><span class="id" title="binder">y</span></a> <a id="z:137" class="idref" href="#z:137"><span class="id" title="binder">z</span></a> : <a class="idref" href="Smallstep.html#X:133"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#multi"><span class="id" title="inductive">multi</span></a> <a class="idref" href="Smallstep.html#R:134"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:135"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y:136"><span class="id" title="variable">y</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1474,7 +1436,6 @@ In particular, for the <span class="inlinecode"><span class="id" title="var">mul
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="test_multistep_1" class="idref" href="#test_multistep_1"><span class="id" title="lemma">test_multistep_1</span></a>:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 0) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3))<br/>
@@ -1504,7 +1465,6 @@ Here's an alternate proof of the same fact that uses <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="test_multistep_1'" class="idref" href="#test_multistep_1'"><span class="id" title="lemma">test_multistep_1'</span></a>:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 0) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3))<br/>
@@ -1581,7 +1541,6 @@ Here's an alternate proof of the same fact that uses <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="step_normal_form" class="idref" href="#step_normal_form"><span class="id" title="definition">step_normal_form</span></a> := <a class="idref" href="Smallstep.html#normal_form"><span class="id" title="definition">normal_form</span></a> <a class="idref" href="Smallstep.html#step"><span class="id" title="inductive">step</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="normal_form_of" class="idref" href="#normal_form_of"><span class="id" title="definition">normal_form_of</span></a> (<a id="t:138" class="idref" href="#t:138"><span class="id" title="binder">t</span></a> <a id="t':139" class="idref" href="#t':139"><span class="id" title="binder">t'</span></a> : <a class="idref" href="Smallstep.html#tm"><span class="id" title="inductive">tm</span></a>) :=<br/>
 &nbsp;&nbsp;(<a class="idref" href="Smallstep.html#t:138"><span class="id" title="variable">t</span></a> <a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Smallstep.html#t':139"><span class="id" title="variable">t'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Smallstep.html#step_normal_form"><span class="id" title="definition">step_normal_form</span></a> <a class="idref" href="Smallstep.html#t':139"><span class="id" title="variable">t'</span></a>).<br/>
@@ -1622,7 +1581,6 @@ We have already seen that, for our language, single-step reduction is
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="normalizing" class="idref" href="#normalizing"><span class="id" title="definition">normalizing</span></a> {<a id="X:140" class="idref" href="#X:140"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="R:141" class="idref" href="#R:141"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:140"><span class="id" title="variable">X</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="t:142" class="idref" href="#t:142"><span class="id" title="binder">t</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="t':143" class="idref" href="#t':143"><span class="id" title="binder">t'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Smallstep.html#multi"><span class="id" title="inductive">multi</span></a> <a class="idref" href="Smallstep.html#R:141"><span class="id" title="variable">R</span></a>) <a class="idref" href="Smallstep.html#t:142"><span class="id" title="variable">t</span></a> <a class="idref" href="Smallstep.html#t':143"><span class="id" title="variable">t'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Smallstep.html#normal_form"><span class="id" title="definition">normal_form</span></a> <a class="idref" href="Smallstep.html#R:141"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#t':143"><span class="id" title="variable">t'</span></a>.<br/>
@@ -1641,7 +1599,6 @@ To prove that <span class="inlinecode"><span class="id" title="var">step</span><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="multistep_congr_1" class="idref" href="#multistep_congr_1"><span class="id" title="lemma">multistep_congr_1</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:144" class="idref" href="#t<sub>1</sub>:144"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>1</sub>':145" class="idref" href="#t<sub>1</sub>':145"><span class="id" title="binder">t<sub>1</sub>'</span></a> <a id="t<sub>2</sub>:146" class="idref" href="#t<sub>2</sub>:146"><span class="id" title="binder">t<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#t<sub>1</sub>:144"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Smallstep.html#t<sub>1</sub>':145"><span class="id" title="variable">t<sub>1</sub>'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> <a class="idref" href="Smallstep.html#t<sub>1</sub>:144"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Smallstep.html#t<sub>2</sub>:146"><span class="id" title="variable">t<sub>2</sub></span></a> <a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> <a class="idref" href="Smallstep.html#t<sub>1</sub>':145"><span class="id" title="variable">t<sub>1</sub>'</span></a> <a class="idref" href="Smallstep.html#t<sub>2</sub>:146"><span class="id" title="variable">t<sub>2</sub></span></a>.<br/>
@@ -1719,7 +1676,6 @@ To prove that <span class="inlinecode"><span class="id" title="var">step</span><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="step_normalizing" class="idref" href="#step_normalizing"><span class="id" title="lemma">step_normalizing</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#normalizing"><span class="id" title="definition">normalizing</span></a> <a class="idref" href="Smallstep.html#step"><span class="id" title="inductive">step</span></a>.<br/>
 <div class="togglescript" id="proofcontrol12" onclick="toggleDisplay('proof12');toggleDisplay('proofcontrol12')"><span class="show"></span></div>
@@ -1822,7 +1778,6 @@ Terse: ***  The key ideas in the proof can be seen in the following picture:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -1841,7 +1796,6 @@ Terse: ***  The key ideas in the proof can be seen in the following picture:
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_eval__multistep_inf" class="idref" href="#manual_grade_for_eval__multistep_inf"><span class="id" title="definition">manual_grade_for_eval__multistep_inf</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
 <font size=-2>&#9744;</font>
@@ -1910,7 +1864,6 @@ Terse: ***  The key ideas in the proof can be seen in the following picture:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="evalF_eval" class="idref" href="#evalF_eval"><span class="id" title="lemma">evalF_eval</span></a> : <span class="id" title="keyword">∀</span> <a id="t:158" class="idref" href="#t:158"><span class="id" title="binder">t</span></a> <a id="n:159" class="idref" href="#n:159"><span class="id" title="binder">n</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#evalF"><span class="id" title="definition">evalF</span></a> <a class="idref" href="Smallstep.html#t:158"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Smallstep.html#n:159"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Smallstep.html#t:158"><span class="id" title="variable">t</span></a> <a class="idref" href="Smallstep.html#7cf9375cc810cd6cb65186f6ede01686"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Smallstep.html#n:159"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1927,7 +1880,6 @@ Terse: ***  The key ideas in the proof can be seen in the following picture:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Combined" class="idref" href="#Combined"><span class="id" title="module">Combined</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Combined.tm" class="idref" href="#Combined.tm"><span class="id" title="inductive">tm</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Combined.C" class="idref" href="#Combined.C"><span class="id" title="constructor">C</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#tm:160"><span class="id" title="inductive">tm</span></a><br/>
@@ -1987,7 +1939,6 @@ Earlier, we separately proved for both plus- and if-expressions...
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Smallstep.html#Combined"><span class="id" title="module">Combined</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
@@ -2013,7 +1964,6 @@ Earlier, we separately proved for both plus- and if-expressions...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="aval" class="idref" href="#aval"><span class="id" title="inductive">aval</span></a> : <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="av_num" class="idref" href="#av_num"><span class="id" title="constructor">av_num</span></a> : <span class="id" title="keyword">∀</span> <a id="n:185" class="idref" href="#n:185"><span class="id" title="binder">n</span></a>, <a class="idref" href="Smallstep.html#aval:183"><span class="id" title="inductive">aval</span></a> (<span class="id" title="constructor">ANum</span> <a class="idref" href="Smallstep.html#n:185"><span class="id" title="variable">n</span></a>).<br/>
 </div>
@@ -2026,7 +1976,6 @@ We are not actually going to bother to define boolean
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; a '/' st '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>a' a' "<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">st</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 39).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="astep" class="idref" href="#astep"><span class="id" title="inductive">astep</span></a> (<a id="st:186" class="idref" href="#st:186"><span class="id" title="binder">st</span></a> : <span class="id" title="definition">state</span>) : <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="inductive">aexp</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
@@ -2149,7 +2098,6 @@ The semantics of commands is the interesting part.  We need two
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; t '/' st '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t' '/' st' "<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">st</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 39, <span class="id" title="var">t'</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 39).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="cstep" class="idref" href="#cstep"><span class="id" title="inductive">cstep</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="inductive">com</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="definition">state</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="inductive">com</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="definition">state</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
@@ -2194,7 +2142,6 @@ The semantics of commands is the interesting part.  We need two
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="CImp" class="idref" href="#CImp"><span class="id" title="module">CImp</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="CImp.com" class="idref" href="#CImp.com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="CImp.CSkip" class="idref" href="#CImp.CSkip"><span class="id" title="constructor">CSkip</span></a> : <a class="idref" href="Smallstep.html#com:271"><span class="id" title="inductive">com</span></a><br/>
@@ -2271,7 +2218,6 @@ Among the many interesting properties of this language is the fact
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="CImp.par_loop" class="idref" href="#CImp.par_loop"><span class="id" title="definition">par_loop</span></a> : <a class="idref" href="Smallstep.html#CImp.com"><span class="id" title="inductive">com</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="definition">Y</span> <a class="idref" href="Smallstep.html#d8973dfc731ad829b426e5a1b78f458b"><span class="id" title="notation">:=</span></a> 1 <a class="idref" href="Smallstep.html#d6b7010d9ad45e09152f6559d8ee4de<sub>6</sub>"><span class="id" title="notation">||</span></a> <a class="idref" href="Smallstep.html#CImp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">while</span></a> <span class="id" title="notation">(</span><span class="id" title="definition">Y</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <a class="idref" href="Smallstep.html#CImp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">do</span></a> <span class="id" title="definition">X</span> <a class="idref" href="Smallstep.html#d8973dfc731ad829b426e5a1b78f458b"><span class="id" title="notation">:=</span></a> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1 <a class="idref" href="Smallstep.html#CImp.:com::'while'_x_'do'_x_'end'"><span class="id" title="notation">end</span></a> <span class="id" title="notation">}&gt;</span>.<br/>
 </div>
@@ -2281,7 +2227,6 @@ In particular, it can terminate with <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="CImp.par_loop_example_0" class="idref" href="#CImp.par_loop_example_0"><span class="id" title="definition">par_loop_example_0</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="st':314" class="idref" href="#st':314"><span class="id" title="binder">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#CImp.par_loop"><span class="id" title="definition">par_loop</span></a> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation">/</span></a> <span class="id" title="definition">empty_st</span>  <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <span class="id" title="notation">&lt;{</span><a class="idref" href="Smallstep.html#CImp.:com::'skip'"><span class="id" title="notation">skip</span></a><span class="id" title="notation">}&gt;</span> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation">/</span></a> <a class="idref" href="Smallstep.html#st':314"><span class="id" title="variable">st'</span></a><br/>
@@ -2311,7 +2256,6 @@ It can also terminate with <span class="inlinecode"><span class="id" title="var"
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="CImp.par_loop_example_2" class="idref" href="#CImp.par_loop_example_2"><span class="id" title="definition">par_loop_example_2</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="st':315" class="idref" href="#st':315"><span class="id" title="binder">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#CImp.par_loop"><span class="id" title="definition">par_loop</span></a> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation">/</span></a> <span class="id" title="definition">empty_st</span> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <span class="id" title="notation">&lt;{</span><a class="idref" href="Smallstep.html#CImp.:com::'skip'"><span class="id" title="notation">skip</span></a><span class="id" title="notation">}&gt;</span> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation">/</span></a> <a class="idref" href="Smallstep.html#st':315"><span class="id" title="variable">st'</span></a><br/>
@@ -2400,7 +2344,6 @@ More generally...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="CImp.par_loop_any_X" class="idref" href="#CImp.par_loop_any_X"><span class="id" title="lemma">par_loop_any_X</span></a>:<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="n:321" class="idref" href="#n:321"><span class="id" title="binder">n</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="st':322" class="idref" href="#st':322"><span class="id" title="binder">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Smallstep.html#CImp.par_loop"><span class="id" title="definition">par_loop</span></a> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation">/</span></a> <span class="id" title="definition">empty_st</span> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a>  <span class="id" title="notation">&lt;{</span><a class="idref" href="Smallstep.html#CImp.:com::'skip'"><span class="id" title="notation">skip</span></a><span class="id" title="notation">}&gt;</span> <a class="idref" href="Smallstep.html#1ac4746b7263e82a2c39e7596bcbcd58"><span class="id" title="notation">/</span></a> <a class="idref" href="Smallstep.html#st':322"><span class="id" title="variable">st'</span></a><br/>
@@ -2442,7 +2385,6 @@ More generally...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="stack" class="idref" href="#stack"><span class="id" title="definition">stack</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="prog" class="idref" href="#prog"><span class="id" title="definition">prog</span></a>  := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="inductive">sinstr</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="stack_step" class="idref" href="#stack_step"><span class="id" title="inductive">stack_step</span></a> (<a id="st:323" class="idref" href="#st:323"><span class="id" title="binder">st</span></a> : <span class="id" title="definition">state</span>) : <a class="idref" href="Smallstep.html#prog"><span class="id" title="definition">prog</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Smallstep.html#stack"><span class="id" title="definition">stack</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#prog"><span class="id" title="definition">prog</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Smallstep.html#stack"><span class="id" title="definition">stack</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
@@ -2484,7 +2426,6 @@ More generally...
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Copy&nbsp;your&nbsp;definition&nbsp;of&nbsp;s_compile&nbsp;here&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="compiler_is_correct_statement" class="idref" href="#compiler_is_correct_statement"><span class="id" title="definition">compiler_is_correct_statement</span></a> : <span class="id" title="keyword">Prop</span><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -2510,7 +2451,6 @@ More generally...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="step_example1" class="idref" href="#step_example1"><span class="id" title="definition">step_example1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">(</span></a><a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 4))<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">(</span></a><a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 10<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">)</span></a>.<br/>
@@ -2533,7 +2473,6 @@ The proof repeatedly applies <span class="inlinecode"><span class="id" title="va
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Smallstep.html#step"><span class="id" title="inductive">step</span></a> <a class="idref" href="Smallstep.html#value"><span class="id" title="inductive">value</span></a> : <span class="id" title="var">core</span>.<br/>
 <span class="id" title="keyword">Example</span> <a id="step_example1'" class="idref" href="#step_example1'"><span class="id" title="definition">step_example1'</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">(</span></a><a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 4))<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">)</span></a><br/>
@@ -2552,7 +2491,6 @@ The following custom <span class="inlinecode"><span class="id" title="keyword">T
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Tactic Notation</span> "print_goal" :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> &#x22A2; ?<span class="id" title="var">x</span> ⇒ <span class="id" title="tactic">idtac</span> <span class="id" title="var">x</span> <span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Tactic Notation</span> "normalize" :=<br/>
@@ -2580,7 +2518,6 @@ The <span class="inlinecode"><span class="id" title="var">normalize</span></span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="step_example1'''" class="idref" href="#step_example1'''"><span class="id" title="definition">step_example1'''</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="e':346" class="idref" href="#e':346"><span class="id" title="binder">e'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">(</span></a><a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 4))<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Smallstep.html#e':346"><span class="id" title="variable">e'</span></a>.<br/>
@@ -2620,7 +2557,6 @@ This time, the trace is:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="normalize_ex'" class="idref" href="#normalize_ex'"><span class="id" title="lemma">normalize_ex'</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="e':348" class="idref" href="#e':348"><span class="id" title="binder">e'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">(</span></a><a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 3) (<a class="idref" href="Smallstep.html#P"><span class="id" title="constructor">P</span></a> (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 2) (<a class="idref" href="Smallstep.html#C"><span class="id" title="constructor">C</span></a> 1))<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#a781e4b1e2c022f0326182a9bd099911"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="Smallstep.html#e':348"><span class="id" title="variable">e'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Smallstep.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="Smallstep.html#e':348"><span class="id" title="variable">e'</span></a>.<br/>
@@ -2631,8 +2567,7 @@ This time, the trace is:
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:09&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -30,12 +30,9 @@
 
 <h1 class="libtitle">Verif_triang<span class="subtitle">A client of the stack functions</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <a class="idref" href="Preface.html#"><span class="id" title="library">VC.Preface</span></a>. <span class="comment">(*&nbsp;Check&nbsp;for&nbsp;the&nbsp;right&nbsp;version&nbsp;of&nbsp;VST&nbsp;*)</span><br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.library</span>.<br/>
@@ -135,7 +132,6 @@ but we generally prefer to reason <i>abstractly</i> about Z, using the lemmas
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="decreasing_nat" class="idref" href="#decreasing_nat"><span class="id" title="definition">decreasing_nat</span></a> (<a id="n:5" class="idref" href="#n:5"><span class="id" title="binder">n</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> := <br/>
 &nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Verif_triang.html#n:5"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> ⇒ <a class="idref" href="Verif_triang.html#n:5"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Verif_triang.html#decreasing_nat:6"><span class="id" title="definition">decreasing_nat</span></a> <span class="id" title="var">n'</span> | <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <span class="id" title="keyword">end</span>.<br/>
 </div>
@@ -157,7 +153,6 @@ But in the integers <span class="inlinecode"><span class="id" title="var">Z</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="decreasing_Z1_aux" class="idref" href="#decreasing_Z1_aux"><span class="id" title="definition">decreasing_Z1_aux</span></a> (<a id="n:11" class="idref" href="#n:11"><span class="id" title="binder">n</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Verif_triang.html#n:11"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.of_nat"><span class="id" title="definition">Z.of_nat</span></a> <a class="idref" href="Verif_triang.html#n:11"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Verif_triang.html#decreasing_Z1_aux:12"><span class="id" title="definition">decreasing_Z1_aux</span></a> <span class="id" title="var">n'</span><br/>
@@ -174,7 +169,6 @@ This will work, but in doing proofs the frequent conversion
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.ZArith_dec.html#Z_gt_dec"><span class="id" title="definition">Z_gt_dec</span></a>. <span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;x&nbsp;y&nbsp;:&nbsp;Z,&nbsp;{x&nbsp;&gt;&nbsp;y}&nbsp;+&nbsp;{~&nbsp;x&nbsp;&gt;&nbsp;y}&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Function</span> <span class="id" title="var">decreasing</span> (<a id="n:22" class="idref" href="#n:22"><span class="id" title="binder">n</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) {<span class="id" title="keyword">measure</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.to_nat"><span class="id" title="definition">Z.to_nat</span></a> <span class="id" title="var">n</span>}:= <br/>
 &nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.ZArith_dec.html#Z_gt_dec"><span class="id" title="definition">Z_gt_dec</span></a> <a class="idref" href="Verif_triang.html#n:15"><span class="id" title="variable">n</span></a> 0 <span class="id" title="keyword">then</span> <a class="idref" href="Verif_triang.html#n:15"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Verif_triang.html#decreasing:16"><span class="id" title="definition">decreasing</span></a> (<a class="idref" href="Verif_triang.html#n:15"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'-'_x"><span class="id" title="notation">-</span></a>1) <span class="id" title="keyword">else</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
@@ -223,7 +217,6 @@ When you define a Function, you must provide a <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="add_list" class="idref" href="#add_list"><span class="id" title="definition">add_list</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#fold_right"><span class="id" title="definition">fold_right</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.add"><span class="id" title="definition">Z.add</span></a> 0.<br/>
 </div>
 
@@ -236,7 +229,6 @@ When you define a Function, you must provide a <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="add_list_decreasing_eq_alt" class="idref" href="#add_list_decreasing_eq_alt"><span class="id" title="lemma">add_list_decreasing_eq_alt</span></a>: <span class="id" title="keyword">∀</span> <a id="n:36" class="idref" href="#n:36"><span class="id" title="binder">n</span></a>,<br/>
 &nbsp;&nbsp;0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#306329b0eca7a2b86c198702f594ad8e"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_triang.html#n:36"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;(2 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">(</span></a><a class="idref" href="Verif_triang.html#add_list"><span class="id" title="definition">add_list</span></a> (<a class="idref" href="Verif_triang.html#decreasing"><span class="id" title="lemma">decreasing</span></a> <a class="idref" href="Verif_triang.html#n:36"><span class="id" title="variable">n</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">Z</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> (<a class="idref" href="Verif_triang.html#n:36"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">(</span></a><a class="idref" href="Verif_triang.html#n:36"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">Z</span>.<br/>
@@ -303,7 +295,6 @@ with lemmas about Z.add and Z.mul.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="listrep" class="idref" href="#listrep"><span class="id" title="definition">listrep</span></a> (<a id="il:38" class="idref" href="#il:38"><span class="id" title="binder">il</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:39" class="idref" href="#p:39"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) : <span class="id" title="definition">mpred</span> :=<br/>
 &nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Verif_triang.html#il:38"><span class="id" title="variable">il</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;| <span class="id" title="var">i</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><span class="id" title="var">il'</span> ⇒ <span class="id" title="notation">EX</span> <a id="y:42" class="idref" href="#y:42"><span class="id" title="binder">y</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <br/>
@@ -337,7 +328,6 @@ Specification of stack data structure
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="stack" class="idref" href="#stack"><span class="id" title="definition">stack</span></a> (<a id="il:47" class="idref" href="#il:47"><span class="id" title="binder">il</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:48" class="idref" href="#p:48"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) :=<br/>
 &nbsp;<span class="id" title="notation">EX</span> <a id="q:49" class="idref" href="#q:49"><span class="id" title="binder">q</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span><br/>
 &nbsp;&nbsp;<span class="id" title="axiom">malloc_token</span> <span class="id" title="definition">Ews</span> (<span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_stack</span> <span class="id" title="definition">noattr</span>) <a class="idref" href="Verif_triang.html#p:48"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span> <br/>
@@ -393,7 +383,6 @@ Specification of stack data structure
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="push_increasing_spec" class="idref" href="#push_increasing_spec"><span class="id" title="definition">push_increasing_spec</span></a> :=<br/>
 &nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_push_increasing</span><br/>
 &nbsp;<span class="id" title="notation">WITH</span> <a id="st:76" class="idref" href="#st:76"><span class="id" title="binder">st</span></a><span class="id" title="notation">:</span> <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <a id="n:77" class="idref" href="#n:77"><span class="id" title="binder">n</span></a><span class="id" title="notation">:</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span> <a id="gv:78" class="idref" href="#gv:78"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
@@ -429,7 +418,6 @@ Putting all the funspecs together
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Gprog" class="idref" href="#Gprog"><span class="id" title="definition">Gprog</span></a> : <span class="id" title="definition">funspecs</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="var">with_library</span> <span class="id" title="definition">prog</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Verif_triang.html#newstack_spec"><span class="id" title="definition">newstack_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_triang.html#push_spec"><span class="id" title="definition">push_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_triang.html#pop_spec"><span class="id" title="definition">pop_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <br/>
@@ -517,7 +505,6 @@ Hint: you don't need induction.  Useful lemmas are, <span class="inlinecode"><sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="add_another" class="idref" href="#add_another"><span class="id" title="lemma">add_another</span></a>:<br/>
 &nbsp;<span class="id" title="keyword">∀</span> <a id="il:94" class="idref" href="#il:94"><span class="id" title="binder">il</span></a>, <br/>
 &nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#Forall"><span class="id" title="inductive">Forall</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.le"><span class="id" title="definition">Z.le</span></a> 0) <a class="idref" href="Verif_triang.html#il:94"><span class="id" title="variable">il</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -697,15 +684,13 @@ You can see that this has produced the SEP conjunct <span class="inlinecode"><sp
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:18&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -88,6 +88,31 @@ Print Assumptions STLCProp.unique_types.
 Goal True.
 idtac " ".
 
+idtac "-------------------  afi  --------------------".
+idtac " ".
+
+idtac "#> Manually graded: STLCProp.afi".
+idtac "Possible points: 1".
+print_manual_grade STLCProp.manual_grade_for_afi.
+idtac " ".
+
+idtac "-------------------  free_in_context  --------------------".
+idtac " ".
+
+idtac "#> STLCProp.free_in_context".
+idtac "Possible points: 2".
+check_type @STLCProp.free_in_context (
+(forall (x : String.string) (t : Stlc.STLC.tm) (T : Stlc.STLC.ty)
+   (Gamma : Stlc.STLC.context),
+ STLCProp.appears_free_in x t ->
+ Stlc.STLC.has_type Gamma t T ->
+ exists T' : Stlc.STLC.ty, Gamma x = @Some Stlc.STLC.ty T')).
+idtac "Assumptions:".
+Abort.
+Print Assumptions STLCProp.free_in_context.
+Goal True.
+idtac " ".
+
 idtac "-------------------  progress_preservation_statement  --------------------".
 idtac " ".
 
@@ -130,8 +155,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 22".
-idtac "Max points - advanced: 28".
+idtac "Max points - standard: 25".
+idtac "Max points - advanced: 31".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -153,6 +178,10 @@ idtac "---------- subject_expansion_stlc ---------".
 idtac "MANUAL".
 idtac "---------- STLCProp.unique_types ---------".
 Print Assumptions STLCProp.unique_types.
+idtac "---------- afi ---------".
+idtac "MANUAL".
+idtac "---------- STLCProp.free_in_context ---------".
+Print Assumptions STLCProp.free_in_context.
 idtac "---------- progress_preservation_statement ---------".
 idtac "MANUAL".
 idtac "---------- stlc_variation1 ---------".
@@ -171,4 +200,4 @@ idtac "---------- STLCProp.substitution_preserves_typing_from_typing_ind -------
 Print Assumptions STLCProp.substitution_preserves_typing_from_typing_ind.
 Abort.
 
-(* 2021-05-07 15:19 *)
+(* 2021-05-12 01:10 *)

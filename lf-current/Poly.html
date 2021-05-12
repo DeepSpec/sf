@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Poly<span class="subtitle">Polymorphism and Higher-Order Functions</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="Lists.html#"><span class="id" title="library">Lists</span></a>.<br/>
 </div>
 
@@ -66,7 +63,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="boollist" class="idref" href="#boollist"><span class="id" title="inductive">boollist</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="bool_nil" class="idref" href="#bool_nil"><span class="id" title="constructor">bool_nil</span></a><br/>
 &nbsp;&nbsp;| <a id="bool_cons" class="idref" href="#bool_cons"><span class="id" title="constructor">bool_cons</span></a> (<a id="b:3" class="idref" href="#b:3"><span class="id" title="binder">b</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) (<a id="l:4" class="idref" href="#l:4"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#boollist:1"><span class="id" title="inductive">boollist</span></a>).<br/>
@@ -87,7 +83,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="list" class="idref" href="#list"><span class="id" title="inductive">list</span></a> (<a id="X:5" class="idref" href="#X:5"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="nil" class="idref" href="#nil"><span class="id" title="constructor">nil</span></a><br/>
 &nbsp;&nbsp;| <a id="cons" class="idref" href="#cons"><span class="id" title="constructor">cons</span></a> (<a id="x:8" class="idref" href="#x:8"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:5"><span class="id" title="variable">X</span></a>) (<a id="l:9" class="idref" href="#l:9"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list:6"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:5"><span class="id" title="variable">X</span></a>).<br/>
@@ -112,7 +107,6 @@ This is exactly like the definition of <span class="inlinecode"><span class="id"
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> : <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>.<br/>
 </div>
 
@@ -126,7 +120,6 @@ The <span class="inlinecode"><span class="id" title="var">X</span></span> in the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 </div>
 
@@ -137,7 +130,6 @@ Similarly, <span class="inlinecode"><span class="id" title="var">cons</span></sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 3 (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 </div>
 
@@ -151,7 +143,6 @@ What might the type of <span class="inlinecode"><span class="id" title="var">nil
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> : <span class="id" title="keyword">∀</span> <a id="X:10" class="idref" href="#X:10"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:10"><span class="id" title="variable">X</span></a>.<br/>
 </div>
 
@@ -163,7 +154,6 @@ Similarly, the type of <span class="inlinecode"><span class="id" title="var">con
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> : <span class="id" title="keyword">∀</span> <a id="X:11" class="idref" href="#X:11"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Poly.html#X:11"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:11"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:11"><span class="id" title="variable">X</span></a>.<br/>
 </div>
 
@@ -183,7 +173,6 @@ Similarly, the type of <span class="inlinecode"><span class="id" title="var">con
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 2 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 1 (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 </div>
@@ -195,7 +184,6 @@ We can now go back and make polymorphic versions of all the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="repeat" class="idref" href="#repeat"><span class="id" title="definition">repeat</span></a> (<a id="X:12" class="idref" href="#X:12"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="x:13" class="idref" href="#x:13"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:12"><span class="id" title="variable">X</span></a>) (<a id="count:14" class="idref" href="#count:14"><span class="id" title="binder">count</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:12"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#count:14"><span class="id" title="variable">count</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| 0 ⇒ <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="Poly.html#X:12"><span class="id" title="variable">X</span></a><br/>
@@ -209,7 +197,6 @@ As with <span class="inlinecode"><span class="id" title="var">nil</span></span> 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_repeat1" class="idref" href="#test_repeat1"><span class="id" title="definition">test_repeat1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#repeat"><span class="id" title="definition">repeat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 4 2 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 4 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 4 (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)).<br/>
 <div class="togglescript" id="proofcontrol1" onclick="toggleDisplay('proof1');toggleDisplay('proofcontrol1')"><span class="show"></span></div>
@@ -224,7 +211,6 @@ To use <span class="inlinecode"><span class="id" title="tactic">repeat</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_repeat2" class="idref" href="#test_repeat2"><span class="id" title="definition">test_repeat2</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#repeat"><span class="id" title="definition">repeat</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a> (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>).<br/>
 <div class="togglescript" id="proofcontrol2" onclick="toggleDisplay('proof2');toggleDisplay('proofcontrol2')"><span class="show"></span></div>
@@ -239,7 +225,6 @@ To use <span class="inlinecode"><span class="id" title="tactic">repeat</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="MumbleGrumble" class="idref" href="#MumbleGrumble"><span class="id" title="module">MumbleGrumble</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="MumbleGrumble.mumble" class="idref" href="#MumbleGrumble.mumble"><span class="id" title="inductive">mumble</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="MumbleGrumble.a" class="idref" href="#MumbleGrumble.a"><span class="id" title="constructor">a</span></a><br/>
@@ -297,7 +282,6 @@ Which of the following are well-typed elements of <span class="inlinecode"><span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="repeat'" class="idref" href="#repeat'"><span class="id" title="definition">repeat'</span></a> <a id="X:26" class="idref" href="#X:26"><span class="id" title="binder">X</span></a> <a id="x:27" class="idref" href="#x:27"><span class="id" title="binder">x</span></a> <a id="count:28" class="idref" href="#count:28"><span class="id" title="binder">count</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:26"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#count:28"><span class="id" title="variable">count</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| 0        ⇒ <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="Poly.html#X:26"><span class="id" title="variable">X</span></a><br/>
@@ -310,7 +294,6 @@ Indeed it will.  Let's see what type Coq has assigned to <span class="inlinecode
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#repeat'"><span class="id" title="definition">repeat'</span></a><br/>
 &nbsp;&nbsp;: <span class="id" title="keyword">∀</span> <a id="X:31" class="idref" href="#X:31"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Poly.html#X:31"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:31"><span class="id" title="variable">X</span></a>.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#repeat"><span class="id" title="definition">repeat</span></a><br/>
@@ -379,7 +362,6 @@ It has exactly the same type as <span class="inlinecode"><span class="id" title=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="repeat''" class="idref" href="#repeat''"><span class="id" title="definition">repeat''</span></a> <a id="X:33" class="idref" href="#X:33"><span class="id" title="binder">X</span></a> <a id="x:34" class="idref" href="#x:34"><span class="id" title="binder">x</span></a> <a id="count:35" class="idref" href="#count:35"><span class="id" title="binder">count</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:33"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#count:35"><span class="id" title="variable">count</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| 0        ⇒ <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <span class="id" title="var">_</span><br/>
@@ -396,7 +378,6 @@ In this instance, we don't save much by writing <span class="inlinecode"><span c
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list123" class="idref" href="#list123"><span class="id" title="definition">list123</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 1 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 2 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> 3 (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>))).<br/>
 </div>
@@ -406,7 +387,6 @@ In this instance, we don't save much by writing <span class="inlinecode"><span c
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list123'" class="idref" href="#list123'"><span class="id" title="definition">list123'</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <span class="id" title="var">_</span> 1 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <span class="id" title="var">_</span> 2 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <span class="id" title="var">_</span> 3 (<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <span class="id" title="var">_</span>))).<br/>
 </div>
@@ -428,7 +408,6 @@ In this instance, we don't save much by writing <span class="inlinecode"><span c
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Arguments</span> <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> {<span class="id" title="var">X</span>}.<br/>
 <span class="id" title="var">Arguments</span> <a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> {<span class="id" title="var">X</span>}.<br/>
 <span class="id" title="var">Arguments</span> <a class="idref" href="Poly.html#repeat"><span class="id" title="definition">repeat</span></a> {<span class="id" title="var">X</span>}.<br/>
@@ -439,7 +418,6 @@ Now we don't have to supply type arguments at all:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list123''" class="idref" href="#list123''"><span class="id" title="definition">list123''</span></a> := <a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> 1 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> 2 (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> 3 <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a>)).<br/>
 </div>
 
@@ -450,7 +428,6 @@ Alternatively, we can declare an argument to be implicit
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="repeat'''" class="idref" href="#repeat'''"><span class="id" title="definition">repeat'''</span></a> {<a id="X:38" class="idref" href="#X:38"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="x:39" class="idref" href="#x:39"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:38"><span class="id" title="variable">X</span></a>) (<a id="count:40" class="idref" href="#count:40"><span class="id" title="binder">count</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:38"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#count:40"><span class="id" title="variable">count</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| 0        ⇒ <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a><br/>
@@ -475,7 +452,6 @@ Alternatively, we can declare an argument to be implicit
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="list'" class="idref" href="#list'"><span class="id" title="inductive">list'</span></a> {<a id="X:43" class="idref" href="#X:43"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>} : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="nil'" class="idref" href="#nil'"><span class="id" title="constructor">nil'</span></a><br/>
 &nbsp;&nbsp;| <a id="cons'" class="idref" href="#cons'"><span class="id" title="constructor">cons'</span></a> (<a id="x:46" class="idref" href="#x:46"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:43"><span class="id" title="variable">X</span></a>) (<a id="l:47" class="idref" href="#l:47"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list':44"><span class="id" title="inductive">list'</span></a>).<br/>
@@ -494,7 +470,6 @@ Because <span class="inlinecode"><span class="id" title="var">X</span></span> is
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="app" class="idref" href="#app"><span class="id" title="definition">app</span></a> {<a id="X:48" class="idref" href="#X:48"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="l<sub>1</sub>:49" class="idref" href="#l<sub>1</sub>:49"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:50" class="idref" href="#l<sub>2</sub>:50"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:48"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:48"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#l<sub>1</sub>:49"><span class="id" title="variable">l<sub>1</sub></span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a>      ⇒ <a class="idref" href="Poly.html#l<sub>2</sub>:50"><span class="id" title="variable">l<sub>2</sub></span></a><br/>
@@ -546,7 +521,6 @@ Because <span class="inlinecode"><span class="id" title="var">X</span></span> is
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Fail</span> <span class="id" title="keyword">Definition</span> <a id="mynil" class="idref" href="#mynil"><span class="id" title="definition">mynil</span></a> := <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
 </div>
 
@@ -566,7 +540,6 @@ Because <span class="inlinecode"><span class="id" title="var">X</span></span> is
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="mynil" class="idref" href="#mynil"><span class="id" title="definition">mynil</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> := <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
 </div>
 
@@ -576,7 +549,6 @@ Alternatively, we can force the implicit arguments to be explicit by
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> : <span class="id" title="keyword">∀</span> <a id="X:61" class="idref" href="#X:61"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:61"><span class="id" title="variable">X</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="mynil'" class="idref" href="#mynil'"><span class="id" title="definition">mynil'</span></a> := @<a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 </div>
@@ -589,7 +561,6 @@ Using argument synthesis and implicit arguments, we can
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id=":::x_'::'_x" class="idref" href="#:::x_'::'_x"><span class="id" title="notation">&quot;</span></a>x :: y" := (<a class="idref" href="Poly.html#cons"><span class="id" title="constructor">cons</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 60, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>).<br/>
 <span class="id" title="keyword">Notation</span> <a id="2c60282cbb04e070c60ae01e76f3865a" class="idref" href="#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">&quot;</span></a>[ ]" := <a class="idref" href="Poly.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
@@ -603,7 +574,6 @@ Now lists can be written just the way we'd hope:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list123'''" class="idref" href="#list123'''"><span class="id" title="definition">list123'''</span></a> := <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a> 2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a> 3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
 </div>
 
@@ -619,7 +589,6 @@ Now lists can be written just the way we'd hope:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="app_nil_r" class="idref" href="#app_nil_r"><span class="id" title="lemma">app_nil_r</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:62" class="idref" href="#X:62"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>), <span class="id" title="keyword">∀</span> <a id="l:63" class="idref" href="#l:63"><span class="id" title="binder">l</span></a>:<a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:62"><span class="id" title="variable">X</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#l:63"><span class="id" title="variable">l</span></a> <a class="idref" href="Poly.html#f03f7a04ef75ff3ac66ca5c23554e52e"><span class="id" title="notation">++</span></a> <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#l:63"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -643,7 +612,6 @@ Now lists can be written just the way we'd hope:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="rev_app_distr" class="idref" href="#rev_app_distr"><span class="id" title="lemma">rev_app_distr</span></a>: <span class="id" title="keyword">∀</span> <a id="X:71" class="idref" href="#X:71"><span class="id" title="binder">X</span></a> (<a id="l<sub>1</sub>:72" class="idref" href="#l<sub>1</sub>:72"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:73" class="idref" href="#l<sub>2</sub>:73"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:71"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="Poly.html#l<sub>1</sub>:72"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Poly.html#f03f7a04ef75ff3ac66ca5c23554e52e"><span class="id" title="notation">++</span></a> <a class="idref" href="Poly.html#l<sub>2</sub>:73"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Poly.html#l<sub>2</sub>:73"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="Poly.html#f03f7a04ef75ff3ac66ca5c23554e52e"><span class="id" title="notation">++</span></a> <a class="idref" href="Poly.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Poly.html#l<sub>1</sub>:72"><span class="id" title="variable">l<sub>1</sub></span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -667,7 +635,6 @@ Now lists can be written just the way we'd hope:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="prod" class="idref" href="#prod"><span class="id" title="inductive">prod</span></a> (<a id="X:76" class="idref" href="#X:76"><span class="id" title="binder">X</span></a> <a id="Y:77" class="idref" href="#Y:77"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
 | <a id="pair" class="idref" href="#pair"><span class="id" title="constructor">pair</span></a> (<a id="x:80" class="idref" href="#x:80"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:76"><span class="id" title="variable">X</span></a>) (<a id="y:81" class="idref" href="#y:81"><span class="id" title="binder">y</span></a> : <a class="idref" href="Poly.html#Y:77"><span class="id" title="variable">Y</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="var">Arguments</span> <a class="idref" href="Poly.html#pair"><span class="id" title="constructor">pair</span></a> {<span class="id" title="var">X</span>} {<span class="id" title="var">Y</span>}.<br/>
@@ -679,7 +646,6 @@ As with lists, we make the type arguments implicit and define the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="62264328926d76449e4f268ee9289ca<sub>9</sub>" class="idref" href="#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">&quot;</span></a>( x , y )" := (<a class="idref" href="Poly.html#pair"><span class="id" title="constructor">pair</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/>
 </div>
 
@@ -689,7 +655,6 @@ We can also use the <span class="inlinecode"><span class="id" title="keyword">No
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="11c698c8685bb8ab1cf725545c085ac<sub>4</sub>" class="idref" href="#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">&quot;</span></a>X * Y" := (<a class="idref" href="Poly.html#prod"><span class="id" title="inductive">prod</span></a> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>) : <span class="id" title="var">type_scope</span>.<br/>
 </div>
 
@@ -711,7 +676,6 @@ We can also use the <span class="inlinecode"><span class="id" title="keyword">No
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="fst" class="idref" href="#fst"><span class="id" title="definition">fst</span></a> {<a id="X:82" class="idref" href="#X:82"><span class="id" title="binder">X</span></a> <a id="Y:83" class="idref" href="#Y:83"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>} (<a id="p:84" class="idref" href="#p:84"><span class="id" title="binder">p</span></a> : <a class="idref" href="Poly.html#X:82"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:83"><span class="id" title="variable">Y</span></a>) : <a class="idref" href="Poly.html#X:82"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#p:84"><span class="id" title="variable">p</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span><a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">,</span></a> <span class="id" title="var">y</span><a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">)</span></a> ⇒ <span class="id" title="var">x</span><br/>
@@ -730,7 +694,6 @@ The following function takes two lists and combines them
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="combine" class="idref" href="#combine"><span class="id" title="definition">combine</span></a> {<a id="X:90" class="idref" href="#X:90"><span class="id" title="binder">X</span></a> <a id="Y:91" class="idref" href="#Y:91"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>} (<a id="lx:92" class="idref" href="#lx:92"><span class="id" title="binder">lx</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:90"><span class="id" title="variable">X</span></a>) (<a id="ly:93" class="idref" href="#ly:93"><span class="id" title="binder">ly</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:91"><span class="id" title="variable">Y</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="Poly.html#X:90"><span class="id" title="variable">X</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="Poly.html#Y:91"><span class="id" title="variable">Y</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#lx:92"><span class="id" title="variable">lx</span></a>, <a class="idref" href="Poly.html#ly:93"><span class="id" title="variable">ly</span></a> <span class="id" title="keyword">with</span><br/>
@@ -772,7 +735,6 @@ The following function takes two lists and combines them
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="split" class="idref" href="#split"><span class="id" title="definition">split</span></a> {<a id="X:97" class="idref" href="#X:97"><span class="id" title="binder">X</span></a> <a id="Y:98" class="idref" href="#Y:98"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>} (<a id="l:99" class="idref" href="#l:99"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="Poly.html#X:97"><span class="id" title="variable">X</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="Poly.html#Y:98"><span class="id" title="variable">Y</span></a>)) : <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:97"><span class="id" title="variable">X</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:98"><span class="id" title="variable">Y</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_split" class="idref" href="#test_split"><span class="id" title="definition">test_split</span></a>:<br/>
@@ -796,7 +758,6 @@ The following function takes two lists and combines them
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="OptionPlayground" class="idref" href="#OptionPlayground"><span class="id" title="module">OptionPlayground</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="OptionPlayground.option" class="idref" href="#OptionPlayground.option"><span class="id" title="inductive">option</span></a> (<a id="X:101" class="idref" href="#X:101"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="OptionPlayground.Some" class="idref" href="#OptionPlayground.Some"><span class="id" title="constructor">Some</span></a> (<a id="x:104" class="idref" href="#x:104"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:101"><span class="id" title="variable">X</span></a>)<br/>
@@ -812,7 +773,6 @@ We can now rewrite the <span class="inlinecode"><span class="id" title="var">nth
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="nth_error" class="idref" href="#nth_error"><span class="id" title="definition">nth_error</span></a> {<a id="X:105" class="idref" href="#X:105"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="l:106" class="idref" href="#l:106"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:105"><span class="id" title="variable">X</span></a>) (<a id="n:107" class="idref" href="#n:107"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Poly.html#X:105"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#l:106"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
@@ -847,7 +807,6 @@ We can now rewrite the <span class="inlinecode"><span class="id" title="var">nth
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="hd_error" class="idref" href="#hd_error"><span class="id" title="definition">hd_error</span></a> {<a id="X:111" class="idref" href="#X:111"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="l:112" class="idref" href="#l:112"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:111"><span class="id" title="variable">X</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Poly.html#X:111"><span class="id" title="variable">X</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 </div>
@@ -858,7 +817,6 @@ Once again, to force the implicit arguments to be explicit,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#hd_error"><span class="id" title="axiom">hd_error</span></a> : <span class="id" title="keyword">∀</span> <a id="X:113" class="idref" href="#X:113"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:113"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Poly.html#X:113"><span class="id" title="variable">X</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_hd_error1" class="idref" href="#test_hd_error1"><span class="id" title="definition">test_hd_error1</span></a> : <a class="idref" href="Poly.html#hd_error"><span class="id" title="axiom">hd_error</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> 1.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -890,7 +848,6 @@ Once again, to force the implicit arguments to be explicit,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="doit3times" class="idref" href="#doit3times"><span class="id" title="definition">doit3times</span></a> {<a id="X:114" class="idref" href="#X:114"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:115" class="idref" href="#f:115"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:114"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Poly.html#X:114"><span class="id" title="variable">X</span></a>) (<a id="n:116" class="idref" href="#n:116"><span class="id" title="binder">n</span></a> : <a class="idref" href="Poly.html#X:114"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Poly.html#X:114"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#f:115"><span class="id" title="variable">f</span></a> (<a class="idref" href="Poly.html#f:115"><span class="id" title="variable">f</span></a> (<a class="idref" href="Poly.html#f:115"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#n:116"><span class="id" title="variable">n</span></a>)).<br/>
 </div>
@@ -902,7 +859,6 @@ The argument <span class="inlinecode"><span class="id" title="var">f</span></spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#doit3times"><span class="id" title="definition">doit3times</span></a> : <span class="id" title="keyword">∀</span> <a id="X:117" class="idref" href="#X:117"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#X:117"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:117"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:117"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:117"><span class="id" title="variable">X</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_doit3times" class="idref" href="#test_doit3times"><span class="id" title="definition">test_doit3times</span></a>: <a class="idref" href="Poly.html#doit3times"><span class="id" title="definition">doit3times</span></a> <a class="idref" href="Basics.html#minustwo"><span class="id" title="definition">minustwo</span></a> 9 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
 <div class="togglescript" id="proofcontrol9" onclick="toggleDisplay('proof9');toggleDisplay('proofcontrol9')"><span class="show"></span></div>
@@ -930,7 +886,6 @@ The argument <span class="inlinecode"><span class="id" title="var">f</span></spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="filter" class="idref" href="#filter"><span class="id" title="definition">filter</span></a> {<a id="X:118" class="idref" href="#X:118"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>} (<a id="test:119" class="idref" href="#test:119"><span class="id" title="binder">test</span></a>: <a class="idref" href="Poly.html#X:118"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>) (<a id="l:120" class="idref" href="#l:120"><span class="id" title="binder">l</span></a>:<a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:118"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:118"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#l:120"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a><br/>
@@ -947,7 +902,6 @@ For example, if we apply <span class="inlinecode"><span class="id" title="var">f
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_filter1" class="idref" href="#test_filter1"><span class="id" title="definition">test_filter1</span></a>: <a class="idref" href="Poly.html#filter"><span class="id" title="definition">filter</span></a> <a class="idref" href="Basics.html#even"><span class="id" title="definition">even</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
 <div class="togglescript" id="proofcontrol11" onclick="toggleDisplay('proof11');toggleDisplay('proofcontrol11')"><span class="show"></span></div>
 <div class="proofscript" id="proof11" onclick="toggleDisplay('proof11');toggleDisplay('proofcontrol11')">
@@ -973,7 +927,6 @@ We can use <span class="inlinecode"><span class="id" title="var">filter</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="countoddmembers'" class="idref" href="#countoddmembers'"><span class="id" title="definition">countoddmembers'</span></a> (<a id="l:125" class="idref" href="#l:125"><span class="id" title="binder">l</span></a>:<a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#length"><span class="id" title="definition">length</span></a> (<a class="idref" href="Poly.html#filter"><span class="id" title="definition">filter</span></a> <a class="idref" href="Basics.html#odd"><span class="id" title="definition">odd</span></a> <a class="idref" href="Poly.html#l:125"><span class="id" title="variable">l</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_countoddmembers'1" class="idref" href="#test_countoddmembers'1"><span class="id" title="definition">test_countoddmembers'1</span></a>:   <a class="idref" href="Poly.html#countoddmembers'"><span class="id" title="definition">countoddmembers'</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>0<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 4.<br/>
@@ -1015,7 +968,6 @@ We can use <span class="inlinecode"><span class="id" title="var">filter</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_anon_fun'" class="idref" href="#test_anon_fun'"><span class="id" title="definition">test_anon_fun'</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#doit3times"><span class="id" title="definition">doit3times</span></a> (<span class="id" title="keyword">fun</span> <a id="n:126" class="idref" href="#n:126"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="Poly.html#n:126"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#n:126"><span class="id" title="variable">n</span></a>) 2 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 256.<br/>
 <div class="togglescript" id="proofcontrol16" onclick="toggleDisplay('proof16');toggleDisplay('proofcontrol16')"><span class="show"></span></div>
@@ -1034,7 +986,6 @@ The expression <span class="inlinecode">(<span class="id" title="keyword">fun</s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_filter2'" class="idref" href="#test_filter2'"><span class="id" title="definition">test_filter2'</span></a>:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Poly.html#filter"><span class="id" title="definition">filter</span></a> (<span class="id" title="keyword">fun</span> <a id="l:127" class="idref" href="#l:127"><span class="id" title="binder">l</span></a> ⇒ <a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Poly.html#l:127"><span class="id" title="variable">l</span></a><a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">=?</span></a> 1)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a> 2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>6<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>7<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];</span></a> <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>8<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a><br/>
@@ -1054,7 +1005,6 @@ The expression <span class="inlinecode">(<span class="id" title="keyword">fun</s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="filter_even_gt<sub>7</sub>" class="idref" href="#filter_even_gt<sub>7</sub>"><span class="id" title="definition">filter_even_gt<sub>7</sub></span></a> (<a id="l:128" class="idref" href="#l:128"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_filter_even_gt7_1" class="idref" href="#test_filter_even_gt7_1"><span class="id" title="definition">test_filter_even_gt7_1</span></a> :<br/>
@@ -1085,7 +1035,6 @@ The expression <span class="inlinecode">(<span class="id" title="keyword">fun</s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="partition" class="idref" href="#partition"><span class="id" title="definition">partition</span></a> {<a id="X:129" class="idref" href="#X:129"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="test:130" class="idref" href="#test:130"><span class="id" title="binder">test</span></a> : <a class="idref" href="Poly.html#X:129"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="l:131" class="idref" href="#l:131"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:129"><span class="id" title="variable">X</span></a>)<br/>
@@ -1108,7 +1057,6 @@ The expression <span class="inlinecode">(<span class="id" title="keyword">fun</s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="map" class="idref" href="#map"><span class="id" title="definition">map</span></a> {<a id="X:133" class="idref" href="#X:133"><span class="id" title="binder">X</span></a> <a id="Y:134" class="idref" href="#Y:134"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:135" class="idref" href="#f:135"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:133"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Poly.html#Y:134"><span class="id" title="variable">Y</span></a>) (<a id="l:136" class="idref" href="#l:136"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:133"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:134"><span class="id" title="variable">Y</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#l:136"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a>     ⇒ <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a><br/>
@@ -1123,7 +1071,6 @@ It takes a function <span class="inlinecode"><span class="id" title="var">f</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_map1" class="idref" href="#test_map1"><span class="id" title="definition">test_map1</span></a>: <a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> (<span class="id" title="keyword">fun</span> <a id="x:139" class="idref" href="#x:139"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> 3 <a class="idref" href="Poly.html#x:139"><span class="id" title="variable">x</span></a>) <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>0<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
 <div class="togglescript" id="proofcontrol18" onclick="toggleDisplay('proof18');toggleDisplay('proofcontrol18')"><span class="show"></span></div>
 <div class="proofscript" id="proof18" onclick="toggleDisplay('proof18');toggleDisplay('proofcontrol18')">
@@ -1139,7 +1086,6 @@ The element types of the input and output lists need not be
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_map2" class="idref" href="#test_map2"><span class="id" title="definition">test_map2</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> <a class="idref" href="Basics.html#odd"><span class="id" title="definition">odd</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
 <div class="togglescript" id="proofcontrol19" onclick="toggleDisplay('proof19');toggleDisplay('proofcontrol19')"><span class="show"></span></div>
@@ -1155,7 +1101,6 @@ It can even be applied to a list of numbers and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="test_map3" class="idref" href="#test_map3"><span class="id" title="definition">test_map3</span></a>:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> (<span class="id" title="keyword">fun</span> <a id="n:140" class="idref" href="#n:140"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="Basics.html#even"><span class="id" title="definition">even</span></a> <a class="idref" href="Poly.html#n:140"><span class="id" title="variable">n</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#odd"><span class="id" title="definition">odd</span></a> <a class="idref" href="Poly.html#n:140"><span class="id" title="variable">n</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>) <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[[</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];[</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];[</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];[</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]]</span></a>.<br/>
@@ -1176,7 +1121,6 @@ It can even be applied to a list of numbers and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="map_rev" class="idref" href="#map_rev"><span class="id" title="lemma">map_rev</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:141" class="idref" href="#X:141"><span class="id" title="binder">X</span></a> <a id="Y:142" class="idref" href="#Y:142"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:143" class="idref" href="#f:143"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:141"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:142"><span class="id" title="variable">Y</span></a>) (<a id="l:144" class="idref" href="#l:144"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:141"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> <a class="idref" href="Poly.html#f:143"><span class="id" title="variable">f</span></a> (<a class="idref" href="Poly.html#rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Poly.html#l:144"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#rev"><span class="id" title="definition">rev</span></a> (<a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> <a class="idref" href="Poly.html#f:143"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#l:144"><span class="id" title="variable">l</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1202,7 +1146,6 @@ It can even be applied to a list of numbers and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="flat_map" class="idref" href="#flat_map"><span class="id" title="definition">flat_map</span></a> {<a id="X:145" class="idref" href="#X:145"><span class="id" title="binder">X</span></a> <a id="Y:146" class="idref" href="#Y:146"><span class="id" title="binder">Y</span></a>: <span class="id" title="keyword">Type</span>} (<a id="f:147" class="idref" href="#f:147"><span class="id" title="binder">f</span></a>: <a class="idref" href="Poly.html#X:145"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:146"><span class="id" title="variable">Y</span></a>) (<a id="l:148" class="idref" href="#l:148"><span class="id" title="binder">l</span></a>: <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:145"><span class="id" title="variable">X</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:146"><span class="id" title="variable">Y</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -1221,7 +1164,6 @@ It can even be applied to a list of numbers and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="option_map" class="idref" href="#option_map"><span class="id" title="definition">option_map</span></a> {<a id="X:151" class="idref" href="#X:151"><span class="id" title="binder">X</span></a> <a id="Y:152" class="idref" href="#Y:152"><span class="id" title="binder">Y</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:153" class="idref" href="#f:153"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:151"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:152"><span class="id" title="variable">Y</span></a>) (<a id="xo:154" class="idref" href="#xo:154"><span class="id" title="binder">xo</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Poly.html#X:151"><span class="id" title="variable">X</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="Poly.html#Y:152"><span class="id" title="variable">Y</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#xo:154"><span class="id" title="variable">xo</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1254,7 +1196,6 @@ It can even be applied to a list of numbers and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="fold" class="idref" href="#fold"><span class="id" title="definition">fold</span></a> {<a id="X:156" class="idref" href="#X:156"><span class="id" title="binder">X</span></a> <a id="Y:157" class="idref" href="#Y:157"><span class="id" title="binder">Y</span></a>: <span class="id" title="keyword">Type</span>} (<a id="f:158" class="idref" href="#f:158"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:156"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Poly.html#Y:157"><span class="id" title="variable">Y</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Poly.html#Y:157"><span class="id" title="variable">Y</span></a>) (<a id="l:159" class="idref" href="#l:159"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:156"><span class="id" title="variable">X</span></a>) (<a id="b:160" class="idref" href="#b:160"><span class="id" title="binder">b</span></a> : <a class="idref" href="Poly.html#Y:157"><span class="id" title="variable">Y</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Poly.html#Y:157"><span class="id" title="variable">Y</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Poly.html#l:159"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1283,7 +1224,6 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="fold_example1" class="idref" href="#fold_example1"><span class="id" title="definition">fold_example1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#mult"><span class="id" title="abbreviation">mult</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 24.<br/>
@@ -1319,7 +1259,6 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_fold_types_different" class="idref" href="#manual_grade_for_fold_types_different"><span class="id" title="definition">manual_grade_for_fold_types_different</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -1341,7 +1280,6 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="constfun" class="idref" href="#constfun"><span class="id" title="definition">constfun</span></a> {<a id="X:163" class="idref" href="#X:163"><span class="id" title="binder">X</span></a>: <span class="id" title="keyword">Type</span>} (<a id="x:164" class="idref" href="#x:164"><span class="id" title="binder">x</span></a>: <a class="idref" href="Poly.html#X:163"><span class="id" title="variable">X</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:163"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="k:165" class="idref" href="#k:165"><span class="id" title="binder">k</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) ⇒ <a class="idref" href="Poly.html#x:164"><span class="id" title="variable">x</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="ftrue" class="idref" href="#ftrue"><span class="id" title="definition">ftrue</span></a> := <a class="idref" href="Poly.html#constfun"><span class="id" title="definition">constfun</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/><hr class='doublespaceincode'/>
@@ -1366,7 +1304,6 @@ In fact, the multiple-argument functions we have already
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
 </div>
 
@@ -1383,7 +1320,6 @@ Each <span class="inlinecode">→</span> in this expression is actually a <i>bin
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="plus3" class="idref" href="#plus3"><span class="id" title="definition">plus3</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> 3.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#plus3"><span class="id" title="definition">plus3</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_plus3" class="idref" href="#test_plus3"><span class="id" title="definition">test_plus3</span></a> :    <a class="idref" href="Poly.html#plus3"><span class="id" title="definition">plus3</span></a> 4 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 7.<br/>
@@ -1409,7 +1345,6 @@ Each <span class="inlinecode">→</span> in this expression is actually a <i>bin
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Exercises" class="idref" href="#Exercises"><span class="id" title="module">Exercises</span></a>.<br/>
 </div>
 
@@ -1420,7 +1355,6 @@ Each <span class="inlinecode">→</span> in this expression is actually a <i>bin
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.fold_length" class="idref" href="#Exercises.fold_length"><span class="id" title="definition">fold_length</span></a> {<a id="X:166" class="idref" href="#X:166"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="l:167" class="idref" href="#l:167"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:166"><span class="id" title="variable">X</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <a id="n:168" class="idref" href="#n:168"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Poly.html#n:168"><span class="id" title="variable">n</span></a>) <a class="idref" href="Poly.html#l:167"><span class="id" title="variable">l</span></a> 0.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="Exercises.test_fold_length1" class="idref" href="#Exercises.test_fold_length1"><span class="id" title="definition">test_fold_length1</span></a> : <a class="idref" href="Poly.html#Exercises.fold_length"><span class="id" title="definition">fold_length</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>7<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>0<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
@@ -1439,7 +1373,6 @@ Prove the correctness of <span class="inlinecode"><span class="id" title="var">f
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="Exercises.fold_length_correct" class="idref" href="#Exercises.fold_length_correct"><span class="id" title="lemma">fold_length_correct</span></a> : <span class="id" title="keyword">∀</span> <a id="X:169" class="idref" href="#X:169"><span class="id" title="binder">X</span></a> (<a id="l:170" class="idref" href="#l:170"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:169"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#Exercises.fold_length"><span class="id" title="definition">fold_length</span></a> <a class="idref" href="Poly.html#l:170"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Poly.html#l:170"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1456,7 +1389,6 @@ Prove the correctness of <span class="inlinecode"><span class="id" title="var">f
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.fold_map" class="idref" href="#Exercises.fold_map"><span class="id" title="definition">fold_map</span></a> {<a id="X:171" class="idref" href="#X:171"><span class="id" title="binder">X</span></a> <a id="Y:172" class="idref" href="#Y:172"><span class="id" title="binder">Y</span></a>: <span class="id" title="keyword">Type</span>} (<a id="f:173" class="idref" href="#f:173"><span class="id" title="binder">f</span></a>: <a class="idref" href="Poly.html#X:171"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:172"><span class="id" title="variable">Y</span></a>) (<a id="l:174" class="idref" href="#l:174"><span class="id" title="binder">l</span></a>: <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:171"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:172"><span class="id" title="variable">Y</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 </div>
@@ -1469,7 +1401,6 @@ Write down a theorem <span class="inlinecode"><span class="id" title="var">fold_
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.manual_grade_for_fold_map" class="idref" href="#Exercises.manual_grade_for_fold_map"><span class="id" title="definition">manual_grade_for_fold_map</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -1500,7 +1431,6 @@ Write down a theorem <span class="inlinecode"><span class="id" title="var">fold_
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.prod_curry" class="idref" href="#Exercises.prod_curry"><span class="id" title="definition">prod_curry</span></a> {<a id="X:175" class="idref" href="#X:175"><span class="id" title="binder">X</span></a> <a id="Y:176" class="idref" href="#Y:176"><span class="id" title="binder">Y</span></a> <a id="Z:177" class="idref" href="#Z:177"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;(<a id="f:178" class="idref" href="#f:178"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:175"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:176"><span class="id" title="variable">Y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Z:177"><span class="id" title="variable">Z</span></a>) (<a id="x:179" class="idref" href="#x:179"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:175"><span class="id" title="variable">X</span></a>) (<a id="y:180" class="idref" href="#y:180"><span class="id" title="binder">y</span></a> : <a class="idref" href="Poly.html#Y:176"><span class="id" title="variable">Y</span></a>) : <a class="idref" href="Poly.html#Z:177"><span class="id" title="variable">Z</span></a> := <a class="idref" href="Poly.html#f:178"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#x:179"><span class="id" title="variable">x</span></a><a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="Poly.html#y:180"><span class="id" title="variable">y</span></a><a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">)</span></a>.<br/>
 </div>
@@ -1511,7 +1441,6 @@ As an exercise, define its inverse, <span class="inlinecode"><span class="id" ti
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.prod_uncurry" class="idref" href="#Exercises.prod_uncurry"><span class="id" title="definition">prod_uncurry</span></a> {<a id="X:181" class="idref" href="#X:181"><span class="id" title="binder">X</span></a> <a id="Y:182" class="idref" href="#Y:182"><span class="id" title="binder">Y</span></a> <a id="Z:183" class="idref" href="#Z:183"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;(<a id="f:184" class="idref" href="#f:184"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:181"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:182"><span class="id" title="variable">Y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Z:183"><span class="id" title="variable">Z</span></a>) (<a id="p:185" class="idref" href="#p:185"><span class="id" title="binder">p</span></a> : <a class="idref" href="Poly.html#X:181"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:182"><span class="id" title="variable">Y</span></a>) : <a class="idref" href="Poly.html#Z:183"><span class="id" title="variable">Z</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
@@ -1523,7 +1452,6 @@ As a (trivial) example of the usefulness of currying, we can use it
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="Exercises.test_map1'" class="idref" href="#Exercises.test_map1'"><span class="id" title="definition">test_map1'</span></a>: <a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> 3) <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>0<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
 <div class="togglescript" id="proofcontrol30" onclick="toggleDisplay('proof30');toggleDisplay('proofcontrol30')"><span class="show"></span></div>
 <div class="proofscript" id="proof30" onclick="toggleDisplay('proof30');toggleDisplay('proofcontrol30')">
@@ -1537,7 +1465,6 @@ Thought exercise: before running the following commands, can you
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#Exercises.prod_curry"><span class="id" title="definition">prod_curry</span></a>.<br/>
 <span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#Exercises.prod_uncurry"><span class="id" title="axiom">prod_uncurry</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="Exercises.uncurry_curry" class="idref" href="#Exercises.uncurry_curry"><span class="id" title="lemma">uncurry_curry</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:186" class="idref" href="#X:186"><span class="id" title="binder">X</span></a> <a id="Y:187" class="idref" href="#Y:187"><span class="id" title="binder">Y</span></a> <a id="Z:188" class="idref" href="#Z:188"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>)<br/>
@@ -1592,7 +1519,6 @@ Thought exercise: before running the following commands, can you
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="Exercises.Church" class="idref" href="#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.Church.cnat" class="idref" href="#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> := <span class="id" title="keyword">∀</span> <a id="X:197" class="idref" href="#X:197"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#X:197"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:197"><span class="id" title="variable">X</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:197"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:197"><span class="id" title="variable">X</span></a>.<br/>
 </div>
@@ -1603,7 +1529,6 @@ Let's see how to write some numbers with this notation. Iterating
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.Church.one" class="idref" href="#Exercises.Church.one"><span class="id" title="definition">one</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:198" class="idref" href="#X:198"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:199" class="idref" href="#f:199"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:198"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:198"><span class="id" title="variable">X</span></a>) (<a id="x:200" class="idref" href="#x:200"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:198"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#f:199"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#x:200"><span class="id" title="variable">x</span></a>.<br/>
 </div>
@@ -1613,7 +1538,6 @@ Similarly, <span class="inlinecode"><span class="id" title="var">two</span></spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.Church.two" class="idref" href="#Exercises.Church.two"><span class="id" title="definition">two</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:201" class="idref" href="#X:201"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:202" class="idref" href="#f:202"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:201"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:201"><span class="id" title="variable">X</span></a>) (<a id="x:203" class="idref" href="#x:203"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:201"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#f:202"><span class="id" title="variable">f</span></a> (<a class="idref" href="Poly.html#f:202"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#x:203"><span class="id" title="variable">x</span></a>).<br/>
 </div>
@@ -1625,7 +1549,6 @@ Defining <span class="inlinecode"><span class="id" title="var">zero</span></span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.Church.zero" class="idref" href="#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:204" class="idref" href="#X:204"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:205" class="idref" href="#f:205"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:204"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:204"><span class="id" title="variable">X</span></a>) (<a id="x:206" class="idref" href="#x:206"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:204"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#x:206"><span class="id" title="variable">x</span></a>.<br/>
 </div>
@@ -1638,7 +1561,6 @@ More generally, a number <span class="inlinecode"><span class="id" title="var">n
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.Church.three" class="idref" href="#Exercises.Church.three"><span class="id" title="definition">three</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> := @<a class="idref" href="Poly.html#doit3times"><span class="id" title="definition">doit3times</span></a>.<br/>
 </div>
 
@@ -1728,7 +1650,6 @@ Complete the definitions of the following functions. Make sure
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.Church.exp" class="idref" href="#Exercises.Church.exp"><span class="id" title="definition">exp</span></a> (<a id="n:212" class="idref" href="#n:212"><span class="id" title="binder">n</span></a> <a id="m:213" class="idref" href="#m:213"><span class="id" title="binder">m</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a>) : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="Exercises.Church.exp_1" class="idref" href="#Exercises.Church.exp_1"><span class="id" title="definition">exp_1</span></a> : <a class="idref" href="Poly.html#Exercises.Church.exp"><span class="id" title="axiom">exp</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a>.<br/>
@@ -1742,10 +1663,9 @@ Complete the definitions of the following functions. Make sure
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises"><span class="id" title="module">Exercises</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:16&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:07&nbsp;*)</span><br/>
 </div>
 </div>
 

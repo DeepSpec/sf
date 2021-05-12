@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Merge<span class="subtitle">Merge Sort, With Specification and Proof of Correctness</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Perm.html#"><span class="id" title="library">Perm</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Sort.html#"><span class="id" title="library">Sort</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.funind.Recdef.html#"><span class="id" title="library">Recdef</span></a>. <span class="comment">(*&nbsp;needed&nbsp;for&nbsp;<span class="inlinecode"><span class="id" title="keyword">Function</span></span>&nbsp;feature&nbsp;*)</span><br/>
@@ -96,7 +93,6 @@ Mergesort is a well-known sorting algorithm, normally presented
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="split" class="idref" href="#split"><span class="id" title="definition">split</span></a> {<a id="X:1" class="idref" href="#X:1"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>} (<a id="l:2" class="idref" href="#l:2"><span class="id" title="binder">l</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:1"><span class="id" title="variable">X</span></a>) : (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:1"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:1"><span class="id" title="variable">X</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Merge.html#l:2"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a><br/>
@@ -119,7 +115,6 @@ Note: For generality, we made this function polymorphic, since the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="split_len_first_try" class="idref" href="#split_len_first_try"><span class="id" title="lemma">split_len_first_try</span></a>: <span class="id" title="keyword">∀</span> {<a id="X:7" class="idref" href="#X:7"><span class="id" title="binder">X</span></a>} (<a id="l:8" class="idref" href="#l:8"><span class="id" title="binder">l</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:7"><span class="id" title="variable">X</span></a>) (<a id="l<sub>1</sub>:9" class="idref" href="#l<sub>1</sub>:9"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:10" class="idref" href="#l<sub>2</sub>:10"><span class="id" title="binder">l<sub>2</sub></span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:7"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#split"><span class="id" title="definition">split</span></a> <a class="idref" href="Merge.html#l:8"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Merge.html#l<sub>1</sub>:9"><span class="id" title="variable">l<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="Merge.html#l<sub>2</sub>:10"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Merge.html#l<sub>1</sub>:9"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Merge.html#l:8"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a><br/>
@@ -148,7 +143,6 @@ The problem here is that the standard induction principle for lists
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list_ind2_principle" class="idref" href="#list_ind2_principle"><span class="id" title="definition">list_ind2_principle</span></a>:=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="A:11" class="idref" href="#A:11"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="P:12" class="idref" href="#P:12"><span class="id" title="binder">P</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#A:11"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#P:12"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -165,7 +159,6 @@ If we assume the correctness of this "non-standard" induction principle,
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="split_len'" class="idref" href="#split_len'"><span class="id" title="lemma">split_len'</span></a>: <a class="idref" href="Merge.html#list_ind2_principle"><span class="id" title="definition">list_ind2_principle</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> {<a id="X:18" class="idref" href="#X:18"><span class="id" title="binder">X</span></a>} (<a id="l:19" class="idref" href="#l:19"><span class="id" title="binder">l</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:18"><span class="id" title="variable">X</span></a>) (<a id="l<sub>1</sub>:20" class="idref" href="#l<sub>1</sub>:20"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:21" class="idref" href="#l<sub>2</sub>:21"><span class="id" title="binder">l<sub>2</sub></span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:18"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#split"><span class="id" title="definition">split</span></a> <a class="idref" href="Merge.html#l:19"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Merge.html#l<sub>1</sub>:20"><span class="id" title="variable">l<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="Merge.html#l<sub>2</sub>:21"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -189,7 +182,6 @@ We still need to prove <span class="inlinecode"><span class="id" title="var">lis
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="list_ind2" class="idref" href="#list_ind2"><span class="id" title="definition">list_ind2</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="A:22" class="idref" href="#A:22"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="P:23" class="idref" href="#P:23"><span class="id" title="binder">P</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#A:22"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#P:23"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -225,7 +217,6 @@ Here, the <span class="inlinecode"><span class="id" title="keyword">fix</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="split_len" class="idref" href="#split_len"><span class="id" title="lemma">split_len</span></a>: <span class="id" title="keyword">∀</span> {<a id="X:41" class="idref" href="#X:41"><span class="id" title="binder">X</span></a>} (<a id="l:42" class="idref" href="#l:42"><span class="id" title="binder">l</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:41"><span class="id" title="variable">X</span></a>) (<a id="l<sub>1</sub>:43" class="idref" href="#l<sub>1</sub>:43"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:44" class="idref" href="#l<sub>2</sub>:44"><span class="id" title="binder">l<sub>2</sub></span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:41"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#split"><span class="id" title="definition">split</span></a> <a class="idref" href="Merge.html#l:42"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Merge.html#l<sub>1</sub>:43"><span class="id" title="variable">l<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="Merge.html#l<sub>2</sub>:44"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Merge.html#l<sub>1</sub>:43"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Merge.html#l:42"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a><br/>
@@ -245,7 +236,6 @@ Here, the <span class="inlinecode"><span class="id" title="keyword">fix</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="split_perm" class="idref" href="#split_perm"><span class="id" title="lemma">split_perm</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:45" class="idref" href="#X:45"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>} (<a id="l:46" class="idref" href="#l:46"><span class="id" title="binder">l</span></a> <a id="l<sub>1</sub>:47" class="idref" href="#l<sub>1</sub>:47"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:48" class="idref" href="#l<sub>2</sub>:48"><span class="id" title="binder">l<sub>2</sub></span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Merge.html#X:45"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#split"><span class="id" title="definition">split</span></a> <a class="idref" href="Merge.html#l:46"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Merge.html#l<sub>1</sub>:47"><span class="id" title="variable">l<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="Merge.html#l<sub>2</sub>:48"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Sorting.Permutation.html#Permutation"><span class="id" title="inductive">Permutation</span></a> <a class="idref" href="Merge.html#l:46"><span class="id" title="variable">l</span></a> (<a class="idref" href="Merge.html#l<sub>1</sub>:47"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Merge.html#l<sub>2</sub>:48"><span class="id" title="variable">l<sub>2</sub></span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -317,7 +307,6 @@ Here, the <span class="inlinecode"><span class="id" title="keyword">fix</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="merge" class="idref" href="#merge"><span class="id" title="definition">merge</span></a> <a id="l<sub>1</sub>:49" class="idref" href="#l<sub>1</sub>:49"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:50" class="idref" href="#l<sub>2</sub>:50"><span class="id" title="binder">l<sub>2</sub></span></a>  {<span class="id" title="keyword">struct</span> <span class="id" title="var">l<sub>1</sub></span>} :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">fix</span> <a id="merge_aux:56" class="idref" href="#merge_aux:56"><span class="id" title="binder">merge_aux</span></a> <a id="l<sub>2</sub>:52" class="idref" href="#l<sub>2</sub>:52"><span class="id" title="binder">l<sub>2</sub></span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Merge.html#l<sub>1</sub>:49"><span class="id" title="variable">l<sub>1</sub></span></a>, <a class="idref" href="Merge.html#l<sub>2</sub>:52"><span class="id" title="variable">l<sub>2</sub></span></a> <span class="id" title="keyword">with</span><br/>
@@ -351,7 +340,6 @@ Coq accepts the outer definition because it is structurally
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="Merge.html#merge"><span class="id" title="definition">merge</span></a>.<br/>
 </div>
 
@@ -385,7 +373,6 @@ Coq accepts the outer definition because it is structurally
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="merge2" class="idref" href="#merge2"><span class="id" title="lemma">merge2</span></a> : <span class="id" title="keyword">∀</span> (<a id="x<sub>1</sub>:57" class="idref" href="#x<sub>1</sub>:57"><span class="id" title="binder">x<sub>1</sub></span></a> <a id="x<sub>2</sub>:58" class="idref" href="#x<sub>2</sub>:58"><span class="id" title="binder">x<sub>2</sub></span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <a id="r<sub>1</sub>:59" class="idref" href="#r<sub>1</sub>:59"><span class="id" title="binder">r<sub>1</sub></span></a> <a id="r<sub>2</sub>:60" class="idref" href="#r<sub>2</sub>:60"><span class="id" title="binder">r<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#x<sub>1</sub>:57"><span class="id" title="variable">x<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Merge.html#x<sub>2</sub>:58"><span class="id" title="variable">x<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Merge.html#merge"><span class="id" title="definition">merge</span></a> (<a class="idref" href="Merge.html#x<sub>1</sub>:57"><span class="id" title="variable">x<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="Merge.html#r<sub>1</sub>:59"><span class="id" title="variable">r<sub>1</sub></span></a>) (<a class="idref" href="Merge.html#x<sub>2</sub>:58"><span class="id" title="variable">x<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="Merge.html#r<sub>2</sub>:60"><span class="id" title="variable">r<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
@@ -517,7 +504,6 @@ Morals:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Function</span> <span class="id" title="var">mergesort</span> (<a id="l:75" class="idref" href="#l:75"><span class="id" title="binder">l</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) {<span class="id" title="keyword">measure</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <span class="id" title="var">l</span>} :  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Merge.html#l:62"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><br/>
@@ -539,7 +525,6 @@ Morals:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;recursive&nbsp;call&nbsp;on&nbsp;l<sub>1</sub>&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
@@ -569,7 +554,6 @@ Notice that the <span class="inlinecode"><span class="id" title="keyword">Proof<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Merge.html#mergesort_equation"><span class="id" title="lemma">mergesort_equation</span></a>.<br/>
 </div>
 
@@ -606,7 +590,6 @@ Notice that the <span class="inlinecode"><span class="id" title="keyword">Proof<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Merge.html#mergesort_ind"><span class="id" title="definition">mergesort_ind</span></a>.<br/>
 </div>
 
@@ -754,7 +737,6 @@ Notice that the <span class="inlinecode"><span class="id" title="keyword">Proof<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="mergesort_correct" class="idref" href="#mergesort_correct"><span class="id" title="lemma">mergesort_correct</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Sort.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a> <a class="idref" href="Merge.html#mergesort"><span class="id" title="lemma">mergesort</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -766,8 +748,7 @@ Notice that the <span class="inlinecode"><span class="id" title="keyword">Proof<
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:23&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:14&nbsp;*)</span><br/>
 </div>
 </div>
 

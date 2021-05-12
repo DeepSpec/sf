@@ -30,13 +30,7 @@
 
 <h1 class="libtitle">TImp: Case Study<span class="subtitle">a Typed Imperative Language</span></h1>
 
-<div class="code">
-</div>
 
-<div class="code">
-
-<br/><hr class='doublespaceincode'/>
-</div>
 
 <div class="doc">
 Having covered the basics of QuickChick in the previous
@@ -96,7 +90,6 @@ Having covered the basics of QuickChick in the previous
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="id" class="idref" href="#id"><span class="id" title="inductive">id</span></a> :=<br/>
 |  <a id="Id" class="idref" href="#Id"><span class="id" title="constructor">Id</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#id:1"><span class="id" title="inductive">id</span></a>.<br/>
 </div>
@@ -113,7 +106,6 @@ We will need one identifier-specific operation, <span class="inlinecode"><span c
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="max_elt" class="idref" href="#max_elt"><span class="id" title="definition">max_elt</span></a> (<a id="al:3" class="idref" href="#al:3"><span class="id" title="binder">al</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#al:3"><span class="id" title="variable">al</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ 0 <br/>
@@ -139,7 +131,6 @@ One advantage of using natural numbers as identifiers is that
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="show_id" class="idref" href="#show_id"><span class="id" title="instance">show_id</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a> :=<br/>
 &nbsp;&nbsp;{ <span class="id" title="method">show</span> <a id="x:9" class="idref" href="#x:9"><span class="id" title="binder">x</span></a> := <span class="id" title="keyword">let</span> '(<a class="idref" href="TImp.html#Id"><span class="id" title="constructor">Id</span></a> <span class="id" title="var">n</span>) := <a class="idref" href="TImp.html#x:9"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">in</span> <span class="id" title="method">show</span> <span class="id" title="var">n</span> }.<br/>
 </div>
@@ -155,7 +146,6 @@ To generate identifiers for TImp, we will not just generate
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="get_fresh_ids" class="idref" href="#get_fresh_ids"><span class="id" title="definition">get_fresh_ids</span></a> <a id="n:11" class="idref" href="#n:11"><span class="id" title="binder">n</span></a> <a id="l:12" class="idref" href="#l:12"><span class="id" title="binder">l</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#n:11"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| 0 ⇒ <a class="idref" href="TImp.html#l:12"><span class="id" title="variable">l</span></a><br/>
@@ -170,7 +160,6 @@ To generate identifiers for TImp, we will not just generate
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -198,7 +187,6 @@ To generate identifiers for TImp, we will not just generate
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="ty" class="idref" href="#ty"><span class="id" title="inductive">ty</span></a> := <a id="TBool" class="idref" href="#TBool"><span class="id" title="constructor">TBool</span></a> | <a id="TNat" class="idref" href="#TNat"><span class="id" title="constructor">TNat</span></a>.<br/>
 </div>
 
@@ -219,7 +207,6 @@ That is, TImp has two kinds of values: booleans and natural
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Derive</span> (<span class="id" title="var">Arbitrary</span>, <span class="id" title="keyword">Show</span>) <span class="id" title="keyword">for</span> <span class="id" title="var">ty</span>.<br/>
 <span class="comment">(*&nbsp;==&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;GenSizedty&nbsp;is&nbsp;defined<br/>
@@ -244,7 +231,6 @@ Decidable equality instances are not yet derived fully
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="eq_dec_ty" class="idref" href="#eq_dec_ty"><span class="id" title="instance">eq_dec_ty</span></a> (<a id="x:33" class="idref" href="#x:33"><span class="id" title="binder">x</span></a> <a id="y:34" class="idref" href="#y:34"><span class="id" title="binder">y</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#x:33"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#y:34"><span class="id" title="variable">y</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="var">dec_eq</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
@@ -288,7 +274,6 @@ Decidable equality instances are not yet derived fully
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Map" class="idref" href="#Map"><span class="id" title="definition">Map</span></a> <a id="A:35" class="idref" href="#A:35"><span class="id" title="binder">A</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="TImp.html#A:35"><span class="id" title="variable">A</span></a>).<br/>
 </div>
 
@@ -297,7 +282,6 @@ The <span class="inlinecode"><span class="id" title="var">empty</span></span> ma
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="map_empty" class="idref" href="#map_empty"><span class="id" title="definition">map_empty</span></a> {<a id="A:36" class="idref" href="#A:36"><span class="id" title="binder">A</span></a>} : <a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <a class="idref" href="TImp.html#A:36"><span class="id" title="variable">A</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>.<br/>
 </div>
 
@@ -308,7 +292,6 @@ To <span class="inlinecode"><span class="id" title="var">get</span></span> the b
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="map_get" class="idref" href="#map_get"><span class="id" title="definition">map_get</span></a> {<a id="A:37" class="idref" href="#A:37"><span class="id" title="binder">A</span></a>} (<a id="m:38" class="idref" href="#m:38"><span class="id" title="binder">m</span></a> : <a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <a class="idref" href="TImp.html#A:37"><span class="id" title="variable">A</span></a>) <a id="x:39" class="idref" href="#x:39"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:37"><span class="id" title="variable">A</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#m:38"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
@@ -322,7 +305,6 @@ To <span class="inlinecode"><span class="id" title="tactic">set</span></span> th
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="map_set" class="idref" href="#map_set"><span class="id" title="definition">map_set</span></a> {<a id="A:42" class="idref" href="#A:42"><span class="id" title="binder">A</span></a>} (<a id="m:43" class="idref" href="#m:43"><span class="id" title="binder">m</span></a>:<a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <a class="idref" href="TImp.html#A:42"><span class="id" title="variable">A</span></a>) (<a id="x:44" class="idref" href="#x:44"><span class="id" title="binder">x</span></a>:<a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a>) (<a id="v:45" class="idref" href="#v:45"><span class="id" title="binder">v</span></a>:<a class="idref" href="TImp.html#A:42"><span class="id" title="variable">A</span></a>) : <a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <a class="idref" href="TImp.html#A:42"><span class="id" title="variable">A</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="TImp.html#x:44"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="TImp.html#v:45"><span class="id" title="variable">v</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="TImp.html#m:43"><span class="id" title="variable">m</span></a>.<br/>
 </div>
 
@@ -344,7 +326,6 @@ We next introduce a simple inductive relation, <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="bound_to" class="idref" href="#bound_to"><span class="id" title="inductive">bound_to</span></a> {<a id="A:50" class="idref" href="#A:50"><span class="id" title="binder">A</span></a>} : <a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <span class="id" title="var">A</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="var">A</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="Bind" class="idref" href="#Bind"><span class="id" title="constructor">Bind</span></a> : <span class="id" title="keyword">∀</span> <a id="x:53" class="idref" href="#x:53"><span class="id" title="binder">x</span></a> <a id="m:54" class="idref" href="#m:54"><span class="id" title="binder">m</span></a> <a id="a:55" class="idref" href="#a:55"><span class="id" title="binder">a</span></a>, <a class="idref" href="TImp.html#map_get"><span class="id" title="definition">map_get</span></a> <a class="idref" href="TImp.html#m:54"><span class="id" title="variable">m</span></a> <a class="idref" href="TImp.html#x:53"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="TImp.html#a:55"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#bound_to:51"><span class="id" title="inductive">bound_to</span></a> <a class="idref" href="TImp.html#m:54"><span class="id" title="variable">m</span></a> <a class="idref" href="TImp.html#x:53"><span class="id" title="variable">x</span></a> <a class="idref" href="TImp.html#a:55"><span class="id" title="variable">a</span></a>.<br/>
 </div>
@@ -362,7 +343,6 @@ We next introduce a simple inductive relation, <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="dec_bound_to" class="idref" href="#dec_bound_to"><span class="id" title="instance">dec_bound_to</span></a> {<a id="A:56" class="idref" href="#A:56"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} <a id="Gamma:57" class="idref" href="#Gamma:57"><span class="id" title="binder">Gamma</span></a> <a id="x:58" class="idref" href="#x:58"><span class="id" title="binder">x</span></a> (<a id="T:59" class="idref" href="#T:59"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#A:56"><span class="id" title="variable">A</span></a>) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{<a id="D:62" class="idref" href="#D:62"><span class="id" title="binder">D</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:60" class="idref" href="#x:60"><span class="id" title="binder">x</span></a> <a id="y:61" class="idref" href="#y:61"><span class="id" title="binder">y</span></a> : <a class="idref" href="TImp.html#A:56"><span class="id" title="variable">A</span></a>), <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#x:60"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#y:61"><span class="id" title="variable">y</span></a>)} <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#bound_to"><span class="id" title="inductive">bound_to</span></a> <a class="idref" href="TImp.html#Gamma:57"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#x:58"><span class="id" title="variable">x</span></a> <a class="idref" href="TImp.html#T:59"><span class="id" title="variable">T</span></a>).<br/>
@@ -380,7 +360,6 @@ After unfolding <span class="inlinecode"><span class="id" title="var">decidable<
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">D</span> <span class="id" title="var">a</span> <span class="id" title="var">T</span>) <span class="id" title="keyword">as</span> [[<span class="id" title="var">Eq</span> | <span class="id" title="var">NEq</span>]]; <span class="id" title="tactic">subst</span>.<br/>
 </div>
 
@@ -390,7 +369,6 @@ At this point, the first goal can be immediately decided positevely
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">left</span>. <span class="id" title="tactic">constructor</span>. <span class="id" title="tactic">auto</span>.<br/>
 </div>
 
@@ -399,7 +377,6 @@ In the second subgoal, we can show that <span class="inlinecode"><span class="id
 </div>
 <div class="code">
 
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">right</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">Contra</span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">Contra</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">Contra</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">congruence</span>.<br/>
 </div>
@@ -410,7 +387,6 @@ Both of these tactic patterns are very common in non-trival <span class="inlinec
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Abort</span>.<br/>
 </div>
 
@@ -420,7 +396,6 @@ A lot of the time, we can immediately decide a property positivly
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">solve_left</span>  := <span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [<span class="id" title="tactic">left</span>; <span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>].<br/>
 </div>
 
@@ -431,7 +406,6 @@ Much of the time, we can also immediately decide that a property
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">solve_right</span> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">Contra</span> := <span class="id" title="tactic">fresh</span> "Contra" <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [<span class="id" title="tactic">right</span>; <span class="id" title="tactic">intro</span> <span class="id" title="var">Contra</span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">Contra</span>; <span class="id" title="tactic">subst</span>; <br/>
@@ -444,7 +418,6 @@ We group both in a single tactic, which does nothing at all if
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">solve_sum</span> := <span class="id" title="var">solve_left</span>; <span class="id" title="var">solve_right</span>.<br/>
 </div>
 
@@ -453,7 +426,6 @@ We can now prove the <span class="inlinecode"><span class="id" title="var">Dec</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="dec_bound_to" class="idref" href="#dec_bound_to"><span class="id" title="instance">dec_bound_to</span></a> {<a id="A:63" class="idref" href="#A:63"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} <a id="Gamma:64" class="idref" href="#Gamma:64"><span class="id" title="binder">Gamma</span></a> <a id="x:65" class="idref" href="#x:65"><span class="id" title="binder">x</span></a> (<a id="T:66" class="idref" href="#T:66"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#A:63"><span class="id" title="variable">A</span></a>) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{<a id="D:69" class="idref" href="#D:69"><span class="id" title="binder">D</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:67" class="idref" href="#x:67"><span class="id" title="binder">x</span></a> <a id="y:68" class="idref" href="#y:68"><span class="id" title="binder">y</span></a> : <a class="idref" href="TImp.html#A:63"><span class="id" title="variable">A</span></a>), <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#x:67"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#y:68"><span class="id" title="variable">y</span></a>)}<br/>
 &nbsp;&nbsp;: <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#bound_to"><span class="id" title="inductive">bound_to</span></a> <a class="idref" href="TImp.html#Gamma:64"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#x:65"><span class="id" title="variable">x</span></a> <a class="idref" href="TImp.html#T:66"><span class="id" title="variable">T</span></a>).<br/>
@@ -476,7 +448,6 @@ We can now prove the <span class="inlinecode"><span class="id" title="var">Dec</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="context" class="idref" href="#context"><span class="id" title="definition">context</span></a> := <a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>.<br/>
 </div>
 
@@ -499,7 +470,6 @@ Given a context <span class="inlinecode"><span class="id" title="var">Gamma</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="gen_typed_id_from_context" class="idref" href="#gen_typed_id_from_context"><span class="id" title="definition">gen_typed_id_from_context</span></a> (<a id="Gamma:70" class="idref" href="#Gamma:70"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) (<a id="T:71" class="idref" href="#T:71"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="axiom">oneOf_</span> (<span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>) <br/>
@@ -520,7 +490,6 @@ We also need to generate typing contexts.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="gen_context" class="idref" href="#gen_context"><span class="id" title="definition">gen_context</span></a> (<a id="n:78" class="idref" href="#n:78"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="axiom">G</span> <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="domain:79" class="idref" href="#domain:79"><span class="id" title="binder">domain</span></a> := <a class="idref" href="TImp.html#get_fresh_ids"><span class="id" title="definition">get_fresh_ids</span></a> <a class="idref" href="TImp.html#n:78"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;<a id="range:80" class="idref" href="#range:80"><span class="id" title="binder">range</span></a> <span class="id" title="notation">&lt;-</span> <span class="id" title="axiom">vectorOf</span> <a class="idref" href="TImp.html#n:78"><span class="id" title="variable">n</span></a> <span class="id" title="method">arbitrary</span> <span class="id" title="notation">;;</span><br/>
@@ -541,7 +510,6 @@ We also need to generate typing contexts.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="exp" class="idref" href="#exp"><span class="id" title="inductive">exp</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="EVar" class="idref" href="#EVar"><span class="id" title="constructor">EVar</span></a> : <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp:81"><span class="id" title="inductive">exp</span></a><br/>
 &nbsp;&nbsp;| <a id="ENum" class="idref" href="#ENum"><span class="id" title="constructor">ENum</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp:81"><span class="id" title="inductive">exp</span></a><br/>
@@ -561,7 +529,6 @@ To print expressions we derive a <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Derive</span> <span class="id" title="keyword">Show</span> <span class="id" title="keyword">for</span> <span class="id" title="var">exp</span>.<br/>
 </div>
 
@@ -576,7 +543,6 @@ To print expressions we derive a <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot;Gamma '|&#x22A2;' e '\IN' T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="has_type" class="idref" href="#has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> := <br/>
 | <a id="Ty_Var" class="idref" href="#Ty_Var"><span class="id" title="constructor">Ty_Var</span></a> : <span class="id" title="keyword">∀</span> <a id="x:90" class="idref" href="#x:90"><span class="id" title="binder">x</span></a> <a id="T:91" class="idref" href="#T:91"><span class="id" title="binder">T</span></a> <a id="Gamma:92" class="idref" href="#Gamma:92"><span class="id" title="binder">Gamma</span></a>, <br/>
@@ -648,7 +614,6 @@ While the typing relation is almost entirely standard, there is a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">solve_inductives</span> <span class="id" title="var">Gamma</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">repeat</span> (<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="var">IH</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>, <span class="id" title="var">_</span> &#x22A2; <span class="id" title="var">_</span> ] ⇒<br/>
@@ -667,7 +632,6 @@ Typing in TImp is decidable: given an expression <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="dec_has_type" class="idref" href="#dec_has_type"><span class="id" title="instance">dec_has_type</span></a> (<a id="e:117" class="idref" href="#e:117"><span class="id" title="binder">e</span></a> : <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) (<a id="Gamma:118" class="idref" href="#Gamma:118"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) (<a id="T:119" class="idref" href="#T:119"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) <br/>
 &nbsp;&nbsp;: <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#Gamma:118"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#5f71ae0595ded9728b8c49a5971f4d<sub>08</sub>"><span class="id" title="notation">|&#x22A2;</span></a> <a class="idref" href="TImp.html#e:117"><span class="id" title="variable">e</span></a> <a class="idref" href="TImp.html#5f71ae0595ded9728b8c49a5971f4d<sub>08</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="TImp.html#5f71ae0595ded9728b8c49a5971f4d<sub>08</sub>"><span class="id" title="notation">IN</span></a> <a class="idref" href="TImp.html#T:119"><span class="id" title="variable">T</span></a>).<br/>
 <div class="togglescript" id="proofcontrol2" onclick="toggleDisplay('proof2');toggleDisplay('proofcontrol2')"><span class="show"></span></div>
@@ -704,7 +668,6 @@ Typing in TImp is decidable: given an expression <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -736,7 +699,6 @@ Typing in TImp is decidable: given an expression <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="bindGenOpt" class="idref" href="#bindGenOpt"><span class="id" title="definition">bindGenOpt</span></a> {<a id="A:120" class="idref" href="#A:120"><span class="id" title="binder">A</span></a> <a id="B:121" class="idref" href="#B:121"><span class="id" title="binder">B</span></a> : <span class="id" title="keyword">Type</span>} <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="gma:122" class="idref" href="#gma:122"><span class="id" title="binder">gma</span></a> : <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:120"><span class="id" title="variable">A</span></a>)) (<a id="k:123" class="idref" href="#k:123"><span class="id" title="binder">k</span></a> : <a class="idref" href="TImp.html#A:120"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#B:121"><span class="id" title="variable">B</span></a>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#B:121"><span class="id" title="variable">B</span></a>) :=<br/>
@@ -753,7 +715,6 @@ This pattern is common enough that QuickChick introduces explicit monadic
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Print</span> <span class="id" title="definition">GOpt</span>.<br/>
 </div>
 
@@ -766,7 +727,6 @@ This pattern is common enough that QuickChick introduces explicit monadic
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> <span class="id" title="instance">Monad_GOpt</span>.<br/>
 </div>
 
@@ -792,7 +752,6 @@ This pattern is common enough that QuickChick introduces explicit monadic
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TypePlayground1" class="idref" href="#TypePlayground1"><span class="id" title="module">TypePlayground1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="TypePlayground1.has_type" class="idref" href="#TypePlayground1.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> := <br/>
 &nbsp;&nbsp;| <a id="TypePlayground1.Ty_Var" class="idref" href="#TypePlayground1.Ty_Var"><span class="id" title="constructor">Ty_Var</span></a> : <span class="id" title="keyword">∀</span> <a id="x:128" class="idref" href="#x:128"><span class="id" title="binder">x</span></a> <a id="T:129" class="idref" href="#T:129"><span class="id" title="binder">T</span></a> <a id="Gamma:130" class="idref" href="#Gamma:130"><span class="id" title="binder">Gamma</span></a>, <br/>
@@ -810,7 +769,6 @@ To generate <span class="inlinecode"><span class="id" title="var">e</span></span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="gen_typed_evar" class="idref" href="#gen_typed_evar"><span class="id" title="definition">gen_typed_evar</span></a> (<a id="Gamma:131" class="idref" href="#Gamma:131"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) (<a id="T:132" class="idref" href="#T:132"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) : <span class="id" title="definition">GOpt</span> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> :=<br/>
 &nbsp;&nbsp;<a id="x:133" class="idref" href="#x:133"><span class="id" title="binder">x</span></a> <span class="id" title="notation">&lt;-</span> <a class="idref" href="TImp.html#gen_typed_id_from_context"><span class="id" title="definition">gen_typed_id_from_context</span></a> <a class="idref" href="TImp.html#Gamma:131"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#T:132"><span class="id" title="variable">T</span></a><span class="id" title="notation">;;</span><br/>
 &nbsp;&nbsp;<span class="id" title="method">ret</span> (<a class="idref" href="TImp.html#EVar"><span class="id" title="constructor">EVar</span></a> <a class="idref" href="TImp.html#x:133"><span class="id" title="variable">x</span></a>).<br/>
@@ -827,7 +785,6 @@ To generate <span class="inlinecode"><span class="id" title="var">e</span></span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TypePlayground2" class="idref" href="#TypePlayground2"><span class="id" title="module">TypePlayground2</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="TypePlayground2.has_type" class="idref" href="#TypePlayground2.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 | <a id="TypePlayground2.Ty_Var" class="idref" href="#TypePlayground2.Ty_Var"><span class="id" title="constructor">Ty_Var</span></a> : <span class="id" title="keyword">∀</span> <a id="x:136" class="idref" href="#x:136"><span class="id" title="binder">x</span></a> <a id="T:137" class="idref" href="#T:137"><span class="id" title="binder">T</span></a> <a id="Gamma:138" class="idref" href="#Gamma:138"><span class="id" title="binder">Gamma</span></a>, <br/>
@@ -848,7 +805,6 @@ We can already generate values satisfying <span class="inlinecode"><span class="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="base'" class="idref" href="#base'"><span class="id" title="definition">base'</span></a> <a id="Gamma:143" class="idref" href="#Gamma:143"><span class="id" title="binder">Gamma</span></a> <a id="T:144" class="idref" href="#T:144"><span class="id" title="binder">T</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<span class="id" title="definition">GOpt</span> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) := <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="TImp.html#gen_typed_evar"><span class="id" title="definition">gen_typed_evar</span></a> <a class="idref" href="TImp.html#Gamma:143"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#T:144"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#T:144"><span class="id" title="variable">T</span></a> <span class="id" title="keyword">with</span> <br/>
@@ -881,7 +837,6 @@ We now need to go from a list of (optional) generators to a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="base" class="idref" href="#base"><span class="id" title="definition">base</span></a> <a id="Gamma:147" class="idref" href="#Gamma:147"><span class="id" title="binder">Gamma</span></a> <a id="T:148" class="idref" href="#T:148"><span class="id" title="binder">T</span></a> := <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="TImp.html#gen_typed_evar"><span class="id" title="definition">gen_typed_evar</span></a> <a class="idref" href="TImp.html#Gamma:147"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#T:148"><span class="id" title="variable">T</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#T:148"><span class="id" title="variable">T</span></a> <span class="id" title="keyword">with</span> <br/>
@@ -898,7 +853,6 @@ To see how we handle recursive rules, let's consider a third
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="TypePlayground3" class="idref" href="#TypePlayground3"><span class="id" title="module">TypePlayground3</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="TypePlayground3.has_type" class="idref" href="#TypePlayground3.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;| <a id="TypePlayground3.Ty_Var" class="idref" href="#TypePlayground3.Ty_Var"><span class="id" title="constructor">Ty_Var</span></a> : <span class="id" title="keyword">∀</span> <a id="x:155" class="idref" href="#x:155"><span class="id" title="binder">x</span></a> <a id="T:156" class="idref" href="#T:156"><span class="id" title="binder">T</span></a> <a id="Gamma:157" class="idref" href="#Gamma:157"><span class="id" title="binder">Gamma</span></a>, <br/>
@@ -920,7 +874,6 @@ Typing derivations involving <span class="inlinecode"><span class="id" title="va
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="gen_has_type_3" class="idref" href="#gen_has_type_3"><span class="id" title="definition">gen_has_type_3</span></a> <a id="size:161" class="idref" href="#size:161"><span class="id" title="binder">size</span></a> <a id="Gamma:162" class="idref" href="#Gamma:162"><span class="id" title="binder">Gamma</span></a> <a id="T:163" class="idref" href="#T:163"><span class="id" title="binder">T</span></a> : <span class="id" title="definition">GOpt</span> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#size:161"><span class="id" title="variable">size</span></a> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="TImp.html#gen_typed_evar"><span class="id" title="definition">gen_typed_evar</span></a> <a class="idref" href="TImp.html#Gamma:162"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#T:163"><span class="id" title="variable">T</span></a><br/>
@@ -943,7 +896,6 @@ Putting all this together, we get the full generator for
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="gen_exp_typed_sized" class="idref" href="#gen_exp_typed_sized"><span class="id" title="definition">gen_exp_typed_sized</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="size:169" class="idref" href="#size:169"><span class="id" title="binder">size</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="Gamma:170" class="idref" href="#Gamma:170"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) (<a id="T:171" class="idref" href="#T:171"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="definition">GOpt</span> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> :=<br/>
@@ -993,7 +945,6 @@ When writing such complex generators, it's good to have some tests
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="gen_typed_has_type" class="idref" href="#gen_typed_has_type"><span class="id" title="definition">gen_typed_has_type</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="num_vars:191" class="idref" href="#num_vars:191"><span class="id" title="binder">num_vars</span></a> := 4 <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="top_level_size:192" class="idref" href="#top_level_size:192"><span class="id" title="binder">top_level_size</span></a> := 3 <span class="id" title="keyword">in</span> <br/>
@@ -1024,7 +975,6 @@ When writing such complex generators, it's good to have some tests
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="value" class="idref" href="#value"><span class="id" title="inductive">value</span></a> := <a id="VNat" class="idref" href="#VNat"><span class="id" title="constructor">VNat</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#value:197"><span class="id" title="inductive">value</span></a> | <a id="VBool" class="idref" href="#VBool"><span class="id" title="constructor">VBool</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#value:197"><span class="id" title="inductive">value</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="var">Derive</span> <span class="id" title="keyword">Show</span> <span class="id" title="keyword">for</span> <span class="id" title="var">value</span>.<br/>
 </div>
@@ -1035,7 +985,6 @@ We can also quickly define a typing relation for values, a Dec instance
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="has_type_value" class="idref" href="#has_type_value"><span class="id" title="inductive">has_type_value</span></a> : <a class="idref" href="TImp.html#value"><span class="id" title="inductive">value</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="TyVNat" class="idref" href="#TyVNat"><span class="id" title="constructor">TyVNat</span></a>  : <span class="id" title="keyword">∀</span> <a id="n:206" class="idref" href="#n:206"><span class="id" title="binder">n</span></a>, <a class="idref" href="TImp.html#has_type_value:204"><span class="id" title="inductive">has_type_value</span></a> (<a class="idref" href="TImp.html#VNat"><span class="id" title="constructor">VNat</span></a>  <a class="idref" href="TImp.html#n:206"><span class="id" title="variable">n</span></a>) <a class="idref" href="TImp.html#TNat"><span class="id" title="constructor">TNat</span></a><br/>
 &nbsp;&nbsp;| <a id="TyVBool" class="idref" href="#TyVBool"><span class="id" title="constructor">TyVBool</span></a> : <span class="id" title="keyword">∀</span> <a id="b:207" class="idref" href="#b:207"><span class="id" title="binder">b</span></a>, <a class="idref" href="TImp.html#has_type_value:204"><span class="id" title="inductive">has_type_value</span></a> (<a class="idref" href="TImp.html#VBool"><span class="id" title="constructor">VBool</span></a> <a class="idref" href="TImp.html#b:207"><span class="id" title="variable">b</span></a>) <a class="idref" href="TImp.html#TBool"><span class="id" title="constructor">TBool</span></a>.<br/><hr class='doublespaceincode'/>
@@ -1064,7 +1013,6 @@ We can also quickly define a typing relation for values, a Dec instance
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="state" class="idref" href="#state"><span class="id" title="definition">state</span></a> := <a class="idref" href="TImp.html#Map"><span class="id" title="definition">Map</span></a> <a class="idref" href="TImp.html#value"><span class="id" title="inductive">value</span></a>.<br/>
 </div>
 
@@ -1083,7 +1031,6 @@ We introduce an inductive relation that specifies when a state is
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="well_typed_state" class="idref" href="#well_typed_state"><span class="id" title="inductive">well_typed_state</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#state"><span class="id" title="definition">state</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 | <a id="TS_Empty" class="idref" href="#TS_Empty"><span class="id" title="constructor">TS_Empty</span></a> : <a class="idref" href="TImp.html#well_typed_state:214"><span class="id" title="inductive">well_typed_state</span></a> <a class="idref" href="TImp.html#map_empty"><span class="id" title="definition">map_empty</span></a> <a class="idref" href="TImp.html#map_empty"><span class="id" title="definition">map_empty</span></a><br/>
 | <a id="TS_Elem" class="idref" href="#TS_Elem"><span class="id" title="constructor">TS_Elem</span></a>  : <span class="id" title="keyword">∀</span> <a id="x:216" class="idref" href="#x:216"><span class="id" title="binder">x</span></a> <a id="v:217" class="idref" href="#v:217"><span class="id" title="binder">v</span></a> <a id="T:218" class="idref" href="#T:218"><span class="id" title="binder">T</span></a> <a id="st:219" class="idref" href="#st:219"><span class="id" title="binder">st</span></a> <a id="Gamma:220" class="idref" href="#Gamma:220"><span class="id" title="binder">Gamma</span></a>, <br/>
@@ -1122,7 +1069,6 @@ We introduce an inductive relation that specifies when a state is
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="eval" class="idref" href="#eval"><span class="id" title="definition">eval</span></a> (<a id="st:228" class="idref" href="#st:228"><span class="id" title="binder">st</span></a> : <a class="idref" href="TImp.html#state"><span class="id" title="definition">state</span></a>) (<a id="e:229" class="idref" href="#e:229"><span class="id" title="binder">e</span></a> : <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#value"><span class="id" title="inductive">value</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#e:229"><span class="id" title="variable">e</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="TImp.html#EVar"><span class="id" title="constructor">EVar</span></a> <span class="id" title="var">x</span> ⇒ <a class="idref" href="TImp.html#map_get"><span class="id" title="definition">map_get</span></a> <a class="idref" href="TImp.html#st:228"><span class="id" title="variable">st</span></a> <span class="id" title="var">x</span><br/>
@@ -1181,7 +1127,6 @@ We will see in a later chapter (<a href="QuickChickTool.html"><span class="inlin
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="isNone" class="idref" href="#isNone"><span class="id" title="definition">isNone</span></a> {<a id="A:232" class="idref" href="#A:232"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} (<a id="m:233" class="idref" href="#m:233"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:232"><span class="id" title="variable">A</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#m:233"><span class="id" title="variable">m</span></a> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
@@ -1197,7 +1142,6 @@ To test this property, we construct an appropriate checker:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="expression_soundness_exec" class="idref" href="#expression_soundness_exec"><span class="id" title="definition">expression_soundness_exec</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="num_vars:240" class="idref" href="#num_vars:240"><span class="id" title="binder">num_vars</span></a> := 4 <span class="id" title="keyword">in</span> <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="top_level_size:241" class="idref" href="#top_level_size:241"><span class="id" title="binder">top_level_size</span></a> := 3 <span class="id" title="keyword">in</span><br/>
@@ -1236,7 +1180,6 @@ To test this property, we construct an appropriate checker:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Derive</span> <span class="id" title="var">Shrink</span> <span class="id" title="keyword">for</span> <span class="id" title="var">exp</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="expression_soundness_exec_firstshrink" class="idref" href="#expression_soundness_exec_firstshrink"><span class="id" title="definition">expression_soundness_exec_firstshrink</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="num_vars:267" class="idref" href="#num_vars:267"><span class="id" title="binder">num_vars</span></a> := 4 <span class="id" title="keyword">in</span> <br/>
@@ -1304,7 +1247,6 @@ To test this property, we construct an appropriate checker:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="shrink_base" class="idref" href="#shrink_base"><span class="id" title="definition">shrink_base</span></a> (<a id="e:274" class="idref" href="#e:274"><span class="id" title="binder">e</span></a> : <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#e:274"><span class="id" title="variable">e</span></a> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;| <a class="idref" href="TImp.html#ENum"><span class="id" title="constructor">ENum</span></a> <span class="id" title="var">n</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <a class="idref" href="TImp.html#ENum"><span class="id" title="constructor">ENum</span></a> (<span class="id" title="method">shrink</span> <span class="id" title="var">n</span>)<br/>
@@ -1323,7 +1265,6 @@ The next case, <span class="inlinecode"><span class="id" title="var">EVar</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="shrink_evar" class="idref" href="#shrink_evar"><span class="id" title="definition">shrink_evar</span></a> (<a id="T:276" class="idref" href="#T:276"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) (<a id="e:277" class="idref" href="#e:277"><span class="id" title="binder">e</span></a> : <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#e:277"><span class="id" title="variable">e</span></a> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;| <a class="idref" href="TImp.html#EVar"><span class="id" title="constructor">EVar</span></a> <span class="id" title="var">x</span> ⇒ <br/>
@@ -1367,7 +1308,6 @@ Finally, we need to be able to shrink the recursive cases. Consider
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="shrink_rec" class="idref" href="#shrink_rec"><span class="id" title="definition">shrink_rec</span></a> (<a id="T:280" class="idref" href="#T:280"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) (<a id="e:281" class="idref" href="#e:281"><span class="id" title="binder">e</span></a> : <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#e:281"><span class="id" title="variable">e</span></a> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;| <a class="idref" href="TImp.html#EPlus"><span class="id" title="constructor">EPlus</span></a> <span class="id" title="var">e<sub>1</sub></span> <span class="id" title="var">e<sub>2</sub></span> ⇒ <br/>
@@ -1387,7 +1327,6 @@ Putting it all together yields the following smart shrinker:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="shrink_exp_typed" class="idref" href="#shrink_exp_typed"><span class="id" title="definition">shrink_exp_typed</span></a> (<a id="T:288" class="idref" href="#T:288"><span class="id" title="binder">T</span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) (<a id="e:289" class="idref" href="#e:289"><span class="id" title="binder">e</span></a> : <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="TImp.html#e:289"><span class="id" title="variable">e</span></a> <span class="id" title="keyword">with</span> <br/>
 &nbsp;&nbsp;| <a class="idref" href="TImp.html#EVar"><span class="id" title="constructor">EVar</span></a> <span class="id" title="var">_</span> ⇒ <br/>
@@ -1434,7 +1373,6 @@ As we saw for generators, we can also perform sanity checks on our
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="shrink_typed_has_type" class="idref" href="#shrink_typed_has_type"><span class="id" title="definition">shrink_typed_has_type</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="num_vars:305" class="idref" href="#num_vars:305"><span class="id" title="binder">num_vars</span></a> := 4 <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="top_level_size:306" class="idref" href="#top_level_size:306"><span class="id" title="binder">top_level_size</span></a> := 3 <span class="id" title="keyword">in</span> <br/>
@@ -1456,7 +1394,6 @@ As we saw for generators, we can also perform sanity checks on our
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="lift_shrink" class="idref" href="#lift_shrink"><span class="id" title="definition">lift_shrink</span></a> {<a id="A:312" class="idref" href="#A:312"><span class="id" title="binder">A</span></a>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="shr:313" class="idref" href="#shr:313"><span class="id" title="binder">shr</span></a> : <a class="idref" href="TImp.html#A:312"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="TImp.html#A:312"><span class="id" title="variable">A</span></a>) (<a id="m:314" class="idref" href="#m:314"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:312"><span class="id" title="variable">A</span></a>) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:312"><span class="id" title="variable">A</span></a>) :=<br/>
@@ -1472,7 +1409,6 @@ Armed with shrinking, we can pinpoint the bug in the <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="expression_soundness_exec'" class="idref" href="#expression_soundness_exec'"><span class="id" title="definition">expression_soundness_exec'</span></a> := <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="num_vars:316" class="idref" href="#num_vars:316"><span class="id" title="binder">num_vars</span></a> := 4 <span class="id" title="keyword">in</span> <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="top_level_size:317" class="idref" href="#top_level_size:317"><span class="id" title="binder">top_level_size</span></a> := 3 <span class="id" title="keyword">in</span><br/>
@@ -1513,7 +1449,6 @@ Armed with shrinking, we can pinpoint the bug in the <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="com" class="idref" href="#com"><span class="id" title="inductive">com</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="CSkip" class="idref" href="#CSkip"><span class="id" title="constructor">CSkip</span></a>  : <a class="idref" href="TImp.html#com:323"><span class="id" title="inductive">com</span></a><br/>
 &nbsp;&nbsp;| <a id="CAsgn" class="idref" href="#CAsgn"><span class="id" title="constructor">CAsgn</span></a>   : <a class="idref" href="TImp.html#id"><span class="id" title="inductive">id</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#exp"><span class="id" title="inductive">exp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#com:323"><span class="id" title="inductive">com</span></a><br/>
@@ -1547,7 +1482,6 @@ Armed with shrinking, we can pinpoint the bug in the <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="well_typed_com" class="idref" href="#well_typed_com"><span class="id" title="inductive">well_typed_com</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#com"><span class="id" title="inductive">com</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="TSkip" class="idref" href="#TSkip"><span class="id" title="constructor">TSkip</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:332" class="idref" href="#Gamma:332"><span class="id" title="binder">Gamma</span></a>, <a class="idref" href="TImp.html#well_typed_com:330"><span class="id" title="inductive">well_typed_com</span></a> <a class="idref" href="TImp.html#Gamma:332"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#CSkip"><span class="id" title="constructor">CSkip</span></a><br/>
 &nbsp;&nbsp;| <a id="TAsgn" class="idref" href="#TAsgn"><span class="id" title="constructor">TAsgn</span></a>  : <span class="id" title="keyword">∀</span> <a id="Gamma:333" class="idref" href="#Gamma:333"><span class="id" title="binder">Gamma</span></a> <a id="x:334" class="idref" href="#x:334"><span class="id" title="binder">x</span></a> <a id="e:335" class="idref" href="#e:335"><span class="id" title="binder">e</span></a> <a id="T:336" class="idref" href="#T:336"><span class="id" title="binder">T</span></a>, <br/>
@@ -1576,7 +1510,6 @@ Armed with shrinking, we can pinpoint the bug in the <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="bind_deterministic" class="idref" href="#bind_deterministic"><span class="id" title="lemma">bind_deterministic</span></a> <a id="Gamma:347" class="idref" href="#Gamma:347"><span class="id" title="binder">Gamma</span></a> <a id="x:348" class="idref" href="#x:348"><span class="id" title="binder">x</span></a> (<a id="T<sub>1</sub>:349" class="idref" href="#T<sub>1</sub>:349"><span class="id" title="binder">T<sub>1</sub></span></a> <a id="T<sub>2</sub>:350" class="idref" href="#T<sub>2</sub>:350"><span class="id" title="binder">T<sub>2</sub></span></a> : <a class="idref" href="TImp.html#ty"><span class="id" title="inductive">ty</span></a>) :<br/>
 &nbsp;&nbsp;<a class="idref" href="TImp.html#bound_to"><span class="id" title="inductive">bound_to</span></a> <a class="idref" href="TImp.html#Gamma:347"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#x:348"><span class="id" title="variable">x</span></a> <a class="idref" href="TImp.html#T<sub>1</sub>:349"><span class="id" title="variable">T<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#bound_to"><span class="id" title="inductive">bound_to</span></a> <a class="idref" href="TImp.html#Gamma:347"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#x:348"><span class="id" title="variable">x</span></a> <a class="idref" href="TImp.html#T<sub>2</sub>:350"><span class="id" title="variable">T<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <br/>
 &nbsp;&nbsp;<a class="idref" href="TImp.html#T<sub>1</sub>:349"><span class="id" title="variable">T<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#T<sub>2</sub>:350"><span class="id" title="variable">T<sub>2</sub></span></a>.<br/>
@@ -1620,7 +1553,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="dec_well_typed_com" class="idref" href="#dec_well_typed_com"><span class="id" title="instance">dec_well_typed_com</span></a> (<a id="Gamma:355" class="idref" href="#Gamma:355"><span class="id" title="binder">Gamma</span></a> : <a class="idref" href="TImp.html#context"><span class="id" title="definition">context</span></a>) (<a id="c:356" class="idref" href="#c:356"><span class="id" title="binder">c</span></a> : <a class="idref" href="TImp.html#com"><span class="id" title="inductive">com</span></a>) <br/>
 &nbsp;&nbsp;: <span class="id" title="class">Dec</span> (<a class="idref" href="TImp.html#well_typed_com"><span class="id" title="inductive">well_typed_com</span></a> <a class="idref" href="TImp.html#Gamma:355"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#c:356"><span class="id" title="variable">c</span></a>).<br/>
 <div class="togglescript" id="proofcontrol7" onclick="toggleDisplay('proof7');toggleDisplay('proofcontrol7')"><span class="show"></span></div>
@@ -1653,7 +1585,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1670,7 +1601,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="result" class="idref" href="#result"><span class="id" title="inductive">result</span></a> := <br/>
 | <a id="Success" class="idref" href="#Success"><span class="id" title="constructor">Success</span></a> : <a class="idref" href="TImp.html#state"><span class="id" title="definition">state</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#result:357"><span class="id" title="inductive">result</span></a><br/>
 | <a id="Fail" class="idref" href="#Fail"><span class="id" title="constructor">Fail</span></a> : <a class="idref" href="TImp.html#result:357"><span class="id" title="inductive">result</span></a> <br/>
@@ -1720,7 +1650,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Conjecture</span> <a id="well_typed_state_never_stuck" class="idref" href="#well_typed_state_never_stuck"><span class="id" title="axiom">well_typed_state_never_stuck</span></a> : <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="Gamma:367" class="idref" href="#Gamma:367"><span class="id" title="binder">Gamma</span></a> <a id="st:368" class="idref" href="#st:368"><span class="id" title="binder">st</span></a>, <a class="idref" href="TImp.html#well_typed_state"><span class="id" title="inductive">well_typed_state</span></a> <a class="idref" href="TImp.html#Gamma:367"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#st:368"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="c:369" class="idref" href="#c:369"><span class="id" title="binder">c</span></a>, <a class="idref" href="TImp.html#well_typed_com"><span class="id" title="inductive">well_typed_com</span></a> <a class="idref" href="TImp.html#Gamma:367"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="TImp.html#c:369"><span class="id" title="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1733,7 +1662,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
@@ -1794,7 +1722,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Derive</span> <span class="id" title="var">ArbitrarySizedSuchThat</span> <span class="id" title="keyword">for</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">has_type_value</span> <span class="id" title="var">v</span> <span class="id" title="var">T</span>).<br/>
 </div>
 
@@ -1808,7 +1735,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="TImp.html#GenSizedSuchThathas_type_value"><span class="id" title="instance">GenSizedSuchThathas_type_value</span></a>.<br/>
 </div>
 
@@ -1863,7 +1789,6 @@ Now, here is a brute-force decision procedure for the typing
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="GenSTPlayground" class="idref" href="#GenSTPlayground"><span class="id" title="module">GenSTPlayground</span></a>.<br/>
 </div>
 
@@ -1872,7 +1797,6 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Class</span> <a id="GenSTPlayground.GenSizedSuchThat" class="idref" href="#GenSTPlayground.GenSizedSuchThat"><span class="id" title="record">GenSizedSuchThat</span></a> (<a id="A:388" class="idref" href="#A:388"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="P:389" class="idref" href="#P:389"><span class="id" title="binder">P</span></a> : <a class="idref" href="TImp.html#A:388"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) := <br/>
 &nbsp;&nbsp;{ <a id="GenSTPlayground.arbitrarySizeST" class="idref" href="#GenSTPlayground.arbitrarySizeST"><span class="id" title="projection">arbitrarySizeST</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:388"><span class="id" title="variable">A</span></a>) }.<br/>
 </div>
@@ -1882,7 +1806,6 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Class</span> <a id="GenSTPlayground.GenSuchThat" class="idref" href="#GenSTPlayground.GenSuchThat"><span class="id" title="record">GenSuchThat</span></a> (<a id="A:392" class="idref" href="#A:392"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="P:393" class="idref" href="#P:393"><span class="id" title="binder">P</span></a> : <a class="idref" href="TImp.html#A:392"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) := <br/>
 &nbsp;&nbsp;{ <a id="GenSTPlayground.arbitraryST" class="idref" href="#GenSTPlayground.arbitraryST"><span class="id" title="projection">arbitraryST</span></a> : <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="TImp.html#A:392"><span class="id" title="variable">A</span></a>) }.<br/>
 </div>
@@ -1892,7 +1815,6 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="GenSTPlayground.:::'genST'_x" class="idref" href="#GenSTPlayground.:::'genST'_x"><span class="id" title="notation">&quot;</span></a>'genST' x" := (@<a class="idref" href="TImp.html#GenSTPlayground.arbitraryST"><span class="id" title="method">arbitraryST</span></a> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">_</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70).<br/>
 </div>
 
@@ -1901,7 +1823,6 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Instance</span> <a id="GenSTPlayground.GenSuchThatOfBounded" class="idref" href="#GenSTPlayground.GenSuchThatOfBounded"><span class="id" title="instance">GenSuchThatOfBounded</span></a> (<a id="A:396" class="idref" href="#A:396"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) (<a id="P:397" class="idref" href="#P:397"><span class="id" title="binder">P</span></a> : <a class="idref" href="TImp.html#A:396"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="H:398" class="idref" href="#H:398"><span class="id" title="binder">H</span></a> : <a class="idref" href="TImp.html#GenSTPlayground.GenSizedSuchThat"><span class="id" title="class">GenSizedSuchThat</span></a> <a class="idref" href="TImp.html#A:396"><span class="id" title="variable">A</span></a> <a class="idref" href="TImp.html#P:397"><span class="id" title="variable">P</span></a>)<br/>
 &nbsp;&nbsp;: <a class="idref" href="TImp.html#GenSTPlayground.GenSuchThat"><span class="id" title="class">GenSuchThat</span></a> <a class="idref" href="TImp.html#A:396"><span class="id" title="variable">A</span></a> <a class="idref" href="TImp.html#P:397"><span class="id" title="variable">P</span></a> := <br/>
@@ -1919,7 +1840,6 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Conjecture</span> <a id="conditional_prop_example" class="idref" href="#conditional_prop_example"><span class="id" title="axiom">conditional_prop_example</span></a> : <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="x:399" class="idref" href="#x:399"><span class="id" title="binder">x</span></a> <a id="y:400" class="idref" href="#y:400"><span class="id" title="binder">y</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>), <a class="idref" href="TImp.html#x:399"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#y:400"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="TImp.html#x:399"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="TImp.html#y:400"><span class="id" title="variable">y</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;QuickChick&nbsp;conditional_prop_example.&nbsp;*)</span><br/>
@@ -1947,8 +1867,7 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:31&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:22&nbsp;*)</span><br/>
 </div>
 </div>
 

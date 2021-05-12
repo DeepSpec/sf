@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">Lists<span class="subtitle">Working with Structured Data</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="Induction.html#"><span class="id" title="library">Induction</span></a>.<br/>
 <span class="id" title="keyword">Module</span> <a id="NatList" class="idref" href="#NatList"><span class="id" title="module">NatList</span></a>.<br/>
 </div>
@@ -52,7 +49,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="NatList.natprod" class="idref" href="#NatList.natprod"><span class="id" title="inductive">natprod</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="NatList.pair" class="idref" href="#NatList.pair"><span class="id" title="constructor">pair</span></a> (<a id="n<sub>1</sub>:3" class="idref" href="#n<sub>1</sub>:3"><span class="id" title="binder">n<sub>1</sub></span></a> <a id="n<sub>2</sub>:4" class="idref" href="#n<sub>2</sub>:4"><span class="id" title="binder">n<sub>2</sub></span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>).<br/>
 </div>
@@ -64,7 +60,6 @@ This declaration can be read: "The one and only way to
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="Lists.html#NatList.pair"><span class="id" title="constructor">pair</span></a> 3 5) : <a class="idref" href="Lists.html#NatList.natprod"><span class="id" title="inductive">natprod</span></a>.<br/>
 </div>
 
@@ -74,7 +69,6 @@ Here are simple functions for extracting the first and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.fst" class="idref" href="#NatList.fst"><span class="id" title="definition">fst</span></a> (<a id="p:5" class="idref" href="#p:5"><span class="id" title="binder">p</span></a> : <a class="idref" href="Lists.html#NatList.natprod"><span class="id" title="inductive">natprod</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#p:5"><span class="id" title="variable">p</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.pair"><span class="id" title="constructor">pair</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ⇒ <span class="id" title="var">x</span><br/>
@@ -95,7 +89,6 @@ Since pairs will be used heavily in what follows, it is nice
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="3797a507925d1a8b76f7e11d37069da<sub>7</sub>" class="idref" href="#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">&quot;</span></a>( x , y )" := (<a class="idref" href="Lists.html#NatList.pair"><span class="id" title="constructor">pair</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/>
 </div>
 
@@ -105,7 +98,6 @@ The new notation can be used both in expressions and in pattern
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Compute</span> (<a class="idref" href="Lists.html#NatList.fst"><span class="id" title="definition">fst</span></a> <a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a>3<a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">,</span></a>5<a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">)</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.fst'" class="idref" href="#NatList.fst'"><span class="id" title="definition">fst'</span></a> (<a id="p:9" class="idref" href="#p:9"><span class="id" title="binder">p</span></a> : <a class="idref" href="Lists.html#NatList.natprod"><span class="id" title="inductive">natprod</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#p:9"><span class="id" title="variable">p</span></a> <span class="id" title="keyword">with</span><br/>
@@ -169,7 +161,6 @@ Note that pattern-matching on a pair (with parentheses: <span class="inlinecode"
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.surjective_pairing'" class="idref" href="#NatList.surjective_pairing'"><span class="id" title="lemma">surjective_pairing'</span></a> : <span class="id" title="keyword">∀</span> (<a id="n:15" class="idref" href="#n:15"><span class="id" title="binder">n</span></a> <a id="m:16" class="idref" href="#m:16"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#n:15"><span class="id" title="variable">n</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">,</span></a><a class="idref" href="Lists.html#m:16"><span class="id" title="variable">m</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.fst"><span class="id" title="definition">fst</span></a> <a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#n:15"><span class="id" title="variable">n</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">,</span></a><a class="idref" href="Lists.html#m:16"><span class="id" title="variable">m</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">),</span></a> <a class="idref" href="Lists.html#NatList.snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#n:15"><span class="id" title="variable">n</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">,</span></a><a class="idref" href="Lists.html#m:16"><span class="id" title="variable">m</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">))</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -182,7 +173,6 @@ But <span class="inlinecode"><span class="id" title="tactic">reflexivity</span><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.surjective_pairing_stuck" class="idref" href="#NatList.surjective_pairing_stuck"><span class="id" title="lemma">surjective_pairing_stuck</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:17" class="idref" href="#p:17"><span class="id" title="binder">p</span></a> : <a class="idref" href="Lists.html#NatList.natprod"><span class="id" title="inductive">natprod</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#p:17"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.fst"><span class="id" title="definition">fst</span></a> <a class="idref" href="Lists.html#p:17"><span class="id" title="variable">p</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="Lists.html#NatList.snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="Lists.html#p:17"><span class="id" title="variable">p</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -197,7 +187,6 @@ Instead, we need to expose the structure of <span class="inlinecode"><span class
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.surjective_pairing" class="idref" href="#NatList.surjective_pairing"><span class="id" title="lemma">surjective_pairing</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:18" class="idref" href="#p:18"><span class="id" title="binder">p</span></a> : <a class="idref" href="Lists.html#NatList.natprod"><span class="id" title="inductive">natprod</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#p:18"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.fst"><span class="id" title="definition">fst</span></a> <a class="idref" href="Lists.html#p:18"><span class="id" title="variable">p</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="Lists.html#NatList.snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="Lists.html#p:18"><span class="id" title="variable">p</span></a><a class="idref" href="Lists.html#3797a507925d1a8b76f7e11d37069da<sub>7</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -248,7 +237,6 @@ Notice that, unlike its behavior with <span class="inlinecode"><span class="id" 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="NatList.natlist" class="idref" href="#NatList.natlist"><span class="id" title="inductive">natlist</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="NatList.nil" class="idref" href="#NatList.nil"><span class="id" title="constructor">nil</span></a><br/>
 &nbsp;&nbsp;| <a id="NatList.cons" class="idref" href="#NatList.cons"><span class="id" title="constructor">cons</span></a> (<a id="n:23" class="idref" href="#n:23"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:24" class="idref" href="#l:24"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#natlist:21"><span class="id" title="inductive">natlist</span></a>).<br/>
@@ -259,7 +247,6 @@ For example, here is a three-element list:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.mylist" class="idref" href="#NatList.mylist"><span class="id" title="definition">mylist</span></a> := <a class="idref" href="Lists.html#NatList.cons"><span class="id" title="constructor">cons</span></a> 1 (<a class="idref" href="Lists.html#NatList.cons"><span class="id" title="constructor">cons</span></a> 2 (<a class="idref" href="Lists.html#NatList.cons"><span class="id" title="constructor">cons</span></a> 3 <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a>)).<br/>
 </div>
 
@@ -271,7 +258,6 @@ As with pairs, it is more convenient to write lists in
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="NatList.:::x_'::'_x" class="idref" href="#NatList.:::x_'::'_x"><span class="id" title="notation">&quot;</span></a>x :: l" := (<a class="idref" href="Lists.html#NatList.cons"><span class="id" title="constructor">cons</span></a> <span class="id" title="var">x</span> <span class="id" title="var">l</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 60, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>).<br/>
 <span class="id" title="keyword">Notation</span> <a id="f5cee4f22b9033d1d704f9d537452cd<sub>0</sub>" class="idref" href="#f5cee4f22b9033d1d704f9d537452cd<sub>0</sub>"><span class="id" title="notation">&quot;</span></a>[ ]" := <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a>.<br/>
@@ -288,7 +274,6 @@ It is not necessary to understand the details of these
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.mylist1" class="idref" href="#NatList.mylist1"><span class="id" title="definition">mylist1</span></a> := 1 <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">(</span></a>2 <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">(</span></a>3 <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a><a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">))</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.mylist2" class="idref" href="#NatList.mylist2"><span class="id" title="definition">mylist2</span></a> := 1 <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> 2 <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> 3 <a class="idref" href="Lists.html#NatList.:::x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.mylist3" class="idref" href="#NatList.mylist3"><span class="id" title="definition">mylist3</span></a> := <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>.<br/>
@@ -336,7 +321,6 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.repeat" class="idref" href="#NatList.repeat"><span class="id" title="definition">repeat</span></a> (<a id="n:25" class="idref" href="#n:25"><span class="id" title="binder">n</span></a> <a id="count:26" class="idref" href="#count:26"><span class="id" title="binder">count</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#count:26"><span class="id" title="variable">count</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a><br/>
@@ -353,7 +337,6 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.length" class="idref" href="#NatList.length"><span class="id" title="definition">length</span></a> (<a id="l:29" class="idref" href="#l:29"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:29"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a><br/>
@@ -370,7 +353,6 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.app" class="idref" href="#NatList.app"><span class="id" title="definition">app</span></a> (<a id="l<sub>1</sub>:32" class="idref" href="#l<sub>1</sub>:32"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:33" class="idref" href="#l<sub>2</sub>:33"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l<sub>1</sub>:32"><span class="id" title="variable">l<sub>1</sub></span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a>    ⇒ <a class="idref" href="Lists.html#l<sub>2</sub>:33"><span class="id" title="variable">l<sub>2</sub></span></a><br/>
@@ -384,7 +366,6 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>" class="idref" href="#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">&quot;</span></a>x ++ y" := (<a class="idref" href="Lists.html#NatList.app"><span class="id" title="definition">app</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>, <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 60).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_app1" class="idref" href="#NatList.test_app1"><span class="id" title="definition">test_app1</span></a>:             <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>5<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>5<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>.<br/>
@@ -408,7 +389,6 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.hd" class="idref" href="#NatList.hd"><span class="id" title="definition">hd</span></a> (<a id="default:36" class="idref" href="#default:36"><span class="id" title="binder">default</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:37" class="idref" href="#l:37"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:37"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="Lists.html#default:36"><span class="id" title="variable">default</span></a><br/>
@@ -439,7 +419,6 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.nonzeros" class="idref" href="#NatList.nonzeros"><span class="id" title="definition">nonzeros</span></a> (<a id="l:41" class="idref" href="#l:41"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_nonzeros" class="idref" href="#NatList.test_nonzeros"><span class="id" title="definition">test_nonzeros</span></a>:<br/>
@@ -484,7 +463,6 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.alternate" class="idref" href="#NatList.alternate"><span class="id" title="definition">alternate</span></a> (<a id="l<sub>1</sub>:46" class="idref" href="#l<sub>1</sub>:46"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:47" class="idref" href="#l<sub>2</sub>:47"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_alternate1" class="idref" href="#NatList.test_alternate1"><span class="id" title="definition">test_alternate1</span></a>:<br/>
@@ -514,7 +492,6 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.bag" class="idref" href="#NatList.bag"><span class="id" title="definition">bag</span></a> := <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>.<br/>
 </div>
 
@@ -525,7 +502,6 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.count" class="idref" href="#NatList.count"><span class="id" title="definition">count</span></a> (<a id="v:49" class="idref" href="#v:49"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:50" class="idref" href="#s:50"><span class="id" title="binder">s</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 </div>
@@ -535,7 +511,6 @@ All these proofs can be done just by <span class="inlinecode"><span class="id" t
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_count1" class="idref" href="#NatList.test_count1"><span class="id" title="definition">test_count1</span></a>:              <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 1 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
 &nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_count2" class="idref" href="#NatList.test_count2"><span class="id" title="definition">test_count2</span></a>:              <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 6 <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
@@ -557,7 +532,6 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.sum" class="idref" href="#NatList.sum"><span class="id" title="definition">sum</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_sum1" class="idref" href="#NatList.test_sum1"><span class="id" title="definition">test_sum1</span></a>:              <a class="idref" href="Lists.html#NatList.count"><span class="id" title="axiom">count</span></a> 1 (<a class="idref" href="Lists.html#NatList.sum"><span class="id" title="axiom">sum</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>4<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
@@ -592,7 +566,6 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.remove_one" class="idref" href="#NatList.remove_one"><span class="id" title="definition">remove_one</span></a> (<a id="v:56" class="idref" href="#v:56"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="s:57" class="idref" href="#s:57"><span class="id" title="binder">s</span></a> : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a>) : <a class="idref" href="Lists.html#NatList.bag"><span class="id" title="definition">bag</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_remove_one1" class="idref" href="#NatList.test_remove_one1"><span class="id" title="definition">test_remove_one1</span></a>:<br/>
@@ -658,7 +631,6 @@ Qed.<br/>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.nil_app" class="idref" href="#NatList.nil_app"><span class="id" title="lemma">nil_app</span></a> : <span class="id" title="keyword">∀</span> <a id="l:65" class="idref" href="#l:65"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#f5cee4f22b9033d1d704f9d537452cd<sub>0</sub>"><span class="id" title="notation">[]</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l:65"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#l:65"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
@@ -677,7 +649,6 @@ Qed.<br/>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.tl_length_pred" class="idref" href="#NatList.tl_length_pred"><span class="id" title="lemma">tl_length_pred</span></a> : <span class="id" title="keyword">∀</span> <a id="l:66" class="idref" href="#l:66"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#pred"><span class="id" title="abbreviation">pred</span></a> (<a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> <a class="idref" href="Lists.html#l:66"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> (<a class="idref" href="Lists.html#NatList.tl"><span class="id" title="definition">tl</span></a> <a class="idref" href="Lists.html#l:66"><span class="id" title="variable">l</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -758,7 +729,6 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.app_assoc" class="idref" href="#NatList.app_assoc"><span class="id" title="lemma">app_assoc</span></a> : <span class="id" title="keyword">∀</span> <a id="l<sub>1</sub>:67" class="idref" href="#l<sub>1</sub>:67"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:68" class="idref" href="#l<sub>2</sub>:68"><span class="id" title="binder">l<sub>2</sub></span></a> <a id="l<sub>3</sub>:69" class="idref" href="#l<sub>3</sub>:69"><span class="id" title="binder">l<sub>3</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#l<sub>1</sub>:67"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:68"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>3</sub>:69"><span class="id" title="variable">l<sub>3</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#l<sub>1</sub>:67"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#l<sub>2</sub>:68"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>3</sub>:69"><span class="id" title="variable">l<sub>3</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -843,7 +813,6 @@ Notice that, as when doing induction on natural numbers, the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.rev" class="idref" href="#NatList.rev"><span class="id" title="definition">rev</span></a> (<a id="l:70" class="idref" href="#l:70"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:70"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a>    ⇒ <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a><br/>
@@ -863,7 +832,6 @@ For something a bit more challenging than the proofs
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.rev_length_firsttry" class="idref" href="#NatList.rev_length_firsttry"><span class="id" title="lemma">rev_length_firsttry</span></a> : <span class="id" title="keyword">∀</span> <a id="l:73" class="idref" href="#l:73"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> (<a class="idref" href="Lists.html#NatList.rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Lists.html#l:73"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> <a class="idref" href="Lists.html#l:73"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -891,7 +859,6 @@ So let's take the equation relating <span class="inlinecode">++</span> and <span
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.app_length" class="idref" href="#NatList.app_length"><span class="id" title="lemma">app_length</span></a> : <span class="id" title="keyword">∀</span> <a id="l<sub>1</sub>:74" class="idref" href="#l<sub>1</sub>:74"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:75" class="idref" href="#l<sub>2</sub>:75"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> (<a class="idref" href="Lists.html#l<sub>1</sub>:74"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:75"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> <a class="idref" href="Lists.html#l<sub>1</sub>:74"><span class="id" title="variable">l<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:75"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -916,7 +883,6 @@ Note that, to make the lemma as general as possible, we
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.rev_length" class="idref" href="#NatList.rev_length"><span class="id" title="lemma">rev_length</span></a> : <span class="id" title="keyword">∀</span> <a id="l:76" class="idref" href="#l:76"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> (<a class="idref" href="Lists.html#NatList.rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Lists.html#l:76"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#NatList.length"><span class="id" title="definition">length</span></a> <a class="idref" href="Lists.html#l:76"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1068,7 +1034,6 @@ For comparison, here are informal proofs of these two theorems:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Search</span> <a class="idref" href="Lists.html#NatList.rev"><span class="id" title="definition">rev</span></a>.<br/>
 </div>
 
@@ -1079,7 +1044,6 @@ Or say you've forgotten the name of the theorem showing that plus
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Search</span> (<span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">_</span>).<br/>
 </div>
 
@@ -1090,7 +1054,6 @@ You'll see a lot of results there, nearly all of them from the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Search</span> (<span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">_</span>) <span class="id" title="var">inside</span> <span class="id" title="keyword">Induction</span>.<br/>
 </div>
 
@@ -1100,7 +1063,6 @@ You can also make the search more precise by using variables in
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Search</span> (?<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> ?<span class="id" title="var">y</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> ?<span class="id" title="var">y</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> ?<span class="id" title="var">x</span>).<br/>
 </div>
 
@@ -1130,7 +1092,6 @@ The question mark in front of the variable is needed to indicate
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.app_nil_r" class="idref" href="#NatList.app_nil_r"><span class="id" title="lemma">app_nil_r</span></a> : <span class="id" title="keyword">∀</span> <a id="l:77" class="idref" href="#l:77"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#l:77"><span class="id" title="variable">l</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#f5cee4f22b9033d1d704f9d537452cd<sub>0</sub>"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#l:77"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1152,7 +1113,6 @@ There is a short solution to the next one.  If you find yourself
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.app_assoc4" class="idref" href="#NatList.app_assoc4"><span class="id" title="lemma">app_assoc4</span></a> : <span class="id" title="keyword">∀</span> <a id="l<sub>1</sub>:81" class="idref" href="#l<sub>1</sub>:81"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:82" class="idref" href="#l<sub>2</sub>:82"><span class="id" title="binder">l<sub>2</sub></span></a> <a id="l<sub>3</sub>:83" class="idref" href="#l<sub>3</sub>:83"><span class="id" title="binder">l<sub>3</sub></span></a> <a id="l<sub>4</sub>:84" class="idref" href="#l<sub>4</sub>:84"><span class="id" title="binder">l<sub>4</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#l<sub>1</sub>:81"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#l<sub>2</sub>:82"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#l<sub>3</sub>:83"><span class="id" title="variable">l<sub>3</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>4</sub>:84"><span class="id" title="variable">l<sub>4</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">))</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">((</span></a><a class="idref" href="Lists.html#l<sub>1</sub>:81"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:82"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>3</sub>:83"><span class="id" title="variable">l<sub>3</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>4</sub>:84"><span class="id" title="variable">l<sub>4</sub></span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1164,7 +1124,6 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="NatList.nonzeros_app" class="idref" href="#NatList.nonzeros_app"><span class="id" title="lemma">nonzeros_app</span></a> : <span class="id" title="keyword">∀</span> <a id="l<sub>1</sub>:85" class="idref" href="#l<sub>1</sub>:85"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:86" class="idref" href="#l<sub>2</sub>:86"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.nonzeros"><span class="id" title="axiom">nonzeros</span></a> (<a class="idref" href="Lists.html#l<sub>1</sub>:85"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:86"><span class="id" title="variable">l<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.nonzeros"><span class="id" title="axiom">nonzeros</span></a> <a class="idref" href="Lists.html#l<sub>1</sub>:85"><span class="id" title="variable">l<sub>1</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Lists.html#NatList.nonzeros"><span class="id" title="axiom">nonzeros</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:86"><span class="id" title="variable">l<sub>2</sub></span></a><a class="idref" href="Lists.html#9051c98c6b1a5a76d335ab187bb449a<sub>6</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1182,7 +1141,6 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.eqblist" class="idref" href="#NatList.eqblist"><span class="id" title="definition">eqblist</span></a> (<a id="l<sub>1</sub>:87" class="idref" href="#l<sub>1</sub>:87"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:88" class="idref" href="#l<sub>2</sub>:88"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_eqblist1" class="idref" href="#NatList.test_eqblist1"><span class="id" title="definition">test_eqblist1</span></a> :<br/>
@@ -1230,7 +1188,6 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.leb_n_Sn" class="idref" href="#NatList.leb_n_Sn"><span class="id" title="lemma">leb_n_Sn</span></a> : <span class="id" title="keyword">∀</span> <a id="n:92" class="idref" href="#n:92"><span class="id" title="binder">n</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#n:92"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>"><span class="id" title="notation">&lt;=?</span></a> <a class="idref" href="Basics.html#0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Lists.html#n:92"><span class="id" title="variable">n</span></a><a class="idref" href="Basics.html#0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1280,7 +1237,6 @@ Before doing the next exercise, make sure you've filled in the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.rev_injective" class="idref" href="#NatList.rev_injective"><span class="id" title="lemma">rev_injective</span></a> : <span class="id" title="keyword">∀</span> (<a id="l<sub>1</sub>:94" class="idref" href="#l<sub>1</sub>:94"><span class="id" title="binder">l<sub>1</sub></span></a> <a id="l<sub>2</sub>:95" class="idref" href="#l<sub>2</sub>:95"><span class="id" title="binder">l<sub>2</sub></span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Lists.html#l<sub>1</sub>:94"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#NatList.rev"><span class="id" title="definition">rev</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:95"><span class="id" title="variable">l<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Lists.html#l<sub>1</sub>:94"><span class="id" title="variable">l<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#l<sub>2</sub>:95"><span class="id" title="variable">l<sub>2</sub></span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1301,7 +1257,6 @@ Before doing the next exercise, make sure you've filled in the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.nth_bad" class="idref" href="#NatList.nth_bad"><span class="id" title="definition">nth_bad</span></a> (<a id="l:96" class="idref" href="#l:96"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) (<a id="n:97" class="idref" href="#n:97"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:96"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a> ⇒ 42<br/>
@@ -1321,7 +1276,6 @@ This solution is not so good: If <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="NatList.natoption" class="idref" href="#NatList.natoption"><span class="id" title="inductive">natoption</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="NatList.Some" class="idref" href="#NatList.Some"><span class="id" title="constructor">Some</span></a> (<a id="n:103" class="idref" href="#n:103"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
 &nbsp;&nbsp;| <a id="NatList.None" class="idref" href="#NatList.None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -1337,7 +1291,6 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="NatList.nth_error" class="idref" href="#NatList.nth_error"><span class="id" title="definition">nth_error</span></a> (<a id="l:104" class="idref" href="#l:104"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) (<a id="n:105" class="idref" href="#n:105"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Lists.html#NatList.natoption"><span class="id" title="inductive">natoption</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#l:104"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="Lists.html#NatList.None"><span class="id" title="constructor">None</span></a><br/>
@@ -1374,7 +1327,6 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.option_elim" class="idref" href="#NatList.option_elim"><span class="id" title="definition">option_elim</span></a> (<a id="d:109" class="idref" href="#d:109"><span class="id" title="binder">d</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="o:110" class="idref" href="#o:110"><span class="id" title="binder">o</span></a> : <a class="idref" href="Lists.html#NatList.natoption"><span class="id" title="inductive">natoption</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#o:110"><span class="id" title="variable">o</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#NatList.Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">n'</span> ⇒ <span class="id" title="var">n'</span><br/>
@@ -1389,7 +1341,6 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="NatList.hd_error" class="idref" href="#NatList.hd_error"><span class="id" title="definition">hd_error</span></a> (<a id="l:112" class="idref" href="#l:112"><span class="id" title="binder">l</span></a> : <a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="Lists.html#NatList.natoption"><span class="id" title="inductive">natoption</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_hd_error1" class="idref" href="#NatList.test_hd_error1"><span class="id" title="definition">test_hd_error1</span></a> : <a class="idref" href="Lists.html#NatList.hd_error"><span class="id" title="axiom">hd_error</span></a> <a class="idref" href="Lists.html#f5cee4f22b9033d1d704f9d537452cd<sub>0</sub>"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#NatList.None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -1409,7 +1360,6 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="NatList.option_elim_hd" class="idref" href="#NatList.option_elim_hd"><span class="id" title="lemma">option_elim_hd</span></a> : <span class="id" title="keyword">∀</span> (<a id="l:113" class="idref" href="#l:113"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) (<a id="default:114" class="idref" href="#default:114"><span class="id" title="binder">default</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.hd"><span class="id" title="definition">hd</span></a> <a class="idref" href="Lists.html#default:114"><span class="id" title="variable">default</span></a> <a class="idref" href="Lists.html#l:113"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#NatList.option_elim"><span class="id" title="definition">option_elim</span></a> <a class="idref" href="Lists.html#default:114"><span class="id" title="variable">default</span></a> (<a class="idref" href="Lists.html#NatList.hd_error"><span class="id" title="axiom">hd_error</span></a> <a class="idref" href="Lists.html#l:113"><span class="id" title="variable">l</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1419,7 +1369,6 @@ We can then change the above definition of <span class="inlinecode"><span class=
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Lists.html#NatList"><span class="id" title="module">NatList</span></a>.<br/>
 </div>
 
@@ -1439,7 +1388,6 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="id" class="idref" href="#id"><span class="id" title="inductive">id</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Id" class="idref" href="#Id"><span class="id" title="constructor">Id</span></a> (<a id="n:117" class="idref" href="#n:117"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>).<br/>
 </div>
@@ -1454,7 +1402,6 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="eqb_id" class="idref" href="#eqb_id"><span class="id" title="definition">eqb_id</span></a> (<a id="x<sub>1</sub>:118" class="idref" href="#x<sub>1</sub>:118"><span class="id" title="binder">x<sub>1</sub></span></a> <a id="x<sub>2</sub>:119" class="idref" href="#x<sub>2</sub>:119"><span class="id" title="binder">x<sub>2</sub></span></a> : <a class="idref" href="Lists.html#id"><span class="id" title="inductive">id</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#x<sub>1</sub>:118"><span class="id" title="variable">x<sub>1</sub></span></a>, <a class="idref" href="Lists.html#x<sub>2</sub>:119"><span class="id" title="variable">x<sub>2</sub></span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#Id"><span class="id" title="constructor">Id</span></a> <span class="id" title="var">n<sub>1</sub></span>, <a class="idref" href="Lists.html#Id"><span class="id" title="constructor">Id</span></a> <span class="id" title="var">n<sub>2</sub></span> ⇒ <span class="id" title="var">n<sub>1</sub></span> <a class="idref" href="Basics.html#ad2ec4e405f68c46c0a176e3e94ae2e<sub>3</sub>"><span class="id" title="notation">=?</span></a> <span class="id" title="var">n<sub>2</sub></span><br/>
@@ -1479,7 +1426,6 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="PartialMap" class="idref" href="#PartialMap"><span class="id" title="module">PartialMap</span></a>.<br/>
 <span class="id" title="keyword">Export</span> <span class="id" title="var">NatList</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="PartialMap.partial_map" class="idref" href="#PartialMap.partial_map"><span class="id" title="inductive">partial_map</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
@@ -1501,7 +1447,6 @@ This declaration can be read: "There are two ways to construct a
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="PartialMap.update" class="idref" href="#PartialMap.update"><span class="id" title="definition">update</span></a> (<a id="d:128" class="idref" href="#d:128"><span class="id" title="binder">d</span></a> : <a class="idref" href="Lists.html#PartialMap.partial_map"><span class="id" title="inductive">partial_map</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="x:129" class="idref" href="#x:129"><span class="id" title="binder">x</span></a> : <a class="idref" href="Lists.html#id"><span class="id" title="inductive">id</span></a>) (<a id="value:130" class="idref" href="#value:130"><span class="id" title="binder">value</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="Lists.html#PartialMap.partial_map"><span class="id" title="inductive">partial_map</span></a> :=<br/>
@@ -1517,7 +1462,6 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="PartialMap.find" class="idref" href="#PartialMap.find"><span class="id" title="definition">find</span></a> (<a id="x:131" class="idref" href="#x:131"><span class="id" title="binder">x</span></a> : <a class="idref" href="Lists.html#id"><span class="id" title="inductive">id</span></a>) (<a id="d:132" class="idref" href="#d:132"><span class="id" title="binder">d</span></a> : <a class="idref" href="Lists.html#PartialMap.partial_map"><span class="id" title="inductive">partial_map</span></a>) : <a class="idref" href="Lists.html#NatList.natoption"><span class="id" title="inductive">natoption</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Lists.html#d:132"><span class="id" title="variable">d</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Lists.html#PartialMap.empty"><span class="id" title="constructor">empty</span></a>         ⇒ <a class="idref" href="Lists.html#NatList.None"><span class="id" title="constructor">None</span></a><br/>
@@ -1565,7 +1509,6 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Inductive</span> <a id="baz" class="idref" href="#baz"><span class="id" title="inductive">baz</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="Baz1" class="idref" href="#Baz1"><span class="id" title="constructor">Baz1</span></a> (<a id="x:144" class="idref" href="#x:144"><span class="id" title="binder">x</span></a> : <a class="idref" href="Lists.html#baz:142"><span class="id" title="inductive">baz</span></a>)<br/>
 &nbsp;&nbsp;| <a id="Baz2" class="idref" href="#Baz2"><span class="id" title="constructor">Baz2</span></a> (<a id="y:145" class="idref" href="#y:145"><span class="id" title="binder">y</span></a> : <a class="idref" href="Lists.html#baz:142"><span class="id" title="inductive">baz</span></a>) (<a id="b:146" class="idref" href="#b:146"><span class="id" title="binder">b</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>).<br/>
@@ -1577,7 +1520,6 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="manual_grade_for_baz_num_elts" class="idref" href="#manual_grade_for_baz_num_elts"><span class="id" title="definition">manual_grade_for_baz_num_elts</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -1586,8 +1528,7 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:16&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:07&nbsp;*)</span><br/>
 </div>
 </div>
 

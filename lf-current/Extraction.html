@@ -31,8 +31,6 @@
 
 <h1 class="libtitle">Extraction<span class="subtitle">Extracting ML from Coq</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
@@ -53,7 +51,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <a class="idref" href="http://coq.inria.fr/library//Coq.extraction.Extraction.html#"><span class="id" title="library">Coq.extraction.Extraction</span></a>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Language</span> <span class="id" title="var">OCaml</span>.<br/>
 </div>
@@ -64,7 +61,6 @@ Now we load up the Coq environment with some definitions, either
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
@@ -77,7 +73,6 @@ Finally, we tell Coq the name of a definition to extract and the
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Extraction</span> "imp1.ml" <span class="id" title="var">ceval_step</span>.<br/>
 </div>
 
@@ -106,7 +101,6 @@ When Coq processes this command, it generates a file <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ⇒ "bool" [ "true" "false" ].<br/>
 </div>
 
@@ -117,7 +111,6 @@ Also, for non-enumeration types (where the constructors take
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ "int"<br/>
 &nbsp;&nbsp;[ "0" "(fun x <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> x + 1)" ]<br/>
 &nbsp;&nbsp;"(fun zero succ n <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>
@@ -130,7 +123,6 @@ We can also extract defined constants to specific OCaml terms or
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">plus</span> ⇒ "( + )".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">mult</span> ⇒ "( * )".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">eqb</span> ⇒ "( = )".<br/>
@@ -149,7 +141,6 @@ Important: It is entirely <i>your responsibility</i> to make sure that
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Extraction</span> "imp2.ml" <span class="id" title="var">ceval_step</span>.<br/>
 </div>
 
@@ -181,7 +172,6 @@ Have a look at the file <span class="inlinecode"><span class="id" title="var">im
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.extraction.ExtrOcamlBasic.html#"><span class="id" title="library">ExtrOcamlBasic</span></a>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.extraction.ExtrOcamlString.html#"><span class="id" title="library">ExtrOcamlString</span></a>.<br/>
 </div>
@@ -191,7 +181,6 @@ We also need one more variant of booleans.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#sumbool"><span class="id" title="inductive">sumbool</span></a> ⇒ "bool" ["true" "false"].<br/>
 </div>
 
@@ -200,7 +189,6 @@ The extraction is the same as always.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Imp.html#"><span class="id" title="library">Imp</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="ImpParser.html#"><span class="id" title="library">ImpParser</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Maps.html#"><span class="id" title="library">Maps</span></a>.<br/>
@@ -246,8 +234,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 </div>
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:16&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:07&nbsp;*)</span><br/>
 </div>
 </div>
 

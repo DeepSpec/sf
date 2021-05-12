@@ -30,12 +30,9 @@
 
 <h1 class="libtitle">QuickChickInterface<span class="subtitle">QuickChick Reference Manual</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">QuickChick</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">QuickChick</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.ZArith.html#"><span class="id" title="library">ZArith</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.Ascii.html#"><span class="id" title="library">Strings.Ascii</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">ExtLib.Structures</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Functor</span> <span class="id" title="library">Applicative</span>.<br/>
@@ -49,7 +46,6 @@ QuickChick provides a large collection of combinators and
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <span class="id" title="keyword">Type</span> <a id="QuickChickSig" class="idref" href="#QuickChickSig"><span class="id" title="module">QuickChickSig</span></a>.<br/>
 </div>
 
@@ -145,7 +141,6 @@ The semantics of a generator is its set of possible outcomes.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Declare Instance</span> <a id="QuickChickSig.Monad_G" class="idref" href="#QuickChickSig.Monad_G"><span class="id" title="instance">Monad_G</span></a> : <span class="id" title="class">Monad</span> <a class="idref" href="QuickChickInterface.html#QuickChickSig.G"><span class="id" title="axiom">G</span></a>.<br/>
 <span class="id" title="keyword">Declare Instance</span> <a id="QuickChickSig.Functor_G" class="idref" href="#QuickChickSig.Functor_G"><span class="id" title="instance">Functor_G</span></a> : <span class="id" title="class">Functor</span> <a class="idref" href="QuickChickInterface.html#QuickChickSig.G"><span class="id" title="axiom">G</span></a>.<br/>
 <span class="id" title="keyword">Declare Instance</span> <a id="QuickChickSig.Applicative_G" class="idref" href="#QuickChickSig.Applicative_G"><span class="id" title="instance">Applicative_G</span></a> : <span class="id" title="class">Applicative</span> <a class="idref" href="QuickChickInterface.html#QuickChickSig.G"><span class="id" title="axiom">G</span></a>.<br/>
@@ -255,7 +250,6 @@ The <span class="inlinecode"><span class="id" title="var">elems_</span></span>, 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="QuickChickSig.QcDefaultNotation" class="idref" href="#QuickChickSig.QcDefaultNotation"><span class="id" title="module">QcDefaultNotation</span></a>.<br/>
 </div>
 
@@ -328,7 +322,6 @@ The original version of QuickChick used <span class="inlinecode"><span class="id
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Existing</span> <span class="id" title="keyword">Class</span> <span class="id" title="var">OrdType</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Declare Instance</span> <a id="QuickChickSig.OrdBool" class="idref" href="#QuickChickSig.OrdBool"><span class="id" title="instance">OrdBool</span></a> : <span class="id" title="class">OrdType</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
 <span class="id" title="keyword">Declare Instance</span> <a id="QuickChickSig.OrdNat" class="idref" href="#QuickChickSig.OrdNat"><span class="id" title="instance">OrdNat</span></a>  : <span class="id" title="class">OrdType</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
@@ -341,7 +334,6 @@ We also expect the random function to be able to pick every element in any
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="var">Existing</span> <span class="id" title="keyword">Class</span> <span class="id" title="var">ChoosableFromInterval</span>.<br/>
 </div>
 
@@ -454,7 +446,6 @@ Here are some basic instances for generators:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Notation</span> <a id="QuickChickSig.:::'genST'_x" class="idref" href="#QuickChickSig.:::'genST'_x"><span class="id" title="notation">&quot;</span></a>'genST' x" := (@<span class="id" title="method">arbitraryST</span> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">_</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70).<br/>
 </div>
 
@@ -840,14 +831,14 @@ Since deciding equalities is a very common requirement in testing,
 <ul class="doclist">
 <li> A paper on deriving QuickChick generators for a large class of
       inductive relations.
-      <a href="https://lemonidas.github.io/pdf/GeneratingGoodGenerators.pdf"><span class="inlineref">https://lemonidas.github.io/pdf/GeneratingGoodGenerators.pdf</span></a>
+      <a href="https://lemonidas.github.io/pdf/GeneratingGoodGenerators.pdf"><span class="inlineref" <a href='https://lemonidas.github.io/pdf/GeneratingGoodGenerators.pdf</span></a>'>https://lemonidas.github.io/pdf/GeneratingGoodGenerators.pdf</span></a></a>
 
 <div class="paragraph"> </div>
 
 
 </li>
 <li> Leo's PhD dissertation.
-      <a href="https://lemonidas.github.io/pdf/Leo-PhD-Thesis.pdf"><span class="inlineref">https://lemonidas.github.io/pdf/Leo-PhD-Thesis.pdf</span></a>
+      <a href="https://lemonidas.github.io/pdf/Leo-PhD-Thesis.pdf"><span class="inlineref" <a href='https://lemonidas.github.io/pdf/Leo-PhD-Thesis.pdf</span></a>'>https://lemonidas.github.io/pdf/Leo-PhD-Thesis.pdf</span></a></a>
 
 <div class="paragraph"> </div>
 
@@ -1092,7 +1083,7 @@ Instead of record updates, you should overwrite extraction constants.  <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">X</span> <span class="id" title="var">ident</span>, <span class="id" title="var">A</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">B</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200).<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="QuickChickInterface.html#QuickChickSig.QcDoNotation"><span class="id" title="module">QcDoNotation</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="QuickChickInterface.html#QuickChickSig"><span class="id" title="module">QuickChickSig</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:31&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:22&nbsp;*)</span><br/>
 </div>
 </div>
 

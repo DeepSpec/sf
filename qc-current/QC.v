@@ -1266,11 +1266,11 @@ Instance genTree {A} `{Gen A} : GenSized (Tree A) :=
 (** **** Exercise: 2 stars, standard (tern_tree_typeclasses)
 
     Add typeclass instances for [GenSized] and [Shrink] so that you
-    can [QuickChick tern_mirror_reverse] directly. *)
+    can [QuickChick tern_mirror_path_flip] directly. *)
 
 (* FILL IN HERE *)
 
-(* QuickChick tern_mirror_reverse.
+(* QuickChick tern_mirror_path_flip.
 
     [] *)
 
@@ -1689,4 +1689,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2021-05-07 15:31 *)
+(* 2021-05-12 01:22 *)

@@ -30,8 +30,6 @@
 
 <h1 class="libtitle">Introduction</h1>
 
-<div class="code">
-</div>
 
 
 <div class="doc">
@@ -45,7 +43,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="remove" class="idref" href="#remove"><span class="id" title="definition">remove</span></a> (<a id="x:1" class="idref" href="#x:1"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:2" class="idref" href="#l:2"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Introduction.html#l:2"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>   ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><br/>
@@ -58,7 +55,6 @@ One possible specification for <span class="inlinecode"><span class="id" title="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Conjecture</span> <a id="removeP" class="idref" href="#removeP"><span class="id" title="axiom">removeP</span></a> : <span class="id" title="keyword">∀</span> <a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> <a id="l:6" class="idref" href="#l:6"><span class="id" title="binder">l</span></a>,  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#In"><span class="id" title="definition">In</span></a> <a class="idref" href="Introduction.html#x:5"><span class="id" title="variable">x</span></a> (<a class="idref" href="Introduction.html#remove"><span class="id" title="definition">remove</span></a> <a class="idref" href="Introduction.html#x:5"><span class="id" title="variable">x</span></a> <a class="idref" href="Introduction.html#l:6"><span class="id" title="variable">l</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">)</span></a>.<br/>
 </div>
 
@@ -79,7 +75,6 @@ One possible specification for <span class="inlinecode"><span class="id" title="
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;QuickChick&nbsp;removeP.&nbsp;*)</span><br/>
 </div>
 
@@ -115,7 +110,6 @@ One possible specification for <span class="inlinecode"><span class="id" title="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="insert" class="idref" href="#insert"><span class="id" title="definition">insert</span></a> <a id="x:8" class="idref" href="#x:8"><span class="id" title="binder">x</span></a> <a id="l:9" class="idref" href="#l:9"><span class="id" title="binder">l</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Introduction.html#l:9"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><a class="idref" href="Introduction.html#x:8"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a><br/>
@@ -130,7 +124,6 @@ Write a property that says "inserting a number <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -147,7 +140,6 @@ Write a property that says "inserting a number <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -215,8 +207,7 @@ Write a property that says "inserting a number <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:31&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:22&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -31,12 +31,9 @@
 
 <h1 class="libtitle">UseTactics: Tactic Library for Coq<span class="subtitle">A Gentle Introduction</span></h1>
 
-<div class="code">
-</div>
 
 <div class="code">
 
-<br/>
 <span class="comment">(*&nbsp;Chapter&nbsp;written&nbsp;and&nbsp;maintained&nbsp;by&nbsp;Arthur&nbsp;Chargueraud&nbsp;*)</span><br/>
 </div>
 
@@ -51,7 +48,6 @@ Coq comes with a set of builtin tactics, such as <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="library">Maps</span>.<br/>
@@ -91,7 +87,7 @@ Remark: SSReflect is another package providing powerful tactics.
     from the "LibTactics" library. It does not aim at presenting all
     the features of "LibTactics". The detailed specification of tactics
     can be found in the source file <span class="inlinecode"><span class="id" title="var">LibTactics.v</span></span>. Further documentation
-    as well as demos can be found at <a href="https://www.chargueraud.org/softs/tlc/"><span class="inlineref">https://www.chargueraud.org/softs/tlc/</span></a>. 
+    as well as demos can be found at <a href="https://www.chargueraud.org/softs/tlc/"><span class="inlineref" <a href='https://www.chargueraud.org/softs/tlc/</span></a>.'>https://www.chargueraud.org/softs/tlc/</span></a>.</a>
 <div class="paragraph"> </div>
 
  In this tutorial, tactics are presented using examples taken from
@@ -102,7 +98,7 @@ Remark: SSReflect is another package providing powerful tactics.
 </div>
 
 <div class="doc">
-<a id="lab540"></a><h1 class="section">Tactics for Naming and Performing Inversion</h1>
+<a id="lab545"></a><h1 class="section">Tactics for Naming and Performing Inversion</h1>
 
 <div class="paragraph"> </div>
 
@@ -118,12 +114,11 @@ Remark: SSReflect is another package providing powerful tactics.
 </div>
 
 <div class="doc">
-<a id="lab541"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">introv</span></span></h2>
+<a id="lab546"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">introv</span></span></h2>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="IntrovExamples" class="idref" href="#IntrovExamples"><span class="id" title="module">IntrovExamples</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
@@ -143,7 +138,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">introv</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="IntrovExamples.ceval_deterministic" class="idref" href="#IntrovExamples.ceval_deterministic"><span class="id" title="lemma">ceval_deterministic</span></a>: <span class="id" title="keyword">∀</span> <a id="c:1" class="idref" href="#c:1"><span class="id" title="binder">c</span></a> <a id="st:2" class="idref" href="#st:2"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:3" class="idref" href="#st<sub>1</sub>:3"><span class="id" title="binder">st<sub>1</sub></span></a> <a id="st<sub>2</sub>:4" class="idref" href="#st<sub>2</sub>:4"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:2"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:1"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:3"><span class="id" title="variable">st<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:2"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:1"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>2</sub>:4"><span class="id" title="variable">st<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -159,7 +153,6 @@ When there is no hypothesis to be named, one can call
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="IntrovExamples.dist_exists_or" class="idref" href="#IntrovExamples.dist_exists_or"><span class="id" title="lemma">dist_exists_or</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:5" class="idref" href="#X:5"><span class="id" title="binder">X</span></a>:<span class="id" title="keyword">Type</span>) (<a id="P:6" class="idref" href="#P:6"><span class="id" title="binder">P</span></a> <a id="Q:7" class="idref" href="#Q:7"><span class="id" title="binder">Q</span></a> : <a class="idref" href="UseTactics.html#X:5"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>),<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:8" class="idref" href="#x:8"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="UseTactics.html#P:6"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:8"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="UseTactics.html#Q:7"><span class="id" title="variable">Q</span></a> <a class="idref" href="UseTactics.html#x:8"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:9" class="idref" href="#x:9"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="UseTactics.html#P:6"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:9"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:10" class="idref" href="#x:10"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="UseTactics.html#Q:7"><span class="id" title="variable">Q</span></a> <a class="idref" href="UseTactics.html#x:10"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -173,7 +166,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">introv</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="IntrovExamples.ceval_deterministic'" class="idref" href="#IntrovExamples.ceval_deterministic'"><span class="id" title="lemma">ceval_deterministic'</span></a>: <span class="id" title="keyword">∀</span> <a id="c:11" class="idref" href="#c:11"><span class="id" title="binder">c</span></a> <a id="st:12" class="idref" href="#st:12"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:13" class="idref" href="#st<sub>1</sub>:13"><span class="id" title="binder">st<sub>1</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="UseTactics.html#st:12"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:11"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:13"><span class="id" title="variable">st<sub>1</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st<sub>2</sub>:14" class="idref" href="#st<sub>2</sub>:14"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
@@ -190,7 +182,6 @@ Like the arguments of <span class="inlinecode"><span class="id" title="tactic">i
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="IntrovExamples.exists_impl" class="idref" href="#IntrovExamples.exists_impl"><span class="id" title="lemma">exists_impl</span></a>: <span class="id" title="keyword">∀</span> <a id="X:15" class="idref" href="#X:15"><span class="id" title="binder">X</span></a> (<a id="P:16" class="idref" href="#P:16"><span class="id" title="binder">P</span></a> : <a class="idref" href="UseTactics.html#X:15"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) (<a id="Q:17" class="idref" href="#Q:17"><span class="id" title="binder">Q</span></a> : <span class="id" title="keyword">Prop</span>) (<a id="R:18" class="idref" href="#R:18"><span class="id" title="binder">R</span></a> : <span class="id" title="keyword">Prop</span>),<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:20" class="idref" href="#x:20"><span class="id" title="binder">x</span></a>, <a class="idref" href="UseTactics.html#P:16"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:20"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#Q:17"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">((</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:19" class="idref" href="#x:19"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="UseTactics.html#P:16"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:19"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#Q:17"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
@@ -207,17 +198,15 @@ Remark: the tactic <span class="inlinecode"><span class="id" title="var">introv<
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="UseTactics.html#IntrovExamples"><span class="id" title="module">IntrovExamples</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab542"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">inverts</span></span></h2>
+<a id="lab547"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">inverts</span></span></h2>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="InvertsExamples" class="idref" href="#InvertsExamples"><span class="id" title="module">InvertsExamples</span></a>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
@@ -243,7 +232,6 @@ The <span class="inlinecode"><span class="id" title="tactic">inversion</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="InvertsExamples.skip_left" class="idref" href="#InvertsExamples.skip_left"><span class="id" title="lemma">skip_left</span></a>: <span class="id" title="keyword">∀</span> <a id="c:21" class="idref" href="#c:21"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">skip</span><span class="id" title="notation">;</span> <a class="idref" href="UseTactics.html#c:21"><span class="id" title="variable">c</span></a><span class="id" title="notation">}&gt;</span> <a class="idref" href="UseTactics.html#c:21"><span class="id" title="variable">c</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -261,7 +249,6 @@ A slightly more interesting example appears next.
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="InvertsExamples.ceval_deterministic" class="idref" href="#InvertsExamples.ceval_deterministic"><span class="id" title="lemma">ceval_deterministic</span></a>: <span class="id" title="keyword">∀</span> <a id="c:22" class="idref" href="#c:22"><span class="id" title="binder">c</span></a> <a id="st:23" class="idref" href="#st:23"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:24" class="idref" href="#st<sub>1</sub>:24"><span class="id" title="binder">st<sub>1</sub></span></a> <a id="st<sub>2</sub>:25" class="idref" href="#st<sub>2</sub>:25"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:23"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:22"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:24"><span class="id" title="variable">st<sub>1</sub></span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:23"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:22"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>2</sub>:25"><span class="id" title="variable">st<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -287,7 +274,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">inverts</span><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="InvertsExamples.ceval_deterministic'" class="idref" href="#InvertsExamples.ceval_deterministic'"><span class="id" title="lemma">ceval_deterministic'</span></a>: <span class="id" title="keyword">∀</span> <a id="c:26" class="idref" href="#c:26"><span class="id" title="binder">c</span></a> <a id="st:27" class="idref" href="#st:27"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:28" class="idref" href="#st<sub>1</sub>:28"><span class="id" title="binder">st<sub>1</sub></span></a> <a id="st<sub>2</sub>:29" class="idref" href="#st<sub>2</sub>:29"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:27"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:26"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:28"><span class="id" title="variable">st<sub>1</sub></span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:27"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:26"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>2</sub>:29"><span class="id" title="variable">st<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -335,7 +321,6 @@ In the particular case where a call to <span class="inlinecode"><span class="id"
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="InvertsExamples.skip_left'" class="idref" href="#InvertsExamples.skip_left'"><span class="id" title="lemma">skip_left'</span></a>: <span class="id" title="keyword">∀</span> <a id="c:30" class="idref" href="#c:30"><span class="id" title="binder">c</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a> <span class="id" title="notation">&lt;{</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">;</span> <a class="idref" href="UseTactics.html#c:30"><span class="id" title="variable">c</span></a><span class="id" title="notation">}&gt;</span> <a class="idref" href="UseTactics.html#c:30"><span class="id" title="variable">c</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -352,7 +337,6 @@ A more involved example appears next. In particular, this example
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="InvertsExamples1" class="idref" href="#InvertsExamples1"><span class="id" title="module">InvertsExamples1</span></a>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="keyword">Types</span>.<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">Stlc</span>.<br/>
@@ -400,7 +384,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab543"></a><h1 class="section">Tactics for N-ary Connectives</h1>
+<a id="lab548"></a><h1 class="section">Tactics for N-ary Connectives</h1>
 
 <div class="paragraph"> </div>
 
@@ -424,7 +408,6 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="NaryExamples" class="idref" href="#NaryExamples"><span class="id" title="module">NaryExamples</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">References</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Smallstep</span>.<br/>
@@ -432,7 +415,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab544"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">splits</span></span></h2>
+<a id="lab549"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">splits</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -443,7 +426,6 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="NaryExamples.demo_splits" class="idref" href="#NaryExamples.demo_splits"><span class="id" title="lemma">demo_splits</span></a> : <span class="id" title="keyword">∀</span> <a id="n:32" class="idref" href="#n:32"><span class="id" title="binder">n</span></a> <a id="m:33" class="idref" href="#m:33"><span class="id" title="binder">m</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#n:32"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="UseTactics.html#n:32"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="UseTactics.html#m:33"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="UseTactics.html#m:33"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="UseTactics.html#n:32"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a>10 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="UseTactics.html#m:33"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> 3.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -452,7 +434,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab545"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">branch</span></span></h2>
+<a id="lab550"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">branch</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -463,7 +445,6 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="NaryExamples.demo_branch" class="idref" href="#NaryExamples.demo_branch"><span class="id" title="lemma">demo_branch</span></a> : <span class="id" title="keyword">∀</span> <a id="n:34" class="idref" href="#n:34"><span class="id" title="binder">n</span></a> <a id="m:35" class="idref" href="#m:35"><span class="id" title="binder">m</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#n:34"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="UseTactics.html#m:35"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="UseTactics.html#n:34"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#m:35"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="UseTactics.html#m:35"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="UseTactics.html#n:34"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -477,7 +458,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab546"></a><h1 class="section">Tactics for Working with Equality</h1>
+<a id="lab551"></a><h1 class="section">Tactics for Working with Equality</h1>
 
 <div class="paragraph"> </div>
 
@@ -509,12 +490,11 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="EqualityExamples" class="idref" href="#EqualityExamples"><span class="id" title="module">EqualityExamples</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab547"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">asserts_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">cuts_rewrite</span></span></h2>
+<a id="lab552"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">asserts_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">cuts_rewrite</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -523,7 +503,6 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="EqualityExamples.mult_0_plus" class="idref" href="#EqualityExamples.mult_0_plus"><span class="id" title="lemma">mult_0_plus</span></a> : <span class="id" title="keyword">∀</span> <a id="n:36" class="idref" href="#n:36"><span class="id" title="binder">n</span></a> <a id="m:37" class="idref" href="#m:37"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a>0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="UseTactics.html#n:36"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:37"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#n:36"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:37"><span class="id" title="variable">m</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -551,7 +530,6 @@ Remark: the syntax <span class="inlinecode"><span class="id" title="var">asserts
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="EqualityExamples.mult_0_plus'" class="idref" href="#EqualityExamples.mult_0_plus'"><span class="id" title="lemma">mult_0_plus'</span></a> : <span class="id" title="keyword">∀</span> <a id="n:38" class="idref" href="#n:38"><span class="id" title="binder">n</span></a> <a id="m:39" class="idref" href="#m:39"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a>0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="UseTactics.html#n:38"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:39"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#n:38"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:39"><span class="id" title="variable">m</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -571,7 +549,6 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="EqualityExamples.mult_0_plus''" class="idref" href="#EqualityExamples.mult_0_plus''"><span class="id" title="lemma">mult_0_plus''</span></a> : <span class="id" title="keyword">∀</span> <a id="u:40" class="idref" href="#u:40"><span class="id" title="binder">u</span></a> <a id="v:41" class="idref" href="#v:41"><span class="id" title="binder">v</span></a> <a id="w:42" class="idref" href="#w:42"><span class="id" title="binder">w</span></a> <a id="x:43" class="idref" href="#x:43"><span class="id" title="binder">x</span></a> <a id="y:44" class="idref" href="#y:44"><span class="id" title="binder">y</span></a> <a id="z:45" class="idref" href="#z:45"><span class="id" title="binder">z</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="UseTactics.html#u:40"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="UseTactics.html#v:41"><span class="id" title="variable">v</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="UseTactics.html#w:42"><span class="id" title="variable">w</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#x:43"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="UseTactics.html#y:44"><span class="id" title="variable">y</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#z:45"><span class="id" title="variable">z</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -582,7 +559,7 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab548"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">substs</span></span></h2>
+<a id="lab553"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">substs</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -592,7 +569,6 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="EqualityExamples.demo_substs" class="idref" href="#EqualityExamples.demo_substs"><span class="id" title="lemma">demo_substs</span></a> : <span class="id" title="keyword">∀</span> <a id="x:50" class="idref" href="#x:50"><span class="id" title="binder">x</span></a> <a id="y:51" class="idref" href="#y:51"><span class="id" title="binder">y</span></a> (<a id="f:52" class="idref" href="#f:52"><span class="id" title="binder">f</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#x:50"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#f:52"><span class="id" title="variable">f</span></a> <a class="idref" href="UseTactics.html#x:50"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#y:51"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#x:50"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -604,7 +580,7 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab549"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">fequals</span></span></h2>
+<a id="lab554"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">fequals</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -615,7 +591,6 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="EqualityExamples.demo_fequals" class="idref" href="#EqualityExamples.demo_fequals"><span class="id" title="lemma">demo_fequals</span></a> : <span class="id" title="keyword">∀</span> (<a id="a:53" class="idref" href="#a:53"><span class="id" title="binder">a</span></a> <a id="b:54" class="idref" href="#b:54"><span class="id" title="binder">b</span></a> <a id="c:55" class="idref" href="#c:55"><span class="id" title="binder">c</span></a> <a id="d:56" class="idref" href="#d:56"><span class="id" title="binder">d</span></a> <a id="e:57" class="idref" href="#e:57"><span class="id" title="binder">e</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="f:58" class="idref" href="#f:58"><span class="id" title="binder">f</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#a:53"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#b:54"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#e:57"><span class="id" title="variable">e</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -628,7 +603,7 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab550"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">applys_eq</span></span></h2>
+<a id="lab555"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">applys_eq</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -644,7 +619,6 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Axiom</span> <a id="EqualityExamples.big_expression_using" class="idref" href="#EqualityExamples.big_expression_using"><span class="id" title="axiom">big_expression_using</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>. <span class="comment">(*&nbsp;Used&nbsp;in&nbsp;the&nbsp;example&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="EqualityExamples.demo_applys_eq_1" class="idref" href="#EqualityExamples.demo_applys_eq_1"><span class="id" title="lemma">demo_applys_eq_1</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:60" class="idref" href="#P:60"><span class="id" title="binder">P</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><span class="id" title="keyword">Prop</span>) <a id="x:61" class="idref" href="#x:61"><span class="id" title="binder">x</span></a> <a id="y:62" class="idref" href="#y:62"><span class="id" title="binder">y</span></a> <a id="z:63" class="idref" href="#z:63"><span class="id" title="binder">z</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#P:60"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:61"><span class="id" title="variable">x</span></a> (<a class="idref" href="UseTactics.html#EqualityExamples.big_expression_using"><span class="id" title="axiom">big_expression_using</span></a> <a class="idref" href="UseTactics.html#z:63"><span class="id" title="variable">z</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -669,7 +643,6 @@ When we have a mismatch on two arguments, we want to produce
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="EqualityExamples.demo_applys_eq_2" class="idref" href="#EqualityExamples.demo_applys_eq_2"><span class="id" title="lemma">demo_applys_eq_2</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:64" class="idref" href="#P:64"><span class="id" title="binder">P</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><span class="id" title="keyword">Prop</span>) <a id="x<sub>1</sub>:65" class="idref" href="#x<sub>1</sub>:65"><span class="id" title="binder">x<sub>1</sub></span></a> <a id="x<sub>2</sub>:66" class="idref" href="#x<sub>2</sub>:66"><span class="id" title="binder">x<sub>2</sub></span></a> <a id="y<sub>1</sub>:67" class="idref" href="#y<sub>1</sub>:67"><span class="id" title="binder">y<sub>1</sub></span></a> <a id="y<sub>2</sub>:68" class="idref" href="#y<sub>2</sub>:68"><span class="id" title="binder">y<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#P:64"><span class="id" title="variable">P</span></a> (<a class="idref" href="UseTactics.html#EqualityExamples.big_expression_using"><span class="id" title="axiom">big_expression_using</span></a> <a class="idref" href="UseTactics.html#x<sub>2</sub>:66"><span class="id" title="variable">x<sub>2</sub></span></a>) (<a class="idref" href="UseTactics.html#EqualityExamples.big_expression_using"><span class="id" title="axiom">big_expression_using</span></a> <a class="idref" href="UseTactics.html#y<sub>2</sub>:68"><span class="id" title="variable">y<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#P:64"><span class="id" title="variable">P</span></a> (<a class="idref" href="UseTactics.html#EqualityExamples.big_expression_using"><span class="id" title="axiom">big_expression_using</span></a> <a class="idref" href="UseTactics.html#x<sub>1</sub>:65"><span class="id" title="variable">x<sub>1</sub></span></a>) (<a class="idref" href="UseTactics.html#EqualityExamples.big_expression_using"><span class="id" title="axiom">big_expression_using</span></a> <a class="idref" href="UseTactics.html#y<sub>1</sub>:67"><span class="id" title="variable">y<sub>1</sub></span></a>).<br/>
@@ -683,7 +656,7 @@ When we have a mismatch on two arguments, we want to produce
 </div>
 
 <div class="doc">
-<a id="lab551"></a><h1 class="section">Some Convenient Shorthands</h1>
+<a id="lab556"></a><h1 class="section">Some Convenient Shorthands</h1>
 
 <div class="paragraph"> </div>
 
@@ -717,12 +690,11 @@ When we have a mismatch on two arguments, we want to produce
 </div>
 
 <div class="doc">
-<a id="lab552"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">unfolds</span></span></h2>
+<a id="lab557"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">unfolds</span></span></h2>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="UnfoldsExample" class="idref" href="#UnfoldsExample"><span class="id" title="module">UnfoldsExample</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Hoare</span>.<br/>
 </div>
@@ -734,7 +706,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">unfolds</span><
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="UnfoldsExample.bexp_eval_true" class="idref" href="#UnfoldsExample.bexp_eval_true"><span class="id" title="lemma">bexp_eval_true</span></a> : <span class="id" title="keyword">∀</span> <a id="b:69" class="idref" href="#b:69"><span class="id" title="binder">b</span></a> <a id="st:70" class="idref" href="#st:70"><span class="id" title="binder">st</span></a>,<br/>
 &nbsp;&nbsp;<span class="id" title="definition">beval</span> <a class="idref" href="UseTactics.html#st:70"><span class="id" title="variable">st</span></a> <a class="idref" href="UseTactics.html#b:69"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="notation">true</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;(<a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="UseTactics.html#b:69"><span class="id" title="variable">b</span></a>) <a class="idref" href="UseTactics.html#st:70"><span class="id" title="variable">st</span></a>.<br/>
@@ -757,12 +728,11 @@ Remark: contrary to the tactic <span class="inlinecode"><span class="id" title="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="UseTactics.html#UnfoldsExample"><span class="id" title="module">UnfoldsExample</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab553"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">false</span></span> and <span class="inlinecode"><span class="id" title="var">tryfalse</span></span></h2>
+<a id="lab558"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">false</span></span> and <span class="inlinecode"><span class="id" title="var">tryfalse</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -774,7 +744,6 @@ Remark: contrary to the tactic <span class="inlinecode"><span class="id" title="
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="demo_false" class="idref" href="#demo_false"><span class="id" title="lemma">demo_false</span></a> : <span class="id" title="keyword">∀</span> <a id="n:71" class="idref" href="#n:71"><span class="id" title="binder">n</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="UseTactics.html#n:71"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#n:71"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
@@ -789,7 +758,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">false</span></s
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="demo_false_arg" class="idref" href="#demo_false_arg"><span class="id" title="lemma">demo_false_arg</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="n:72" class="idref" href="#n:72"><span class="id" title="binder">n</span></a>, <a class="idref" href="UseTactics.html#n:72"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;3 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -806,7 +774,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="demo_tryfalse" class="idref" href="#demo_tryfalse"><span class="id" title="lemma">demo_tryfalse</span></a> : <span class="id" title="keyword">∀</span> <a id="n:73" class="idref" href="#n:73"><span class="id" title="binder">n</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="UseTactics.html#n:73"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#n:73"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
@@ -816,7 +783,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 
 <div class="doc">
-<a id="lab554"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">gen</span></span></h2>
+<a id="lab559"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">gen</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -826,7 +793,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="GenExample" class="idref" href="#GenExample"><span class="id" title="module">GenExample</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Stlc</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">STLC</span>.<br/>
@@ -853,7 +819,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 
 <div class="doc">
-<a id="lab555"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">admits</span></span>, <span class="inlinecode"><span class="id" title="var">admit_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">admit_goal</span></span></h2>
+<a id="lab560"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">admits</span></span>, <span class="inlinecode"><span class="id" title="var">admit_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">admit_goal</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -863,7 +829,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="SkipExample" class="idref" href="#SkipExample"><span class="id" title="module">SkipExample</span></a>.<br/>
 </div>
 
@@ -875,7 +840,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">admits</span></
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="SkipExample.demo_admits" class="idref" href="#SkipExample.demo_admits"><span class="id" title="lemma">demo_admits</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">admits</span> <span class="id" title="var">H</span>: (<span class="id" title="keyword">∀</span> <a id="n:82" class="idref" href="#n:82"><span class="id" title="binder">n</span></a> <a id="m:83" class="idref" href="#m:83"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a>0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="UseTactics.html#n:80"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:81"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#n:80"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:81"><span class="id" title="variable">m</span></a>).<br/>
@@ -888,7 +852,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">admit_rewrite</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="SkipExample.mult_plus_0" class="idref" href="#SkipExample.mult_plus_0"><span class="id" title="lemma">mult_plus_0</span></a> : <span class="id" title="keyword">∀</span> <a id="n:84" class="idref" href="#n:84"><span class="id" title="binder">n</span></a> <a id="m:85" class="idref" href="#m:85"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="UseTactics.html#n:84"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:85"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="UseTactics.html#n:84"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="UseTactics.html#m:85"><span class="id" title="variable">m</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -921,7 +884,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">admit_goal</spa
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="SkipExample.ceval_deterministic" class="idref" href="#SkipExample.ceval_deterministic"><span class="id" title="lemma">ceval_deterministic</span></a>: <span class="id" title="keyword">∀</span> <a id="c:88" class="idref" href="#c:88"><span class="id" title="binder">c</span></a> <a id="st:89" class="idref" href="#st:89"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:90" class="idref" href="#st<sub>1</sub>:90"><span class="id" title="binder">st<sub>1</sub></span></a> <a id="st<sub>2</sub>:91" class="idref" href="#st<sub>2</sub>:91"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:89"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:88"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:90"><span class="id" title="variable">st<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -955,12 +917,11 @@ The tactic <span class="inlinecode"><span class="id" title="var">admit_goal</spa
 </div>
 
 <div class="doc">
-<a id="lab556"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">sort</span></span></h2>
+<a id="lab561"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">sort</span></span></h2>
 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="SortExamples" class="idref" href="#SortExamples"><span class="id" title="module">SortExamples</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
 </div>
@@ -972,7 +933,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Theorem</span> <a id="SortExamples.ceval_deterministic" class="idref" href="#SortExamples.ceval_deterministic"><span class="id" title="lemma">ceval_deterministic</span></a>: <span class="id" title="keyword">∀</span> <a id="c:92" class="idref" href="#c:92"><span class="id" title="binder">c</span></a> <a id="st:93" class="idref" href="#st:93"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:94" class="idref" href="#st<sub>1</sub>:94"><span class="id" title="binder">st<sub>1</sub></span></a> <a id="st<sub>2</sub>:95" class="idref" href="#st<sub>2</sub>:95"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:93"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:92"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:94"><span class="id" title="variable">st<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:93"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:92"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>2</sub>:95"><span class="id" title="variable">st<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -988,7 +948,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 </div>
 
 <div class="doc">
-<a id="lab557"></a><h1 class="section">Tactics for Advanced Lemma Instantiation</h1>
+<a id="lab562"></a><h1 class="section">Tactics for Advanced Lemma Instantiation</h1>
 
 <div class="paragraph"> </div>
 
@@ -1016,7 +976,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 </div>
 
 <div class="doc">
-<a id="lab558"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">lets</span></span></h2>
+<a id="lab563"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">lets</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1043,7 +1003,6 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Module</span> <a id="ExamplesLets" class="idref" href="#ExamplesLets"><span class="id" title="module">ExamplesLets</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Sub</span>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;To&nbsp;illustrate&nbsp;the&nbsp;working&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">lets</span></span>,&nbsp;assume&nbsp;that&nbsp;we&nbsp;want&nbsp;to<br/>
@@ -1065,7 +1024,6 @@ First, assume we have an assumption <span class="inlinecode"><span class="id" ti
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="ExamplesLets.demo_lets_1" class="idref" href="#ExamplesLets.demo_lets_1"><span class="id" title="lemma">demo_lets_1</span></a> : <span class="id" title="keyword">∀</span> (<a id="G:101" class="idref" href="#G:101"><span class="id" title="binder">G</span></a>:<a class="idref" href="Sub.html#context"><span class="id" title="definition">context</span></a>) (<a id="x:102" class="idref" href="#x:102"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="T:103" class="idref" href="#T:103"><span class="id" title="binder">T</span></a>:<a class="idref" href="Sub.html#ty"><span class="id" title="inductive">ty</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#G:101"><span class="id" title="variable">G</span></a> <a class="idref" href="Sub.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="UseTactics.html#x:102"><span class="id" title="variable">x</span></a> <a class="idref" href="Sub.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">\</span></a><a class="idref" href="Sub.html#3b5796de2387691122e67a3516cd710b"><span class="id" title="notation">in</span></a> <a class="idref" href="UseTactics.html#T:103"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
@@ -1091,7 +1049,6 @@ Assume now that we know the values of <span class="inlinecode"><span class="id" 
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="ExamplesLets.demo_lets_2" class="idref" href="#ExamplesLets.demo_lets_2"><span class="id" title="lemma">demo_lets_2</span></a> : <span class="id" title="keyword">∀</span> (<a id="G:104" class="idref" href="#G:104"><span class="id" title="binder">G</span></a>:<a class="idref" href="Sub.html#context"><span class="id" title="definition">context</span></a>) (<a id="x:105" class="idref" href="#x:105"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="T:106" class="idref" href="#T:106"><span class="id" title="binder">T</span></a>:<a class="idref" href="Sub.html#ty"><span class="id" title="inductive">ty</span></a>), <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">x</span> <span class="id" title="var">T</span>.<br/>
@@ -1109,7 +1066,6 @@ Usually, there is only one context <span class="inlinecode"><span class="id" tit
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="ExamplesLets.demo_lets_3" class="idref" href="#ExamplesLets.demo_lets_3"><span class="id" title="lemma">demo_lets_3</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:107" class="idref" href="#x:107"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>), <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
@@ -1124,7 +1080,6 @@ We may go even further by not giving any argument to instantiate
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="ExamplesLets.demo_lets_4" class="idref" href="#ExamplesLets.demo_lets_4"><span class="id" title="lemma">demo_lets_4</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">lets</span> (<span class="id" title="var">S</span> &amp; <span class="id" title="var">Eq</span> &amp; <span class="id" title="var">Sub</span>): <a class="idref" href="UseTactics.html#ExamplesLets.typing_inversion_var"><span class="id" title="axiom">typing_inversion_var</span></a> <a class="idref" href="LibTactics.html#::ltac_scope:'___'"><span class="id" title="notation">___</span></a>.<br/>
@@ -1138,7 +1093,6 @@ Note: if we provide <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="ExamplesLets.demo_lets_5" class="idref" href="#ExamplesLets.demo_lets_5"><span class="id" title="lemma">demo_lets_5</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">lets</span> <span class="id" title="var">H</span>: <a class="idref" href="UseTactics.html#ExamplesLets.typing_inversion_var"><span class="id" title="axiom">typing_inversion_var</span></a>.<br/>
@@ -1155,7 +1109,6 @@ A last useful feature of <span class="inlinecode"><span class="id" title="var">l
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="ExamplesLets.demo_lets_underscore" class="idref" href="#ExamplesLets.demo_lets_underscore"><span class="id" title="lemma">demo_lets_underscore</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="n:108" class="idref" href="#n:108"><span class="id" title="binder">n</span></a> <a id="m:109" class="idref" href="#m:109"><span class="id" title="binder">m</span></a>, <a class="idref" href="UseTactics.html#n:108"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="UseTactics.html#m:109"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#n:108"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="UseTactics.html#m:109"><span class="id" title="variable">m</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a>.<br/>
@@ -1186,12 +1139,11 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="UseTactics.html#ExamplesLets"><span class="id" title="module">ExamplesLets</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab559"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">applys</span></span>, <span class="inlinecode"><span class="id" title="var">forwards</span></span> and <span class="inlinecode"><span class="id" title="var">specializes</span></span></h2>
+<a id="lab564"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">applys</span></span>, <span class="inlinecode"><span class="id" title="var">forwards</span></span> and <span class="inlinecode"><span class="id" title="var">specializes</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1237,11 +1189,9 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
     Examples of use of <span class="inlinecode"><span class="id" title="var">applys</span></span> appear further on. Several examples of
     use of <span class="inlinecode"><span class="id" title="var">forwards</span></span> can be found in the tutorial chapter <a href="UseAuto.html"><span class="inlineref">UseAuto</span></a>. 
 </div>
-<div class="code">
-</div>
 
 <div class="doc">
-<a id="lab560"></a><h1 class="section">Summary</h1>
+<a id="lab565"></a><h1 class="section">Summary</h1>
 
 <div class="paragraph"> </div>
 
@@ -1322,7 +1272,7 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 
     If you are interested in using <span class="inlinecode"><span class="id" title="var">LibTactics.v</span></span> in your own developments,
     make sure you get the lastest version from:
-    <a href="https://www.chargueraud.org/softs/tlc/"><span class="inlineref">https://www.chargueraud.org/softs/tlc/</span></a>.
+    <a href="https://www.chargueraud.org/softs/tlc/"><span class="inlineref" <a href='https://www.chargueraud.org/softs/tlc/</span></a>.'>https://www.chargueraud.org/softs/tlc/</span></a>.</a>
 
 <div class="paragraph"> </div>
 
@@ -1330,8 +1280,7 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:09&nbsp;*)</span><br/>
 </div>
 </div>
 

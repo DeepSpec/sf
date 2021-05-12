@@ -243,8 +243,7 @@ Proof.
 
 (** Prove that adding an element to the beginning of a
     selection-sorted list maintains sortedness, as long as the element
-    is small enough and enough fuel is provided. Proceed by induction
-    on [bl]. *)
+    is small enough and enough fuel is provided. *)
 
 Lemma cons_of_small_maintains_sort: forall bl y n,
     n = length bl ->
@@ -390,4 +389,4 @@ Proof.
 
 
 
-(* 2021-05-07 15:23 *)
+(* 2021-05-12 01:14 *)

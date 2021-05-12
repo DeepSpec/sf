@@ -30,8 +30,6 @@
 
 <h1 class="libtitle">Verif_stack<span class="subtitle">Stack ADT implemented by linked lists</span></h1>
 
-<div class="code">
-</div>
 
 <div class="doc">
 
@@ -111,7 +109,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Require</span> <a class="idref" href="Preface.html#"><span class="id" title="library">VC.Preface</span></a>. <span class="comment">(*&nbsp;Check&nbsp;for&nbsp;the&nbsp;right&nbsp;version&nbsp;of&nbsp;VST&nbsp;*)</span><br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.library</span>.<br/>
@@ -172,7 +169,6 @@
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="malloc_spec_example" class="idref" href="#malloc_spec_example"><span class="id" title="definition">malloc_spec_example</span></a>  :=<br/>
 &nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_malloc</span><br/>
 &nbsp;<span class="id" title="notation">WITH</span> <a id="t:2" class="idref" href="#t:2"><span class="id" title="binder">t</span></a><span class="id" title="notation">:</span><span class="id" title="inductive">type</span><br/>
@@ -221,7 +217,6 @@ If your source program says <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="listrep" class="idref" href="#listrep"><span class="id" title="definition">listrep</span></a> (<a id="il:8" class="idref" href="#il:8"><span class="id" title="binder">il</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:9" class="idref" href="#p:9"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) : <span class="id" title="definition">mpred</span> :=<br/>
 &nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Verif_stack.html#il:8"><span class="id" title="variable">il</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;| <span class="id" title="var">i</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><span class="id" title="var">il'</span> ⇒ <span class="id" title="notation">EX</span> <a id="y:12" class="idref" href="#y:12"><span class="id" title="binder">y</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <br/>
@@ -296,7 +291,6 @@ See if you can remember how to prove this; or look again
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="stack" class="idref" href="#stack"><span class="id" title="definition">stack</span></a> (<a id="il:17" class="idref" href="#il:17"><span class="id" title="binder">il</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:18" class="idref" href="#p:18"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) :=<br/>
 &nbsp;<span class="id" title="notation">EX</span> <a id="q:19" class="idref" href="#q:19"><span class="id" title="binder">q</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span><br/>
 &nbsp;&nbsp;<span class="id" title="axiom">malloc_token</span> <span class="id" title="definition">Ews</span> (<span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_stack</span> <span class="id" title="definition">noattr</span>) <a class="idref" href="Verif_stack.html#p:18"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span> <br/>
@@ -311,7 +305,6 @@ See if you can remember how to prove this; or look again
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Lemma</span> <a id="stack_local_prop" class="idref" href="#stack_local_prop"><span class="id" title="lemma">stack_local_prop</span></a>: <span class="id" title="keyword">∀</span> <a id="il:20" class="idref" href="#il:20"><span class="id" title="binder">il</span></a> <a id="p:21" class="idref" href="#p:21"><span class="id" title="binder">p</span></a>, <a class="idref" href="Verif_stack.html#stack"><span class="id" title="definition">stack</span></a> <a class="idref" href="Verif_stack.html#il:20"><span class="id" title="variable">il</span></a> <a class="idref" href="Verif_stack.html#p:21"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span>  <span class="id" title="notation">!!</span> <span class="id" title="notation">(</span><span class="id" title="definition">isptr</span> <a class="idref" href="Verif_stack.html#p:21"><span class="id" title="variable">p</span></a><span class="id" title="notation">)</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 #[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">stack_local_prop</span> : <span class="id" title="var">saturate_local</span>.<br/><hr class='doublespaceincode'/>
@@ -331,7 +324,6 @@ See if you can remember how to prove this; or look again
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="newstack_spec" class="idref" href="#newstack_spec"><span class="id" title="definition">newstack_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
 &nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_newstack</span><br/>
 &nbsp;<span class="id" title="notation">WITH</span> <a id="gv:25" class="idref" href="#gv:25"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
@@ -364,7 +356,6 @@ Putting all the funspecs together:
 </div>
 <div class="code">
 
-<br/>
 <span class="id" title="keyword">Definition</span> <a id="Gprog" class="idref" href="#Gprog"><span class="id" title="definition">Gprog</span></a> : <span class="id" title="definition">funspecs</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="var">with_library</span> <span class="id" title="definition">prog</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Verif_stack.html#newstack_spec"><span class="id" title="definition">newstack_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_stack.html#push_spec"><span class="id" title="definition">push_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_stack.html#pop_spec"><span class="id" title="definition">pop_spec</span></a><br/>
@@ -451,8 +442,7 @@ Putting all the funspecs together:
 
 <div class="code">
 
-<br/>
-<span class="comment">(*&nbsp;2021-05-07&nbsp;15:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:18&nbsp;*)</span><br/>
 </div>
 </div>
 

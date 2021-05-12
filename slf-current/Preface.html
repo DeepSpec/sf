@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Preface: Introduction to the Course</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/slf.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 6: Separation Logic Foundations</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Preface<span class="subtitle">Introduction to the Course</span></h1>
+
+
+
+<div class="doc">
+<a id="lab1"></a><h1 class="section">Welcome</h1>
+
+<div class="paragraph"> </div>
+
+ This electronic book is Volume 6 of the <i>Software Foundations</i>
+    series, which presents the mathematical underpinnings of reliable
+    software.
+
+<div class="paragraph"> </div>
+
+    In this volume, you will learn about the foundations of Separation
+    Logic, a practical approach to the modular verification of
+    imperative programs. In particular, this volume presents the building
+    blocks for constructing a program verification tool. It does not,
+    however, focus on reasoning about data structures and algorithms using
+    Separation Logic. This aspect is covered to some extent by Volume 5
+    of <i>Software Foundations</i>, which presents Verifiable C, a program logic
+    and proof system for C. For OCaml programs, this aspect will be covered
+    in a yet-to-be-written volume presenting CFML, a tool that builds upon
+    all the techniques presented in this volume.
+
+<div class="paragraph"> </div>
+
+    You are only assumed to understand the material in <i>Software Foundations</i>
+    Volume 1 (<i>Logical Foundations</i>), and the two chapters on Hoare Logic (Hoare
+    and Hoare2) from Software Foundations Volume 2 (<i>PL Foundations</i>). The
+    reading of Volume 5 is not a prerequisite. The exposition here is intended
+    for a broad range of readers, from advanced undergraduates to PhD students
+    and researchers.
+
+<div class="paragraph"> </div>
+
+    A large fraction of the contents of this course is also written up in
+    traditional LaTeX-style presentation, in the ICFP'20 article:
+    <i>Separation Logic for Sequential Programs</i>, by Arthur Charguéraud.
+    The long version of this paper is available from:
+    <a href='http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf'>http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf</a>.
+
+<div class="paragraph"> </div>
+
+    This paper includes, in particular, a 5-page historical survey of
+    contributions to mechanized presentations of Separation Logic, featuring
+    100+ citations. For a broader survey of Separation Logic, we recommend
+    Peter O'Hearn's 2019 survey, which is available from:
+    <a href='https://dl.acm.org/doi/10.1145/3211968'>https://dl.acm.org/doi/10.1145/3211968</a>-- including the
+    <i>supplemental material</i> linked near the bottom of that page. 
+</div>
+
+<div class="doc">
+<a id="lab2"></a><h1 class="section">Separation Logic</h1>
+
+<div class="paragraph"> </div>
+
+ Separation Logic is a <i>program logic</i>: it enables one to establish
+    that a program satisfies its specification. Specifications are expressed
+    using triples of the form <span class="inlinecode">{<span class="id" title="var">H</span>}</span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">{<span class="id" title="var">Q</span>}</span>. Whereas in Hoare logic the
+    precondition <span class="inlinecode"><span class="id" title="var">H</span></span> and the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> describe the whole memory
+    state, in Separation Logic, <span class="inlinecode"><span class="id" title="var">H</span></span> and <span class="inlinecode"><span class="id" title="var">Q</span></span> describe only a fragment of the
+    memory state. This fragment includes the resources necessary to the
+    execution of <span class="inlinecode"><span class="id" title="var">t</span></span>.
+
+<div class="paragraph"> </div>
+
+    A key ingredient of Separation Logic is the frame rule, which enables
+    modular proofs. It is stated as follows.
+<center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">{ H } t { Q }</td>
+  <td class="infrulenamecol" rowspan="3">
+    &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">{ H <span class='gray-font'>\</span>* H' } t { Q <span class='gray-font'>\</span>* H' }</td>
+  <td></td>
+</td>
+</table></center>    The above rule asserts that if a term <span class="inlinecode"><span class="id" title="var">t</span></span> executes correctly with the
+    resources <span class="inlinecode"><span class="id" title="var">H</span></span> and produces <span class="inlinecode"><span class="id" title="var">Q</span></span>, then the term <span class="inlinecode"><span class="id" title="var">t</span></span> admits the same
+    behavior in a larger memory state, described by the union of <span class="inlinecode"><span class="id" title="var">H</span></span>
+    with a disjoint component <span class="inlinecode"><span class="id" title="var">H'</span></span>, producing the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> extended
+    with that same resource <span class="inlinecode"><span class="id" title="var">H'</span></span> unmodified. The star symbol <span class="inlinecode"><span class='gray-font'>\</span>*</span> denotes the
+    <i>separating conjunction</i> operator of Separation Logic.
+
+<div class="paragraph"> </div>
+
+    Separation Logic can be exploited in three kind of tools.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Automated proofs: the user provides only the code, and the tool
+      locates sources of potential bugs. A good automated tool provides
+      feedback that, most of time, is relevant.
+
+</li>
+<li> Semi-automated proofs: the user provides not just the code,
+      but also specifications and invariants. The tool then leverages
+      automated solvers (e.g., SMT solvers) to discharge proof obligations.
+
+</li>
+<li> Interactive proofs: the user provides not just the code and its
+      specifications, but also a detailed proof script justifying the
+      correctness of the code. These proofs may be worked on interactively
+      using a proof assistant such as Coq.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    The present course focuses on the third approach, that is, the integration
+    of Separation Logic in an interactive proof assistant. This approach
+    has been successfully put to practice throughout the world, using
+    various proof assistants (Coq, Isabelle/HOL, HOL), targeting different
+    languages (Assembly, C, SML, OCaml, Rust...), and for verifying various
+    kind of programs, ranging from low-level operating system kernels
+    to high-level data structures and algorithms. 
+</div>
+
+<div class="doc">
+<a id="lab3"></a><h1 class="section">Separation Logic in a proof assistant</h1>
+
+<div class="paragraph"> </div>
+
+ The benefits of exploiting Separation Logic in a proof assistant
+    include at least four major points:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> higher-order logic provides virtually unlimited expressiveness
+      that enables formulating arbitrarily complex specifications and
+      invariants;
+
+</li>
+<li> a proof assistant provides a unified framework to prove both
+      the implementation details of the code and the underlying
+      mathematical results form, e.g., results from theory or graph
+      theory;
+
+</li>
+<li> proof scripts may be easily maintained to reflect on a change
+      to the source code;
+
+</li>
+<li> the fact that Separation Logic is formalized in the proof
+      assistant provides high confidence in the correctness of the tool.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    Pretty much all the tools that leverage Separation Logic in a proof
+    assistant are constructed following the same schema:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> A formalization of the syntax and semantics of the source language.
+      This is called a <i>deep embedding</i> of the programming language.
+
+</li>
+<li> A definition of Separation Logic predicates as predicates from
+      higher-order logic. This is called a <i>shallow embedding</i> of the
+      program logic.
+
+</li>
+<li> A definition of Separation Logic triples as a predicate, the
+      statements of the reasoning rules as lemmas, and the proof of
+      these reasoning rules with respect to the semantics.
+
+</li>
+<li> An infrastructure that consists of lemmas, tactics and notation,
+      allowing for the verification of concrete programs to be carried out
+      through relatively concise proof scripts.
+
+</li>
+<li> Applications of this infrastructure to the verification of concrete
+      programs.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    The purpose of this course is to explain how to set up such a construction.
+    To that end, we consider in this course the simplest possible variant of
+    Separation Logic, and apply it to a minimalistic imperative programming
+    language. The language essentially consists of a lambda-calculus with
+    references. This language admits a simple semantics and avoids in
+    particular the need to distinguish between stack variables and heap-
+    allocated variables. Advanced chapters from the course explains how
+    to add support for loops, records, arrays, and n-ary functions. 
+</div>
+
+<div class="doc">
+<a id="lab4"></a><h1 class="section">Several Possible Depths of Reading</h1>
+
+<div class="paragraph"> </div>
+
+ The material is organized in such a way that it can be easily adapted to
+    the amount of time that the reader is ready to invest in the course.
+
+<div class="paragraph"> </div>
+
+    The course contains 13 chapters, not counting the Preface and Postface.
+    These chapters are organized in 3 major parts, as pictured in the dependency
+    diagram.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> The short curriculum includes only the 5 first chapters (ranging from
+      chapter <a href="Basic.html"><span class="inlineref">Basic</span></a> to chapter <a href="Rules.html"><span class="inlineref">Rules</span></a>).
+
+</li>
+<li> The medium curriculum includes 3 additional chapters (ranging from
+      chapter <a href="WPsem.html"><span class="inlineref">WPsem</span></a> to chapter <a href="Wand.html"><span class="inlineref">Wand</span></a>).
+
+</li>
+<li> The full curriculum includes 5 more chapters (ranging from
+      chapter <a href="Partial.html"><span class="inlineref">Partial</span></a> to chapter <a href="Rich.html"><span class="inlineref">Rich</span></a>).
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    In addition, each chapter is decomposed in three parts.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> The <i>First Pass</i> section presents the most important ideas only.
+      The course in designed in such a way that it is possible to read only
+      the <i>First Pass</i> section of every chapter. The reader may be interested
+      in going through all these sections to get the big picture, before
+      revisiting each chapter in more details.
+
+</li>
+<li> The <i>More Details</i> section presents additional material explaining
+      in more depth the meaning and the consequences of the key results.
+      This section also contains descriptions of the most important proofs.
+      By default, readers would eventually read all this material.
+
+</li>
+<li> The <i>Optional Material</i> section typically contains the remaining
+      proofs, as well as discussions of alternative definitions. The <i>Optional
+      Material</i> sections are all independent from each other. They would
+      typically be of interest to readers who want to understand every detail,
+      readers who are seeking for a deep understanding of a particular notion,
+      and readers who are looking for answers to specific question. 
+</li>
+</ul>
+
+</div>
+
+<div class="doc">
+<a id="lab5"></a><h1 class="section">List of Chapters</h1>
+
+<div class="paragraph"> </div>
+
+ The first two chapters, namely chapters <a href="Basic.html"><span class="inlineref">Basic</span></a> and <a href="Repr.html"><span class="inlineref">Repr</span></a>
+    give a primer on how to prove imperative programs in Separation Logic,
+    thus focusing on the end user's perspective. All the other chapters
+    focus on the implementor's perspective, explaining how Separation Logic
+    is defined and how a practical verification tool can be constructed.
+
+<div class="paragraph"> </div>
+
+    The list of chapters appears below. The numbering corresponds to <i>teaching
+    units</i>: if the chapters were taught as part of a University course, one
+    could presumably aim to cover one teaching unit per week.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> (1) <a href="Basic.html"><span class="inlineref">Basic</span></a>: introduction to the core features of Separation Logic,
+          illustrated using short programs manipulating references.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (1) <a href="Repr.html"><span class="inlineref">Repr</span></a>: introduction to representation predicates in Separation
+          Logic, in particular for describing mutable lists and trees.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (2) <a href="Hprop.html"><span class="inlineref">Hprop</span></a>: definition of the core operators of Separation Logic,
+          of Hoare triples, and of Separation Logic triples.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (2) <a href="Himpl.html"><span class="inlineref">Himpl</span></a>: definition of the entailment relation, statement and
+          proofs of its fundamental properties, and description of the
+          simplification tactic for entailment.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (3) <a href="Rules.html"><span class="inlineref">Rules</span></a>: statement and proofs of the reasoning rules of
+          Separation Logic, and example proofs of programs using these rules.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (4) <a href="WPsem.html"><span class="inlineref">WPsem</span></a>: definition of the semantic notion of weakest
+          precondition, and statement of rules in weakest-precondition style.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (4) <a href="WPgen.html"><span class="inlineref">WPgen</span></a>: presentation of a function that effectively computes
+          the weakest precondition of a term, independently of its
+          specification.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (5) <a href="Wand.html"><span class="inlineref">Wand</span></a>: introduction of the magic wand operator and of the
+          ramified frame rule, and extension of the weakest-precondition
+          generator for handling local function definitions.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (5) <a href="Affine.html"><span class="inlineref">Affine</span></a>: description of a generalization of Separation Logic
+          with affine heap predicates, which are useful, in particular, for
+          handling garbage-collected programming languages.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (6) <a href="Struct.html"><span class="inlineref">Struct</span></a>: specification of array and record operations, and
+          encoding of these operations using pointer arithmetic.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (6) <a href="Rich.html"><span class="inlineref">Rich</span></a>: description of the treatment of additional language
+          constructs, including loops, assertions, and n-ary functions.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (7) <a href="Nondet.html"><span class="inlineref">Nondet</span></a>: definition of triples for non-deterministic
+          programming languages.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> (7) <a href="Partial.html"><span class="inlineref">Partial</span></a>: definition of triples for partial correctness
+          only, i.e., for not requiring termination proofs. 
+</li>
+</ul>
+
+</div>
+
+<div class="doc">
+<a id="lab6"></a><h1 class="section">Other Distributed Files</h1>
+
+<div class="paragraph"> </div>
+
+ The chapters listed above depend on a number of auxiliary files, which
+    the reader does not need to go through, but might be interested in
+    looking at, either by curiosity, or for checking out a specific
+    implementation detail.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <a href="LibSepReference.html"><span class="inlineref">LibSepReference</span></a>: a long file that defines the program
+      verification tool that is used in the first two chapters, and
+      whose implementation is discussed throughout the other chapters.
+      Each chapter from the course imports this module, as opposed to
+      importing the chapters that precedes it.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <a href="LibSepVar.html"><span class="inlineref">LibSepVar</span></a>: a formalization of program variables, together with
+      a bunch of notations for parsing variables.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <a href="LibSepFmap.html"><span class="inlineref">LibSepFmap</span></a>: a formalization of finite maps, which are used for
+      representing the memory state.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <a href="LibSepSimpl.html"><span class="inlineref">LibSepSimpl</span></a>: a functor that implements a powerful tactic for
+      automatically simplifying entailments in Separation Logic.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <a href="LibSepMinimal.html"><span class="inlineref">LibSepMinimal</span></a>: a minimalistic formalization of a soundness
+      proof for Separation Logic, corresponding to the definitions and proofs
+      presented in the ICFP'20 paper mentioned earlier.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> All other <span class="inlinecode"><span class="id" title="var">Lib</span>*</span> files are imports from the TLC library,
+      which is described next. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ The TLC library is a collection of general purpose theory and tactics
+    developed over the years by Arthur Charguéraud. The TLC library is
+    exploited in this course to streamline the presentation. TLC provides,
+    in particular, extensions for classical logic and tactics that are
+    particularly well-suited for meta-theory. Prior knowledge of TLC is not
+    required, and all exercises can be completed without using TLC tactics.
+
+<div class="paragraph"> </div>
+
+    The classical logic aspects of TLC are presented at the moment they
+    appear in the course. The TLC tactics are also briefly described upon
+    their first occurrence. Moreover, most of these tactics are presented
+    in the chapter <a href="https://softwarefoundations.cis.upenn.edu/plf-current/UseTactics.html"><span class="inlineref">UseTactics</span></a> of Software Foundations Volume 2
+    (<i>Programming Language Foundations</i>). 
+</div>
+
+<div class="doc">
+<a id="lab7"></a><h1 class="section">Practicalities</h1>
+
+</div>
+
+<div class="doc">
+<a id="lab8"></a><h2 class="section">Feedback Welcome</h2>
+
+<div class="paragraph"> </div>
+
+ If you intend to use this course either in class of for self-study,
+    the author, Arthur Charguéraud, would love to hear from you. Just
+    knowing in which context the course has been used and how much of
+    the course students were able to cover is very valuable information.
+
+<div class="paragraph"> </div>
+
+    If you plan on providing any non-small amount of feedback, do not
+    hesitate to ask the author to be added as contributor to the
+    github repository. In particular, please do not hesitate to improve
+    the formulation of the English sentences throughout this volume,
+    as the author is not a native speaker. 
+</div>
+
+<div class="doc">
+<a id="lab9"></a><h2 class="section">Exercises</h2>
+
+<div class="paragraph"> </div>
+
+ Each chapter includes numerous exercises.  The star rating scheme
+    is described in the <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Preface.html"><span class="inlineref">Preface</span></a> of Software Foundations Volume 1
+    (<i>Logical Foundations</i>).
+
+<div class="paragraph"> </div>
+
+    <i>Disclaimer</i>: the difficulty ratings currently in place are highly
+    speculative! You feedback is very much welcome.
+
+<div class="paragraph"> </div>
+
+    <i>Disclaimer</i>: the auto-grading system has not been tested for this
+    volume. If you are interested in using auto-grading for this
+    volume, please contact the author. 
+</div>
+
+<div class="doc">
+<a id="lab10"></a><h2 class="section">System Requirements</h2>
+
+<div class="paragraph"> </div>
+
+ The <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Preface.html"><span class="inlineref">Preface</span></a> of Software Foundations Volume 1 (<i>Logical
+    Foundations</i>) describes how to install Coq. The files you are
+    reading have been tested with Coq 8.12. 
+</div>
+
+<div class="doc">
+<a id="lab11"></a><h2 class="section">Note for CoqIDE Users</h2>
+
+<div class="paragraph"> </div>
+
+ CoqIDE typically works better with its <i>asynchronous</i> proof mode disabled.
+    To load all the course files in CoqIDE, use the following command line.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">Basic.v</span> &amp;
+<div class="paragraph"> </div>
+
+</span>
+</div>
+
+<div class="doc">
+<a id="lab12"></a><h2 class="section">Recommended Citation Format</h2>
+
+<div class="paragraph"> </div>
+
+ If you want to refer to this volume in your own writing, please
+    do so as follows:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;@<span class="id" title="var">book</span>            {Charguéraud:<span class="id" title="var">SF</span>6,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">author</span>       =   {Arthur Charguéraud},<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">title</span>        =   "Separation Logic Foundations",<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">series</span>       =   "Software Foundations",<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">volume</span>       =   "6",<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">year</span>         =   "2021",<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">publisher</span>    =   "Electronic textbook",<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">note</span>         =   {<span class="id" title="var">Version</span> 1.0, \<span class="id" title="var">URL</span>{<span class="id" title="var">http</span>://<span class="id" title="var">softwarefoundations.cis.upenn.edu</span>} },<br/>
+&nbsp;&nbsp;&nbsp;}
+<div class="paragraph"> </div>
+
+</span>
+</div>
+
+<div class="doc">
+<a id="lab13"></a><h1 class="section">Thanks</h1>
+
+<div class="paragraph"> </div>
+
+ The development of the technical infrastructure for the <i>Software
+    Foundations</i> series has been supported, in part, by the National Science
+    Foundation under the NSF Expeditions grant 1521523, <i>The Science of Deep
+    Specification</i>. 
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2021-05-12&nbsp;01:22&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
