@@ -1272,4 +1272,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     higher-order programs may be found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-05-12 01:22 *)
+(* 2021-05-18 18:14 *)

@@ -1129,4 +1129,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     Separation Logic predicates are directly inspired from those introduced in
     the Ynot project (2006-2008). See chapter [Postface] for references. *)
 
-(* 2021-05-12 01:22 *)
+(* 2021-05-18 18:14 *)

@@ -1292,4 +1292,4 @@ End PrimitiveNaryFun.
     iterations, has appeared independently in work by [Charguéraud 2010] (in Bib.v)
     and [Tuerk 2010] (in Bib.v). *)
 
-(* 2021-05-12 01:22 *)
+(* 2021-05-18 18:14 *)
