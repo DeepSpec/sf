@@ -73,6 +73,3 @@ workflows:
           name: Coq 8.13
           coq: '8.13'
           vc: true
-      - build:
-          name: Coq dev
-          coq: 'latest'
