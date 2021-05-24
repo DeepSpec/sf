@@ -46,7 +46,7 @@
 </div>
 
 <div class="doc">
-<a id="lab248"></a><h1 class="section">First Pass</h1>
+<a id="lab251"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -132,8 +132,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> (<span class="id" title="tactic">subst</span> <span class="id" title="var">x</span> <span class="id" title="var">v</span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    From there, to obtain the actual definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span>, we need to
     refine the above definition in four steps.
 
@@ -172,8 +170,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">v</span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -200,8 +196,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">v</span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -220,8 +214,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">wpgen_let</span> (<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">v</span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    Each of the auxiliary definitions introduced comes with a custom notation
     that enables a nice display of the output of <span class="inlinecode"><span class="id" title="var">wpgen</span></span>. For example, we set
     up the notation <span class="inlinecode"><span class="id" title="var">Let'</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">F<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="var">F<sub>2</sub></span></span> to stand for
@@ -250,8 +242,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_val</span> <span class="id" title="var">v</span> ⇒ ...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>).
-<div class="paragraph"> </div>
-
 </span>    Without entering the details, the predicate <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> is a function
     of type <span class="inlinecode"><span class="id" title="var">formula</span>→<span class="id" title="var">formula</span></span> that captures the essence of the wp-style
     consequence-frame structural rule. This rule, called <span class="inlinecode"><span class="id" title="var">wp_conseq_frame</span></span>
@@ -276,12 +266,12 @@
 </div>
 
 <div class="doc">
-<a id="lab249"></a><h1 class="section">More Details</h1>
+<a id="lab252"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab250"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Term Rules</h2>
+<a id="lab253"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Term Rules</h2>
 
 <div class="paragraph"> </div>
 
@@ -306,8 +296,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_fix</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> ⇒ ..<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_if</span> <span class="id" title="var">v<sub>0</sub></span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ ..<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>).
-<div class="paragraph"> </div>
-
 </span>    Our first goal is to figure out how to fill in the dots for each of the
     term constructors.
 
@@ -317,8 +305,6 @@
     for <span class="inlinecode"><span class="id" title="var">wpgen</span></span>, which takes the following form:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">wpgen</span> <span class="id" title="var">t</span> <span class="id" title="var">Q</span> ==&gt; <span class="id" title="var">wp</span> <span class="id" title="var">t</span> <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>    This entailment asserts in particular that, if we are able to establish
     a statement of the form <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">==&gt;</span> <span class="inlinecode"><span class="id" title="var">wpgen</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, then we can derive from it
     <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">==&gt;</span> <span class="inlinecode"><span class="id" title="var">wp</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>. The latter is also equivalent to <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>.
@@ -333,7 +319,7 @@
 </div>
 
 <div class="doc">
-<a id="lab251"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Values</h3>
+<a id="lab254"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Values</h3>
 
 <div class="paragraph"> </div>
 
@@ -363,13 +349,11 @@ The soundness theorem for <span class="inlinecode"><span class="id" title="var">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_val</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">Q</span> <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab252"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Functions</h3>
+<a id="lab255"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Functions</h3>
 
 <div class="paragraph"> </div>
 
@@ -393,8 +377,6 @@ So, likewise, we can define <span class="inlinecode"><span class="id" title="var
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_fun</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span>   ⇒ <span class="id" title="var">Q</span> (<span class="id" title="var">val_fun</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_fix</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> ⇒ <span class="id" title="var">Q</span> (<span class="id" title="var">val_fix</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -410,7 +392,7 @@ So, likewise, we can define <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab253"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Sequence</h3>
+<a id="lab256"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Sequence</h3>
 
 <div class="paragraph"> </div>
 
@@ -438,13 +420,11 @@ The intention is for <span class="inlinecode"><span class="id" title="var">wpgen
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_seq</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab254"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Let-Bindings</h3>
+<a id="lab257"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Let-Bindings</h3>
 
 <div class="paragraph"> </div>
 
@@ -465,8 +445,6 @@ We fill in the dots as follows:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> (<span class="id" title="tactic">subst</span> <span class="id" title="var">x</span> <span class="id" title="var">v</span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>    One important observation to make at this point is that the
     function <span class="inlinecode"><span class="id" title="var">wpgen</span></span> is no longer structurally recursive. Indeed,
     while the first recursive call to <span class="inlinecode"><span class="id" title="var">wpgen</span></span> is invoked on <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span>, which
@@ -484,7 +462,7 @@ We fill in the dots as follows:
 </div>
 
 <div class="doc">
-<a id="lab255"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Variables</h3>
+<a id="lab258"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Variables</h3>
 
 <div class="paragraph"> </div>
 
@@ -518,8 +496,6 @@ We fill in the dots as follows:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_var</span> <span class="id" title="var">x</span> ⇒ <span class='gray-font'>\</span>[<span class="id" title="var">False</span>]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -548,7 +524,7 @@ All these rules are correct, albeit totally useless.
 </div>
 
 <div class="doc">
-<a id="lab256"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Function Applications</h3>
+<a id="lab259"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Function Applications</h3>
 
 <div class="paragraph"> </div>
 
@@ -574,24 +550,16 @@ All these rules are correct, albeit totally useless.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_app</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span> ⇒ <span class="id" title="var">wp</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span>) <span class="id" title="var">Q</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>    As we carry out verification proofs in practice, when reaching
     an application we will face a goal of the form:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> ==&gt; <span class="id" title="var">wpgen</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span>) <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>    By revealing the definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> on applications, we get:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> ==&gt; <span class="id" title="var">wp</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span>) <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>    Then, by exploiting the equivalence with triples, we obtain:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">triple</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span>) <span class="id" title="var">H</span> <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>    Such a proof obligation can be discharged by invoking a specification
     triple for the function <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span>.
 
@@ -609,9 +577,9 @@ All these rules are correct, albeit totally useless.
     to map all these terms to <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">False</span>]</span>. In the specific case of an
     application of the form <span class="inlinecode"><span class="id" title="var">trm_app</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span> where <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span> are
     not both values, it is still correct to define <span class="inlinecode"><span class="id" title="var">wpgen</span></span> <span class="inlinecode">(<span class="id" title="var">trm_app</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span>))</span>
-    <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode">[<span class="id" title="var">wp</span></span> <span class="inlinecode">(<span class="id" title="var">trm_app</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span>)].</span> <span class="inlinecode"><span class="id" title="var">So</span>,</span> <span class="inlinecode"><span class="id" title="var">we</span></span> <span class="inlinecode"><span class="id" title="var">need</span></span> <span class="inlinecode"><span class="id" title="var">not</span></span> <span class="inlinecode"><span class="id" title="var">bother</span></span> <span class="inlinecode"><span class="id" title="var">checking</span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="var">the</span></span>
-    <span class="inlinecode"><span class="id" title="var">definition</span></span> <span class="inlinecode"><span class="id" title="keyword">of</span></span> <span class="inlinecode">[<span class="id" title="var">wpgen</span>]</span> <span class="inlinecode"><span class="id" title="var">that</span></span> <span class="inlinecode"><span class="id" title="var">the</span></span> <span class="inlinecode"><span class="id" title="var">arguments</span></span> <span class="inlinecode"><span class="id" title="keyword">of</span></span> <span class="inlinecode">[<span class="id" title="var">trm_app</span>]</span> <span class="inlinecode"><span class="id" title="var">are</span></span> <span class="inlinecode"><span class="id" title="var">actually</span></span>
-    <span class="inlinecode"><span class="id" title="var">values</span>.</span> <span class="inlinecode"></span>
+    as <span class="inlinecode"><span class="id" title="var">wp</span></span> <span class="inlinecode">(<span class="id" title="var">trm_app</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span>)</span>. So, we need not bother checking in the
+    definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> that the arguments of <span class="inlinecode"><span class="id" title="var">trm_app</span></span> are actually
+    values. 
 <div class="paragraph"> </div>
 
  Thus, the most concise definition for <span class="inlinecode"><span class="id" title="var">wpgen</span></span> on applications is:
@@ -621,13 +589,11 @@ All these rules are correct, albeit totally useless.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_app</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒ <span class="id" title="var">wp</span> <span class="id" title="var">t</span> <span class="id" title="var">Q</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab257"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Conditionals</h3>
+<a id="lab260"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Conditionals</h3>
 
 <div class="paragraph"> </div>
 
@@ -668,13 +634,11 @@ We need to define <span class="inlinecode"><span class="id" title="var">wpgen</s
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='gray-font'>\</span><span class="id" title="tactic">∃</span> (<span class="id" title="var">b</span>:<span class="id" title="var">bool</span>), <span class='gray-font'>\</span>[<span class="id" title="var">t<sub>0</sub></span> = <span class="id" title="var">trm_val</span> (<span class="id" title="var">val_bool</span> <span class="id" title="var">b</span>)]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='gray-font'>\</span>* (<span class="id" title="keyword">if</span> <span class="id" title="var">b</span> <span class="id" title="keyword">then</span> (<span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>1</sub></span>) <span class="id" title="var">Q</span> <span class="id" title="keyword">else</span> (<span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab258"></a><h3 class="section">Summary of the Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Term Rules</h3>
+<a id="lab261"></a><h3 class="section">Summary of the Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Term Rules</h3>
 
 <div class="paragraph"> </div>
 
@@ -693,15 +657,13 @@ We need to define <span class="inlinecode"><span class="id" title="var">wpgen</s
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='gray-font'>\</span><span class="id" title="tactic">∃</span> (<span class="id" title="var">b</span>:<span class="id" title="var">bool</span>), <span class='gray-font'>\</span>[<span class="id" title="var">t<sub>0</sub></span> = <span class="id" title="var">trm_val</span> (<span class="id" title="var">val_bool</span> <span class="id" title="var">b</span>)]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='gray-font'>\</span>* (<span class="id" title="keyword">if</span> <span class="id" title="var">b</span> <span class="id" title="keyword">then</span> (<span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>1</sub></span>) <span class="id" title="var">Q</span> <span class="id" title="keyword">else</span> (<span class="id" title="var">wpgen</span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    As pointed out earlier, this definition is not structurally recursive
     and thus not accepted by Coq, due to the recursive call
     <span class="inlinecode"><span class="id" title="var">wpgen</span></span> <span class="inlinecode">(<span class="id" title="tactic">subst</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span>)</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>. Our next step is to fix this issue. 
 </div>
 
 <div class="doc">
-<a id="lab259"></a><h2 class="section">Computing with <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
+<a id="lab262"></a><h2 class="section">Computing with <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -724,7 +686,7 @@ We need to define <span class="inlinecode"><span class="id" title="var">wpgen</s
 </div>
 
 <div class="doc">
-<a id="lab260"></a><h3 class="section">Definition of Contexts and Operations on Them</h3>
+<a id="lab263"></a><h3 class="section">Definition of Contexts and Operations on Them</h3>
 
 <div class="paragraph"> </div>
 
@@ -832,7 +794,7 @@ Remark: it is also possible to define the substitution by iterating
 </div>
 
 <div class="doc">
-<a id="lab261"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Let-Binding Case</h3>
+<a id="lab264"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Let-Binding Case</h3>
 
 <div class="paragraph"> </div>
 
@@ -851,13 +813,11 @@ Remark: it is also possible to define the substitution by iterating
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">v</span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) <span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab262"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Variable Case</h3>
+<a id="lab265"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Variable Case</h3>
 
 <div class="paragraph"> </div>
 
@@ -887,13 +847,11 @@ Remark: it is also possible to define the substitution by iterating
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) <span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab263"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Application Case</h3>
+<a id="lab266"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Application Case</h3>
 
 <div class="paragraph"> </div>
 
@@ -918,13 +876,11 @@ Remark: it is also possible to define the substitution by iterating
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_app</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span> ⇒ <span class="id" title="var">wp</span> (<span class="id" title="var">isubst</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab264"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Function Definition Case</h3>
+<a id="lab267"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: the Function Definition Case</h3>
 
 <div class="paragraph"> </div>
 
@@ -955,13 +911,11 @@ Remark: it is also possible to define the substitution by iterating
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_fix</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> ⇒ <span class="id" title="keyword">fun</span> <span class="id" title="var">Q</span> ⇒ <span class="id" title="var">Q</span> (<span class="id" title="var">val_fix</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> (<span class="id" title="var">isubst</span> (<span class="id" title="var">rem</span> <span class="id" title="var">x</span> (<span class="id" title="var">rem</span> <span class="id" title="var">f</span> <span class="id" title="var">E</span>)) <span class="id" title="var">t<sub>1</sub></span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) <span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab265"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: at Last, an Executable Function</h3>
+<a id="lab268"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">wpgen</span></span>: at Last, an Executable Function</h3>
 
 </div>
 <div class="code">
@@ -1061,7 +1015,7 @@ Reformulating the rule above into a rule for <span class="inlinecode"><span clas
 </div>
 
 <div class="doc">
-<a id="lab266"></a><h3 class="section">Executing <span class="inlinecode"><span class="id" title="var">wpgen</span></span> on a Concrete Program</h3>
+<a id="lab269"></a><h3 class="section">Executing <span class="inlinecode"><span class="id" title="var">wpgen</span></span> on a Concrete Program</h3>
 
 </div>
 <div class="code">
@@ -1117,7 +1071,7 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 </div>
 
 <div class="doc">
-<a id="lab267"></a><h2 class="section">Optimizing the Readability of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Output</h2>
+<a id="lab270"></a><h2 class="section">Optimizing the Readability of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Output</h2>
 
 <div class="paragraph"> </div>
 
@@ -1144,7 +1098,7 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 </div>
 
 <div class="doc">
-<a id="lab268"></a><h3 class="section">Reability Step 1: Moving the Function below the Branches.</h3>
+<a id="lab271"></a><h3 class="section">Reability Step 1: Moving the Function below the Branches.</h3>
 
 <div class="paragraph"> </div>
 
@@ -1157,8 +1111,6 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 &nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_fun</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span>  ⇒  <span class="id" title="var">Q</span> (<span class="id" title="var">val_fun</span> <span class="id" title="var">x</span> (<span class="id" title="var">isubst</span> (<span class="id" title="var">rem</span> <span class="id" title="var">x</span> <span class="id" title="var">E</span>) <span class="id" title="var">t<sub>1</sub></span>))<br/>
 &nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    to the equivalent form:
 <br/>
 <span class="inlinecode">&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">wpgen</span> (<span class="id" title="var">E</span>:<span class="id" title="var">ctx</span>) (<span class="id" title="var">t</span>:<span class="id" title="var">trm</span>) : (<span class="id" title="var">val</span>→<span class="id" title="var">hprop</span>)<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span><span class="id" title="var">hprop</span> :=<br/>
@@ -1167,8 +1119,6 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 &nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_fun</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span>  ⇒  <span class="id" title="keyword">fun</span> (<span class="id" title="var">Q</span>:<span class="id" title="var">val</span>→<span class="id" title="var">hprop</span>) ⇒ <span class="id" title="var">Q</span> (<span class="id" title="var">val_fun</span> <span class="id" title="var">x</span> (<span class="id" title="var">isubst</span> (<span class="id" title="var">rem</span> <span class="id" title="var">x</span> <span class="id" title="var">E</span>) <span class="id" title="var">t<sub>1</sub></span>))<br/>
 &nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1181,7 +1131,7 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 </div>
 
 <div class="doc">
-<a id="lab269"></a><h3 class="section">Readability Steps 2 and 3, Illustrated on the Case of Sequences</h3>
+<a id="lab272"></a><h3 class="section">Readability Steps 2 and 3, Illustrated on the Case of Sequences</h3>
 
 <div class="paragraph"> </div>
 
@@ -1194,8 +1144,6 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_seq</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒  <span class="id" title="keyword">fun</span> <span class="id" title="var">Q</span> ⇒ (<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    to the equivalent form:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">wpgen</span> (<span class="id" title="var">E</span>:<span class="id" title="var">ctx</span>) (<span class="id" title="var">t</span>:<span class="id" title="var">trm</span>) : <span class="id" title="var">formula</span> :=<br/>
@@ -1204,8 +1152,6 @@ The goal takes the form <span class="inlinecode"><span class="id" title="var">H<
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_seq</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> ⇒  <span class="id" title="var">wpgen_seq</span> (<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span>) (<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    where <span class="inlinecode"><span class="id" title="var">wpgen_seq</span></span> is defined as shown below.
 
 </div>
@@ -1227,7 +1173,7 @@ Remark: above, <span class="inlinecode"><span class="id" title="var">F<sub>1</su
 
  Finally, we introduce a piece of notation for each case. In the case
     of the sequence, we set up the notation defined next to so that any
-    formula of the form <span class="inlinecode"><span class="id" title="var">wpgen_seq</span></span> <span class="inlinecode"><span class="id" title="var">F<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">F<sub>2</sub></span></span> gets displayed as <span class="inlinecode"><span class="id" title="var">Seq</span></span> <span class="inlinecode"><span class="id" title="var">F<sub>1</sub></span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="var">F<sub>2</sub></span></span> <span class="inlinecode"></span>.  
+    formula of the form <span class="inlinecode"><span class="id" title="var">wpgen_seq</span></span> <span class="inlinecode"><span class="id" title="var">F<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">F<sub>2</sub></span></span> gets displayed as <span class="inlinecode"><span class="id" title="var">Seq</span></span> <span class="inlinecode"><span class="id" title="var">F<sub>1</sub></span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="var">F<sub>2</sub></span></span> <span class="inlinecode"></span>. 
 </div>
 <div class="code">
 
@@ -1244,7 +1190,7 @@ Thanks to this notation, the <span class="inlinecode"><span class="id" title="va
 </div>
 
 <div class="doc">
-<a id="lab270"></a><h3 class="section">Readability Step 2: Auxiliary Definitions for other Constructs</h3>
+<a id="lab273"></a><h3 class="section">Readability Step 2: Auxiliary Definitions for other Constructs</h3>
 
 <div class="paragraph"> </div>
 
@@ -1305,7 +1251,7 @@ This definition is, up to unfolding of the new intermediate definitions,
 </div>
 
 <div class="doc">
-<a id="lab271"></a><h3 class="section">Readability Step 3: Notation for Auxiliary Definitions</h3>
+<a id="lab274"></a><h3 class="section">Readability Step 3: Notation for Auxiliary Definitions</h3>
 
 <div class="paragraph"> </div>
 
@@ -1353,7 +1299,7 @@ In addition, we introduce handy notation of the result of <span class="inlinecod
 </div>
 
 <div class="doc">
-<a id="lab272"></a><h3 class="section">Test of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> with Notation.</h3>
+<a id="lab275"></a><h3 class="section">Test of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> with Notation.</h3>
 
 <div class="paragraph"> </div>
 
@@ -1383,8 +1329,6 @@ Up to proper tabulation, alpha-renaming, and removal of
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <span class="id" title="var">n</span> := <span class="id" title="var">App</span> <span class="id" title="var">val_get</span> <span class="id" title="var">p</span> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Let</span> <span class="id" title="var">m</span> := <span class="id" title="var">App</span> (<span class="id" title="var">val_add</span> <span class="id" title="var">n</span>) 1 <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">App</span> (<span class="id" title="var">val_set</span> <span class="id" title="var">p</span>) <span class="id" title="var">m</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1400,7 +1344,7 @@ Up to proper tabulation, alpha-renaming, and removal of
 </div>
 
 <div class="doc">
-<a id="lab273"></a><h2 class="section">Extension of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> to Handle Structural Rules</h2>
+<a id="lab276"></a><h2 class="section">Extension of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> to Handle Structural Rules</h2>
 
 <div class="paragraph"> </div>
 
@@ -1429,7 +1373,7 @@ Up to proper tabulation, alpha-renaming, and removal of
 </div>
 
 <div class="doc">
-<a id="lab274"></a><h3 class="section">Introduction of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> in the Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h3>
+<a id="lab277"></a><h3 class="section">Introduction of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> in the Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1473,8 +1417,6 @@ We would like <span class="inlinecode"><span class="id" title="var">wpgen</span>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">trm_val</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">wpgen_val</span> <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>).
-<div class="paragraph"> </div>
-
 </span>    The interest of the insertion of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> above is that every result
     of a computation of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> on a concrete term <span class="inlinecode"><span class="id" title="var">t</span></span> is, by construction,
     of the form <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> <span class="inlinecode"><span class="id" title="var">F</span></span> for some argument <span class="inlinecode"><span class="id" title="var">F</span></span>.
@@ -1485,7 +1427,7 @@ We would like <span class="inlinecode"><span class="id" title="var">wpgen</span>
 </div>
 
 <div class="doc">
-<a id="lab275"></a><h3 class="section">Properties of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
+<a id="lab278"></a><h3 class="section">Properties of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
 
 </div>
 <div class="code">
@@ -1547,7 +1489,7 @@ Moreover, <span class="inlinecode"><span class="id" title="var">mkstruct</span><
 </div>
 
 <div class="doc">
-<a id="lab276"></a><h3 class="section">Realization of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
+<a id="lab279"></a><h3 class="section">Realization of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1631,7 +1573,7 @@ Another interesting property of <span class="inlinecode"><span class="id" title=
     framing on <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span> is equivalent to framing on <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span>). 
 <div class="paragraph"> </div>
 
-<a id="lab277"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (mkstruct_idempotent)</h4>
+<a id="lab280"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (mkstruct_idempotent)</h4>
  Complete the proof of the idempotence of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span>.
     Hint: leverage <span class="inlinecode"><span class="id" title="var">xpull</span></span> and <span class="inlinecode"><span class="id" title="var">xsimpl</span></span>. 
 </div>
@@ -1647,7 +1589,7 @@ Another interesting property of <span class="inlinecode"><span class="id" title=
 
 
 <div class="doc">
-<a id="lab278"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> that Includes <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
+<a id="lab281"></a><h3 class="section">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> that Includes <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1685,7 +1627,7 @@ Again, we assert the soundness theorem and its corollary,
 </div>
 
 <div class="doc">
-<a id="lab279"></a><h3 class="section">Notation for <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> and Test</h3>
+<a id="lab282"></a><h3 class="section">Notation for <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> and Test</h3>
 
 <div class="paragraph"> </div>
 
@@ -1725,8 +1667,6 @@ Up to proper tabulation, alpha-renaming, and removal of
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;`<span class="id" title="keyword">Let</span> <span class="id" title="var">n</span> := `(<span class="id" title="var">App</span> <span class="id" title="var">val_get</span> <span class="id" title="var">p</span>) <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<span class="id" title="keyword">Let</span> <span class="id" title="var">m</span> := `(<span class="id" title="var">App</span> (<span class="id" title="var">val_add</span> <span class="id" title="var">n</span>) 1) <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<span class="id" title="var">App</span> (<span class="id" title="var">val_set</span> <span class="id" title="var">p</span>) <span class="id" title="var">m</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1735,7 +1675,7 @@ Up to proper tabulation, alpha-renaming, and removal of
 </div>
 
 <div class="doc">
-<a id="lab280"></a><h2 class="section">Lemmas for Handling <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Goals</h2>
+<a id="lab283"></a><h2 class="section">Lemmas for Handling <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Goals</h2>
 
 <div class="paragraph"> </div>
 
@@ -1829,7 +1769,7 @@ Likewise, <span class="inlinecode"><span class="id" title="var">xseq_lemma</span
 </div>
 
 <div class="doc">
-<a id="lab281"></a><h2 class="section">An Example Proof</h2>
+<a id="lab284"></a><h2 class="section">An Example Proof</h2>
 
 <div class="paragraph"> </div>
 
@@ -1869,7 +1809,7 @@ Likewise, <span class="inlinecode"><span class="id" title="var">xseq_lemma</span
 </div>
 
 <div class="doc">
-<a id="lab282"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xlemmas)</h4>
+<a id="lab285"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xlemmas)</h4>
  Using x-lemmas, verify the proof of <span class="inlinecode"><span class="id" title="var">triple_succ_using_incr</span></span>.
     (The proof was carried out using triples in chapter <a href="Rules.html"><span class="inlineref">Rules</span></a>.) 
 </div>
@@ -1889,7 +1829,7 @@ Likewise, <span class="inlinecode"><span class="id" title="var">xseq_lemma</span
 </div>
 
 <div class="doc">
-<a id="lab283"></a><h2 class="section">Making Proof Scripts More Concise</h2>
+<a id="lab286"></a><h2 class="section">Making Proof Scripts More Concise</h2>
 
 <div class="paragraph"> </div>
 
@@ -1976,7 +1916,7 @@ Let us revisit the previous proof scripts using x-tactics
 </div>
 
 <div class="doc">
-<a id="lab284"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xtactics)</h4>
+<a id="lab287"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xtactics)</h4>
  Using x-tactics, verify the proof of <span class="inlinecode"><span class="id" title="var">succ_using_incr</span></span>. 
 </div>
 <div class="code">
@@ -1995,7 +1935,7 @@ Let us revisit the previous proof scripts using x-tactics
 </div>
 
 <div class="doc">
-<a id="lab285"></a><h2 class="section">Further Improvements to the <span class="inlinecode"><span class="id" title="var">xapp</span></span> Tactic.</h2>
+<a id="lab288"></a><h2 class="section">Further Improvements to the <span class="inlinecode"><span class="id" title="var">xapp</span></span> Tactic.</h2>
 
 <div class="paragraph"> </div>
 
@@ -2070,7 +2010,7 @@ The argument-free variants <span class="inlinecode"><span class="id" title="var"
     is not able to automatically apply specifications that feature a
     premise that <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> cannot solve. To exploit such specifications,
     one need to provide the specification explicitly (using <span class="inlinecode"><span class="id" title="var">xapp</span></span> <span class="inlinecode"><span class="id" title="var">E</span></span>),
-    or to exploit a more complex hint mechanism (as done in CFML).  (A
+    or to exploit a more complex hint mechanism (as done in CFML). (A
     poor-man's workaround consists in moving all the premises inside
     the precondition, however doing so harms readability.) 
 </div>
@@ -2084,7 +2024,7 @@ The argument-free variants <span class="inlinecode"><span class="id" title="var"
 </div>
 
 <div class="doc">
-<a id="lab286"></a><h2 class="section">Demo of a Practical Proof using x-Tactics.</h2>
+<a id="lab289"></a><h2 class="section">Demo of a Practical Proof using x-Tactics.</h2>
 
 </div>
 <div class="code">
@@ -2121,7 +2061,7 @@ In order to enable automatically exploiting the specification
 </div>
 
 <div class="doc">
-<a id="lab287"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xapps)</h4>
+<a id="lab290"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xapps)</h4>
  Using the improved x-tactics, verify the proof of <span class="inlinecode"><span class="id" title="var">succ_using_incr</span></span>. 
 </div>
 <div class="code">
@@ -2147,12 +2087,12 @@ In order to enable automatically exploiting the specification
 </div>
 
 <div class="doc">
-<a id="lab288"></a><h1 class="section">Optional Material</h1>
+<a id="lab291"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab289"></a><h2 class="section">Tactics <span class="inlinecode"><span class="id" title="var">xconseq</span></span> and <span class="inlinecode"><span class="id" title="var">xframe</span></span></h2>
+<a id="lab292"></a><h2 class="section">Tactics <span class="inlinecode"><span class="id" title="var">xconseq</span></span> and <span class="inlinecode"><span class="id" title="var">xframe</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2166,7 +2106,7 @@ In order to enable automatically exploiting the specification
     stated below. 
 <div class="paragraph"> </div>
 
-<a id="lab290"></a><h4 class="section">Exercise: 1 star, standard, optional (xconseq_lemma)</h4>
+<a id="lab293"></a><h4 class="section">Exercise: 1 star, standard, optional (xconseq_lemma)</h4>
  Prove the <span class="inlinecode"><span class="id" title="var">xconseq_lemma</span></span>. 
 </div>
 <div class="code">
@@ -2194,7 +2134,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">xframe</span></
     to specify the heap predicate to frame out---everything else is kept. 
 <div class="paragraph"> </div>
 
-<a id="lab291"></a><h4 class="section">Exercise: 2 stars, standard, optional (xframe_lemma)</h4>
+<a id="lab294"></a><h4 class="section">Exercise: 2 stars, standard, optional (xframe_lemma)</h4>
  Prove the <span class="inlinecode"><span class="id" title="var">xframe_lemma</span></span>.
     Exploit the properties of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span>; do not try to unfold the
     definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span>. 
@@ -2259,7 +2199,7 @@ Finally we check the check that the current state augmented with
 </div>
 
 <div class="doc">
-<a id="lab292"></a><h2 class="section">Soundness Proof for <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
+<a id="lab295"></a><h2 class="section">Soundness Proof for <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
 
 </div>
 <div class="code">
@@ -2268,7 +2208,7 @@ Finally we check the check that the current state augmented with
 </div>
 
 <div class="doc">
-<a id="lab293"></a><h3 class="section">Introduction of the Predicate <span class="inlinecode"><span class="id" title="var">formula_sound</span></span></h3>
+<a id="lab296"></a><h3 class="section">Introduction of the Predicate <span class="inlinecode"><span class="id" title="var">formula_sound</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -2276,8 +2216,6 @@ Finally we check the check that the current state augmented with
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <span class="id" title="var">wpgen_sound</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">Q</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">wpgen</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">Q</span> ==&gt; <span class="id" title="var">wp</span> (<span class="id" title="var">isubst</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) <span class="id" title="var">Q</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -2305,7 +2243,7 @@ Using <span class="inlinecode"><span class="id" title="var">formula_sound</span>
 </div>
 
 <div class="doc">
-<a id="lab294"></a><h3 class="section">Soundness for the Case of Sequences</h3>
+<a id="lab297"></a><h3 class="section">Soundness for the Case of Sequences</h3>
 
 <div class="paragraph"> </div>
 
@@ -2323,8 +2261,6 @@ Using <span class="inlinecode"><span class="id" title="var">formula_sound</span>
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">wpgen_seq</span> (<span class="id" title="var">F<sub>1</sub></span> <span class="id" title="var">F<sub>2</sub></span>:<span class="id" title="var">formula</span>) : <span class="id" title="var">formula</span> := <span class="id" title="keyword">fun</span> <span class="id" title="var">Q</span> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">F<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">F<sub>2</sub></span> <span class="id" title="var">Q</span>).
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -2413,7 +2349,7 @@ This statement captures the essence of the correctness of
 </div>
 
 <div class="doc">
-<a id="lab295"></a><h3 class="section">Soundness of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for the Other Term Constructs</h3>
+<a id="lab298"></a><h3 class="section">Soundness of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for the Other Term Constructs</h3>
 
 <div class="paragraph"> </div>
 
@@ -2476,7 +2412,7 @@ The formula <span class="inlinecode"><span class="id" title="var">wp</span></spa
 </div>
 
 <div class="doc">
-<a id="lab296"></a><h3 class="section">Soundness of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
+<a id="lab299"></a><h3 class="section">Soundness of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -2534,7 +2470,7 @@ Another, lower-level proof for the same result reveals the definition
 </div>
 
 <div class="doc">
-<a id="lab297"></a><h3 class="section">Lemmas Capturing Properties of Iterated Substitutions</h3>
+<a id="lab300"></a><h3 class="section">Lemmas Capturing Properties of Iterated Substitutions</h3>
 
 <div class="paragraph"> </div>
 
@@ -2572,7 +2508,7 @@ The proofs for these two lemmas is technical and of limited interest.
 </div>
 
 <div class="doc">
-<a id="lab298"></a><h3 class="section">Main Induction for the Soundness Proof of <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h3>
+<a id="lab301"></a><h3 class="section">Main Induction for the Soundness Proof of <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -2628,7 +2564,7 @@ The proofs for these two lemmas is technical and of limited interest.
 </div>
 
 <div class="doc">
-<a id="lab299"></a><h3 class="section">Statement of Soundness of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Closed Terms</h3>
+<a id="lab302"></a><h3 class="section">Statement of Soundness of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Closed Terms</h3>
 
 <div class="paragraph"> </div>
 
@@ -2703,7 +2639,7 @@ The lemma <span class="inlinecode"><span class="id" title="var">triple_app_fix_f
 </div>
 
 <div class="doc">
-<a id="lab300"></a><h2 class="section">Guessing the Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h2>
+<a id="lab303"></a><h2 class="section">Guessing the Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h2>
 
 </div>
 <div class="code">
@@ -2721,8 +2657,6 @@ How could we have possibly guessed the definition of <span class="inlinecode"><s
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">mkstruct_idempotence</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">F</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mkstruct</span> (<span class="id" title="var">mkstruct</span> <span class="id" title="var">F</span>) = <span class="id" title="var">mkstruct</span> <span class="id" title="var">F</span>
-<div class="paragraph"> </div>
-
 </span>    This idempotence property reflects in particular the fact that consecutive
     applications of the frame rule can be combined into into a single
     application of this rule, and likewise for the rule of consequence. Since
@@ -2821,7 +2755,7 @@ As we have proved earlier in this chapter, this definition indeed satisfies
 </div>
 
 <div class="doc">
-<a id="lab301"></a><h2 class="section">Proof of Properties of Iterated Substitution</h2>
+<a id="lab304"></a><h2 class="section">Proof of Properties of Iterated Substitution</h2>
 
 </div>
 <div class="code">
@@ -2845,8 +2779,6 @@ Recall that <span class="inlinecode"><span class="id" title="var">isubst</span><
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">isubst</span> <span class="id" title="var">nil</span> <span class="id" title="var">t</span> = <span class="id" title="var">t</span><br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span> <span class="id" title="var">x</span> <span class="id" title="var">v</span> (<span class="id" title="var">isubst</span> (<span class="id" title="var">rem</span> <span class="id" title="var">x</span> <span class="id" title="var">E</span>) <span class="id" title="var">t</span>) = <span class="id" title="var">isubst</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">v</span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -2885,8 +2817,6 @@ The second lemma is much more involved to prove.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Tactic</span> <span class="id" title="keyword">Notation</span> "case_var" :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">var_eq_spec</span> <span class="id" title="keyword">in</span> *; <span class="id" title="tactic">repeat</span> <span class="id" title="var">case_if</span>.
-<div class="paragraph"> </div>
-
 </span>    The tactic <span class="inlinecode"><span class="id" title="var">case_var</span>*</span> is a shorthand for <span class="inlinecode"><span class="id" title="var">case_var</span></span>
     followed with automation (essentially, <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>).
 
@@ -3095,7 +3025,7 @@ We also prove the variant lemma which is useful for handling recursive
 </div>
 
 <div class="doc">
-<a id="lab302"></a><h2 class="section">Historical Notes</h2>
+<a id="lab305"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -3124,8 +3054,9 @@ We also prove the variant lemma which is useful for handling recursive
     to Separation Logic in the PhD work of <a href="Bib.html#Charguéraud-2010"><span class="inlineref">[Charguéraud 2010]</span></a>, which
     resulted in the CFML tool. CFML 1.0 used an external tool that produced
     characteristic formulae in the form of Coq axioms. Later work by
-    <a href="Bib.html#Guéneau,-Myreen, Kumar and Norrish 2017"><span class="inlineref">[Guéneau, Myreen, Kumar and Norrish 2017]</span></a> showed how the characteristic
-    formulae could be produced together with proofs justifying their correctness.
+    <a href="Bib.html#Guéneau,-Myreen, Kumar and Norrish 2017"><span class="inlineref">[Guéneau, Myreen, Kumar and Norrish 2017]</span></a> showed how the
+    characteristic formulae could be produced together with proofs justifying
+    their correctness.
 
 <div class="paragraph"> </div>
 
@@ -3144,7 +3075,7 @@ We also prove the variant lemma which is useful for handling recursive
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

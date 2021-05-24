@@ -116,7 +116,9 @@ Arguments Fmap.disjoint_union_eq_r {A} {B}.
     follows. *)
 
 Definition example_val : val :=
-  val_fun "x" (trm_if (trm_var "x") (trm_val (val_int 0)) (trm_val (val_int 1))).
+  val_fun "x" (trm_if (trm_var "x")
+                (trm_val (val_int 0))
+                (trm_val (val_int 1))).
 
 (** Thanks to a set of coercions and notation, this term can be written in a
     somewhat more readable way, as follows. *)
@@ -767,4 +769,4 @@ End Extensionality.
     pieces of heaps, the "high-level" definition that bakes in the frame rule
     leads to more elegant, simpler proofs. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

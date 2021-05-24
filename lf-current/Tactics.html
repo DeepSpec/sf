@@ -325,8 +325,6 @@ Actually, the name <span class="inlinecode"><span class="id" title="var">m</span
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">nat</span> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">O</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>).
-<div class="paragraph"> </div>
-
 </span>    It is obvious from this definition that every number has one of
     two forms: either it is the constructor <span class="inlinecode"><span class="id" title="var">O</span></span> or it is built by
     applying the constructor <span class="inlinecode"><span class="id" title="var">S</span></span> to another number.  But there is more
@@ -669,18 +667,12 @@ Forward reasoning starts from what is <i>given</i> (premises,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">double_injective</span>: <span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">double</span> <span class="id" title="var">n</span> = <span class="id" title="var">double</span> <span class="id" title="var">m</span> → <span class="id" title="var">n</span> = <span class="id" title="var">m</span>.
-<div class="paragraph"> </div>
-
 </span>    The way we start this proof is a bit delicate: if we begin it with
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.
-<div class="paragraph"> </div>
-
 </span>    all is well.  But if we begin it with introducing both variables
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.
-<div class="paragraph"> </div>
-
 </span>    we get stuck in the middle of the inductive case... 
 </div>
 <div class="code">
@@ -1726,26 +1718,16 @@ When we come to the second equality test in the body
     predicate:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">forallb</span> <span class="id" title="var">odd</span> [1;3;5;7;9] = <span class="id" title="var">true</span><br/>
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">forallb</span> <span class="id" title="var">negb</span> [<span class="id" title="var">false</span>;<span class="id" title="var">false</span>] = <span class="id" title="var">true</span><br/>
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">forallb</span> <span class="id" title="var">even</span> [0;2;4;5] = <span class="id" title="var">false</span><br/>
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">forallb</span> (<span class="id" title="var">eqb</span> 5) [] = <span class="id" title="var">true</span>
-<div class="paragraph"> </div>
-
 </span>    The second checks whether there exists an element in the list that
     satisfies a given predicate:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">existsb</span> (<span class="id" title="var">eqb</span> 5) [0;2;3;6] = <span class="id" title="var">false</span><br/>
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">existsb</span> (<span class="id" title="var">andb</span> <span class="id" title="var">true</span>) [<span class="id" title="var">true</span>;<span class="id" title="var">true</span>;<span class="id" title="var">false</span>] = <span class="id" title="var">true</span><br/>
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">existsb</span> <span class="id" title="var">odd</span> [1;0;0;0;0;3] = <span class="id" title="var">true</span><br/>
-<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">existsb</span> <span class="id" title="var">even</span> [] = <span class="id" title="var">false</span>
-<div class="paragraph"> </div>
-
 </span>    Next, define a <i>nonrecursive</i> version of <span class="inlinecode"><span class="id" title="var">existsb</span></span> -- call it
     <span class="inlinecode"><span class="id" title="var">existsb'</span></span> -- using <span class="inlinecode"><span class="id" title="var">forallb</span></span> and <span class="inlinecode"><span class="id" title="var">negb</span></span>.
 
@@ -1787,7 +1769,7 @@ When we come to the second equality test in the body
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

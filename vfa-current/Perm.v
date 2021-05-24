@@ -135,9 +135,9 @@ Proof.
   lia.
 Qed.
 
-(** Lia is a decision procedure for integer linear arithemetic. 
-    The [lia] tactic was made available by importing [Lia] at the 
-    beginning of the file.  The tactic 
+(** Lia is a decision procedure for integer linear arithemetic.
+    The [lia] tactic was made available by importing [Lia] at the
+    beginning of the file.  The tactic
     works with Coq types [Z] and [nat], and these operators: [<] [=] [>]
     [<=] [>=] [+] [-] [~], as well as multiplication by small integer
     literals (such as 0,1,2,3...), and some uses of [\/], [/\], and [<->].
@@ -145,7 +145,7 @@ Qed.
     Lia does not "understand" other operators.  It treats
     expressions such as [f x y] as variables.  That is, it
     can prove [f x y > a * b -> f x y + 3 >= a * b], in the same way it
-    would prove [u > v -> u + 3 >= v].  
+    would prove [u > v -> u + 3 >= v].
 *)
 
 Theorem lia_example_3 : forall (f : nat -> nat -> nat) a b x y,
@@ -598,5 +598,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-
-(* 2021-05-18 18:08 *)
+(* 2021-05-24 18:32 *)

@@ -264,7 +264,7 @@ Proof.
         * (* Evaluation of r1 terminates normally *)
           apply E_Seq with s.
             apply IHi'. rewrite Heqr1. reflexivity.
-            apply IHi'. simpl in H1. assumption.
+            apply IHi'. assumption.
         * (* Otherwise -- contradiction *)
           discriminate H1.
 
@@ -284,7 +284,7 @@ Proof.
            apply E_WhileTrue with s. rewrite Heqr.
            reflexivity.
            apply IHi'. rewrite Heqr1. reflexivity.
-           apply IHi'. simpl in H1. assumption. }
+           apply IHi'. assumption. }
          { (* r1 = None *) discriminate H1. }
         * (* r = false *)
           injection H1 as H2. rewrite <- H2.
@@ -393,4 +393,4 @@ Proof.
   rewrite E1 in E2. inversion E2. reflexivity.
   lia. lia.  Qed.
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

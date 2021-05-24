@@ -89,8 +89,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">scc</span> <span class="id" title="var">t</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">prd</span> <span class="id" title="var">t</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">iszro</span> <span class="id" title="var">t</span>
-<div class="paragraph"> </div>
-
 </span>    And here it is formally: 
 </div>
 <div class="code">
@@ -311,8 +309,6 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
     take a step, but the almost as obviously nonsensical term
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">scc</span> (<span class="id" title="var">test</span> <span class="id" title="var">tru</span> <span class="id" title="keyword">then</span> <span class="id" title="var">tru</span> <span class="id" title="keyword">else</span> <span class="id" title="var">tru</span>)
-<div class="paragraph"> </div>
-
 </span>    can take a step (once, before becoming stuck). 
 </div>
 
@@ -945,8 +941,6 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_SccBool</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x22A2; <span class="id" title="var">t</span> \<span class="id" title="keyword">in</span> <span class="id" title="var">Bool</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x22A2; <span class="id" title="var">scc</span> <span class="id" title="var">t</span> \<span class="id" title="keyword">in</span> <span class="id" title="var">Bool</span>
-<div class="paragraph"> </div>
-
 </span>   Which of the following properties remain true in the presence of
    this rule?  For each one, write either "remains true" or
    else "becomes false." If a property becomes false, give a
@@ -981,8 +975,6 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny1</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">test</span> <span class="id" title="var">tru</span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> <span class="id" title="var">t<sub>3</sub></span>
-<div class="paragraph"> </div>
-
 </span>   Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
             <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
@@ -1003,8 +995,6 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny2</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>2</sub>'</span> <span class="id" title="var">t<sub>3</sub></span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t<sub>2</sub></span> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> <span class="id" title="var">t<sub>2</sub>'</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">test</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> (<span class="id" title="var">test</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub>'</span> <span class="id" title="var">t<sub>3</sub></span>)
-<div class="paragraph"> </div>
-
 </span>   Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
             <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
@@ -1016,8 +1006,6 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ST_Funny3</span> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">prd</span> <span class="id" title="var">fls</span>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> (<span class="id" title="var">prd</span> (<span class="id" title="var">prd</span> <span class="id" title="var">fls</span>))
-<div class="paragraph"> </div>
-
 </span>   Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
@@ -1029,8 +1017,6 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_Funny4</span> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x22A2; <span class="id" title="var">zro</span> \<span class="id" title="keyword">in</span> <span class="id" title="var">Bool</span>
-<div class="paragraph"> </div>
-
 </span>   Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
@@ -1042,8 +1028,6 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">T_Funny5</span> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x22A2; <span class="id" title="var">prd</span> <span class="id" title="var">zro</span> \<span class="id" title="keyword">in</span> <span class="id" title="var">Bool</span>
-<div class="paragraph"> </div>
-
 </span>   Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
@@ -1110,7 +1094,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:25&nbsp;*)</span><br/>
 </div>
 </div>
 

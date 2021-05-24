@@ -71,8 +71,6 @@
     the <span class="inlinecode"><span class="id" title="var">stack</span>-<span class="id" title="var">compiler</span></span> subdirectory and run the following command:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">quickChick</span> -<span class="id" title="var">color</span> -<span class="id" title="var">top</span> <span class="id" title="var">Stack</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -166,8 +164,6 @@
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!&nbsp;Section&nbsp;arithmetic_expressions&nbsp;*)</span><br/>
 
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -254,8 +250,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!&nbsp;QuickChick&nbsp;optimize_correct_prop.&nbsp;*)</span><br/>
 
-<div class="paragraph"> </div>
-
 </span> 
 <div class="paragraph"> </div>
 
@@ -306,8 +300,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
     the test annotation.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">QuickChick</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">e</span> ⇒ <span class="id" title="tactic">eval</span> (<span class="id" title="var">optimize</span> <span class="id" title="var">e</span>) = <span class="id" title="tactic">eval</span> <span class="id" title="var">e</span>?).
-<div class="paragraph"> </div>
-
 </span><a id="lab106"></a><h1 class="section">Sections</h1>
 
 <div class="paragraph"> </div>
@@ -334,13 +326,9 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!&nbsp;Section&nbsp;arithmetic_expressions&nbsp;*)</span><br/>
 
-<div class="paragraph"> </div>
-
 </span>    The second also includes an <span class="inlinecode"><span class="id" title="var">extends</span></span> clause. 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!&nbsp;Section&nbsp;optimizations&nbsp;*)</span><span class="comment">(*!&nbsp;extends&nbsp;arithmetic_expressions&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
 
 </span>   This signifies that this new block (until the end of the file, 
    in this case, since there are no further section headers), also 
@@ -353,8 +341,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
     the <span class="inlinecode"><span class="id" title="var">stack</span>-<span class="id" title="var">compiler</span></span> directory:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">quickChick</span> -<span class="id" title="var">color</span> -<span class="id" title="var">top</span> <span class="id" title="var">Stack</span> -<span class="id" title="var">s</span> <span class="id" title="var">optimizations</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -407,8 +393,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!!&nbsp;Plus-copy-paste-error&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!&nbsp;|&nbsp;APlus&nbsp;e<sub>1</sub>&nbsp;e<sub>2</sub>&nbsp;=&gt;&nbsp;(eval&nbsp;e<sub>1</sub>)&nbsp;+&nbsp;(eval&nbsp;e<sub>1</sub>)&nbsp;*)</span><br/>
 
-<div class="paragraph"> </div>
-
 </span>    Let's break it down into its parts.
 
 <div class="paragraph"> </div>
@@ -417,8 +401,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
     that signifies the beginning of a mutant. That is always the same:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
 
 </span>    This is followed by the correct code. In our example, by the evaluation
     of <span class="inlinecode"><span class="id" title="var">APlus</span></span> <span class="inlinecode"><span class="id" title="var">e<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">e<sub>2</sub></span></span>. 
@@ -429,8 +411,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
     the mutant, which begins with two exclamation marks to help the parser. 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*!!&nbsp;Plus-copy-paste-error&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
 
 </span>
 <div class="paragraph"> </div>
@@ -450,8 +430,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;AMinus&nbsp;(ANum&nbsp;0)&nbsp;e&nbsp;=&gt;&nbsp;optimize&nbsp;e&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
 
-<div class="paragraph"> </div>
-
 </span>    This bug allows the optimization of <span class="inlinecode">0-<span class="id" title="var">e</span></span> to <span class="inlinecode"><span class="id" title="var">e</span></span> instead of <span class="inlinecode"><span class="id" title="var">e</span>-0</span> to <span class="inlinecode"><span class="id" title="var">e</span></span>. 
 <div class="paragraph"> </div>
 
@@ -459,8 +437,6 @@ Again, the actual definition in <span class="inlinecode"><span class="id" title=
     last <span class="inlinecode"><span class="id" title="var">quickChick</span></span> command we ran:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">quickChick</span> -<span class="id" title="var">color</span> -<span class="id" title="var">top</span> <span class="id" title="var">Stack</span> -<span class="id" title="var">s</span> <span class="id" title="var">optimizations</span>
-<div class="paragraph"> </div>
-
 </span><pre>
     Testing mutant 0 (./Exp.v: line 35): Minus-Reverse
     make -f Makefile.coq 
@@ -601,8 +577,6 @@ In the compilation above we have made a rookie compiler-writer
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">QuickChecking</span> <span class="id" title="var">compiles_correctly</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">AMinus</span> (<span class="id" title="var">ANum</span> 0) (<span class="id" title="var">ANum</span> 1)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;*** <span class="id" title="var">Failed</span> <span class="id" title="keyword">after</span> 3 <span class="id" title="var">tests</span> <span class="id" title="var">and</span> 2 <span class="id" title="var">shrinks</span>. (0 <span class="id" title="var">discards</span>)
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -627,8 +601,6 @@ In the compilation above we have made a rookie compiler-writer
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;AMult&nbsp;&nbsp;e<sub>1</sub>&nbsp;e<sub>2</sub>&nbsp;=&gt;&nbsp;compile&nbsp;e<sub>1</sub>&nbsp;++&nbsp;compile&nbsp;e<sub>2</sub>&nbsp;++&nbsp;<span class="inlinecode"><span class="id" title="var">SMult</span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -636,8 +608,6 @@ In the compilation above we have made a rookie compiler-writer
     <span class="inlinecode">-<span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">stack</span></span> to only check the <span class="inlinecode"><span class="id" title="var">stack</span></span> section.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">quickChick</span> -<span class="id" title="var">color</span> -<span class="id" title="var">top</span> <span class="id" title="var">Stack</span> -<span class="id" title="var">s</span> <span class="id" title="var">stack</span>
-<div class="paragraph"> </div>
-
 </span><pre>
     Testing base...
     make -f Makefile.coq 
@@ -689,7 +659,7 @@ In the compilation above we have made a rookie compiler-writer
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:42&nbsp;*)</span><br/>
 </div>
 </div>
 

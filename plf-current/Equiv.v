@@ -8,9 +8,8 @@ From Coq Require Import Init.Nat.
 From Coq Require Import Arith.PeanoNat. Import Nat.
 From Coq Require Import Arith.EqNat.
 From Coq Require Import Lia.
-From Coq Require Import Lists.List.
+From Coq Require Import Lists.List. Import ListNotations.
 From Coq Require Import Logic.FunctionalExtensionality.
-Import ListNotations.
 From PLF Require Export Imp.
 
 (** *** Before you Get Started:
@@ -26,7 +25,7 @@ From PLF Require Export Imp.
          - [Equiv.v] (this file)
          - [_CoqProject], containing the following line:
 
-             -Q . PLF
+           -Q . PLF
 
     - Reminder: If you see errors like this...
 
@@ -943,7 +942,7 @@ Proof.
    show just the case where [b] has the form [a1 = a2].
 
    In this case, we must show
-{[
+
        beval st <{ a1 = a2 }>
      = beval st (fold_constants_bexp <{ a1 = a2 }>).
 
@@ -1655,4 +1654,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

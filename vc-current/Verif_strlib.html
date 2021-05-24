@@ -478,8 +478,6 @@ The unpronounceable "ptrofs" stands for "pointer offset".
 Look at the proof goal below the line.  We have the assertion,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">PROP</span> ( )  <span class="id" title="var">LOCAL</span> (<span class="id" title="var">temp</span> <span class="id" title="var">_str</span> <span class="id" title="var">str</span>)  <span class="id" title="var">SEP</span> (<span class="id" title="var">cstring</span> <span class="id" title="var">sh</span> <span class="id" title="var">s</span> <span class="id" title="var">str</span>))
-<div class="paragraph"> </div>
-
 </span> When proving things about a string-manipulating function, the
   first decision is:  Does this function treat the string <i>abstractly</i>
   or does it subscript the array and look at the individual characters?
@@ -521,8 +519,6 @@ Now we are at a for-loop.  Unlike a simple while-loop, a for-loop may:
  The general form of Verifiable C's loop tactic is:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">forward_loop</span> <span class="id" title="var">Inv1</span>  <span class="id" title="var">continue</span>: <span class="id" title="var">Inv2</span> <span class="id" title="var">break</span>: <span class="id" title="var">Inv3</span>
-<div class="paragraph"> </div>
-
 </span> where <span class="inlinecode"><span class="id" title="var">Inv1</span></span> is the invariant that holds right before the loop test,
  <span class="inlinecode"><span class="id" title="var">Inv2</span></span> is the invariant that holds right before the increment, and
  <span class="inlinecode"><span class="id" title="var">Inv3</span></span> is the postcondition of the loop.
@@ -831,13 +827,9 @@ In the second subgoal, we use the fact that <i>any</i> value
 The moral of the story is:  When proving 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">sh</span> <span class="id" title="var">t</span> <span class="id" title="var">a</span> <span class="id" title="var">p</span> <span class="nowrap">&vert;--</span> <span class="id" title="var">data_at</span> <span class="id" title="var">sh</span> <span class="id" title="var">t</span> <span class="id" title="var">b</span> <span class="id" title="var">p</span>
-<div class="paragraph"> </div>
-
 </span>   if (a=b) you can simplify the goal using
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">derives_refl'</span>; <span class="id" title="tactic">f_equal</span>.
-<div class="paragraph"> </div>
-
 </span>   but if a is strictly more defined than b, then derives_refl' is not appropriate. 
 <div class="paragraph"> </div>
 
@@ -944,7 +936,7 @@ This proof is fairly straightforward.  First, figure out what WITH
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:12&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:38&nbsp;*)</span><br/>
 </div>
 </div>
 

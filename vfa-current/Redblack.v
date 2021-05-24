@@ -820,4 +820,4 @@ On the same machine that prints,
     - Red-black trees are about as fast on consecutive insertions as
       on random. *)
 
-(* 2021-05-18 18:08 *)
+(* 2021-05-24 18:32 *)

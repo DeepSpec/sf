@@ -335,7 +335,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;Evaluation&nbsp;of&nbsp;r<sub>1</sub>&nbsp;terminates&nbsp;normally&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Imp.html#E_Seq"><span class="id" title="constructor">E_Seq</span></a> <span class="id" title="keyword">with</span> <span class="id" title="var">s</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHi'</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Heqr1</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHi'</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>1</sub></span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHi'</span>. <span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;Otherwise&nbsp;--&nbsp;contradiction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">discriminate</span> <span class="id" title="var">H<sub>1</sub></span>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;if&nbsp;*)</span><br/>
@@ -353,7 +353,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Imp.html#E_WhileTrue"><span class="id" title="constructor">E_WhileTrue</span></a> <span class="id" title="keyword">with</span> <span class="id" title="var">s</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Heqr</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHi'</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Heqr1</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHi'</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>1</sub></span>. <span class="id" title="tactic">assumption</span>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHi'</span>. <span class="id" title="tactic">assumption</span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="comment">(*&nbsp;r<sub>1</sub>&nbsp;=&nbsp;None&nbsp;*)</span> <span class="id" title="tactic">discriminate</span> <span class="id" title="var">H<sub>1</sub></span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;r&nbsp;=&nbsp;false&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">injection</span> <span class="id" title="var">H<sub>1</sub></span> <span class="id" title="keyword">as</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">H<sub>2</sub></span>.<br/>
@@ -481,7 +481,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 </div>
 
 <br/>
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -417,13 +417,9 @@ The argument of <span class="inlinecode"><span class="id" title="var">unfold_dat
   In the LOCAL part of your loop invariant, try to use something like
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">temp</span> <span class="id" title="var">_c</span> (<span class="id" title="var">Vbyte</span> (<span class="id" title="var">Znth</span> <span class="id" title="var">i</span> (<span class="id" title="var">contents</span> ++ [<span class="id" title="var">Byte.zero</span>]))
-<div class="paragraph"> </div>
-
 </span>  instead of 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">temp</span> <span class="id" title="var">_c</span> (<span class="id" title="var">Znth</span> <span class="id" title="var">i</span> (<span class="id" title="var">map</span> <span class="id" title="var">Vbyte</span> (...)))
-<div class="paragraph"> </div>
-
 </span>  The reason is that <span class="inlinecode"><span class="id" title="var">temp</span></span> <span class="inlinecode"><span class="id" title="var">_c</span></span> <span class="inlinecode">(<span class="id" title="var">Vint</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> or <span class="inlinecode"><span class="id" title="var">temp</span></span> <span class="inlinecode"><span class="id" title="var">_c</span></span> <span class="inlinecode">(<span class="id" title="var">Vbyte</span></span> <span class="inlinecode"><span class="id" title="var">y</span>)</span> is much 
   easier for Floyd to handle than <span class="inlinecode"><span class="id" title="var">temp</span></span> <span class="inlinecode"><span class="id" title="var">_c</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span>
   where X is a general formula of type <span class="inlinecode"><span class="id" title="var">val</span></span>.
@@ -540,25 +536,17 @@ The loop invariant in this function describes a partially
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">thashtable</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> <span class="id" title="var">i</span>) <span class="id" title="var">nullval</span> ++ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> (<span class="id" title="var">N</span>-<span class="id" title="var">i</span>)) <span class="id" title="var">Vundef</span>)   <span class="id" title="var">p</span>.
-<div class="paragraph"> </div>
-
 </span>  Then at some point you'll have to prove something about,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">thashtable</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> (<span class="id" title="var">i</span> + 1)) <span class="id" title="var">nullval</span> ++ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> (<span class="id" title="var">N</span> - (<span class="id" title="var">i</span> + 1))) <span class="id" title="var">Vundef</span>)   <span class="id" title="var">p</span>
-<div class="paragraph"> </div>
-
 </span>  In particular, you'll have to split up 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> (<span class="id" title="var">i</span> + 1)) <span class="id" title="var">nullval</span>
-<div class="paragraph"> </div>
-
 </span>   into 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> <span class="id" title="var">i</span>) <span class="id" title="var">nullval</span> ++ <span class="id" title="var">list_repeat</span> (<span class="id" title="var">Z.to_nat</span> 1) <span class="id" title="var">nullval</span>.
-<div class="paragraph"> </div>
-
 </span>  The best way to do that is <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">&lt;-</span> <span class="inlinecode"><span class="id" title="var">list_repeat_app'</span></span>. 
 </div>
 <div class="code">
@@ -601,23 +589,15 @@ The loop invariant in this function describes a partially
   something-to-fill-the-hole, then you get the original data structure:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">hole</span> × (<span class="id" title="var">hole</span> <span class="nowrap">&minus;&lowast;</span> <span class="id" title="var">data</span>-<span class="id" title="var">structure</span>) <span class="nowrap">&vert;--</span> <span class="id" title="var">data</span>-<span class="id" title="var">structure</span>
-<div class="paragraph"> </div>
-
 </span> Before the loop, we have a precondition such as,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;(<span class="id" title="var">listrep</span> <span class="id" title="var">b<sub>0</sub></span> <span class="id" title="var">p<sub>0</sub></span>; <span class="id" title="var">other_stuff</span>)
-<div class="paragraph"> </div>
-
 </span> After a few loop iterations, we have a situation like,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;(<span class="id" title="var">listrep</span> <span class="id" title="var">b</span> <span class="id" title="var">p</span>; (<span class="id" title="var">listrep</span> <span class="id" title="var">b</span> <span class="id" title="var">p</span> <span class="nowrap">&minus;&lowast;</span> <span class="id" title="var">listrep</span> <span class="id" title="var">b<sub>0</sub></span> <span class="id" title="var">p<sub>0</sub></span>); <span class="id" title="var">other_stuff</span>)
-<div class="paragraph"> </div>
-
 </span> If the loop reaches <span class="inlinecode"><span class="id" title="var">p</span>==<span class="id" title="var">NULL</span></span>, then we have,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;(<span class="id" title="var">listrep</span> <span class="id" title="var">nil</span> <span class="id" title="var">nullval</span>; (<span class="id" title="var">listrep</span> <span class="id" title="var">nil</span> <span class="id" title="var">nullval</span> <span class="nowrap">&minus;&lowast;</span> <span class="id" title="var">listrep</span> <span class="id" title="var">b<sub>0</sub></span> <span class="id" title="var">p<sub>0</sub></span>); <span class="id" title="var">other_stuff</span>)
-<div class="paragraph"> </div>
-
 </span> The <span class="inlinecode"><span class="id" title="var">listrep_traverse_</span>×</span> lemmas in this exercise illustrate how
  to start a traversal, how to perform one iteration of the traversal,
  and how to finish a traversal. 
@@ -957,16 +937,12 @@ void incr_list (struct cell **r<sub>0</sub>, char *s) {
   We will describe variable <span class="inlinecode"><span class="id" title="var">r</span></span> something like this:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">PROP</span>() <span class="id" title="var">LOCAL</span>(<span class="id" title="var">temp</span> <span class="id" title="var">_r</span> <span class="id" title="var">r</span>) <span class="id" title="var">SEP</span>(<span class="id" title="var">data_at</span> <span class="id" title="var">Ews</span> (<span class="id" title="var">tptr</span> <span class="id" title="var">tcell</span>) <span class="id" title="var">q</span> <span class="id" title="var">r</span>).
-<div class="paragraph"> </div>
-
 </span>  That is, pointer to a single word containing <span class="inlinecode"><span class="id" title="var">q</span></span>.  But when
   we do <span class="inlinecode"><span class="id" title="var">r</span></span> <span class="inlinecode">=</span> <span class="inlinecode">&amp;(<span class="id" title="var">p</span>→<span class="id" title="var">next</span>)</span> we will have <span class="inlinecode"><span class="id" title="var">r</span></span> pointing into the middle
   of a <span class="inlinecode"><span class="id" title="keyword">struct</span></span> <span class="inlinecode"><span class="id" title="var">cell</span></span> record, at the <span class="inlinecode"><span class="id" title="var">next</span></span> field.  To  describe that
   single field all alone, we use <span class="inlinecode"><span class="id" title="var">unfold_data_at</span></span> to split
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">tcell</span> (<span class="id" title="var">x</span>,<span class="id" title="var">y</span>,<span class="id" title="var">q</span>) <span class="id" title="var">p</span>
-<div class="paragraph"> </div>
-
 </span>  into four separate conjuncts:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">field_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_key</span>] <span class="id" title="var">x</span> <span class="id" title="var">p</span> ×<br/>
@@ -974,13 +950,9 @@ void incr_list (struct cell **r<sub>0</sub>, char *s) {
 &nbsp;&nbsp;<span class="id" title="var">spacer</span> <span class="id" title="var">Ews</span> (<span class="id" title="var">nested_field_offset</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_count</span>] + <span class="id" title="var">sizeof</span> <span class="id" title="var">tuint</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">nested_field_offset</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_next</span>]) <span class="id" title="var">p</span> ×<br/>
 &nbsp;&nbsp;<span class="id" title="var">field_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_next</span>] <span class="id" title="var">q</span> <span class="id" title="var">p</span>
-<div class="paragraph"> </div>
-
 </span>  and then we must rewrite the last conjunct into
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Ews</span> (<span class="id" title="var">tptr</span> <span class="id" title="var">tcell</span>) <span class="id" title="var">q</span> (<span class="id" title="var">field_address</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_next</span>] <span class="id" title="var">p</span>)
-<div class="paragraph"> </div>
-
 </span>  where the <span class="inlinecode">(<span class="id" title="var">field_address</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span>)</span> is an "address arithmetic" expression
   that describes the offset, in bytes, from <span class="inlinecode"><span class="id" title="var">p</span></span> to <span class="inlinecode">&amp;(<span class="id" title="var">p</span>→<span class="id" title="var">next</span>)</span>.
 
@@ -1045,8 +1017,6 @@ Sometime during the proof below, you will have
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">field_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_key</span>] ... <span class="id" title="var">p</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="var">field_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_count</span>] ... <span class="id" title="var">p</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="var">field_at</span> <span class="id" title="var">Ews</span> <span class="id" title="var">tcell</span> [<span class="id" title="var">StructField</span> <span class="id" title="var">_next</span>] ... <span class="id" title="var">p</span>].
-<div class="paragraph"> </div>
-
 </span>   You can do this with <span class="inlinecode"><span class="id" title="var">unfold_data_at</span></span> <span class="inlinecode">(<span class="id" title="tactic">pattern</span>)</span> where <span class="inlinecode"><span class="id" title="tactic">pattern</span></span> is 
    something like <span class="inlinecode">(<span class="id" title="var">data_at</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">p</span>)</span> indicating which SEP conjunct
    you want to expand.
@@ -1542,8 +1512,6 @@ This says that <span class="inlinecode"><span class="id" title="var">data_at</sp
     which is to say,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">offset_val</span> (<span class="id" title="var">sizeof</span> (<span class="id" title="var">tptr</span> <span class="id" title="var">tcell</span>) × <span class="id" title="var">h</span>) <span class="id" title="var">table</span>
-<div class="paragraph"> </div>
-
 </span>   But we want to express that as 
 <span class="inlinecode">[</span>  
    <span class="inlinecode"><span class="id" title="var">field_address0</span></span> <span class="inlinecode">(<span class="id" title="var">tarray</span></span> <span class="inlinecode">(<span class="id" title="var">tptr</span></span> <span class="inlinecode"><span class="id" title="var">tcell</span>)</span> <span class="inlinecode"><span class="id" title="var">N</span>)</span> <span class="inlinecode">[<span class="id" title="var">ArraySubsc</span></span> <span class="inlinecode"><span class="id" title="var">h</span>]</span>
@@ -1632,7 +1600,7 @@ For the remainder of the proof, here are some useful lemmas:
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:12&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:38&nbsp;*)</span><br/>
 </div>
 </div>
 

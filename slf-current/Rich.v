@@ -936,8 +936,8 @@ Tactic Notation "xwp" :=
         | applys xwp_lemma_fix2; [ reflexivity | splits; reflexivity | ] ];
   xwp_simpl.
 
-(** This tactic [xwp] also appears in the file [LibSepReference.v]. It is exploited
-    in several examples from the chapter [Basic]. *)
+(** This tactic [xwp] also appears in the file [LibSepReference.v]. It is
+    exploited in several examples from the chapter [Basic]. *)
 
 End CurriedFun.
 
@@ -1210,7 +1210,7 @@ Module NarySyntax.
 
 (** To explain the working of our coercion trick, let us consider a simplified
     grammar of terms, including only the constructor [trm_apps] for n-ary
-    applications, and the construct [trm_val] for values.  *)
+    applications, and the construct [trm_val] for values. *)
 
 Inductive trm : Type :=
   | trm_val : val -> trm
@@ -1292,4 +1292,4 @@ End PrimitiveNaryFun.
     iterations, has appeared independently in work by [Charguéraud 2010] (in Bib.v)
     and [Tuerk 2010] (in Bib.v). *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

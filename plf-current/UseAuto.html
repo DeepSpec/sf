@@ -78,7 +78,7 @@ In a machine-checked proof, every single detail has to be
 </div>
 
 <div class="doc">
-<a id="lab566"></a><h1 class="section">Basic Features of Proof Search</h1>
+<a id="lab595"></a><h1 class="section">Basic Features of Proof Search</h1>
 
 <div class="paragraph"> </div>
 
@@ -98,7 +98,7 @@ In a machine-checked proof, every single detail has to be
 </div>
 
 <div class="doc">
-<a id="lab567"></a><h2 class="section">Strength of Proof Search</h2>
+<a id="lab596"></a><h2 class="section">Strength of Proof Search</h2>
 
 <div class="paragraph"> </div>
 
@@ -139,7 +139,7 @@ In a machine-checked proof, every single detail has to be
 </div>
 
 <div class="doc">
-<a id="lab568"></a><h2 class="section">Basics</h2>
+<a id="lab597"></a><h2 class="section">Basics</h2>
 
 <div class="paragraph"> </div>
 
@@ -224,7 +224,7 @@ If we are interested to see which proof <span class="inlinecode"><span class="id
 </div>
 
 <div class="doc">
-<a id="lab569"></a><h2 class="section">Conjunctions</h2>
+<a id="lab598"></a><h2 class="section">Conjunctions</h2>
 
 <div class="paragraph"> </div>
 
@@ -327,7 +327,7 @@ This situation is slightly disappointing, since automation is
 </div>
 
 <div class="doc">
-<a id="lab570"></a><h2 class="section">Disjunctions</h2>
+<a id="lab599"></a><h2 class="section">Disjunctions</h2>
 
 <div class="paragraph"> </div>
 
@@ -380,7 +380,7 @@ However, the ability of <span class="inlinecode"><span class="id" title="var">ia
 </div>
 
 <div class="doc">
-<a id="lab571"></a><h2 class="section">Existentials</h2>
+<a id="lab600"></a><h2 class="section">Existentials</h2>
 
 <div class="paragraph"> </div>
 
@@ -423,7 +423,7 @@ A major strength of <span class="inlinecode"><span class="id" title="var">jauto<
 </div>
 
 <div class="doc">
-<a id="lab572"></a><h2 class="section">Negation</h2>
+<a id="lab601"></a><h2 class="section">Negation</h2>
 
 <div class="paragraph"> </div>
 
@@ -466,7 +466,7 @@ We will come back later on to the behavior of proof search with
 </div>
 
 <div class="doc">
-<a id="lab573"></a><h2 class="section">Equalities</h2>
+<a id="lab602"></a><h2 class="section">Equalities</h2>
 
 <div class="paragraph"> </div>
 
@@ -491,12 +491,12 @@ To automate more advanced reasoning on equalities, one should
 </div>
 
 <div class="doc">
-<a id="lab574"></a><h1 class="section">How Proof Search Works</h1>
+<a id="lab603"></a><h1 class="section">How Proof Search Works</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab575"></a><h2 class="section">Search Depth</h2>
+<a id="lab604"></a><h2 class="section">Search Depth</h2>
 
 <div class="paragraph"> </div>
 
@@ -631,7 +631,7 @@ Because <span class="inlinecode"><span class="id" title="tactic">auto</span></sp
 </div>
 
 <div class="doc">
-<a id="lab576"></a><h2 class="section">Backtracking</h2>
+<a id="lab605"></a><h2 class="section">Backtracking</h2>
 
 <div class="paragraph"> </div>
 
@@ -771,7 +771,7 @@ This time, the output message suggests that the proof search
 </div>
 
 <div class="doc">
-<a id="lab577"></a><h2 class="section">Adding Hints</h2>
+<a id="lab606"></a><h2 class="section">Adding Hints</h2>
 
 <div class="paragraph"> </div>
 
@@ -799,7 +799,7 @@ This time, the output message suggests that the proof search
 
 <span class="id" title="keyword">Lemma</span> <a id="nat_le_refl" class="idref" href="#nat_le_refl"><span class="id" title="lemma">nat_le_refl</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:64" class="idref" href="#x:64"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>), <a class="idref" href="UseAuto.html#x:64"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="UseAuto.html#x:64"><span class="id" title="variable">x</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#le_n"><span class="id" title="constructor">le_n</span></a>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">nat_le_refl</span> : <span class="id" title="var">core</span>.<br/>
+<span class="id" title="keyword">Local Hint Resolve</span> <span class="id" title="var">nat_le_refl</span> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
@@ -817,7 +817,7 @@ A convenient shorthand for adding all the constructors of an
 </div>
 
 <div class="doc">
-<a id="lab578"></a><h2 class="section">Integration of Automation in Tactics</h2>
+<a id="lab607"></a><h2 class="section">Integration of Automation in Tactics</h2>
 
 <div class="paragraph"> </div>
 
@@ -833,8 +833,6 @@ A convenient shorthand for adding all the constructors of an
     star symbol, can be modified whenever needed. Simply write:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Ltac</span> <span class="id" title="var">auto_star</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">a_new_definition</span>.
-<div class="paragraph"> </div>
-
 </span>    Observe the use of <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> instead of <span class="inlinecode">:=</span>, which indicates that the
     tactic is being rebound to a new definition. So, the default
     definition is as follows. 
@@ -897,7 +895,7 @@ In the examples that follow, only <span class="inlinecode"><span class="id" titl
 </div>
 
 <div class="doc">
-<a id="lab579"></a><h1 class="section">Example Proofs using Automation</h1>
+<a id="lab608"></a><h1 class="section">Example Proofs using Automation</h1>
 
 <div class="paragraph"> </div>
 
@@ -907,7 +905,7 @@ In the examples that follow, only <span class="inlinecode"><span class="id" titl
 </div>
 
 <div class="doc">
-<a id="lab580"></a><h2 class="section">Determinism</h2>
+<a id="lab609"></a><h2 class="section">Determinism</h2>
 
 </div>
 <div class="code">
@@ -1086,7 +1084,7 @@ To polish the proof script, it remains to factorize the calls
 </div>
 
 <div class="doc">
-<a id="lab581"></a><h2 class="section">Preservation for STLC</h2>
+<a id="lab610"></a><h2 class="section">Preservation for STLC</h2>
 
 <div class="paragraph"> </div>
 
@@ -1150,7 +1148,7 @@ Exercise: rewrite this proof using tactics from <span class="inlinecode"><span c
 </div>
 
 <div class="doc">
-<a id="lab582"></a><h2 class="section">Progress for STLC</h2>
+<a id="lab611"></a><h2 class="section">Progress for STLC</h2>
 
 <div class="paragraph"> </div>
 
@@ -1210,7 +1208,7 @@ Exercise: optimize the above proof.
 </div>
 
 <div class="doc">
-<a id="lab583"></a><h2 class="section">BigStep and SmallStep</h2>
+<a id="lab612"></a><h2 class="section">BigStep and SmallStep</h2>
 
 </div>
 <div class="code">
@@ -1306,7 +1304,7 @@ If we try to combine the two proofs into a single one,
 </div>
 
 <div class="doc">
-<a id="lab584"></a><h2 class="section">Preservation for STLCRef</h2>
+<a id="lab613"></a><h2 class="section">Preservation for STLCRef</h2>
 
 </div>
 <div class="code">
@@ -1546,7 +1544,7 @@ The optimized proof of preservation is summarized next.
 </div>
 
 <div class="doc">
-<a id="lab585"></a><h2 class="section">Progress for STLCRef</h2>
+<a id="lab614"></a><h2 class="section">Progress for STLCRef</h2>
 
 <div class="paragraph"> </div>
 
@@ -1589,7 +1587,7 @@ The optimized proof of preservation is summarized next.
 </div>
 
 <div class="doc">
-<a id="lab586"></a><h2 class="section">Subtyping</h2>
+<a id="lab615"></a><h2 class="section">Subtyping</h2>
 
 </div>
 <div class="code">
@@ -1641,12 +1639,12 @@ Exercise: optimize the proof script, using
 </div>
 
 <div class="doc">
-<a id="lab587"></a><h1 class="section">Advanced Topics in Proof Search</h1>
+<a id="lab616"></a><h1 class="section">Advanced Topics in Proof Search</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab588"></a><h2 class="section">Stating Lemmas in the Right Way</h2>
+<a id="lab617"></a><h2 class="section">Stating Lemmas in the Right Way</h2>
 
 <div class="paragraph"> </div>
 
@@ -1713,7 +1711,7 @@ It is very important to understand that the hypothesis <span class="inlinecode">
 </div>
 
 <div class="doc">
-<a id="lab589"></a><h2 class="section">Unfolding of Definitions During Proof-Search</h2>
+<a id="lab618"></a><h2 class="section">Unfolding of Definitions During Proof-Search</h2>
 
 <div class="paragraph"> </div>
 
@@ -1813,7 +1811,7 @@ There is actually one exception to the previous rule: a constant
 </div>
 
 <div class="doc">
-<a id="lab590"></a><h2 class="section">Automation for Proving Absurd Goals</h2>
+<a id="lab619"></a><h2 class="section">Automation for Proving Absurd Goals</h2>
 
 <div class="paragraph"> </div>
 
@@ -1974,7 +1972,7 @@ In the above example, <span class="inlinecode"><span class="id" title="var">fals
 </div>
 
 <div class="doc">
-<a id="lab591"></a><h2 class="section">Automation for Transitivity Lemmas</h2>
+<a id="lab620"></a><h2 class="section">Automation for Transitivity Lemmas</h2>
 
 <div class="paragraph"> </div>
 
@@ -2170,7 +2168,7 @@ We may also check that the new external hint does not suffer from the
 </div>
 
 <div class="doc">
-<a id="lab592"></a><h1 class="section">Decision Procedures</h1>
+<a id="lab621"></a><h1 class="section">Decision Procedures</h1>
 
 <div class="paragraph"> </div>
 
@@ -2186,7 +2184,7 @@ We may also check that the new external hint does not suffer from the
 </div>
 
 <div class="doc">
-<a id="lab593"></a><h2 class="section">Lia</h2>
+<a id="lab622"></a><h2 class="section">Lia</h2>
 
 <div class="paragraph"> </div>
 
@@ -2268,7 +2266,7 @@ Note: <span class="inlinecode"><span class="id" title="tactic">omega</span></spa
 </div>
 
 <div class="doc">
-<a id="lab594"></a><h2 class="section">Ring</h2>
+<a id="lab623"></a><h2 class="section">Ring</h2>
 
 <div class="paragraph"> </div>
 
@@ -2292,7 +2290,7 @@ Note: <span class="inlinecode"><span class="id" title="tactic">omega</span></spa
 </div>
 
 <div class="doc">
-<a id="lab595"></a><h2 class="section">Congruence</h2>
+<a id="lab624"></a><h2 class="section">Congruence</h2>
 
 <div class="paragraph"> </div>
 
@@ -2363,7 +2361,7 @@ One of the strengths of <span class="inlinecode"><span class="id" title="tactic"
 </div>
 
 <div class="doc">
-<a id="lab596"></a><h1 class="section">Summary</h1>
+<a id="lab625"></a><h1 class="section">Summary</h1>
 
 <div class="paragraph"> </div>
 
@@ -2472,7 +2470,7 @@ One of the strengths of <span class="inlinecode"><span class="id" title="tactic"
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:25&nbsp;*)</span><br/>
 </div>
 </div>
 

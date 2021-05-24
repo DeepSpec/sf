@@ -48,8 +48,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> × <span class="id" title="var">Z</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Z</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -65,12 +63,10 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Bool.Bool.html#"><span class="id" title="library">Bool.Bool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Nat</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">Nat</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Strings.String</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Maps.html#"><span class="id" title="library">Maps</span></a>.<br/>
 </div>
 
@@ -121,8 +117,6 @@ In this chapter, we'll mostly elide the translation from the
     translate the string <span class="inlinecode">&quot;1</span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode">×</span> <span class="inlinecode">3&quot;</span> to the AST
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">APlus</span> (<span class="id" title="var">ANum</span> 1) (<span class="id" title="var">AMult</span> (<span class="id" title="var">ANum</span> 2) (<span class="id" title="var">ANum</span> 3)).
-<div class="paragraph"> </div>
-
 </span>    The optional chapter <a href="ImpParser.html"><span class="inlineref">ImpParser</span></a> develops a simple lexical
     analyzer and parser that can perform this translation.  You do
     <i>not</i> need to understand that chapter to understand this one, but
@@ -144,8 +138,6 @@ In this chapter, we'll mostly elide the translation from the
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">a</span> ≤ <span class="id" title="var">a</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ¬<span class="id" title="var">b</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">b</span> &amp;&amp; <span class="id" title="var">b</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -454,8 +446,6 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
     <i>Theorem</i>: For all arithmetic expressions <span class="inlinecode"><span class="id" title="var">a</span></span>,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aeval</span> (<span class="id" title="var">optimize_0plus</span> <span class="id" title="var">a</span>) = <span class="id" title="var">aeval</span> <span class="id" title="var">a</span>.
-<div class="paragraph"> </div>
-
 </span>    <i>Proof</i>: By induction on <span class="inlinecode"><span class="id" title="var">a</span></span>.  Most cases follow directly from the
     IH.  The remaining cases are as follows:
 
@@ -465,8 +455,6 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
 <li> Suppose <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">ANum</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> for some <span class="inlinecode"><span class="id" title="var">n</span></span>.  We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aeval</span> (<span class="id" title="var">optimize_0plus</span> (<span class="id" title="var">ANum</span> <span class="id" title="var">n</span>)) = <span class="id" title="var">aeval</span> (<span class="id" title="var">ANum</span> <span class="id" title="var">n</span>).
-<div class="paragraph"> </div>
-
 </span>        This is immediate from the definition of <span class="inlinecode"><span class="id" title="var">optimize_0plus</span></span>.
 
 <div class="paragraph"> </div>
@@ -477,8 +465,6 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
         show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aeval</span> (<span class="id" title="var">optimize_0plus</span> (<span class="id" title="var">APlus</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>)) = <span class="id" title="var">aeval</span> (<span class="id" title="var">APlus</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>).
-<div class="paragraph"> </div>
-
 </span>        Consider the possible forms of <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span>.  For most of them,
         <span class="inlinecode"><span class="id" title="var">optimize_0plus</span></span> simply calls itself recursively for the
         subexpressions and rebuilds a new expression of the same form
@@ -491,8 +477,6 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
         <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span>, then
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">optimize_0plus</span> (<span class="id" title="var">APlus</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>) = <span class="id" title="var">optimize_0plus</span> <span class="id" title="var">a<sub>2</sub></span>
-<div class="paragraph"> </div>
-
 </span>        and the IH for <span class="inlinecode"><span class="id" title="var">a<sub>2</sub></span></span> is exactly what we need.  On the other
         hand, if <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span> for some <span class="inlinecode"><span class="id" title="var">n'</span></span>, then again <span class="inlinecode"><span class="id" title="var">optimize_0plus</span></span>
         simply calls itself recursively, and the result follows from
@@ -540,8 +524,6 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
     then
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span>; [<span class="id" title="var">T<sub>1</sub></span> | <span class="id" title="var">T<sub>2</sub></span> | ... | <span class="id" title="var">Tn</span>]
-<div class="paragraph"> </div>
-
 </span>    is a tactic that first performs <span class="inlinecode"><span class="id" title="var">T</span></span> and then performs <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span> on the
     first subgoal generated by <span class="inlinecode"><span class="id" title="var">T</span></span>, performs <span class="inlinecode"><span class="id" title="var">T<sub>2</sub></span></span> on the second
     subgoal, etc.
@@ -552,8 +534,6 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
     <span class="inlinecode"><span class="id" title="var">Ti</span></span>'s are the same tactic; i.e., <span class="inlinecode"><span class="id" title="var">T</span>;<span class="id" title="var">T'</span></span> is shorthand for:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span>; [<span class="id" title="var">T'</span> | <span class="id" title="var">T'</span> | ... | <span class="id" title="var">T'</span>]
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
@@ -645,7 +625,7 @@ While evaluation in Coq's term language, Gallina, is guaranteed to
     sophisticated optimizer and prove it correct.  (You will probably
     find it easiest to start small -- add just a single, simple
     optimization and its correctness proof -- and build up to
-    something more interesting incrementially.)  
+    something more interesting incrementally.)  
 </div>
 <div class="code">
 
@@ -960,8 +940,6 @@ As we saw in <a href="IndProp.html"><span class="inlineref">IndProp</span></a> i
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aevalR</span> <span class="id" title="var">e<sub>1</sub></span> <span class="id" title="var">n<sub>1</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aevalR</span> <span class="id" title="var">e<sub>2</sub></span> <span class="id" title="var">n<sub>2</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aevalR</span> (<span class="id" title="var">APlus</span> <span class="id" title="var">e<sub>1</sub></span> <span class="id" title="var">e<sub>2</sub></span>) (<span class="id" title="var">n<sub>1</sub></span> + <span class="id" title="var">n<sub>2</sub></span>)
-<div class="paragraph"> </div>
-
 </span>    ...would be written like this as an inference rule:
 <center><table class="infrule">
 <tr class="infruleassumption">
@@ -1080,8 +1058,6 @@ As we saw in <a href="IndProp.html"><span class="inlineref">IndProp</span></a> i
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BNot</span> <span class="id" title="var">b</span>      ⇒ <span class="id" title="var">negb</span> (<span class="id" title="var">beval</span> <span class="id" title="var">b</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BAnd</span> <span class="id" title="var">b<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span>  ⇒ <span class="id" title="var">andb</span> (<span class="id" title="var">beval</span> <span class="id" title="var">b<sub>1</sub></span>) (<span class="id" title="var">beval</span> <span class="id" title="var">b<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    Write out a corresponding definition of boolean evaluation as a
     relation (in inference rule notation). 
 </div>
@@ -1614,8 +1590,6 @@ Now we can add a notation for a "singleton state" with just one
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c</span> := <span class="id" title="var">skip</span> | <span class="id" title="var">x</span> := <span class="id" title="var">a</span> | <span class="id" title="var">c</span> ; <span class="id" title="var">c</span> | <span class="id" title="keyword">if</span> <span class="id" title="var">b</span> <span class="id" title="keyword">then</span> <span class="id" title="var">c</span> <span class="id" title="keyword">else</span> <span class="id" title="var">c</span> <span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">while</span> <span class="id" title="var">b</span> <span class="id" title="tactic">do</span> <span class="id" title="var">c</span> <span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span> 
 <div class="paragraph"> </div>
 
@@ -1852,12 +1826,9 @@ For example, here is the factorial function again, written as a
 
  Here's an attempt at defining an evaluation function for commands,
     omitting the <span class="inlinecode"><span class="id" title="var">while</span></span> case. 
-<div class="paragraph"> </div>
-
- The following declaration is needed to be able to use the
-    notations in match patterns. 
 </div>
 <div class="code">
+
 <span class="id" title="keyword">Fixpoint</span> <a id="ceval_fun_no_while" class="idref" href="#ceval_fun_no_while"><span class="id" title="definition">ceval_fun_no_while</span></a> (<a id="st:202" class="idref" href="#st:202"><span class="id" title="binder">st</span></a> : <a class="idref" href="Imp.html#state"><span class="id" title="definition">state</span></a>) (<a id="c:203" class="idref" href="#c:203"><span class="id" title="binder">c</span></a> : <a class="idref" href="Imp.html#com"><span class="id" title="inductive">com</span></a>) : <a class="idref" href="Imp.html#state"><span class="id" title="definition">state</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Imp.html#c:203"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="Imp.html#23430cd9e427d30c054d4f029e39cb7f"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Imp.html#:com:com_scope:'skip'"><span class="id" title="notation">skip</span></a> <a class="idref" href="Imp.html#23430cd9e427d30c054d4f029e39cb7f"><span class="id" title="notation">}&gt;</span></a> ⇒<br/>
@@ -1894,24 +1865,24 @@ In a traditional functional programming language like OCaml or
     define is not guaranteed to terminate. Indeed, it <i>doesn't</i> always
     terminate: for example, the full version of the <span class="inlinecode"><span class="id" title="var">ceval_fun</span></span>
     function applied to the <span class="inlinecode"><span class="id" title="var">loop</span></span> program above would never
-    terminate. Since Coq is not just a functional programming
-    language but also a consistent logic, any potentially
-    non-terminating function needs to be rejected. Here is
-    an (invalid!) program showing what would go wrong if Coq
-    allowed non-terminating recursive functions:
+    terminate. Since Coq is not just a functional programming language
+    but also a consistent logic, any potentially non-terminating
+    function needs to be rejected. Here is an (invalid!) program
+    showing what would go wrong if Coq allowed non-terminating
+    recursive functions:
 <pre>
          Fixpoint loop_false (n : nat) : False := loop_false n.
 </pre>
     That is, propositions like <span class="inlinecode"><span class="id" title="var">False</span></span> would become provable
-    (<span class="inlinecode"><span class="id" title="var">loop_false</span></span> <span class="inlinecode">0</span> would be a proof of <span class="inlinecode"><span class="id" title="var">False</span></span>), which
-    would be a disaster for Coq's logical consistency.
+    (<span class="inlinecode"><span class="id" title="var">loop_false</span></span> <span class="inlinecode">0</span> would be a proof of <span class="inlinecode"><span class="id" title="var">False</span></span>), which would be
+    a disaster for Coq's logical consistency.
 
 <div class="paragraph"> </div>
 
-    Thus, because it doesn't terminate on all inputs,
-    of <span class="inlinecode"><span class="id" title="var">ceval_fun</span></span> cannot be written in Coq -- at least not without
-    additional tricks and workarounds (see chapter <a href="ImpCEvalFun.html"><span class="inlineref">ImpCEvalFun</span></a>
-    if you're curious about what those might be). 
+    Thus, because it doesn't terminate on all inputs, <span class="inlinecode"><span class="id" title="var">ceval_fun</span></span>
+    cannot be written in Coq -- at least not without additional tricks
+    and workarounds (see chapter <a href="ImpCEvalFun.html"><span class="inlineref">ImpCEvalFun</span></a> if you're curious
+    about what those might be). 
 </div>
 
 <div class="doc">
@@ -2624,8 +2595,6 @@ Next, we need to define the behavior of <span class="inlinecode"><span class="id
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 1;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    ... the value of <span class="inlinecode"><span class="id" title="var">X</span></span> should be <span class="inlinecode">1</span>, and not <span class="inlinecode">0</span>.
 
 <div class="paragraph"> </div>
@@ -2826,7 +2795,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

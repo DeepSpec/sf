@@ -24,12 +24,10 @@ Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Bool.Bool.
 From Coq Require Import Init.Nat.
 From Coq Require Import Arith.Arith.
-From Coq Require Import Arith.EqNat.
-Import Nat.
+From Coq Require Import Arith.EqNat. Import Nat.
 From Coq Require Import Lia.
-From Coq Require Import Lists.List.
+From Coq Require Import Lists.List. Import ListNotations.
 From Coq Require Import Strings.String.
-Import ListNotations.
 From LF Require Import Maps.
 
 (* ################################################################# *)
@@ -463,7 +461,7 @@ Proof.
     sophisticated optimizer and prove it correct.  (You will probably
     find it easiest to start small -- add just a single, simple
     optimization and its correctness proof -- and build up to
-    something more interesting incrementially.)  *)
+    something more interesting incrementally.)  *)
 
 (* FILL IN HERE
 
@@ -1329,8 +1327,6 @@ Definition loop : com :=
 (** Here's an attempt at defining an evaluation function for commands,
     omitting the [while] case. *)
 
-(** The following declaration is needed to be able to use the
-    notations in match patterns. *)
 Fixpoint ceval_fun_no_while (st : state) (c : com) : state :=
   match c with
     | <{ skip }> =>
@@ -1365,22 +1361,22 @@ Fixpoint ceval_fun_no_while (st : state) (c : com) : state :=
     define is not guaranteed to terminate. Indeed, it _doesn't_ always
     terminate: for example, the full version of the [ceval_fun]
     function applied to the [loop] program above would never
-    terminate. Since Coq is not just a functional programming
-    language but also a consistent logic, any potentially
-    non-terminating function needs to be rejected. Here is
-    an (invalid!) program showing what would go wrong if Coq
-    allowed non-terminating recursive functions:
+    terminate. Since Coq is not just a functional programming language
+    but also a consistent logic, any potentially non-terminating
+    function needs to be rejected. Here is an (invalid!) program
+    showing what would go wrong if Coq allowed non-terminating
+    recursive functions:
 
          Fixpoint loop_false (n : nat) : False := loop_false n.
 
     That is, propositions like [False] would become provable
-    ([loop_false 0] would be a proof of [False]), which
-    would be a disaster for Coq's logical consistency.
+    ([loop_false 0] would be a proof of [False]), which would be
+    a disaster for Coq's logical consistency.
 
-    Thus, because it doesn't terminate on all inputs,
-    of [ceval_fun] cannot be written in Coq -- at least not without
-    additional tricks and workarounds (see chapter [ImpCEvalFun]
-    if you're curious about what those might be). *)
+    Thus, because it doesn't terminate on all inputs, [ceval_fun]
+    cannot be written in Coq -- at least not without additional tricks
+    and workarounds (see chapter [ImpCEvalFun] if you're curious
+    about what those might be). *)
 
 (* ================================================================= *)
 (** ** Evaluation as a Relation *)
@@ -2026,4 +2022,4 @@ End BreakImp.
 
     [] *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

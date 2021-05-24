@@ -254,15 +254,11 @@ Of course, in any given development there will probably be
     proofs.  We can add these to the global hint database by writing
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">T</span> : <span class="id" title="var">core</span>.
-<div class="paragraph"> </div>
-
 </span>    at the top level, where <span class="inlinecode"><span class="id" title="var">T</span></span> is a top-level theorem or a
     constructor of an inductively defined proposition (i.e., anything
     whose type is an implication).  As a shorthand, we can write
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Constructors</span> <span class="id" title="var">c</span> : <span class="id" title="var">core</span>.
-<div class="paragraph"> </div>
-
 </span>    to tell Coq to do a <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Resolve</span></span> for <i>all</i> of the constructors
     from the inductive definition of <span class="inlinecode"><span class="id" title="var">c</span></span>.
 
@@ -271,8 +267,6 @@ Of course, in any given development there will probably be
     It is also sometimes necessary to add
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Unfold</span> <span class="id" title="var">d</span> : <span class="id" title="var">core</span>.
-<div class="paragraph"> </div>
-
 </span>    where <span class="inlinecode"><span class="id" title="var">d</span></span> is a defined symbol, so that <span class="inlinecode"><span class="id" title="tactic">auto</span></span> knows to expand uses
     of <span class="inlinecode"><span class="id" title="var">d</span></span>, thus enabling further possibilities for applying lemmas that
     it knows about. 
@@ -393,13 +387,9 @@ When we are using a particular tactic many times in a proof, we
     cases. Each of them occurs in a situation where we have both
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H<sub>1</sub></span>: <span class="id" title="var">beval</span> <span class="id" title="var">st</span> <span class="id" title="var">b</span> = <span class="id" title="var">false</span>
-<div class="paragraph"> </div>
-
 </span>    and
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H<sub>2</sub></span>: <span class="id" title="var">beval</span> <span class="id" title="var">st</span> <span class="id" title="var">b</span> = <span class="id" title="var">true</span>
-<div class="paragraph"> </div>
-
 </span>    as hypotheses.  The contradiction is evident, but demonstrating it
     is a little complicated: we have to locate the two hypotheses <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span>
     and <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span> and do a <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> following by a <span class="inlinecode"><span class="id" title="tactic">discriminate</span></span>.  We'd
@@ -713,8 +703,6 @@ In the first step of the proof, we had to explicitly provide a
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st</span>  =[ <span class="id" title="var">c<sub>1</sub></span> ]=&gt; <span class="id" title="var">st'</span>  →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st'</span> =[ <span class="id" title="var">c<sub>2</sub></span> ]=&gt; <span class="id" title="var">st''</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st</span>  =[ <span class="id" title="var">c<sub>1</sub></span> ; <span class="id" title="var">c<sub>2</sub></span> ]=&gt; <span class="id" title="var">st''</span>
-<div class="paragraph"> </div>
-
 </span>   is quantified over a variable, <span class="inlinecode"><span class="id" title="var">st'</span></span>, that does not appear in its
    conclusion, so unifying its conclusion with the goal state doesn't
    help Coq find a suitable value for this variable.  If we leave
@@ -865,8 +853,6 @@ An additional constraint is that existential variables cannot be
 The error we get, with some details elided, is:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cannot</span> <span class="id" title="tactic">instantiate</span> "?y" <span class="id" title="var">because</span> "y" <span class="id" title="keyword">is</span> <span class="id" title="var">not</span> <span class="id" title="keyword">in</span> <span class="id" title="var">its</span> <span class="id" title="var">scope</span>
-<div class="paragraph"> </div>
-
 </span>    In this case there is an easy fix: doing <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">HP</span></span> <i>before</i>
     doing <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> <span class="inlinecode"><span class="id" title="var">HQ</span></span>. 
 </div>
@@ -919,7 +905,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">HP</span> <span class="id" title="var">HQ</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">HP</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">y</span> <span class="id" title="var">HP'</span>]. <span class="id" title="tactic">eauto</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

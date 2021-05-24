@@ -23,14 +23,14 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {$FIRSTAUTHOR:SF$VOLUMENUMBER,
-   author       =   {$AUTHORS},
+   @book            {Lampropoulos:SF4,
+   author       =   {Leonidas Lampropoulos and Benjamin C. Pierce},
    title        =   "$VOLUMENAME",
    series       =   "Software Foundations",
-   volume       =   "$VOLUMENUMBER",
-   year         =   "$VOLUMEYEAR",
+   volume       =   "4",
+   year         =   "2021",
    publisher    =   "Electronic textbook",
-   note         =   {Version $VERSION, \URLhttp://softwarefoundations.cis.upenn.edu },
+   note         =   {Version 1.2, \URLhttp://softwarefoundations.cis.upenn.edu },
    }
 *)
 
@@ -43,4 +43,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:42 *)

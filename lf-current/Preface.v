@@ -257,7 +257,7 @@
 (** Coq runs on Windows, Linux, and macOS.  You will need:
 
     - A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.12.
+      These files have been tested with Coq 8.12 or later.
 
     - An IDE for interacting with Coq.  Currently, there are two
       choices:
@@ -279,8 +279,8 @@
           Users who like CoqIDE should consider running it with the
           "asynchronous" and "error resilience" modes disabled:
 
-              coqide -async-proofs off \
-                     -async-proofs-command-error-resilience off Foo.v &
+          coqide -async-proofs off \
+                 -async-proofs-command-error-resilience off Foo.v &
 *)
 
 (* ================================================================= *)
@@ -350,15 +350,23 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {$FIRSTAUTHOR:SF$VOLUMENUMBER,
-   author       =   {$AUTHORS},
-   title        =   "$VOLUMENAME",
-   series       =   "Software Foundations",
-   volume       =   "$VOLUMENUMBER",
-   year         =   "$VOLUMEYEAR",
-   publisher    =   "Electronic textbook",
-   note         =   {Version $VERSION, \URLhttp://softwarefoundations.cis.upenn.edu },
-   }
+    @book            {Pierce:SF1,
+    author       =   {Benjamin C. Pierce and
+		      Arthur Azevedo de Amorim and
+		      Chris Casinghino and
+		      Marco Gaboardi and
+		      Michael Greenberg and
+		      Cătălin Hriţcu and
+		      Vilhelm Sjöberg and
+		      Brent Yorgey},
+    title        =   "$VOLUMENAME",
+    series       =   "Software Foundations",
+    volume       =   "1",
+    year         =   "2021",
+    publisher    =   "Electronic textbook",
+    note         =   {Version 6.0,
+                      \URLhttp://softwarefoundations.cis.upenn.edu }
+    }
 *)
 
 (* ################################################################# *)
@@ -439,4 +447,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

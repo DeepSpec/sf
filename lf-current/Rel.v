@@ -22,15 +22,16 @@ From LF Require Export IndProp.
 
 Definition relation (X: Type) := X -> X -> Prop.
 
-(** Confusingly, the Coq standard library hijacks the generic term
-    "relation" for this specific instance of the idea. To maintain
-    consistency with the library, we will do the same.  So, henceforth
-    the Coq identifier [relation] will always refer to a binary
-    relation between some set and itself, whereas the English word
-    "relation" can refer either to the specific Coq concept or the
-    more general concept of a relation between any number of possibly
-    different sets.  The context of the discussion should always make
-    clear which is meant. *)
+(** Rather confusingly, the Coq standard library hijacks the generic
+    term "relation" for this specific instance of the idea. To
+    maintain consistency with the library, we will do the same.  So,
+    henceforth, the Coq identifier [relation] will always refer to a
+    binary relation _on_ some set (between the set and itself),
+    whereas in ordinary mathematical English the word "relation" can
+    refer either to this specific concept or the more general concept
+    of a relation between any number of possibly different sets.  The
+    context of the discussion should always make clear which is
+    meant. *)
 
 (** An example relation on [nat] is [le], the less-than-or-equal-to
     relation, which we usually write [n1 <= n2]. *)
@@ -394,4 +395,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

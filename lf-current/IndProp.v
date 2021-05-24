@@ -2,6 +2,7 @@
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From LF Require Export Logic.
+From Coq Require Import Lia.
 
 (* ################################################################# *)
 (** * Inductively Defined Propositions *)
@@ -394,7 +395,7 @@ Lemma ev_Even_firsttry : forall n,
   ev n -> Even n.
 Proof.
   (* WORKED IN CLASS *)
-  unfold Even. 
+  unfold Even.
 
 (** We could try to proceed by case analysis or induction on [n].  But
     since [ev] is mentioned in a premise, this strategy would
@@ -427,11 +428,11 @@ Proof.
     which is the same as the original statement, but with [n'] instead
     of [n].  Indeed, it is not difficult to convince Coq that this
     intermediate result suffices. *)
-    
-    assert (H: (exists k', n' = double k') -> (exists n0, S (S n') = double n0)). 
+
+    assert (H: (exists k', n' = double k') -> (exists n0, S (S n') = double n0)).
     { intros [k' EQ'']. exists (S k'). simpl. rewrite <- EQ''. reflexivity. }
-    apply H. 
- 
+    apply H.
+
     (** Unforunately, now we are stuck. To make that apparent, let's move
         [E'] back into the goal from the hypotheses. *)
 
@@ -813,7 +814,7 @@ Definition manual_grade_for_R_provability : option (nat*string) := None.
 
     The relation [R] above actually encodes a familiar function.
     Figure out which function; then state and prove this equivalence
-    in Coq? *)
+    in Coq. *)
 
 Definition fR : nat -> nat -> nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -996,8 +997,6 @@ Inductive exp_match {T} : list T -> reg_exp T -> Prop :=
                : (s1 ++ s2) =~ (Star re)
   where "s =~ re" := (exp_match s re).
 
-Lemma quiz : forall T (s:list T), ~(s =~ EmptySet).
-Proof. intros T s Hc. inversion Hc. Qed.
 (** Again, for readability, we can also display this definition using
     inference-rule notation. *)
 
@@ -2282,4 +2281,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

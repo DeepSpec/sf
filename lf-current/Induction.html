@@ -59,18 +59,13 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
     line (if you obtained the whole volume "Logical Foundations" as a
     single archive, a <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> should already exist and you can
     skip this step):
-
-<div class="paragraph"> </div>
-
-      <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span>
-
-<div class="paragraph"> </div>
-
-    This maps the current directory ("<span class="inlinecode">.</span>", which contains <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>,
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span>
+</span>    This maps the current directory ("<span class="inlinecode">.</span>", which contains <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>,
     <span class="inlinecode"><span class="id" title="var">Induction.v</span></span>, etc.) to the prefix (or "logical directory")
-    "<span class="inlinecode"><span class="id" title="var">LF</span></span>".  PG and CoqIDE read <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> automatically, so they
-    know to where to look for the file <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span> corresponding to
-    the library <span class="inlinecode"><span class="id" title="var">LF.Basics</span></span>.
+    "<span class="inlinecode"><span class="id" title="var">LF</span></span>".  Proof General and CoqIDE read <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span>
+    automatically, so they know to where to look for the file
+    <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span> corresponding to the library <span class="inlinecode"><span class="id" title="var">LF.Basics</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -80,67 +75,38 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> In Proof General: The compilation can be made to happen
-       automatically when you submit the <span class="inlinecode"><span class="id" title="keyword">Require</span></span> line above to PG,
-       by setting the emacs variable <span class="inlinecode"><span class="id" title="var">coq</span>-<span class="id" title="var">compile</span>-<span class="id" title="keyword">before</span>-<span class="id" title="var">require</span></span> to
-       <span class="inlinecode"><span class="id" title="var">t</span></span>. You can also use the menu option "Coq <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> Auto
-       Compilation <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> Compile Before Require".
+<li> In Proof General or CoqIDE, the compilation should happen
+       automatically when you submit the <span class="inlinecode"><span class="id" title="keyword">Require</span></span> line above to PG.
 
 <div class="paragraph"> </div>
 
 
 </li>
-<li> In CoqIDE: Open <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>; then, in the "Compile" menu, click
-       on "Compile Buffer".
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> From the command line: Generate a <span class="inlinecode"><span class="id" title="var">Makefile</span></span> using the
-       <span class="inlinecode"><span class="id" title="var">coq_makefile</span></span> utility, which comes installed with Coq (if you
-       obtained the whole volume as a single archive, a <span class="inlinecode"><span class="id" title="var">Makefile</span></span>
-       should already exist and you can skip this step):
-
-<div class="paragraph"> </div>
-
-         <span class="inlinecode"><span class="id" title="var">coq_makefile</span></span> <span class="inlinecode">-<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> <span class="inlinecode">*.<span class="id" title="var">v</span></span> <span class="inlinecode">-<span class="id" title="var">o</span></span> <span class="inlinecode"><span class="id" title="var">Makefile</span></span>
-
-<div class="paragraph"> </div>
-
-       Note: You should rerun that command whenever you add or remove
+<li> If you want to compile from the command line, generate a
+       <span class="inlinecode"><span class="id" title="var">Makefile</span></span> using the <span class="inlinecode"><span class="id" title="var">coq_makefile</span></span> utility, which comes
+       installed with Coq (if you obtained the whole volume as a
+       single archive, a <span class="inlinecode"><span class="id" title="var">Makefile</span></span> should already exist and you can
+       skip this step):
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coq_makefile</span> -<span class="id" title="var">f</span> <span class="id" title="var">_CoqProject</span> *.<span class="id" title="var">v</span> -<span class="id" title="var">o</span> <span class="id" title="var">Makefile</span>
+</span>       Note: You should rerun that command whenever you add or remove
        Coq files to the directory.
 
 <div class="paragraph"> </div>
 
        Now you can compile <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> by running <span class="inlinecode"><span class="id" title="var">make</span></span> with the
        corresponding <span class="inlinecode">.<span class="id" title="var">vo</span></span> file as a target:
-
-<div class="paragraph"> </div>
-
-         <span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span>
-
-<div class="paragraph"> </div>
-
-       All files in the directory can be compiled by giving no
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">make</span> <span class="id" title="var">Basics.vo</span>
+</span>       All files in the directory can be compiled by giving no
        arguments:
-
-<div class="paragraph"> </div>
-
-         <span class="inlinecode"><span class="id" title="var">make</span></span>
-
-<div class="paragraph"> </div>
-
-       Under the hood, <span class="inlinecode"><span class="id" title="var">make</span></span> uses the Coq compiler, <span class="inlinecode"><span class="id" title="var">coqc</span></span>.  You can
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">make</span>
+</span>       Under the hood, <span class="inlinecode"><span class="id" title="var">make</span></span> uses the Coq compiler, <span class="inlinecode"><span class="id" title="var">coqc</span></span>.  You can
        also run <span class="inlinecode"><span class="id" title="var">coqc</span></span> directly:
-
-<div class="paragraph"> </div>
-
-         <span class="inlinecode"><span class="id" title="var">coqc</span></span> <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span> <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>
-
-<div class="paragraph"> </div>
-
-       But <span class="inlinecode"><span class="id" title="var">make</span></span> also calculates dependencies between source files to
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span>
+</span>       But <span class="inlinecode"><span class="id" title="var">make</span></span> also calculates dependencies between source files to
        compile them in the right order, so <span class="inlinecode"><span class="id" title="var">make</span></span> should generally be
        preferred over explicit <span class="inlinecode"><span class="id" title="var">coqc</span></span>.
 
@@ -157,15 +123,10 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
 <div class="paragraph"> </div>
 
     In particular, if you see a message like
-
-<div class="paragraph"> </div>
-
-        <span class="inlinecode"><span class="id" title="var">Compiled</span></span> <span class="inlinecode"><span class="id" title="var">library</span></span> <span class="inlinecode"><span class="id" title="var">Foo</span></span> <span class="inlinecode"><span class="id" title="var">makes</span></span> <span class="inlinecode"><span class="id" title="var">inconsistent</span></span> <span class="inlinecode"><span class="id" title="var">assumptions</span></span> <span class="inlinecode"><span class="id" title="var">over</span></span>
-        <span class="inlinecode"><span class="id" title="var">library</span></span> <span class="inlinecode"><span class="id" title="var">Bar</span></span>
-
-<div class="paragraph"> </div>
-
-    check whether you have multiple installations of Coq on your
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Compiled</span> <span class="id" title="var">library</span> <span class="id" title="var">Foo</span> <span class="id" title="var">makes</span> <span class="id" title="var">inconsistent</span> <span class="id" title="var">assumptions</span> <span class="id" title="var">over</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">library</span> <span class="id" title="var">Bar</span>
+</span>    check whether you have multiple installations of Coq on your
     machine.  It may be that commands (like <span class="inlinecode"><span class="id" title="var">coqc</span></span>) that you execute
     in a terminal window are getting a different version of Coq than
     commands executed by Proof General or CoqIDE.
@@ -612,8 +573,6 @@ Coq is perfectly happy with this.  For a human, however, it
 <li> <i>Theorem</i>: For any <span class="inlinecode"><span class="id" title="var">n</span></span>, <span class="inlinecode"><span class="id" title="var">m</span></span> and <span class="inlinecode"><span class="id" title="var">p</span></span>,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">n</span> + (<span class="id" title="var">m</span> + <span class="id" title="var">p</span>) = (<span class="id" title="var">n</span> + <span class="id" title="var">m</span>) + <span class="id" title="var">p</span>.
-<div class="paragraph"> </div>
-
 </span>    <i>Proof</i>: By induction on <span class="inlinecode"><span class="id" title="var">n</span></span>.
 
 <div class="paragraph"> </div>
@@ -622,8 +581,6 @@ Coq is perfectly happy with this.  For a human, however, it
 <li> First, suppose <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span>.  We must show that
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 + (<span class="id" title="var">m</span> + <span class="id" title="var">p</span>) = (0 + <span class="id" title="var">m</span>) + <span class="id" title="var">p</span>.
-<div class="paragraph"> </div>
-
 </span>      This follows directly from the definition of <span class="inlinecode">+</span>.
 
 <div class="paragraph"> </div>
@@ -633,18 +590,12 @@ Coq is perfectly happy with this.  For a human, however, it
 <li> Next, suppose <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span></span>, where
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">n'</span> + (<span class="id" title="var">m</span> + <span class="id" title="var">p</span>) = (<span class="id" title="var">n'</span> + <span class="id" title="var">m</span>) + <span class="id" title="var">p</span>.
-<div class="paragraph"> </div>
-
 </span>      We must now show that
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">S</span> <span class="id" title="var">n'</span>) + (<span class="id" title="var">m</span> + <span class="id" title="var">p</span>) = ((<span class="id" title="var">S</span> <span class="id" title="var">n'</span>) + <span class="id" title="var">m</span>) + <span class="id" title="var">p</span>.
-<div class="paragraph"> </div>
-
 </span>      By the definition of <span class="inlinecode">+</span>, this follows from
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">S</span> (<span class="id" title="var">n'</span> + (<span class="id" title="var">m</span> + <span class="id" title="var">p</span>)) = <span class="id" title="var">S</span> ((<span class="id" title="var">n'</span> + <span class="id" title="var">m</span>) + <span class="id" title="var">p</span>),
-<div class="paragraph"> </div>
-
 </span>      which is immediate from the induction hypothesis.  <i>Qed</i>. 
 </li>
 </ul>
@@ -940,7 +891,7 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

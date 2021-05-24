@@ -1,6 +1,7 @@
 (** * Postscript *)
 
-(** Congratulations: We've made it to the end! *)
+(** Congratulations: We've made it to the end of _Logical
+    Foundations_! *)
 
 (* ################################################################# *)
 (** * Looking Back *)
@@ -35,20 +36,13 @@
 (* ################################################################# *)
 (** * Looking Forward *)
 
-(** If what you've seen so far has whetted your interest, you have two
-    choices for further reading in the _Software Foundations_ series:
-
-           - _Programming Language Foundations_ (volume 2, by a set of
-             authors similar to this book's) covers material that
-             might be found in a graduate course on the theory of
-             programming languages, including Hoare logic, operational
-             semantics, and type systems.
-
-           - _Verified Functional Algorithms_ (volume 3, by Andrew
-             Appel) builds on the themes of functional programming and
-             program verification in Coq, addressing a range of topics
-             that might be found in a standard data structures course,
-             with an eye to formal verification. *)
+(** If what you've seen so far has whetted your interest, you have
+    several choices for further reading in later volumes of the
+    _Software Foundations_ series.  Some of these are intended to be
+    accessible to readers immediately after finishing _Logical
+    Foundations_; others require a few chapters from Volume 2,
+    _Programming Language Foundations_.  The Preface chapter in each
+    volume gives details about prerequisites. *)
 
 (* ################################################################# *)
 (** * Resources *)
@@ -88,4 +82,4 @@
          https://deepspec.org/event/dsss17/index.html
 *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

@@ -46,40 +46,43 @@
 
     In this volume, you will learn about the foundations of Separation
     Logic, a practical approach to the modular verification of
-    imperative programs. In particular, this volume presents the building
-    blocks for constructing a program verification tool. It does not,
-    however, focus on reasoning about data structures and algorithms using
-    Separation Logic. This aspect is covered to some extent by Volume 5
-    of <i>Software Foundations</i>, which presents Verifiable C, a program logic
-    and proof system for C. For OCaml programs, this aspect will be covered
-    in a yet-to-be-written volume presenting CFML, a tool that builds upon
-    all the techniques presented in this volume.
+    imperative programs. In particular, this volume presents the
+    building blocks for constructing a program verification tool. It
+    does not, however, focus on reasoning about data structures and
+    algorithms using Separation Logic. This aspect is covered to some
+    extent by Volume 5 of <i>Software Foundations</i>, which presents
+    Verifiable C, a program logic and proof system for C. For OCaml
+    programs, this aspect will be covered in a yet-to-be-written
+    volume presenting CFML, a tool that builds upon all the techniques
+    presented in this volume.
 
 <div class="paragraph"> </div>
 
-    You are only assumed to understand the material in <i>Software Foundations</i>
-    Volume 1 (<i>Logical Foundations</i>), and the two chapters on Hoare Logic (Hoare
-    and Hoare2) from Software Foundations Volume 2 (<i>PL Foundations</i>). The
-    reading of Volume 5 is not a prerequisite. The exposition here is intended
-    for a broad range of readers, from advanced undergraduates to PhD students
-    and researchers.
+    You are only assumed to understand the material in <i>Software
+    Foundations</i> Volume 1 (<i>Logical Foundations</i>), and the two
+    chapters on Hoare Logic (Hoare and Hoare2) from Software
+    Foundations Volume 2 (<i>PL Foundations</i>). The reading of Volume 5
+    is not a prerequisite. The exposition here is intended for a broad
+    range of readers, from advanced undergraduates to PhD students and
+    researchers.
 
 <div class="paragraph"> </div>
 
-    A large fraction of the contents of this course is also written up in
-    traditional LaTeX-style presentation, in the ICFP'20 article:
+    A large fraction of the contents of this course is also written up
+    in traditional LaTeX-style presentation, in the ICFP'20 article:
     <i>Separation Logic for Sequential Programs</i>, by Arthur Charguéraud.
-    The long version of this paper is available from:
-    <a href='http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf'>http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf</a>.
+    The long version of this paper is available at this link:
+    <a href='http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf'>http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf</a>
 
 <div class="paragraph"> </div>
 
     This paper includes, in particular, a 5-page historical survey of
-    contributions to mechanized presentations of Separation Logic, featuring
-    100+ citations. For a broader survey of Separation Logic, we recommend
-    Peter O'Hearn's 2019 survey, which is available from:
-    <a href='https://dl.acm.org/doi/10.1145/3211968'>https://dl.acm.org/doi/10.1145/3211968</a>-- including the
-    <i>supplemental material</i> linked near the bottom of that page. 
+    contributions to mechanized presentations of Separation Logic,
+    featuring 100+ citations. For a broader survey of Separation
+    Logic, we recommend Peter O'Hearn's 2019 survey, which is
+    available from: <a href='https://dl.acm.org/doi/10.1145/3211968'>https://dl.acm.org/doi/10.1145/3211968</a>--
+    including the <i>supplemental material</i> linked near the bottom of
+    that page. 
 </div>
 
 <div class="doc">
@@ -242,9 +245,9 @@
 
 <div class="paragraph"> </div>
 
-    The course contains 13 chapters, not counting the Preface and Postface.
-    These chapters are organized in 3 major parts, as pictured in the dependency
-    diagram.
+    The course contains 13 chapters, not counting the <a href="Preface.html"><span class="inlineref">Preface</span></a>,
+    <a href="Postscript.html"><span class="inlineref">Postscript</span></a>, and <a href="Bib.html"><span class="inlineref">Bib</span></a> chapters. The course is organized in 3
+    major parts, as pictured in the roadmap diagram.
 
 <div class="paragraph"> </div>
 
@@ -265,7 +268,7 @@
 
 <div class="paragraph"> </div>
 
-    In addition, each chapter is decomposed in three parts.
+    In addition, each chapter except <a href="Basic.html"><span class="inlineref">Basic</span></a> is decomposed in three parts.
 
 <div class="paragraph"> </div>
 
@@ -513,7 +516,7 @@
 
 <div class="paragraph"> </div>
 
- Each chapter includes numerous exercises.  The star rating scheme
+ Each chapter includes numerous exercises. The star rating scheme
     is described in the <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Preface.html"><span class="inlineref">Preface</span></a> of Software Foundations Volume 1
     (<i>Logical Foundations</i>).
 
@@ -536,7 +539,7 @@
 
  The <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Preface.html"><span class="inlineref">Preface</span></a> of Software Foundations Volume 1 (<i>Logical
     Foundations</i>) describes how to install Coq. The files you are
-    reading have been tested with Coq 8.12. 
+    reading have been tested with Coq 8.12 or later. 
 </div>
 
 <div class="doc">
@@ -547,9 +550,7 @@
  CoqIDE typically works better with its <i>asynchronous</i> proof mode disabled.
     To load all the course files in CoqIDE, use the following command line.
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">Basic.v</span> &amp;
-<div class="paragraph"> </div>
-
+<span class="inlinecode"><span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">SLF</span> <span class="id" title="var">Basic.v</span>&amp;
 </span>
 </div>
 
@@ -561,8 +562,8 @@
  If you want to refer to this volume in your own writing, please
     do so as follows:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;@<span class="id" title="var">book</span>            {Charguéraud:<span class="id" title="var">SF</span>6,<br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="var">author</span>       =   {Arthur Charguéraud},<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;@<span class="id" title="var">book</span>            {<span class="id" title="var">Charguéraud</span>:<span class="id" title="var">SF<sub>6</sub></span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">author</span>       =   {<span class="id" title="var">Arthur</span> <span class="id" title="var">Charguéraud</span>},<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">title</span>        =   "Separation Logic Foundations",<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">series</span>       =   "Software Foundations",<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">volume</span>       =   "6",<br/>
@@ -570,8 +571,6 @@
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">publisher</span>    =   "Electronic textbook",<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">note</span>         =   {<span class="id" title="var">Version</span> 1.0, \<span class="id" title="var">URL</span>{<span class="id" title="var">http</span>://<span class="id" title="var">softwarefoundations.cis.upenn.edu</span>} },<br/>
 &nbsp;&nbsp;&nbsp;}
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
@@ -587,7 +586,7 @@
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

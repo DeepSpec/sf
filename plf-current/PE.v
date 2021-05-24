@@ -809,8 +809,8 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> Prop :=
 
   where "c1 '/' st '==>' c1' '/' st'" := (pe_com c1 st c1' st').
 
-Hint Constructors pe_com : core.
-Hint Constructors ceval : core.
+Local Hint Constructors pe_com : core.
+Local Hint Constructors ceval : core.
 
 (* ================================================================= *)
 (** ** Examples *)
@@ -867,7 +867,7 @@ Inductive pe_ceval
     c' / pe_st' / st ==> st''
   where "c' '/' pe_st' '/' st '==>' st''" := (pe_ceval c' pe_st' st st'').
 
-Hint Constructors pe_ceval : core.
+Local Hint Constructors pe_ceval : core.
 
 (* NOTATION : IY -- The "If" case line spacing looks a little off---what are the line
    break insert rules for Imp? *)
@@ -1096,7 +1096,7 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
 
   where "c1 '/' st '==>' c1' '/' st' '/' c''" := (pe_com c1 st c1' st' c'').
 
-Hint Constructors pe_com : core.
+Local Hint Constructors pe_com : core.
 
 (* ================================================================= *)
 (** ** Examples *)
@@ -1220,7 +1220,7 @@ Inductive ceval_count : com -> state -> state -> nat -> Prop :=
 
   where "c1 '/' st '==>' st' # n" := (ceval_count c1 st st' n).
 
-Hint Constructors ceval_count : core.
+Local Hint Constructors ceval_count : core.
 
 Theorem ceval_count_complete: forall c st st',
   st =[ c ]=> st' -> exists n, c / st ==> st' # n.
@@ -1265,7 +1265,7 @@ Inductive pe_ceval_count (c':com) (pe_st':pe_state) (c'':com)
   where "c' '/' pe_st' '/' c'' '/' st '==>' st'' '#' n" :=
         (pe_ceval_count c' pe_st' c'' st st'' n).
 
-Hint Constructors pe_ceval_count : core.
+Local Hint Constructors pe_ceval_count : core.
 
 Lemma pe_ceval_count_le: forall c' pe_st' c'' st st'' n n',
   n' <= n ->
@@ -1659,4 +1659,4 @@ Proof. intros.
       eapply E_Some; eauto. apply pe_block_correct. apply Hkeval.
 Qed.
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

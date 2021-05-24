@@ -256,7 +256,7 @@ Coercion trm_app : trm >-> Funclass.
 
 Inductive eval : state -> trm -> state -> val -> Prop :=
 
-  (** 1. [eval] for values and function definitions.
+(** 1. [eval] for values and function definitions.
 
       A value evaluates to itself.
       A term function evaluates to a value function.
@@ -269,7 +269,7 @@ Inductive eval : state -> trm -> state -> val -> Prop :=
   | eval_fix : forall s f x t1,
       eval s (trm_fix f x t1) s (val_fix f x t1)
 
-  (** 2. [eval] for function applications.
+(** 2. [eval] for function applications.
 
      The beta reduction rule asserts that [(val_fun x t1) v2]
      evaluates to the same result as [subst x v2 t1].
@@ -287,7 +287,7 @@ Inductive eval : state -> trm -> state -> val -> Prop :=
       eval s1 (subst x v2 (subst f v1 t1)) s2 v ->
       eval s1 (trm_app v1 v2) s2 v
 
-  (** 3. [eval] for structural constructs.
+(** 3. [eval] for structural constructs.
 
       A sequence [trm_seq t1 t2] first evaluates [t1], taking the
       state from [s1] to [s2], drops the result of [t1], then evaluates
@@ -305,7 +305,7 @@ Inductive eval : state -> trm -> state -> val -> Prop :=
       eval s2 (subst x v1 t2) s3 r ->
       eval s1 (trm_let x t1 t2) s3 r
 
-  (** 4. [eval] for conditionals.
+(** 4. [eval] for conditionals.
 
       A conditional in a source program is assumed to be of the form
       [if t0 then t1 else t2], where [t0] is either a variable or a
@@ -324,7 +324,7 @@ Inductive eval : state -> trm -> state -> val -> Prop :=
       eval s1 (if b then t1 else t2) s2 v ->
       eval s1 (trm_if (val_bool b) t1 t2) s2 v
 
-  (** 5. [eval] for primitive stateless operations.
+(** 5. [eval] for primitive stateless operations.
 
       For similar reasons as explained above, the behavior of applied
       primitive functions only need to be described for the case of value
@@ -344,7 +344,7 @@ Inductive eval : state -> trm -> state -> val -> Prop :=
       n2 <> 0 ->
       eval s (val_div (val_int n1) (val_int n2)) s (val_int (Z.quot n1 n2))
 
-  (** 6. [eval] for primitive operations on memory.
+(** 6. [eval] for primitive operations on memory.
 
       There remains to describe operations that act on the mutable store.
 
@@ -588,7 +588,7 @@ Parameter triple_fun : forall x t1 H Q,
 (** Last but not least, we need a reasoning rule to reason about a
     function application. Consider an application [trm_app v1 v2].
     Assume [v1] to be a function, that is, to be of the form
-(*     [val_fun x t1]. Then, according to the beta-reduction rule, the *)
+    [val_fun x t1]. Then, according to the beta-reduction rule, the
     semantics of [trm_app v1 v2] is the same as that of [subst x v2 t1].
     This reasoning rule is thus:
 
@@ -1443,7 +1443,7 @@ Lemma eval_ref_sep : forall s1 s2 v p,
   Fmap.disjoint s2 s1 ->
   eval s1 (val_ref v) (Fmap.union s2 s1) (val_loc p).
 Proof using.
-  (** It is not needed to follow through this proof. *)
+(** It is not needed to follow through this proof. *)
   introv -> D. forwards Dv: Fmap.indom_single p v.
   rewrite <- Fmap.update_eq_union_single. applys* eval_ref.
   { intros N. applys* Fmap.disjoint_inv_not_indom_both D N. }
@@ -1468,7 +1468,7 @@ Parameter exists_fresh : forall s,
 Lemma single_fresh : forall h v,
   exists p, Fmap.disjoint (Fmap.single p v) h.
 Proof using.
-  (** It is not needed to follow through this proof. *)
+(** It is not needed to follow through this proof. *)
   intros. forwards (p&F&N): exists_fresh h.
   exists p. applys* Fmap.disjoint_single_of_not_indom.
 Qed.
@@ -1727,7 +1727,7 @@ Lemma eval_set_sep : forall s1 s2 h2 p v1 v2,
   Fmap.disjoint (Fmap.single p v1) h2 ->
   eval s1 (val_set (val_loc p) v2) s2 val_unit.
 Proof using.
-  (** It is not needed to follow through this proof. *)
+(** It is not needed to follow through this proof. *)
   introv -> -> D. forwards Dv: Fmap.indom_single p v1.
   applys_eq eval_set.
   { rewrite* Fmap.update_union_l. fequals.
@@ -1914,10 +1914,9 @@ Proof using.
   { applys triple_eval_like M. introv R. applys* E. }
 Qed.
 
-(** The reasoning rule [triple_eval_like] has a number of practical applications.
-
-    One, show below, is to revisit the proof of [triple_app_fun] in a
-    much more succint way, by arguing that [trm_app (val_fun x t1) v2] and
+(** The reasoning rule [triple_eval_like] has a number of practical
+    applications. One, show below, is to revisit the proof of [triple_app_fun]
+    in a much more succint way, by arguing that [trm_app (val_fun x t1) v2] and
     [subst x v2 t1] are equivalent terms, hence they admit the same behavior. *)
 
 Lemma triple_app_fun : forall x v1 v2 t1 H Q,
@@ -2011,4 +2010,4 @@ End MatchStyle.
     we refer to Section 10.3 from the paper:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

@@ -347,13 +347,9 @@ It has exactly the same type as <span class="inlinecode"><span class="id" title=
     of simply omitting the types of some arguments to a function, like
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">repeat'</span> <span class="id" title="var">X</span> <span class="id" title="var">x</span> <span class="id" title="var">count</span> : <span class="id" title="var">list</span> <span class="id" title="var">X</span> :=
-<div class="paragraph"> </div>
-
 </span>    we can also replace the types with holes
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">repeat'</span> (<span class="id" title="var">X</span> : <span class="id" title="var">_</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">_</span>) (<span class="id" title="var">count</span> : <span class="id" title="var">_</span>) : <span class="id" title="var">list</span> <span class="id" title="var">X</span> :=
-<div class="paragraph"> </div>
-
 </span>    to tell Coq to attempt to infer the missing information.
 
 <div class="paragraph"> </div>
@@ -715,8 +711,6 @@ The following function takes two lists and combines them
 <li> What does
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Compute</span> (<span class="id" title="var">combine</span> [1;2] [<span class="id" title="var">false</span>;<span class="id" title="var">false</span>;<span class="id" title="var">true</span>;<span class="id" title="var">true</span>]).
-<div class="paragraph"> </div>
-
 </span>      print? 
 </li>
 </ul>
@@ -1024,8 +1018,6 @@ The expression <span class="inlinecode">(<span class="id" title="keyword">fun</s
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">partition</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">X</span> : <span class="id" title="keyword">Type</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">X</span> → <span class="id" title="var">bool</span>) → <span class="id" title="var">list</span> <span class="id" title="var">X</span> → <span class="id" title="var">list</span> <span class="id" title="var">X</span> × <span class="id" title="var">list</span> <span class="id" title="var">X</span>
-<div class="paragraph"> </div>
-
 </span>   Given a set <span class="inlinecode"><span class="id" title="var">X</span></span>, a predicate of type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">bool</span></span> and a <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span>,
    <span class="inlinecode"><span class="id" title="var">partition</span></span> should return a pair of lists.  The first member of the
    pair is the sublist of the original list containing the elements
@@ -1140,8 +1132,6 @@ It can even be applied to a list of numbers and
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">flat_map</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">n</span> ⇒ [<span class="id" title="var">n</span>;<span class="id" title="var">n</span>+1;<span class="id" title="var">n</span>+2]) [1;5;10]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= [1; 2; 3; 5; 6; 7; 10; 11; 12].
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1213,13 +1203,9 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
     example,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">fold</span> <span class="id" title="var">plus</span> [1;2;3;4] 0
-<div class="paragraph"> </div>
-
 </span>    yields
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 + (2 + (3 + (4 + 0))).
-<div class="paragraph"> </div>
-
 </span>    Some more examples: 
 </div>
 <div class="code">
@@ -1492,13 +1478,9 @@ Thought exercise: before running the following commands, can you
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [] ⇒ <span class="id" title="var">None</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">a</span> :: <span class="id" title="var">l'</span> ⇒ <span class="id" title="keyword">if</span> <span class="id" title="var">n</span> =? <span class="id" title="var">O</span> <span class="id" title="keyword">then</span> <span class="id" title="var">Some</span> <span class="id" title="var">a</span> <span class="id" title="keyword">else</span> <span class="id" title="var">nth_error</span> <span class="id" title="var">l'</span> (<span class="id" title="var">pred</span> <span class="id" title="var">n</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>   Write an informal proof of the following theorem:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">X</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span>, <span class="id" title="var">length</span> <span class="id" title="var">l</span> = <span class="id" title="var">n</span> → @<span class="id" title="var">nth_error</span> <span class="id" title="var">X</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> = <span class="id" title="var">None</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1665,7 +1647,7 @@ Complete the definitions of the following functions. Make sure
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises"><span class="id" title="module">Exercises</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -47,13 +47,9 @@ The <a href="Equiv.html"><span class="inlineref">Equiv</span></a> chapter introd
     example, it does not simplify the sequence
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 3; <span class="id" title="var">Y</span> := <span class="id" title="var">X</span> + 1
-<div class="paragraph"> </div>
-
 </span>    to
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 3; <span class="id" title="var">Y</span> := 4
-<div class="paragraph"> </div>
-
 </span>    because it forgets that <span class="inlinecode"><span class="id" title="var">X</span></span> is <span class="inlinecode">3</span> by the time it gets to <span class="inlinecode"><span class="id" title="var">Y</span></span>.
 
 <div class="paragraph"> </div>
@@ -67,13 +63,9 @@ The <a href="Equiv.html"><span class="inlineref">Equiv</span></a> chapter introd
     For example, we can only simplify the program
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 3; <span class="id" title="var">Y</span> := (<span class="id" title="var">X</span> + 1) - <span class="id" title="var">Y</span>
-<div class="paragraph"> </div>
-
 </span>    to
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 3; <span class="id" title="var">Y</span> := 4 - <span class="id" title="var">Y</span>
-<div class="paragraph"> </div>
-
 </span>    without knowing the initial value of <span class="inlinecode"><span class="id" title="var">Y</span></span>. 
 </div>
 <div class="code">
@@ -92,7 +84,7 @@ The <a href="Equiv.html"><span class="inlineref">Equiv</span></a> chapter introd
 </div>
 
 <div class="doc">
-<a id="lab597"></a><h1 class="section">Generalizing Constant Folding</h1>
+<a id="lab474"></a><h1 class="section">Generalizing Constant Folding</h1>
 
 <div class="paragraph"> </div>
 
@@ -102,7 +94,7 @@ The <a href="Equiv.html"><span class="inlineref">Equiv</span></a> chapter introd
     <span class="inlinecode">3</span> and nothing about any other variable. 
 <div class="paragraph"> </div>
 
-<a id="lab598"></a><h2 class="section">Partial States</h2>
+<a id="lab475"></a><h2 class="section">Partial States</h2>
 
 <div class="paragraph"> </div>
 
@@ -155,8 +147,6 @@ More generally, if the <span class="inlinecode"><span class="id" title="var">lis
     tactic for reasoning with <span class="inlinecode"><span class="id" title="var">string</span></span> equality.  The tactic
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">compare</span> <span class="id" title="var">V</span> <span class="id" title="var">V'</span>
-<div class="paragraph"> </div>
-
 </span>    means to reason by cases over <span class="inlinecode"><span class="id" title="var">eqb_string</span></span> <span class="inlinecode"><span class="id" title="var">V</span></span> <span class="inlinecode"><span class="id" title="var">V'</span></span>.
     In the case where <span class="inlinecode"><span class="id" title="var">V</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">V'</span></span>, the tactic
     substitutes <span class="inlinecode"><span class="id" title="var">V</span></span> for <span class="inlinecode"><span class="id" title="var">V'</span></span> throughout. 
@@ -237,7 +227,7 @@ It is easy to relate <span class="inlinecode"><span class="id" title="var">inb</
 </div>
 
 <div class="doc">
-<a id="lab599"></a><h2 class="section">Arithmetic Expressions</h2>
+<a id="lab476"></a><h2 class="section">Arithmetic Expressions</h2>
 
 <div class="paragraph"> </div>
 
@@ -332,31 +322,21 @@ However, we will soon want our partial evaluator to remove
     assignments.  For example, it will simplify
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 3; <span class="id" title="var">Y</span> := <span class="id" title="var">X</span> - <span class="id" title="var">Y</span>; <span class="id" title="var">X</span> := 4
-<div class="paragraph"> </div>
-
 </span>    to just
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := 3 - <span class="id" title="var">Y</span>; <span class="id" title="var">X</span> := 4
-<div class="paragraph"> </div>
-
 </span>    by delaying the assignment to <span class="inlinecode"><span class="id" title="var">X</span></span> until the end.  To accomplish
     this simplification, we need the result of partial evaluating
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pe_aexp</span> [(<span class="id" title="var">X</span>,3)] (<span class="id" title="var">X</span> - <span class="id" title="var">Y</span>)
-<div class="paragraph"> </div>
-
 </span>    to be equal to <span class="inlinecode">3</span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> and <i>not</i> the original
     expression <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">Y</span></span>.  After all, it would be
     incorrect, not just inefficient, to transform
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 3; <span class="id" title="var">Y</span> := <span class="id" title="var">X</span> - <span class="id" title="var">Y</span>; <span class="id" title="var">X</span> := 4
-<div class="paragraph"> </div>
-
 </span>    to
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">X</span> - <span class="id" title="var">Y</span>; <span class="id" title="var">X</span> := 4
-<div class="paragraph"> </div>
-
 </span>    even though the output expressions <span class="inlinecode">3</span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> and
     <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> both satisfy the correctness criterion
     that we just proved.  Indeed, if we were to just define <span class="inlinecode"><span class="id" title="var">pe_aexp</span></span>
@@ -462,7 +442,7 @@ Now we can state and prove that <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab600"></a><h2 class="section">Boolean Expressions</h2>
+<a id="lab477"></a><h2 class="section">Boolean Expressions</h2>
 
 <div class="paragraph"> </div>
 
@@ -544,7 +524,7 @@ The correctness of <span class="inlinecode"><span class="id" title="var">pe_bexp
 </div>
 
 <div class="doc">
-<a id="lab601"></a><h1 class="section">Partial Evaluation of Commands, Without Loops</h1>
+<a id="lab478"></a><h1 class="section">Partial Evaluation of Commands, Without Loops</h1>
 
 <div class="paragraph"> </div>
 
@@ -583,15 +563,11 @@ The correctness of <span class="inlinecode"><span class="id" title="var">pe_bexp
     relation.  We write
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c<sub>1</sub></span> / <span class="id" title="var">st</span> ==&gt; <span class="id" title="var">c<sub>1</sub>'</span> / <span class="id" title="var">st'</span>
-<div class="paragraph"> </div>
-
 </span>    to mean that partially evaluating the source command <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> in the
     initial partial state <span class="inlinecode"><span class="id" title="var">st</span></span> yields the residual command <span class="inlinecode"><span class="id" title="var">c<sub>1</sub>'</span></span> and
     the final partial state <span class="inlinecode"><span class="id" title="var">st'</span></span>.  For example, we want something like
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] / (<span class="id" title="var">X</span> := 3 ; <span class="id" title="var">Y</span> := <span class="id" title="var">Z</span> × (<span class="id" title="var">X</span> + <span class="id" title="var">X</span>)) ==&gt; (<span class="id" title="var">Y</span> := <span class="id" title="var">Z</span> × 6) / [(<span class="id" title="var">X</span>,3)]
-<div class="paragraph"> </div>
-
 </span>    to hold.  The assignment to <span class="inlinecode"><span class="id" title="var">X</span></span> appears in the final partial state,
     not the residual command.
 
@@ -602,7 +578,7 @@ The correctness of <span class="inlinecode"><span class="id" title="var">pe_bexp
 
 <div class="paragraph"> </div>
 
-<a id="lab602"></a><h2 class="section">Assignment</h2>
+<a id="lab479"></a><h2 class="section">Assignment</h2>
 
 <div class="paragraph"> </div>
 
@@ -679,7 +655,7 @@ We will use the two theorems below to show that our partial
 </div>
 
 <div class="doc">
-<a id="lab603"></a><h2 class="section">Conditional</h2>
+<a id="lab480"></a><h2 class="section">Conditional</h2>
 
 <div class="paragraph"> </div>
 
@@ -699,8 +675,6 @@ We will use the two theorems below to show that our partial
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := 4;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">X</span> ≤ <span class="id" title="var">Y</span> <span class="id" title="keyword">then</span> <span class="id" title="var">Y</span> := 999 <span class="id" title="keyword">else</span> <span class="id" title="var">skip</span> <span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">skip</span> <span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    Suppose the initial partial state is empty.  We don't know
     statically how <span class="inlinecode"><span class="id" title="var">Y</span></span> compares to <span class="inlinecode">4</span>, so we must partially evaluate
     both branches of the (outer) conditional.  On the <span class="inlinecode"><span class="id" title="keyword">then</span></span> branch,
@@ -725,8 +699,6 @@ We will use the two theorems below to show that our partial
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">skip</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := 4<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">skip</span> <span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    Programming this case in Coq calls for several auxiliary
     functions: we need to compute the intersection of two <span class="inlinecode"><span class="id" title="var">pe_state</span></span>s
     and turn their difference into sequences of assignments.
@@ -936,7 +908,7 @@ The command generated by <span class="inlinecode"><span class="id" title="var">a
 </div>
 
 <div class="doc">
-<a id="lab604"></a><h2 class="section">The Partial Evaluation Relation</h2>
+<a id="lab481"></a><h2 class="section">The Partial Evaluation Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -984,12 +956,12 @@ The command generated by <span class="inlinecode"><span class="id" title="var">a
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="PE.html#b4b2897a6a6bcd7183113e5d578cc9c<sub>5</sub>"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#pe_removes"><span class="id" title="definition">pe_removes</span></a> <a class="idref" href="PE.html#pe_st<sub>1</sub>:157"><span class="id" title="variable">pe_st<sub>1</sub></span></a> (<a class="idref" href="PE.html#pe_compare"><span class="id" title="definition">pe_compare</span></a> <a class="idref" href="PE.html#pe_st<sub>1</sub>:157"><span class="id" title="variable">pe_st<sub>1</sub></span></a> <a class="idref" href="PE.html#pe_st<sub>2</sub>:158"><span class="id" title="variable">pe_st<sub>2</sub></span></a>)<br/>
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">where</span> <a id="b4b2897a6a6bcd7183113e5d578cc9c<sub>5</sub>" class="idref" href="#b4b2897a6a6bcd7183113e5d578cc9c<sub>5</sub>"><span class="id" title="notation">&quot;</span></a>c<sub>1</sub> '/' st '==&gt;' c<sub>1</sub>' '/' st'" := (<a class="idref" href="PE.html#pe_com:126"><span class="id" title="inductive">pe_com</span></a> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">st</span> <span class="id" title="var">c<sub>1</sub>'</span> <span class="id" title="var">st'</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="PE.html#pe_com"><span class="id" title="inductive">pe_com</span></a> : <span class="id" title="var">core</span>.<br/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="PE.html#ceval"><span class="id" title="inductive">ceval</span></a> : <span class="id" title="var">core</span>.<br/>
+<span class="id" title="keyword">Local Hint Constructors</span> <a class="idref" href="PE.html#pe_com"><span class="id" title="inductive">pe_com</span></a> : <span class="id" title="var">core</span>.<br/>
+<span class="id" title="keyword">Local Hint Constructors</span> <a class="idref" href="PE.html#ceval"><span class="id" title="inductive">ceval</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab605"></a><h2 class="section">Examples</h2>
+<a id="lab482"></a><h2 class="section">Examples</h2>
 
 <div class="paragraph"> </div>
 
@@ -1031,7 +1003,7 @@ The command generated by <span class="inlinecode"><span class="id" title="var">a
 </div>
 
 <div class="doc">
-<a id="lab606"></a><h2 class="section">Correctness of Partial Evaluation</h2>
+<a id="lab483"></a><h2 class="section">Correctness of Partial Evaluation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1048,7 +1020,7 @@ The command generated by <span class="inlinecode"><span class="id" title="var">a
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="PE.html#pe_update"><span class="id" title="definition">pe_update</span></a> <a class="idref" href="PE.html#st':180"><span class="id" title="variable">st'</span></a> <a class="idref" href="PE.html#pe_st':175"><span class="id" title="variable">pe_st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="PE.html#st'':177"><span class="id" title="variable">st''</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="PE.html#c':174"><span class="id" title="variable">c'</span></a> <a class="idref" href="PE.html#9080f57e2483ed1c9ac1940b94629a9a"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#pe_st':175"><span class="id" title="variable">pe_st'</span></a> <a class="idref" href="PE.html#9080f57e2483ed1c9ac1940b94629a9a"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#st:176"><span class="id" title="variable">st</span></a> <a class="idref" href="PE.html#9080f57e2483ed1c9ac1940b94629a9a"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="PE.html#st'':177"><span class="id" title="variable">st''</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">where</span> <a id="9080f57e2483ed1c9ac1940b94629a9a" class="idref" href="#9080f57e2483ed1c9ac1940b94629a9a"><span class="id" title="notation">&quot;</span></a>c' '/' pe_st' '/' st '==&gt;' st''" := (<a class="idref" href="PE.html#pe_ceval:179"><span class="id" title="inductive">pe_ceval</span></a> <span class="id" title="var">c'</span> <span class="id" title="var">pe_st'</span> <span class="id" title="var">st</span> <span class="id" title="var">st''</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="PE.html#pe_ceval"><span class="id" title="inductive">pe_ceval</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Local Hint Constructors</span> <a class="idref" href="PE.html#pe_ceval"><span class="id" title="inductive">pe_ceval</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;NOTATION&nbsp;:&nbsp;IY&nbsp;--&nbsp;The&nbsp;"If"&nbsp;case&nbsp;line&nbsp;spacing&nbsp;looks&nbsp;a&nbsp;little&nbsp;off---what&nbsp;are&nbsp;the&nbsp;line<br/>
 &nbsp;&nbsp;&nbsp;break&nbsp;insert&nbsp;rules&nbsp;for&nbsp;Imp?&nbsp;*)</span><br/>
 <span class="id" title="keyword">Theorem</span> <a id="pe_com_complete" class="idref" href="#pe_com_complete"><span class="id" title="lemma">pe_com_complete</span></a>:<br/>
@@ -1133,7 +1105,7 @@ The main theorem. Thanks to David Menendez for this formulation!
 </div>
 
 <div class="doc">
-<a id="lab607"></a><h1 class="section">Partial Evaluation of Loops</h1>
+<a id="lab484"></a><h1 class="section">Partial Evaluation of Loops</h1>
 
 <div class="paragraph"> </div>
 
@@ -1146,8 +1118,6 @@ The main theorem. Thanks to David Menendez for this formulation!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> × <span class="id" title="var">Y</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    If we know neither <span class="inlinecode"><span class="id" title="var">X</span></span> nor <span class="inlinecode"><span class="id" title="var">Y</span></span> statically, then the entire loop is
     dynamic and the residual command should be the same.  If we know
     <span class="inlinecode"><span class="id" title="var">X</span></span> but not <span class="inlinecode"><span class="id" title="var">Y</span></span>, then the loop can be unrolled all the way and the
@@ -1156,8 +1126,6 @@ The main theorem. Thanks to David Menendez for this formulation!
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> × <span class="id" title="var">Y</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> × <span class="id" title="var">Y</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> × <span class="id" title="var">Y</span>
-<div class="paragraph"> </div>
-
 </span>    if <span class="inlinecode"><span class="id" title="var">X</span></span> is initially <span class="inlinecode">3</span> (and finally <span class="inlinecode">0</span>).  In general, a loop is
     easy to partially evaluate if the final partial state of the loop
     body is equal to the initial state, or if its guard condition is
@@ -1174,8 +1142,6 @@ The main theorem. Thanks to David Menendez for this formulation!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> - 1 ;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 1 - <span class="id" title="var">X</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    The value of <span class="inlinecode"><span class="id" title="var">X</span></span> alternates between <span class="inlinecode">0</span> and <span class="inlinecode">1</span> during the loop.
     Ideally, we would like to unroll this loop, not all the way but
     <i>two-fold</i>, into something like
@@ -1189,8 +1155,6 @@ The main theorem. Thanks to David Menendez for this formulation!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 0
-<div class="paragraph"> </div>
-
 </span>    Unfortunately, there is no <span class="inlinecode"><span class="id" title="var">EXIT</span></span> command in Imp.  Without
     extending the range of control structures available in our
     language, the best we can do is to repeat loop-guard tests or add
@@ -1289,11 +1253,11 @@ The main theorem. Thanks to David Menendez for this formulation!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="PE.html#7120073eb86390e07bb1d827e01dd845"><span class="id" title="notation">==&gt;</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">while</span> <a class="idref" href="PE.html#pe_bexp"><span class="id" title="definition">pe_bexp</span></a> <a class="idref" href="PE.html#pe_st:271"><span class="id" title="variable">pe_st</span></a> <a class="idref" href="PE.html#b<sub>1</sub>:274"><span class="id" title="variable">b<sub>1</sub></span></a> <span class="id" title="notation">do</span> <a class="idref" href="PE.html#c<sub>1</sub>':276"><span class="id" title="variable">c<sub>1</sub>'</span></a><span class="id" title="notation">;</span> <a class="idref" href="PE.html#c<sub>2</sub>':277"><span class="id" title="variable">c<sub>2</sub>'</span></a> <span class="id" title="notation">end</span><span class="id" title="notation">}&gt;</span> <a class="idref" href="PE.html#7120073eb86390e07bb1d827e01dd845"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#pe_st:271"><span class="id" title="variable">pe_st</span></a> <a class="idref" href="PE.html#7120073eb86390e07bb1d827e01dd845"><span class="id" title="notation">/</span></a> <span class="id" title="notation">&lt;{</span><span class="id" title="notation">skip</span><span class="id" title="notation">}&gt;</span><br/>
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">where</span> <a id="7120073eb86390e07bb1d827e01dd845" class="idref" href="#7120073eb86390e07bb1d827e01dd845"><span class="id" title="notation">&quot;</span></a>c<sub>1</sub> '/' st '==&gt;' c<sub>1</sub>' '/' st' '/' c''" := (<a class="idref" href="PE.html#pe_com:200"><span class="id" title="inductive">pe_com</span></a> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">st</span> <span class="id" title="var">c<sub>1</sub>'</span> <span class="id" title="var">st'</span> <span class="id" title="var">c''</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="PE.html#pe_com"><span class="id" title="inductive">pe_com</span></a> : <span class="id" title="var">core</span>.<br/>
+<span class="id" title="keyword">Local Hint Constructors</span> <a class="idref" href="PE.html#pe_com"><span class="id" title="inductive">pe_com</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab608"></a><h2 class="section">Examples</h2>
+<a id="lab485"></a><h2 class="section">Examples</h2>
 
 </div>
 <div class="code">
@@ -1373,7 +1337,7 @@ The main theorem. Thanks to David Menendez for this formulation!
 </div>
 
 <div class="doc">
-<a id="lab609"></a><h2 class="section">Correctness</h2>
+<a id="lab486"></a><h2 class="section">Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -1415,7 +1379,7 @@ The main theorem. Thanks to David Menendez for this formulation!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span><span class="id" title="notation">while</span> <a class="idref" href="PE.html#b<sub>1</sub>:350"><span class="id" title="variable">b<sub>1</sub></span></a> <span class="id" title="notation">do</span> <a class="idref" href="PE.html#c<sub>1</sub>:351"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">end</span><span class="id" title="notation">}&gt;</span> <a class="idref" href="PE.html#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#st:347"><span class="id" title="variable">st</span></a> <a class="idref" href="PE.html#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="PE.html#st'':349"><span class="id" title="variable">st''</span></a> <a class="idref" href="PE.html#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">#</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="PE.html#n<sub>1</sub>:352"><span class="id" title="variable">n<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="PE.html#n<sub>2</sub>:353"><span class="id" title="variable">n<sub>2</sub></span></a>)<br/>
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">where</span> <a id="393ab9c73cfe2dca7780259f226e53a<sub>7</sub>" class="idref" href="#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">&quot;</span></a>c<sub>1</sub> '/' st '==&gt;' st' # n" := (<a class="idref" href="PE.html#ceval_count:319"><span class="id" title="inductive">ceval_count</span></a> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">st</span> <span class="id" title="var">st'</span> <span class="id" title="var">n</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="PE.html#ceval_count"><span class="id" title="inductive">ceval_count</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Local Hint Constructors</span> <a class="idref" href="PE.html#ceval_count"><span class="id" title="inductive">ceval_count</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="Loop.ceval_count_complete" class="idref" href="#Loop.ceval_count_complete"><span class="id" title="lemma">ceval_count_complete</span></a>: <span class="id" title="keyword">∀</span> <a id="c:354" class="idref" href="#c:354"><span class="id" title="binder">c</span></a> <a id="st:355" class="idref" href="#st:355"><span class="id" title="binder">st</span></a> <a id="st':356" class="idref" href="#st':356"><span class="id" title="binder">st'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="PE.html#st:355"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="PE.html#c:354"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="PE.html#st':356"><span class="id" title="variable">st'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="n:357" class="idref" href="#n:357"><span class="id" title="binder">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="PE.html#c:354"><span class="id" title="variable">c</span></a> <a class="idref" href="PE.html#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#st:355"><span class="id" title="variable">st</span></a> <a class="idref" href="PE.html#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="PE.html#st':356"><span class="id" title="variable">st'</span></a> <a class="idref" href="PE.html#393ab9c73cfe2dca7780259f226e53a<sub>7</sub>"><span class="id" title="notation">#</span></a> <a class="idref" href="PE.html#n:357"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">c</span> <span class="id" title="var">st</span> <span class="id" title="var">st'</span> <span class="id" title="var">Heval</span>.<br/>
@@ -1453,7 +1417,7 @@ The main theorem. Thanks to David Menendez for this formulation!
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="PE.html#c':368"><span class="id" title="variable">c'</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#pe_st':369"><span class="id" title="variable">pe_st'</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#c'':370"><span class="id" title="variable">c''</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#st:371"><span class="id" title="variable">st</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="PE.html#st'':372"><span class="id" title="variable">st''</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">#</span></a> <a class="idref" href="PE.html#n:373"><span class="id" title="variable">n</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">where</span> <a id="530219aa3c99e1366657faa7f9243326" class="idref" href="#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">&quot;</span></a>c' '/' pe_st' '/' c'' '/' st '==&gt;' st'' '#' n" :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="PE.html#pe_ceval_count:375"><span class="id" title="inductive">pe_ceval_count</span></a> <span class="id" title="var">c'</span> <span class="id" title="var">pe_st'</span> <span class="id" title="var">c''</span> <span class="id" title="var">st</span> <span class="id" title="var">st''</span> <span class="id" title="var">n</span>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="PE.html#pe_ceval_count"><span class="id" title="inductive">pe_ceval_count</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Local Hint Constructors</span> <a class="idref" href="PE.html#pe_ceval_count"><span class="id" title="inductive">pe_ceval_count</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="Loop.pe_ceval_count_le" class="idref" href="#Loop.pe_ceval_count_le"><span class="id" title="lemma">pe_ceval_count_le</span></a>: <span class="id" title="keyword">∀</span> <a id="c':378" class="idref" href="#c':378"><span class="id" title="binder">c'</span></a> <a id="pe_st':379" class="idref" href="#pe_st':379"><span class="id" title="binder">pe_st'</span></a> <a id="c'':380" class="idref" href="#c'':380"><span class="id" title="binder">c''</span></a> <a id="st:381" class="idref" href="#st:381"><span class="id" title="binder">st</span></a> <a id="st'':382" class="idref" href="#st'':382"><span class="id" title="binder">st''</span></a> <a id="n:383" class="idref" href="#n:383"><span class="id" title="binder">n</span></a> <a id="n':384" class="idref" href="#n':384"><span class="id" title="binder">n'</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="PE.html#n':384"><span class="id" title="variable">n'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="PE.html#n:383"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="PE.html#c':378"><span class="id" title="variable">c'</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#pe_st':379"><span class="id" title="variable">pe_st'</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#c'':380"><span class="id" title="variable">c''</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">/</span></a> <a class="idref" href="PE.html#st:381"><span class="id" title="variable">st</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="PE.html#st'':382"><span class="id" title="variable">st''</span></a> <a class="idref" href="PE.html#530219aa3c99e1366657faa7f9243326"><span class="id" title="notation">#</span></a> <a class="idref" href="PE.html#n':384"><span class="id" title="variable">n'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1627,7 +1591,7 @@ The main theorem. Thanks to David Menendez for this formulation!
 </div>
 
 <div class="doc">
-<a id="lab610"></a><h1 class="section">Partial Evaluation of Flowchart Programs</h1>
+<a id="lab487"></a><h1 class="section">Partial Evaluation of Flowchart Programs</h1>
 
 <div class="paragraph"> </div>
 
@@ -1641,7 +1605,7 @@ The main theorem. Thanks to David Menendez for this formulation!
     that is not possible in general; we do not pursue it here. 
 <div class="paragraph"> </div>
 
-<a id="lab611"></a><h2 class="section">Basic blocks</h2>
+<a id="lab488"></a><h2 class="section">Basic blocks</h2>
 
 <div class="paragraph"> </div>
 
@@ -1715,7 +1679,7 @@ To evaluate a basic block, given an initial state, is to compute
 </div>
 
 <div class="doc">
-<a id="lab612"></a><h2 class="section">Flowchart programs</h2>
+<a id="lab489"></a><h2 class="section">Flowchart programs</h2>
 
 <div class="paragraph"> </div>
 
@@ -1764,7 +1728,7 @@ Unlike a basic block, a program may not terminate, so we model the
 </div>
 
 <div class="doc">
-<a id="lab613"></a><h2 class="section">Partial Evaluation of Basic Blocks and Flowchart Programs</h2>
+<a id="lab490"></a><h2 class="section">Partial Evaluation of Basic Blocks and Flowchart Programs</h2>
 
 <div class="paragraph"> </div>
 
@@ -1873,7 +1837,7 @@ Unlike a basic block, a program may not terminate, so we model the
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">k</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">k</span>|]; <span class="id" title="tactic">inversion</span> <span class="id" title="var">Hlookup</span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="PE.html#E_Some"><span class="id" title="constructor">E_Some</span></a>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="PE.html#pe_block_correct"><span class="id" title="lemma">pe_block_correct</span></a>. <span class="id" title="tactic">apply</span> <span class="id" title="var">Hkeval</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:25&nbsp;*)</span><br/>
 </div>
 </div>
 

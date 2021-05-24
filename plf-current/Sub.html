@@ -307,8 +307,6 @@
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> : <span class="id" title="var">C</span> → <span class="id" title="var">Student</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">g</span> : (<span class="id" title="var">C</span>→<span class="id" title="var">Person</span>) → <span class="id" title="var">D</span>
-<div class="paragraph"> </div>
-
 </span>    That is, <span class="inlinecode"><span class="id" title="var">f</span></span> is a function that yields a record of type <span class="inlinecode"><span class="id" title="var">Student</span></span>,
     and <span class="inlinecode"><span class="id" title="var">g</span></span> is a (higher-order) function that expects its argument to be
     a function yielding a record of type <span class="inlinecode"><span class="id" title="var">Person</span></span>.  Also suppose that
@@ -369,8 +367,6 @@
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> : <span class="id" title="var">Person</span> → <span class="id" title="var">C</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">g</span> : (<span class="id" title="var">Student</span> → <span class="id" title="var">C</span>) → <span class="id" title="var">D</span>
-<div class="paragraph"> </div>
-
 </span>    The application <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> is safe, because the only thing the body of
     <span class="inlinecode"><span class="id" title="var">g</span></span> can do with <span class="inlinecode"><span class="id" title="var">f</span></span> is to apply it to some argument of type
     <span class="inlinecode"><span class="id" title="var">Student</span></span>.  Since <span class="inlinecode"><span class="id" title="var">f</span></span> requires records having (at least) the
@@ -406,8 +402,6 @@
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">name</span>:<span class="id" title="var">String</span>, <span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>, <span class="id" title="var">gpa</span>:<span class="id" title="var">Nat</span>} &lt;: {<span class="id" title="var">name</span>:<span class="id" title="var">String</span>, <span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">name</span>:<span class="id" title="var">String</span>, <span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>} &lt;: {<span class="id" title="var">name</span>:<span class="id" title="var">String</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">name</span>:<span class="id" title="var">String</span>} &lt;: {}
-<div class="paragraph"> </div>
-
 </span>    This is known as "width subtyping" for records. 
 <div class="paragraph"> </div>
 
@@ -418,8 +412,6 @@
     <span class="inlinecode"><span class="id" title="var">T</span></span>. For example,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">x</span>:<span class="id" title="var">Student</span>} &lt;: {<span class="id" title="var">x</span>:<span class="id" title="var">Person</span>}
-<div class="paragraph"> </div>
-
 </span>    This is known as "depth subtyping". 
 <div class="paragraph"> </div>
 
@@ -427,8 +419,6 @@
     particular order, the order does not really matter. For example,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">name</span>:<span class="id" title="var">String</span>,<span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>} &lt;: {<span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>,<span class="id" title="var">name</span>:<span class="id" title="var">String</span>}
-<div class="paragraph"> </div>
-
 </span>    This is known as "permutation subtyping". 
 <div class="paragraph"> </div>
 
@@ -577,8 +567,6 @@
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> : <span class="id" title="var">Student</span> → <span class="id" title="var">Nat</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">g</span> : (<span class="id" title="var">Person</span> → <span class="id" title="var">Nat</span>) → <span class="id" title="var">Nat</span>
-<div class="paragraph"> </div>
-
 </span>    ... such that the application <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> will get stuck during
     execution.  (Use informal syntax.  No need to prove formally that
     the application gets stuck.)
@@ -900,8 +888,6 @@ of the five types above. It may be unrelated to some of them.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">S</span> &lt;: <span class="id" title="var">T<sub>1</sub></span>×<span class="id" title="var">T<sub>2</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">S<sub>1</sub></span> <span class="id" title="var">S<sub>2</sub></span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">S</span> = <span class="id" title="var">S<sub>1</sub></span>×<span class="id" title="var">S<sub>2</sub></span>  ∧  <span class="id" title="var">S<sub>1</sub></span> &lt;: <span class="id" title="var">T<sub>1</sub></span>  ∧  <span class="id" title="var">S<sub>2</sub></span> &lt;: <span class="id" title="var">T<sub>2</sub></span>  
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -998,8 +984,6 @@ of the five types above. It may be unrelated to some of them.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~(<span class="id" title="var">T</span> = <span class="id" title="var">Bool</span> ∨ <span class="id" title="tactic">∃</span> <span class="id" title="var">n</span>, <span class="id" title="var">T</span> = <span class="id" title="var">Base</span> <span class="id" title="var">n</span>) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">S</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">S</span> &lt;: <span class="id" title="var">T</span>  ∧  <span class="id" title="var">S</span> ≠ <span class="id" title="var">T</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1023,8 +1007,6 @@ of the five types above. It may be unrelated to some of them.
      type.)
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">empty</span> &#x22A2; (\<span class="id" title="var">p</span>:<span class="id" title="var">T</span>×<span class="id" title="var">Top</span>. <span class="id" title="var">p.fst</span>) ((\<span class="id" title="var">z</span>:<span class="id" title="var">A.z</span>), <span class="id" title="var">unit</span>) \<span class="id" title="keyword">in</span> <span class="id" title="var">A</span>→<span class="id" title="var">A</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1058,8 +1040,6 @@ of the five types above. It may be unrelated to some of them.
      assertion true?
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">empty</span> &#x22A2; (\<span class="id" title="var">p</span>:(<span class="id" title="var">A</span>→<span class="id" title="var">A</span> × <span class="id" title="var">B</span>→<span class="id" title="var">B</span>). <span class="id" title="var">p</span>) ((\<span class="id" title="var">z</span>:<span class="id" title="var">A.z</span>), (\<span class="id" title="var">z</span>:<span class="id" title="var">B.z</span>)) \<span class="id" title="keyword">in</span> <span class="id" title="var">T</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1093,8 +1073,6 @@ of the five types above. It may be unrelated to some of them.
      assertion true?
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span>:<span class="id" title="var">A</span> &#x22A2; (\<span class="id" title="var">p</span>:(<span class="id" title="var">A</span>×<span class="id" title="var">T</span>). (<span class="id" title="var">p.snd</span>) (<span class="id" title="var">p.fst</span>)) (<span class="id" title="var">a</span>, \<span class="id" title="var">z</span>:<span class="id" title="var">A.z</span>) \<span class="id" title="keyword">in</span> <span class="id" title="var">A</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1120,8 +1098,6 @@ of the five types above. It may be unrelated to some of them.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">S</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">empty</span> &#x22A2; (\<span class="id" title="var">p</span>:(<span class="id" title="var">A</span>×<span class="id" title="var">T</span>). (<span class="id" title="var">p.snd</span>) (<span class="id" title="var">p.fst</span>)) \<span class="id" title="keyword">in</span> <span class="id" title="var">S</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1153,8 +1129,6 @@ of the five types above. It may be unrelated to some of them.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">S</span> <span class="id" title="var">t</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">empty</span> &#x22A2; (\<span class="id" title="var">x</span>:<span class="id" title="var">T</span>. <span class="id" title="var">x</span> <span class="id" title="var">x</span>) <span class="id" title="var">t</span> \<span class="id" title="keyword">in</span> <span class="id" title="var">S</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1172,8 +1146,6 @@ of the five types above. It may be unrelated to some of them.
     assertion true?
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">empty</span> &#x22A2; (\<span class="id" title="var">x</span>:<span class="id" title="var">Top</span>. <span class="id" title="var">x</span>) ((\<span class="id" title="var">z</span>:<span class="id" title="var">A.z</span>) , (\<span class="id" title="var">z</span>:<span class="id" title="var">B.z</span>)) \<span class="id" title="keyword">in</span> <span class="id" title="var">T</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1467,8 +1439,6 @@ Note that we don't need any special rules for base types (<span class="inlinecod
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Person</span> := { <span class="id" title="var">name</span> : <span class="id" title="var">String</span> }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Student</span> := { <span class="id" title="var">name</span> : <span class="id" title="var">String</span> ; <span class="id" title="var">gpa</span> : <span class="id" title="var">Float</span> }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Employee</span> := { <span class="id" title="var">name</span> : <span class="id" title="var">String</span> ; <span class="id" title="var">ssn</span> : <span class="id" title="var">Integer</span> }
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -2556,7 +2526,7 @@ Do the following exercises after you have added product types to
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:25&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -687,7 +687,7 @@ Proof.
       (* was: [apply IHE1_1; assumption.] *)
       (* new: *) eapply IH. eapply E1_1. eapply Red1. }
     subst st3.
-    (* was: apply IHE1_2. assumption.] *)
+    (* was: [apply IHE1_2. assumption.] *)
     (* new: *) eapply IH. eapply E1_2. eapply Red2.
   (* The other cases are similiar. *)
 Abort.
@@ -736,7 +736,7 @@ End SortExamples.
 (** In this section, we'll use a useful feature of Coq for decomposing
     conjunctions and existentials. In short, a tactic like [intros] or
     [destruct] can be provided with a pattern [(H1 & H2 & H3 & H4 & H5)],
-    which is a shorthand for [[H1 [H2 [H3 [H4 H5]]]]]]. For example,
+    which is a shorthand for [ [H1 [H2 [H3 [H4 H5] ] ] ] ]. For example,
     [destruct (H _ _ _ Htypt) as [T [Hctx Hsub]].] can be rewritten in
     the form [destruct (H _ _ _ Htypt) as (T & Hctx & Hsub).] *)
 
@@ -939,4 +939,4 @@ End ExamplesLets.
 
 *)
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

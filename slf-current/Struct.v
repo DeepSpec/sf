@@ -32,8 +32,8 @@ Implicit Types z : nat.
     operations.
 
     The memory model that we consider is somewhat artificial, in the sense that
-    it does not  perfectly match the memory model of an existing language----it
-    lies somewhere  between the memory model of C and that of OCaml.
+    it does not perfectly match the memory model of an existing language----it
+    lies somewhere between the memory model of C and that of OCaml.
     Nevertheless, this memory model has the benefits of its simplicity, and it
     suffices to illustrate formal proofs involving block headers and pointer
     arithmetics. *)
@@ -917,7 +917,7 @@ Parameter eval_length : forall s p k,
   eval s (val_length (val_loc p)) s (val_int k).
 
 (* ================================================================= *)
-(** ** Realization of [hheader]  *)
+(** ** Realization of [hheader] *)
 
 (** The heap predicate [hheader k p] describes a cell at location
     whose contents is the special value [val_header k], and with
@@ -957,7 +957,7 @@ Proof using. intros. rewrite hheader_def. xsimpl*. Qed.
     the specifications axiomatized so far. Note, however, that this
     definition should not be revealed to the end user. In other words,
     it should be made "strongly opaque". (Technically, this could be
-    achieved by means  of a functor in Coq.)
+    achieved by means of a functor in Coq.)
 
     Otherwise, the user could exploit the [val_set] operation to update
     the contents of a header field, replacing [p ~~> (val_header k)]
@@ -1370,7 +1370,7 @@ Qed.
 End ArrayAccessDef.
 
 (* ================================================================= *)
-(** ** Encoding of Record Operations using Pointer Arithmetic  *)
+(** ** Encoding of Record Operations using Pointer Arithmetic *)
 
 (** An access to the [k]-th field of a record at location [p] can be
     encoded as an access to the cell at location [p+k+1]. *)
@@ -1447,7 +1447,10 @@ Proof using.
   { case_if.
     { inverts E. subst ki. applys triple_conseq_frame.
       { applys triple_get_field. } { xsimpl. } { xsimpl*. } }
-    { applys triple_conseq_frame. { applys IHL' E. } { xsimpl. } { xsimpl*. } } }
+    { applys triple_conseq_frame.
+      { applys IHL' E. }
+      { xsimpl. }
+      { xsimpl*. } } }
 Qed.
 
 (** Get operation on a record *)
@@ -1632,4 +1635,4 @@ Qed.
 
 End Realization.
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

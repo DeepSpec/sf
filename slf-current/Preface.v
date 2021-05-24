@@ -9,34 +9,37 @@
 
     In this volume, you will learn about the foundations of Separation
     Logic, a practical approach to the modular verification of
-    imperative programs. In particular, this volume presents the building
-    blocks for constructing a program verification tool. It does not,
-    however, focus on reasoning about data structures and algorithms using
-    Separation Logic. This aspect is covered to some extent by Volume 5
-    of _Software Foundations_, which presents Verifiable C, a program logic
-    and proof system for C. For OCaml programs, this aspect will be covered
-    in a yet-to-be-written volume presenting CFML, a tool that builds upon
-    all the techniques presented in this volume.
+    imperative programs. In particular, this volume presents the
+    building blocks for constructing a program verification tool. It
+    does not, however, focus on reasoning about data structures and
+    algorithms using Separation Logic. This aspect is covered to some
+    extent by Volume 5 of _Software Foundations_, which presents
+    Verifiable C, a program logic and proof system for C. For OCaml
+    programs, this aspect will be covered in a yet-to-be-written
+    volume presenting CFML, a tool that builds upon all the techniques
+    presented in this volume.
 
-    You are only assumed to understand the material in _Software Foundations_
-    Volume 1 (_Logical Foundations_), and the two chapters on Hoare Logic (Hoare
-    and Hoare2) from Software Foundations Volume 2 (_PL Foundations_). The
-    reading of Volume 5 is not a prerequisite. The exposition here is intended
-    for a broad range of readers, from advanced undergraduates to PhD students
-    and researchers.
+    You are only assumed to understand the material in _Software
+    Foundations_ Volume 1 (_Logical Foundations_), and the two
+    chapters on Hoare Logic (Hoare and Hoare2) from Software
+    Foundations Volume 2 (_PL Foundations_). The reading of Volume 5
+    is not a prerequisite. The exposition here is intended for a broad
+    range of readers, from advanced undergraduates to PhD students and
+    researchers.
 
-    A large fraction of the contents of this course is also written up in
-    traditional LaTeX-style presentation, in the ICFP'20 article:
+    A large fraction of the contents of this course is also written up
+    in traditional LaTeX-style presentation, in the ICFP'20 article:
     _Separation Logic for Sequential Programs_, by Arthur Charguéraud.
-    The long version of this paper is available from:
-    http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf .
+    The long version of this paper is available at this link:
+    http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf
 
     This paper includes, in particular, a 5-page historical survey of
-    contributions to mechanized presentations of Separation Logic, featuring
-    100+ citations. For a broader survey of Separation Logic, we recommend
-    Peter O'Hearn's 2019 survey, which is available from:
-    https://dl.acm.org/doi/10.1145/3211968 -- including the
-    _supplemental material_ linked near the bottom of that page. *)
+    contributions to mechanized presentations of Separation Logic,
+    featuring 100+ citations. For a broader survey of Separation
+    Logic, we recommend Peter O'Hearn's 2019 survey, which is
+    available from: https://dl.acm.org/doi/10.1145/3211968 --
+    including the _supplemental material_ linked near the bottom of
+    that page. *)
 
 (* ################################################################# *)
 (** * Separation Logic *)
@@ -134,9 +137,9 @@
 (** The material is organized in such a way that it can be easily adapted to
     the amount of time that the reader is ready to invest in the course.
 
-    The course contains 13 chapters, not counting the Preface and Postface.
-    These chapters are organized in 3 major parts, as pictured in the dependency
-    diagram.
+    The course contains 13 chapters, not counting the [Preface],
+    [Postscript], and [Bib] chapters. The course is organized in 3
+    major parts, as pictured in the roadmap diagram.
 
     - The short curriculum includes only the 5 first chapters (ranging from
       chapter [Basic] to chapter [Rules]).
@@ -145,7 +148,7 @@
     - The full curriculum includes 5 more chapters (ranging from
       chapter [Partial] to chapter [Rich]).
 
-    In addition, each chapter is decomposed in three parts.
+    In addition, each chapter except [Basic] is decomposed in three parts.
 
     - The _First Pass_ section presents the most important ideas only.
       The course in designed in such a way that it is possible to read only
@@ -283,7 +286,7 @@
 (* ================================================================= *)
 (** ** Exercises *)
 
-(** Each chapter includes numerous exercises.  The star rating scheme
+(** Each chapter includes numerous exercises. The star rating scheme
     is described in the [Preface] of Software Foundations Volume 1
     (_Logical Foundations_).
 
@@ -299,7 +302,7 @@
 
 (** The [Preface] of Software Foundations Volume 1 (_Logical
     Foundations_) describes how to install Coq. The files you are
-    reading have been tested with Coq 8.12. *)
+    reading have been tested with Coq 8.12 or later. *)
 
 (* ================================================================= *)
 (** ** Note for CoqIDE Users *)
@@ -307,7 +310,7 @@
 (** CoqIDE typically works better with its _asynchronous_ proof mode disabled.
     To load all the course files in CoqIDE, use the following command line.
 
-  coqide -async-proofs off -async-proofs-command-error-resilience off -Q . Basic.v &
+coqide -async-proofs off -async-proofs-command-error-resilience off -Q . SLF Basic.v&
 *)
 
 (* ================================================================= *)
@@ -316,14 +319,14 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {$FIRSTAUTHOR:SF$VOLUMENUMBER,
-   author       =   {$AUTHORS},
+   @book            {Charguéraud:SF6,
+   author       =   {Arthur Charguéraud},
    title        =   "$VOLUMENAME",
    series       =   "Software Foundations",
-   volume       =   "$VOLUMENUMBER",
-   year         =   "$VOLUMEYEAR",
+   volume       =   "6",
+   year         =   "2021",
    publisher    =   "Electronic textbook",
-   note         =   {Version $VERSION, \URLhttp://softwarefoundations.cis.upenn.edu },
+   note         =   {Version 1.0, \URLhttp://softwarefoundations.cis.upenn.edu },
    }
 *)
 
@@ -335,4 +338,4 @@
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

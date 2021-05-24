@@ -790,7 +790,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** It is technically possible to bypass even the definition of
     [triple] and specify all functions directly using the predicate
-    [wp].  However, using [triple] leads to better readability of
+    [wp]. However, using [triple] leads to better readability of
     specifications, thus it seems preferable to continue using that
     style for specifying functions. (See discussion in chapter
     [Wand], appendix on "Texan triples".) *)
@@ -810,6 +810,6 @@ End WpFromHoare.
 
     In the context of Separation Logic in a proof assistant, the Iris framework
     (https://iris-project.org/), developed since 2015, exploits weakest
-    preconditions to state reasoning rules. See the [Postface]. *)
+    preconditions to state reasoning rules. See the [Postscript]. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

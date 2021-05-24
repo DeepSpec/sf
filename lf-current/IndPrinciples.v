@@ -288,7 +288,7 @@ Inductive foo' (X:Type) : Type :=
   | C1 (l : list X) (f : foo' X)
   | C2.
 
-(** What induction principle will Coq generate for [foo']?  Fill
+(** What induction principle will Coq generate for [foo']?  (Fill
    in the blanks, then check your answer with Coq.)
 
      foo'_ind :
@@ -449,7 +449,7 @@ Proof.
 
 Print ev.
 
-(* ===> 
+(* ===>
 
   Inductive ev : nat -> Prop :=
   | ev_0 : ev 0
@@ -592,10 +592,10 @@ Check le2_ind :
 (** Question: What is the relation between a formal proof of a
     proposition [P] and an informal proof of the same proposition [P]?
 
-    Answer: The latter should _teach_ the reader how to produce the
-    former.
+    Answer: The latter should _teach_ the reader everything they would
+    need to understand to be able to produce the former.
 
-    Question: How much detail is needed??
+    Question: How much detail does that require?
 
     Unfortunately, there is no single right answer; rather, there is a
     range of choices.
@@ -855,4 +855,4 @@ Proof.
 Qed.
 
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

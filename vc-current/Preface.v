@@ -139,14 +139,14 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {$FIRSTAUTHOR:SF$VOLUMENUMBER,
-   author       =   {$AUTHORS},
+   @book            {Appel:SF5,
+   author       =   {Andrew W. Appel and Qinxiang Cao},
    title        =   "$VOLUMENAME",
    series       =   "Software Foundations",
-   volume       =   "$VOLUMENUMBER",
-   year         =   "$VOLUMEYEAR",
+   volume       =   "5",
+   year         =   "2021",
    publisher    =   "Electronic textbook",
-   note         =   {Version $VERSION, \URLhttp://softwarefoundations.cis.upenn.edu },
+   note         =   {Version 1.1.0, \URLhttp://softwarefoundations.cis.upenn.edu },
    }
 *)
 
@@ -175,4 +175,4 @@ Goal release = "2.7".
 reflexivity || fail "The wrong version of VST is installed".
 Abort.
 
-(* 2021-05-18 18:11 *)
+(* 2021-05-24 18:37 *)

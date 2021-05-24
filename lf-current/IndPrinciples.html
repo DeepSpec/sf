@@ -159,8 +159,6 @@ This proof is basically the same as the earlier one, but a
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... <span class="id" title="tactic">case</span> <span class="id" title="keyword">for</span> <span class="id" title="var">c<sub>2</sub></span> ... → ...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... <span class="id" title="tactic">case</span> <span class="id" title="keyword">for</span> <span class="id" title="var">cn</span> ... →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">t</span>, <span class="id" title="var">P</span> <span class="id" title="var">n</span>
-<div class="paragraph"> </div>
-
 </span>    The specific shape of each case depends on the arguments to the
     corresponding constructor. 
 <div class="paragraph"> </div>
@@ -229,8 +227,6 @@ In general, the automatically generated induction principle for
 <li> If <span class="inlinecode"><span class="id" title="var">c</span></span> takes no arguments, that case is:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"P holds of c"
-<div class="paragraph"> </div>
-
 </span>
 </li>
 <li> If <span class="inlinecode"><span class="id" title="var">c</span></span> takes arguments <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span>:<span class="id" title="var">a<sub>1</sub></span></span> ... <span class="inlinecode"><span class="id" title="var">xn</span>:<span class="id" title="var">an</span></span>, that case is:
@@ -238,8 +234,6 @@ In general, the automatically generated induction principle for
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"For all x<sub>1</sub>:a<sub>1</sub> ... xn:an,
           if [P] holds of each of the arguments of type [t],
           then [P] holds of [c x<sub>1</sub> ... xn]"
-<div class="paragraph"> </div>
-
 </span>      But that oversimplifies a little.  An assumption about <span class="inlinecode"><span class="id" title="var">P</span></span>
       holding of an argument <span class="inlinecode"><span class="id" title="var">x</span></span> of type <span class="inlinecode"><span class="id" title="var">t</span></span> actually occurs
       immediately after the quantification of <span class="inlinecode"><span class="id" title="var">x</span></span>.
@@ -300,8 +294,6 @@ Now the induction principle case for <span class="inlinecode"><span class="id" t
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">b</span> : <span class="id" title="var">bool</span>, <span class="id" title="var">P</span> (<span class="id" title="var">con1</span> <span class="id" title="var">b</span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">Toy</span>), <span class="id" title="var">P</span> <span class="id" title="var">t</span> → <span class="id" title="var">P</span> (<span class="id" title="var">con2</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">t</span> : <span class="id" title="var">Toy</span>, <span class="id" title="var">P</span> <span class="id" title="var">t</span>
-<div class="paragraph"> </div>
-
 </span>    Give an <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definition of <span class="inlinecode"><span class="id" title="var">Toy</span></span>, such that the induction
     principle Coq generates is that given above: 
 </div>
@@ -331,8 +323,6 @@ Now the induction principle case for <span class="inlinecode"><span class="id" t
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">list</span> (<span class="id" title="var">X</span>:<span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">nil</span> : <span class="id" title="var">list</span> <span class="id" title="var">X</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cons</span> : <span class="id" title="var">X</span> → <span class="id" title="var">list</span> <span class="id" title="var">X</span> → <span class="id" title="var">list</span> <span class="id" title="var">X</span>.
-<div class="paragraph"> </div>
-
 </span>    is very similar to that of <span class="inlinecode"><span class="id" title="var">natlist</span></span>.  The main difference is
     that, here, the whole definition is <i>parameterized</i> on a set <span class="inlinecode"><span class="id" title="var">X</span></span>:
     that is, we are defining a <i>family</i> of inductive types <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span>,
@@ -348,8 +338,6 @@ Now the induction principle case for <span class="inlinecode"><span class="id" t
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">P</span> [] →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> (<span class="id" title="var">x</span> : <span class="id" title="var">X</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">X</span>), <span class="id" title="var">P</span> <span class="id" title="var">l</span> → <span class="id" title="var">P</span> (<span class="id" title="var">x</span> :: <span class="id" title="var">l</span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">X</span>, <span class="id" title="var">P</span> <span class="id" title="var">l</span>
-<div class="paragraph"> </div>
-
 </span>    Note that the <i>whole</i> induction principle is parameterized on
     <span class="inlinecode"><span class="id" title="var">X</span></span>.  That is, <span class="inlinecode"><span class="id" title="var">list_ind</span></span> can be thought of as a polymorphic
     function that, when applied to a type <span class="inlinecode"><span class="id" title="var">X</span></span>, gives us back an
@@ -384,8 +372,6 @@ Now the induction principle case for <span class="inlinecode"><span class="id" t
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">m</span> : <span class="id" title="var">mytype</span> <span class="id" title="var">X</span>, <span class="id" title="var">P</span> <span class="id" title="var">m</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">P</span> (<span class="id" title="var">constr3</span> <span class="id" title="var">X</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">m</span> : <span class="id" title="var">mytype</span> <span class="id" title="var">X</span>, <span class="id" title="var">P</span> <span class="id" title="var">m</span>
-<div class="paragraph"> </div>
-
 </span> <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
@@ -400,8 +386,6 @@ Now the induction principle case for <span class="inlinecode"><span class="id" t
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">f<sub>1</sub></span> : <span class="id" title="var">nat</span> → <span class="id" title="var">foo</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">P</span> (<span class="id" title="var">f<sub>1</sub></span> <span class="id" title="var">n</span>)) → <span class="id" title="var">P</span> (<span class="id" title="var">quux</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span> <span class="id" title="var">f<sub>1</sub></span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">f<sub>2</sub></span> : <span class="id" title="var">foo</span> <span class="id" title="var">X</span> <span class="id" title="var">Y</span>, <span class="id" title="var">P</span> <span class="id" title="var">f<sub>2</sub></span>
-<div class="paragraph"> </div>
-
 </span> <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
@@ -416,7 +400,7 @@ Now the induction principle case for <span class="inlinecode"><span class="id" t
 </div>
 
 <div class="doc">
-What induction principle will Coq generate for <span class="inlinecode"><span class="id" title="var">foo'</span></span>?  Fill
+What induction principle will Coq generate for <span class="inlinecode"><span class="id" title="var">foo'</span></span>?  (Fill
    in the blanks, then check your answer with Coq.)
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">foo'_ind</span> :<br/>
@@ -426,8 +410,6 @@ What induction principle will Coq generate for <span class="inlinecode"><span cl
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_______________________</span>   ) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">___________________________________________</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">f</span> : <span class="id" title="var">foo'</span> <span class="id" title="var">X</span>, <span class="id" title="var">________________________</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -449,8 +431,6 @@ What induction principle will Coq generate for <span class="inlinecode"><span cl
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">P</span> 0  →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">P</span> <span class="id" title="var">n</span> → <span class="id" title="var">P</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>))  →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">P</span> <span class="id" title="var">n</span>
-<div class="paragraph"> </div>
-
 </span>   is a generic statement that holds for all propositions
    <span class="inlinecode"><span class="id" title="var">P</span></span> (or rather, strictly speaking, for all families of
    propositions <span class="inlinecode"><span class="id" title="var">P</span></span> indexed by a number <span class="inlinecode"><span class="id" title="var">n</span></span>).  Each time we
@@ -637,7 +617,7 @@ Note that <span class="inlinecode"><span class="id" title="tactic">induction</sp
 <div class="code">
 
 <span class="id" title="keyword">Print</span> <a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;===&gt;<br/>
 <br/>
 &nbsp;&nbsp;Inductive&nbsp;ev&nbsp;:&nbsp;nat&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;Prop&nbsp;:=<br/>
 &nbsp;&nbsp;|&nbsp;ev_0&nbsp;:&nbsp;ev&nbsp;0<br/>
@@ -756,8 +736,6 @@ The second one is better, even though it looks less symmetric.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> (<span class="id" title="var">m</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">E</span> : <span class="id" title="var">ev''</span> <span class="id" title="var">m</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">P</span> <span class="id" title="var">m</span> <span class="id" title="var">E</span> → <span class="id" title="var">P</span> (<span class="id" title="var">S</span> (<span class="id" title="var">S</span> <span class="id" title="var">m</span>)) (<span class="id" title="var">ev_SS</span> <span class="id" title="var">m</span> <span class="id" title="var">E</span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">E</span> : <span class="id" title="var">ev''</span> <span class="id" title="var">n</span>), <span class="id" title="var">P</span> <span class="id" title="var">n</span> <span class="id" title="var">E</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -824,8 +802,6 @@ The second one is better, even though it looks less symmetric.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">even</span> <span class="id" title="var">n</span> → <span class="id" title="var">P</span> <span class="id" title="var">n</span>
-<div class="paragraph"> </div>
-
 </span>    That is why Coq actually generates the induction principle
     <span class="inlinecode"><span class="id" title="var">ev_ind</span></span> that we saw before. 
 </div>
@@ -840,12 +816,12 @@ The second one is better, even though it looks less symmetric.
 
 <div class="paragraph"> </div>
 
-    Answer: The latter should <i>teach</i> the reader how to produce the
-    former.
+    Answer: The latter should <i>teach</i> the reader everything they would
+    need to understand to be able to produce the former.
 
 <div class="paragraph"> </div>
 
-    Question: How much detail is needed??
+    Question: How much detail does that require?
 
 <div class="paragraph"> </div>
 
@@ -983,13 +959,9 @@ The second one is better, even though it looks less symmetric.
           Let <span class="inlinecode"><span class="id" title="var">n</span></span> be a number with <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>.  Since
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> <span class="id" title="var">l</span> = <span class="id" title="var">length</span> (<span class="id" title="var">x</span>::<span class="id" title="var">l'</span>) = <span class="id" title="var">S</span> (<span class="id" title="var">length</span> <span class="id" title="var">l'</span>),
-<div class="paragraph"> </div>
-
 </span>          it suffices to show that
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">index</span> (<span class="id" title="var">S</span> (<span class="id" title="var">length</span> <span class="id" title="var">l'</span>)) <span class="id" title="var">l'</span> = <span class="id" title="var">None</span>.
-<div class="paragraph"> </div>
-
 </span>          But this follows directly from the induction hypothesis,
           picking <span class="inlinecode"><span class="id" title="var">n'</span></span> to be <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l'</span></span>.  <font size=-2>&#9744;</font> 
 </li>
@@ -1255,7 +1227,7 @@ Once you get the hang of it, it is entirely straightforward to
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHn'</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">H</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

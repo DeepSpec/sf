@@ -812,8 +812,6 @@ Internally, this declaration is desugared into a single-field
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">Point</span> : <span class="id" title="keyword">Set</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Build_Point</span> : <span class="id" title="var">nat</span> → <span class="id" title="var">nat</span> → <span class="id" title="var">Point</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1061,8 +1059,6 @@ In the second line, the search procedure decides to try applying
 &nbsp;&nbsp;&nbsp;&nbsp;@<span class="id" title="var">show</span> <span class="id" title="var">nat</span> (?<span class="id" title="var">Show0</span> : <span class="id" title="keyword">Show</span> <span class="id" title="var">nat</span>) 42<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;===&gt;   { <span class="id" title="keyword">Proof</span> <span class="id" title="var">search</span> <span class="id" title="keyword">for</span> <span class="id" title="keyword">Show</span> <span class="id" title="var">Nat</span> <span class="id" title="var">returns</span> <span class="id" title="var">showNat</span> }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;@<span class="id" title="var">show</span> <span class="id" title="var">nat</span> <span class="id" title="var">showNat</span> 42
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1427,8 +1423,6 @@ The main definition provided by this library is the following typeclass:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">T</span> : <span class="id" title="keyword">Type</span>}, <span class="id" title="var">T</span> → <span class="id" title="var">M</span> <span class="id" title="var">T</span> ;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">bind</span> : <span class="id" title="keyword">∀</span> {<span class="id" title="var">T</span> <span class="id" title="var">U</span> : <span class="id" title="keyword">Type</span>}, <span class="id" title="var">M</span> <span class="id" title="var">T</span> → (<span class="id" title="var">T</span> → <span class="id" title="var">M</span> <span class="id" title="var">U</span>) → <span class="id" title="var">M</span> <span class="id" title="var">U</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}.
-<div class="paragraph"> </div>
-
 </span> That is, a type family <span class="inlinecode"><span class="id" title="var">M</span></span> is an instance of the <span class="inlinecode"><span class="id" title="var">Monad</span></span> class if
     we can define functions <span class="inlinecode"><span class="id" title="var">ret</span></span> and <span class="inlinecode"><span class="id" title="var">bind</span></span> of the appropriate types.  (If you <span class="inlinecode"><span class="id" title="keyword">Print</span></span> the actual definition, you'll see something more
     complicated, involving <span class="inlinecode"><span class="id" title="var">Polymorphic</span></span> <span class="inlinecode"><span class="id" title="keyword">Record</span></span> <span class="inlinecode"><span class="id" title="var">bla</span></span> <span class="inlinecode"><span class="id" title="var">bla</span></span>...  The
@@ -1458,23 +1452,15 @@ The other nice thing we get from the <span class="inlinecode"><span class="id" t
     lightweight notation for bind: Instead of
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">bind</span> <span class="id" title="var">m<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">m<sub>2</sub></span>),
-<div class="paragraph"> </div>
-
 </span>    we can write
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">x</span> &lt;- <span class="id" title="var">m<sub>1</sub></span> ;; <span class="id" title="var">m<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>    Or, if the result from <span class="inlinecode"><span class="id" title="var">m<sub>1</sub></span></span> is not needed in <span class="inlinecode"><span class="id" title="var">m<sub>2</sub></span></span>, then instead of
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">bind</span> <span class="id" title="var">m<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">m<sub>2</sub></span>),
-<div class="paragraph"> </div>
-
 </span>we can write
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">m<sub>1</sub></span> ;; <span class="id" title="var">m<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -2109,8 +2095,6 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
     requires me to often use:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Typeclasses</span> <span class="id" title="tactic">eauto</span> := <span class="id" title="tactic">debug</span>.
-<div class="paragraph"> </div>
-
 </span>   and switch to my *coq* buffer to see which lookup did not resolve to the
    instance I was expecting. This is usually fixed by one of two things:
 
@@ -2143,8 +2127,6 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">foo</span> (<span class="id" title="var">C</span> <span class="id" title="var">D</span> : <span class="id" title="var">Category</span>) (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">C</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">x</span> ~&gt; <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="var">fobj</span> <span class="id" title="var">x</span> ~&gt; <span class="id" title="var">fobj</span> <span class="id" title="var">y</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fmap</span> <span class="id" title="var">f</span>.
-<div class="paragraph"> </div>
-
 </span>    In Haskell this gives an error stating that no Functor is
     available. In Coq, it type checks using the highest priority
     <span class="inlinecode"><span class="id" title="var">C</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span> <span class="inlinecode"><span class="id" title="var">D</span></span> functor instance in scope. I typically discover that
@@ -2184,8 +2166,6 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">oops_is_bar</span> :&gt; <span class="id" title="var">Bar</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">oops_is_baz</span> :&gt; <span class="id" title="var">Baz</span><br/>
 &nbsp;&nbsp;&nbsp;}.
-<div class="paragraph"> </div>
-
 </span>    <span class="inlinecode"><span class="id" title="var">Oops</span></span> refers to two <span class="inlinecode"><span class="id" title="var">Foos</span></span>, and I need explicit evidence to know when
     they are the same <span class="inlinecode"><span class="id" title="var">Foo</span></span>. I work around this using indices:
 <br/>
@@ -2203,8 +2183,6 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">oops_is_bar</span> :&gt; <span class="id" title="var">Bar</span> <span class="id" title="var">F</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">oops_is_baz</span> :&gt; <span class="id" title="var">Baz</span> <span class="id" title="var">F</span><br/>
 &nbsp;&nbsp;&nbsp;}.
-<div class="paragraph"> </div>
-
 </span>    Only those classes which might be multiply-inherited need to be
     lifted like this. It forces me to use Sections to avoid
     repetition, but allows Coq to see that base classes sharing is
@@ -2223,8 +2201,6 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> : @<span class="id" title="var">method</span> (@<span class="id" title="var">bar_is_foo</span> (@<span class="id" title="var">oops_is_bar</span> <span class="id" title="var">O</span>)) <span class="id" title="var">A</span> = @<span class="id" title="var">method</span> <span class="id" title="var">F</span> <span class="id" title="var">B</span><br/>
 &nbsp;&nbsp;&nbsp;--------------------<br/>
 &nbsp;&nbsp;&nbsp;@<span class="id" title="var">method</span> <span class="id" title="var">F</span> <span class="id" title="var">A</span> = @<span class="id" title="var">method</span> <span class="id" title="var">F</span> <span class="id" title="var">B</span>
-<div class="paragraph"> </div>
-
 </span>    You can't apply here without simplying in H. However, what you see at
     first is:
 <br/>
@@ -2234,8 +2210,6 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> : <span class="id" title="var">method</span> <span class="id" title="var">A</span> = <span class="id" title="var">method</span> <span class="id" title="var">B</span><br/>
 &nbsp;&nbsp;&nbsp;--------------------<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">method</span> <span class="id" title="var">A</span> = <span class="id" title="var">method</span> <span class="id" title="var">B</span>
-<div class="paragraph"> </div>
-
 </span>    As a newcomer, knowing to turn on Printing All is just not obvious
     here, but it quickly becomes something you learn to do whenever
     what looks obvious is not.
@@ -2376,7 +2350,7 @@ Definition&nbsp;e<sub>4</sub>&nbsp;:&nbsp;list&nbsp;nat&nbsp;:=&nbsp;mymap&nbsp;
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:42&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -386,4 +386,4 @@ Insert and lookup 20000 consecutive integers in 0.387535 seconds.
     balanced search trees to achieve logarithmic.  [Redblack]
     will do that. *)
 
-(* 2021-05-18 18:08 *)
+(* 2021-05-24 18:32 *)

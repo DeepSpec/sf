@@ -1560,24 +1560,24 @@ Qed.
     big, and they contain many conjuncts that are essentially trivial.
     Our [verify_assn] can often take care of them. *)
 
-Eval simpl in verification_conditions_dec dec_while. 
+Eval simpl in verification_conditions_dec dec_while.
 
-(* ==> 
-  =  (((fun _ : state => True) ->> 
+(* ==>
+  =  (((fun _ : state => True) ->>
               (fun _ : state => True)) /\
-     ((fun st : state => True /\ negb (st X =? 0) = true) ->> 
+     ((fun st : state => True /\ negb (st X =? 0) = true) ->>
               (fun st : state => True /\ st X <> 0)) /\
-     ((fun st : state => True /\ negb (st X =? 0) <> true) ->> 
+     ((fun st : state => True /\ negb (st X =? 0) <> true) ->>
               (fun st : state => True /\ st X = 0)) /\
-     (fun st : state => True /\ st X <> 0) ->> 
+     (fun st : state => True /\ st X <> 0) ->>
               (fun _ : state => True) [X |-> X - 1]) /\
-      (fun st : state => True /\ st X = 0) ->> 
+      (fun st : state => True /\ st X = 0) ->>
               (fun st : state => st X = 0)
    : Prop
 
 *)
 
-Example vc_dec_while : verification_conditions_dec dec_while. 
+Example vc_dec_while : verification_conditions_dec dec_while.
 Proof.  verify_assn. Qed.
 
 (* ================================================================= *)
@@ -2165,4 +2165,4 @@ Theorem dfib_correct : forall n,
 
     [] *)
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

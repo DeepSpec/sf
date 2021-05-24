@@ -393,8 +393,6 @@ Now prove the main theorem. Proceed by induction on the evidence
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> × 1 = <span class="id" title="var">a</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> × 0 = 0<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">a</span> × (<span class="id" title="var">b</span> + <span class="id" title="var">c</span>) = <span class="id" title="var">a</span> × <span class="id" title="var">b</span> + <span class="id" title="var">a</span> × <span class="id" title="var">c</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -407,8 +405,6 @@ Now prove the main theorem. Proceed by induction on the evidence
 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span> <span class="id" title="var">d</span> <span class="id" title="var">k</span> <span class="id" title="var">empty_tree</span> = <span class="id" title="var">d</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -423,8 +419,6 @@ Now prove the main theorem. Proceed by induction on the evidence
 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span> <span class="id" title="var">d</span> <span class="id" title="var">k</span> (<span class="id" title="var">insert</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">t</span>) = <span class="id" title="var">v</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -436,8 +430,6 @@ Now prove the main theorem. Proceed by induction on the evidence
 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span> <span class="id" title="var">d</span> <span class="id" title="var">k'</span> (<span class="id" title="var">insert</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">t</span>) = <span class="id" title="var">lookup</span> <span class="id" title="var">d</span> <span class="id" title="var">k'</span> <span class="id" title="var">t</span>      <span class="id" title="keyword">if</span> <span class="id" title="var">k</span> ≠ <span class="id" title="var">k'</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1283,8 +1275,6 @@ This corollary illustrates a general technique:  prove the correctness
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">elements</span> <span class="id" title="var">empty_tree</span> = ...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">elements</span> (<span class="id" title="var">insert</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">t</span>) = ... (<span class="id" title="var">elements</span> <span class="id" title="var">t</span>) ...
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1508,8 +1498,6 @@ We now proceed to prove that each operation preserves (or establishes)
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">bound</span>           <span class="id" title="var">map_bound</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span>          <span class="id" title="var">find</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">insert</span>          <span class="id" title="var">update</span>
-<div class="paragraph"> </div>
-
 </span> 
 <div class="paragraph"> </div>
 
@@ -1657,8 +1645,6 @@ We now proceed to prove that each operation preserves (or establishes)
     Where we define:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">update'</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">m</span> = <span class="id" title="var">update</span> <span class="id" title="var">m</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1980,7 +1966,7 @@ We can prove some simple properties of lookup and update on unions,
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:32&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -654,11 +654,11 @@ Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Preservation *)
 
-  (* As before, we prove the substitution lemma by induction
-     on the term t. The only new case (compared to the proof in
-     StlcProp.v) is the case of rcons. For this case, we must do a little
-     extra work to show that substituting into a term doesn't change
-     whetherit is a record term. *)
+(** As before, we prove the substitution lemma by induction
+    on the term t. The only new case (compared to the proof in
+    StlcProp.v) is the case of rcons. For this case, we must do a little
+    extra work to show that substituting into a term doesn't change
+    whetherit is a record term. *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
   (x |-> U ; Gamma) |- t \in T ->
@@ -735,4 +735,4 @@ Qed.
 
 End STLCExtendedRecords.
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

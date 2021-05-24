@@ -7,8 +7,7 @@
     may be found in the paper [Charguéraud 2020], available from:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf
 
-    A subset of the references most relevant to the contents of the course
-    appears below. *)
+    The references most relevant to the contents of the course appear below. *)
 
 (**
 
@@ -40,6 +39,14 @@
   Separation Logic for Sequential Programs.
   In Internation Conference on Function Programming (ICFP).
   https://dl.acm.org/doi/abs/10.1145/3408998
+
+[Chlipala et al 2009]
+  Adam Chlipala, Gregory Malecha, Greg Morrisett, Avraham Shinnar,
+   and Ryan Wisnesky.
+  Effective Interactive Proofs for Higher-Order Imperative Programs.
+  In International Conference on Functional Programming (ICFP).
+  https://doi.org/10.1145/1596550.
+  See also the other papers: https://ynot.cs.harvard.edu/
 
 [Guéneau, Jourdan, Charguéraud, and Pottier 2019]
   Armaël Guéneau, Jacques-Henri Jourdan, Arthur Charguéraud,
@@ -97,8 +104,10 @@
   https://doi.org/10.1145/373243.375719
 
 [Jung et al 2018]
-  Ralf Jung, Robbert Krebbers, Jacques-Henri Jourdan, Ale{\v{s}} Bizjak, Lars Birkedal, Derek Dreyer.
-  Iris from the ground up: A modular foundation for higher-order concurrent separation logic.
+  Ralf Jung, Robbert Krebbers, Jacques-Henri Jourdan, Ale{\v{s}} Bizjak,
+   Lars Birkedal, Derek Dreyer.
+  Iris from the ground up: A modular foundation for higher-order concurrent
+   separation logic.
   Journal of Functional Programming.
   https://doi.org/10.1017/S0956796818000151
 
@@ -129,7 +138,8 @@
 [Tuerk 2010]
   Thomas Tuerk.
   Local Reasoning about While-Loops.
-  In International Conference on Verified Software: Theories, Tools and Experiments (VSTTE).
+  In International Conference on Verified Software: Theories, Tools and
+   Experiments (VSTTE).
 
 [Weber 2004]
   Tjark Weber.
@@ -147,4 +157,4 @@
 
 (** $Date$ *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

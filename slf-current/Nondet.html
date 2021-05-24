@@ -52,7 +52,7 @@
 </div>
 
 <div class="doc">
-<a id="lab432"></a><h1 class="section">First Pass</h1>
+<a id="lab435"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -98,7 +98,7 @@
 </div>
 
 <div class="doc">
-<a id="lab433"></a><h2 class="section">Non-Deterministic Big-Step Semantics: the Predicate <span class="inlinecode"><span class="id" title="var">evaln</span></span></h2>
+<a id="lab436"></a><h2 class="section">Non-Deterministic Big-Step Semantics: the Predicate <span class="inlinecode"><span class="id" title="var">evaln</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -289,16 +289,12 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">evaln</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">Q<sub>1</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">v<sub>1</sub></span>, <span class="id" title="var">Q<sub>1</sub></span> <span class="id" title="var">v<sub>1</sub></span> → <span class="id" title="var">evaln</span> (<span class="id" title="tactic">subst</span> <span class="id" title="var">x</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">evaln</span> (<span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>      Second, let us switch from a substitution-based semantics to an
       environment-based semantics---nothing but change of presentation.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">evaln</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">Q<sub>1</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">v<sub>1</sub></span>, <span class="id" title="var">Q<sub>1</sub></span> <span class="id" title="var">v<sub>1</sub></span> → <span class="id" title="var">evaln</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">v<sub>1</sub></span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span>) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">evaln</span> <span class="id" title="var">E</span> (<span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>      Now, let's consider a typing property. For example, expressing that a
       term has type <span class="inlinecode"><span class="id" title="var">int</span></span> amounts to asserting that this term produces a
       value <span class="inlinecode"><span class="id" title="var">v</span></span> of the form <span class="inlinecode"><span class="id" title="var">val_int</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> for some <span class="inlinecode"><span class="id" title="var">n</span></span>. This property may be
@@ -309,8 +305,6 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">typing</span> <span class="id" title="var">E</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">Q<sub>1</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">typing</span> ((<span class="id" title="var">x</span>,<span class="id" title="var">Q<sub>1</sub></span>)::<span class="id" title="var">E</span>) <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">typing</span> <span class="id" title="var">E</span> (<span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>
-<div class="paragraph"> </div>
-
 </span>      The only difference is that the evaluation rule maps <span class="inlinecode"><span class="id" title="var">x</span></span> to any value
       <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> such that <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> has type <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span>, whereas the typing rule directly
       maps <span class="inlinecode"><span class="id" title="var">x</span></span> to the type <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span>. The two presentations are thus essentially
@@ -325,7 +319,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     precondition. We focus on the particular case of a let-binding. 
 <div class="paragraph"> </div>
 
-<a id="lab434"></a><h4 class="section">Exercise: 1 star, standard, optional (evaln_let')</h4>
+<a id="lab437"></a><h4 class="section">Exercise: 1 star, standard, optional (evaln_let')</h4>
  The rule <span class="inlinecode"><span class="id" title="var">evaln_let</span></span> shares similarities with the statement of
     the weakest-precondition style reasoning rule for let-bindings.
     Prove the following alternative statement, with a wp-style flavor. 
@@ -342,7 +336,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab435"></a><h4 class="section">Exercise: 2 stars, standard, optional (evaln_let_of_evaln_let')</h4>
+<a id="lab438"></a><h4 class="section">Exercise: 2 stars, standard, optional (evaln_let_of_evaln_let')</h4>
  Reciprocally, prove that the statement considered in the inductive
     definition of <span class="inlinecode"><span class="id" title="var">evaln</span></span> is derivable from <span class="inlinecode"><span class="id" title="var">evaln_let'</span></span>. More precisely,
     prove the statement below by using <span class="inlinecode"><span class="id" title="var">evaln_let'</span></span> and <span class="inlinecode"><span class="id" title="var">evaln_conseq</span></span>. 
@@ -370,13 +364,11 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">evaln'_let</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">Q<sub>1</sub></span> <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">Q</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">evaln'</span> <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">t<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> ⇒ <span class="id" title="var">evaln'</span> <span class="id" title="var">s<sub>2</sub></span> (<span class="id" title="tactic">subst</span> <span class="id" title="var">x</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">evaln'</span> <span class="id" title="var">s<sub>1</sub></span> (<span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">Q</span>.
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab436"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span></h2>
+<a id="lab439"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -436,7 +428,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     that <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> holds. This result is formalized by the following lemma. 
 <div class="paragraph"> </div>
 
-<a id="lab437"></a><h4 class="section">Exercise: 3 stars, standard, optional (evaln_inv_eval)</h4>
+<a id="lab440"></a><h4 class="section">Exercise: 3 stars, standard, optional (evaln_inv_eval)</h4>
  Assume <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> to hold. Prove that the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> holds of
     any output that <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> may evaluate to according to the judgment <span class="inlinecode"><span class="id" title="tactic">eval</span></span>. 
 </div>
@@ -461,7 +453,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     formalized by the following lemma. 
 <div class="paragraph"> </div>
 
-<a id="lab438"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evaln_inv_exists_eval)</h4>
+<a id="lab441"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evaln_inv_exists_eval)</h4>
  Assume <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> to hold. Prove that there exists an output
     <span class="inlinecode">(<span class="id" title="var">s'</span>,<span class="id" title="var">v</span>)</span> that <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> may evaluate to according to the judgment
     <span class="inlinecode"><span class="id" title="tactic">eval</span></span>, and that this output satisfies <span class="inlinecode"><span class="id" title="var">Q</span></span>.
@@ -524,7 +516,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     for which one particular execution may diverge or get stuck. 
 <div class="paragraph"> </div>
 
-<a id="lab439"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_post_of_evaln)</h4>
+<a id="lab442"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_post_of_evaln)</h4>
  Prove the fact that if <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> holds for some <span class="inlinecode"><span class="id" title="var">Q</span></span>, then it
     holds for the smallest postcondition, namely <span class="inlinecode"><span class="id" title="var">post</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>.
     Hint: in the let-binding case, you'll need to guess an appropriate
@@ -542,7 +534,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab440"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (evaln_inv_post_qimpl)</h4>
+<a id="lab443"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (evaln_inv_post_qimpl)</h4>
  Prove the fact that if <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> holds, then <span class="inlinecode"><span class="id" title="var">post</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">===&gt;</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>,
     i.e. the smallest-possible postcondition entails the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>.
     Hint: the proof is only one line long. 
@@ -558,7 +550,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 
 
 <div class="doc">
-<a id="lab441"></a><h2 class="section">Triples for Non-Deterministic Big-Step Semantics</h2>
+<a id="lab444"></a><h2 class="section">Triples for Non-Deterministic Big-Step Semantics</h2>
 
 <div class="paragraph"> </div>
 
@@ -586,7 +578,7 @@ A Separation Logic triple, written <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab442"></a><h2 class="section">Triple-Style Reasoning Rules for a Non-Deterministic Semantics.</h2>
+<a id="lab445"></a><h2 class="section">Triple-Style Reasoning Rules for a Non-Deterministic Semantics.</h2>
 
 <div class="paragraph"> </div>
 
@@ -756,12 +748,12 @@ Statements and proofs of reasoning rules for other term constructs
 </div>
 
 <div class="doc">
-<a id="lab443"></a><h1 class="section">More Details</h1>
+<a id="lab446"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab444"></a><h2 class="section">Weakest-Precondition Style Presentation.</h2>
+<a id="lab447"></a><h2 class="section">Weakest-Precondition Style Presentation.</h2>
 
 <div class="paragraph"> </div>
 
@@ -828,7 +820,7 @@ This definition is associated with the following introduction rule,
 </div>
 
 <div class="doc">
-<a id="lab445"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_equiv)</h4>
+<a id="lab448"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_equiv)</h4>
  Prove the standard equivalence <span class="inlinecode">(<span class="id" title="var">H</span></span> <span class="inlinecode">==&gt;</span> <span class="inlinecode"><span class="id" title="var">wp</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span>)</span> <span class="inlinecode">↔</span> <span class="inlinecode">(<span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span>)</span>
     to relate the predicates <span class="inlinecode"><span class="id" title="var">wpn</span></span> and <span class="inlinecode"><span class="id" title="var">triplen</span></span>.
     Hint: using lemma <span class="inlinecode"><span class="id" title="var">wpn_of_hoarewpn</span></span> can be helpful. 
@@ -850,7 +842,7 @@ This definition is associated with the following introduction rule,
 </div>
 
 <div class="doc">
-<a id="lab446"></a><h2 class="section">Hoare Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
+<a id="lab449"></a><h2 class="section">Hoare Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
 
 <div class="paragraph"> </div>
 
@@ -896,7 +888,8 @@ Rules for term constructs
 &nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">h</span> <span class="id" title="var">K</span>. <span class="id" title="var">applys</span>* <a class="idref" href="Nondet.html#evaln_app_fix"><span class="id" title="constructor">evaln_app_fix</span></a>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="hoarewpn_let" class="idref" href="#hoarewpn_let"><span class="id" title="lemma">hoarewpn_let</span></a> : <span class="id" title="keyword">∀</span> <a id="x:250" class="idref" href="#x:250"><span class="id" title="binder">x</span></a> <a id="t<sub>1</sub>:251" class="idref" href="#t<sub>1</sub>:251"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:252" class="idref" href="#t<sub>2</sub>:252"><span class="id" title="binder">t<sub>2</sub></span></a> <a id="Q:253" class="idref" href="#Q:253"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a> <a class="idref" href="Nondet.html#t<sub>1</sub>:251"><span class="id" title="variable">t<sub>1</sub></span></a> (<span class="id" title="keyword">fun</span> <a id="v:254" class="idref" href="#v:254"><span class="id" title="binder">v</span></a> ⇒ <a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a> (<a class="idref" href="LibSepReference.html#subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="Nondet.html#x:250"><span class="id" title="variable">x</span></a> <a class="idref" href="Nondet.html#v:254"><span class="id" title="variable">v</span></a> <a class="idref" href="Nondet.html#t<sub>2</sub>:252"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Nondet.html#Q:253"><span class="id" title="variable">Q</span></a>) <a class="idref" href="LibSepReference.html#c7ebd77e939e3f02c508e57b470dc021"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a> (<a class="idref" href="LibSepReference.html#trm_let"><span class="id" title="constructor">trm_let</span></a> <a class="idref" href="Nondet.html#x:250"><span class="id" title="variable">x</span></a> <a class="idref" href="Nondet.html#t<sub>1</sub>:251"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Nondet.html#t<sub>2</sub>:252"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Nondet.html#Q:253"><span class="id" title="variable">Q</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a> <a class="idref" href="Nondet.html#t<sub>1</sub>:251"><span class="id" title="variable">t<sub>1</sub></span></a> (<span class="id" title="keyword">fun</span> <a id="v:254" class="idref" href="#v:254"><span class="id" title="binder">v</span></a> ⇒ <a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a> (<a class="idref" href="LibSepReference.html#subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="Nondet.html#x:250"><span class="id" title="variable">x</span></a> <a class="idref" href="Nondet.html#v:254"><span class="id" title="variable">v</span></a> <a class="idref" href="Nondet.html#t<sub>2</sub>:252"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Nondet.html#Q:253"><span class="id" title="variable">Q</span></a>)<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#c7ebd77e939e3f02c508e57b470dc021"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a> (<a class="idref" href="LibSepReference.html#trm_let"><span class="id" title="constructor">trm_let</span></a> <a class="idref" href="Nondet.html#x:250"><span class="id" title="variable">x</span></a> <a class="idref" href="Nondet.html#t<sub>1</sub>:251"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Nondet.html#t<sub>2</sub>:252"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Nondet.html#Q:253"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Nondet.html#hoarewpn"><span class="id" title="definition">hoarewpn</span></a>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">h</span> <span class="id" title="var">K</span>. <span class="id" title="var">applys</span>* <a class="idref" href="Nondet.html#evaln_let"><span class="id" title="constructor">evaln_let</span></a>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
@@ -974,7 +967,7 @@ Rules for primitives. We state their specifications following the
 </div>
 
 <div class="doc">
-<a id="lab447"></a><h2 class="section">Separation Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
+<a id="lab450"></a><h2 class="section">Separation Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
 
 <div class="paragraph"> </div>
 
@@ -1030,7 +1023,7 @@ Rules for term constructs
 </div>
 
 <div class="doc">
-<a id="lab448"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_let)</h4>
+<a id="lab451"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_let)</h4>
  Derive the reasoning rule <span class="inlinecode"><span class="id" title="var">wpn_let</span></span> from <span class="inlinecode"><span class="id" title="var">hoarewpn_let</span></span>. 
 </div>
 <div class="code">
@@ -1166,7 +1159,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab449"></a><h4 class="section">Exercise: 4 stars, standard, optional (wpn_rand_of_triplen_rand)</h4>
+<a id="lab452"></a><h4 class="section">Exercise: 4 stars, standard, optional (wpn_rand_of_triplen_rand)</h4>
  The proof of lemma <span class="inlinecode"><span class="id" title="var">triplen_rand</span></span> shows that a triple-based specification
     of <span class="inlinecode"><span class="id" title="var">val_rand</span></span> is derivable from a wp-style specification. In this
     exercise, we aim to prove the reciprocal. Concretely, prove the following
@@ -1184,7 +1177,7 @@ Rules for primitives, alternative presentation using triples.
 
 
 <div class="doc">
-<a id="lab450"></a><h1 class="section">Optional Material</h1>
+<a id="lab453"></a><h1 class="section">Optional Material</h1>
 
 <div class="paragraph"> </div>
 
@@ -1196,7 +1189,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab451"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">terminates</span></span></h2>
+<a id="lab454"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">terminates</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1246,7 +1239,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab452"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_iff_terminates_and_post)</h4>
+<a id="lab455"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_iff_terminates_and_post)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is equivalent to the conjunction of
     <span class="inlinecode"><span class="id" title="var">terminates</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> and to a partial correctness result asserting that
     if an evaluation of <span class="inlinecode"><span class="id" title="var">t</span>/<span class="id" title="var">s</span></span> terminates on some result then this result
@@ -1273,7 +1266,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab453"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (terminates_iff_evaln_any)</h4>
+<a id="lab456"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (terminates_iff_evaln_any)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">terminates</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Any</span></span>.
     Hint: exploit <span class="inlinecode"><span class="id" title="var">evaln_iff_terminates_and_post</span></span>. 
 </div>
@@ -1291,7 +1284,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab454"></a><h2 class="section">Small-Step Evaluation Relation</h2>
+<a id="lab457"></a><h2 class="section">Small-Step Evaluation Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1361,7 +1354,7 @@ Consider a configuration <span class="inlinecode">(<span class="id" title="var">
 </div>
 
 <div class="doc">
-<a id="lab455"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evalns</span></span>: Attempts</h2>
+<a id="lab458"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evalns</span></span>: Attempts</h2>
 
 <div class="paragraph"> </div>
 
@@ -1449,8 +1442,6 @@ Solution follows.
 
 <span class="inlinecode-ocaml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">rec</span> <span class="id" title="var">f</span> () =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> (<span class="id" title="var">val_rand</span> 2) = 0 <span class="id" title="keyword">then</span> () <span class="id" title="keyword">else</span> <span class="id" title="var">f</span> ()
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1547,8 +1538,6 @@ Solution: Consider the following program.
 <span class="inlinecode-ocaml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">rec</span> <span class="id" title="var">f</span> <span class="id" title="var">n</span> =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">n</span> &gt; 0 <span class="id" title="keyword">then</span> <span class="id" title="var">f</span> (<span class="id" title="var">n</span>-1) <span class="id" title="keyword">else</span> () <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span> (<span class="id" title="var">unbounded_rand</span>())
-<div class="paragraph"> </div>
-
 </span>    The number of execution evals can be arbitrary. Yet, any given
     program execution terminates.
 
@@ -1613,7 +1602,7 @@ Solution: Consider the following program.
 </div>
 
 <div class="doc">
-<a id="lab456"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evaln</span></span>: A Solution</h2>
+<a id="lab459"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evaln</span></span>: A Solution</h2>
 
 <div class="paragraph"> </div>
 
@@ -1704,7 +1693,7 @@ Observe how this definition allows for <span class="inlinecode"><span class="id"
     <span class="inlinecode"><span class="id" title="var">unbounded_rand</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab457"></a><h4 class="section">Exercise: 2 stars, standard, optional (evalns_val_inv)</h4>
+<a id="lab460"></a><h4 class="section">Exercise: 2 stars, standard, optional (evalns_val_inv)</h4>
  Prove the following inversion lemma, which asserts that
     <span class="inlinecode"><span class="id" title="var">evalns</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> implies <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span>. 
 </div>
@@ -1738,7 +1727,7 @@ Observe how this definition allows for <span class="inlinecode"><span class="id"
 </div>
 
 <div class="doc">
-<a id="lab458"></a><h2 class="section">Triples for Small-Step Semantics</h2>
+<a id="lab461"></a><h2 class="section">Triples for Small-Step Semantics</h2>
 
 <div class="paragraph"> </div>
 
@@ -1771,7 +1760,7 @@ There is nothing new in deriving rules for <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab459"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">seval</span></span></h2>
+<a id="lab462"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">seval</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1825,7 +1814,7 @@ The rules for term constructs are established next. Note that there is
 </div>
 
 <div class="doc">
-<a id="lab460"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalns_let)</h4>
+<a id="lab463"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalns_let)</h4>
  Prove the big-step reasoning rule for let-bindings for <span class="inlinecode"><span class="id" title="var">evalns</span></span>. 
 </div>
 <div class="code">
@@ -1851,7 +1840,7 @@ The rules for term constructs are established next. Note that there is
 </div>
 
 <div class="doc">
-<a id="lab461"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">hoarens</span></span></h2>
+<a id="lab464"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">hoarens</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2005,7 +1994,8 @@ The evaluation rules for primitive operations are proved in a way that is
 &nbsp;&nbsp;{ <span class="id" title="var">introv</span> <span class="id" title="var">R</span>. <span class="id" title="var">inverts</span> <span class="id" title="var">R</span>; <span class="id" title="var">tryfalse</span>. <span class="id" title="var">applys</span> <a class="idref" href="Nondet.html#evalns_val"><span class="id" title="constructor">evalns_val</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="LibSepReference.html#SepSimplArgs.hstar_hpure_l"><span class="id" title="lemma">hstar_hpure_l</span></a>. <span class="id" title="tactic">split</span>¬.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <a class="idref" href="LibSepFmap.html#remove_union_single_l"><span class="id" title="lemma">remove_union_single_l</span></a>. { <span class="id" title="tactic">auto</span>. }<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">N'</span>. <span class="id" title="var">applys</span> <a class="idref" href="LibSepFmap.html#disjoint_inv_not_indom_both"><span class="id" title="lemma">disjoint_inv_not_indom_both</span></a> <span class="id" title="var">D</span> <span class="id" title="var">N'</span>. <span class="id" title="var">applys</span> <a class="idref" href="LibSepFmap.html#indom_single"><span class="id" title="lemma">indom_single</span></a>. } }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">N'</span>. <span class="id" title="var">applys</span> <a class="idref" href="LibSepFmap.html#disjoint_inv_not_indom_both"><span class="id" title="lemma">disjoint_inv_not_indom_both</span></a> <span class="id" title="var">D</span> <span class="id" title="var">N'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">applys</span> <a class="idref" href="LibSepFmap.html#indom_single"><span class="id" title="lemma">indom_single</span></a>. } }<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -2016,7 +2006,7 @@ From there, reasoning rules for <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab462"></a><h2 class="section">Equivalence Between Non-Deterministic Small-Step and Big-Step Semantics</h2>
+<a id="lab465"></a><h2 class="section">Equivalence Between Non-Deterministic Small-Step and Big-Step Sem.</h2>
 
 <div class="paragraph"> </div>
 
@@ -2122,7 +2112,8 @@ Let's now turn to the second direction, from <span class="inlinecode"><span clas
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">false</span>* <span class="id" title="var">C</span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">destruct</span> <span class="id" title="var">K<sub>3</sub></span> <span class="id" title="keyword">as</span> (?&amp;?&amp;<span class="id" title="var">K<sub>5</sub></span>). <span class="id" title="tactic">do</span> 2 <span class="id" title="var">esplit</span>. <span class="id" title="var">applys</span>* <a class="idref" href="Nondet.html#step_let_ctx"><span class="id" title="constructor">step_let_ctx</span></a>. } }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">introv</span> <span class="id" title="var">K</span>. <span class="id" title="var">inverts</span> <span class="id" title="var">K</span> <span class="id" title="keyword">as</span> <span class="id" title="var">K'</span>; [|<span class="id" title="var">false</span>* <span class="id" title="var">C</span>].<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inverts</span> <span class="id" title="var">IHM1</span> <span class="id" title="keyword">as</span> <span class="id" title="var">K<sub>5</sub></span> <span class="id" title="var">K<sub>6</sub></span>; [<span class="id" title="var">false</span>* <span class="id" title="var">C</span>|]. <span class="id" title="var">specializes</span> <span class="id" title="var">K<sub>6</sub></span> <span class="id" title="var">K'</span>. <span class="id" title="var">applys</span>* <a class="idref" href="Nondet.html#evalns_let"><span class="id" title="axiom">evalns_let</span></a>. } } }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inverts</span> <span class="id" title="var">IHM1</span> <span class="id" title="keyword">as</span> <span class="id" title="var">K<sub>5</sub></span> <span class="id" title="var">K<sub>6</sub></span>; [<span class="id" title="var">false</span>* <span class="id" title="var">C</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">specializes</span> <span class="id" title="var">K<sub>6</sub></span> <span class="id" title="var">K'</span>. <span class="id" title="var">applys</span>* <a class="idref" href="Nondet.html#evalns_let"><span class="id" title="axiom">evalns_let</span></a>. } } }<br/>
 &nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="Nondet.html#evalns_step"><span class="id" title="constructor">evalns_step</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">do</span> 2 <span class="id" title="var">esplit</span>. <span class="id" title="var">applys</span>* <a class="idref" href="Nondet.html#step_if"><span class="id" title="constructor">step_if</span></a>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">introv</span> <span class="id" title="var">K</span>. <span class="id" title="var">inverts</span> <span class="id" title="var">K</span>. <span class="id" title="var">applys</span> <span class="id" title="var">IHM</span>. } }<br/>
@@ -2176,7 +2167,7 @@ As immediate corollary, we obtain the equivalence between the big-step and
 </div>
 
 <div class="doc">
-<a id="lab463"></a><h2 class="section">Historical Notes</h2>
+<a id="lab466"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -2209,7 +2200,7 @@ As immediate corollary, we obtain the equivalence between the big-step and
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

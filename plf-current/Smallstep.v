@@ -5,8 +5,7 @@ From Coq Require Import Arith.Arith.
 From Coq Require Import Arith.EqNat.
 From Coq Require Import Init.Nat.
 From Coq Require Import Lia.
-From Coq Require Import Lists.List.
-Import ListNotations.
+From Coq Require Import Lists.List. Import ListNotations.
 From PLF Require Import Maps.
 From PLF Require Import Imp.
 
@@ -755,15 +754,12 @@ Definition bool_step_prop3 :=
 Definition manual_grade_for_smallstep_bools : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (progress_bool)
+(** **** Exercise: 3 stars, standard, optional (strong_progress_bool)
 
     Just as we proved a progress theorem for plus expressions, we can
-    do so for boolean expressions, as well.
+    do so for boolean expressions, as well. *)
 
-     BCP: This should be called strong_progress_bool, no? 
- *)
-
-Theorem progress_bool : forall t,
+Theorem strong_progress_bool : forall t,
   value t \/ (exists t', t --> t').
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -1835,4 +1831,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

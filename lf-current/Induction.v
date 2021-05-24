@@ -19,32 +19,27 @@ From LF Require Export Basics.
     single archive, a [_CoqProject] should already exist and you can
     skip this step):
 
-      [-Q . LF]
+      -Q . LF
 
     This maps the current directory ("[.]", which contains [Basics.v],
     [Induction.v], etc.) to the prefix (or "logical directory")
-    "[LF]".  PG and CoqIDE read [_CoqProject] automatically, so they
-    know to where to look for the file [Basics.vo] corresponding to
-    the library [LF.Basics].
+    "[LF]".  Proof General and CoqIDE read [_CoqProject]
+    automatically, so they know to where to look for the file
+    [Basics.vo] corresponding to the library [LF.Basics].
 
     Once [_CoqProject] is thus created, there are various ways to
     build [Basics.vo]:
 
-     - In Proof General: The compilation can be made to happen
-       automatically when you submit the [Require] line above to PG,
-       by setting the emacs variable [coq-compile-before-require] to
-       [t]. You can also use the menu option "Coq -> Auto
-       Compilation -> Compile Before Require".
+     - In Proof General or CoqIDE, the compilation should happen
+       automatically when you submit the [Require] line above to PG.
 
-     - In CoqIDE: Open [Basics.v]; then, in the "Compile" menu, click
-       on "Compile Buffer".
+     - If you want to compile from the command line, generate a
+       [Makefile] using the [coq_makefile] utility, which comes
+       installed with Coq (if you obtained the whole volume as a
+       single archive, a [Makefile] should already exist and you can
+       skip this step):
 
-     - From the command line: Generate a [Makefile] using the
-       [coq_makefile] utility, which comes installed with Coq (if you
-       obtained the whole volume as a single archive, a [Makefile]
-       should already exist and you can skip this step):
-
-         [coq_makefile -f _CoqProject *.v -o Makefile]
+         coq_makefile -f _CoqProject *.v -o Makefile
 
        Note: You should rerun that command whenever you add or remove
        Coq files to the directory.
@@ -52,17 +47,17 @@ From LF Require Export Basics.
        Now you can compile [Basics.v] by running [make] with the
        corresponding [.vo] file as a target:
 
-         [make Basics.vo]
+         make Basics.vo
 
        All files in the directory can be compiled by giving no
        arguments:
 
-         [make]
+         make
 
        Under the hood, [make] uses the Coq compiler, [coqc].  You can
        also run [coqc] directly:
 
-         [coqc -Q . LF Basics.v]
+         coqc -Q . LF Basics.v
 
        But [make] also calculates dependencies between source files to
        compile them in the right order, so [make] should generally be
@@ -75,8 +70,8 @@ From LF Require Export Basics.
 
     In particular, if you see a message like
 
-        [Compiled library Foo makes inconsistent assumptions over
-        library Bar]
+        Compiled library Foo makes inconsistent assumptions over
+        library Bar
 
     check whether you have multiple installations of Coq on your
     machine.  It may be that commands (like [coqc]) that you execute
@@ -671,4 +666,4 @@ Definition manual_grade_for_binary_inverse_b : option (nat*string) := None.
 Definition manual_grade_for_binary_inverse_c : option (nat*string) := None.
 (** [] *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

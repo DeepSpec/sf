@@ -848,7 +848,7 @@ Tactic Notation "xwp" :=
 
 (** Using the updated version of [xwp], let us revisite the proof of our
     motivating example [succ_using_incr] in a fully affine logic, i.e.,
-    a logical where any predicate  can be discarded. *)
+    a logical where any predicate can be discarded. *)
 
 Module MotivatingExampleWithUpdatedXwp.
 Export MotivatingExample.
@@ -1027,7 +1027,7 @@ Import LibSepReference.
     we import the definitions from [LibSepDirect] but assume that the
     definition of [mkstruct] is like the one presented in the present
     file, that is, including the [\GC] when defining [mkstruct F]
-    as [fun Q => \exists Q', F Q' \* (Q' \--* (Q \*+ \GC)).
+    as [fun Q => \exists Q', F Q' \* (Q' \--* (Q \*+ \GC))].
 
     As argued earlier on, with this definition, [mkstruct] satisfies the
     following discard rule. *)
@@ -1289,10 +1289,9 @@ End LowLevel.
     floor".
 
     This chapter gives a presentation of Separation Logic featuring a
-    customizable predicate [haffine] for controlling which resources should be
+    customizable predicate [haffine] for controlling which resources should bedd
     treated as affine, and which ones should be treated as linear. This
-    direct approach to controlling linearity was introduced in the context
-    of CFML, in work by [Guéneau, Jourdan, Charguéraud, and Pottier 2019] (in Bib.v).
-*)
+    direct approach to controlling linearity was introduced in the context of
+    CFML, in work by [Guéneau, Jourdan, Charguéraud, and Pottier 2019] (in Bib.v) *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

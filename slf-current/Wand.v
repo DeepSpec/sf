@@ -1140,6 +1140,7 @@ Implicit Type op : hprop->hprop->hprop.
 
     2. The definition [hwand], expressed in terms of existing operators:
        [\exists H0, H0 \* \[ (H1 \* H0) ==> H2]]
+
     3. The characterization via the equivalence [hwand_equiv]:
        [forall H0 H1 H2, (H0 ==> H1 \-* H2) <-> (H1 \* H0 ==> H2)].
 
@@ -1500,7 +1501,7 @@ End QwandEquiv.
 Definition mkstruct' (F:formula) : formula :=
   fun (Q:val->hprop) => \exists Q1 H, F Q1 \* H \* \[Q1 \*+ H ===> Q].
 
-(** Observe that the fragment [\exists H, H \* \[Q1 \*+ H ===> Q]
+(** Observe that the fragment [\exists H, H \* \[Q1 \*+ H ===> Q]]
     is equivalent to [Q1 \--* Q]. This observation leads to the following
     more concise reformulation of the definition of [mkstruct]. *)
 
@@ -1631,7 +1632,7 @@ Qed.
     We next formalize the equivalence between the two presentations, for
     the specific case where the specification involves a single auxiliary
     variable, called [x]. The statement below makes it explicit that
-    (v] may depend on [x], and that [H] may depend on [r] and [x]. *)
+    [v] may depend on [x], and that [H] may depend on [r] and [x]. *)
 
 Lemma texan_triple_equiv : forall t H A (Hof:val->A->hprop) (vof:A->val),
       (triple t H (fun r => \exists x, \[r = vof x] \* Hof r x))
@@ -2115,4 +2116,4 @@ End SummaryHprop.
     have advertised for the interest of this rule. The ramified frame
     rule was integrated in CFML 2.0 in 2018. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

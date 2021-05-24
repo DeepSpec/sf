@@ -47,7 +47,6 @@ From PLF Require Import Smallstep.
            | false                     (constant false)
            | if t then t else t        (conditional)
 *)
-
 (** The [\] symbol in a function abstraction [\x:T,t] is usually
     written as a Greek letter "lambda" (hence the name of the
     calculus).  The variable [x] is called the _parameter_ to the
@@ -191,8 +190,8 @@ Notation "'true'"  := tm_true (in custom stlc at level 0).
 Notation "'false'"  := false (at level 1).
 Notation "'false'"  := tm_false (in custom stlc at level 0).
 
-(** Some more notation magic to set up the concrete syntax, as we did
-    in the [Imp] chapter... *)
+(** Now we need some notation magic to set up the concrete syntax, as
+    we did in the [Imp] chapter... *)
 
 Definition x : string := "x".
 Definition y : string := "y".
@@ -847,4 +846,4 @@ Proof.
 
 End STLC.
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

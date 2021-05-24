@@ -1,8 +1,14 @@
-(** * AltAuto: More Automation *)
+(** * AltAuto: A Streamlined Treatment of Automation *)
+
+(** This chapter gives an alternative treatment of Coq automation that
+    does not depend on [Imp].  It contains most of the automation
+    material from that chapter, and most of the existing [Auto]
+    chapter except for material on [match].  It is suitable, e.g., for
+    a course that wants to move quickly on to VFA (which covers
+    [match]) without doing any language metatheory at all. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Lia
-                        Arith.
+From Coq Require Import Lia Arith.
 From LF Require Import IndProp.
 
 (** Up to now, we've used the more manual part of Coq's tactic
@@ -154,9 +160,9 @@ Proof.
     destruct re1;
     (* Most cases follow by the same formula.
        Notice that [apply MApp] gives two subgoals:
-       [try apply H1] is run on both of them and
+       [try apply IH1] is run on both of them and
        succeeds on the first but not the second;
-       [apply H2] is then run on this remaining goal. *)
+       [apply IH2] is then run on this remaining goal. *)
     try (apply MApp; try apply IH1; apply IH2).
     (* The interesting case, on which [try...] does nothing,
        is when [re1 = EmptyStr]. In this case, we have
@@ -188,11 +194,10 @@ Qed.
     [Ti]'s are the same tactic; i.e., [T;T'] is shorthand for:
 
       T; [T' | T' | ... | T']
-
 *)
 
-(* We can use this mechanism to give a slightly neater version
-of our optimization proof: *)
+(** We can use this mechanism to give a slightly neater version
+    of our optimization proof: *)
 
 Lemma re_opt_e_match'' : forall T (re: reg_exp T) s,
   s =~ re -> s =~ re_opt_e re.
@@ -221,7 +226,7 @@ Qed.
 (** *** The [repeat] Tactical *)
 
 (** The [repeat] tactical takes another tactic and keeps applying this
-    tactic until it fails or stops making progress. Here is an example 
+    tactic until it fails or stops making progress. Here is an example
     showing that [10] is in a long list using repeat. *)
 
 Theorem In10 : In 10 [1;2;3;4;5;6;7;8;9;10].
@@ -256,7 +261,7 @@ Qed.
 
 Fixpoint re_opt {T:Type} (re: reg_exp T) : reg_exp T :=
   match re with
-  | App re1 EmptySet => EmptySet
+  | App _ EmptySet => EmptySet
   | App EmptyStr re2 => re_opt re2
   | App re1 EmptyStr => re_opt re1
   | App re1 re2 => App (re_opt re1) (re_opt re2)
@@ -504,15 +509,15 @@ Ltac impl_and_try c := simpl; try c.
 (** ** The [lia] Tactic *)
 
 (** The [lia] tactic implements a decision procedure for integer linear
-    arithmetic, a subset of propositional logic and arithmetic. 
+    arithmetic, a subset of propositional logic and arithmetic.
 
     If the goal is a formula made out of
 
       - variables and constants of type [nat] (or other integer types)
 
       - numeric constants, addition ([+] and [S]), subtraction ([-]
-        and [pred]), and multiplication by constants 
-        (this is what makes it linear arithmetic) 
+        and [pred]), and multiplication by constants
+        (this is what makes it linear arithmetic)
 
       - equality ([=] and [<>]) and ordering ([<=]), and
 
@@ -554,9 +559,9 @@ Qed.
     like [apply c]. *)
 
 Print ev.
-(* ===> 
+(* ===>
    Inductive ev : nat -> Prop :=
-    ev_0 : ev 0 
+    ev_0 : ev 0
   | ev_SS : forall n : nat, ev n -> ev (S (S n))
 *)
 
@@ -583,7 +588,7 @@ Example auto_example_1 : forall (P Q R: Prop),
   (P -> Q) -> (Q -> R) -> P -> R.
 Proof.
   intros P Q R H1 H2 H3.
-  apply H2. apply H1. apply H3. 
+  apply H2. apply H1. apply H3.
 Qed.
 
 (** The [auto] tactic frees us from this drudgery by _searching_ for a
@@ -844,4 +849,4 @@ Qed.
     [auto] most of the time, only switching to the [e] variants when
     the ordinary variants don't do the job. *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

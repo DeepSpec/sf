@@ -440,7 +440,7 @@ Proof using. intros. rewrite <- wp_equiv. applys wp_var. Qed.
     on terms that are not in A-normal form. One possibility is
     to map all these terms to [\[False]]. In the specific case of an
     application of the form [trm_app t1 t2] where [t1] and [t2] are
-    not both values, it is still correct to define [wpgen (trm_app t1 t2))
+    not both values, it is still correct to define [wpgen (trm_app t1 t2))]
     as [wp (trm_app t1 t2)]. So, we need not bother checking in the
     definition of [wpgen] that the arguments of [trm_app] are actually
     values. *)
@@ -888,7 +888,7 @@ Definition wpgen_seq (F1 F2:formula) : formula := fun Q =>
 
 (** Finally, we introduce a piece of notation for each case. In the case
     of the sequence, we set up the notation defined next to so that any
-    formula of the form [wpgen_seq F1 F2] gets displayed as [Seq F1 ; F2 ].  *)
+    formula of the form [wpgen_seq F1 F2] gets displayed as [Seq F1 ; F2 ]. *)
 
 Notation "'Seq' F1 ; F2" :=
   ((wpgen_seq F1 F2))
@@ -1534,7 +1534,7 @@ Hint Resolve triple_get triple_set triple_ref triple_free triple_add : triple.
     is not able to automatically apply specifications that feature a
     premise that [eauto] cannot solve. To exploit such specifications,
     one need to provide the specification explicitly (using [xapp E]),
-    or to exploit a more complex hint mechanism (as done in CFML).  (A
+    or to exploit a more complex hint mechanism (as done in CFML). (A
     poor-man's workaround consists in moving all the premises inside
     the precondition, however doing so harms readability.) *)
 
@@ -2299,8 +2299,9 @@ End IsubstProp.
     to Separation Logic in the PhD work of [Charguéraud 2010] (in Bib.v), which
     resulted in the CFML tool. CFML 1.0 used an external tool that produced
     characteristic formulae in the form of Coq axioms. Later work by
-    [Guéneau, Myreen, Kumar and Norrish 2017] (in Bib.v) showed how the characteristic
-    formulae could be produced together with proofs justifying their correctness.
+    [Guéneau, Myreen, Kumar and Norrish 2017] (in Bib.v) showed how the
+    characteristic formulae could be produced together with proofs justifying
+    their correctness.
 
     In Charguéraud's PhD and in Guéneau et al.'s work, characteristic formulae
     were slightly more complicated than those presented here, because they did
@@ -2313,4 +2314,4 @@ End IsubstProp.
     serves that purpose. The definition of [wpgen] as stated in this chapter
     will probably be the matter of a publication in 2021. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

@@ -375,18 +375,12 @@ Let's use some of what we discovered above to automate.
       Whenever we have a subgoal of the form
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ForallT</span> <span class="id" title="var">_</span> (<span class="id" title="var">T</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)
-<div class="paragraph"> </div>
-
 </span>      we can split it.  Whenever we have a hypothesis of the form
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">BST</span> (<span class="id" title="var">T</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)
-<div class="paragraph"> </div>
-
 </span>      we can invert it.  And with a hypothesis
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ForallT</span> <span class="id" title="var">_</span> (<span class="id" title="var">T</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)
-<div class="paragraph"> </div>
-
 </span>      we can simplify then destruct it.  Actually, the simplification
       is optional -- Coq will do the destruct without needing the
       simplification.  Anything else seems able to be finished with
@@ -430,8 +424,6 @@ Let's use some of what we discovered above to automate.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ForallT</span> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">k'</span> : <span class="id" title="var">int</span>) (<span class="id" title="var">_</span> : <span class="id" title="var">V</span>) ⇒ <span class="id" title="var">Abs</span> <span class="id" title="var">k'</span> &gt; <span class="id" title="var">Abs</span> <span class="id" title="var">k<sub>0</sub></span>) <span class="id" title="var">r<sub>2</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Abs</span> <span class="id" title="var">k<sub>1</sub></span> &lt; <span class="id" title="var">Abs</span> <span class="id" title="var">k<sub>0</sub></span>
-<div class="paragraph"> </div>
-
 </span>      The other goals look similar. 
 </div>
 <div class="code">
@@ -590,8 +582,6 @@ Now we can return to automating the proof.
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span> <span class="id" title="var">k</span> <span class="id" title="var">empty_tree</span> = <span class="id" title="var">default</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span> <span class="id" title="var">k</span> (<span class="id" title="var">insert</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">t</span>) = <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lookup</span> <span class="id" title="var">k'</span> (<span class="id" title="var">insert</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">t</span>) = <span class="id" title="var">lookup</span> <span class="id" title="var">k'</span> <span class="id" title="var">t</span>       <span class="id" title="keyword">if</span> <span class="id" title="var">k</span> ≠ <span class="id" title="var">k'</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1058,7 +1048,7 @@ On the same machine that prints,
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:32&nbsp;*)</span><br/>
 </div>
 </div>
 

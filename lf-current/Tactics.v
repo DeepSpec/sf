@@ -1134,22 +1134,16 @@ Proof.
     predicate:
 
       forallb odd [1;3;5;7;9] = true
-
       forallb negb [false;false] = true
-
       forallb even [0;2;4;5] = false
-
       forallb (eqb 5) [] = true
 
     The second checks whether there exists an element in the list that
     satisfies a given predicate:
 
       existsb (eqb 5) [0;2;3;6] = false
-
       existsb (andb true) [true;true;false] = true
-
       existsb odd [1;0;0;0;0;3] = true
-
       existsb even [] = false
 
     Next, define a _nonrecursive_ version of [existsb] -- call it
@@ -1198,4 +1192,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

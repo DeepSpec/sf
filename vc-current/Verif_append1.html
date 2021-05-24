@@ -217,8 +217,6 @@ Is our definition of <span class="inlinecode"><span class="id" title="var">lseg<
 cannot connect to a nonempty linked list. For instance, we can prove that
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">a</span>, <span class="id" title="var">y</span>) <span class="id" title="var">x</span> × <span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">b</span>, <span class="id" title="var">y</span>) <span class="id" title="var">y</span> × <span class="id" title="var">listrep</span> [<span class="id" title="var">c</span>] <span class="id" title="var">y</span>
-<div class="paragraph"> </div>
-
 </span>will lead to a contradication. Here, the first two separating conjuncts build
 a loopy <span class="inlinecode"><span class="id" title="var">lseg</span></span> and the third separating conjunct is a nonempty <span class="inlinecode"><span class="id" title="var">listrep</span></span>. 
 </div>
@@ -639,14 +637,10 @@ Here, "nt" means no-touch.
   loop-free partial linked lists, the assertion
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">nt_lseg</span> <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> × <span class="id" title="var">nt_lseg</span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">y</span> <span class="id" title="var">z</span>)
-<div class="paragraph"> </div>
-
 </span>  cannot ensure that the structure is loop free. Specifically, the address
   <span class="inlinecode"><span class="id" title="var">z</span></span> may be used in <span class="inlinecode">(<span class="id" title="var">nt_lseg</span></span> <span class="inlinecode"><span class="id" title="var">s<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span>)</span>. In other words,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">nt_lseg</span> <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> × <span class="id" title="var">nt_lseg</span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> &#x22A2;/- <span class="id" title="var">nt_lseg</span> (<span class="id" title="var">s<sub>1</sub></span> ++ <span class="id" title="var">s<sub>2</sub></span>) <span class="id" title="var">x</span> <span class="id" title="var">z</span> 
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -755,7 +749,7 @@ Now use <span class="inlinecode"><span class="id" title="var">forward_while</spa
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:12&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:38&nbsp;*)</span><br/>
 </div>
 </div>
 

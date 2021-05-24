@@ -60,7 +60,7 @@ Declare Scope ltac_scope.
   Lemma test : forall b, b = false.
   time eauto 7. (* takes over 4 seconds to fail! *) *)
 
-Remove Hints Bool.trans_eq_bool : core.
+Local Remove Hints Bool.trans_eq_bool : core.
 
 (* ################################################################# *)
 (** * Tools for Programming with Ltac *)
@@ -611,7 +611,7 @@ Tactic Notation "protects" constr(E) "do" tactic(Tac) "/" :=
 
 Definition eq' := @eq.
 
-Hint Unfold eq' : core.
+Local Hint Unfold eq' : core.
 
 Notation "x '='' y" := (@eq' _ x y)
   (at level 70, y at next level).
@@ -4971,4 +4971,4 @@ Open Scope nat_scope.
 
 
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

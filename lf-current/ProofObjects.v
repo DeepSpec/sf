@@ -3,8 +3,8 @@
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From LF Require Export IndProp.
 
-(** "_Algorithms are the computational content of proofs_."
-    --Robert Harper *)
+(** "Algorithms are the computational content of proofs."
+    (Robert Harper) *)
 
 (** We have seen that Coq has mechanisms both for _programming_,
     using inductive data types like [nat] or [list] and functions over
@@ -765,4 +765,4 @@ Fail Definition falso : False := infinite_loop 0.
     validity from scratch.  Only theorems whose proofs pass the
     type-checker can be used in further proof developments.  *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

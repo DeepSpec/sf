@@ -726,8 +726,6 @@ Examine the precondition, and notice that now we have the additional
     such as
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">EX</span> <span class="id" title="var">s<sub>1</sub></span> ... <span class="id" title="var">PROP</span>(...)<span class="id" title="var">LOCAL</span>(...)<span class="id" title="var">SEP</span>(...).
-<div class="paragraph"> </div>
-
 </span> 
 </div>
 <div class="code">
@@ -1012,31 +1010,21 @@ our definition:
 &nbsp;&nbsp;&nbsp;| <span class="id" title="var">h</span>::<span class="id" title="var">hs</span> ⇒ <span class="id" title="var">EX</span> <span class="id" title="var">y</span>:<span class="id" title="var">val</span>, <span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">h</span>,<span class="id" title="var">y</span>) <span class="id" title="var">p</span>  ×  <span class="id" title="var">listrep</span> <span class="id" title="var">hs</span> <span class="id" title="var">y</span><br/>
 &nbsp;&nbsp;&nbsp;| <span class="id" title="var">nil</span> ⇒  !! (<span class="id" title="var">p</span> = <span class="id" title="var">nullval</span>) &amp;&amp; <span class="id" title="var">emp</span><br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>In the nonempty list case, the head element is described by
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">h</span>,<span class="id" title="var">y</span>) <span class="id" title="var">p</span>
-<div class="paragraph"> </div>
-
 </span>which is separated (by the separating conjunction * ) from the rest of the list
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">listrep</span> <span class="id" title="var">hs</span> <span class="id" title="var">y</span>.
-<div class="paragraph"> </div>
-
 </span>This separation ensures that no address could be used for more than once in a
 linked list. For example, considering a linked list of length at least 2,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">listrep</span> (<span class="id" title="var">a</span> :: <span class="id" title="var">b</span> :: <span class="id" title="var">l</span>) <span class="id" title="var">x</span>.
-<div class="paragraph"> </div>
-
 </span>We know that there must be two addresses <span class="inlinecode"><span class="id" title="var">y</span></span> and <span class="inlinecode"><span class="id" title="var">z</span></span> such that
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">a</span>,<span class="id" title="var">y</span>) <span class="id" title="var">x</span> ×<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">b</span>,<span class="id" title="var">z</span>) <span class="id" title="var">y</span> ×<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">listrep</span> <span class="id" title="var">l</span> <span class="id" title="var">z</span>.
-<div class="paragraph"> </div>
-
 </span>The "separating conjunction" <span class="inlinecode">×</span> tells us that <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> must be different!
 Formally, we can prove the following two lemmas: 
 </div>
@@ -1160,8 +1148,6 @@ Now, our proof goal is:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">SEP</span> (<span class="id" title="var">listrep</span> <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">w</span>; <span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">h</span>, <span class="id" title="var">y</span>) <span class="id" title="var">v</span>; <span class="id" title="var">listrep</span> <span class="id" title="var">r</span> <span class="id" title="var">y</span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">_v</span> → <span class="id" title="var">_tail</span>) = <span class="id" title="var">_w</span>; <span class="id" title="var">MORE_COMMANDS</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">POSTCONDITION</span>.
-<div class="paragraph"> </div>
-
 </span>The next <span class="inlinecode"><span class="id" title="var">forward</span></span> tactic will do symbolic execution of <span class="inlinecode"><span class="id" title="var">v</span>→<span class="id" title="var">tail</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">w</span></span>. 
 </div>
 <div class="code">
@@ -1174,8 +1160,6 @@ It turns the precondition into:
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">PROP</span> ( )<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LOCAL</span> (<span class="id" title="var">temp</span> <span class="id" title="var">_t</span> <span class="id" title="var">y</span>; <span class="id" title="var">temp</span> <span class="id" title="var">_w</span> <span class="id" title="var">w</span>; <span class="id" title="var">temp</span> <span class="id" title="var">_v</span> <span class="id" title="var">v</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">SEP</span> (<span class="id" title="var">listrep</span> <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">w</span>; <span class="id" title="var">data_at</span> <span class="id" title="var">Tsh</span> <span class="id" title="var">t_list</span> (<span class="id" title="var">h</span>, <span class="id" title="var">w</span>) <span class="id" title="var">v</span>; <span class="id" title="var">listrep</span> <span class="id" title="var">r</span> <span class="id" title="var">y</span>).
-<div class="paragraph"> </div>
-
 </span>It is no problem that the separating conjunct <span class="inlinecode"><span class="id" title="var">data_at</span></span> <span class="inlinecode"><span class="id" title="var">Tsh</span></span> <span class="inlinecode"><span class="id" title="var">t_list</span></span> <span class="inlinecode">(<span class="id" title="var">h</span>,</span> <span class="inlinecode"><span class="id" title="var">y</span>)</span> <span class="inlinecode"><span class="id" title="var">v</span></span> is
 turned into <span class="inlinecode"><span class="id" title="var">data_at</span></span> <span class="inlinecode"><span class="id" title="var">Tsh</span></span> <span class="inlinecode"><span class="id" title="var">t_list</span></span> <span class="inlinecode">(<span class="id" title="var">h</span>,</span> <span class="inlinecode"><span class="id" title="var">w</span>)</span> <span class="inlinecode"><span class="id" title="var">v</span></span>. But why weren't the other separating
 conjuncts like <span class="inlinecode"><span class="id" title="var">listrep</span></span> <span class="inlinecode"><span class="id" title="var">s<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">w</span></span> affected?
@@ -1197,7 +1181,7 @@ When C programs manipulate pointer data structures (or slices of arrays),
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:12&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:38&nbsp;*)</span><br/>
 </div>
 </div>
 

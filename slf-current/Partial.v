@@ -780,7 +780,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (* ================================================================= *)
-(** ** Equivalence Between the Two Small-Step Characterizations of Partial Correctness *)
+(** ** Equivalence Between the Two Small-Step Charact. of Partial Correctness *)
 
 (** This section establishes that [hoarenpz] is equivalent to [hoarenps].
     The key result is to prove [evalnpz] equivalent to [evalnps]. *)
@@ -1047,4 +1047,4 @@ Qed.
     in this chapter with the predicate [evalnp], appears to be novel as of Jan.
     2021. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

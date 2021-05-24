@@ -42,9 +42,8 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#"><span class="id" title="library">Arith.PeanoNat</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">Nat</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Logic.FunctionalExtensionality.html#"><span class="id" title="library">Logic.FunctionalExtensionality</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <span class="id" title="library">Imp</span>.<br/>
 </div>
 
@@ -77,9 +76,7 @@
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span>, containing the following line:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">Q</span> . <span class="id" title="var">PLF</span>
-<div class="paragraph"> </div>
-
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">Q</span> . <span class="id" title="var">PLF</span>
 </span>
 </li>
 </ul>
@@ -90,8 +87,6 @@
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Compiled</span> <span class="id" title="var">library</span> <span class="id" title="var">PLF.Maps</span> (<span class="id" title="keyword">in</span> <span class="id" title="var">file</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<span class="id" title="var">Users</span>/.../<span class="id" title="var">plf</span>/<span class="id" title="var">Maps.vo</span>) <span class="id" title="var">makes</span> <span class="id" title="var">inconsistent</span> <span class="id" title="var">assumptions</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">over</span> <span class="id" title="var">library</span> <span class="id" title="var">Coq.Init.Logic</span>
-<div class="paragraph"> </div>
-
 </span>      ... it may mean something went wrong with the above steps.
       Doing "<span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">clean</span></span>" (or manually removing everything except
       <span class="inlinecode">.<span class="id" title="var">v</span></span> and <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> files) may help. 
@@ -666,8 +661,6 @@ Of course, no (human) programmer would write a conditional whose
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ [<span class="id" title="var">prog_a</span>;<span class="id" title="var">prog_b</span>;<span class="id" title="var">prog_c</span>;<span class="id" title="var">prog_d</span>;<span class="id" title="var">prog_e</span>;<span class="id" title="var">prog_f</span>;<span class="id" title="var">prog_g</span>;<span class="id" title="var">prog_h</span>] ;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">prog_i</span>] ]
-<div class="paragraph"> </div>
-
 </span>    Write down your answer below in the definition of
     <span class="inlinecode"><span class="id" title="var">equiv_classes</span></span>. 
 </div>
@@ -1347,11 +1340,10 @@ To fold constants in a command, we apply the appropriate folding
 <div class="paragraph"> </div>
 
    In this case, we must show
-{<span class="inlinecode"></span>
-       <span class="inlinecode"><span class="id" title="var">beval</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">&lt;{</span> <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">a<sub>2</sub></span></span> <span class="inlinecode">}&gt;</span>
-     <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">beval</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">(<span class="id" title="var">fold_constants_bexp</span></span> <span class="inlinecode">&lt;{</span> <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">a<sub>2</sub></span></span> <span class="inlinecode">}&gt;).</span>
-<span class="inlinecode"></span>]
-   There are two cases to consider:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{ <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span> }&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">beval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_bexp</span> &lt;{ <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span> }&gt;).
+</span>   There are two cases to consider:
 
 <div class="paragraph"> </div>
 
@@ -1364,8 +1356,6 @@ To fold constants in a command, we apply the appropriate folding
        In this case, we have
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fold_constants_bexp</span> [[ <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span> 
-<div class="paragraph"> </div>
-
 </span>         = if n<sub>1</sub> =? n<sub>2</sub> then &lt;{true}&gt; else &lt;{false}&gt;
 
 </li>
@@ -1375,8 +1365,6 @@ To fold constants in a command, we apply the appropriate folding
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{<span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span>}&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>1</sub></span>) =? (<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>2</sub></span>).
-<div class="paragraph"> </div>
-
 </span>       By the soundness of constant folding for arithmetic
        expressions (Lemma <span class="inlinecode"><span class="id" title="var">fold_constants_aexp_sound</span></span>), we know
 <br/>
@@ -1384,23 +1372,17 @@ To fold constants in a command, we apply the appropriate folding
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>1</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">ANum</span> <span class="id" title="var">n<sub>1</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">n<sub>1</sub></span>
-<div class="paragraph"> </div>
-
 </span>       and
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>2</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">ANum</span> <span class="id" title="var">n<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">n<sub>2</sub></span>,
-<div class="paragraph"> </div>
-
 </span>       so
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{<span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span>}&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>1</sub></span>) =? (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>       Also, it is easy to see (by considering the cases <span class="inlinecode"><span class="id" title="var">n<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n<sub>2</sub></span></span> and
        <span class="inlinecode"><span class="id" title="var">n<sub>1</sub></span></span> <span class="inlinecode">≠</span> <span class="inlinecode"><span class="id" title="var">n<sub>2</sub></span></span> separately) that
 <br/>
@@ -1408,15 +1390,11 @@ To fold constants in a command, we apply the appropriate folding
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="keyword">if</span> <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span> <span class="id" title="keyword">then</span> <span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{<span class="id" title="var">true</span>}&gt; <span class="id" title="keyword">else</span> <span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{<span class="id" title="var">false</span>}&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="keyword">if</span> <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span> <span class="id" title="keyword">then</span> <span class="id" title="var">true</span> <span class="id" title="keyword">else</span> <span class="id" title="var">false</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>       So
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">beval</span> <span class="id" title="var">st</span> (&lt;{ <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span> }&gt;)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">beval</span> <span class="id" title="var">st</span> (<span class="id" title="keyword">if</span> <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span> <span class="id" title="keyword">then</span> &lt;{<span class="id" title="var">true</span>}&gt; <span class="id" title="keyword">else</span> &lt;{<span class="id" title="var">false</span>}&gt;),
-<div class="paragraph"> </div>
-
 </span>       as required.
 
 <div class="paragraph"> </div>
@@ -1429,22 +1407,16 @@ To fold constants in a command, we apply the appropriate folding
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{<span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span>}&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="var">beval</span> <span class="id" title="var">st</span> (&lt;{ (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>1</sub></span>) =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>2</sub></span>) }&gt;),
-<div class="paragraph"> </div>
-
 </span>       which, by the definition of <span class="inlinecode"><span class="id" title="var">beval</span></span>, is the same as showing
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>1</sub></span>) =? (<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>1</sub></span>)) =?<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>2</sub></span>)).
-<div class="paragraph"> </div>
-
 </span>       But the soundness of constant folding for arithmetic
        expressions (<span class="inlinecode"><span class="id" title="var">fold_constants_aexp_sound</span></span>) gives us
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>1</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>2</sub></span> = <span class="id" title="var">aeval</span> <span class="id" title="var">st</span> (<span class="id" title="var">fold_constants_aexp</span> <span class="id" title="var">a<sub>2</sub></span>),
-<div class="paragraph"> </div>
-
 </span>       completing the case.  <font size=-2>&#9744;</font> 
 </li>
 </ul>
@@ -1546,8 +1518,6 @@ To fold constants in a command, we apply the appropriate folding
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &lt;{ <span class="id" title="var">a<sub>1</sub></span> × <span class="id" title="var">a<sub>2</sub></span> }&gt; ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;{ (<span class="id" title="var">optimize_0plus</span> <span class="id" title="var">a<sub>1</sub></span>) × (<span class="id" title="var">optimize_0plus</span> <span class="id" title="var">a<sub>2</sub></span>) }&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>   Note that this function is defined over the old <span class="inlinecode"><span class="id" title="var">aexp</span></span>s,
    without states.
 
@@ -1559,8 +1529,6 @@ To fold constants in a command, we apply the appropriate folding
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">optimize_0plus_aexp</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">optimize_0plus_bexp</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">optimize_0plus_com</span>
-<div class="paragraph"> </div>
-
 </span>   Prove that these three functions are sound, as we did for
    <span class="inlinecode"><span class="id" title="var">fold_constants_</span>×</span>.  Make sure you use the congruence lemmas in
    the proof of <span class="inlinecode"><span class="id" title="var">optimize_0plus_com</span></span> -- otherwise it will be <i>long</i>!
@@ -1607,8 +1575,6 @@ To fold constants in a command, we apply the appropriate folding
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + <span class="id" title="var">X</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c<sub>2</sub></span>  =  (<span class="id" title="var">X</span> := 42 + 53;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + (42 + 53))
-<div class="paragraph"> </div>
-
 </span>    Clearly, this <i>particular</i> <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> are equivalent.  Is this
     true in general? 
 <div class="paragraph"> </div>
@@ -1666,13 +1632,9 @@ Sadly, the property does <i>not</i> always hold.
     We can show the following counterexample:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> + 1; <span class="id" title="var">Y</span> := <span class="id" title="var">X</span>
-<div class="paragraph"> </div>
-
 </span>    If we perform the substitution, we get
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> + 1; <span class="id" title="var">Y</span> := <span class="id" title="var">X</span> + 1
-<div class="paragraph"> </div>
-
 </span>    which clearly isn't equivalent to the original program. <font size=-2>&#9744;</font> 
 </div>
 <div class="code">
@@ -1792,8 +1754,6 @@ Using <span class="inlinecode"><span class="id" title="var">var_not_used_in_aexp
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">x</span> = 0;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">f</span>(++<span class="id" title="var">x</span>, <span class="id" title="var">x</span>)
-<div class="paragraph"> </div>
-
 </span>    might call <span class="inlinecode"><span class="id" title="var">f</span></span> with arguments <span class="inlinecode">(1,</span> <span class="inlinecode">0)</span> or <span class="inlinecode">(1,</span> <span class="inlinecode">1)</span>, depending how
     the compiler chooses to order things.  This can be a little
     confusing for programmers, but it gives the compiler writer useful
@@ -1810,8 +1770,6 @@ Using <span class="inlinecode"><span class="id" title="var">var_not_used_in_aexp
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">HAVOC</span> <span class="id" title="var">Y</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Y</span> × 2
-<div class="paragraph"> </div>
-
 </span>    the value of <span class="inlinecode"><span class="id" title="var">Y</span></span> can be any number, while the value of <span class="inlinecode"><span class="id" title="var">Z</span></span> is
     twice that of <span class="inlinecode"><span class="id" title="var">Y</span></span> (so <span class="inlinecode"><span class="id" title="var">Z</span></span> is always even). Note that we are not
     saying anything about the <i>probabilities</i> of the outcomes -- just
@@ -2127,8 +2085,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">for</span> (<span class="id" title="var">c<sub>1</sub></span>; <span class="id" title="var">b</span>; <span class="id" title="var">c<sub>2</sub></span>) {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c<sub>3</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
-<div class="paragraph"> </div>
-
 </span>    is equivalent to:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c<sub>1</sub></span>;<br/>
@@ -2136,8 +2092,6 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c<sub>3</sub></span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">c<sub>2</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -2188,8 +2142,6 @@ For example, the program
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">c<sub>1</sub></span> = <span class="id" title="var">while</span> ~(<span class="id" title="var">X</span> = 1) <span class="id" title="tactic">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    approximates <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode">1</span>, but <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> does not approximate <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span>
     since <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> does not terminate when <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span> but <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> does.  If two
     programs approximate each other in both directions, then they are
@@ -2236,7 +2188,7 @@ Finally, find a non-trivial property which is preserved by
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:25&nbsp;*)</span><br/>
 </div>
 </div>
 

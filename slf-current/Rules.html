@@ -58,7 +58,7 @@ This file imports <span class="inlinecode"><span class="id" title="var">LibSepDi
 </div>
 
 <div class="doc">
-<a id="lab149"></a><h1 class="section">First Pass</h1>
+<a id="lab152"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -137,7 +137,7 @@ This file imports <span class="inlinecode"><span class="id" title="var">LibSepDi
 </div>
 
 <div class="doc">
-<a id="lab150"></a><h2 class="section">Semantic of Terms</h2>
+<a id="lab153"></a><h2 class="section">Semantic of Terms</h2>
 
 </div>
 <div class="code">
@@ -146,7 +146,7 @@ This file imports <span class="inlinecode"><span class="id" title="var">LibSepDi
 </div>
 
 <div class="doc">
-<a id="lab151"></a><h3 class="section">Syntax</h3>
+<a id="lab154"></a><h3 class="section">Syntax</h3>
 
 <div class="paragraph"> </div>
 
@@ -233,7 +233,7 @@ Note that <span class="inlinecode"><span class="id" title="var">trm_fun</span></
 </div>
 
 <div class="doc">
-<a id="lab152"></a><h3 class="section">State</h3>
+<a id="lab155"></a><h3 class="section">State</h3>
 
 <div class="paragraph"> </div>
 
@@ -268,7 +268,7 @@ For technical reasons related to the internal representation of finite
 </div>
 
 <div class="doc">
-<a id="lab153"></a><h3 class="section">Substitution</h3>
+<a id="lab156"></a><h3 class="section">Substitution</h3>
 
 <div class="paragraph"> </div>
 
@@ -327,7 +327,7 @@ For technical reasons related to the internal representation of finite
 </div>
 
 <div class="doc">
-<a id="lab154"></a><h3 class="section">Implicit Types and Coercions</h3>
+<a id="lab157"></a><h3 class="section">Implicit Types and Coercions</h3>
 
 <div class="paragraph"> </div>
 
@@ -380,7 +380,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab155"></a><h3 class="section">Big-Step Semantics</h3>
+<a id="lab158"></a><h3 class="section">Big-Step Semantics</h3>
 
 <div class="paragraph"> </div>
 
@@ -418,7 +418,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 
 <span class="id" title="keyword">Inductive</span> <a id="SyntaxAndSemantics.eval" class="idref" href="#SyntaxAndSemantics.eval"><span class="id" title="inductive">eval</span></a> : <a class="idref" href="Rules.html#SyntaxAndSemantics.state"><span class="id" title="definition">state</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Rules.html#SyntaxAndSemantics.trm"><span class="id" title="inductive">trm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Rules.html#SyntaxAndSemantics.state"><span class="id" title="definition">state</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Rules.html#SyntaxAndSemantics.val"><span class="id" title="inductive">val</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 <br/>
-&nbsp;&nbsp;</div>
+</div>
 
 <div class="doc">
 1. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> for values and function definitions.
@@ -438,7 +438,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 &nbsp;&nbsp;| <a id="SyntaxAndSemantics.eval_fix" class="idref" href="#SyntaxAndSemantics.eval_fix"><span class="id" title="constructor">eval_fix</span></a> : <span class="id" title="keyword">∀</span> <a id="s:23" class="idref" href="#s:23"><span class="id" title="binder">s</span></a> <a id="f:24" class="idref" href="#f:24"><span class="id" title="binder">f</span></a> <a id="x:25" class="idref" href="#x:25"><span class="id" title="binder">x</span></a> <a id="t<sub>1</sub>:26" class="idref" href="#t<sub>1</sub>:26"><span class="id" title="binder">t<sub>1</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s:23"><span class="id" title="variable">s</span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.trm_fix"><span class="id" title="constructor">trm_fix</span></a> <a class="idref" href="Rules.html#f:24"><span class="id" title="variable">f</span></a> <a class="idref" href="Rules.html#x:25"><span class="id" title="variable">x</span></a> <a class="idref" href="Rules.html#t<sub>1</sub>:26"><span class="id" title="variable">t<sub>1</sub></span></a>) <a class="idref" href="Rules.html#s:23"><span class="id" title="variable">s</span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.val_fix"><span class="id" title="constructor">val_fix</span></a> <a class="idref" href="Rules.html#f:24"><span class="id" title="variable">f</span></a> <a class="idref" href="Rules.html#x:25"><span class="id" title="variable">x</span></a> <a class="idref" href="Rules.html#t<sub>1</sub>:26"><span class="id" title="variable">t<sub>1</sub></span></a>)<br/>
 <br/>
-&nbsp;&nbsp;</div>
+</div>
 
 <div class="doc">
 2. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> for function applications.
@@ -465,7 +465,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s<sub>1</sub>:34"><span class="id" title="variable">s<sub>1</sub></span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="Rules.html#x:39"><span class="id" title="variable">x</span></a> <a class="idref" href="Rules.html#v<sub>2</sub>:37"><span class="id" title="variable">v<sub>2</sub></span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="Rules.html#f:38"><span class="id" title="variable">f</span></a> <a class="idref" href="Rules.html#v<sub>1</sub>:36"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="Rules.html#t<sub>1</sub>:40"><span class="id" title="variable">t<sub>1</sub></span></a>)) <a class="idref" href="Rules.html#s<sub>2</sub>:35"><span class="id" title="variable">s<sub>2</sub></span></a> <a class="idref" href="Rules.html#v:41"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s<sub>1</sub>:34"><span class="id" title="variable">s<sub>1</sub></span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.trm_app"><span class="id" title="constructor">trm_app</span></a> <a class="idref" href="Rules.html#v<sub>1</sub>:36"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="Rules.html#v<sub>2</sub>:37"><span class="id" title="variable">v<sub>2</sub></span></a>) <a class="idref" href="Rules.html#s<sub>2</sub>:35"><span class="id" title="variable">s<sub>2</sub></span></a> <a class="idref" href="Rules.html#v:41"><span class="id" title="variable">v</span></a><br/>
 <br/>
-&nbsp;&nbsp;</div>
+</div>
 
 <div class="doc">
 3. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> for structural constructs.
@@ -492,7 +492,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s<sub>2</sub>:50"><span class="id" title="variable">s<sub>2</sub></span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="Rules.html#x:52"><span class="id" title="variable">x</span></a> <a class="idref" href="Rules.html#v<sub>1</sub>:55"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="Rules.html#t<sub>2</sub>:54"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Rules.html#s<sub>3</sub>:51"><span class="id" title="variable">s<sub>3</sub></span></a> <a class="idref" href="Rules.html#r:56"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s<sub>1</sub>:49"><span class="id" title="variable">s<sub>1</sub></span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.trm_let"><span class="id" title="constructor">trm_let</span></a> <a class="idref" href="Rules.html#x:52"><span class="id" title="variable">x</span></a> <a class="idref" href="Rules.html#t<sub>1</sub>:53"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Rules.html#t<sub>2</sub>:54"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Rules.html#s<sub>3</sub>:51"><span class="id" title="variable">s<sub>3</sub></span></a> <a class="idref" href="Rules.html#r:56"><span class="id" title="variable">r</span></a><br/>
 <br/>
-&nbsp;&nbsp;</div>
+</div>
 
 <div class="doc">
 4. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> for conditionals.
@@ -520,7 +520,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s<sub>1</sub>:57"><span class="id" title="variable">s<sub>1</sub></span></a> (<span class="id" title="keyword">if</span> <a class="idref" href="Rules.html#b:59"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="Rules.html#t<sub>1</sub>:61"><span class="id" title="variable">t<sub>1</sub></span></a> <span class="id" title="keyword">else</span> <a class="idref" href="Rules.html#t<sub>2</sub>:62"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Rules.html#s<sub>2</sub>:58"><span class="id" title="variable">s<sub>2</sub></span></a> <a class="idref" href="Rules.html#v:60"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s<sub>1</sub>:57"><span class="id" title="variable">s<sub>1</sub></span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.trm_if"><span class="id" title="constructor">trm_if</span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.val_bool"><span class="id" title="constructor">val_bool</span></a> <a class="idref" href="Rules.html#b:59"><span class="id" title="variable">b</span></a>) <a class="idref" href="Rules.html#t<sub>1</sub>:61"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Rules.html#t<sub>2</sub>:62"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="Rules.html#s<sub>2</sub>:58"><span class="id" title="variable">s<sub>2</sub></span></a> <a class="idref" href="Rules.html#v:60"><span class="id" title="variable">v</span></a><br/>
 <br/>
-&nbsp;&nbsp;</div>
+</div>
 
 <div class="doc">
 5. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> for primitive stateless operations.
@@ -551,7 +551,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#n<sub>2</sub>:68"><span class="id" title="variable">n<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Rules.html#eval:16"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Rules.html#s:66"><span class="id" title="variable">s</span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.val_div"><span class="id" title="constructor">val_div</span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.val_int"><span class="id" title="constructor">val_int</span></a> <a class="idref" href="Rules.html#n<sub>1</sub>:67"><span class="id" title="variable">n<sub>1</sub></span></a>) (<a class="idref" href="Rules.html#SyntaxAndSemantics.val_int"><span class="id" title="constructor">val_int</span></a> <a class="idref" href="Rules.html#n<sub>2</sub>:68"><span class="id" title="variable">n<sub>2</sub></span></a>)) <a class="idref" href="Rules.html#s:66"><span class="id" title="variable">s</span></a> (<a class="idref" href="Rules.html#SyntaxAndSemantics.val_int"><span class="id" title="constructor">val_int</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.quot"><span class="id" title="definition">Z.quot</span></a> <a class="idref" href="Rules.html#n<sub>1</sub>:67"><span class="id" title="variable">n<sub>1</sub></span></a> <a class="idref" href="Rules.html#n<sub>2</sub>:68"><span class="id" title="variable">n<sub>2</sub></span></a>))<br/>
 <br/>
-&nbsp;&nbsp;</div>
+</div>
 
 <div class="doc">
 6. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> for primitive operations on memory.
@@ -600,7 +600,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab156"></a><h3 class="section">Loading of Definitions from <span class="inlinecode"><span class="id" title="var">Direc</span>ŧ</span></h3>
+<a id="lab159"></a><h3 class="section">Loading of Definitions from <span class="inlinecode"><span class="id" title="var">Direc</span>ŧ</span></h3>
 
 <div class="paragraph"> </div>
 
@@ -629,7 +629,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab157"></a><h2 class="section">Rules for Terms</h2>
+<a id="lab160"></a><h2 class="section">Rules for Terms</h2>
 
 <div class="paragraph"> </div>
 
@@ -642,7 +642,7 @@ Interestingly, the "Funclass" coercion for <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab158"></a><h3 class="section">Reasoning Rule for Sequences</h3>
+<a id="lab161"></a><h3 class="section">Reasoning Rule for Sequences</h3>
 
 <div class="paragraph"> </div>
 
@@ -682,7 +682,7 @@ The variable <span class="inlinecode"><span class="id" title="var">v</span></spa
 </div>
 
 <div class="doc">
-<a id="lab159"></a><h3 class="section">Reasoning Rule for Let-Bindings</h3>
+<a id="lab162"></a><h3 class="section">Reasoning Rule for Let-Bindings</h3>
 
 <div class="paragraph"> </div>
 
@@ -739,7 +739,7 @@ The variable <span class="inlinecode"><span class="id" title="var">v</span></spa
 </div>
 
 <div class="doc">
-<a id="lab160"></a><h3 class="section">Reasoning Rule for Conditionals</h3>
+<a id="lab163"></a><h3 class="section">Reasoning Rule for Conditionals</h3>
 
 <div class="paragraph"> </div>
 
@@ -775,7 +775,7 @@ Note that the two premises may be factorized into a single one
 </div>
 
 <div class="doc">
-<a id="lab161"></a><h3 class="section">Reasoning Rule for Values</h3>
+<a id="lab164"></a><h3 class="section">Reasoning Rule for Values</h3>
 
 <div class="paragraph"> </div>
 
@@ -803,8 +803,6 @@ Note that the two premises may be factorized into a single one
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> ==&gt; <span class="id" title="var">Q</span> <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">H</span>} <span class="id" title="var">v</span> {<span class="id" title="var">Q</span>}
-<div class="paragraph"> </div>
-
 </span>    It may not be completely obvious at first sight why this alternative
     rule is equivalent to the former. We prove the equivalence further
     in this chapter.
@@ -825,7 +823,7 @@ Let us prove that the "minimalistic" rule <span class="inlinecode">{<span class=
     is equivalent to <span class="inlinecode"><span class="id" title="var">triple_val</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab162"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_val_minimal)</h4>
+<a id="lab165"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_val_minimal)</h4>
  Prove that the alternative rule for values derivable from
     <span class="inlinecode"><span class="id" title="var">triple_val</span></span>. Hint: use the tactic <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to conclude the proof. 
 </div>
@@ -840,7 +838,7 @@ Let us prove that the "minimalistic" rule <span class="inlinecode">{<span class=
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab163"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_val')</h4>
+<a id="lab166"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_val')</h4>
  More interestingly, prove that <span class="inlinecode"><span class="id" title="var">triple_val</span></span> is derivable
     from <span class="inlinecode"><span class="id" title="var">triple_val_minimal</span></span>. Hint: you will need to exploit
     the appropriate structural rule(s). 
@@ -857,7 +855,7 @@ Let us prove that the "minimalistic" rule <span class="inlinecode">{<span class=
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab164"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (triple_let_val)</h4>
+<a id="lab167"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (triple_let_val)</h4>
  Consider a term of the form <span class="inlinecode"><span class="id" title="keyword">let</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="keyword">in</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span>, that is, where the
     argument of the let-binding is already a value. State and prove a
     reasoning rule of the form:
@@ -865,8 +863,6 @@ Let us prove that the "minimalistic" rule <span class="inlinecode">{<span class=
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">triple_let_val</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span> <span class="id" title="var">H</span> <span class="id" title="var">Q</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">triple</span> (<span class="id" title="var">trm_let</span> <span class="id" title="var">x</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">t<sub>2</sub></span>) <span class="id" title="var">H</span> <span class="id" title="var">Q</span>.
-<div class="paragraph"> </div>
-
 </span>    Hint: you'll need to guess the intermediate postcondition <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span> associated
     with the let-binding rule, and exploit the appropriate structural rules. 
 </div>
@@ -878,7 +874,7 @@ Let us prove that the "minimalistic" rule <span class="inlinecode">{<span class=
 
 
 <div class="doc">
-<a id="lab165"></a><h3 class="section">Reasoning Rule for Functions</h3>
+<a id="lab168"></a><h3 class="section">Reasoning Rule for Functions</h3>
 
 <div class="paragraph"> </div>
 
@@ -922,7 +918,7 @@ The rule for recursive functions is similar. It is presented
  Last but not least, we need a reasoning rule to reason about a
     function application. Consider an application <span class="inlinecode"><span class="id" title="var">trm_app</span></span> <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span>.
     Assume <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> to be a function, that is, to be of the form
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">val_fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span>.&nbsp;Then,&nbsp;according&nbsp;to&nbsp;the&nbsp;beta-reduction&nbsp;rule,&nbsp;the&nbsp;*)</span><br/>
+    <span class="inlinecode"><span class="id" title="var">val_fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span>. Then, according to the beta-reduction rule, the
     semantics of <span class="inlinecode"><span class="id" title="var">trm_app</span></span> <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span> is the same as that of <span class="inlinecode"><span class="id" title="tactic">subst</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span>.
     This reasoning rule is thus:
 <center><table class="infrule">
@@ -954,7 +950,7 @@ The generalization to the application of recursive functions is
 </div>
 
 <div class="doc">
-<a id="lab166"></a><h2 class="section">Specification of Primitive Operations</h2>
+<a id="lab169"></a><h2 class="section">Specification of Primitive Operations</h2>
 
 <div class="paragraph"> </div>
 
@@ -964,7 +960,7 @@ The generalization to the application of recursive functions is
 </div>
 
 <div class="doc">
-<a id="lab167"></a><h3 class="section">Specification of Arithmetic Primitive Operations</h3>
+<a id="lab170"></a><h3 class="section">Specification of Arithmetic Primitive Operations</h3>
 
 <div class="paragraph"> </div>
 
@@ -1027,7 +1023,7 @@ This latter presentation with pure facts such as <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab168"></a><h3 class="section">Specification of Primitive Operations Acting on Memory</h3>
+<a id="lab171"></a><h3 class="section">Specification of Primitive Operations Acting on Memory</h3>
 
 <div class="paragraph"> </div>
 
@@ -1118,7 +1114,7 @@ Recall that <span class="inlinecode"><span class="id" title="var">val_free</span
 </div>
 
 <div class="doc">
-<a id="lab169"></a><h2 class="section">Review of the Structural Rules</h2>
+<a id="lab172"></a><h2 class="section">Review of the Structural Rules</h2>
 
 <div class="paragraph"> </div>
 
@@ -1182,7 +1178,7 @@ The two extraction rules enable to extract pure facts and existentially
 </div>
 
 <div class="doc">
-<a id="lab170"></a><h4 class="section">Exercise: 1 star, standard, optional (triple_hpure')</h4>
+<a id="lab173"></a><h4 class="section">Exercise: 1 star, standard, optional (triple_hpure')</h4>
  The extraction rule <span class="inlinecode"><span class="id" title="var">triple_hpure</span></span> assumes a precondition of the form
     <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H</span></span>. The variant rule <span class="inlinecode"><span class="id" title="var">triple_hpure'</span></span>, stated below, assumes
     instead a precondition with only the pure part, i.e., of the form <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span>.
@@ -1199,7 +1195,7 @@ The two extraction rules enable to extract pure facts and existentially
 
 
 <div class="doc">
-<a id="lab171"></a><h2 class="section">Verification Proof in Separation Logic</h2>
+<a id="lab174"></a><h2 class="section">Verification Proof in Separation Logic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1213,7 +1209,7 @@ The two extraction rules enable to extract pure facts and existentially
 </div>
 
 <div class="doc">
-<a id="lab172"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">incr</span></span></h3>
+<a id="lab175"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">incr</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1224,8 +1220,6 @@ The two extraction rules enable to extract pure facts and existentially
 
 <span class="inlinecode-ocaml">&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">incr</span> <span class="id" title="var">p</span> =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">p</span> := !<span class="id" title="var">p</span> + 1
-<div class="paragraph"> </div>
-
 </span>    Recall that, for simplicity, we assume programs to be written in
     "A-normal form", that is, with all intermediate expressions named
     by a let-binding. Thereafter, we thus consider the following
@@ -1237,8 +1231,6 @@ The two extraction rules enable to extract pure facts and existentially
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> = !<span class="id" title="var">p</span> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">m</span> = <span class="id" title="var">n</span>+1 <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">p</span> := <span class="id" title="var">m</span>
-<div class="paragraph"> </div>
-
 </span>    Using the construct from our toy programming language, the definition
     of <span class="inlinecode"><span class="id" title="var">incr</span></span> is written as shown below. 
 </div>
@@ -1340,7 +1332,7 @@ We next show a detailed proof for this specification. It exploits:
 </div>
 
 <div class="doc">
-<a id="lab173"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">succ_using_incr</span></span></h3>
+<a id="lab176"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">succ_using_incr</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1369,7 +1361,7 @@ Recall the specification of <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab174"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (triple_succ_using_incr)</h4>
+<a id="lab177"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (triple_succ_using_incr)</h4>
  Verify the function <span class="inlinecode"><span class="id" title="var">triple_succ_using_incr</span></span>.
     Hint: follow the pattern of <span class="inlinecode"><span class="id" title="var">triple_incr</span></span>.
     Hint: use <span class="inlinecode"><span class="id" title="var">applys</span></span> <span class="inlinecode"><span class="id" title="var">triple_seq</span></span> for reasoning about a sequence.
@@ -1384,7 +1376,7 @@ Recall the specification of <span class="inlinecode"><span class="id" title="var
 
 
 <div class="doc">
-<a id="lab175"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">factorec</span></span></h3>
+<a id="lab178"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">factorec</span></span></h3>
 
 </div>
 <div class="code">
@@ -1399,8 +1391,6 @@ Recall from <span class="inlinecode"><span class="id" title="var">Basic</span></
 
 <span class="inlinecode-ocaml">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">rec</span> <span class="id" title="var">factorec</span> <span class="id" title="var">n</span> =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">n</span> ≤ 1 <span class="id" title="keyword">then</span> 1 <span class="id" title="keyword">else</span> <span class="id" title="var">n</span> * <span class="id" title="var">factorec</span> (<span class="id" title="var">n</span>-1)
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1416,7 +1406,7 @@ Recall from <span class="inlinecode"><span class="id" title="var">Basic</span></
 </div>
 
 <div class="doc">
-<a id="lab176"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (triple_factorec)</h4>
+<a id="lab179"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (triple_factorec)</h4>
  Verify the function <span class="inlinecode"><span class="id" title="var">factorec</span></span>.
     Hint: exploit <span class="inlinecode"><span class="id" title="var">triple_app_fix</span></span> for reasoning about the recursive function.
     Hint: <span class="inlinecode"><span class="id" title="var">triple_hpure'</span></span>, the corollary of <span class="inlinecode"><span class="id" title="var">triple_hpure</span></span>, is helpful.
@@ -1444,7 +1434,7 @@ Recall from <span class="inlinecode"><span class="id" title="var">Basic</span></
 </div>
 
 <div class="doc">
-<a id="lab177"></a><h2 class="section">What's Next</h2>
+<a id="lab180"></a><h2 class="section">What's Next</h2>
 
 <div class="paragraph"> </div>
 
@@ -1469,12 +1459,12 @@ Recall from <span class="inlinecode"><span class="id" title="var">Basic</span></
 </div>
 
 <div class="doc">
-<a id="lab178"></a><h1 class="section">More Details</h1>
+<a id="lab181"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab179"></a><h2 class="section">Alternative Specification Style for Pure Preconditions</h2>
+<a id="lab182"></a><h2 class="section">Alternative Specification Style for Pure Preconditions</h2>
 
 </div>
 <div class="code">
@@ -1510,7 +1500,7 @@ Equivalently, we could place the requirement <span class="inlinecode"><span clas
 Let us formally prove that the two presentations are equivalent. 
 <div class="paragraph"> </div>
 
-<a id="lab180"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_div_from_triple_div')</h4>
+<a id="lab183"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_div_from_triple_div')</h4>
  Prove <span class="inlinecode"><span class="id" title="var">triple_div</span></span> by exploiting <span class="inlinecode"><span class="id" title="var">triple_div'</span></span>.
     Hint: the key proof step is <span class="inlinecode"><span class="id" title="var">applys</span></span> <span class="inlinecode"><span class="id" title="var">triple_conseq</span></span> 
 </div>
@@ -1528,7 +1518,7 @@ Let us formally prove that the two presentations are equivalent.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab181"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_div'_from_triple_div)</h4>
+<a id="lab184"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_div'_from_triple_div)</h4>
  Prove <span class="inlinecode"><span class="id" title="var">triple_div'</span></span> by exploiting <span class="inlinecode"><span class="id" title="var">triple_div</span></span>.
     Hint: the first key proof step is <span class="inlinecode"><span class="id" title="var">applys</span></span> <span class="inlinecode"><span class="id" title="var">triple_hpure</span></span>.
     Yet some preliminary rewriting is required for this
@@ -1559,7 +1549,7 @@ Let us formally prove that the two presentations are equivalent.
 </div>
 
 <div class="doc">
-<a id="lab182"></a><h2 class="section">The Combined let-frame Rule Rule</h2>
+<a id="lab185"></a><h2 class="section">The Combined let-frame Rule Rule</h2>
 
 </div>
 <div class="code">
@@ -1607,7 +1597,7 @@ At first sight, it seems that, to reason about <span class="inlinecode"><span cl
 </div>
 
 <div class="doc">
-<a id="lab183"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_let_frame)</h4>
+<a id="lab186"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_let_frame)</h4>
  Prove the let-frame rule. 
 </div>
 <div class="code">
@@ -1622,7 +1612,7 @@ At first sight, it seems that, to reason about <span class="inlinecode"><span cl
 </div>
 
 <div class="doc">
-<a id="lab184"></a><h2 class="section">Proofs for the Rules for Terms</h2>
+<a id="lab187"></a><h2 class="section">Proofs for the Rules for Terms</h2>
 
 </div>
 <div class="code">
@@ -1643,8 +1633,6 @@ The proofs for the Separation Logic reasoning rules all follow
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">hoare</span> (<span class="id" title="var">t</span>:<span class="id" title="var">trm</span>) (<span class="id" title="var">H</span>:<span class="id" title="var">hprop</span>) (<span class="id" title="var">Q</span>:<span class="id" title="var">val</span>→<span class="id" title="var">hprop</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">s</span>, <span class="id" title="var">H</span> <span class="id" title="var">s</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">s'</span> <span class="id" title="var">v</span>, <span class="id" title="tactic">eval</span> <span class="id" title="var">s</span> <span class="id" title="var">t</span> <span class="id" title="var">s'</span> <span class="id" title="var">v</span> ∧ <span class="id" title="var">Q</span> <span class="id" title="var">v</span> <span class="id" title="var">s'</span>.
-<div class="paragraph"> </div>
-
 </span>    Concretely, we consider a given initial state <span class="inlinecode"><span class="id" title="var">s</span></span> satisfying the
     precondition, and we have to provide witnesses for the output
     value <span class="inlinecode"><span class="id" title="var">v</span></span> and output state <span class="inlinecode"><span class="id" title="var">s'</span></span> such that the reduction holds and
@@ -1657,15 +1645,13 @@ The proofs for the Separation Logic reasoning rules all follow
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">triple</span> <span class="id" title="var">t</span> <span class="id" title="var">H</span> <span class="id" title="var">Q</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">H'</span>, <span class="id" title="var">hoare</span> <span class="id" title="var">t</span> (<span class="id" title="var">H</span> <span class='gray-font'>\</span>* <span class="id" title="var">H'</span>) (<span class="id" title="var">Q</span> <span class='gray-font'>\</span>*+ <span class="id" title="var">H'</span>).
-<div class="paragraph"> </div>
-
 </span>    Recall that we already employed this two-step scheme in the
     previous chapter, e.g., to establish the consequence rule
     (<span class="inlinecode"><span class="id" title="var">rule_conseq</span></span>). 
 </div>
 
 <div class="doc">
-<a id="lab185"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_val</span></span></h3>
+<a id="lab188"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_val</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1753,7 +1739,7 @@ The Separation Logic version of the rule then follows.
 </div>
 
 <div class="doc">
-<a id="lab186"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_seq</span></span></h3>
+<a id="lab189"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_seq</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1870,7 +1856,7 @@ The Separation Logic reasoning rule is proved as follows.
 </div>
 
 <div class="doc">
-<a id="lab187"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_let</span></span></h3>
+<a id="lab190"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_let</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -1885,7 +1871,7 @@ The Separation Logic reasoning rule is proved as follows.
 </div>
 
 <div class="doc">
-<a id="lab188"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_let)</h4>
+<a id="lab191"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_let)</h4>
  Following the same proof scheme as for <span class="inlinecode"><span class="id" title="var">triple_seq</span></span>, establish
     the reasoning rule for <span class="inlinecode"><span class="id" title="var">triple_let</span></span>, whose statement appears
     earlier in this file. Make sure to first state and prove the
@@ -1900,12 +1886,12 @@ The Separation Logic reasoning rule is proved as follows.
 
 
 <div class="doc">
-<a id="lab189"></a><h2 class="section">Proofs for the Arithmetic Primitive Operations</h2>
+<a id="lab192"></a><h2 class="section">Proofs for the Arithmetic Primitive Operations</h2>
 
 </div>
 
 <div class="doc">
-<a id="lab190"></a><h3 class="section">Addition</h3>
+<a id="lab193"></a><h3 class="section">Addition</h3>
 
 <div class="paragraph"> </div>
 
@@ -1961,7 +1947,7 @@ Deriving <span class="inlinecode"><span class="id" title="var">triple_add</span>
 </div>
 
 <div class="doc">
-<a id="lab191"></a><h3 class="section">Division</h3>
+<a id="lab194"></a><h3 class="section">Division</h3>
 
 <div class="paragraph"> </div>
 
@@ -1975,7 +1961,7 @@ Deriving <span class="inlinecode"><span class="id" title="var">triple_add</span>
 </div>
 
 <div class="doc">
-<a id="lab192"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_div)</h4>
+<a id="lab195"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_div)</h4>
  Following the same proof scheme as for <span class="inlinecode"><span class="id" title="var">triple_add</span></span>, establish
     the reasoning rule for <span class="inlinecode"><span class="id" title="var">triple_div</span></span>. Make sure to first state
     and prove <span class="inlinecode"><span class="id" title="var">hoare_div</span></span>, which is like <span class="inlinecode"><span class="id" title="var">triple_div</span></span> except with
@@ -1989,7 +1975,7 @@ Deriving <span class="inlinecode"><span class="id" title="var">triple_add</span>
 
 
 <div class="doc">
-<a id="lab193"></a><h2 class="section">Proofs for Primitive Operations Operating on the State</h2>
+<a id="lab196"></a><h2 class="section">Proofs for Primitive Operations Operating on the State</h2>
 
 <div class="paragraph"> </div>
 
@@ -2026,13 +2012,11 @@ Deriving <span class="inlinecode"><span class="id" title="var">triple_add</span>
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">hval</span> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">hval_val</span> : <span class="id" title="var">val</span> → <span class="id" title="var">hval</span>.
-<div class="paragraph"> </div>
-
 </span>
 </div>
 
 <div class="doc">
-<a id="lab194"></a><h3 class="section">Read in a Reference</h3>
+<a id="lab197"></a><h3 class="section">Read in a Reference</h3>
 
 <div class="paragraph"> </div>
 
@@ -2083,8 +2067,6 @@ Our goal is to establish the triple:
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">triple</span> (<span class="id" title="var">val_get</span> <span class="id" title="var">p</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">p</span> ~~&gt; <span class="id" title="var">v</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">r</span> ⇒ <span class='gray-font'>\</span>[<span class="id" title="var">r</span> = <span class="id" title="var">v</span>] <span class='gray-font'>\</span>* (<span class="id" title="var">p</span> ~~&gt; <span class="id" title="var">v</span>)).
-<div class="paragraph"> </div>
-
 </span>    Establishing this lemma requires us to reason about propositions
     of the form <span class="inlinecode">(<span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H</span>)</span> <span class="inlinecode"><span class="id" title="var">h</span></span> and <span class="inlinecode">(<span class="id" title="var">p</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode"><span class="id" title="var">v</span>)</span> <span class="inlinecode"><span class="id" title="var">h</span></span>. To that end,
     recall lemma <span class="inlinecode"><span class="id" title="var">hstar_hpure_l</span></span>, which was already exploited in the
@@ -2147,7 +2129,7 @@ Deriving the Separation Logic triple follows the usual pattern.
 </div>
 
 <div class="doc">
-<a id="lab195"></a><h3 class="section">Allocation of a Reference</h3>
+<a id="lab198"></a><h3 class="section">Allocation of a Reference</h3>
 
 <div class="paragraph"> </div>
 
@@ -2282,12 +2264,12 @@ We then derive the Separation Logic triple as usual.
 </div>
 
 <div class="doc">
-<a id="lab196"></a><h1 class="section">Optional Material</h1>
+<a id="lab199"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab197"></a><h2 class="section">Reasoning Rules for Recursive Functions</h2>
+<a id="lab200"></a><h2 class="section">Reasoning Rules for Recursive Functions</h2>
 
 <div class="paragraph"> </div>
 
@@ -2319,7 +2301,7 @@ The reasoning rule that corresponds to beta-reduction for
 </div>
 
 <div class="doc">
-<a id="lab198"></a><h3 class="section">Other Proofs of Reasoning Rules for Terms</h3>
+<a id="lab201"></a><h3 class="section">Other Proofs of Reasoning Rules for Terms</h3>
 
 </div>
 <div class="code">
@@ -2328,7 +2310,7 @@ The reasoning rule that corresponds to beta-reduction for
 </div>
 
 <div class="doc">
-<a id="lab199"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_fun</span></span> and <span class="inlinecode"><span class="id" title="var">triple_fix</span></span></h3>
+<a id="lab202"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_fun</span></span> and <span class="inlinecode"><span class="id" title="var">triple_fix</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -2338,7 +2320,7 @@ The reasoning rule that corresponds to beta-reduction for
 </div>
 
 <div class="doc">
-<a id="lab200"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_if</span></span></h3>
+<a id="lab203"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_if</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -2419,7 +2401,7 @@ Observe that the above proofs contain a fair amount of duplication,
 </div>
 
 <div class="doc">
-<a id="lab201"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_app_fun</span></span></h3>
+<a id="lab204"></a><h3 class="section">Proof of <span class="inlinecode"><span class="id" title="var">triple_app_fun</span></span></h3>
 
 <div class="paragraph"> </div>
 
@@ -2441,7 +2423,7 @@ Observe that the above proofs contain a fair amount of duplication,
 </div>
 
 <div class="doc">
-<a id="lab202"></a><h4 class="section">Exercise: 2 stars, standard, optional (hoare_app_fun)</h4>
+<a id="lab205"></a><h4 class="section">Exercise: 2 stars, standard, optional (hoare_app_fun)</h4>
  Prove the lemma <span class="inlinecode"><span class="id" title="var">hoare_app_fun</span></span>. 
 </div>
 <div class="code">
@@ -2457,7 +2439,7 @@ Observe that the above proofs contain a fair amount of duplication,
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab203"></a><h4 class="section">Exercise: 2 stars, standard, optional (triple_app_fun)</h4>
+<a id="lab206"></a><h4 class="section">Exercise: 2 stars, standard, optional (triple_app_fun)</h4>
  Prove the lemma <span class="inlinecode"><span class="id" title="var">triple_app_fun</span></span>. 
 </div>
 <div class="code">
@@ -2472,7 +2454,7 @@ Observe that the above proofs contain a fair amount of duplication,
 
 
 <div class="doc">
-<a id="lab204"></a><h3 class="section">Deallocation of a Reference</h3>
+<a id="lab207"></a><h3 class="section">Deallocation of a Reference</h3>
 
 <div class="paragraph"> </div>
 
@@ -2507,7 +2489,7 @@ Let us reformulate <span class="inlinecode"><span class="id" title="var">eval_fr
 </div>
 
 <div class="doc">
-<a id="lab205"></a><h4 class="section">Exercise: 3 stars, standard, optional (hoare_free)</h4>
+<a id="lab208"></a><h4 class="section">Exercise: 3 stars, standard, optional (hoare_free)</h4>
  Prove the Hoare triple for the operation <span class="inlinecode"><span class="id" title="var">free</span></span>.
     Hint: exploit the lemma <span class="inlinecode"><span class="id" title="var">eval_free_sep</span></span>. 
 </div>
@@ -2524,7 +2506,7 @@ Let us reformulate <span class="inlinecode"><span class="id" title="var">eval_fr
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab206"></a><h4 class="section">Exercise: 1 star, standard, optional (triple_free)</h4>
+<a id="lab209"></a><h4 class="section">Exercise: 1 star, standard, optional (triple_free)</h4>
  Derive from the Hoare triple for the operation <span class="inlinecode"><span class="id" title="var">free</span></span>
     the corresponding Separation Logic triple.
     Hint: adapt the proof of lemma <span class="inlinecode"><span class="id" title="var">triple_set</span></span>. 
@@ -2541,7 +2523,7 @@ Let us reformulate <span class="inlinecode"><span class="id" title="var">eval_fr
 
 
 <div class="doc">
-<a id="lab207"></a><h3 class="section">Write in a Reference</h3>
+<a id="lab210"></a><h3 class="section">Write in a Reference</h3>
 
 <div class="paragraph"> </div>
 
@@ -2592,12 +2574,10 @@ The proof of the Hoare rule for <span class="inlinecode"><span class="id" title=
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.disjoint_single_set</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">p</span> <span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span> <span class="id" title="var">h<sub>2</sub></span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> (<span class="id" title="var">Fmap.single</span> <span class="id" title="var">p</span> <span class="id" title="var">v<sub>1</sub></span>) <span class="id" title="var">h<sub>2</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> (<span class="id" title="var">Fmap.single</span> <span class="id" title="var">p</span> <span class="id" title="var">v<sub>2</sub></span>) <span class="id" title="var">h<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
-<a id="lab208"></a><h4 class="section">Exercise: 5 stars, standard, optional (hoare_set)</h4>
+<a id="lab211"></a><h4 class="section">Exercise: 5 stars, standard, optional (hoare_set)</h4>
  Prove the lemma <span class="inlinecode"><span class="id" title="var">hoare_set</span></span>.
     Hints:
 <ul class="doclist">
@@ -2645,7 +2625,7 @@ The proof of the Hoare rule for <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab209"></a><h3 class="section">Proofs Revisited using the <span class="inlinecode"><span class="id" title="var">triple_of_hoare</span></span> Lemma</h3>
+<a id="lab212"></a><h3 class="section">Proofs Revisited using the <span class="inlinecode"><span class="id" title="var">triple_of_hoare</span></span> Lemma</h3>
 
 </div>
 <div class="code">
@@ -2661,7 +2641,7 @@ The proof that, e.g., <span class="inlinecode"><span class="id" title="var">trip
    The following lemma corresponds to such an attempt. 
 <div class="paragraph"> </div>
 
-<a id="lab210"></a><h4 class="section">Exercise: 2 stars, standard, optional (triple_of_hoare)</h4>
+<a id="lab213"></a><h4 class="section">Exercise: 2 stars, standard, optional (triple_of_hoare)</h4>
  Prove the lemma <span class="inlinecode"><span class="id" title="var">triple_of_hoare</span></span> stated below. 
 </div>
 <div class="code">
@@ -2677,7 +2657,7 @@ The proof that, e.g., <span class="inlinecode"><span class="id" title="var">trip
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab211"></a><h4 class="section">Exercise: 2 stars, standard, optional (triple_add')</h4>
+<a id="lab214"></a><h4 class="section">Exercise: 2 stars, standard, optional (triple_add')</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">triple_add</span></span> is a consequence of <span class="inlinecode"><span class="id" title="var">hoare_add</span></span> by
     exploiting <span class="inlinecode"><span class="id" title="var">triple_of_hoare</span></span>. 
 </div>
@@ -2697,7 +2677,7 @@ The proof that, e.g., <span class="inlinecode"><span class="id" title="var">trip
 </div>
 
 <div class="doc">
-<a id="lab212"></a><h3 class="section">Triple for Terms with Same Semantics</h3>
+<a id="lab215"></a><h3 class="section">Triple for Terms with Same Semantics</h3>
 
 </div>
 <div class="code">
@@ -2835,12 +2815,9 @@ It follows that if two terms are equivalent, then they admit
 </div>
 
 <div class="doc">
-The reasoning rule <span class="inlinecode"><span class="id" title="var">triple_eval_like</span></span> has a number of practical applications.
-
-<div class="paragraph"> </div>
-
-    One, show below, is to revisit the proof of <span class="inlinecode"><span class="id" title="var">triple_app_fun</span></span> in a
-    much more succint way, by arguing that <span class="inlinecode"><span class="id" title="var">trm_app</span></span> <span class="inlinecode">(<span class="id" title="var">val_fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span>)</span> <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span> and
+The reasoning rule <span class="inlinecode"><span class="id" title="var">triple_eval_like</span></span> has a number of practical
+    applications. One, show below, is to revisit the proof of <span class="inlinecode"><span class="id" title="var">triple_app_fun</span></span>
+    in a much more succint way, by arguing that <span class="inlinecode"><span class="id" title="var">trm_app</span></span> <span class="inlinecode">(<span class="id" title="var">val_fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span>)</span> <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span> and
     <span class="inlinecode"><span class="id" title="tactic">subst</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> are equivalent terms, hence they admit the same behavior. 
 </div>
 <div class="code">
@@ -2860,7 +2837,7 @@ Another application is the following rule, which allows to modify the
     parenthesis structure of a sequence. 
 <div class="paragraph"> </div>
 
-<a id="lab213"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_trm_seq_assoc)</h4>
+<a id="lab216"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_trm_seq_assoc)</h4>
  Prove that the term <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span>;</span> <span class="inlinecode">(<span class="id" title="var">t<sub>2</sub></span>;</span> <span class="inlinecode"><span class="id" title="var">t<sub>3</sub></span>)</span> satisfies the same triples as the
     term <span class="inlinecode">(<span class="id" title="var">t<sub>1</sub></span>;<span class="id" title="var">t<sub>2</sub></span>);</span> <span class="inlinecode"><span class="id" title="var">t<sub>3</sub></span></span>. 
 </div>
@@ -2890,7 +2867,7 @@ Another application is the following rule, which allows to modify the
 </div>
 
 <div class="doc">
-<a id="lab214"></a><h2 class="section">Alternative Specification Style for Result Values.</h2>
+<a id="lab217"></a><h2 class="section">Alternative Specification Style for Result Values.</h2>
 
 </div>
 <div class="code">
@@ -2935,7 +2912,7 @@ However, the pattern-matching presentation is less readable and
 </div>
 
 <div class="doc">
-<a id="lab215"></a><h2 class="section">Historical Notes</h2>
+<a id="lab218"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -2975,7 +2952,7 @@ However, the pattern-matching presentation is less readable and
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

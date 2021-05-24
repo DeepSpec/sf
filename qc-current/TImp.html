@@ -595,8 +595,6 @@ While the typing relation is almost entirely standard, there is a
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">IH</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">T</span> : <span class="id" title="var">ty</span>) (<span class="id" title="var">Gamma</span> : <span class="id" title="keyword">context</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ssrbool.decidable</span> (<span class="id" title="var">Gamma</span> |&#x22A2; <span class="id" title="var">e<sub>1</sub></span> \<span class="id" title="var">IN</span> <span class="id" title="var">T</span>)
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -658,8 +656,6 @@ Typing in TImp is decidable: given an expression <span class="inlinecode"><span 
     this:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">QuickChickWith</span> (<span class="id" title="var">updMaxSize</span> <span class="id" title="var">stdArgs</span> 3) <span class="id" title="var">cond_prop</span>.
-<div class="paragraph"> </div>
-
 </span>    This idiom sets the maximum-size parameter for all generators to
     <span class="inlinecode">3</span>, rather the default, which is something larger like 10.  When
     generating examples, QuickChick will start with size 0, gradually
@@ -823,8 +819,6 @@ We now need to go from a list of (optional) generators to a
     Instead, we introduce a new one, called <span class="inlinecode"><span class="id" title="var">backtrack</span></span>:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">backtrack</span> : <span class="id" title="var">list</span> (<span class="id" title="var">nat</span> × <span class="id" title="var">GOpt</span> ?<span class="id" title="var">A</span>) → <span class="id" title="var">GOpt</span> ?<span class="id" title="var">A</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1674,8 +1668,6 @@ Now, here is a brute-force decision procedure for the typing
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Ty_Eq</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">Gamma</span> <span class="id" title="var">e<sub>1</sub></span> <span class="id" title="var">e<sub>2</sub></span>, <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Gamma</span> |&#x22A2; <span class="id" title="var">e<sub>1</sub></span> \<span class="id" title="var">IN</span> <span class="id" title="var">TBool</span> → <span class="id" title="var">Gamma</span> |&#x22A2; <span class="id" title="var">e<sub>2</sub></span> \<span class="id" title="var">IN</span> <span class="id" title="var">TBool</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Gamma</span> |&#x22A2; <span class="id" title="var">EEq</span> <span class="id" title="var">e<sub>1</sub></span> <span class="id" title="var">e<sub>2</sub></span> \<span class="id" title="var">IN</span> <span class="id" title="var">TBool</span>
-<div class="paragraph"> </div>
-
 </span>   Make sure you also update the evaluation relation to 
    compare boolean values. Update the generators and shrinkers
    accordingly to find counterexamples to the buggy properties
@@ -1714,8 +1706,6 @@ Now, here is a brute-force decision procedure for the typing
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">TNat</span>  ⇒ <span class="id" title="var">n</span> &lt;- <span class="id" title="var">arbitrary</span>;; <span class="id" title="var">ret</span> (<span class="id" title="var">VNat</span> <span class="id" title="var">n</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">TBool</span> ⇒ <span class="id" title="var">b</span> &lt;- <span class="id" title="var">arbitrary</span>;; <span class="id" title="var">ret</span> (<span class="id" title="var">VBool</span> <span class="id" title="var">b</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    QuickChick includes a derivation mechanism that can <i>automatically</i>
     produce such generators -- i.e., generators for data structures 
     satisfying inductively defined properties! 
@@ -1867,7 +1857,7 @@ A variant that takes a size,...
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:42&nbsp;*)</span><br/>
 </div>
 </div>
 

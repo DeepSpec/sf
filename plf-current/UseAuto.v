@@ -594,7 +594,7 @@ Proof. intros P H1 H3 H2. (* debug *) eauto. Qed.
 Lemma nat_le_refl : forall (x:nat), x <= x.
 Proof. apply le_n. Qed.
 
-Hint Resolve nat_le_refl : core.
+Local Hint Resolve nat_le_refl : core.
 
 (** A convenient shorthand for adding all the constructors of an
     inductive datatype as hints is the command [Hint Constructors
@@ -1921,4 +1921,4 @@ Proof. congruence. Qed.
     some investment, however this investment will pay off very quickly.
 *)
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

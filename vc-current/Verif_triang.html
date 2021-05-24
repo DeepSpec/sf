@@ -594,20 +594,14 @@ This <span class="inlinecode"><span class="id" title="var">forward_call</span></
    <span class="inlinecode"><span class="id" title="var">stack</span></span> <span class="inlinecode">(<span class="id" title="var">sublist</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> <span class="inlinecode">(<span class="id" title="var">Zlength</span></span> <span class="inlinecode"><span class="id" title="var">il</span>)</span> <span class="inlinecode"><span class="id" title="var">il</span>)</span> <span class="inlinecode"><span class="id" title="var">st</span></span> with 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">stack</span> (<span class="id" title="var">Znth</span> <span class="id" title="var">i</span> <span class="id" title="var">il</span> :: <span class="id" title="var">sublist</span> (<span class="id" title="var">i</span> + 1) (<span class="id" title="var">Zlength</span> <span class="id" title="var">il</span>) <span class="id" title="var">il</span>) <span class="id" title="var">st</span>.
-<div class="paragraph"> </div>
-
 </span>   You have to help, by doing some rewrites with 
    <span class="inlinecode"><span class="id" title="var">sublist_split</span>,</span> <span class="inlinecode"><span class="id" title="var">sublist_len_1</span></span> that prove 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">sublist</span> <span class="id" title="var">i</span> (<span class="id" title="var">Zlength</span> <span class="id" title="var">il</span>) <span class="id" title="var">il</span> = <span class="id" title="var">Znth</span> <span class="id" title="var">i</span> <span class="id" title="var">il</span> :: <span class="id" title="var">sublist</span> (<span class="id" title="var">i</span>+1) (<span class="id" title="var">Zlength</span> <span class="id" title="var">il</span>) <span class="id" title="var">il</span>.
-<div class="paragraph"> </div>
-
 </span>   When you've rewritten the goal into,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">stack</span> (<span class="id" title="var">Znth</span> <span class="id" title="var">i</span> <span class="id" title="var">il</span> :: <span class="id" title="var">sublist</span> (<span class="id" title="var">i</span> + 1) (<span class="id" title="var">Zlength</span> <span class="id" title="var">il</span>) <span class="id" title="var">il</span>) <span class="id" title="var">st</span><br/>
 &nbsp;&nbsp;&nbsp;<span class="nowrap">&vert;--</span> <span class="id" title="var">stack</span> (<span class="id" title="var">Znth</span> <span class="id" title="var">i</span> <span class="id" title="var">il</span> :: <span class="id" title="var">sublist</span> (<span class="id" title="var">i</span> + 1) (<span class="id" title="var">Zlength</span> <span class="id" title="var">il</span>) <span class="id" title="var">il</span>) <span class="id" title="var">st</span> × <span class="id" title="var">fold_right_sepcon</span> <span class="id" title="var">Frame</span>
-<div class="paragraph"> </div>
-
 </span>   then just do <span class="inlinecode"><span class="id" title="var">cancel</span></span>.  
 </div>
 <div class="code">
@@ -690,7 +684,7 @@ You can see that this has produced the SEP conjunct <span class="inlinecode"><sp
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:12&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:38&nbsp;*)</span><br/>
 </div>
 </div>
 

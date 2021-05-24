@@ -49,7 +49,7 @@
 </div>
 
 <div class="doc">
-<a id="lab384"></a><h1 class="section">First Pass</h1>
+<a id="lab387"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -74,15 +74,15 @@
 <div class="paragraph"> </div>
 
     The memory model that we consider is somewhat artificial, in the sense that
-    it does not  perfectly match the memory model of an existing language----it
-    lies somewhere  between the memory model of C and that of OCaml.
+    it does not perfectly match the memory model of an existing language----it
+    lies somewhere between the memory model of C and that of OCaml.
     Nevertheless, this memory model has the benefits of its simplicity, and it
     suffices to illustrate formal proofs involving block headers and pointer
     arithmetics. 
 </div>
 
 <div class="doc">
-<a id="lab385"></a><h2 class="section">Representation of a Set of Consecutive Cells</h2>
+<a id="lab388"></a><h2 class="section">Representation of a Set of Consecutive Cells</h2>
 
 <div class="paragraph"> </div>
 
@@ -140,7 +140,7 @@ This "splitting lemma for arrays" is useful for carrying out local
 </div>
 
 <div class="doc">
-<a id="lab386"></a><h2 class="section">Representation of an Array with a Block Header</h2>
+<a id="lab389"></a><h2 class="section">Representation of an Array with a Block Header</h2>
 
 <div class="paragraph"> </div>
 
@@ -208,7 +208,7 @@ An array is described by the predicate <span class="inlinecode"><span class="id"
 </div>
 
 <div class="doc">
-<a id="lab387"></a><h2 class="section">Specification of Allocation</h2>
+<a id="lab390"></a><h2 class="section">Specification of Allocation</h2>
 
 <div class="paragraph"> </div>
 
@@ -227,8 +227,6 @@ The operation <span class="inlinecode"><span class="id" title="var">val_alloc</s
     of values.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">val_uninit</span> : <span class="id" title="var">val</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -286,7 +284,7 @@ Remark: in OCaml, one must provide an initialization value explicitly,
 </div>
 
 <div class="doc">
-<a id="lab388"></a><h2 class="section">Specification of the Deallocation</h2>
+<a id="lab391"></a><h2 class="section">Specification of the Deallocation</h2>
 
 <div class="paragraph"> </div>
 
@@ -316,7 +314,7 @@ Observe that the <span class="inlinecode"><span class="id" title="var">harray</s
 </div>
 
 <div class="doc">
-<a id="lab389"></a><h2 class="section">Specification of Array Operations</h2>
+<a id="lab392"></a><h2 class="section">Specification of Array Operations</h2>
 
 <div class="paragraph"> </div>
 
@@ -407,7 +405,7 @@ The second specification for <span class="inlinecode"><span class="id" title="va
 </div>
 
 <div class="doc">
-<a id="lab390"></a><h2 class="section">Representation of Individual Records Fields</h2>
+<a id="lab393"></a><h2 class="section">Representation of Individual Records Fields</h2>
 
 <div class="paragraph"> </div>
 
@@ -467,7 +465,7 @@ For example, consider a mutable list cell allocated at location <span class="inl
 </div>
 
 <div class="doc">
-<a id="lab391"></a><h2 class="section">Representation of Records</h2>
+<a id="lab394"></a><h2 class="section">Representation of Records</h2>
 
 <div class="paragraph"> </div>
 
@@ -627,7 +625,7 @@ We introduce the notation <span class="inlinecode"><span class="id" title="var">
 </div>
 
 <div class="doc">
-<a id="lab392"></a><h2 class="section">Example with Mutable Linked Lists</h2>
+<a id="lab395"></a><h2 class="section">Example with Mutable Linked Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -672,7 +670,7 @@ Recall the statement of the lemma <span class="inlinecode"><span class="id" titl
 </div>
 
 <div class="doc">
-<a id="lab393"></a><h2 class="section">Reading in Record Fields</h2>
+<a id="lab396"></a><h2 class="section">Reading in Record Fields</h2>
 
 </div>
 <div class="code">
@@ -772,7 +770,7 @@ Third and last, the read operation can be specified with respect
 </div>
 
 <div class="doc">
-<a id="lab394"></a><h2 class="section">Writing in Record Fields</h2>
+<a id="lab397"></a><h2 class="section">Writing in Record Fields</h2>
 
 <div class="paragraph"> </div>
 
@@ -859,7 +857,7 @@ The specification in terms of <span class="inlinecode"><span class="id" title="v
 </div>
 
 <div class="doc">
-<a id="lab395"></a><h2 class="section">Allocation of Records</h2>
+<a id="lab398"></a><h2 class="section">Allocation of Records</h2>
 
 <div class="paragraph"> </div>
 
@@ -930,7 +928,7 @@ For example, the allocation of a list cell is specified as follows.
 </div>
 
 <div class="doc">
-<a id="lab396"></a><h2 class="section">Deallocation of Records</h2>
+<a id="lab399"></a><h2 class="section">Deallocation of Records</h2>
 
 <div class="paragraph"> </div>
 
@@ -982,7 +980,7 @@ For example, the following corollary to <span class="inlinecode"><span class="id
 </div>
 
 <div class="doc">
-<a id="lab397"></a><h2 class="section">Combined Record Allocation and Initialization</h2>
+<a id="lab400"></a><h2 class="section">Combined Record Allocation and Initialization</h2>
 
 <div class="paragraph"> </div>
 
@@ -1067,12 +1065,12 @@ For example, the operation <span class="inlinecode"><span class="id" title="var"
 </div>
 
 <div class="doc">
-<a id="lab398"></a><h1 class="section">More Details</h1>
+<a id="lab401"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab399"></a><h2 class="section">Extending <span class="inlinecode"><span class="id" title="var">xapp</span></span> to Support Record Access Operations</h2>
+<a id="lab402"></a><h2 class="section">Extending <span class="inlinecode"><span class="id" title="var">xapp</span></span> to Support Record Access Operations</h2>
 
 <div class="paragraph"> </div>
 
@@ -1126,7 +1124,7 @@ For example, the operation <span class="inlinecode"><span class="id" title="var"
 </div>
 
 <div class="doc">
-<a id="lab400"></a><h2 class="section">Deallocation Function for Lists</h2>
+<a id="lab403"></a><h2 class="section">Deallocation Function for Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -1154,8 +1152,6 @@ The operation <span class="inlinecode"><span class="id" title="var">mfree_list</
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">delete</span> <span class="id" title="var">p</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mfree_list</span> <span class="id" title="var">q</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1175,7 +1171,7 @@ The precondition of <span class="inlinecode"><span class="id" title="var">mfree_
     The postcondition is empty: the entire list is destroyed. 
 <div class="paragraph"> </div>
 
-<a id="lab401"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (Triple_mfree_list)</h4>
+<a id="lab404"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (Triple_mfree_list)</h4>
  Verify the function <span class="inlinecode"><span class="id" title="var">mfree_list</span></span>.
     Hint: the overall pattern of the proof follows that used for the
     function <span class="inlinecode"><span class="id" title="var">triple_mcopy</span></span>, from chapter <a href="Basic.html"><span class="inlineref">Basic</span></a>. 
@@ -1196,7 +1192,7 @@ The precondition of <span class="inlinecode"><span class="id" title="var">mfree_
 </div>
 
 <div class="doc">
-<a id="lab402"></a><h1 class="section">Optional Material</h1>
+<a id="lab405"></a><h1 class="section">Optional Material</h1>
 
 <div class="paragraph"> </div>
 
@@ -1215,7 +1211,7 @@ The precondition of <span class="inlinecode"><span class="id" title="var">mfree_
 </div>
 
 <div class="doc">
-<a id="lab403"></a><h2 class="section">Refined Source Language</h2>
+<a id="lab406"></a><h2 class="section">Refined Source Language</h2>
 
 <div class="paragraph"> </div>
 
@@ -1316,7 +1312,7 @@ Note that the specification above allows the integer <span class="inlinecode"><s
 </div>
 
 <div class="doc">
-<a id="lab404"></a><h2 class="section">Realization of <span class="inlinecode"><span class="id" title="var">hheader</span></span></h2>
+<a id="lab407"></a><h2 class="section">Realization of <span class="inlinecode"><span class="id" title="var">hheader</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1371,7 +1367,7 @@ The definition of <span class="inlinecode"><span class="id" title="var">hheader<
     the specifications axiomatized so far. Note, however, that this
     definition should not be revealed to the end user. In other words,
     it should be made "strongly opaque". (Technically, this could be
-    achieved by means  of a functor in Coq.)
+    achieved by means of a functor in Coq.)
 
 <div class="paragraph"> </div>
 
@@ -1382,7 +1378,7 @@ The definition of <span class="inlinecode"><span class="id" title="var">hheader<
 </div>
 
 <div class="doc">
-<a id="lab405"></a><h2 class="section">Introduction and Elimination Lemmas for <span class="inlinecode"><span class="id" title="var">hcells</span></span> and <span class="inlinecode"><span class="id" title="var">harray</span></span></h2>
+<a id="lab408"></a><h2 class="section">Introduction and Elimination Lemmas for <span class="inlinecode"><span class="id" title="var">hcells</span></span> and <span class="inlinecode"><span class="id" title="var">harray</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1436,7 +1432,7 @@ The definition of <span class="inlinecode"><span class="id" title="var">hheader<
 </div>
 
 <div class="doc">
-<a id="lab406"></a><h2 class="section">Proving the Specification of Allocation and Deallocation</h2>
+<a id="lab409"></a><h2 class="section">Proving the Specification of Allocation and Deallocation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1536,7 +1532,7 @@ We also establish the specification of deallocation, first w.r.t.
 </div>
 
 <div class="doc">
-<a id="lab407"></a><h2 class="section">Splitting Lemmas for <span class="inlinecode"><span class="id" title="var">hcells</span></span></h2>
+<a id="lab410"></a><h2 class="section">Splitting Lemmas for <span class="inlinecode"><span class="id" title="var">hcells</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1648,7 +1644,7 @@ The above focus lemma immediately extends to a full array described
 </div>
 
 <div class="doc">
-<a id="lab408"></a><h2 class="section">Specification of Pointer Arithmetic</h2>
+<a id="lab411"></a><h2 class="section">Specification of Pointer Arithmetic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1705,7 +1701,7 @@ The following lemma specializes the specification for the case
 </div>
 
 <div class="doc">
-<a id="lab409"></a><h2 class="section">Specification of the <span class="inlinecode"><span class="id" title="var">length</span></span> Operation to Read the Header</h2>
+<a id="lab412"></a><h2 class="section">Specification of the <span class="inlinecode"><span class="id" title="var">length</span></span> Operation to Read the Header</h2>
 
 <div class="paragraph"> </div>
 
@@ -1744,7 +1740,7 @@ The following lemma specializes the specification for the case
 </div>
 
 <div class="doc">
-<a id="lab410"></a><h2 class="section">Encoding of Array Operations using Pointer Arithmetic</h2>
+<a id="lab413"></a><h2 class="section">Encoding of Array Operations using Pointer Arithmetic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1857,7 +1853,7 @@ The set operation on an array, written <span class="inlinecode"><span class="id"
 </div>
 
 <div class="doc">
-<a id="lab411"></a><h2 class="section">Encoding of Record Operations using Pointer Arithmetic</h2>
+<a id="lab414"></a><h2 class="section">Encoding of Record Operations using Pointer Arithmetic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1920,7 +1916,7 @@ The set operation on a field, written <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab412"></a><h2 class="section">Specification of Record Operations w.r.t. <span class="inlinecode"><span class="id" title="var">hfields</span></span> and <span class="inlinecode"><span class="id" title="var">hrecord</span></span></h2>
+<a id="lab415"></a><h2 class="section">Specification of Record Operations w.r.t. <span class="inlinecode"><span class="id" title="var">hfields</span></span> and <span class="inlinecode"><span class="id" title="var">hrecord</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1947,7 +1943,10 @@ The set operation on a field, written <span class="inlinecode"><span class="id" 
 &nbsp;&nbsp;{ <span class="id" title="var">case_if</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">inverts</span> <span class="id" title="var">E</span>. <span class="id" title="tactic">subst</span> <span class="id" title="var">ki</span>. <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#triple_conseq_frame"><span class="id" title="lemma">triple_conseq_frame</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="Struct.html#Realization.triple_get_field"><span class="id" title="lemma">triple_get_field</span></a>. } { <span class="id" title="var">xsimpl</span>. } { <span class="id" title="var">xsimpl</span>*. } }<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#triple_conseq_frame"><span class="id" title="lemma">triple_conseq_frame</span></a>. { <span class="id" title="var">applys</span> <span class="id" title="var">IHL'</span> <span class="id" title="var">E</span>. } { <span class="id" title="var">xsimpl</span>. } { <span class="id" title="var">xsimpl</span>*. } } }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#triple_conseq_frame"><span class="id" title="lemma">triple_conseq_frame</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <span class="id" title="var">IHL'</span> <span class="id" title="var">E</span>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">xsimpl</span>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">xsimpl</span>*. } } }<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -2034,7 +2033,7 @@ Set operation on a record
 </div>
 
 <div class="doc">
-<a id="lab413"></a><h2 class="section">Specification of Record Allocation and Deallocation</h2>
+<a id="lab416"></a><h2 class="section">Specification of Record Allocation and Deallocation</h2>
 
 <div class="paragraph"> </div>
 
@@ -2180,7 +2179,7 @@ Exploiting the above lemma, we derive the specification of record
 &nbsp;&nbsp;<span class="id" title="var">xapp</span> <a class="idref" href="Struct.html#Realization.triple_dealloc"><span class="id" title="lemma">triple_dealloc</span></a>. <span class="id" title="var">xsimpl</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Struct.html#Realization"><span class="id" title="module">Realization</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

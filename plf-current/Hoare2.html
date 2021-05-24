@@ -75,8 +75,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Z</span> - 1;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span> Here is one possible specification for this program:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">True</span> <span style='letter-spacing:-.4em;'>}</span>}<br/>
@@ -87,8 +85,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">p</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>   Note the <i>parameters</i> <span class="inlinecode"><span class="id" title="var">m</span></span> and <span class="inlinecode"><span class="id" title="var">p</span></span>, which stand for
    fixed-but-arbitrary numbers.  Formally, they are simply Coq
    variables of type <span class="inlinecode"><span class="id" title="var">nat</span></span>.
@@ -113,8 +109,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> - <span class="id" title="var">X</span> = <span class="id" title="var">p</span> - <span class="id" title="var">m</span> ∧ ¬(<span class="id" title="var">X</span> ≠ 0) <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">p</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -133,8 +127,6 @@
       postcondition are the same:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> <span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">skip</span> <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </li>
 </ul>
@@ -148,8 +140,6 @@
       locally consistent (with respect to <span class="inlinecode"><span class="id" title="var">Q</span></span> and <span class="inlinecode"><span class="id" title="var">R</span></span>):
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> <span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">c<sub>1</sub></span>; <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Q</span> <span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">c<sub>2</sub></span> <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">R</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </li>
 </ul>
@@ -163,8 +153,6 @@
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> [<span class="id" title="var">X</span> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span> <span class="id" title="var">a</span>] <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">a</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </li>
 </ul>
@@ -188,8 +176,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Q</span> <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Q</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </li>
 </ul>
@@ -209,8 +195,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> ∧ ¬<span class="id" title="var">b</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </li>
 </ul>
@@ -223,8 +207,6 @@
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P'</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>      This corresponds to the application of <span class="inlinecode"><span class="id" title="var">hoare_consequence</span></span>, and it
       is the <i>only</i> place in a decorated program where checking whether
       decorations are correct is not fully mechanical and syntactic,
@@ -263,8 +245,6 @@
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> + <span class="id" title="var">Y</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">X</span> - <span class="id" title="var">Y</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - <span class="id" title="var">Y</span>
-<div class="paragraph"> </div>
-
 </span>    We can prove (informally) using decorations that this program is
     correct -- i.e., it always swaps the values of variables <span class="inlinecode"><span class="id" title="var">X</span></span> and <span class="inlinecode"><span class="id" title="var">Y</span></span>. 
 <div class="paragraph"> </div>
@@ -278,8 +258,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;(4)     <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> - <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> ∧ <span class="id" title="var">Y</span> = <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - <span class="id" title="var">Y</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(5)     <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">n</span> ∧ <span class="id" title="var">Y</span> = <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    The decorations can be constructed as follows:
 
 <div class="paragraph"> </div>
@@ -321,8 +299,6 @@
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">m</span> + <span class="id" title="var">n</span>) - ((<span class="id" title="var">m</span> + <span class="id" title="var">n</span>) - <span class="id" title="var">n</span>) = <span class="id" title="var">n</span> ∧ (<span class="id" title="var">m</span> + <span class="id" title="var">n</span>) - <span class="id" title="var">n</span> = <span class="id" title="var">m</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">m</span> + <span class="id" title="var">n</span>) - <span class="id" title="var">m</span> = <span class="id" title="var">n</span> ∧ <span class="id" title="var">m</span> = <span class="id" title="var">m</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">n</span> = <span class="id" title="var">n</span> ∧ <span class="id" title="var">m</span> = <span class="id" title="var">m</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -352,8 +328,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7)       <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Z</span> + <span class="id" title="var">X</span> = <span class="id" title="var">Y</span> ∨ <span class="id" title="var">Z</span> + <span class="id" title="var">Y</span> = <span class="id" title="var">X</span><span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8)     <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Z</span> + <span class="id" title="var">X</span> = <span class="id" title="var">Y</span> ∨ <span class="id" title="var">Z</span> + <span class="id" title="var">Y</span> = <span class="id" title="var">X</span><span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>These decorations were constructed as follows:
 
 <div class="paragraph"> </div>
@@ -410,8 +384,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{                         <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">X</span> + <span class="id" title="var">Z</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Briefly justify each use of <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span>.
 
 </div>
@@ -440,8 +412,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(5)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">True</span> ∧ ~(<span class="id" title="var">X</span> ≠ 0) <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(6)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = 0 <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>   The decorations can be constructed as follows:
 
 <div class="paragraph"> </div>
@@ -630,8 +600,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - <span class="id" title="var">n</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;
-<div class="paragraph"> </div>
-
 </span>    If we replace <span class="inlinecode"><span class="id" title="var">m</span></span> and <span class="inlinecode"><span class="id" title="var">n</span></span> by numbers and execute the program, it
     will terminate with the variable <span class="inlinecode"><span class="id" title="var">X</span></span> set to the remainder when <span class="inlinecode"><span class="id" title="var">m</span></span>
     is divided by <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">Y</span></span> set to the quotient. 
@@ -664,8 +632,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(9)    <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">n</span> × <span class="id" title="var">Y</span> + <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ ¬(<span class="id" title="var">n</span> ≤ <span class="id" title="var">X</span>) <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(10)    <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">n</span> × <span class="id" title="var">Y</span> + <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ <span class="id" title="var">X</span> &lt; <span class="id" title="var">n</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Assertions (4), (5), (8), and (9) are derived mechanically from
     the invariant and the loop's guard.  Assertions (8), (7), and (6)
     are derived using the assignment rule going backwards from (8)
@@ -748,8 +714,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -775,8 +739,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Inv</span> ∧ ¬(<span class="id" title="var">X</span> ≠ 0) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>            (<span class="id" title="var">b</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    By examining this skeleton, we can see that any valid <span class="inlinecode"><span class="id" title="var">Inv</span></span> will
     have to respect three conditions:
 <ul class="doclist">
@@ -824,8 +786,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">True</span> ∧ ~(<span class="id" title="var">X</span> ≠ 0) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>       (<span class="id" title="var">b</span> - <span class="id" title="var">WRONG</span>!)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(8)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    While conditions (a) and (c) are trivially satisfied, condition
     (b) is wrong, i.e., it is not the case that <span class="inlinecode"><span class="id" title="var">True</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span> (7)
     implies <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">m</span></span> (8).  In fact, the two assertions are
@@ -852,8 +812,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(7)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> ∧ ~(<span class="id" title="var">X</span> ≠ 0) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>      (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(8)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    This time, condition (b) holds trivially, but (a) and (c) are
     broken. Condition (a) requires that (1) <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>
     implies (2) <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">m</span></span>.  If we substitute <span class="inlinecode"><span class="id" title="var">Y</span></span> by <span class="inlinecode"><span class="id" title="var">n</span></span> we have to
@@ -897,8 +855,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(7)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> - <span class="id" title="var">X</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> ∧ ~(<span class="id" title="var">X</span> ≠ 0) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>       (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(8)      <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">n</span> - <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Success!  Conditions (a), (b) and (c) all hold now.  (To
     verify (c), we need to check that, under the assumption that <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">≠</span>
     <span class="inlinecode">0</span>, we have <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode">(<span class="id" title="var">Y</span></span> <span class="inlinecode">-</span> <span class="inlinecode">1)</span> <span class="inlinecode">-</span> <span class="inlinecode">(<span class="id" title="var">X</span></span> <span class="inlinecode">-</span> <span class="inlinecode">1)</span>; this holds for all
@@ -923,8 +879,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Write an informal decorated program showing that this procedure
     is correct, and justify each use of <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span>. 
 </div>
@@ -950,8 +904,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Z</span> + 1;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    Following the pattern of the <span class="inlinecode"><span class="id" title="var">subtract_slowly</span></span> example above, pick
     a precondition and postcondition that give an appropriate
     specification of <span class="inlinecode"><span class="id" title="var">add_slowly</span></span>; then (informally) decorate the
@@ -977,8 +929,6 @@ All that automation makes it easy to verify <span class="inlinecode"><span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 2<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">parity</span> <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    The mathematical <span class="inlinecode"><span class="id" title="var">parity</span></span> function used in the specification is
     defined in Coq as follows: 
 </div>
@@ -1013,8 +963,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">parity</span> <span class="id" title="var">X</span> = <span class="id" title="var">parity</span> <span class="id" title="var">m</span> ∧ ~(2 ≤ <span class="id" title="var">X</span>) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>       (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">parity</span> <span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    With this invariant, conditions (a), (b), and (c) are all
     satisfied. For verifying (b), we observe that, when <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">&lt;</span> <span class="inlinecode">2</span>, we
     have <span class="inlinecode"><span class="id" title="var">parity</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> (we can easily see this in the definition of
@@ -1098,8 +1046,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Z</span>+1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span>×<span class="id" title="var">Z</span>≤<span class="id" title="var">m</span> ∧ <span class="id" title="var">m</span>&lt;(<span class="id" title="var">Z</span>+1)*(<span class="id" title="var">Z</span>+1) <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1118,8 +1064,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(7)  <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span>×<span class="id" title="var">Z</span>≤<span class="id" title="var">m</span> ∧ <span class="id" title="var">m</span>&lt;(<span class="id" title="var">Z</span>+1)*(<span class="id" title="var">Z</span>+1) ∧ ~((<span class="id" title="var">Z</span>+1)*(<span class="id" title="var">Z</span>+1)&lt;=<span class="id" title="var">X</span>) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span> (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(8)  <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span>×<span class="id" title="var">Z</span>≤<span class="id" title="var">m</span> ∧ <span class="id" title="var">m</span>&lt;(<span class="id" title="var">Z</span>+1)*(<span class="id" title="var">Z</span>+1) <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    This didn't work very well: conditions (a) and (c) both failed.
     Looking at condition (c), we see that the second conjunct of (4)
     is almost the same as the first conjunct of (5), except that (4)
@@ -1151,8 +1095,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span>=<span class="id" title="var">m</span> ∧ <span class="id" title="var">Z</span>×<span class="id" title="var">Z</span>≤<span class="id" title="var">m</span> ∧ ~((<span class="id" title="var">Z</span>+1)*(<span class="id" title="var">Z</span>+1)&lt;=<span class="id" title="var">X</span>) <span style='letter-spacing:-.4em;'>}</span>}  <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>           (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span>×<span class="id" title="var">Z</span>≤<span class="id" title="var">m</span> ∧ <span class="id" title="var">m</span>&lt;(<span class="id" title="var">Z</span>+1)*(<span class="id" title="var">Z</span>+1) <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    This works, since conditions (a), (b), and (c) are now all
     trivially satisfied.
 
@@ -1179,8 +1121,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + 1<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">m</span>×<span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1207,8 +1147,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">m</span>×<span class="id" title="var">m</span> ∧ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ ~(<span class="id" title="var">Y</span> ≠ <span class="id" title="var">X</span>) <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>         (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">m</span>×<span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1236,8 +1174,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">Y</span>×<span class="id" title="var">m</span> ∧ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ ~(<span class="id" title="var">Y</span> ≠ <span class="id" title="var">X</span>) <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>           (<span class="id" title="var">b</span> - <span class="id" title="var">OK</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">m</span>×<span class="id" title="var">m</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1272,8 +1208,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">m</span>! <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Fill in the blanks in following decorated program. Bear in mind
     that we are working with natural numbers, for which both division
     and subtraction can behave differently than with real numbers.
@@ -1293,8 +1227,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{                                      <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">m</span>! <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Briefly justify each use of <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span>.
 
 </div>
@@ -1327,8 +1259,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>&lt;&gt;0 ∧ <span class="id" title="var">y</span>&lt;&gt;0) → <span class="id" title="var">min</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ≠ 0.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lemma2</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">min</span> (<span class="id" title="var">x</span>-1) (<span class="id" title="var">y</span>-1) = (<span class="id" title="var">min</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) - 1.
-<div class="paragraph"> </div>
-
 </span>    plus standard high-school algebra, as always. 
 <div class="paragraph"> </div>
 
@@ -1356,8 +1286,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{                            <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">min</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1384,8 +1312,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + 1;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Z</span> + 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    Show that it does what it should by filling in the blanks in the
     following decorated program.
 <br/>
@@ -1417,8 +1343,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{                                        <span style='letter-spacing:-.4em;'>}</span>} <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Z</span> = <span class="id" title="var">a</span> + <span class="id" title="var">b</span> + <span class="id" title="var">c</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1446,8 +1370,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">Y</span> + <span class="id" title="var">Z</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> + 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    Write a decorated program for this, and justify each use of <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span>. 
 </div>
 <div class="code">
@@ -1466,8 +1388,6 @@ The postcondition does not hold at the beginning of the loop,
     For example,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">False</span> <span style='letter-spacing:-.4em;'>}</span>}  <span class="id" title="var">X</span> := <span class="id" title="var">Y</span> + 1  <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> ≤ 5 <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    is <i>not</i> very interesting: although it is perfectly valid Hoare
     triple, it tells us nothing useful.  Since the precondition isn't
     satisfied by any state, it doesn't describe any situations where
@@ -1479,8 +1399,6 @@ The postcondition does not hold at the beginning of the loop,
     By contrast,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> ≤ 4 ∧ <span class="id" title="var">Z</span> = 0 <span style='letter-spacing:-.4em;'>}</span>}  <span class="id" title="var">X</span> := <span class="id" title="var">Y</span> + 1 <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> ≤ 5 <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    has a useful precondition: it tells us that, if we can somehow
     create a situation in which we know that <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span>, then
     running this command will produce a state satisfying the
@@ -1493,8 +1411,6 @@ The postcondition does not hold at the beginning of the loop,
     The most useful precondition is this one:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> ≤ 4 <span style='letter-spacing:-.4em;'>}</span>}  <span class="id" title="var">X</span> := <span class="id" title="var">Y</span> + 1  <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> ≤ 5 <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    Assertion <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> is the <i>weakest precondition</i> of command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span>
     <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> for postcondition <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">5</span>. 
 <div class="paragraph"> </div>
@@ -1556,8 +1472,6 @@ The postcondition does not hold at the beginning of the loop,
 &nbsp;&nbsp;6) <span style='letter-spacing:-.4em;'>{</span>{ ? <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">while</span> <span class="id" title="var">true</span> <span class="id" title="tactic">do</span> <span class="id" title="var">X</span> := 0 <span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = 0 <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1650,8 +1564,6 @@ The postcondition does not hold at the beginning of the loop,
     be annotated as
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>} (<span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">skip</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>}) ; (<span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">skip</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>}) <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P</span><span style='letter-spacing:-.4em;'>}</span>},
-<div class="paragraph"> </div>
-
 </span>    with pre- and post-conditions on each <span class="inlinecode"><span class="id" title="var">skip</span></span>, plus identical pre-
     and post-conditions on the semicolon!
 
@@ -2044,16 +1956,16 @@ The propositions generated by <span class="inlinecode"><span class="id" title="v
 <div class="code">
 
 <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <a class="idref" href="Hoare2.html#verification_conditions_dec"><span class="id" title="definition">verification_conditions_dec</span></a> <a class="idref" href="Hoare2.html#dec_while"><span class="id" title="definition">dec_while</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;==&gt;&nbsp;<br/>
-&nbsp;&nbsp;=&nbsp;&nbsp;(((fun&nbsp;_&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>&nbsp;<br/>
+<span class="comment">(*&nbsp;==&gt;<br/>
+&nbsp;&nbsp;=&nbsp;&nbsp;(((fun&nbsp;_&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True))&nbsp;/\<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;negb&nbsp;(st&nbsp;X&nbsp;=?&nbsp;0)&nbsp;=&nbsp;true)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;negb&nbsp;(st&nbsp;X&nbsp;=?&nbsp;0)&nbsp;=&nbsp;true)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;st&nbsp;X&nbsp;&lt;&gt;&nbsp;0))&nbsp;/\<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;negb&nbsp;(st&nbsp;X&nbsp;=?&nbsp;0)&nbsp;&lt;&gt;&nbsp;true)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;negb&nbsp;(st&nbsp;X&nbsp;=?&nbsp;0)&nbsp;&lt;&gt;&nbsp;true)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;st&nbsp;X&nbsp;=&nbsp;0))&nbsp;/\<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;st&nbsp;X&nbsp;&lt;&gt;&nbsp;0)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;st&nbsp;X&nbsp;&lt;&gt;&nbsp;0)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True)&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">-</span> <span class="inlinecode">1</span>)&nbsp;/\<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;st&nbsp;X&nbsp;=&nbsp;0)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;True&nbsp;/\&nbsp;st&nbsp;X&nbsp;=&nbsp;0)&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;st&nbsp;:&nbsp;state&nbsp;=&gt;&nbsp;st&nbsp;X&nbsp;=&nbsp;0)<br/>
 &nbsp;&nbsp;&nbsp;:&nbsp;Prop<br/>
 <br/>
@@ -2536,8 +2448,6 @@ Here is a more intuitive way of writing the invariant:
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ 0 = 0 <span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;<span class="id" title="var">Y</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 0<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ <span class="id" title="var">Y</span> = 0 <span style='letter-spacing:-.4em;'>}</span>} ;;
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -2575,8 +2485,6 @@ Now prove the correctness of your decorated program.  If all goes well,
 &nbsp;&nbsp;| <span class="id" title="var">O</span> ⇒ 1<br/>
 &nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n'</span> ⇒ <span class="id" title="var">n</span> × (<span class="id" title="var">fact</span> <span class="id" title="var">n'</span>)<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>     
 </div>
 <div class="code">
@@ -2626,8 +2534,6 @@ Using your solutions to <span class="inlinecode"><span class="id" title="var">fa
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1 ⇒ 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fib</span> (<span class="id" title="var">pred</span> <span class="id" title="var">n</span>) + <span class="id" title="var">fib</span> (<span class="id" title="var">pred</span> (<span class="id" title="var">pred</span> <span class="id" title="var">n</span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>   This doesn't pass Coq's termination checker, but here is a
    slightly clunkier definition that does: 
 </div>
@@ -2673,14 +2579,10 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">T</span>;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 1 + <span class="id" title="var">X</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-<div class="paragraph"> </div>
-
 </span>    Fill in the following definition of <span class="inlinecode"><span class="id" title="var">dfib</span></span> and prove that it
     satisfies this specification:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">True</span> <span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">dfib</span> <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> = <span class="id" title="var">fib</span> <span class="id" title="var">n</span> <span style='letter-spacing:-.4em;'>}</span>}
-<div class="paragraph"> </div>
-
 </span>    If all goes well, your proof will be very brief.
     Hint: you will need many uses of <span class="inlinecode"><span class="id" title="var">ap</span></span> in your assertions.
 
@@ -2717,7 +2619,7 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:05&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:25&nbsp;*)</span><br/>
 </div>
 </div>
 

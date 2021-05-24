@@ -23,8 +23,7 @@ From Coq Require Import Strings.Ascii.
 From Coq Require Import Arith.Arith.
 From Coq Require Import Init.Nat.
 From Coq Require Import Arith.EqNat.
-From Coq Require Import Lists.List.
-Import ListNotations.
+From Coq Require Import Lists.List. Import ListNotations.
 From LF Require Import Maps Imp.
 
 (* ################################################################# *)
@@ -461,4 +460,4 @@ Example eg2 : parse "
       "x" := "z" }>.
 Proof. cbv. reflexivity. Qed.
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

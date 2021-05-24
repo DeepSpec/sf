@@ -1637,7 +1637,7 @@ Qed.
 
     since we will never enter the loop. *)
 
-(** The program  
+(** The program
 
     while Y > 10 do Y := Y - 1; Z := Z + 1 end
 
@@ -1646,10 +1646,10 @@ Qed.
     X = Y + Z
 
     Note that this doesn't contradict the loop guard but neither
-    is it an invariant of [Y := Y - 1; Z := Z + 1] -- if X = 5, 
-    Y = 0 and Z = 5, running the command will set Y + Z to 6. The 
-    loop guard [Y > 10] guarantees that this will not be the case. 
-    We will see many such loop invariants in the following chapter. 
+    is it an invariant of [Y := Y - 1; Z := Z + 1] -- if X = 5,
+    Y = 0 and Z = 5, running the command will set Y + Z to 6. The
+    loop guard [Y > 10] guarantees that this will not be the case.
+    We will see many such loop invariants in the following chapter.
 *)
 
 Example while_example :
@@ -2263,4 +2263,4 @@ End HoareAssertAssume.
 
 
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

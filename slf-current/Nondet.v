@@ -694,7 +694,8 @@ Proof using.
 Qed.
 
 Lemma hoarewpn_let : forall x t1 t2 Q,
-  hoarewpn t1 (fun v => hoarewpn (subst x v t2) Q) ==> hoarewpn (trm_let x t1 t2) Q.
+      hoarewpn t1 (fun v => hoarewpn (subst x v t2) Q)
+  ==> hoarewpn (trm_let x t1 t2) Q.
 Proof using.
   unfold hoarewpn. intros. intros h K. applys* evaln_let.
 Qed.
@@ -1609,7 +1610,8 @@ Proof using.
   { introv R. inverts R; tryfalse. applys evalns_val.
     rewrite hstar_hpure_l. split~.
     { rewrite remove_union_single_l. { auto. }
-      intros N'. applys disjoint_inv_not_indom_both D N'. applys indom_single. } }
+      intros N'. applys disjoint_inv_not_indom_both D N'.
+      applys indom_single. } }
 Qed.
 
 (** From there, reasoning rules for [triplens] can be derived from the rules
@@ -1617,7 +1619,7 @@ Qed.
     same proofs as for deriving rules for [triple] from rules for [hoare]. *)
 
 (* ================================================================= *)
-(** ** Equivalence Between Non-Deterministic Small-Step and Big-Step Semantics *)
+(** ** Equivalence Between Non-Deterministic Small-Step and Big-Step Sem. *)
 
 (** We end this chapter with the proof of equivalence between [hoarens] and
     [hoaren], establishing a formal relationship between triples defined with
@@ -1709,7 +1711,8 @@ Proof using.
         { false* C. }
         { destruct K3 as (?&?&K5). do 2 esplit. applys* step_let_ctx. } }
       { introv K. inverts K as K'; [|false* C].
-        inverts IHM1 as K5 K6; [false* C|]. specializes K6 K'. applys* evalns_let. } } }
+        inverts IHM1 as K5 K6; [false* C|].
+        specializes K6 K'. applys* evalns_let. } } }
   { applys evalns_step.
     { do 2 esplit. applys* step_if. }
     { introv K. inverts K. applys IHM. } }
@@ -1779,4 +1782,4 @@ Proof using. unfold hoarens, hoaren. rewrite* evalns_eq_evalns. Qed.
     using a big-step judgment, as done in this chapter with the predicate
     [evaln], appears to be a novel approach, as of Jan. 2021. *)
 
-(* 2021-05-18 18:14 *)
+(* 2021-05-24 18:43 *)

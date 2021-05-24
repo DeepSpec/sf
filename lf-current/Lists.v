@@ -910,7 +910,7 @@ Proof.
     involving the functions [count] and [sum], and prove it using
     Coq.  (You may find that the difficulty of the proof depends on
     how you defined [count]!  Hint: If you defined [count] using
-    [=?] you may find it useful to know that [destruct] works on 
+    [=?] you may find it useful to know that [destruct] works on
     arbitrary expressions, not just simple identifiers.)
 *)
 (* FILL IN HERE
@@ -1125,4 +1125,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

@@ -127,8 +127,6 @@ Note that pattern-matching on a pair (with parentheses: <span class="inlinecode"
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">_</span> , <span class="id" title="var">O</span>    ⇒ <span class="id" title="var">n</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n'</span>, <span class="id" title="var">S</span> <span class="id" title="var">m'</span> ⇒ <span class="id" title="var">minus</span> <span class="id" title="var">n'</span> <span class="id" title="var">m'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>    The distinction is minor, but it is worth knowing that they
     are not the same. For instance, the following definitions are
     ill-formed:
@@ -146,8 +144,6 @@ Note that pattern-matching on a pair (with parentheses: <span class="inlinecode"
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" title="var">S</span> <span class="id" title="var">_</span> , <span class="id" title="var">O</span>   ) ⇒ <span class="id" title="var">n</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| (<span class="id" title="var">S</span> <span class="id" title="var">n'</span>, <span class="id" title="var">S</span> <span class="id" title="var">m'</span>) ⇒ <span class="id" title="var">bad_minus</span> <span class="id" title="var">n'</span> <span class="id" title="var">m'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -287,8 +283,6 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> "x + y" := (<span class="id" title="var">plus</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).
-<div class="paragraph"> </div>
-
 </span>    the <span class="inlinecode">+</span> operator will bind tighter than <span class="inlinecode">::</span>, so <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode">::</span> <span class="inlinecode">[3]</span>
     will be parsed, as we'd expect, as <span class="inlinecode">(1</span> <span class="inlinecode">+</span> <span class="inlinecode">2)</span> <span class="inlinecode">::</span> <span class="inlinecode">[3]</span> rather than
     <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">(2</span> <span class="inlinecode">::</span> <span class="inlinecode">[3])</span>.
@@ -774,8 +768,6 @@ Notice that, as when doing induction on natural numbers, the
 <li> First, suppose <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode">[]</span>.  We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;([] ++ <span class="id" title="var">l<sub>2</sub></span>) ++ <span class="id" title="var">l<sub>3</sub></span> = [] ++ (<span class="id" title="var">l<sub>2</sub></span> ++ <span class="id" title="var">l<sub>3</sub></span>),
-<div class="paragraph"> </div>
-
 </span>     which follows directly from the definition of <span class="inlinecode">++</span>.
 
 <div class="paragraph"> </div>
@@ -785,18 +777,12 @@ Notice that, as when doing induction on natural numbers, the
 <li> Next, suppose <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span>::<span class="id" title="var">l<sub>1</sub>'</span></span>, with
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">l<sub>1</sub>'</span> ++ <span class="id" title="var">l<sub>2</sub></span>) ++ <span class="id" title="var">l<sub>3</sub></span> = <span class="id" title="var">l<sub>1</sub>'</span> ++ (<span class="id" title="var">l<sub>2</sub></span> ++ <span class="id" title="var">l<sub>3</sub></span>)
-<div class="paragraph"> </div>
-
 </span>     (the induction hypothesis). We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">n</span> :: <span class="id" title="var">l<sub>1</sub>'</span>) ++ <span class="id" title="var">l<sub>2</sub></span>) ++ <span class="id" title="var">l<sub>3</sub></span> = (<span class="id" title="var">n</span> :: <span class="id" title="var">l<sub>1</sub>'</span>) ++ (<span class="id" title="var">l<sub>2</sub></span> ++ <span class="id" title="var">l<sub>3</sub></span>).
-<div class="paragraph"> </div>
-
 </span>     By the definition of <span class="inlinecode">++</span>, this follows from
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">n</span> :: ((<span class="id" title="var">l<sub>1</sub>'</span> ++ <span class="id" title="var">l<sub>2</sub></span>) ++ <span class="id" title="var">l<sub>3</sub></span>) = <span class="id" title="var">n</span> :: (<span class="id" title="var">l<sub>1</sub>'</span> ++ (<span class="id" title="var">l<sub>2</sub></span> ++ <span class="id" title="var">l<sub>3</sub></span>)),
-<div class="paragraph"> </div>
-
 </span>     which is immediate from the induction hypothesis.  <font size=-2>&#9744;</font> 
 </li>
 </ul>
@@ -914,8 +900,6 @@ For comparison, here are informal proofs of these two theorems:
 <li> First, suppose <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode">[]</span>.  We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> ([] ++ <span class="id" title="var">l<sub>2</sub></span>) = <span class="id" title="var">length</span> [] + <span class="id" title="var">length</span> <span class="id" title="var">l<sub>2</sub></span>,
-<div class="paragraph"> </div>
-
 </span>      which follows directly from the definitions of
       <span class="inlinecode"><span class="id" title="var">length</span></span>, <span class="inlinecode">++</span>, and <span class="inlinecode"><span class="id" title="var">plus</span></span>.
 
@@ -926,13 +910,9 @@ For comparison, here are informal proofs of these two theorems:
 <li> Next, suppose <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span>::<span class="id" title="var">l<sub>1</sub>'</span></span>, with
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">l<sub>1</sub>'</span> ++ <span class="id" title="var">l<sub>2</sub></span>) = <span class="id" title="var">length</span> <span class="id" title="var">l<sub>1</sub>'</span> + <span class="id" title="var">length</span> <span class="id" title="var">l<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>      We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> ((<span class="id" title="var">n</span>::<span class="id" title="var">l<sub>1</sub>'</span>) ++ <span class="id" title="var">l<sub>2</sub></span>) = <span class="id" title="var">length</span> (<span class="id" title="var">n</span>::<span class="id" title="var">l<sub>1</sub>'</span>) + <span class="id" title="var">length</span> <span class="id" title="var">l<sub>2</sub></span>.
-<div class="paragraph"> </div>
-
 </span>      This follows directly from the definitions of <span class="inlinecode"><span class="id" title="var">length</span></span> and <span class="inlinecode">++</span>
       together with the induction hypothesis. <font size=-2>&#9744;</font> 
 </li>
@@ -952,8 +932,6 @@ For comparison, here are informal proofs of these two theorems:
 <li> First, suppose <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode">[]</span>.  We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> []) = <span class="id" title="var">length</span> [],
-<div class="paragraph"> </div>
-
 </span>        which follows directly from the definitions of <span class="inlinecode"><span class="id" title="var">length</span></span>
         and <span class="inlinecode"><span class="id" title="var">rev</span></span>.
 
@@ -964,23 +942,15 @@ For comparison, here are informal proofs of these two theorems:
 <li> Next, suppose <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span>::<span class="id" title="var">l'</span></span>, with
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l'</span>) = <span class="id" title="var">length</span> <span class="id" title="var">l'</span>.
-<div class="paragraph"> </div>
-
 </span>        We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> (<span class="id" title="var">n</span> :: <span class="id" title="var">l'</span>)) = <span class="id" title="var">length</span> (<span class="id" title="var">n</span> :: <span class="id" title="var">l'</span>).
-<div class="paragraph"> </div>
-
 </span>        By the definition of <span class="inlinecode"><span class="id" title="var">rev</span></span>, this follows from
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> ((<span class="id" title="var">rev</span> <span class="id" title="var">l'</span>) ++ [<span class="id" title="var">n</span>]) = <span class="id" title="var">S</span> (<span class="id" title="var">length</span> <span class="id" title="var">l'</span>)
-<div class="paragraph"> </div>
-
 </span>        which, by the previous lemma, is the same as
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> (<span class="id" title="var">rev</span> <span class="id" title="var">l'</span>) + <span class="id" title="var">length</span> [<span class="id" title="var">n</span>] = <span class="id" title="var">S</span> (<span class="id" title="var">length</span> <span class="id" title="var">l'</span>).
-<div class="paragraph"> </div>
-
 </span>        This follows directly from the induction hypothesis and the
         definition of <span class="inlinecode"><span class="id" title="var">length</span></span>. <font size=-2>&#9744;</font> 
 </li>
@@ -1219,7 +1189,7 @@ Before doing the next exercise, make sure you've filled in the
     involving the functions <span class="inlinecode"><span class="id" title="var">count</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span>, and prove it using
     Coq.  (You may find that the difficulty of the proof depends on
     how you defined <span class="inlinecode"><span class="id" title="var">count</span></span>!  Hint: If you defined <span class="inlinecode"><span class="id" title="var">count</span></span> using
-    <span class="inlinecode">=?</span> you may find it useful to know that <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> works on 
+    <span class="inlinecode">=?</span> you may find it useful to know that <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> works on
     arbitrary expressions, not just simple identifiers.)
 
 </div>
@@ -1528,7 +1498,7 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

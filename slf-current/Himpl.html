@@ -72,7 +72,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab101"></a><h1 class="section">First Pass</h1>
+<a id="lab104"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -104,8 +104,6 @@ Implicit Types
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">H</span> ==&gt; <span class="id" title="var">H'</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Q'</span> ===&gt; <span class="id" title="var">Q</span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">triple</span> <span class="id" title="var">t</span> <span class="id" title="var">H</span> <span class="id" title="var">Q</span>.
-<div class="paragraph"> </div>
-
 </span>   This chapter presents:
 <ul class="doclist">
 <li> the formal definition of the entailment relations,
@@ -137,7 +135,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab102"></a><h2 class="section">Definition of Entailment</h2>
+<a id="lab105"></a><h2 class="section">Definition of Entailment</h2>
 
 <div class="paragraph"> </div>
 
@@ -173,7 +171,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab103"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_antisym)</h4>
+<a id="lab106"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_antisym)</h4>
  Prove the antisymmetry of entailment result shown below
     using extensionality for heap predicates, as captured by
     lemma <span class="inlinecode"><span class="id" title="var">predicate_extensionality</span></span> (or lemma <span class="inlinecode"><span class="id" title="var">hprop_eq</span></span>)
@@ -205,7 +203,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab104"></a><h2 class="section">Entailment for Postconditions</h2>
+<a id="lab107"></a><h2 class="section">Entailment for Postconditions</h2>
 
 <div class="paragraph"> </div>
 
@@ -254,7 +252,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 </div>
 
 <div class="doc">
-<a id="lab105"></a><h2 class="section">Fundamental Properties of Separation Logic Operators</h2>
+<a id="lab108"></a><h2 class="section">Fundamental Properties of Separation Logic Operators</h2>
 
 <div class="paragraph"> </div>
 
@@ -325,7 +323,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 </div>
 
 <div class="doc">
-<a id="lab106"></a><h4 class="section">Exercise: 1 star, standard, especially useful (hstar_comm_assoc)</h4>
+<a id="lab109"></a><h4 class="section">Exercise: 1 star, standard, especially useful (hstar_comm_assoc)</h4>
  The commutativity and associativity results combine into one result
     that is sometimes convenient to exploit in proofs. 
 </div>
@@ -340,7 +338,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab107"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
+<a id="lab110"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
  The monotonicity property of the star operator w.r.t. entailment can
     also be stated in a symmetric fashion, as shown next. Prove this result.
     Hint: exploit the transitivity of entailment (<span class="inlinecode"><span class="id" title="var">himpl_trans</span></span>) and the
@@ -358,7 +356,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab108"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_lr)</h4>
+<a id="lab111"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_lr)</h4>
  The monotonicity property of the star operator w.r.t. entailment can
     also be stated in a symmetric fashion, as shown next. Prove this result.
     Hint: exploit the transitivity of entailment (<span class="inlinecode"><span class="id" title="var">himpl_trans</span></span>) and the
@@ -376,7 +374,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 
 
 <div class="doc">
-<a id="lab109"></a><h2 class="section">Introduction and Elimination Rules w.r.t. Entailments</h2>
+<a id="lab112"></a><h2 class="section">Introduction and Elimination Rules w.r.t. Entailments</h2>
 
 <div class="paragraph"> </div>
 
@@ -389,7 +387,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     <span class="inlinecode"><span class="id" title="var">H'</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab110"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_r).</h4>
+<a id="lab113"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_r).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span>.
     Hint: recall from <span class="inlinecode"><span class="id" title="var">Hprop</span></span> the lemma <span class="inlinecode"><span class="id" title="var">hstar_hpure_l</span></span>, which asserts
     the equality <span class="inlinecode">(<span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H</span>)</span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode">=</span> <span class="inlinecode">(<span class="id" title="var">P</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">h</span>)</span>. 
@@ -425,7 +423,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     the Coq context. It is stated as follows. 
 <div class="paragraph"> </div>
 
-<a id="lab111"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_l).</h4>
+<a id="lab114"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_l).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_l</span></span>. 
 </div>
 <div class="code">
@@ -445,7 +443,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     entailment, one must exhibit a value for <span class="inlinecode"><span class="id" title="var">x</span></span> for which <span class="inlinecode"><span class="id" title="var">H</span></span> entails <span class="inlinecode"><span class="id" title="var">J</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab112"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_r).</h4>
+<a id="lab115"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_r).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hexists_r</span></span>. 
 </div>
 <div class="code">
@@ -483,7 +481,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     the Coq context. It is stated as follows. 
 <div class="paragraph"> </div>
 
-<a id="lab113"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_l).</h4>
+<a id="lab116"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_l).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hexists_l</span></span>. 
 </div>
 <div class="code">
@@ -497,7 +495,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 
 
 <div class="doc">
-<a id="lab114"></a><h2 class="section">Extracting Information from Heap Predicates</h2>
+<a id="lab117"></a><h2 class="section">Extracting Information from Heap Predicates</h2>
 
 <div class="paragraph"> </div>
 
@@ -529,8 +527,6 @@ The proof of this result exploits a result on finite maps.
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">disjoint_single_single_same_inv</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">p</span>:<span class="id" title="var">loc</span>) (<span class="id" title="var">v<sub>1</sub></span> <span class="id" title="var">v<sub>2</sub></span>:<span class="id" title="var">val</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> (<span class="id" title="var">Fmap.single</span> <span class="id" title="var">p</span> <span class="id" title="var">v<sub>1</sub></span>) (<span class="id" title="var">Fmap.single</span> <span class="id" title="var">p</span> <span class="id" title="var">v<sub>2</sub></span>) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">False</span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -555,7 +551,7 @@ More generally, a heap predicate of the form <span class="inlinecode"><span clas
 </div>
 
 <div class="doc">
-<a id="lab115"></a><h2 class="section">Consequence, Frame, and their Combination</h2>
+<a id="lab118"></a><h2 class="section">Consequence, Frame, and their Combination</h2>
 
 <div class="paragraph"> </div>
 
@@ -607,7 +603,7 @@ Observe that, stated as such, it is very unlikely for the frame rule
 </div>
 
 <div class="doc">
-<a id="lab116"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_conseq_frame)</h4>
+<a id="lab119"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_conseq_frame)</h4>
  Prove the combined consequence-frame rule. 
 </div>
 <div class="code">
@@ -618,7 +614,7 @@ Observe that, stated as such, it is very unlikely for the frame rule
 
 
 <div class="doc">
-<a id="lab117"></a><h2 class="section">The Extraction Rules for Triples</h2>
+<a id="lab120"></a><h2 class="section">The Extraction Rules for Triples</h2>
 
 <div class="paragraph"> </div>
 
@@ -650,7 +646,7 @@ A judgment of the form <span class="inlinecode"><span class="id" title="var">tri
 </div>
 
 <div class="doc">
-<a id="lab118"></a><h1 class="section">More Details</h1>
+<a id="lab121"></a><h1 class="section">More Details</h1>
 
 </div>
 <div class="code">
@@ -661,7 +657,7 @@ A judgment of the form <span class="inlinecode"><span class="id" title="var">tri
 </div>
 
 <div class="doc">
-<a id="lab119"></a><h2 class="section">Identifying True and False Entailments</h2>
+<a id="lab122"></a><h2 class="section">Identifying True and False Entailments</h2>
 
 </div>
 <div class="code">
@@ -673,7 +669,7 @@ A judgment of the form <span class="inlinecode"><span class="id" title="var">tri
 </div>
 
 <div class="doc">
-<a id="lab120"></a><h2 class="section">Proving Entailments by Hand</h2>
+<a id="lab123"></a><h2 class="section">Proving Entailments by Hand</h2>
 
 </div>
 <div class="code">
@@ -693,7 +689,7 @@ Proving an entailment by hand is generally a tedious task. This is why
     a few proofs by hand. 
 <div class="paragraph"> </div>
 
-<a id="lab121"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_1)</h4>
+<a id="lab124"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_1)</h4>
  Prove the example entailment below.
     Hint: exploit <span class="inlinecode"><span class="id" title="var">hstar_comm</span></span>, <span class="inlinecode"><span class="id" title="var">hstar_assoc</span></span>, or <span class="inlinecode"><span class="id" title="var">hstar_comm_assoc</span></span>
     which combines the two, and exploit <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span> or <span class="inlinecode"><span class="id" title="var">himpl_frame_r</span></span>
@@ -711,7 +707,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab122"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_2)</h4>
+<a id="lab125"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_2)</h4>
  Prove the example entailment below.
     Hint: use <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span> to extract pure facts, once they
     appear at the head of the left-hand side of the entailment. 
@@ -728,7 +724,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab123"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_3)</h4>
+<a id="lab126"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_3)</h4>
  Prove the example entailment below.
     Hint: use lemmas among <span class="inlinecode"><span class="id" title="var">himpl_hexists_r</span></span>, <span class="inlinecode"><span class="id" title="var">himpl_hexists_l</span></span>,
     <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span> and <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span> to deal with
@@ -749,7 +745,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 </div>
 
 <div class="doc">
-<a id="lab124"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> Tactic</h2>
+<a id="lab127"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -777,7 +773,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 </div>
 
 <div class="doc">
-<a id="lab125"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Extract Pure Facts and Quantifiers in LHS</h3>
+<a id="lab128"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Extract Pure Facts and Quantifiers in LHS</h3>
 
 <div class="paragraph"> </div>
 
@@ -843,7 +839,7 @@ A call to <span class="inlinecode"><span class="id" title="var">xsimpl</span></s
 </div>
 
 <div class="doc">
-<a id="lab126"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Cancel Out Heap Predicates from LHS and RHS</h3>
+<a id="lab129"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Cancel Out Heap Predicates from LHS and RHS</h3>
 
 <div class="paragraph"> </div>
 
@@ -893,7 +889,7 @@ If all the pieces of heap predicate get canceled out, the remaining
 </div>
 
 <div class="doc">
-<a id="lab127"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Instantiate Pure Facts and Quantifiers in RHS</h3>
+<a id="lab130"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Instantiate Pure Facts and Quantifiers in RHS</h3>
 
 <div class="paragraph"> </div>
 
@@ -995,7 +991,7 @@ The instantiation of the evar <span class="inlinecode">?<span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab128"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on Entailments Between Postconditions</h3>
+<a id="lab131"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on Entailments Between Postconditions</h3>
 
 <div class="paragraph"> </div>
 
@@ -1014,7 +1010,7 @@ The instantiation of the evar <span class="inlinecode">?<span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab129"></a><h3 class="section">Example of Entailment Proofs using <span class="inlinecode"><span class="id" title="var">xsimpl</span></span></h3>
+<a id="lab132"></a><h3 class="section">Example of Entailment Proofs using <span class="inlinecode"><span class="id" title="var">xsimpl</span></span></h3>
 
 </div>
 <div class="code">
@@ -1043,7 +1039,7 @@ The instantiation of the evar <span class="inlinecode">?<span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab130"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xchange</span></span> Tactic</h2>
+<a id="lab133"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xchange</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1112,7 +1108,7 @@ How does the <span class="inlinecode"><span class="id" title="var">xchange</span
     of reasoning implemented by the tactic <span class="inlinecode"><span class="id" title="var">xchange</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab131"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (xchange_lemma)</h4>
+<a id="lab134"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (xchange_lemma)</h4>
  Prove, without using the tactic <span class="inlinecode"><span class="id" title="var">xchange</span></span>, the following lemma which
     captures the internal working of <span class="inlinecode"><span class="id" title="var">xchange</span></span>. 
 </div>
@@ -1133,12 +1129,12 @@ How does the <span class="inlinecode"><span class="id" title="var">xchange</span
 </div>
 
 <div class="doc">
-<a id="lab132"></a><h1 class="section">Optional Material</h1>
+<a id="lab135"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab133"></a><h2 class="section">Proofs for the Separation Algebra</h2>
+<a id="lab136"></a><h2 class="section">Proofs for the Separation Algebra</h2>
 
 </div>
 <div class="code">
@@ -1161,7 +1157,7 @@ We next show the details of the proofs establishing the fundamental
     We begin with the frame property, which is the simplest to prove. 
 <div class="paragraph"> </div>
 
-<a id="lab134"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_l)</h4>
+<a id="lab137"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_l)</h4>
  Prove the frame property for entailment.
     Hint: unfold the definition of <span class="inlinecode"><span class="id" title="var">hstar</span></span>. 
 </div>
@@ -1177,7 +1173,7 @@ We next show the details of the proofs establishing the fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab135"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
+<a id="lab138"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
  Prove the lemma <span class="inlinecode"><span class="id" title="var">himpl_frame_r</span></span>, symmetric to <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span>. 
 </div>
 <div class="code">
@@ -1253,8 +1249,6 @@ To prove commutativity of star, we need to exploit the fact that the union
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.union_comm_of_disjoint</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span> →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">h<sub>1</sub></span> \<span class="id" title="var">u</span> <span class="id" title="var">h<sub>2</sub></span> = <span class="id" title="var">h<sub>2</sub></span> \<span class="id" title="var">u</span> <span class="id" title="var">h<sub>1</sub></span>.
-<div class="paragraph"> </div>
-
 </span>    The commutativity result is then proved as follows. Observe the use of
     the lemma <span class="inlinecode"><span class="id" title="var">hprop_op_comm</span></span>, which allows establishing the entailment in
     only one of the two directions.
@@ -1271,15 +1265,13 @@ To prove commutativity of star, we need to exploit the fact that the union
 </div>
 
 <div class="doc">
-<a id="lab136"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hstar_hempty_l)</h4>
+<a id="lab139"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hstar_hempty_l)</h4>
  Prove that the empty heap predicate is a neutral element for the star.
     You will need to exploit the fact that the union with an empty map is
     the identity, as captured by lemma <span class="inlinecode"><span class="id" title="var">Fmap.union_empty_l</span></span>.
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.union_empty_l</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">h</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.empty</span> \<span class="id" title="var">u</span> <span class="id" title="var">h</span> = <span class="id" title="var">h</span>.
-<div class="paragraph"> </div>
-
 </span>
 </div>
 <div class="code">
@@ -1321,12 +1313,10 @@ Associativity of star is the most tedious result to derive.
 &nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.disjoint_union_eq_r</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span> <span class="id" title="var">h<sub>3</sub></span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> <span class="id" title="var">h<sub>1</sub></span> (<span class="id" title="var">h<sub>2</sub></span> \<span class="id" title="var">u</span> <span class="id" title="var">h<sub>3</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;= (<span class="id" title="var">Fmap.disjoint</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span> ∧ <span class="id" title="var">Fmap.disjoint</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>3</sub></span>).
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
-<a id="lab137"></a><h4 class="section">Exercise: 1 star, standard, optional (hstar_assoc)</h4>
+<a id="lab140"></a><h4 class="section">Exercise: 1 star, standard, optional (hstar_assoc)</h4>
  Complete the right-to-left part of the proof of associativity of the
     star operator. 
 </div>
@@ -1353,7 +1343,7 @@ Associativity of star is the most tedious result to derive.
 </div>
 
 <div class="doc">
-<a id="lab138"></a><h2 class="section">Proof of the Consequence Rule</h2>
+<a id="lab141"></a><h2 class="section">Proof of the Consequence Rule</h2>
 
 </div>
 <div class="code">
@@ -1393,7 +1383,7 @@ An alternative proof consists of first establishing the consequence
     the <span class="inlinecode"><span class="id" title="var">triple</span></span> judgment of Separation Logic. 
 <div class="paragraph"> </div>
 
-<a id="lab139"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hoare_conseq)</h4>
+<a id="lab142"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hoare_conseq)</h4>
  Prove the consequence rule for Hoare triples. 
 </div>
 <div class="code">
@@ -1410,7 +1400,7 @@ An alternative proof consists of first establishing the consequence
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab140"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_conseq)</h4>
+<a id="lab143"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_conseq)</h4>
  Prove the consequence rule by leveraging the lemma <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span>.
     Hint: unfold the definition of <span class="inlinecode"><span class="id" title="var">triple</span></span>, apply the lemma <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span>
     with the appropriate arguments, then exploit <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span>
@@ -1433,7 +1423,7 @@ An alternative proof consists of first establishing the consequence
 </div>
 
 <div class="doc">
-<a id="lab141"></a><h2 class="section">Proof of the Extraction Rules for Triples</h2>
+<a id="lab144"></a><h2 class="section">Proof of the Extraction Rules for Triples</h2>
 
 </div>
 <div class="code">
@@ -1479,7 +1469,7 @@ Similarly, the extraction rule for existentials for
     <span class="inlinecode"><span class="id" title="var">triple</span></span> can be derived from that for <span class="inlinecode"><span class="id" title="var">hoare</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab142"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_hexists)</h4>
+<a id="lab145"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_hexists)</h4>
  Prove the extraction rule <span class="inlinecode"><span class="id" title="var">triple_hexists</span></span>.
     Hint: start by stating and proving the corresponding
     lemma for <span class="inlinecode"><span class="id" title="var">hoare</span></span> triples. 
@@ -1542,7 +1532,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 </div>
 
 <div class="doc">
-<a id="lab143"></a><h3 class="section">Rules for Naming Heaps</h3>
+<a id="lab146"></a><h3 class="section">Rules for Naming Heaps</h3>
 
 <div class="paragraph"> </div>
 
@@ -1550,7 +1540,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
     the heap predicate that only accepts heaps exactly equal to <span class="inlinecode"><span class="id" title="var">h</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab144"></a><h4 class="section">Exercise: 3 stars, standard, optional (hexists_named_eq)</h4>
+<a id="lab147"></a><h4 class="section">Exercise: 3 stars, standard, optional (hexists_named_eq)</h4>
  Prove that a heap predicate <span class="inlinecode"><span class="id" title="var">H</span></span> is equivalent to the heap
     predicate which asserts that the heap is, for a heap <span class="inlinecode"><span class="id" title="var">h</span></span>
     such that <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>, exactly equal to <span class="inlinecode"><span class="id" title="var">H</span></span>.
@@ -1571,7 +1561,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab145"></a><h4 class="section">Exercise: 1 star, standard, optional (hoare_named_heap)</h4>
+<a id="lab148"></a><h4 class="section">Exercise: 1 star, standard, optional (hoare_named_heap)</h4>
  Prove that the proposition <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is equivalent to:
     for any heap <span class="inlinecode"><span class="id" title="var">h</span></span> satisfying the precondition <span class="inlinecode"><span class="id" title="var">H</span></span>, the Hoare
     triple whose precondition requires the input heap to be exactly
@@ -1589,7 +1579,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab146"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_named_heap)</h4>
+<a id="lab149"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_named_heap)</h4>
  Prove the counterpart of <span class="inlinecode"><span class="id" title="var">hoare_named_heap</span></span> for Separation
     Logic triples.
 
@@ -1610,7 +1600,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 
 
 <div class="doc">
-<a id="lab147"></a><h2 class="section">Alternative Structural Rule for Existentials</h2>
+<a id="lab150"></a><h2 class="section">Alternative Structural Rule for Existentials</h2>
 
 </div>
 <div class="code">
@@ -1659,7 +1649,7 @@ Traditional papers on Separation Logic do not include <span class="inlinecode"><
 </div>
 
 <div class="doc">
-<a id="lab148"></a><h2 class="section">Historical Notes</h2>
+<a id="lab151"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1676,7 +1666,7 @@ Traditional papers on Separation Logic do not include <span class="inlinecode"><
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -34,11 +34,11 @@ From Coq Require Import Strings.String.
 From Coq Require Import Init.Nat.
 From Coq Require Import Arith.Arith.
 From Coq Require Import Arith.PeanoNat.
-Import Nat.
 From Coq Require Import Lia.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
 From Coq Require Import Lists.List.
+Import Nat.
 
 (* ################################################################# *)
 (** * Definitions *)
@@ -173,7 +173,7 @@ Notation "'Unit'" :=
   (Ty_Unit) (in custom stlc at level 0).
 Notation "'unit'" := tm_unit (in custom stlc at level 0).
 
-Notation "'Natural'" := Ty_Nat (in custom stlc at level 0).
+Notation "'Nat'" := Ty_Nat (in custom stlc at level 0).
 Notation "'succ' x" := (tm_succ x) (in custom stlc at level 0,
                                      x custom stlc at level 0).
 Notation "'pred' x" := (tm_pred x) (in custom stlc at level 0,
@@ -456,15 +456,15 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
     we've defined above allow us to create references to values of any
     type, including functions.  For example, we can use references to
     functions to give an (inefficient) implementation of arrays
-    of numbers, as follows.  Write [NaturalArray] for the type
-    [Ref (Natural->Natural)].
+    of numbers, as follows.  Write [NatArray] for the type
+    [Ref (Nat->Nat)].
 
     Recall the [equal] function from the [MoreStlc] chapter:
 
       equal =
         fix
-          (\eq:Natural->Natural->Bool.
-             \m:Natural. \n:Natural.
+          (\eq:Nat->Nat->Bool.
+             \m:Nat. \n:Nat.
                if m=0 then iszero n
                else if n=0 then false
                else eq (pred m) (pred n))
@@ -472,12 +472,12 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
     To build a new array, we allocate a reference cell and fill
     it with a function that, when given an index, always returns [0].
 
-      newarray = \_:Unit. ref (\n:Natural.0)
+      newarray = \_:Unit. ref (\n:Nat.0)
 
     To look up an element of an array, we simply apply
     the function to the desired index.
 
-      lookup = \a:NaturalArray. \n:Natural. (!a) n
+      lookup = \a:NatArray. \n:Nat. (!a) n
 
     The interesting part of the encoding is the [update] function.  It
     takes an array, an index, and a new value to be stored at that index, and
@@ -486,9 +486,9 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
     value that was given to [update], while on all other indices it passes the
     lookup to the function that was previously stored in the reference.
 
-      update = \a:NaturalArray. \m:Natural. \v:Natural.
+      update = \a:NatArray. \m:Nat. \v:Nat.
                    let oldf = !a in
-                   a := (\n:Natural. if equal m n then v else oldf n);
+                   a := (\n:Nat. if equal m n then v else oldf n);
 
     References to values containing other references can also be very
     useful, allowing us to define data structures such as mutable
@@ -498,8 +498,8 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
 
     If we defined [update] more compactly like this
 
-      update = \a:NaturalArray. \m:Natural. \v:Natural.
-                  a := (\n:Natural. if equal m n then v else (!a) n)
+      update = \a:NatArray. \m:Nat. \v:Nat.
+                  a := (\n:Nat. if equal m n then v else (!a) n)
 
 would it behave the same? *)
 
@@ -553,7 +553,7 @@ Definition manual_grade_for_compact_update : option (nat*string) := None.
     a number, save a reference to it in some data structure, use it
     for a while, then deallocate it and allocate a new cell holding a
     boolean, possibly reusing the same storage.  Now we can have two
-    names for the same storage cell -- one with type [Ref Natural] and the
+    names for the same storage cell -- one with type [Ref Nat] and the
     other with type [Ref Bool]. *)
 
 (** **** Exercise: 2 stars, standard (type_safety_violation)
@@ -851,17 +851,17 @@ Inductive step : tm * store -> tm * store -> Prop :=
          t2 / st --> t2' / st' ->
          <{ v1 t2 }> / st --> <{ v1 t2' }> / st'
   (* numbers *)
-  | ST_SuccNatural : forall (n : nat) st,
+  | ST_SuccNat : forall (n : nat) st,
          <{ succ n }> / st --> tm_const (S n) / st
   | ST_Succ : forall t1 t1' st st',
          t1 / st --> t1' / st' ->
          <{ succ t1 }> / st --> <{ succ t1' }> / st'
-  | ST_PredNatural : forall (n : nat) st,
+  | ST_PredNat : forall (n : nat) st,
          <{ pred n }> / st --> tm_const (n - 1) / st
   | ST_Pred : forall t1 t1' st st',
          t1 / st --> t1' / st' ->
          <{ pred t1 }> / st --> <{ pred t1' }> / st'
-  | ST_MultNaturals : forall (n1 n2 : nat) st,
+  | ST_MultNats : forall (n1 n2 : nat) st,
       <{ n1 * n2 }> / st -->  tm_const (n1 * n2) / st
   | ST_Mult1 : forall t1 t2 t1' st st',
          t1 / st --> t1' / st' ->
@@ -993,7 +993,7 @@ Definition context := partial_map ty.
     there is no finite typing derivation for the location [0] with respect
     to this store:
 
-   [\x:Natural. (!(loc 1)) x, \x:Natural. (!(loc 0)) x]
+   [\x:Nat. (!(loc 1)) x, \x:Nat. (!(loc 0)) x]
 *)
 
 (** **** Exercise: 2 stars, standard (cyclic_store)
@@ -1095,20 +1095,20 @@ Inductive has_type (ST : store_ty) : context -> tm -> ty -> Prop :=
       Gamma ; ST |- t1 \in (T2 -> T1) ->
       Gamma ; ST |- t2 \in T2 ->
       Gamma ; ST |- t1 t2 \in T1
-  | T_Natural : forall Gamma (n : nat),
-      Gamma ; ST |- n \in Natural
+  | T_Nat : forall Gamma (n : nat),
+      Gamma ; ST |- n \in Nat
   | T_Succ : forall Gamma t1,
-      Gamma ; ST |- t1 \in Natural ->
-      Gamma ; ST |- succ t1 \in Natural
+      Gamma ; ST |- t1 \in Nat ->
+      Gamma ; ST |- succ t1 \in Nat
   | T_Pred : forall Gamma t1,
-      Gamma ; ST |- t1 \in Natural ->
-      Gamma ; ST |- pred t1 \in Natural
+      Gamma ; ST |- t1 \in Nat ->
+      Gamma ; ST |- pred t1 \in Nat
   | T_Mult : forall Gamma t1 t2,
-      Gamma ; ST |- t1 \in Natural ->
-      Gamma ; ST |- t2 \in Natural ->
-      Gamma ; ST |- t1 * t2 \in Natural
+      Gamma ; ST |- t1 \in Nat ->
+      Gamma ; ST |- t2 \in Nat ->
+      Gamma ; ST |- t1 * t2 \in Nat
   | T_If0 : forall Gamma t1 t2 t3 T0,
-      Gamma ; ST |- t1 \in Natural ->
+      Gamma ; ST |- t1 \in Nat ->
       Gamma ; ST |- t2 \in T0 ->
       Gamma ; ST |- t3 \in T0 ->
       Gamma ; ST |- if0 t1 then t2 else t3 \in T0
@@ -1418,10 +1418,10 @@ Proof with auto.
   intros l' Hl'.
   destruct (l' =? l) eqn: Heqll'.
   - (* l' = l *)
-    apply Nat.eqb_eq in Heqll'; subst.
+    apply eqb_eq in Heqll'; subst.
     rewrite lookup_replace_eq...
   - (* l' <> l *)
-    apply Nat.eqb_neq in Heqll'.
+    apply eqb_neq in Heqll'.
     rewrite lookup_replace_neq...
     rewrite length_replace in Hl'.
     apply H0...
@@ -1852,7 +1852,7 @@ Qed.
 Definition factorial : tm
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Lemma factorial_type : empty; nil |- factorial \in (Natural -> Natural).
+Lemma factorial_type : empty; nil |- factorial \in (Nat -> Nat).
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 
@@ -1883,4 +1883,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)

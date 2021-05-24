@@ -992,3 +992,8 @@ body.sf_home #header {
 body.sf_home #main_home {
     background-color: transparent;
 }
+
+/* A partial fix to a coqdoc bug...  
+   See https://github.com/DeepSpec/sfdev/issues/236 */
+.inlinecode { white-space: pre; }
+.inlinecode br { display: none; }

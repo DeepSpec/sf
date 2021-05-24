@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="common/css/sf.css" rel="stylesheet" type="text/css" />
-<title>AltAuto: More Automation</title>
+<title>AltAuto: A Streamlined Treatment of Automation</title>
 <link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
 <script src="common/jquery-ui/external/jquery/jquery.js"></script>
 <script src="common/jquery-ui/jquery-ui.js"></script>
@@ -29,14 +29,24 @@
 
 <div id="main">
 
-<h1 class="libtitle">AltAuto<span class="subtitle">More Automation</span></h1>
+<h1 class="libtitle">AltAuto<span class="subtitle">A Streamlined Treatment of Automation</span></h1>
 
 
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ This chapter gives an alternative treatment of Coq automation that
+    does not depend on <a href="Imp.html"><span class="inlineref">Imp</span></a>.  It contains most of the automation
+    material from that chapter, and most of the existing <a href="Auto.html"><span class="inlineref">Auto</span></a>
+    chapter except for material on <span class="inlinecode"><span class="id" title="keyword">match</span></span>.  It is suitable, e.g., for
+    a course that wants to move quickly on to VFA (which covers
+    <span class="inlinecode"><span class="id" title="keyword">match</span></span>) without doing any language metatheory at all. 
+</div>
 <div class="code">
 
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="IndProp.html#"><span class="id" title="library">IndProp</span></a>.<br/>
 </div>
 
@@ -226,9 +236,9 @@ Using <span class="inlinecode"><span class="id" title="tactic">try</span></span>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">re<sub>1</sub></span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Most&nbsp;cases&nbsp;follow&nbsp;by&nbsp;the&nbsp;same&nbsp;formula.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;that&nbsp;<span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">MApp</span></span>&nbsp;gives&nbsp;two&nbsp;subgoals:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span>&nbsp;is&nbsp;run&nbsp;on&nbsp;both&nbsp;of&nbsp;them&nbsp;and<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">IH<sub>1</sub></span></span>&nbsp;is&nbsp;run&nbsp;on&nbsp;both&nbsp;of&nbsp;them&nbsp;and<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;succeeds&nbsp;on&nbsp;the&nbsp;first&nbsp;but&nbsp;not&nbsp;the&nbsp;second;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span>&nbsp;is&nbsp;then&nbsp;run&nbsp;on&nbsp;this&nbsp;remaining&nbsp;goal.&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">IH<sub>2</sub></span></span>&nbsp;is&nbsp;then&nbsp;run&nbsp;on&nbsp;this&nbsp;remaining&nbsp;goal.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">try</span> (<span class="id" title="tactic">apply</span> <a class="idref" href="IndProp.html#MApp"><span class="id" title="constructor">MApp</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">IH<sub>1</sub></span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">IH<sub>2</sub></span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;The&nbsp;interesting&nbsp;case,&nbsp;on&nbsp;which&nbsp;<span class="inlinecode"><span class="id" title="tactic">try</span>...</span>&nbsp;does&nbsp;nothing,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;when&nbsp;<span class="inlinecode"><span class="id" title="var">re<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">EmptyStr</span></span>.&nbsp;In&nbsp;this&nbsp;case,&nbsp;we&nbsp;have<br/>
@@ -252,8 +262,6 @@ Using <span class="inlinecode"><span class="id" title="tactic">try</span></span>
     then
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span>; [<span class="id" title="var">T<sub>1</sub></span> | <span class="id" title="var">T<sub>2</sub></span> | ... | <span class="id" title="var">Tn</span>]
-<div class="paragraph"> </div>
-
 </span>    is a tactic that first performs <span class="inlinecode"><span class="id" title="var">T</span></span> and then performs <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span> on the
     first subgoal generated by <span class="inlinecode"><span class="id" title="var">T</span></span>, performs <span class="inlinecode"><span class="id" title="var">T<sub>2</sub></span></span> on the second
     subgoal, etc.
@@ -264,17 +272,14 @@ Using <span class="inlinecode"><span class="id" title="tactic">try</span></span>
     <span class="inlinecode"><span class="id" title="var">Ti</span></span>'s are the same tactic; i.e., <span class="inlinecode"><span class="id" title="var">T</span>;<span class="id" title="var">T'</span></span> is shorthand for:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span>; [<span class="id" title="var">T'</span> | <span class="id" title="var">T'</span> | ... | <span class="id" title="var">T'</span>]
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
-
+ We can use this mechanism to give a slightly neater version
+    of our optimization proof: 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;We&nbsp;can&nbsp;use&nbsp;this&nbsp;mechanism&nbsp;to&nbsp;give&nbsp;a&nbsp;slightly&nbsp;neater&nbsp;version<br/>
-of&nbsp;our&nbsp;optimization&nbsp;proof:&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="re_opt_e_match''" class="idref" href="#re_opt_e_match''"><span class="id" title="lemma">re_opt_e_match''</span></a> : <span class="id" title="keyword">∀</span> <a id="T:15" class="idref" href="#T:15"><span class="id" title="binder">T</span></a> (<a id="re:16" class="idref" href="#re:16"><span class="id" title="binder">re</span></a>: <a class="idref" href="IndProp.html#reg_exp"><span class="id" title="inductive">reg_exp</span></a> <a class="idref" href="AltAuto.html#T:15"><span class="id" title="variable">T</span></a>) <a id="s:17" class="idref" href="#s:17"><span class="id" title="binder">s</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="AltAuto.html#s:17"><span class="id" title="variable">s</span></a> <a class="idref" href="IndProp.html#70ea788eca33f3ac1bb7ed2e8169c791"><span class="id" title="notation">=~</span></a> <a class="idref" href="AltAuto.html#re:16"><span class="id" title="variable">re</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="AltAuto.html#s:17"><span class="id" title="variable">s</span></a> <a class="idref" href="IndProp.html#70ea788eca33f3ac1bb7ed2e8169c791"><span class="id" title="notation">=~</span></a> <a class="idref" href="AltAuto.html#re_opt_e"><span class="id" title="definition">re_opt_e</span></a> <a class="idref" href="AltAuto.html#re:16"><span class="id" title="variable">re</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -305,7 +310,7 @@ of&nbsp;our&nbsp;optimization&nbsp;proof:&nbsp;*)</span><br/><hr class='doublesp
 <div class="paragraph"> </div>
 
  The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> tactical takes another tactic and keeps applying this
-    tactic until it fails or stops making progress. Here is an example 
+    tactic until it fails or stops making progress. Here is an example
     showing that <span class="inlinecode">10</span> is in a long list using repeat. 
 </div>
 <div class="code">
@@ -353,7 +358,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 
 <span class="id" title="keyword">Fixpoint</span> <a id="re_opt" class="idref" href="#re_opt"><span class="id" title="definition">re_opt</span></a> {<a id="T:18" class="idref" href="#T:18"><span class="id" title="binder">T</span></a>:<span class="id" title="keyword">Type</span>} (<a id="re:19" class="idref" href="#re:19"><span class="id" title="binder">re</span></a>: <a class="idref" href="IndProp.html#reg_exp"><span class="id" title="inductive">reg_exp</span></a> <a class="idref" href="AltAuto.html#T:18"><span class="id" title="variable">T</span></a>) : <a class="idref" href="IndProp.html#reg_exp"><span class="id" title="inductive">reg_exp</span></a> <a class="idref" href="AltAuto.html#T:18"><span class="id" title="variable">T</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="AltAuto.html#re:19"><span class="id" title="variable">re</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="IndProp.html#App"><span class="id" title="constructor">App</span></a> <span class="id" title="var">re<sub>1</sub></span> <a class="idref" href="IndProp.html#EmptySet"><span class="id" title="constructor">EmptySet</span></a> ⇒ <a class="idref" href="IndProp.html#EmptySet"><span class="id" title="constructor">EmptySet</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="IndProp.html#App"><span class="id" title="constructor">App</span></a> <span class="id" title="var">_</span> <a class="idref" href="IndProp.html#EmptySet"><span class="id" title="constructor">EmptySet</span></a> ⇒ <a class="idref" href="IndProp.html#EmptySet"><span class="id" title="constructor">EmptySet</span></a><br/>
 &nbsp;&nbsp;| <a class="idref" href="IndProp.html#App"><span class="id" title="constructor">App</span></a> <a class="idref" href="IndProp.html#EmptyStr"><span class="id" title="constructor">EmptyStr</span></a> <span class="id" title="var">re<sub>2</sub></span> ⇒ <a class="idref" href="AltAuto.html#re_opt:20"><span class="id" title="definition">re_opt</span></a> <span class="id" title="var">re<sub>2</sub></span><br/>
 &nbsp;&nbsp;| <a class="idref" href="IndProp.html#App"><span class="id" title="constructor">App</span></a> <span class="id" title="var">re<sub>1</sub></span> <a class="idref" href="IndProp.html#EmptyStr"><span class="id" title="constructor">EmptyStr</span></a> ⇒ <a class="idref" href="AltAuto.html#re_opt:20"><span class="id" title="definition">re_opt</span></a> <span class="id" title="var">re<sub>1</sub></span><br/>
 &nbsp;&nbsp;| <a class="idref" href="IndProp.html#App"><span class="id" title="constructor">App</span></a> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> ⇒ <a class="idref" href="IndProp.html#App"><span class="id" title="constructor">App</span></a> (<a class="idref" href="AltAuto.html#re_opt:20"><span class="id" title="definition">re_opt</span></a> <span class="id" title="var">re<sub>1</sub></span>) (<a class="idref" href="AltAuto.html#re_opt:20"><span class="id" title="definition">re_opt</span></a> <span class="id" title="var">re<sub>2</sub></span>)<br/>
@@ -649,7 +654,7 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
 <div class="paragraph"> </div>
 
  The <span class="inlinecode"><span class="id" title="var">lia</span></span> tactic implements a decision procedure for integer linear
-    arithmetic, a subset of propositional logic and arithmetic. 
+    arithmetic, a subset of propositional logic and arithmetic.
 
 <div class="paragraph"> </div>
 
@@ -665,8 +670,8 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
 
 </li>
 <li> numeric constants, addition (<span class="inlinecode">+</span> and <span class="inlinecode"><span class="id" title="var">S</span></span>), subtraction (<span class="inlinecode">-</span>
-        and <span class="inlinecode"><span class="id" title="var">pred</span></span>), and multiplication by constants 
-        (this is what makes it linear arithmetic) 
+        and <span class="inlinecode"><span class="id" title="var">pred</span></span>), and multiplication by constants
+        (this is what makes it linear arithmetic)
 
 <div class="paragraph"> </div>
 
@@ -730,9 +735,9 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
 <div class="code">
 
 <span class="id" title="keyword">Print</span> <a class="idref" href="IndProp.html#ev"><span class="id" title="inductive">ev</span></a>.<br/>
-<span class="comment">(*&nbsp;===&gt;&nbsp;<br/>
+<span class="comment">(*&nbsp;===&gt;<br/>
 &nbsp;&nbsp;&nbsp;Inductive&nbsp;ev&nbsp;:&nbsp;nat&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;Prop&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;ev_0&nbsp;:&nbsp;ev&nbsp;0&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ev_0&nbsp;:&nbsp;ev&nbsp;0<br/>
 &nbsp;&nbsp;|&nbsp;ev_SS&nbsp;:&nbsp;forall&nbsp;n&nbsp;:&nbsp;nat,&nbsp;ev&nbsp;n&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;ev&nbsp;(S&nbsp;(S&nbsp;n))<br/>
 *)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="constructor_example" class="idref" href="#constructor_example"><span class="id" title="definition">constructor_example</span></a>: <span class="id" title="keyword">∀</span> (<a id="n:32" class="idref" href="#n:32"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>),<br/>
@@ -888,15 +893,11 @@ Of course, in any given development there will probably be
     proofs.  We can add these to the global hint database by writing
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">T</span> : <span class="id" title="var">core</span>.
-<div class="paragraph"> </div>
-
 </span>    at the top level, where <span class="inlinecode"><span class="id" title="var">T</span></span> is a top-level theorem or a
     constructor of an inductively defined proposition (i.e., anything
     whose type is an implication).  As a shorthand, we can write
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Constructors</span> <span class="id" title="var">c</span> : <span class="id" title="var">core</span>.
-<div class="paragraph"> </div>
-
 </span>    to tell Coq to do a <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Resolve</span></span> for <i>all</i> of the constructors
     from the inductive definition of <span class="inlinecode"><span class="id" title="var">c</span></span>.
 
@@ -905,8 +906,6 @@ Of course, in any given development there will probably be
     It is also sometimes necessary to add
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Unfold</span> <span class="id" title="var">d</span> : <span class="id" title="var">core</span>.
-<div class="paragraph"> </div>
-
 </span>    where <span class="inlinecode"><span class="id" title="var">d</span></span> is a defined symbol, so that <span class="inlinecode"><span class="id" title="tactic">auto</span></span> knows to expand uses
     of <span class="inlinecode"><span class="id" title="var">d</span></span>, thus enabling further possibilities for applying lemmas that
     it knows about. 
@@ -1017,8 +1016,6 @@ In the first step of the proof, we had to explicitly provide a
     of <span class="inlinecode"><span class="id" title="var">le_trans</span></span>...
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">le_trans</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span> <span class="id" title="var">o</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">m</span> ≤ <span class="id" title="var">n</span> → <span class="id" title="var">n</span> ≤ <span class="id" title="var">o</span> → <span class="id" title="var">m</span> ≤ <span class="id" title="var">o</span>
-<div class="paragraph"> </div>
-
 </span>   is quantified over a variable, <span class="inlinecode"><span class="id" title="var">n</span></span>, that does not appear in its
    conclusion, so unifying its conclusion with the goal state doesn't
    help Coq find a suitable value for this variable.  If we leave
@@ -1094,7 +1091,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

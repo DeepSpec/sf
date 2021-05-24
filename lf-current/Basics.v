@@ -297,12 +297,13 @@ Definition orb' (b1:bool) (b2:bool) : bool :=
   else b2.
 
 (** Coq's conditionals are exactly like those found in any other
-    language, with one small generalization.  Since the [bool] type
-    is not built in, Coq actually supports conditional expressions over
-    _any_ inductively defined type with exactly two constructors.  The
-    guard is considered true if it evaluates to the first constructor
-    in the [Inductive] definition and false if it evaluates to the
-    second. *)
+    language, with one small generalization.  Since the [bool] type is
+    not built in, Coq actually supports conditional expressions over
+    _any_ inductively defined type with exactly two clauses in its
+    definition.  The guard is considered true if it evaluates to the
+    "constructor" of the first clause of the [Inductive]
+    definition (which just happens to be called [true] in this case)
+    and false if it evaluates to the second. *)
 
 (** **** Exercise: 1 star, standard (nandb)
 
@@ -632,10 +633,8 @@ Definition pred (n : nat) : nat :=
 (** The second branch can be read: "if [n] has the form [S n']
     for some [n'], then return [n']."  *)
 
-(** The following [End] command closes the current module,
-    so [nat] will refer back to the type from the standard library.
-    As mentioned earlier, it comes with special notation (as decimal
-    numbers) unlike the above redefinition of [nat]. *)
+(** The following [End] command closes the current module, so
+    [nat] will refer back to the type from the standard library. *)
 
 End NatPlayground.
 
@@ -1038,8 +1037,8 @@ Proof.
     (The arrow symbol in the [rewrite] has nothing to do with
     implication: it tells Coq to apply the rewrite from left to right.
     In fact, you can omit the arrow, and Coq will default to rewriting
-    in this direction.  To rewrite from right to left, you can use 
-    [rewrite <-].  Try making this change in the above proof and see 
+    in this direction.  To rewrite from right to left, you can use
+    [rewrite <-].  Try making this change in the above proof and see
     what difference it makes.) *)
 
 (** **** Exercise: 1 star, standard (plus_id_exercise)
@@ -1480,7 +1479,7 @@ Proof.
 
     For example:
 
-        decimal            binary                           unary
+        decimal               binary                          unary
            0                       Z                              O
            1                    B1 Z                            S O
            2                B0 (B1 Z)                        S (S O)
@@ -1604,4 +1603,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2021-05-18 18:03 *)
+(* 2021-05-24 18:21 *)

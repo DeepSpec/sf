@@ -272,8 +272,6 @@ The details are not important just now, but essentially this
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">BasicsTest.v</span>
-<div class="paragraph"> </div>
-
 </span>    See the end of this chapter for more information about how to interpret
     the output of test scripts.
 
@@ -412,12 +410,13 @@ We can also introduce some familiar infix syntax for the
 
 <div class="doc">
 Coq's conditionals are exactly like those found in any other
-    language, with one small generalization.  Since the <span class="inlinecode"><span class="id" title="var">bool</span></span> type
-    is not built in, Coq actually supports conditional expressions over
-    <i>any</i> inductively defined type with exactly two constructors.  The
-    guard is considered true if it evaluates to the first constructor
-    in the <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definition and false if it evaluates to the
-    second. 
+    language, with one small generalization.  Since the <span class="inlinecode"><span class="id" title="var">bool</span></span> type is
+    not built in, Coq actually supports conditional expressions over
+    <i>any</i> inductively defined type with exactly two clauses in its
+    definition.  The guard is considered true if it evaluates to the
+    "constructor" of the first clause of the <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>
+    definition (which just happens to be called <span class="inlinecode"><span class="id" title="var">true</span></span> in this case)
+    and false if it evaluates to the second. 
 <div class="paragraph"> </div>
 
 <a id="lab25"></a><h4 class="section">Exercise: 1 star, standard (nandb)</h4>
@@ -891,10 +890,8 @@ The second branch can be read: "if <span class="inlinecode"><span class="id" tit
     for some <span class="inlinecode"><span class="id" title="var">n'</span></span>, then return <span class="inlinecode"><span class="id" title="var">n'</span></span>."  
 <div class="paragraph"> </div>
 
- The following <span class="inlinecode"><span class="id" title="keyword">End</span></span> command closes the current module,
-    so <span class="inlinecode"><span class="id" title="var">nat</span></span> will refer back to the type from the standard library.
-    As mentioned earlier, it comes with special notation (as decimal
-    numbers) unlike the above redefinition of <span class="inlinecode"><span class="id" title="var">nat</span></span>. 
+ The following <span class="inlinecode"><span class="id" title="keyword">End</span></span> command closes the current module, so
+    <span class="inlinecode"><span class="id" title="var">nat</span></span> will refer back to the type from the standard library. 
 </div>
 <div class="code">
 
@@ -1406,8 +1403,8 @@ The first line of the proof moves the universally quantified
     (The arrow symbol in the <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> has nothing to do with
     implication: it tells Coq to apply the rewrite from left to right.
     In fact, you can omit the arrow, and Coq will default to rewriting
-    in this direction.  To rewrite from right to left, you can use 
-    <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">&lt;-</span>.  Try making this change in the above proof and see 
+    in this direction.  To rewrite from right to left, you can use
+    <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">&lt;-</span>.  Try making this change in the above proof and see
     what difference it makes.) 
 <div class="paragraph"> </div>
 
@@ -1736,8 +1733,6 @@ Since curly braces mark both the beginning and the end of a proof,
     analysis on a variable right after introducing it:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">y</span> <span class="id" title="keyword">as</span> [|<span class="id" title="var">y</span>] <span class="id" title="var">eqn</span>:<span class="id" title="var">E</span>.
-<div class="paragraph"> </div>
-
 </span>    This pattern is so common that Coq provides a shorthand for it: we
     can perform case analysis on a variable when introducing it by
     using an intro pattern instead of a variable name. For instance,
@@ -1968,7 +1963,7 @@ When Coq checks this definition, it notes that <span class="inlinecode"><span cl
 
     For example:
 <pre>
-        decimal            binary                           unary
+        decimal               binary                          unary
            0                       Z                              O
            1                    B<sub>1</sub> Z                            S O
            2                B<sub>0</sub> (B<sub>1</sub> Z)                        S (S O)
@@ -2056,8 +2051,6 @@ The following "unit tests" of your increment and binary-to-unary
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">BasicsTest.v</span>
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -2137,7 +2130,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:03&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:21&nbsp;*)</span><br/>
 </div>
 </div>
 

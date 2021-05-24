@@ -47,7 +47,7 @@
 </div>
 
 <div class="doc">
-<a id="lab355"></a><h1 class="section">First Pass</h1>
+<a id="lab358"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -103,7 +103,7 @@
 </div>
 
 <div class="doc">
-<a id="lab356"></a><h2 class="section">Motivation for the Discard Rule</h2>
+<a id="lab359"></a><h2 class="section">Motivation for the Discard Rule</h2>
 
 </div>
 <div class="code">
@@ -184,7 +184,7 @@ This situation is desirable in a programming language with explicit
 </div>
 
 <div class="doc">
-<a id="lab357"></a><h2 class="section">Statement of the Discard Rule</h2>
+<a id="lab360"></a><h2 class="section">Statement of the Discard Rule</h2>
 
 <div class="paragraph"> </div>
 
@@ -253,7 +253,7 @@ Observe the difference between the two rules. In <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab358"></a><h2 class="section">Fine-grained Control on Collectable Predicates</h2>
+<a id="lab361"></a><h2 class="section">Fine-grained Control on Collectable Predicates</h2>
 
 <div class="paragraph"> </div>
 
@@ -316,7 +316,7 @@ To constraint the discard rule and allow fine-tuning of which heap
 </div>
 
 <div class="doc">
-<a id="lab359"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> and of <span class="inlinecode"><span class="id" title="var">haffine</span></span></h2>
+<a id="lab362"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> and of <span class="inlinecode"><span class="id" title="var">haffine</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -430,7 +430,7 @@ Note, in the last rule above, that the type <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-<a id="lab360"></a><h2 class="section">Definition of the "Affine Top" Heap Predicates</h2>
+<a id="lab363"></a><h2 class="section">Definition of the "Affine Top" Heap Predicates</h2>
 
 <div class="paragraph"> </div>
 
@@ -465,7 +465,7 @@ The introduction lemmas asserts that <span class="inlinecode">\<span class="id" 
     satisfies <span class="inlinecode"><span class="id" title="var">heap_affine</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab361"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_frame)</h4>
+<a id="lab364"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_frame)</h4>
  Prove that the affine heap predicate holds of any affine heap. 
 </div>
 <div class="code">
@@ -483,7 +483,7 @@ The introduction lemmas asserts that <span class="inlinecode">\<span class="id" 
  The elimination lemma asserts the reciprocal. 
 <div class="paragraph"> </div>
 
-<a id="lab362"></a><h4 class="section">Exercise: 2 stars, standard, optional (hgc_inv)</h4>
+<a id="lab365"></a><h4 class="section">Exercise: 2 stars, standard, optional (hgc_inv)</h4>
  Prove the elimination lemma for <span class="inlinecode">\<span class="id" title="var">GC</span></span> expressed using <span class="inlinecode"><span class="id" title="var">heap_affine</span></span>. 
 </div>
 <div class="code">
@@ -516,7 +516,7 @@ The introduction lemmas asserts that <span class="inlinecode">\<span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab363"></a><h2 class="section">Properties of the <span class="inlinecode">\<span class="id" title="var">GC</span></span> Predicate</h2>
+<a id="lab366"></a><h2 class="section">Properties of the <span class="inlinecode">\<span class="id" title="var">GC</span></span> Predicate</h2>
 
 <div class="paragraph"> </div>
 
@@ -594,7 +594,7 @@ Not only is this rule more concise than <span class="inlinecode"><span class="id
 </div>
 
 <div class="doc">
-<a id="lab364"></a><h2 class="section">Instantiation of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> for a Fully Affine Logic</h2>
+<a id="lab367"></a><h2 class="section">Instantiation of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> for a Fully Affine Logic</h2>
 
 </div>
 <div class="code">
@@ -662,7 +662,7 @@ With that instantiation, the affine top predicate <span class="inlinecode">\<spa
 </div>
 
 <div class="doc">
-<a id="lab365"></a><h2 class="section">Instantiation of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> for a Fully Linear Logic</h2>
+<a id="lab368"></a><h2 class="section">Instantiation of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> for a Fully Linear Logic</h2>
 
 </div>
 <div class="code">
@@ -734,7 +734,7 @@ With that instantiation, the affine top predicate <span class="inlinecode">\<spa
 </div>
 
 <div class="doc">
-<a id="lab366"></a><h2 class="section">Refined Definition of Separation Logic Triples</h2>
+<a id="lab369"></a><h2 class="section">Refined Definition of Separation Logic Triples</h2>
 
 </div>
 <div class="code">
@@ -757,8 +757,6 @@ Thereafter, we purposely leave the definition of <span class="inlinecode"><span 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">triple</span> (<span class="id" title="var">t</span>:<span class="id" title="var">trm</span>) (<span class="id" title="var">H</span>:<span class="id" title="var">hprop</span>) (<span class="id" title="var">Q</span>:<span class="id" title="var">val</span>→<span class="id" title="var">hprop</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">H'</span>:<span class="id" title="var">hprop</span>), <span class="id" title="var">hoare</span> <span class="id" title="var">t</span> (<span class="id" title="var">H</span> <span class='gray-font'>\</span>* <span class="id" title="var">H'</span>) (<span class="id" title="var">Q</span> <span class='gray-font'>\</span>*+ <span class="id" title="var">H'</span>).
-<div class="paragraph"> </div>
-
 </span>    The discard rule <span class="inlinecode"><span class="id" title="var">triple_htop_post</span></span> asserts that postconditions
     may be freely extended with the <span class="inlinecode">\<span class="id" title="var">GC</span></span> predicate. To support
     this rule, it suffices to modify the definition of <span class="inlinecode"><span class="id" title="var">triple</span></span> to
@@ -800,14 +798,14 @@ Observe that this definition of <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab367"></a><h2 class="section">Soundness of the Existing Rules</h2>
+<a id="lab370"></a><h2 class="section">Soundness of the Existing Rules</h2>
 
 <div class="paragraph"> </div>
 
  Let us update the soundness proof for the other structural rules. 
 <div class="paragraph"> </div>
 
-<a id="lab368"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_frame)</h4>
+<a id="lab371"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_frame)</h4>
  Prove the frame rule for the definition of <span class="inlinecode"><span class="id" title="var">triple</span></span> that includes <span class="inlinecode">\<span class="id" title="var">GC</span></span>.
     Hint: unfold the definition of <span class="inlinecode"><span class="id" title="var">triple</span></span> but not that of <span class="inlinecode"><span class="id" title="var">hoare</span></span>,
     then exploit lemma <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span> and conclude using the tactic <span class="inlinecode"><span class="id" title="var">xsimpl</span></span>. 
@@ -824,7 +822,7 @@ Observe that this definition of <span class="inlinecode"><span class="id" title=
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab369"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_conseq)</h4>
+<a id="lab372"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_conseq)</h4>
  Prove the frame rule for the definition of <span class="inlinecode"><span class="id" title="var">triple</span></span> that includes <span class="inlinecode">\<span class="id" title="var">GC</span></span>.
     Hint: follow the same approach as in the proof of <span class="inlinecode"><span class="id" title="var">triple_frame</span></span>,
     and leverage the tactic <span class="inlinecode"><span class="id" title="var">xchange</span></span> to conclude. 
@@ -893,7 +891,7 @@ The standard reasoning rules of Separation Logic can be derived
 </div>
 
 <div class="doc">
-<a id="lab370"></a><h2 class="section">Soundness of the Discard Rules</h2>
+<a id="lab373"></a><h2 class="section">Soundness of the Discard Rules</h2>
 
 </div>
 <div class="code">
@@ -906,7 +904,7 @@ Let us first establish the soundness of the discard rule
     <span class="inlinecode"><span class="id" title="var">triple_htop_post</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab371"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_hgc_post)</h4>
+<a id="lab374"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_hgc_post)</h4>
  Prove <span class="inlinecode"><span class="id" title="var">triple_h_post</span></span> with respect to the refined definition of
     <span class="inlinecode"><span class="id" title="var">triple</span></span> that includes <span class="inlinecode">\<span class="id" title="var">GC</span></span> in the postcondition.
     Hint: exploit <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span>, then exploit <span class="inlinecode"><span class="id" title="var">hstar_hgc_hgc</span></span>, with
@@ -1018,7 +1016,7 @@ Let us first establish the soundness of the discard rule
 </div>
 
 <div class="doc">
-<a id="lab372"></a><h2 class="section">Discard Rules in WP Style</h2>
+<a id="lab375"></a><h2 class="section">Discard Rules in WP Style</h2>
 
 <div class="paragraph"> </div>
 
@@ -1109,7 +1107,7 @@ For a change, let us present below a direct proof for this lemma,
 </div>
 
 <div class="doc">
-<a id="lab373"></a><h2 class="section">Exploiting the Discard Rule in Proofs</h2>
+<a id="lab376"></a><h2 class="section">Exploiting the Discard Rule in Proofs</h2>
 
 <div class="paragraph"> </div>
 
@@ -1191,13 +1189,13 @@ Let us update the tactic <span class="inlinecode"><span class="id" title="var">x
 </div>
 
 <div class="doc">
-<a id="lab374"></a><h2 class="section">Example Proof Involving Discarded Heap Predicates</h2>
+<a id="lab377"></a><h2 class="section">Example Proof Involving Discarded Heap Predicates</h2>
 
 <div class="paragraph"> </div>
 
  Using the updated version of <span class="inlinecode"><span class="id" title="var">xwp</span></span>, let us revisite the proof of our
     motivating example <span class="inlinecode"><span class="id" title="var">succ_using_incr</span></span> in a fully affine logic, i.e.,
-    a logical where any predicate  can be discarded. 
+    a logical where any predicate can be discarded. 
 </div>
 <div class="code">
 
@@ -1242,12 +1240,12 @@ We will show further on how to automate the work from the last line
 </div>
 
 <div class="doc">
-<a id="lab375"></a><h1 class="section">More Details</h1>
+<a id="lab378"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab376"></a><h2 class="section">Revised Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h2>
+<a id="lab379"></a><h2 class="section">Revised Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1255,8 +1253,6 @@ We will show further on how to automate the work from the last line
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">mkstruct</span> (<span class="id" title="var">F</span>:<span class="id" title="var">formula</span>) : <span class="id" title="var">formula</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">Q</span> ⇒ <span class='gray-font'>\</span><span class="id" title="tactic">∃</span> <span class="id" title="var">Q'</span>, (<span class="id" title="var">F</span> <span class="id" title="var">Q'</span>) <span class='gray-font'>\</span>* (<span class="id" title="var">Q'</span> <span class='gray-font'>\</span><span class="nowrap">&minus;&minus;&lowast;</span> <span class="id" title="var">Q</span>).
-<div class="paragraph"> </div>
-
 </span>    This definition can be generalized to handle not just the consequence
     and the frame rule, but also the discard rule.
 
@@ -1353,7 +1349,7 @@ EX2? (mkstruct_haffine_post)
 </div>
 
 <div class="doc">
-<a id="lab377"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">xaffine</span></span>, and Behavior of <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on <span class="inlinecode">\<span class="id" title="var">GC</span></span></h2>
+<a id="lab380"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">xaffine</span></span>, and Behavior of <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on <span class="inlinecode">\<span class="id" title="var">GC</span></span></h2>
 
 </div>
 <div class="code">
@@ -1421,7 +1417,7 @@ In addition, <span class="inlinecode"><span class="id" title="var">xsimpl</span>
 </div>
 
 <div class="doc">
-<a id="lab378"></a><h2 class="section">The Proof Tactics for Applying the Discard Rules</h2>
+<a id="lab381"></a><h2 class="section">The Proof Tactics for Applying the Discard Rules</h2>
 
 </div>
 <div class="code">
@@ -1435,10 +1431,12 @@ To present the discard tactics <span class="inlinecode"><span class="id" title="
     we import the definitions from <span class="inlinecode"><span class="id" title="var">LibSepDirect</span></span> but assume that the
     definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> is like the one presented in the present
     file, that is, including the <span class="inlinecode">\<span class="id" title="var">GC</span></span> when defining <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> <span class="inlinecode"><span class="id" title="var">F</span></span>
-    as <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">Q'</span>,</span> <span class="inlinecode"><span class="id" title="var">F</span></span> <span class="inlinecode"><span class="id" title="var">Q'</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode">(<span class="id" title="var">Q'</span></span> <span class="inlinecode"><span class='gray-font'>\</span><span class="nowrap">&minus;&minus;&lowast;</span></span> <span class="inlinecode">(<span class="id" title="var">Q</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*+</span> <span class="inlinecode">\<span class="id" title="var">GC</span>)).</span>
+    as <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">Q'</span>,</span> <span class="inlinecode"><span class="id" title="var">F</span></span> <span class="inlinecode"><span class="id" title="var">Q'</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode">(<span class="id" title="var">Q'</span></span> <span class="inlinecode"><span class='gray-font'>\</span><span class="nowrap">&minus;&minus;&lowast;</span></span> <span class="inlinecode">(<span class="id" title="var">Q</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*+</span> <span class="inlinecode">\<span class="id" title="var">GC</span>))</span>.
 
-    <span class="inlinecode"><span class="id" title="var">As</span></span> <span class="inlinecode"><span class="id" title="var">argued</span></span> <span class="inlinecode"><span class="id" title="var">earlier</span></span> <span class="inlinecode"><span class="id" title="var">on</span>,</span> <span class="inlinecode"><span class="id" title="keyword">with</span></span> <span class="inlinecode"><span class="id" title="var">this</span></span> <span class="inlinecode"><span class="id" title="var">definition</span>,</span> <span class="inlinecode">[<span class="id" title="var">mkstruct</span>]</span> <span class="inlinecode"><span class="id" title="var">satisfies</span></span> <span class="inlinecode"><span class="id" title="var">the</span></span>
-    <span class="inlinecode"><span class="id" title="var">following</span></span> <span class="inlinecode"><span class="id" title="var">discard</span></span> <span class="inlinecode"><span class="id" title="var">rule</span>.</span> <span class="inlinecode"></span>
+<div class="paragraph"> </div>
+
+    As argued earlier on, with this definition, <span class="inlinecode"><span class="id" title="var">mkstruct</span></span> satisfies the
+    following discard rule. 
 </div>
 <div class="code">
 
@@ -1525,12 +1523,12 @@ The tactic <span class="inlinecode"><span class="id" title="var">xgc_post</span>
 </div>
 
 <div class="doc">
-<a id="lab379"></a><h1 class="section">Optional Material</h1>
+<a id="lab382"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab380"></a><h2 class="section">Alternative Statement for Distribution of <span class="inlinecode"><span class="id" title="var">haffine</span></span> on Quantifiers</h2>
+<a id="lab383"></a><h2 class="section">Alternative Statement for Distribution of <span class="inlinecode"><span class="id" title="var">haffine</span></span> on Quantifiers</h2>
 
 </div>
 <div class="code">
@@ -1548,8 +1546,6 @@ Recall the lemmas <span class="inlinecode"><span class="id" title="var">haffine_
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">haffine_hforall</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">A</span> `{<span class="id" title="var">Inhab</span> <span class="id" title="var">A</span>} (<span class="id" title="var">J</span>:<span class="id" title="var">A</span>→<span class="id" title="var">hprop</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">x</span>, <span class="id" title="var">haffine</span> (<span class="id" title="var">J</span> <span class="id" title="var">x</span>)) →<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">haffine</span> (\<span class="id" title="keyword">∀</span> <span class="id" title="var">x</span>, (<span class="id" title="var">J</span> <span class="id" title="var">x</span>)).
-<div class="paragraph"> </div>
-
 </span>    They can be reformulated in a more concise way, as explained next. 
 <div class="paragraph"> </div>
 
@@ -1582,7 +1578,7 @@ The rules then reformulate as follows.
 </div>
 
 <div class="doc">
-<a id="lab381"></a><h2 class="section">Pre and Post Rules</h2>
+<a id="lab384"></a><h2 class="section">Pre and Post Rules</h2>
 
 </div>
 <div class="code">
@@ -1642,7 +1638,7 @@ The key idea of the proof is that a term <span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab382"></a><h2 class="section">Low-level Definition of Refined Triples</h2>
+<a id="lab385"></a><h2 class="section">Low-level Definition of Refined Triples</h2>
 
 </div>
 <div class="code">
@@ -1673,8 +1669,6 @@ In chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>, we pre
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> <span class="id" title="var">h<sub>1</sub>'</span> <span class="id" title="var">h<sub>2</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="tactic">eval</span> (<span class="id" title="var">h<sub>1</sub></span> \<span class="id" title="var">u</span> <span class="id" title="var">h<sub>2</sub></span>) <span class="id" title="var">t</span> (<span class="id" title="var">h<sub>1</sub>'</span> \<span class="id" title="var">u</span> <span class="id" title="var">h<sub>2</sub></span>) <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">Q</span> <span class="id" title="var">v</span> <span class="id" title="var">h<sub>1</sub>'</span>.
-<div class="paragraph"> </div>
-
 </span>    In what follows, we explain how to generalize this definition to match
     our revised definition of <span class="inlinecode"><span class="id" title="var">triple</span></span>, and thereby obtain a direct definition
     expressed in terms of heap, that does not depend on the definition of
@@ -1698,8 +1692,6 @@ In chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>, we pre
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">disjoint</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">disjoint</span> <span class="id" title="var">h<sub>2</sub></span> <span class="id" title="var">h<sub>3</sub></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">disjoint</span> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>3</sub></span>.
-<div class="paragraph"> </div>
-
 </span>
 <div class="paragraph"> </div>
 
@@ -1751,7 +1743,7 @@ One can prove the equivalence of <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab383"></a><h2 class="section">Historical Notes</h2>
+<a id="lab386"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1767,15 +1759,14 @@ One can prove the equivalence of <span class="inlinecode"><span class="id" title
 <div class="paragraph"> </div>
 
     This chapter gives a presentation of Separation Logic featuring a
-    customizable predicate <span class="inlinecode"><span class="id" title="var">haffine</span></span> for controlling which resources should be
+    customizable predicate <span class="inlinecode"><span class="id" title="var">haffine</span></span> for controlling which resources should bedd
     treated as affine, and which ones should be treated as linear. This
-    direct approach to controlling linearity was introduced in the context
-    of CFML, in work by <a href="Bib.html#Guéneau,-Jourdan, Charguéraud, and Pottier 2019"><span class="inlineref">[Guéneau, Jourdan, Charguéraud, and Pottier 2019]</span></a>.
-
+    direct approach to controlling linearity was introduced in the context of
+    CFML, in work by <a href="Bib.html#Guéneau,-Jourdan, Charguéraud, and Pottier 2019"><span class="inlineref">[Guéneau, Jourdan, Charguéraud, and Pottier 2019]</span></a> 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-18&nbsp;18:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-24&nbsp;18:43&nbsp;*)</span><br/>
 </div>
 </div>
 

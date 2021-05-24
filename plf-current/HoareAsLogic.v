@@ -20,9 +20,8 @@
 
 Set Warnings "-deprecated-hint-without-locality,-deprecated-hint-without-locality".
 From PLF Require Import Maps.
-From PLF Require Import Imp.
-Hint Constructors ceval : core.
 From PLF Require Import Hoare.
+Hint Constructors ceval : core.
 
 (* ################################################################# *)
 (** * Hoare Logic and Model Theory *)
@@ -137,10 +136,10 @@ Definition valid (P : Assertion) (c : com) (Q : Assertion) : Prop :=
 
 (**
 
-                 ---------------------------  (hoare_asgn)
-X=0 ->> X+1=1    {{X+1=1}} X ::= X+1 {{X=1}}
-----------------------------------------------------------  (hoare_consequence)
-                  {{X=0}} X ::= X+1 {{X=1}}
+                    ---------------------------  (hoare_asgn)
+   X=0 ->> X+1=1    {{X+1=1}} X ::= X+1 {{X=1}}
+   -------------------------------------------------------  (hoare_consequence)
+                     {{X=0}} X ::= X+1 {{X=1}}
 *)
 
 (** At each step we have either used one of the rules, or we
@@ -378,18 +377,18 @@ Proof.
 (** * Postscript: Decidability *)
 
 (** We might hope that Hoare logic would be _decidable_; that is, that
-    there is an (terminating) algorithm (a _decision procedure_) that
-    can determine whether or not a given Hoare triple is valid or
-    derivable.  But such a decision procedure cannot exist.
+    there would be an (terminating) algorithm (a _decision procedure_)
+    that can determine whether or not a given Hoare triple is valid or
+    derivable.  Sadly, such a decision procedure cannot exist.
 
-    Consider the triple [{{True}} c {{False}}]. This triple is valid if and
-    only if [c] is non-terminating.  So any algorithm that could
-    determine validity of arbitrary triples could solve the Halting
-    Problem.
+    Consider the triple [{{True}} c {{False}}]. This triple is valid
+    if and only if [c] is non-terminating.  So any algorithm that
+    could determine validity of arbitrary triples could solve the
+    Halting Problem.
 
-    Similarly, the triple [{{True}} skip {{P}}] is valid if and only if
-    [forall s, P s] is valid, where [P] is an arbitrary assertion of Coq's
-    logic. But it is known that there can be no decision procedure for
-    this logic. *)
+    Similarly, the triple [{{True}} skip {{P}}] is valid if and only
+    if [forall s, P s] is valid, where [P] is an arbitrary assertion
+    of Coq's logic. But this logic is far too powerful to be
+    decidable. *)
 
-(* 2021-05-18 18:05 *)
+(* 2021-05-24 18:25 *)
