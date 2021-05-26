@@ -670,12 +670,11 @@ Lemma silly1 : forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
   Q 42.
 Proof.
   intros P Q HP HQ. eapply HQ. apply HP.
-Fail Qed.
-(** Coq gives a warning after [apply HP].  ("All the remaining goals
+(** Coq gives a warning after [apply HP]: "All the remaining goals
     are on the shelf," means that we've finished all our top-level
     proof obligations but along the way we've put some aside to be
-    done later, and we have not finished those.)  Trying to close the
-    proof with [Qed] gives an error. *)
+    done later, and we have not finished those.  Trying to close the
+    proof with [Qed] would yield an error. (Try it!) *)
 Abort.
 
 (** An additional constraint is that existential variables cannot be
@@ -739,4 +738,4 @@ Proof.
   intros P Q HP HQ. destruct HP as [y HP']. eauto.
 Qed.
 
-(* 2021-05-26 13:48 *)
+(* 2021-05-26 15:09 *)

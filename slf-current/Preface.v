@@ -304,7 +304,7 @@
 
 (** The [Preface] of Software Foundations Volume 1 (_Logical
     Foundations_) describes how to install Coq. The files you are
-    reading have been tested with Coq 8.12 or later. *)
+    reading have been tested with Coq 8.12. *)
 
 (* ================================================================= *)
 (** ** Note for CoqIDE Users *)
@@ -340,4 +340,4 @@ coqide -async-proofs off -async-proofs-command-error-resilience off -Q . SLF Bas
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-05-26 14:04 *)
+(* 2021-05-26 15:29 *)

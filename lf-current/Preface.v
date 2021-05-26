@@ -257,7 +257,7 @@
 (** Coq runs on Windows, Linux, and macOS.  You will need:
 
     - A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.12 or later.
+      These files have been tested with Coq 8.12.
 
     - An IDE for interacting with Coq.  Currently, there are two
       choices:
@@ -447,4 +447,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-05-26 13:48 *)
+(* 2021-05-26 15:08 *)

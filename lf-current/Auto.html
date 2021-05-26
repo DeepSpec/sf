@@ -816,15 +816,14 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 &nbsp;&nbsp;<a class="idref" href="Auto.html#Q:128"><span class="id" title="variable">Q</span></a> 42.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">HP</span> <span class="id" title="var">HQ</span>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">HQ</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">HP</span>.<br/>
-<span class="id" title="var">Fail</span> <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-Coq gives a warning after <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">HP</span></span>.  ("All the remaining goals
+Coq gives a warning after <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">HP</span></span>: "All the remaining goals
     are on the shelf," means that we've finished all our top-level
     proof obligations but along the way we've put some aside to be
-    done later, and we have not finished those.)  Trying to close the
-    proof with <span class="inlinecode"><span class="id" title="keyword">Qed</span></span> gives an error. 
+    done later, and we have not finished those.  Trying to close the
+    proof with <span class="inlinecode"><span class="id" title="keyword">Qed</span></span> would yield an error. (Try it!) 
 </div>
 <div class="code">
 <span class="id" title="keyword">Abort</span>.<br/>
@@ -905,7 +904,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">HP</span> <span class="id" title="var">HQ</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">HP</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">y</span> <span class="id" title="var">HP'</span>]. <span class="id" title="tactic">eauto</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-26&nbsp;13:48&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-05-26&nbsp;15:09&nbsp;*)</span><br/>
 </div>
 </div>
 
