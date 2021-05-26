@@ -277,6 +277,8 @@
     knowing in which context the course has been used and how much of
     the course students were able to cover is very valuable information.
 
+    You can send feedback at: slf --at-- chargueraud.org.
+
     If you plan on providing any non-small amount of feedback, do not
     hesitate to ask the author to be added as contributor to the
     github repository. In particular, please do not hesitate to improve
@@ -338,4 +340,4 @@ coqide -async-proofs off -async-proofs-command-error-resilience off -Q . SLF Bas
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-05-24 18:43 *)
+(* 2021-05-26 14:04 *)
