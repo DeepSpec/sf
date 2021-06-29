@@ -75,7 +75,7 @@ Eval compute in fold_left (fun x q =>insert q x) [3;1;4;1;5;9;2;3;5] empty.
              (Node 3 (Node 2 Leaf Leaf) (Node 5 Leaf Leaf)))
           Leaf]
      : priqueue
->> *)
+*)
 
 Fixpoint join (p q: priqueue) (c: tree) : priqueue :=
   match p, q, c with
@@ -397,4 +397,4 @@ End BinomQueue.
 *)
 (** [] *)
 
-(* 2021-05-26 15:18 *)
+(* 2021-06-29 21:56 *)

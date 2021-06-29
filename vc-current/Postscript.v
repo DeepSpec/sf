@@ -1,21 +1,5 @@
 (** * Postscript: Postcript and bibliography *)
 
-(* ################################################################# *)
-(** * Looking back *)
-
-(** You've now seen how to verify programs that use many of C's data
-  structures (arrays, pointers, structs, integers) and control
-  structures (functions, if-then-else, loops), and abstraction 
-  structures (data abstraction, module interfaces).  The final exercise
-  (hash tables) demonstrated all of these at once, in addition to a
-  key concept: layering the proof using a functional model,
-  so that proofs about the properties of the functional model ([Hashfun])
-  cleanly separate from the implementation proof ([Verif_hash]) showing
-  that the C program refines the functional model. *)
-
-(* ################################################################# *)
-(** * Looking forward *)
-
 (** If you want to verify some C programs on your own, you may take
  inspiration from some of these Verifiable C proofs:
  - SHA-2 cryptographic hashing [Appel 2015] (in Bib.v)
@@ -33,18 +17,21 @@
     VST is distributed with a [progs] directory of many small C programs
   that demonstrate different features and methods of Verifiable C.
   If your VST installation is in the standard place, you can find this
-  as a subdirectory of [`coqc -where`/user-contrib/VST]. *)
-
+  as a subdirectory of
+  [[
+    `coqc -where`/user-contrib/VST
+  ]]
+*)
 (* ================================================================= *)
 (** ** Modules
 
-    All the verifications in this volume are single-file C programs.  Real 
-  software engineering in C is done with modules in .c files and interfaces
-  in .h files.  Since 2019, VST has a module system; the early version
-  is described in [Beringer 2019] (in Bib.v) and the newer version is demonstrated 
-  in progs/VSUpile.  The description in [Beringer 2019] (in Bib.v) mostly matches
-  the proofs in progs/VSUpile, but the proofs handle data abstraction in a more
-  advanced way than is described in the paper. *)
+    The first-draft version of VST's module system -- for verifying
+  multimodule C programs with .c and .h files -- is described in
+  [Beringer 2019] (in Bib.v).  The newer version, using Verified Software Units,
+  is demonstrated in progs/VSUpile distributed with VST.  
+  The description in [Beringer 2019] (in Bib.v) mostly matches
+  the proofs in progs/VSUpile, but the proofs handle data abstraction
+  using the methods described in the the VSU chapters of this volume. *)
 
 (* ================================================================= *)
 (** ** Input/output
@@ -178,4 +165,4 @@
   future software verification efforts. *)
   
   
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)

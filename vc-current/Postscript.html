@@ -35,25 +35,6 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab156"></a><h1 class="section">Looking back</h1>
-
-<div class="paragraph"> </div>
-
- You've now seen how to verify programs that use many of C's data
-  structures (arrays, pointers, structs, integers) and control
-  structures (functions, if-then-else, loops), and abstraction 
-  structures (data abstraction, module interfaces).  The final exercise
-  (hash tables) demonstrated all of these at once, in addition to a
-  key concept: layering the proof using a functional model,
-  so that proofs about the properties of the functional model (<a href="Hashfun.html"><span class="inlineref">Hashfun</span></a>)
-  cleanly separate from the implementation proof (<a href="Verif_hash.html"><span class="inlineref">Verif_hash</span></a>) showing
-  that the C program refines the functional model. 
-<div class="paragraph"> </div>
-
-<a id="lab157"></a><h1 class="section">Looking forward</h1>
-
-<div class="paragraph"> </div>
-
  If you want to verify some C programs on your own, you may take
  inspiration from some of these Verifiable C proofs:
 <ul class="doclist">
@@ -82,24 +63,24 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab158"></a><h2 class="section">Small examples</h2>
+<a id="lab229"></a><h2 class="section">Small examples</h2>
  VST is distributed with a <span class="inlinecode"><span class="id" title="var">progs</span></span> directory of many small C programs
   that demonstrate different features and methods of Verifiable C.
   If your VST installation is in the standard place, you can find this
-  as a subdirectory of <span class="inlinecode">`<span class="id" title="var">coqc</span></span> <span class="inlinecode">-<span class="id" title="keyword">where</span>`/<span class="id" title="var">user</span>-<span class="id" title="var">contrib</span>/<span class="id" title="var">VST</span></span>. 
+  as a subdirectory of
+  <br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;`<span class="id" title="var">coqc</span> -<span class="id" title="keyword">where</span>`/<span class="id" title="var">user</span>-<span class="id" title="var">contrib</span>/<span class="id" title="var">VST</span>
+</span><a id="lab230"></a><h2 class="section">Modules</h2>
+ The first-draft version of VST's module system -- for verifying
+  multimodule C programs with .c and .h files -- is described in
+  <a href="Bib.html#Beringer-2019"><span class="inlineref">[Beringer 2019]</span></a>.  The newer version, using Verified Software Units,
+  is demonstrated in progs/VSUpile distributed with VST.  
+  The description in <a href="Bib.html#Beringer-2019"><span class="inlineref">[Beringer 2019]</span></a> mostly matches
+  the proofs in progs/VSUpile, but the proofs handle data abstraction
+  using the methods described in the the VSU chapters of this volume. 
 <div class="paragraph"> </div>
 
-<a id="lab159"></a><h2 class="section">Modules</h2>
- All the verifications in this volume are single-file C programs.  Real 
-  software engineering in C is done with modules in .c files and interfaces
-  in .h files.  Since 2019, VST has a module system; the early version
-  is described in <a href="Bib.html#Beringer-2019"><span class="inlineref">[Beringer 2019]</span></a> and the newer version is demonstrated 
-  in progs/VSUpile.  The description in <a href="Bib.html#Beringer-2019"><span class="inlineref">[Beringer 2019]</span></a> mostly matches
-  the proofs in progs/VSUpile, but the proofs handle data abstraction in a more
-  advanced way than is described in the paper. 
-<div class="paragraph"> </div>
-
-<a id="lab160"></a><h2 class="section">Input/output</h2>
+<a id="lab231"></a><h2 class="section">Input/output</h2>
   To prove I/O using our Verifiable C logic, we treat the state of the
   outside world as a resource in the SEP clause, alongside (but separating from) 
   in-memory conjuncts.  Proved examples are in <span class="inlinecode"><span class="id" title="var">progs</span>/<span class="id" title="var">io.c</span>,</span> <span class="inlinecode"><span class="id" title="var">progs</span>/<span class="id" title="var">io_mem.c</span></span>,
@@ -108,7 +89,7 @@
   <a href="Bib.html#Mansky-2020"><span class="inlineref">[Mansky 2020]</span></a>. 
 <div class="paragraph"> </div>
 
-<a id="lab161"></a><h1 class="section">Looking around</h1>
+<a id="lab232"></a><h1 class="section">Looking around</h1>
 
 <div class="paragraph"> </div>
 
@@ -116,7 +97,7 @@
   which system to use? 
 <div class="paragraph"> </div>
 
-<a id="lab162"></a><h2 class="section">Static analyzers</h2>
+<a id="lab233"></a><h2 class="section">Static analyzers</h2>
  There are many <i>static analyzers</i> -- too numerous to list here -- that
   attempt to check <i>safety</i> of your program:  will it crash?  Will it access
   an array out of bounds, or dereference an uninitialized pointer?  Static
@@ -136,7 +117,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab163"></a><h2 class="section">Functional correctness verifiers -- functional languages</h2>
+<a id="lab234"></a><h2 class="section">Functional correctness verifiers -- functional languages</h2>
  A good way to write proved-correct software is to program in a pure
   functional program logic, and use higher-order logic to prove correctness.
   For example:
@@ -162,7 +143,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab164"></a><h2 class="section">Functional correctness verifiers -- imperative languages</h2>
+<a id="lab235"></a><h2 class="section">Functional correctness verifiers -- imperative languages</h2>
 
 <div class="paragraph"> </div>
 
@@ -190,7 +171,7 @@
   programs in HOL <a href="Bib.html#Kumar-2014"><span class="inlineref">[Kumar 2014]</span></a>. 
 <div class="paragraph"> </div>
 
-<a id="lab165"></a><h2 class="section">Functional correctness verifiers -- C</h2>
+<a id="lab236"></a><h2 class="section">Functional correctness verifiers -- C</h2>
 
 <div class="paragraph"> </div>
 
@@ -250,7 +231,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab166"></a><h2 class="section">Foundational soundness</h2>
+<a id="lab237"></a><h2 class="section">Foundational soundness</h2>
 
 <div class="paragraph"> </div>
 
@@ -270,7 +251,7 @@
   connection end-to-end, with machine-checked proofs. 
 <div class="paragraph"> </div>
 
-<a id="lab167"></a><h1 class="section">Conclusion</h1>
+<a id="lab238"></a><h1 class="section">Conclusion</h1>
 
 <div class="paragraph"> </div>
 
@@ -284,7 +265,7 @@
 </div>
 <div class="code">
 <hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-05-26&nbsp;15:24&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-06-29&nbsp;22:00&nbsp;*)</span><br/>
 </div>
 </div>
 

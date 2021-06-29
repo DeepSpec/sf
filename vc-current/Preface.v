@@ -57,8 +57,9 @@
       exercises!
     - Study the Sort, SearchTree, and ADT chapters of _Software
       Foundations Volume 3_ (Verified Functional Algorithms), and do
-      the exercises!  You will also need a working knowledge of the C
-      programming language. *)
+      the exercises!
+
+    You will also need a working knowledge of the C programming language. *)
 
 (* ################################################################# *)
 (** * Practicalities *)
@@ -67,28 +68,26 @@
 (** ** System Requirements *)
 
 (** Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
-    describes the Coq installation you will need.  This edition was
-    built with Coq 8.12.0.
+   describes the Coq installation you will need.  This edition was
+   built with Coq 8.13.0.
 
-    You will need VST installed.  You can do that either by installing
-    it as part of the standard "Coq Platform" that is released with each
-    new version of Coq, or using opam (the package is named coq-vst).
-    At the end of this chapter is a test to make sure you have the right
-    version of VST installed.
+   You will need VST 2.8 installed.  You can do that either by installing
+   it as part of the standard "Coq Platform" that is released with each
+   new version of Coq, or using opam (the package is named coq-vst).
+   At the end of this chapter is a test to make sure you have the right
+   version of VST installed.
 
-    _IF YOU USE OPAM_, the following opam commands may be useful:
-    - opam repo add coq-released https://coq.inria.fr/opam/released
-    - opam pin coq 8.13.1
-    - opam install coq-vst.2.7 (_this will take 30 minutes or more_)
-    - (to use coqide:) opam pin lablgtk3 3.0.beta5
-    - (to use coqide:) opam install coqide
+   _IF YOU USE OPAM_, you can install Coq and CoqIDE using the
+     instructions at https://coq.inria.fr/opam-using.html
+   and then continue with,
+   - opam update   (_as necessary_)
+   - opam install coq-vst.2.8 (_this will take 30 minutes or more_)
 
-    _You do not need to install CompCert clightgen_ to do the exercises
-    in this volume.  But if you wish to modify and reparse the .c files,
-    or verify C programs of your own, install the CompCert verified
-    optimizing C compiler.  You can get CompCert from compcert.inria.fr,
-    or (starting with Coq 8.12) in the standard "Coq Package" or by
-    opam (the package is named coq-compcert). *)
+   _You do not need to install CompCert clightgen_ to do the exercises
+   in this volume.  But if you wish to modify and reparse the .c files,
+   or verify C programs of your own, install the CompCert verified
+   optimizing C compiler.  You can get CompCert in the standard "Coq Package"
+   or by opam (the package is named coq-compcert). *)
 
 (* ================================================================= *)
 (** ** Downloading the Coq Files *)
@@ -140,13 +139,13 @@
     do so as follows:
 
    @book            {Appel:SF5,
-   author       =   {Andrew W. Appel and Qinxiang Cao},
+   author       =   {Andrew W. Appel, Lennart Beringer, and Qinxiang Cao},
    title        =   "$VOLUMENAME",
    series       =   "Software Foundations",
    volume       =   "5",
    year         =   "2021",
    publisher    =   "Electronic textbook",
-   note         =   {Version 1.1.0, \URLhttp://softwarefoundations.cis.upenn.edu },
+   note         =   {Version 1.1.1, \URLhttp://softwarefoundations.cis.upenn.edu },
    }
 *)
 
@@ -162,17 +161,48 @@
 (** * Thanks *)
 
 (** Development of the _Software Foundations_ series has been supported, in
-  part, by the National Science Foundation under the NSF Expeditions grant
-  1521523, _The Science of Deep Specification_. *)
+    part, by the National Science Foundation under the NSF Expeditions grant
+    1521523, _The Science of Deep Specification_. *)
 
 (*** Check for the right version of VST *)
 Require Import Coq.Strings.String.
 Open Scope string.
 Require Import VST.veric.version.  (* If this line fails, it means
   you don't have a VST installed. *)
-
-Goal release = "2.7".
-reflexivity || fail "The wrong version of VST is installed".
+Definition release_needed := "2.8".
+Goal release = release_needed.
+reflexivity ||
+let need := constr:(release_needed) in let need := eval hnf in need in
+let rel := constr:(release) in let rel := eval hnf in rel in
+fail "The wrong version of VST is installed.
+You have VST version"
+rel "but this version of 'Software Foundations Volume 5: Verifiable C'"
+"demands version" need ". If possible, install VST version" need
+"using the Coq Platform or using opam.  Or, if not from Coq Platform or opam,"
+"for instructions about building VST from source and accessing that version,
+see the README file in this directory."
+"Or, instead of installing VST" need ","
+"if you want to proceed using VST version" rel ","
+"then edit the Definition release_needed in Preface.v".
 Abort.
 
-(* 2021-05-26 15:24 *)
+Require Import ZArith.
+Local Open Scope Z_scope.
+
+Require VC.stack.  (* If this line fails, do 'make stack.vo' *)
+Goal VC.stack.Info.bitsize = VST.veric.version.bitsize.
+reflexivity ||
+let b1 := constr:(VST.veric.version.bitsize) in let b1 := eval compute in b1 in
+let b2 := constr:(VC.stack.Info.bitsize) in let b2 := eval compute in b2 in
+fail "Your installed VST is configured to verify C programs compiled with"
+  b1 "bit pointers,"
+ "but the .c files in the local directory have been clightgen'ed as if compiled with"
+ b2 "bit pointers."
+"You can fix this by executing the shell command,
+"
+"bash cfiles-bitsize" b1 "
+to install the properly configured clightgen outputs."
+"It is not necessary to have clightgen installed".
+Abort.
+
+(* 2021-06-29 22:00 *)

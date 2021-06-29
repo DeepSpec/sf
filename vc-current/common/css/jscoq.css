@@ -86,9 +86,9 @@ body.goals-active #jscoq-plug {
   background: #ccc;
 }
 
-#panel-wrapper #toolbar {
-  padding-left: 15px;
-}
+#panel-wrapper #toolbar > *:first-child {
+  margin-left: 15px;  /* cannot use padding on `#toolbar` */
+}                     /* because an element with padding cannot have zero width */
 
 /*
  * Larger fonts in presentation mode

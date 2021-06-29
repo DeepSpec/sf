@@ -72,7 +72,7 @@ Proof.
       split; simpl; auto.
     + inv H. destruct (split l') as [l1' l2'] eqn:E. inv H1. 
       (* We're stuck! The IH talks about [split (x::l')] but we
-         only know aobut [split (a::x::l'). *)
+         only know aobut [split (a::x::l')]. *)
 Abort.
 
 (** The problem here is that the standard induction principle for lists
@@ -523,4 +523,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2021-05-26 15:18 *)
+(* 2021-06-29 21:56 *)

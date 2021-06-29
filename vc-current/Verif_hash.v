@@ -184,21 +184,6 @@ Definition hashtable_rep (contents: hashtable_contents) (p: val) : mpred :=
 (** **** Exercise: 2 stars, standard (hashtable_rep_hints) *)
 Lemma hashtable_rep_local_facts: forall contents p,
  hashtable_rep contents p |-- !! (isptr p /\ Zlength contents = N).
-Proof.
-intros.
-unfold hashtable_rep.
-Intros bl.
-(** If you look at [struct hashtable], you'll see that it has just one field, 
-  which is the array of bucket-pointers.    Therefore, 
-  [data_at Ews thashtable (map snd bl)] should be synonymous with
-  [field_at  Ews thashtable (DOT _buckets) (map snd bl) p].
-  Here and elsewhere in the proof  of lemmas in Verif_hash, we'll want
- to "unfold" the [data_at] into a [field_at], which we can do as follows: *)
-unfold_data_at (data_at _ _ _ p).
-(** The argument of [unfold_data_at] is a _pattern_ specifying which
-  of the [data_at]s in the current proof goal to unfold.  In this case,
-  there's just one, so we can leave most of the pattern-arguments
-  as underscores (wildcards).*)
 (* FILL IN HERE *) Admitted.
 #[export] Hint Resolve hashtable_rep_local_facts : saturate_local.
 
@@ -363,12 +348,12 @@ rewrite <- (sublist_same 0 (Zlength al) al) at 1 by auto.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (body_new_table) *)
+(** **** Exercise: 2 stars, standard (body_new_table) *)
 Lemma body_new_table_helper: 
  (* This lemma is useful as the very last thing to do in body_new_table *)
+ forall n, 
   emp
-  |-- iter_sepcon (uncurry listrep) (list_repeat (Z.to_nat N) ([], nullval)).
-Proof.
+  |-- iter_sepcon (uncurry listrep) (repeat ([], nullval) n).
 (* FILL IN HERE *) Admitted.
 
 Lemma body_new_table: semax_body Vprog Gprog f_new_table new_table_spec.
@@ -377,24 +362,22 @@ Proof.
   initialized array. The best way to do that is with something like,
 
   data_at Ews thashtable 
-      (list_repeat (Z.to_nat i) nullval ++ 
-       list_repeat (Z.to_nat (N-i)) Vundef)   p.
+      (Zrepeat nullval i ++ Zrepeat Vundef (N-i))   p.
 
   Then at some point you'll have to prove something about,
 
    data_at Ews thashtable
-      (list_repeat (Z.to_nat (i + 1)) nullval ++ 
-       list_repeat (Z.to_nat (N - (i + 1))) Vundef)   p
+      (Zrepeat nullval (i + 1) ++ repeat Vundef (N - (i + 1)))   p
 
   In particular, you'll have to split up 
 
-   list_repeat (Z.to_nat (i + 1)) nullval
+   Zrepeat nullval (i + 1)
 
    into 
 
-   list_repeat (Z.to_nat i) nullval ++ list_repeat (Z.to_nat 1) nullval.
+   Zrepeat nullval i ++ Zrepeat nullval 1.
 
-  The best way to do that is [rewrite <- list_repeat_app']. *)
+  The best way to do that is [rewrite <- Zrepeat_app]. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -494,7 +477,7 @@ apply seq_assoc1; assert_after 1
   LOCAL (temp _h (Vint (Int.repr (hashfun sigma)));
          temp _table table;  temp _s s) 
   SEP (cstring Ews sigma s; malloc_token Ews thashtable table; 
-       field_at Ews thashtable [StructField _buckets] (map snd cts) table; 
+       data_at Ews thashtable (map snd cts) table; 
        iter_sepcon (uncurry listrep) cts))%assert.
 {
  (* FILL IN HERE *) admit.
@@ -542,7 +525,7 @@ set (h := hashfun sigma mod N) in *.
 eapply semax_pre; [ instantiate (1:=
   PROP ( )   LOCAL (temp _p (snd (Znth h cts)); temp _s s)  
   SEP (cstring Ews sigma s; malloc_token Ews thashtable table; 
-       field_at Ews thashtable [StructField _buckets] (map snd cts) table; 
+       data_at Ews thashtable (map snd cts) table; 
        iter_sepcon (uncurry listrep) (sublist 0 h cts);
         listrep (fst (Znth h cts)) (snd (Znth h cts)); 
        iter_sepcon (uncurry listrep) (sublist (h + 1) (Zlength cts) cts))) | ].
@@ -564,7 +547,7 @@ simpl.
 (** Several of our SEP conjuncts will not be needed until after the
     loop is done.  We can hide them away in a single SEP-conjunct
     [FRZL FR1] by doing this command: *)
-freeze FR1 := (malloc_token _ _ table) (field_at _ _ _ _ table)
+freeze FR1 := (malloc_token _ _ table) (data_at _ _ _ table)
        (iter_sepcon _ _) (iter_sepcon _ _).
 (** The [freeze] tactic "frames out" several conjuncts for a while, 
   until later we [thaw FR1]. *)
@@ -773,7 +756,7 @@ intros.
 inv H;  (* Solve the goal if we are in 64-bit mode *)
 (* otherwise we are in 32-bit mode *)
 (eapply derives_trans; [ | apply (listboxrep_traverse p kp key count r)];
-unfold spacer; simpl; cancel).
+ unfold spacer; simpl; cancel).
 Qed.
 
 (** **** Exercise: 4 stars, standard (body_incr_list) *)
@@ -1109,6 +1092,21 @@ Proof.
   autorewrite with norm. auto.
 Qed.
 
+(** Hint:  Examine this lemma, and how it's proved, and think
+     about what it means. *)
+Lemma data_at_thashtable_tarray:
+ forall al table,
+    data_at Ews thashtable al table
+    |-- data_at Ews (tarray (tptr tcell) N) al
+           (field_address thashtable [StructField _buckets] table).
+Proof.
+intros.
+unfold_data_at (data_at _ _ _ table).
+rewrite field_at_data_at.
+simpl.
+apply derives_refl.
+Qed.
+
 (** **** Exercise: 4 stars, standard (body_incr) *)
 Lemma body_incr: semax_body Vprog Gprog f_incr incr_spec.
 Proof.
@@ -1142,4 +1140,4 @@ erewrite (wand_slice_array h (h+1) N _ (tptr tcell))
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)

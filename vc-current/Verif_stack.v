@@ -104,28 +104,29 @@ Require Import VC.hints.  (* Import special hints for this tutorial. *)
 
 Definition malloc_spec_example  :=
  DECLARE _malloc
- WITH t:type
+ WITH t:type, gv: globals
  PRE [ tuint ]
     PROP (0 <= sizeof t <= Int.max_unsigned;
           complete_legal_cosu_type t = true;
           natural_aligned natural_alignment t = true)
     PARAMS (Vint (Int.repr (sizeof t)))
-    SEP ()
+    SEP (mem_mgr gv)
  POST [ tptr tvoid ] EX p:_,
     PROP ()
     RETURN (p)
-    SEP (if eq_dec p nullval then emp
-         else (malloc_token Ews t p * data_at_ Ews t p)).
+    SEP (mem_mgr gv;
+            if eq_dec p nullval then emp
+            else (malloc_token Ews t p * data_at_ Ews t p)).
 
 Definition free_spec_example :=
  DECLARE _free
- WITH t: type, p:val
+ WITH t: type, p:val, gv: globals
  PRE [ tptr tvoid ]
      PROP ()
      PARAMS (p)
-     SEP (malloc_token Ews t p; data_at_ Ews t p)
+     SEP (mem_mgr gv; malloc_token Ews t p; data_at_ Ews t p)
  POST [ Tvoid ]
-     PROP () RETURN () SEP ().
+     PROP () RETURN () SEP (mem_mgr gv).
 
 (** If your source program says [malloc(sizeof(t))], your [forward_call] 
     should supply (as a WITH-witness) the C type [t].
@@ -292,7 +293,6 @@ Lemma body_push: semax_body Vprog Gprog f_push push_spec.
 Proof.
 start_function.
 forward_call (Tstruct _cons noattr, gv).
-simpl; split3; auto.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -303,4 +303,4 @@ start_function.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)

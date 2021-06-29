@@ -735,7 +735,7 @@ forward_call (*  s = sumarray(four,4); *)
 (** The subgoal of [forward_call] is that we have to prove the PROP
   part of the [sumarray] function's precondition. *)
 
- split3. auto. computable. repeat constructor; computable.
+repeat constructor; computable.
 
 (** Now we are after the function-call, and we can go forward through
   the return statement. *)
@@ -777,4 +777,4 @@ Qed.
 
 (** Recommended: read VC.pdf Chapters 22-47 (up to _Pointer comparisons_) *)
 
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)

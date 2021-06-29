@@ -66,7 +66,7 @@ Fail Fixpoint selsort (l : list nat) : list nat :=
     call in [selsort] is not _structurally decreasing_: the argument
     [r'] at the call site is not known to be a smaller part of the
     original input [l]. Indeed, [select] might not return such a list.
-    For example, [select 1 [0; 2]] is [(0, [1; 2]], but [[1; 2]] is
+    For example, [select 1 [0; 2]] is [(0, [1; 2])], but [[1; 2]] is
     not a part of [[0; 2]]. *)
 
 (** There are severals ways to fix this problem. One programming
@@ -389,4 +389,4 @@ Proof.
 
 
 
-(* 2021-05-26 15:18 *)
+(* 2021-06-29 21:56 *)

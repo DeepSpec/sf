@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>VSU_stack: VSU verification of the Stack module</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">VSU_stack<span class="subtitle">VSU verification of the Stack module</span></h1>
+
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+<a id="lab183"></a><h2 class="section">stack2.c</h2>
+ The module stack2.c is slightly adjusted from stack.c; it uses an
+  internal function surely_malloc, just to illustrate how to handle
+  local functions that are not exported in the ASI module interface.
+
+<div class="paragraph"> </div>
+
+<pre>
+    #include &lt;stddef.h&gt;
+    #include "stdlib.h"
+    #include "stack2.h"
+
+    struct cons { int value; struct cons *next; };
+
+    struct stack { struct cons *top; };
+
+    void *surely_malloc (size_t n) {
+      void *p = malloc(n);
+      if (!p) exit(1);
+      return p;
+    }
+
+    struct stack *newstack(void) {
+      struct stack *p;
+      p = (struct stack * ) surely_malloc(sizeof (struct stack));
+      p<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>top = NULL;
+      return p;
+    }
+
+    void push (struct stack *p, int i) {
+      struct cons *q;
+      q = (struct cons * ) surely_malloc(sizeof (struct cons));
+      q<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>value = i;
+      q<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>next = p<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>top;
+      p<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>top = q;
+    }
+
+    int pop (struct stack *p) {
+      struct cons *q;
+      int i;
+      q = p<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>top;
+      p<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>top = q<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>next;
+      i = q<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>value;
+      free(q);
+      return i;
+    }
+</pre>
+
+<div class="paragraph"> </div>
+
+<a id="lab184"></a><h1 class="section">Building the VSU</h1>
+ Now we can verify the implementations of the individual modules.
+  That is, for each module, we produce a VSU, a Verified Software Unit.
+
+<div class="paragraph"> </div>
+
+  Each of these verifications imports only ASIs (abstract specification
+  interfaces), not other VSUs; that is, the verification of a module
+  depends only on interfaces, not on the implementations (or
+  verifications) of other modules.
+
+<div class="paragraph"> </div>
+
+  We start by importing floyd.proofauto, as usual, but also
+  the floyd.VSU support. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.VSU</span>.<br/>
+</div>
+
+<div class="doc">
+Next, we import the ASIs of the imported modules, and of this
+  module.  Since <span class="inlinecode"><span class="id" title="var">stack2.c</span></span> uses the malloc/free library (exported
+  from our stdlib module), we import <span class="inlinecode"><span class="id" title="var">Spec_stdlib</span></span> as well
+  as <span class="inlinecode"><span class="id" title="var">Spec_stack</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stack.html#"><span class="id" title="library">VC.Spec_stack</span></a>.<br/>
+</div>
+
+<div class="doc">
+Next, as usual we import a C program file (as parsed by clightgen).
+  But we can import just this module: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.stack2</span>.<br/>
+</div>
+
+<div class="doc">
+<i>CompSpecs</i> stands for "composite specifications", that is,
+  CompCert's description of the struct and union types defined
+  in this module.  The different modules of a program, that is,
+  the different .c files that will be linked together,  may have
+  different structs and unions.  Here we process the compspecs
+  of <i>this</i> module. Here, <span class="inlinecode"><span class="id" title="var">prog</span></span> is really VC.stack2.prog.  
+</div>
+<div class="code">
+<span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+</div>
+
+<div class="doc">
+Recall that our ASIs are parameterized by the APDs they use;
+  and we used a Section for that purpose in <a href="Spec_stack.html"><span class="inlineref">Spec_stack</span></a>.
+  The StackASI was parameterized by (M: MallocFreeAPD) and
+  (STACK: StackAPD).
+
+<div class="paragraph"> </div>
+
+  The Stack VSU will use the same two APDs.  As before, M will
+  be a parameter.  But STACK will not be a parameter: we will
+  build and instantiate that APD in this verification.  So our
+  <span class="inlinecode"><span class="id" title="keyword">Section</span></span> <span class="inlinecode"><span class="id" title="var">Stack_VSU</span></span> is only for the purpose of parameterizing by M. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Section</span> <a id="Stack_VSU" class="idref" href="#Stack_VSU"><span class="id" title="section">Stack_VSU</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a id="Stack_VSU.M" class="idref" href="#Stack_VSU.M"><span class="id" title="variable">M</span></a>: <a class="idref" href="Spec_stdlib.html#MallocFreeAPD"><span class="id" title="record">MallocFreeAPD</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab185"></a><h2 class="section">First, instantiate the APD</h2>
+
+<div class="paragraph"> </div>
+
+ Now it's time to build an instance of StackAPD.  To do that,
+  we need to construct the same <span class="inlinecode"><span class="id" title="var">stack</span></span> mpred that we constructed
+  in <a href="Verif_stack.html"><span class="inlineref">Verif_stack</span></a>.  In this exercise, you will paste in
+  your solutions to the corresponding exercises in <a href="Verif_stack.html"><span class="inlineref">Verif_stack</span></a>,
+  leading up to the definition of a StackAPD. 
+<div class="paragraph"> </div>
+
+<a id="lab186"></a><h4 class="section">Exercise: 2 stars, standard (STACK)</h4>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fixpoint</span> <a id="listrep" class="idref" href="#listrep"><span class="id" title="definition">listrep</span></a> (<a id="il:2" class="idref" href="#il:2"><span class="id" title="binder">il</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:3" class="idref" href="#p:3"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) : <span class="id" title="definition">mpred</span> :=<br/>
+&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VSU_stack.html#il:2"><span class="id" title="variable">il</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;| <span class="id" title="var">i</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><span class="id" title="var">il'</span> ⇒ <span class="id" title="notation">EX</span> <a id="y:6" class="idref" href="#y:6"><span class="id" title="binder">y</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Spec_stdlib.html#malloc_token"><span class="id" title="definition">malloc_token</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <span class="id" title="definition">Ews</span> (<span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_cons</span> <span class="id" title="definition">noattr</span>) <a class="idref" href="VSU_stack.html#p:3"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">data_at</span> <span class="id" title="definition">Ews</span> (<span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_cons</span> <span class="id" title="definition">noattr</span>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> <span class="id" title="var">i</span>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="VSU_stack.html#y:6"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="VSU_stack.html#p:3"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stack.html#listrep:4"><span class="id" title="definition">listrep</span></a> <span class="id" title="var">il'</span> <a class="idref" href="VSU_stack.html#y:6"><span class="id" title="variable">y</span></a><br/>
+&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <span class="id" title="notation">!!</span> <span class="id" title="notation">(</span><a class="idref" href="VSU_stack.html#p:3"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">nullval</span><span class="id" title="notation">)</span> <span class="id" title="notation">&amp;&amp;</span> <span class="id" title="method">emp</span><br/>
+&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="listrep_local_prop" class="idref" href="#listrep_local_prop"><span class="id" title="lemma">listrep_local_prop</span></a>: <span class="id" title="keyword">∀</span> <a id="il:7" class="idref" href="#il:7"><span class="id" title="binder">il</span></a> <a id="p:8" class="idref" href="#p:8"><span class="id" title="binder">p</span></a>, <a class="idref" href="VSU_stack.html#listrep"><span class="id" title="definition">listrep</span></a> <a class="idref" href="VSU_stack.html#il:7"><span class="id" title="variable">il</span></a> <a class="idref" href="VSU_stack.html#p:8"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">!!</span> <span class="id" title="notation">(</span><span class="id" title="definition">is_pointer_or_null</span> <a class="idref" href="VSU_stack.html#p:8"><span class="id" title="variable">p</span></a>  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">(</span></a><a class="idref" href="VSU_stack.html#p:8"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><span class="id" title="definition">nullval</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="VSU_stack.html#il:7"><span class="id" title="variable">il</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">)</span></a><span class="id" title="notation">)</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<span class="id" title="keyword">Local Hint Resolve</span> <span class="id" title="var">listrep_local_prop</span> : <span class="id" title="var">saturate_local</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="listrep_valid_pointer" class="idref" href="#listrep_valid_pointer"><span class="id" title="lemma">listrep_valid_pointer</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="il:9" class="idref" href="#il:9"><span class="id" title="binder">il</span></a> <a id="p:10" class="idref" href="#p:10"><span class="id" title="binder">p</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stack.html#listrep"><span class="id" title="definition">listrep</span></a> <a class="idref" href="VSU_stack.html#il:9"><span class="id" title="variable">il</span></a> <a class="idref" href="VSU_stack.html#p:10"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="definition">valid_pointer</span> <a class="idref" href="VSU_stack.html#p:10"><span class="id" title="variable">p</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<span class="id" title="keyword">Local Hint Resolve</span> <span class="id" title="var">listrep_valid_pointer</span> : <span class="id" title="var">valid_pointer</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="stack" class="idref" href="#stack"><span class="id" title="definition">stack</span></a> (<a id="il:11" class="idref" href="#il:11"><span class="id" title="binder">il</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:12" class="idref" href="#p:12"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) :=<br/>
+&nbsp;<span class="id" title="notation">EX</span> <a id="q:13" class="idref" href="#q:13"><span class="id" title="binder">q</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span><br/>
+&nbsp;&nbsp;<a class="idref" href="Spec_stdlib.html#malloc_token"><span class="id" title="definition">malloc_token</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <span class="id" title="definition">Ews</span> (<span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_stack</span> <span class="id" title="definition">noattr</span>) <a class="idref" href="VSU_stack.html#p:12"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span> <br/>
+&nbsp;&nbsp;<span class="id" title="definition">data_at</span> <span class="id" title="definition">Ews</span> (<span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_stack</span> <span class="id" title="definition">noattr</span>) <a class="idref" href="VSU_stack.html#q:13"><span class="id" title="variable">q</span></a> <a class="idref" href="VSU_stack.html#p:12"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;<a class="idref" href="VSU_stack.html#listrep"><span class="id" title="definition">listrep</span></a> <a class="idref" href="VSU_stack.html#il:11"><span class="id" title="variable">il</span></a> <a class="idref" href="VSU_stack.html#q:13"><span class="id" title="variable">q</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="VSU_stack.html#stack"><span class="id" title="definition">stack</span></a> <span class="id" title="var">il</span> <span class="id" title="var">p</span> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">never</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="stack_local_prop" class="idref" href="#stack_local_prop"><span class="id" title="lemma">stack_local_prop</span></a>: <span class="id" title="keyword">∀</span> <a id="il:14" class="idref" href="#il:14"><span class="id" title="binder">il</span></a> <a id="p:15" class="idref" href="#p:15"><span class="id" title="binder">p</span></a>, <a class="idref" href="VSU_stack.html#stack"><span class="id" title="definition">stack</span></a> <a class="idref" href="VSU_stack.html#il:14"><span class="id" title="variable">il</span></a> <a class="idref" href="VSU_stack.html#p:15"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span>  <span class="id" title="notation">!!</span> <span class="id" title="notation">(</span><span class="id" title="definition">isptr</span> <a class="idref" href="VSU_stack.html#p:15"><span class="id" title="variable">p</span></a><span class="id" title="notation">)</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<span class="id" title="keyword">Local Hint Resolve</span> <span class="id" title="var">stack_local_prop</span> : <span class="id" title="var">saturate_local</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="stack_valid_pointer" class="idref" href="#stack_valid_pointer"><span class="id" title="lemma">stack_valid_pointer</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="il:16" class="idref" href="#il:16"><span class="id" title="binder">il</span></a> <a id="p:17" class="idref" href="#p:17"><span class="id" title="binder">p</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stack.html#stack"><span class="id" title="definition">stack</span></a> <a class="idref" href="VSU_stack.html#il:16"><span class="id" title="variable">il</span></a> <a class="idref" href="VSU_stack.html#p:17"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="definition">valid_pointer</span> <a class="idref" href="VSU_stack.html#p:17"><span class="id" title="variable">p</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<span class="id" title="keyword">Local Hint Resolve</span> <span class="id" title="var">stack_valid_pointer</span> : <span class="id" title="var">valid_pointer</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ Now we can construct STACK, an instance of StackAPD, by
+  gluing together the <span class="inlinecode"><span class="id" title="var">stack</span></span> predicate with the two lemmas
+  about it. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="STACK" class="idref" href="#STACK"><span class="id" title="definition">STACK</span></a> : <a class="idref" href="Spec_stack.html#StackAPD"><span class="id" title="record">StackAPD</span></a> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Spec_stack.html#Build_StackAPD"><span class="id" title="constructor">Build_StackAPD</span></a> <a class="idref" href="VSU_stack.html#stack"><span class="id" title="definition">stack</span></a> <a class="idref" href="VSU_stack.html#stack_local_prop"><span class="id" title="axiom">stack_local_prop</span></a> <a class="idref" href="VSU_stack.html#stack_valid_pointer"><span class="id" title="axiom">stack_valid_pointer</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab187"></a><h1 class="section">Internal functions</h1>
+
+<div class="paragraph"> </div>
+
+ Each internal function needs a funspec.  Unlike the exported
+  functions, whose funspecs go in the ASI (such as <a href="Spec_stack.html"><span class="inlineref">Spec_stack</span></a>),
+  funspecs for internal functions go here in the VSU. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="surely_malloc_spec" class="idref" href="#surely_malloc_spec"><span class="id" title="definition">surely_malloc_spec</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_surely_malloc</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="notation">WITH</span> <a id="t:20" class="idref" href="#t:20"><span class="id" title="binder">t</span></a><span class="id" title="notation">:</span><span class="id" title="inductive">type</span><span class="id" title="notation">,</span> <a id="gv:21" class="idref" href="#gv:21"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <span class="id" title="definition">size_t</span> <span class="id" title="notation">]</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">(</span>0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">sizeof</span> <a class="idref" href="VSU_stack.html#t:18"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">Ptrofs.max_unsigned</span><span class="id" title="notation">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">complete_legal_cosu_type</span> <a class="idref" href="VSU_stack.html#t:18"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><span class="id" title="notation">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">natural_aligned</span> <span class="id" title="definition">natural_alignment</span> <a class="idref" href="VSU_stack.html#t:18"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PARAMS</span> <span class="id" title="notation">(</span><span class="id" title="definition">Vptrofs</span> (<span class="id" title="definition">Ptrofs.repr</span> (<span class="id" title="definition">sizeof</span> <a class="idref" href="VSU_stack.html#t:18"><span class="id" title="variable">t</span></a>))<span class="id" title="notation">)</span> <span class="id" title="notation">GLOBALS</span> <span class="id" title="notation">(</span><a class="idref" href="VSU_stack.html#gv:19"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#gv:19"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tptr</span> <span class="id" title="definition">tvoid</span> <span class="id" title="notation">]</span> <span class="id" title="notation">EX</span> <a id="p:22" class="idref" href="#p:22"><span class="id" title="binder">p</span></a>:<span class="id" title="var">_</span><span class="id" title="notation">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">()</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><a class="idref" href="VSU_stack.html#p:22"><span class="id" title="variable">p</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#gv:21"><span class="id" title="variable">gv</span></a><span class="id" title="notation">;</span> <a class="idref" href="Spec_stdlib.html#malloc_token"><span class="id" title="definition">malloc_token</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <span class="id" title="definition">Ews</span> <a class="idref" href="VSU_stack.html#t:20"><span class="id" title="variable">t</span></a> <a class="idref" href="VSU_stack.html#p:22"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span> <span class="id" title="definition">data_at_</span> <span class="id" title="definition">Ews</span> <a class="idref" href="VSU_stack.html#t:20"><span class="id" title="variable">t</span></a> <a class="idref" href="VSU_stack.html#p:22"><span class="id" title="variable">p</span></a><span class="id" title="notation">)</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab188"></a><h2 class="section">Constructing Vprog and Gprog</h2>
+
+<div class="paragraph"> </div>
+
+ Imports of a VSU is just the concatenation of all the
+   ASIs of the modules that it's importing: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Stack_imports" class="idref" href="#Stack_imports"><span class="id" title="definition">Stack_imports</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_stdlib.html#MallocFreeASI"><span class="id" title="definition">MallocFreeASI</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a>.<br/>
+</div>
+
+<div class="doc">
+Privates of a module are the funspecs of locally defined
+  functions that are <i>not</i> to be exported for client use 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Stack_private" class="idref" href="#Stack_private"><span class="id" title="definition">Stack_private</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><a class="idref" href="VSU_stack.html#surely_malloc_spec"><span class="id" title="definition">surely_malloc_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>.<br/>
+</div>
+
+<div class="doc">
+Internals are just the Privates and the other internal funspecs.
+  <i>IF</i> the module does not re-export any imported functions, then that's
+  just the same as the Privates plus the Exports, as shown here: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Stack_internals" class="idref" href="#Stack_internals"><span class="id" title="definition">Stack_internals</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stack.html#Stack_private"><span class="id" title="definition">Stack_private</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Spec_stack.html#StackASI"><span class="id" title="definition">StackASI</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#STACK"><span class="id" title="definition">STACK</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">)</span></a>.<br/>
+</div>
+
+<div class="doc">
+Gprog is the basis on which to prove each semax_body;
+  it is always the Imports plus the Internals 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Stack_Gprog" class="idref" href="#Stack_Gprog"><span class="id" title="definition">Stack_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stack.html#Stack_imports"><span class="id" title="definition">Stack_imports</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="VSU_stack.html#Stack_internals"><span class="id" title="definition">Stack_internals</span></a>.<br/>
+</div>
+
+<div class="doc">
+For every module except Main, the Vprog is computed as, 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Stack_Vprog" class="idref" href="#Stack_Vprog"><span class="id" title="definition">Stack_Vprog</span></a> : <span class="id" title="definition">varspecs</span>. <span class="id" title="var">mk_varspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab189"></a><h2 class="section">Proofs of the function bodies</h2>
+<a id="lab190"></a><h4 class="section">Exercise: 2 stars, standard (stack_bodies)</h4>
+ Copy and adapt these proofs from <a href="Verif_stack.html"><span class="inlineref">Verif_stack</span></a>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="body_pop" class="idref" href="#body_pop"><span class="id" title="lemma">body_pop</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stack.html#Stack_Vprog"><span class="id" title="definition">Stack_Vprog</span></a> <a class="idref" href="VSU_stack.html#Stack_Gprog"><span class="id" title="definition">Stack_Gprog</span></a> <span class="id" title="definition">f_pop</span> (<a class="idref" href="Spec_stack.html#pop_spec"><span class="id" title="definition">pop_spec</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#STACK"><span class="id" title="definition">STACK</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">start_function</span>.<br/>
+<span class="id" title="tactic">simpl</span> <span class="id" title="var">stackrep</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="body_push" class="idref" href="#body_push"><span class="id" title="lemma">body_push</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stack.html#Stack_Vprog"><span class="id" title="definition">Stack_Vprog</span></a> <a class="idref" href="VSU_stack.html#Stack_Gprog"><span class="id" title="definition">Stack_Gprog</span></a> <span class="id" title="definition">f_push</span> (<a class="idref" href="Spec_stack.html#push_spec"><span class="id" title="definition">push_spec</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#STACK"><span class="id" title="definition">STACK</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">start_function</span>.<br/>
+<span class="id" title="tactic">simpl</span> <span class="id" title="var">stackrep</span>.<br/>
+<span class="id" title="var">forward_call</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_cons</span> <span class="id" title="definition">noattr</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">gv</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="body_newstack" class="idref" href="#body_newstack"><span class="id" title="lemma">body_newstack</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stack.html#Stack_Vprog"><span class="id" title="definition">Stack_Vprog</span></a> <a class="idref" href="VSU_stack.html#Stack_Gprog"><span class="id" title="definition">Stack_Gprog</span></a> <span class="id" title="definition">f_newstack</span> (<a class="idref" href="Spec_stack.html#newstack_spec"><span class="id" title="definition">newstack_spec</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#STACK"><span class="id" title="definition">STACK</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">start_function</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="body_surely_malloc" class="idref" href="#body_surely_malloc"><span class="id" title="lemma">body_surely_malloc</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stack.html#Stack_Vprog"><span class="id" title="definition">Stack_Vprog</span></a> <a class="idref" href="VSU_stack.html#Stack_Gprog"><span class="id" title="definition">Stack_Gprog</span></a> <span class="id" title="definition">f_surely_malloc</span> <a class="idref" href="VSU_stack.html#surely_malloc_spec"><span class="id" title="definition">surely_malloc_spec</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">start_function</span>.<br/>
+<span class="id" title="var">forward_call</span> (<a class="idref" href="Spec_stdlib.html#malloc_spec_sub"><span class="id" title="lemma">malloc_spec_sub</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <span class="id" title="var">t</span>) <span class="id" title="var">gv</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab191"></a><h1 class="section">Construction of the VSU</h1>
+
+<div class="paragraph"> </div>
+
+ Programs that do input/output need an "External Specification" 
+  (or <span class="inlinecode"><span class="id" title="var">Espec</span></span>) that characterizes the interaction.  All the VSUs of the
+  program must use the same Espec.   Since this program doesn't do
+  any I/O, it can use the standard trivial Espec, as follows: 
+</div>
+<div class="code">
+<span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">NullExtension.Espec</span>.<br/>
+</div>
+
+<div class="doc">
+Notice that all the <span class="inlinecode"><span class="id" title="var">semax_body</span></span> proofs above didn't depend at all
+  on which Espec we use, so they're portable to any Espec.  That wouldn't
+  be true if some of them did I/O. 
+<div class="paragraph"> </div>
+
+ To construct the StackVSU, we first define its <i>type</i>, as follows: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="StackVSU" class="idref" href="#StackVSU"><span class="id" title="lemma">StackVSU</span></a>: <span class="id" title="definition">VSU</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="VSU_stack.html#Stack_imports"><span class="id" title="definition">Stack_imports</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">stack2.prog</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Spec_stack.html#StackASI"><span class="id" title="definition">StackASI</span></a> <a class="idref" href="VSU_stack.html#Stack_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_stack.html#STACK"><span class="id" title="definition">STACK</span></a>) <span class="id" title="method">emp</span>.<br/>
+</div>
+
+<div class="doc">
+That is,
+<ul class="doclist">
+<li> nil,  the Externs of this module;
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Stack_imports</span></span>, the Imports of this module;
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">prog</span></span>, the <i>program</i> of this module, but transformed into a <span class="inlinecode"><span class="id" title="var">QP.program</span></span>
+   by the <span class="inlinecode"><span class="id" title="var">QPprog</span></span> tactic;
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">StackASI</span></span>, the Exports of this module;
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">emp</span></span> is the global-variable specifier, since this implementation
+      of the stack module has no global variables of its own.
+     
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+  Having specified the StackVSU lemma, we now prove it.
+  The <span class="inlinecode"><span class="id" title="var">mkVSU</span></span> line has two arguments: The C program (stack2.prog),
+  and the Internals (that were not mentioned in the <i>type</i> of the VSU).
+  Then, there is one subgoal for each function-body defined in the .c file.
+  In each subgoal,  <span class="inlinecode"><span class="id" title="var">solve_SF_internal</span></span> solves the goal, using the
+  appropriate <span class="inlinecode"><span class="id" title="var">semax_body</span></span> lemma that you have proved. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">mkVSU</span> <span class="id" title="definition">prog</span> <a class="idref" href="VSU_stack.html#Stack_internals"><span class="id" title="definition">Stack_internals</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stack.html#body_surely_malloc"><span class="id" title="axiom">body_surely_malloc</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stack.html#body_newstack"><span class="id" title="axiom">body_newstack</span></a>.<br/>
+&nbsp;&nbsp;+<br/>
+</div>
+
+<div class="doc">
+How do you know which <span class="inlinecode"><span class="id" title="var">semax_body</span></span> proof to supply for 
+   each subgoal?  It's easy -- the subgoal has the form,
+  <span class="inlinecode"><span class="id" title="var">SF</span></span> <span class="inlinecode"><span class="id" title="var">Gprog</span></span> <span class="inlinecode"><span class="id" title="var">name</span></span> <span class="inlinecode"><span class="id" title="var">fundef</span></span> <span class="inlinecode"><span class="id" title="var">funspec</span></span>, where in this case 
+  name is <span class="inlinecode"><span class="id" title="var">_surely_malloc</span></span> and fundef is <span class="inlinecode"><span class="id" title="var">Internal</span></span> <span class="inlinecode"><span class="id" title="var">f_surely_malloc</span></span>,
+  so it's pretty clear that <span class="inlinecode"><span class="id" title="var">body_surely_malloc</span></span> is what we want to
+ provide here. 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stack.html#body_push"><span class="id" title="axiom">body_push</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stack.html#body_pop"><span class="id" title="axiom">body_pop</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VSU_stack.html#Stack_VSU"><span class="id" title="section">Stack_VSU</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab192"></a><h2 class="section">Next Chapter: <a href="VSU_triang.html"><span class="inlineref">VSU_triang</span></a></h2>
+
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2021-06-29&nbsp;22:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

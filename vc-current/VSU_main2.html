@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>VSU_main2: linking with stdlib2 instead of with stdlib</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">VSU_main2<span class="subtitle">linking with stdlib2 instead of with stdlib</span></h1>
+
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+  In this chapter we link the stack/triang program with 
+  stdlib2 (our internal implementation of malloc/free/exit) instead
+ of with stdlib (which axiomatizes malloc/free/exit as external functions).
+
+<div class="paragraph"> </div>
+
+  Both programs use the exact same main.c program: 
+<pre>
+#include &lt;stddef.h&gt;
+#include "stdlib.h"
+#include "stack2.h"
+#include "triang2.h"
+
+int main(void) {
+  return triang(10);
+}
+</pre>
+and the only difference would be in the Makefile, the Unix <span class="inlinecode"><span class="id" title="var">ld</span></span> or <span class="inlinecode"><span class="id" title="var">cc</span></span> command
+would link the programs together with stdlib2.o instead of stdlib.o.
+
+<div class="paragraph"> </div>
+
+The Coq code in this chapter is practically the same as in <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a>,
+since the client program (main.c) should be oblivious of private data
+representations (etc.) of the stdlib module. The only difference is that
+in some places it says <span class="inlinecode"><span class="id" title="var">stdlib2</span></span> instead of <span class="inlinecode"><span class="id" title="var">stdlib</span></span>.
+
+<div class="paragraph"> </div>
+
+In addition, we illustrate a new concept, restrictExports, a more general 
+mechanism than privatizeExports. 
+<div class="paragraph"> </div>
+
+<a id="lab226"></a><h1 class="section">The VSU for main</h1>
+
+<div class="paragraph"> </div>
+
+ This VSU has the standard preamble: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.VSU</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.main2</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="library">VC.stdlib2</span> <span class="id" title="library">VC.stack2</span> <span class="id" title="library">VC.triang2</span>.<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a> <a class="idref" href="Spec_stack.html#"><span class="id" title="library">VC.Spec_stack</span></a> <a class="idref" href="Spec_triang.html#"><span class="id" title="library">VC.Spec_triang</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="VSU_stdlib2.html#"><span class="id" title="library">VC.VSU_stdlib2</span></a> <a class="idref" href="VSU_stack.html#"><span class="id" title="library">VC.VSU_stack</span></a> <a class="idref" href="VSU_triang.html#"><span class="id" title="library">VC.VSU_triang</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="M" class="idref" href="#M"><span class="id" title="definition">M</span></a> : <a class="idref" href="Spec_stdlib.html#MallocFreeAPD"><span class="id" title="record">Spec_stdlib.MallocFreeAPD</span></a> := <a class="idref" href="VSU_stdlib2.html#M"><span class="id" title="definition">VSU_stdlib2.M</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="STACK" class="idref" href="#STACK"><span class="id" title="definition">STACK</span></a> : <a class="idref" href="Spec_stack.html#StackAPD"><span class="id" title="record">Spec_stack.StackAPD</span></a> := <a class="idref" href="VSU_stack.html#STACK"><span class="id" title="definition">VSU_stack.STACK</span></a> <a class="idref" href="VSU_main2.html#M"><span class="id" title="definition">M</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Time</span> <span class="id" title="keyword">Definition</span> <a id="stacktriangVSU1" class="idref" href="#stacktriangVSU1"><span class="id" title="definition">stacktriangVSU1</span></a> := <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">linkVSUs</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="VSU_stack.html#StackVSU"><span class="id" title="lemma">VSU_stack.StackVSU</span></a> <a class="idref" href="VSU_main2.html#M"><span class="id" title="definition">M</span></a>) (<a class="idref" href="VSU_triang.html#TriangVSU"><span class="id" title="axiom">VSU_triang.TriangVSU</span></a> <a class="idref" href="VSU_main2.html#M"><span class="id" title="definition">M</span></a> <a class="idref" href="VSU_main2.html#STACK"><span class="id" title="definition">STACK</span></a>)).<br/>
+&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;1.98&nbsp;seconds&nbsp;to&nbsp;6&nbsp;&nbsp;seconds&nbsp;&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+<a id="lab227"></a><h2 class="section">An alternate way to adjust the Exports of a VSU</h2>
+
+<div class="paragraph"> </div>
+
+ Recall that in <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a> we needed to restrict the Exports list
+   of <span class="inlinecode"><span class="id" title="var">stacktriangVSU1</span></span>, to obtain <span class="inlinecode"><span class="id" title="var">stacktriangVSU</span></span>.  We did this using
+   <span class="inlinecode"><span class="id" title="var">privatizeExports</span></span>.  But sometimes one <i>also</i> wants to restrict the
+   Exports list in a different way: weaken some of the funspecs using
+   funspec_sub, to provide more abstraction (give the client less information).
+
+<div class="paragraph"> </div>
+
+    In this stack+triang+main program, we have no need to do that, but
+    we illustrate the process. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">restrictExports</span>. <span class="comment">(*&nbsp;:&nbsp;&nbsp;VSU&nbsp;E&nbsp;Imports&nbsp;p&nbsp;Exports&nbsp;GP&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;funspecs&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;Type&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Check</span> <span class="id" title="lemma">prove_restrictExports</span>. <span class="comment">(*<br/>
+&nbsp;:&nbsp;forall&nbsp;(v:&nbsp;VSU&nbsp;?E&nbsp;?Imports&nbsp;?p&nbsp;?Exports&nbsp;?GP&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Exports':&nbsp;funspecs),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list_norepet&nbsp;(map&nbsp;fst&nbsp;Exports')&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forall&nbsp;(funspec_sub_in&nbsp;?Exports)&nbsp;Exports'&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;restrictExports&nbsp;v&nbsp;Exports'&nbsp;&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+Given a VSU v,  <span class="inlinecode"><span class="id" title="var">restrictExports</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">Exports'</span></span> is the type of a new VSU
+   whose Exports list has been replaced by Exports'.
+
+<div class="paragraph"> </div>
+
+  The lemma <span class="inlinecode"><span class="id" title="var">prove_restrictExports</span></span> says,
+<ul class="doclist">
+<li> if Exports' does not have any repeated identifiers, and
+
+</li>
+<li> if for every (id,fspec') in Exports', there is an (id,fspec) in Exports
+       such that funspec_sub (fspec,fspec'),
+
+</li>
+<li> then there is a new VSU whose exports is Exports'. 
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+  We will now use this to build <span class="inlinecode"><span class="id" title="var">stacktriangVSU</span></span>.  
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="definition">VSU_Exports</span> <a class="idref" href="VSU_main2.html#stacktriangVSU1"><span class="id" title="definition">stacktriangVSU1</span></a>. <span class="comment">(*&nbsp;newstack,&nbsp;push,&nbsp;pop,&nbsp;triang&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="stacktriangVSU" class="idref" href="#stacktriangVSU"><span class="id" title="lemma">stacktriangVSU</span></a>: <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="definition">restrictExports</span> <a class="idref" href="VSU_main2.html#stacktriangVSU1"><span class="id" title="definition">stacktriangVSU1</span></a><br/>
+&nbsp;&nbsp;&nbsp;(<a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">Spec_triang.TriangASI</span></a> <a class="idref" href="VSU_main2.html#M"><span class="id" title="definition">M</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">prove_restrictExports</span>.<br/>
+</div>
+
+<div class="doc">
+At this point, we must prove <span class="inlinecode"><span class="id" title="var">funspec_sub</span></span> for every (id,fspec') in
+  the TriangASI.  There is just one, namely  <span class="inlinecode"><span class="id" title="var">triang_spec</span></span>.  So just
+  one bulleted subgoal.  And because (in this use of restrictExports)
+  we did not change the funspec between Exports and Exports',
+  we can use <span class="inlinecode"><span class="id" title="var">funspec_sub_refl</span></span> to prove it. 
+</div>
+<div class="code">
+- <span class="id" title="tactic">apply</span> <span class="id" title="lemma">funspec_sub_refl</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="definition">VSU_Exports</span> <a class="idref" href="VSU_main2.html#stacktriangVSU"><span class="id" title="lemma">stacktriangVSU</span></a>. <span class="comment">(*&nbsp;newstack,&nbsp;push,&nbsp;pop,&nbsp;triang&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+For more significant uses of funspec_sub to adapt and abstract VSUs, see:
+   "Verified Software Units", by Lennart Beringer, ESOP'21. 
+<div class="paragraph"> </div>
+
+<a id="lab228"></a><h2 class="section">End of digression about restrictExports</h2>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Time</span> <span class="id" title="keyword">Definition</span> <a id="coreVSU" class="idref" href="#coreVSU"><span class="id" title="definition">coreVSU</span></a> := <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="lemma">privatizeExports</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="var">linkVSUs</span> <a class="idref" href="VSU_main2.html#stacktriangVSU"><span class="id" title="lemma">stacktriangVSU</span></a> <a class="idref" href="VSU_stdlib2.html#MallocFreeVSU"><span class="id" title="definition">VSU_stdlib2.MallocFreeVSU</span></a>)<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">stdlib._malloc</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stdlib._free</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stdlib._exit</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> .<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Time</span> <span class="id" title="keyword">Definition</span> <a id="whole_prog" class="idref" href="#whole_prog"><span class="id" title="definition">whole_prog</span></a> := <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPlink_progs</span> (<span class="id" title="definition">QPprog</span> <span class="id" title="definition">prog</span>) (<span class="id" title="definition">VSU_prog</span> <a class="idref" href="VSU_main2.html#coreVSU"><span class="id" title="definition">coreVSU</span></a>)).<br/>
+</div>
+
+<div class="doc">
+The funspec for <span class="inlinecode"><span class="id" title="var">main</span></span> is just as it was in <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="main_spec" class="idref" href="#main_spec"><span class="id" title="definition">main_spec</span></a> :=<br/>
+&nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_main</span><br/>
+&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:2" class="idref" href="#gv:2"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
+&nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <span class="id" title="notation">]</span> <span class="id" title="definition">main_pre</span> <a class="idref" href="VSU_main2.html#whole_prog"><span class="id" title="definition">whole_prog</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="VSU_main2.html#gv:1"><span class="id" title="variable">gv</span></a><br/>
+&nbsp;<span class="id" title="notation">POST</span><span class="id" title="notation">[</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span><span class="id" title="notation">()</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> 55)<span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span><span class="id" title="notation">(</span><span class="id" title="method">TT</span><span class="id" title="notation">)</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Instance</span> <a id="Compspecs" class="idref" href="#Compspecs"><span class="id" title="instance">Compspecs</span></a>: <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">VC.main2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="Vprog" class="idref" href="#Vprog"><span class="id" title="definition">Vprog</span></a>: <span class="id" title="definition">varspecs</span> := <span class="id" title="definition">QPvarspecs</span> <a class="idref" href="VSU_main2.html#whole_prog"><span class="id" title="definition">whole_prog</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="Main_imports" class="idref" href="#Main_imports"><span class="id" title="definition">Main_imports</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">Spec_triang.TriangASI</span></a> <a class="idref" href="VSU_main2.html#M"><span class="id" title="definition">M</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Main_Gprog" class="idref" href="#Main_Gprog"><span class="id" title="definition">Main_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_main2.html#main_spec"><span class="id" title="definition">main_spec</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="VSU_main2.html#Main_imports"><span class="id" title="definition">Main_imports</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="body_main" class="idref" href="#body_main"><span class="id" title="lemma">body_main</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_main2.html#Vprog"><span class="id" title="definition">Vprog</span></a> <a class="idref" href="VSU_main2.html#Main_Gprog"><span class="id" title="definition">Main_Gprog</span></a> <span class="id" title="definition">f_main</span> <a class="idref" href="VSU_main2.html#main_spec"><span class="id" title="definition">main_spec</span></a>.<br/>
+</div>
+
+<div class="doc">
+Identical to the proof of <span class="inlinecode"><span class="id" title="var">body_main</span></span> in <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a>. 
+</div>
+<div class="code">
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="MainComp" class="idref" href="#MainComp"><span class="id" title="definition">MainComp</span></a>:  <span class="id" title="definition">MainCompType</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) <a class="idref" href="VSU_main2.html#coreVSU"><span class="id" title="definition">coreVSU</span></a> <a class="idref" href="VSU_main2.html#whole_prog"><span class="id" title="definition">whole_prog</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="VSU_main2.html#main_spec"><span class="id" title="definition">main_spec</span></a>) <span class="id" title="method">emp</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">mkComponent</span> <span class="id" title="definition">prog</span>.<br/>
+<span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_main2.html#body_main"><span class="id" title="axiom">body_main</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="WholeComp" class="idref" href="#WholeComp"><span class="id" title="lemma">WholeComp</span></a>: <span class="id" title="definition">WholeCompType</span> <a class="idref" href="VSU_main2.html#coreVSU"><span class="id" title="definition">coreVSU</span></a> <a class="idref" href="VSU_main2.html#MainComp"><span class="id" title="definition">MainComp</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">proveWholeComponent</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="WholeProgSafe" class="idref" href="#WholeProgSafe"><span class="id" title="lemma">WholeProgSafe</span></a>: <span class="id" title="definition">WholeProgSafeType</span> <a class="idref" href="VSU_main2.html#WholeComp"><span class="id" title="lemma">WholeComp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">proveWholeProgSafe</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">red</span> <span class="id" title="keyword">in</span> <span class="id" title="definition">WholeProgSafeType</span> <a class="idref" href="VSU_main2.html#WholeComp"><span class="id" title="lemma">WholeComp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="comment">(*&nbsp;2021-06-29&nbsp;22:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>VSU_stdlib2: Malloc/free/exit programmed in C</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">VSU_stdlib2<span class="subtitle">Malloc/free/exit programmed in C</span></h1>
+
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ In contrast to <a href="VSU_stdlib.html"><span class="inlineref">VSU_stdlib</span></a> which axiomatized malloc, free,
+  and exit as external functions, in this chapter we construct them as
+  ordinary C functions, and prove them correct.  This chapter shows
+  how to manage global variables that are private to a module.
+
+<div class="paragraph"> </div>
+
+ In the C code, there is a <span class="inlinecode"><span class="id" title="var">stdlib.h</span></span> interface, with alternative
+ implementations <span class="inlinecode"><span class="id" title="var">stdlib.c</span></span> and <span class="inlinecode"><span class="id" title="var">stdlib2.c</span></span> that are quite
+ independent of each other.
+
+<div class="paragraph"> </div>
+
+ The the proofs, there is a specification <span class="inlinecode"><span class="id" title="var">Spec_stdlib.MallocFreeASI</span></span>
+ (that is, the "malloc-free Abstract Specification Interface")
+ with two alternative implementations-with-proofs,
+ <span class="inlinecode"><span class="id" title="var">VSU_stdlib.MallocFreeVSU</span></span> and <span class="inlinecode"><span class="id" title="var">VSU_stdlib2.MallocFreeVSU</span></span>.
+
+<div class="paragraph"> </div>
+
+ That second VSU is the one we build in this chapter.
+
+<div class="paragraph"> </div>
+
+<a id="lab210"></a><h1 class="section">The C program</h1>
+
+<div class="paragraph"> </div>
+
+ Here is our C program.  Notice the variables <span class="inlinecode"><span class="id" title="var">pool</span>,</span> <span class="inlinecode"><span class="id" title="var">pool_index</span>,</span> <span class="inlinecode"><span class="id" title="var">freelist</span></span> 
+that are global to the module, but meant to be private--not to be
+directly manipulated by clients of the module.  Furthermore, these
+variables have initial values (<span class="inlinecode"><span class="id" title="var">pool_index</span>=0,</span> <span class="inlinecode"><span class="id" title="var">freelist</span>=<span class="id" title="var">NULL</span></span>,
+and <span class="inlinecode"><span class="id" title="var">pool</span></span> zero-initialized implicitly) that 
+represent a meaningful initial state.
+
+<div class="paragraph"> </div>
+
+<pre>
+/* stdlib2.c */
+#include &lt;stddef.h&gt;
+#include "stdlib.h"
+
+struct cell {struct cell *a, *b, *c, *d;};
+
+#define N 80000
+
+struct cell pool[N];
+int pool_index = 0;
+struct cell *freelist=NULL;
+
+void *malloc (size_t n) {
+  struct cell *p;
+  if (n&gt;sizeof(struct cell)) return NULL;
+  if (freelist) {
+    p = freelist;
+    freelist = p<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>a;
+  } else if (pool_index &lt; N) {
+    p = pool+pool_index++;
+  } else p=NULL;
+  return (void* ) p;
+}
+
+void free (void *p) {
+  struct cell *pp = p;
+  if (pp==NULL) return;
+  pp<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>a = freelist;
+  freelist=pp;
+}
+
+void exit (int n) {
+  while (1) ;
+}
+</pre>
+As you can see, malloc can allocate blocks whose size ranges from
+ 0 to sizeof(struct cell), that is, up to four words long.  Any malloc
+ request larger than that will return NULL, which is legal behavior
+ for malloc.  Furthermore, the maximum size of the pool is N=80000,
+ beyond which malloc will return NULL.
+
+<div class="paragraph"> </div>
+
+  The exit() function infinite-loops, so that it satisfies its postcondition
+  of False in our Hoare logic of partial correctness.
+
+<div class="paragraph"> </div>
+
+<a id="lab211"></a><h1 class="section">The normal boilerplate</h1>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.VSU</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.stdlib2</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a>.<br/>
+<span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">stdlib2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+</div>
+
+<div class="doc">
+As usual, we define representation relations.  First, for the free list,
+    which is just a linked list much as in <a href="VSU_stack.html"><span class="inlineref">VSU_stack</span></a>.
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="tcell" class="idref" href="#tcell"><span class="id" title="definition">tcell</span></a> := <span class="id" title="constructor">Tstruct</span> <span class="id" title="definition">_cell</span> <span class="id" title="definition">noattr</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Fixpoint</span> <a id="freelistrep" class="idref" href="#freelistrep"><span class="id" title="definition">freelistrep</span></a> (<a id="n:1" class="idref" href="#n:1"><span class="id" title="binder">n</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="p:2" class="idref" href="#p:2"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) : <span class="id" title="definition">mpred</span> :=<br/>
+&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="VSU_stdlib2.html#n:1"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> ⇒ <span class="id" title="notation">EX</span> <a id="y:5" class="idref" href="#y:5"><span class="id" title="binder">y</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">!!</span> <span class="id" title="definition">malloc_compatible</span> (<span class="id" title="definition">sizeof</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a>) <a class="idref" href="VSU_stdlib2.html#p:2"><span class="id" title="variable">p</span></a> <span class="id" title="notation">&amp;&amp;</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">data_at</span> <span class="id" title="definition">Ews</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="VSU_stdlib2.html#y:5"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="constructor">Vundef</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="constructor">Vundef</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="constructor">Vundef</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)))</span></a> <a class="idref" href="VSU_stdlib2.html#p:2"><span class="id" title="variable">p</span></a> <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#freelistrep:3"><span class="id" title="definition">freelistrep</span></a> <span class="id" title="var">n'</span> <a class="idref" href="VSU_stdlib2.html#y:5"><span class="id" title="variable">y</span></a><br/>
+&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <span class="id" title="notation">!!</span> <span class="id" title="notation">(</span><a class="idref" href="VSU_stdlib2.html#p:2"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">nullval</span><span class="id" title="notation">)</span> <span class="id" title="notation">&amp;&amp;</span> <span class="id" title="method">emp</span><br/>
+&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="VSU_stdlib2.html#freelistrep"><span class="id" title="definition">freelistrep</span></a> <span class="id" title="var">n</span> <span class="id" title="var">p</span> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">never</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="freelistrep_local_prop" class="idref" href="#freelistrep_local_prop"><span class="id" title="lemma">freelistrep_local_prop</span></a>: <span class="id" title="keyword">∀</span> <a id="n:6" class="idref" href="#n:6"><span class="id" title="binder">n</span></a> <a id="p:7" class="idref" href="#p:7"><span class="id" title="binder">p</span></a>, <br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#freelistrep"><span class="id" title="definition">freelistrep</span></a> <a class="idref" href="VSU_stdlib2.html#n:6"><span class="id" title="variable">n</span></a> <a class="idref" href="VSU_stdlib2.html#p:7"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span>  <span class="id" title="notation">!!</span> (<span class="id" title="definition">is_pointer_or_null</span> <a class="idref" href="VSU_stdlib2.html#p:7"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">(</span></a><a class="idref" href="VSU_stdlib2.html#n:6"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a><a class="idref" href="VSU_stdlib2.html#p:7"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><span class="id" title="definition">nullval</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">(</span></a><a class="idref" href="VSU_stdlib2.html#n:6"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a><span class="id" title="definition">isptr</span> <a class="idref" href="VSU_stdlib2.html#p:7"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">nat</span>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">freelistrep_local_prop</span> : <span class="id" title="var">saturate_local</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="freelistrep_valid_pointer" class="idref" href="#freelistrep_valid_pointer"><span class="id" title="lemma">freelistrep_valid_pointer</span></a>:<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="n:8" class="idref" href="#n:8"><span class="id" title="binder">n</span></a> <a id="p:9" class="idref" href="#p:9"><span class="id" title="binder">p</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#freelistrep"><span class="id" title="definition">freelistrep</span></a> <a class="idref" href="VSU_stdlib2.html#n:8"><span class="id" title="variable">n</span></a> <a class="idref" href="VSU_stdlib2.html#p:9"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="definition">valid_pointer</span> <a class="idref" href="VSU_stdlib2.html#p:9"><span class="id" title="variable">p</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">freelistrep_valid_pointer</span> : <span class="id" title="var">valid_pointer</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab212"></a><h1 class="section">malloc_token</h1>
+
+<div class="paragraph"> </div>
+
+ Suppose the user does <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">malloc</span>(7);</span>.  Then <span class="inlinecode"><span class="id" title="var">p</span></span> points to
+  a newly allocated block of 7 bytes.  What does <span class="inlinecode"><span class="id" title="var">malloc_token</span>(<span class="id" title="var">p</span>)</span>
+  represent?
+<ul class="doclist">
+<li> Normally, there must be some way for <span class="inlinecode"><span class="id" title="var">free</span>(<span class="id" title="var">p</span>)</span> to figure out
+   the size of the block.  This can be done by having a header word,
+   just before address p, that gives the size (though there are other
+   ways to do it).  Normally, this header word is part of what 
+   malloc_token represents.  But in this implementation, all blocks
+   are the same size, so there's no need for such a header.
+
+</li>
+<li> The memory-manager's free list contains blocks all of size
+   sizeof(tcell), which  is 16 bytes when <span class="inlinecode"><span class="id" title="var">sizeof</span>(<span class="id" title="var">size_t</span>)=4</span> or 
+   32 bytes when <span class="inlinecode"><span class="id" title="var">sizeof</span>(<span class="id" title="var">size_t</span>)=8</span>.  When <span class="inlinecode"><span class="id" title="var">malloc</span>(7)</span> splits a
+   block into two pieces, the malloc_token represents the
+   second piece, the portion of the block between offset 7 and the end.
+   That is the <span class="inlinecode"><span class="id" title="var">memory_block</span></span> shown in the definition below.
+
+</li>
+<li> In addition, the malloc_token has three propositional facts about
+   address <span class="inlinecode"><span class="id" title="var">p</span></span>, that will assist the <span class="inlinecode"><span class="id" title="var">free</span>()</span> function in reconstituting
+   the two parts of the split block. 
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="malloc_token_sz" class="idref" href="#malloc_token_sz"><span class="id" title="definition">malloc_token_sz</span></a> (<a id="sh:10" class="idref" href="#sh:10"><span class="id" title="binder">sh</span></a>: <span class="id" title="definition">share</span>) (<a id="n:11" class="idref" href="#n:11"><span class="id" title="binder">n</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:12" class="idref" href="#p:12"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span>) : <span class="id" title="definition">mpred</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="notation">!!</span> <span class="id" title="notation">(</span><span class="id" title="definition">field_compatible</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="VSU_stdlib2.html#p:12"><span class="id" title="variable">p</span></a> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <span class="id" title="definition">malloc_compatible</span> (<span class="id" title="definition">sizeof</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a>) <a class="idref" href="VSU_stdlib2.html#p:12"><span class="id" title="variable">p</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="VSU_stdlib2.html#n:11"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">sizeof</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a><span class="id" title="notation">)</span> <br/>
+&nbsp;<span class="id" title="notation">&amp;&amp;</span>  <span class="id" title="definition">memory_block</span> <span class="id" title="definition">Ews</span> (<span class="id" title="definition">sizeof</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'-'_x"><span class="id" title="notation">-</span></a> <a class="idref" href="VSU_stdlib2.html#n:11"><span class="id" title="variable">n</span></a>) (<span class="id" title="definition">offset_val</span> <a class="idref" href="VSU_stdlib2.html#n:11"><span class="id" title="variable">n</span></a> <a class="idref" href="VSU_stdlib2.html#p:12"><span class="id" title="variable">p</span></a>).<br/>
+</div>
+
+<div class="doc">
+<a id="lab213"></a><h4 class="section">Exercise: 2 stars, standard (malloc_token_properties)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="malloc_token_sz_valid_pointer" class="idref" href="#malloc_token_sz_valid_pointer"><span class="id" title="lemma">malloc_token_sz_valid_pointer</span></a>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="sh:13" class="idref" href="#sh:13"><span class="id" title="binder">sh</span></a> : <span class="id" title="definition">share</span>) (<a id="sz:14" class="idref" href="#sz:14"><span class="id" title="binder">sz</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>)  (<a id="p:15" class="idref" href="#p:15"><span class="id" title="binder">p</span></a> : <span class="id" title="inductive">val</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#sz:14"><span class="id" title="variable">sz</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#306329b0eca7a2b86c198702f594ad8e"><span class="id" title="notation">≤</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#malloc_token_sz"><span class="id" title="definition">malloc_token_sz</span></a> <a class="idref" href="VSU_stdlib2.html#sh:13"><span class="id" title="variable">sh</span></a> <a class="idref" href="VSU_stdlib2.html#sz:14"><span class="id" title="variable">sz</span></a> <a class="idref" href="VSU_stdlib2.html#p:15"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="definition">valid_pointer</span> <a class="idref" href="VSU_stdlib2.html#p:15"><span class="id" title="variable">p</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span>  <a id="malloc_token_sz_local_facts" class="idref" href="#malloc_token_sz_local_facts"><span class="id" title="lemma">malloc_token_sz_local_facts</span></a> : <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="sh:16" class="idref" href="#sh:16"><span class="id" title="binder">sh</span></a> : <span class="id" title="definition">share</span>) (<a id="sz:17" class="idref" href="#sz:17"><span class="id" title="binder">sz</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>) (<a id="p:18" class="idref" href="#p:18"><span class="id" title="binder">p</span></a> : <span class="id" title="inductive">val</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#malloc_token_sz"><span class="id" title="definition">malloc_token_sz</span></a> <a class="idref" href="VSU_stdlib2.html#sh:16"><span class="id" title="variable">sh</span></a> <a class="idref" href="VSU_stdlib2.html#sz:17"><span class="id" title="variable">sz</span></a> <a class="idref" href="VSU_stdlib2.html#p:18"><span class="id" title="variable">p</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="notation">!!</span> <span class="id" title="definition">malloc_compatible</span> <a class="idref" href="VSU_stdlib2.html#sz:17"><span class="id" title="variable">sz</span></a> <a class="idref" href="VSU_stdlib2.html#p:18"><span class="id" title="variable">p</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ The next three lines define an opaque constant that, nevertheless,
+  rep_lia can unfold.     See VC.pdf, chapter 65 "Opaque Constants". 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="N" class="idref" href="#N"><span class="id" title="definition">N</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj1_sig"><span class="id" title="definition">proj1_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> 80000).<br/>
+<span class="id" title="keyword">Definition</span> <a id="N_eq" class="idref" href="#N_eq"><span class="id" title="definition">N_eq</span></a> : <a class="idref" href="VSU_stdlib2.html#N"><span class="id" title="definition">N</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><span class="id" title="var">_</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj2_sig"><span class="id" title="definition">proj2_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> <span class="id" title="var">_</span>).<br/>
+<span class="id" title="keyword">Hint Rewrite</span> <a class="idref" href="VSU_stdlib2.html#N_eq"><span class="id" title="definition">N_eq</span></a> : <span class="id" title="var">rep_lia</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab214"></a><h3 class="section">Digression (feel free to skip this)</h3>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Module</span> <a id="Digression" class="idref" href="#Digression"><span class="id" title="module">Digression</span></a>.<br/>
+</div>
+
+<div class="doc">
+Suppose someone changes the source program stdlib2.c,  putting a
+  different constant than 80000.  You would like your verification 
+  script to automatically adjust.    We will revise the line,
+  <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">...</span>  to find the constant automagically.
+
+<div class="paragraph"> </div>
+
+  Step one is to find the constant.  You can look in stdlib2.v, which
+  is produced by CompCert clightgen from stdlib2.c, for the variable
+  definition v_pool.  And now look where the number 80000 appears
+  in <span class="inlinecode"><span class="id" title="var">gvar_info</span>(<span class="id" title="var">v_pool</span>)</span>: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Compute</span> <span class="id" title="projection">gvar_info</span> (<span class="id" title="definition">stdlib2.v_pool</span>).<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;Tarray<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Tstruct&nbsp;57&nbsp;{|&nbsp;attr_volatile&nbsp;:=&nbsp;false;&nbsp;attr_alignas&nbsp;:=&nbsp;None&nbsp;|})<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80000<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|&nbsp;attr_volatile&nbsp;:=&nbsp;false;&nbsp;attr_alignas&nbsp;:=&nbsp;None&nbsp;|}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;type&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+It's easy to extract that number automatically: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Compute</span> <span class="id" title="keyword">match</span> <span class="id" title="projection">gvar_info</span> (<span class="id" title="definition">stdlib2.v_pool</span>) <span class="id" title="keyword">with</span> <span class="id" title="constructor">Tarray</span> <span class="id" title="var">_</span> <span class="id" title="var">n</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">n</span> | <span class="id" title="var">_</span> ⇒ 0 <span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;=&nbsp;80000:&nbsp;Z&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+The following definition of <span class="inlinecode"><span class="id" title="var">N</span></span> won't work well, because N will 
+  not be a constant, it'll be a match expression: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Digression.N'" class="idref" href="#Digression.N'"><span class="id" title="definition">N'</span></a> := <span class="id" title="keyword">match</span> <span class="id" title="projection">gvar_info</span> (<span class="id" title="definition">stdlib2.v_pool</span>) <span class="id" title="keyword">with</span> <span class="id" title="constructor">Tarray</span> <span class="id" title="var">_</span> <span class="id" title="var">n</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">n</span> | <span class="id" title="var">_</span> ⇒ 0 <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="VSU_stdlib2.html#Digression.N'"><span class="id" title="definition">N'</span></a>. <span class="comment">(*&nbsp;N'&nbsp;=&nbsp;match&nbsp;gvar_info&nbsp;v_pool&nbsp;with&nbsp;Tarray&nbsp;_&nbsp;n&nbsp;_&nbsp;=&gt;&nbsp;n&nbsp;|&nbsp;_&nbsp;=&gt;&nbsp;0&nbsp;end&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+So instead, use this Coq trick: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Digression.N''" class="idref" href="#Digression.N''"><span class="id" title="definition">N''</span></a> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="keyword">constr</span>:(<span class="id" title="keyword">match</span> <span class="id" title="projection">gvar_info</span> (<span class="id" title="definition">stdlib2.v_pool</span>) <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="constructor">Tarray</span> <span class="id" title="var">_</span> <span class="id" title="var">n</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ 0 <span class="id" title="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">in</span> <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="keyword">in</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">exact</span> <span class="id" title="var">x</span>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="VSU_stdlib2.html#Digression.N''"><span class="id" title="definition">N''</span></a>. <span class="comment">(*&nbsp;N''&nbsp;=&nbsp;80000&nbsp;:&nbsp;Z&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+Now, throw away N'' and we'll combine the two tricks together:
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">opaque_constant</span></span> to define a constant that won't unfold except 
+    by explicit rewriting; and
+
+</li>
+<li> extract the value of the constant from the program itself. 
+</li>
+</ul>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="Digression.N" class="idref" href="#Digression.N"><span class="id" title="definition">N</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj1_sig"><span class="id" title="definition">proj1_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">ltac</span>:(<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="keyword">constr</span>:(<span class="id" title="keyword">match</span> <span class="id" title="projection">gvar_info</span> (<span class="id" title="definition">stdlib2.v_pool</span>) <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="constructor">Tarray</span> <span class="id" title="var">_</span> <span class="id" title="var">n</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">n</span> | <span class="id" title="var">_</span> ⇒ 0 <span class="id" title="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">in</span> <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="keyword">in</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">exact</span> <span class="id" title="var">x</span>))).<br/>
+<span class="id" title="keyword">Definition</span> <a id="Digression.N_eq" class="idref" href="#Digression.N_eq"><span class="id" title="definition">N_eq</span></a> : <a class="idref" href="VSU_stdlib2.html#Digression.N"><span class="id" title="definition">N</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><span class="id" title="var">_</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj2_sig"><span class="id" title="definition">proj2_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> <span class="id" title="var">_</span>).<br/>
+<span class="id" title="keyword">Hint Rewrite</span> <a class="idref" href="VSU_stdlib2.html#Digression.N_eq"><span class="id" title="definition">N_eq</span></a> : <span class="id" title="var">rep_lia</span>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="VSU_stdlib2.html#Digression.N_eq"><span class="id" title="definition">N_eq</span></a>. <span class="comment">(*&nbsp;:&nbsp;N&nbsp;=&nbsp;80000&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VSU_stdlib2.html#Digression"><span class="id" title="module">Digression</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab215"></a><h3 class="section">End of digression. Aren't you glad you skipped it?</h3>
+
+<div class="paragraph"> </div>
+
+<a id="lab216"></a><h1 class="section">Defining the mem_mgr APD</h1>
+
+<div class="paragraph"> </div>
+
+ This <span class="inlinecode"><span class="id" title="var">mem_mgr</span></span> predicate is the client-view abstract predicate
+  that characterizes the contents of this module's global state variables,
+  <span class="inlinecode"><span class="id" title="var">pool</span></span>, <span class="inlinecode"><span class="id" title="var">pool_index</span></span>, and <span class="inlinecode"><span class="id" title="var">freelist</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="mem_mgr" class="idref" href="#mem_mgr"><span class="id" title="definition">mem_mgr</span></a> (<a id="gv:19" class="idref" href="#gv:19"><span class="id" title="binder">gv</span></a>: <span class="id" title="definition">globals</span>) : <span class="id" title="definition">mpred</span> :=<br/>
+&nbsp;<span class="id" title="notation">EX</span> <a id="i:20" class="idref" href="#i:20"><span class="id" title="binder">i</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span> <span class="id" title="notation">EX</span> <a id="p:21" class="idref" href="#p:21"><span class="id" title="binder">p</span></a>: <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <span class="id" title="notation">EX</span> <a id="frees:22" class="idref" href="#frees:22"><span class="id" title="binder">frees</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><span class="id" title="notation">,</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">!!</span> <span class="id" title="notation">(</span>0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="VSU_stdlib2.html#i:20"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="VSU_stdlib2.html#N"><span class="id" title="definition">N</span></a><span class="id" title="notation">)</span> <span class="id" title="notation">&amp;&amp;</span><br/>
+&nbsp;&nbsp;<span class="id" title="definition">data_at</span> <span class="id" title="definition">Ews</span> <span class="id" title="definition">tint</span> (<span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> <a class="idref" href="VSU_stdlib2.html#i:20"><span class="id" title="variable">i</span></a>)) (<a class="idref" href="VSU_stdlib2.html#gv:19"><span class="id" title="variable">gv</span></a> <span class="id" title="definition">_pool_index</span>) <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;<span class="id" title="definition">data_at_</span> <span class="id" title="definition">Ews</span> (<span class="id" title="definition">tarray</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a> (<a class="idref" href="VSU_stdlib2.html#N"><span class="id" title="definition">N</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#::Z_scope:x_'-'_x"><span class="id" title="notation">-</span></a><a class="idref" href="VSU_stdlib2.html#i:20"><span class="id" title="variable">i</span></a>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="definition">field_address0</span> (<span class="id" title="definition">tarray</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a> <a class="idref" href="VSU_stdlib2.html#N"><span class="id" title="definition">N</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><span class="id" title="constructor">ArraySubsc</span> <a class="idref" href="VSU_stdlib2.html#i:20"><span class="id" title="variable">i</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>  (<a class="idref" href="VSU_stdlib2.html#gv:19"><span class="id" title="variable">gv</span></a> <span class="id" title="definition">_pool</span>)) <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;<span class="id" title="definition">data_at</span> <span class="id" title="definition">Ews</span> (<span class="id" title="definition">tptr</span> <a class="idref" href="VSU_stdlib2.html#tcell"><span class="id" title="definition">tcell</span></a>) <a class="idref" href="VSU_stdlib2.html#p:21"><span class="id" title="variable">p</span></a> (<a class="idref" href="VSU_stdlib2.html#gv:19"><span class="id" title="variable">gv</span></a> <span class="id" title="definition">_freelist</span>) <span class="id" title="notation">×</span><br/>
+&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#freelistrep"><span class="id" title="definition">freelistrep</span></a> <a class="idref" href="VSU_stdlib2.html#frees:22"><span class="id" title="variable">frees</span></a> <a class="idref" href="VSU_stdlib2.html#p:21"><span class="id" title="variable">p</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="M" class="idref" href="#M"><span class="id" title="definition">M</span></a> : <a class="idref" href="Spec_stdlib.html#MallocFreeAPD"><span class="id" title="record">MallocFreeAPD</span></a> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Spec_stdlib.html#Build_MallocFreeAPD"><span class="id" title="constructor">Build_MallocFreeAPD</span></a> <a class="idref" href="VSU_stdlib2.html#mem_mgr"><span class="id" title="definition">mem_mgr</span></a> <a class="idref" href="VSU_stdlib2.html#malloc_token_sz"><span class="id" title="definition">malloc_token_sz</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#malloc_token_sz_valid_pointer"><span class="id" title="axiom">malloc_token_sz_valid_pointer</span></a> <a class="idref" href="VSU_stdlib2.html#malloc_token_sz_local_facts"><span class="id" title="axiom">malloc_token_sz_local_facts</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab217"></a><h1 class="section">Constructing Vprog and Gprog</h1>
+
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_ASI" class="idref" href="#MF_ASI"><span class="id" title="definition">MF_ASI</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_stdlib.html#MallocFreeASI"><span class="id" title="definition">MallocFreeASI</span></a> <a class="idref" href="VSU_stdlib2.html#M"><span class="id" title="definition">M</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_imported_specs" class="idref" href="#MF_imported_specs"><span class="id" title="definition">MF_imported_specs</span></a>:<span class="id" title="definition">funspecs</span> :=  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_internal_specs" class="idref" href="#MF_internal_specs"><span class="id" title="definition">MF_internal_specs</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stdlib2.html#MF_ASI"><span class="id" title="definition">MF_ASI</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_globals" class="idref" href="#MF_globals"><span class="id" title="definition">MF_globals</span></a> <a id="gv:23" class="idref" href="#gv:23"><span class="id" title="binder">gv</span></a> : <span class="id" title="definition">mpred</span>:= <a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">Spec_stdlib.mem_mgr</span></a> <a class="idref" href="VSU_stdlib2.html#M"><span class="id" title="definition">M</span></a> <a class="idref" href="VSU_stdlib2.html#gv:23"><span class="id" title="variable">gv</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MFVprog" class="idref" href="#MFVprog"><span class="id" title="definition">MFVprog</span></a> : <span class="id" title="definition">varspecs</span>. <span class="id" title="var">mk_varspecs</span> <span class="id" title="definition">stdlib2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MFGprog" class="idref" href="#MFGprog"><span class="id" title="definition">MFGprog</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stdlib2.html#MF_imported_specs"><span class="id" title="definition">MF_imported_specs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="VSU_stdlib2.html#MF_internal_specs"><span class="id" title="definition">MF_internal_specs</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab218"></a><h4 class="section">Exercise: 3 stars, standard (stdlib2_body_malloc)</h4>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="body_malloc" class="idref" href="#body_malloc"><span class="id" title="lemma">body_malloc</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stdlib2.html#MFVprog"><span class="id" title="definition">MFVprog</span></a> <a class="idref" href="VSU_stdlib2.html#MFGprog"><span class="id" title="definition">MFGprog</span></a> <span class="id" title="definition">f_malloc</span> (<a class="idref" href="Spec_stdlib.html#malloc_spec_sz"><span class="id" title="definition">malloc_spec_sz</span></a> <a class="idref" href="VSU_stdlib2.html#M"><span class="id" title="definition">M</span></a>).<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab219"></a><h4 class="section">Exercise: 3 stars, standard (stdlib2_body_free)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="body_free" class="idref" href="#body_free"><span class="id" title="lemma">body_free</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stdlib2.html#MFVprog"><span class="id" title="definition">MFVprog</span></a> <a class="idref" href="VSU_stdlib2.html#MFGprog"><span class="id" title="definition">MFGprog</span></a> <span class="id" title="definition">f_free</span> (<a class="idref" href="Spec_stdlib.html#free_spec_sz"><span class="id" title="definition">free_spec_sz</span></a> <a class="idref" href="VSU_stdlib2.html#M"><span class="id" title="definition">M</span></a>).<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab220"></a><h4 class="section">Exercise: 2 stars, standard (stdlib2_body_exit)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="body_exit" class="idref" href="#body_exit"><span class="id" title="lemma">body_exit</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_stdlib2.html#MFVprog"><span class="id" title="definition">MFVprog</span></a> <a class="idref" href="VSU_stdlib2.html#MFGprog"><span class="id" title="definition">MFGprog</span></a> <span class="id" title="definition">f_exit</span> <a class="idref" href="Spec_stdlib.html#exit_spec"><span class="id" title="definition">exit_spec</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab221"></a><h1 class="section">Initializers for global data</h1>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Check</span> @<span class="id" title="projection">Comp_MkInitPred</span>.<br/>
+</div>
+
+<div class="doc">
+ Each VSU may have private global variables that constitute its
+  "local state".  The client of the VSU should not access these
+  directly; and in separation logic all these variables should be
+  abstracted as a single abstract predicate.  Since these variables
+  may have initial values that concretely represent some abstract
+  state, we need an axiom in the VSU interface (proved as a lemma
+  in the VSU implementation), saying that the initial values
+  properly represent a proper state of the abstract predicate. 
+<div class="paragraph"> </div>
+
+<a id="lab222"></a><h4 class="section">Exercise: 2 stars, standard (stdlib2_initialize)</h4>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a id="initialize" class="idref" href="#initialize"><span class="id" title="lemma">initialize</span></a>: <span class="id" title="definition">VSU_initializer</span> <span class="id" title="definition">prog</span> <a class="idref" href="VSU_stdlib2.html#MF_globals"><span class="id" title="definition">MF_globals</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">InitGPred_tac</span>.<br/>
+<span class="id" title="tactic">unfold</span> <a class="idref" href="VSU_stdlib2.html#MF_globals"><span class="id" title="definition">MF_globals</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab223"></a><h2 class="section">Defining the pieces of a VSU</h2>
+ And now, in the usual way, we can put totether the pieces: 
+<div class="paragraph"> </div>
+
+<a id="lab224"></a><h1 class="section">Constructing the Component and the VSU</h1>
+
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_Externs" class="idref" href="#MF_Externs"><span class="id" title="definition">MF_Externs</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="MallocFreeVSU" class="idref" href="#MallocFreeVSU"><span class="id" title="definition">MallocFreeVSU</span></a>: @<span class="id" title="definition">VSU</span> <span class="id" title="definition">NullExtension.Espec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib2.html#MF_Externs"><span class="id" title="definition">MF_Externs</span></a> <a class="idref" href="VSU_stdlib2.html#MF_imported_specs"><span class="id" title="definition">MF_imported_specs</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) <a class="idref" href="VSU_stdlib2.html#MF_ASI"><span class="id" title="definition">MF_ASI</span></a> <a class="idref" href="VSU_stdlib2.html#MF_globals"><span class="id" title="definition">MF_globals</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" title="var">mkVSU</span> <span class="id" title="definition">prog</span> <a class="idref" href="VSU_stdlib2.html#MF_internal_specs"><span class="id" title="definition">MF_internal_specs</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stdlib2.html#body_malloc"><span class="id" title="axiom">body_malloc</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stdlib2.html#body_free"><span class="id" title="axiom">body_free</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">solve_SF_internal</span> <a class="idref" href="VSU_stdlib2.html#body_exit"><span class="id" title="axiom">body_exit</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VSU_stdlib2.html#initialize"><span class="id" title="axiom">initialize</span></a>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab225"></a><h2 class="section">Next Chapter: <a href="VSU_main2.html"><span class="inlineref">VSU_main2</span></a></h2>
+
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2021-06-29&nbsp;22:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

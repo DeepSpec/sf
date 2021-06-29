@@ -140,7 +140,7 @@ Hint Rewrite N_eq : rep_lia.
 Global Opaque N.
 
 Definition empty_table : hashtable_contents :=
-  list_repeat (Z.to_nat N) nil.
+  Zrepeat nil N.
 
 Fixpoint list_get (s: list byte) (al: list (list byte * Z)) : Z :=
   match al with
@@ -328,4 +328,4 @@ Proof.
 
 End IntHashTable.
 
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)

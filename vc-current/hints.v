@@ -9,7 +9,7 @@ match goal with
                  (Etempvar ?i _ :: _)) _) _ =>
   match Q with context [temp i ?q] =>
    match R with context [data_at _ ?t _ q] =>
-       unify ((glob_specs D) ! free) (Some library.free_spec');
+       unify (Maps.PTree.get free (glob_specs D)) (Some library.free_spec');
        idtac "When doing forward_call through this call to" free
   "you need to supply a WITH-witness of type (type*val*globals) and you need to supply a proof that"
    q "<>nullval.  Look in your SEP clauses for 'data_at _" t "_" q"', which will be useful for both."
@@ -51,4 +51,4 @@ Ltac vc_special_hint :=
 
 Ltac hint_special ::=  try vc_special_hint.
 
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)

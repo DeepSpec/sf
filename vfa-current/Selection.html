@@ -120,7 +120,7 @@ Coq rejects <span class="inlinecode"><span class="id" title="var">selsort</span>
     call in <span class="inlinecode"><span class="id" title="var">selsort</span></span> is not <i>structurally decreasing</i>: the argument
     <span class="inlinecode"><span class="id" title="var">r'</span></span> at the call site is not known to be a smaller part of the
     original input <span class="inlinecode"><span class="id" title="var">l</span></span>. Indeed, <span class="inlinecode"><span class="id" title="var">select</span></span> might not return such a list.
-    For example, <span class="inlinecode"><span class="id" title="var">select</span></span> <span class="inlinecode">1</span> <span class="inlinecode">[0;</span> <span class="inlinecode">2]</span> is <span class="inlinecode">(0,</span> <span class="inlinecode">[1;</span> <span class="inlinecode">2]</span>, but <span class="inlinecode">[1;</span> <span class="inlinecode">2]</span> is
+    For example, <span class="inlinecode"><span class="id" title="var">select</span></span> <span class="inlinecode">1</span> <span class="inlinecode">[0;</span> <span class="inlinecode">2]</span> is <span class="inlinecode">(0,</span> <span class="inlinecode">[1;</span> <span class="inlinecode">2])</span>, but <span class="inlinecode">[1;</span> <span class="inlinecode">2]</span> is
     not a part of <span class="inlinecode">[0;</span> <span class="inlinecode">2]</span>. 
 <div class="paragraph"> </div>
 
@@ -595,7 +595,7 @@ Instead, anywhere you want to unfold or simplify <span class="inlinecode"><span 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-05-26&nbsp;15:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-06-29&nbsp;21:56&nbsp;*)</span><br/>
 </div>
 </div>
 

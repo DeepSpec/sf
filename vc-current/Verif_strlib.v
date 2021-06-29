@@ -152,7 +152,7 @@ Print cstringn. (* =
  !! (~ In Byte.zero s) &&
  data_at sh (tarray tschar n)
   (map Vbyte (s ++ [Byte.zero]) ++
-   list_repeat (Z.to_nat (n - (Zlength s + 1))) Vundef) p *)
+   Zrepeat Vundef (n - (Zlength s + 1))) p *)
 
 Check (cstringn Tsh Hello' 10 p). (* : mpred *)
 
@@ -415,18 +415,18 @@ Lemma strcpy_then_clause:
   ~ In Byte.zero s ->
     data_at wsh (tarray tschar n)
       (map Vbyte (sublist 0 (Zlength s) s) ++
-       upd_Znth 0 (list_repeat (Z.to_nat (n - Zlength s)) Vundef)
+       upd_Znth 0 (Zrepeat Vundef (n - Zlength s))
          (Vint (Int.repr (Byte.signed (Znth (Zlength s) (s ++ [Byte.zero]))))))
       dest
   |-- data_at wsh (tarray tschar n)
         (map Vbyte (s ++ [Byte.zero]) ++
-             list_repeat (Z.to_nat (n - (Zlength s + 1))) Vundef)
+             Zrepeat Vundef (n - (Zlength s + 1)))
         dest.
 Proof.
 intros.
 apply derives_refl'.
 f_equal.
-Check list_repeat_app'.  (* Hint: this lemma will be useful. *)
+Check Zrepeat_app.  (* Hint: this lemma will be useful. *)
 Check upd_Znth_app1.     (* Hint: this lemma will be useful. *)
 Check app_Znth2.         (* Hint: this lemma will be useful. *)
 Check Znth_0_cons.       (* Hint: this lemma will be useful. *)
@@ -442,17 +442,17 @@ Lemma strcpy_else_clause: forall wsh dest n s i,
   Znth i (s ++ [Byte.zero]) <> Byte.zero ->
      data_at wsh (tarray tschar n)
       (upd_Znth i (map Vbyte (sublist 0 i s)
-                       ++ list_repeat (Z.to_nat (n - i)) Vundef)
+                       ++ Zrepeat Vundef (n - i))
              (Vint (Int.repr (Byte.signed (Znth i (s ++ [Byte.zero])))))) dest
   |-- data_at wsh (tarray tschar n)
       (map Vbyte (sublist 0 (i + 1) s)
-           ++ list_repeat (Z.to_nat (n - (i + 1))) Vundef) dest.
+           ++ Zrepeat Vundef (n - (i + 1))) dest.
 Proof.
 intros.
 apply derives_refl'.
 f_equal.
 (** Useful lemmas here will be: upd_Znth_app2, sublist_split,
-list_repeat_app', app_Znth1, map_app, app_ass, sublist_len_1. *)
+repeat_app', app_Znth1, map_app, app_ass, sublist_len_1. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -465,12 +465,12 @@ Lemma data_at_Vundef_example:
   forall i n sh p,
     0 <= i < n ->
   data_at sh (tarray tschar n)
-          (list_repeat (Z.to_nat (i+1)) (Vbyte Byte.zero)
-             ++ list_repeat (Z.to_nat (n-(i+1))) Vundef) p
+          (Zrepeat (Vbyte Byte.zero) (i+1)
+             ++ Zrepeat Vundef (n-(i+1))) p
  |--           
   data_at sh (tarray tschar n)
-          (list_repeat (Z.to_nat i) (Vbyte Byte.zero)
-             ++ list_repeat (Z.to_nat (n-i)) Vundef) p.
+          (Zrepeat (Vbyte Byte.zero) i
+             ++ Zrepeat Vundef (n-i)) p.
 Proof.
 intros.
 
@@ -482,9 +482,9 @@ intros.
    [strcpy_then_clause]: *)
 apply derives_refl'.
 f_equal.
-rewrite <- list_repeat_app' by lia.
+rewrite <- Zrepeat_app by lia.
 replace (n-i) with (1 + (n-(i+1))) by lia.
-rewrite <- list_repeat_app' by lia.
+rewrite <- Zrepeat_app by lia.
 rewrite !app_ass.
 f_equal.
 f_equal.
@@ -496,17 +496,17 @@ Lemma data_at_Vundef_example:
   forall i n sh p,
     0 <= i < n ->
   data_at sh (tarray tschar n)
-          (list_repeat (Z.to_nat (i+1)) (Vbyte Byte.zero)
-             ++ list_repeat (Z.to_nat (n-(i+1))) Vundef) p
+          (Zrepeat (Vbyte Byte.zero) (i+1)
+             ++ Zrepeat Vundef (n-(i+1))) p
  |--           
   data_at sh (tarray tschar n)
-          (list_repeat (Z.to_nat i) (Vbyte Byte.zero)
-             ++ list_repeat (Z.to_nat (n-i)) Vundef) p.
+          (Zrepeat (Vbyte Byte.zero) i
+             ++ Zrepeat Vundef (n-i) ) p.
 Proof.
 intros.
-rewrite <- list_repeat_app' by lia.
+rewrite <- Zrepeat_app by lia.
 replace (n-i) with (1 + (n-(i+1))) by lia.
-rewrite <- list_repeat_app' by lia.
+rewrite <- Zrepeat_app by lia.
 rewrite !app_ass.
 Check split2_data_at_Tarray_app.
 (*  forall (cs : compspecs) (mid n : Z) (sh : Share.t) 
@@ -571,7 +571,7 @@ forward_loop (EX i : Z,
   PROP (0 <= i < Zlength s + 1)
   LOCAL (temp _i (Vptrofs (Ptrofs.repr i)); temp _dest dest; temp _src src)
   SEP (data_at wsh (tarray tschar n)
-        (map Vbyte (sublist 0 i s) ++ list_repeat (Z.to_nat (n - i)) Vundef) dest;
+        (map Vbyte (sublist 0 i s) ++ Zrepeat Vundef (n - i)) dest;
        data_at rsh (tarray tschar (Zlength s + 1)) (map Vbyte (s ++ [Byte.zero])) src)).
 + (* Prove the precondition implies the loop invariant *)
 (* FILL IN HERE *) admit.
@@ -628,4 +628,4 @@ Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-05-26 15:24 *)
+(* 2021-06-29 22:00 *)
