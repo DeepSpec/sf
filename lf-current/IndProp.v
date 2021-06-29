@@ -763,6 +763,7 @@ Proof.
 
 (** Hint: The next one can easily be proved without using [induction]. *)
 
+ 
 Theorem leb_true_trans : forall n m o,
   n <=? m = true -> m <=? o = true -> n <=? o = true.
 Proof.
@@ -1204,7 +1205,7 @@ Proof.
     [s1] (which matches [re1]), and a second one that applies when [x]
     occurs in [s2] (which matches [re2]). *)
 
-    simpl. rewrite In_app_iff in *.
+    rewrite In_app_iff in *.
     destruct Hin as [Hin | Hin].
     + (* In x s1 *)
       left. apply (IH1 Hin).
@@ -2281,4 +2282,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-06-29 22:14 *)
+(* 2021-06-29 22:40 *)

@@ -856,10 +856,16 @@ This defines a new tactical called <span class="inlinecode"><span class="id" tit
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Imp.html#aevalR:49"><span class="id" title="inductive">aevalR</span></a> <a class="idref" href="Imp.html#e<sub>1</sub>:60"><span class="id" title="variable">e<sub>1</sub></span></a> <a class="idref" href="Imp.html#n<sub>1</sub>:62"><span class="id" title="variable">n<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Imp.html#aevalR:49"><span class="id" title="inductive">aevalR</span></a> <a class="idref" href="Imp.html#e<sub>2</sub>:61"><span class="id" title="variable">e<sub>2</sub></span></a> <a class="idref" href="Imp.html#n<sub>2</sub>:63"><span class="id" title="variable">n<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Imp.html#aevalR:49"><span class="id" title="inductive">aevalR</span></a> (<a class="idref" href="Imp.html#AExp.AMult"><span class="id" title="constructor">AMult</span></a> <a class="idref" href="Imp.html#e<sub>1</sub>:60"><span class="id" title="variable">e<sub>1</sub></span></a> <a class="idref" href="Imp.html#e<sub>2</sub>:61"><span class="id" title="variable">e<sub>2</sub></span></a>) (<a class="idref" href="Imp.html#n<sub>1</sub>:62"><span class="id" title="variable">n<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Imp.html#n<sub>2</sub>:63"><span class="id" title="variable">n<sub>2</sub></span></a>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Module</span> <a id="AExp.aevalR_first_try.HypothesisNames" class="idref" href="#AExp.aevalR_first_try.HypothesisNames"><span class="id" title="module">HypothesisNames</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;A&nbsp;small&nbsp;notational&nbsp;aside.&nbsp;We&nbsp;could&nbsp;also&nbsp;write&nbsp;the&nbsp;definition&nbsp;of<br/>
-&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">aevalR</span></span>&nbsp;as&nbsp;follow,&nbsp;with&nbsp;explicit&nbsp;names&nbsp;for&nbsp;the&nbsp;hypotheses&nbsp;in&nbsp;each<br/>
-&nbsp;&nbsp;&nbsp;case:&nbsp;*)</span><br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Module</span> <a id="AExp.aevalR_first_try.HypothesisNames" class="idref" href="#AExp.aevalR_first_try.HypothesisNames"><span class="id" title="module">HypothesisNames</span></a>.<br/>
+</div>
+
+<div class="doc">
+A small notational aside. We could also write the definition of
+    <span class="inlinecode"><span class="id" title="var">aevalR</span></span> as follow, with explicit names for the hypotheses in each
+    case: 
+</div>
+<div class="code">
+
 <span class="id" title="keyword">Inductive</span> <a id="AExp.aevalR_first_try.HypothesisNames.aevalR" class="idref" href="#AExp.aevalR_first_try.HypothesisNames.aevalR"><span class="id" title="inductive">aevalR</span></a> : <a class="idref" href="Imp.html#AExp.aexp"><span class="id" title="inductive">aexp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="AExp.aevalR_first_try.HypothesisNames.E_ANum" class="idref" href="#AExp.aevalR_first_try.HypothesisNames.E_ANum"><span class="id" title="constructor">E_ANum</span></a> (<a id="n:66" class="idref" href="#n:66"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Imp.html#aevalR:64"><span class="id" title="inductive">aevalR</span></a> (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> <a class="idref" href="Imp.html#n:66"><span class="id" title="variable">n</span></a>) <a class="idref" href="Imp.html#n:66"><span class="id" title="variable">n</span></a><br/>
@@ -2795,7 +2801,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-06-29&nbsp;22:14&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-06-29&nbsp;22:40&nbsp;*)</span><br/>
 </div>
 </div>
 

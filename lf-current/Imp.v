@@ -608,9 +608,9 @@ Inductive aevalR : aexp -> nat -> Prop :=
 
 Module HypothesisNames.
 
-(* A small notational aside. We could also write the definition of
-   [aevalR] as follow, with explicit names for the hypotheses in each
-   case: *)
+(** A small notational aside. We could also write the definition of
+    [aevalR] as follow, with explicit names for the hypotheses in each
+    case: *)
 
 Inductive aevalR : aexp -> nat -> Prop :=
   | E_ANum (n : nat) :
@@ -2022,4 +2022,4 @@ End BreakImp.
 
     [] *)
 
-(* 2021-06-29 22:14 *)
+(* 2021-06-29 22:40 *)

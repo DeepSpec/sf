@@ -445,7 +445,7 @@ Proof.
 
 (** Inductive definitions of propositions also cause Coq to generate
     induction priniciples.  For example, recall our proposition [ev]
-    from \Chap{IndProp}: *)
+    from [IndProp]: *)
 
 Print ev.
 
@@ -475,7 +475,7 @@ Check ev_ind :
 (** As expected, we can apply [ev_ind] directly instead of using
     [induction].  For example, we can use it to show that [ev'] (the
     slightly awkward alternate definition of evenness that we saw in
-    an exercise in the \chap{IndProp} chapter) is equivalent to the
+    an exercise in the [IndProp] chapter) is equivalent to the
     cleaner inductive definition [ev]: *)
 
 Inductive ev' : nat -> Prop :=
@@ -855,4 +855,4 @@ Proof.
 Qed.
 
 
-(* 2021-06-29 22:14 *)
+(* 2021-06-29 22:40 *)
