@@ -54,7 +54,7 @@
          them.
 
        - For questions about Coq, the [#coq] area of Stack
-         Overflow (https://stackoverflow.com/questions/tagged/coq)
+         Overflow ({https://stackoverflow.com/questions/tagged/coq})
          is an excellent community resource.
 
        - Here are some great books on functional programming
@@ -79,7 +79,7 @@
        - For applications of Coq in building verified systems, the
          lectures and course materials for the 2017 DeepSpec Summer
          School are a great resource.
-         https://deepspec.org/event/dsss17/index.html
+         {https://deepspec.org/event/dsss17/index.html}
 *)
 
-(* 2021-06-29 21:51 *)
+(* 2021-06-29 22:14 *)

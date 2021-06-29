@@ -331,7 +331,7 @@
 
 (** A tar file containing the full sources for the "release version"
     of this book (as a collection of Coq scripts and HTML files) is
-    available at https://softwarefoundations.cis.upenn.edu.
+    available at {https://softwarefoundations.cis.upenn.edu}.
 
     If you are using the book as part of a class, your professor may
     give you access to a locally modified version of the files; you
@@ -359,13 +359,13 @@
 		      Cătălin Hriţcu and
 		      Vilhelm Sjöberg and
 		      Brent Yorgey},
-    title        =   "$VOLUMENAME",
+    editor       =   {Benjamin C. Pierce},
+    title        =   "Logical Foundations",
     series       =   "Software Foundations",
     volume       =   "1",
     year         =   "2021",
     publisher    =   "Electronic textbook",
-    note         =   {Version 6.0,
-                      \URLhttp://softwarefoundations.cis.upenn.edu }
+    note         =   {Version 6.0, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
 *)
 
@@ -378,7 +378,7 @@
 (** A large compendium of exams from many offerings of
     CIS500 ("Software Foundations") at the University of Pennsylvania
     can be found at
-    https://www.seas.upenn.edu/~cis500/current/exams/index.html.
+    {https://www.seas.upenn.edu/~cis500/current/exams/index.html}.
     There has been some drift of notations over the years, but most of
     the problems are still relevant to the current text. *)
 
@@ -387,8 +387,8 @@
 
 (** Lectures for two intensive summer courses based on _Logical
     Foundations_ (part of the DeepSpec summer school series) can be
-    found at https://deepspec.org/event/dsss17 and
-    https://deepspec.org/event/dsss18/.  The video quality in the
+    found at {https://deepspec.org/event/dsss17} and
+    {https://deepspec.org/event/dsss18/}.  The video quality in the
     2017 lectures is poor at the beginning but gets better in the
     later lectures. *)
 
@@ -436,8 +436,8 @@
 
 (** Thanks to the efforts of a team of volunteer translators,
     _Software Foundations_ can be enjoyed in Japanese at
-    http://proofcafe.org/sf.  A Chinese translation is also underway;
-    you can preview it at https://coq-zh.github.io/SF-zh/. *)
+    {http://proofcafe.org/sf}.  A Chinese translation is also underway;
+    you can preview it at {https://coq-zh.github.io/SF-zh/}. *)
 
 (* ################################################################# *)
 (** * Thanks *)
@@ -447,4 +447,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-06-29 21:51 *)
+(* 2021-06-29 22:14 *)

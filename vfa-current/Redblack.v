@@ -10,9 +10,9 @@
 
     - Red-Black Trees in a Functional Setting, by Chris Okasaki.
       _Journal of Functional Programming_, 9(4):471-477, July 1999.
-      Available from https://doi.org/10.1017/S0956796899003494.
+      Available from {https://doi.org/10.1017/S0956796899003494}.
       Archived at
-      https://web.archive.org/web/20070926220746/http://www.eecs.usma.edu/webs/people/okasaki/jfp99.ps.
+      {https://web.archive.org/web/20070926220746/http://www.eecs.usma.edu/webs/people/okasaki/jfp99.ps}.
 
     - _Purely Functional Data Structures_, by Chris Okasaki. Section
       3.3.  Cambridge University Press, 1998.
@@ -28,7 +28,7 @@
 
     - Efficient Verified Red-Black Trees, by Andrew W. Appel,
       September 2011.  Available from
-      http://www.cs.princeton.edu/~appel/papers/redblack.pdf.  *)
+      {http://www.cs.princeton.edu/~appel/papers/redblack.pdf}.  *)
 
 From Coq Require Import String.
 From Coq Require Import Logic.FunctionalExtensionality.
@@ -820,4 +820,4 @@ On the same machine that prints,
     - Red-black trees are about as fast on consecutive insertions as
       on random. *)
 
-(* 2021-06-29 21:56 *)
+(* 2021-06-29 22:21 *)

@@ -321,15 +321,16 @@ coqide -async-proofs off -async-proofs-command-error-resilience off -Q . SLF Bas
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {Charguéraud:SF6,
-   author       =   {Arthur Charguéraud},
-   title        =   "$VOLUMENAME",
-   series       =   "Software Foundations",
-   volume       =   "6",
-   year         =   "2021",
-   publisher    =   "Electronic textbook",
-   note         =   {Version 1.0, \URLhttp://softwarefoundations.cis.upenn.edu },
-   }
+    @book            {Chargueraud:SF6,
+    author       =   {Arthur Charguéraud},
+    editor       =   {Benjamin C. Pierce},
+    title        =   "Separation Logic Foundations",
+    series       =   "Software Foundations",
+    volume       =   "6",
+    year         =   "2021",
+    publisher    =   "Electronic textbook",
+    note         =   {Version 1.0, \URL{http://softwarefoundations.cis.upenn.edu} },
+    }
 *)
 
 (* ################################################################# *)
@@ -340,4 +341,4 @@ coqide -async-proofs off -async-proofs-command-error-resilience off -Q . SLF Bas
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-06-29 22:03 *)
+(* 2021-06-29 22:28 *)

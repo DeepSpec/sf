@@ -1,7 +1,7 @@
 (** * Hashfun: Functional model of hash tables *)
 
 (** This C program, [hash.c], implements a hash table with
-   external chaining.  See https://www.cs.princeton.edu/~appel/HashTables.pdf
+   external chaining.  See {https://www.cs.princeton.edu/~appel/HashTables.pdf}
    for an introduction to hash tables.
 
     /* First, access a few standard-library functions */
@@ -328,4 +328,4 @@ Proof.
 
 End IntHashTable.
 
-(* 2021-06-29 22:00 *)
+(* 2021-06-29 22:24 *)

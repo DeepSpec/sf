@@ -21,11 +21,11 @@
 
     - _Introduction to Objective Caml_, chapters 12 and 13.  Jason
       Hickey, 2008.  Available from
-      https://ocaml.org/learn/books.html.
+      {https://ocaml.org/learn/books.html}.
 
     - The OCaml System Manual, chapter 2.  Xavier Leroy et al.,
       2020. Available from
-      http://caml.inria.fr/pub/docs/manual-ocaml/.  *)
+      {http://caml.inria.fr/pub/docs/manual-ocaml/}.  *)
 
 From Coq Require Import String.  (* for manual grading *)
 From VFA Require Import Perm.
@@ -1495,4 +1495,4 @@ End TreeETableSubset.
 Definition manual_grade_for_ListsETable : option (nat*string) := None.
 (** [] *)
 
-(* 2021-06-29 21:56 *)
+(* 2021-06-29 22:21 *)

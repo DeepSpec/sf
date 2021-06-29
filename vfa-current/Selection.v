@@ -22,7 +22,7 @@
     - What you should really never use is bubble sort.  "Bubble sort
       would be the wrong way to go."  Everybody should know that!  See
       this video for a definitive statement:
-        https://www.youtube.com/watch?v=k4RRi_ntQc8&t=34 *)
+        {https://www.youtube.com/watch?v=k4RRi_ntQc8&t=34} *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
@@ -389,4 +389,4 @@ Proof.
 
 
 
-(* 2021-06-29 21:56 *)
+(* 2021-06-29 22:21 *)

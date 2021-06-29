@@ -146,8 +146,8 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {Pierce:SF2,
-   author       =   {Benjamin C. Pierce and
+    @book            {Pierce:SF2,
+    author       =   {Benjamin C. Pierce and
 		     Arthur Azevedo de Amorim and
 		     Chris Casinghino and
 		     Marco Gaboardi and
@@ -156,14 +156,15 @@
 		     Vilhelm Sjöberg and
 		     Andrew Tolmach and
 		     Brent Yorgey},
-   title        =   "$VOLUMENAME",
-   series       =   "Software Foundations",
-   volume       =   "2",
-   year         =   "2021",
-   publisher    =   "Electronic textbook",
-   note         =   {Version 6.0,
-                     \URLhttp://softwarefoundations.cis.upenn.edu },
-   }
+    editor       =   {Benjamin C. Pierce},
+    title        =   "Programming Language Foundations",
+    series       =   "Software Foundations",
+    volume       =   "2",
+    year         =   "2021",
+    publisher    =   "Electronic textbook",
+    note         =   {Version 6.0,
+                      \URL{http://softwarefoundations.cis.upenn.edu} },
+    }
 *)
 
 (* ################################################################# *)
@@ -182,4 +183,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-06-29 21:52 *)
+(* 2021-06-29 22:16 *)

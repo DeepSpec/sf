@@ -98,7 +98,7 @@
         where safety checks are explicit and machine-checked, has
         tangible benefits for compiler users.
 
-    http://compcert.inria.fr *)
+    {http://compcert.inria.fr} *)
 
 (* ----------------------------------------------------------------- *)
 (** *** seL4
@@ -119,7 +119,7 @@
     traditional high-assurance development approaches, while giving
     guarantees traditional approaches cannot provide."
 
-    https://sel4.systems. *)
+    {https://sel4.systems}. *)
 
 (* ----------------------------------------------------------------- *)
 (** *** CertiKOS
@@ -139,7 +139,7 @@
     certified kernels? and (4) how to build automation facilities to
     make certified software development really scale?"
 
-    http://flint.cs.yale.edu/certikos/ *)
+    {http://flint.cs.yale.edu/certikos/} *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Ironclad
@@ -164,7 +164,7 @@
     hardware to enable secure channels from the verified software to
     remote users."
 
-    https://github.com/Microsoft/Ironclad/tree/master/ironclad-apps *)
+    {https://github.com/Microsoft/Ironclad/tree/master/ironclad-apps} *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Verdi
@@ -183,7 +183,7 @@
     including a fault-tolerant key-value store, achieve comparable
     performance to unverified counterparts."
 
-    http://verdi.uwplse.org *)
+    {http://verdi.uwplse.org} *)
 
 (* ----------------------------------------------------------------- *)
 (** *** DeepSpec
@@ -193,10 +193,10 @@
     specification and verification of full functional correctness of
     both software and hardware.  It also sponsors workshops and summer
     schools.
-      - Website: https://deepspec.org/
+      - Website: {https://deepspec.org/}
       - Overview presentations:
-          - https://deepspec.org/page/About/
-          - https://www.youtube.com/watch?v=IPNdsnRWBkk *)
+          - {https://deepspec.org/page/About/}
+          - {https://www.youtube.com/watch?v=IPNdsnRWBkk} *)
 
 (* ----------------------------------------------------------------- *)
 (** *** REMS
@@ -224,7 +224,7 @@
     research. Supporting all this, we are also working on new
     specification tools and their foundations."
 
-    https://www.cl.cam.ac.uk/~pes20/rems/ *)
+    {https://www.cl.cam.ac.uk/~pes20/rems/} *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Others *)
@@ -292,4 +292,4 @@
 
 (** $Date$ *)
 
-(* 2021-06-29 21:53 *)
+(* 2021-06-29 22:16 *)

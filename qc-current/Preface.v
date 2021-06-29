@@ -9,7 +9,7 @@
 (** For working with this material, you will need to install
     QuickChick.  Instructions can be found here:
 
-       https://github.com/QuickChick/QuickChick
+       {https://github.com/QuickChick/QuickChick}
 
     The [QuickChickInterface] chapter serves as a reference
     manual for QuickChick.  The rest of the book explains its features
@@ -23,15 +23,16 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {Lampropoulos:SF4,
-   author       =   {Leonidas Lampropoulos and Benjamin C. Pierce},
-   title        =   "$VOLUMENAME",
-   series       =   "Software Foundations",
-   volume       =   "4",
-   year         =   "2021",
-   publisher    =   "Electronic textbook",
-   note         =   {Version 1.2, \URLhttp://softwarefoundations.cis.upenn.edu },
-   }
+    @book            {Lampropoulos:SF4,
+    author       =   {Leonidas Lampropoulos and Benjamin C. Pierce},
+    editor       =   {Benjamin C. Pierce},
+    title        =   "QuickChick: Property-Based Testing in Coq",
+    series       =   "Software Foundations",
+    volume       =   "4",
+    year         =   "2021",
+    publisher    =   "Electronic textbook",
+    note         =   {Version 1.2, \URL{http://softwarefoundations.cis.upenn.edu} },
+    }
 *)
 
 (* ################################################################# *)
@@ -43,4 +44,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2021-06-29 21:59 *)
+(* 2021-06-29 22:24 *)

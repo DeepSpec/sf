@@ -1036,7 +1036,7 @@ Definition silly_fun2 (x y z : nat) :=
     for monads.  Our current favorite (as of Summer 2017) is the monad
     typeclasses in Gregory Malecha's [ext-lib] package:
 
-    https://github.com/coq-community/coq-ext-lib/blob/master/theories/Structures/Monad.v
+    {https://github.com/coq-community/coq-ext-lib/blob/master/theories/Structures/Monad.v}
 
     Once the [ext-lib] package is installed (e.g., via OPAM), we can write: *)
 
@@ -1156,7 +1156,7 @@ Definition sum3opt' (n1 n2 : option nat) :=
   liftM2 plus n1 n2.
 
 (** The [/examples] directory in the [ext-lib] Github
-    repository (https://github.com/coq-community/coq-ext-lib/blob/master/) includes
+    repository ({https://github.com/coq-community/coq-ext-lib/blob/master/}) includes
     some further examples of using monads in Coq. *)
 
 (* ================================================================= *)
@@ -1167,12 +1167,12 @@ Definition sum3opt' (n1 n2 : option nat) :=
     [Transitive], etc.) and [Proper].  They are described in the
     second half of _A Gentle Introduction to Type Classes and
     Relations in Coq_, by Castéran and Sozeau.
-    https://www.labri.fr/perso/casteran/CoqArt/TypeClassesTut/typeclassestut.pdf.
+    {https://www.labri.fr/perso/casteran/CoqArt/TypeClassesTut/typeclassestut.pdf}.
 
     A much larger collection of typeclasses for formalizing
     mathematics is described in _Type Classes for Mathematics in Type
     Theory_, by Bas Spitters and Eelis van der
-    Weegen. https://arxiv.org/pdf/1102.1323.pdf
+    Weegen. {https://arxiv.org/pdf/1102.1323.pdf}
 *)
 
 (* ################################################################# *)
@@ -1484,7 +1484,7 @@ Definition e4 : list nat := mymap false.
          David Pichardie, editors, ITP 2013, 4th Conference on
          Interactive Theorem Proving, volume 7998 of LNCS, pages
          19–34, Rennes, France, 2013. Springer.
-         https://hal.inria.fr/hal-00816703v1/document
+         {https://hal.inria.fr/hal-00816703v1/document}
 
        - Gonthier et al., "How to make ad hoc proof automation less ad
          hoc", JFP 23 (4): 357–401, 2013.  (This explains some
@@ -1492,7 +1492,7 @@ Definition e4 : list nat := mymap false.
          used in in the [mathcomp] libraries.)
 
     A useful discussion of typeclasses vs. dependent records is:
-    https://stackoverflow.com/questions/29872260/coq-typeclasses-vs-dependent-records
+    {https://stackoverflow.com/questions/29872260/coq-typeclasses-vs-dependent-records}
 *)
 
 (* ################################################################# *)
@@ -1715,7 +1715,7 @@ Definition e4 : list nat := mymap false.
     Spitters, Bas, and Eelis Van Der Weegen. “Type Classes for
     Mathematics in Type Theory.” MSCS 21, no. Special Issue 04 (2011):
     795–825. doi:10.1017/S0960129511000119.
-    https://arxiv.org/pdf/1102.1323v1.pdf.
+    {https://arxiv.org/pdf/1102.1323v1.pdf}.
 
     I think the above paper is missing one argument for unbundling:
     I've seen many libraries that begin by making an interface (say I)
@@ -1739,25 +1739,25 @@ Definition e4 : list nat := mymap false.
       - How to make ad-hoc polymorphism less ad hoc Philip Wadler and
         Stephen Blott. 16'th Symposium on Principles of Programming
         Languages, ACM Press, Austin, Texas, January 1989.
-        https://homepages.inf.ed.ac.uk/wadler/topics/type-classes.html
+        {https://homepages.inf.ed.ac.uk/wadler/topics/type-classes.html}
 
     The original paper on typeclasses In Coq:
       - Matthieu Sozeau and Nicolas Oury. First-Class Type
         Classes. TPHOLs 2008.
-        https://link.springer.com/chapter/10.1007%%2F978-3-540-71067-7_23
+        {https://link.springer.com/chapter/10.1007%%2F978-3-540-71067-7_23}
 
     Sources for this tutorial:
      - Coq Reference Manual:
-       https://coq.inria.fr/refman/
+       {https://coq.inria.fr/refman/}
      - Casteran and Sozeau's "Gentle Introduction":
-       https://www.labri.fr/perso/casteran/CoqArt/TypeClassesTut/typeclassestut.pdf
+       {https://www.labri.fr/perso/casteran/CoqArt/TypeClassesTut/typeclassestut.pdf}
      - Sozeau's slides from a talk at Penn:
-       https://www.cis.upenn.edu/~bcpierce/courses/670Fall12/slides.pdf
+       {https://www.cis.upenn.edu/~bcpierce/courses/670Fall12/slides.pdf}
 
     Some of the many tutorials on typeclasses in Haskell:
-     - https://en.wikibooks.org/wiki/Haskell/Classes_and_types
-     - http://learnyouahaskell.com/types-and-typeclasses and
-       http://learnyouahaskell.com/making-our-own-types-and-typeclasses
+     - {https://en.wikibooks.org/wiki/Haskell/Classes_and_types}
+     - {http://learnyouahaskell.com/types-and-typeclasses} and
+       {http://learnyouahaskell.com/making-our-own-types-and-typeclasses}
 *)
 
-(* 2021-06-29 21:59 *)
+(* 2021-06-29 22:24 *)

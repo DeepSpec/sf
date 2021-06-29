@@ -94,7 +94,7 @@
 
 (** A tar file containing the full sources for the "release version"
     of this book (as a collection of Coq scripts and HTML files) is
-    available at https://softwarefoundations.cis.upenn.edu.
+    available at {https://softwarefoundations.cis.upenn.edu}.
 
     (If you are using the book as part of a class, your professor may
     give you access to a locally modified version of the files, which
@@ -138,15 +138,16 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {Appel:SF5,
-   author       =   {Andrew W. Appel, Lennart Beringer, and Qinxiang Cao},
-   title        =   "$VOLUMENAME",
-   series       =   "Software Foundations",
-   volume       =   "5",
-   year         =   "2021",
-   publisher    =   "Electronic textbook",
-   note         =   {Version 1.1.1, \URLhttp://softwarefoundations.cis.upenn.edu },
-   }
+    @book            {Appel:SF5,
+    author       =   {Andrew W. Appel, Lennart Beringer, and Qinxiang Cao},
+    editor       =   {Benjamin C. Pierce},
+    title        =   "Verifiable C",
+    series       =   "Software Foundations",
+    volume       =   "5",
+    year         =   "2021",
+    publisher    =   "Electronic textbook",
+    note         =   {Version 1.1.1, \URL{http://softwarefoundations.cis.upenn.edu} },
+    }
 *)
 
 (* ================================================================= *)
@@ -205,4 +206,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2021-06-29 22:00 *)
+(* 2021-06-29 22:24 *)

@@ -115,7 +115,7 @@
 
 (** A tar file containing the full sources for the "release version"
     of this book (as a collection of Coq scripts and HTML files) is
-    available at https://softwarefoundations.cis.upenn.edu.
+    available at {https://softwarefoundations.cis.upenn.edu}.
 
     (If you are using the book as part of a class, your professor may
     give you access to a locally modified version of the files, which
@@ -126,7 +126,7 @@
 
 (** Lectures on for an intensive summer course based on some chapters
     of this book at the DeepSpec summer school in 2017 can be
-    found at https://deepspec.org/event/dsss17/lecture_appel.html. *)
+    found at {https://deepspec.org/event/dsss17/lecture_appel.html}. *)
 
 (* ================================================================= *)
 (** ** For Instructors and Contributors *)
@@ -142,15 +142,16 @@
 (** If you want to refer to this volume in your own writing, please
     do so as follows:
 
-   @book            {Appel:SF3,
-   author       =   {Andrew W. Appel},
-   title        =   "$VOLUMENAME",
-   series       =   "Software Foundations",
-   volume       =   "3",
-   year         =   "2021",
-   publisher    =   "Electronic textbook",
-   note         =   {Version 1.5, \URLhttp://softwarefoundations.cis.upenn.edu },
-   }
+    @book            {Appel:SF3,
+    author       =   {Andrew W. Appel},
+    editor       =   {Benjamin C. Pierce},
+    title        =   "Verified Functional Algorithms",
+    series       =   "Software Foundations",
+    volume       =   "3",
+    year         =   "2021",
+    publisher    =   "Electronic textbook",
+    note         =   {Version 1.5, \URL{http://softwarefoundations.cis.upenn.edu} },
+    }
 *)
 
 (* ################################################################# *)
@@ -161,4 +162,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-06-29 21:56 *)
+(* 2021-06-29 22:21 *)

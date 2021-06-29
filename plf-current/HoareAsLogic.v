@@ -360,7 +360,7 @@ Proof.
 
     Acknowledgment: Our approach to this proof is inspired by:
 
-      https://www.ps.uni-saarland.de/courses/sem-ws11/script/Hoare.html
+      {https://www.ps.uni-saarland.de/courses/sem-ws11/script/Hoare.html}
 *)
 
 Theorem hoare_complete: forall P c Q,
@@ -391,4 +391,4 @@ Proof.
     of Coq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2021-06-29 21:53 *)
+(* 2021-06-29 22:16 *)

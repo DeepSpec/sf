@@ -9,10 +9,10 @@
 
 (* ################################################################# *)
 (** * Required Reading
-  Binomial Queues https://www.cs.princeton.edu/~appel/Binom.pdf
+  Binomial Queues {https://www.cs.princeton.edu/~appel/Binom.pdf}
   by Andrew W. Appel, 2016.
 
-  Binomial Queues https://www.cs.princeton.edu/~appel/BQ.pdf
+  Binomial Queues {https://www.cs.princeton.edu/~appel/BQ.pdf}
   Section 9.7 of _Algorithms 3rd Edition in Java, Parts 1-4:
     Fundamentals, Data Structures, Sorting, and Searching_,
   by Robert Sedgewick.  Addison-Wesley, 2002.
@@ -397,4 +397,4 @@ End BinomQueue.
 *)
 (** [] *)
 
-(* 2021-06-29 21:56 *)
+(* 2021-06-29 22:21 *)

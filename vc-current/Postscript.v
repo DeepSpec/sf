@@ -108,7 +108,7 @@
 
 (** For the canonical _low-level imperative language_ -- C -- there
   are several systems:
-  - Frama-C (https://frama-c.com/)
+  - Frama-C ({https://frama-c.com/})
   - VeriFast [Jacobs 2011] (in Bib.v)
   - VST (the subject of this volume).
 
@@ -165,4 +165,4 @@
   future software verification efforts. *)
   
   
-(* 2021-06-29 22:00 *)
+(* 2021-06-29 22:24 *)
