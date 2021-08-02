@@ -1355,13 +1355,9 @@ To fold constants in a command, we apply the appropriate folding
 
        In this case, we have
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fold_constants_bexp</span> [[ <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span> 
-</span>         = if n<sub>1</sub> =? n<sub>2</sub> then &lt;{true}&gt; else &lt;{false}&gt;
-
-</li>
-</ul>
-]]
-       and
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fold_constants_bexp</span> &lt;{ <span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span> }&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="id" title="keyword">if</span> <span class="id" title="var">n<sub>1</sub></span> =? <span class="id" title="var">n<sub>2</sub></span> <span class="id" title="keyword">then</span> &lt;{<span class="id" title="var">true</span>}&gt; <span class="id" title="keyword">else</span> &lt;{<span class="id" title="var">false</span>}&gt;
+</span>       and
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">beval</span> <span class="id" title="var">st</span> &lt;{<span class="id" title="var">a<sub>1</sub></span> = <span class="id" title="var">a<sub>2</sub></span>}&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>1</sub></span>) =? (<span class="id" title="var">aeval</span> <span class="id" title="var">st</span> <span class="id" title="var">a<sub>2</sub></span>).
@@ -1399,7 +1395,8 @@ To fold constants in a command, we apply the appropriate folding
 
 <div class="paragraph"> </div>
 
-<ul class="doclist">
+
+</li>
 <li> Otherwise, one of <span class="inlinecode"><span class="id" title="var">fold_constants_aexp</span></span> <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> and
        <span class="inlinecode"><span class="id" title="var">fold_constants_aexp</span></span> <span class="inlinecode"><span class="id" title="var">a<sub>2</sub></span></span> is not a constant.  In this case, we
        must show
@@ -2140,9 +2137,9 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 For example, the program
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="var">c<sub>1</sub></span> = <span class="id" title="var">while</span> ~(<span class="id" title="var">X</span> = 1) <span class="id" title="tactic">do</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">X</span> - 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := <span class="id" title="var">X</span> - 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
-</span>    approximates <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode">1</span>, but <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> does not approximate <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span>
+</span>    approximates <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">1</span>, but <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> does not approximate <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span>
     since <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> does not terminate when <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode">0</span> but <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> does.  If two
     programs approximate each other in both directions, then they are
     equivalent. 
@@ -2188,7 +2185,7 @@ Finally, find a non-trivial property which is preserved by
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-06-29&nbsp;22:43&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-08-02&nbsp;21:57&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -585,7 +585,7 @@ Proof.
     Complete these Hoare triples...
 
     1) {{ ??? }}
-       X ::= 2 * X
+       X := 2 * X
        {{ X <= 10 }}
 
     2) {{ ??? }}
@@ -1150,7 +1150,7 @@ Proof.
     Show that
 
     {{ a = n }}
-      X := 3;; Y := a
+      X := 3; Y := a
     {{ Y = n }}
 
     is not a valid Hoare triple for some choices of [a] and [n].
@@ -2263,4 +2263,4 @@ End HoareAssertAssume.
 
 
 
-(* 2021-06-29 22:43 *)
+(* 2021-08-02 21:57 *)

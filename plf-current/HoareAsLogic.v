@@ -32,7 +32,7 @@ Hint Constructors ceval : core.
     introduced),
 
       Pre:  X = 0
-      Com:  X ::= X + 1
+      Com:  X := X + 1
       Post: X = 1
 
     is a Hoare triple, as is
@@ -60,11 +60,11 @@ Definition valid (P : Assertion) (c : com) (Q : Assertion) : Prop :=
     Imp programs execute.  That model itself is based on states.  So,
 
       Pre:  X = 0
-      Com:  X ::= X + 1
+      Com:  X := X + 1
       Post: X = 1
 
     is _valid_, because starting from any state in which [X] is [0],
-    and executing [X ::= X + 1], we are guaranteed to reach a state in
+    and executing [X := X + 1], we are guaranteed to reach a state in
     which [X] is [1]. But,
 
       Pre:  X = 0
@@ -102,12 +102,12 @@ Definition valid (P : Assertion) (c : com) (Q : Assertion) : Prop :=
              {{P}} skip {{P}}
 
              ----------------------------- (hoare_asgn)
-             {{Q [X |-> a]}} X ::= a {{Q}}
+             {{Q [X |-> a]}} X := a {{Q}}
 
                {{P}} c1 {{Q}}
                {{Q}} c2 {{R}}
               ------------------  (hoare_seq)
-              {{P}} c1;; c2 {{R}}
+              {{P}} c1; c2 {{R}}
 
               {{P /\   b}} c1 {{Q}}
               {{P /\ ~ b}} c2 {{Q}}
@@ -130,16 +130,16 @@ Definition valid (P : Assertion) (c : com) (Q : Assertion) : Prop :=
     and evaluations.  They are just syntax that the rules tell us how
     to manipulate in legal ways.
 
-    Through this new lens, triple [{{X = 0}} X ::= X + 1 {{X = 1}}]
+    Through this new lens, triple [{{X = 0}} X := X + 1 {{X = 1}}]
     is _derivable_, because we can derive a proof tree using the rules:
 *)
 
 (**
 
                     ---------------------------  (hoare_asgn)
-   X=0 ->> X+1=1    {{X+1=1}} X ::= X+1 {{X=1}}
+   X=0 ->> X+1=1    {{X+1=1}} X := X+1 {{X=1}}
    -------------------------------------------------------  (hoare_consequence)
-                     {{X=0}} X ::= X+1 {{X=1}}
+                     {{X=0}} X := X+1 {{X=1}}
 *)
 
 (** At each step we have either used one of the rules, or we
@@ -210,8 +210,8 @@ Proof. eauto using H_Consequence. Qed.
 (** As an example, let's construct a proof tree for
 
         {{(X=3) [X |-> X + 2] [X |-> X + 1]}}
-      X ::= X + 1;;
-      X ::= X + 2
+      X := X + 1;
+      X := X + 2
         {{X=3}}
 *)
 
@@ -326,7 +326,7 @@ Proof. eauto. Qed.
 
 (** **** Exercise: 1 star, standard (wp_seq) *)
 
-(** What if we have a sequence [c1;; c2], but not an intermediate assertion for
+(** What if we have a sequence [c1; c2], but not an intermediate assertion for
     what should hold in between [c1] and [c2]?  No problem.  Prove that [wp c2 Q]
     suffices as such an assertion. *)
 
@@ -391,4 +391,4 @@ Proof.
     of Coq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2021-06-29 22:43 *)
+(* 2021-08-02 21:57 *)

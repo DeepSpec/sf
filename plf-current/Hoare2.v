@@ -94,7 +94,7 @@ From PLF Require Import Hoare.
           {{ P }} c1; {{ Q }} c2 {{ R }}
 *)
 
-(** - An assignment [X ::= a] is locally consistent with respect to
+(** - An assignment [X := a] is locally consistent with respect to
       a precondition of the form [P [X |-> a]] and the postcondition [P]:
 
           {{ P [X |-> a] }}
@@ -1119,7 +1119,7 @@ Definition manual_grade_for_decorations_in_two_loops : option (nat*string) := No
     is _not_ very interesting: although it is perfectly valid Hoare
     triple, it tells us nothing useful.  Since the precondition isn't
     satisfied by any state, it doesn't describe any situations where
-    we can use the command [X ::= Y + 1] to achieve the postcondition
+    we can use the command [X := Y + 1] to achieve the postcondition
     [X <= 5].
 
     By contrast,
@@ -1137,10 +1137,10 @@ Definition manual_grade_for_decorations_in_two_loops : option (nat*string) := No
 
       {{ Y <= 4 }}  X := Y + 1  {{ X <= 5 }}
 
-    Assertion [Y <= 4] is the _weakest precondition_ of command [X ::=
+    Assertion [Y <= 4] is the _weakest precondition_ of command [X :=
     Y + 1] for postcondition [X <= 5]. *)
 
-(** Assertion [Y <= 4] is a _weakest precondition_ of command [X ::=
+(** Assertion [Y <= 4] is a _weakest precondition_ of command [X :=
     Y + 1] with respect to postcondition [X <= 5].  Think of _weakest_
     here as meaning "easiest to satisfy": a weakest precondition is
     one that as many states as possible can satisfy.
@@ -1191,7 +1191,7 @@ Definition is_wp P c Q :=
 (** **** Exercise: 3 stars, advanced, optional (is_wp_formal)
 
     Prove formally, using the definition of [hoare_triple], that [Y <= 4]
-    is indeed a weakest precondition of [X ::= Y + 1] with respect to
+    is indeed a weakest precondition of [X := Y + 1] with respect to
     postcondition [X <= 5]. *)
 
 Theorem is_wp_example :
@@ -1270,14 +1270,14 @@ End Himp2.
     - Command [skip] is decorated only with its postcondition, as
       [skip {{ Q }}].
 
-    - Sequence [d1 ;; d2] contains no additional decoration.  Inside
+    - Sequence [d1 ; d2] contains no additional decoration.  Inside
       [d2] there will be a postcondition; that serves as the
-      postcondition of [d1 ;; d2].  Inside [d1] there will also be a
+      postcondition of [d1 ; d2].  Inside [d1] there will also be a
       postcondition; it additionally serves as the precondition for
       [d2].
 
-    - Assignment [X ::= a] is decorated only with its postcondition,
-      as [X ::= a {{ Q }}].
+    - Assignment [X := a] is decorated only with its postcondition,
+      as [X := a {{ Q }}].
 
     - If statement [if b then d1 else d2] is decorated with a
       postcondition for the entire statement, as well as preconditions
@@ -1300,7 +1300,7 @@ Inductive dcom : Type :=
 | DCSkip (Q : Assertion)
   (* skip {{ Q }} *)
 | DCSeq (d1 d2 : dcom)
-  (* d1 ;; d2 *)
+  (* d1 ; d2 *)
 | DCAsgn (X : string) (a : aexp) (Q : Assertion)
   (* X := a {{ Q }} *)
 | DCIf (b : bexp) (P1 : Assertion) (d1 : dcom)
@@ -2028,8 +2028,8 @@ Qed.
 becomes
 
     {{ X = m /\ 0 = 0 }}
-  Y ::= 0
-    {{ X = m /\ Y = 0 }} ;;
+  Y := 0
+    {{ X = m /\ Y = 0 }} ;
 *)
 
 Example slow_assignment_dec (m : nat) : decorated
@@ -2121,14 +2121,14 @@ Proof.
     The following Imp program leaves the value of [fib n] in the
     variable [Y] when it terminates:
 
-    X ::= 1;;
-    Y ::= 1;;
-    Z ::= 1;;
+    X := 1;
+    Y := 1;
+    Z := 1;
     while ~(X = 1 + n) do
-      T ::= Z;;
-      Z ::= Z + Y;;
-      Y ::= T;;
-      X ::= 1 + X
+      T := Z;
+      Z := Z + Y;
+      Y := T;
+      X := 1 + X
     end
 
     Fill in the following definition of [dfib] and prove that it
@@ -2165,4 +2165,4 @@ Theorem dfib_correct : forall n,
 
     [] *)
 
-(* 2021-06-29 22:43 *)
+(* 2021-08-02 21:57 *)

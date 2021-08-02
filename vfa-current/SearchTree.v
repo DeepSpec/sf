@@ -1322,4 +1322,4 @@ Proof.
 	   efficiently inside Coq.  We'll explore [extraction] in a
 	   [Extract]. *)
 
-(* 2021-06-29 22:47 *)
+(* 2021-08-02 22:01 *)

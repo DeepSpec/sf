@@ -914,9 +914,7 @@ Inductive multi {X : Type} (R : relation X) : relation X :=
 
 Notation " t '-->*' t' " := (multi step t t') (at level 40).
 
-(** Terse: ***
-
-    The relation [multi R] has several crucial properties.
+(** The relation [multi R] has several crucial properties.
 
     First, it is obviously _reflexive_ (that is, [forall x, multi R x
     x]).  In the case of the [-->*] (i.e., [multi step]) relation, the
@@ -1167,9 +1165,7 @@ Qed.
 Theorem eval__multistep : forall t n,
   t ==> n -> t -->* C n.
 
-(** Terse: ***
-
-    The key ideas in the proof can be seen in the following picture:
+(** The key ideas in the proof can be seen in the following picture:
 
        P t1 t2 -->            (by ST_Plus1)
        P t1' t2 -->           (by ST_Plus1)
@@ -1831,4 +1827,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-06-29 22:43 *)
+(* 2021-08-02 21:57 *)

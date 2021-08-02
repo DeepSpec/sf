@@ -147,7 +147,7 @@
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> An assignment <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> is locally consistent with respect to
+<li> An assignment <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">a</span></span> is locally consistent with respect to
       a precondition of the form <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">[<span class="id" title="var">X</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <span class="inlinecode"><span class="id" title="var">a</span>]</span> and the postcondition <span class="inlinecode"><span class="id" title="var">P</span></span>:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">P</span> [<span class="id" title="var">X</span> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span> <span class="id" title="var">a</span>] <span style='letter-spacing:-.4em;'>}</span>}<br/>
@@ -1391,7 +1391,7 @@ The postcondition does not hold at the beginning of the loop,
 </span>    is <i>not</i> very interesting: although it is perfectly valid Hoare
     triple, it tells us nothing useful.  Since the precondition isn't
     satisfied by any state, it doesn't describe any situations where
-    we can use the command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> to achieve the postcondition
+    we can use the command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> to achieve the postcondition
     <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">5</span>.
 
 <div class="paragraph"> </div>
@@ -1411,11 +1411,11 @@ The postcondition does not hold at the beginning of the loop,
     The most useful precondition is this one:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">Y</span> ≤ 4 <span style='letter-spacing:-.4em;'>}</span>}  <span class="id" title="var">X</span> := <span class="id" title="var">Y</span> + 1  <span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> ≤ 5 <span style='letter-spacing:-.4em;'>}</span>}
-</span>    Assertion <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> is the <i>weakest precondition</i> of command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span>
+</span>    Assertion <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> is the <i>weakest precondition</i> of command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span>
     <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> for postcondition <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">5</span>. 
 <div class="paragraph"> </div>
 
- Assertion <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> is a <i>weakest precondition</i> of command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span>
+ Assertion <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> is a <i>weakest precondition</i> of command <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span>
     <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> with respect to postcondition <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">5</span>.  Think of <i>weakest</i>
     here as meaning "easiest to satisfy": a weakest precondition is
     one that as many states as possible can satisfy.
@@ -1484,7 +1484,7 @@ The postcondition does not hold at the beginning of the loop,
 
 <a id="lab117"></a><h4 class="section">Exercise: 3 stars, advanced, optional (is_wp_formal)</h4>
  Prove formally, using the definition of <span class="inlinecode"><span class="id" title="var">hoare_triple</span></span>, that <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span>
-    is indeed a weakest precondition of <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> with respect to
+    is indeed a weakest precondition of <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> with respect to
     postcondition <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">5</span>. 
 </div>
 <div class="code">
@@ -1592,9 +1592,9 @@ The postcondition does not hold at the beginning of the loop,
 
 
 </li>
-<li> Sequence <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> <span class="inlinecode">;;</span> <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span> contains no additional decoration.  Inside
+<li> Sequence <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span> contains no additional decoration.  Inside
       <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span> there will be a postcondition; that serves as the
-      postcondition of <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> <span class="inlinecode">;;</span> <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span>.  Inside <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> there will also be a
+      postcondition of <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span>.  Inside <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> there will also be a
       postcondition; it additionally serves as the precondition for
       <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span>.
 
@@ -1602,8 +1602,8 @@ The postcondition does not hold at the beginning of the loop,
 
 
 </li>
-<li> Assignment <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> is decorated only with its postcondition,
-      as <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>}</span>}</span>.
+<li> Assignment <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">a</span></span> is decorated only with its postcondition,
+      as <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{</span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>}</span>}</span>.
 
 <div class="paragraph"> </div>
 
@@ -1643,7 +1643,7 @@ The postcondition does not hold at the beginning of the loop,
 | <a id="DCSkip" class="idref" href="#DCSkip"><span class="id" title="constructor">DCSkip</span></a> (<a id="Q:19" class="idref" href="#Q:19"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>)<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;skip&nbsp;<span style='letter-spacing:-.4em;'>{</span>{&nbsp;Q&nbsp;<span style='letter-spacing:-.4em;'>}</span>}&nbsp;*)</span><br/>
 | <a id="DCSeq" class="idref" href="#DCSeq"><span class="id" title="constructor">DCSeq</span></a> (<a id="d<sub>1</sub>:20" class="idref" href="#d<sub>1</sub>:20"><span class="id" title="binder">d<sub>1</sub></span></a> <a id="d<sub>2</sub>:21" class="idref" href="#d<sub>2</sub>:21"><span class="id" title="binder">d<sub>2</sub></span></a> : <a class="idref" href="Hoare2.html#dcom:17"><span class="id" title="inductive">dcom</span></a>)<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;d<sub>1</sub>&nbsp;;;&nbsp;d<sub>2</sub>&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;d<sub>1</sub>&nbsp;;&nbsp;d<sub>2</sub>&nbsp;*)</span><br/>
 | <a id="DCAsgn" class="idref" href="#DCAsgn"><span class="id" title="constructor">DCAsgn</span></a> (<a id="X:22" class="idref" href="#X:22"><span class="id" title="binder">X</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="a:23" class="idref" href="#a:23"><span class="id" title="binder">a</span></a> : <span class="id" title="inductive">aexp</span>) (<a id="Q:24" class="idref" href="#Q:24"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>)<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;X&nbsp;:=&nbsp;a&nbsp;<span style='letter-spacing:-.4em;'>{</span>{&nbsp;Q&nbsp;<span style='letter-spacing:-.4em;'>}</span>}&nbsp;*)</span><br/>
 | <a id="DCIf" class="idref" href="#DCIf"><span class="id" title="constructor">DCIf</span></a> (<a id="b:25" class="idref" href="#b:25"><span class="id" title="binder">b</span></a> : <span class="id" title="inductive">bexp</span>) (<a id="P<sub>1</sub>:26" class="idref" href="#P<sub>1</sub>:26"><span class="id" title="binder">P<sub>1</sub></span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) (<a id="d<sub>1</sub>:27" class="idref" href="#d<sub>1</sub>:27"><span class="id" title="binder">d<sub>1</sub></span></a> : <a class="idref" href="Hoare2.html#dcom:17"><span class="id" title="inductive">dcom</span></a>)<br/>
@@ -2446,8 +2446,8 @@ Here is a more intuitive way of writing the invariant:
 <span class="id" title="var">becomes</span><br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ 0 = 0 <span style='letter-spacing:-.4em;'>}</span>}<br/>
-&nbsp;&nbsp;<span class="id" title="var">Y</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ <span class="id" title="var">Y</span> = 0 <span style='letter-spacing:-.4em;'>}</span>} ;;
+&nbsp;&nbsp;<span class="id" title="var">Y</span> := 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{ <span class="id" title="var">X</span> = <span class="id" title="var">m</span> ∧ <span class="id" title="var">Y</span> = 0 <span style='letter-spacing:-.4em;'>}</span>} ;
 </span>
 </div>
 <div class="code">
@@ -2570,14 +2570,14 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
  The following Imp program leaves the value of <span class="inlinecode"><span class="id" title="var">fib</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> in the
     variable <span class="inlinecode"><span class="id" title="var">Y</span></span> when it terminates:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 1;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 1;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 1;;<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 1;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := 1;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := 1;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">while</span> ~(<span class="id" title="var">X</span> = 1 + <span class="id" title="var">n</span>) <span class="id" title="tactic">do</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">Z</span>;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">Z</span> + <span class="id" title="var">Y</span>;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> <span class="id" title="var">T</span>;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span> 1 + <span class="id" title="var">X</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span> := <span class="id" title="var">Z</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Z</span> := <span class="id" title="var">Z</span> + <span class="id" title="var">Y</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Y</span> := <span class="id" title="var">T</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">X</span> := 1 + <span class="id" title="var">X</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>
 </span>    Fill in the following definition of <span class="inlinecode"><span class="id" title="var">dfib</span></span> and prove that it
     satisfies this specification:
@@ -2619,7 +2619,7 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-06-29&nbsp;22:43&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-08-02&nbsp;21:57&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -953,7 +953,7 @@ Proof.
 
        In this case, we have
 
-           fold_constants_bexp [[ a1 = a2 ]]
+           fold_constants_bexp <{ a1 = a2 }>
          = if n1 =? n2 then <{true}> else <{false}>
 
        and
@@ -1599,6 +1599,7 @@ Theorem swap_noninterfering_assignments: forall l1 l2 a1 a2,
     <{ l2 := a2; l1 := a1 }>.
 Proof.
 (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (** **** Exercise: 4 stars, advanced, optional (capprox)
@@ -1616,10 +1617,10 @@ Definition capprox (c1 c2 : com) : Prop := forall (st st' : state),
 (** For example, the program
 
   c1 = while ~(X = 1) do
-         X ::= X - 1
+         X := X - 1
        end
 
-    approximates [c2 = X ::= 1], but [c2] does not approximate [c1]
+    approximates [c2 = X := 1], but [c2] does not approximate [c1]
     since [c1] does not terminate when [X = 0] but [c2] does.  If two
     programs approximate each other in both directions, then they are
     equivalent. *)
@@ -1654,4 +1655,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-06-29 22:43 *)
+(* 2021-08-02 21:57 *)

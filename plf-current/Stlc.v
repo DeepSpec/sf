@@ -383,9 +383,9 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
 
 where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
 
-(** Note on notations: You might be wondering why we need curly braces
+(** Note on notations: You might be wondering why we need parentheses
     around the substitution notation in the above definition, and why
-    do we need to redefine the substition notation in the [stlc]
+    do we need to redefine the substitution notation in the [stlc]
     custom grammar. The reason is that reserved notations in
     definitions have to be defined in the general Coq grammar (and not
     a custom one like [stlc]). This restriction only applies to the
@@ -846,4 +846,4 @@ Proof.
 
 End STLC.
 
-(* 2021-06-29 22:43 *)
+(* 2021-08-02 21:58 *)
