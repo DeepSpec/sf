@@ -1287,4 +1287,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-08-02 22:08 *)
+(* 2021-08-02 22:32 *)

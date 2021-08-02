@@ -48,8 +48,8 @@ async function jsCoqLoad() {
     await JsCoq.load(jscoq_opts.base_path);
 
     Deprettify.REPLACES.push(   // LF,PLF define their own versions (for Imp)
-        [/∨/g, '\\/'], [/∧/g, '/\\'], [/↔/g, '<->'], [/≤/g, '<='], [/≠/g, '<>'],
-        [/∈/g, '\\in']);
+        [/∨/g, '\\/'], [/∧/g, '/\\'], [/↔/g, '<->'],
+        [/≤/g, '<='], [/≥/g, '>='], [/≠/g, '<>'], [/∈/g, '\\in']);
 
     var coq = await JsCoq.start(jscoq_ids, jscoq_opts);
     window.coq = coq;
