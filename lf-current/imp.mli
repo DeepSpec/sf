@@ -15,6 +15,12 @@ val leb : int -> int -> bool
 
 module Nat :
  sig
+  val add : int -> int -> int
+
+  val mul : int -> int -> int
+
+  val sub : int -> int -> int
+
   val eqb : int -> int -> bool
 
   val leb : int -> int -> bool

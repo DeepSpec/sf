@@ -55,6 +55,38 @@ let rec leb n0 m =
 
 module Nat =
  struct
+  (** val add : int -> int -> int **)
+
+  let rec add n0 m =
+    (fun zero succ n ->
+      if n=0 then zero () else succ (n-1))
+      (fun _ -> m)
+      (fun p -> (fun x -> x + 1) (add p m))
+      n0
+
+  (** val mul : int -> int -> int **)
+
+  let rec mul n0 m =
+    (fun zero succ n ->
+      if n=0 then zero () else succ (n-1))
+      (fun _ -> 0)
+      (fun p -> add m (mul p m))
+      n0
+
+  (** val sub : int -> int -> int **)
+
+  let rec sub n0 m =
+    (fun zero succ n ->
+      if n=0 then zero () else succ (n-1))
+      (fun _ -> n0)
+      (fun k ->
+      (fun zero succ n ->
+      if n=0 then zero () else succ (n-1))
+        (fun _ -> n0)
+        (fun l -> sub k l)
+        m)
+      n0
+
   (** val eqb : int -> int -> bool **)
 
   let rec eqb n0 m =
@@ -309,17 +341,17 @@ type bexp =
 let rec aeval st = function
 | ANum n0 -> n0
 | AId x -> st x
-| APlus (a1, a2) -> add (aeval st a1) (aeval st a2)
-| AMinus (a1, a2) -> sub (aeval st a1) (aeval st a2)
-| AMult (a1, a2) -> mul (aeval st a1) (aeval st a2)
+| APlus (a1, a2) -> Nat.add (aeval st a1) (aeval st a2)
+| AMinus (a1, a2) -> Nat.sub (aeval st a1) (aeval st a2)
+| AMult (a1, a2) -> Nat.mul (aeval st a1) (aeval st a2)
 
 (** val beval : state -> bexp -> bool **)
 
 let rec beval st = function
 | BTrue -> true
 | BFalse -> false
-| BEq (a1, a2) -> eqb (aeval st a1) (aeval st a2)
-| BLe (a1, a2) -> leb (aeval st a1) (aeval st a2)
+| BEq (a1, a2) -> Nat.eqb (aeval st a1) (aeval st a2)
+| BLe (a1, a2) -> Nat.leb (aeval st a1) (aeval st a2)
 | BNot b1 -> negb (beval st b1)
 | BAnd (b1, b2) -> (&&) (beval st b1) (beval st b2)
 
@@ -365,7 +397,7 @@ let isWhite c =
   let n0 = nat_of_ascii c in
   (||)
     ((||)
-      (Nat.eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -376,15 +408,15 @@ let isWhite c =
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) 0)))))))))))))))))))))))))))))))))
-      (Nat.eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 0)))))))))))
     ((||)
-      (Nat.eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) 0)))))))))))
-      (Nat.eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (eqb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -395,7 +427,7 @@ let isWhite c =
 let isLowerAlpha c =
   let n0 = nat_of_ascii c in
   (&&)
-    (Nat.leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+    (leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -422,7 +454,7 @@ let isLowerAlpha c =
       ((fun x -> x + 1) ((fun x -> x + 1)
       0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
       n0)
-    (Nat.leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+    (leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -461,7 +493,7 @@ let isAlpha c =
   let n0 = nat_of_ascii c in
   (||)
     ((&&)
-      (Nat.leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -484,7 +516,7 @@ let isAlpha c =
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1)
         0))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) n0)
-      (Nat.leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -516,7 +548,7 @@ let isAlpha c =
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         0))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     ((&&)
-      (Nat.leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -551,7 +583,7 @@ let isAlpha c =
         ((fun x -> x + 1)
         0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
         n0)
-      (Nat.leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+      (leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
         ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -599,7 +631,7 @@ let isAlpha c =
 let isDigit c =
   let n0 = nat_of_ascii c in
   (&&)
-    (Nat.leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+    (leb ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
@@ -612,7 +644,7 @@ let isDigit c =
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) 0)))))))))))))))))))))))))))))))))))))))))))))))) n0)
-    (Nat.leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
+    (leb n0 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)
       ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1)

@@ -580,26 +580,27 @@ Proof.
 
    We will see how to do so in the next section. *)
 
-(** **** Exercise: 2 stars, standard, optional (hoare_asgn_examples)
+(** Complete these Hoare triples by providing an appropriate
+    precondition using [exists], then prove then with [apply
+    hoare_asgn]. If you find that tactic doesn't suffice, double check
+    that you have completed the triple properly. *)
+(** **** Exercise: 2 stars, standard, optional (hoare_asgn_examples1) *)
+Example hoare_asgn_examples1 :
+  exists P,
+    {{ P }}
+      X := 2 * X
+    {{ X <= 10 }}.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
-    Complete these Hoare triples...
-
-    1) {{ ??? }}
-       X := 2 * X
-       {{ X <= 10 }}
-
-    2) {{ ??? }}
-       X := 3
-       {{ 0 <= X /\ X <= 5 }}
-
-   ...using the names [assn_sub_ex1] and [assn_sub_ex2], and prove
-   both with just [apply hoare_asgn]. If you find that tactic doesn't
-   suffice, double check that you have completed the triple properly. *)
-
-(* FILL IN HERE *)
-
-(* Do not modify the following line: *)
-Definition manual_grade_for_hoare_asgn_examples : option (nat*string) := None.
+(** **** Exercise: 2 stars, standard, optional (hoare_asgn_examples2) *)
+Example hoare_asgn_examples2 :
+  exists P,
+    {{ P }}
+      X := 3
+    {{ 0 <=  X /\ X <= 5 }}.
+Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, especially useful (hoare_asgn_wrong)
@@ -2263,4 +2264,4 @@ End HoareAssertAssume.
 
 
 
-(* 2021-08-03 20:57 *)
+(* 2021-08-30 19:29 *)

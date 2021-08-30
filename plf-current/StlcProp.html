@@ -50,7 +50,7 @@ In this chapter, we develop the fundamental theory of the Simply
 </div>
 
 <div class="doc">
-<a id="lab235"></a><h1 class="section">Canonical Forms</h1>
+<a id="lab236"></a><h1 class="section">Canonical Forms</h1>
 
 <div class="paragraph"> </div>
 
@@ -98,7 +98,7 @@ In this chapter, we develop the fundamental theory of the Simply
 </div>
 
 <div class="doc">
-<a id="lab236"></a><h1 class="section">Progress</h1>
+<a id="lab237"></a><h1 class="section">Progress</h1>
 
 <div class="paragraph"> </div>
 
@@ -197,12 +197,12 @@ In this chapter, we develop the fundamental theory of the Simply
 </li>
 <li> Otherwise, <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> takes a step, and therefore so does <span class="inlinecode"><span class="id" title="var">t</span></span> (by
           <span class="inlinecode"><span class="id" title="var">ST_If</span></span>). 
-</li>
-</ul>
 
 </li>
 </ul>
 
+</li>
+</ul>
 </div>
 <div class="code">
 <div class="togglescript" id="proofcontrol3" onclick="toggleDisplay('proof3');toggleDisplay('proofcontrol3')"><span class="show"></span></div>
@@ -241,7 +241,7 @@ In this chapter, we develop the fundamental theory of the Simply
 </div>
 
 <div class="doc">
-<a id="lab237"></a><h4 class="section">Exercise: 3 stars, advanced (progress_from_term_ind)</h4>
+<a id="lab238"></a><h4 class="section">Exercise: 3 stars, advanced (progress_from_term_ind)</h4>
  Show that progress can also be proved by induction on terms
     instead of induction on typing derivations. 
 </div>
@@ -259,7 +259,7 @@ In this chapter, we develop the fundamental theory of the Simply
 
 
 <div class="doc">
-<a id="lab238"></a><h1 class="section">Preservation</h1>
+<a id="lab239"></a><h1 class="section">Preservation</h1>
 
 <div class="paragraph"> </div>
 
@@ -311,7 +311,7 @@ In this chapter, we develop the fundamental theory of the Simply
 </div>
 
 <div class="doc">
-<a id="lab239"></a><h2 class="section">The Weakening Lemma</h2>
+<a id="lab240"></a><h2 class="section">The Weakening Lemma</h2>
 
 <div class="paragraph"> </div>
 
@@ -347,7 +347,7 @@ The following simple corollary is what we actually need below.
 </div>
 
 <div class="doc">
-<a id="lab240"></a><h2 class="section">A Substitution Lemma</h2>
+<a id="lab241"></a><h2 class="section">A Substitution Lemma</h2>
 
 <div class="paragraph"> </div>
 
@@ -464,9 +464,9 @@ The substitution lemma can be viewed as a kind of "commutation
 
 </li>
 <li> The remaining cases are similar to the application case. 
+
 </li>
 </ul>
-
 </div>
 <div class="code">
 
@@ -508,7 +508,7 @@ One technical subtlety in the statement of the above lemma is that
  
 <div class="paragraph"> </div>
 
-<a id="lab241"></a><h4 class="section">Exercise: 3 stars, advanced (substitution_preserves_typing_from_typing_ind)</h4>
+<a id="lab242"></a><h4 class="section">Exercise: 3 stars, advanced (substitution_preserves_typing_from_typing_ind)</h4>
  Show that substitution_preserves_typing can also be
     proved by induction on typing derivations instead
     of induction on terms. 
@@ -529,7 +529,7 @@ One technical subtlety in the statement of the above lemma is that
 
 
 <div class="doc">
-<a id="lab242"></a><h2 class="section">Main Theorem</h2>
+<a id="lab243"></a><h2 class="section">Main Theorem</h2>
 
 <div class="paragraph"> </div>
 
@@ -622,12 +622,12 @@ One technical subtlety in the statement of the above lemma is that
 <li> Otherwise, <span class="inlinecode"><span class="id" title="var">t</span></span> steps by <span class="inlinecode"><span class="id" title="var">ST_If</span></span>, and the desired
           conclusion follows directly from the first induction
           hypothesis. 
-</li>
-</ul>
 
 </li>
 </ul>
 
+</li>
+</ul>
 </div>
 <div class="code">
 
@@ -651,7 +651,7 @@ One technical subtlety in the statement of the above lemma is that
 </div>
 
 <div class="doc">
-<a id="lab243"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (subject_expansion_stlc)</h4>
+<a id="lab244"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (subject_expansion_stlc)</h4>
  An exercise in the <a href="Types.html"><span class="inlineref">Types</span></a> chapter asked about the <i>subject
     expansion</i> property for the simple language of arithmetic and
     boolean expressions.  This property did not hold for that language,
@@ -675,11 +675,11 @@ One technical subtlety in the statement of the above lemma is that
 
 
 <div class="doc">
-<a id="lab244"></a><h1 class="section">Type Soundness</h1>
+<a id="lab245"></a><h1 class="section">Type Soundness</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab245"></a><h4 class="section">Exercise: 2 stars, standard, optional (type_soundness)</h4>
+<a id="lab246"></a><h4 class="section">Exercise: 2 stars, standard, optional (type_soundness)</h4>
  Put progress and preservation together and show that a well-typed
     term can <i>never</i> reach a stuck state.  
 </div>
@@ -706,11 +706,11 @@ One technical subtlety in the statement of the above lemma is that
 </div>
 
 <div class="doc">
-<a id="lab246"></a><h1 class="section">Uniqueness of Types</h1>
+<a id="lab247"></a><h1 class="section">Uniqueness of Types</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab247"></a><h4 class="section">Exercise: 3 stars, standard (unique_types)</h4>
+<a id="lab248"></a><h4 class="section">Exercise: 3 stars, standard (unique_types)</h4>
  Another nice property of the STLC is that types are unique: a
     given term (in a given context) has at most one type. 
 </div>
@@ -727,7 +727,7 @@ One technical subtlety in the statement of the above lemma is that
 
 
 <div class="doc">
-<a id="lab248"></a><h1 class="section">Context Invariance (Optional)</h1>
+<a id="lab249"></a><h1 class="section">Context Invariance (Optional)</h1>
 
 <div class="paragraph"> </div>
 
@@ -811,7 +811,7 @@ Conversely, an <i>open</i> term is one that may contain free
     containing free variables.") 
 <div class="paragraph"> </div>
 
-<a id="lab249"></a><h4 class="section">Exercise: 1 star, standard (afi)</h4>
+<a id="lab250"></a><h4 class="section">Exercise: 1 star, standard (afi)</h4>
  In the space below, write out the rules of the <span class="inlinecode"><span class="id" title="var">appears_free_in</span></span>
     relation in informal inference-rule notation.  (Use whatever
     notational conventions you like -- the point of the exercise is
@@ -892,7 +892,7 @@ Conversely, an <i>open</i> term is one that may contain free
 
 <div class="paragraph"> </div>
 
-<a id="lab250"></a><h4 class="section">Exercise: 2 stars, standard (free_in_context)</h4>
+<a id="lab251"></a><h4 class="section">Exercise: 2 stars, standard (free_in_context)</h4>
  Complete the following proof. 
 </div>
 <div class="code">
@@ -914,7 +914,7 @@ Conversely, an <i>open</i> term is one that may contain free
     no free variables). 
 <div class="paragraph"> </div>
 
-<a id="lab251"></a><h4 class="section">Exercise: 2 stars, standard, optional (typable_empty__closed)</h4>
+<a id="lab252"></a><h4 class="section">Exercise: 2 stars, standard, optional (typable_empty__closed)</h4>
 
 </div>
 <div class="code">
@@ -1004,7 +1004,7 @@ Conversely, an <i>open</i> term is one that may contain free
 
 <div class="paragraph"> </div>
 
-<a id="lab252"></a><h4 class="section">Exercise: 3 stars, standard, optional (context_invariance)</h4>
+<a id="lab253"></a><h4 class="section">Exercise: 3 stars, standard, optional (context_invariance)</h4>
  Complete the following proof. 
 </div>
 <div class="code">
@@ -1025,11 +1025,11 @@ Conversely, an <i>open</i> term is one that may contain free
 </div>
 
 <div class="doc">
-<a id="lab253"></a><h1 class="section">Additional Exercises</h1>
+<a id="lab254"></a><h1 class="section">Additional Exercises</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab254"></a><h4 class="section">Exercise: 1 star, standard (progress_preservation_statement)</h4>
+<a id="lab255"></a><h4 class="section">Exercise: 1 star, standard (progress_preservation_statement)</h4>
  Without peeking at their statements above, write down the progress
     and preservation theorems for the simply typed lambda-calculus (as
     Coq theorems).
@@ -1046,7 +1046,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab255"></a><h4 class="section">Exercise: 2 stars, standard (stlc_variation1)</h4>
+<a id="lab256"></a><h4 class="section">Exercise: 2 stars, standard (stlc_variation1)</h4>
  Suppose we add a new term <span class="inlinecode"><span class="id" title="var">zap</span></span> with the following reduction rule
 <center><table class="infrule">
 <tr class="infruleassumption">
@@ -1112,7 +1112,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab256"></a><h4 class="section">Exercise: 2 stars, standard (stlc_variation2)</h4>
+<a id="lab257"></a><h4 class="section">Exercise: 2 stars, standard (stlc_variation2)</h4>
  Suppose instead that we add a new term <span class="inlinecode"><span class="id" title="var">foo</span></span> with the following
     reduction rules:
 <center><table class="infrule">
@@ -1178,7 +1178,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab257"></a><h4 class="section">Exercise: 2 stars, standard (stlc_variation3)</h4>
+<a id="lab258"></a><h4 class="section">Exercise: 2 stars, standard (stlc_variation3)</h4>
  Suppose instead that we remove the rule <span class="inlinecode"><span class="id" title="var">ST_App1</span></span> from the <span class="inlinecode"><span class="id" title="var">step</span></span>
     relation. Which of the following properties of the STLC remain
     true in the presence of this rule?  For each one, write either
@@ -1217,7 +1217,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab258"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation4)</h4>
+<a id="lab259"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation4)</h4>
  Suppose instead that we add the following new rule to the
     reduction relation:
 <center><table class="infrule">
@@ -1261,7 +1261,7 @@ Conversely, an <i>open</i> term is one that may contain free
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab259"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation5)</h4>
+<a id="lab260"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation5)</h4>
  Suppose instead that we add the following new rule to the typing
     relation:
 <center><table class="infrule">
@@ -1309,7 +1309,7 @@ Conversely, an <i>open</i> term is one that may contain free
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab260"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation6)</h4>
+<a id="lab261"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation6)</h4>
  Suppose instead that we add the following new rule to the typing
     relation:
 <center><table class="infrule">
@@ -1357,7 +1357,7 @@ Conversely, an <i>open</i> term is one that may contain free
  <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
-<a id="lab261"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation7)</h4>
+<a id="lab262"></a><h4 class="section">Exercise: 2 stars, standard, optional (stlc_variation7)</h4>
  Suppose we add the following new rule to the typing relation
     of the STLC:
 <center><table class="infrule">
@@ -1406,7 +1406,7 @@ Conversely, an <i>open</i> term is one that may contain free
 </div>
 
 <div class="doc">
-<a id="lab262"></a><h2 class="section">Exercise: STLC with Arithmetic</h2>
+<a id="lab263"></a><h2 class="section">Exercise: STLC with Arithmetic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1476,7 +1476,7 @@ To terms, we add natural number constants, along with
 </div>
 
 <div class="doc">
-<a id="lab263"></a><h4 class="section">Exercise: 5 stars, standard (stlc_arith)</h4>
+<a id="lab264"></a><h4 class="section">Exercise: 5 stars, standard (stlc_arith)</h4>
  Finish formalizing the definition and properties of the STLC
     extended with arithmetic. This is a longer exercise. Specifically:
 
@@ -1559,7 +1559,7 @@ To terms, we add natural number constants, along with
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="StlcProp.html#STLCArith"><span class="id" title="module">STLCArith</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-08-03&nbsp;20:57&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-08-30&nbsp;19:29&nbsp;*)</span><br/>
 </div>
 </div>
 

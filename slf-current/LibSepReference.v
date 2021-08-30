@@ -2661,7 +2661,8 @@ Notation "'Val' v" :=
 Notation "'Let' x ':=' F1 'in' F2" :=
   ((wpgen_let F1 (fun x => F2)))
   (in custom wp at level 69,
-   x ident,
+   x name, (* NOTE: For compilation with Coq 8.12, replace "name" with "ident",
+               here and in the next 3 occurrences in the rest of the section. *)
    F1 custom wp at level 99,
    F2 custom wp at level 99,
    right associativity,
@@ -2694,7 +2695,7 @@ Notation "'If_' v 'Then' F1 'Else' F2" :=
 Notation "'Fun' x '=>' F1" :=
   ((wpgen_fun (fun x => F1)))
   (in custom wp at level 69,
-   x ident,
+   x name,
    F1 custom wp at level 99,
    right associativity,
   format "'[v' '[' 'Fun'  x  '=>'  F1  ']' ']'") : wp_scope.
@@ -2702,7 +2703,7 @@ Notation "'Fun' x '=>' F1" :=
 Notation "'Fix' f x '=>' F1" :=
   ((wpgen_fix (fun f x => F1)))
   (in custom wp at level 69,
-   f ident, x ident,
+   f name, x name,
    F1 custom wp at level 99,
    right associativity,
    format "'[v' '[' 'Fix'  f  x  '=>'  F1  ']' ']'") : wp_scope.
@@ -3684,4 +3685,4 @@ Qed.
 
 End DemoPrograms.
 
-(* 2021-08-03 21:08 *)
+(* 2021-08-30 19:34 *)

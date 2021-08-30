@@ -49,7 +49,7 @@ Check ltb_reflect.  (* : forall x y, reflect (x<y) (x <? y) *)
 
    But in this chapter I will show something much simpler.  When 
    reasoning about less-than comparisons on natural numbers, we have
-   the advantage that [nat] already an inductive type; it is "pre-reflected,"
+   the advantage that [nat] is already an inductive type; it is "pre-reflected,"
    in some sense.  (The same for [Z], [list], [bool], etc.)  *)
 
 (** Now, let's examine how [reflect] expresses the coherence between
@@ -503,4 +503,4 @@ simpl.
    it does.   Either of these two methods is a reasonable way of programming
    with proof.  *)
 
-(* 2021-08-03 21:01 *)
+(* 2021-08-30 19:31 *)

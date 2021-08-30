@@ -292,9 +292,9 @@
       typically be of interest to readers who want to understand every detail,
       readers who are seeking for a deep understanding of a particular notion,
       and readers who are looking for answers to specific question. 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
@@ -407,9 +407,9 @@
 </li>
 <li> (7) <a href="Partial.html"><span class="inlineref">Partial</span></a>: definition of triples for partial correctness
           only, i.e., for not requiring termination proofs. 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
@@ -493,7 +493,36 @@
 </div>
 
 <div class="doc">
-<a id="lab8"></a><h2 class="section">Feedback Welcome</h2>
+<a id="lab8"></a><h2 class="section">System Requirements</h2>
+
+<div class="paragraph"> </div>
+
+ The <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Preface.html"><span class="inlineref">Preface</span></a> of Software Foundations Volume 1 (<i>Logical
+    Foundations</i>) describes how to install Coq. The files you are
+    reading have been tested with Coq version 8.13. 
+<div class="paragraph"> </div>
+
+ If you use Coq version 8.12, you will first need to patch the sources by
+    executing the following command:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">sed</span> '<span class="id" title="var">s</span>/<span class="id" title="var">name</span>,/<span class="id" title="var">ident</span>,/<span class="id" title="var">g'</span> -<span class="id" title="var">i</span> <span class="id" title="var">LibSepReference.v</span>
+</span>
+</div>
+
+<div class="doc">
+<a id="lab9"></a><h2 class="section">Note for CoqIDE Users</h2>
+
+<div class="paragraph"> </div>
+
+ CoqIDE typically works better with its <i>asynchronous</i> proof mode disabled.
+    To load all the course files in CoqIDE, use the following command line.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Basic.v</span> &amp;
+</span>
+</div>
+
+<div class="doc">
+<a id="lab10"></a><h2 class="section">Feedback Welcome</h2>
 
 <div class="paragraph"> </div>
 
@@ -516,7 +545,7 @@
 </div>
 
 <div class="doc">
-<a id="lab9"></a><h2 class="section">Exercises</h2>
+<a id="lab11"></a><h2 class="section">Exercises</h2>
 
 <div class="paragraph"> </div>
 
@@ -534,28 +563,6 @@
     <i>Disclaimer</i>: the auto-grading system has not been tested for this
     volume. If you are interested in using auto-grading for this
     volume, please contact the author. 
-</div>
-
-<div class="doc">
-<a id="lab10"></a><h2 class="section">System Requirements</h2>
-
-<div class="paragraph"> </div>
-
- The <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Preface.html"><span class="inlineref">Preface</span></a> of Software Foundations Volume 1 (<i>Logical
-    Foundations</i>) describes how to install Coq. The files you are
-    reading have been tested with Coq 8.12. 
-</div>
-
-<div class="doc">
-<a id="lab11"></a><h2 class="section">Note for CoqIDE Users</h2>
-
-<div class="paragraph"> </div>
-
- CoqIDE typically works better with its <i>asynchronous</i> proof mode disabled.
-    To load all the course files in CoqIDE, use the following command line.
-<br/>
-<span class="inlinecode"><span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">SLF</span> <span class="id" title="var">Basic.v</span>&amp;
-</span>
 </div>
 
 <div class="doc">
@@ -591,7 +598,7 @@
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-08-03&nbsp;21:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-08-30&nbsp;19:34&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -98,7 +98,7 @@ Remark: SSReflect is another package providing powerful tactics.
 </div>
 
 <div class="doc">
-<a id="lab574"></a><h1 class="section">Tactics for Naming and Performing Inversion</h1>
+<a id="lab575"></a><h1 class="section">Tactics for Naming and Performing Inversion</h1>
 
 <div class="paragraph"> </div>
 
@@ -108,13 +108,13 @@ Remark: SSReflect is another package providing powerful tactics.
 
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">inverts</span></span>, for improving the <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> tactic. 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
-<a id="lab575"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">introv</span></span></h2>
+<a id="lab576"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">introv</span></span></h2>
 
 </div>
 <div class="code">
@@ -183,8 +183,8 @@ Like the arguments of <span class="inlinecode"><span class="id" title="tactic">i
 <div class="code">
 
 <span class="id" title="keyword">Theorem</span> <a id="IntrovExamples.exists_impl" class="idref" href="#IntrovExamples.exists_impl"><span class="id" title="lemma">exists_impl</span></a>: <span class="id" title="keyword">∀</span> <a id="X:15" class="idref" href="#X:15"><span class="id" title="binder">X</span></a> (<a id="P:16" class="idref" href="#P:16"><span class="id" title="binder">P</span></a> : <a class="idref" href="UseTactics.html#X:15"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) (<a id="Q:17" class="idref" href="#Q:17"><span class="id" title="binder">Q</span></a> : <span class="id" title="keyword">Prop</span>) (<a id="R:18" class="idref" href="#R:18"><span class="id" title="binder">R</span></a> : <span class="id" title="keyword">Prop</span>),<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:20" class="idref" href="#x:20"><span class="id" title="binder">x</span></a>, <a class="idref" href="UseTactics.html#P:16"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:20"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#Q:17"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">((</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:19" class="idref" href="#x:19"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="UseTactics.html#P:16"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:19"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#Q:17"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:19" class="idref" href="#x:19"><span class="id" title="binder">x</span></a>, <a class="idref" href="UseTactics.html#P:16"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:19"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#Q:17"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">((</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:20" class="idref" href="#x:20"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="UseTactics.html#P:16"><span class="id" title="variable">P</span></a> <a class="idref" href="UseTactics.html#x:20"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="UseTactics.html#Q:17"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> [<span class="id" title="var">x</span> <span class="id" title="var">H<sub>2</sub></span>]. <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;same&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="tactic">intros</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">R</span></span> <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode">[<span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span>].</span>,&nbsp;which&nbsp;is&nbsp;itself&nbsp;short<br/>
@@ -202,7 +202,7 @@ Remark: the tactic <span class="inlinecode"><span class="id" title="var">introv<
 </div>
 
 <div class="doc">
-<a id="lab576"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">inverts</span></span></h2>
+<a id="lab577"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">inverts</span></span></h2>
 
 </div>
 <div class="code">
@@ -384,7 +384,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab577"></a><h1 class="section">Tactics for N-ary Connectives</h1>
+<a id="lab578"></a><h1 class="section">Tactics for N-ary Connectives</h1>
 
 <div class="paragraph"> </div>
 
@@ -402,9 +402,9 @@ Note: in the rare cases where one needs to perform an inversion
 
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">branch</span></span> for decomposing n-ary disjunctions 
+
 </li>
 </ul>
-
 </div>
 <div class="code">
 
@@ -415,7 +415,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab578"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">splits</span></span></h2>
+<a id="lab579"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">splits</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -434,7 +434,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab579"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">branch</span></span></h2>
+<a id="lab580"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">branch</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -458,7 +458,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab580"></a><h1 class="section">Tactics for Working with Equality</h1>
+<a id="lab581"></a><h1 class="section">Tactics for Working with Equality</h1>
 
 <div class="paragraph"> </div>
 
@@ -484,9 +484,9 @@ Note: in the rare cases where one needs to perform an inversion
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">applys_eq</span></span> for proving <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> using an hypothesis <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">z</span></span>,
       automatically producing an equality <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">z</span></span> as subgoal. 
+
 </li>
 </ul>
-
 </div>
 <div class="code">
 
@@ -494,7 +494,7 @@ Note: in the rare cases where one needs to perform an inversion
 </div>
 
 <div class="doc">
-<a id="lab581"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">asserts_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">cuts_rewrite</span></span></h2>
+<a id="lab582"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">asserts_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">cuts_rewrite</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -559,7 +559,7 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab582"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">substs</span></span></h2>
+<a id="lab583"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">substs</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -580,7 +580,7 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab583"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">fequals</span></span></h2>
+<a id="lab584"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">fequals</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -603,7 +603,7 @@ More generally, the tactics <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab584"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">applys_eq</span></span></h2>
+<a id="lab585"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">applys_eq</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -656,7 +656,7 @@ When we have a mismatch on two arguments, we want to produce
 </div>
 
 <div class="doc">
-<a id="lab585"></a><h1 class="section">Some Convenient Shorthands</h1>
+<a id="lab586"></a><h1 class="section">Some Convenient Shorthands</h1>
 
 <div class="paragraph"> </div>
 
@@ -684,13 +684,13 @@ When we have a mismatch on two arguments, we want to produce
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">sort</span></span> for re-ordering the proof context by moving all
       propositions at the bottom. 
+
 </li>
 </ul>
-
 </div>
 
 <div class="doc">
-<a id="lab586"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">unfolds</span></span></h2>
+<a id="lab587"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">unfolds</span></span></h2>
 
 </div>
 <div class="code">
@@ -732,7 +732,7 @@ Remark: contrary to the tactic <span class="inlinecode"><span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab587"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">false</span></span> and <span class="inlinecode"><span class="id" title="var">tryfalse</span></span></h2>
+<a id="lab588"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">false</span></span> and <span class="inlinecode"><span class="id" title="var">tryfalse</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -783,7 +783,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 
 <div class="doc">
-<a id="lab588"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">gen</span></span></h2>
+<a id="lab589"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">gen</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -819,7 +819,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 </div>
 
 <div class="doc">
-<a id="lab589"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">admits</span></span>, <span class="inlinecode"><span class="id" title="var">admit_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">admit_goal</span></span></h2>
+<a id="lab590"></a><h2 class="section">The Tactics <span class="inlinecode"><span class="id" title="var">admits</span></span>, <span class="inlinecode"><span class="id" title="var">admit_rewrite</span></span> and <span class="inlinecode"><span class="id" title="var">admit_goal</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -917,7 +917,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">admit_goal</spa
 </div>
 
 <div class="doc">
-<a id="lab590"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">sort</span></span></h2>
+<a id="lab591"></a><h2 class="section">The Tactic <span class="inlinecode"><span class="id" title="var">sort</span></span></h2>
 
 </div>
 <div class="code">
@@ -948,7 +948,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 </div>
 
 <div class="doc">
-<a id="lab591"></a><h1 class="section">Tactics for Advanced Lemma Instantiation</h1>
+<a id="lab592"></a><h1 class="section">Tactics for Advanced Lemma Instantiation</h1>
 
 <div class="paragraph"> </div>
 
@@ -976,7 +976,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 </div>
 
 <div class="doc">
-<a id="lab592"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">lets</span></span></h2>
+<a id="lab593"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">lets</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1143,7 +1143,7 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 
 <div class="doc">
-<a id="lab593"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">applys</span></span>, <span class="inlinecode"><span class="id" title="var">forwards</span></span> and <span class="inlinecode"><span class="id" title="var">specializes</span></span></h2>
+<a id="lab594"></a><h2 class="section">Working of <span class="inlinecode"><span class="id" title="var">applys</span></span>, <span class="inlinecode"><span class="id" title="var">forwards</span></span> and <span class="inlinecode"><span class="id" title="var">specializes</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1191,7 +1191,7 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 
 <div class="doc">
-<a id="lab594"></a><h1 class="section">Summary</h1>
+<a id="lab595"></a><h1 class="section">Summary</h1>
 
 <div class="paragraph"> </div>
 
@@ -1280,7 +1280,7 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-08-03&nbsp;20:57&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-08-30&nbsp;19:29&nbsp;*)</span><br/>
 </div>
 </div>
 
