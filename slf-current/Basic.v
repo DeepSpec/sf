@@ -417,7 +417,7 @@ Proof using.
 Qed.
 
 (** Taking a step back, it may appear somewhat disappointing that we need
-    two different specifications for a same function, depending on whether
+    two different specifications for the same function, depending on whether
     its arguments are aliased on not. There exists advanced features of
     Separation Logic that allow handling the two cases through a single
     specification. However, for such a simple function it is easiest to just
@@ -961,7 +961,7 @@ Proof using.
 (** First, introduces all variables and hypotheses. *)
   intros n m Hm.
 (** Next, generalize those that are not constant during the recursion. We use
-    the TLC tactic [gen], which is a shorthand for [generalized dependent]. *)
+    the TLC tactic [gen], which is a shorthand for [generalize dependent]s. *)
   gen n Hm.
 (** Then, set up the induction. *)
   induction_wf IH: (downto 0) m. unfold downto in IH.
@@ -1153,4 +1153,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2021-08-30 19:52 *)
+(* 2021-08-30 20:15 *)

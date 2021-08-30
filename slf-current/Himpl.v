@@ -1212,4 +1212,4 @@ End AlternativeExistentialRule.
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf
     though it makes sense to wait until chapter [Wand] for reading it. *)
 
-(* 2021-08-30 19:52 *)
+(* 2021-08-30 20:15 *)

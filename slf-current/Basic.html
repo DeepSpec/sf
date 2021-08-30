@@ -622,7 +622,7 @@ By exploiting the alternative specification for <span class="inlinecode"><span c
 
 <div class="doc">
 Taking a step back, it may appear somewhat disappointing that we need
-    two different specifications for a same function, depending on whether
+    two different specifications for the same function, depending on whether
     its arguments are aliased on not. There exists advanced features of
     Separation Logic that allow handling the two cases through a single
     specification. However, for such a simple function it is easiest to just
@@ -1421,7 +1421,7 @@ First, introduces all variables and hypotheses.
 
 <div class="doc">
 Next, generalize those that are not constant during the recursion. We use
-    the TLC tactic <span class="inlinecode"><span class="id" title="var">gen</span></span>, which is a shorthand for <span class="inlinecode"><span class="id" title="var">generalized</span></span> <span class="inlinecode"><span class="id" title="tactic">dependent</span></span>. 
+    the TLC tactic <span class="inlinecode"><span class="id" title="var">gen</span></span>, which is a shorthand for <span class="inlinecode"><span class="id" title="tactic">generalize</span></span> <span class="inlinecode"><span class="id" title="tactic">dependent</span></span>s. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="var">gen</span> <span class="id" title="var">n</span> <span class="id" title="var">Hm</span>.<br/>
@@ -1726,7 +1726,7 @@ The specification of <span class="inlinecode"><span class="id" title="var">step_
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-08-30&nbsp;19:52&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-08-30&nbsp;20:15&nbsp;*)</span><br/>
 </div>
 </div>
 
