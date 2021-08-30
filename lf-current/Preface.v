@@ -257,7 +257,7 @@
 (** Coq runs on Windows, Linux, and macOS.  You will need:
 
     - A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.12.
+      These files have been tested with Coq 8.13.
 
     - An IDE for interacting with Coq.  Currently, there are two
       choices:
@@ -365,7 +365,7 @@
     volume       =   "1",
     year         =   "2021",
     publisher    =   "Electronic textbook",
-    note         =   {Version 6.0, \URL{http://softwarefoundations.cis.upenn.edu}}
+    note         =   {Version 6.1, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
 *)
 
@@ -447,4 +447,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2021-08-30 19:27 *)
+(* 2021-08-30 19:43 *)

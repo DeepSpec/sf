@@ -31,7 +31,7 @@
     volume       =   "4",
     year         =   "2021",
     publisher    =   "Electronic textbook",
-    note         =   {Version 1.2, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 1.2.1, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -44,4 +44,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2021-08-30 19:33 *)
+(* 2021-08-30 19:50 *)
