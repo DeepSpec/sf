@@ -599,4 +599,4 @@ Compute (M.elements (color palette G)). (* = [(4, 1); (2, 3); (6, 2); (1, 2); (5
   nodes [6] and [1] with [2], and node [5] with color [1]. *)
 
 
-(* 2021-09-05 17:38 *)
+(* 2021-09-05 17:55 *)
