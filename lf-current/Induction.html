@@ -401,10 +401,10 @@ Use induction to prove this simple fact about <span class="inlinecode"><span cla
 <div class="code">
 
 <span class="id" title="keyword">Theorem</span> <a id="mult_0_plus'" class="idref" href="#mult_0_plus'"><span class="id" title="lemma">mult_0_plus'</span></a> : <span class="id" title="keyword">∀</span> <a id="n:18" class="idref" href="#n:18"><span class="id" title="binder">n</span></a> <a id="m:19" class="idref" href="#m:19"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a>0 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a><a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: 0 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <span class="id" title="var">n</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">n</span>). { <span class="id" title="tactic">reflexivity</span>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: <span class="id" title="var">n</span> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">n</span>). { <span class="id" title="tactic">apply</span> <a class="idref" href="Induction.html#add_comm"><span class="id" title="axiom">add_comm</span></a>. }<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -413,28 +413,28 @@ Use induction to prove this simple fact about <span class="inlinecode"><span cla
 The <span class="inlinecode"><span class="id" title="tactic">assert</span></span> tactic introduces two sub-goals.  The first is
     the assertion itself; by prefixing it with <span class="inlinecode"><span class="id" title="var">H</span>:</span> we name the
     assertion <span class="inlinecode"><span class="id" title="var">H</span></span>.  (We can also name the assertion with <span class="inlinecode"><span class="id" title="keyword">as</span></span> just as
-    we did above with <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">induction</span></span>, i.e., <span class="inlinecode"><span class="id" title="tactic">assert</span></span> <span class="inlinecode">(0</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span></span>
+    we did above with <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">induction</span></span>, i.e., <span class="inlinecode"><span class="id" title="tactic">assert</span></span> <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span>
     <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>.)  Note that we surround the proof of this assertion
     with curly braces <span class="inlinecode">{</span> <span class="inlinecode">...</span> <span class="inlinecode">}</span>, both for readability and so that,
     when using Coq interactively, we can see more easily when we have
     finished this sub-proof.  The second goal is the same as the one
     at the point where we invoke <span class="inlinecode"><span class="id" title="tactic">assert</span></span> except that, in the context,
-    we now have the assumption <span class="inlinecode"><span class="id" title="var">H</span></span> that <span class="inlinecode">0</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>.  That is,
+    we now have the assumption <span class="inlinecode"><span class="id" title="var">H</span></span> that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>.  That is,
     <span class="inlinecode"><span class="id" title="tactic">assert</span></span> generates one subgoal where we must prove the asserted
     fact and a second subgoal where we can use the asserted fact to
     make progress on whatever we were trying to prove in the first
     place. 
 <div class="paragraph"> </div>
 
- For example, suppose we want to prove that <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode">+</span> <span class="inlinecode">(<span class="id" title="var">p</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">q</span>)</span>
-    <span class="inlinecode">=</span> <span class="inlinecode">(<span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">+</span> <span class="inlinecode">(<span class="id" title="var">p</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">q</span>)</span>. The only difference between the two sides of
-    the <span class="inlinecode">=</span> is that the arguments <span class="inlinecode"><span class="id" title="var">m</span></span> and <span class="inlinecode"><span class="id" title="var">n</span></span> to the first inner <span class="inlinecode">+</span>
-    are swapped, so it seems we should be able to use the
-    commutativity of addition (<span class="inlinecode"><span class="id" title="var">add_comm</span></span>) to rewrite one into the
+ As another example, suppose we want to prove that <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span>
+    <span class="inlinecode">+</span> <span class="inlinecode">(<span class="id" title="var">p</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">q</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode">(<span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode">+</span> <span class="inlinecode">(<span class="id" title="var">p</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">q</span>)</span>. The only difference between the
+    two sides of the <span class="inlinecode">=</span> is that the arguments <span class="inlinecode"><span class="id" title="var">m</span></span> and <span class="inlinecode"><span class="id" title="var">n</span></span> to the
+    first inner <span class="inlinecode">+</span> are swapped, so it seems we should be able to use
+    the commutativity of addition (<span class="inlinecode"><span class="id" title="var">add_comm</span></span>) to rewrite one into the
     other.  However, the <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> tactic is not very smart about
     <i>where</i> it applies the rewrite.  There are three uses of <span class="inlinecode">+</span> here,
-    and it turns out that doing <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">add_comm</span></span> will affect
-    only the <i>outer</i> one... 
+    and it turns out that doing <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">add_comm</span></span> will affect only
+    the <i>outer</i> one... 
 </div>
 <div class="code">
 
@@ -557,7 +557,7 @@ Coq is perfectly happy with this.  For a human, however, it
 </div>
 
 <div class="doc">
-... and if you're used to Coq you may be able to step
+... and if you're used to Coq you might be able to step
     through the tactics one after the other in your mind and imagine
     the state of the context and goal stack at each point, but if the
     proof were even a little bit more complicated this would be next
@@ -801,7 +801,6 @@ Now prove commutativity of multiplication.  You will probably
     That is, incrementing a binary number and then converting it to
     a (unary) natural number yields the same result as first converting
     it to a natural number and then incrementing.
-    Name your theorem <span class="inlinecode"><span class="id" title="var">bin_to_nat_pres_incr</span></span> ("pres" for "preserves").
 
 <div class="paragraph"> </div>
 
@@ -813,9 +812,17 @@ Now prove commutativity of multiplication.  You will probably
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="manual_grade_for_binary_commute" class="idref" href="#manual_grade_for_binary_commute"><span class="id" title="definition">manual_grade_for_binary_commute</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<span class="id" title="keyword">Inductive</span> <a id="bin" class="idref" href="#bin"><span class="id" title="inductive">bin</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Fixpoint</span> <a id="incr" class="idref" href="#incr"><span class="id" title="definition">incr</span></a> (<a id="m:61" class="idref" href="#m:61"><span class="id" title="binder">m</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Fixpoint</span> <a id="bin_to_nat" class="idref" href="#bin_to_nat"><span class="id" title="definition">bin_to_nat</span></a> (<a id="m:63" class="idref" href="#m:63"><span class="id" title="binder">m</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <a id="bin_to_nat_pres_incr" class="idref" href="#bin_to_nat_pres_incr"><span class="id" title="lemma">bin_to_nat_pres_incr</span></a> : <span class="id" title="keyword">∀</span> <a id="b:65" class="idref" href="#b:65"><span class="id" title="binder">b</span></a> : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Induction.html#b:65"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:65"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -825,7 +832,7 @@ Now prove commutativity of multiplication.  You will probably
 <a id="lab66"></a><h4 class="section">Exercise: 5 stars, advanced (binary_inverse)</h4>
  This is a further continuation of the previous exercises about
     binary numbers.  You may find you need to go back and change your
-    earlier definitions to get things to work here.
+    earlier definitions to get things to work smoothly here.
 
 <div class="paragraph"> </div>
 
@@ -834,7 +841,7 @@ Now prove commutativity of multiplication.  You will probably
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="nat_to_bin" class="idref" href="#nat_to_bin"><span class="id" title="definition">nat_to_bin</span></a> (<a id="n:59" class="idref" href="#n:59"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Basics.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="nat_to_bin" class="idref" href="#nat_to_bin"><span class="id" title="definition">nat_to_bin</span></a> (<a id="n:66" class="idref" href="#n:66"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 </div>
 
@@ -847,11 +854,9 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Theorem</span> <a id="nat_bin_nat" class="idref" href="#nat_bin_nat"><span class="id" title="lemma">nat_bin_nat</span></a> : <span class="id" title="keyword">∀</span> <a id="n:61" class="idref" href="#n:61"><span class="id" title="binder">n</span></a>, <a class="idref" href="Basics.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> <a class="idref" href="Induction.html#n:61"><span class="id" title="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:61"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Theorem</span> <a id="nat_bin_nat" class="idref" href="#nat_bin_nat"><span class="id" title="lemma">nat_bin_nat</span></a> : <span class="id" title="keyword">∀</span> <a id="n:68" class="idref" href="#n:68"><span class="id" title="binder">n</span></a>, <a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> <a class="idref" href="Induction.html#n:68"><span class="id" title="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:68"><span class="id" title="variable">n</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="manual_grade_for_binary_inverse_a" class="idref" href="#manual_grade_for_binary_inverse_a"><span class="id" title="definition">manual_grade_for_binary_inverse_a</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 </div>
 
 <div class="doc">
@@ -859,39 +864,50 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
         opposite direction -- that starting with a binary number,
         converting to a natural, and then back to binary should yield
         the same number we started with.  However, this is not the
-        case!  Explain (in a comment) what the problem is. 
+        case!  Explain (in a comment) what the problem is.  (Your
+        explanation will not be graded, but it's important that you
+        get it clear in your mind before going on to the next
+        part.) 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="manual_grade_for_binary_inverse_b" class="idref" href="#manual_grade_for_binary_inverse_b"><span class="id" title="definition">manual_grade_for_binary_inverse_b</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 </div>
 
 <div class="doc">
 (c) Define a normalization function -- i.e., a function
         <span class="inlinecode"><span class="id" title="var">normalize</span></span> going directly from <span class="inlinecode"><span class="id" title="var">bin</span></span> to <span class="inlinecode"><span class="id" title="var">bin</span></span> (i.e., <i>not</i> by
         converting to <span class="inlinecode"><span class="id" title="var">nat</span></span> and back) such that, for any binary number
-        <span class="inlinecode"><span class="id" title="var">b</span></span>, converting <span class="inlinecode"><span class="id" title="var">b</span></span> to a natural and then back to binary yields
-        <span class="inlinecode">(<span class="id" title="var">normalize</span></span> <span class="inlinecode"><span class="id" title="var">b</span>)</span>.  Prove it.  (Warning: This part is a bit
-        tricky -- you may end up defining several auxiliary lemmas.
-        One good way to find out what you need is to start by trying
-        to prove the main statement, see where you get stuck, and see
-        if you can find a lemma -- perhaps requiring its own inductive
-        proof -- that will allow the main proof to make progress.) Don't
-        define this using <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span> and <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>! 
+        <span class="inlinecode"><span class="id" title="var">b</span></span>, converting <span class="inlinecode"><span class="id" title="var">b</span></span> to a natural and then back to binary
+        yields <span class="inlinecode">(<span class="id" title="var">normalize</span></span> <span class="inlinecode"><span class="id" title="var">b</span>)</span>.  Prove it.
+
+<div class="paragraph"> </div>
+
+        Warning: This part is a bit tricky -- you may end up defining
+        several auxiliary lemmas.  One good way to find out what you
+        need is to start by trying to prove the main statement, see
+        where you get stuck, and see if you can find a lemma --
+        perhaps requiring its own inductive proof -- that will allow
+        the main proof to make progress.
+
+<div class="paragraph"> </div>
+
+        Hint: Don't define <span class="inlinecode"><span class="id" title="var">normalize</span></span> using <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span> and
+        <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>. 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="manual_grade_for_binary_inverse_c" class="idref" href="#manual_grade_for_binary_inverse_c"><span class="id" title="definition">manual_grade_for_binary_inverse_c</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="normalize" class="idref" href="#normalize"><span class="id" title="definition">normalize</span></a> (<a id="b:69" class="idref" href="#b:69"><span class="id" title="binder">b</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Theorem</span> <a id="bin_nat_bin" class="idref" href="#bin_nat_bin"><span class="id" title="lemma">bin_nat_bin</span></a> : <span class="id" title="keyword">∀</span> <a id="b:71" class="idref" href="#b:71"><span class="id" title="binder">b</span></a>, <a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> (<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:71"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#normalize"><span class="id" title="axiom">normalize</span></a> <a class="idref" href="Induction.html#b:71"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-06&nbsp;14:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-07&nbsp;23:45&nbsp;*)</span><br/>
 </div>
 </div>
 

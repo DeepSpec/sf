@@ -274,37 +274,37 @@ Definition manual_grade_for_destruct_induction : option (nat*string) := None.
     [assert] tactic allows us to do this. *)
 
 Theorem mult_0_plus' : forall n m : nat,
-  (0 + n) * m = n * m.
+  (n + 0) * m = n * m.
 Proof.
   intros n m.
-  assert (H: 0 + n = n). { reflexivity. }
+  assert (H: n + 0 = n). { apply add_comm. }
   rewrite -> H.
   reflexivity.  Qed.
 
 (** The [assert] tactic introduces two sub-goals.  The first is
     the assertion itself; by prefixing it with [H:] we name the
     assertion [H].  (We can also name the assertion with [as] just as
-    we did above with [destruct] and [induction], i.e., [assert (0 + n
+    we did above with [destruct] and [induction], i.e., [assert (n + 0
     = n) as H].)  Note that we surround the proof of this assertion
     with curly braces [{ ... }], both for readability and so that,
     when using Coq interactively, we can see more easily when we have
     finished this sub-proof.  The second goal is the same as the one
     at the point where we invoke [assert] except that, in the context,
-    we now have the assumption [H] that [0 + n = n].  That is,
+    we now have the assumption [H] that [n + 0 = n].  That is,
     [assert] generates one subgoal where we must prove the asserted
     fact and a second subgoal where we can use the asserted fact to
     make progress on whatever we were trying to prove in the first
     place. *)
 
-(** For example, suppose we want to prove that [(n + m) + (p + q)
-    = (m + n) + (p + q)]. The only difference between the two sides of
-    the [=] is that the arguments [m] and [n] to the first inner [+]
-    are swapped, so it seems we should be able to use the
-    commutativity of addition ([add_comm]) to rewrite one into the
+(** As another example, suppose we want to prove that [(n + m)
+    + (p + q) = (m + n) + (p + q)]. The only difference between the
+    two sides of the [=] is that the arguments [m] and [n] to the
+    first inner [+] are swapped, so it seems we should be able to use
+    the commutativity of addition ([add_comm]) to rewrite one into the
     other.  However, the [rewrite] tactic is not very smart about
     _where_ it applies the rewrite.  There are three uses of [+] here,
-    and it turns out that doing [rewrite -> add_comm] will affect
-    only the _outer_ one... *)
+    and it turns out that doing [rewrite -> add_comm] will affect only
+    the _outer_ one... *)
 
 Theorem plus_rearrange_firsttry : forall n m p q : nat,
   (n + m) + (p + q) = (m + n) + (p + q).
@@ -400,7 +400,7 @@ Proof.
   - (* n = S n' *)
     simpl. rewrite IHn'. reflexivity.   Qed.
 
-(** ... and if you're used to Coq you may be able to step
+(** ... and if you're used to Coq you might be able to step
     through the tactics one after the other in your mind and imagine
     the state of the context and goal stack at each point, but if the
     proof were even a little bit more complicated this would be next
@@ -598,7 +598,6 @@ Proof.
     That is, incrementing a binary number and then converting it to
     a (unary) natural number yields the same result as first converting
     it to a natural number and then incrementing.
-    Name your theorem [bin_to_nat_pres_incr] ("pres" for "preserves").
 
     Before you start working on this exercise, copy the definitions of
     [incr] and [bin_to_nat] from your solution to the [binary]
@@ -606,17 +605,28 @@ Proof.
     want to change your original definitions to make the property
     easier to prove, feel free to do so! *)
 
-(* FILL IN HERE *)
+Inductive bin : Type :=
+  (* FILL IN HERE *)
+.
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_binary_commute : option (nat*string) := None.
+Fixpoint incr (m:bin) : bin
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Fixpoint bin_to_nat (m:bin) : nat
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Theorem bin_to_nat_pres_incr : forall b : bin,
+  bin_to_nat (incr b) = 1 + bin_to_nat b.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (** **** Exercise: 5 stars, advanced (binary_inverse)
 
     This is a further continuation of the previous exercises about
     binary numbers.  You may find you need to go back and change your
-    earlier definitions to get things to work here.
+    earlier definitions to get things to work smoothly here.
 
     (a) First, write a function to convert natural numbers to binary
         numbers. *)
@@ -634,36 +644,40 @@ Theorem nat_bin_nat : forall n, bin_to_nat (nat_to_bin n) = n.
 Proof.
   (* FILL IN HERE *) Admitted.
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_binary_inverse_a : option (nat*string) := None.
-
 (** (b) One might naturally expect that we could also prove the
         opposite direction -- that starting with a binary number,
         converting to a natural, and then back to binary should yield
         the same number we started with.  However, this is not the
-        case!  Explain (in a comment) what the problem is. *)
+        case!  Explain (in a comment) what the problem is.  (Your
+        explanation will not be graded, but it's important that you
+        get it clear in your mind before going on to the next
+        part.) *)
 
 (* FILL IN HERE *)
-
-(* Do not modify the following line: *)
-Definition manual_grade_for_binary_inverse_b : option (nat*string) := None.
 
 (** (c) Define a normalization function -- i.e., a function
         [normalize] going directly from [bin] to [bin] (i.e., _not_ by
         converting to [nat] and back) such that, for any binary number
-        [b], converting [b] to a natural and then back to binary yields
-        [(normalize b)].  Prove it.  (Warning: This part is a bit
-        tricky -- you may end up defining several auxiliary lemmas.
-        One good way to find out what you need is to start by trying
-        to prove the main statement, see where you get stuck, and see
-        if you can find a lemma -- perhaps requiring its own inductive
-        proof -- that will allow the main proof to make progress.) Don't
-        define this using [nat_to_bin] and [bin_to_nat]! *)
+        [b], converting [b] to a natural and then back to binary
+        yields [(normalize b)].  Prove it.
 
-(* FILL IN HERE *)
+        Warning: This part is a bit tricky -- you may end up defining
+        several auxiliary lemmas.  One good way to find out what you
+        need is to start by trying to prove the main statement, see
+        where you get stuck, and see if you can find a lemma --
+        perhaps requiring its own inductive proof -- that will allow
+        the main proof to make progress.
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_binary_inverse_c : option (nat*string) := None.
+        Hint: Don't define [normalize] using [nat_to_bin] and
+        [bin_to_nat]. *)
+
+Fixpoint normalize (b:bin) : bin
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Theorem bin_nat_bin : forall b, nat_to_bin (bin_to_nat b) = normalize b.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
-(* 2021-09-06 14:08 *)
+(* 2021-09-07 23:45 *)

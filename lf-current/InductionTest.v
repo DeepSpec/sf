@@ -107,30 +107,37 @@ idtac " ".
 idtac "-------------------  binary_commute  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: binary_commute".
+idtac "#> bin_to_nat_pres_incr".
 idtac "Possible points: 3".
-print_manual_grade manual_grade_for_binary_commute.
+check_type @bin_to_nat_pres_incr (
+(forall b : bin, bin_to_nat (incr b) = 1 + bin_to_nat b)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions bin_to_nat_pres_incr.
+Goal True.
 idtac " ".
 
 idtac "-------------------  binary_inverse  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: binary_inverse_a".
+idtac "#> nat_bin_nat".
 idtac "Advanced".
 idtac "Possible points: 4".
-print_manual_grade manual_grade_for_binary_inverse_a.
+check_type @nat_bin_nat ((forall n : nat, bin_to_nat (nat_to_bin n) = n)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions nat_bin_nat.
+Goal True.
 idtac " ".
 
-idtac "#> Manually graded: binary_inverse_b".
+idtac "#> bin_nat_bin".
 idtac "Advanced".
-idtac "Possible points: 2".
-print_manual_grade manual_grade_for_binary_inverse_b.
-idtac " ".
-
-idtac "#> Manually graded: binary_inverse_c".
-idtac "Advanced".
-idtac "Possible points: 4".
-print_manual_grade manual_grade_for_binary_inverse_c.
+idtac "Possible points: 6".
+check_type @bin_nat_bin ((forall b : bin, nat_to_bin (bin_to_nat b) = normalize b)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions bin_nat_bin.
+Goal True.
 idtac " ".
 
 idtac " ".
@@ -166,18 +173,16 @@ idtac "---------- double_plus ---------".
 Print Assumptions double_plus.
 idtac "---------- mul_comm ---------".
 Print Assumptions mul_comm.
-idtac "---------- binary_commute ---------".
-idtac "MANUAL".
+idtac "---------- bin_to_nat_pres_incr ---------".
+Print Assumptions bin_to_nat_pres_incr.
 idtac "".
 idtac "********** Advanced **********".
 idtac "---------- add_comm_informal ---------".
 idtac "MANUAL".
-idtac "---------- binary_inverse_a ---------".
-idtac "MANUAL".
-idtac "---------- binary_inverse_b ---------".
-idtac "MANUAL".
-idtac "---------- binary_inverse_c ---------".
-idtac "MANUAL".
+idtac "---------- nat_bin_nat ---------".
+Print Assumptions nat_bin_nat.
+idtac "---------- bin_nat_bin ---------".
+Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2021-09-06 14:08 *)
+(* 2021-09-07 23:45 *)

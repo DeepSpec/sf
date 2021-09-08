@@ -258,4 +258,4 @@ Proof using. introv I. induction n; introv Hx; autos*. Qed.
 (* --TODO: rename applyn to iter *)
 (* --TODO: migrate iteration of functionals from LibFix to here *)
 
-(* 2021-09-06 14:19 *)
+(* 2021-09-07 23:53 *)
