@@ -96,7 +96,7 @@ From LF Require Export Basics.
 (* ################################################################# *)
 (** * Proof by Induction *)
 
-(** We can prove that [0] is a neutral element for [+] on the left
+(** We can prove that [0] is a neutral element for [+] on the _left_
     using just [reflexivity].  But the proof that it is also a neutral
     element on the _right_ ... *)
 
@@ -266,7 +266,7 @@ Definition manual_grade_for_destruct_induction : option (nat*string) := None.
 
 (** In Coq, as in informal mathematics, large proofs are often
     broken into a sequence of theorems, with later proofs referring to
-    earlier theorems.  But sometimes a proof will require some
+    earlier theorems.  But sometimes a proof will involve some
     miscellaneous fact that is too trivial and of too little general
     interest to bother giving it its own top-level name.  In such
     cases, it is convenient to be able to simply state and prove the
@@ -274,10 +274,11 @@ Definition manual_grade_for_destruct_induction : option (nat*string) := None.
     [assert] tactic allows us to do this. *)
 
 Theorem mult_0_plus' : forall n m : nat,
-  (n + 0) * m = n * m.
+  (n + 0 + 0) * m = n * m.
 Proof.
-  intros n m.
-  assert (H: n + 0 = n). { apply add_comm. }
+  intros n m. 
+  assert (H: n + 0 + 0 = n).
+    { rewrite add_comm. simpl. rewrite add_comm. reflexivity. }
   rewrite -> H.
   reflexivity.  Qed.
 
@@ -285,16 +286,16 @@ Proof.
     the assertion itself; by prefixing it with [H:] we name the
     assertion [H].  (We can also name the assertion with [as] just as
     we did above with [destruct] and [induction], i.e., [assert (n + 0
-    = n) as H].)  Note that we surround the proof of this assertion
-    with curly braces [{ ... }], both for readability and so that,
-    when using Coq interactively, we can see more easily when we have
-    finished this sub-proof.  The second goal is the same as the one
-    at the point where we invoke [assert] except that, in the context,
-    we now have the assumption [H] that [n + 0 = n].  That is,
-    [assert] generates one subgoal where we must prove the asserted
-    fact and a second subgoal where we can use the asserted fact to
-    make progress on whatever we were trying to prove in the first
-    place. *)
+    + 0 = n) as H].)  Note that we surround the proof of this
+    assertion with curly braces [{ ... }], both for readability and so
+    that, when using Coq interactively, we can see more easily when we
+    have finished this sub-proof.  The second goal is the same as the
+    one at the point where we invoke [assert] except that, in the
+    context, we now have the assumption [H] that [n + 0 + 0 = n].
+    That is, [assert] generates one subgoal where we must prove the
+    asserted fact and a second subgoal where we can use the asserted
+    fact to make progress on whatever we were trying to prove in the
+    first place. *)
 
 (** As another example, suppose we want to prove that [(n + m)
     + (p + q) = (m + n) + (p + q)]. The only difference between the
@@ -680,4 +681,4 @@ Proof.
 
 (** [] *)
 
-(* 2021-09-07 23:45 *)
+(* 2021-09-08 00:17 *)

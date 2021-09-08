@@ -160,7 +160,7 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
 
 <div class="paragraph"> </div>
 
- We can prove that <span class="inlinecode">0</span> is a neutral element for <span class="inlinecode">+</span> on the left
+ We can prove that <span class="inlinecode">0</span> is a neutral element for <span class="inlinecode">+</span> on the <i>left</i>
     using just <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.  But the proof that it is also a neutral
     element on the <i>right</i> ... 
 </div>
@@ -391,7 +391,7 @@ Use induction to prove this simple fact about <span class="inlinecode"><span cla
 
  In Coq, as in informal mathematics, large proofs are often
     broken into a sequence of theorems, with later proofs referring to
-    earlier theorems.  But sometimes a proof will require some
+    earlier theorems.  But sometimes a proof will involve some
     miscellaneous fact that is too trivial and of too little general
     interest to bother giving it its own top-level name.  In such
     cases, it is convenient to be able to simply state and prove the
@@ -401,10 +401,11 @@ Use induction to prove this simple fact about <span class="inlinecode"><span cla
 <div class="code">
 
 <span class="id" title="keyword">Theorem</span> <a id="mult_0_plus'" class="idref" href="#mult_0_plus'"><span class="id" title="lemma">mult_0_plus'</span></a> : <span class="id" title="keyword">∀</span> <a id="n:18" class="idref" href="#n:18"><span class="id" title="binder">n</span></a> <a id="m:19" class="idref" href="#m:19"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0<a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:18"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#ea2ff3d561159081cea6fb2e8113cc<sub>54</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Induction.html#m:19"><span class="id" title="variable">m</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: <span class="id" title="var">n</span> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">n</span>). { <span class="id" title="tactic">apply</span> <a class="idref" href="Induction.html#add_comm"><span class="id" title="axiom">add_comm</span></a>. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">H</span>: <span class="id" title="var">n</span> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <a class="idref" href="Induction.html#add_comm"><span class="id" title="axiom">add_comm</span></a>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="Induction.html#add_comm"><span class="id" title="axiom">add_comm</span></a>. <span class="id" title="tactic">reflexivity</span>. }<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -414,16 +415,16 @@ The <span class="inlinecode"><span class="id" title="tactic">assert</span></span
     the assertion itself; by prefixing it with <span class="inlinecode"><span class="id" title="var">H</span>:</span> we name the
     assertion <span class="inlinecode"><span class="id" title="var">H</span></span>.  (We can also name the assertion with <span class="inlinecode"><span class="id" title="keyword">as</span></span> just as
     we did above with <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> and <span class="inlinecode"><span class="id" title="tactic">induction</span></span>, i.e., <span class="inlinecode"><span class="id" title="tactic">assert</span></span> <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span>
-    <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>.)  Note that we surround the proof of this assertion
-    with curly braces <span class="inlinecode">{</span> <span class="inlinecode">...</span> <span class="inlinecode">}</span>, both for readability and so that,
-    when using Coq interactively, we can see more easily when we have
-    finished this sub-proof.  The second goal is the same as the one
-    at the point where we invoke <span class="inlinecode"><span class="id" title="tactic">assert</span></span> except that, in the context,
-    we now have the assumption <span class="inlinecode"><span class="id" title="var">H</span></span> that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>.  That is,
-    <span class="inlinecode"><span class="id" title="tactic">assert</span></span> generates one subgoal where we must prove the asserted
-    fact and a second subgoal where we can use the asserted fact to
-    make progress on whatever we were trying to prove in the first
-    place. 
+    <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>.)  Note that we surround the proof of this
+    assertion with curly braces <span class="inlinecode">{</span> <span class="inlinecode">...</span> <span class="inlinecode">}</span>, both for readability and so
+    that, when using Coq interactively, we can see more easily when we
+    have finished this sub-proof.  The second goal is the same as the
+    one at the point where we invoke <span class="inlinecode"><span class="id" title="tactic">assert</span></span> except that, in the
+    context, we now have the assumption <span class="inlinecode"><span class="id" title="var">H</span></span> that <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">+</span> <span class="inlinecode">0</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span>.
+    That is, <span class="inlinecode"><span class="id" title="tactic">assert</span></span> generates one subgoal where we must prove the
+    asserted fact and a second subgoal where we can use the asserted
+    fact to make progress on whatever we were trying to prove in the
+    first place. 
 <div class="paragraph"> </div>
 
  As another example, suppose we want to prove that <span class="inlinecode">(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span>
@@ -907,7 +908,7 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-07&nbsp;23:45&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-08&nbsp;00:17&nbsp;*)</span><br/>
 </div>
 </div>
 
