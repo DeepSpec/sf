@@ -485,9 +485,9 @@ Theorem add_shuffle3 : forall n m p : nat,
 Proof.
   (* FILL IN HERE *) Admitted.
 
-(** Now prove commutativity of multiplication.  You will probably
-    want to define and prove a "helper" theorem to be used
-    in the proof of this one. Hint: what is [n * (1 + k)]? *)
+(** Now prove commutativity of multiplication.  You will probably want
+    to look for (or define and prove) a "helper" theorem to be used in
+    the proof of this one. Hint: what is [n * (1 + k)]? *)
 
 Theorem mul_comm : forall m n : nat,
   m * n = n * m.
@@ -701,4 +701,4 @@ Proof.
 
 (** [] *)
 
-(* 2021-09-13 21:02 *)
+(* 2021-09-13 21:26 *)
