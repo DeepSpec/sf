@@ -185,4 +185,4 @@ idtac "---------- bin_nat_bin ---------".
 Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2021-09-13 21:26 *)
+(* 2021-09-13 22:38 *)

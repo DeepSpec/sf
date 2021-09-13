@@ -1,10 +1,10 @@
 (** * Color: Graph Coloring *)
 
 (** Required reading: 
-  , by Andrew W. Appel, 2016.
+  Kempe's graph-coloring algorithm, by Andrew W. Appel, 2016.
 
   Suggested reading:
-  ,
+  Formal Verification of Coalescing Graph-Coloring Register Allocation,
   by Sandrine Blazy, Benoit Robillard, and Andrew W. Appel. 
   ESOP 2010: 19th European Symposium on Programming, pp. 145-164, March 2010. 
   
@@ -599,4 +599,4 @@ Compute (M.elements (color palette G)). (* = [(4, 1); (2, 3); (6, 2); (1, 2); (5
   nodes [6] and [1] with [2], and node [5] with color [1]. *)
 
 
-(* 2021-09-13 21:31 *)
+(* 2021-09-13 22:43 *)
