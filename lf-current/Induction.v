@@ -276,7 +276,7 @@ Definition manual_grade_for_destruct_induction : option (nat*string) := None.
 Theorem mult_0_plus' : forall n m : nat,
   (n + 0 + 0) * m = n * m.
 Proof.
-  intros n m. 
+  intros n m.
   assert (H: n + 0 + 0 = n).
     { rewrite add_comm. simpl. rewrite add_comm. reflexivity. }
   rewrite -> H.
@@ -669,8 +669,28 @@ Proof.
         perhaps requiring its own inductive proof -- that will allow
         the main proof to make progress.
 
-        Hint: Don't define [normalize] using [nat_to_bin] and
-        [bin_to_nat]. *)
+        Hint 1: Don't define [normalize] using [nat_to_bin] and
+        [bin_to_nat].
+
+        Hint 2 (this will probably only make sense after you've
+        thought about the exercise for a while by yourself): There are
+        multiple ways of defining the [normalize] function, and some
+        lead to substantially smoother proofs than others.  In
+        particular, one way to define [normalize] is to try to "cut
+        off" the normalization early, by checking whether all
+        remaining digits are zero before every recursive call, while
+        another strategy is to recurse all the way to the end of the
+        binary number and then treat zero as a special case on the
+        _result_ of the recursive call at each level.  The latter
+        seems to work more smoothly, perhaps because it examines each
+        digit of the binary number just once, while the former
+        involves repeatedly "looking ahead" at the remaining bits to
+        see if they are all zero.
+
+        More generally, the shape of a proof by induction will match the
+        recursive structure of the program you are verifying, so a good
+        strategy for designing algorithms that are easy to verify is to
+        make your recursions as simple as possible. *)
 
 Fixpoint normalize (b:bin) : bin
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -681,4 +701,4 @@ Proof.
 
 (** [] *)
 
-(* 2021-09-08 00:17 *)
+(* 2021-09-13 12:04 *)

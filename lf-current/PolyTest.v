@@ -32,14 +32,6 @@ Import Check.
 
 Goal True.
 
-idtac "-------------------  mumble_grumble  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: mumble_grumble".
-idtac "Possible points: 2".
-print_manual_grade manual_grade_for_mumble_grumble.
-idtac " ".
-
 idtac "-------------------  split  --------------------".
 idtac " ".
 
@@ -150,15 +142,6 @@ idtac "Assumptions:".
 Abort.
 Print Assumptions test_flat_map1.
 Goal True.
-idtac " ".
-
-idtac "-------------------  fold_types_different  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: fold_types_different".
-idtac "Advanced".
-idtac "Possible points: 1".
-print_manual_grade manual_grade_for_fold_types_different.
 idtac " ".
 
 idtac "-------------------  fold_length  --------------------".
@@ -357,8 +340,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 19".
-idtac "Max points - advanced: 30".
+idtac "Max points - standard: 17".
+idtac "Max points - advanced: 27".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -376,8 +359,6 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
-idtac "---------- mumble_grumble ---------".
-idtac "MANUAL".
 idtac "---------- split ---------".
 Print Assumptions split.
 idtac "---------- test_split ---------".
@@ -404,8 +385,6 @@ idtac "---------- fold_map ---------".
 idtac "MANUAL".
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- fold_types_different ---------".
-idtac "MANUAL".
 idtac "---------- Exercises.uncurry_curry ---------".
 Print Assumptions Exercises.uncurry_curry.
 idtac "---------- Exercises.curry_uncurry ---------".
@@ -434,4 +413,4 @@ idtac "---------- Exercises.Church.exp_3 ---------".
 Print Assumptions Exercises.Church.exp_3.
 Abort.
 
-(* 2021-09-08 00:17 *)
+(* 2021-09-13 12:05 *)

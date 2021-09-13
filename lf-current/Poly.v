@@ -131,7 +131,7 @@ Example test_repeat2 :
   repeat bool false 1 = cons bool false (nil bool).
 Proof. reflexivity. Qed.
 
-(** **** Exercise: 2 stars, standard (mumble_grumble)
+(** **** Exercise: 2 stars, standard, optional (mumble_grumble)
 
     Consider the following two inductively defined types. *)
 
@@ -157,9 +157,6 @@ Inductive grumble (X:Type) : Type :=
       - [c]  *)
 (* FILL IN HERE *)
 End MumbleGrumble.
-
-(* Do not modify the following line: *)
-Definition manual_grade_for_mumble_grumble : option (nat*string) := None.
 (** [] *)
 
 (* ----------------------------------------------------------------- *)
@@ -175,7 +172,7 @@ Fixpoint repeat' X x count : list X :=
   | S count' => cons X x (repeat' X x count')
   end.
 
-(** Indeed it will.  Let's see what type Coq has assigned to [repeat']: *)
+(** Indeed it will.  Let's see what type Coq has assigned to [repeat']... *)
 
 Check repeat'
   : forall X : Type, X -> nat -> list X.
@@ -263,7 +260,7 @@ Arguments nil {X}.
 Arguments cons {X}.
 Arguments repeat {X}.
 
-(** Now we don't have to supply type arguments at all: *)
+(** Now we don't have to supply any type arguments at all in the example: *)
 
 Definition list123'' := cons 1 (cons 2 (cons 3 nil)).
 
@@ -436,7 +433,7 @@ Arguments pair {X} {Y}.
 Notation "( x , y )" := (pair x y).
 
 (** We can also use the [Notation] mechanism to define the standard
-    notation for product _types_: *)
+    notation for _product types_ (i.e., the types of pairs): *)
 
 Notation "X * Y" := (prod X Y) : type_scope.
 
@@ -858,7 +855,7 @@ Example fold_example3 :
   fold app  [[1];[];[2;3];[4]] [] = [1;2;3;4].
 Proof. reflexivity. Qed.
 
-(** **** Exercise: 1 star, advanced (fold_types_different)
+(** **** Exercise: 1 star, standard, optional (fold_types_different)
 
     Observe that the type of [fold] is parameterized by _two_ type
     variables, [X] and [Y], and the parameter [f] is a binary operator
@@ -866,11 +863,9 @@ Proof. reflexivity. Qed.
     situation where it would be useful for [X] and [Y] to be
     different? *)
 
-(* FILL IN HERE *)
+(* FILL IN HERE
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_fold_types_different : option (nat*string) := None.
-(** [] *)
+    [] *)
 
 (* ================================================================= *)
 (** ** Functions That Construct Functions *)
@@ -1157,4 +1152,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2021-09-08 00:17 *)
+(* 2021-09-13 12:04 *)

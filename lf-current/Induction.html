@@ -893,8 +893,32 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 
 <div class="paragraph"> </div>
 
-        Hint: Don't define <span class="inlinecode"><span class="id" title="var">normalize</span></span> using <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span> and
-        <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>. 
+        Hint 1: Don't define <span class="inlinecode"><span class="id" title="var">normalize</span></span> using <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span> and
+        <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>.
+
+<div class="paragraph"> </div>
+
+        Hint 2 (this will probably only make sense after you've
+        thought about the exercise for a while by yourself): There are
+        multiple ways of defining the <span class="inlinecode"><span class="id" title="var">normalize</span></span> function, and some
+        lead to substantially smoother proofs than others.  In
+        particular, one way to define <span class="inlinecode"><span class="id" title="var">normalize</span></span> is to try to "cut
+        off" the normalization early, by checking whether all
+        remaining digits are zero before every recursive call, while
+        another strategy is to recurse all the way to the end of the
+        binary number and then treat zero as a special case on the
+        <i>result</i> of the recursive call at each level.  The latter
+        seems to work more smoothly, perhaps because it examines each
+        digit of the binary number just once, while the former
+        involves repeatedly "looking ahead" at the remaining bits to
+        see if they are all zero.
+
+<div class="paragraph"> </div>
+
+        More generally, the shape of a proof by induction will match the
+        recursive structure of the program you are verifying, so a good
+        strategy for designing algorithms that are easy to verify is to
+        make your recursions as simple as possible. 
 </div>
 <div class="code">
 
@@ -908,7 +932,7 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-08&nbsp;00:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-13&nbsp;12:04&nbsp;*)</span><br/>
 </div>
 </div>
 

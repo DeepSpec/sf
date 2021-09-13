@@ -64,8 +64,8 @@ This declaration can be read: "The one and only way to
 </div>
 
 <div class="doc">
-Here are simple functions for extracting the first and
-    second components of a pair. 
+Functions for extracting the first and second components of a pair
+    can then be defined by pattern matching. 
 </div>
 <div class="code">
 
@@ -164,8 +164,8 @@ Note that pattern-matching on a pair (with parentheses: <span class="inlinecode"
 </div>
 
 <div class="doc">
-But <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is not enough if we state the lemma in a more
-    natural way: 
+But just <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is not enough if we state the lemma in the
+    most natural way: 
 </div>
 <div class="code">
 
@@ -598,7 +598,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 
 <a id="lab81"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (add_inc_count)</h4>
  Adding a value to a bag should increase the value's count by one.
-    State that as a theorem and prove it. 
+    State this as a theorem and prove it. 
 </div>
 <div class="code">
 <span class="comment">(*<br/>
@@ -756,7 +756,7 @@ Notice that, as when doing induction on natural numbers, the
 <div class="paragraph"> </div>
 
  <i>Theorem</i>: For all lists <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span>, <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span></span>, and <span class="inlinecode"><span class="id" title="var">l<sub>3</sub></span></span>,
-   <span class="inlinecode">(<span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span>)</span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">l<sub>3</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode">(<span class="id" title="var">l<sub>2</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">l<sub>3</sub></span>)</span>.
+               <span class="inlinecode">(<span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span>)</span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">l<sub>3</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode">(<span class="id" title="var">l<sub>2</sub></span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">l<sub>3</sub></span>)</span>.
 
 <div class="paragraph"> </div>
 
@@ -1365,7 +1365,8 @@ We can then change the above definition of <span class="inlinecode"><span class=
 <div class="doc">
 Internally, an <span class="inlinecode"><span class="id" title="var">id</span></span> is just a number.  Introducing a separate type
     by wrapping each nat with the tag <span class="inlinecode"><span class="id" title="var">Id</span></span> makes definitions more
-    readable and gives us more flexibility. 
+    readable and gives us flexibility to change representations later
+    if we want to. 
 <div class="paragraph"> </div>
 
  We'll also need an equality test for <span class="inlinecode"><span class="id" title="var">id</span></span>s: 
@@ -1397,7 +1398,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="PartialMap" class="idref" href="#PartialMap"><span class="id" title="module">PartialMap</span></a>.<br/>
-<span class="id" title="keyword">Export</span> <span class="id" title="var">NatList</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Export</span> <span class="id" title="var">NatList</span>. <span class="comment">(*&nbsp;make&nbsp;the&nbsp;definitions&nbsp;from&nbsp;NatList&nbsp;available&nbsp;here&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="PartialMap.partial_map" class="idref" href="#PartialMap.partial_map"><span class="id" title="inductive">partial_map</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="PartialMap.empty" class="idref" href="#PartialMap.empty"><span class="id" title="constructor">empty</span></a><br/>
 &nbsp;&nbsp;| <a id="PartialMap.record" class="idref" href="#PartialMap.record"><span class="id" title="constructor">record</span></a> (<a id="i:125" class="idref" href="#i:125"><span class="id" title="binder">i</span></a> : <a class="idref" href="Lists.html#id"><span class="id" title="inductive">id</span></a>) (<a id="v:126" class="idref" href="#v:126"><span class="id" title="binder">v</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="m:127" class="idref" href="#m:127"><span class="id" title="binder">m</span></a> : <a class="idref" href="Lists.html#partial_map:123"><span class="id" title="inductive">partial_map</span></a>).<br/>
@@ -1498,7 +1499,7 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-08&nbsp;00:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-13&nbsp;12:04&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -19,8 +19,8 @@ Inductive natprod : Type :=
 
 Check (pair 3 5) : natprod.
 
-(** Here are simple functions for extracting the first and
-    second components of a pair. *)
+(** Functions for extracting the first and second components of a pair
+    can then be defined by pattern matching. *)
 
 Definition fst (p : natprod) : nat :=
   match p with
@@ -106,8 +106,8 @@ Theorem surjective_pairing' : forall (n m : nat),
 Proof.
   reflexivity. Qed.
 
-(** But [reflexivity] is not enough if we state the lemma in a more
-    natural way: *)
+(** But just [reflexivity] is not enough if we state the lemma in the
+    most natural way: *)
 
 Theorem surjective_pairing_stuck : forall (p : natprod),
   p = (fst p, snd p).
@@ -466,7 +466,7 @@ Example test_subset2:              subset [1;2;2] [2;1;4;1] = false.
 (** **** Exercise: 2 stars, standard, especially useful (add_inc_count)
 
     Adding a value to a bag should increase the value's count by one.
-    State that as a theorem and prove it. *)
+    State this as a theorem and prove it. *)
 (*
 Theorem bag_theorem : ...
 Proof.
@@ -583,7 +583,7 @@ Proof.
 (** For comparison, here is an informal proof of the same theorem. *)
 
 (** _Theorem_: For all lists [l1], [l2], and [l3],
-   [(l1 ++ l2) ++ l3 = l1 ++ (l2 ++ l3)].
+               [(l1 ++ l2) ++ l3 = l1 ++ (l2 ++ l3)].
 
    _Proof_: By induction on [l1].
 
@@ -1038,7 +1038,8 @@ Inductive id : Type :=
 
 (** Internally, an [id] is just a number.  Introducing a separate type
     by wrapping each nat with the tag [Id] makes definitions more
-    readable and gives us more flexibility. *)
+    readable and gives us flexibility to change representations later
+    if we want to. *)
 
 (** We'll also need an equality test for [id]s: *)
 
@@ -1056,7 +1057,7 @@ Proof.
 (** Now we define the type of partial maps: *)
 
 Module PartialMap.
-Export NatList.
+Export NatList.  (* make the definitions from NatList available here *)
 
 Inductive partial_map : Type :=
   | empty
@@ -1125,4 +1126,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2021-09-08 00:17 *)
+(* 2021-09-13 12:04 *)

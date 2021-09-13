@@ -220,7 +220,7 @@ To use <span class="inlinecode"><span class="id" title="tactic">repeat</span></s
 </div>
 
 <div class="doc">
-<a id="lab104"></a><h4 class="section">Exercise: 2 stars, standard (mumble_grumble)</h4>
+<a id="lab104"></a><h4 class="section">Exercise: 2 stars, standard, optional (mumble_grumble)</h4>
  Consider the following two inductively defined types. 
 </div>
 <div class="code">
@@ -264,9 +264,7 @@ Which of the following are well-typed elements of <span class="inlinecode"><span
 </div>
 <div class="code">
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
-<span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#MumbleGrumble"><span class="id" title="module">MumbleGrumble</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="manual_grade_for_mumble_grumble" class="idref" href="#manual_grade_for_mumble_grumble"><span class="id" title="definition">manual_grade_for_mumble_grumble</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#MumbleGrumble"><span class="id" title="module">MumbleGrumble</span></a>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -290,7 +288,7 @@ Which of the following are well-typed elements of <span class="inlinecode"><span
 </div>
 
 <div class="doc">
-Indeed it will.  Let's see what type Coq has assigned to <span class="inlinecode"><span class="id" title="var">repeat'</span></span>: 
+Indeed it will.  Let's see what type Coq has assigned to <span class="inlinecode"><span class="id" title="var">repeat'</span></span>... 
 </div>
 <div class="code">
 
@@ -410,7 +408,7 @@ In this instance, we don't save much by writing <span class="inlinecode"><span c
 </div>
 
 <div class="doc">
-Now we don't have to supply type arguments at all: 
+Now we don't have to supply any type arguments at all in the example: 
 </div>
 <div class="code">
 
@@ -647,7 +645,7 @@ As with lists, we make the type arguments implicit and define the
 
 <div class="doc">
 We can also use the <span class="inlinecode"><span class="id" title="keyword">Notation</span></span> mechanism to define the standard
-    notation for product <i>types</i>: 
+    notation for <i>product types</i> (i.e., the types of pairs): 
 </div>
 <div class="code">
 
@@ -1236,7 +1234,7 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab129"></a><h4 class="section">Exercise: 1 star, advanced (fold_types_different)</h4>
+<a id="lab129"></a><h4 class="section">Exercise: 1 star, standard, optional (fold_types_different)</h4>
  Observe that the type of <span class="inlinecode"><span class="id" title="tactic">fold</span></span> is parameterized by <i>two</i> type
     variables, <span class="inlinecode"><span class="id" title="var">X</span></span> and <span class="inlinecode"><span class="id" title="var">Y</span></span>, and the parameter <span class="inlinecode"><span class="id" title="var">f</span></span> is a binary operator
     that takes an <span class="inlinecode"><span class="id" title="var">X</span></span> and a <span class="inlinecode"><span class="id" title="var">Y</span></span> and returns a <span class="inlinecode"><span class="id" title="var">Y</span></span>.  Can you think of a
@@ -1245,9 +1243,7 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="manual_grade_for_fold_types_different" class="idref" href="#manual_grade_for_fold_types_different"><span class="id" title="definition">manual_grade_for_fold_types_different</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -1647,7 +1643,7 @@ Complete the definitions of the following functions. Make sure
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises"><span class="id" title="module">Exercises</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-09-08&nbsp;00:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-13&nbsp;12:04&nbsp;*)</span><br/>
 </div>
 </div>
 
