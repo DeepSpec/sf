@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2021-09-13 20:32 *)
+(* 2021-09-13 21:08 *)
