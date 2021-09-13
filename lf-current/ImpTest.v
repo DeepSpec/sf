@@ -308,4 +308,4 @@ idtac "---------- BreakImp.seq_stops_on_break ---------".
 Print Assumptions BreakImp.seq_stops_on_break.
 Abort.
 
-(* 2021-09-13 12:05 *)
+(* 2021-09-13 19:50 *)
