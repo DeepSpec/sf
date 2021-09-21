@@ -491,8 +491,15 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 
 <div class="doc">
 <a id="lab79"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (bag_functions)</h4>
- Complete the following definitions for the functions
-    <span class="inlinecode"><span class="id" title="var">count</span></span>, <span class="inlinecode"><span class="id" title="var">sum</span></span>, <span class="inlinecode"><span class="id" title="var">add</span></span>, and <span class="inlinecode"><span class="id" title="var">member</span></span> for bags. 
+ Complete the following definitions for the functions <span class="inlinecode"><span class="id" title="var">count</span></span>,
+    <span class="inlinecode"><span class="id" title="var">sum</span></span>, <span class="inlinecode"><span class="id" title="var">add</span></span>, and <span class="inlinecode"><span class="id" title="var">member</span></span> for bags.
+
+<div class="paragraph"> </div>
+
+    For each, make sure you put a <span class="inlinecode">:=</span> between the header we've given
+    you and whatever you add.  If you see an error like "The reference
+    count was not found in the current environment," it means you've
+    forgotten the <span class="inlinecode">:=</span>. 
 </div>
 <div class="code">
 
@@ -515,14 +522,18 @@ All these proofs can be done just by <span class="inlinecode"><span class="id" t
 Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span> is similar to set <span class="inlinecode"><span class="id" title="var">union</span></span>: <span class="inlinecode"><span class="id" title="var">sum</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> contains all
     the elements of <span class="inlinecode"><span class="id" title="var">a</span></span> and of <span class="inlinecode"><span class="id" title="var">b</span></span>.  (Mathematicians usually define
     <span class="inlinecode"><span class="id" title="var">union</span></span> on multisets a little bit differently -- using max instead
-    of sum -- which is why we don't call this operation <span class="inlinecode"><span class="id" title="var">union</span></span>.)  For
-    <span class="inlinecode"><span class="id" title="var">sum</span></span>, we're giving you a header that does not give explicit names
-    to the arguments.  Moreover, it uses the keyword <span class="inlinecode"><span class="id" title="keyword">Definition</span></span>
-    instead of <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>, so even if you had names for the arguments,
-    you wouldn't be able to process them recursively.  The point of
-    stating the question this way is to encourage you to think about
-    whether <span class="inlinecode"><span class="id" title="var">sum</span></span> can be implemented in another way -- perhaps by
-    using one or more functions that have already been defined.  
+    of sum -- which is why we don't call this operation <span class="inlinecode"><span class="id" title="var">union</span></span>.)
+
+<div class="paragraph"> </div>
+
+    For <span class="inlinecode"><span class="id" title="var">sum</span></span>, we're giving you a header that does not give explicit
+    names to the arguments.  Moreover, it uses the keyword
+    <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> instead of <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>, so even if you had names for
+    the arguments, you wouldn't be able to process them recursively.
+    The point of stating the question this way is to encourage you to
+    think about whether <span class="inlinecode"><span class="id" title="var">sum</span></span> can be implemented in another way --
+    perhaps by using one or more functions that have already been
+    defined. 
 </div>
 <div class="code">
 
@@ -1499,7 +1510,7 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-13&nbsp;22:38&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-21&nbsp;22:25&nbsp;*)</span><br/>
 </div>
 </div>
 

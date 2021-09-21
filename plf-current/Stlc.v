@@ -398,7 +398,8 @@ Check <{[x:=true] x}>.
 
 (** _Technical note_: Substitution becomes trickier to define if we
     consider the case where [s], the term being substituted for a
-    variable in some other term, may itself contain free variables. 
+    variable in some other term, may itself contain free variables.
+
     Since we are only interested here in defining the [step] relation
     on _closed_ terms (i.e., terms like [\x:Bool, x] that include
     binders for all of the variables they mention), we can sidestep this
@@ -846,4 +847,4 @@ Proof.
 
 End STLC.
 
-(* 2021-09-13 22:40 *)
+(* 2021-09-21 22:27 *)

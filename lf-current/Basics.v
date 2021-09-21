@@ -192,6 +192,8 @@ Proof. simpl. reflexivity.  Qed.
        coqc -Q . LF Basics.v
        coqc -Q . LF BasicsTest.v
 
+    (Make sure that there is a 
+
     See the end of this chapter for more information about how to interpret
     the output of test scripts.
 
@@ -1557,6 +1559,9 @@ Example test_bin_incr6 :
        coqc -Q . LF Basics.v
        coqc -Q . LF BasicsTest.v
 
+    (Make sure you do this in a directory that also contains a file named
+    [_CoqProject] containing the single line [-Q . LF].)
+
     If you accidentally deleted an exercise or changed its name, then
     [make BasicsTest.vo] will fail with an error that tells you the
     name of the missing exercise.  Otherwise, you will get a lot of
@@ -1603,4 +1608,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2021-09-13 22:38 *)
+(* 2021-09-21 22:25 *)

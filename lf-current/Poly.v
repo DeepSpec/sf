@@ -378,7 +378,7 @@ Definition list123''' := [1; 2; 3].
 (* ----------------------------------------------------------------- *)
 (** *** Exercises *)
 
-(** **** Exercise: 2 stars, standard, optional (poly_exercises)
+(** **** Exercise: 2 stars, standard (poly_exercises)
 
     Here are a few simple exercises, just like ones in the [Lists]
     chapter, for practice with polymorphism.  Complete the proofs
@@ -400,7 +400,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (more_poly_exercises)
+(** **** Exercise: 2 stars, standard (more_poly_exercises)
 
     Here are some slightly more interesting ones... *)
 
@@ -1152,4 +1152,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2021-09-13 22:38 *)
+(* 2021-09-21 22:25 *)

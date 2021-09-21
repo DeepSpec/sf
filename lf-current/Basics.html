@@ -272,7 +272,11 @@ The details are not important just now, but essentially this
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">BasicsTest.v</span>
-</span>    See the end of this chapter for more information about how to interpret
+</span>    (Make sure that there is a 
+
+<div class="paragraph"> </div>
+
+    See the end of this chapter for more information about how to interpret
     the output of test scripts.
 
 <div class="paragraph"> </div>
@@ -2051,7 +2055,9 @@ The following "unit tests" of your increment and binary-to-unary
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">BasicsTest.v</span>
-</span>
+</span>    (Make sure you do this in a directory that also contains a file named
+    <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> containing the single line <span class="inlinecode">-<span class="id" title="var">Q</span></span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">LF</span></span>.)
+
 <div class="paragraph"> </div>
 
     If you accidentally deleted an exercise or changed its name, then
@@ -2130,7 +2136,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-13&nbsp;22:38&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-21&nbsp;22:25&nbsp;*)</span><br/>
 </div>
 </div>
 

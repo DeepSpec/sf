@@ -364,8 +364,13 @@ Definition bag := natlist.
 
 (** **** Exercise: 3 stars, standard, especially useful (bag_functions)
 
-    Complete the following definitions for the functions
-    [count], [sum], [add], and [member] for bags. *)
+    Complete the following definitions for the functions [count],
+    [sum], [add], and [member] for bags.
+    
+    For each, make sure you put a [:=] between the header we've given
+    you and whatever you add.  If you see an error like "The reference
+    count was not found in the current environment," it means you've
+    forgotten the [:=]. *)
 
 Fixpoint count (v : nat) (s : bag) : nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -380,14 +385,16 @@ Example test_count2:              count 6 [1;2;3;1;4;1] = 0.
 (** Multiset [sum] is similar to set [union]: [sum a b] contains all
     the elements of [a] and of [b].  (Mathematicians usually define
     [union] on multisets a little bit differently -- using max instead
-    of sum -- which is why we don't call this operation [union].)  For
-    [sum], we're giving you a header that does not give explicit names
-    to the arguments.  Moreover, it uses the keyword [Definition]
-    instead of [Fixpoint], so even if you had names for the arguments,
-    you wouldn't be able to process them recursively.  The point of
-    stating the question this way is to encourage you to think about
-    whether [sum] can be implemented in another way -- perhaps by
-    using one or more functions that have already been defined.  *)
+    of sum -- which is why we don't call this operation [union].)
+
+    For [sum], we're giving you a header that does not give explicit
+    names to the arguments.  Moreover, it uses the keyword
+    [Definition] instead of [Fixpoint], so even if you had names for
+    the arguments, you wouldn't be able to process them recursively.
+    The point of stating the question this way is to encourage you to
+    think about whether [sum] can be implemented in another way --
+    perhaps by using one or more functions that have already been
+    defined. *)
 
 Definition sum : bag -> bag -> bag
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1126,4 +1133,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2021-09-13 22:38 *)
+(* 2021-09-21 22:25 *)

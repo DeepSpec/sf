@@ -32,6 +32,61 @@ Import Check.
 
 Goal True.
 
+idtac "-------------------  poly_exercises  --------------------".
+idtac " ".
+
+idtac "#> app_nil_r".
+idtac "Possible points: 0.5".
+check_type @app_nil_r ((forall (X : Type) (l : list X), l ++ [ ] = l)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions app_nil_r.
+Goal True.
+idtac " ".
+
+idtac "#> app_assoc".
+idtac "Possible points: 1".
+check_type @app_assoc ((forall (A : Type) (l m n : list A), l ++ m ++ n = (l ++ m) ++ n)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions app_assoc.
+Goal True.
+idtac " ".
+
+idtac "#> app_length".
+idtac "Possible points: 0.5".
+check_type @app_length (
+(forall (X : Type) (l1 l2 : list X),
+ @length X (l1 ++ l2) = @length X l1 + @length X l2)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions app_length.
+Goal True.
+idtac " ".
+
+idtac "-------------------  more_poly_exercises  --------------------".
+idtac " ".
+
+idtac "#> rev_app_distr".
+idtac "Possible points: 1".
+check_type @rev_app_distr (
+(forall (X : Type) (l1 l2 : list X),
+ @rev X (l1 ++ l2) = @rev X l2 ++ @rev X l1)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions rev_app_distr.
+Goal True.
+idtac " ".
+
+idtac "#> rev_involutive".
+idtac "Possible points: 1".
+check_type @rev_involutive ((forall (X : Type) (l : list X), @rev X (@rev X l) = l)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions rev_involutive.
+Goal True.
+idtac " ".
+
 idtac "-------------------  split  --------------------".
 idtac " ".
 
@@ -340,8 +395,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 17".
-idtac "Max points - advanced: 27".
+idtac "Max points - standard: 21".
+idtac "Max points - advanced: 31".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -359,6 +414,16 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
+idtac "---------- app_nil_r ---------".
+Print Assumptions app_nil_r.
+idtac "---------- app_assoc ---------".
+Print Assumptions app_assoc.
+idtac "---------- app_length ---------".
+Print Assumptions app_length.
+idtac "---------- rev_app_distr ---------".
+Print Assumptions rev_app_distr.
+idtac "---------- rev_involutive ---------".
+Print Assumptions rev_involutive.
 idtac "---------- split ---------".
 Print Assumptions split.
 idtac "---------- test_split ---------".
@@ -413,4 +478,4 @@ idtac "---------- Exercises.Church.exp_3 ---------".
 Print Assumptions Exercises.Church.exp_3.
 Abort.
 
-(* 2021-09-13 22:38 *)
+(* 2021-09-21 22:25 *)

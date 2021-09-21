@@ -341,6 +341,7 @@ Proof.
 (** To see how negation works, recall the _principle of explosion_
     from the [Tactics] chapter, which asserts that, if we assume a
     contradiction, then any other proposition can be derived. 
+
     Following this intuition, we could define [~ P] ("not [P]") as
     [forall Q, P -> Q].
 
@@ -921,7 +922,9 @@ Check add_comm : forall n m : nat, n + m = m + n.
 (** Coq checks the _statement_ of the [add_comm] theorem (or prints
     it for us, if we leave off the part beginning with the colon) in
     the same way that it checks the _type_ of any term (e.g., plus)
-    that we ask it to [Check]. Why? *)
+    that we ask it to [Check].
+
+    Why? *)
 
 (** The reason is that the identifier [add_comm] actually refers to a
     _proof object_, which represents a logical derivation establishing
@@ -982,7 +985,7 @@ Proof.
   reflexivity.
 Qed.
 
-(** Let's see another example of using a theorem like a function. 
+(** Let's see another example of using a theorem like a function.
 
     The following theorem says: any list [l] containing some element
     must be nonempty. *)
@@ -1318,7 +1321,7 @@ Proof.
 Qed.
 
 (** Even when the boolean and propositional formulations of a claim
-    are equivalent from a purely logical perspective, they are often
+    are equivalent from a purely _logical_ perspective, they are often
     not equivalent from the point of view of convenience for some
     specific purpose. *)
 
@@ -1329,9 +1332,9 @@ Qed.
     [even_double_conv] exercise) required a clever generalization,
     since we can't directly prove [(even n = true) -> Even n]. *)
 
-(** We cannot _test_ whether a [Prop] is true or not in a
-    function definition; as a consequence, the following code fragment
-    is rejected: *)
+(** Similarly, we cannot _test_ whether or not a [Prop] is
+    true in a function definition; as a consequence, the following
+    code fragment is rejected: *)
 
 Fail
 Definition is_even_prime n :=
@@ -1710,4 +1713,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2021-09-13 22:38 *)
+(* 2021-09-21 22:25 *)

@@ -77,9 +77,9 @@ Proof.
 (** [] *)
 
 (** To use the [apply] tactic, the (conclusion of the) fact
-    being applied must match the goal exactly -- for example, [apply]
-    will not work if the left and right sides of the equality are
-    swapped. *)
+    being applied must match the goal exactly (perhaps after
+    simplification) -- for example, [apply] will not work if the left
+    and right sides of the equality are swapped. *)
 
 Theorem silly3 : forall (n m : nat),
   n = m ->
@@ -318,8 +318,10 @@ Proof.
     nonsensical situation described by the premise did somehow arise,
     _then_ the nonsensical conclusion would also follow, because we'd
     be living in an inconsistent universe where every statement is
-    true.  We'll explore the principle of explosion in more detail in
-    the next chapter. *)
+    true.
+
+    We'll explore the principle of explosion in more detail in the
+    next chapter. *)
 
 (** **** Exercise: 1 star, standard (discriminate_ex3) *)
 Example discriminate_ex3 :
@@ -374,10 +376,10 @@ Theorem eq_implies_succ_equal : forall (n m : nat),
 Proof. intros n m H. apply f_equal. apply H. Qed.
 
 (** There is also a tactic named `f_equal` that can prove such
-    theorems.  Given a goal of the form [f a1 ... an = g b1 ... bn],
-    the tactic [f_equal] will produce subgoals of the form [f = g],
-    [a1 = b1], ..., [an = bn]. At the same time, any of these subgoals
-    that are simple enough (e.g., immediately provable by
+    theorems directly.  Given a goal of the form [f a1 ... an = g b1
+    ... bn], the tactic [f_equal] will produce subgoals of the form [f
+    = g], [a1 = b1], ..., [an = bn]. At the same time, any of these
+    subgoals that are simple enough (e.g., immediately provable by
     [reflexivity]) will be automatically discharged by [f_equal]. *)
 
 Theorem eq_implies_succ_equal' : forall (n m : nat),
@@ -432,10 +434,10 @@ Proof.
     the _goal_ and iteratively reasons about what would imply the
     goal, until premises or previously proven theorems are reached.
 
-    The informal proofs that you've seen in math or computer science
-    classes probably tended to use forward reasoning.  In general,
-    idiomatic use of Coq favors backward reasoning, but in some
-    situations the forward style can be easier to think about. *)
+    The informal proofs seen in math or computer science classes tend
+    to use forward reasoning.  By contrast, idiomatic use of Coq
+    generally favors backward reasoning, though in some situations the
+    forward style can be easier to think about. *)
 
 (* ################################################################# *)
 (** * Varying the Induction Hypothesis *)
@@ -455,7 +457,7 @@ Proof.
 
        intros n. induction n.
 
-    all is well.  But if we begin it with introducing both variables
+    then all is well.  But if we begin it with introducing both variables
 
        intros n m. induction n.
 
@@ -513,9 +515,8 @@ Abort.
 
        - "if [double (S n) = double m] then [S n = m]".
 
-    To see why this is strange, let's think of a particular (arbitrary,
-    but fixed) [m] -- say, [5].  The statement is then saying that,
-    if we know
+    To see why this is strange, let's think of a particular [m] -- 
+    say, [5].  The statement is then saying that, if we know
 
       - [Q] = "if [double n = 10] then [n = 5]"
 
@@ -580,14 +581,14 @@ Proof.
 
       apply IHn'. simpl in eq. injection eq as goal. apply goal. Qed.
 
-(** What you should take away from all this is that you need to be
+(** The thing to take away from all this is that you need to be
     careful, when using induction, that you are not trying to prove
     something too specific: When proving a property involving two
     variables [n] and [m] by induction on [n], it is sometimes crucial
     to leave [m] generic. *)
 
-(** The following exercise (which further strengthens the link between
-    [=?] and [=]) follows the same pattern. *)
+(** The following exercise, which further strengthens the link between
+    [=?] and [=], follows the same pattern. *)
 
 (** **** Exercise: 2 stars, standard (eqb_true) *)
 Theorem eqb_true : forall n m,
@@ -807,11 +808,12 @@ Abort.
     a match whose scrutinee, [m], is a variable, so the [match] cannot
     be simplified further.  It is not smart enough to notice that the
     two branches of the [match] are identical, so it gives up on
-    unfolding [bar m] and leaves it alone.  Similarly, tentatively
-    unfolding [bar (m+1)] leaves a [match] whose scrutinee is a
-    function application (that cannot itself be simplified, even
-    after unfolding the definition of [+]), so [simpl] leaves it
-    alone. *)
+    unfolding [bar m] and leaves it alone.
+
+    Similarly, tentatively unfolding [bar (m+1)] leaves a [match]
+    whose scrutinee is a function application (that cannot itself be
+    simplified, even after unfolding the definition of [+]), so
+    [simpl] leaves it alone. *)
 
 (** At this point, there are two ways to make progress.  One is to use
     [destruct m] to break the proof into two cases, each focusing on a
@@ -1192,4 +1194,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2021-09-13 22:38 *)
+(* 2021-09-21 22:25 *)

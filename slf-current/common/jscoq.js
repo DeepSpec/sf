@@ -45,11 +45,12 @@ async function jsCoqLoad() {
         });
 
     // - load and start jsCoq
-    await JsCoq.load(jscoq_opts.base_path);
+    await JsCoq.load();
 
     Deprettify.REPLACES.push(   // LF,PLF define their own versions (for Imp)
         [/∨/g, '\\/'], [/∧/g, '/\\'], [/↔/g, '<->'],
-        [/≤/g, '<='], [/≥/g, '>='], [/≠/g, '<>'], [/∈/g, '\\in']);
+        [/≤/g, '<='], [/≥/g, '>='], [/≠/g, '<>'], [/∈/g, '\\in'],
+        [/\\−∗/, '\\-*'] /* SLF */);
 
     var coq = await JsCoq.start(jscoq_ids, jscoq_opts);
     window.coq = coq;

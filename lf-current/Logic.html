@@ -483,6 +483,9 @@ Conversely, to show that a disjunction holds, it suffices to show
  To see how negation works, recall the <i>principle of explosion</i>
     from the <a href="Tactics.html"><span class="inlineref">Tactics</span></a> chapter, which asserts that, if we assume a
     contradiction, then any other proposition can be derived. 
+
+<div class="paragraph"> </div>
+
     Following this intuition, we could define <span class="inlinecode">¬</span> <span class="inlinecode"><span class="id" title="var">P</span></span> ("not <span class="inlinecode"><span class="id" title="var">P</span></span>") as
     <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">Q</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>.
 
@@ -1229,7 +1232,11 @@ To test your definition, prove the following facts:
 Coq checks the <i>statement</i> of the <span class="inlinecode"><span class="id" title="var">add_comm</span></span> theorem (or prints
     it for us, if we leave off the part beginning with the colon) in
     the same way that it checks the <i>type</i> of any term (e.g., plus)
-    that we ask it to <span class="inlinecode"><span class="id" title="keyword">Check</span></span>. Why? 
+    that we ask it to <span class="inlinecode"><span class="id" title="keyword">Check</span></span>.
+
+<div class="paragraph"> </div>
+
+    Why? 
 <div class="paragraph"> </div>
 
  The reason is that the identifier <span class="inlinecode"><span class="id" title="var">add_comm</span></span> actually refers to a
@@ -1309,7 +1316,7 @@ A more elegant alternative is to apply <span class="inlinecode"><span class="id"
 </div>
 
 <div class="doc">
-Let's see another example of using a theorem like a function. 
+Let's see another example of using a theorem like a function.
 
 <div class="paragraph"> </div>
 
@@ -1789,7 +1796,7 @@ In view of this theorem, we say that the boolean computation
 
 <div class="doc">
 Even when the boolean and propositional formulations of a claim
-    are equivalent from a purely logical perspective, they are often
+    are equivalent from a purely <i>logical</i> perspective, they are often
     not equivalent from the point of view of convenience for some
     specific purpose. 
 <div class="paragraph"> </div>
@@ -1802,9 +1809,9 @@ Even when the boolean and propositional formulations of a claim
     since we can't directly prove <span class="inlinecode">(<span class="id" title="var">even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">true</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Even</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>. 
 <div class="paragraph"> </div>
 
- We cannot <i>test</i> whether a <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> is true or not in a
-    function definition; as a consequence, the following code fragment
-    is rejected: 
+ Similarly, we cannot <i>test</i> whether or not a <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> is
+    true in a function definition; as a consequence, the following
+    code fragment is rejected: 
 </div>
 <div class="code">
 
@@ -2296,7 +2303,7 @@ It may seem strange that the general excluded middle is not
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-13&nbsp;22:38&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-21&nbsp;22:25&nbsp;*)</span><br/>
 </div>
 </div>
 

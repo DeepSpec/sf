@@ -150,9 +150,9 @@ Typically, when we use <span class="inlinecode"><span class="id" title="tactic">
 <div class="paragraph"> </div>
 
  To use the <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic, the (conclusion of the) fact
-    being applied must match the goal exactly -- for example, <span class="inlinecode"><span class="id" title="tactic">apply</span></span>
-    will not work if the left and right sides of the equality are
-    swapped. 
+    being applied must match the goal exactly (perhaps after
+    simplification) -- for example, <span class="inlinecode"><span class="id" title="tactic">apply</span></span> will not work if the left
+    and right sides of the equality are swapped. 
 </div>
 <div class="code">
 
@@ -482,8 +482,12 @@ These examples are instances of a logical principle known as the
     nonsensical situation described by the premise did somehow arise,
     <i>then</i> the nonsensical conclusion would also follow, because we'd
     be living in an inconsistent universe where every statement is
-    true.  We'll explore the principle of explosion in more detail in
-    the next chapter. 
+    true.
+
+<div class="paragraph"> </div>
+
+    We'll explore the principle of explosion in more detail in the
+    next chapter. 
 <div class="paragraph"> </div>
 
 <a id="lab148"></a><h4 class="section">Exercise: 1 star, standard (discriminate_ex<sub>3</sub>)</h4>
@@ -565,10 +569,10 @@ The injectivity of constructors allows us to reason that
 
 <div class="doc">
 There is also a tactic named `f_equal` that can prove such
-    theorems.  Given a goal of the form <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">an</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode"><span class="id" title="var">b<sub>1</sub></span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">bn</span></span>,
-    the tactic <span class="inlinecode"><span class="id" title="tactic">f_equal</span></span> will produce subgoals of the form <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">g</span></span>,
-    <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">b<sub>1</sub></span></span>, ..., <span class="inlinecode"><span class="id" title="var">an</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">bn</span></span>. At the same time, any of these subgoals
-    that are simple enough (e.g., immediately provable by
+    theorems directly.  Given a goal of the form <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">an</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode"><span class="id" title="var">b<sub>1</sub></span></span>
+    <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">bn</span></span>, the tactic <span class="inlinecode"><span class="id" title="tactic">f_equal</span></span> will produce subgoals of the form <span class="inlinecode"><span class="id" title="var">f</span></span>
+    <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">g</span></span>, <span class="inlinecode"><span class="id" title="var">a<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">b<sub>1</sub></span></span>, ..., <span class="inlinecode"><span class="id" title="var">an</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">bn</span></span>. At the same time, any of these
+    subgoals that are simple enough (e.g., immediately provable by
     <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>) will be automatically discharged by <span class="inlinecode"><span class="id" title="tactic">f_equal</span></span>. 
 </div>
 <div class="code">
@@ -646,10 +650,10 @@ Forward reasoning starts from what is <i>given</i> (premises,
 
 <div class="paragraph"> </div>
 
-    The informal proofs that you've seen in math or computer science
-    classes probably tended to use forward reasoning.  In general,
-    idiomatic use of Coq favors backward reasoning, but in some
-    situations the forward style can be easier to think about. 
+    The informal proofs seen in math or computer science classes tend
+    to use forward reasoning.  By contrast, idiomatic use of Coq
+    generally favors backward reasoning, though in some situations the
+    forward style can be easier to think about. 
 </div>
 
 <div class="doc">
@@ -670,7 +674,7 @@ Forward reasoning starts from what is <i>given</i> (premises,
 </span>    The way we start this proof is a bit delicate: if we begin it with
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.
-</span>    all is well.  But if we begin it with introducing both variables
+</span>    then all is well.  But if we begin it with introducing both variables
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.
 </span>    we get stuck in the middle of the inductive case... 
@@ -778,9 +782,8 @@ What went wrong?
 
 <div class="paragraph"> </div>
 
-    To see why this is strange, let's think of a particular (arbitrary,
-    but fixed) <span class="inlinecode"><span class="id" title="var">m</span></span> -- say, <span class="inlinecode">5</span>.  The statement is then saying that,
-    if we know
+    To see why this is strange, let's think of a particular <span class="inlinecode"><span class="id" title="var">m</span></span> -- 
+    say, <span class="inlinecode">5</span>.  The statement is then saying that, if we know
 
 <div class="paragraph"> </div>
 
@@ -884,15 +887,15 @@ At this point, since we are in the second branch of the <span class="inlinecode"
 </div>
 
 <div class="doc">
-What you should take away from all this is that you need to be
+The thing to take away from all this is that you need to be
     careful, when using induction, that you are not trying to prove
     something too specific: When proving a property involving two
     variables <span class="inlinecode"><span class="id" title="var">n</span></span> and <span class="inlinecode"><span class="id" title="var">m</span></span> by induction on <span class="inlinecode"><span class="id" title="var">n</span></span>, it is sometimes crucial
     to leave <span class="inlinecode"><span class="id" title="var">m</span></span> generic. 
 <div class="paragraph"> </div>
 
- The following exercise (which further strengthens the link between
-    <span class="inlinecode">=?</span> and <span class="inlinecode">=</span>) follows the same pattern. 
+ The following exercise, which further strengthens the link between
+    <span class="inlinecode">=?</span> and <span class="inlinecode">=</span>, follows the same pattern. 
 <div class="paragraph"> </div>
 
 <a id="lab151"></a><h4 class="section">Exercise: 2 stars, standard (eqb_true)</h4>
@@ -1202,11 +1205,14 @@ The reason that <span class="inlinecode"><span class="id" title="tactic">simpl</
     a match whose scrutinee, <span class="inlinecode"><span class="id" title="var">m</span></span>, is a variable, so the <span class="inlinecode"><span class="id" title="keyword">match</span></span> cannot
     be simplified further.  It is not smart enough to notice that the
     two branches of the <span class="inlinecode"><span class="id" title="keyword">match</span></span> are identical, so it gives up on
-    unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> and leaves it alone.  Similarly, tentatively
-    unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode">(<span class="id" title="var">m</span>+1)</span> leaves a <span class="inlinecode"><span class="id" title="keyword">match</span></span> whose scrutinee is a
-    function application (that cannot itself be simplified, even
-    after unfolding the definition of <span class="inlinecode">+</span>), so <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> leaves it
-    alone. 
+    unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span> and leaves it alone.
+
+<div class="paragraph"> </div>
+
+    Similarly, tentatively unfolding <span class="inlinecode"><span class="id" title="var">bar</span></span> <span class="inlinecode">(<span class="id" title="var">m</span>+1)</span> leaves a <span class="inlinecode"><span class="id" title="keyword">match</span></span>
+    whose scrutinee is a function application (that cannot itself be
+    simplified, even after unfolding the definition of <span class="inlinecode">+</span>), so
+    <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> leaves it alone. 
 <div class="paragraph"> </div>
 
  At this point, there are two ways to make progress.  One is to use
@@ -1769,7 +1775,7 @@ When we come to the second equality test in the body
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-09-13&nbsp;22:38&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-09-21&nbsp;22:25&nbsp;*)</span><br/>
 </div>
 </div>
 
