@@ -1047,4 +1047,4 @@ Qed.
     in this chapter with the predicate [evalnp], appears to be novel as of Jan.
     2021. *)
 
-(* 2021-09-21 22:41 *)
+(* 2021-09-22 01:03 *)

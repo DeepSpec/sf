@@ -143,4 +143,4 @@ Proof. proveWholeProgSafe. Qed.
 
 Eval red in WholeProgSafeType WholeComp tt.
 
-(* 2021-09-21 22:37 *)
+(* 2021-09-22 01:02 *)
