@@ -265,4 +265,4 @@ Proof using.
   rewrite IHn1. extens. rew_istrue. nat_math.
 Qed.
 
-(* 2021-09-22 01:03 *)
+(* 2021-09-24 18:49 *)
