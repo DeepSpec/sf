@@ -257,6 +257,12 @@ idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
+idtac "plus_le".
+idtac "le_trans".
+idtac "le_plus_l".
+idtac "add_le_cases".
+idtac "Sn_le_Sm__n_le_m".
+idtac "O_le_n".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -308,4 +314,4 @@ idtac "---------- BreakImp.seq_stops_on_break ---------".
 Print Assumptions BreakImp.seq_stops_on_break.
 Abort.
 
-(* 2021-09-24 18:38 *)
+(* 2021-10-06 00:52 *)

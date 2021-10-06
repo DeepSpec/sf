@@ -391,4 +391,4 @@ Proof.
     of Coq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2021-09-24 18:39 *)
+(* 2021-10-06 00:53 *)
