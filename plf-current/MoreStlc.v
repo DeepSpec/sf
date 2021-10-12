@@ -1086,9 +1086,9 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   (* pure STLC *)
   | tm_var y =>
-      if eqb_string x y then s else t
+      if String.eqb x y then s else t
   | <{\y:T, t1}> =>
-      if eqb_string x y then t else <{\y:T, [x:=s] t1}>
+      if String.eqb x y then t else <{\y:T, [x:=s] t1}>
   | <{t1 t2}> =>
       <{([x:=s] t1) ([x:=s] t2)}>
   (* numbers *)
@@ -1109,8 +1109,8 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
       <{inr T1 ( [x:=s] t2) }>
   | <{case t0 of | inl y1 => t1 | inr y2 => t2}> =>
       <{case ([x:=s] t0) of
-         | inl y1 => { if eqb_string x y1 then t1 else <{ [x:=s] t1 }> }
-         | inr y2 => {if eqb_string x y2 then t2 else <{ [x:=s] t2 }> } }>
+         | inl y1 => { if String.eqb x y1 then t1 else <{ [x:=s] t1 }> }
+         | inr y2 => {if String.eqb x y2 then t2 else <{ [x:=s] t2 }> } }>
   (* lists *)
   | <{nil _}> =>
       t
@@ -1120,9 +1120,9 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
       <{case ( [x:=s] t1 ) of
         | nil => [x:=s] t2
         | y1 :: y2 =>
-        {if eqb_string x y1 then
+        {if String.eqb x y1 then
            t3
-         else if eqb_string x y2 then t3
+         else if String.eqb x y2 then t3
               else <{ [x:=s] t3 }> } }>
   (* unit *)
   | <{unit}> => <{unit}>
@@ -1936,13 +1936,13 @@ Definition manual_grade_for_progress : option (nat*string) := None.
     search depth of eauto to 7.) *)
 
 Lemma weakening : forall Gamma Gamma' t T,
-     inclusion Gamma Gamma' ->
+     includedin Gamma Gamma' ->
      Gamma  |- t \in T  ->
      Gamma' |- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
-  induction Ht; eauto 7 using inclusion_update.
+  induction Ht; eauto 7 using includedin_update.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
@@ -1978,7 +1978,7 @@ Proof with eauto.
   (* in each case, we'll want to get at the derivation of H *)
     inversion H; clear H; subst; simpl; eauto.
   - (* var *)
-    rename s into y. destruct (eqb_stringP x y); subst.
+    rename s into y. destruct (eqb_spec x y); subst.
     + (* x=y *)
       rewrite update_eq in H2.
       injection H2 as H2; subst.
@@ -1987,7 +1987,7 @@ Proof with eauto.
       apply T_Var. rewrite update_neq in H2; auto.
   - (* abs *)
     rename s into y, t into S.
-    destruct (eqb_stringP x y); subst; apply T_Abs.
+    destruct (eqb_spec x y); subst; apply T_Abs.
     + (* x=y *)
       rewrite update_shadow in H5. assumption.
     + (* x<>y *)
@@ -1998,14 +1998,14 @@ Proof with eauto.
     rename s into x1, s0 into x2.
     eapply T_Case...
     + (* left arm *)
-      destruct (eqb_stringP x x1); subst.
+      destruct (eqb_spec x x1); subst.
       * (* x = x1 *)
         rewrite update_shadow in H8. assumption.
       * (* x <> x1 *)
         apply IHt2.
         rewrite update_permute; auto.
     + (* right arm *)
-      destruct (eqb_stringP x x2); subst.
+      destruct (eqb_spec x x2); subst.
       * (* x = x2 *)
         rewrite update_shadow in H9. assumption.
       * (* x <> x2 *)
@@ -2014,9 +2014,9 @@ Proof with eauto.
   - (* tm_lcase *)
     rename s into y1, s0 into y2.
     eapply T_Lcase...
-    destruct (eqb_stringP x y1); subst.
+    destruct (eqb_spec x y1); subst.
     + (* x=y1 *)
-      destruct (eqb_stringP y2 y1); subst.
+      destruct (eqb_spec y2 y1); subst.
       * (* y2=y1 *)
         repeat rewrite update_shadow in H9.
         rewrite update_shadow.
@@ -2025,7 +2025,7 @@ Proof with eauto.
         rewrite update_shadow in H9.
         rewrite update_permute;  assumption.
     + (* x<>y1 *)
-      destruct (eqb_stringP x y2); subst.
+      destruct (eqb_spec x y2); subst.
       * (* x=y2 *)
         rewrite update_shadow in H9.
         assumption.
@@ -2097,4 +2097,4 @@ Definition manual_grade_for_preservation : option (nat*string) := None.
 
 End STLCExtended.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)

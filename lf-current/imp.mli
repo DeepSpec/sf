@@ -77,9 +77,9 @@ val nat_of_ascii : char -> int
 
 val string_dec : char list -> char list -> bool
 
-val append : char list -> char list -> char list
+val eqb0 : char list -> char list -> bool
 
-val eqb_string : char list -> char list -> bool
+val append : char list -> char list -> char list
 
 type 'a total_map = char list -> 'a
 
@@ -100,6 +100,7 @@ type bexp =
 | BTrue
 | BFalse
 | BEq of aexp * aexp
+| BNeq of aexp * aexp
 | BLe of aexp * aexp
 | BNot of bexp
 | BAnd of bexp * bexp

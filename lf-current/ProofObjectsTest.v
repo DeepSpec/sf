@@ -116,14 +116,14 @@ idtac " ".
 idtac "-------------------  equality__leibniz_equality  --------------------".
 idtac " ".
 
-idtac "#> MyEquality.equality__leibniz_equality".
+idtac "#> EqualityPlayground.equality__leibniz_equality".
 idtac "Possible points: 2".
-check_type @MyEquality.equality__leibniz_equality (
+check_type @EqualityPlayground.equality__leibniz_equality (
 (forall (X : Type) (x y : X),
- @MyEquality.eq X x y -> forall P : X -> Prop, P x -> P y)).
+ @EqualityPlayground.eq X x y -> forall P : X -> Prop, P x -> P y)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions MyEquality.equality__leibniz_equality.
+Print Assumptions EqualityPlayground.equality__leibniz_equality.
 Goal True.
 idtac " ".
 
@@ -168,10 +168,10 @@ idtac "---------- Props.p_implies_true ---------".
 Print Assumptions Props.p_implies_true.
 idtac "---------- Props.ex_falso_quodlibet' ---------".
 Print Assumptions Props.ex_falso_quodlibet'.
-idtac "---------- MyEquality.equality__leibniz_equality ---------".
-Print Assumptions MyEquality.equality__leibniz_equality.
+idtac "---------- EqualityPlayground.equality__leibniz_equality ---------".
+Print Assumptions EqualityPlayground.equality__leibniz_equality.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

@@ -951,9 +951,9 @@ Definition fold_map {X Y: Type} (f: X -> Y) (l: list X) : list Y
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 (** Write down a theorem [fold_map_correct] in Coq stating that
-   [fold_map] is correct, and prove it.  (Hint: again, remember that
-   [reflexivity] simplifies expressions a bit more aggressively than
-   [simpl].) *)
+    [fold_map] is correct, and prove it.  (Hint: again, remember that
+    [reflexivity] simplifies expressions a bit more aggressively than
+    [simpl].) *)
 
 (* FILL IN HERE *)
 
@@ -1024,9 +1024,11 @@ Proof.
      | a :: l' => if n =? O then Some a else nth_error l' (pred n)
      end.
 
-   Write an informal proof of the following theorem:
+   Write a careful informal proof of the following theorem:
 
    forall X l n, length l = n -> @nth_error X l n = None
+
+   Make sure to state the induction hypothesis _explicitly_.
 *)
 (* FILL IN HERE *)
 
@@ -1152,4 +1154,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

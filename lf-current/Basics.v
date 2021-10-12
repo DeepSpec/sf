@@ -192,7 +192,7 @@ Proof. simpl. reflexivity.  Qed.
        coqc -Q . LF Basics.v
        coqc -Q . LF BasicsTest.v
 
-    (Make sure that there is a 
+    (Make sure that there is a
 
     See the end of this chapter for more information about how to interpret
     the output of test scripts.
@@ -1608,4 +1608,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

@@ -37,12 +37,9 @@ From LF Require Export IndProp.
 
 (** Look again at the formal definition of the [ev] property.  *)
 
-Print ev.
-(* ==>
-  Inductive ev : nat -> Prop :=
-    | ev_0 : ev 0
-    | ev_SS : forall n, ev n -> ev (S (S n)).
-*)
+Inductive ev : nat -> Prop :=
+  | ev_0                       : ev 0
+  | ev_SS (n : nat) (H : ev n) : ev (S (S n)).
 
 (** Suppose we introduce an alternative pronunciation of "[:]".
     Instead of "has type," we can say "is a proof of."  For example,
@@ -152,9 +149,9 @@ Qed.
     given in the [Theorem] command. *)
 
 (** Tactic proofs are useful and convenient, but they are not
-    essential: in principle, we can always construct the required
-    evidence by hand, as shown above. Then we can use [Definition]
-    (rather than [Theorem]) to give a global name directly to this
+    essential in Coq: in principle, we can always construct the
+    required evidence by hand. Then we can use [Definition] (rather
+    than [Theorem]) to give a global name directly to this
     evidence. *)
 
 Definition ev_4''' : ev 4 :=
@@ -237,10 +234,10 @@ Check ev_plus4''
     argument's type, [ev n], mentions the _value_ of the first
     argument, [n].
 
-    While such _dependent types_ are not found in conventional
-    programming languages, they can be useful in programming too, as
-    the recent flurry of activity in the functional programming
-    community demonstrates. *)
+    While such _dependent types_ are not found in most mainstream
+    programming languages, they can be quite useful in programming
+    too, as the flurry of activity in the functional programming
+    community over the past couple of decades demonstrates. *)
 
 (** Notice that both implication ([->]) and quantification ([forall])
     correspond to functions on evidence.  In fact, they are really the
@@ -250,7 +247,7 @@ Check ev_plus4''
 
            forall (x:nat), nat
         =  forall (_:nat), nat
-        =  nat -> nat
+        =  nat          -> nat
 *)
 
 (** For example, consider this proposition: *)
@@ -281,7 +278,9 @@ Definition ev_plus2'' : Prop :=
 
 (** If we can build proofs by giving explicit terms rather than
     executing tactic scripts, you may be wondering whether we can
-    build _programs_ using _tactics_ rather than explicit terms.
+    build _programs_ using tactics rather than by writing down
+    explicit terms.
+
     Naturally, the answer is yes! *)
 
 Definition add1 : nat -> nat.
@@ -319,8 +318,9 @@ Compute add1 2.
 (** Inductive definitions are powerful enough to express most of the
     connectives we have seen so far.  Indeed, only universal
     quantification (with implication as a special case) is built into
-    Coq; all the others are defined inductively.  We'll see these
-    definitions in this section. *)
+    Coq; all the others are defined inductively.
+
+    We'll see how in this section. *)
 
 Module Props.
 
@@ -474,14 +474,14 @@ Notation "'exists' x , p" :=
 
 End Ex.
 
-(** This may benefit from a little unpacking.  The core definition is
+(** This probably needs a little unpacking.  The core definition is
     for a type former [ex] that can be used to build propositions of
     the form [ex P], where [P] itself is a _function_ from witness
     values in the type [A] to propositions.  The [ex_intro]
     constructor then offers a way of constructing evidence for [ex P],
     given a witness [x] and a proof of [P x].
 
-    The notation in the standard library is a slight variant of
+    The notation in the standard library is a slight extension of
     the above, enabling syntactic forms such as [exists x y, P x y]. *)
 
 (** The more familiar form [exists x, P x] desugars to an expression
@@ -564,7 +564,7 @@ End Props.
 (** Even Coq's equality relation is not built in.  We can define
     it ourselves: *)
 
-Module MyEquality.
+Module EqualityPlayground.
 
 Inductive eq {X:Type} : X -> X -> Prop :=
   | eq_refl : forall x, eq x x.
@@ -643,7 +643,7 @@ Proof.
 
 (** [] *)
 
-End MyEquality.
+End EqualityPlayground.
 
 (* ================================================================= *)
 (** ** Inversion, Again *)
@@ -698,7 +698,7 @@ End MyEquality.
     context. *)
 
 (* ################################################################# *)
-(** * The Coq Trusted Computing Base *)
+(** * Coq's Trusted Computing Base *)
 
 (** One issue that arises with any automated proof assistant is
     "why trust it?": what if there is a bug in the implementation that
@@ -748,6 +748,7 @@ Fail Definition or_bogus : forall P Q, P \/ Q -> P :=
 
 Fail Fixpoint infinite_loop {X : Type} (n : nat) {struct n} : X :=
   infinite_loop n.
+
 Fail Definition falso : False := infinite_loop 0.
 
 (** Recursive function [infinite_loop] purports to return a
@@ -765,4 +766,4 @@ Fail Definition falso : False := infinite_loop 0.
     validity from scratch.  Only theorems whose proofs pass the
     type-checker can be used in further proof developments.  *)
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

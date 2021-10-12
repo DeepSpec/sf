@@ -22,7 +22,7 @@ From LF Require Export IndProp.
 
 Definition relation (X: Type) := X -> X -> Prop.
 
-(** Rather confusingly, the Coq standard library hijacks the generic
+(** Somewhat confusingly, the Coq standard library hijacks the generic
     term "relation" for this specific instance of the idea. To
     maintain consistency with the library, we will do the same.  So,
     henceforth, the Coq identifier [relation] will always refer to a
@@ -67,12 +67,10 @@ Check le : relation nat.
 Definition partial_function {X: Type} (R: relation X) :=
   forall x y1 y2 : X, R x y1 -> R x y2 -> y1 = y2.
 
-(** For example, the [next_nat] relation defined earlier is a partial
-    function. *)
+(** For example, the [next_nat] relation is a partial function. *)
+Inductive next_nat : nat -> nat -> Prop :=
+  | nn n : next_nat n (S n).
 
-Print next_nat.
-(* ====> Inductive next_nat (n : nat) : nat -> Prop :=
-           nn : next_nat n (S n) *)
 Check next_nat : relation nat.
 
 Theorem next_nat_partial_function :
@@ -395,4 +393,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

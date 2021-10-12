@@ -3,21 +3,20 @@
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From LF Require Export Tactics.
 
-(** We have seen many examples of factual claims (_propositions_)
+(** We have now seen many examples of factual claims (_propositions_)
     and ways of presenting evidence of their truth (_proofs_).  In
-    particular, we have worked extensively with _equality
-    propositions_ ([e1 = e2]), implications ([P -> Q]), and quantified
+    particular, we have worked extensively with equality
+    propositions ([e1 = e2]), implications ([P -> Q]), and quantified
     propositions ([forall x, P]).  In this chapter, we will see how
     Coq can be used to carry out other familiar forms of logical
     reasoning.
 
-    Before diving into details, let's talk a bit about the status of
+    Before diving into details, we should talk a bit about the status of
     mathematical statements in Coq.  Recall that Coq is a _typed_
-    language, which means that every sensible expression in its world
-    has an associated type.  Logical claims are no exception: any
-    statement we might try to prove in Coq has a type, namely [Prop],
-    the type of _propositions_.  We can see this with the [Check]
-    command: *)
+    language, which means that every sensible expression has an
+    associated type.  Logical claims are no exception: any statement
+    we might try to prove in Coq has a type, namely [Prop], the type
+    of _propositions_.  We can see this with the [Check] command: *)
 
 Check (3 = 3) : Prop.
 
@@ -46,9 +45,9 @@ Theorem plus_2_2_is_4 :
   2 + 2 = 4.
 Proof. reflexivity.  Qed.
 
-(** But propositions can be used in many other ways.  For example, we
+(** But propositions can be used in other ways.  For example, we
     can give a name to a proposition using a [Definition], just as we
-    have given names to other kinds of expressions. *)
+    give names to other kinds of expressions. *)
 
 Definition plus_claim : Prop := 2 + 2 = 4.
 Check plus_claim : Prop.
@@ -86,7 +85,7 @@ Proof.
   intros n m H. injection H as H1. apply H1.
 Qed.
 
-(** The equality operator [=] is also a function that returns a
+(** The equality operator [=] is a (binary) function that returns a
     [Prop].
 
     The expression [n = m] is syntactic sugar for [eq n m] (defined in
@@ -156,10 +155,10 @@ Proof.
     direction -- i.e., to _use_ a conjunctive hypothesis to help prove
     something else -- we employ the [destruct] tactic.
 
-    If the proof context contains a hypothesis [H] of the form
-    [A /\ B], writing [destruct H as [HA HB]] will remove [H] from the
-    context and add two new hypotheses: [HA], stating that [A] is
-    true, and [HB], stating that [B] is true.  *)
+    When the current proof context contains a hypothesis [H] of the
+    form [A /\ B], writing [destruct H as [HA HB]] will remove [H]
+    from the context and replace it with two new hypotheses: [HA],
+    stating that [A] is true, and [HB], stating that [B] is true.  *)
 
 Lemma and_example2 :
   forall n m : nat, n = 0 /\ m = 0 -> n + m = 0.
@@ -272,9 +271,9 @@ Check and : Prop -> Prop -> Prop.
     Prop -> Prop].) *)
 
 (** To use a disjunctive hypothesis in a proof, we proceed by case
-    analysis (which, as with other data types like [nat], can be done
+    analysis -- which, as with other data types like [nat], can be done
     explicitly with [destruct] or implicitly with an [intros]
-    pattern): *)
+    pattern: *)
 
 Lemma factor_is_O:
   forall n m : nat, n = 0 \/ m = 0 -> n * m = 0.
@@ -290,10 +289,10 @@ Proof.
 Qed.
 
 (** Conversely, to show that a disjunction holds, it suffices to show
-    that one of its sides holds. This is done via two tactics, [left]
-    and [right].  As their names imply, the first one requires proving
-    the left side of the disjunction, while the second requires
-    proving its right side.  Here is a trivial use... *)
+    that one of its sides holds. This can be done via two tactics,
+    [left] and [right].  As their names imply, the first one requires
+    proving the left side of the disjunction, while the second
+    requires proving its right side.  Here is a trivial use... *)
 
 Lemma or_intro_l : forall A B : Prop, A -> A \/ B.
 Proof.
@@ -331,8 +330,8 @@ Proof.
 (* ================================================================= *)
 (** ** Falsehood and Negation
 
-    So far, we have mostly been concerned with proving that certain
-    things are _true_ -- addition is commutative, appending lists is
+    So far, we have mostly been concerned with proving "positive"
+    statements -- addition is commutative, appending lists is
     associative, etc.  Of course, we may also be interested in
     negative results, demonstrating that some given proposition is
     _not_ true. Such statements are expressed with the logical
@@ -340,7 +339,7 @@ Proof.
 
 (** To see how negation works, recall the _principle of explosion_
     from the [Tactics] chapter, which asserts that, if we assume a
-    contradiction, then any other proposition can be derived. 
+    contradiction, then any other proposition can be derived.
 
     Following this intuition, we could define [~ P] ("not [P]") as
     [forall Q, P -> Q].
@@ -349,7 +348,7 @@ Proof.
     defining [~ P] as [P -> False], where [False] is a specific
     contradictory proposition defined in the standard library. *)
 
-Module MyNot.
+Module NotPlayground.
 
 Definition not (P:Prop) := P -> False.
 
@@ -357,7 +356,7 @@ Notation "~ x" := (not x) : type_scope.
 
 Check not : Prop -> Prop.
 
-End MyNot.
+End NotPlayground.
 
 (** Since [False] is a contradictory proposition, the principle of
     explosion also applies to it. If we get [False] into the proof
@@ -385,7 +384,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** Inequality is a frequent enough example of negated statement
+(** Inequality is a frequent enough form of negated statement
     that there is a special notation for it, [x <> y]:
 
       Notation "x <> y" := (~(x = y)).
@@ -397,8 +396,8 @@ Proof.
 Theorem zero_not_one : 0 <> 1.
 Proof.
   (** The proposition [0 <> 1] is exactly the same as
-      [~(0 = 1)], that is [not (0 = 1)], which unfolds to
-      [(0 = 1) -> False]. (We use [unfold not] explicitly here
+      [~(0 = 1)] -- that is, [not (0 = 1)] -- which unfolds to
+      [(0 = 1) -> False]. (We use [unfold not] explicitly here,
       to illustrate that point, but generally it can be omitted.) *)
   unfold not.
   (** To prove an inequality, we may assume the opposite
@@ -412,7 +411,7 @@ Proof.
 Qed.
 
 (** It takes a little practice to get used to working with negation in
-    Coq.  Even though you can see perfectly well why a statement
+    Coq.  Even though _you_ can see perfectly well why a statement
     involving negation is true, it can be a little tricky at first to
     make Coq understand it!  Here are proofs of a few familiar facts
     to get you warmed up. *)
@@ -474,12 +473,15 @@ Definition manual_grade_for_informal_not_PNP : option (nat*string) := None.
 
 (** Since inequality involves a negation, it also requires a little
     practice to be able to work with it fluently.  Here is one useful
-    trick.  If you are trying to prove a goal that is
-    nonsensical (e.g., the goal state is [false = true]), apply
-    [ex_falso_quodlibet] to change the goal to [False].  This makes it
-    easier to use assumptions of the form [~P] that may be available
-    in the context -- in particular, assumptions of the form
-    [x<>y]. *)
+    trick:
+
+    If you are trying to prove a goal that is nonsensical (e.g., the
+    goal state is [false = true]), apply [ex_falso_quodlibet] to
+    change the goal to [False].
+
+    This makes it easier to use assumptions of the form [~P] that may
+    be available in the context -- in particular, assumptions of the
+    form [x<>y]. *)
 
 Theorem not_true_is_false : forall b : bool,
   b <> true -> b = false.
@@ -513,7 +515,8 @@ Qed.
 
 (** Besides [False], Coq's standard library also defines [True], a
     proposition that is trivially true. To prove it, we use the
-    predefined constant [I : True]: *)
+    constant [I : True], which is also defined in the standard
+    library: *)
 
 Lemma True_is_true : True.
 Proof. apply I. Qed.
@@ -521,14 +524,15 @@ Proof. apply I. Qed.
 (** Unlike [False], which is used extensively, [True] is used
     relatively rarely, since it is trivial (and therefore
     uninteresting) to prove as a goal, and conversely it provides no
-    useful information as a hypothesis.
+    interesting information when used as a hypothesis. *)
 
-    But it can be quite useful when defining complex [Prop]s using
-    conditionals or as a parameter to higher-order [Prop]s.  We will
-    see examples later on. *)
+(** However, [True] can be quite useful when defining complex [Prop]s
+    using conditionals or as a parameter to higher-order
+    [Prop]s. We'll come back to this later.
 
-(** As an example, we can demonstrate how to achieve a similar effect
-    as the [discriminate] tactic, without using it. *)
+    For now, let's take a look at how we can use [True] and [False] to
+    achieve a similar effect as the [discriminate] tactic, without
+    literally using [discriminate]. *)
 
 (** Pattern-matching lets us do different things for different
     constructors.  If the result of applying two different
@@ -542,7 +546,7 @@ Definition disc_fn (n: nat) : Prop :=
   | S _ => False
   end.
 
-Theorem disc : forall n, ~ (O = S n).
+Theorem disc_example : forall n, ~ (O = S n).
 Proof.
   intros n H1.
   assert (H2 : disc_fn O). { simpl. apply I. }
@@ -551,8 +555,11 @@ Qed.
 
 (** To generalize this to other constructors, we simply have to
     provide the appropriate generalization of [disc_fn]. To generalize
-    it to other conclusions, we can use [exfalso] to replace them. But
-    the built-in [discriminate] takes care of all this for us. *)
+    it to other conclusions, we can use [exfalso] to replace them with
+    [False].
+
+    The built-in [discriminate] tactic takes care of all this for
+    us! *)
 
 (* ================================================================= *)
 (** ** Logical Equivalence *)
@@ -561,7 +568,7 @@ Qed.
     propositions have the same truth value, is simply the conjunction
     of two implications. *)
 
-Module MyIff.
+Module IffPlayground.
 
 Definition iff (P Q : Prop) := (P -> Q) /\ (Q -> P).
 
@@ -569,7 +576,7 @@ Notation "P <-> Q" := (iff P Q)
                       (at level 95, no associativity)
                       : type_scope.
 
-End MyIff.
+End IffPlayground.
 
 Theorem iff_sym : forall P Q : Prop,
   (P <-> Q) -> (Q <-> P).
@@ -624,7 +631,7 @@ Proof.
 
 From Coq Require Import Setoids.Setoid.
 
-(** A "setoid" is a set equipped with an equivalence relation,
+(** A "setoid" is a set equipped with an equivalence relation --
     that is, a relation that is reflexive, symmetric, and transitive.
     When two elements of a set are equivalent according to the
     relation, [rewrite] can be used to replace one element with the
@@ -687,7 +694,7 @@ Qed.
 (* ================================================================= *)
 (** ** Existential Quantification *)
 
-(** Another important logical connective is _existential
+(** Another basic logical connective is _existential
     quantification_.  To say that there is some [x] of type [T] such
     that some property [P] holds of [x], we write [exists x : T,
     P]. As with [forall], the type annotation [: T] can be omitted if
@@ -703,7 +710,7 @@ Qed.
 
 Definition Even x := exists n : nat, x = double n.
 
-Lemma four_is_even : Even 4.
+Lemma four_is_Even : Even 4.
 Proof.
   unfold Even. exists 2. reflexivity.
 Qed.
@@ -744,6 +751,17 @@ Proof.
    (* FILL IN HERE *) Admitted.
 (** [] *)
 
+(** **** Exercise: 3 stars, standard, optional (leb_plus_exists) *)
+Theorem leb_plus_exists : forall n m, n <=? m = true -> exists x, m = n+x.
+Proof.
+(* FILL IN HERE *) Admitted.
+
+Theorem plus_exists_le : forall n m, (exists x, m = n+x) -> n <=? m = true.
+Proof.
+  (* Hint: An auxiliary lemma proved by induction may be useful. *)
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
 (* ################################################################# *)
 (** * Programming with Propositions *)
 
@@ -757,7 +775,7 @@ Proof.
          property "[x] appears in [l]" is simply false.
 
        - Otherwise, [l] has the form [x' :: l'].  In this case, [x]
-         occurs in [l] if either it is equal to [x'] or it occurs in
+         occurs in [l] if it is equal to [x'] or if it occurs in
          [l']. *)
 
 (** We can translate this directly into a straightforward recursive
@@ -791,10 +809,10 @@ Qed.
 (** (Notice the use of the empty pattern to discharge the last case
     _en passant_.) *)
 
-(** We can also prove more generic, higher-level lemmas about [In].
+(** We can also prove more generic, higher-level lemmas about [In]. *)
 
-    (Note how [In] starts out applied to a variable and only gets
-    expanded when we do case analysis on this variable.) *)
+(** (Note how [In] starts out applied to a variable and only
+    gets expanded when we do case analysis on this variable.) *)
 
 Theorem In_map :
   forall (A B : Type) (f : A -> B) (l : list A) (x : A),
@@ -816,7 +834,7 @@ Qed.
     subject to Coq's usual restrictions regarding the definition of
     recursive functions, e.g., the requirement that they be "obviously
     terminating."  In the next chapter, we will see how to define
-    propositions _inductively_, a different technique with its own set
+    propositions _inductively_ -- a different technique with its own set
     of strengths and limitations. *)
 
 (** **** Exercise: 3 stars, standard (In_map_iff) *)
@@ -896,7 +914,6 @@ Theorem combine_odd_even_elim_even :
     Peven n.
 Proof.
   (* FILL IN HERE *) Admitted.
-
 (** [] *)
 
 (* ################################################################# *)
@@ -907,16 +924,15 @@ Proof.
     _proofs_ as first-class objects.
 
     There is a great deal to be said about this, but it is not
-    necessary to understand it all in detail in order to use Coq.
-    This section gives just a taste, while a deeper exploration can be
-    found in the optional chapters [ProofObjects] and
-    [IndPrinciples]. *)
+    necessary to understand it all, in order to use Coq.  This section
+    gives just a taste, while a deeper exploration can be found in the
+    optional chapters [ProofObjects] and [IndPrinciples]. *)
 
 (** We have seen that we can use [Check] to ask Coq to print the type
     of an expression.  We can also use it to ask what theorem a
     particular identifier refers to. *)
 
-Check plus      : nat -> nat -> nat.
+Check plus     : nat -> nat -> nat.
 Check add_comm : forall n m : nat, n + m = m + n.
 
 (** Coq checks the _statement_ of the [add_comm] theorem (or prints
@@ -929,7 +945,7 @@ Check add_comm : forall n m : nat, n + m = m + n.
 (** The reason is that the identifier [add_comm] actually refers to a
     _proof object_, which represents a logical derivation establishing
     of the truth of the statement [forall n m : nat, n + m = m + n].  The
-    type of this object is the proposition which it is a proof of. *)
+    type of this object is the proposition that it is a proof of. *)
 
 (** Intuitively, this makes sense because the statement of a
     theorem tells us what we can use that theorem for. *)
@@ -949,14 +965,13 @@ Lemma add_comm3 :
     effect of the first. *)
 
 Proof.
-  (* WORKED IN CLASS *)
   intros x y z.
   rewrite add_comm.
   rewrite add_comm.
   (* We are back where we started... *)
 Abort.
 
-(** We saw similar problems back in Chapter [Induction], and saw one
+(** We saw similar problems back in Chapter [Induction], and we saw one
     way to work around them by using [assert] to derive a specialized
     version of [add_comm] that can be used to rewrite exactly where
     we want. *)
@@ -967,7 +982,7 @@ Proof.
   intros x y z.
   rewrite add_comm.
   assert (H : y + z = z + y).
-  { rewrite add_comm. reflexivity. }
+    { rewrite add_comm. reflexivity. }
   rewrite H.
   reflexivity.
 Qed.
@@ -1050,15 +1065,16 @@ Proof.
   apply (in_not_nil _ _ _ H).
 Qed.
 
-(** You can "use theorems as functions" in this way with almost all
-    tactics that take a theorem name as an argument.  Note also that
-    theorem application uses the same inference mechanisms as function
-    application; thus, it is possible, for example, to supply
-    wildcards as arguments to be inferred, or to declare some
-    hypotheses to a theorem as implicit by default.  These features
-    are illustrated in the proof below. (The details of how this proof
-    works are not critical -- the goal here is just to illustrate what
-    can be done.) *)
+(** You can "use a theorem as a function" in this way with almost any
+    tactic that can take a theorem's name as an argument.
+
+    Note, also, that theorem application uses the same inference
+    mechanisms as function application; thus, it is possible, for
+    example, to supply wildcards as arguments to be inferred, or to
+    declare some hypotheses to a theorem as implicit by default.
+    These features are illustrated in the proof below. (The details of
+    how this proof works are not critical -- the goal here is just to
+    illustrate applying theorems to arguments.) *)
 
 Example lemma_application_ex :
   forall {n : nat} {ns : list nat},
@@ -1079,17 +1095,9 @@ Qed.
 (** Coq's logical core, the _Calculus of Inductive
     Constructions_, differs in some important ways from other formal
     systems that are used by mathematicians to write down precise and
-    rigorous definitions and proofs.  For example, in the most popular
-    foundation for paper-and-pencil mathematics, Zermelo-Fraenkel Set
-    Theory (ZFC), a mathematical object can potentially be a member of
-    many different sets; a term in Coq's logic, on the other hand, is
-    a member of at most one type.  This difference often leads to
-    slightly different ways of capturing informal mathematical
-    concepts, but these are, by and large, about equally natural and
-    easy to work with.  For example, instead of saying that a natural
-    number [n] belongs to the set of even numbers, we would say in Coq
-    that [Even n] holds, where [Even : nat -> Prop] is a property
-    describing even numbers.
+    rigorous definitions and proofs -- in particular, from
+    Zermelo-Fraenkel Set Theory (ZFC), the most popular foundation for
+    paper-and-pencil mathematics.
 
     We conclude this chapter with a brief discussion of some of the
     most significant differences between the two worlds. *)
@@ -1099,8 +1107,8 @@ Qed.
 
 (** Coq's logic is intentionally quite minimal.  This means that there
     are occasionally some cases where translating standard
-    mathematical reasoning into Coq can be cumbersome or sometimes
-    even impossible, unless we enrich the core logic with additional
+    mathematical reasoning into Coq can be cumbersome or even
+    impossible, unless we enrich the core logic with additional
     axioms. *)
 
 (** The equality assertions that we have seen so far mostly have
@@ -1136,8 +1144,8 @@ Proof.
    (* Stuck *)
 Abort.
 
-(** However, we can add functional extensionality to Coq's core using
-    the [Axiom] command. *)
+(** However, if we like, we can add functional extensionality to Coq's
+    core using the [Axiom] command. *)
 
 Axiom functional_extensionality : forall {X Y: Type}
                                     {f g : X -> Y},
@@ -1180,9 +1188,9 @@ Qed.
          forall (X Y : Type) (f g : X -> Y),
                 (forall x : X, f x = g x) -> f = g
 
-    (You may also see [add_comm] listed as an assumption, depending
-    on whether the copy of [Tactics.v] in the local directory has the
-    proof of [add_comm] filled in.) *)
+    (If you try this yourself, you may also see [add_comm] listed as
+    an assumption, depending on whether the copy of [Tactics.v] in the
+    local directory has the proof of [add_comm] filled in.) *)
 
 (** **** Exercise: 4 stars, standard (tr_rev_correct)
 
@@ -1225,7 +1233,7 @@ Proof.
 
                                            bool     Prop
                                            ====     ====
-           decidable?                      yes       no
+           decidable?                       yes       no
            useable with match?             yes       no
            equalities rewritable?          no        yes
 *)
@@ -1257,7 +1265,7 @@ Proof.
 (** ** Working with Decidable Properties *)
 
 (** Since [Prop] includes _both_ decidable and undecidable properties,
-    we have two choices when when we are dealing with a property that
+    we have two choices when when we want to formalize a property that
     happens to be decidable: we can express it as a boolean
     computation or as a function into [Prop].
 
@@ -1377,8 +1385,8 @@ Example even_1000 : Even 1000.
 Proof. unfold Even. exists 500. reflexivity. Qed.
 
 (** The proof of the corresponding boolean statement is even
-    simpler (because we don't have to invent the witness: Coq's
-    computation mechanism does it for us!). *)
+    simpler, because we don't have to invent the witness: Coq's
+    computation mechanism does it for us! *)
 
 Example even_1000' : even 1000 = true.
 Proof. reflexivity. Qed.
@@ -1440,10 +1448,10 @@ Proof.
 Qed.
 
 (** We won't discuss reflection any further for the moment, but it
-    serves as a good example showing the complementary strengths of
-    booleans and general propositions, and being able to cross back
-    and forth between the boolean and propositional worlds will often
-    be convenient in later chapters. *)
+    serves as a good example showing the different strengths of
+    booleans and general propositions; being able to cross back and
+    forth between the boolean and propositional worlds will often be
+    convenient in later chapters. *)
 
 (** **** Exercise: 2 stars, standard (logical_connectives)
 
@@ -1526,7 +1534,7 @@ Proof.
 
 (** We have seen that it is not possible to test whether or not a
     proposition [P] holds while defining a Coq function.  You may be
-    surprised to learn that a similar restriction applies to _proofs_!
+    surprised to learn that a similar restriction applies in _proofs_!
     In other words, the following intuitive reasoning principle is not
     derivable in Coq: *)
 
@@ -1713,4 +1721,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

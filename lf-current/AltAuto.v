@@ -849,4 +849,4 @@ Qed.
     [auto] most of the time, only switching to the [e] variants when
     the ordinary variants don't do the job. *)
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

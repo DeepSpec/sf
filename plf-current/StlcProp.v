@@ -185,16 +185,16 @@ Proof.
 (** ** The Weakening Lemma *)
 
 (** Typing is preserved under "extensions" to the context [Gamma].
-    (Recall the definition of "inclusion" from Maps.v.) *)
+    (Recall the definition of "includedin" from Maps.v.) *)
 
 Lemma weakening : forall Gamma Gamma' t T,
-     inclusion Gamma Gamma' ->
+     includedin Gamma Gamma' ->
      Gamma  |- t \in T  ->
      Gamma' |- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
-  induction Ht; eauto using inclusion_update.
+  induction Ht; eauto using includedin_update.
 Qed.
 
 (** The following simple corollary is what we actually need below. *)
@@ -293,7 +293,7 @@ Proof.
   (* in each case, we'll want to get at the derivation of H *)
     inversion H; clear H; subst; simpl; eauto.
   - (* var *)
-    rename s into y. destruct (eqb_stringP x y); subst.
+    rename s into y. destruct (eqb_spec x y); subst.
     + (* x=y *)
       rewrite update_eq in H2.
       injection H2 as H2; subst.
@@ -302,7 +302,7 @@ Proof.
       apply T_Var. rewrite update_neq in H2; auto.
   - (* abs *)
     rename s into y, t into S.
-    destruct (eqb_stringP x y); subst; apply T_Abs.
+    destruct (eqb_spec x y); subst; apply T_Abs.
     + (* x=y *)
       rewrite update_shadow in H5. assumption.
     + (* x<>y *)
@@ -960,4 +960,4 @@ Definition manual_grade_for_stlc_arith : option (nat*string) := None.
 
 End STLCArith.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)

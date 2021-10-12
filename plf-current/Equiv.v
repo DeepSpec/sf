@@ -818,6 +818,14 @@ Fixpoint fold_constants_bexp (b : bexp) : bexp :=
       | (a1', a2') =>
           <{ a1' = a2' }>
       end
+  | <{ a1 <> a2 }>  =>
+      match (fold_constants_aexp a1,
+             fold_constants_aexp a2) with
+      | (ANum n1, ANum n2) =>
+          if negb (n1 =? n2) then <{true}> else <{false}>
+      | (a1', a2') =>
+          <{ a1' <> a2' }>
+      end
   | <{ a1 <= a2 }>  =>
       match (fold_constants_aexp a1,
              fold_constants_aexp a2) with
@@ -1039,6 +1047,18 @@ Proof.
     (* The only interesting case is when both a1 and a2
        become constants after folding *)
       simpl. destruct (n =? n0); reflexivity.
+  - (* BNeq *)
+    simpl.
+    remember (fold_constants_aexp a1) as a1' eqn:Heqa1'.
+    remember (fold_constants_aexp a2) as a2' eqn:Heqa2'.
+    replace (aeval st a1) with (aeval st a1') by
+       (subst a1'; rewrite <- fold_constants_aexp_sound; reflexivity).
+    replace (aeval st a2) with (aeval st a2') by
+       (subst a2'; rewrite <- fold_constants_aexp_sound; reflexivity).
+    destruct a1'; destruct a2'; try reflexivity.
+    (* The only interesting case is when both a1 and a2
+       become constants after folding *)
+      simpl. destruct (n =? n0); reflexivity.
   - (* BLe *)
     (* FILL IN HERE *) admit.
   - (* BNot *)
@@ -1163,7 +1183,7 @@ Fixpoint subst_aexp (x : string) (u : aexp) (a : aexp) : aexp :=
   | ANum n       =>
       ANum n
   | AId x'       =>
-      if eqb_string x x' then u else AId x'
+      if String.eqb x x' then u else AId x'
   | <{ a1 + a2 }>  =>
       <{ (subst_aexp x u a1) + (subst_aexp x u a2) }>
   | <{ a1 - a2 }> =>
@@ -1655,4 +1675,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:23 *)

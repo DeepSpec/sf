@@ -125,6 +125,17 @@ Print Assumptions subseq_app.
 Goal True.
 idtac " ".
 
+idtac "#> subseq_trans".
+idtac "Advanced".
+idtac "Possible points: 1".
+check_type @subseq_trans (
+(forall l1 l2 l3 : list nat, subseq l1 l2 -> subseq l2 l3 -> subseq l1 l3)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions subseq_trans.
+Goal True.
+idtac " ".
+
 idtac "-------------------  exp_match_ex1  --------------------".
 idtac " ".
 
@@ -247,7 +258,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 25".
-idtac "Max points - advanced: 46".
+idtac "Max points - advanced: 47".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -305,10 +316,12 @@ idtac "---------- subseq_refl ---------".
 Print Assumptions subseq_refl.
 idtac "---------- subseq_app ---------".
 Print Assumptions subseq_app.
+idtac "---------- subseq_trans ---------".
+Print Assumptions subseq_trans.
 idtac "---------- Pumping.weak_pumping ---------".
 Print Assumptions Pumping.weak_pumping.
 idtac "---------- filter_challenge ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

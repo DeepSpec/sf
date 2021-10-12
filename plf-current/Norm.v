@@ -148,9 +148,9 @@ Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   | tm_var y =>
-      if eqb_string x y then s else t
+      if String.eqb x y then s else t
   | <{ \ y : T, t1 }> =>
-      if eqb_string x y then t else <{ \y:T, [x:=s] t1 }>
+      if String.eqb x y then t else <{ \y:T, [x:=s] t1 }>
   | <{t1 t2}> =>
       <{ ([x:=s]t1) ([x:=s]t2)}>
   | <{true}> =>
@@ -296,13 +296,13 @@ Hint Extern 2 (_ = _) => compute; reflexivity : core.
 (** The weakening lemma is proved as in pure STLC. *)
 
 Lemma weakening : forall Gamma Gamma' t T,
-     inclusion Gamma Gamma' ->
+     includedin Gamma Gamma' ->
      Gamma  |- t \in T  ->
      Gamma' |- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
-  induction Ht; eauto using inclusion_update.
+  induction Ht; eauto using includedin_update.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
@@ -328,7 +328,7 @@ Proof with eauto.
   (* in each case, we'll want to get at the derivation of H *)
     inversion H; clear H; subst; simpl; eauto.
   - (* var *)
-    rename s into y. destruct (eqb_stringP x y); subst.
+    rename s into y. destruct (eqb_spec x y); subst.
     + (* x=y *)
       rewrite update_eq in H2.
       injection H2 as H2; subst.
@@ -337,7 +337,7 @@ Proof with eauto.
       apply T_Var. rewrite update_neq in H2; auto.
   - (* abs *)
     rename s into y, t into S.
-    destruct (eqb_stringP x y); subst; apply T_Abs.
+    destruct (eqb_spec x y); subst; apply T_Abs.
     + (* x=y *)
       rewrite update_shadow in H5. assumption.
     + (* x<>y *)
@@ -426,7 +426,7 @@ Proof.
     apply T_Abs.
     apply IHhas_type. intros x1 Hafi.
     (* the only tricky step... *)
-    destruct (eqb_stringP x x1); subst.
+    destruct (eqb_spec x x1); subst.
     + rewrite update_eq.
       rewrite update_eq.
       reflexivity.
@@ -434,6 +434,13 @@ Proof.
       rewrite update_neq; [| assumption].
       auto.
 Qed.
+
+(* A handy consequence of [eqb_neq] *)
+Theorem false_eqb_string : forall x y : string,
+   x <> y -> String.eqb x y = false.
+Proof.
+  intros x y. rewrite String.eqb_neq.
+  intros H. apply H. Qed.
 
 Lemma free_in_context : forall x t T Gamma,
    appears_free_in x t ->
@@ -816,7 +823,7 @@ Fixpoint lookup {X:Set} (k : string) (l : list (string * X))
   match l with
     | nil => None
     | (j,x) :: l' =>
-      if eqb_string j k then Some x else lookup k l'
+      if String.eqb j k then Some x else lookup k l'
   end.
 
 Fixpoint drop {X:Set} (n:string) (nxs:list (string * X))
@@ -824,7 +831,7 @@ Fixpoint drop {X:Set} (n:string) (nxs:list (string * X))
   match nxs with
     | nil => nil
     | ((n',x)::nxs') =>
-        if eqb_string n' n then drop n nxs'
+        if String.eqb n' n then drop n nxs'
         else (n',x)::(drop n nxs')
   end.
 
@@ -865,12 +872,12 @@ Proof with eauto.  (* rather slow this way *)
   unfold closed, not.
   induction t; intros x v P A; simpl in A.
     - (* var *)
-     destruct (eqb_stringP x s)...
+     destruct (eqb_spec x s)...
      inversion A; subst. auto.
     - (* app *)
      inversion A; subst...
     - (* abs *)
-     destruct (eqb_stringP x s)...
+     destruct (eqb_spec x s)...
      + inversion A; subst...
      + inversion A; subst...
     - (* tru *)
@@ -900,10 +907,10 @@ Lemma swap_subst : forall t x x1 v v1,
 Proof with eauto.
  induction t; intros; simpl.
   - (* var *)
-   destruct (eqb_stringP x s); destruct (eqb_stringP x1 s).
+   destruct (eqb_spec x s); destruct (eqb_spec x1 s).
    + subst. exfalso...
-   + subst. simpl. rewrite <- eqb_string_refl. apply subst_closed...
-   + subst. simpl. rewrite <- eqb_string_refl. rewrite subst_closed...
+   + subst. simpl. rewrite String.eqb_refl. apply subst_closed...
+   + subst. simpl. rewrite String.eqb_refl. rewrite subst_closed...
    + simpl. rewrite false_eqb_string... rewrite false_eqb_string...
   (* FILL IN HERE *) Admitted.
 
@@ -934,7 +941,7 @@ Proof.
   induction env0; intros; auto.
   destruct a. simpl.
   inversion H0.
-  destruct (eqb_stringP s x).
+  destruct (eqb_spec s x).
   - subst. rewrite duplicate_subst; auto.
   - simpl. rewrite swap_subst; eauto.
 Qed.
@@ -949,7 +956,7 @@ Proof.
   induction ss; intros.
     reflexivity.
     destruct a.
-     simpl. destruct (eqb_string s x).
+     simpl. destruct (String.eqb s x).
       apply msubst_closed. inversion H; auto.
       apply IHss. inversion H; auto.
 Qed.
@@ -960,7 +967,7 @@ Proof.
   induction ss; intros.
     reflexivity.
     destruct a.
-      simpl. destruct (eqb_string s x); simpl; auto.
+      simpl. destruct (String.eqb s x); simpl; auto.
 Qed.
 
 Lemma msubst_app : forall ss t1 t2,
@@ -987,20 +994,20 @@ Lemma mupdate_lookup : forall (c : tass) (x:string),
 Proof.
   induction c; intros.
     auto.
-    destruct a. unfold lookup, mupdate, update, t_update. destruct (eqb_string s x); auto.
+    destruct a. unfold lookup, mupdate, update, t_update. destruct (String.eqb s x); auto.
 Qed.
 
 Lemma mupdate_drop : forall (c: tass) Gamma x x',
       mupdate Gamma (drop x c) x'
-    = if eqb_string x x' then Gamma x' else mupdate Gamma c x'.
+    = if String.eqb x x' then Gamma x' else mupdate Gamma c x'.
 Proof.
   induction c; intros.
-  - destruct (eqb_stringP x x'); auto.
+  - destruct (eqb_spec x x'); auto.
   - destruct a. simpl.
-    destruct (eqb_stringP s x).
+    destruct (eqb_spec s x).
     + subst. rewrite IHc.
-      unfold update, t_update. destruct (eqb_stringP x x'); auto.
-    + simpl. unfold update, t_update. destruct (eqb_stringP s x'); auto.
+      unfold update, t_update. destruct (eqb_spec x x'); auto.
+    + simpl. unfold update, t_update. destruct (eqb_spec s x'); auto.
       subst. rewrite false_eqb_string; congruence.
 Qed.
 
@@ -1017,7 +1024,7 @@ Proof.
   intros c e V. induction V; intros x0 T0 C.
     solve_by_invert.
     simpl in *.
-    destruct (eqb_string x x0); eauto.
+    destruct (String.eqb x x0); eauto.
 Qed.
 
 Lemma instantiation_env_closed : forall c e,
@@ -1038,7 +1045,7 @@ Lemma instantiation_R : forall c e,
 Proof.
   intros c e V. induction V; intros x' t' T' G E.
     solve_by_invert.
-    unfold lookup in *.  destruct (eqb_string x x').
+    unfold lookup in *.  destruct (String.eqb x x').
       inversion G; inversion E; subst.  auto.
       eauto.
 Qed.
@@ -1050,7 +1057,7 @@ Proof.
   intros c e V. induction V.
     intros.  simpl.  constructor.
     intros. unfold drop.
-    destruct (eqb_string x x0); auto. constructor; eauto.
+    destruct (String.eqb x x0); auto. constructor; eauto.
 Qed.
 
 (* ----------------------------------------------------------------- *)
@@ -1122,13 +1129,13 @@ Proof.
       eapply context_invariance.
       { apply HT. }
       intros.
-      unfold update, t_update. rewrite mupdate_drop. destruct (eqb_stringP x x0).
+      unfold update, t_update. rewrite mupdate_drop. destruct (eqb_spec x x0).
       + auto.
       + rewrite H.
         clear - c n. induction c.
         simpl.  rewrite false_eqb_string; auto.
         simpl. destruct a.  unfold update, t_update.
-        destruct (eqb_string s x0); auto. }
+        destruct (String.eqb s x0); auto. }
     unfold R. fold R. split.
        auto.
      split. apply value_halts. apply v_abs.
@@ -1146,7 +1153,7 @@ Proof.
        apply (R_typable_empty H1).
        eapply instantiation_env_closed; eauto.
        eapply (IHHT ((x,T2)::c)).
-          intros. unfold update, t_update, lookup. destruct (eqb_string x x0); auto.
+          intros. unfold update, t_update, lookup. destruct (String.eqb x x0); auto.
        constructor; auto.
 
   - (* T_App *)
@@ -1170,4 +1177,4 @@ Proof.
   eapply V_nil.
 Qed.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)

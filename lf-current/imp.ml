@@ -295,17 +295,24 @@ let rec string_dec s x =
      | [] -> false
      | a0::s1 -> if (=) a a0 then string_dec s0 s1 else false)
 
+(** val eqb0 : char list -> char list -> bool **)
+
+let rec eqb0 s1 s2 =
+  match s1 with
+  | [] -> (match s2 with
+           | [] -> true
+           | _::_ -> false)
+  | c1::s1' ->
+    (match s2 with
+     | [] -> false
+     | c2::s2' -> if (=) c1 c2 then eqb0 s1' s2' else false)
+
 (** val append : char list -> char list -> char list **)
 
 let rec append s1 s2 =
   match s1 with
   | [] -> s2
   | c::s1' -> c::(append s1' s2)
-
-(** val eqb_string : char list -> char list -> bool **)
-
-let eqb_string x y =
-  if string_dec x y then true else false
 
 type 'a total_map = char list -> 'a
 
@@ -317,7 +324,7 @@ let t_empty v _ =
 (** val t_update : 'a1 total_map -> char list -> 'a1 -> char list -> 'a1 **)
 
 let t_update m x v x' =
-  if eqb_string x x' then v else m x'
+  if eqb0 x x' then v else m x'
 
 type state = int total_map
 
@@ -332,6 +339,7 @@ type bexp =
 | BTrue
 | BFalse
 | BEq of aexp * aexp
+| BNeq of aexp * aexp
 | BLe of aexp * aexp
 | BNot of bexp
 | BAnd of bexp * bexp
@@ -351,6 +359,7 @@ let rec beval st = function
 | BTrue -> true
 | BFalse -> false
 | BEq (a1, a2) -> Nat.eqb (aeval st a1) (aeval st a2)
+| BNeq (a1, a2) -> negb (Nat.eqb (aeval st a1) (aeval st a2))
 | BLe (a1, a2) -> Nat.leb (aeval st a1) (aeval st a2)
 | BNot b1 -> negb (beval st b1)
 | BAnd (b1, b2) -> (&&) (beval st b1) (beval st b2)

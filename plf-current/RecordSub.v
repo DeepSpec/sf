@@ -129,9 +129,9 @@ Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   | tm_var y =>
-      if eqb_string x y then s else t
+      if String.eqb x y then s else t
   | <{\y:T, t1}> =>
-      if eqb_string x y then t else <{\y:T, [x:=s] t1}>
+      if String.eqb x y then t else <{\y:T, [x:=s] t1}>
   | <{t1 t2}> =>
       <{([x:=s] t1) ([x:=s] t2)}>
   | <{ t1 --> i }> =>
@@ -161,14 +161,14 @@ Hint Constructors value : core.
 Fixpoint Tlookup (i:string) (Tr:ty) : option ty :=
   match Tr with
   | <{{ i' : T :: Tr' }}> =>
-      if eqb_string i i' then Some T else Tlookup i Tr'
+      if String.eqb i i' then Some T else Tlookup i Tr'
   | _ => None
   end.
 
 Fixpoint tlookup (i:string) (tr:tm) : option tm :=
   match tr with
   | <{ i' := t :: tr' }> =>
-      if eqb_string i i' then Some t else tlookup i tr'
+      if String.eqb i i' then Some t else tlookup i tr'
   | _ => None
   end.
 
@@ -359,7 +359,7 @@ Proof with eauto.
   induction T; intros; try solve_by_invert.
   - (* RCons *)
     inversion H. subst. unfold Tlookup in H0.
-    destruct (eqb_string i s)...  inversion H0; subst...  Qed.
+    destruct (String.eqb i s)...  inversion H0; subst...  Qed.
 
 (* ----------------------------------------------------------------- *)
 (** *** Field Lookup *)
@@ -388,16 +388,16 @@ Proof with (eauto using wf_rcd_lookup).
   - (* S_RcdDepth *)
     rename i0 into k.
     unfold Tlookup. unfold Tlookup in Hget.
-    destruct (eqb_string i k)...
+    destruct (String.eqb i k)...
     + (* i = k -- we're looking up the first field *)
       inversion Hget. subst. exists S1...
   - (* S_RcdPerm *)
     exists Ti. split.
     + (* lookup *)
       unfold Tlookup. unfold Tlookup in Hget.
-      destruct (eqb_stringP i i1)...
+      destruct (eqb_spec i i1)...
       * (* i = i1 -- we're looking up the first field *)
-        destruct (eqb_stringP i i2)...
+        destruct (eqb_spec i i2)...
         (* i = i2 -- contradictory *)
         destruct H0.
         subst...
@@ -562,7 +562,7 @@ Proof with eauto.
     destruct HgetSi as [vi [Hget Htyvi]]...
   - (* T_RCons *)
     simpl in H0. simpl. simpl in H1.
-    destruct (eqb_string i i0).
+    destruct (String.eqb i i0).
     + (* i is first *)
       injection H1 as H1. subst. exists t...
     + (* i in tail *)
@@ -733,13 +733,13 @@ Proof with eauto.
 (** The weakening lemma is proved as in pure STLC. *)
 
 Lemma weakening : forall Gamma Gamma' t T,
-     inclusion Gamma Gamma' ->
+     includedin Gamma Gamma' ->
      Gamma  |- t \in T  ->
      Gamma' |- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
-  induction Ht; eauto using inclusion_update.
+  induction Ht; eauto using includedin_update.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
@@ -766,7 +766,7 @@ Proof.
   induction Ht; intros Gamma' G; simpl; eauto.
   - (* T_Var *)
     rename x0 into y.
-    destruct (eqb_stringP x y) as [Hxy|Hxy]; subst.
+    destruct (eqb_spec x y) as [Hxy|Hxy]; subst.
     + (* x = y *)
       rewrite update_eq in H.
       injection H as H. subst.
@@ -776,7 +776,7 @@ Proof.
       rewrite update_neq in H; assumption.
   - (* T_Abs *)
     rename x0 into y. subst.
-    destruct (eqb_stringP x y) as [Hxy|Hxy]; apply T_Abs; try assumption.
+    destruct (eqb_spec x y) as [Hxy|Hxy]; apply T_Abs; try assumption.
     + (* x=y *)
       subst. rewrite update_shadow in Ht. assumption.
     + (* x <> y *)
@@ -871,4 +871,4 @@ Proof with eauto.
 
 End RecordSub.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)

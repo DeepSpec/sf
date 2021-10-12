@@ -5,11 +5,7 @@ type 'a option =
 | Some of 'a
 | None
 
-type sumbool =
-| Left
-| Right
-
-val bool_dec : bool -> bool -> sumbool
+val eqb : bool -> bool -> bool
 
 module Nat :
  sig
@@ -27,15 +23,13 @@ module Nat :
 type ascii =
 | Ascii of bool * bool * bool * bool * bool * bool * bool * bool
 
-val ascii_dec : ascii -> ascii -> sumbool
+val eqb0 : ascii -> ascii -> bool
 
 type string =
 | EmptyString
 | String of ascii * string
 
-val string_dec : string -> string -> sumbool
-
-val eqb_string : string -> string -> bool
+val eqb1 : string -> string -> bool
 
 type 'a total_map = string -> 'a
 
@@ -54,6 +48,7 @@ type bexp =
 | BTrue
 | BFalse
 | BEq of aexp * aexp
+| BNeq of aexp * aexp
 | BLe of aexp * aexp
 | BNot of bexp
 | BAnd of bexp * bexp

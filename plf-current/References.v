@@ -264,9 +264,9 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   (* pure STLC *)
   | tm_var y =>
-      if eqb_string x y then s else t
+      if String.eqb x y then s else t
   | <{\y:T, t1}> =>
-      if eqb_string x y then t else <{\y:T, [x:=s] t1}>
+      if String.eqb x y then t else <{\y:T, [x:=s] t1}>
   | <{t1 t2}> =>
       <{([x:=s] t1) ([x:=s] t2)}>
   (* numbers *)
@@ -1352,13 +1352,13 @@ Definition preservation_theorem := forall ST t t' T st st',
     we used in the proof of the substitution lemma for the STLC. *)
 
 Lemma weakening : forall Gamma Gamma' ST t T,
-     inclusion Gamma Gamma' ->
+     includedin Gamma Gamma' ->
      Gamma  ; ST |- t \in T  ->
      Gamma' ; ST |- t \in T.
 Proof.
   intros Gamma Gamma' ST t T H Ht.
   generalize dependent Gamma'.
-  induction Ht; eauto using inclusion_update.
+  induction Ht; eauto using includedin_update.
 Qed.
 
 Lemma weakening_empty : forall Gamma ST t T,
@@ -1381,7 +1381,7 @@ Proof.
   (* in each case, we'll want to get at the derivation of H *)
     inversion H; clear H; subst; simpl; eauto.
   - (* var *)
-    rename s into y. destruct (eqb_stringP x y); subst.
+    rename s into y. destruct (String.eqb_spec x y); subst.
     + (* x=y *)
       rewrite update_eq in H2.
       injection H2 as H2; subst.
@@ -1390,7 +1390,7 @@ Proof.
       apply T_Var. rewrite update_neq in H2; auto.
   - (* abs *)
     rename s into y.
-    destruct (eqb_stringP x y); subst; apply T_Abs.
+    destruct (String.eqb_spec x y); subst; apply T_Abs.
     + (* x=y *)
       rewrite update_shadow in H5. assumption.
     + (* x<>y *)
@@ -1883,4 +1883,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)

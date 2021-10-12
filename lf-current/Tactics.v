@@ -515,7 +515,7 @@ Abort.
 
        - "if [double (S n) = double m] then [S n = m]".
 
-    To see why this is strange, let's think of a particular [m] -- 
+    To see why this is strange, let's think of a particular [m] --
     say, [5].  The statement is then saying that, if we know
 
       - [Q] = "if [double n = 10] then [n = 5]"
@@ -599,8 +599,9 @@ Proof.
 
 (** **** Exercise: 2 stars, advanced (eqb_true_informal)
 
-    Give a careful informal proof of [eqb_true], being as explicit
-    as possible about quantifiers. *)
+    Give a careful informal proof of [eqb_true], stating the induction
+    hypothesis explicitly and being as explicit as possible about
+    quantifiers, everywhere. *)
 
 (* FILL IN HERE *)
 
@@ -1194,4 +1195,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2021-10-06 00:52 *)
+(* 2021-10-12 18:21 *)

@@ -368,9 +368,9 @@ Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   | tm_var y =>
-      if eqb_string x y then s else t
+      if String.eqb x y then s else t
   | <{\y:T, t1}> =>
-      if eqb_string x y then t else <{\y:T, [x:=s] t1}>
+      if String.eqb x y then t else <{\y:T, [x:=s] t1}>
   | <{t1 t2}> =>
       <{([x:=s] t1) ([x:=s] t2)}>
   | <{true}> =>
@@ -847,4 +847,4 @@ Proof.
 
 End STLC.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)

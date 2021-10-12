@@ -253,9 +253,9 @@ Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
   | tm_var y =>
-      if eqb_string x y then s else t
+      if String.eqb x y then s else t
   | <{\y:T, t1}> =>
-      if eqb_string x y then t else <{\y:T, [x:=s] t1}>
+      if String.eqb x y then t else <{\y:T, [x:=s] t1}>
   | <{t1 t2}> =>
       <{([x:=s] t1) ([x:=s] t2)}>
   | <{ t1 --> i }> =>
@@ -289,7 +289,7 @@ Hint Constructors value : core.
 
 Fixpoint tlookup (i:string) (tr:tm) : option tm :=
   match tr with
-  | <{ i' := t :: tr'}> => if eqb_string i i' then Some t else tlookup i tr'
+  | <{ i' := t :: tr'}> => if String.eqb i i' then Some t else tlookup i tr'
   | _ => None
   end.
 
@@ -358,7 +358,7 @@ Hint Constructors step : core.
 Fixpoint Tlookup (i:string) (Tr:ty) : option ty :=
   match Tr with
   | <{{ i' : T :: Tr' }}> =>
-      if eqb_string i i' then Some T else Tlookup i Tr'
+      if String.eqb i i' then Some T else Tlookup i Tr'
   | _ => None
   end.
 
@@ -452,7 +452,7 @@ Proof with eauto.
   induction T; intros; try solve_by_invert.
   - (* RCons *)
     inversion H. subst. unfold Tlookup in H0.
-    destruct (eqb_string i s)...
+    destruct (String.eqb i s)...
     inversion H0. subst...  Qed.
 
 Lemma step_preserves_record_tm : forall tr tr',
@@ -521,7 +521,7 @@ Proof with eauto.
   remember empty as Gamma.
   induction Htyp; subst; try solve_by_invert...
   - (* T_RCons *)
-    simpl in Hget. simpl. destruct (eqb_string i i0).
+    simpl in Hget. simpl. destruct (String.eqb i i0).
     + (* i is first *)
       simpl. injection Hget as Hget. subst.
       exists t...
@@ -633,13 +633,13 @@ Proof with eauto.
 (** The weakening lemma is proved as in pure STLC. *)
 
 Lemma weakening : forall Gamma Gamma' t T,
-     inclusion Gamma Gamma' ->
+     includedin Gamma Gamma' ->
      Gamma  |- t \in T  ->
      Gamma' |- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
-  induction Ht; eauto using inclusion_update.
+  induction Ht; eauto using includedin_update.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
@@ -671,7 +671,7 @@ Proof.
   (* in each case, we'll want to get at the derivation of H *)
     inversion H; clear H; subst; simpl; eauto.
   - (* var *)
-    rename s into y. destruct (eqb_stringP x y); subst.
+    rename s into y. destruct (eqb_spec x y); subst.
     + (* x=y *)
       rewrite update_eq in H1.
       injection H1 as H1; subst.
@@ -680,7 +680,7 @@ Proof.
       apply T_Var. rewrite update_neq in H1; auto. assumption.
   - (* abs *)
     rename s into y, t into T.
-    destruct (eqb_stringP x y); subst; apply T_Abs; try assumption.
+    destruct (eqb_spec x y); subst; apply T_Abs; try assumption.
     + (* x=y *)
       rewrite update_shadow in H5. assumption.
     + (* x<>y *)
@@ -735,4 +735,4 @@ Qed.
 
 End STLCExtendedRecords.
 
-(* 2021-10-06 00:53 *)
+(* 2021-10-12 18:24 *)
