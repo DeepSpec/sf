@@ -960,4 +960,4 @@ Definition manual_grade_for_stlc_arith : option (nat*string) := None.
 
 End STLCArith.
 
-(* 2021-10-12 18:24 *)
+(* 2021-10-21 12:26 *)

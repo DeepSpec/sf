@@ -707,7 +707,7 @@ Examine the precondition, and notice that now we have the additional
     fact, <span class="inlinecode"><span class="id" title="var">temp</span></span> <span class="inlinecode"><span class="id" title="var">_v</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>. 
 <div class="paragraph"> </div>
 
- We cannot the next step using <span class="inlinecode"><span class="id" title="var">forward</span></span> ... 
+ We cannot take the next step using <span class="inlinecode"><span class="id" title="var">forward</span></span> ... 
 </div>
 <div class="code">
 
@@ -752,7 +752,7 @@ On the left-hand side of this entailment is the precondition
   (that we had already established by forward symbolic execution to this
   point) for the entire while-loop.  On the right-hand side is the loop
   invariant, that we just gave to the <span class="inlinecode"><span class="id" title="var">forward_while</span></span> tactic.  Because
-  the right_hand side has for existentials, a good proof strategy is to
+  the right-hand side has four existentials, a good proof strategy is to
   choose values for them, using the <span class="inlinecode"><span class="id" title="var">Exists</span></span> tactic. 
 </div>
 <div class="code">
@@ -1016,7 +1016,7 @@ our definition:
 </span>which is separated (by the separating conjunction * ) from the rest of the list
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">listrep</span> <span class="id" title="var">hs</span> <span class="id" title="var">y</span>.
-</span>This separation ensures that no address could be used for more than once in a
+</span>This separation ensures that no address could be used more than once in a
 linked list. For example, considering a linked list of length at least 2,
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;<span class="id" title="var">listrep</span> (<span class="id" title="var">a</span> :: <span class="id" title="var">b</span> :: <span class="id" title="var">l</span>) <span class="id" title="var">x</span>.
@@ -1103,7 +1103,7 @@ Actually, even the property <span class="inlinecode"><span class="id" title="var
 <div class="paragraph"> </div>
 
  (We rarely state intermediate proof goals such as this one.
-  We do it here to illustrate a point about separating conjunction.  
+  We do it here to illustrate a point about separating conjunction.)  
 </div>
 <div class="code">
 
@@ -1181,7 +1181,7 @@ When C programs manipulate pointer data structures (or slices of arrays),
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-10-12&nbsp;18:33&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-10-21&nbsp;12:34&nbsp;*)</span><br/>
 </div>
 </div>
 

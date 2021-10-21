@@ -531,7 +531,7 @@ Qed.
   for the quantified variable: *)
   Exists 0.   (* Instantiate the existential on the right-side of |--   *)
 
-(** Notice that [i] has now been replace with [0] on the right side.
+(** Notice that [i] has now been replaced with [0] on the right side.
 
    To prove entailments, we usually use the [entailer!] tactic to
    simplify the entailment as much as possible--or in many cases,
@@ -630,7 +630,7 @@ assert_PROP (Zlength contents = size). {
 }
 hint.
 
- (** Now that we have [Zlength contents = size] above the, we can go
+(** Now that we have [Zlength contents = size] above the line, we can go
    [forward] through the array-subscript statement. *)
 forward. (* [x = a[i];] *)
 
@@ -777,4 +777,4 @@ Qed.
 
 (** Recommended: read VC.pdf Chapters 22-47 (up to _Pointer comparisons_) *)
 
-(* 2021-10-12 18:33 *)
+(* 2021-10-21 12:34 *)

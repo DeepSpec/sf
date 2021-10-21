@@ -400,7 +400,7 @@ forward.  (* v = p; *)
 (** Examine the precondition, and notice that now we have the additional
     fact, [temp _v p]. *)
 
-(** We cannot the next step using [forward] ... *)
+(** We cannot take the next step using [forward] ... *)
 
 Fail forward.
 
@@ -431,7 +431,7 @@ hint.
   (that we had already established by forward symbolic execution to this
   point) for the entire while-loop.  On the right-hand side is the loop
   invariant, that we just gave to the [forward_while] tactic.  Because
-  the right_hand side has for existentials, a good proof strategy is to
+  the right-hand side has four existentials, a good proof strategy is to
   choose values for them, using the [Exists] tactic. *)
 
 Exists (@nil val) sigma nullval p.
@@ -609,7 +609,7 @@ which is separated (by the separating conjunction * ) from the rest of the list
 
    listrep hs y.
 
-This separation ensures that no address could be used for more than once in a
+This separation ensures that no address could be used more than once in a
 linked list. For example, considering a linked list of length at least 2,
 
    listrep (a :: b :: l) x.
@@ -680,7 +680,7 @@ Qed.
  intermediate step in the proof of [body_reverse].
 
  (We rarely state intermediate proof goals such as this one.
-  We do it here to illustrate a point about separating conjunction.  *)
+  We do it here to illustrate a point about separating conjunction.)  *)
 
 Lemma body_reverse_step: forall
   {Espec : OracleKind}
@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2021-10-12 18:33 *)
+(* 2021-10-21 12:34 *)
