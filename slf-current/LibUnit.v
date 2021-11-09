@@ -48,4 +48,4 @@ Proof using. intros. destruct tt1. destruct~ tt2. Qed.
 
 
 
-(* 2021-11-09 17:42 *)
+(* 2021-11-09 19:56 *)

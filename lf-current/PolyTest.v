@@ -484,4 +484,4 @@ idtac "---------- Exercises.Church.exp_3 ---------".
 Print Assumptions Exercises.Church.exp_3.
 Abort.
 
-(* 2021-11-09 17:32 *)
+(* 2021-11-09 19:45 *)
