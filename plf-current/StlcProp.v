@@ -42,8 +42,8 @@ Lemma canonical_forms_fun : forall t T1 T2,
   exists x u, t = <{\x:T1, u}>.
 Proof.
   intros t T1 T2 HT HVal.
-  destruct HVal; inversion HT; subst.
-  exists x0, t1. reflexivity.
+  destruct HVal as [x ? t1| |] ; inversion HT; subst.
+  exists x, t1. reflexivity.
 Qed.
 
 (* ################################################################# *)
@@ -585,7 +585,7 @@ Lemma free_in_context : forall x t T Gamma,
 Proof.
   intros x t T Gamma H H0. generalize dependent Gamma.
   generalize dependent T.
-  induction H;
+  induction H as [| | |y T1 t1 H H0 IHappears_free_in| | |];
          intros; try solve [inversion H0; eauto].
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -660,7 +660,7 @@ Lemma context_invariance : forall Gamma Gamma' t T,
 Proof.
   intros.
   generalize dependent Gamma'.
-  induction H; intros; auto.
+  induction H as [| ? x0 ????? | | | |]; intros; auto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -960,4 +960,4 @@ Definition manual_grade_for_stlc_arith : option (nat*string) := None.
 
 End STLCArith.
 
-(* 2021-10-21 12:26 *)
+(* 2021-11-09 17:33 *)

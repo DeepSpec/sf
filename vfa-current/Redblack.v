@@ -97,7 +97,7 @@ Section ValueType.
             T Red (T Black a x vx b) y vy (T Black c k vk t2)
           | T Red a x vx (T Red b y vy c) =>
             T Red (T Black a x vx b) y vy (T Black c k vk t2)
-          | a => match t2 with
+          | _ => match t2 with
                 | T Red (T Red b y vy c) z vz d =>
 	          T Red (T Black t1 k vk b) y vy (T Black c z vz d)
                 | T Red b y vy (T Red c z vz d)  =>
@@ -820,4 +820,4 @@ On the same machine that prints,
     - Red-black trees are about as fast on consecutive insertions as
       on random. *)
 
-(* 2021-10-21 12:30 *)
+(* 2021-11-09 17:36 *)

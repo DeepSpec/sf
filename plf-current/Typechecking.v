@@ -228,7 +228,7 @@ Theorem type_checking_complete : forall Gamma t T,
 Proof with auto.
   intros Gamma t T Hty.
   induction Hty; simpl.
-  - (* T_Var *) destruct (Gamma x0) eqn:H0; assumption.
+  - (* T_Var *) destruct (Gamma _) eqn:H0; assumption.
   - (* T_Abs *) rewrite IHHty...
   - (* T_App *)
     rewrite IHHty1. rewrite IHHty2.
@@ -453,7 +453,7 @@ Proof.
     try (rewrite (eqb_ty_refl T2));
     try (rewrite (eqb_ty_refl T3));
     eauto.
-    - destruct (Gamma x0); [assumption| solve_by_invert].
+    - destruct (Gamma _); [assumption| solve_by_invert].
       Admitted. (* ... and delete this line *)
 (* 
 Qed. (* ... and uncomment this one *)
@@ -505,4 +505,4 @@ Import StepFunction.
 End StlcImpl.
 (** [] *)
 
-(* 2021-10-21 12:26 *)
+(* 2021-11-09 17:33 *)

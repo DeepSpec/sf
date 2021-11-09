@@ -91,8 +91,8 @@ In this chapter, we develop the fundamental theory of the Simply
 <div class="proofscript" id="proof2" onclick="toggleDisplay('proof2');toggleDisplay('proofcontrol2')">
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">T<sub>1</sub></span> <span class="id" title="var">T<sub>2</sub></span> <span class="id" title="var">HT</span> <span class="id" title="var">HVal</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">HVal</span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">HT</span>; <span class="id" title="tactic">subst</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">x<sub>0</sub></span>, <span class="id" title="var">t<sub>1</sub></span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">HVal</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">x</span> ? <span class="id" title="var">t<sub>1</sub></span>| |] ; <span class="id" title="tactic">inversion</span> <span class="id" title="var">HT</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">x</span>, <span class="id" title="var">t<sub>1</sub></span>. <span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
@@ -900,7 +900,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> <span class="id" title="var">Gamma</span> <span class="id" title="var">H</span> <span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">Gamma</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">T</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [| | |<span class="id" title="var">y</span> <span class="id" title="var">T<sub>1</sub></span> <span class="id" title="var">t<sub>1</sub></span> <span class="id" title="var">H</span> <span class="id" title="var">H<sub>0</sub></span> <span class="id" title="var">IHappears_free_in</span>| | |];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [<span class="id" title="tactic">inversion</span> <span class="id" title="var">H<sub>0</sub></span>; <span class="id" title="tactic">eauto</span>].<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -1011,7 +1011,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">Gamma'</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [| ? <span class="id" title="var">x<sub>0</sub></span> ????? | | | |]; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1559,7 +1559,7 @@ To terms, we add natural number constants, along with
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="StlcProp.html#STLCArith"><span class="id" title="module">STLCArith</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-10-21&nbsp;12:26&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-11-09&nbsp;17:33&nbsp;*)</span><br/>
 </div>
 </div>
 

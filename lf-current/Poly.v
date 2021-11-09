@@ -1154,4 +1154,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2021-10-21 12:24 *)
+(* 2021-11-09 17:32 *)
