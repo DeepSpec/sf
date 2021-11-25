@@ -286,7 +286,7 @@ Notation "x '|->' v ';' m" := (update m x v)
 Notation "x '|->' v" := (update empty x v)
   (at level 100).
 
-Example examplepmap :=
+Definition examplepmap :=
   ("Church" |-> true ; "Turing" |-> false).
 
 (** We now straightforwardly lift all of the basic lemmas about total
@@ -370,4 +370,4 @@ Qed.
     used to keep track of which program variables are defined in a
     given scope. *)
 
-(* 2021-11-09 19:44 *)
+(* 2021-11-25 17:37 *)

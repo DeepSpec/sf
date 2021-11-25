@@ -32,83 +32,79 @@ Import Check.
 
 Goal True.
 
-idtac "-------------------  if_minus_plus_reloaded  --------------------".
+idtac "-------------------  if_minus_plus_correct  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: decorations_in_if_minus_plus_reloaded".
+idtac "#> if_minus_plus_correct".
 idtac "Possible points: 2".
-print_manual_grade manual_grade_for_decorations_in_if_minus_plus_reloaded.
+check_type @if_minus_plus_correct ((outer_triple_valid if_minus_plus_dec)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions if_minus_plus_correct.
+Goal True.
 idtac " ".
 
 idtac "-------------------  slow_assignment  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: decorations_in_slow_assignment".
+idtac "#> slow_assignment".
 idtac "Possible points: 2".
-print_manual_grade manual_grade_for_decorations_in_slow_assignment.
+check_type @slow_assignment (
+(forall m : nat, outer_triple_valid (slow_assignment_dec m))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions slow_assignment.
+Goal True.
 idtac " ".
 
-idtac "-------------------  factorial  --------------------".
+idtac "-------------------  factorial_correct  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: decorations_in_factorial".
+idtac "#> factorial_correct".
+idtac "Advanced".
+idtac "Possible points: 6".
+check_type @factorial_correct ((forall m : nat, outer_triple_valid (factorial_dec m))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions factorial_correct.
+Goal True.
+idtac " ".
+
+idtac "-------------------  minimum_correct  --------------------".
+idtac " ".
+
+idtac "#> minimum_correct".
 idtac "Possible points: 3".
-print_manual_grade manual_grade_for_decorations_in_factorial.
-idtac " ".
-
-idtac "-------------------  Min_Hoare  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: decorations_in_Min_Hoare".
-idtac "Possible points: 3".
-print_manual_grade manual_grade_for_decorations_in_Min_Hoare.
+check_type @minimum_correct ((forall a b : nat, outer_triple_valid (minimum_dec a b))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions minimum_correct.
+Goal True.
 idtac " ".
 
 idtac "-------------------  two_loops  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: decorations_in_two_loops".
+idtac "#> two_loops".
 idtac "Possible points: 3".
-print_manual_grade manual_grade_for_decorations_in_two_loops.
-idtac " ".
-
-idtac "-------------------  slow_assignment_dec  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: check_defn_of_slow_assignment_dec".
-idtac "Advanced".
-idtac "Possible points: 1".
-print_manual_grade manual_grade_for_check_defn_of_slow_assignment_dec.
-idtac " ".
-
-idtac "#> slow_assignment_dec_correct".
-idtac "Advanced".
-idtac "Possible points: 2".
-check_type @slow_assignment_dec_correct (
-(forall m : nat, dec_correct (slow_assignment_dec m))).
+check_type @two_loops ((forall a b c : nat, outer_triple_valid (two_loops_dec a b c))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions slow_assignment_dec_correct.
+Print Assumptions two_loops.
 Goal True.
 idtac " ".
 
-idtac "-------------------  factorial_dec  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: factorial_dec".
-idtac "Advanced".
-idtac "Possible points: 6".
-print_manual_grade manual_grade_for_factorial_dec.
-idtac " ".
-
-idtac " ".
-
-idtac "Max points - standard: 13".
-idtac "Max points - advanced: 22".
+idtac "Max points - standard: 10".
+idtac "Max points - advanced: 16".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
+idtac "CSeq_congruence".
+idtac "fold_constants_bexp_sound".
+idtac "succ_hastype_nat__hastype_nat".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -122,24 +118,18 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
-idtac "---------- decorations_in_if_minus_plus_reloaded ---------".
-idtac "MANUAL".
-idtac "---------- decorations_in_slow_assignment ---------".
-idtac "MANUAL".
-idtac "---------- decorations_in_factorial ---------".
-idtac "MANUAL".
-idtac "---------- decorations_in_Min_Hoare ---------".
-idtac "MANUAL".
-idtac "---------- decorations_in_two_loops ---------".
-idtac "MANUAL".
+idtac "---------- if_minus_plus_correct ---------".
+Print Assumptions if_minus_plus_correct.
+idtac "---------- slow_assignment ---------".
+Print Assumptions slow_assignment.
+idtac "---------- minimum_correct ---------".
+Print Assumptions minimum_correct.
+idtac "---------- two_loops ---------".
+Print Assumptions two_loops.
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- check_defn_of_slow_assignment_dec ---------".
-idtac "MANUAL".
-idtac "---------- slow_assignment_dec_correct ---------".
-Print Assumptions slow_assignment_dec_correct.
-idtac "---------- factorial_dec ---------".
-idtac "MANUAL".
+idtac "---------- factorial_correct ---------".
+Print Assumptions factorial_correct.
 Abort.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

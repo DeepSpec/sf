@@ -64,28 +64,23 @@
 <div class="paragraph"> </div>
 
     Syntax:
-&lt;{
-       t <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>                          Terms:
-           | {i=t, ..., i=t}             record
-           | t.i                         projection
-           | ...
-
-<div class="paragraph"> </div>
-
-       v <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>                          Values:
-           | {i=v, ..., i=v}             record value
-           | ...
-
-<div class="paragraph"> </div>
-
-       T <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>                          Types:
-           | {i:T, ..., i:T}             record type
-           | ...
-}&gt;
-   Reduction:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>                          <span class="id" title="var">Terms</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| {<span class="id" title="var">i</span>=<span class="id" title="var">t</span>, ..., <span class="id" title="var">i</span>=<span class="id" title="var">t</span>}             <span class="id" title="var">record</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">t.i</span>                         <span class="id" title="var">projection</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ...<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">v</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>                          <span class="id" title="var">Values</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| {<span class="id" title="var">i</span>=<span class="id" title="var">v</span>, ..., <span class="id" title="var">i</span>=<span class="id" title="var">v</span>}             <span class="id" title="var">record</span> <span class="id" title="var">value</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ...<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">T</span> <span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>:</span>:</span>=</span>                          <span class="id" title="keyword">Types</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| {<span class="id" title="var">i</span>:<span class="id" title="var">T</span>, ..., <span class="id" title="var">i</span>:<span class="id" title="var">T</span>}             <span class="id" title="var">record</span> <span class="id" title="keyword">type</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ...
+</span>   Reduction:
 <center><table class="infrule">
 <tr class="infruleassumption">
-  <td class="infrule">ti ==> ti'</td>
+  <td class="infrule">tn ==> tn'</td>
   <td class="infrulenamecol" rowspan="3">
     (ST_Rcd) &nbsp;
   </td></tr>
@@ -948,7 +943,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Records.html#STLCExtendedRecords"><span class="id" title="module">STLCExtendedRecords</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-11-09&nbsp;19:46&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-11-25&nbsp;17:39&nbsp;*)</span><br/>
 </div>
 </div>
 

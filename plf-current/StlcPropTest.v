@@ -88,14 +88,6 @@ Print Assumptions STLCProp.unique_types.
 Goal True.
 idtac " ".
 
-idtac "-------------------  afi  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: STLCProp.afi".
-idtac "Possible points: 1".
-print_manual_grade STLCProp.manual_grade_for_afi.
-idtac " ".
-
 idtac "-------------------  free_in_context  --------------------".
 idtac " ".
 
@@ -111,14 +103,6 @@ idtac "Assumptions:".
 Abort.
 Print Assumptions STLCProp.free_in_context.
 Goal True.
-idtac " ".
-
-idtac "-------------------  progress_preservation_statement  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: STLCProp.progress_preservation_statement".
-idtac "Possible points: 1".
-print_manual_grade STLCProp.manual_grade_for_progress_preservation_statement.
 idtac " ".
 
 idtac "-------------------  stlc_variation1  --------------------".
@@ -145,22 +129,76 @@ idtac "Possible points: 2".
 print_manual_grade STLCProp.manual_grade_for_stlc_variation3.
 idtac " ".
 
-idtac "-------------------  stlc_arith  --------------------".
+idtac "-------------------  STLCArith.subst  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: STLCArith.stlc_arith".
+idtac "#> STLCArith.subst".
 idtac "Possible points: 10".
-print_manual_grade STLCArith.manual_grade_for_stlc_arith.
+check_type @STLCArith.subst (
+(String.string -> STLCArith.tm -> STLCArith.tm -> STLCArith.tm)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions STLCArith.subst.
+Goal True.
+idtac " ".
+
+idtac "-------------------  STLCArith.weakening  --------------------".
+idtac " ".
+
+idtac "#> STLCArith.weakening".
+idtac "Possible points: 6".
+check_type @STLCArith.weakening (
+(forall (Gamma Gamma' : Maps.partial_map STLCArith.ty) 
+   (t : STLCArith.tm) (T : STLCArith.ty),
+ @Maps.includedin STLCArith.ty Gamma Gamma' ->
+ STLCArith.has_type Gamma t T -> STLCArith.has_type Gamma' t T)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions STLCArith.weakening.
+Goal True.
+idtac " ".
+
+idtac "-------------------  STLCArith.preservation  --------------------".
+idtac " ".
+
+idtac "#> STLCArith.preservation".
+idtac "Possible points: 6".
+check_type @STLCArith.preservation (
+(forall (t t' : STLCArith.tm) (T : STLCArith.ty),
+ STLCArith.has_type (@Maps.empty STLCArith.ty) t T ->
+ STLCArith.step t t' -> STLCArith.has_type (@Maps.empty STLCArith.ty) t' T)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions STLCArith.preservation.
+Goal True.
+idtac " ".
+
+idtac "-------------------  STLCArith.progress  --------------------".
+idtac " ".
+
+idtac "#> STLCArith.progress".
+idtac "Possible points: 6".
+check_type @STLCArith.progress (
+(forall (t : STLCArith.tm) (T : STLCArith.ty),
+ STLCArith.has_type (@Maps.empty STLCArith.ty) t T ->
+ STLCArith.value t \/ (exists t' : STLCArith.tm, STLCArith.step t t'))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions STLCArith.progress.
+Goal True.
 idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 25".
-idtac "Max points - advanced: 31".
+idtac "Max points - standard: 41".
+idtac "Max points - advanced: 47".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
+idtac "CSeq_congruence".
+idtac "fold_constants_bexp_sound".
+idtac "succ_hastype_nat__hastype_nat".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -178,20 +216,22 @@ idtac "---------- subject_expansion_stlc ---------".
 idtac "MANUAL".
 idtac "---------- STLCProp.unique_types ---------".
 Print Assumptions STLCProp.unique_types.
-idtac "---------- afi ---------".
-idtac "MANUAL".
 idtac "---------- STLCProp.free_in_context ---------".
 Print Assumptions STLCProp.free_in_context.
-idtac "---------- progress_preservation_statement ---------".
-idtac "MANUAL".
 idtac "---------- stlc_variation1 ---------".
 idtac "MANUAL".
 idtac "---------- stlc_variation2 ---------".
 idtac "MANUAL".
 idtac "---------- stlc_variation3 ---------".
 idtac "MANUAL".
-idtac "---------- stlc_arith ---------".
-idtac "MANUAL".
+idtac "---------- STLCArith.subst ---------".
+Print Assumptions STLCArith.subst.
+idtac "---------- STLCArith.weakening ---------".
+Print Assumptions STLCArith.weakening.
+idtac "---------- STLCArith.preservation ---------".
+Print Assumptions STLCArith.preservation.
+idtac "---------- STLCArith.progress ---------".
+Print Assumptions STLCArith.progress.
 idtac "".
 idtac "********** Advanced **********".
 idtac "---------- STLCProp.progress' ---------".
@@ -200,4 +240,4 @@ idtac "---------- STLCProp.substitution_preserves_typing_from_typing_ind -------
 Print Assumptions STLCProp.substitution_preserves_typing_from_typing_ind.
 Abort.
 
-(* 2021-11-09 19:47 *)
+(* 2021-11-25 17:40 *)

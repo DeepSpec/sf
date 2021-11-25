@@ -13,7 +13,6 @@
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Arith.Arith.
 From PLF Require Import Maps.
-From PLF Require Import Imp.
 From PLF Require Import Smallstep.
 
 Hint Constructors multi : core.
@@ -37,37 +36,53 @@ Hint Constructors multi : core.
 
 (** Here is the syntax, informally:
 
-    t ::= tru
-        | fls
-        | test t then t else t
-        | zro
-        | scc t
-        | prd t
-        | iszro t
-
-    And here it is formally: *)
+    t ::= true
+        | false
+        | if t then t else t
+        | 0
+        | succ 0
+        | pred t
+        | ? t
+*)
+(** And here it is formally: *)
+Module TM.
 
 Inductive tm : Type :=
   | tru : tm
   | fls : tm
-  | test : tm -> tm -> tm -> tm
+  | ite : tm -> tm -> tm -> tm
   | zro : tm
   | scc : tm -> tm
   | prd : tm -> tm
   | iszro : tm -> tm.
 
-(** (Since it is so simple, we will not bother introducing custom
-    concrete syntax for this language.) *)
+Declare Custom Entry tm.
+Declare Scope tm_scope.
+Notation "'true'"  := true (at level 1): tm_scope.
+Notation "'true'" := (tru) (in custom tm at level 0): tm_scope.
+Notation "'false'"  := false (at level 1): tm_scope.
+Notation "'false'" := (fls) (in custom tm at level 0): tm_scope.
+Notation "<{ e }>" := e (e custom tm at level 99): tm_scope.
+Notation "( x )" := x (in custom tm, x at level 99): tm_scope.
+Notation "x" := x (in custom tm at level 0, x constr at level 0): tm_scope.
+Notation "'0'" := (zro) (in custom tm at level 0): tm_scope.
+Notation "'0'"  := 0 (at level 1): tm_scope.
+Notation "'succ' x" := (scc x) (in custom tm at level 90, x custom tm at level 80): tm_scope.
+Notation "'pred' x" := (prd x) (in custom tm at level 90, x custom tm at level 80): tm_scope.
+Notation "'iszero' x" := (iszro x) (in custom tm at level 80, x custom tm at level 70): tm_scope.
+Notation "'if' c 'then' t 'else' e" := (ite c t e)
+                 (in custom tm at level 90, c custom tm at level 80,
+                  t custom tm at level 80, e custom tm at level 80): tm_scope.
+Local Open Scope tm_scope.
 
-(** _Values_ are [tru], [fls], and numeric values... *)
-
+(** _Values_ are [<{true}>], [<{false}>], and numeric values... *)
 Inductive bvalue : tm -> Prop :=
-  | bv_tru : bvalue tru
-  | bv_fls : bvalue fls.
+  | bv_True : bvalue <{ true }>
+  | bv_false : bvalue <{ false }>.
 
 Inductive nvalue : tm -> Prop :=
-  | nv_zro : nvalue zro
-  | nv_scc : forall t, nvalue t -> nvalue (scc t).
+  | nv_0 : nvalue <{ 0 }>
+  | nv_succ : forall t, nvalue t -> nvalue <{ succ t }>.
 
 Definition value (t : tm) := bvalue t \/ nvalue t.
 
@@ -79,41 +94,41 @@ Hint Unfold value : core.
 
 (** Here is the single-step relation, first informally...
 
-                   -------------------------------                  (ST_TestTru)
-                   test tru then t1 else t2 --> t1
+                   -------------------------------                   (ST_IfTrue)
+                   if true then t1 else t2 --> t1
 
-                   -------------------------------                  (ST_TestFls)
-                   test fls then t1 else t2 --> t2
+                   -------------------------------                  (ST_IfFalse)
+                   if false then t1 else t2 --> t2
 
                                t1 --> t1'
-            ----------------------------------------------------       (ST_Test)
-            test t1 then t2 else t3 --> test t1' then t2 else t3
+            ------------------------------------------------             (ST_If)
+            if t1 then t2 else t3 --> if t1' then t2 else t3
 
                              t1 --> t1'
-                         ------------------                             (ST_Scc)
-                         scc t1 --> scc t1'
+                         --------------------                          (ST_Succ)
+                         succ t1 --> succ t1'
 
-                           ---------------                           (ST_PrdZro)
-                           prd zro --> zro
+                           ------------                               (ST_Pred0)
+                           pred 0 --> 0
 
                          numeric value v
-                        -------------------                          (ST_PrdScc)
-                        prd (scc v) --> v
+                        -------------------                        (ST_PredSucc)
+                        pred (succ v) --> v
 
                               t1 --> t1'
-                         ------------------                             (ST_Prd)
-                         prd t1 --> prd t1'
+                         --------------------                          (ST_Pred)
+                         pred t1 --> pred t1'
 
-                          -----------------                        (ST_IszroZro)
-                          iszro zro --> tru
+                          -----------------                         (ST_IsZero0)
+                          iszero 0 --> true
 
                          numeric value v
-                      ---------------------                       (ST_IszroScc)
-                      iszro (scc v) --> fls
+                      -------------------------                  (ST_IszeroSucc)
+                      iszero (succ v) --> false
 
                             t1 --> t1'
-                       ----------------------                         (ST_Iszro)
-                       iszro t1 --> iszro t1'
+                       ------------------------                      (ST_Iszero)
+                       iszero t1 --> iszero t1'
 *)
 
 (** ... and then formally: *)
@@ -121,32 +136,32 @@ Hint Unfold value : core.
 Reserved Notation "t '-->' t'" (at level 40).
 
 Inductive step : tm -> tm -> Prop :=
-  | ST_TestTru : forall t1 t2,
-      (test tru t1 t2) --> t1
-  | ST_TestFls : forall t1 t2,
-      (test fls t1 t2) --> t2
-  | ST_Test : forall t1 t1' t2 t3,
+  | ST_IfTrue : forall t1 t2,
+      <{ if true then t1 else t2 }> --> t1
+  | ST_IfFalse : forall t1 t2,
+      <{ if false then t1 else t2 }> --> t2
+  | ST_If : forall c c' t2 t3,
+      c --> c' ->
+      <{ if c then t2 else t3 }> --> <{ if c' then t2 else t3 }>
+  | ST_Succ : forall t1 t1',
       t1 --> t1' ->
-      (test t1 t2 t3) --> (test t1' t2 t3)
-  | ST_Scc : forall t1 t1',
-      t1 --> t1' ->
-      (scc t1) --> (scc t1')
-  | ST_PrdZro :
-      (prd zro) --> zro
-  | ST_PrdScc : forall v,
+      <{ succ t1 }> --> <{ succ t1' }>
+  | ST_Pred0 :
+      <{ pred 0 }> --> <{ 0 }>
+  | ST_PredSucc : forall v,
       nvalue v ->
-      (prd (scc v)) --> v
-  | ST_Prd : forall t1 t1',
+      <{ pred (succ v) }> --> v
+  | ST_Pred : forall t1 t1',
       t1 --> t1' ->
-      (prd t1) --> (prd t1')
-  | ST_IszroZro :
-      (iszro zro) --> tru
-  | ST_IszroScc : forall v,
+      <{ pred t1 }> --> <{ pred t1' }>
+  | ST_Iszero0 :
+      <{ iszero 0 }> --> <{ true }>
+  | ST_IszeroSucc : forall v,
        nvalue v ->
-      (iszro (scc v)) --> fls
-  | ST_Iszro : forall t1 t1',
+      <{ iszero (succ v) }> --> <{ false }>
+  | ST_Iszero : forall t1 t1',
       t1 --> t1' ->
-      (iszro t1) --> (iszro t1')
+      <{ iszero t1 }> --> <{ iszero t1' }>
 
 where "t '-->' t'" := (step t t').
 
@@ -155,10 +170,10 @@ Hint Constructors step : core.
 (** Notice that the [step] relation doesn't care about whether the
     expression being stepped makes global sense -- it just checks that
     the operation in the _next_ reduction step is being applied to the
-    right kinds of operands.  For example, the term [scc tru] cannot
+    right kinds of operands.  For example, the term <{ succ true }> cannot
     take a step, but the almost as obviously nonsensical term
 
-       scc (test tru then tru else tru)
+       <{ succ (if true then true else true) }>
 
     can take a step (once, before becoming stuck). *)
 
@@ -240,67 +255,67 @@ Inductive ty : Type :=
     is always empty.
 
     
-                           ---------------                     (T_Tru)
-                           |- tru \in Bool
+                           ---------------                     (T_True)
+                           |- true \in Bool
 
-                          ---------------                      (T_Fls)
-                          |- fls \in Bool
+                          ---------------                      (T_False)
+                          |- false \in Bool
 
              |- t1 \in Bool    |- t2 \in T    |- t3 \in T
-             --------------------------------------------     (T_Test)
-                    |- test t1 then t2 else t3 \in T
+             --------------------------------------------     (T_If)
+                    |- if t1 then t2 else t3 \in T
 
-                             --------------                    (T_Zro)
-                             |- zro \in Nat
-
-                            |- t1 \in Nat
-                          -----------------                    (T_Scc)
-                          |- scc t1 \in Nat
+                             --------------                    (T_0)
+                             |- 0 \in Nat
 
                             |- t1 \in Nat
-                          -----------------                    (T_Prd)
-                          |- prd t1 \in Nat
+                          -----------------                    (T_Succ)
+                          |- succ t1 \in Nat
 
                             |- t1 \in Nat
-                        --------------------                 (T_IsZro)
-                        |- iszro t1 \in Bool
+                          -----------------                    (T_Pred)
+                          |- pred t1 \in Nat
+
+                            |- t1 \in Nat
+                        --------------------                 (T_Iszero)
+                          |-  iszero t1 \in Bool
 *)
 
 Reserved Notation "'|-' t '\in' T" (at level 40).
 
 Inductive has_type : tm -> ty -> Prop :=
-  | T_Tru :
-       |- tru \in Bool
-  | T_Fls :
-       |- fls \in Bool
-  | T_Test : forall t1 t2 t3 T,
+  | T_True :
+       |- <{ true }> \in Bool
+  | T_False :
+       |- <{ false }> \in Bool
+  | T_If : forall t1 t2 t3 T,
        |- t1 \in Bool ->
        |- t2 \in T ->
        |- t3 \in T ->
-       |- test t1 t2 t3 \in T
-  | T_Zro :
-       |- zro \in Nat
-  | T_Scc : forall t1,
+       |- <{ if t1 then t2 else t3 }> \in T
+  | T_0 :
+       |- <{ 0 }> \in Nat
+  | T_Succ : forall t1,
        |- t1 \in Nat ->
-       |- scc t1 \in Nat
-  | T_Prd : forall t1,
+       |- <{ succ t1 }> \in Nat
+  | T_Pred : forall t1,
        |- t1 \in Nat ->
-       |- prd t1 \in Nat
-  | T_Iszro : forall t1,
+       |- <{ pred t1 }> \in Nat
+  | T_Iszero : forall t1,
        |- t1 \in Nat ->
-       |- iszro t1 \in Bool
+       |- <{ iszero t1 }> \in Bool
 
 where "'|-' t '\in' T" := (has_type t T).
 
 Hint Constructors has_type : core.
 
 Example has_type_1 :
-  |- test fls zro (scc zro) \in Nat.
+  |- <{ if false then 0 else (succ 0) }> \in Nat.
 Proof.
-  apply T_Test.
-  - apply T_Fls.
-  - apply T_Zro.
-  - apply T_Scc. apply T_Zro.
+  apply T_If.
+  - apply T_False.
+  - apply T_0.
+  - apply T_Succ. apply T_0.
 Qed.
 
 (** (Since we've included all the constructors of the typing relation
@@ -313,13 +328,13 @@ Qed.
     not calculate the type of its normal form. *)
 
 Example has_type_not :
-  ~ ( |- test fls zro tru \in Bool ).
+  ~ ( |- <{ if false then 0 else true}> \in Bool ).
 Proof.
   intros Contra. solve_by_inverts 2.  Qed.
 
-(** **** Exercise: 1 star, standard, optional (scc_hastype_nat__hastype_nat) *)
-Example scc_hastype_nat__hastype_nat : forall t,
-  |- scc t \in Nat ->
+(** **** Exercise: 1 star, standard, optional (succ_hastype_nat__hastype_nat) *)
+Example succ_hastype_nat__hastype_nat : forall t,
+  |- <{succ t}> \in Nat ->
   |- t \in Nat.
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -370,9 +385,9 @@ Theorem progress : forall t T,
 Proof.
   intros t T HT.
   induction HT; auto.
-  (* The cases that were obviously values, like T_Tru and
-     T_Fls, are eliminated immediately by auto *)
-  - (* T_Test *)
+  (* The cases that were obviously values, like T_True and
+     T_False, are eliminated immediately by auto *)
+  - (* T_If *)
     right. destruct IHHT1.
     + (* t1 is a value *)
     apply (bool_canonical t1 HT1) in H.
@@ -381,7 +396,7 @@ Proof.
       * exists t3. auto.
     + (* t1 can take a step *)
       destruct H as [t1' H1].
-      exists (test t1' t2 t3). auto.
+      exists (<{ if t1' then t2 else t3 }>). auto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -394,20 +409,20 @@ Proof.
 
 (** _Proof_: By induction on a derivation of [|- t \in T].
 
-    - If the last rule in the derivation is [T_Test], then [t = test t1
+    - If the last rule in the derivation is [T_If], then [t = if t1
       then t2 else t3], with [|- t1 \in Bool], [|- t2 \in T] and [|- t3
       \in T].  By the IH, either [t1] is a value or else [t1] can step
       to some [t1'].
 
       - If [t1] is a value, then by the canonical forms lemmas
         and the fact that [|- t1 \in Bool] we have that [t1]
-        is a [bvalue] -- i.e., it is either [tru] or [fls].
-        If [t1 = tru], then [t] steps to [t2] by [ST_TestTru],
-        while if [t1 = fls], then [t] steps to [t3] by
-        [ST_TestFls].  Either way, [t] can step, which is what
+        is a [bvalue] -- i.e., it is either [true] or [false].
+        If [t1 = true], then [t] steps to [t2] by [ST_IfTrue],
+        while if [t1 = false], then [t] steps to [t3] by
+        [ST_IfFalse].  Either way, [t] can step, which is what
         we wanted to show.
 
-      - If [t1] itself can take a step, then, by [ST_Test], so can
+      - If [t1] itself can take a step, then, by [ST_If], so can
         [t].
 
     - (* FILL IN HERE *)
@@ -446,10 +461,10 @@ Proof.
          (* and we can deal with several impossible
             cases all at once *)
          try solve_by_invert.
-    - (* T_Test *) inversion HE; subst; clear HE.
-      + (* ST_TESTTru *) assumption.
-      + (* ST_TestFls *) assumption.
-      + (* ST_Test *) apply T_Test; try assumption.
+    - (* T_If *) inversion HE; subst; clear HE.
+      + (* ST_IFTrue *) assumption.
+      + (* ST_IfFalse *) assumption.
+      + (* ST_If *) apply T_If; try assumption.
         apply IHHT1; assumption.
     (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -462,25 +477,25 @@ Proof.
 
 (** _Proof_: By induction on a derivation of [|- t \in T].
 
-    - If the last rule in the derivation is [T_Test], then [t = test t1
+    - If the last rule in the derivation is [T_If], then [t = if t1
       then t2 else t3], with [|- t1 \in Bool], [|- t2 \in T] and [|- t3
       \in T].
 
       Inspecting the rules for the small-step reduction relation and
-      remembering that [t] has the form [test ...], we see that the
+      remembering that [t] has the form [if ...], we see that the
       only ones that could have been used to prove [t --> t'] are
-      [ST_TestTru], [ST_TestFls], or [ST_Test].
+      [ST_IfTrue], [ST_IfFalse], or [ST_If].
 
-      - If the last rule was [ST_TestTru], then [t' = t2].  But we
+      - If the last rule was [ST_IfTrue], then [t' = t2].  But we
         know that [|- t2 \in T], so we are done.
 
-      - If the last rule was [ST_TestFls], then [t' = t3].  But we
+      - If the last rule was [ST_IfFalse], then [t' = t3].  But we
         know that [|- t3 \in T], so we are done.
 
-      - If the last rule was [ST_Test], then [t' = test t1' then t2
+      - If the last rule was [ST_If], then [t' = if t1' then t2
         else t3], where [t1 --> t1'].  We know [|- t1 \in Bool] so,
-        by the IH, [|- t1' \in Bool].  The [T_Test] rule then gives us
-        [|- test t1' then t2 else t3 \in T], as required.
+        by the IH, [|- t1' \in Bool].  The [T_If] rule then gives us
+        [|- if t1' then t2 else t3 \in T], as required.
 
     - (* FILL IN HERE *)
 *)
@@ -538,7 +553,7 @@ Qed.
 (** **** Exercise: 2 stars, standard, especially useful (subject_expansion)
 
     Having seen the subject reduction property, one might
-    wonder whether the opposity property -- subject _expansion_ --
+    wonder whether the opposite property -- subject _expansion_ --
     also holds.  That is, is it always the case that, if [t --> t']
     and [|- t' \in T], then [|- t \in T]?  If so, prove it.  If
     not, give a counter-example.  (You do not need to prove your
@@ -554,9 +569,9 @@ Definition manual_grade_for_subject_expansion : option (nat*string) := None.
 
     Suppose that we add this new rule to the typing relation:
 
-      | T_SccBool : forall t,
+      | T_SuccBool : forall t,
            |- t \in Bool ->
-           |- scc t \in Bool
+           |- <{ succ t }> \in Bool
 
    Which of the following properties remain true in the presence of
    this rule?  For each one, write either "remains true" or
@@ -578,7 +593,7 @@ Definition manual_grade_for_variation1 : option (nat*string) := None.
     Suppose, instead, that we add this new rule to the [step] relation:
 
       | ST_Funny1 : forall t2 t3,
-           (test tru t2 t3) --> t3
+           (<{ if true then t2 else t3 }>) --> t3
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -594,7 +609,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 
       | ST_Funny2 : forall t1 t2 t2' t3,
            t2 --> t2' ->
-           (test t1 t2 t3) --> (test t1 t2' t3)
+           (<{ if t1 then t2 else t3 }>) --> (<{ if t1 then t2' else t3 }>)
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -607,7 +622,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
     Suppose instead that we add this rule:
 
       | ST_Funny3 :
-          (prd fls) --> (prd (prd fls))
+          (<{pred false}>) --> (<{ pred (pred false)}>)
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -620,7 +635,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
     Suppose instead that we add this rule:
 
       | T_Funny4 :
-            |- zro \in Bool
+            |- <{ 0 }> \in Bool
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -633,7 +648,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
     Suppose instead that we add this rule:
 
       | T_Funny5 :
-            |- prd zro \in Bool
+            |- <{ pred 0 }> \in Bool
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -652,18 +667,18 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
 
     [] *)
 
-(** **** Exercise: 1 star, standard (remove_prdzro)
+(** **** Exercise: 1 star, standard (remove_pred0)
 
-    The reduction rule [ST_PrdZro] is a bit counter-intuitive: we
-    might feel that it makes more sense for the predecessor of [zro] to
-    be undefined, rather than being defined to be [zro].  Can we
+    The reduction rule [ST_Pred0] is a bit counter-intuitive: we
+    might feel that it makes more sense for the predecessor of [<{0}>] to
+    be undefined, rather than being defined to be [<{0}>].  Can we
     achieve this simply by removing the rule from the definition of
     [step]?  Would doing so create any problems elsewhere?
 
 (* FILL IN HERE *)
 *)
 (* Do not modify the following line: *)
-Definition manual_grade_for_remove_predzro : option (nat*string) := None.
+Definition manual_grade_for_remove_pred0 : option (nat*string) := None.
 (** [] *)
 
 (** **** Exercise: 4 stars, advanced (prog_pres_bigstep)
@@ -681,5 +696,6 @@ Definition manual_grade_for_remove_predzro : option (nat*string) := None.
 (* Do not modify the following line: *)
 Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
+End TM.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

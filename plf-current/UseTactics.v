@@ -67,7 +67,6 @@ Import Maps.
 Import Imp.
 Import Equiv.
 Import Stlc.
-
 (** The tactic [introv] allows to automatically introduce the
     variables of a theorem and explicitly name the hypotheses
     involved. In the example shown next, the variables [c],
@@ -340,14 +339,13 @@ End NaryExamples.
 (* ################################################################# *)
 (** * Tactics for Working with Equality *)
 
-(** One of the major weakness of Coq compared with other interactive
+(** One of the major weaknesses of Coq compared with other interactive
     proof assistants is its relatively poor support for reasoning
     with equalities. The tactics described next aims at simplifying
     pieces of proof scripts manipulating equalities. *)
 
 (** This section presents the following tactics:
     - [asserts_rewrite] for introducing an equality to rewrite with,
-    - [cuts_rewrite], which is similar except that its subgoals are swapped,
     - [substs] for improving the [subst] tactic,
     - [fequals] for improving the [f_equal] tactic,
     - [applys_eq] for proving [P x y] using an hypothesis [P x z],
@@ -356,7 +354,7 @@ End NaryExamples.
 Module EqualityExamples.
 
 (* ================================================================= *)
-(** ** The Tactics [asserts_rewrite] and [cuts_rewrite] *)
+(** ** The Tactic [asserts_rewrite] *)
 
 (** The tactic [asserts_rewrite (E1 = E2)] replaces [E1] with [E2] in
     the goal, and produces the goal [E1 = E2]. *)
@@ -380,21 +378,8 @@ Qed.
 (** Remark: the syntax [asserts_rewrite (E1 = E2) in H] allows
      rewriting in the hypothesis [H] rather than in the goal. *)
 
-(** The tactic [cuts_rewrite (E1 = E2)] is like
-    [asserts_rewrite (E1 = E2)], except that the equality [E1 = E2]
-    appears as first subgoal. *)
-
-Theorem mult_0_plus' : forall n m : nat,
-  (0 + n) * m = n * m.
-Proof.
-  intros n m.
-  cuts_rewrite (0 + n = n).
-    reflexivity. (* subgoal [n*m = m*n] *)
-    reflexivity. (* subgoal [0+n = n] *)
-Qed.
-
-(** More generally, the tactics [asserts_rewrite] and [cuts_rewrite]
-    can be provided a lemma as argument. For example, one can write
+(** More generally, the tactic [asserts_rewrite] can be provided
+    a lemma as argument. For example, one can write
     [asserts_rewrite (forall a b, a*(S b) = a*b+a)].
     This formulation is useful when [a] and [b] are big terms,
     since there is no need to repeat their statements. *)
@@ -406,6 +391,9 @@ Proof.
     (* first subgoal:  [forall a b, a*(S b) = a*b+a] *)
     (* second subgoal: [(u + v) * (w * x + y) + (u + v) = z] *)
 Abort.
+
+(** The tactic [cuts_rewrite] is similar to [asserts_write] except that
+    it the two subgoals produced are swapped. *)
 
 (* ================================================================= *)
 (** ** The Tactic [substs] *)
@@ -472,10 +460,8 @@ Proof.
     admit. (* Assume we can prove this equality somehow. *)
 Abort.
 
-(** When we have a mismatch on two arguments, we want to produce
-    two equalities. To achieve this, we may call [applys_eq H].
-    More generally, the tactic [applys_eq] expects a lemma and a
-    sequence of natural numbers as arguments. *)
+(** When we have a mismatch on two arguments, the tactic [applys_eq]
+    produces two equalities. Consider the following example. *)
 
 Lemma demo_applys_eq_2 : forall (P:nat->nat->Prop) x1 x2 y1 y2,
   P (big_expression_using x2) (big_expression_using y2) ->
@@ -662,7 +648,6 @@ Admitted.
     of the induction hypothesis. *)
 
 Import Imp.
-
 Theorem ceval_deterministic: forall c st st1 st2,
   st =[ c ]=> st1 ->
   st =[ c ]=> st2 ->
@@ -699,7 +684,6 @@ End SkipExample.
 
 Module SortExamples.
   Import Imp.
-
 (** The tactic [sort] reorganizes the proof context by placing
     all the variables at the top and all the hypotheses at the
     bottom, thereby making the proof context more readable. *)
@@ -915,8 +899,6 @@ End ExamplesLets.
 
     - [gen] helps setting up goals for induction.
 
-    - [cases] and [cases_if] help with case analysis.
-
     - [splits] and [branch], to deal with n-ary constructs.
 
     - [asserts_rewrite], [cuts_rewrite], [substs] and [fequals] help
@@ -939,4 +921,4 @@ End ExamplesLets.
 
 *)
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

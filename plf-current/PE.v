@@ -46,6 +46,7 @@ Import ListNotations.
 
 From PLF Require Import Smallstep.
 From PLF Require Import Imp.
+
 (* ################################################################# *)
 (** * Generalizing Constant Folding *)
 
@@ -101,7 +102,7 @@ Definition empty_pe_state : pe_state := [].
 
 Tactic Notation "compare" ident(i) ident(j) :=
   let H := fresh "Heq" i j in
-  destruct (String.eqb_spec i j);
+  destruct (String.eqb_spec i j) as [H|H];
   [ subst j | ].
 
 Theorem pe_domain: forall pe_st V n,
@@ -805,7 +806,7 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> Prop :=
       c1 / pe_st ==> c1' / pe_st' ->
       <{if b1 then c1 else c2 end}> / pe_st ==> c1' / pe_st'
   | PE_IfFalse : forall pe_st pe_st' b1 c1 c2 c2',
-      pe_bexp pe_st b1 = BFalse ->
+      pe_bexp pe_st b1 = <{ false }> ->
       c2 / pe_st ==> c2' / pe_st' ->
       <{if b1 then c1 else c2 end}> / pe_st ==> c2' / pe_st'
   | PE_If : forall pe_st pe_st1 pe_st2 b1 c1 c2 c1' c2',
@@ -881,8 +882,6 @@ Inductive pe_ceval
 
 Local Hint Constructors pe_ceval : core.
 
-(* NOTATION : IY -- The "If" case line spacing looks a little off---what are the line
-   break insert rules for Imp? *)
 Theorem pe_com_complete:
   forall c pe_st pe_st' c', c / pe_st ==> c' / pe_st' ->
   forall st st'',
@@ -916,8 +915,6 @@ Proof. intros c pe_st pe_st' c' Hpe.
       rewrite <- assign_removes. eassumption.
 Qed.
 
-(* NOTATION : IY -- Note : In the PE_AsgnDynamic/If cases, "=[ ]=>" breaks in a weird
-   way. *)
 Theorem pe_com_sound:
   forall c pe_st pe_st' c', c / pe_st ==> c' / pe_st' ->
   forall st st'',
@@ -1060,7 +1057,7 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
             / pe_removes pe_st1 (pe_compare pe_st1 pe_st2)
             / c''
   | PE_WhileFalse : forall pe_st b1 c1,
-      pe_bexp pe_st b1 = BFalse ->
+      pe_bexp pe_st b1 = <{ false }> ->
       <{while b1 do c1 end}> / pe_st ==> <{skip}> / pe_st / <{skip}>
   | PE_WhileTrue : forall pe_st pe_st' pe_st'' b1 c1 c1' c2' c2'',
       pe_bexp pe_st b1 = <{ true }> ->
@@ -1095,7 +1092,7 @@ Inductive pe_com : com -> pe_state -> com -> pe_state -> com -> Prop :=
       (* Because we have an infinite loop, we should actually
          start to throw away the rest of the program:
          (while b1 do c1 end) / pe_st
-         ==> skip / pe_st / (while BTrue do skip end) *)
+         ==> skip / pe_st / (while true do skip end) *)
   | PE_WhileFixed : forall pe_st pe_st' pe_st'' b1 c1 c1' c2',
       pe_bexp pe_st b1 <> <{ false }> ->
       pe_bexp pe_st b1 <> <{ true }> ->
@@ -1671,4 +1668,4 @@ Proof. intros.
       eapply E_Some; eauto. apply pe_block_correct. apply Hkeval.
 Qed.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

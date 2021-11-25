@@ -1320,7 +1320,6 @@ Lemma substitution_preserves_typing : forall Gamma x U t v T,
    empty |- v \in U   ->
    Gamma |- [x:=v]t \in T.
 Proof.
-Proof.
   intros Gamma x U t v T Ht Hv.
   remember (x |-> U; Gamma) as Gamma'.
   generalize dependent Gamma.
@@ -1535,6 +1534,7 @@ Definition manual_grade_for_variations : option (nat*string) := None.
                                                  y custom stlc at level 0).
     Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 0).
     Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 0).
+
 *)
 
 (* FILL IN HERE *)
@@ -1543,4 +1543,4 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 Definition manual_grade_for_products : option (nat*string) := None.
 (** [] *)
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

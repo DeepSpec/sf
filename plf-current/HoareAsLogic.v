@@ -21,6 +21,7 @@
 Set Warnings "-deprecated-hint-without-locality,-deprecated-hint-without-locality".
 From PLF Require Import Maps.
 From PLF Require Import Hoare.
+
 Hint Constructors ceval : core.
 
 (* ################################################################# *)
@@ -391,4 +392,4 @@ Proof.
     of Coq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

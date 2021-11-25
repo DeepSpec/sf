@@ -22,7 +22,7 @@ From PLF Require Import Stlc.
 
 (**
     Syntax:
-<{
+
        t ::=                          Terms:
            | {i=t, ..., i=t}             record
            | t.i                         projection
@@ -35,10 +35,10 @@ From PLF Require Import Stlc.
        T ::=                          Types:
            | {i:T, ..., i:T}             record type
            | ...
-}>
+
    Reduction:
 
-                               ti ==> ti'
+                               tn ==> tn'
   -------------------------------------------------------------------- (ST_Rcd)
   {i1=v1, ..., im=vm, in=tn, ...} ==> {i1=v1, ..., im=vm, in=tn', ...}
 
@@ -735,4 +735,4 @@ Qed.
 
 End STLCExtendedRecords.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

@@ -58,14 +58,6 @@ Print Assumptions step_deterministic.
 Goal True.
 idtac " ".
 
-idtac "-------------------  smallstep_bools  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: Temp4.smallstep_bools".
-idtac "Possible points: 1".
-print_manual_grade Temp4.manual_grade_for_smallstep_bools.
-idtac " ".
-
 idtac "-------------------  smallstep_bool_shortcut  --------------------".
 idtac " ".
 
@@ -97,7 +89,7 @@ idtac " ".
 idtac "#> multistep_congr_2".
 idtac "Possible points: 2".
 check_type @multistep_congr_2 (
-(forall t1 t2 t2' : tm, value t1 -> t2 -->* t2' -> P t1 t2 -->* P t1 t2')).
+(forall v1 t2 t2' : tm, value v1 -> t2 -->* t2' -> P v1 t2 -->* P v1 t2')).
 idtac "Assumptions:".
 Abort.
 Print Assumptions multistep_congr_2.
@@ -150,12 +142,32 @@ Print Assumptions multistep__eval.
 Goal True.
 idtac " ".
 
-idtac "-------------------  combined_properties  --------------------".
+idtac "-------------------  combined_step_deterministic  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: combined_properties".
-idtac "Possible points: 6".
-print_manual_grade manual_grade_for_combined_properties.
+idtac "#> Combined.combined_step_deterministic".
+idtac "Possible points: 3".
+check_type @Combined.combined_step_deterministic (
+(@deterministic Combined.tm Combined.step)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions Combined.combined_step_deterministic.
+Goal True.
+idtac " ".
+
+idtac "-------------------  combined_strong_progress  --------------------".
+idtac " ".
+
+idtac "#> Combined.combined_strong_progress".
+idtac "Possible points: 3".
+check_type @Combined.combined_strong_progress (
+(~
+ (forall t : Combined.tm,
+  Combined.value t \/ (exists t' : Combined.tm, Combined.step t t')))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions Combined.combined_strong_progress.
+Goal True.
 idtac " ".
 
 idtac "-------------------  compiler_is_correct  --------------------".
@@ -185,12 +197,15 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 27".
-idtac "Max points - advanced: 33".
+idtac "Max points - standard: 26".
+idtac "Max points - advanced: 32".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
+idtac "CSeq_congruence".
+idtac "fold_constants_bexp_sound".
+idtac "succ_hastype_nat__hastype_nat".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -208,8 +223,6 @@ idtac "---------- SimpleArith1.test_step_2 ---------".
 Print Assumptions SimpleArith1.test_step_2.
 idtac "---------- step_deterministic ---------".
 Print Assumptions step_deterministic.
-idtac "---------- smallstep_bools ---------".
-idtac "MANUAL".
 idtac "---------- Temp4.Temp5.bool_step_prop4_holds ---------".
 Print Assumptions Temp4.Temp5.bool_step_prop4_holds.
 idtac "---------- test_multistep_4 ---------".
@@ -222,8 +235,10 @@ idtac "---------- step__eval ---------".
 Print Assumptions step__eval.
 idtac "---------- multistep__eval ---------".
 Print Assumptions multistep__eval.
-idtac "---------- combined_properties ---------".
-idtac "MANUAL".
+idtac "---------- Combined.combined_step_deterministic ---------".
+Print Assumptions Combined.combined_step_deterministic.
+idtac "---------- Combined.combined_strong_progress ---------".
+Print Assumptions Combined.combined_strong_progress.
 idtac "---------- normalize_ex ---------".
 Print Assumptions normalize_ex.
 idtac "".
@@ -234,4 +249,4 @@ idtac "---------- compiler_is_correct ---------".
 Print Assumptions compiler_is_correct.
 Abort.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

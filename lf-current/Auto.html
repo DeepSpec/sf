@@ -171,9 +171,12 @@ The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> 
 <div class="doc">
 Proof search could, in principle, take an arbitrarily long time,
     so there are limits to how far <span class="inlinecode"><span class="id" title="tactic">auto</span></span> will search by default. 
+<div class="paragraph"> </div>
+
+ If <span class="inlinecode"><span class="id" title="tactic">auto</span></span> is not solving our goal as expected
+    we can use <span class="inlinecode"><span class="id" title="tactic">debug</span></span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span> to see a trace 
 </div>
 <div class="code">
-
 <span class="id" title="keyword">Example</span> <a id="auto_example_3" class="idref" href="#auto_example_3"><span class="id" title="definition">auto_example_3</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:17" class="idref" href="#P:17"><span class="id" title="binder">P</span></a> <a id="Q:18" class="idref" href="#Q:18"><span class="id" title="binder">Q</span></a> <a id="R:19" class="idref" href="#R:19"><span class="id" title="binder">R</span></a> <a id="S:20" class="idref" href="#S:20"><span class="id" title="binder">S</span></a> <a id="T:21" class="idref" href="#T:21"><span class="id" title="binder">T</span></a> <a id="U:22" class="idref" href="#U:22"><span class="id" title="binder">U</span></a>: <span class="id" title="keyword">Prop</span>),<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Auto.html#P:17"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Auto.html#Q:18"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Auto.html#Q:18"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Auto.html#R:19"><span class="id" title="variable">R</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -184,7 +187,9 @@ Proof search could, in principle, take an arbitrarily long time,
 &nbsp;&nbsp;<a class="idref" href="Auto.html#U:22"><span class="id" title="variable">U</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;When&nbsp;it&nbsp;cannot&nbsp;solve&nbsp;the&nbsp;goal,&nbsp;<span class="inlinecode"><span class="id" title="tactic">auto</span></span>&nbsp;does&nbsp;nothing&nbsp;*)</span><br/>
-&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Let's&nbsp;see&nbsp;where&nbsp;<span class="inlinecode"><span class="id" title="tactic">auto</span></span>&nbsp;gets&nbsp;stuck&nbsp;using&nbsp;<span class="inlinecode"><span class="id" title="tactic">debug</span></span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">debug</span> <span class="id" title="tactic">auto</span>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;Optional&nbsp;argument&nbsp;says&nbsp;how&nbsp;deep&nbsp;to&nbsp;search&nbsp;(default&nbsp;is&nbsp;5)&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">auto</span> 6.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
@@ -302,7 +307,13 @@ Of course, in any given development there will probably be
 </div>
 
 <div class="doc">
-Let's take a first pass over <span class="inlinecode"><span class="id" title="var">ceval_deterministic</span></span> to simplify the
+(Note that the <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Unfold</span></span> <span class="inlinecode"><span class="id" title="var">is_fortytwo</span></span> command above the
+    example is needed because, unlike the <span class="inlinecode"><span class="id" title="tactic">apply</span></span> tactic, the "apply"
+    steps that are performed by <span class="inlinecode"><span class="id" title="tactic">auto</span></span> do not do any automatic
+    unfolding. 
+<div class="paragraph"> </div>
+
+ Let's take a first pass over <span class="inlinecode"><span class="id" title="var">ceval_deterministic</span></span> to simplify the
     proof script. 
 </div>
 <div class="code">
@@ -904,7 +915,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">HP</span> <span class="id" title="var">HQ</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">HP</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">y</span> <span class="id" title="var">HP'</span>]. <span class="id" title="tactic">eauto</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-11-09&nbsp;19:44&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-11-25&nbsp;17:37&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -35,124 +35,126 @@ Goal True.
 idtac "-------------------  some_term_is_stuck  --------------------".
 idtac " ".
 
-idtac "#> some_term_is_stuck".
+idtac "#> TM.some_term_is_stuck".
 idtac "Possible points: 2".
-check_type @some_term_is_stuck ((exists t : tm, stuck t)).
+check_type @TM.some_term_is_stuck ((exists t : TM.tm, TM.stuck t)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions some_term_is_stuck.
+Print Assumptions TM.some_term_is_stuck.
 Goal True.
 idtac " ".
 
 idtac "-------------------  value_is_nf  --------------------".
 idtac " ".
 
-idtac "#> value_is_nf".
+idtac "#> TM.value_is_nf".
 idtac "Possible points: 3".
-check_type @value_is_nf ((forall t : tm, value t -> step_normal_form t)).
+check_type @TM.value_is_nf ((forall t : TM.tm, TM.value t -> TM.step_normal_form t)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions value_is_nf.
+Print Assumptions TM.value_is_nf.
 Goal True.
 idtac " ".
 
 idtac "-------------------  finish_progress  --------------------".
 idtac " ".
 
-idtac "#> progress".
+idtac "#> TM.progress".
 idtac "Possible points: 3".
-check_type @progress (
-(forall (t : tm) (T : ty),
- |- t \in T -> value t \/ (exists t' : tm, t --> t'))).
+check_type @TM.progress (
+(forall (t : TM.tm) (T : TM.ty),
+ TM.has_type t T -> TM.value t \/ (exists t' : TM.tm, TM.step t t'))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions progress.
+Print Assumptions TM.progress.
 Goal True.
 idtac " ".
 
 idtac "-------------------  finish_progress_informal  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: finish_progress_informal".
+idtac "#> Manually graded: TM.finish_progress_informal".
 idtac "Advanced".
 idtac "Possible points: 3".
-print_manual_grade manual_grade_for_finish_progress_informal.
+print_manual_grade TM.manual_grade_for_finish_progress_informal.
 idtac " ".
 
 idtac "-------------------  finish_preservation  --------------------".
 idtac " ".
 
-idtac "#> preservation".
+idtac "#> TM.preservation".
 idtac "Possible points: 2".
-check_type @preservation (
-(forall (t t' : tm) (T : ty), |- t \in T -> t --> t' -> |- t' \in T)).
+check_type @TM.preservation (
+(forall (t t' : TM.tm) (T : TM.ty),
+ TM.has_type t T -> TM.step t t' -> TM.has_type t' T)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions preservation.
+Print Assumptions TM.preservation.
 Goal True.
 idtac " ".
 
 idtac "-------------------  finish_preservation_informal  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: finish_preservation_informal".
+idtac "#> Manually graded: TM.finish_preservation_informal".
 idtac "Advanced".
 idtac "Possible points: 3".
-print_manual_grade manual_grade_for_finish_preservation_informal.
+print_manual_grade TM.manual_grade_for_finish_preservation_informal.
 idtac " ".
 
 idtac "-------------------  preservation_alternate_proof  --------------------".
 idtac " ".
 
-idtac "#> preservation'".
+idtac "#> TM.preservation'".
 idtac "Possible points: 3".
-check_type @preservation' (
-(forall (t t' : tm) (T : ty), |- t \in T -> t --> t' -> |- t' \in T)).
+check_type @TM.preservation' (
+(forall (t t' : TM.tm) (T : TM.ty),
+ TM.has_type t T -> TM.step t t' -> TM.has_type t' T)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions preservation'.
+Print Assumptions TM.preservation'.
 Goal True.
 idtac " ".
 
 idtac "-------------------  subject_expansion  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: subject_expansion".
+idtac "#> Manually graded: TM.subject_expansion".
 idtac "Possible points: 2".
-print_manual_grade manual_grade_for_subject_expansion.
+print_manual_grade TM.manual_grade_for_subject_expansion.
 idtac " ".
 
 idtac "-------------------  variation1  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: variation1".
+idtac "#> Manually graded: TM.variation1".
 idtac "Possible points: 2".
-print_manual_grade manual_grade_for_variation1.
+print_manual_grade TM.manual_grade_for_variation1.
 idtac " ".
 
 idtac "-------------------  variation2  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: variation2".
+idtac "#> Manually graded: TM.variation2".
 idtac "Possible points: 2".
-print_manual_grade manual_grade_for_variation2.
+print_manual_grade TM.manual_grade_for_variation2.
 idtac " ".
 
-idtac "-------------------  remove_prdzro  --------------------".
+idtac "-------------------  remove_pred0  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: remove_predzro".
+idtac "#> Manually graded: TM.remove_pred0".
 idtac "Possible points: 1".
-print_manual_grade manual_grade_for_remove_predzro.
+print_manual_grade TM.manual_grade_for_remove_pred0.
 idtac " ".
 
 idtac "-------------------  prog_pres_bigstep  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: prog_pres_bigstep".
+idtac "#> Manually graded: TM.prog_pres_bigstep".
 idtac "Advanced".
 idtac "Possible points: 6".
-print_manual_grade manual_grade_for_prog_pres_bigstep.
+print_manual_grade TM.manual_grade_for_prog_pres_bigstep.
 idtac " ".
 
 idtac " ".
@@ -163,6 +165,9 @@ idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
+idtac "CSeq_congruence".
+idtac "fold_constants_bexp_sound".
+idtac "succ_hastype_nat__hastype_nat".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -176,23 +181,23 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
-idtac "---------- some_term_is_stuck ---------".
-Print Assumptions some_term_is_stuck.
-idtac "---------- value_is_nf ---------".
-Print Assumptions value_is_nf.
-idtac "---------- progress ---------".
-Print Assumptions progress.
-idtac "---------- preservation ---------".
-Print Assumptions preservation.
-idtac "---------- preservation' ---------".
-Print Assumptions preservation'.
+idtac "---------- TM.some_term_is_stuck ---------".
+Print Assumptions TM.some_term_is_stuck.
+idtac "---------- TM.value_is_nf ---------".
+Print Assumptions TM.value_is_nf.
+idtac "---------- TM.progress ---------".
+Print Assumptions TM.progress.
+idtac "---------- TM.preservation ---------".
+Print Assumptions TM.preservation.
+idtac "---------- TM.preservation' ---------".
+Print Assumptions TM.preservation'.
 idtac "---------- subject_expansion ---------".
 idtac "MANUAL".
 idtac "---------- variation1 ---------".
 idtac "MANUAL".
 idtac "---------- variation2 ---------".
 idtac "MANUAL".
-idtac "---------- remove_predzro ---------".
+idtac "---------- remove_pred0 ---------".
 idtac "MANUAL".
 idtac "".
 idtac "********** Advanced **********".
@@ -204,4 +209,4 @@ idtac "---------- prog_pres_bigstep ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2021-11-09 19:47 *)
+(* 2021-11-25 17:39 *)

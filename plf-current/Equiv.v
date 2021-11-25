@@ -12,11 +12,14 @@ From Coq Require Import Lists.List. Import ListNotations.
 From Coq Require Import Logic.FunctionalExtensionality.
 From PLF Require Export Imp.
 
-(** *** Before you Get Started:
+(** *** Before You Get Started:
 
     - Create a fresh directory for this volume. (Do not try to mix the
       files from this volume with files from _Logical Foundations_ in
-      the same directory: the result will not make you happy.)
+      the same directory: the result will not make you happy.)  You
+      can either start with an empty directory and populate it with
+      the files listed below, or else download the whole PLF zip file
+      and unzip it.
 
     - The new directory should contain at least the following files:
          - [Imp.v] (make sure it is the one from the PLF distribution,
@@ -27,7 +30,7 @@ From PLF Require Export Imp.
 
            -Q . PLF
 
-    - Reminder: If you see errors like this...
+    - If you see errors like this...
 
              Compiled library PLF.Maps (in file
              /Users/.../plf/Maps.vo) makes inconsistent assumptions
@@ -35,13 +38,20 @@ From PLF Require Export Imp.
 
       ... it may mean something went wrong with the above steps.
       Doing "[make clean]" (or manually removing everything except
-      [.v] and [_CoqProject] files) may help. *)
+      [.v] and [_CoqProject] files) may help.
+
+    - If you are using VSCode with the VSCoq extension, you'll then
+      want to open a new window in VSCode, click [Open Folder > plf],
+      and run [make].  If you get an error like "Cannot find a
+      physical path..." error, it may be because you didn't open plf
+      directly (you instead opened a folder containing both lf and
+      plf, for example). *)
 
 (** *** Advice for Working on Exercises:
 
-    - Most of the Coq proofs we ask you to do are similar to proofs
-      that we've provided.  Before starting to work on exercises
-      problems, take the time to work through our proofs (both
+    - Most of the Coq proofs we ask you to do in this chapter are
+      similar to proofs that we've provided.  Before starting to work
+      on exercises, take the time to work through our proofs (both
       informally and in Coq) and make sure you understand them in
       detail.  This will save you a lot of time.
 
@@ -71,14 +81,16 @@ From PLF Require Export Imp.
     program that evaluates to the same number as the original.
 
     To talk about the correctness of program transformations for the
-    full Imp language, in particular assignment, we need to consider
-    the role of variables and state. *)
+    full Imp language -- in particular, assignment -- we need to
+    consider the role of mutable state and develop a more
+    sophisticated notion of correctness, which we'll call _behavioral
+    equivalence_.. *)
 
 (* ================================================================= *)
 (** ** Definitions *)
 
 (** For [aexp]s and [bexp]s with variables, the definition we want is
-    clear: Two [aexp]s or [bexp]s are _behaviorally equivalent_ if
+    clear: Two [aexp]s or [bexp]s are "behaviorally equivalent" if
     they evaluate to the same result in every state. *)
 
 Definition aequiv (a1 a2 : aexp) : Prop :=
@@ -92,37 +104,48 @@ Definition bequiv (b1 b2 : bexp) : Prop :=
 (** Here are some simple examples of equivalences of arithmetic
     and boolean expressions. *)
 
-Theorem aequiv_example: aequiv <{ X - X }> <{ 0 }>.
+Theorem aequiv_example:
+  aequiv
+    <{ X - X }>
+    <{ 0 }>.
 Proof.
   intros st. simpl. lia.
 Qed.
 
-Theorem bequiv_example: bequiv <{ X - X = 0 }> <{ true }>.
+Theorem bequiv_example:
+  bequiv
+    <{ X - X = 0 }>
+    <{ true }>.
 Proof.
   intros st. unfold beval.
   rewrite aequiv_example. reflexivity.
 Qed.
 
-(** For commands, the situation is a little more subtle.  We can't
-    simply say "two commands are behaviorally equivalent if they
+(** For commands, the situation is a little more subtle.  We
+    can't simply say "two commands are behaviorally equivalent if they
     evaluate to the same ending state whenever they are started in the
     same initial state," because some commands, when run in some
-    starting states, don't terminate in any final state at all!  What
-    we need instead is this: two commands are behaviorally equivalent
-    if, for any given starting state, they either (1) both diverge
-    or (2) both terminate in the same final state.  A compact way to
-    express this is "if the first one terminates in a particular state
-    then so does the second, and vice versa." *)
+    starting states, don't terminate in any final state at all!
+
+    What we need instead is this: two commands are behaviorally
+    equivalent if, for any given starting state, they either (1) both
+    diverge or (2) both terminate in the same final state.  A compact
+    way to express this is "if the first one terminates in a
+    particular state then so does the second, and vice versa." *)
 
 Definition cequiv (c1 c2 : com) : Prop :=
   forall (st st' : state),
     (st =[ c1 ]=> st') <-> (st =[ c2 ]=> st').
 
+Definition refines (c1 c2 : com) : Prop :=
+  forall (st st' : state),
+    (st =[ c1 ]=> st') -> (st =[ c2 ]=> st').
+
 (* ================================================================= *)
 (** ** Simple Examples *)
 
 (** For examples of command equivalence, let's start by looking at
-    some trivial program transformations involving [skip]: *)
+    some trivial program equivalences involving [skip]: *)
 
 Theorem skip_left : forall c,
   cequiv
@@ -155,7 +178,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** Similarly, here is a simple transformation that optimizes [if]
+(** Similarly, here is a simple equivalence that optimizes [if]
     commands: *)
 
 Theorem if_true_simple : forall c1 c2,
@@ -171,8 +194,8 @@ Proof.
     apply E_IfTrue. reflexivity. assumption.  Qed.
 
 (** Of course, no (human) programmer would write a conditional whose
-    guard is literally [true].  But they might write one whose guard
-    is _equivalent_ to true:
+    condition is literally [true].  But they might write one whose
+    condition is _equivalent_ to true:
 
     _Theorem_: If [b] is equivalent to [true], then [if b then c1
     else c2 end] is equivalent to [c1].
@@ -246,7 +269,7 @@ Proof.
 (** **** Exercise: 3 stars, standard (swap_if_branches)
 
     Show that we can swap the branches of an [if] if we also negate its
-    guard. *)
+    condition. *)
 
 Theorem swap_if_branches : forall b c1 c2,
   cequiv
@@ -259,8 +282,9 @@ Proof.
 (** For [while] loops, we can give a similar pair of theorems.  A loop
     whose guard is equivalent to [false] is equivalent to [skip],
     while a loop whose guard is equivalent to [true] is equivalent to
-    [while true do skip end] (or any other non-terminating program).
-    The first of these facts is easy. *)
+    [while true do skip end] (or any other non-terminating program). *)
+
+(** The first of these facts is easy. *)
 
 Theorem while_false : forall b c,
   bequiv b <{false}> ->
@@ -361,7 +385,8 @@ Proof.
 (** A more interesting fact about [while] commands is that any number
     of copies of the body can be "unrolled" without changing meaning.
 
-    Loop unrolling is an important transformation in real compilers! *)
+    Loop unrolling is an important transformation in any real
+    compiler, so its correctness is of more than academic interest! *)
 
 Theorem loop_unrolling : forall b c,
   cequiv
@@ -395,9 +420,8 @@ Proof.
 (** [] *)
 
 (** Proving program properties involving assignments is one place
-    where the fact that program states are treated
-    extensionally (e.g., [x !-> m x ; m] and [m] are equal maps) comes
-    in handy. *)
+    where the fact that program states are treated extensionally
+    (e.g., [x !-> m x ; m] and [m] are equal maps) comes in handy. *)
 
 Theorem identity_assignment : forall x,
   cequiv
@@ -417,9 +441,9 @@ Proof.
 Qed.
 
 (** **** Exercise: 2 stars, standard, especially useful (assign_aequiv) *)
-Theorem assign_aequiv : forall (x : string) a,
-  aequiv x a ->
-  cequiv <{ skip }> <{ x := a }>.
+Theorem assign_aequiv : forall (X : string) (a : aexp),
+  aequiv <{ X }> a ->
+  cequiv <{ skip }> <{ X := a }>.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -457,7 +481,7 @@ Definition prog_c : com :=
   <{ skip }> .
 
 Definition prog_d : com :=
-  <{ while ~(X = 0) do
+  <{ while X <> 0 do
        X := (X * Y) + 1
      end }>.
 
@@ -466,7 +490,7 @@ Definition prog_e : com :=
 
 Definition prog_f : com :=
   <{ Y := X + 1;
-     while ~(X = Y) do
+     while X <> Y do
        Y := X + 1
      end }>.
 
@@ -476,12 +500,12 @@ Definition prog_g : com :=
      end }>.
 
 Definition prog_h : com :=
-  <{ while ~(X = X) do
+  <{ while X <> X do
        X := X + 1
      end }>.
 
 Definition prog_i : com :=
-  <{ while ~(X = Y) do
+  <{ while X <> Y do
        X := Y + 1
      end }>.
 
@@ -501,11 +525,12 @@ Definition manual_grade_for_equiv_classes : option (nat*string) := None.
 (* ================================================================= *)
 (** ** Behavioral Equivalence Is an Equivalence *)
 
-(** First, we verify that the equivalences on [aexps], [bexps], and
+(** First, let's verify that the equivalences on [aexps], [bexps], and
     [com]s really are _equivalences_ -- i.e., that they are reflexive,
     symmetric, and transitive.  The proofs are all easy. *)
 
-Lemma refl_aequiv : forall (a : aexp), aequiv a a.
+Lemma refl_aequiv : forall (a : aexp),
+  aequiv a a.
 Proof.
   intros a st. reflexivity.  Qed.
 
@@ -520,7 +545,8 @@ Proof.
   unfold aequiv. intros a1 a2 a3 H12 H23 st.
   rewrite (H12 st). rewrite (H23 st). reflexivity.  Qed.
 
-Lemma refl_bequiv : forall (b : bexp), bequiv b b.
+Lemma refl_bequiv : forall (b : bexp),
+  bequiv b b.
 Proof.
   unfold bequiv. intros b st. reflexivity.  Qed.
 
@@ -535,7 +561,8 @@ Proof.
   unfold bequiv. intros b1 b2 b3 H12 H23 st.
   rewrite (H12 st). rewrite (H23 st). reflexivity.  Qed.
 
-Lemma refl_cequiv : forall (c : com), cequiv c c.
+Lemma refl_cequiv : forall (c : com),
+  cequiv c c.
 Proof.
   unfold cequiv. intros c st st'. reflexivity.  Qed.
 
@@ -572,18 +599,19 @@ Qed.
     ... and so on for the other forms of commands. *)
 
 (** (Note that we are using the inference rule notation here not
-    as part of a definition, but simply to write down some valid
-    implications in a readable format. We prove these implications
-    below.) *)
+    as part of an inductive definition, but simply to write down some
+    valid implications in a readable format. We prove these
+    implications below.) *)
 
 (** We will see a concrete example of why these congruence
     properties are important in the following section (in the proof of
     [fold_constants_com_sound]), but the main idea is that they allow
     us to replace a small part of a large program with an equivalent
     small part and know that the whole large programs are equivalent
-    _without_ doing an explicit proof about the non-varying parts --
-    i.e., the "proof burden" of a small change to a large program is
-    proportional to the size of the change, not the program. *)
+    _without_ doing an explicit proof about the parts that didn't
+    change -- i.e., the "proof burden" of a small change to a large
+    program is proportional to the size of the change, not the
+    program! *)
 
 Theorem CAsgn_congruence : forall x a a',
   aequiv a a' ->
@@ -694,20 +722,12 @@ Example congruence_example:
   cequiv
     (* Program 1: *)
     <{ X := 0;
-       if (X = 0)
-       then
-         Y := 0
-       else
-         Y := 42
-       end }>
+       if (X = 0) then Y := 0
+       else Y := 42 end }>
     (* Program 2: *)
     <{ X := 0;
-       if (X = 0)
-       then
-         Y := X - X   (* <--- Changed here *)
-       else
-         Y := 42
-       end }>.
+       if (X = 0) then Y := X - X   (* <--- Changed here *)
+       else Y := 42 end }>.
 Proof.
   apply CSeq_congruence.
   - apply refl_cequiv.
@@ -718,25 +738,28 @@ Proof.
     + apply refl_cequiv.
 Qed.
 
-(** **** Exercise: 3 stars, advanced, optional (not_congr)
+(** **** Exercise: 3 stars, advanced (not_congr)
 
     We've shown that the [cequiv] relation is both an equivalence and
     a congruence on commands.  Can you think of a relation on commands
-    that is an equivalence but _not_ a congruence? *)
+    that is an equivalence but _not_ a congruence?  Write down the
+    relation (formally), together with an informal sketch of a proof
+    that it is an equivalence but not a congruence. *)
 
-(* FILL IN HERE
-
-    [] *)
+(* FILL IN HERE *)
+(* Do not modify the following line: *)
+Definition manual_grade_for_not_congr : option (nat*string) := None.
+(** [] *)
 
 (* ################################################################# *)
 (** * Program Transformations *)
 
 (** A _program transformation_ is a function that takes a program as
-    input and produces some variant of the program as output.
-    Compiler optimizations such as constant folding are a canonical
-    example, but there are many others. *)
+    input and produces a modified program as output.  Compiler
+    optimizations such as constant folding are a canonical example,
+    but there are many others. *)
 
-(** A program transformation is _sound_ if it preserves the
+(** A program transformation is said to be _sound_ if it preserves the
     behavior of the original program. *)
 
 Definition atrans_sound (atrans : aexp -> aexp) : Prop :=
@@ -754,8 +777,7 @@ Definition ctrans_sound (ctrans : com -> com) : Prop :=
 (* ================================================================= *)
 (** ** The Constant-Folding Transformation *)
 
-(** An expression is _constant_ when it contains no variable
-    references.
+(** An expression is _constant_ if it contains no variable references.
 
     Constant folding is an optimization that finds constant
     expressions and replaces them by their values. *)
@@ -792,19 +814,22 @@ Example fold_aexp_ex1 :
   = <{ 3 * X }>.
 Proof. reflexivity. Qed.
 
-(** Note that this version of constant folding doesn't eliminate
-    trivial additions, etc. -- we are focusing attention on a single
-    optimization for the sake of simplicity.  It is not hard to
-    incorporate other ways of simplifying expressions; the definitions
-    and proofs just get longer. *)
+(** Note that this version of constant folding doesn't do other
+    "obvious" things like eliminating trivial additions (e.g.,
+    rewriting [0 + X] to just [X]).: we are focusing attention on a
+    single optimization for the sake of simplicity.
+
+    It is not hard to incorporate other ways of simplifying
+    expressions -- the definitions and proofs just get longer.  We'll
+    consider optimizations in the exercises. *)
 
 Example fold_aexp_ex2 :
   fold_constants_aexp <{ X - ((0 * 6) + Y) }> = <{ X - (0 + Y) }>.
 Proof. reflexivity. Qed.
 
 (** Not only can we lift [fold_constants_aexp] to [bexp]s (in the
-    [BEq] and [BLe] cases); we can also look for constant _boolean_
-    expressions and evaluate them in-place. *)
+    [BEq], [BNeq], and [BLe] cases); we can also look for constant
+    _boolean_ expressions and evaluate them in-place as well. *)
 
 Fixpoint fold_constants_bexp (b : bexp) : bexp :=
   match b with
@@ -1105,10 +1130,10 @@ Proof.
     (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* ----------------------------------------------------------------- *)
-(** *** Soundness of (0 + n) Elimination, Redux *)
+(* ================================================================= *)
+(** ** Soundness of (0 + n) Elimination, Redux *)
 
-(** **** Exercise: 4 stars, advanced, optional (optimize_0plus)
+(** **** Exercise: 4 stars, standard, optional (optimize_0plus_var)
 
     Recall the definition [optimize_0plus] from the [Imp] chapter
     of _Logical Foundations_:
@@ -1127,39 +1152,82 @@ Proof.
           <{ (optimize_0plus a1) * (optimize_0plus a2) }>
       end.
 
-   Note that this function is defined over the old [aexp]s,
+   Note that this function is defined over the old version of [aexp]s,
    without states.
 
-   Write a new version of this function that accounts for variables,
-   plus analogous ones for [bexp]s and commands:
+   Write a new version of this function that deals with variables (by
+   leaving them alone), plus analogous ones for [bexp]s and commands:
 
      optimize_0plus_aexp
      optimize_0plus_bexp
      optimize_0plus_com
+*)
 
-   Prove that these three functions are sound, as we did for
-   [fold_constants_*].  Make sure you use the congruence lemmas in
-   the proof of [optimize_0plus_com] -- otherwise it will be _long_!
+Fixpoint optimize_0plus_aexp (a : aexp) : aexp
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-   Then define an optimizer on commands that first folds
-   constants (using [fold_constants_com]) and then eliminates [0 + n]
-   terms (using [optimize_0plus_com]).
+Fixpoint optimize_0plus_bexp (b : bexp) : bexp
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-   - Give a meaningful example of this optimizer's output.
+Fixpoint optimize_0plus_com (c : com) : com
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-   - Prove that the optimizer is sound.  (This part should be _very_
-     easy.)  *)
+Example test_optimize_0plus:
+    optimize_0plus_com
+       <{ while X <> 0 do X := 0 + X - 1 end }>
+  =    <{ while X <> 0 do X := X - 1 end }>.
+Proof.
+  (* FILL IN HERE *) Admitted.
 
-(* FILL IN HERE
+(** Prove that these three functions are sound, as we did for
+    [fold_constants_*].  Make sure you use the congruence lemmas in the
+    proof of [optimize_0plus_com] -- otherwise it will be _long_! *)
 
-    [] *)
+Theorem optimize_0plus_aexp_sound:
+  atrans_sound optimize_0plus_aexp.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+Theorem optimize_0plus_bexp_sound :
+  btrans_sound optimize_0plus_bexp.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+Theorem optimize_0plus_com_sound :
+  ctrans_sound optimize_0plus_com.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** Finally, let's define a compound optimizer on commands that first
+    folds constants (using [fold_constants_com]) and then eliminates
+    [0 + n] terms (using [optimize_0plus_com]). *)
+
+Definition optimizer (c : com) := optimize_0plus_com (fold_constants_com c).
+
+(** Prove that this optimizer is sound. *)
+
+Theorem optimizer_sound :
+  ctrans_sound optimizer.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
 (* ################################################################# *)
 (** * Proving Inequivalence *)
 
-(** Suppose that [c1] is a command of the form [X := a1; Y := a2]
-    and [c2] is the command [X := a1; Y := a2'], where [a2'] is
-    formed by substituting [a1] for all occurrences of [X] in [a2].
+(** Next, let's look at some programs that are _not_ equivalent. *)
+
+(** Suppose that [c1] is a command of the form
+
+       X := a1; Y := a2
+
+    and [c2] is the command
+
+       X := a1; Y := a2'
+
+    where [a2'] is formed by substituting [a1] for all occurrences
+    of [X] in [a2].
+
     For example, [c1] and [c2] might be:
 
        c1  =  (X := 42 + 53;
@@ -1201,13 +1269,13 @@ Proof. simpl. reflexivity. Qed.
     claim that commands [c1] and [c2] as described above are
     always equivalent.  *)
 
-Definition subst_equiv_property := forall x1 x2 a1 a2,
+Definition subst_equiv_property : Prop := forall x1 x2 a1 a2,
   cequiv <{ x1 := a1; x2 := a2 }>
          <{ x1 := a1; x2 := subst_aexp x1 a1 a2 }>.
 
 (** Sadly, the property does _not_ always hold.
 
-    We can show the following counterexample:
+    Here is a counterexample:
 
        X := X + 1; Y := X
 
@@ -1215,7 +1283,7 @@ Definition subst_equiv_property := forall x1 x2 a1 a2,
 
        X := X + 1; Y := X + 1
 
-    which clearly isn't equivalent to the original program. [] *)
+    which clearly isn't equivalent. *)
 
 Theorem subst_inequiv :
   ~ subst_equiv_property.
@@ -1264,9 +1332,9 @@ Proof.
 (** **** Exercise: 4 stars, standard, optional (better_subst_equiv)
 
     The equivalence we had in mind above was not complete nonsense --
-    it was actually almost right.  To make it correct, we just need to
-    exclude the case where the variable [X] occurs in the
-    right-hand-side of the first assignment statement. *)
+    in fact, it was actually almost right.  To make it correct, we
+    just need to exclude the case where the variable [X] occurs in the
+    right-hand side of the first assignment statement. *)
 
 Inductive var_not_used_in_aexp (x : string) : aexp -> Prop :=
   | VNUNum : forall n, var_not_used_in_aexp x (ANum n)
@@ -1464,7 +1532,11 @@ Definition pYX :=
 
 Theorem pXY_cequiv_pYX :
   cequiv pXY pYX \/ ~cequiv pXY pYX.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  (* Hint: You may want to use [t_update_permute] at some point,
+     in which case you'll probably be left with [X <> Y] as a
+     hypothesis. You can use [discriminate] to discharge this. *)
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 4 stars, standard, optional (havoc_copy)
@@ -1544,7 +1616,7 @@ Proof. (* FILL IN HERE *) Admitted.
 
 Definition p3 : com :=
   <{ Z := 1;
-     while ~(X = 0) do
+     while X <> 0 do
        havoc X;
        havoc Z
      end }>.
@@ -1568,7 +1640,7 @@ Proof. (* FILL IN HERE *) Admitted.
     is it always possible to make [p5] terminate?) *)
 
 Definition p5 : com :=
-  <{ while ~(X = 1) do
+  <{ while X <> 1 do
        havoc X
      end }>.
 
@@ -1583,6 +1655,21 @@ End Himp.
 
 (* ################################################################# *)
 (** * Additional Exercises *)
+
+(** **** Exercise: 3 stars, standard, optional (swap_noninterfering_assignments)
+
+    (Hint: You'll need [functional_extensionality] for this one.) *)
+
+Theorem swap_noninterfering_assignments: forall l1 l2 a1 a2,
+  l1 <> l2 ->
+  var_not_used_in_aexp l1 a2 ->
+  var_not_used_in_aexp l2 a1 ->
+  cequiv
+    <{ l1 := a1; l2 := a2 }>
+    <{ l2 := a2; l1 := a1 }>.
+Proof.
+(* FILL IN HERE *) Admitted.
+(** [] *)
 
 (** **** Exercise: 4 stars, standard, optional (for_while_equiv)
 
@@ -1606,22 +1693,6 @@ End Himp.
 
     [] *)
 
-(** **** Exercise: 3 stars, standard, optional (swap_noninterfering_assignments)
-
-    (Hint: You'll need [functional_extensionality] for this one.) *)
-
-Theorem swap_noninterfering_assignments: forall l1 l2 a1 a2,
-  l1 <> l2 ->
-  var_not_used_in_aexp l1 a2 ->
-  var_not_used_in_aexp l2 a1 ->
-  cequiv
-    <{ l1 := a1; l2 := a2 }>
-    <{ l2 := a2; l1 := a1 }>.
-Proof.
-(* FILL IN HERE *) Admitted.
-
-(** [] *)
-
 (** **** Exercise: 4 stars, advanced, optional (capprox)
 
     In this exercise we define an asymmetric variant of program
@@ -1636,7 +1707,7 @@ Definition capprox (c1 c2 : com) : Prop := forall (st st' : state),
 
 (** For example, the program
 
-  c1 = while ~(X = 1) do
+  c1 = while X <> 1 do
          X := X - 1
        end
 
@@ -1675,4 +1746,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

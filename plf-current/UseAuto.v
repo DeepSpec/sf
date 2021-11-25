@@ -110,7 +110,7 @@ Lemma solving_by_apply : forall (P Q : nat->Prop),
   (forall n, Q n -> P n) ->
   (forall n, Q n) ->
   P 2.
-Proof. auto. Qed.
+Proof. auto. (* [info_auto] *) Qed.
 
 (** If we are interested to see which proof [auto] came up with,
     one possibility is to look at the generated proof-term,
@@ -127,7 +127,8 @@ Proof. auto. Qed.
    (the first one), and then applied the hypothesis [H0] (the
    second one).
 
-*)
+   A more practical approach is to invoke the tactic [info_auto], which
+   reveals the proof script that [auto] used to complete the proof. *)
 
 (** The tactic [auto] can invoke [apply] but not [eapply]. So, [auto]
     cannot exploit lemmas whose instantiation cannot be directly
@@ -357,7 +358,7 @@ Proof. auto. Qed.
     [reflexivity] and [assumption]. If one of these calls solves the
     goal, the job is done. Otherwise [auto] tries to apply the most
     recently introduced assumption that can be applied to the goal
-    without producing and error. This application produces
+    without producing an error. This application produces
     subgoals. There are two possible cases. If the sugboals produced
     can be solved by a recursive call to [auto], then the job is done.
     Otherwise, if this application produces at least one subgoal that
@@ -471,11 +472,11 @@ Proof. auto. auto 6. Qed.
     [P k] is also derivable from [P (k + 1)]. Adding this hypothesis
     offers a new possibility that [auto] could consider at every step.
 
-    There exists a special command that one can use for tracing
-    all the steps that proof-search considers. To view such a
-    trace, one should write [debug eauto]. (For some reason, the
-    command [debug auto] does not exist, so we have to use the
-    command [debug eauto] instead.) *)
+    There exists a special commands, named [info_auto] and [info_eauto],
+    that one can use to see what tactics [auto] uses to solve a goal.
+    There also exists more verbose commands, named [debug auto] and
+    [debug eauto], that one can use for tracing all the steps that
+    considered during a proof-search. *)
 
 Lemma working_of_auto_1 : forall (P : nat->Prop),
   (* Hypothesis H1: *) (P 0) ->
@@ -483,7 +484,7 @@ Lemma working_of_auto_1 : forall (P : nat->Prop),
   (* Hypothesis H3: *) (forall k, P (k + 1) -> P k) ->
   (* Goal:          *) (P 2).
 (* Uncomment "debug" in the following line to see the debug trace: *)
-Proof. intros P H1 H2 H3. (* debug *) eauto. Qed.
+Proof. intros P H1 H2 H3. (* debug *) auto. Qed.
 
 (** The output message produced by [debug eauto] is as follows.
 
@@ -509,7 +510,7 @@ Lemma working_of_auto_2 : forall (P : nat->Prop),
   (* Hypothesis H3: *) (forall k, P (k + 1) -> P k) ->
   (* Hypothesis H2: *) (forall k, P (k - 1) -> P k) ->
   (* Goal:          *) (P 2).
-Proof. intros P H1 H3 H2. (* debug *) eauto. Qed.
+Proof. intros P H1 H3 H2. (* debug *) auto. Qed.
 
 (** This time, the output message suggests that the proof search
     investigates many possibilities. If we print the proof term:
@@ -576,25 +577,39 @@ Proof. intros P H1 H3 H2. (* debug *) eauto. Qed.
 (** ** Adding Hints *)
 
 (** By default, [auto] (and [eauto]) only tries to apply the
-    hypotheses that appear in the proof context. There are two
+    hypotheses that appear in the proof context. There are three
     possibilities for telling [auto] to exploit a lemma that have
-    been proved previously: either adding the lemma as an assumption
-    just before calling [auto], or adding the lemma as a hint, so
+    been proved previously: either add the lemma as a on-the-fly
+    hint with [auto using lemma]; or add the lemma as an assumption
+    just before calling [auto]; or add the lemma as a hint, so
     that it can be used by every calls to [auto].
 
-    The first possibility is useful to have [auto] exploit a lemma
-    that only serves at this particular point. To add the lemma as
-    hypothesis, one can type [generalize mylemma; intros], or simply
-    [lets: mylemma] (the latter requires [LibTactics.v]).
+    The first and second possibilities are useful to have [auto] exploit a 
+    lemma that only serves at this particular point. Note: to add a lemma 
+    as an hypothesis, one can type [generalize mylemma; intro], or simply
+    [lets: mylemma], if using [LibTactics.v].
 
-    The second possibility is useful for lemmas that need to be
-    exploited several times. The syntax for adding a lemma as a hint
-    is [Hint Resolve mylemma]. For example: *)
+    The third possibility is useful for lemmas that need to be exploited 
+    accross several lemmas. The syntax for adding a lemma as a hint is 
+    [Hint Resolve mylemma]. For example: *)
 
 Lemma nat_le_refl : forall (x:nat), x <= x.
 Proof. apply le_n. Qed.
 
 Local Hint Resolve nat_le_refl : core.
+
+(** The standard library adds a few lemmas in the hint database.
+    For example, the [eq_sym] lemma, which characterizes symmetry of equality,
+    is registered in module [Coq.Init.Logic] via the line
+    [Hint Immediate eq_sym not_eq_sym: core.]. There [Hint Immediate] is used
+    instead of [Hint Resolve] to limit the search depth after symmetry is
+    exploited. In practice, [auto] is able to prove a result such as the
+    following one. *)
+
+Lemma solving_by_symmetry : forall n,
+  n = 5 ->
+  5 = n.
+Proof. info_auto. Qed.
 
 (** A convenient shorthand for adding all the constructors of an
     inductive datatype as hints is the command [Hint Constructors
@@ -650,7 +665,7 @@ Ltac auto_tilde ::= auto.
 (** In the examples that follow, only [auto_star] is needed. *)
 
 (** An alternative, possibly more efficient version of auto_star is the
-    following":
+    following:
 
     Ltac auto_star ::= try solve [ eassumption | auto | jauto ].
 
@@ -660,7 +675,7 @@ Ltac auto_tilde ::= auto.
     [jauto] is strictly stronger than [eassumption] and [auto], it
     makes sense to call these tactics first, because, when the
     succeed, they save a lot of time, and when they fail to prove
-    the goal, they fail very quickly.".
+    the goal, they fail very quickly..
 
 *)
 
@@ -676,7 +691,6 @@ Ltac auto_tilde ::= auto.
 
 Module DeterministicImp.
   Import Imp.
-
 (** Recall the original proof of the determinism lemma for the IMP
     language, shown below. *)
 
@@ -1171,7 +1185,7 @@ Qed.
     The difficulty comes from the statement of [nth_eq_last], which
     takes the form [nth (length l) (l ++ x::nil) d = x]. This lemma is
     hard to exploit because its first argument, [length l], mentions
-    a list [l] that has to be exactly the same as the [l] occuring in
+    a list [l] that has to be exactly the same as the [l] occurring in
     [l ++ x::nil]. In practice, the first argument is often a natural
     number [n] that is provably equal to [length l] yet that is not
     syntactically equal to [length l]. There is a simple fix for
@@ -1340,7 +1354,7 @@ End SubtypingInversion.
 
 Lemma order_matters_1 : forall (P : nat->Prop),
   (forall n m, P m -> m <> 0 -> P n) ->
-  P 2 ->
+  P 5 ->
   P 1.
 Proof.
   eauto. (* Success *)
@@ -1443,7 +1457,7 @@ Proof.
 Qed.
 
 (** There is actually one exception to the previous rule: a constant
-    occuring in an hypothesis is automatically unfolded if the
+    occurring in an hypothesis is automatically unfolded if the
     hypothesis can be directly applied to the current goal. For example,
     [auto] can prove [myFact -> P 3], as illustrated below. *)
 
@@ -1770,7 +1784,7 @@ Lemma lia_demo_2 : forall (x y z : nat),
   (x - z <= 2).
 Proof. intros. lia. Qed.
 
-(** One can proof [False] using [omega] if the mathematical facts
+(** One can proof [False] using [lia] if the mathematical facts
     from the context are contradictory. In the following example,
     the constraints on the values [x] and [y] cannot be all
     satisfied in the same time. *)
@@ -1781,8 +1795,8 @@ Lemma lia_demo_3 : forall (x y : nat),
   False.
 Proof. intros. lia. Qed.
 
-(** Note: [omega] can prove a goal by contradiction only if its
-    conclusion reduces to [False]. The tactic [omega] always fails
+(** Note: [lia] can prove a goal by contradiction only if its
+    conclusion reduces to [False]. The tactic [lia] always fails
     when the conclusion is an arbitrary proposition [P], even though
     [False] implies any proposition [P] (by [ex_falso_quodlibet]). *)
 
@@ -1881,6 +1895,9 @@ Proof. congruence. Qed.
     - [eauto] moreover tries [eapply], and in particular can instantiate
       existentials in the conclusion.
 
+    - [info_auto], [info_eauto], [debug auto] and [debug eauto] can be used
+      to obtain details on the proof search process.
+
     - [iauto] extends [eauto] with support for negation, conjunctions, and
       disjunctions. However, its support for disjunction can make it
       exponentially slow.
@@ -1921,4 +1938,4 @@ Proof. congruence. Qed.
     some investment, however this investment will pay off very quickly.
 *)
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

@@ -755,7 +755,7 @@ The key issue in the normalization proof (as in many proofs by
 <div class="doc">
 As immediate consequences of this definition, we have that every
     element of every set <span class="inlinecode"><span class="id" title="var">R_T</span></span> halts in a value and is closed with type
-    <span class="inlinecode"><span class="id" title="var">t</span></span> :
+    <span class="inlinecode"><span class="id" title="var">T</span></span> :
 </div>
 <div class="code">
 
@@ -1399,7 +1399,7 @@ You'll need similar functions for the other term constructors.
 <div class="togglescript" id="proofcontrol31" onclick="toggleDisplay('proof31');toggleDisplay('proofcontrol31')"><span class="show"></span></div>
 <div class="proofscript" id="proof31" onclick="toggleDisplay('proof31');toggleDisplay('proofcontrol31')">
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 1; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">c</span> <span class="id" title="var">e</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">intros</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHinstantiation</span>.<br/>
@@ -1500,7 +1500,7 @@ And at long last, the main lemma.
 </div>
 
 <br/>
-<span class="comment">(*&nbsp;2021-11-09&nbsp;19:46&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-11-25&nbsp;17:39&nbsp;*)</span><br/>
 </div>
 </div>
 

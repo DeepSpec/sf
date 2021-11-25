@@ -23,7 +23,7 @@ Import STLC.
     arrow types, they are lambda-abstractions.
 
     Formally, we will need these lemmas only for terms that are not
-    only well typed but _closed_ -- well typed in the empty
+    only well typed but _closed_ -- i.e., well typed in the empty
     context. *)
 
 Lemma canonical_forms_bool : forall t,
@@ -184,8 +184,9 @@ Proof.
 (* ================================================================= *)
 (** ** The Weakening Lemma *)
 
-(** Typing is preserved under "extensions" to the context [Gamma].
-    (Recall the definition of "includedin" from Maps.v.) *)
+(** First, we show that typing is preserved under "extensions" to the
+    context [Gamma].  (Recall the definition of "includedin" from
+    Maps.v.) *)
 
 Lemma weakening : forall Gamma Gamma' t T,
      includedin Gamma Gamma' ->
@@ -209,7 +210,7 @@ Proof.
 Qed.
 
 (* ================================================================= *)
-(** ** A Substitution Lemma *)
+(** ** The Substitution Lemma *)
 
 (** Now we come to the conceptual heart of the proof that reduction
     preserves types -- namely, the observation that _substitution_
@@ -222,9 +223,9 @@ Qed.
     that we've shown that [v] has type [U].  Then, since [v] satisfies
     the assumption we made about [x] when typing [t], we can
     substitute [v] for each of the occurrences of [x] in [t] and
-    obtain a new term that still has type [T]. *)
+    obtain a new term that still has type [T].
 
-(** _Lemma_: If [x|->U; Gamma |- t \in T] and [|- v \in U],
+    _Lemma_: If [x|->U; Gamma |- t \in T] and [|- v \in U],
     then [Gamma |- [x:=v]t \in T]. *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
@@ -275,7 +276,7 @@ Lemma substitution_preserves_typing : forall Gamma x U t v T,
         Second, suppose [x <> y]. Again, using [T_Abs],
         we need to show that [y|->S; Gamma |- [x:=v]t0 \in T1].
         Since [x <> y], we have
-        [y|->S; x|->U; Gamma = x|->U; y|->S; Gamma]. So,
+        [y|->S; x|->U; Gamma = x|->U; y|->S; Gamma]. So
         we have [x|->U; y|->S; Gamma |- t0 \in T1]. Then, the
         the IH applies (taking [Gamma' = y|->S; Gamma]), giving us
         [y|->S; Gamma |- [x:=v]t0 \in T1], as required.
@@ -524,15 +525,16 @@ Definition closed (t:tm) :=
     are a subset of the open ones.  "Open" precisely means "possibly
     containing free variables.") *)
 
-(** **** Exercise: 1 star, standard (afi)
+(** **** Exercise: 1 star, standard, optional (afi)
 
-    In the space below, write out the rules of the [appears_free_in]
-    relation in informal inference-rule notation.  (Use whatever
-    notational conventions you like -- the point of the exercise is
-    just for you to think a bit about the meaning of each rule.)
-    Although this is a rather low-level, technical definition,
-    understanding it is crucial to understanding substitution and its
-    properties, which are really the crux of the lambda-calculus. *)
+    (Officially optional, but strongly recommended!) In the space
+    below, write out the rules of the [appears_free_in] relation in
+    informal inference-rule notation.  (Use whatever notational
+    conventions you like -- the point of the exercise is just for you
+    to think a bit about the meaning of each rule.)  Although this is
+    a rather low-level, technical definition, understanding it is
+    crucial to understanding substitution and its properties, which
+    are really the crux of the lambda-calculus. *)
 
 (* FILL IN HERE *)
 
@@ -671,12 +673,12 @@ Proof.
 (* ################################################################# *)
 (** * Additional Exercises *)
 
-(** **** Exercise: 1 star, standard (progress_preservation_statement)
+(** **** Exercise: 1 star, standard, optional (progress_preservation_statement)
 
-    Without peeking at their statements above, write down the progress
-    and preservation theorems for the simply typed lambda-calculus (as
-    Coq theorems).
-    You can write [Admitted] for the proofs. *)
+    (Officially optional, but strongly recommended!) Without peeking
+    at their statements above, write down the progress and
+    preservation theorems for the simply typed lambda-calculus (as Coq
+    theorems).  You can write [Admitted] for the proofs. *)
 
 (* FILL IN HERE *)
 
@@ -915,49 +917,113 @@ Notation "'if0' x 'then' y 'else' z" :=
                     left associativity).
 Coercion tm_const : nat >-> tm.
 
-(** **** Exercise: 5 stars, standard (stlc_arith)
+(** In this extended exercise, your job is to finish formalizing the
+    definition and properties of the STLC extended with arithmetic.
+    Specifically:
 
-    Finish formalizing the definition and properties of the STLC
-    extended with arithmetic. This is a longer exercise. Specifically:
+    Fill in the core definitions for STLCArith, by starting
+    with the rules and terms which are the same as STLC.
+    Then prove the key lemmas and theorems we provide.
+    You will need to define and prove helper lemmas, as before.
+       
+    It will be necessary to also fill in "Reserved Notation",
+    "Notation", and "Hint Constructors". 
 
-    1. Copy the core definitions for STLC that we went through,
-        as well as the key lemmas and theorems, and paste them
-        into the file at this point. Do not copy examples, exercises,
-        etc. (In particular, make sure you don't copy any of the []
-        comments at the end of exercises, to avoid confusing the
-        autograder.)
+    Hint: If you get an error "STLC.tm" found instead of term "tm" then Coq is picking
+    up the old notation for ie: subst instead of the new notation
+    for STLCArith, so you need to overwrite the old with the notation
+    before you can use it.
 
-        You should copy over five definitions:
-          - Fixpoint subst
-          - Inductive value
-          - Inductive step
-          - Inductive has_type
-          - Inductive appears_free_in
+    Make sure Coq accepts the whole file before submitting 
+*)
 
-        And five theorems, with their proofs:
-          - Lemma weakening
-          - Lemma weakening_empty
-          - Lemma substitution_preserves_typing
-          - Theorem preservation
-          - Theorem progress
+Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 
-        It will be helpful to also copy over "Reserved Notation",
-        "Notation", and "Hint Constructors" for these things.
+(** **** Exercise: 5 stars, standard (STLCArith.subst) *)
+Fixpoint subst (x : string) (s : tm) (t : tm) : tm
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-    2. Edit and extend the four definitions (subst, value, step,
-        and has_type) so they are appropriate for the new STLC
-        extended with arithmetic.
+Inductive value : tm -> Prop :=
+  (* FILL IN HERE *)
+.
 
-    3. Extend the proofs of all the five properties of the original
-        STLC to deal with the new syntactic forms. Make sure Coq
-        accepts the whole file. *)
+Hint Constructors value : core.
+
+Reserved Notation "t '-->' t'" (at level 40).
+
+Inductive step : tm -> tm -> Prop :=
+  (* FILL IN HERE *)
+where "t '-->' t'" := (step t t').
+
+Notation multistep := (multi step).
+Notation "t1 '-->*' t2" := (multistep t1 t2) (at level 40).
+
+Hint Constructors step : core.
+
+(* An example *)
+
+Example Nat_step_example : exists t,
+<{(\x: Nat, \y: Nat, x * y ) 3 2 }> -->* t.
+Proof. (* FILL IN HERE *) Admitted.
+
+(* Typing *)
+
+Definition context := partial_map ty.
+
+Reserved Notation "Gamma '|-' t '\in' T" (at level 101, t custom stlc, T custom stlc at level 0).
+
+Inductive has_type : context -> tm -> ty -> Prop :=
+  (* FILL IN HERE *)
+where "Gamma '|-' t '\in' T" := (has_type Gamma t T).
+
+Hint Constructors has_type : core.
+
+(* An example *)
+
+Example Nat_typing_example :
+   empty |- ( \x: Nat, \y: Nat, x * y ) 3 2 \in Nat.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(* ================================================================= *)
+(** ** The Technical Theorems *)
+
+(** The next lemmas are proved _exactly_ as before. *)
+
+(** **** Exercise: 4 stars, standard (STLCArith.weakening) *)
+Lemma weakening : forall Gamma Gamma' t T,
+     includedin Gamma Gamma' ->
+     Gamma  |- t \in T  ->
+     Gamma' |- t \in T.
+Proof. (* FILL IN HERE *) Admitted.
 
 (* FILL IN HERE *)
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_stlc_arith : option (nat*string) := None.
+(** [] *)
+
+(* Preservation *)
+(* Hint: You will need to define and prove the same helper lemmas we used before *)
+
+(** **** Exercise: 4 stars, standard (STLCArith.preservation) *)
+Theorem preservation : forall t t' T,
+  empty |- t \in T  ->
+  t --> t'  ->
+  empty |- t' \in T.
+Proof with eauto. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(* Progress *)
+
+(** **** Exercise: 4 stars, standard (STLCArith.progress) *)
+Theorem progress : forall t T,
+  empty |- t \in T ->
+  value t \/ exists t', t --> t'.
+Proof with eauto. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 End STLCArith.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

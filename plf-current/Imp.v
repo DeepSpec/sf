@@ -1069,6 +1069,7 @@ Coercion ANum : nat >-> aexp.
 
 Declare Custom Entry com.
 Declare Scope com_scope.
+
 Notation "<{ e }>" := e (at level 0, e custom com at level 99) : com_scope.
 Notation "( x )" := x (in custom com, x at level 99) : com_scope.
 Notation "x" := x (in custom com at level 0, x constr at level 0) : com_scope.
@@ -2052,4 +2053,4 @@ End BreakImp.
 
     [] *)
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

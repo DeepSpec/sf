@@ -632,7 +632,7 @@ Fixpoint R (T:ty) (t:tm) : Prop :=
 
 (** As immediate consequences of this definition, we have that every
     element of every set [R_T] halts in a value and is closed with type
-    [t] :*)
+    [T] :*)
 
 Lemma R_halts : forall {T} {t}, R T t -> halts t.
 Proof.
@@ -1089,7 +1089,7 @@ Lemma msubst_preserves_typing : forall c e,
      forall Gamma t S, (mupdate Gamma c) |- t \in S ->
      Gamma |- { (msubst e t) } \in S.
 Proof.
-  induction 1; intros.
+    intros c e H. induction H; intros.
     simpl in H. simpl. auto.
     simpl in H2.  simpl.
     apply IHinstantiation.
@@ -1177,4 +1177,4 @@ Proof.
   eapply V_nil.
 Qed.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

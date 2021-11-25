@@ -93,8 +93,8 @@ idtac " ".
 idtac "#> assign_aequiv".
 idtac "Possible points: 2".
 check_type @assign_aequiv (
-(forall (x : String.string) (a : aexp),
- aequiv (AId x) a -> cequiv <{ skip }> <{ x := a }>)).
+(forall (X : String.string) (a : aexp),
+ aequiv (AId X) a -> cequiv <{ skip }> <{ X := a }>)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions assign_aequiv.
@@ -124,6 +124,15 @@ idtac "Assumptions:".
 Abort.
 Print Assumptions CIf_congruence.
 Goal True.
+idtac " ".
+
+idtac "-------------------  not_congr  --------------------".
+idtac " ".
+
+idtac "#> Manually graded: not_congr".
+idtac "Advanced".
+idtac "Possible points: 3".
+print_manual_grade manual_grade_for_not_congr.
 idtac " ".
 
 idtac "-------------------  fold_constants_com_sound  --------------------".
@@ -227,11 +236,14 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 27".
-idtac "Max points - advanced: 45".
+idtac "Max points - advanced: 48".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
 idtac "FunctionalExtensionality.functional_extensionality_dep".
+idtac "CSeq_congruence".
+idtac "fold_constants_bexp_sound".
+idtac "succ_hastype_nat__hastype_nat".
 idtac "".
 idtac "".
 idtac "********** Summary **********".
@@ -269,6 +281,8 @@ idtac "---------- Himp.pXY_cequiv_pYX ---------".
 Print Assumptions Himp.pXY_cequiv_pYX.
 idtac "".
 idtac "********** Advanced **********".
+idtac "---------- not_congr ---------".
+idtac "MANUAL".
 idtac "---------- Himp.p1_may_diverge ---------".
 Print Assumptions Himp.p1_may_diverge.
 idtac "---------- Himp.p2_may_diverge ---------".
@@ -279,4 +293,4 @@ idtac "---------- Himp.p3_p4_inequiv ---------".
 Print Assumptions Himp.p3_p4_inequiv.
 Abort.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)

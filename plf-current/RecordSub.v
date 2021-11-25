@@ -76,17 +76,7 @@ Notation "'Top'" := (Ty_Top) (in custom stlc_ty at level 0).
     that it admits things like a record type whose final "tail" is
     [Top] or some arrow type rather than [Nil].  To avoid such cases,
     it is useful to assume that all the record types and terms that we
-    see will obey some simple well-formedness conditions.
-
-    [An interesting technical question is whether the basic properties
-    of the system -- progress and preservation -- remain true if we
-    drop these conditions.  I believe they do, and I would encourage
-    motivated readers to try to check this by dropping the conditions
-    from the definitions of typing and subtyping and adjusting the
-    proofs in the rest of the chapter accordingly.  This is not a
-    trivial exercise (or I'd have done it!), but it should not involve
-    changing the basic structure of the proofs.  If someone does do
-    it, please let me know. --BCP 5/16.] *)
+    see will obey some simple well-formedness conditions. *)
 
 Inductive record_ty : ty -> Prop :=
   | RTnil :
@@ -871,4 +861,4 @@ Proof with eauto.
 
 End RecordSub.
 
-(* 2021-11-09 19:46 *)
+(* 2021-11-25 17:39 *)
