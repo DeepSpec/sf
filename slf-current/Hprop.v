@@ -769,4 +769,4 @@ End Extensionality.
     pieces of heaps, the "high-level" definition that bakes in the frame rule
     leads to more elegant, simpler proofs. *)
 
-(* 2021-11-25 17:51 *)
+(* 2021-11-29 23:47 *)

@@ -2010,4 +2010,4 @@ End MatchStyle.
     we refer to Section 10.3 from the paper:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-11-25 17:51 *)
+(* 2021-11-29 23:47 *)

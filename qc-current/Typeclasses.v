@@ -341,6 +341,8 @@ Class Ord A `{Eq A} : Type :=
     le : A -> A -> bool
   }.
 
+Notation "x <=? y" := (le x y) (at level 70).
+
 Check Ord.
 
 (** (The old class [Eq] is sometimes called a "superclass" of [Ord],
@@ -1760,4 +1762,4 @@ Definition e4 : list nat := mymap false.
        {http://learnyouahaskell.com/making-our-own-types-and-typeclasses}
 *)
 
-(* 2021-11-25 17:46 *)
+(* 2021-11-29 23:43 *)
