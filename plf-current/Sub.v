@@ -1154,9 +1154,9 @@ Qed.
     - If the final step of the derivation is by [T_Sub], then there is
       a type [T2] such that [T1 <: T2] and [empty |- t1 \in T1].  The desired
       result is exactly the induction hypothesis for the typing
-      subderivation.
+      subderivation. *)
 
-    Formally: *)
+(** Formally: *)
 
 Theorem progress : forall t T,
      empty |- t \in T ->
@@ -1220,7 +1220,7 @@ Qed.
      - If the last step of the derivation is a use of [T_Abs] then
        there is a type [T12] such that [T = S1 -> T12] and [x:S1;
        Gamma |- t2 \in T12].  Picking [T12] for [S2] gives us what we
-       need: [S1 -> T12 <: S1 -> T12] follows from [S_Refl].
+       need, since [S1 -> T12 <: S1 -> T12] follows from [S_Refl].
 
      - If the last step of the derivation is a use of [T_Sub] then
        there is a type [S] such that [S <: T] and [Gamma |- \x:S1.t2
@@ -1311,8 +1311,8 @@ Qed.
 
 (** When subtyping is involved proofs are generally easier
     when done by induction on typing derivations, rather than on terms.
-    The _substitution lemma_ is proved as for pure STLC but using
-    induction on the typing derivation (see Exercise
+    The _substitution lemma_ is proved as for pure STLC, but using
+    induction on the typing derivation this time (see Exercise
     substitution_preserves_typing_from_typing_ind in StlcProp.v). *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
@@ -1529,9 +1529,9 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 
     Notation "X '*' Y" :=
       (Ty_Prod X Y) (in custom stlc at level 2, left associativity).
-    Notation "'[' x ',' y ']'" := (tm_pair x y) (in custom stlc at level 5,
-                                                 x custom stlc at level 3,
-                                                 y custom stlc at level 0).
+    Notation "( x ',' y )" := (tm_pair x y) (in custom stlc at level 0,
+                                                    x custom stlc at level 99,
+                                                    y custom stlc at level 99).
     Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 0).
     Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 0).
 
@@ -1543,4 +1543,4 @@ Definition manual_grade_for_variations : option (nat*string) := None.
 Definition manual_grade_for_products : option (nat*string) := None.
 (** [] *)
 
-(* 2021-12-07 21:32 *)
+(* 2021-12-20 19:03 *)

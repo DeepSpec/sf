@@ -61,63 +61,6 @@ Tweak to simplify the use of definitions and lemmas from <span class="inlinecode
 
 <div class="paragraph"> </div>
 
- In the programming language that we consider, a concrete
-    memory state is described as a finite map from locations
-    to values.
-
-<div class="paragraph"> </div>
-
-<ul class="doclist">
-<li> A location has type <span class="inlinecode"><span class="id" title="var">loc</span></span>.
-
-</li>
-<li> A value has type <span class="inlinecode"><span class="id" title="var">val</span></span>.
-
-</li>
-<li> A state has type <span class="inlinecode"><span class="id" title="var">state</span></span>.
-
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
-    Details will be presented in the chapter <a href="Rules.html"><span class="inlineref">Rules</span></a>.
-
-<div class="paragraph"> </div>
-
-    To help distinguish between full states and pieces of state,
-    we let the type <span class="inlinecode"><span class="id" title="var">heap</span></span> be a synonymous for <span class="inlinecode"><span class="id" title="var">state</span></span> but with
-    the intention of representing only a piece of state.
-    Throughout the course, we write <span class="inlinecode"><span class="id" title="var">s</span></span> for a full memory state
-    (of type <span class="inlinecode"><span class="id" title="var">state</span></span>), and we write <span class="inlinecode"><span class="id" title="var">h</span></span> for a piece of memory state
-    (of type <span class="inlinecode"><span class="id" title="var">heap</span></span>).
-
-<div class="paragraph"> </div>
-
-    In Separation Logic, a piece of state is described by a
-    "heap predicate", i.e., a predicate over heaps.
-    A heap predicate has type <span class="inlinecode"><span class="id" title="var">hprop</span></span>, defined as <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>,
-    which is equivalent to <span class="inlinecode"><span class="id" title="var">state</span>→<span class="id" title="keyword">Prop</span></span>.
-
-<div class="paragraph"> </div>
-
-    By convention, throughout the course:
-
-<div class="paragraph"> </div>
-
-<ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="var">H</span></span> denotes a heap predicate of type <span class="inlinecode"><span class="id" title="var">hprop</span></span>; it describes a
-      piece of state,
-
-</li>
-<li> <span class="inlinecode"><span class="id" title="var">Q</span></span> denotes a postcondition, of type <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span>; it describes
-      both a result value and a piece of state. Observe that
-      <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">state</span>→<span class="id" title="keyword">Prop</span></span>. 
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
  This chapter presents the definition of the key heap predicate
     operators from Separation Logic:
 
@@ -164,6 +107,63 @@ Tweak to simplify the use of definitions and lemmas from <span class="inlinecode
 </li>
 </ul>
  
+<div class="paragraph"> </div>
+
+ In the programming language that we consider, a concrete
+    memory state is described as a finite map from locations
+    to values.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> A location has type <span class="inlinecode"><span class="id" title="var">loc</span></span>.
+
+</li>
+<li> A value has type <span class="inlinecode"><span class="id" title="var">val</span></span>.
+
+</li>
+<li> A state has type <span class="inlinecode"><span class="id" title="var">state</span></span>.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    Details will be presented in the chapter <a href="Rules.html"><span class="inlineref">Rules</span></a>.
+
+<div class="paragraph"> </div>
+
+    To help distinguish between full states and pieces of state,
+    we let the type <span class="inlinecode"><span class="id" title="var">heap</span></span> be a synonym for <span class="inlinecode"><span class="id" title="var">state</span></span> but with
+    the intention of representing only a piece of state.
+    Throughout the course, we write <span class="inlinecode"><span class="id" title="var">s</span></span> for a full memory state
+    (of type <span class="inlinecode"><span class="id" title="var">state</span></span>), and we write <span class="inlinecode"><span class="id" title="var">h</span></span> for a piece of memory state
+    (of type <span class="inlinecode"><span class="id" title="var">heap</span></span>).
+
+<div class="paragraph"> </div>
+
+    In Separation Logic, a piece of state is described by a
+    "heap predicate", i.e., a predicate over heaps.
+    A heap predicate has type <span class="inlinecode"><span class="id" title="var">hprop</span></span>, defined as <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>,
+    which is equivalent to <span class="inlinecode"><span class="id" title="var">state</span>→<span class="id" title="keyword">Prop</span></span>.
+
+<div class="paragraph"> </div>
+
+    By convention, throughout the course:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">H</span></span> denotes a heap predicate of type <span class="inlinecode"><span class="id" title="var">hprop</span></span>; it describes a
+      piece of state,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Q</span></span> denotes a postcondition, of type <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span>; it describes
+      both a result value and a piece of state. Observe that
+      <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">state</span>→<span class="id" title="keyword">Prop</span></span>. 
+</li>
+</ul>
+
 <div class="paragraph"> </div>
 
  This chapter and the following ones exploit a few additional TLC tactics
@@ -581,7 +581,10 @@ The desired equality property for postconditions follows directly
 
 <div class="doc">
 Note that <span class="inlinecode"><span class="id" title="var">Q</span></span> has type <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span>, thus <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> has type <span class="inlinecode"><span class="id" title="var">hprop</span></span>.
-    Recall that <span class="inlinecode"><span class="id" title="var">hprop</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>. Thus <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> has type <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. 
+    Recall that <span class="inlinecode"><span class="id" title="var">hprop</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>. Thus <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> has type <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.
+    Note also that the judgment <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> captures the property that the
+    execution of <span class="inlinecode"><span class="id" title="var">t</span></span> terminates, because it is defined in terms of the big-step
+    evaluation judgment <span class="inlinecode"><span class="id" title="tactic">eval</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span>, which itself captures termination. 
 <div class="paragraph"> </div>
 
  The frame rule asserts that if one can derive a specification of
@@ -665,7 +668,7 @@ The operation <span class="inlinecode"><span class="id" title="var">incr</span><
 <div class="code">
 
 <span class="id" title="keyword">Parameter</span> <a id="triple_incr" class="idref" href="#triple_incr"><span class="id" title="axiom">triple_incr</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:57" class="idref" href="#p:57"><span class="id" title="binder">p</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="n:58" class="idref" href="#n:58"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="LibSepReference.html#trm_app"><span class="id" title="constructor">trm_app</span></a> <a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Hprop.html#p:57"><span class="id" title="variable">p</span></a>)<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Hprop.html#p:57"><span class="id" title="variable">p</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hprop.html#p:57"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#n:58"><span class="id" title="variable">n</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="r:59" class="idref" href="#r:59"><span class="id" title="binder">r</span></a> ⇒ <a class="idref" href="Hprop.html#p:57"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#n:58"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1<a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a>).<br/>
 </div>
@@ -709,6 +712,8 @@ The above specification lemma is derivable from the specification
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">lets</span> <span class="id" title="var">M</span>: <a class="idref" href="Hprop.html#triple_incr"><span class="id" title="axiom">triple_incr</span></a> <span class="id" title="var">p</span> <span class="id" title="var">n</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">lets</span> <span class="id" title="var">N</span>: <a class="idref" href="Hprop.html#triple_frame"><span class="id" title="lemma">triple_frame</span></a> (<span class="id" title="var">q</span> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <span class="id" title="var">m</span>) <span class="id" title="var">M</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">N</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;A&nbsp;shorter,&nbsp;backward-reasoning&nbsp;proof:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">intros</span>.</span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">triple_frame</span>.</span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">triple_incr</span>.</span>&nbsp;*)</span><br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -1150,7 +1155,7 @@ The axiom of "functional extensionality" asserts that
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
 </div>
 </div>
 

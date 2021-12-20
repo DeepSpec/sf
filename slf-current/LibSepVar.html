@@ -43,7 +43,7 @@
 </div>
 
 <div class="doc">
-<a id="lab607"></a><h1 class="section">Representation of Program Variables</h1>
+<a id="lab606"></a><h1 class="section">Representation of Program Variables</h1>
 
 <div class="paragraph"> </div>
 
@@ -52,7 +52,7 @@
 </div>
 
 <div class="doc">
-<a id="lab608"></a><h2 class="section">Representation of Variables</h2>
+<a id="lab607"></a><h2 class="section">Representation of Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -87,7 +87,7 @@ The boolean function <span class="inlinecode"><span class="id" title="var">var_e
 </div>
 
 <div class="doc">
-<a id="lab609"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">case_var</span></span></h2>
+<a id="lab608"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">case_var</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -105,12 +105,12 @@ The boolean function <span class="inlinecode"><span class="id" title="var">var_e
 </div>
 
 <div class="doc">
-<a id="lab610"></a><h1 class="section">Representation of List of Variables</h1>
+<a id="lab609"></a><h1 class="section">Representation of List of Variables</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab611"></a><h2 class="section">Definition of Distinct Variables</h2>
+<a id="lab610"></a><h2 class="section">Definition of Distinct Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -184,7 +184,7 @@ The following lemma asserts that if <span class="inlinecode"><span class="id" ti
 </div>
 
 <div class="doc">
-<a id="lab612"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
+<a id="lab611"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -222,7 +222,7 @@ The following lemma asserts that if <span class="inlinecode"><span class="id" ti
 </div>
 
 <div class="doc">
-<a id="lab613"></a><h2 class="section">Generation of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
+<a id="lab612"></a><h2 class="section">Generation of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -316,7 +316,7 @@ The properties of <span class="inlinecode"><span class="id" title="var">var_seq<
 </div>
 
 <div class="doc">
-<a id="lab614"></a><h1 class="section">Notation for Program Variables</h1>
+<a id="lab613"></a><h1 class="section">Notation for Program Variables</h1>
 
 <div class="paragraph"> </div>
 
@@ -327,7 +327,7 @@ The properties of <span class="inlinecode"><span class="id" title="var">var_seq<
 </div>
 
 <div class="doc">
-<a id="lab615"></a><h2 class="section">Program Variables Expressed Using Definitions</h2>
+<a id="lab614"></a><h2 class="section">Program Variables Expressed Using Definitions</h2>
 
 <div class="paragraph"> </div>
 
@@ -461,7 +461,7 @@ Tactic to unfold these definitions. Useful to avoid the definitions
 </div>
 
 <div class="doc">
-<a id="lab616"></a><h2 class="section">Program Variables Expressed Using Notation, with a Quote Symbol</h2>
+<a id="lab615"></a><h2 class="section">Program Variables Expressed Using Notation, with a Quote Symbol</h2>
 
 <div class="paragraph"> </div>
 
@@ -582,12 +582,12 @@ Tactic to unfold these definitions. Useful to avoid the definitions
 </div>
 
 <div class="doc">
-<a id="lab617"></a><h1 class="section">Optional Material</h1>
+<a id="lab616"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab618"></a><h2 class="section">Bonuse: the Tactic <span class="inlinecode"><span class="id" title="var">var_neq</span></span></h2>
+<a id="lab617"></a><h2 class="section">Bonuse: the Tactic <span class="inlinecode"><span class="id" title="var">var_neq</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -606,7 +606,7 @@ Tactic to unfold these definitions. Useful to avoid the definitions
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string_dec"><span class="id" title="definition">String.string_dec</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) <span class="id" title="keyword">as</span> [<span class="id" title="var">E</span>|<span class="id" title="var">E</span>];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="var">false</span> | <span class="id" title="tactic">apply</span> <span class="id" title="var">E</span> ] ] <span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Hint Extern</span> 1 (?<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> ?<span class="id" title="var">y</span>) ⇒ <span class="id" title="var">var_neq</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
 </div>
 </div>
 

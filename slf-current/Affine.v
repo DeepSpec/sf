@@ -275,17 +275,28 @@ Lemma haffine_hexists : forall A (J:A->hprop),
   haffine (\exists x, (J x)).
 Proof using. introv F1 (x&Hx). applys* F1. Qed.
 
+Lemma haffine_hforall' : forall A (J:A->hprop),
+  (exists x, haffine (J x)) ->
+  haffine (\forall x, (J x)).
+Proof using.
+  introv (x&Hx) M. lets N: hforall_inv M. applys* Hx.
+Qed.
+
+(** The rule [haffine_hforall'] requires the user to provide evidence
+    that there exists at least one value [x] of type [A] for which
+    [haffine (J x)] is true. In practice, the user is generally not
+    interested in proving properties of a specific value [x], but is
+    happy to justify that [J x] is affine for any [x]. The corresponding
+    statement appears below, with an assumption [Inhab A] asserting that
+    the type [A] is inhabited. In practice, the [\forall] quantifier
+    is always invoked on inhabited types, so this is a benign restriction. *)
+
 Lemma haffine_hforall : forall A `{Inhab A} (J:A->hprop),
   (forall x, haffine (J x)) ->
   haffine (\forall x, (J x)).
 Proof using.
-  introv IA F1 Hx. lets N: hforall_inv Hx.
-  applys* F1 (arbitrary (A:=A)).
+  introv IA M. applys haffine_hforall'. exists (arbitrary (A:=A)). applys M.
 Qed.
-
-(** Note, in the last rule above, that the type [A] must be inhabited
-    for this rule to make sense. In practice, the [\forall] quantifier
-    is always invoked on inhabited types, so this is a benign restriction. *)
 
 (** In addition, [haffine (\[P] \* H)] should simplify to [haffine H]
     under the hypothesis [P]. Indeed, if a heap [h] satisfies [\[P] \* H],
@@ -1294,4 +1305,4 @@ End LowLevel.
     direct approach to controlling linearity was introduced in the context of
     CFML, in work by [Guéneau, Jourdan, Charguéraud, and Pottier 2019] (in Bib.v) *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

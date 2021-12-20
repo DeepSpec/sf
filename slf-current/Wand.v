@@ -57,7 +57,13 @@ Implicit Types Q : val->hprop.
     describes a piece of heap that "can" be subtracted from [H2]. Otherwise,
     the predicate [H1 \-* H2] characterizes a heap that cannot possibly exist.
     Informally speaking, [H1] must somehow be a subset of [H2] for the
-    subtraction [-H1 + H2] to make sense. *)
+    subtraction [-H1 + H2] to make sense. 
+
+    Another possible analogy is that of logical operators. If [P1] and [P2]
+    were propositions (of type [Prop]), then [P1 \* P2] would mean [P1 /\ P2]
+    and [P1 \-* P2] would mean [P1 -> P2]. The entailment 
+    [P1 \* (P1 \-* P2) ==> P2] then corresponds to the tautology
+    [(P1 /\ (P1 -> P2)) -> P2]. *)
 
 (* ================================================================= *)
 (** ** Definition of the Magic Wand *)
@@ -172,7 +178,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** In what follows, we generalize the magic wand to operate on postconditions,
     introducing a heap predicate of the form [Q1 \--* Q2], of type [hprop].
-    Note that the entailment between two postconditions produces a heap
+    Note that the magic wand between two postconditions produces a heap
     predicate, and not a postcondition.
 
     The definition follows exactly the same pattern as [hwand]: it quantifies
@@ -382,6 +388,16 @@ Proof using. intros. xsimpl. Qed.
 Lemma xsimpl_demo_qwand_cancel : forall v (Q1 Q2:val->hprop) H1 H2,
   (Q1 \--* Q2) \* H1 \* (Q1 v) ==> H2.
 Proof using. intros. xsimpl. Abort.
+
+(** [xsimpl] is able to prove entailments whose right-hand side is
+    a magic wand.  *)
+Lemma xsimpl_hwand_frame : forall H1 H2 H3,
+  (H1 \-* H2) ==> ((H1 \* H3) \-* (H2 \* H3)).
+Proof using.
+  intros. xsimpl.
+  (* [xsimpl] first step is to turn the goal into:
+     [(H1 \-* H2) \* (H1 \* H3) ==> (H2 \* H3)]. *)
+Qed.
 
 End XsimplDemo.
 
@@ -1165,6 +1181,9 @@ Definition hwand_characterization_3 (op:hprop->hprop->hprop) :=
 Definition hwand_characterization_4 (op:hprop->hprop->hprop) :=
      (forall H0 H1 H2, (H1 \* H0 ==> H2) -> (H0 ==> op H1 H2))
   /\ (forall H1 H2, (H1 \* (op H1 H2) ==> H2)).
+
+(** The equivalence proofs are given here for reference. It is not needed
+    to follow through the technical details. *)
 
 Lemma hwand_characterization_1_eq_2 :
   hwand_characterization_1 = hwand_characterization_2.
@@ -2002,7 +2021,8 @@ Proof using. introv M1 M2 Hh. intros b. case_if*. Qed.
 (** **** Exercise: 1 star, standard, especially useful (hand_comm)
 
     Prove that [hand] is a symmetric operator.
-    Hint: use [if_neg] and [hprop_op_comm]. *)
+    Hint: use [hprop_op_comm], and [rewrite if_neg] (or a case analysis
+    on the boolean value coming from [hand]). *)
 
 Lemma hand_comm : forall H1 H2,
   hand H1 H2 = hand H2 H1.
@@ -2116,4 +2136,4 @@ End SummaryHprop.
     have advertised for the interest of this rule. The ramified frame
     rule was integrated in CFML 2.0 in 2018. *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

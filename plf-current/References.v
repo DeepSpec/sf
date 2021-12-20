@@ -85,17 +85,21 @@ Module STLCRef.
     _dereferencing_, and _assignment_.
 
        - To allocate a reference, we use the [ref] operator, providing
-         an initial value for the new cell.  For example, [ref 5]
-         creates a new cell containing the value [5], and reduces to
-         a reference to that cell.
+         an initial value for the new cell.
+
+         For example, [ref 5] creates a new cell containing the value
+         [5], and reduces to a reference to that cell.
 
        - To read the current value of this cell, we use the
-         dereferencing operator [!]; for example, [!(ref 5)] reduces
-         to [5].
+         dereferencing operator [!].
+
+         For example, [!(ref 5)] reduces to [5].
 
        - To change the value stored in a cell, we use the assignment
-         operator.  If [r] is a reference, [r := 7] will store the
-         value [7] in the cell referenced by [r]. *)
+         operator.
+
+         If [r] is a reference, [r := 7] will store the value [7] in
+         the cell referenced by [r]. *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Types *)
@@ -241,8 +245,8 @@ Notation " e1 ':=' e2 " := (tm_assign e1 e2) (in custom stlc at level 21).
 (* ----------------------------------------------------------------- *)
 (** *** Values and Substitution *)
 
-(** Besides abstractions and numbers, we have two new types of values:
-    the unit value, and locations.  *)
+(** Besides abstractions, numbers, and the unit value, we have one new
+    type of value: locations.  *)
 
 Inductive value : tm -> Prop :=
   | v_abs : forall x T2 t1,
@@ -257,7 +261,8 @@ Inductive value : tm -> Prop :=
 Hint Constructors value : core.
 
 (** Extending substitution to handle the new syntax of terms is
-    straightforward.  *)
+    straightforward: substituting in a pointer leaves it
+    unchanged.  *)
 
 Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
@@ -331,7 +336,6 @@ where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
 Definition x : string := "x".
 Definition y : string := "y".
 Definition z : string := "z".
-
 Hint Unfold x : core.
 Hint Unfold y : core.
 Hint Unfold z : core.
@@ -361,9 +365,9 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
 
     the cell referenced by [r] will contain the value [82], while the
     result of the whole expression will be [83].  The references [r]
-    and [s] are said to be _aliases_ for the same cell.
+    and [s] are said to be _aliases_ for the same cell. *)
 
-    The possibility of aliasing can make programs with references
+(** The possibility of aliasing can make programs with references
     quite tricky to reason about.  For example, the expression
 
       r := 5; r := !s
@@ -375,7 +379,12 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
       r := !s
 
     _unless_ we happen to do it in a context where [r] and [s] are
-    aliases for the same cell! *)
+    aliases for the same cell!
+
+      let r = ref 0 in
+      let s = r in
+      r := 5; r := !s
+*)
 
 (* ================================================================= *)
 (** ** Shared State *)
@@ -456,10 +465,11 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
     we've defined above allow us to create references to values of any
     type, including functions.  For example, we can use references to
     functions to give an (inefficient) implementation of arrays
-    of numbers, as follows.  Write [NatArray] for the type
-    [Ref (Nat->Nat)].
+    of numbers, as follows.
 
-    Recall the [equal] function from the [MoreStlc] chapter:
+    Write [NatArray] for the type [Ref (Nat->Nat)]. *)
+
+(** Recall the [equal] function from the [MoreStlc] chapter:
 
       equal =
         fix
@@ -468,18 +478,21 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
                if m=0 then iszero n
                else if n=0 then false
                else eq (pred m) (pred n))
+*)
 
-    To build a new array, we allocate a reference cell and fill
+(** To build a new array, we allocate a reference cell and fill
     it with a function that, when given an index, always returns [0].
 
       newarray = \_:Unit. ref (\n:Nat.0)
+*)
 
-    To look up an element of an array, we simply apply
+(** To look up an element of an array, we simply apply
     the function to the desired index.
 
       lookup = \a:NatArray. \n:Nat. (!a) n
+*)
 
-    The interesting part of the encoding is the [update] function.  It
+(** The interesting part of the encoding is the [update] function.  It
     takes an array, an index, and a new value to be stored at that index, and
     does its job by creating (and storing in the reference) a new function
     that, when it is asked for the value at this very index, returns the new
@@ -489,8 +502,9 @@ Notation "t1 ; t2" := (tseq t1 t2) (in custom stlc at level 3).
       update = \a:NatArray. \m:Nat. \v:Nat.
                    let oldf = !a in
                    a := (\n:Nat. if equal m n then v else oldf n);
+*)
 
-    References to values containing other references can also be very
+(** References to values containing other references can also be very
     useful, allowing us to define data structures such as mutable
     lists and trees. *)
 
@@ -544,9 +558,9 @@ Definition manual_grade_for_compact_update : option (nat*string) := None.
     no longer needed.  Instead, like many modern languages (including
     ML and Java) we rely on the run-time system to perform _garbage
     collection_, automatically identifying and reusing cells that can
-    no longer be reached by the program.
+    no longer be reached by the program. *)
 
-    This is _not_ just a question of taste in language design: it is
+(** This is _not_ just a question of taste in language design: it is
     extremely difficult to achieve type safety in the presence of an
     explicit deallocation operation.  One reason for this is the
     familiar _dangling reference_ problem: we allocate a cell holding
@@ -640,7 +654,7 @@ Definition store := list tm.
 (** We use [store_lookup n st] to retrieve the value of the reference
     cell at location [n] in the store [st].  Note that we must give a
     default value to [nth] in case we try looking up an index which is
-    too large. (In fact, we will never actually do this, but proving
+    too large. (In fact, we will never actually do this, but _proving_
     that we don't will require a bit of work.) *)
 
 Definition store_lookup (n:nat) (st:store) :=
@@ -713,6 +727,36 @@ Qed.
 
 (* ================================================================= *)
 (** ** Reduction *)
+
+(** Now we can give the rules for the new constructs:
+
+                   ------------------------------                  (ST_RefValue)
+                   ref v / st --> loc |st| / st,v
+
+                        t1 / st --> t1' / st'
+                    -----------------------------                    (ST_Ref)
+                    ref t1 / st --> ref t1' / st'
+
+                               l < |st|
+                     ----------------------------------            (ST_DerefLoc)
+                     !(loc l) / st --> lookup l st / st
+
+                        t1 / st --> t1' / st'
+                       -----------------------                       (ST_Deref)
+                       !t1 / st --> !t1' / st'
+
+                               l < |st|
+                ------------------------------------------         (ST_Assign)
+                loc l := v / st --> unit / replace l v st
+
+                        t1 / st --> t1' / st'
+                 -----------------------------------               (ST_Assign1)
+                 t1 := t2 / st --> t1' := t2 / st'
+
+                        t2 / st --> t2' / st'
+                 -----------------------------------               (ST_Assign2)
+                 v1 := t2 / st --> v1 := t2' / st'
+*)
 
 (** Next, we need to extend the operational semantics to take
     stores into account.  Since the result of reducing an expression
@@ -904,11 +948,12 @@ Inductive step : tm * store -> tm * store -> Prop :=
 
 where "t '/' st '-->' t' '/' st'" := (step (t,st) (t',st')).
 
-(** One slightly ugly point should be noted here: In the [ST_RefValue]
-    rule, we extend the state by writing [st ++ v::nil] rather than
-    the more natural [st ++ [v]].  The reason for this is that the
-    notation we've defined for substitution uses square brackets,
-    which clash with the standard library's notation for lists. *)
+(** One slightly ugly point should be noted here: In the
+    [ST_RefValue] rule, we extend the state by writing [st ++ v::nil]
+    rather than the more natural [st ++ [v]].  The reason for this is
+    that the notation we've defined for substitution uses square
+    brackets, which clash with the standard library's notation for
+    lists. *)
 
 Hint Constructors step : core.
 
@@ -928,7 +973,9 @@ Definition context := partial_map ty.
 (* ================================================================= *)
 (** ** Store typings *)
 
-(** Having extended our syntax and reduction rules to accommodate
+(**  Tersify! 
+
+    Having extended our syntax and reduction rules to accommodate
     references, our last job is to write down typing rules for the new
     constructs (and, of course, to check that these rules are sound!).
     Naturalurally, the key question is, "What is the type of a location?"
@@ -1082,7 +1129,8 @@ Definition store_Tlookup (n:nat) (ST:store_ty) :=
                     Gamma; ST |- t1 := t2 : Unit
 *)
 
-Reserved Notation "Gamma ';' ST '|-' t '\in' T"  (at level 40, t custom stlc, T custom stlc at level 0).
+Reserved Notation "Gamma ';' ST '|-' t '\in' T"
+                  (at level 40, t custom stlc, T custom stlc at level 0).
 
 Inductive has_type (ST : store_ty) : context -> tm -> ty -> Prop :=
   | T_Var : forall Gamma x T1,
@@ -1192,6 +1240,7 @@ Abort.
     stored in locations (why?), it suffices to type them in the empty
     context. The following definition of [store_well_typed] formalizes
     this.  *)
+
 
 Definition store_well_typed (ST:store_ty) (st:store) :=
   length ST = length st /\
@@ -1503,7 +1552,7 @@ Proof.
   induction l; intros; [ auto | simpl; rewrite IHl; auto ].
 Qed.
 
-(** And here, at last, is the preservation theorem and proof: *)
+(** And here, at last, is the preservation theorem: *)
 
 Theorem preservation : forall ST t t' T st st',
   empty ; ST |- t \in T ->
@@ -1722,9 +1771,9 @@ Qed.
     What about STLC + references?  Surprisingly, adding references
     causes us to lose the normalization property: there exist
     well-typed terms in the STLC + references which can continue to
-    reduce forever, without ever reaching a normal form!
+    reduce forever, without ever reaching a normal form! *)
 
-    How can we construct such a term?  The main idea is to make a
+(** How can we construct such a term?  The main idea is to make a
     function which calls itself.  We first make a function which calls
     another function stored in a reference cell; the trick is that we
     then smuggle in a reference to itself!
@@ -1732,15 +1781,16 @@ Qed.
    (\r:Ref (Unit -> Unit).
         r := (\x:Unit.(!r) unit); (!r) unit)
    (ref (\x:Unit.unit))
+*)
 
-   First, [ref (\x:Unit.unit)] creates a reference to a cell of type
-   [Unit -> Unit].  We then pass this reference as the argument to a
-   function which binds it to the name [r], and assigns to it the
-   function [\x:Unit.(!r) unit] -- that is, the function which ignores
-   its argument and calls the function stored in [r] on the argument
-   [unit]; but of course, that function is itself!  To start the
-   divergent loop, we execute the function stored in the cell by
-   evaluating [(!r) unit].
+(** First, [ref (\x:Unit.unit)] creates a reference to a cell of type
+    [Unit -> Unit].  We then pass this reference as the argument to a
+    function which binds it to the name [r], and assigns to it the
+    function [\x:Unit.(!r) unit] -- that is, the function which ignores
+    its argument and calls the function stored in [r] on the argument
+    [unit]; but of course, that function is itself!  To start the
+    divergent loop, we execute the function stored in the cell by
+    evaluating [(!r) unit].
 
    Here is the divergent term in Coq: *)
 
@@ -1883,4 +1933,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2021-12-07 21:32 *)
+(* 2021-12-20 19:03 *)

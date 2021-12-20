@@ -449,8 +449,8 @@ Definition wp (t:trm) (Q:val->hprop) : hprop :=
 
 (** **** Exercise: 2 stars, standard, especially useful (wp_equiv)
 
-    Prove that the definition [wp_high] satisfies the
-    characteristic equivalence for weakest preconditions. *)
+    Prove that the definition [wp] satisfies the characteristic equivalence
+    for weakest preconditions. *)
 
 Lemma wp_equiv : forall t H Q,
   (H ==> wp t Q) <-> (triple t H Q).
@@ -691,8 +691,7 @@ Module WpFromHoare.
       forall (H':hprop), hoare t (H \* H') (Q \*+ H').
 
     In what follows, we conduct the proofs by assuming a concrete definition
-    for [wp], namely [wp_high], which lends itself better to automated
-    proofs. *)
+    for [wp] that lends itself better to automated  proofs. *)
 
 Definition wp (t:trm) := fun (Q:val->hprop) =>
   \exists H, H \* \[triple t H Q].
@@ -812,4 +811,4 @@ End WpFromHoare.
     (https://iris-project.org/), developed since 2015, exploits weakest
     preconditions to state reasoning rules. See the [Postscript]. *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

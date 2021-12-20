@@ -706,8 +706,8 @@ From PLF Require Import Stlc.
       evenodd =
         fix
           (\eo: (Nat->Bool * Nat->Bool),
-             let e = \n:Nat, if n=0 then tru else eo,snd (pred n) in
-             let o = \n:Nat, if n=0 then fls else eo,fst (pred n) in
+             let e = \n:Nat, if n=0 then tru else eo.snd (pred n) in
+             let o = \n:Nat, if n=0 then fls else eo.fst (pred n) in
              (e,o))
 
       even = evenodd.fst
@@ -1733,12 +1733,11 @@ Example reduces :
   eotest -->* <{(0, 1)}>.
 Proof.
 (* 
-  unfold eotest. normalize.
+  unfold eotest. eauto 10. normalize.
 *)
 (* FILL IN HERE *) Admitted.
 
 End FixTest4.
-
 End Examples.
 
 (* ================================================================= *)
@@ -2077,4 +2076,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2021-12-07 21:32 *)
+(* 2021-12-20 19:03 *)

@@ -401,6 +401,67 @@ Implicit Types H : hprop.
 Implicit Types Q : val->hprop.
 
 (* ================================================================= *)
+(** ** Review of the Structural Rules *)
+
+(** Let us review the essential structural rules, which were introduced
+    in the previous chapters. These structural rules are involved in
+    the practical verification proofs carried out further in this chapter. *)
+
+(** The frame rule asserts that the precondition and the postcondition
+    can be extended together by an arbitrary heap predicate.
+    Recall that the definition of [triple] was set up precisely to
+    validate this frame rule, so in a sense in holds "by construction". *)
+
+Parameter triple_frame : forall t H Q H',
+  triple t H Q ->
+  triple t (H \* H') (Q \*+ H').
+
+(** The consequence rule allows to strengthen the precondition and
+    weaken the postcondition. *)
+
+Parameter triple_conseq : forall t H' Q' H Q,
+  triple t H' Q' ->
+  H ==> H' ->
+  Q' ===> Q ->
+  triple t H Q.
+
+(** In practice, it is most convenient to exploit a rule that combines
+    both frame and consequence into a single rule, as stated next.
+    (Note that this "combined structural rule" was proved as an exercise
+    in chapter [Himpl].) *)
+
+Parameter triple_conseq_frame : forall H2 H1 Q1 t H Q,
+  triple t H1 Q1 ->
+  H ==> H1 \* H2 ->
+  Q1 \*+ H2 ===> Q ->
+  triple t H Q.
+
+(** The two extraction rules enable to extract pure facts and existentially
+    quantified variables, from the precondition into the Coq context. *)
+
+Parameter triple_hpure : forall t (P:Prop) H Q,
+  (P -> triple t H Q) ->
+  triple t (\[P] \* H) Q.
+
+Parameter triple_hexists : forall t (A:Type) (J:A->hprop) Q,
+  (forall (x:A), triple t (J x) Q) ->
+  triple t (\exists (x:A), J x) Q.
+
+(** **** Exercise: 1 star, standard, optional (triple_hpure')
+
+    The extraction rule [triple_hpure] assumes a precondition of the form
+    [\[P] \* H]. The variant rule [triple_hpure'], stated below, assumes
+    instead a precondition with only the pure part, i.e., of the form [\[P]].
+    Prove that [triple_hpure'] is indeed a corollary of [triple_hpure]. *)
+
+Lemma triple_hpure' : forall t (P:Prop) Q,
+  (P -> triple t \[] Q) ->
+  triple t \[P] Q.
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(* ================================================================= *)
 (** ** Rules for Terms *)
 
 (** We next present reasoning rule for terms. Most of these Separation Logic
@@ -500,7 +561,7 @@ Parameter triple_if_case : forall b t1 t2 H Q,
 
     It is however more convenient in practice to work with a judgment
     whose conclusion is of the form [{H} v {Q}], for an arbitrary
-    [H] and [Q]. For this reason, we prever the following rule for
+    [H] and [Q]. For this reason, we prefer the following rule for
     values.
 
       H ==> Q v
@@ -535,7 +596,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 
     More interestingly, prove that [triple_val] is derivable
     from [triple_val_minimal]. Hint: you will need to exploit
-    the appropriate structural rule(s). *)
+    the structural rule [triple_conseq_frame]. *)
 
 Lemma triple_val' : forall v H Q,
   H ==> Q v ->
@@ -724,67 +785,6 @@ Parameter triple_free : forall p v,
   triple (val_free (val_loc p))
     (p ~~> v)
     (fun _ => \[]).
-
-(* ================================================================= *)
-(** ** Review of the Structural Rules *)
-
-(** Let us review the essential structural rules, which were introduced
-    in the previous chapters. These structural rules are involved in
-    the practical verification proofs carried out further in this chapter. *)
-
-(** The frame rule asserts that the precondition and the postcondition
-    can be extended together by an arbitrary heap predicate.
-    Recall that the definition of [triple] was set up precisely to
-    validate this frame rule, so in a sense in holds "by construction". *)
-
-Parameter triple_frame : forall t H Q H',
-  triple t H Q ->
-  triple t (H \* H') (Q \*+ H').
-
-(** The consequence rule allows to strengthen the precondition and
-    weaken the postcondition. *)
-
-Parameter triple_conseq : forall t H' Q' H Q,
-  triple t H' Q' ->
-  H ==> H' ->
-  Q' ===> Q ->
-  triple t H Q.
-
-(** In practice, it is most convenient to exploit a rule that combines
-    both frame and consequence into a single rule, as stated next.
-    (Note that this "combined structural rule" was proved as an exercise
-    in chapter [Himpl].) *)
-
-Parameter triple_conseq_frame : forall H2 H1 Q1 t H Q,
-  triple t H1 Q1 ->
-  H ==> H1 \* H2 ->
-  Q1 \*+ H2 ===> Q ->
-  triple t H Q.
-
-(** The two extraction rules enable to extract pure facts and existentially
-    quantified variables, from the precondition into the Coq context. *)
-
-Parameter triple_hpure : forall t (P:Prop) H Q,
-  (P -> triple t H Q) ->
-  triple t (\[P] \* H) Q.
-
-Parameter triple_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall (x:A), triple t (J x) Q) ->
-  triple t (\exists (x:A), J x) Q.
-
-(** **** Exercise: 1 star, standard, optional (triple_hpure')
-
-    The extraction rule [triple_hpure] assumes a precondition of the form
-    [\[P] \* H]. The variant rule [triple_hpure'], stated below, assumes
-    instead a precondition with only the pure part, i.e., of the form [\[P]].
-    Prove that [triple_hpure'] is indeed a corollary of [triple_hpure]. *)
-
-Lemma triple_hpure' : forall t (P:Prop) Q,
-  (P -> triple t \[] Q) ->
-  triple t \[P] Q.
-Proof using. (* FILL IN HERE *) Admitted.
-
-(** [] *)
 
 (* ================================================================= *)
 (** ** Verification Proof in Separation Logic *)
@@ -1001,7 +1001,16 @@ Parameter triple_div' : forall n1 n2,
     \[n2 <> 0]
     (fun r => \[r = val_int (Z.quot n1 n2)]).
 
-(** Let us formally prove that the two presentations are equivalent. *)
+(** Let us formally prove that the two presentations are equivalent. 
+    Frist, we prove [triple_div'] by exploiting [triple_div]. *)
+
+Lemma triple_div'_from_triple_div : forall n1 n2,
+  triple (val_div n1 n2)
+    \[n2 <> 0]
+    (fun r => \[r = val_int (Z.quot n1 n2)]).
+Proof using.
+  intros. applys triple_hpure'. applys triple_div.
+Qed.
 
 (** **** Exercise: 1 star, standard, especially useful (triple_div_from_triple_div')
 
@@ -1017,22 +1026,6 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, especially useful (triple_div'_from_triple_div)
-
-    Prove [triple_div'] by exploiting [triple_div].
-    Hint: the first key proof step is [applys triple_hpure].
-    Yet some preliminary rewriting is required for this
-    tactic to apply.
-    Hint: the second key proof step is [applys triple_conseq]. *)
-
-Lemma triple_div'_from_triple_div : forall n1 n2,
-  triple (val_div n1 n2)
-    \[n2 <> 0]
-    (fun r => \[r = val_int (Z.quot n1 n2)]).
-Proof using. (* FILL IN HERE *) Admitted.
-
-(** [] *)
-
 (** As we said, placing pure preconditions outside of the triples
     makes it slightly more convenient to exploit specifications.
     For this reason, we adopt the style that precondition only
@@ -1041,7 +1034,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 End DivSpec.
 
 (* ================================================================= *)
-(** ** The Combined let-frame Rule Rule *)
+(** ** The Combined Let-Frame Rule *)
 
 Module LetFrame.
 
@@ -1769,10 +1762,7 @@ Lemma triple_set : forall w p v,
     (p ~~> v)
     (fun _ => p ~~> w).
 Proof using.
-  intros. intros H'. applys hoare_conseq.
-  { applys hoare_set. }
-  { xsimpl. }
-  { xsimpl. }
+  intros. intros H'. applys hoare_set.
 Qed.
 
 End ProofsContinued.
@@ -2010,4 +2000,4 @@ End MatchStyle.
     we refer to Section 10.3 from the paper:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

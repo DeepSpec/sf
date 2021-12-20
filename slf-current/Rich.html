@@ -49,7 +49,7 @@
 </div>
 
 <div class="doc">
-<a id="lab417"></a><h1 class="section">First Pass</h1>
+<a id="lab416"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -112,12 +112,12 @@
 <div class="paragraph"> </div>
 
     In this chapter, we describe the first two approaches. The third
-    approach (tupled functions) involves algebraic data types, which
-    are beyond the scope of this course. 
+    approach (tupled functions) would require product data types in
+    the source language. 
 </div>
 
 <div class="doc">
-<a id="lab418"></a><h2 class="section">Reasoning Rule for Assertions</h2>
+<a id="lab417"></a><h2 class="section">Reasoning Rule for Assertions</h2>
 
 </div>
 <div class="code">
@@ -263,7 +263,7 @@ Yet, such a rule would be overly restrictive, for two reasons. First, it
 </div>
 
 <div class="doc">
-<a id="lab419"></a><h2 class="section">Semantics of Conditionals not in Administrative Normal Form</h2>
+<a id="lab418"></a><h2 class="section">Semantics of Conditionals not in Administrative Normal Form</h2>
 
 <div class="paragraph"> </div>
 
@@ -331,7 +331,7 @@ The reasoning rule can also be reformulated in weakest-precondition form.
 </div>
 
 <div class="doc">
-<a id="lab420"></a><h2 class="section">Semantics and Basic Evaluation Rules for While-Loops</h2>
+<a id="lab419"></a><h2 class="section">Semantics and Basic Evaluation Rules for While-Loops</h2>
 
 </div>
 <div class="code">
@@ -412,7 +412,7 @@ This evaluation rule translates directly into a reasoning rule:
 </div>
 
 <div class="doc">
-<a id="lab421"></a><h2 class="section">Separation-Logic-friendly Reasoning Rule for While-Loops</h2>
+<a id="lab420"></a><h2 class="section">Separation-Logic-friendly Reasoning Rule for While-Loops</h2>
 
 <div class="paragraph"> </div>
 
@@ -568,12 +568,12 @@ The above rule can be equivalently reformulated in weakest-precondition
 </div>
 
 <div class="doc">
-<a id="lab422"></a><h1 class="section">More Details</h1>
+<a id="lab421"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab423"></a><h2 class="section">Semantics and Basic Evaluation Rules for For-Loops</h2>
+<a id="lab422"></a><h2 class="section">Semantics and Basic Evaluation Rules for For-Loops</h2>
 
 </div>
 <div class="code">
@@ -657,17 +657,17 @@ Just like for while loops, we can reduce the noise associated with applying
 <div class="code">
 
 <span class="id" title="keyword">Lemma</span> <a id="WhileLoops.ForLoops.triple_for'" class="idref" href="#WhileLoops.ForLoops.triple_for'"><span class="id" title="lemma">triple_for'</span></a> : <span class="id" title="keyword">∀</span> <a id="x:167" class="idref" href="#x:167"><span class="id" title="binder">x</span></a> <a id="n<sub>1</sub>:168" class="idref" href="#n<sub>1</sub>:168"><span class="id" title="binder">n<sub>1</sub></span></a> <a id="n<sub>2</sub>:169" class="idref" href="#n<sub>2</sub>:169"><span class="id" title="binder">n<sub>2</sub></span></a> <a id="t<sub>3</sub>:170" class="idref" href="#t<sub>3</sub>:170"><span class="id" title="binder">t<sub>3</sub></span></a> <a id="H:171" class="idref" href="#H:171"><span class="id" title="binder">H</span></a> <a id="Q:172" class="idref" href="#Q:172"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="tloop:173" class="idref" href="#tloop:173"><span class="id" title="binder">tloop</span></a>:<span class="id" title="notation">int</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="LibSepReference.html#trm"><span class="id" title="inductive">trm</span></a>) (<a id="i:174" class="idref" href="#i:174"><span class="id" title="binder">i</span></a>:<span class="id" title="notation">int</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="tloop:173" class="idref" href="#tloop:173"><span class="id" title="binder">tloop</span></a>:<span class="id" title="notation">int</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="LibSepReference.html#trm"><span class="id" title="inductive">trm</span></a>) (<a id="n:174" class="idref" href="#n:174"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="i:175" class="idref" href="#i:175"><span class="id" title="binder">i</span></a> <a id="H':176" class="idref" href="#H':176"><span class="id" title="binder">H'</span></a> <a id="Q':177" class="idref" href="#Q':177"><span class="id" title="binder">Q'</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="notation">If</span> <a class="idref" href="Rich.html#i:175"><span class="id" title="variable">i</span></a> <span class="id" title="notation">≤</span> <a class="idref" href="Rich.html#n<sub>2</sub>:169"><span class="id" title="variable">n<sub>2</sub></span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">then</span> <span class="id" title="notation">(</span><span class="id" title="notation">∃</span> <a id="H<sub>1</sub>:178" class="idref" href="#H<sub>1</sub>:178"><span class="id" title="binder">H<sub>1</sub></span></a><span class="id" title="notation">,</span> <a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="LibSepReference.html#subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="Rich.html#x:167"><span class="id" title="variable">x</span></a> <a class="idref" href="Rich.html#i:175"><span class="id" title="variable">i</span></a> <a class="idref" href="Rich.html#t<sub>3</sub>:170"><span class="id" title="variable">t<sub>3</sub></span></a>) <a class="idref" href="Rich.html#H':176"><span class="id" title="variable">H'</span></a> (<span class="id" title="keyword">fun</span> <a id="v:179" class="idref" href="#v:179"><span class="id" title="binder">v</span></a> ⇒ <a class="idref" href="Rich.html#H<sub>1</sub>:178"><span class="id" title="variable">H<sub>1</sub></span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Rich.html#tloop:173"><span class="id" title="variable">tloop</span></a> (<a class="idref" href="Rich.html#i:175"><span class="id" title="variable">i</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1)) <a class="idref" href="Rich.html#H<sub>1</sub>:178"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Rich.html#Q':177"><span class="id" title="variable">Q'</span></a><span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">else</span> <span class="id" title="notation">(</span><a class="idref" href="Rich.html#H':176"><span class="id" title="variable">H'</span></a> <a class="idref" href="LibSepReference.html#c7ebd77e939e3f02c508e57b470dc021"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Rich.html#Q':177"><span class="id" title="variable">Q'</span></a> <a class="idref" href="LibSepReference.html#val_unit"><span class="id" title="constructor">val_unit</span></a><span class="id" title="notation">)</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Rich.html#tloop:173"><span class="id" title="variable">tloop</span></a> <a class="idref" href="Rich.html#i:175"><span class="id" title="variable">i</span></a>) <a class="idref" href="Rich.html#H':176"><span class="id" title="variable">H'</span></a> <a class="idref" href="Rich.html#Q':177"><span class="id" title="variable">Q'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Rich.html#tloop:173"><span class="id" title="variable">tloop</span></a> <a class="idref" href="Rich.html#i:174"><span class="id" title="variable">i</span></a>) <a class="idref" href="Rich.html#H:171"><span class="id" title="variable">H</span></a> <a class="idref" href="Rich.html#Q:172"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Rich.html#tloop:173"><span class="id" title="variable">tloop</span></a> <a class="idref" href="Rich.html#n:174"><span class="id" title="variable">n</span></a>) <a class="idref" href="Rich.html#H:171"><span class="id" title="variable">H</span></a> <a class="idref" href="Rich.html#Q:172"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Rich.html#WhileLoops.ForLoops.trm_for"><span class="id" title="axiom">trm_for</span></a> <a class="idref" href="Rich.html#x:167"><span class="id" title="variable">x</span></a> <a class="idref" href="Rich.html#n<sub>1</sub>:168"><span class="id" title="variable">n<sub>1</sub></span></a> <a class="idref" href="Rich.html#n<sub>2</sub>:169"><span class="id" title="variable">n<sub>2</sub></span></a> <a class="idref" href="Rich.html#t<sub>3</sub>:170"><span class="id" title="variable">t<sub>3</sub></span></a>) <a class="idref" href="Rich.html#H:171"><span class="id" title="variable">H</span></a> <a class="idref" href="Rich.html#Q:172"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="var">applys</span> <span class="id" title="var">M</span> (<span class="id" title="keyword">fun</span> <a id="i:181" class="idref" href="#i:181"><span class="id" title="binder">i</span></a> ⇒ <a class="idref" href="Rich.html#WhileLoops.ForLoops.trm_for"><span class="id" title="axiom">trm_for</span></a> <span class="id" title="var">x</span> <a class="idref" href="Rich.html#i:180"><span class="id" title="variable">i</span></a> <span class="id" title="var">n<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>). <span class="id" title="var">introv</span> <span class="id" title="var">K</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="var">applys</span> <span class="id" title="var">M</span> (<span class="id" title="keyword">fun</span> <a id="n:181" class="idref" href="#n:181"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="Rich.html#WhileLoops.ForLoops.trm_for"><span class="id" title="axiom">trm_for</span></a> <span class="id" title="var">x</span> <a class="idref" href="Rich.html#n:180"><span class="id" title="variable">n</span></a> <span class="id" title="var">n<sub>2</sub></span> <span class="id" title="var">t<sub>3</sub></span>). <span class="id" title="var">introv</span> <span class="id" title="var">K</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">applys</span> <a class="idref" href="Rich.html#WhileLoops.ForLoops.triple_for"><span class="id" title="lemma">triple_for</span></a>. <span class="id" title="var">applys</span> <a class="idref" href="Rich.html#triple_if_trm"><span class="id" title="lemma">triple_if_trm</span></a>.<br/>
 &nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#triple_conseq_frame"><span class="id" title="lemma">triple_conseq_frame</span></a> <a class="idref" href="LibSepReference.html#triple_le"><span class="id" title="lemma">triple_le</span></a>. <span class="id" title="var">xsimpl</span>. <span class="id" title="var">xsimpl</span>. }<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">v</span>. <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#triple_hpure"><span class="id" title="lemma">triple_hpure</span></a>. <span class="id" title="tactic">intros</span> →. <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#triple_if"><span class="id" title="lemma">triple_if</span></a>.<br/>
@@ -683,7 +683,7 @@ Just like for while loops, we can reduce the noise associated with applying
 We can derive a simpler rule for the case of loops with no iterations. 
 <div class="paragraph"> </div>
 
-<a id="lab424"></a><h4 class="section">Exercise: 4 stars, standard, optional (triple_for_ge)</h4>
+<a id="lab423"></a><h4 class="section">Exercise: 4 stars, standard, optional (triple_for_ge)</h4>
  Prove the specification of for loops in the case where the lower bound
     of the loop exceeds the upper bound of the loop.
     Hint: the proof shares similarities with that of <span class="inlinecode"><span class="id" title="var">triple_for'</span></span>. 
@@ -708,7 +708,7 @@ We can derive a simpler rule for the case of loops with no iterations.
     application of the induction principle. 
 <div class="paragraph"> </div>
 
-<a id="lab425"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (triple_for_inv_conseq_frame)</h4>
+<a id="lab424"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (triple_for_inv_conseq_frame)</h4>
  Prove the invariant-based reasoning rule for for-loops.
     Hint: the proof shares similarities with that of <span class="inlinecode"><span class="id" title="var">triple_for'</span></span>. 
 </div>
@@ -731,7 +731,7 @@ We can derive a simpler rule for the case of loops with no iterations.
 </div>
 
 <div class="doc">
-<a id="lab426"></a><h2 class="section">Treatment of Generalized Conditionals and Loops in <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
+<a id="lab425"></a><h2 class="section">Treatment of Generalized Conditionals and Loops in <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
 
 </div>
 <div class="code">
@@ -856,7 +856,7 @@ The soundness proof of <span class="inlinecode"><span class="id" title="var">wpg
 </div>
 
 <div class="doc">
-<a id="lab427"></a><h2 class="section">Notation and Tactics for Manipulating While-Loops</h2>
+<a id="lab426"></a><h2 class="section">Notation and Tactics for Manipulating While-Loops</h2>
 
 <div class="paragraph"> </div>
 
@@ -921,7 +921,7 @@ Note: a similar construction could be set up for dealing with for loops.
 </div>
 
 <div class="doc">
-<a id="lab428"></a><h2 class="section">Example of the Application of Frame During Loop Iterations</h2>
+<a id="lab427"></a><h2 class="section">Example of the Application of Frame During Loop Iterations</h2>
 
 </div>
 <div class="code">
@@ -1037,7 +1037,7 @@ At this point, we reason about the recursive call.
 </div>
 
 <div class="doc">
-<a id="lab429"></a><h2 class="section">Reasoning Rule for Loops in an Affine Logic</h2>
+<a id="lab428"></a><h2 class="section">Reasoning Rule for Loops in an Affine Logic</h2>
 
 </div>
 <div class="code">
@@ -1085,7 +1085,7 @@ In that setting, it is useful to integrate <span class="inlinecode">\<span class
 </div>
 
 <div class="doc">
-<a id="lab430"></a><h2 class="section">Curried Functions of Several Arguments</h2>
+<a id="lab429"></a><h2 class="section">Curried Functions of Several Arguments</h2>
 
 </div>
 <div class="code">
@@ -1290,7 +1290,7 @@ This tactic <span class="inlinecode"><span class="id" title="var">xwp</span></sp
 </div>
 
 <div class="doc">
-<a id="lab431"></a><h2 class="section">Primitive n-ary Functions</h2>
+<a id="lab430"></a><h2 class="section">Primitive n-ary Functions</h2>
 
 </div>
 <div class="code">
@@ -1620,12 +1620,12 @@ The second change consists of introducing the <span class="inlinecode"><span cla
 </div>
 
 <div class="doc">
-<a id="lab432"></a><h1 class="section">Optional Material</h1>
+<a id="lab431"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab433"></a><h2 class="section">A Coercion for Parsing Primitive N-ary Applications</h2>
+<a id="lab432"></a><h2 class="section">A Coercion for Parsing Primitive N-ary Applications</h2>
 
 <div class="paragraph"> </div>
 
@@ -1772,7 +1772,7 @@ The following demo shows how the term <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab434"></a><h2 class="section">Historical Notes</h2>
+<a id="lab433"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1787,7 +1787,7 @@ The following demo shows how the term <span class="inlinecode"><span class="id" 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
 </div>
 </div>
 

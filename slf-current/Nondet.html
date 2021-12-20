@@ -52,7 +52,7 @@
 </div>
 
 <div class="doc">
-<a id="lab435"></a><h1 class="section">First Pass</h1>
+<a id="lab434"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -98,7 +98,7 @@
 </div>
 
 <div class="doc">
-<a id="lab436"></a><h2 class="section">Non-Deterministic Big-Step Semantics: the Predicate <span class="inlinecode"><span class="id" title="var">evaln</span></span></h2>
+<a id="lab435"></a><h2 class="section">Non-Deterministic Big-Step Semantics: the Predicate <span class="inlinecode"><span class="id" title="var">evaln</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -319,7 +319,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     precondition. We focus on the particular case of a let-binding. 
 <div class="paragraph"> </div>
 
-<a id="lab437"></a><h4 class="section">Exercise: 1 star, standard, optional (evaln_let')</h4>
+<a id="lab436"></a><h4 class="section">Exercise: 1 star, standard, optional (evaln_let')</h4>
  The rule <span class="inlinecode"><span class="id" title="var">evaln_let</span></span> shares similarities with the statement of
     the weakest-precondition style reasoning rule for let-bindings.
     Prove the following alternative statement, with a wp-style flavor. 
@@ -336,7 +336,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab438"></a><h4 class="section">Exercise: 2 stars, standard, optional (evaln_let_of_evaln_let')</h4>
+<a id="lab437"></a><h4 class="section">Exercise: 2 stars, standard, optional (evaln_let_of_evaln_let')</h4>
  Reciprocally, prove that the statement considered in the inductive
     definition of <span class="inlinecode"><span class="id" title="var">evaln</span></span> is derivable from <span class="inlinecode"><span class="id" title="var">evaln_let'</span></span>. More precisely,
     prove the statement below by using <span class="inlinecode"><span class="id" title="var">evaln_let'</span></span> and <span class="inlinecode"><span class="id" title="var">evaln_conseq</span></span>. 
@@ -368,7 +368,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 </div>
 
 <div class="doc">
-<a id="lab439"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span></h2>
+<a id="lab438"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -428,7 +428,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     that <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> holds. This result is formalized by the following lemma. 
 <div class="paragraph"> </div>
 
-<a id="lab440"></a><h4 class="section">Exercise: 3 stars, standard, optional (evaln_inv_eval)</h4>
+<a id="lab439"></a><h4 class="section">Exercise: 3 stars, standard, optional (evaln_inv_eval)</h4>
  Assume <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> to hold. Prove that the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> holds of
     any output that <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> may evaluate to according to the judgment <span class="inlinecode"><span class="id" title="tactic">eval</span></span>. 
 </div>
@@ -453,7 +453,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     formalized by the following lemma. 
 <div class="paragraph"> </div>
 
-<a id="lab441"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evaln_inv_exists_eval)</h4>
+<a id="lab440"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evaln_inv_exists_eval)</h4>
  Assume <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> to hold. Prove that there exists an output
     <span class="inlinecode">(<span class="id" title="var">s'</span>,<span class="id" title="var">v</span>)</span> that <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> may evaluate to according to the judgment
     <span class="inlinecode"><span class="id" title="tactic">eval</span></span>, and that this output satisfies <span class="inlinecode"><span class="id" title="var">Q</span></span>.
@@ -516,11 +516,12 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
     for which one particular execution may diverge or get stuck. 
 <div class="paragraph"> </div>
 
-<a id="lab442"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_post_of_evaln)</h4>
+<a id="lab441"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_post_of_evaln)</h4>
  Prove the fact that if <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> holds for some <span class="inlinecode"><span class="id" title="var">Q</span></span>, then it
     holds for the smallest postcondition, namely <span class="inlinecode"><span class="id" title="var">post</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>.
-    Hint: in the let-binding case, you'll need to guess an appropriate
-    intermediate postcondition for the subterm <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span>. 
+    Hint: in the let-binding case, you'll need to either exploit
+    <span class="inlinecode"><span class="id" title="var">evaln_inv_eval</span></span> or to provide an explicit intermediate postcondition
+    for the subterm <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> that revers to <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span>. 
 </div>
 <div class="code">
 
@@ -534,7 +535,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab443"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (evaln_inv_post_qimpl)</h4>
+<a id="lab442"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (evaln_inv_post_qimpl)</h4>
  Prove the fact that if <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> holds, then <span class="inlinecode"><span class="id" title="var">post</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">===&gt;</span> <span class="inlinecode"><span class="id" title="var">Q</span></span>,
     i.e. the smallest-possible postcondition entails the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>.
     Hint: the proof is only one line long. 
@@ -550,7 +551,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">evaln</span><
 
 
 <div class="doc">
-<a id="lab444"></a><h2 class="section">Triples for Non-Deterministic Big-Step Semantics</h2>
+<a id="lab443"></a><h2 class="section">Triples for Non-Deterministic Big-Step Semantics</h2>
 
 <div class="paragraph"> </div>
 
@@ -578,7 +579,7 @@ A Separation Logic triple, written <span class="inlinecode"><span class="id" tit
 </div>
 
 <div class="doc">
-<a id="lab445"></a><h2 class="section">Triple-Style Reasoning Rules for a Non-Deterministic Semantics.</h2>
+<a id="lab444"></a><h2 class="section">Triple-Style Reasoning Rules for a Non-Deterministic Semantics.</h2>
 
 <div class="paragraph"> </div>
 
@@ -748,12 +749,12 @@ Statements and proofs of reasoning rules for other term constructs
 </div>
 
 <div class="doc">
-<a id="lab446"></a><h1 class="section">More Details</h1>
+<a id="lab445"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab447"></a><h2 class="section">Weakest-Precondition Style Presentation.</h2>
+<a id="lab446"></a><h2 class="section">Weakest-Precondition Style Presentation.</h2>
 
 <div class="paragraph"> </div>
 
@@ -820,7 +821,7 @@ This definition is associated with the following introduction rule,
 </div>
 
 <div class="doc">
-<a id="lab448"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_equiv)</h4>
+<a id="lab447"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_equiv)</h4>
  Prove the standard equivalence <span class="inlinecode">(<span class="id" title="var">H</span></span> <span class="inlinecode">==&gt;</span> <span class="inlinecode"><span class="id" title="var">wp</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span>)</span> <span class="inlinecode">↔</span> <span class="inlinecode">(<span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span>)</span>
     to relate the predicates <span class="inlinecode"><span class="id" title="var">wpn</span></span> and <span class="inlinecode"><span class="id" title="var">triplen</span></span>.
     Hint: using lemma <span class="inlinecode"><span class="id" title="var">wpn_of_hoarewpn</span></span> can be helpful. 
@@ -842,7 +843,7 @@ This definition is associated with the following introduction rule,
 </div>
 
 <div class="doc">
-<a id="lab449"></a><h2 class="section">Hoare Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
+<a id="lab448"></a><h2 class="section">Hoare Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
 
 <div class="paragraph"> </div>
 
@@ -967,7 +968,7 @@ Rules for primitives. We state their specifications following the
 </div>
 
 <div class="doc">
-<a id="lab450"></a><h2 class="section">Separation Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
+<a id="lab449"></a><h2 class="section">Separation Logic WP-Style Rules for a Non-Deterministic Semantics.</h2>
 
 <div class="paragraph"> </div>
 
@@ -1023,7 +1024,7 @@ Rules for term constructs
 </div>
 
 <div class="doc">
-<a id="lab451"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_let)</h4>
+<a id="lab450"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (wpn_let)</h4>
  Derive the reasoning rule <span class="inlinecode"><span class="id" title="var">wpn_let</span></span> from <span class="inlinecode"><span class="id" title="var">hoarewpn_let</span></span>. 
 </div>
 <div class="code">
@@ -1159,7 +1160,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab452"></a><h4 class="section">Exercise: 4 stars, standard, optional (wpn_rand_of_triplen_rand)</h4>
+<a id="lab451"></a><h4 class="section">Exercise: 4 stars, standard, optional (wpn_rand_of_triplen_rand)</h4>
  The proof of lemma <span class="inlinecode"><span class="id" title="var">triplen_rand</span></span> shows that a triple-based specification
     of <span class="inlinecode"><span class="id" title="var">val_rand</span></span> is derivable from a wp-style specification. In this
     exercise, we aim to prove the reciprocal. Concretely, prove the following
@@ -1177,7 +1178,7 @@ Rules for primitives, alternative presentation using triples.
 
 
 <div class="doc">
-<a id="lab453"></a><h1 class="section">Optional Material</h1>
+<a id="lab452"></a><h1 class="section">Optional Material</h1>
 
 <div class="paragraph"> </div>
 
@@ -1189,7 +1190,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab454"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">terminates</span></span></h2>
+<a id="lab453"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">terminates</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1239,7 +1240,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab455"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_iff_terminates_and_post)</h4>
+<a id="lab454"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evaln_iff_terminates_and_post)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is equivalent to the conjunction of
     <span class="inlinecode"><span class="id" title="var">terminates</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> and to a partial correctness result asserting that
     if an evaluation of <span class="inlinecode"><span class="id" title="var">t</span>/<span class="id" title="var">s</span></span> terminates on some result then this result
@@ -1266,7 +1267,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab456"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (terminates_iff_evaln_any)</h4>
+<a id="lab455"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (terminates_iff_evaln_any)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">terminates</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">evaln</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Any</span></span>.
     Hint: exploit <span class="inlinecode"><span class="id" title="var">evaln_iff_terminates_and_post</span></span>. 
 </div>
@@ -1284,7 +1285,7 @@ Rules for primitives, alternative presentation using triples.
 </div>
 
 <div class="doc">
-<a id="lab457"></a><h2 class="section">Small-Step Evaluation Relation</h2>
+<a id="lab456"></a><h2 class="section">Small-Step Evaluation Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1354,7 +1355,7 @@ Consider a configuration <span class="inlinecode">(<span class="id" title="var">
 </div>
 
 <div class="doc">
-<a id="lab458"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evalns</span></span>: Attempts</h2>
+<a id="lab457"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evalns</span></span>: Attempts</h2>
 
 <div class="paragraph"> </div>
 
@@ -1387,7 +1388,12 @@ Consider a configuration <span class="inlinecode">(<span class="id" title="var">
 </div>
 
 <div class="doc">
-Let's check out several candidate definitions for the judgment <span class="inlinecode"><span class="id" title="var">evalns</span></span>. 
+Quiz: Before reading further, try to devise a definition of <span class="inlinecode"><span class="id" title="var">evalns</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>
+    expressed in terms for the judgment <span class="inlinecode"><span class="id" title="var">evals</span></span> that applies to the general case
+    of non-deterministic semantics. 
+<div class="paragraph"> </div>
+
+ Let's check out several candidate definitions for the judgment <span class="inlinecode"><span class="id" title="var">evalns</span></span>. 
 <div class="paragraph"> </div>
 
  The definition <span class="inlinecode"><span class="id" title="var">evalns_attempt_2</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> asserts that any execution starting
@@ -1432,11 +1438,17 @@ The definition <span class="inlinecode"><span class="id" title="var">evalns_atte
 </div>
 
 <div class="doc">
-Solution follows.
+Quiz: Why is <span class="inlinecode"><span class="id" title="var">evalns_attempt_4</span></span> not equivalent to <span class="inlinecode"><span class="id" title="var">evaln</span></span>? Can you find a
+    counter-example program for which the property "all possible evaluations
+    reach a final configuration satisfying the postcondition" does not hold? 
+<div class="paragraph"> </div>
+
+ Solution follows.
 
 <div class="paragraph"> </div>
 
-    Consider the following program.
+    Consider the following program, which does satisfy <span class="inlinecode"><span class="id" title="var">evalns_attempt_4</span></span>
+    yet whose execution may diverge.
 
 <div class="paragraph"> </div>
 
@@ -1531,7 +1543,13 @@ Is the definition of <span class="inlinecode"><span class="id" title="var">evaln
 </div>
 
 <div class="doc">
-Solution: Consider the following program.
+Quiz: devise a counter-example program such that (1) every possible
+    execution of this program does terminate, and (2) this program does not
+    satisfy <span class="inlinecode"><span class="id" title="var">evalns_attempt_5</span></span> because there does not exist an upper bound on
+    the length of all executions. 
+<div class="paragraph"> </div>
+
+ Solution: Consider the following program.
 
 <div class="paragraph"> </div>
 
@@ -1602,7 +1620,7 @@ Solution: Consider the following program.
 </div>
 
 <div class="doc">
-<a id="lab459"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evaln</span></span>: A Solution</h2>
+<a id="lab458"></a><h2 class="section">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evaln</span></span>: A Solution</h2>
 
 <div class="paragraph"> </div>
 
@@ -1693,7 +1711,7 @@ Observe how this definition allows for <span class="inlinecode"><span class="id"
     <span class="inlinecode"><span class="id" title="var">unbounded_rand</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab460"></a><h4 class="section">Exercise: 2 stars, standard, optional (evalns_val_inv)</h4>
+<a id="lab459"></a><h4 class="section">Exercise: 2 stars, standard, optional (evalns_val_inv)</h4>
  Prove the following inversion lemma, which asserts that
     <span class="inlinecode"><span class="id" title="var">evalns</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> implies <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span>. 
 </div>
@@ -1727,7 +1745,7 @@ Observe how this definition allows for <span class="inlinecode"><span class="id"
 </div>
 
 <div class="doc">
-<a id="lab461"></a><h2 class="section">Triples for Small-Step Semantics</h2>
+<a id="lab460"></a><h2 class="section">Triples for Small-Step Semantics</h2>
 
 <div class="paragraph"> </div>
 
@@ -1760,7 +1778,7 @@ There is nothing new in deriving rules for <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab462"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">seval</span></span></h2>
+<a id="lab461"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">seval</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1814,7 +1832,7 @@ The rules for term constructs are established next. Note that there is
 </div>
 
 <div class="doc">
-<a id="lab463"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalns_let)</h4>
+<a id="lab462"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalns_let)</h4>
  Prove the big-step reasoning rule for let-bindings for <span class="inlinecode"><span class="id" title="var">evalns</span></span>. 
 </div>
 <div class="code">
@@ -1840,7 +1858,7 @@ The rules for term constructs are established next. Note that there is
 </div>
 
 <div class="doc">
-<a id="lab464"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">hoarens</span></span></h2>
+<a id="lab463"></a><h2 class="section">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">hoarens</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -2006,7 +2024,7 @@ From there, reasoning rules for <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab465"></a><h2 class="section">Equivalence Between Non-Deterministic Small-Step and Big-Step Sem.</h2>
+<a id="lab464"></a><h2 class="section">Equivalence Between Non-Deterministic Small-Step and Big-Step Sem.</h2>
 
 <div class="paragraph"> </div>
 
@@ -2167,7 +2185,7 @@ As immediate corollary, we obtain the equivalence between the big-step and
 </div>
 
 <div class="doc">
-<a id="lab466"></a><h2 class="section">Historical Notes</h2>
+<a id="lab465"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -2200,7 +2218,7 @@ As immediate corollary, we obtain the equivalence between the big-step and
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
 </div>
 </div>
 

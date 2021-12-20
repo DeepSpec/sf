@@ -1178,8 +1178,8 @@ Here is another way of presenting recursive functions that is
       evenodd =
         fix
           (\eo: (Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool * Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool),
-             let e = \n:Nat, if n=0 then tru else eo,snd (pred n) in
-             let o = \n:Nat, if n=0 then fls else eo,fst (pred n) in
+             let e = \n:Nat, if n=0 then tru else eo.snd (pred n) in
+             let o = \n:Nat, if n=0 then fls else eo.fst (pred n) in
              (e,o))
 
       even = evenodd.fst
@@ -2355,10 +2355,10 @@ Next, a bit of Coq hackery to automate searching for typing
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest4.eotest"><span class="id" title="definition">eotest</span></a> <a class="idref" href="MoreStlc.html#9cd10f7cb4dfdde0d448b6577b0f7bdd"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">(</span></a>0<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">,</span></a> 1<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;<br/>
-&nbsp;&nbsp;unfold&nbsp;eotest.&nbsp;normalize.<br/>
+&nbsp;&nbsp;unfold&nbsp;eotest.&nbsp;eauto&nbsp;10.&nbsp;normalize.<br/>
 *)</span><br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest4"><span class="id" title="module">FixTest4</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest4"><span class="id" title="module">FixTest4</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples"><span class="id" title="module">Examples</span></a>.<br/>
 </div>
 
@@ -2729,7 +2729,7 @@ Next, a bit of Coq hackery to automate searching for typing
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended"><span class="id" title="module">STLCExtended</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:32&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:03&nbsp;*)</span><br/>
 </div>
 </div>
 

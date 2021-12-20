@@ -52,7 +52,7 @@
 </div>
 
 <div class="doc">
-<a id="lab467"></a><h1 class="section">First Pass</h1>
+<a id="lab466"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -90,7 +90,7 @@
 </div>
 
 <div class="doc">
-<a id="lab468"></a><h2 class="section">Big-Step Characterization of Partial Correctness</h2>
+<a id="lab467"></a><h2 class="section">Big-Step Characterization of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -183,7 +183,7 @@ One key property is the covariance of <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab469"></a><h4 class="section">Exercise: 3 stars, standard, optional (evalnp_inv_eval)</h4>
+<a id="lab468"></a><h4 class="section">Exercise: 3 stars, standard, optional (evalnp_inv_eval)</h4>
  Assume <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> to hold. Prove that the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> holds of
     any output that <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> may evaluate to according to the judgment <span class="inlinecode"><span class="id" title="tactic">eval</span></span>. 
 </div>
@@ -199,7 +199,7 @@ One key property is the covariance of <span class="inlinecode"><span class="id" 
 
 
 <div class="doc">
-<a id="lab470"></a><h2 class="section">From Total to Partial Correctness</h2>
+<a id="lab469"></a><h2 class="section">From Total to Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -229,7 +229,7 @@ One key property is the covariance of <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab471"></a><h2 class="section">Characterization of Divergence</h2>
+<a id="lab470"></a><h2 class="section">Characterization of Divergence</h2>
 
 <div class="paragraph"> </div>
 
@@ -261,7 +261,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">divn</span></
 </div>
 
 <div class="doc">
-<a id="lab472"></a><h2 class="section">Big-Step-Based Reasoning Rules</h2>
+<a id="lab471"></a><h2 class="section">Big-Step-Based Reasoning Rules</h2>
 
 <div class="paragraph"> </div>
 
@@ -407,7 +407,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab473"></a><h2 class="section">Big-Step-Based Reasoning Rules for Divergence</h2>
+<a id="lab472"></a><h2 class="section">Big-Step-Based Reasoning Rules for Divergence</h2>
 
 <div class="paragraph"> </div>
 
@@ -425,7 +425,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab474"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (divn_let_ctx)</h4>
+<a id="lab473"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (divn_let_ctx)</h4>
  Prove the divergence rule for a let-binding covering the case where the
     first subterm diverges. 
 </div>
@@ -452,12 +452,12 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab475"></a><h1 class="section">Optional Material</h1>
+<a id="lab474"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab476"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evalnp</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">safe</span></span></h2>
+<a id="lab475"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evalnp</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">safe</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -506,7 +506,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab477"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnp_iff_safe_and_post)</h4>
+<a id="lab476"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnp_iff_safe_and_post)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is equivalent to the conjunction of <span class="inlinecode"><span class="id" title="var">safe</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>
     and to a partial correctness result asserting that if an evaluation of
     <span class="inlinecode"><span class="id" title="var">t</span>/<span class="id" title="var">s</span></span> terminates on a particular result, then this result satisfies <span class="inlinecode"><span class="id" title="var">Q</span></span>. 
@@ -532,7 +532,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab478"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (safe_iff_evalnp_any)</h4>
+<a id="lab477"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (safe_iff_evalnp_any)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">safe</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Any</span></span>.
     Hint: a direct proof fails---why?
     The solution is to exploit <span class="inlinecode"><span class="id" title="var">evalnp_iff_safe_and_post</span></span>. 
@@ -551,7 +551,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab479"></a><h2 class="section">Small-Step Characterization of Partial Correctness</h2>
+<a id="lab478"></a><h2 class="section">Small-Step Characterization of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -672,7 +672,7 @@ The property <span class="inlinecode"><span class="id" title="var">evalnps</span
 Second, let's prove the preservation property. 
 <div class="paragraph"> </div>
 
-<a id="lab480"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (evalnps_inv_step)</h4>
+<a id="lab479"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (evalnps_inv_step)</h4>
  Prove that the property <span class="inlinecode"><span class="id" title="var">evalnps</span></span> for a given postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> is
     preserved when a program takes a reduction step. 
 </div>
@@ -692,7 +692,7 @@ Second, let's prove the preservation property.
  Third, let's prove the progress property. 
 <div class="paragraph"> </div>
 
-<a id="lab481"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evalnps_not_val_inv)</h4>
+<a id="lab480"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evalnps_not_val_inv)</h4>
  Prove that if the property <span class="inlinecode"><span class="id" title="var">evalnps</span></span> holds for a given postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>,
     and for a configuration that has not already reached a value, and this
     configuration can take a step. Moreover, the configuration reached also
@@ -710,7 +710,7 @@ Second, let's prove the preservation property.
 
 
 <div class="doc">
-<a id="lab482"></a><h2 class="section">Reasoning Rules w.r.t. Small-Step Characterization</h2>
+<a id="lab481"></a><h2 class="section">Reasoning Rules w.r.t. Small-Step Characterization</h2>
 
 <div class="paragraph"> </div>
 
@@ -746,7 +746,7 @@ The second proof targets the reasoning rule for let-bindings, stated
     lemma an introduction rule for let-bindings with respect to <span class="inlinecode"><span class="id" title="var">evalnps</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab483"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnps_let)</h4>
+<a id="lab482"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnps_let)</h4>
  Prove the reasoning rule for let-bindings for <span class="inlinecode"><span class="id" title="var">evalnps</span></span>. 
 </div>
 <div class="code">
@@ -772,7 +772,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 </div>
 
 <div class="doc">
-<a id="lab484"></a><h2 class="section">Small-Step Characterization of Divergence</h2>
+<a id="lab483"></a><h2 class="section">Small-Step Characterization of Divergence</h2>
 
 <div class="paragraph"> </div>
 
@@ -813,7 +813,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 </div>
 
 <div class="doc">
-<a id="lab485"></a><h4 class="section">Exercise: 3 stars, standard, optional (divns_iff_evalnps_Empty)</h4>
+<a id="lab484"></a><h4 class="section">Exercise: 3 stars, standard, optional (divns_iff_evalnps_Empty)</h4>
  Prove the equivalence between <span class="inlinecode"><span class="id" title="var">divns</span></span> and the specialization
     of <span class="inlinecode"><span class="id" title="var">evalnps</span></span> to <span class="inlinecode"><span class="id" title="var">Empty</span></span>. 
 </div>
@@ -828,7 +828,14 @@ The second proof targets the reasoning rule for let-bindings, stated
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab486"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_inv_step)</h4>
+ The three exercises that follow can be proved trivially by exploiting
+    the equivalence <span class="inlinecode"><span class="id" title="var">divns_iff_evalnps_Empty</span></span> then exploiting the already
+    established properties of <span class="inlinecode"><span class="id" title="var">evalnps</span></span>. However, it is interesting to
+    know how to carry out proofs directly with respect to the definition
+    <span class="inlinecode"><span class="id" title="var">divns</span></span>. 
+<div class="paragraph"> </div>
+
+<a id="lab485"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_inv_step)</h4>
  Prove that if a diverging configuration takes a step, then it reaches a
     configuration that also diverges. 
 </div>
@@ -845,7 +852,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab487"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_val_inv)</h4>
+<a id="lab486"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_val_inv)</h4>
  Prove that the execution of a value does not diverge. 
 </div>
 <div class="code">
@@ -859,7 +866,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab488"></a><h4 class="section">Exercise: 5 stars, standard, optional (divns_let_ctx)</h4>
+<a id="lab487"></a><h4 class="section">Exercise: 5 stars, standard, optional (divns_let_ctx)</h4>
  Prove the divergence rule for a let-binding covering the case where the
     first subterm diverges, with respect to the definition <span class="inlinecode"><span class="id" title="var">divns</span></span>. 
 </div>
@@ -874,7 +881,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 
 
 <div class="doc">
-<a id="lab489"></a><h2 class="section">Coinductive, Small-Step Characterization of Partial Correctness</h2>
+<a id="lab488"></a><h2 class="section">Coinductive, Small-Step Characterization of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -951,7 +958,7 @@ Secondly, we let's prove the reasoning rule for let-bindings. Here again,
     the key intermediate result is to establish a rule for <span class="inlinecode"><span class="id" title="var">evalnpz</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab490"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (hoarenpz_let)</h4>
+<a id="lab489"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (hoarenpz_let)</h4>
  Prove the reasoning rule for let-bindings stated for <span class="inlinecode"><span class="id" title="var">evalnpz</span></span>.
     Hint: to set up the coinductive proof, follow the template that appears
     at the beginning of the proof of <span class="inlinecode"><span class="id" title="var">evalnpz_conseq</span></span>. 
@@ -996,7 +1003,7 @@ To express diverge, the judgment <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab491"></a><h4 class="section">Exercise: 4 stars, standard, optional (divnz_iff_evalnpz_Empty)</h4>
+<a id="lab490"></a><h4 class="section">Exercise: 4 stars, standard, optional (divnz_iff_evalnpz_Empty)</h4>
  Prove the equivalence between <span class="inlinecode"><span class="id" title="var">divnz</span></span> and the specialization of the
     judgment <span class="inlinecode"><span class="id" title="var">evalnp</span></span> to <span class="inlinecode"><span class="id" title="var">Empty</span></span>. 
 </div>
@@ -1010,7 +1017,7 @@ To express diverge, the judgment <span class="inlinecode"><span class="id" title
 
 
 <div class="doc">
-<a id="lab492"></a><h2 class="section">Equivalence Between the Two Small-Step Charact. of Partial Correctness</h2>
+<a id="lab491"></a><h2 class="section">Equivalence Between the Two Small-Step Charact. of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -1061,7 +1068,7 @@ As a corollary, we can establish the equivalence between the two small-step
 </div>
 
 <div class="doc">
-<a id="lab493"></a><h2 class="section">Equivalence Between Small-Step and Big-Step Partial Correctness</h2>
+<a id="lab492"></a><h2 class="section">Equivalence Between Small-Step and Big-Step Partial Correctness</h2>
 
        Semantics 
 <div class="paragraph"> </div>
@@ -1294,7 +1301,7 @@ As another corollary, we can establish the equivalence between the big-step
 </div>
 
 <div class="doc">
-<a id="lab494"></a><h2 class="section">Historical Notes</h2>
+<a id="lab493"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1318,7 +1325,7 @@ As another corollary, we can establish the equivalence between the big-step
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
 </div>
 </div>
 

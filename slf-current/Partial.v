@@ -636,6 +636,12 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
+(** The three exercises that follow can be proved trivially by exploiting
+    the equivalence [divns_iff_evalnps_Empty] then exploiting the already
+    established properties of [evalnps]. However, it is interesting to
+    know how to carry out proofs directly with respect to the definition
+    [divns]. *)
+
 (** **** Exercise: 2 stars, standard, optional (divns_inv_step)
 
     Prove that if a diverging configuration takes a step, then it reaches a
@@ -1047,4 +1053,4 @@ Qed.
     in this chapter with the predicate [evalnp], appears to be novel as of Jan.
     2021. *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

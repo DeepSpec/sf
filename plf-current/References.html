@@ -146,25 +146,35 @@ The basic operations on references are <i>allocation</i>,
 
 <ul class="doclist">
 <li> To allocate a reference, we use the <span class="inlinecode"><span class="id" title="var">ref</span></span> operator, providing
-         an initial value for the new cell.  For example, <span class="inlinecode"><span class="id" title="var">ref</span></span> <span class="inlinecode">5</span>
-         creates a new cell containing the value <span class="inlinecode">5</span>, and reduces to
-         a reference to that cell.
+         an initial value for the new cell.
+
+<div class="paragraph"> </div>
+
+         For example, <span class="inlinecode"><span class="id" title="var">ref</span></span> <span class="inlinecode">5</span> creates a new cell containing the value
+         <span class="inlinecode">5</span>, and reduces to a reference to that cell.
 
 <div class="paragraph"> </div>
 
 
 </li>
 <li> To read the current value of this cell, we use the
-         dereferencing operator <span class="inlinecode">!</span>; for example, <span class="inlinecode">!(<span class="id" title="var">ref</span></span> <span class="inlinecode">5)</span> reduces
-         to <span class="inlinecode">5</span>.
+         dereferencing operator <span class="inlinecode">!</span>.
+
+<div class="paragraph"> </div>
+
+         For example, <span class="inlinecode">!(<span class="id" title="var">ref</span></span> <span class="inlinecode">5)</span> reduces to <span class="inlinecode">5</span>.
 
 <div class="paragraph"> </div>
 
 
 </li>
 <li> To change the value stored in a cell, we use the assignment
-         operator.  If <span class="inlinecode"><span class="id" title="var">r</span></span> is a reference, <span class="inlinecode"><span class="id" title="var">r</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">7</span> will store the
-         value <span class="inlinecode">7</span> in the cell referenced by <span class="inlinecode"><span class="id" title="var">r</span></span>. 
+         operator.
+
+<div class="paragraph"> </div>
+
+         If <span class="inlinecode"><span class="id" title="var">r</span></span> is a reference, <span class="inlinecode"><span class="id" title="var">r</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">7</span> will store the value <span class="inlinecode">7</span> in
+         the cell referenced by <span class="inlinecode"><span class="id" title="var">r</span></span>. 
 
 </li>
 </ul>
@@ -373,8 +383,8 @@ Intuitively:
 
 <div class="paragraph"> </div>
 
- Besides abstractions and numbers, we have two new types of values:
-    the unit value, and locations.  
+ Besides abstractions, numbers, and the unit value, we have one new
+    type of value: locations.  
 </div>
 <div class="code">
 
@@ -392,7 +402,8 @@ Intuitively:
 
 <div class="doc">
 Extending substitution to handle the new syntax of terms is
-    straightforward.  
+    straightforward: substituting in a pointer leaves it
+    unchanged.  
 </div>
 <div class="code">
 
@@ -476,7 +487,7 @@ Extending substitution to handle the new syntax of terms is
 
 <span class="id" title="keyword">Definition</span> <a id="STLCRef.x" class="idref" href="#STLCRef.x"><span class="id" title="definition">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "x".<br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCRef.y" class="idref" href="#STLCRef.y"><span class="id" title="definition">y</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "y".<br/>
-<span class="id" title="keyword">Definition</span> <a id="STLCRef.z" class="idref" href="#STLCRef.z"><span class="id" title="definition">z</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "z".<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="STLCRef.z" class="idref" href="#STLCRef.z"><span class="id" title="definition">z</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a> := "z".<br/>
 <span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="References.html#STLCRef.x"><span class="id" title="definition">x</span></a> : <span class="id" title="var">core</span>.<br/>
 <span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="References.html#STLCRef.y"><span class="id" title="definition">y</span></a> : <span class="id" title="var">core</span>.<br/>
 <span class="id" title="keyword">Hint Unfold</span> <a class="idref" href="References.html#STLCRef.z"><span class="id" title="definition">z</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
@@ -511,11 +522,10 @@ Extending substitution to handle the new syntax of terms is
 </pre>
     the cell referenced by <span class="inlinecode"><span class="id" title="var">r</span></span> will contain the value <span class="inlinecode">82</span>, while the
     result of the whole expression will be <span class="inlinecode">83</span>.  The references <span class="inlinecode"><span class="id" title="var">r</span></span>
-    and <span class="inlinecode"><span class="id" title="var">s</span></span> are said to be <i>aliases</i> for the same cell.
-
+    and <span class="inlinecode"><span class="id" title="var">s</span></span> are said to be <i>aliases</i> for the same cell. 
 <div class="paragraph"> </div>
 
-    The possibility of aliasing can make programs with references
+ The possibility of aliasing can make programs with references
     quite tricky to reason about.  For example, the expression
 <pre>
       r := 5; r := !s
@@ -527,7 +537,13 @@ Extending substitution to handle the new syntax of terms is
       r := !s
 </pre>
     <i>unless</i> we happen to do it in a context where <span class="inlinecode"><span class="id" title="var">r</span></span> and <span class="inlinecode"><span class="id" title="var">s</span></span> are
-    aliases for the same cell! 
+    aliases for the same cell!
+<pre>
+      let r = ref 0 in
+      let s = r in
+      r := 5; r := !s
+</pre>
+
 </div>
 
 <div class="doc">
@@ -626,12 +642,14 @@ Extending substitution to handle the new syntax of terms is
     we've defined above allow us to create references to values of any
     type, including functions.  For example, we can use references to
     functions to give an (inefficient) implementation of arrays
-    of numbers, as follows.  Write <span class="inlinecode"><span class="id" title="var">NatArray</span></span> for the type
-    <span class="inlinecode"><span class="id" title="var">Ref</span></span> <span class="inlinecode">(<span class="id" title="var">Nat</span>→<span class="id" title="var">Nat</span>)</span>.
+    of numbers, as follows.
 
 <div class="paragraph"> </div>
 
-    Recall the <span class="inlinecode"><span class="id" title="var">equal</span></span> function from the <a href="MoreStlc.html"><span class="inlineref">MoreStlc</span></a> chapter:
+    Write <span class="inlinecode"><span class="id" title="var">NatArray</span></span> for the type <span class="inlinecode"><span class="id" title="var">Ref</span></span> <span class="inlinecode">(<span class="id" title="var">Nat</span>→<span class="id" title="var">Nat</span>)</span>. 
+<div class="paragraph"> </div>
+
+ Recall the <span class="inlinecode"><span class="id" title="var">equal</span></span> function from the <a href="MoreStlc.html"><span class="inlineref">MoreStlc</span></a> chapter:
 <pre>
       equal =
         fix
@@ -641,17 +659,26 @@ Extending substitution to handle the new syntax of terms is
                else if n=0 then false
                else eq (pred m) (pred n))
 </pre>
-    To build a new array, we allocate a reference cell and fill
+ 
+<div class="paragraph"> </div>
+
+ To build a new array, we allocate a reference cell and fill
     it with a function that, when given an index, always returns <span class="inlinecode">0</span>.
 <pre>
       newarray = \_:Unit. ref (\n:Nat.0)
 </pre>
-    To look up an element of an array, we simply apply
+
+<div class="paragraph"> </div>
+
+ To look up an element of an array, we simply apply
     the function to the desired index.
 <pre>
       lookup = \a:NatArray. \n:Nat. (!a) n
 </pre>
-    The interesting part of the encoding is the <span class="inlinecode"><span class="id" title="var">update</span></span> function.  It
+
+<div class="paragraph"> </div>
+
+ The interesting part of the encoding is the <span class="inlinecode"><span class="id" title="var">update</span></span> function.  It
     takes an array, an index, and a new value to be stored at that index, and
     does its job by creating (and storing in the reference) a new function
     that, when it is asked for the value at this very index, returns the new
@@ -662,7 +689,10 @@ Extending substitution to handle the new syntax of terms is
                    let oldf = !a in
                    a := (\n:Nat. if equal m n then v else oldf n);
 </pre>
-    References to values containing other references can also be very
+ 
+<div class="paragraph"> </div>
+
+ References to values containing other references can also be very
     useful, allowing us to define data structures such as mutable
     lists and trees. 
 <div class="paragraph"> </div>
@@ -730,11 +760,10 @@ would it behave the same?
     no longer needed.  Instead, like many modern languages (including
     ML and Java) we rely on the run-time system to perform <i>garbage
     collection</i>, automatically identifying and reusing cells that can
-    no longer be reached by the program.
-
+    no longer be reached by the program. 
 <div class="paragraph"> </div>
 
-    This is <i>not</i> just a question of taste in language design: it is
+ This is <i>not</i> just a question of taste in language design: it is
     extremely difficult to achieve type safety in the presence of an
     explicit deallocation operation.  One reason for this is the
     familiar <i>dangling reference</i> problem: we allocate a cell holding
@@ -852,7 +881,7 @@ would it behave the same?
 We use <span class="inlinecode"><span class="id" title="var">store_lookup</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> to retrieve the value of the reference
     cell at location <span class="inlinecode"><span class="id" title="var">n</span></span> in the store <span class="inlinecode"><span class="id" title="var">st</span></span>.  Note that we must give a
     default value to <span class="inlinecode"><span class="id" title="var">nth</span></span> in case we try looking up an index which is
-    too large. (In fact, we will never actually do this, but proving
+    too large. (In fact, we will never actually do this, but <i>proving</i>
     that we don't will require a bit of work.) 
 </div>
 <div class="code">
@@ -952,6 +981,101 @@ As might be expected, we will also need some technical
 <div class="doc">
 <a id="lab401"></a><h2 class="section">Reduction</h2>
 
+<div class="paragraph"> </div>
+
+ Now we can give the rules for the new constructs:
+<center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">&nbsp;&nbsp;</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_RefValue) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">ref v / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> loc |st| / st,v</td>
+  <td></td>
+</td>
+</table></center><center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_Ref) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">ref t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> ref t<sub>1</sub>' / st'</td>
+  <td></td>
+</td>
+</table></center><center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">l < |st|</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_DerefLoc) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">!(loc l) / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> lookup l st / st</td>
+  <td></td>
+</td>
+</table></center><center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_Deref) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">!t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> !t<sub>1</sub>' / st'</td>
+  <td></td>
+</td>
+</table></center><center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">l < |st|</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_Assign) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">loc l := v / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> unit / replace l v st</td>
+  <td></td>
+</td>
+</table></center><center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_Assign1) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">t<sub>1</sub> := t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' := t<sub>2</sub> / st'</td>
+  <td></td>
+</td>
+</table></center><center><table class="infrule">
+<tr class="infruleassumption">
+  <td class="infrule">t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>2</sub>' / st'</td>
+  <td class="infrulenamecol" rowspan="3">
+    (ST_Assign2) &nbsp;
+  </td></tr>
+<tr class="infrulemiddle">
+  <td class="infrule"><hr /></td>
+</tr>
+<tr class="infruleassumption">
+  <td class="infrule">v<sub>1</sub> := t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> v<sub>1</sub> := t<sub>2</sub>' / st'</td>
+  <td></td>
+</td>
+</table></center>
 <div class="paragraph"> </div>
 
  Next, we need to extend the operational semantics to take
@@ -1246,11 +1370,12 @@ As might be expected, we will also need some technical
 </div>
 
 <div class="doc">
-One slightly ugly point should be noted here: In the <span class="inlinecode"><span class="id" title="var">ST_RefValue</span></span>
-    rule, we extend the state by writing <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">v</span>::<span class="id" title="var">nil</span></span> rather than
-    the more natural <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">++</span> <span class="inlinecode">[<span class="id" title="var">v</span>]</span>.  The reason for this is that the
-    notation we've defined for substitution uses square brackets,
-    which clash with the standard library's notation for lists. 
+One slightly ugly point should be noted here: In the
+    <span class="inlinecode"><span class="id" title="var">ST_RefValue</span></span> rule, we extend the state by writing <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">v</span>::<span class="id" title="var">nil</span></span>
+    rather than the more natural <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">++</span> <span class="inlinecode">[<span class="id" title="var">v</span>]</span>.  The reason for this is
+    that the notation we've defined for substitution uses square
+    brackets, which clash with the standard library's notation for
+    lists. 
 </div>
 <div class="code">
 
@@ -1279,7 +1404,8 @@ One slightly ugly point should be noted here: In the <span class="inlinecode"><s
 
 <div class="paragraph"> </div>
 
- Having extended our syntax and reduction rules to accommodate
+ <div style="background-color:lightgray; color:red; margin:10px; padding:10px; "> Tersify! 
+</div>  Having extended our syntax and reduction rules to accommodate
     references, our last job is to write down typing rules for the new
     constructs (and, of course, to check that these rules are sound!).
     Naturalurally, the key question is, "What is the type of a location?"
@@ -1534,7 +1660,8 @@ Suppose we are given a store typing <span class="inlinecode"><span class="id" ti
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Reserved Notation</span> &quot;Gamma ';' ST '&#x22A2;' t '&#x2208;' T"  (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Reserved Notation</span> &quot;Gamma ';' ST '&#x22A2;' t '&#x2208;' T"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="STLCRef.has_type" class="idref" href="#STLCRef.has_type"><span class="id" title="inductive">has_type</span></a> (<a id="ST:124" class="idref" href="#ST:124"><span class="id" title="binder">ST</span></a> : <a class="idref" href="References.html#STLCRef.store_ty"><span class="id" title="definition">store_ty</span></a>) : <a class="idref" href="References.html#STLCRef.context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="References.html#STLCRef.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="References.html#STLCRef.ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="STLCRef.T_Var" class="idref" href="#STLCRef.T_Var"><span class="id" title="constructor">T_Var</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:127" class="idref" href="#Gamma:127"><span class="id" title="binder">Gamma</span></a> <a id="x:128" class="idref" href="#x:128"><span class="id" title="binder">x</span></a> <a id="T<sub>1</sub>:129" class="idref" href="#T<sub>1</sub>:129"><span class="id" title="binder">T<sub>1</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="References.html#Gamma:127"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="References.html#x:128"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="References.html#T<sub>1</sub>:129"><span class="id" title="variable">T<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -2063,7 +2190,7 @@ We can use the <span class="inlinecode"><span class="id" title="var">store_weake
 </div>
 
 <div class="doc">
-And here, at last, is the preservation theorem and proof: 
+And here, at last, is the preservation theorem: 
 </div>
 <div class="code">
 
@@ -2306,11 +2433,10 @@ And here, at last, is the preservation theorem and proof:
     What about STLC + references?  Surprisingly, adding references
     causes us to lose the normalization property: there exist
     well-typed terms in the STLC + references which can continue to
-    reduce forever, without ever reaching a normal form!
-
+    reduce forever, without ever reaching a normal form! 
 <div class="paragraph"> </div>
 
-    How can we construct such a term?  The main idea is to make a
+ How can we construct such a term?  The main idea is to make a
     function which calls itself.  We first make a function which calls
     another function stored in a reference cell; the trick is that we
     then smuggle in a reference to itself!
@@ -2319,14 +2445,17 @@ And here, at last, is the preservation theorem and proof:
         r := (\x:Unit.(!r) unit); (!r) unit)
    (ref (\x:Unit.unit))
 </pre>
-   First, <span class="inlinecode"><span class="id" title="var">ref</span></span> <span class="inlinecode">(\<span class="id" title="var">x</span>:<span class="id" title="var">Unit.unit</span>)</span> creates a reference to a cell of type
-   <span class="inlinecode"><span class="id" title="var">Unit</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Unit</span></span>.  We then pass this reference as the argument to a
-   function which binds it to the name <span class="inlinecode"><span class="id" title="var">r</span></span>, and assigns to it the
-   function <span class="inlinecode">\<span class="id" title="var">x</span>:<span class="id" title="var">Unit</span>.(!<span class="id" title="var">r</span>)</span> <span class="inlinecode"><span class="id" title="var">unit</span></span> -- that is, the function which ignores
-   its argument and calls the function stored in <span class="inlinecode"><span class="id" title="var">r</span></span> on the argument
-   <span class="inlinecode"><span class="id" title="var">unit</span></span>; but of course, that function is itself!  To start the
-   divergent loop, we execute the function stored in the cell by
-   evaluating <span class="inlinecode">(!<span class="id" title="var">r</span>)</span> <span class="inlinecode"><span class="id" title="var">unit</span></span>.
+
+<div class="paragraph"> </div>
+
+ First, <span class="inlinecode"><span class="id" title="var">ref</span></span> <span class="inlinecode">(\<span class="id" title="var">x</span>:<span class="id" title="var">Unit.unit</span>)</span> creates a reference to a cell of type
+    <span class="inlinecode"><span class="id" title="var">Unit</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Unit</span></span>.  We then pass this reference as the argument to a
+    function which binds it to the name <span class="inlinecode"><span class="id" title="var">r</span></span>, and assigns to it the
+    function <span class="inlinecode">\<span class="id" title="var">x</span>:<span class="id" title="var">Unit</span>.(!<span class="id" title="var">r</span>)</span> <span class="inlinecode"><span class="id" title="var">unit</span></span> -- that is, the function which ignores
+    its argument and calls the function stored in <span class="inlinecode"><span class="id" title="var">r</span></span> on the argument
+    <span class="inlinecode"><span class="id" title="var">unit</span></span>; but of course, that function is itself!  To start the
+    divergent loop, we execute the function stored in the cell by
+    evaluating <span class="inlinecode">(!<span class="id" title="var">r</span>)</span> <span class="inlinecode"><span class="id" title="var">unit</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -2505,7 +2634,7 @@ Qed.<br/>
 
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef.RefsAndNontermination"><span class="id" title="module">RefsAndNontermination</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef"><span class="id" title="module">STLCRef</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:32&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:03&nbsp;*)</span><br/>
 </div>
 </div>
 

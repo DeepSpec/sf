@@ -26,11 +26,11 @@ Implicit Types x : val.
     ones, is decomposed in three parts:
 
     - The _First Pass_ section presents the most important ideas only.
-    - The _More Details_ section presents additional material explaining
-      in more depth the meaning and the consequences of the key results.
-      By default, readers would eventually read all this material.
-    - The _Optional Material_ section contains more advanced material,
-      for readers who can afford to invest more time in the topic. *)
+    - The _More Details_ section presents additional material explaining in more
+      depth the meaning and the consequences of the key results. By default,
+      readers would eventually read all this material.
+    - The _Optional Material_ section contains more advanced material, for
+      readers who can afford to invest more time in the topic. *)
 
 (* ================================================================= *)
 (** ** Formalization of the List Representation Predicate *)
@@ -59,10 +59,9 @@ Definition tail : field := 1%nat.
     predicate is defined recursively on the structure of [L]:
 
     - if [L] is empty, then [p] is the null pointer,
-    - if [L] is of the form [x::L'], then [p] is not null, and the
-      head field of [p] contains [x], and the tail field of [p]
-      contains a pointer [q] such that [MList L' q] describes the
-      tail of the list.
+    - if [L] is of the form [x::L'], then [p] is not null, and the head field of
+      [p] contains [x], and the tail field of [p] contains a pointer [q] such
+      that [MList L' q] describes the tail of the list.
 
     This definition is formalized as follows. *)
 
@@ -202,6 +201,7 @@ Proof using.
     the induction hypothesis, then we fold back the head cell. *)
   { xapp. xchange <- MList_cons. }
 Qed.
+
 
 (* ================================================================= *)
 (** ** Smart Constructors for Linked Lists *)
@@ -348,7 +348,8 @@ Definition mlength : val :=
 
 (** **** Exercise: 3 stars, standard, especially useful (triple_mlength)
 
-    Prove the correctness of the function [mlength]. *)
+    Prove the correctness of the function [mlength].
+    Hint: use the TLC tactic [rew_list] to normalize list expressions. *)
 
 Lemma triple_mlength : forall L p,
   triple (mlength p)
@@ -484,10 +485,13 @@ Module SizedStack.
 
 OCaml:
 
-    type 'a stack = { data : 'a list; size : int }
+    type 'a stack = {
+      data : 'a list;
+      size : int }
 
     let create () =
-      { data = nil; size = 0 }
+      { data = null;
+        size = 0 }
 
     let sizeof s =
       s.size
@@ -1287,4 +1291,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

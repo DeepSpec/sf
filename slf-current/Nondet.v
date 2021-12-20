@@ -381,8 +381,9 @@ Definition post (s:state) (t:trm) : val->hprop :=
 
     Prove the fact that if [evaln s t Q] holds for some [Q], then it
     holds for the smallest postcondition, namely [post s t].
-    Hint: in the let-binding case, you'll need to guess an appropriate
-    intermediate postcondition for the subterm [t1]. *)
+    Hint: in the let-binding case, you'll need to either exploit
+    [evaln_inv_eval] or to provide an explicit intermediate postcondition
+    for the subterm [t1] that revers to [Q1]. *)
 
 Lemma evaln_post_of_evaln : forall s t Q,
   evaln s t Q ->
@@ -1142,6 +1143,10 @@ Inductive evals : state -> trm -> state -> trm -> Prop :=
 Definition evalns_attempt_1 (s:state) (t:trm) (Q:val->hprop) : Prop :=
   exists v s', evals s t s' (trm_val v) /\ Q v s'.
 
+(** Quiz: Before reading further, try to devise a definition of [evalns s t Q]
+    expressed in terms for the judgment [evals] that applies to the general case
+    of non-deterministic semantics. *)
+
 (** Let's check out several candidate definitions for the judgment [evalns]. *)
 
 (** The definition [evalns_attempt_2 s t Q] asserts that any execution starting
@@ -1174,9 +1179,14 @@ Definition evalns_attempt_4 (s:state) (t:trm) (Q:val->hprop) : Prop :=
   forall s2 t2, evals s t s2 t2 ->
   exists v3 s3, evals s2 t2 s3 (trm_val v3) /\ Q v3 s3.
 
+(** Quiz: Why is [evalns_attempt_4] not equivalent to [evaln]? Can you find a
+    counter-example program for which the property "all possible evaluations
+    reach a final configuration satisfying the postcondition" does not hold? *)
+
 (** Solution follows.
 
-    Consider the following program.
+    Consider the following program, which does satisfy [evalns_attempt_4]
+    yet whose execution may diverge.
 
 OCaml:
 
@@ -1246,6 +1256,11 @@ Parameter val_unbounded_rand : val.
 Parameter evaln_unbounded_rand : forall s Q,
   (forall n1, Q n1 s) ->
   evaln s (val_unbounded_rand val_unit) Q.
+
+(** Quiz: devise a counter-example program such that (1) every possible
+    execution of this program does terminate, and (2) this program does not
+    satisfy [evalns_attempt_5] because there does not exist an upper bound on
+    the length of all executions. *)
 
 (** Solution: Consider the following program.
 
@@ -1782,4 +1797,4 @@ Proof using. unfold hoarens, hoaren. rewrite* evalns_eq_evalns. Qed.
     using a big-step judgment, as done in this chapter with the predicate
     [evaln], appears to be a novel approach, as of Jan. 2021. *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

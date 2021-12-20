@@ -69,13 +69,13 @@
 <li> The <i>First Pass</i> section presents the most important ideas only.
 
 </li>
-<li> The <i>More Details</i> section presents additional material explaining
-      in more depth the meaning and the consequences of the key results.
-      By default, readers would eventually read all this material.
+<li> The <i>More Details</i> section presents additional material explaining in more
+      depth the meaning and the consequences of the key results. By default,
+      readers would eventually read all this material.
 
 </li>
-<li> The <i>Optional Material</i> section contains more advanced material,
-      for readers who can afford to invest more time in the topic. 
+<li> The <i>Optional Material</i> section contains more advanced material, for
+      readers who can afford to invest more time in the topic. 
 
 </li>
 </ul>
@@ -123,10 +123,9 @@ The heap predicate <span class="inlinecode"><span class="id" title="var">p</span
 <li> if <span class="inlinecode"><span class="id" title="var">L</span></span> is empty, then <span class="inlinecode"><span class="id" title="var">p</span></span> is the null pointer,
 
 </li>
-<li> if <span class="inlinecode"><span class="id" title="var">L</span></span> is of the form <span class="inlinecode"><span class="id" title="var">x</span>::<span class="id" title="var">L'</span></span>, then <span class="inlinecode"><span class="id" title="var">p</span></span> is not null, and the
-      head field of <span class="inlinecode"><span class="id" title="var">p</span></span> contains <span class="inlinecode"><span class="id" title="var">x</span></span>, and the tail field of <span class="inlinecode"><span class="id" title="var">p</span></span>
-      contains a pointer <span class="inlinecode"><span class="id" title="var">q</span></span> such that <span class="inlinecode"><span class="id" title="var">MList</span></span> <span class="inlinecode"><span class="id" title="var">L'</span></span> <span class="inlinecode"><span class="id" title="var">q</span></span> describes the
-      tail of the list.
+<li> if <span class="inlinecode"><span class="id" title="var">L</span></span> is of the form <span class="inlinecode"><span class="id" title="var">x</span>::<span class="id" title="var">L'</span></span>, then <span class="inlinecode"><span class="id" title="var">p</span></span> is not null, and the head field of
+      <span class="inlinecode"><span class="id" title="var">p</span></span> contains <span class="inlinecode"><span class="id" title="var">x</span></span>, and the tail field of <span class="inlinecode"><span class="id" title="var">p</span></span> contains a pointer <span class="inlinecode"><span class="id" title="var">q</span></span> such
+      that <span class="inlinecode"><span class="id" title="var">MList</span></span> <span class="inlinecode"><span class="id" title="var">L'</span></span> <span class="inlinecode"><span class="id" title="var">q</span></span> describes the tail of the list.
 
 </li>
 </ul>
@@ -570,7 +569,8 @@ The proof is structure is like the previous ones. While playing the script,
 
 <div class="doc">
 <a id="lab52"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (triple_mlength)</h4>
- Prove the correctness of the function <span class="inlinecode"><span class="id" title="var">mlength</span></span>. 
+ Prove the correctness of the function <span class="inlinecode"><span class="id" title="var">mlength</span></span>.
+    Hint: use the TLC tactic <span class="inlinecode"><span class="id" title="var">rew_list</span></span> to normalize list expressions. 
 </div>
 <div class="code">
 
@@ -728,10 +728,13 @@ In this section, we consider the implementation of a mutable stack featuring
 
 <div class="paragraph"> </div>
 
-<span class="inlinecode-ocaml">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">type</span> '<span class="id" title="var">a</span> <span class="id" title="var">stack</span> = { <span class="id" title="var">data</span> : '<span class="id" title="var">a</span> <span class="id" title="var">list</span>; <span class="id" title="var">size</span> : <span class="id" title="var">int</span> }<br/>
+<span class="inlinecode-ocaml">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">type</span> '<span class="id" title="var">a</span> <span class="id" title="var">stack</span> = {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">data</span> : '<span class="id" title="var">a</span> <span class="id" title="var">list</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">size</span> : <span class="id" title="var">int</span> }<br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">create</span> () =<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">data</span> = <span class="id" title="var">nil</span>; <span class="id" title="var">size</span> = 0 }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">data</span> = <span class="id" title="var">null</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">size</span> = 0 }<br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">sizeof</span> <span class="id" title="var">s</span> =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">s.size</span><br/>
@@ -1748,7 +1751,7 @@ The specification of <span class="inlinecode"><span class="id" title="var">miter
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-07&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
 </div>
 </div>
 

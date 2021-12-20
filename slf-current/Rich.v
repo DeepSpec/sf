@@ -42,8 +42,8 @@ Implicit Types L : list val.
     - tupled functions, e.g., [fun (x,y) => t] in OCaml syntax.
 
     In this chapter, we describe the first two approaches. The third
-    approach (tupled functions) involves algebraic data types, which
-    are beyond the scope of this course. *)
+    approach (tupled functions) would require product data types in
+    the source language. *)
 
 (* ================================================================= *)
 (** ** Reasoning Rule for Assertions *)
@@ -460,17 +460,17 @@ Proof using. introv M. intros H'. apply hoare_for. applys* M. Qed.
     are useful for the follow-up exercises. *)
 
 Lemma triple_for' : forall x n1 n2 t3 H Q,
-  (forall (tloop:int->trm) (i:int),
+  (forall (tloop:int->trm) (n:int),
      (forall i H' Q',
         (If i <= n2
            then (exists H1, triple (subst x i t3) H' (fun v => H1)
                          /\ triple (tloop (i+1)) H1 Q')
            else (H' ==> Q' val_unit)) ->
         triple (tloop i) H' Q') ->
-    triple (tloop i) H Q) ->
+    triple (tloop n) H Q) ->
   triple (trm_for x n1 n2 t3) H Q.
 Proof using.
-  introv M. applys M (fun i => trm_for x i n2 t3). introv K.
+  introv M. applys M (fun n => trm_for x n n2 t3). introv K.
   applys triple_for. applys triple_if_trm.
   { applys triple_conseq_frame triple_le. xsimpl. xsimpl. }
   { intros v. applys triple_hpure. intros ->. applys triple_if.
@@ -1292,4 +1292,4 @@ End PrimitiveNaryFun.
     iterations, has appeared independently in work by [Charguéraud 2010] (in Bib.v)
     and [Tuerk 2010] (in Bib.v). *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

@@ -20,36 +20,6 @@ Arguments Fmap.disjoint_union_eq_r {A} {B}.
 (* ################################################################# *)
 (** * First Pass *)
 
-(** In the programming language that we consider, a concrete
-    memory state is described as a finite map from locations
-    to values.
-
-    - A location has type [loc].
-    - A value has type [val].
-    - A state has type [state].
-
-    Details will be presented in the chapter [Rules].
-
-    To help distinguish between full states and pieces of state,
-    we let the type [heap] be a synonymous for [state] but with
-    the intention of representing only a piece of state.
-    Throughout the course, we write [s] for a full memory state
-    (of type [state]), and we write [h] for a piece of memory state
-    (of type [heap]).
-
-    In Separation Logic, a piece of state is described by a
-    "heap predicate", i.e., a predicate over heaps.
-    A heap predicate has type [hprop], defined as [heap->Prop],
-    which is equivalent to [state->Prop].
-
-    By convention, throughout the course:
-
-    - [H] denotes a heap predicate of type [hprop]; it describes a
-      piece of state,
-    - [Q] denotes a postcondition, of type [val->hprop]; it describes
-      both a result value and a piece of state. Observe that
-      [val->hprop] is equivalent to [val->state->Prop]. *)
-
 (** This chapter presents the definition of the key heap predicate
     operators from Separation Logic:
 
@@ -70,6 +40,36 @@ Arguments Fmap.disjoint_union_eq_r {A} {B}.
      a postcondition that describes only the piece of the memory state
      in which the execution of the term [t] takes place.
  *)
+
+(** In the programming language that we consider, a concrete
+    memory state is described as a finite map from locations
+    to values.
+
+    - A location has type [loc].
+    - A value has type [val].
+    - A state has type [state].
+
+    Details will be presented in the chapter [Rules].
+
+    To help distinguish between full states and pieces of state,
+    we let the type [heap] be a synonym for [state] but with
+    the intention of representing only a piece of state.
+    Throughout the course, we write [s] for a full memory state
+    (of type [state]), and we write [h] for a piece of memory state
+    (of type [heap]).
+
+    In Separation Logic, a piece of state is described by a
+    "heap predicate", i.e., a predicate over heaps.
+    A heap predicate has type [hprop], defined as [heap->Prop],
+    which is equivalent to [state->Prop].
+
+    By convention, throughout the course:
+
+    - [H] denotes a heap predicate of type [hprop]; it describes a
+      piece of state,
+    - [Q] denotes a postcondition, of type [val->hprop]; it describes
+      both a result value and a piece of state. Observe that
+      [val->hprop] is equivalent to [val->state->Prop]. *)
 
 (** This chapter and the following ones exploit a few additional TLC tactics
    to enable concise proofs.
@@ -341,7 +341,10 @@ Definition hoare (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
   exists (s':state) (v:val), eval s t s' v /\ Q v s'.
 
 (** Note that [Q] has type [val->hprop], thus [Q v] has type [hprop].
-    Recall that [hprop = heap->Prop]. Thus [Q v s'] has type [Prop]. *)
+    Recall that [hprop = heap->Prop]. Thus [Q v s'] has type [Prop].
+    Note also that the judgment [hoare t H Q] captures the property that the
+    execution of [t] terminates, because it is defined in terms of the big-step
+    evaluation judgment [eval s t s' v], which itself captures termination. *)
 
 (** The frame rule asserts that if one can derive a specification of
     the form [triple H t Q] for a term [t], then one should be able
@@ -399,7 +402,7 @@ Proof using. reflexivity. Qed.
     below. *)
 
 Parameter triple_incr : forall (p:loc) (n:int),
-  triple (trm_app incr p)
+  triple (incr p)
     (p ~~> n)
     (fun r => p ~~> (n+1)).
 
@@ -430,6 +433,8 @@ Lemma triple_incr_2 : forall (p q:loc) (n m:int),
 Proof using.
   intros. lets M: triple_incr p n.
   lets N: triple_frame (q ~~> m) M. apply N.
+  (* A shorter, backward-reasoning proof:
+     [intros. apply triple_frame. apply triple_incr.] *)
 Qed.
 
 (** Here, we have framed on [q ~~> m], but we could similarly
@@ -769,4 +774,4 @@ End Extensionality.
     pieces of heaps, the "high-level" definition that bakes in the frame rule
     leads to more elegant, simpler proofs. *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

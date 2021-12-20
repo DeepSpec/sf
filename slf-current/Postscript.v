@@ -52,7 +52,7 @@
     - The programming language "Rust" features a type system with "borrows", a
       notion directly inspired by Separation Logic.
 
-    - The tool "VeriFast" targets Java programs.
+    - The tool "VeriFast" targets C and Java programs.
       https://people.cs.kuleuven.be/~bart.jacobs/verifast and
       https://github.com/verifast/verifast
 
@@ -128,7 +128,12 @@
     - Andrew Appel, Lars Birkedal, Adam Chlipala, Magnus Myreen, Gerwin Klein,
       Peter Lammich, and Zhong Shao, who kindly answered questions on related
       work aspects.
-    - Jonathan Leivent for reporting typos on the beta-version of this course.
+
+   Thanks also to users who contributed feedback and helped fixing typos:
+    - Jonathan Leivent
+    - Ori Lahav
+    - Shachar Itzhaky.
+
 *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)

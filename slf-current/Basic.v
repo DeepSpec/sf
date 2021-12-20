@@ -838,7 +838,7 @@ Lemma triple_factorec : forall n,
     how to set up the induction, how we exploit it for reasoning about the
     recursive call, and how we justify that the recursive call is made on a
     smaller input. *)
-Proof using. unfold factorec.
+Proof using.
 (** We set up a proof by induction on [n] to obtain an induction hypothesis
     for the recursive calls. The well-founded relation [downto 0] captures
     the order on arguments: [downto 0 i j] asserts that [0 <= i < j] holds.
@@ -910,7 +910,7 @@ OCaml:
 
     In the concrete syntax for programs, conditionals without an 'else' branch
     are written [if t1 then t2 end]. The keyword [end] avoids ambiguities in
-    cases where this construct is followed by a semi-column. *)
+    cases where this construct is followed by a semicolon. *)
 
 Definition repeat_incr : val :=
   <{ fix 'f 'p 'm =>
@@ -1153,4 +1153,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2021-12-07 21:40 *)
+(* 2021-12-20 19:10 *)
