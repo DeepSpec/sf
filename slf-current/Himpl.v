@@ -1,16 +1,5 @@
 (** * Himpl: Heap Entailment *)
 
-(**
-
-Foundations of Separation Logic
-
-Chapter: "Himpl".
-
-Author: Arthur Charguéraud.
-License: CC-by 4.0.
-
-*)
-
 Set Implicit Arguments.
 From SLF Require LibSepReference.
 From SLF Require Export Hprop.
@@ -615,8 +604,9 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** **** Exercise: 3 stars, standard, optional (himpl_example_2)
 
     Prove the example entailment below.
-    Hint: use [himpl_hstar_hpure_r] to extract pure facts, once they
-    appear at the head of the left-hand side of the entailment. *)
+    Hint: use [himpl_hstar_hpure_l] to extract pure facts, once they
+    appear at the head of the left-hand side of the entailment.
+    For arithmetic inequalities, use the [math] tactic. *)
 
 Lemma himpl_example_2 : forall p1 p2 p3 n,
       p1 ~~> 6 \* \[n > 0] \* p2 ~~> 7 \* \[n < 0]
@@ -1111,22 +1101,8 @@ Proof using.
   exists h1' v. splits~. applys WQ HQ.
 Qed.
 
-(** An alternative proof consists of first establishing the consequence
-    rule for the [hoare] judgment, then derive its generalization to
-    the [triple] judgment of Separation Logic. *)
-
-(** **** Exercise: 3 stars, standard, especially useful (hoare_conseq)
-
-    Prove the consequence rule for Hoare triples. *)
-
-Lemma hoare_conseq : forall t H Q H' Q',
-  hoare t H' Q' ->
-  H ==> H' ->
-  Q' ===> Q ->
-  hoare t H Q.
-Proof using. (* FILL IN HERE *) Admitted.
-
-(** [] *)
+(** An alternative proof leverages the consequence rule for the [hoare]
+    judgment, namely lemma [hoare_conseq]. *)
 
 (** **** Exercise: 2 stars, standard, especially useful (triple_conseq)
 
@@ -1332,4 +1308,4 @@ End AlternativeExistentialRule.
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf
     though it makes sense to wait until chapter [Wand] for reading it. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

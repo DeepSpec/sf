@@ -265,7 +265,14 @@ At this stage, the proof obligation takes the form <span class="inlinecode"><spa
 </div>
 
 <div class="doc">
-This completes the verification of the lemma <span class="inlinecode"><span class="id" title="var">triple_incr</span></span>, which
+The reader may be curious to know what the notation <span class="inlinecode"><span class="id" title="var">PRE</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">CODE</span></span> <span class="inlinecode"><span class="id" title="var">F</span></span> <span class="inlinecode"><span class="id" title="var">POST</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>
+    stands for, and what the x-tactics are doing. Everything will be explaiend
+    throughout the course. This chapter and the next one focus presenting the
+    features of Separation Logic, and on showing how x-tactics can be used to
+    verify programs in Separation Logic. 
+<div class="paragraph"> </div>
+
+ This completes the verification of the lemma <span class="inlinecode"><span class="id" title="var">triple_incr</span></span>, which
     establishes a formal specification for the increment function. Before
     moving on to another function, we associate using the command shown below
     the lemma <span class="inlinecode"><span class="id" title="var">triple_incr</span></span> with the function <span class="inlinecode"><span class="id" title="var">incr</span></span> in a hint database called
@@ -279,11 +286,33 @@ This completes the verification of the lemma <span class="inlinecode"><span clas
 </div>
 
 <div class="doc">
-The reader may be curious to know what the notation <span class="inlinecode"><span class="id" title="var">PRE</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">CODE</span></span> <span class="inlinecode"><span class="id" title="var">F</span></span> <span class="inlinecode"><span class="id" title="var">POST</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>
-    stands for, and what the x-tactics are doing. Everything will be explaiend
-    throughout the course. This chapter and the next one focus presenting the
-    features of Separation Logic, and on showing how x-tactics can be used to
-    verify programs in Separation Logic. 
+To minimize the amount of syntactic noise in specifications, we leverage
+    an advanced feature of Coq's coercion mechanism. Concretely, instead of
+    writing the specification in the form <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode">&lt;{</span> <span class="inlinecode"><span class="id" title="var">incr</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">}&gt;</span> <span class="inlinecode">...</span>, we write
+    it in the form <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode">(<span class="id" title="var">incr</span></span> <span class="inlinecode"><span class="id" title="var">p</span>)</span> <span class="inlinecode">...</span>, that is, with just parentheses.
+    Thanks to the coercion mecanism, explained in more details in <a href="Rules.html"><span class="inlineref">Rules</span></a>,
+    when Coq sees a "program value" <span class="inlinecode"><span class="id" title="var">incr</span></span> being applied to an argument <span class="inlinecode"><span class="id" title="var">p</span></span>,
+    it automatically interprets this as a "program function call" of <span class="inlinecode"><span class="id" title="var">incr</span></span>
+    to <span class="inlinecode"><span class="id" title="var">p</span></span>. Thus, the specification of the increment function can be written
+    as follows. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="triple_incr'" class="idref" href="#triple_incr'"><span class="id" title="lemma">triple_incr'</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:3" class="idref" href="#p:3"><span class="id" title="binder">p</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="n:4" class="idref" href="#n:4"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Basic.html#incr"><span class="id" title="definition">incr</span></a> <a class="idref" href="Basic.html#p:3"><span class="id" title="variable">p</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Basic.html#p:3"><span class="id" title="variable">p</span></a> <a class="idref" href="LibSepReference.html#04d59e26c33e7500ff8979242a3d649f"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Basic.html#n:4"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ (<a class="idref" href="Basic.html#p:3"><span class="id" title="variable">p</span></a> <a class="idref" href="LibSepReference.html#04d59e26c33e7500ff8979242a3d649f"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="LibSepReference.html#04d59e26c33e7500ff8979242a3d649f"><span class="id" title="notation">(</span></a><a class="idref" href="Basic.html#n:4"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1<a class="idref" href="LibSepReference.html#04d59e26c33e7500ff8979242a3d649f"><span class="id" title="notation">)</span></a>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Here,&nbsp;to&nbsp;view&nbsp;coercions,&nbsp;use&nbsp;<span class="inlinecode"><span class="id" title="keyword">Set</span></span> <span class="inlinecode"><span class="id" title="keyword">Printing</span></span> <span class="inlinecode"><span class="id" title="var">Coercions</span>.</span>,&nbsp;or&nbsp;in&nbsp;CoqIDE&nbsp;use<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">Shift</span>+<span class="id" title="var">Alt</span>+<span class="id" title="var">C</span></span>,&nbsp;which&nbsp;corresponds&nbsp;to&nbsp;the&nbsp;menu&nbsp;View&nbsp;/&nbsp;Display&nbsp;Coerctions.&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">xwp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xsimpl</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+The existence of implicit coercions might be a little confusing at times,
+    yet coercions make specifications so much more readable that it would
+    be a pity to not exploit them. 
 </div>
 
 <div class="doc">
@@ -345,10 +374,10 @@ The specification takes the form <span class="inlinecode"><span class="id" title
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="triple_example_let" class="idref" href="#triple_example_let"><span class="id" title="lemma">triple_example_let</span></a> : <span class="id" title="keyword">∀</span> (<a id="n:3" class="idref" href="#n:3"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="LibSepReference.html#e0b85224b7295b880f5ac68dccd380d<sub>1</sub>"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Basic.html#example_let"><span class="id" title="definition">example_let</span></a> <a class="idref" href="Basic.html#n:3"><span class="id" title="variable">n</span></a> <a class="idref" href="LibSepReference.html#e0b85224b7295b880f5ac68dccd380d<sub>1</sub>"><span class="id" title="notation">}&gt;</span></a><br/>
+<span class="id" title="keyword">Lemma</span> <a id="triple_example_let" class="idref" href="#triple_example_let"><span class="id" title="lemma">triple_example_let</span></a> : <span class="id" title="keyword">∀</span> (<a id="n:5" class="idref" href="#n:5"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Basic.html#example_let"><span class="id" title="definition">example_let</span></a> <a class="idref" href="Basic.html#n:5"><span class="id" title="variable">n</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#0a700e54c124035039013e87e1a2bcaa"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="r:4" class="idref" href="#r:4"><span class="id" title="binder">r</span></a> ⇒ <a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Basic.html#r:4"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 2<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">*</span></a><a class="idref" href="Basic.html#n:3"><span class="id" title="variable">n</span></a><a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation">]</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="r:6" class="idref" href="#r:6"><span class="id" title="binder">r</span></a> ⇒ <a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Basic.html#r:6"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 2<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">*</span></a><a class="idref" href="Basic.html#n:5"><span class="id" title="variable">n</span></a><a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation">]</span></a>).<br/>
 </div>
 
 <div class="doc">
@@ -363,27 +392,6 @@ The proof script is quite similar to the previous one: <span class="inlinecode">
 <div class="code">
 
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">xwp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xsimpl</span>. <span class="id" title="var">math</span>.<br/>
-<span class="id" title="keyword">Qed</span>.<br/>
-</div>
-
-<div class="doc">
-From here on, we use the command <span class="inlinecode"><span class="id" title="keyword">Proof</span></span> <span class="inlinecode"><span class="id" title="keyword">using</span></span> for introducing a proof
-    instead of writing just <span class="inlinecode"><span class="id" title="keyword">Proof</span></span>. Doing so enables asynchronous proof
-    checking, a feature that may enable faster processing of scripts.
-    Moreover, to minimize the amount of syntactic noise in specifications, we
-    leverage the coercion mechanism to allow writing the specified term,
-    here <span class="inlinecode"><span class="id" title="var">example_let</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> simply surrounded with parentheses, as opposed to
-    the heavier form <span class="inlinecode">&lt;{</span> <span class="inlinecode"><span class="id" title="var">example_let</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">}&gt;</span>. (See <a href="Rules.html"><span class="inlineref">Rules</span></a> for details).
-    For example, we would format the previous proof in the following form. 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Lemma</span> <a id="triple_example_let'" class="idref" href="#triple_example_let'"><span class="id" title="lemma">triple_example_let'</span></a> : <span class="id" title="keyword">∀</span> (<a id="n:5" class="idref" href="#n:5"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Basic.html#example_let"><span class="id" title="definition">example_let</span></a> <a class="idref" href="Basic.html#n:5"><span class="id" title="variable">n</span></a>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#0a700e54c124035039013e87e1a2bcaa"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="r:6" class="idref" href="#r:6"><span class="id" title="binder">r</span></a> ⇒ <a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Basic.html#r:6"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 2<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#d3ea1afb7d81263dc23c4eb0da2a3c4e"><span class="id" title="notation">*</span></a><a class="idref" href="Basic.html#n:5"><span class="id" title="variable">n</span></a><a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation">]</span></a>).<br/>
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">xwp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xapp</span>. <span class="id" title="var">xsimpl</span>. <span class="id" title="var">math</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -444,6 +452,13 @@ Specify and verify the function <span class="inlinecode"><span class="id" title=
 <font size=-2>&#9744;</font>
 </div>
 
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ From here on, we use the command <span class="inlinecode"><span class="id" title="keyword">Proof</span></span> <span class="inlinecode"><span class="id" title="keyword">using</span></span> for introducing a proof
+    instead of writing just <span class="inlinecode"><span class="id" title="keyword">Proof</span></span>. Doing so enables asynchronous proof
+    checking, a feature that may enable faster processing of scripts. 
+</div>
 
 <div class="doc">
 <a id="lab21"></a><h1 class="section">Separation Logic Operators</h1>
@@ -1615,8 +1630,8 @@ The specification of <span class="inlinecode"><span class="id" title="var">step_
       <span class="inlinecode"><span class="id" title="var">t</span></span>, a precondition <span class="inlinecode"><span class="id" title="var">H</span></span>, and a postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>.
 
 </li>
-<li> "Entailment proof obligations", of the form <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">==&gt;</span> <span class="inlinecode"><span class="id" title="var">H'</span></span> or <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">===&gt;</span> <span class="inlinecode"><span class="id" title="var">Q'</span></span>,
-      which assert that a pre- or post-condition is weaker than another one.
+<li> "Entailmens", of the form <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">==&gt;</span> <span class="inlinecode"><span class="id" title="var">H'</span></span> or <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode">===&gt;</span> <span class="inlinecode"><span class="id" title="var">Q'</span></span>, which assert that a
+      pre- or post-condition is weaker than another one.
 
 </li>
 <li> "Verification proof obligations", of the form <span class="inlinecode"><span class="id" title="var">PRE</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">CODE</span></span> <span class="inlinecode"><span class="id" title="var">F</span></span> <span class="inlinecode"><span class="id" title="var">POST</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, which
@@ -1726,7 +1741,7 @@ The specification of <span class="inlinecode"><span class="id" title="var">step_
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-23&nbsp;19:54&nbsp;*)</span><br/>
 </div>
 </div>
 

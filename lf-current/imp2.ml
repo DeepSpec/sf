@@ -143,6 +143,7 @@ type bexp =
 | BEq of aexp * aexp
 | BNeq of aexp * aexp
 | BLe of aexp * aexp
+| BGt of aexp * aexp
 | BNot of bexp
 | BAnd of bexp * bexp
 
@@ -163,6 +164,7 @@ let rec beval st = function
 | BEq (a1, a2) -> Nat.eqb (aeval st a1) (aeval st a2)
 | BNeq (a1, a2) -> negb (Nat.eqb (aeval st a1) (aeval st a2))
 | BLe (a1, a2) -> Nat.leb (aeval st a1) (aeval st a2)
+| BGt (a1, a2) -> negb (Nat.leb (aeval st a1) (aeval st a2))
 | BNot b1 -> negb (beval st b1)
 | BAnd (b1, b2) -> if beval st b1 then beval st b2 else false
 

@@ -153,8 +153,9 @@ Implicit Types Q : val->hprop.
     up the notation [Let' v := F1 in F2] to stand for
     [wpgen_let F1 (fun v => F2)].
     Thanks to this notation, the result of computing [wpgen] on a source term
-    [Let x := t1 in t2] (of type [trm]) will be a formula displayed in the form
-    [Let x := F1 in F2] (of type [formula]).
+    [Let x := t1 in t2] (which is an Coq expression of type [trm]) will be a
+    formula displayed in the form [Let' x := F1 in F2] (which is an Coq
+    expression of type [formula]).
 
     Thanks to these auxiliary definitions and pieces of notation, the formula
     that [wpgen] produces as output reads pretty much like the source term
@@ -282,7 +283,7 @@ Parameter wp_fun : forall x t1 Q,
 (** An important observation is that we here do not attempt to
     recursively compute [wpgen] over the body of the function.
     This is something that we could do, and that we will see how
-    to achiever further on, yet we postpone it for now because it is
+    to achieve further on, yet we postpone it for now because it is
     relatively technical. In practice, if the program features a
     local function definition, the user may explicitly request the
     computation of [wpgen] over the body of that function. Thus,
@@ -1594,7 +1595,8 @@ End ProofsWithAdvancedXtactics.
 (* ================================================================= *)
 (** ** Tactics [xconseq] and [xframe] *)
 
-(** The tactic [xconseq] enables weakening the current postcondition.
+(** The tactic [xconseq] applies the weakening rule, from the perspective of
+    the user, it replaces the current postcondition with a stronger one.
     Optionally, the tactic can be passed an explicit argument, using
     the syntax [xconseq Q].
 
@@ -2073,6 +2075,9 @@ End MkstructGuess.
 (* ================================================================= *)
 (** ** Proof of Properties of Iterated Substitution *)
 
+(** In these proofs, we use the TLC tactic [fequals] which is an enhanced
+    variant of the tactic [f_equal]. *)
+
 Module IsubstProp.
 
 Open Scope liblist_scope.
@@ -2314,4 +2319,4 @@ End IsubstProp.
     serves that purpose. The definition of [wpgen] as stated in this chapter
     will probably be the matter of a publication in 2021. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

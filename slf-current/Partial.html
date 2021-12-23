@@ -52,7 +52,7 @@
 </div>
 
 <div class="doc">
-<a id="lab466"></a><h1 class="section">First Pass</h1>
+<a id="lab476"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -90,7 +90,7 @@
 </div>
 
 <div class="doc">
-<a id="lab467"></a><h2 class="section">Big-Step Characterization of Partial Correctness</h2>
+<a id="lab477"></a><h2 class="section">Big-Step Characterization of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -98,12 +98,12 @@
     execution of the program <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> terminates on an output satisfying <span class="inlinecode"><span class="id" title="var">Q</span></span>.
     In contrast, the partial correctness judgment <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> asserts that
     any execution of the program <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> either terminates on an output
-    satisfying <span class="inlinecode"><span class="id" title="var">Q</span></span>, or diverges (that is, executes for ever).
+    satisfying <span class="inlinecode"><span class="id" title="var">Q</span></span>, or diverges (that is, executes forever).
 
 <div class="paragraph"> </div>
 
     The definition of the predicate <span class="inlinecode"><span class="id" title="var">evalnp</span></span> is obtained by taking the
-    constructors from the inductive definition of <span class="inlinecode"><span class="id" title="var">evals</span></span>, and considering
+    constructors from the inductive definition of <span class="inlinecode"><span class="id" title="var">evaln</span></span>, and considering
     the coinductive interpretation of these constructors. The coinductive
     interpretation allows for infinite derivation. It thereby introduces the
     possibility of diverging executions. Importantly, the predicate <span class="inlinecode"><span class="id" title="var">evalnp</span></span>
@@ -183,7 +183,7 @@ One key property is the covariance of <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab468"></a><h4 class="section">Exercise: 3 stars, standard, optional (evalnp_inv_eval)</h4>
+<a id="lab478"></a><h4 class="section">Exercise: 3 stars, standard, optional (evalnp_inv_eval)</h4>
  Assume <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> to hold. Prove that the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> holds of
     any output that <span class="inlinecode">(<span class="id" title="var">s</span>,<span class="id" title="var">t</span>)</span> may evaluate to according to the judgment <span class="inlinecode"><span class="id" title="tactic">eval</span></span>. 
 </div>
@@ -199,7 +199,7 @@ One key property is the covariance of <span class="inlinecode"><span class="id" 
 
 
 <div class="doc">
-<a id="lab469"></a><h2 class="section">From Total to Partial Correctness</h2>
+<a id="lab479"></a><h2 class="section">From Total to Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -229,7 +229,7 @@ One key property is the covariance of <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab470"></a><h2 class="section">Characterization of Divergence</h2>
+<a id="lab480"></a><h2 class="section">Characterization of Divergence</h2>
 
 <div class="paragraph"> </div>
 
@@ -261,7 +261,7 @@ The judgment <span class="inlinecode"><span class="id" title="var">divn</span></
 </div>
 
 <div class="doc">
-<a id="lab471"></a><h2 class="section">Big-Step-Based Reasoning Rules</h2>
+<a id="lab481"></a><h2 class="section">Big-Step-Based Reasoning Rules</h2>
 
 <div class="paragraph"> </div>
 
@@ -407,7 +407,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab472"></a><h2 class="section">Big-Step-Based Reasoning Rules for Divergence</h2>
+<a id="lab482"></a><h2 class="section">Big-Step-Based Reasoning Rules for Divergence</h2>
 
 <div class="paragraph"> </div>
 
@@ -425,7 +425,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab473"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (divn_let_ctx)</h4>
+<a id="lab483"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (divn_let_ctx)</h4>
  Prove the divergence rule for a let-binding covering the case where the
     first subterm diverges. 
 </div>
@@ -452,12 +452,12 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab474"></a><h1 class="section">Optional Material</h1>
+<a id="lab484"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab475"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evalnp</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">safe</span></span></h2>
+<a id="lab485"></a><h2 class="section">Interpretation of <span class="inlinecode"><span class="id" title="var">evalnp</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">safe</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -485,7 +485,7 @@ Rules for primitive operations
 &nbsp;&nbsp;| <a id="safe_if" class="idref" href="#safe_if"><span class="id" title="constructor">safe_if</span></a> : <span class="id" title="keyword">∀</span> <a id="s:182" class="idref" href="#s:182"><span class="id" title="binder">s</span></a> <a id="b:183" class="idref" href="#b:183"><span class="id" title="binder">b</span></a> <a id="t<sub>1</sub>:184" class="idref" href="#t<sub>1</sub>:184"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:185" class="idref" href="#t<sub>2</sub>:185"><span class="id" title="binder">t<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Partial.html#safe:162"><span class="id" title="inductive">safe</span></a> <a class="idref" href="Partial.html#s:182"><span class="id" title="variable">s</span></a> (<span class="id" title="keyword">if</span> <a class="idref" href="Partial.html#b:183"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="Partial.html#t<sub>1</sub>:184"><span class="id" title="variable">t<sub>1</sub></span></a> <span class="id" title="keyword">else</span> <a class="idref" href="Partial.html#t<sub>2</sub>:185"><span class="id" title="variable">t<sub>2</sub></span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Partial.html#safe:162"><span class="id" title="inductive">safe</span></a> <a class="idref" href="Partial.html#s:182"><span class="id" title="variable">s</span></a> (<a class="idref" href="LibSepReference.html#trm_if"><span class="id" title="constructor">trm_if</span></a> (<a class="idref" href="LibSepReference.html#val_bool"><span class="id" title="constructor">val_bool</span></a> <a class="idref" href="Partial.html#b:183"><span class="id" title="variable">b</span></a>) <a class="idref" href="Partial.html#t<sub>1</sub>:184"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Partial.html#t<sub>2</sub>:185"><span class="id" title="variable">t<sub>2</sub></span></a>)<br/>
-&nbsp;&nbsp;| <a id="safes_add" class="idref" href="#safes_add"><span class="id" title="constructor">safes_add</span></a> : <span class="id" title="keyword">∀</span> <a id="s:186" class="idref" href="#s:186"><span class="id" title="binder">s</span></a> <a id="n<sub>1</sub>:187" class="idref" href="#n<sub>1</sub>:187"><span class="id" title="binder">n<sub>1</sub></span></a> <a id="n<sub>2</sub>:188" class="idref" href="#n<sub>2</sub>:188"><span class="id" title="binder">n<sub>2</sub></span></a>,<br/>
+&nbsp;&nbsp;| <a id="safe_add" class="idref" href="#safe_add"><span class="id" title="constructor">safe_add</span></a> : <span class="id" title="keyword">∀</span> <a id="s:186" class="idref" href="#s:186"><span class="id" title="binder">s</span></a> <a id="n<sub>1</sub>:187" class="idref" href="#n<sub>1</sub>:187"><span class="id" title="binder">n<sub>1</sub></span></a> <a id="n<sub>2</sub>:188" class="idref" href="#n<sub>2</sub>:188"><span class="id" title="binder">n<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Partial.html#safe:162"><span class="id" title="inductive">safe</span></a> <a class="idref" href="Partial.html#s:186"><span class="id" title="variable">s</span></a> (<a class="idref" href="LibSepReference.html#val_add"><span class="id" title="constructor">val_add</span></a> (<a class="idref" href="LibSepReference.html#val_int"><span class="id" title="constructor">val_int</span></a> <a class="idref" href="Partial.html#n<sub>1</sub>:187"><span class="id" title="variable">n<sub>1</sub></span></a>) (<a class="idref" href="LibSepReference.html#val_int"><span class="id" title="constructor">val_int</span></a> <a class="idref" href="Partial.html#n<sub>2</sub>:188"><span class="id" title="variable">n<sub>2</sub></span></a>))<br/>
 &nbsp;&nbsp;| <a id="safe_rand" class="idref" href="#safe_rand"><span class="id" title="constructor">safe_rand</span></a> : <span class="id" title="keyword">∀</span> <a id="s:189" class="idref" href="#s:189"><span class="id" title="binder">s</span></a> <a id="n:190" class="idref" href="#n:190"><span class="id" title="binder">n</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Partial.html#n:190"><span class="id" title="variable">n</span></a> <span class="id" title="notation">&gt;</span> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -506,10 +506,12 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab476"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnp_iff_safe_and_post)</h4>
+<a id="lab486"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnp_iff_safe_and_post)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is equivalent to the conjunction of <span class="inlinecode"><span class="id" title="var">safe</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>
     and to a partial correctness result asserting that if an evaluation of
-    <span class="inlinecode"><span class="id" title="var">t</span>/<span class="id" title="var">s</span></span> terminates on a particular result, then this result satisfies <span class="inlinecode"><span class="id" title="var">Q</span></span>. 
+    <span class="inlinecode"><span class="id" title="var">t</span>/<span class="id" title="var">s</span></span> terminates on a particular result, then this result satisfies <span class="inlinecode"><span class="id" title="var">Q</span></span>.
+    Hint: make sure to split the equivalence and the conjunction before
+    entering the coinductive proofs. 
 </div>
 <div class="code">
 
@@ -532,7 +534,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab477"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (safe_iff_evalnp_any)</h4>
+<a id="lab487"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (safe_iff_evalnp_any)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">safe</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">evalnp</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Any</span></span>.
     Hint: a direct proof fails---why?
     The solution is to exploit <span class="inlinecode"><span class="id" title="var">evalnp_iff_safe_and_post</span></span>. 
@@ -551,7 +553,7 @@ Rules for primitive operations
 </div>
 
 <div class="doc">
-<a id="lab478"></a><h2 class="section">Small-Step Characterization of Partial Correctness</h2>
+<a id="lab488"></a><h2 class="section">Small-Step Characterization of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -672,7 +674,7 @@ The property <span class="inlinecode"><span class="id" title="var">evalnps</span
 Second, let's prove the preservation property. 
 <div class="paragraph"> </div>
 
-<a id="lab479"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (evalnps_inv_step)</h4>
+<a id="lab489"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (evalnps_inv_step)</h4>
  Prove that the property <span class="inlinecode"><span class="id" title="var">evalnps</span></span> for a given postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> is
     preserved when a program takes a reduction step. 
 </div>
@@ -692,9 +694,9 @@ Second, let's prove the preservation property.
  Third, let's prove the progress property. 
 <div class="paragraph"> </div>
 
-<a id="lab480"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evalnps_not_val_inv)</h4>
+<a id="lab490"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (evalnps_not_val_inv)</h4>
  Prove that if the property <span class="inlinecode"><span class="id" title="var">evalnps</span></span> holds for a given postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>,
-    and for a configuration that has not already reached a value, and this
+    and for a configuration that has not already reached a value, then this
     configuration can take a step. Moreover, the configuration reached also
     satisfies the property <span class="inlinecode"><span class="id" title="var">evalnps</span></span> for that same <span class="inlinecode"><span class="id" title="var">Q</span></span>. 
 </div>
@@ -710,7 +712,7 @@ Second, let's prove the preservation property.
 
 
 <div class="doc">
-<a id="lab481"></a><h2 class="section">Reasoning Rules w.r.t. Small-Step Characterization</h2>
+<a id="lab491"></a><h2 class="section">Reasoning Rules w.r.t. Small-Step Characterization</h2>
 
 <div class="paragraph"> </div>
 
@@ -746,8 +748,10 @@ The second proof targets the reasoning rule for let-bindings, stated
     lemma an introduction rule for let-bindings with respect to <span class="inlinecode"><span class="id" title="var">evalnps</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab482"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnps_let)</h4>
- Prove the reasoning rule for let-bindings for <span class="inlinecode"><span class="id" title="var">evalnps</span></span>. 
+<a id="lab492"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (evalnps_let)</h4>
+ Prove the reasoning rule for let-bindings for <span class="inlinecode"><span class="id" title="var">evalnps</span></span>.
+    Hint: in the proof, you can use <span class="inlinecode"><span class="id" title="var">tests</span></span> <span class="inlinecode"><span class="id" title="var">C</span>:</span> <span class="inlinecode">(<span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span>,</span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">trm_val</span></span> <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span>)</span>
+    to make a case analysis on whether <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> is a value or not. 
 </div>
 <div class="code">
 
@@ -772,7 +776,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 </div>
 
 <div class="doc">
-<a id="lab483"></a><h2 class="section">Small-Step Characterization of Divergence</h2>
+<a id="lab493"></a><h2 class="section">Small-Step Characterization of Divergence</h2>
 
 <div class="paragraph"> </div>
 
@@ -813,7 +817,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 </div>
 
 <div class="doc">
-<a id="lab484"></a><h4 class="section">Exercise: 3 stars, standard, optional (divns_iff_evalnps_Empty)</h4>
+<a id="lab494"></a><h4 class="section">Exercise: 3 stars, standard, optional (divns_iff_evalnps_Empty)</h4>
  Prove the equivalence between <span class="inlinecode"><span class="id" title="var">divns</span></span> and the specialization
     of <span class="inlinecode"><span class="id" title="var">evalnps</span></span> to <span class="inlinecode"><span class="id" title="var">Empty</span></span>. 
 </div>
@@ -835,7 +839,7 @@ The second proof targets the reasoning rule for let-bindings, stated
     <span class="inlinecode"><span class="id" title="var">divns</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab485"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_inv_step)</h4>
+<a id="lab495"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_inv_step)</h4>
  Prove that if a diverging configuration takes a step, then it reaches a
     configuration that also diverges. 
 </div>
@@ -852,7 +856,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab486"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_val_inv)</h4>
+<a id="lab496"></a><h4 class="section">Exercise: 2 stars, standard, optional (divns_val_inv)</h4>
  Prove that the execution of a value does not diverge. 
 </div>
 <div class="code">
@@ -866,7 +870,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab487"></a><h4 class="section">Exercise: 5 stars, standard, optional (divns_let_ctx)</h4>
+<a id="lab497"></a><h4 class="section">Exercise: 5 stars, standard, optional (divns_let_ctx)</h4>
  Prove the divergence rule for a let-binding covering the case where the
     first subterm diverges, with respect to the definition <span class="inlinecode"><span class="id" title="var">divns</span></span>. 
 </div>
@@ -881,7 +885,7 @@ The second proof targets the reasoning rule for let-bindings, stated
 
 
 <div class="doc">
-<a id="lab488"></a><h2 class="section">Coinductive, Small-Step Characterization of Partial Correctness</h2>
+<a id="lab498"></a><h2 class="section">Coinductive, Small-Step Characterization of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -958,7 +962,7 @@ Secondly, we let's prove the reasoning rule for let-bindings. Here again,
     the key intermediate result is to establish a rule for <span class="inlinecode"><span class="id" title="var">evalnpz</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab489"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (hoarenpz_let)</h4>
+<a id="lab499"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (hoarenpz_let)</h4>
  Prove the reasoning rule for let-bindings stated for <span class="inlinecode"><span class="id" title="var">evalnpz</span></span>.
     Hint: to set up the coinductive proof, follow the template that appears
     at the beginning of the proof of <span class="inlinecode"><span class="id" title="var">evalnpz_conseq</span></span>. 
@@ -1003,7 +1007,7 @@ To express diverge, the judgment <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab490"></a><h4 class="section">Exercise: 4 stars, standard, optional (divnz_iff_evalnpz_Empty)</h4>
+<a id="lab500"></a><h4 class="section">Exercise: 4 stars, standard, optional (divnz_iff_evalnpz_Empty)</h4>
  Prove the equivalence between <span class="inlinecode"><span class="id" title="var">divnz</span></span> and the specialization of the
     judgment <span class="inlinecode"><span class="id" title="var">evalnp</span></span> to <span class="inlinecode"><span class="id" title="var">Empty</span></span>. 
 </div>
@@ -1017,7 +1021,7 @@ To express diverge, the judgment <span class="inlinecode"><span class="id" title
 
 
 <div class="doc">
-<a id="lab491"></a><h2 class="section">Equivalence Between the Two Small-Step Charact. of Partial Correctness</h2>
+<a id="lab501"></a><h2 class="section">Equivalence Between the Two Small-Step Charact. of Partial Correctness</h2>
 
 <div class="paragraph"> </div>
 
@@ -1068,9 +1072,8 @@ As a corollary, we can establish the equivalence between the two small-step
 </div>
 
 <div class="doc">
-<a id="lab492"></a><h2 class="section">Equivalence Between Small-Step and Big-Step Partial Correctness</h2>
+<a id="lab502"></a><h2 class="section">Equivalence Between Small-Step and Big-Step Partial Correctness Semantics</h2>
 
-       Semantics 
 <div class="paragraph"> </div>
 
  We end this chapter with the proof of equivalence between <span class="inlinecode"><span class="id" title="var">hoarenps</span></span> and
@@ -1301,7 +1304,7 @@ As another corollary, we can establish the equivalence between the big-step
 </div>
 
 <div class="doc">
-<a id="lab493"></a><h2 class="section">Historical Notes</h2>
+<a id="lab503"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1325,7 +1328,7 @@ As another corollary, we can establish the equivalence between the big-step
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-23&nbsp;19:54&nbsp;*)</span><br/>
 </div>
 </div>
 

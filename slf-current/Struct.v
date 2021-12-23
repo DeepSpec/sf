@@ -458,7 +458,7 @@ Declare Scope trm_scope_ext.
 
 Parameter val_get_field : field -> val.
 
-(** The read operation [val_get_field k p] is abbreviated as [p'.k]. *)
+(** The read operation [val_get_field k p] is abbreviated as [p`.k]. *)
 
 Notation "t1 '`.' k" :=
   (val_get_field k t1)
@@ -523,7 +523,7 @@ Parameter triple_get_field_hrecord : forall kvs p k v,
 Parameter val_set_field : field -> val.
 
 (** The write operation [val_get_field k p v] is abbreviated as
-    [Set p'.k ':= v]. *)
+    [Set p`.k ':= v]. *)
 
 Notation "t1 '`.' k ':=' t2" :=
   (val_set_field k t1 t2)
@@ -818,7 +818,7 @@ Definition mfree_list : val :=
 
     Verify the function [mfree_list].
     Hint: the overall pattern of the proof follows that used for the
-    function [triple_mcopy], from chapter [Basic]. *)
+    function [triple_mcopy], from chapter [Repr]. *)
 
 Lemma triple_mfree_list : forall L p,
   triple (mfree_list p)
@@ -1378,7 +1378,7 @@ End ArrayAccessDef.
 Module Export FieldAccessDef.
 Import ProgramSyntax.
 
-(** The get operation on a field, written [p'.k],
+(** The get operation on a field, written [p`.k],
     is encoded as [val_get (p+k+1)]. *)
 
 Definition val_get_field (k:field) : val :=
@@ -1400,7 +1400,7 @@ Proof using.
   xapp triple_get. xsimpl*.
 Qed.
 
-(** The set operation on a field, written [Set p'.k := v],
+(** The set operation on a field, written [Set p`.k := v],
     is encoded as [val_set (p+k+1) v]. *)
 
 Definition val_set_field (k:field) : val :=
@@ -1635,4 +1635,4 @@ Qed.
 
 End Realization.
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

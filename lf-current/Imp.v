@@ -59,6 +59,7 @@ Inductive bexp : Type :=
   | BEq (a1 a2 : aexp)
   | BNeq (a1 a2 : aexp)
   | BLe (a1 a2 : aexp)
+  | BGt (a1 a2 : aexp)
   | BNot (b : bexp)
   | BAnd (b1 b2 : bexp).
 
@@ -88,6 +89,7 @@ Inductive bexp : Type :=
         | a = a
         | a <> a
         | a <= a
+        | a > a
         | ~ b
         | b && b
 *)
@@ -149,6 +151,7 @@ Fixpoint beval (b : bexp) : bool :=
   | BEq a1 a2   => (aeval a1) =? (aeval a2)
   | BNeq a1 a2  => negb ((aeval a1) =? (aeval a2))
   | BLe a1 a2   => (aeval a1) <=? (aeval a2)
+  | BGt a1 a2   => negb ((aeval a1) <=? (aeval a2))
   | BNot b1     => negb (beval b1)
   | BAnd b1 b2  => andb (beval b1) (beval b2)
   end.
@@ -538,7 +541,7 @@ Qed.
         and [pred]), and multiplication by constants (this is what
         makes it Presburger arithmetic),
 
-      - equality ([=] and [<>]) and ordering ([<=]), and
+      - equality ([=] and [<>]) and ordering ([<=] and [>]), and
 
       - the logical connectives [/\], [\/], [~], and [->],
 
@@ -767,6 +770,7 @@ Inductive aevalR : aexp -> nat -> Prop :=
     | BEq a1 a2   => (aeval a1) =? (aeval a2)
     | BNeq a1 a2  => negb ((aeval a1) =? (aeval a2))
     | BLe a1 a2   => (aeval a1) <=? (aeval a2)
+    | BGt a1 a2   => ~((aeval a1) <=? (aeval a2))
     | BNot b      => negb (beval b)
     | BAnd b1 b2  => andb (beval b1) (beval b2)
     end.
@@ -1039,6 +1043,7 @@ Inductive bexp : Type :=
   | BEq (a1 a2 : aexp)
   | BNeq (a1 a2 : aexp)
   | BLe (a1 a2 : aexp)
+  | BGt (a1 a2 : aexp)
   | BNot (b : bexp)
   | BAnd (b1 b2 : bexp).
 
@@ -1085,6 +1090,7 @@ Notation "'true'"  := BTrue (in custom com at level 0).
 Notation "'false'" := false (at level 1).
 Notation "'false'" := BFalse (in custom com at level 0).
 Notation "x <= y"  := (BLe x y) (in custom com at level 70, no associativity).
+Notation "x > y"   := (BGt x y) (in custom com at level 70, no associativity).
 Notation "x = y"   := (BEq x y) (in custom com at level 70, no associativity).
 Notation "x <> y"  := (BNeq x y) (in custom com at level 70, no associativity).
 Notation "x && y"  := (BAnd x y) (in custom com at level 80, left associativity).
@@ -1121,6 +1127,7 @@ Fixpoint beval (st : state) (* <--- NEW *) (b : bexp) : bool :=
   | <{a1 = a2}>   => (aeval st a1) =? (aeval st a2)
   | <{a1 <> a2}>  => negb ((aeval st a1) =? (aeval st a2))
   | <{a1 <= a2}>  => (aeval st a1) <=? (aeval st a2)
+  | <{a1 > a2}>   => negb ((aeval st a1) <=? (aeval st a2))
   | <{~ b1}>      => negb (beval st b1)
   | <{b1 && b2}>  => andb (beval st b1) (beval st b2)
   end.
@@ -2053,4 +2060,4 @@ End BreakImp.
 
     [] *)
 
-(* 2021-12-20 19:01 *)
+(* 2021-12-23 19:46 *)

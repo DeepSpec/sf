@@ -39,7 +39,7 @@
 </div>
 
 <div class="doc">
-<a id="lab578"></a><h1 class="section">Representation of Finite Maps</h1>
+<a id="lab588"></a><h1 class="section">Representation of Finite Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -76,12 +76,12 @@
 </div>
 
 <div class="doc">
-<a id="lab579"></a><h2 class="section">Representation of Potentially-Infinite Maps as Partial Functions</h2>
+<a id="lab589"></a><h2 class="section">Representation of Potentially-Infinite Maps as Partial Functions</h2>
 
 </div>
 
 <div class="doc">
-<a id="lab580"></a><h3 class="section">Representation</h3>
+<a id="lab590"></a><h3 class="section">Representation</h3>
 
 <div class="paragraph"> </div>
 
@@ -94,7 +94,7 @@
 </div>
 
 <div class="doc">
-<a id="lab581"></a><h3 class="section">Operations</h3>
+<a id="lab591"></a><h3 class="section">Operations</h3>
 
 <div class="paragraph"> </div>
 
@@ -183,7 +183,7 @@ Map a function on the values of a map
 </div>
 
 <div class="doc">
-<a id="lab582"></a><h3 class="section">Properties</h3>
+<a id="lab592"></a><h3 class="section">Properties</h3>
 
 </div>
 <div class="code">
@@ -282,12 +282,12 @@ Finiteness of map
 </div>
 
 <div class="doc">
-<a id="lab583"></a><h2 class="section">Representation of Finite Maps as Dependent Pairs</h2>
+<a id="lab593"></a><h2 class="section">Representation of Finite Maps as Dependent Pairs</h2>
 
 </div>
 
 <div class="doc">
-<a id="lab584"></a><h3 class="section">Representation</h3>
+<a id="lab594"></a><h3 class="section">Representation</h3>
 
 </div>
 <div class="code">
@@ -299,7 +299,7 @@ Finiteness of map
 </div>
 
 <div class="doc">
-<a id="lab585"></a><h3 class="section">Operations</h3>
+<a id="lab595"></a><h3 class="section">Operations</h3>
 
 </div>
 <div class="code">
@@ -414,7 +414,7 @@ Inhabited type <span class="inlinecode"><span class="id" title="var">fmap</span>
 </div>
 
 <div class="doc">
-<a id="lab586"></a><h2 class="section">Predicates on Finite Maps</h2>
+<a id="lab596"></a><h2 class="section">Predicates on Finite Maps</h2>
 
 <div class="paragraph"> </div>
 
@@ -462,7 +462,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab587"></a><h1 class="section">Poperties of Operations on Finite Maps</h1>
+<a id="lab597"></a><h1 class="section">Poperties of Operations on Finite Maps</h1>
 
 </div>
 <div class="code">
@@ -475,7 +475,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab588"></a><h2 class="section">Equality</h2>
+<a id="lab598"></a><h2 class="section">Equality</h2>
 
 </div>
 <div class="code">
@@ -498,7 +498,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab589"></a><h2 class="section">Disjointness</h2>
+<a id="lab599"></a><h2 class="section">Disjointness</h2>
 
 </div>
 <div class="code">
@@ -516,7 +516,8 @@ Notation for disjointness
 <span class="id" title="keyword">Lemma</span> <a id="disjoint_empty_r" class="idref" href="#disjoint_empty_r"><span class="id" title="lemma">disjoint_empty_r</span></a> : <span class="id" title="keyword">∀</span> <a id="h:134" class="idref" href="#h:134"><span class="id" title="binder">h</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="LibSepFmap.html#0bbe997a7c7c5a530609d9c93466d8ab"><span class="id" title="notation">\#</span></a> <a class="idref" href="LibSepFmap.html#h:134"><span class="id" title="variable">h</span></a> <a class="idref" href="LibSepFmap.html#empty"><span class="id" title="definition">empty</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">intros</span> [<span class="id" title="var">f</span> <span class="id" title="var">F</span>] <span class="id" title="var">x</span>. <span class="id" title="tactic">simple</span>¬. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">disjoint_sym</span> <span class="id" title="var">disjoint_empty_l</span> <span class="id" title="var">disjoint_empty_r</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Hint Immediate</span> <span class="id" title="var">disjoint_sym</span>.<br/>
+<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">disjoint_empty_l</span> <span class="id" title="var">disjoint_empty_r</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="disjoint_union_eq_r" class="idref" href="#disjoint_union_eq_r"><span class="id" title="lemma">disjoint_union_eq_r</span></a> : <span class="id" title="keyword">∀</span> <a id="h<sub>1</sub>:135" class="idref" href="#h<sub>1</sub>:135"><span class="id" title="binder">h<sub>1</sub></span></a> <a id="h<sub>2</sub>:136" class="idref" href="#h<sub>2</sub>:136"><span class="id" title="binder">h<sub>2</sub></span></a> <a id="h<sub>3</sub>:137" class="idref" href="#h<sub>3</sub>:137"><span class="id" title="binder">h<sub>3</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="LibSepFmap.html#0bbe997a7c7c5a530609d9c93466d8ab"><span class="id" title="notation">\#</span></a> <a class="idref" href="LibSepFmap.html#h<sub>1</sub>:135"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="LibSepFmap.html#0bbe997a7c7c5a530609d9c93466d8ab"><span class="id" title="notation">(</span></a><a class="idref" href="LibSepFmap.html#h<sub>2</sub>:136"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="LibSepFmap.html#56e77046959d53f4c7feac55396eb3b<sub>1</sub>"><span class="id" title="notation">\+</span></a> <a class="idref" href="LibSepFmap.html#h<sub>3</sub>:137"><span class="id" title="variable">h<sub>3</sub></span></a><a class="idref" href="LibSepFmap.html#0bbe997a7c7c5a530609d9c93466d8ab"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="LibSepFmap.html#0bbe997a7c7c5a530609d9c93466d8ab"><span class="id" title="notation">\#</span></a> <a class="idref" href="LibSepFmap.html#h<sub>1</sub>:135"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="LibSepFmap.html#h<sub>2</sub>:136"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepFmap.html#0bbe997a7c7c5a530609d9c93466d8ab"><span class="id" title="notation">\#</span></a> <a class="idref" href="LibSepFmap.html#h<sub>1</sub>:135"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="LibSepFmap.html#h<sub>3</sub>:137"><span class="id" title="variable">h<sub>3</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
@@ -561,7 +562,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab590"></a><h2 class="section">Union</h2>
+<a id="lab600"></a><h2 class="section">Union</h2>
 
 </div>
 <div class="code">
@@ -642,7 +643,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab591"></a><h2 class="section">Compatibility</h2>
+<a id="lab601"></a><h2 class="section">Compatibility</h2>
 
 </div>
 <div class="code">
@@ -753,7 +754,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab592"></a><h2 class="section">Domain</h2>
+<a id="lab602"></a><h2 class="section">Domain</h2>
 
 </div>
 <div class="code">
@@ -780,7 +781,7 @@ Notation for disjointness
 </div>
 
 <div class="doc">
-<a id="lab593"></a><h2 class="section">Disjoint and Domain</h2>
+<a id="lab603"></a><h2 class="section">Disjoint and Domain</h2>
 
 </div>
 <div class="code">
@@ -818,7 +819,7 @@ Note that the reciprocal of the above lemma is a special instance of
 </div>
 
 <div class="doc">
-<a id="lab594"></a><h2 class="section">Read</h2>
+<a id="lab604"></a><h2 class="section">Read</h2>
 
 </div>
 <div class="code">
@@ -847,7 +848,7 @@ Note that the reciprocal of the above lemma is a special instance of
 </div>
 
 <div class="doc">
-<a id="lab595"></a><h2 class="section">Update</h2>
+<a id="lab605"></a><h2 class="section">Update</h2>
 
 </div>
 <div class="code">
@@ -884,7 +885,7 @@ Note that the reciprocal of the above lemma is a special instance of
 </div>
 
 <div class="doc">
-<a id="lab596"></a><h2 class="section">Removal</h2>
+<a id="lab606"></a><h2 class="section">Removal</h2>
 
 </div>
 <div class="code">
@@ -912,12 +913,12 @@ Fixing arguments
 </div>
 
 <div class="doc">
-<a id="lab597"></a><h1 class="section">Tactics for Finite Maps</h1>
+<a id="lab607"></a><h1 class="section">Tactics for Finite Maps</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab598"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">disjoint</span></span> for proving disjointness results</h2>
+<a id="lab608"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">disjoint</span></span> for proving disjointness results</h2>
 
 <div class="paragraph"> </div>
 
@@ -956,7 +957,7 @@ Fixing arguments
 </div>
 
 <div class="doc">
-<a id="lab599"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">rew_map</span></span> for Normalizing Expressions</h2>
+<a id="lab609"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">rew_map</span></span> for Normalizing Expressions</h2>
 
 </div>
 <div class="code">
@@ -974,7 +975,7 @@ Fixing arguments
 </div>
 
 <div class="doc">
-<a id="lab600"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">fmap_eq</span></span> for Proving Equalities</h2>
+<a id="lab610"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">fmap_eq</span></span> for Proving Equalities</h2>
 
 </div>
 <div class="code">
@@ -1093,12 +1094,12 @@ Fixing arguments
 </div>
 
 <div class="doc">
-<a id="lab601"></a><h1 class="section">Existence of Fresh Locations</h1>
+<a id="lab611"></a><h1 class="section">Existence of Fresh Locations</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab602"></a><h2 class="section">Consecutive Locations</h2>
+<a id="lab612"></a><h2 class="section">Consecutive Locations</h2>
 
 <div class="paragraph"> </div>
 
@@ -1126,7 +1127,7 @@ Fixing arguments
 </div>
 
 <div class="doc">
-<a id="lab603"></a><h2 class="section">Existence of Fresh Locations</h2>
+<a id="lab613"></a><h2 class="section">Existence of Fresh Locations</h2>
 
 </div>
 <div class="code">
@@ -1226,7 +1227,7 @@ For any heap <span class="inlinecode"><span class="id" title="var">h</span></spa
 </div>
 
 <div class="doc">
-<a id="lab604"></a><h2 class="section">Existence of a Smallest Fresh Locations</h2>
+<a id="lab614"></a><h2 class="section">Existence of a Smallest Fresh Locations</h2>
 
 <div class="paragraph"> </div>
 
@@ -1256,7 +1257,7 @@ For any heap <span class="inlinecode"><span class="id" title="var">h</span></spa
 </div>
 
 <div class="doc">
-<a id="lab605"></a><h2 class="section">Existence of Nonempty Heaps</h2>
+<a id="lab615"></a><h2 class="section">Existence of Nonempty Heaps</h2>
 
 <div class="paragraph"> </div>
 
@@ -1278,7 +1279,7 @@ For any heap <span class="inlinecode"><span class="id" title="var">h</span></spa
 &nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">N</span> <span class="id" title="keyword">in</span> <span class="id" title="var">M<sub>1</sub></span>. <span class="id" title="var">false</span>*.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="LibSepFmap.html#FmapFresh"><span class="id" title="section">FmapFresh</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-23&nbsp;19:54&nbsp;*)</span><br/>
 </div>
 </div>
 

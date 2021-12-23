@@ -77,10 +77,6 @@ Lemma wp_weakest : forall t H Q,
   H ==> wp t Q.
 Proof using. introv M. rewrite wp_equiv. applys M. Qed.
 
-(** In other words, [wp t Q] is the "smallest" [H] satisfying
-    [triple t H Q] with respect to the order on heap predicates
-    induced by the entailment relation [==>]. *)
-
 (** There are several equivalent ways to define [wp], as we show
     in the optional contents of this chapter. It turns out that
     the equivalence [(H ==> wp t Q) <-> (triple t H Q)] fully
@@ -594,13 +590,12 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(** The combined structural rule for [wp] can actually be stated
-    in a more concise way, as follows. The rule reads as follows:
-    if you own a state from which the execution of [t] produces
-    (a result and a state satisfying) [Q1] and you own [H], and
-    if you can trade the combination of [Q1] and [H] against [Q2],
-    the you own a piece of state from which the execution of [t]
-    produces [Q2]. *)
+(** The combined structural rule for [wp] can actually be stated in a more
+    concise way. The rule reads as follows: if you own a state from which the
+    execution of [t] produces (a result and a state satisfying) [Q1] and you
+    own [H], and if you can trade the combination of [Q1] and [H] against [Q2],
+    the you own a piece of state from which the execution of [t] produces
+    [Q2]. *)
 
 (** **** Exercise: 2 stars, standard, especially useful (wp_conseq_frame)
 
@@ -669,7 +664,7 @@ End WpIfAlt.
 (** The notion of Hoare triple is a key abstraction that enables conduction
     further proofs without manipulating heaps (of type [heap]) explicitly.
     Experiments suggest that it is beneficial to introduce the Hoare
-    logic layer. In other words, it is counterproductive to try an prove
+    logic layer. In other words, it is counterproductive to try and prove
     Separation Logic reasoning rules, whether for [triple] or for [wp],
     directly with respect to the evaluation judgment [eval].
 
@@ -811,4 +806,4 @@ End WpFromHoare.
     (https://iris-project.org/), developed since 2015, exploits weakest
     preconditions to state reasoning rules. See the [Postscript]. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

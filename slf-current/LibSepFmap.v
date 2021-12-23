@@ -335,7 +335,8 @@ Lemma disjoint_empty_r : forall h,
   \# h empty.
 Proof using. intros [f F] x. simple~. Qed.
 
-Hint Resolve disjoint_sym disjoint_empty_l disjoint_empty_r.
+Hint Immediate disjoint_sym.
+Hint Resolve disjoint_empty_l disjoint_empty_r.
 
 Lemma disjoint_union_eq_r : forall h1 h2 h3,
   \# h1 (h2 \+ h3) =
@@ -1084,4 +1085,4 @@ Qed.
 
 End FmapFresh.
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

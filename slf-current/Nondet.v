@@ -172,7 +172,7 @@ Qed.
       has type [hprop], and its interpretation matches exactly that of a
       weakest precondition for a Hoare triple. We'll formalize this claim
       further on in this chapter, and we'll point out shortly afterwards the
-      difference between the rules that define [evaln] and the tradition
+      difference between the rules that define [evaln] and the traditional
       weakest-precondition reasoning rules.
     - The judgment [evaln] may be viewed as a CPS-version of the predicate
       [eval]. Indeed, The output of [eval], made of an output value and an
@@ -186,7 +186,7 @@ Qed.
     - The judgment [evaln] may be viewed as a generalized form of a typing
       relation. To make the analogy clear, let us adapt the definition of
       [evaln] in two ways, and focus on the evaluation rule for let-bindings.
-      First, let us get read of the state, i.e., consider a language without
+      First, let us get rid of the state, i.e., consider a language without
       side-effects, for simplicity.
 
      evaln t1 Q1 ->
@@ -547,10 +547,11 @@ Proof using.
   { applys* Fmap.indom_union_l. subst. applys indom_single. }
   { rewrite hstar_hpure_l. split*.
     { subst h1. rewrite* Fmap.update_union_l. rewrite* update_single.
-      applys* hstar_intro.
+      applys hstar_intro.
       { applys* hsingle_intro. }
+      { auto. }
       { applys Fmap.disjoint_single_set D. }
-      { applys indom_single. } } }
+      { auto. applys indom_single. } } }
 Qed.
 
 Lemma hoaren_free : forall H p v,
@@ -961,7 +962,8 @@ Qed.
     The proof of lemma [triplen_rand] shows that a triple-based specification
     of [val_rand] is derivable from a wp-style specification. In this
     exercise, we aim to prove the reciprocal. Concretely, prove the following
-    specification by exploiting [wpn_rand]. Hint: make use of [wpn_equiv]. *)
+    specification by exploiting [triplen_rand].
+    Hint: make use of [wpn_equiv]. *)
 
 Lemma wpn_rand_of_triplen_rand : forall n Q,
   n > 0 ->
@@ -1007,7 +1009,7 @@ Inductive terminates : state -> trm -> Prop :=
   | terminates_if : forall s b t1 t2,
       terminates s (if b then t1 else t2) ->
       terminates s (trm_if (val_bool b) t1 t2)
-  | terminatess_add : forall s n1 n2,
+  | terminates_add : forall s n1 n2,
       terminates s (val_add (val_int n1) (val_int n2))
   | terminates_rand : forall s n,
       n > 0 ->
@@ -1153,8 +1155,8 @@ Definition evalns_attempt_1 (s:state) (t:trm) (Q:val->hprop) : Prop :=
     from configuration [(s,t)] and ending on a final configuration [(s',v)] is
     such that the final configuration satisfies the postcondition [Q]. Yet,
     this definition fails to rule out the possibility of executions that get
-    stuck. Thus, in it is only applicable for semantics that include error-
-    propagation rules, and for which there are no stuck terms. *)
+    stuck. Thus, it is only applicable for semantics that include
+    error-propagation rules, and for which there are no stuck terms. *)
 
 Definition evalns_attempt_2 (s:state) (t:trm) (Q:val->hprop) : Prop :=
   forall v s', evals s t s' (trm_val v) -> Q v s'.
@@ -1197,7 +1199,7 @@ OCaml:
    calls. This execution may terminate in a finite number of evaluation
    evals. Indeed, the next call to [val_rand] may return zero. However, not
    all executions terminate. Indeed, the execution path where all calls to
-   [val_rand] return [1], the program runs for ever. *)
+   [val_rand] return [1], the program runs forever. *)
 
 (** The key challenge is to capture the property that "every possible execution
     terminates". To that end, let's consider yet another approach, based on the
@@ -1300,7 +1302,7 @@ OCaml:
       semantics without stuck terms.
     - [evalns_attempt_3] captures partial correctness only, and says
       nothing about termination.
-    - [evalns_attempt 4] also fails to properly capture termination.
+    - [evalns_attempt_4] also fails to properly capture termination.
     - [evalns_attempt_5] captures total correctness only for semantics
       that feature only bounded sources of non-determinism, i.e., with
       a finite number of possible transitions from each configuration.
@@ -1797,4 +1799,4 @@ Proof using. unfold hoarens, hoaren. rewrite* evalns_eq_evalns. Qed.
     using a big-step judgment, as done in this chapter with the predicate
     [evaln], appears to be a novel approach, as of Jan. 2021. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

@@ -159,6 +159,12 @@ Proof.
   xsimpl.
 Qed.
 
+(** The reader may be curious to know what the notation [PRE H CODE F POST Q]
+    stands for, and what the x-tactics are doing. Everything will be explaiend
+    throughout the course. This chapter and the next one focus presenting the
+    features of Separation Logic, and on showing how x-tactics can be used to
+    verify programs in Separation Logic. *)
+
 (** This completes the verification of the lemma [triple_incr], which
     establishes a formal specification for the increment function. Before
     moving on to another function, we associate using the command shown below
@@ -169,11 +175,29 @@ Qed.
 
 Hint Resolve triple_incr : triple.
 
-(** The reader may be curious to know what the notation [PRE H CODE F POST Q]
-    stands for, and what the x-tactics are doing. Everything will be explaiend
-    throughout the course. This chapter and the next one focus presenting the
-    features of Separation Logic, and on showing how x-tactics can be used to
-    verify programs in Separation Logic. *)
+(** To minimize the amount of syntactic noise in specifications, we leverage
+    an advanced feature of Coq's coercion mechanism. Concretely, instead of
+    writing the specification in the form [triple <{ incr p }> ...], we write
+    it in the form [triple (incr p) ...], that is, with just parentheses.
+    Thanks to the coercion mecanism, explained in more details in [Rules],
+    when Coq sees a "program value" [incr] being applied to an argument [p],
+    it automatically interprets this as a "program function call" of [incr]
+    to [p]. Thus, the specification of the increment function can be written
+    as follows. *)
+
+Lemma triple_incr' : forall (p:loc) (n:int),
+  triple (incr p)
+    (p ~~> n)
+    (fun _ => (p ~~> (n+1))).
+Proof.
+  (* Here, to view coercions, use [Set Printing Coercions.], or in CoqIDE use
+     [Shift+Alt+C], which corresponds to the menu View / Display Coerctions. *)
+  xwp. xapp. xapp. xapp. xsimpl.
+Qed.
+
+(** The existence of implicit coercions might be a little confusing at times,
+    yet coercions make specifications so much more readable that it would
+    be a pity to not exploit them. *)
 
 (* ================================================================= *)
 (** ** A Function with a Return Value *)
@@ -219,7 +243,7 @@ Definition example_let : val :=
     and wait until chapter [Rules] to learn about coercions. *)
 
 Lemma triple_example_let : forall (n:int),
-  triple <{ example_let n }>
+  triple (example_let n)
     \[]
     (fun r => \[r = 2*n]).
 
@@ -232,23 +256,6 @@ Lemma triple_example_let : forall (n:int),
     that this course leverages TLC for enhanced definitions and tactics. *)
 
 Proof.
-  xwp. xapp. xapp. xapp. xsimpl. math.
-Qed.
-
-(** From here on, we use the command [Proof using] for introducing a proof
-    instead of writing just [Proof]. Doing so enables asynchronous proof
-    checking, a feature that may enable faster processing of scripts.
-    Moreover, to minimize the amount of syntactic noise in specifications, we
-    leverage the coercion mechanism to allow writing the specified term,
-    here [example_let n] simply surrounded with parentheses, as opposed to
-    the heavier form [<{ example_let n }>]. (See [Rules] for details).
-    For example, we would format the previous proof in the following form. *)
-
-Lemma triple_example_let' : forall (n:int),
-  triple (example_let n)
-    \[]
-    (fun r => \[r = 2*n]).
-Proof using.
   xwp. xapp. xapp. xapp. xsimpl. math.
 Qed.
 
@@ -287,6 +294,10 @@ Definition inplace_double : val :=
 (* FILL IN HERE *)
 
 (** [] *)
+
+(** From here on, we use the command [Proof using] for introducing a proof
+    instead of writing just [Proof]. Doing so enables asynchronous proof
+    checking, a feature that may enable faster processing of scripts. *)
 
 (* ################################################################# *)
 (** * Separation Logic Operators *)
@@ -1096,8 +1107,8 @@ Proof using. (* FILL IN HERE *) Admitted.
       Logic.
     - "Specification triples", of the form [triple t H Q], which relate a term
       [t], a precondition [H], and a postcondition [Q].
-    - "Entailment proof obligations", of the form [H ==> H'] or [Q ===> Q'],
-      which assert that a pre- or post-condition is weaker than another one.
+    - "Entailmens", of the form [H ==> H'] or [Q ===> Q'], which assert that a
+      pre- or post-condition is weaker than another one.
     - "Verification proof obligations", of the form [PRE H CODE F POST Q], which
       are produced by the framework, and capture triples by leveraging a notion
       of "weakest precondition", presented further in the course.
@@ -1153,4 +1164,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

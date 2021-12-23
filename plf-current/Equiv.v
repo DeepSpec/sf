@@ -859,6 +859,14 @@ Fixpoint fold_constants_bexp (b : bexp) : bexp :=
       | (a1', a2') =>
           <{ a1' <= a2' }>
       end
+  | <{ a1 > a2 }>  =>
+      match (fold_constants_aexp a1,
+             fold_constants_aexp a2) with
+      | (ANum n1, ANum n2) =>
+          if n1 <=? n2 then <{false}> else <{true}>
+      | (a1', a2') =>
+          <{ a1' > a2' }>
+      end
   | <{ ~ b1 }>  =>
       match (fold_constants_bexp b1) with
       | <{true}> => <{false}>
@@ -1085,6 +1093,8 @@ Proof.
        become constants after folding *)
       simpl. destruct (n =? n0); reflexivity.
   - (* BLe *)
+    (* FILL IN HERE *) admit.
+  - (* BGt *)
     (* FILL IN HERE *) admit.
   - (* BNot *)
     simpl. remember (fold_constants_bexp b) as b' eqn:Heqb'.
@@ -1746,4 +1756,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2021-12-20 19:03 *)
+(* 2021-12-23 19:47 *)

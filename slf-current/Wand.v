@@ -57,11 +57,11 @@ Implicit Types Q : val->hprop.
     describes a piece of heap that "can" be subtracted from [H2]. Otherwise,
     the predicate [H1 \-* H2] characterizes a heap that cannot possibly exist.
     Informally speaking, [H1] must somehow be a subset of [H2] for the
-    subtraction [-H1 + H2] to make sense. 
+    subtraction [-H1 + H2] to make sense.
 
     Another possible analogy is that of logical operators. If [P1] and [P2]
     were propositions (of type [Prop]), then [P1 \* P2] would mean [P1 /\ P2]
-    and [P1 \-* P2] would mean [P1 -> P2]. The entailment 
+    and [P1 \-* P2] would mean [P1 -> P2]. The entailment
     [P1 \* (P1 \-* P2) ==> P2] then corresponds to the tautology
     [(P1 /\ (P1 -> P2)) -> P2]. *)
 
@@ -589,6 +589,15 @@ Proof using.
   { intros vx. rewrite <- isubst_rem. applys IH. }
 Qed.
 
+(** Like for other auxiliary functions associated with [wpgen], we introduce
+    a custom notation for [wpgen_fun]. Here, we let [Fun x := F] stand for
+    [wpgen_fun (fun x => F)]. *)
+
+Notation "'Fun' x ':=' F1" :=
+  ((wpgen_fun (fun x => F1)))
+  (at level 69, x ident, right associativity,
+  format "'[v' '[' 'Fun'  x  ':='  F1  ']' ']'").
+
 (* ----------------------------------------------------------------- *)
 (** *** 2. Treatment of Recursive Functions *)
 
@@ -660,12 +669,12 @@ Proof using.
 Qed.
 
 (** Here again, we introduce a piece of notation for [wpgen_fix]. We let
-    [Fix' f x := F] stand for [wpgen_fix (fun f x => F)]. *)
+    [Fix f x := F] stand for [wpgen_fix (fun f x => F)]. *)
 
-Notation "'Fix'' f x ':=' F1" :=
+Notation "'Fix' f x ':=' F1" :=
   ((wpgen_fix (fun f x => F1)))
   (at level 69, f ident, x ident, right associativity,
-  format "'[v' '[' 'Fix''  f  x  ':='  F1  ']' ']'").
+  format "'[v' '[' 'Fix'  f  x  ':='  F1  ']' ']'").
 
 (** Remark: similarly to [xfun], one could devise a [xfix] tactic.
     We omit the details. *)
@@ -691,18 +700,9 @@ Fixpoint wpgen (E:ctx) (t:trm) : formula :=
     [wpgen_sound]. *)
 
 (* ----------------------------------------------------------------- *)
-(** *** 4. Notation and Tactic to Handle [wpgen_fun] and [wpgen_fix] *)
+(** *** 4. Tactic to Reason About Functions *)
 
-(** Like for other auxiliary functions associated with [wpgen], we introduce
-    a custom notation for [wpgen_fun]. Here, we let [Fun' x := F] stand for
-    [wpgen_fun (fun x => F)]. *)
-
-Notation "'Fun'' x ':=' F1" :=
-  ((wpgen_fun (fun x => F1)))
-  (at level 69, x ident, right associativity,
-  format "'[v' '[' 'Fun''  x  ':='  F1  ']' ']'").
-
-(** Also, like for other language constructs, we introduce a custom tactic
+(** Like for other language constructs, we introduce a custom tactic
     for [wpgen_fun]. It is called [xfun], and helps the user to process a
     local function definition in the course of a verification script.
 
@@ -896,7 +896,7 @@ Proof using.
   intros. applys triple_conseq_frame.
   (* observe the evar [?H2] that appears in the second and third subgoals *)
   { applys triple_ref. }
-  { (* here, [?H2] should be in theory instantiated with the RHS.
+  { (* here, [?H2] should be in theory instantiated with the LHS.
        but [xsimpl] strategy is to first extract the quantifiers
        from the LHS. After that, the instantiation of [?H2] fails,
        because the LHS contains variables that are not defined in
@@ -1013,7 +1013,7 @@ Qed.
     The entailment [hwand_trans_elim]:
     [(H1 \-* H2) \* (H2 \-* H3) ==> (H1 \-* H3)]
     is correct because, intuitively, the left-hand-side captures
-    that [H1 <= H2] and that [H1 <= H3] for some vaguely defined
+    that [H1 <= H2] and that [H2 <= H3] for some vaguely defined
     notion of [<=] as "being a subset of". From that, we can derive
     [H1 <= H3], and justify that the right-hand-side makes sense.
 
@@ -1133,6 +1133,17 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 Lemma hwand_cancel_part : forall H1 H2 H3,
   H1 \* ((H1 \* H2) \-* H3) ==> (H2 \-* H3).
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 3 stars, standard, optional (hwand_frame)
+
+    Prove that [H1 \-* H2] entails to [(H1 \* H3) \-* (H2 \* H3)].
+    Hint: you can use [xsimpl] during the proof. *)
+
+Lemma hwand_frame : forall H1 H2 H3,
+  H1 \-* H2 ==> (H1 \* H3) \-* (H2 \* H3).
 Proof using. (* FILL IN HERE *) Admitted.
 
 (** [] *)
@@ -1418,6 +1429,7 @@ Implicit Type op : (val->hprop)->(val->hprop)->hprop.
 
     2. The definition [qwand], expressed in terms of existing operators:
        [\exists H0, H0 \* \[ (Q1 \*+ H0) ===> Q2]]
+
     3. The definition expressed using the universal quantifier:
        [\forall v, (Q1 v) \-* (Q2 v)]
 
@@ -1635,13 +1647,13 @@ Qed.
 (** *** 2. The General Pattern *)
 
 (** In practice, specification triples can (pretty much) all be casted
-    in the form: [triple t H (fun r => exists x1 x2, \[r = v] \* H'].
+    in the form: [triple t H (fun r => exists x1 x2, \[r = v] \* H')].
     In such a specification:
 
     - the value [v] may depend on the [xi],
     - the heap predicate [H'] may depend on [r] and the [xi],
     - the number of existentials [xi] may vary, possibly be zero,
-    - the equality \[r = v] may be removed if no pure fact is needed about [r].
+    - the equality [\[r = v]] may be removed if no pure fact is needed about [r].
 
     Such a specification triple of the form
     [triple t H (fun r => exists x1 x2, \[r = v] \* H']
@@ -1888,26 +1900,26 @@ Proof using. (* FILL IN HERE *) Admitted.
       show that "[H1] or [H2]" entails [H3], one must show both that
       [H1] entails [H3] and that [H2] entails [H3]. *)
 
-Lemma himpl_hor_r_r : forall H1 H2,
+Lemma himpl_hor_r_l : forall H1 H2,
   H1 ==> hor H1 H2.
 Proof using. intros. unfolds hor. exists* true. Qed.
 
-Lemma himpl_hor_r_l : forall H1 H2,
+Lemma himpl_hor_r_r : forall H1 H2,
   H2 ==> hor H1 H2.
 Proof using. intros. unfolds hor. exists* false. Qed.
 
 (** In practice, these two rules are easier to exploit when combined with a
     transitivity step. *)
 
-Lemma himpl_hor_r_r_trans : forall H1 H2 H3,
+Lemma himpl_hor_r_l_trans : forall H1 H2 H3,
   H3 ==> H1 ->
   H3 ==> hor H1 H2.
-Proof using. introv W. applys himpl_trans W. applys himpl_hor_r_r. Qed.
+Proof using. introv W. applys himpl_trans W. applys himpl_hor_r_l. Qed.
 
-Lemma himpl_hor_r_l_trans : forall H1 H2 H3,
+Lemma himpl_hor_r_r_trans : forall H1 H2 H3,
   H3 ==> H2 ->
   H3 ==> hor H1 H2.
-Proof using. introv W. applys himpl_trans W. applys himpl_hor_r_l. Qed.
+Proof using. introv W. applys himpl_trans W. applys himpl_hor_r_r. Qed.
 
 (** The elimination rule is stated as follows. *)
 
@@ -2136,4 +2148,4 @@ End SummaryHprop.
     have advertised for the interest of this rule. The ramified frame
     rule was integrated in CFML 2.0 in 2018. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

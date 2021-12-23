@@ -45,10 +45,10 @@ Implicit Types Q : val->hprop.
     execution of the program [(s,t)] terminates on an output satisfying [Q].
     In contrast, the partial correctness judgment [evalnp s t Q] asserts that
     any execution of the program [(s,t)] either terminates on an output
-    satisfying [Q], or diverges (that is, executes for ever).
+    satisfying [Q], or diverges (that is, executes forever).
 
     The definition of the predicate [evalnp] is obtained by taking the
-    constructors from the inductive definition of [evals], and considering
+    constructors from the inductive definition of [evaln], and considering
     the coinductive interpretation of these constructors. The coinductive
     interpretation allows for infinite derivation. It thereby introduces the
     possibility of diverging executions. Importantly, the predicate [evalnp]
@@ -381,7 +381,7 @@ CoInductive safe : state -> trm -> Prop :=
   | safe_if : forall s b t1 t2,
       safe s (if b then t1 else t2) ->
       safe s (trm_if (val_bool b) t1 t2)
-  | safes_add : forall s n1 n2,
+  | safe_add : forall s n1 n2,
       safe s (val_add (val_int n1) (val_int n2))
   | safe_rand : forall s n,
       n > 0 ->
@@ -405,7 +405,9 @@ Hint Constructors eval evalnp.
 
     Prove that [evalnp s t Q] is equivalent to the conjunction of [safe s t]
     and to a partial correctness result asserting that if an evaluation of
-    [t/s] terminates on a particular result, then this result satisfies [Q]. *)
+    [t/s] terminates on a particular result, then this result satisfies [Q].
+    Hint: make sure to split the equivalence and the conjunction before
+    entering the coinductive proofs. *)
 
 Lemma evalnp_iff_safe_and_post : forall s t Q,
   evalnp s t Q <-> (safe s t /\ (forall v s', eval s t s' v -> Q v s')).
@@ -534,7 +536,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** **** Exercise: 4 stars, standard, especially useful (evalnps_not_val_inv)
 
     Prove that if the property [evalnps] holds for a given postcondition [Q],
-    and for a configuration that has not already reached a value, and this
+    and for a configuration that has not already reached a value, then this
     configuration can take a step. Moreover, the configuration reached also
     satisfies the property [evalnps] for that same [Q]. *)
 
@@ -579,7 +581,9 @@ Qed.
 
 (** **** Exercise: 5 stars, standard, especially useful (evalnps_let)
 
-    Prove the reasoning rule for let-bindings for [evalnps]. *)
+    Prove the reasoning rule for let-bindings for [evalnps].
+    Hint: in the proof, you can use [tests C: (exists v1, t1 = trm_val v1)]
+    to make a case analysis on whether [t1] is a value or not. *)
 
 Lemma evalnps_let : forall s x t1 t2 Q1 Q,
   evalnps s t1 Q1 ->
@@ -828,8 +832,8 @@ Proof using.
   rewrite* evalnpz_eq_evalnps.
 Qed.
 
-(** ** Equivalence Between Small-Step and Big-Step Partial Correctness
-       Semantics *)
+(* ================================================================= *)
+(** ** Equivalence Between Small-Step and Big-Step Partial Correctness Semantics *)
 
 (** We end this chapter with the proof of equivalence between [hoarenps] and
     [hoarenp], establishing a formal relationship between partial correctness
@@ -1053,4 +1057,4 @@ Qed.
     in this chapter with the predicate [evalnp], appears to be novel as of Jan.
     2021. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

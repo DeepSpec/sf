@@ -30,7 +30,14 @@ Implicit Types x : val.
       depth the meaning and the consequences of the key results. By default,
       readers would eventually read all this material.
     - The _Optional Material_ section contains more advanced material, for
-      readers who can afford to invest more time in the topic. *)
+      readers who can afford to invest more time in the topic.
+
+    In the proofs, we will make use of a few additional tactics:
+    - [xpull] to extract pure facts and quantifiers from the LHS of [==>].
+    - [xchange] for exploiting transitivity of [==>].
+    - [xfun] to reason about a function definition.
+    - [xtriple] to establish a specification for an abstract function.
+    - [rew_list] is a TLC tactic used to normalize list expressions. *)
 
 (* ================================================================= *)
 (** ** Formalization of the List Representation Predicate *)
@@ -117,19 +124,21 @@ Lemma MList_if : forall (p:loc) (L:list val),
 Proof using.
 (** Let's prove this result by case analysis on [L]. *)
   intros. destruct L as [|x L'].
-(** Case [L = nil]. By definition of [MList], we have [p = null]. *)
-  { xchange MList_nil. intros M.
+(** Case [L = nil]. By definition of [MList], we have [p = null].
+    To exploit this property, we can execute [rewrite MList_nil], then
+    invoke the CFML the tactic [xpull] to extract the pure heap predicate
+    [\[p = null]] from the LHS. A more efficient approach is to leverage
+    the CFML tactic [xchange], as follows. *)
+  { xchange MList_nil. (* Same as [rewrite MList_nil. xpull.] *)
+    intros M.
 (** We have to justify [L = nil], which is trivial. The TLC [case_if] tactic
     performs a case analysis on the argument of the first visible [if]. *)
     case_if. xsimpl. auto. }
 (** Case [L = x::L'].
 
-    One possibility is to perform a rewrite operation using [MList_cons] on its
-    first occurrence. Then using CFML the tactic [xpull] to extract the
-    existential quantifiers out from the precondition:
-    [rewrite MList_cons. xpull. intros q.]
-    A more efficient approach is to use the dedicated CFML tactic [xchange],
-    which is specialized for performing updates in the current state. *)
+    To simplify [MList (x :: L') p], we could execute the tactics:
+    [rewrite MList_cons. xpull.] but, here again, using [xchange]
+    leads to a more concise script. *)
     { xchange MList_cons. intros q.
 (** Because a record is allocated at location [p], the pointer [p] cannot be
     null. The lemma [hrecord_not_null] allows us to exploit this property,
@@ -324,6 +333,13 @@ Proof using.
     xapp. intros p'. xchange <- MList_cons. xsimpl*. }
 Qed.
 
+(** When entering the first branch of the proof after the case analysis,
+    Coq reports on two hypotheses [p = null]. Actually, these two hypotheses
+    are slightly different. Using [Set Printing Coercions.] (or Shift+Alt+C in
+    CoqIDE) reveals their true type: [val_loc p = val_loc null] and [p = null].
+    Thus, only the second hypothesis can be used for a substitution or rewrite
+    operation. *)
+
 (* ================================================================= *)
 (** ** Length Function for Lists *)
 
@@ -349,7 +365,8 @@ Definition mlength : val :=
 (** **** Exercise: 3 stars, standard, especially useful (triple_mlength)
 
     Prove the correctness of the function [mlength].
-    Hint: use the TLC tactic [rew_list] to normalize list expressions. *)
+    Hint: use the TLC tactic [rew_list] to normalize list expressions,
+    in particular to prove [length L' + 1 = length (x :: L')]. *)
 
 Lemma triple_mlength : forall L p,
   triple (mlength p)
@@ -432,7 +449,7 @@ OCaml:
               mrev_aux p2 p3)
 
     let mrev p =
-      mrev_aux p null
+      mrev_aux null p
 *)
 
 Definition mrev_aux : val :=
@@ -452,7 +469,7 @@ Definition mrev : val :=
 (** **** Exercise: 5 stars, standard, optional (triple_mrev)
 
     Prove the correctness of the functions [mrev_aux] and [mrev]. Hint: here
-    again, start by stating a lemma [mtriple_rev_aux] expressing the
+    again, start by stating a lemma [triple_mrev_aux] expressing the
     specification of the recursive function [mrev_aux]. Make sure to generalize
     the appropriate variables before applying the well-founded induction tactic.
     Then, complete the proof of [triple_mrev], using [xapp triple_mrev_aux]. *)
@@ -704,7 +721,7 @@ Proof using. auto. Qed.
 
 (** The third lemma reformulates [MTree T p] using a case analysis on whether
     [p] is the null pointer. This formulation matches the case analysis
-    typically perform in the code of functions that operates on trees. *)
+    typically performed in the code of functions that operates on trees. *)
 
 Lemma MTree_if : forall (p:loc) (T:tree),
       (MTree T p)
@@ -756,7 +773,7 @@ Lemma triple_mnode : forall n p1 p2,
   triple (mnode n p1 p2)
     \[]
     (funloc p => p ~~~> `{ item := n ; left := p1 ; right := p2 }).
-Proof using. intros. applys* triple_new_hrecord_3. Qed.
+Proof using. intros. apply triple_new_hrecord_3; auto. Qed.
 
 (** A second specification, derived from the first, asserts that, if provided
     the description of two subtrees [T1] and [T2] at locations [p1] and [p2],
@@ -873,7 +890,7 @@ Fixpoint treesum (T:tree) : int :=
 
 (** **** Exercise: 4 stars, standard, optional (triple_mtreesum)
 
-    Prove the correctness of the function [mlength']. Hint: to begin with, state
+    Prove the correctness of the function [mtreesum]. Hint: to begin with, state
     and prove the specification lemma [triple_treeacc]. *)
 
 (* FILL IN HERE *)
@@ -940,7 +957,13 @@ Implicit Type f : val.
 (** The function [create_counter] creates a fresh counter. Its precondition is
     empty. Its postcondition asserts that the function [f] being returned
     satisfies [CounterSpec f p], and the output state contains a cell [p ~~> 0]
-    for some existentially quantified location [p]. *)
+    for some existentially quantified location [p].
+
+    Most importantly, observe how the postcondition that appears in the triple
+    below refers to [CounterSpec], which itself involves a triple. In other
+    words, a triple appears nested inside another triple. (In technical terms,
+    we are leveraging the "imprecativity of triples", which comes as a direct
+    consequence of the "impredicativity of predicates" in the logic of Coq. *)
 
 Lemma triple_create_counter :
   triple (create_counter ())
@@ -955,31 +978,11 @@ Proof using.
   xsimpl.
   { intros m.
 (** To reason about the call to the function [f], we can exploit [Hf], either
-    explicitly by calling [applys Hf], or automatically by simply calling [xapp]
-    . *)
+    explicitly by calling [apply Hf], or automatically by simply calling
+    [xapp]. *)
     xapp.
     xapp. xapp. xsimpl. auto. }
 Qed.
-
-(** Consider now a call to a counter function [f], under the assumption
-    [CounterSpec f p]. Assume the input state to be of the form [p ~~> n] for
-    some [n]. Then, the call produces a state [p ~~> (n+1)], and returns the
-    value [n+1]. The specification shown below captures this logic, for any [f].
-    *)
-
-Lemma triple_apply_counter : forall f p n,
-  CounterSpec f p ->
-  triple (f ())
-    (p ~~> n)
-    (fun r => \[r = n+1] \* (p ~~> (n+1))).
-(** The specification above is in fact nothing but a reformulation of the
-    definition of [CounterSpec]. Thus, its proof is straightforwards. (The proof
-    may actually be reduced to just [auto], however in general one needs to use
-    [xapp] for reasoning about an abstract function.) *)
-Proof using. introv Hf. unfolds in Hf. xapp. xsimpl*. Qed.
-
-(* ================================================================= *)
-(** ** Verification of a Counter Function with Local State, With Abstraction *)
 
 (** Let us move on to the presentation of more abstract specifications. The goal
     is to hide from the client the existence of the reference cell used to
@@ -1002,7 +1005,7 @@ Lemma triple_create_counter_abstract :
     (fun f => IsCounter f 0).
 (** This lemma is the same as the previous specification [triple_create_counter]
     , except that the reference cell [p] is no longer visible. *)
-Proof using. unfold IsCounter. applys triple_create_counter. Qed.
+Proof using. unfold IsCounter. apply triple_create_counter. Qed.
 
 (** We can also reformulate the specification of a call to a counter function. A
     call to [f()], in a state satisfying [IsCounter f n], produces a state
@@ -1023,6 +1026,47 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 Opaque IsCounter.
+
+(** Finally, let us illustrate how a client might work with counter functions.
+
+OCaml:
+
+    let test_counter () =
+       let c1 = create_counter () in
+       let c2 = create_counter () in
+       let n1 = c1() in
+       let n2 = c2() in
+       let n3 = c1() in
+       n2 + n3
+*)
+
+Definition test_counter : val :=
+  <{ fun 'u =>
+       let 'c1 = create_counter () in
+       let 'c2 = create_counter () in
+       let 'n1 = 'c1 () in
+       let 'n2 = 'c2 () in
+       let 'n3 = 'c1 () in
+       'n2 + 'n3 }>.
+
+(** **** Exercise: 2 stars, standard, optional (triple_test_counter)
+
+    Prove the example function manipulating abstract counters. In the 
+    specification below, the [\exists H, H] part corresponds to the
+    two counters, which we currently have no way of deallocating.
+    The necessary mechanism for garbage collection will be introduced
+    later in [Affine].
+
+    Hint: use [xapp triple_create_counter_abstract] and
+    [xapp triple_apply_counter_abstract] to invoke the specifications. *)
+
+Lemma triple_test_counter :
+  triple (test_counter ())
+    \[]
+    (fun r => \[r = 3] \* (\exists H, H)).
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
 
 (* ################################################################# *)
 (** * Optional Material *)
@@ -1102,8 +1146,12 @@ Proof using.
     triple (repeat f m)
       (I (n-m))
       (fun u => I n)).
-  { applys_eq G. { fequals. math. } { math. } }
-(** We then carry a proof by induction: during the execution, the value of [m]
+  { replace 0 with (n - n). { eapply G. math. } { math. } }
+(** The above line can be made more concise using the TLC tactics [applys_eq],
+    a variant of [apply] that automatically introduces the necessary equalities:
+    [applys_eq G. { f_equal. math. } { math. }].
+
+    We then carry a proof by induction: during the execution, the value of [m]
     decreases step by step down to [0]. *)
   intros m. induction_wf IH: (downto 0) m. intros Hm.
   xwp. xapp. xif; intros C.
@@ -1170,7 +1218,7 @@ Proof using. (* FILL IN HERE *) Admitted.
     invariant, which cannot be inferred automatically, should describe the state
     at the point where the iteration has traversed a prefix [K] of the list [L].
     Concretely, for reasoning about a call to [miter], one should exploit the
-    tactic [xapp (triple_iter (fun K => ...))]. An example appears next. *)
+    tactic [xapp (triple_miter (fun K => ...))]. An example appears next. *)
 
 (* ================================================================= *)
 (** ** Computing the Length of a Mutable List using an Iterator *)
@@ -1191,7 +1239,7 @@ OCaml:
 
     Prove the correctness of [mlength_using_iter]. Hint: as explained earlier,
     use [xfun; intros f Hf] for reasoning about the function definition, then
-    use [xapp] for reasoning about a call to [f]. *)
+    use [xapp] for reasoning about a call to [f]. Use of [xlet] is optional. *)
 
 Definition mlength_using_miter : val :=
   <{ fun 'p =>
@@ -1256,11 +1304,40 @@ Definition cps_append : val :=
       let 'f = (fun_ 'r => 'r) in
       cps_append_aux 'p1 'p2 'f }>.
 
-(** **** Exercise: 5 stars, standard, optional (triple_cps_append)
+(** The goal is to establish the following specification for [cps_append].
 
-    Specify and verify [cps_append_aux], then verify [cps_append]. *)
+  Lemma triple_cps_append : forall (L1 L2:list val) (p1 p2:loc),
+    triple (cps_append p1 p2)
+      (MList L1 p1 \* MList L2 p2)
+      (funloc p3 => MList (L1++L2) p3).
 
-(* FILL IN HERE *)
+   If you are interested in the challenge of solving a 6-star exercise, then
+   try to prove the above specification without reading any further. *)
+
+(** **** Exercise: 5 stars, standard, optional (triple_cps_append_aux)
+
+    The specification of [cps_append_aux] involves an hypothesis describing
+    the behavior of the continuation [k]. For this function, and more generally
+    for code in CPS form, we cannot easily leverage the frame property, thus we
+    need to quantify explicitly over a heap predicate [H] for describing the
+    "rest of the state". Prove that specification. Hint: you can use the syntax
+    [xapp (>> IH H')] to instantiate the induction hypothesis [IH] on a specific
+    heap predicate [H']. *)
+
+Lemma triple_cps_append_aux : forall H Q (L1 L2:list val) (p1 p2:loc) (k:val),
+  (forall (p3:loc), triple (k p3) (MList (L1 ++ L2) p3 \* H) Q) ->
+  triple (cps_append_aux p1 p2 k)
+    (MList L1 p1 \* MList L2 p2 \* H)
+    Q.
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 3 stars, standard, optional (triple_cps_append)
+
+    Verify [cps_append]. Hint: use the syntax [@triple_cps_append_aux H' Q']
+    to specialize the specification of the auxiliary function to specific pre-
+    and post-conditions. *)
 
 Lemma triple_cps_append : forall (L1 L2:list val) (p1 p2:loc),
   triple (cps_append p1 p2)
@@ -1291,4 +1368,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

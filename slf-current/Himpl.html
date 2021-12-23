@@ -32,28 +32,6 @@
 <h1 class="libtitle">Himpl<span class="subtitle">Heap Entailment</span></h1>
 
 
-<div class="doc">
-
-<div class="paragraph"> </div>
-
-
-<div class="paragraph"> </div>
-
-Foundations of Separation Logic
-
-<div class="paragraph"> </div>
-
-Chapter: "Himpl".
-
-<div class="paragraph"> </div>
-
-Author: Arthur Charguéraud.
-License: CC-by 4.0.
-
-<div class="paragraph"> </div>
-
-
-</div>
 <div class="code">
 
 <span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
@@ -72,7 +50,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab104"></a><h1 class="section">First Pass</h1>
+<a id="lab106"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -135,7 +113,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab105"></a><h2 class="section">Definition of Entailment</h2>
+<a id="lab107"></a><h2 class="section">Definition of Entailment</h2>
 
 <div class="paragraph"> </div>
 
@@ -171,7 +149,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab106"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_antisym)</h4>
+<a id="lab108"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_antisym)</h4>
  Prove the antisymmetry of entailment result shown below
     using extensionality for heap predicates, as captured by
     lemma <span class="inlinecode"><span class="id" title="var">predicate_extensionality</span></span> (or lemma <span class="inlinecode"><span class="id" title="var">hprop_eq</span></span>)
@@ -203,7 +181,7 @@ Implicit Types
 </div>
 
 <div class="doc">
-<a id="lab107"></a><h2 class="section">Entailment for Postconditions</h2>
+<a id="lab109"></a><h2 class="section">Entailment for Postconditions</h2>
 
 <div class="paragraph"> </div>
 
@@ -252,7 +230,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 </div>
 
 <div class="doc">
-<a id="lab108"></a><h2 class="section">Fundamental Properties of Separation Logic Operators</h2>
+<a id="lab110"></a><h2 class="section">Fundamental Properties of Separation Logic Operators</h2>
 
 <div class="paragraph"> </div>
 
@@ -323,7 +301,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 </div>
 
 <div class="doc">
-<a id="lab109"></a><h4 class="section">Exercise: 1 star, standard, especially useful (hstar_comm_assoc)</h4>
+<a id="lab111"></a><h4 class="section">Exercise: 1 star, standard, especially useful (hstar_comm_assoc)</h4>
  The commutativity and associativity results combine into one result
     that is sometimes convenient to exploit in proofs. 
 </div>
@@ -338,7 +316,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab110"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
+<a id="lab112"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
  Prove <span class="inlinecode"><span class="id" title="var">himpl_frame_r</span></span>, which is the symmetric of <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span>. 
 </div>
 <div class="code">
@@ -353,7 +331,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab111"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_lr)</h4>
+<a id="lab113"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_lr)</h4>
  The monotonicity property of the star operator w.r.t. entailment can
     also be stated in a symmetric fashion, as shown next. Prove this result.
     Hint: exploit the transitivity of entailment (<span class="inlinecode"><span class="id" title="var">himpl_trans</span></span>) and the
@@ -371,7 +349,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 
 
 <div class="doc">
-<a id="lab112"></a><h2 class="section">Introduction and Elimination Rules w.r.t. Entailments</h2>
+<a id="lab114"></a><h2 class="section">Introduction and Elimination Rules w.r.t. Entailments</h2>
 
 <div class="paragraph"> </div>
 
@@ -384,7 +362,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     <span class="inlinecode"><span class="id" title="var">H'</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab113"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_r).</h4>
+<a id="lab115"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_r).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span>.
     Hint: recall from <span class="inlinecode"><span class="id" title="var">Hprop</span></span> the lemma <span class="inlinecode"><span class="id" title="var">hstar_hpure_l</span></span>, which asserts
     the equality <span class="inlinecode">(<span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H</span>)</span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode">=</span> <span class="inlinecode">(<span class="id" title="var">P</span></span> <span class="inlinecode">∧</span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">h</span>)</span>. 
@@ -413,7 +391,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     the Coq context. It is stated as follows. 
 <div class="paragraph"> </div>
 
-<a id="lab114"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_l).</h4>
+<a id="lab116"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_l).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_l</span></span>. 
 </div>
 <div class="code">
@@ -433,7 +411,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     entailment, one must exhibit a value for <span class="inlinecode"><span class="id" title="var">x</span></span> for which <span class="inlinecode"><span class="id" title="var">H</span></span> entails <span class="inlinecode"><span class="id" title="var">J</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab115"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_r).</h4>
+<a id="lab117"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_r).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hexists_r</span></span>. 
 </div>
 <div class="code">
@@ -471,7 +449,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
     the Coq context. It is stated as follows. 
 <div class="paragraph"> </div>
 
-<a id="lab116"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_l).</h4>
+<a id="lab118"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (himpl_hexists_l).</h4>
  Prove the rule <span class="inlinecode"><span class="id" title="var">himpl_hexists_l</span></span>. 
 </div>
 <div class="code">
@@ -485,7 +463,7 @@ Remark: equivalently, <span class="inlinecode"><span class="id" title="var">Q<su
 
 
 <div class="doc">
-<a id="lab117"></a><h2 class="section">Extracting Information from Heap Predicates</h2>
+<a id="lab119"></a><h2 class="section">Extracting Information from Heap Predicates</h2>
 
 <div class="paragraph"> </div>
 
@@ -541,7 +519,7 @@ More generally, a heap predicate of the form <span class="inlinecode"><span clas
 </div>
 
 <div class="doc">
-<a id="lab118"></a><h2 class="section">Consequence, Frame, and their Combination</h2>
+<a id="lab120"></a><h2 class="section">Consequence, Frame, and their Combination</h2>
 
 <div class="paragraph"> </div>
 
@@ -593,7 +571,7 @@ Observe that, stated as such, it is very unlikely for the frame rule
 </div>
 
 <div class="doc">
-<a id="lab119"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_conseq_frame)</h4>
+<a id="lab121"></a><h4 class="section">Exercise: 1 star, standard, especially useful (triple_conseq_frame)</h4>
  Prove the combined consequence-frame rule. 
 </div>
 <div class="code">
@@ -604,7 +582,7 @@ Observe that, stated as such, it is very unlikely for the frame rule
 
 
 <div class="doc">
-<a id="lab120"></a><h2 class="section">The Extraction Rules for Triples</h2>
+<a id="lab122"></a><h2 class="section">The Extraction Rules for Triples</h2>
 
 <div class="paragraph"> </div>
 
@@ -636,7 +614,7 @@ A judgment of the form <span class="inlinecode"><span class="id" title="var">tri
 </div>
 
 <div class="doc">
-<a id="lab121"></a><h1 class="section">More Details</h1>
+<a id="lab123"></a><h1 class="section">More Details</h1>
 
 </div>
 <div class="code">
@@ -647,7 +625,7 @@ A judgment of the form <span class="inlinecode"><span class="id" title="var">tri
 </div>
 
 <div class="doc">
-<a id="lab122"></a><h2 class="section">Identifying True and False Entailments</h2>
+<a id="lab124"></a><h2 class="section">Identifying True and False Entailments</h2>
 
 </div>
 <div class="code">
@@ -807,7 +785,7 @@ The answers to the quiz are as follows.
 </div>
 
 <div class="doc">
-<a id="lab123"></a><h2 class="section">Proving Entailments by Hand</h2>
+<a id="lab125"></a><h2 class="section">Proving Entailments by Hand</h2>
 
 </div>
 <div class="code">
@@ -827,7 +805,7 @@ Proving an entailment by hand is generally a tedious task. This is why
     a few proofs by hand. 
 <div class="paragraph"> </div>
 
-<a id="lab124"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_1)</h4>
+<a id="lab126"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_1)</h4>
  Prove the example entailment below.
     Hint: exploit <span class="inlinecode"><span class="id" title="var">hstar_comm</span></span>, <span class="inlinecode"><span class="id" title="var">hstar_assoc</span></span>, or <span class="inlinecode"><span class="id" title="var">hstar_comm_assoc</span></span>
     which combines the two, and exploit <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span> or <span class="inlinecode"><span class="id" title="var">himpl_frame_r</span></span>
@@ -845,10 +823,11 @@ Proving an entailment by hand is generally a tedious task. This is why
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab125"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_2)</h4>
+<a id="lab127"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_2)</h4>
  Prove the example entailment below.
-    Hint: use <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span> to extract pure facts, once they
-    appear at the head of the left-hand side of the entailment. 
+    Hint: use <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_l</span></span> to extract pure facts, once they
+    appear at the head of the left-hand side of the entailment.
+    For arithmetic inequalities, use the <span class="inlinecode"><span class="id" title="var">math</span></span> tactic. 
 </div>
 <div class="code">
 
@@ -862,7 +841,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab126"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_3)</h4>
+<a id="lab128"></a><h4 class="section">Exercise: 3 stars, standard, optional (himpl_example_3)</h4>
  Prove the example entailment below.
     Hint: use lemmas among <span class="inlinecode"><span class="id" title="var">himpl_hexists_r</span></span>, <span class="inlinecode"><span class="id" title="var">himpl_hexists_l</span></span>,
     <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span> and <span class="inlinecode"><span class="id" title="var">himpl_hstar_hpure_r</span></span> to deal with
@@ -883,7 +862,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 </div>
 
 <div class="doc">
-<a id="lab127"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> Tactic</h2>
+<a id="lab129"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -911,7 +890,7 @@ Proving an entailment by hand is generally a tedious task. This is why
 </div>
 
 <div class="doc">
-<a id="lab128"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Extract Pure Facts and Quantifiers in LHS</h3>
+<a id="lab130"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Extract Pure Facts and Quantifiers in LHS</h3>
 
 <div class="paragraph"> </div>
 
@@ -977,7 +956,7 @@ A call to <span class="inlinecode"><span class="id" title="var">xsimpl</span></s
 </div>
 
 <div class="doc">
-<a id="lab129"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Cancel Out Heap Predicates from LHS and RHS</h3>
+<a id="lab131"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Cancel Out Heap Predicates from LHS and RHS</h3>
 
 <div class="paragraph"> </div>
 
@@ -1027,7 +1006,7 @@ If all the pieces of heap predicate get canceled out, the remaining
 </div>
 
 <div class="doc">
-<a id="lab130"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Instantiate Pure Facts and Quantifiers in RHS</h3>
+<a id="lab132"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> to Instantiate Pure Facts and Quantifiers in RHS</h3>
 
 <div class="paragraph"> </div>
 
@@ -1129,7 +1108,7 @@ The instantiation of the evar <span class="inlinecode">?<span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab131"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on Entailments Between Postconditions</h3>
+<a id="lab133"></a><h3 class="section"><span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on Entailments Between Postconditions</h3>
 
 <div class="paragraph"> </div>
 
@@ -1148,7 +1127,7 @@ The instantiation of the evar <span class="inlinecode">?<span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab132"></a><h3 class="section">Example of Entailment Proofs using <span class="inlinecode"><span class="id" title="var">xsimpl</span></span></h3>
+<a id="lab134"></a><h3 class="section">Example of Entailment Proofs using <span class="inlinecode"><span class="id" title="var">xsimpl</span></span></h3>
 
 </div>
 <div class="code">
@@ -1174,7 +1153,7 @@ The instantiation of the evar <span class="inlinecode">?<span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab133"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xchange</span></span> Tactic</h2>
+<a id="lab135"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">xchange</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1243,7 +1222,7 @@ How does the <span class="inlinecode"><span class="id" title="var">xchange</span
     of reasoning implemented by the tactic <span class="inlinecode"><span class="id" title="var">xchange</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab134"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (xchange_lemma)</h4>
+<a id="lab136"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (xchange_lemma)</h4>
  Prove, without using the tactic <span class="inlinecode"><span class="id" title="var">xchange</span></span>, the following lemma which
     captures the internal working of <span class="inlinecode"><span class="id" title="var">xchange</span></span>. 
 </div>
@@ -1264,12 +1243,12 @@ How does the <span class="inlinecode"><span class="id" title="var">xchange</span
 </div>
 
 <div class="doc">
-<a id="lab135"></a><h1 class="section">Optional Material</h1>
+<a id="lab137"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab136"></a><h2 class="section">Proofs for the Separation Algebra</h2>
+<a id="lab138"></a><h2 class="section">Proofs for the Separation Algebra</h2>
 
 </div>
 <div class="code">
@@ -1292,7 +1271,7 @@ We next show the details of the proofs establishing the fundamental
     We begin with the frame property, which is the simplest to prove. 
 <div class="paragraph"> </div>
 
-<a id="lab137"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_l)</h4>
+<a id="lab139"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_l)</h4>
  Prove the frame property for entailment.
     Hint: unfold the definition of <span class="inlinecode"><span class="id" title="var">hstar</span></span>. 
 </div>
@@ -1308,7 +1287,7 @@ We next show the details of the proofs establishing the fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab138"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
+<a id="lab140"></a><h4 class="section">Exercise: 1 star, standard, especially useful (himpl_frame_r)</h4>
  Prove the lemma <span class="inlinecode"><span class="id" title="var">himpl_frame_r</span></span>, symmetric to <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span>. 
 </div>
 <div class="code">
@@ -1400,7 +1379,7 @@ To prove commutativity of star, we need to exploit the fact that the union
 </div>
 
 <div class="doc">
-<a id="lab139"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hstar_hempty_l)</h4>
+<a id="lab141"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hstar_hempty_l)</h4>
  Prove that the empty heap predicate is a neutral element for the star.
     You will need to exploit the fact that the union with an empty map is
     the identity, as captured by lemma <span class="inlinecode"><span class="id" title="var">Fmap.union_empty_l</span></span>.
@@ -1451,7 +1430,7 @@ Associativity of star is the most tedious result to derive.
 </span>
 <div class="paragraph"> </div>
 
-<a id="lab140"></a><h4 class="section">Exercise: 1 star, standard, optional (hstar_assoc)</h4>
+<a id="lab142"></a><h4 class="section">Exercise: 1 star, standard, optional (hstar_assoc)</h4>
  Complete the right-to-left part of the proof of associativity of the
     star operator. 
 </div>
@@ -1478,7 +1457,7 @@ Associativity of star is the most tedious result to derive.
 </div>
 
 <div class="doc">
-<a id="lab141"></a><h2 class="section">Proof of the Consequence Rule</h2>
+<a id="lab143"></a><h2 class="section">Proof of the Consequence Rule</h2>
 
 </div>
 <div class="code">
@@ -1513,29 +1492,11 @@ A direct proof of <span class="inlinecode"><span class="id" title="var">triple_c
 </div>
 
 <div class="doc">
-An alternative proof consists of first establishing the consequence
-    rule for the <span class="inlinecode"><span class="id" title="var">hoare</span></span> judgment, then derive its generalization to
-    the <span class="inlinecode"><span class="id" title="var">triple</span></span> judgment of Separation Logic. 
+An alternative proof leverages the consequence rule for the <span class="inlinecode"><span class="id" title="var">hoare</span></span>
+    judgment, namely lemma <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab142"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hoare_conseq)</h4>
- Prove the consequence rule for Hoare triples. 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Lemma</span> <a id="ProveConsequenceRules.hoare_conseq" class="idref" href="#ProveConsequenceRules.hoare_conseq"><span class="id" title="lemma">hoare_conseq</span></a> : <span class="id" title="keyword">∀</span> <a id="t:293" class="idref" href="#t:293"><span class="id" title="binder">t</span></a> <a id="H:294" class="idref" href="#H:294"><span class="id" title="binder">H</span></a> <a id="Q:295" class="idref" href="#Q:295"><span class="id" title="binder">Q</span></a> <a id="H':296" class="idref" href="#H':296"><span class="id" title="binder">H'</span></a> <a id="Q':297" class="idref" href="#Q':297"><span class="id" title="binder">Q'</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:293"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H':296"><span class="id" title="variable">H'</span></a> <a class="idref" href="Himpl.html#Q':297"><span class="id" title="variable">Q'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Himpl.html#H:294"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#7cf9375cc810cd6cb65186f6ede01686"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Himpl.html#H':296"><span class="id" title="variable">H'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Himpl.html#Q':297"><span class="id" title="variable">Q'</span></a> <a class="idref" href="Himpl.html#28f43c6c1c00c11599fc86b7e27012f<sub>9</sub>"><span class="id" title="notation">===&gt;</span></a> <a class="idref" href="Himpl.html#Q:295"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:293"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:294"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:295"><span class="id" title="variable">Q</span></a>.<br/>
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="doc"> 
-<div class="paragraph"> </div>
-
-<a id="lab143"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_conseq)</h4>
+<a id="lab144"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_conseq)</h4>
  Prove the consequence rule by leveraging the lemma <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span>.
     Hint: unfold the definition of <span class="inlinecode"><span class="id" title="var">triple</span></span>, apply the lemma <span class="inlinecode"><span class="id" title="var">hoare_conseq</span></span>
     with the appropriate arguments, then exploit <span class="inlinecode"><span class="id" title="var">himpl_frame_l</span></span>
@@ -1543,11 +1504,11 @@ An alternative proof consists of first establishing the consequence
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="ProveConsequenceRules.triple_conseq" class="idref" href="#ProveConsequenceRules.triple_conseq"><span class="id" title="lemma">triple_conseq</span></a> : <span class="id" title="keyword">∀</span> <a id="t:298" class="idref" href="#t:298"><span class="id" title="binder">t</span></a> <a id="H:299" class="idref" href="#H:299"><span class="id" title="binder">H</span></a> <a id="Q:300" class="idref" href="#Q:300"><span class="id" title="binder">Q</span></a> <a id="H':301" class="idref" href="#H':301"><span class="id" title="binder">H'</span></a> <a id="Q':302" class="idref" href="#Q':302"><span class="id" title="binder">Q'</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:298"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H':301"><span class="id" title="variable">H'</span></a> <a class="idref" href="Himpl.html#Q':302"><span class="id" title="variable">Q'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Himpl.html#H:299"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#7cf9375cc810cd6cb65186f6ede01686"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Himpl.html#H':301"><span class="id" title="variable">H'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Himpl.html#Q':302"><span class="id" title="variable">Q'</span></a> <a class="idref" href="Himpl.html#28f43c6c1c00c11599fc86b7e27012f<sub>9</sub>"><span class="id" title="notation">===&gt;</span></a> <a class="idref" href="Himpl.html#Q:300"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:298"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:299"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:300"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="ProveConsequenceRules.triple_conseq" class="idref" href="#ProveConsequenceRules.triple_conseq"><span class="id" title="lemma">triple_conseq</span></a> : <span class="id" title="keyword">∀</span> <a id="t:293" class="idref" href="#t:293"><span class="id" title="binder">t</span></a> <a id="H:294" class="idref" href="#H:294"><span class="id" title="binder">H</span></a> <a id="Q:295" class="idref" href="#Q:295"><span class="id" title="binder">Q</span></a> <a id="H':296" class="idref" href="#H':296"><span class="id" title="binder">H'</span></a> <a id="Q':297" class="idref" href="#Q':297"><span class="id" title="binder">Q'</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:293"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H':296"><span class="id" title="variable">H'</span></a> <a class="idref" href="Himpl.html#Q':297"><span class="id" title="variable">Q'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Himpl.html#H:294"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#7cf9375cc810cd6cb65186f6ede01686"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Himpl.html#H':296"><span class="id" title="variable">H'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Himpl.html#Q':297"><span class="id" title="variable">Q'</span></a> <a class="idref" href="Himpl.html#28f43c6c1c00c11599fc86b7e27012f<sub>9</sub>"><span class="id" title="notation">===&gt;</span></a> <a class="idref" href="Himpl.html#Q:295"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:293"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:294"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:295"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1558,7 +1519,7 @@ An alternative proof consists of first establishing the consequence
 </div>
 
 <div class="doc">
-<a id="lab144"></a><h2 class="section">Proof of the Extraction Rules for Triples</h2>
+<a id="lab145"></a><h2 class="section">Proof of the Extraction Rules for Triples</h2>
 
 </div>
 <div class="code">
@@ -1571,9 +1532,9 @@ Recall the extraction rule for pure facts.
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.triple_hpure'" class="idref" href="#ProveExtractionRules.triple_hpure'"><span class="id" title="axiom">triple_hpure'</span></a> : <span class="id" title="keyword">∀</span> <a id="t:303" class="idref" href="#t:303"><span class="id" title="binder">t</span></a> (<a id="P:304" class="idref" href="#P:304"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:305" class="idref" href="#H:305"><span class="id" title="binder">H</span></a> <a id="Q:306" class="idref" href="#Q:306"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:304"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:303"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:305"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:306"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:303"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:304"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:305"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:306"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.triple_hpure'" class="idref" href="#ProveExtractionRules.triple_hpure'"><span class="id" title="axiom">triple_hpure'</span></a> : <span class="id" title="keyword">∀</span> <a id="t:298" class="idref" href="#t:298"><span class="id" title="binder">t</span></a> (<a id="P:299" class="idref" href="#P:299"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:300" class="idref" href="#H:300"><span class="id" title="binder">H</span></a> <a id="Q:301" class="idref" href="#Q:301"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:299"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:298"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:300"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:301"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:298"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:299"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:300"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:301"><span class="id" title="variable">Q</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1582,16 +1543,16 @@ To prove this lemma, we first the establish corresponding
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.hoare_hpure" class="idref" href="#ProveExtractionRules.hoare_hpure"><span class="id" title="lemma">hoare_hpure</span></a> : <span class="id" title="keyword">∀</span> <a id="t:308" class="idref" href="#t:308"><span class="id" title="binder">t</span></a> (<a id="P:309" class="idref" href="#P:309"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:310" class="idref" href="#H:310"><span class="id" title="binder">H</span></a> <a id="Q:311" class="idref" href="#Q:311"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:309"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:308"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:310"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:311"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:308"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:309"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:310"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:311"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.hoare_hpure" class="idref" href="#ProveExtractionRules.hoare_hpure"><span class="id" title="lemma">hoare_hpure</span></a> : <span class="id" title="keyword">∀</span> <a id="t:303" class="idref" href="#t:303"><span class="id" title="binder">t</span></a> (<a id="P:304" class="idref" href="#P:304"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:305" class="idref" href="#H:305"><span class="id" title="binder">H</span></a> <a id="Q:306" class="idref" href="#Q:306"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:304"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:303"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:305"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:306"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:303"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:304"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:305"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:306"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">h</span> (<span class="id" title="var">h<sub>1</sub></span>&amp;<span class="id" title="var">h<sub>2</sub></span>&amp;<span class="id" title="var">M<sub>1</sub></span>&amp;<span class="id" title="var">M<sub>2</sub></span>&amp;<span class="id" title="var">D</span>&amp;<span class="id" title="var">U</span>). <span class="id" title="tactic">destruct</span> <span class="id" title="var">M<sub>1</sub></span> <span class="id" title="keyword">as</span> (<span class="id" title="var">M<sub>1</sub></span>&amp;<span class="id" title="var">HP</span>).<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="LibSepReference.html#Fmap.union_empty_l"><span class="id" title="lemma">Fmap.union_empty_l</span></a>. <span class="id" title="var">applys</span> <span class="id" title="var">M</span> <span class="id" title="var">HP</span> <span class="id" title="var">M<sub>2</sub></span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.triple_hpure" class="idref" href="#ProveExtractionRules.triple_hpure"><span class="id" title="lemma">triple_hpure</span></a> : <span class="id" title="keyword">∀</span> <a id="t:312" class="idref" href="#t:312"><span class="id" title="binder">t</span></a> (<a id="P:313" class="idref" href="#P:313"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:314" class="idref" href="#H:314"><span class="id" title="binder">H</span></a> <a id="Q:315" class="idref" href="#Q:315"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:313"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:312"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:314"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:315"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:312"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:313"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:314"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:315"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.triple_hpure" class="idref" href="#ProveExtractionRules.triple_hpure"><span class="id" title="lemma">triple_hpure</span></a> : <span class="id" title="keyword">∀</span> <a id="t:307" class="idref" href="#t:307"><span class="id" title="binder">t</span></a> (<a id="P:308" class="idref" href="#P:308"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:309" class="idref" href="#H:309"><span class="id" title="binder">H</span></a> <a id="Q:310" class="idref" href="#Q:310"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:308"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:307"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:309"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:310"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:307"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:308"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:309"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:310"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">H'</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="Himpl.html#hstar_assoc"><span class="id" title="axiom">hstar_assoc</span></a>. <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#ProveExtractionRules.hoare_hpure"><span class="id" title="lemma">hoare_hpure</span></a>.<br/>
@@ -1604,7 +1565,7 @@ Similarly, the extraction rule for existentials for
     <span class="inlinecode"><span class="id" title="var">triple</span></span> can be derived from that for <span class="inlinecode"><span class="id" title="var">hoare</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab145"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_hexists)</h4>
+<a id="lab146"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (triple_hexists)</h4>
  Prove the extraction rule <span class="inlinecode"><span class="id" title="var">triple_hexists</span></span>.
     Hint: start by stating and proving The corresponding lemma for
     <span class="inlinecode"><span class="id" title="var">hoare</span></span> triples, named <span class="inlinecode"><span class="id" title="var">hoare_hexists</span></span>. 
@@ -1612,9 +1573,9 @@ Similarly, the extraction rule for existentials for
 <div class="code">
 
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.triple_hexists" class="idref" href="#ProveExtractionRules.triple_hexists"><span class="id" title="lemma">triple_hexists</span></a> : <span class="id" title="keyword">∀</span> <a id="t:316" class="idref" href="#t:316"><span class="id" title="binder">t</span></a> (<a id="A:317" class="idref" href="#A:317"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="J:318" class="idref" href="#J:318"><span class="id" title="binder">J</span></a>:<a class="idref" href="Himpl.html#A:317"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="Q:319" class="idref" href="#Q:319"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:320" class="idref" href="#x:320"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:316"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#J:318"><span class="id" title="variable">J</span></a> <a class="idref" href="Himpl.html#x:320"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:319"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:316"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:321" class="idref" href="#x:321"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#J:318"><span class="id" title="variable">J</span></a> <a class="idref" href="Himpl.html#x:321"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:319"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.triple_hexists" class="idref" href="#ProveExtractionRules.triple_hexists"><span class="id" title="lemma">triple_hexists</span></a> : <span class="id" title="keyword">∀</span> <a id="t:311" class="idref" href="#t:311"><span class="id" title="binder">t</span></a> (<a id="A:312" class="idref" href="#A:312"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="J:313" class="idref" href="#J:313"><span class="id" title="binder">J</span></a>:<a class="idref" href="Himpl.html#A:312"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="Q:314" class="idref" href="#Q:314"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:315" class="idref" href="#x:315"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:311"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#J:313"><span class="id" title="variable">J</span></a> <a class="idref" href="Himpl.html#x:315"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:314"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:311"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:316" class="idref" href="#x:316"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#J:313"><span class="id" title="variable">J</span></a> <a class="idref" href="Himpl.html#x:316"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:314"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1634,11 +1595,11 @@ Similarly, the extraction rule for existentials for
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.hstar_hexists'" class="idref" href="#ProveExtractionRules.hstar_hexists'"><span class="id" title="axiom">hstar_hexists'</span></a> : <span class="id" title="keyword">∀</span> <a id="A:322" class="idref" href="#A:322"><span class="id" title="binder">A</span></a> (<a id="J:323" class="idref" href="#J:323"><span class="id" title="binder">J</span></a>:<a class="idref" href="Himpl.html#A:322"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="H:324" class="idref" href="#H:324"><span class="id" title="binder">H</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> <a class="idref" href="Himpl.html#J:323"><span class="id" title="variable">J</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:324"><span class="id" title="variable">H</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> (<a class="idref" href="Himpl.html#J:323"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#9c07dc3fe866f600abcbb5cdf7c0a7fa"><span class="id" title="notation"><span class='gray-font'>\</span>*+</span></a> <a class="idref" href="Himpl.html#H:324"><span class="id" title="variable">H</span></a>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.triple_hexists'" class="idref" href="#ProveExtractionRules.triple_hexists'"><span class="id" title="axiom">triple_hexists'</span></a> : <span class="id" title="keyword">∀</span> <a id="t:326" class="idref" href="#t:326"><span class="id" title="binder">t</span></a> (<a id="A:327" class="idref" href="#A:327"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="J:328" class="idref" href="#J:328"><span class="id" title="binder">J</span></a>:<a class="idref" href="Himpl.html#A:327"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="Q:329" class="idref" href="#Q:329"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:330" class="idref" href="#x:330"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:326"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#J:328"><span class="id" title="variable">J</span></a> <a class="idref" href="Himpl.html#x:330"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:329"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:326"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> <a class="idref" href="Himpl.html#J:328"><span class="id" title="variable">J</span></a>) <a class="idref" href="Himpl.html#Q:329"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.hstar_hexists'" class="idref" href="#ProveExtractionRules.hstar_hexists'"><span class="id" title="axiom">hstar_hexists'</span></a> : <span class="id" title="keyword">∀</span> <a id="A:317" class="idref" href="#A:317"><span class="id" title="binder">A</span></a> (<a id="J:318" class="idref" href="#J:318"><span class="id" title="binder">J</span></a>:<a class="idref" href="Himpl.html#A:317"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="H:319" class="idref" href="#H:319"><span class="id" title="binder">H</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> <a class="idref" href="Himpl.html#J:318"><span class="id" title="variable">J</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:319"><span class="id" title="variable">H</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> (<a class="idref" href="Himpl.html#J:318"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#9c07dc3fe866f600abcbb5cdf7c0a7fa"><span class="id" title="notation"><span class='gray-font'>\</span>*+</span></a> <a class="idref" href="Himpl.html#H:319"><span class="id" title="variable">H</span></a>).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.triple_hexists'" class="idref" href="#ProveExtractionRules.triple_hexists'"><span class="id" title="axiom">triple_hexists'</span></a> : <span class="id" title="keyword">∀</span> <a id="t:321" class="idref" href="#t:321"><span class="id" title="binder">t</span></a> (<a id="A:322" class="idref" href="#A:322"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="J:323" class="idref" href="#J:323"><span class="id" title="binder">J</span></a>:<a class="idref" href="Himpl.html#A:322"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="Q:324" class="idref" href="#Q:324"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:325" class="idref" href="#x:325"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:321"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#J:323"><span class="id" title="variable">J</span></a> <a class="idref" href="Himpl.html#x:325"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:324"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:321"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> <a class="idref" href="Himpl.html#J:323"><span class="id" title="variable">J</span></a>) <a class="idref" href="Himpl.html#Q:324"><span class="id" title="variable">Q</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1649,11 +1610,11 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.hpure_encoding" class="idref" href="#ProveExtractionRules.hpure_encoding"><span class="id" title="axiom">hpure_encoding</span></a> : <span class="id" title="keyword">∀</span> <a id="P:332" class="idref" href="#P:332"><span class="id" title="binder">P</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:332"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(</span></a><a id="p:333" class="idref" href="#p:333"><span class="id" title="binder">p</span></a>:<a class="idref" href="Himpl.html#P:332"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">),</span></a> <a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.triple_hpure_from_triple_hexists" class="idref" href="#ProveExtractionRules.triple_hpure_from_triple_hexists"><span class="id" title="lemma">triple_hpure_from_triple_hexists</span></a> : <span class="id" title="keyword">∀</span> <a id="t:335" class="idref" href="#t:335"><span class="id" title="binder">t</span></a> (<a id="P:336" class="idref" href="#P:336"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:337" class="idref" href="#H:337"><span class="id" title="binder">H</span></a> <a id="Q:338" class="idref" href="#Q:338"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:336"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:335"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:337"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:338"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:335"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:336"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:337"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:338"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Parameter</span> <a id="ProveExtractionRules.hpure_encoding" class="idref" href="#ProveExtractionRules.hpure_encoding"><span class="id" title="axiom">hpure_encoding</span></a> : <span class="id" title="keyword">∀</span> <a id="P:327" class="idref" href="#P:327"><span class="id" title="binder">P</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:327"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(</span></a><a id="p:328" class="idref" href="#p:328"><span class="id" title="binder">p</span></a>:<a class="idref" href="Himpl.html#P:327"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">),</span></a> <a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="ProveExtractionRules.triple_hpure_from_triple_hexists" class="idref" href="#ProveExtractionRules.triple_hpure_from_triple_hexists"><span class="id" title="lemma">triple_hpure_from_triple_hexists</span></a> : <span class="id" title="keyword">∀</span> <a id="t:330" class="idref" href="#t:330"><span class="id" title="binder">t</span></a> (<a id="P:331" class="idref" href="#P:331"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) <a id="H:332" class="idref" href="#H:332"><span class="id" title="binder">H</span></a> <a id="Q:333" class="idref" href="#Q:333"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Himpl.html#P:331"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:330"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:332"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:333"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:330"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#P:331"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Himpl.html#H:332"><span class="id" title="variable">H</span></a>) <a class="idref" href="Himpl.html#Q:333"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="Himpl.html#ProveExtractionRules.hpure_encoding"><span class="id" title="axiom">hpure_encoding</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="Himpl.html#hstar_hexists"><span class="id" title="axiom">hstar_hexists</span></a>. <span class="comment">(*&nbsp;disable&nbsp;notation&nbsp;printing&nbsp;to&nbsp;see&nbsp;the&nbsp;effect&nbsp;*)</span><br/>
@@ -1664,7 +1625,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 </div>
 
 <div class="doc">
-<a id="lab146"></a><h3 class="section">Rules for Naming Heaps</h3>
+<a id="lab147"></a><h3 class="section">Rules for Naming Heaps</h3>
 
 <div class="paragraph"> </div>
 
@@ -1672,7 +1633,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
     the heap predicate that only accepts heaps exactly equal to <span class="inlinecode"><span class="id" title="var">h</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab147"></a><h4 class="section">Exercise: 3 stars, standard, optional (hexists_named_eq)</h4>
+<a id="lab148"></a><h4 class="section">Exercise: 3 stars, standard, optional (hexists_named_eq)</h4>
  Prove that a heap predicate <span class="inlinecode"><span class="id" title="var">H</span></span> is equivalent to the heap
     predicate which asserts that the heap is, for a heap <span class="inlinecode"><span class="id" title="var">h</span></span>
     such that <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>, exactly equal to <span class="inlinecode"><span class="id" title="var">H</span></span>.
@@ -1684,8 +1645,8 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="hexists_named_eq" class="idref" href="#hexists_named_eq"><span class="id" title="lemma">hexists_named_eq</span></a> : <span class="id" title="keyword">∀</span> <a id="H:339" class="idref" href="#H:339"><span class="id" title="binder">H</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Himpl.html#H:339"><span class="id" title="variable">H</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="h:340" class="idref" href="#h:340"><span class="id" title="binder">h</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#H:339"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#h:340"><span class="id" title="variable">h</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><span class="id" title="notation">=</span> <a class="idref" href="Himpl.html#h:340"><span class="id" title="variable">h</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="hexists_named_eq" class="idref" href="#hexists_named_eq"><span class="id" title="lemma">hexists_named_eq</span></a> : <span class="id" title="keyword">∀</span> <a id="H:334" class="idref" href="#H:334"><span class="id" title="binder">H</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Himpl.html#H:334"><span class="id" title="variable">H</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="h:335" class="idref" href="#h:335"><span class="id" title="binder">h</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Himpl.html#H:334"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#h:335"><span class="id" title="variable">h</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><span class="id" title="notation">=</span> <a class="idref" href="Himpl.html#h:335"><span class="id" title="variable">h</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1693,7 +1654,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab148"></a><h4 class="section">Exercise: 1 star, standard, optional (hoare_named_heap)</h4>
+<a id="lab149"></a><h4 class="section">Exercise: 1 star, standard, optional (hoare_named_heap)</h4>
  Prove that the proposition <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> is equivalent to:
     for any heap <span class="inlinecode"><span class="id" title="var">h</span></span> satisfying the precondition <span class="inlinecode"><span class="id" title="var">H</span></span>, the Hoare
     triple whose precondition requires the input heap to be exactly
@@ -1701,9 +1662,9 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="hoare_named_heap" class="idref" href="#hoare_named_heap"><span class="id" title="lemma">hoare_named_heap</span></a> : <span class="id" title="keyword">∀</span> <a id="t:341" class="idref" href="#t:341"><span class="id" title="binder">t</span></a> <a id="H:342" class="idref" href="#H:342"><span class="id" title="binder">H</span></a> <a id="Q:343" class="idref" href="#Q:343"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="h:344" class="idref" href="#h:344"><span class="id" title="binder">h</span></a>, <a class="idref" href="Himpl.html#H:342"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#h:344"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:341"><span class="id" title="variable">t</span></a> (<span class="id" title="notation">=</span> <a class="idref" href="Himpl.html#h:344"><span class="id" title="variable">h</span></a>) <a class="idref" href="Himpl.html#Q:343"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:341"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:342"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:343"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="hoare_named_heap" class="idref" href="#hoare_named_heap"><span class="id" title="lemma">hoare_named_heap</span></a> : <span class="id" title="keyword">∀</span> <a id="t:336" class="idref" href="#t:336"><span class="id" title="binder">t</span></a> <a id="H:337" class="idref" href="#H:337"><span class="id" title="binder">H</span></a> <a id="Q:338" class="idref" href="#Q:338"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="h:339" class="idref" href="#h:339"><span class="id" title="binder">h</span></a>, <a class="idref" href="Himpl.html#H:337"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#h:339"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:336"><span class="id" title="variable">t</span></a> (<span class="id" title="notation">=</span> <a class="idref" href="Himpl.html#h:339"><span class="id" title="variable">h</span></a>) <a class="idref" href="Himpl.html#Q:338"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Himpl.html#t:336"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:337"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:338"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1711,7 +1672,7 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab149"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_named_heap)</h4>
+<a id="lab150"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_named_heap)</h4>
  Prove the counterpart of <span class="inlinecode"><span class="id" title="var">hoare_named_heap</span></span> for Separation
     Logic triples.
 
@@ -1723,16 +1684,16 @@ Remark: in chapter <a href="Hprop.html"><span class="inlineref">Hprop</span></a>
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="triple_named_heap" class="idref" href="#triple_named_heap"><span class="id" title="lemma">triple_named_heap</span></a> : <span class="id" title="keyword">∀</span> <a id="t:345" class="idref" href="#t:345"><span class="id" title="binder">t</span></a> <a id="H:346" class="idref" href="#H:346"><span class="id" title="binder">H</span></a> <a id="Q:347" class="idref" href="#Q:347"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="h:348" class="idref" href="#h:348"><span class="id" title="binder">h</span></a>, <a class="idref" href="Himpl.html#H:346"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#h:348"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:345"><span class="id" title="variable">t</span></a> (<span class="id" title="notation">=</span> <a class="idref" href="Himpl.html#h:348"><span class="id" title="variable">h</span></a>) <a class="idref" href="Himpl.html#Q:347"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:345"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:346"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:347"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="triple_named_heap" class="idref" href="#triple_named_heap"><span class="id" title="lemma">triple_named_heap</span></a> : <span class="id" title="keyword">∀</span> <a id="t:340" class="idref" href="#t:340"><span class="id" title="binder">t</span></a> <a id="H:341" class="idref" href="#H:341"><span class="id" title="binder">H</span></a> <a id="Q:342" class="idref" href="#Q:342"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="h:343" class="idref" href="#h:343"><span class="id" title="binder">h</span></a>, <a class="idref" href="Himpl.html#H:341"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#h:343"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:340"><span class="id" title="variable">t</span></a> (<span class="id" title="notation">=</span> <a class="idref" href="Himpl.html#h:343"><span class="id" title="variable">h</span></a>) <a class="idref" href="Himpl.html#Q:342"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:340"><span class="id" title="variable">t</span></a> <a class="idref" href="Himpl.html#H:341"><span class="id" title="variable">H</span></a> <a class="idref" href="Himpl.html#Q:342"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 
 <div class="doc">
-<a id="lab150"></a><h2 class="section">Alternative Structural Rule for Existentials</h2>
+<a id="lab151"></a><h2 class="section">Alternative Structural Rule for Existentials</h2>
 
 </div>
 <div class="code">
@@ -1757,9 +1718,9 @@ Traditional papers on Separation Logic do not include <span class="inlinecode"><
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="AlternativeExistentialRule.triple_hexists2" class="idref" href="#AlternativeExistentialRule.triple_hexists2"><span class="id" title="lemma">triple_hexists2</span></a> : <span class="id" title="keyword">∀</span> <a id="A:349" class="idref" href="#A:349"><span class="id" title="binder">A</span></a> (<a id="Hof:350" class="idref" href="#Hof:350"><span class="id" title="binder">Hof</span></a>:<a class="idref" href="Himpl.html#A:349"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) (<a id="Qof:351" class="idref" href="#Qof:351"><span class="id" title="binder">Qof</span></a>:<a class="idref" href="Himpl.html#A:349"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="t:352" class="idref" href="#t:352"><span class="id" title="binder">t</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:353" class="idref" href="#x:353"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:352"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#Hof:350"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:353"><span class="id" title="variable">x</span></a>) (<a class="idref" href="Himpl.html#Qof:351"><span class="id" title="variable">Qof</span></a> <a class="idref" href="Himpl.html#x:353"><span class="id" title="variable">x</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:352"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:356" class="idref" href="#x:356"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#Hof:350"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:356"><span class="id" title="variable">x</span></a>) (<span class="id" title="keyword">fun</span> <a id="v:354" class="idref" href="#v:354"><span class="id" title="binder">v</span></a> ⇒ <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:355" class="idref" href="#x:355"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#Qof:351"><span class="id" title="variable">Qof</span></a> <a class="idref" href="Himpl.html#x:355"><span class="id" title="variable">x</span></a> <a class="idref" href="Himpl.html#v:354"><span class="id" title="variable">v</span></a>).<br/>
+<span class="id" title="keyword">Lemma</span> <a id="AlternativeExistentialRule.triple_hexists2" class="idref" href="#AlternativeExistentialRule.triple_hexists2"><span class="id" title="lemma">triple_hexists2</span></a> : <span class="id" title="keyword">∀</span> <a id="A:344" class="idref" href="#A:344"><span class="id" title="binder">A</span></a> (<a id="Hof:345" class="idref" href="#Hof:345"><span class="id" title="binder">Hof</span></a>:<a class="idref" href="Himpl.html#A:344"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) (<a id="Qof:346" class="idref" href="#Qof:346"><span class="id" title="binder">Qof</span></a>:<a class="idref" href="Himpl.html#A:344"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="t:347" class="idref" href="#t:347"><span class="id" title="binder">t</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:348" class="idref" href="#x:348"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:347"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#Hof:345"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:348"><span class="id" title="variable">x</span></a>) (<a class="idref" href="Himpl.html#Qof:346"><span class="id" title="variable">Qof</span></a> <a class="idref" href="Himpl.html#x:348"><span class="id" title="variable">x</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:347"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:351" class="idref" href="#x:351"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#Hof:345"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:351"><span class="id" title="variable">x</span></a>) (<span class="id" title="keyword">fun</span> <a id="v:349" class="idref" href="#v:349"><span class="id" title="binder">v</span></a> ⇒ <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:350" class="idref" href="#x:350"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#Qof:346"><span class="id" title="variable">Qof</span></a> <a class="idref" href="Himpl.html#x:350"><span class="id" title="variable">x</span></a> <a class="idref" href="Himpl.html#v:349"><span class="id" title="variable">v</span></a>).<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#triple_hexists"><span class="id" title="axiom">triple_hexists</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
@@ -1767,12 +1728,12 @@ Traditional papers on Separation Logic do not include <span class="inlinecode"><
 &nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#himpl_refl"><span class="id" title="lemma">himpl_refl</span></a>. }<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">v</span>. <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#himpl_hexists_r"><span class="id" title="axiom">himpl_hexists_r</span></a> <span class="id" title="var">x</span>. <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#himpl_refl"><span class="id" title="lemma">himpl_refl</span></a>. }<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="AlternativeExistentialRule.triple_hexists_of_triple_hexists2" class="idref" href="#AlternativeExistentialRule.triple_hexists_of_triple_hexists2"><span class="id" title="lemma">triple_hexists_of_triple_hexists2</span></a> : <span class="id" title="keyword">∀</span> <a id="t:357" class="idref" href="#t:357"><span class="id" title="binder">t</span></a> (<a id="A:358" class="idref" href="#A:358"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="Hof:359" class="idref" href="#Hof:359"><span class="id" title="binder">Hof</span></a>:<a class="idref" href="Himpl.html#A:358"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="Q:360" class="idref" href="#Q:360"><span class="id" title="binder">Q</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:361" class="idref" href="#x:361"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:357"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#Hof:359"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:361"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:360"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:357"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:362" class="idref" href="#x:362"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#Hof:359"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:362"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:360"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="AlternativeExistentialRule.triple_hexists_of_triple_hexists2" class="idref" href="#AlternativeExistentialRule.triple_hexists_of_triple_hexists2"><span class="id" title="lemma">triple_hexists_of_triple_hexists2</span></a> : <span class="id" title="keyword">∀</span> <a id="t:352" class="idref" href="#t:352"><span class="id" title="binder">t</span></a> (<a id="A:353" class="idref" href="#A:353"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="Hof:354" class="idref" href="#Hof:354"><span class="id" title="binder">Hof</span></a>:<a class="idref" href="Himpl.html#A:353"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="Q:355" class="idref" href="#Q:355"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:356" class="idref" href="#x:356"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:352"><span class="id" title="variable">t</span></a> (<a class="idref" href="Himpl.html#Hof:354"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:356"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:355"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Himpl.html#t:352"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:357" class="idref" href="#x:357"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Himpl.html#Hof:354"><span class="id" title="variable">Hof</span></a> <a class="idref" href="Himpl.html#x:357"><span class="id" title="variable">x</span></a>) <a class="idref" href="Himpl.html#Q:355"><span class="id" title="variable">Q</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#triple_conseq"><span class="id" title="axiom">triple_conseq</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:366" class="idref" href="#x:366"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <span class="id" title="var">Hof</span> <a class="idref" href="Himpl.html#x:363"><span class="id" title="variable">x</span></a>) (<span class="id" title="keyword">fun</span> (<a id="v:367" class="idref" href="#v:367"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>) ⇒ <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(</span></a><a id="x:368" class="idref" href="#x:368"><span class="id" title="binder">x</span></a>:<span class="id" title="var">A</span><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">),</span></a> <span class="id" title="var">Q</span> <a class="idref" href="Himpl.html#v:364"><span class="id" title="variable">v</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#triple_conseq"><span class="id" title="axiom">triple_conseq</span></a> (<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:361" class="idref" href="#x:361"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <span class="id" title="var">Hof</span> <a class="idref" href="Himpl.html#x:358"><span class="id" title="variable">x</span></a>) (<span class="id" title="keyword">fun</span> (<a id="v:362" class="idref" href="#v:362"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>) ⇒ <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(</span></a><a id="x:363" class="idref" href="#x:363"><span class="id" title="binder">x</span></a>:<span class="id" title="var">A</span><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">),</span></a> <span class="id" title="var">Q</span> <a class="idref" href="Himpl.html#v:359"><span class="id" title="variable">v</span></a>).<br/>
 &nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#AlternativeExistentialRule.triple_hexists2"><span class="id" title="lemma">triple_hexists2</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>. <span class="id" title="var">applys</span> <span class="id" title="var">M</span>. }<br/>
 &nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#himpl_refl"><span class="id" title="lemma">himpl_refl</span></a>. }<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">v</span>. <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#himpl_hexists_l"><span class="id" title="axiom">himpl_hexists_l</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">_</span>. <span class="id" title="var">applys</span> <a class="idref" href="Himpl.html#himpl_refl"><span class="id" title="lemma">himpl_refl</span></a>. }<br/>
@@ -1781,7 +1742,7 @@ Traditional papers on Separation Logic do not include <span class="inlinecode"><
 </div>
 
 <div class="doc">
-<a id="lab151"></a><h2 class="section">Historical Notes</h2>
+<a id="lab152"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1798,7 +1759,7 @@ Traditional papers on Separation Logic do not include <span class="inlinecode"><
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-23&nbsp;19:54&nbsp;*)</span><br/>
 </div>
 </div>
 

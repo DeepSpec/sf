@@ -2856,7 +2856,7 @@ Notation "t1 / t2" :=
   (in custom trm at level 57) : trm_scope.
 
 Notation "t1 'mod' t2" :=
-  (val_div t1 t2)
+  (val_mod t1 t2)
   (in custom trm at level 57) : trm_scope.
 
 Notation "t1 = t2" :=
@@ -2920,11 +2920,11 @@ Proof using.
     applys himpl_hexists_r (neg b). destruct* b. }
 Qed.
 
-Lemma himpl_hor_r_r : forall H1 H2,
+Lemma himpl_hor_r_l : forall H1 H2,
   H1 ==> hor H1 H2.
 Proof using. intros. unfolds hor. exists* true. Qed.
 
-Lemma himpl_hor_r_l : forall H1 H2,
+Lemma himpl_hor_r_r : forall H1 H2,
   H2 ==> hor H1 H2.
 Proof using. intros. unfolds hor. exists* false. Qed.
 
@@ -3195,7 +3195,8 @@ Tactic Notation "xwp" :=
         | applys xwp_lemma_fun2; [ reflexivity | reflexivity | ]
         | applys xwp_lemma_fix2; [ reflexivity | splits; reflexivity | ]
         | applys xwp_lemma_fun3; [ reflexivity | splits; reflexivity | ]
-        | applys xwp_lemma_fix3; [ reflexivity | splits; reflexivity | ] ];
+        | applys xwp_lemma_fix3; [ reflexivity | splits; reflexivity | ] 
+        | fail 1 "xwp only applies to functions defined using [val_fun] or [val_fix], with at most 3 arguments" ];
   xwp_simpl.
 
 (* ================================================================= *)
@@ -3685,4 +3686,4 @@ Qed.
 
 End DemoPrograms.
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

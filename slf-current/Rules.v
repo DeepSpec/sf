@@ -243,7 +243,7 @@ Coercion trm_app : trm >-> Funclass.
     a state [s'], producing an output value [v].
 
     For simplicity, we assume terms to be in "A-normal form": the arguments
-    of applications and of conditionals are restricted to variables and value.
+    of applications and of conditionals are restricted to variables and values.
     Such a requirement does not limit expressiveness, yet it simplifies the
     statement of the evaluation rules.
 
@@ -378,7 +378,7 @@ Inductive eval : state -> trm -> state -> val -> Prop :=
 End SyntaxAndSemantics.
 
 (* ----------------------------------------------------------------- *)
-(** *** Loading of Definitions from [Direcŧ] *)
+(** *** Loading of Definitions from [Direct] *)
 
 (** Throughout the rest of this file, we rely not on the definitions
     shown above, but on the definitions from [LibSepDirect.v]. The latter
@@ -698,7 +698,7 @@ Parameter triple_add : forall n1 n2,
     This requirement [n2 <> 0] is a pure fact, which can be asserted as
     part of the precondition, as follows. *)
 
-Parameter triple_div : forall n1 n2,
+Parameter triple_div' : forall n1 n2,
   triple (val_div n1 n2)
     \[n2 <> 0]
     (fun r => \[r = val_int (Z.quot n1 n2)]).
@@ -707,7 +707,7 @@ Parameter triple_div : forall n1 n2,
     hypothesis to the front of the triple judgment, in the form of
     a standard Coq hypothesis, as shown below. *)
 
-Parameter triple_div' : forall n1 n2,
+Parameter triple_div : forall n1 n2,
   n2 <> 0 ->
   triple (val_div n1 n2)
     \[]
@@ -1001,7 +1001,7 @@ Parameter triple_div' : forall n1 n2,
     \[n2 <> 0]
     (fun r => \[r = val_int (Z.quot n1 n2)]).
 
-(** Let us formally prove that the two presentations are equivalent. 
+(** Let us formally prove that the two presentations are equivalent.
     Frist, we prove [triple_div'] by exploiting [triple_div]. *)
 
 Lemma triple_div'_from_triple_div : forall n1 n2,
@@ -1202,6 +1202,7 @@ Proof using.
 (** 3. For the hypothesis on the first subterm [t1],
        we can invoke directly our first hypothesis. *)
   { applys M1. }
+(** 4. Likewise, we invoke an induction hypothesis for [t2]. *)
   { applys M2. }
 Qed.
 
@@ -1282,8 +1283,9 @@ Parameter eval_div' : forall s n1 n2,
 
     Following the same proof scheme as for [triple_add], establish
     the reasoning rule for [triple_div]. Make sure to first state
-    and prove [hoare_div], which is like [triple_div] except with
-    [hoare] instead of [triple]. *)
+    and prove [hoare_div], which is similar to [triple_div], except with
+    [hoare] instead of [triple], and with a precondition named [H] for
+    describing the input state. *)
 
 (* FILL IN HERE *)
 
@@ -1723,7 +1725,7 @@ Proof using.
 (** It is not needed to follow through this proof. *)
   introv -> -> D. forwards Dv: Fmap.indom_single p v1.
   applys_eq eval_set.
-  { rewrite* Fmap.update_union_l. fequals.
+  { rewrite* Fmap.update_union_l. f_equal.
     rewrite* Fmap.update_single. }
   { applys* Fmap.indom_union_l. }
 Qed.
@@ -2000,4 +2002,4 @@ End MatchStyle.
     we refer to Section 10.3 from the paper:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

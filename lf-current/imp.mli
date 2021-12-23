@@ -102,6 +102,7 @@ type bexp =
 | BEq of aexp * aexp
 | BNeq of aexp * aexp
 | BLe of aexp * aexp
+| BGt of aexp * aexp
 | BNot of bexp
 | BAnd of bexp * bexp
 

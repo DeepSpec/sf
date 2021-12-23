@@ -49,7 +49,7 @@
 </div>
 
 <div class="doc">
-<a id="lab416"></a><h1 class="section">First Pass</h1>
+<a id="lab426"></a><h1 class="section">First Pass</h1>
 
 <div class="paragraph"> </div>
 
@@ -73,8 +73,10 @@
 
     Regarding assertions, we present a reasoning rule such that:
 <ul class="doclist">
-<li> assertions may be expressed in terms of mutable data, and possibly
-      to perform local side-effects, and
+<li> assertions may access to mutable data,
+
+</li>
+<li> assertions may perform local side-effects,
 
 </li>
 <li> the program remains correct whether assertions are executed or not.
@@ -117,7 +119,7 @@
 </div>
 
 <div class="doc">
-<a id="lab417"></a><h2 class="section">Reasoning Rule for Assertions</h2>
+<a id="lab427"></a><h2 class="section">Reasoning Rule for Assertions</h2>
 
 </div>
 <div class="code">
@@ -263,7 +265,7 @@ Yet, such a rule would be overly restrictive, for two reasons. First, it
 </div>
 
 <div class="doc">
-<a id="lab418"></a><h2 class="section">Semantics of Conditionals not in Administrative Normal Form</h2>
+<a id="lab428"></a><h2 class="section">Semantics of Conditionals not in Administrative Normal Form</h2>
 
 <div class="paragraph"> </div>
 
@@ -331,7 +333,7 @@ The reasoning rule can also be reformulated in weakest-precondition form.
 </div>
 
 <div class="doc">
-<a id="lab419"></a><h2 class="section">Semantics and Basic Evaluation Rules for While-Loops</h2>
+<a id="lab429"></a><h2 class="section">Semantics and Basic Evaluation Rules for While-Loops</h2>
 
 </div>
 <div class="code">
@@ -412,7 +414,7 @@ This evaluation rule translates directly into a reasoning rule:
 </div>
 
 <div class="doc">
-<a id="lab420"></a><h2 class="section">Separation-Logic-friendly Reasoning Rule for While-Loops</h2>
+<a id="lab430"></a><h2 class="section">Separation-Logic-friendly Reasoning Rule for While-Loops</h2>
 
 <div class="paragraph"> </div>
 
@@ -568,12 +570,12 @@ The above rule can be equivalently reformulated in weakest-precondition
 </div>
 
 <div class="doc">
-<a id="lab421"></a><h1 class="section">More Details</h1>
+<a id="lab431"></a><h1 class="section">More Details</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab422"></a><h2 class="section">Semantics and Basic Evaluation Rules for For-Loops</h2>
+<a id="lab432"></a><h2 class="section">Semantics and Basic Evaluation Rules for For-Loops</h2>
 
 </div>
 <div class="code">
@@ -683,7 +685,7 @@ Just like for while loops, we can reduce the noise associated with applying
 We can derive a simpler rule for the case of loops with no iterations. 
 <div class="paragraph"> </div>
 
-<a id="lab423"></a><h4 class="section">Exercise: 4 stars, standard, optional (triple_for_ge)</h4>
+<a id="lab433"></a><h4 class="section">Exercise: 4 stars, standard, optional (triple_for_ge)</h4>
  Prove the specification of for loops in the case where the lower bound
     of the loop exceeds the upper bound of the loop.
     Hint: the proof shares similarities with that of <span class="inlinecode"><span class="id" title="var">triple_for'</span></span>. 
@@ -708,7 +710,7 @@ We can derive a simpler rule for the case of loops with no iterations.
     application of the induction principle. 
 <div class="paragraph"> </div>
 
-<a id="lab424"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (triple_for_inv_conseq_frame)</h4>
+<a id="lab434"></a><h4 class="section">Exercise: 5 stars, standard, especially useful (triple_for_inv_conseq_frame)</h4>
  Prove the invariant-based reasoning rule for for-loops.
     Hint: the proof shares similarities with that of <span class="inlinecode"><span class="id" title="var">triple_for'</span></span>. 
 </div>
@@ -731,7 +733,7 @@ We can derive a simpler rule for the case of loops with no iterations.
 </div>
 
 <div class="doc">
-<a id="lab425"></a><h2 class="section">Treatment of Generalized Conditionals and Loops in <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
+<a id="lab435"></a><h2 class="section">Treatment of Generalized Conditionals and Loops in <span class="inlinecode"><span class="id" title="var">wpgen</span></span></h2>
 
 </div>
 <div class="code">
@@ -856,7 +858,7 @@ The soundness proof of <span class="inlinecode"><span class="id" title="var">wpg
 </div>
 
 <div class="doc">
-<a id="lab426"></a><h2 class="section">Notation and Tactics for Manipulating While-Loops</h2>
+<a id="lab436"></a><h2 class="section">Notation and Tactics for Manipulating While-Loops</h2>
 
 <div class="paragraph"> </div>
 
@@ -921,7 +923,7 @@ Note: a similar construction could be set up for dealing with for loops.
 </div>
 
 <div class="doc">
-<a id="lab427"></a><h2 class="section">Example of the Application of Frame During Loop Iterations</h2>
+<a id="lab437"></a><h2 class="section">Example of the Application of Frame During Loop Iterations</h2>
 
 </div>
 <div class="code">
@@ -943,7 +945,7 @@ Consider the following function, which computes the length of a linked
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">r</span> = <span class="id" title="var">ref</span> <span class="id" title="var">p</span> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">while</span> !<span class="id" title="var">r</span> != <span class="id" title="var">null</span> <span class="id" title="tactic">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">incr</span> <span class="id" title="var">a</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">r</span> := !<span class="id" title="var">p.tail</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">r</span> := !(<span class="id" title="var">r</span>).<span class="id" title="var">tail</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">done</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> = !<span class="id" title="var">a</span> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">free</span> <span class="id" title="var">a</span>;<br/>
@@ -1037,7 +1039,7 @@ At this point, we reason about the recursive call.
 </div>
 
 <div class="doc">
-<a id="lab428"></a><h2 class="section">Reasoning Rule for Loops in an Affine Logic</h2>
+<a id="lab438"></a><h2 class="section">Reasoning Rule for Loops in an Affine Logic</h2>
 
 </div>
 <div class="code">
@@ -1085,7 +1087,7 @@ In that setting, it is useful to integrate <span class="inlinecode">\<span class
 </div>
 
 <div class="doc">
-<a id="lab429"></a><h2 class="section">Curried Functions of Several Arguments</h2>
+<a id="lab439"></a><h2 class="section">Curried Functions of Several Arguments</h2>
 
 </div>
 <div class="code">
@@ -1290,7 +1292,7 @@ This tactic <span class="inlinecode"><span class="id" title="var">xwp</span></sp
 </div>
 
 <div class="doc">
-<a id="lab430"></a><h2 class="section">Primitive n-ary Functions</h2>
+<a id="lab440"></a><h2 class="section">Primitive n-ary Functions</h2>
 
 </div>
 <div class="code">
@@ -1446,7 +1448,7 @@ This substitution operation is well-behaved only if the list <span class="inline
     To formally capture all these invariants, we introduce the predicate
     <span class="inlinecode"><span class="id" title="var">var_fixs</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>, where <span class="inlinecode"><span class="id" title="var">n</span></span> denotes the number of arguments the
     function is being applied to. Typically, <span class="inlinecode"><span class="id" title="var">n</span></span> is equal to the length
-    of the list of arguments <span class="inlinecode"><span class="id" title="var">vs</span></span>). 
+    of the list of arguments <span class="inlinecode"><span class="id" title="var">vs</span></span>. 
 </div>
 <div class="code">
 
@@ -1620,12 +1622,12 @@ The second change consists of introducing the <span class="inlinecode"><span cla
 </div>
 
 <div class="doc">
-<a id="lab431"></a><h1 class="section">Optional Material</h1>
+<a id="lab441"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab432"></a><h2 class="section">A Coercion for Parsing Primitive N-ary Applications</h2>
+<a id="lab442"></a><h2 class="section">A Coercion for Parsing Primitive N-ary Applications</h2>
 
 <div class="paragraph"> </div>
 
@@ -1635,7 +1637,7 @@ The second change consists of introducing the <span class="inlinecode"><span cla
 <div class="paragraph"> </div>
 
     Writing an application in the form <span class="inlinecode"><span class="id" title="var">trm_apps</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">(<span class="id" title="var">x</span>::<span class="id" title="var">y</span>::<span class="id" title="var">nil</span>)</span> to denote
-    teh application of a function <span class="inlinecode"><span class="id" title="var">f</span></span> to two arguments <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> is
+    the application of a function <span class="inlinecode"><span class="id" title="var">f</span></span> to two arguments <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> is
     fairly verbose, in comparison with the syntax <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>, which we were able
     to set up by declaring <span class="inlinecode"><span class="id" title="var">trm_app</span></span> as a <span class="inlinecode"><span class="id" title="var">Funclass</span></span> coercion---recall chapter
     <a href="Rules.html"><span class="inlineref">Rules</span></a>.
@@ -1772,7 +1774,7 @@ The following demo shows how the term <span class="inlinecode"><span class="id" 
 </div>
 
 <div class="doc">
-<a id="lab433"></a><h2 class="section">Historical Notes</h2>
+<a id="lab443"></a><h2 class="section">Historical Notes</h2>
 
 <div class="paragraph"> </div>
 
@@ -1787,7 +1789,7 @@ The following demo shows how the term <span class="inlinecode"><span class="id" 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-20&nbsp;19:10&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2021-12-23&nbsp;19:54&nbsp;*)</span><br/>
 </div>
 </div>
 

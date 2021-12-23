@@ -25,11 +25,11 @@ Arguments Fmap.disjoint_union_eq_r {A} {B}.
 
     - [\[]] denotes the empty heap predicate,
     - [\[P]] denotes a pure fact,
-    - [p ~~> v] denotes a singleton heap,
+    - [p ~~> v] denotes a predicate that characterizes a singleton heap,
     - [H1 \* H2] denotes the separating conjunction,
     - [Q1 \*+ H2] denotes the separating conjunction,
                    between a postcondition and a heap predicate,
-    - [\exists x, H] denotes an existential.
+    - [\exists x, H] denotes an existential quantifier.
 
    This chapter also introduces the formal definition of triples:
 
@@ -99,7 +99,7 @@ Arguments Fmap.disjoint_union_eq_r {A} {B}.
     - a type of terms, written [trm],
     - a type of values, written [val],
     - a type of states, written [state] (i.e., finite map from [loc] to [val]),
-    - a big-step evaluation judgment, written [eval h1 t h2 v], asserting that,
+    - a big-step evaluation judgment, written [eval s1 t s2 v], asserting that,
       starting from state [s1], the evaluation of the term [t] terminates in
       the state [s2] and produces the value [v].
 
@@ -136,7 +136,7 @@ Definition example_val' : trm :=
     A state is a finite map from locations to values.
 
     The file [LibSepFmap.v] provides a self-contained formalization of finite
-    maps, but we do need to know about the details. *)
+    maps, but we do not need to know about the details. *)
 
 Definition state : Type := fmap loc val.
 
@@ -243,6 +243,9 @@ Notation "'\exists' x1 .. xn , H" :=
   (at level 39, x1 binder, H at level 50, right associativity,
    format "'[' '\exists' '/ '  x1  ..  xn , '/ '  H ']'").
 
+(** Universal quantification in [hprop] is only useful for more advanced
+    features of Separation Logic. We postpone its introduction to [Wand]. *)
+
 (** All the definitions above are eventually turned [Opaque], after
     the appropriate introduction and elimination lemmas are
     established for them. Thus, at some point it is no longer
@@ -283,7 +286,10 @@ Axiom predicate_extensionality : forall (A:Type) (P Q:A->Prop),
 Lemma hprop_eq : forall (H1 H2:hprop),
   (forall (h:heap), H1 h <-> H2 h) ->
   H1 = H2.
-Proof using. applys predicate_extensionality. Qed.
+Proof using. apply predicate_extensionality. Qed.
+
+(** More information about extensionality axioms may be found further
+    in this file. *)
 
 (* ================================================================= *)
 (** ** Type and Syntax for Postconditions *)
@@ -319,7 +325,7 @@ Axiom functional_extensionality : forall A B (f g:A->B),
 Lemma qprop_eq : forall (Q1 Q2:val->hprop),
   (forall (v:val), Q1 v = Q2 v) ->
   Q1 = Q2.
-Proof using. applys functional_extensionality. Qed.
+Proof using. apply functional_extensionality. Qed.
 
 (* ================================================================= *)
 (** ** Separation Logic Triples and the Frame Rule *)
@@ -346,6 +352,20 @@ Definition hoare (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
     execution of [t] terminates, because it is defined in terms of the big-step
     evaluation judgment [eval s t s' v], which itself captures termination. *)
 
+(** **** Exercise: 3 stars, standard, especially useful (hoare_conseq)
+
+    To gain familiarity with the [hoare] judgment, prove the consequence rule
+    for Hoare triples. *)
+
+Lemma hoare_conseq : forall t H Q H' Q',
+  hoare t H' Q' ->
+  H ==> H' ->
+  Q' ===> Q ->
+  hoare t H Q.
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
 (** The frame rule asserts that if one can derive a specification of
     the form [triple H t Q] for a term [t], then one should be able
     to automatically derive [triple (H \* H') t (Q \*+ H')] for any [H'].
@@ -362,7 +382,7 @@ Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
   forall (H':hprop), hoare t (H \* H') (Q \*+ H').
 
 (** This definition inherently satisfies the frame rule, as we show
-    below. The proof only exploits the associativity of the star
+    below. The proof essentially exploits the associativity of the star
     operator. *)
 
 Lemma triple_frame : forall t H Q H',
@@ -371,10 +391,12 @@ Lemma triple_frame : forall t H Q H',
 Proof using.
   introv M. unfold triple in *. rename H' into H1. intros H2.
   specializes M (H1 \* H2).
-  (* [M] matches the goal up to rewriting for associativity. *)
-  applys_eq M.
+(** At this point, [M] matches the goal up to rewriting for associativity.
+    We can exploit the consequence rule to complete the proof. *)
+  eapply hoare_conseq.
+  { apply M. }
   { rewrite hstar_assoc. auto. }
-  { applys functional_extensionality. intros v. rewrite hstar_assoc. auto. }
+  { intros v. rewrite hstar_assoc. auto. }
 Qed.
 
 (* ================================================================= *)
@@ -498,7 +520,8 @@ Notation "h1 \u h2" := (Fmap.union h1 h2) (at level 37, right associativity).
 
 (** The following lemmas help getting a better understanding of the meaning
     of the Separation Logic combinators. For each operator, we present one
-    introduction lemma and one inversion lemma. *)
+    introduction lemma and one inversion lemma. The proofs below use the
+    tactic [hnf] (head normal form), which unfolds the head constants. *)
 
 Implicit Types P : Prop.
 Implicit Types v : val.
@@ -571,6 +594,8 @@ Proof using. introv M. hnf in M. eauto. Qed.
     Check Fmap.disjoint_empty_l : forall h,
       Fmap.disjoint Fmap.empty h.
 
+    Note that [auto] can apply [Fmap.disjoint_empty_l] automatically.
+
     Hint: begin the proof by appyling [propositional_extensionality].
 *)
 
@@ -611,10 +636,9 @@ Definition triple_lowlevel (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
 (** Let us establish the equivalence between this alternative
     definition of [triple] and the original one. *)
 
-(** **** Exercise: 4 stars, standard, especially useful (triple_iff_triple_lowlevel)
+(** **** Exercise: 3 stars, standard, optional (triple_iff_triple_lowlevel)
 
-    Prove the equivalence between [triple] and [triple_low_level].
-    Warning: this is probably a very challenging exercise. *)
+    Prove the equivalence between [triple] and [triple_low_level]. *)
 
 Lemma triple_iff_triple_lowlevel : forall t H Q,
   triple t H Q <-> triple_lowlevel t H Q.
@@ -638,7 +662,7 @@ Lemma hempty_eq_hpure_true :
 Proof using.
   unfold hempty, hpure. apply hprop_eq. intros h. iff Hh.
   { auto. }
-  { jauto. }
+  { destruct Hh. auto. }
 Qed.
 
 (** Thus, [hempty] could be defined in terms of [hpure], as [hpure True],
@@ -661,7 +685,8 @@ Proof using.
 Qed.
 
 (** Thus, [hpure] could be defined in terms of [hexists] and [hempty], as
-    [hexists (fun (p:P) => hempty)], also written [\exists (p:P), \[]]. *)
+    [hexists (fun (p:P) => hempty)], also written [\exists (p:P), \[]].
+    In fact, this is how [hpure] is defined in the rest of the course. *)
 
 Definition hpure' (P:Prop) : hprop :=
   \exists (p:P), \[].
@@ -694,8 +719,10 @@ Definition hpure' (P:Prop) : hprop :=
   Parameter (p:loc).
   Check (\exists (n:int), p ~~> (val_int n)) : hprop.
 
-    The type of [\exists], which operates on [hprop], is very similar
-    to that of [exists], which operates on [Prop].
+    The type of [\exists], which operates on [hprop],is very similar
+    to that of [exists], which operates on [Prop]. The key difference is
+    that a witness for a [\exists] can depend on the current heap, whereas
+    a witness for a [exists] cannot.
 
     The notation [exists x, P] stands for [ex (fun x => P)],
     where [ex] has the following type:
@@ -774,4 +801,4 @@ End Extensionality.
     pieces of heaps, the "high-level" definition that bakes in the frame rule
     leads to more elegant, simpler proofs. *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

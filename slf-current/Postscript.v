@@ -38,8 +38,9 @@
 (** Ideas of Separation Logic have had significant influence on the field
     of programming languages from various perspectives. For a broad survey
     of Separation Logic, we refer to Peter O'Hearn's CACM paper [2019].
-    https://dl.acm.org/doi/10.1145/3211968 (make sure to also download
-    the "supplementary material" link at the bottom of the page).
+    https://dl.acm.org/doi/10.1145/3211968
+    (Make sure to also download the "supplementary material" link at the bottom
+    of the page.)
 
     Here is a non-exhaustive list of active projects leveraging Separation
     Logic.
@@ -53,7 +54,7 @@
       notion directly inspired by Separation Logic.
 
     - The tool "VeriFast" targets C and Java programs.
-      https://people.cs.kuleuven.be/~bart.jacobs/verifast and
+      https://people.cs.kuleuven.be/~bart.jacobs/verifast  and
       https://github.com/verifast/verifast
 
     - The tool "Verifiable C" tool, from the VST project, targets the
@@ -136,4 +137,4 @@
 
 *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

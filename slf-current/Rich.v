@@ -24,8 +24,8 @@ Implicit Types L : list val.
     - n-ary functions (bonus contents).
 
     Regarding assertions, we present a reasoning rule such that:
-    - assertions may be expressed in terms of mutable data, and possibly
-      to perform local side-effects, and
+    - assertions may access to mutable data,
+    - assertions may perform local side-effects,
     - the program remains correct whether assertions are executed or not.
 
     Regarding loops, we explain why traditional Hoare-style reasoning rules
@@ -692,7 +692,7 @@ OCaml:
       let r = ref p in
       while !r != null do
         incr a;
-        r := !p.tail;
+        r := !(r).tail;
       done;
       let n = !a in
       free a;
@@ -1055,7 +1055,7 @@ Fixpoint substn (xs:list var) (vs:list val) (t:trm) : trm :=
     To formally capture all these invariants, we introduce the predicate
     [var_fixs f xs n], where [n] denotes the number of arguments the
     function is being applied to. Typically, [n] is equal to the length
-    of the list of arguments [vs]). *)
+    of the list of arguments [vs]. *)
 
 Definition var_fixs (f:var) (xs:vars) (n:nat) : Prop :=
      LibList.noduplicates (f::xs)
@@ -1193,7 +1193,7 @@ Parameter xwp_lemma_fixs : forall v0 ts vs f xs t1 H Q,
     in a smooth way consists of improving the parsing of applications.
 
     Writing an application in the form [trm_apps f (x::y::nil)] to denote
-    teh application of a function [f] to two arguments [x] and [y] is
+    the application of a function [f] to two arguments [x] and [y] is
     fairly verbose, in comparison with the syntax [f x y], which we were able
     to set up by declaring [trm_app] as a [Funclass] coercion---recall chapter
     [Rules].
@@ -1292,4 +1292,4 @@ End PrimitiveNaryFun.
     iterations, has appeared independently in work by [Charguéraud 2010] (in Bib.v)
     and [Tuerk 2010] (in Bib.v). *)
 
-(* 2021-12-20 19:10 *)
+(* 2021-12-23 19:54 *)

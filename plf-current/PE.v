@@ -347,9 +347,9 @@ Qed.
 (* ================================================================= *)
 (** ** Boolean Expressions *)
 
-(** The partial evaluation of boolean expressions is similar.  In
+(** The partial evaluation of boolean expressions is similar.  (In
     fact, it is entirely analogous to the constant folding of boolean
-    expressions, because our language has no boolean variables. *)
+    expressions, because our language has no boolean variables.) *)
 
 Fixpoint pe_bexp (pe_st : pe_state) (b : bexp) : bexp :=
   match b with
@@ -369,6 +369,11 @@ Fixpoint pe_bexp (pe_st : pe_state) (b : bexp) : bexp :=
       match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
       | (ANum n1, ANum n2) => if n1 <=? n2 then <{ true }> else <{ false }>
       | (a1', a2') => <{ a1' <= a2' }>
+      end
+  | <{ a1 > a2 }> =>
+      match (pe_aexp pe_st a1, pe_aexp pe_st a2) with
+      | (ANum n1, ANum n2) => if n1 <=? n2 then <{ false }> else <{ true }>
+      | (a1', a2') => <{ a1' > a2' }>
       end
   | <{ ~ b1 }> =>
       match (pe_bexp pe_st b1) with
@@ -1668,4 +1673,4 @@ Proof. intros.
       eapply E_Some; eauto. apply pe_block_correct. apply Hkeval.
 Qed.
 
-(* 2021-12-20 19:03 *)
+(* 2021-12-23 19:47 *)
