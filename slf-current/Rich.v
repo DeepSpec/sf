@@ -692,7 +692,7 @@ OCaml:
       let r = ref p in
       while !r != null do
         incr a;
-        r := !(r).tail;
+        r := (!r).tail;
       done;
       let n = !a in
       free a;
@@ -1292,4 +1292,4 @@ End PrimitiveNaryFun.
     iterations, has appeared independently in work by [Charguéraud 2010] (in Bib.v)
     and [Tuerk 2010] (in Bib.v). *)
 
-(* 2021-12-23 19:54 *)
+(* 2022-01-06 13:53 *)

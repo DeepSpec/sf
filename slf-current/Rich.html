@@ -945,7 +945,7 @@ Consider the following function, which computes the length of a linked
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">r</span> = <span class="id" title="var">ref</span> <span class="id" title="var">p</span> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">while</span> !<span class="id" title="var">r</span> != <span class="id" title="var">null</span> <span class="id" title="tactic">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">incr</span> <span class="id" title="var">a</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">r</span> := !(<span class="id" title="var">r</span>).<span class="id" title="var">tail</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">r</span> := (!<span class="id" title="var">r</span>).<span class="id" title="var">tail</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">done</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">n</span> = !<span class="id" title="var">a</span> <span class="id" title="keyword">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">free</span> <span class="id" title="var">a</span>;<br/>
@@ -1789,7 +1789,7 @@ The following demo shows how the term <span class="inlinecode"><span class="id" 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2021-12-23&nbsp;19:54&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-01-06&nbsp;13:53&nbsp;*)</span><br/>
 </div>
 </div>
 

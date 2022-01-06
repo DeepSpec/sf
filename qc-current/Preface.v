@@ -29,7 +29,7 @@
     title        =   "QuickChick: Property-Based Testing in Coq",
     series       =   "Software Foundations",
     volume       =   "4",
-    year         =   "2021",
+    year         =   "2022",
     publisher    =   "Electronic textbook",
     note         =   {Version 1.2.1, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
@@ -44,4 +44,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2021-12-23 19:51 *)
+(* 2022-01-06 13:48 *)

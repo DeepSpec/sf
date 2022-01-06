@@ -144,7 +144,7 @@
     title        =   "Verifiable C",
     series       =   "Software Foundations",
     volume       =   "5",
-    year         =   "2021",
+    year         =   "2022",
     publisher    =   "Electronic textbook",
     note         =   {Version 1.1.1, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
@@ -206,4 +206,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2021-12-23 19:52 *)
+(* 2022-01-06 13:49 *)
