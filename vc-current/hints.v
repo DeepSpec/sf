@@ -51,4 +51,4 @@ Ltac vc_special_hint :=
 
 Ltac hint_special ::=  try vc_special_hint.
 
-(* 2022-01-06 13:49 *)
+(* 2022-01-12 18:09 *)

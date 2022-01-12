@@ -1047,10 +1047,6 @@ Proof.
 
     Remove "[Admitted.]" and fill in the proof. *)
 
-(* SOOMER: KK: [plus_id_exercise] contains multiple hypotheses, and at
-   least one student was confused about this. Maybe we can talk about
-   [->] being right-associative before it. *)
-
 Theorem plus_id_exercise : forall n m o : nat,
   n = m -> m = o -> n + m = m + o.
 Proof.
@@ -1608,4 +1604,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-01-06 13:41 *)
+(* 2022-01-12 18:03 *)
