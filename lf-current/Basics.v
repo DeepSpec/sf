@@ -541,7 +541,11 @@ End TuplePlayground.
 
 Module NatPlayground.
 
-(** All the types we have defined so far -- both "enumerated types" such as [day], [bool], and [bit] and tuple types such as [nybble] built from them -- are finite.  The natural numbers, on the other hand, are an infinite set, so we'll need to use a slightly richer form of type declaration to represent them.
+(** All the types we have defined so far -- both "enumerated
+    types" such as [day], [bool], and [bit] and tuple types such as
+    [nybble] built from them -- are finite.  The natural numbers, on
+    the other hand, are an infinite set, so we'll need to use a
+    slightly richer form of type declaration to represent them.
 
     There are many representations of numbers to choose from. We are
     most familiar with decimal notation (base 10), using the digits 0
@@ -560,13 +564,14 @@ Module NatPlayground.
 
     In fact, there is a representation of numbers that is even simpler
     than binary, namely unary (base 1), in which only a single digit
-    is used (as one might do to count days elapsed by scratching on
-    the walls). To represent unary numbers with a Coq datatype, we use
-    two constructors. The capital-letter [O] constructor represents
-    zero.  When the [S] constructor is applied to the representation
-    of the natural number n, the result is the representation of n+1,
-    where [S] stands for "successor" (or "scratch").  Here is the
-    complete datatype definition. *)
+    is used (as our ancient forebears might have done to count days by
+    making scratches on the walls of their caves). To represent unary
+    numbers with a Coq datatype, we use two constructors. The
+    capital-letter [O] constructor represents zero.  When the [S]
+    constructor is applied to the representation of the natural number
+    n, the result is the representation of n+1, where [S] stands for
+    "successor" (or "scratch").  Here is the complete datatype
+    definition. *)
 
 Inductive nat : Type :=
   | O
@@ -1598,4 +1603,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-01-28 19:10 *)
+(* 2022-01-28 19:20 *)

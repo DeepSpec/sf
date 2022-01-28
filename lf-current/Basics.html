@@ -757,7 +757,11 @@ The <span class="inlinecode"><span class="id" title="var">bits</span></span> con
 </div>
 
 <div class="doc">
-All the types we have defined so far -- both "enumerated types" such as <span class="inlinecode"><span class="id" title="var">day</span></span>, <span class="inlinecode"><span class="id" title="var">bool</span></span>, and <span class="inlinecode"><span class="id" title="var">bit</span></span> and tuple types such as <span class="inlinecode"><span class="id" title="var">nybble</span></span> built from them -- are finite.  The natural numbers, on the other hand, are an infinite set, so we'll need to use a slightly richer form of type declaration to represent them.
+All the types we have defined so far -- both "enumerated
+    types" such as <span class="inlinecode"><span class="id" title="var">day</span></span>, <span class="inlinecode"><span class="id" title="var">bool</span></span>, and <span class="inlinecode"><span class="id" title="var">bit</span></span> and tuple types such as
+    <span class="inlinecode"><span class="id" title="var">nybble</span></span> built from them -- are finite.  The natural numbers, on
+    the other hand, are an infinite set, so we'll need to use a
+    slightly richer form of type declaration to represent them.
 
 <div class="paragraph"> </div>
 
@@ -782,13 +786,14 @@ All the types we have defined so far -- both "enumerated types" such as <span cl
 
     In fact, there is a representation of numbers that is even simpler
     than binary, namely unary (base 1), in which only a single digit
-    is used (as one might do to count days elapsed by scratching on
-    the walls). To represent unary numbers with a Coq datatype, we use
-    two constructors. The capital-letter <span class="inlinecode"><span class="id" title="var">O</span></span> constructor represents
-    zero.  When the <span class="inlinecode"><span class="id" title="var">S</span></span> constructor is applied to the representation
-    of the natural number n, the result is the representation of n+1,
-    where <span class="inlinecode"><span class="id" title="var">S</span></span> stands for "successor" (or "scratch").  Here is the
-    complete datatype definition. 
+    is used (as our ancient forebears might have done to count days by
+    making scratches on the walls of their caves). To represent unary
+    numbers with a Coq datatype, we use two constructors. The
+    capital-letter <span class="inlinecode"><span class="id" title="var">O</span></span> constructor represents zero.  When the <span class="inlinecode"><span class="id" title="var">S</span></span>
+    constructor is applied to the representation of the natural number
+    n, the result is the representation of n+1, where <span class="inlinecode"><span class="id" title="var">S</span></span> stands for
+    "successor" (or "scratch").  Here is the complete datatype
+    definition. 
 </div>
 <div class="code">
 
@@ -2125,7 +2130,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-01-28&nbsp;19:10&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-01-28&nbsp;19:20&nbsp;*)</span><br/>
 </div>
 </div>
 
