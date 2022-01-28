@@ -766,4 +766,4 @@ Fail Definition falso : False := infinite_loop 0.
     validity from scratch.  Only theorems whose proofs pass the
     type-checker can be used in further proof developments.  *)
 
-(* 2022-01-28 18:53 *)
+(* 2022-01-28 18:55 *)
