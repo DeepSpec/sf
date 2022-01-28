@@ -57,7 +57,7 @@
     library providing definitions of booleans, numbers, and many
     common data structures like lists and hash tables.  But there is
     nothing magic or primitive about these library definitions.  To
-    illustrate this, this course we will explicitly recapitulate
+    illustrate this, in this course we will explicitly recapitulate
     (almost) all the definitions we need, rather than getting them
     from the standard library. *)
 
@@ -191,8 +191,6 @@ Proof. simpl. reflexivity.  Qed.
 
        coqc -Q . LF Basics.v
        coqc -Q . LF BasicsTest.v
-
-    (Make sure that there is a
 
     See the end of this chapter for more information about how to interpret
     the output of test scripts.
@@ -543,11 +541,7 @@ End TuplePlayground.
 
 Module NatPlayground.
 
-(** All the types we have defined so far -- both "enumerated
-    types" such as [day], [bool], and [bit] and tuple types such as
-    [nybble] built from them -- are finite.  The natural numbers, on
-    the other hand, are an infinite set, so we'll need to use a
-    slightly richer form of type declaration to represent them.
+(** All the types we have defined so far -- both "enumerated types" such as [day], [bool], and [bit] and tuple types such as [nybble] built from them -- are finite.  The natural numbers, on the other hand, are an infinite set, so we'll need to use a slightly richer form of type declaration to represent them.
 
     There are many representations of numbers to choose from. We are
     most familiar with decimal notation (base 10), using the digits 0
@@ -566,13 +560,13 @@ Module NatPlayground.
 
     In fact, there is a representation of numbers that is even simpler
     than binary, namely unary (base 1), in which only a single digit
-    is used (as one might do to count days in prison by scratching on
+    is used (as one might do to count days elapsed by scratching on
     the walls). To represent unary numbers with a Coq datatype, we use
     two constructors. The capital-letter [O] constructor represents
     zero.  When the [S] constructor is applied to the representation
-    of the natural number n, the result is the representation of
-    n+1, where [S] stands for "successor" (or "scratch" if one is in
-    prison).  Here is the complete datatype definition. *)
+    of the natural number n, the result is the representation of n+1,
+    where [S] stands for "successor" (or "scratch").  Here is the
+    complete datatype definition. *)
 
 Inductive nat : Type :=
   | O
@@ -1604,4 +1598,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-01-12 18:03 *)
+(* 2022-01-28 18:53 *)
