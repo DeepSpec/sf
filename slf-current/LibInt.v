@@ -849,4 +849,4 @@ Tactic Notation "rew_to_nat_nonneg" :=
 Tactic Notation "rew_to_nat_nonneg" "~" :=
   autorewrite with rew_to_nat_nonneg; try math; autos~.
 
-(* 2022-01-28 19:30 *)
+(* 2022-01-29 23:27 *)

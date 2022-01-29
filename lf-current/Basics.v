@@ -317,7 +317,13 @@ Definition orb' (b1:bool) (b2:bool) : bool :=
     each be verified by Coq.  (I.e., fill in each proof, following the
     model of the [orb] tests above, and make sure Coq accepts it.) The
     function should return [true] if either or both of its inputs are
-    [false]. *)
+    [false].
+
+    Hint: if [simpl] will not simplify the goal in your proof, it's
+    probably because you defined [nandb] without using a [match]
+    expression. Try a different definition of [nandb], or just
+    skip over [simpl] and go directly to [reflexivity]. We'll
+    explain this phenomenon later in the chapter. *)
 
 Definition nandb (b1:bool) (b2:bool) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1603,4 +1609,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-01-28 19:20 *)
+(* 2022-01-29 23:18 *)
