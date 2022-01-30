@@ -580,11 +580,33 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
+(* ################################################################# *)
+(** * Nat to Bin and Back to Nat *)
+
+(** Recall the [bin] type we defined in [Basics]: *)
+
+Inductive bin : Type :=
+  | Z
+  | B0 (n : bin)
+  | B1 (n : bin)
+.
+(** Before you start working on the next exercise, replace the stub
+    definitions of [incr] and [bin_to_nat], below, with your solution
+    from [Basics].  That will make it possible for this file to
+    be graded on its own. *)
+
+Fixpoint incr (m:bin) : bin
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Fixpoint bin_to_nat (m:bin) : nat
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+(** In [Basics], we did some unit testing of [bin_to_nat], but we
+    didn't prove its correctness. Now we'll do so. *)
+
 (** **** Exercise: 3 stars, standard, especially useful (binary_commute)
 
-    Recall the [incr] and [bin_to_nat] functions that you
-    wrote for the [binary] exercise in the [Basics] chapter.  Prove
-    that the following diagram commutes:
+    Prove that the following diagram commutes:
 
                             incr
               bin ----------------------> bin
@@ -599,21 +621,8 @@ Proof.
     a (unary) natural number yields the same result as first converting
     it to a natural number and then incrementing.
 
-    Before you start working on this exercise, copy the definitions of
-    [incr] and [bin_to_nat] from your solution to the [binary]
-    exercise here so that this file can be graded on its own.  If you
-    want to change your original definitions to make the property
-    easier to prove, feel free to do so! *)
-
-Inductive bin : Type :=
-  (* FILL IN HERE *)
-.
-
-Fixpoint incr (m:bin) : bin
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
-
-Fixpoint bin_to_nat (m:bin) : nat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+    If you want to change your previous definitions of [incr] or [bin_to_nat]
+    to make the property easier to prove, feel free to do so! *)
 
 Theorem bin_to_nat_pres_incr : forall b : bin,
   bin_to_nat (incr b) = 1 + bin_to_nat b.
@@ -622,77 +631,124 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced (binary_inverse)
+(** **** Exercise: 3 stars, standard (nat_bin_nat) *)
 
-    This is a further continuation of the previous exercises about
-    binary numbers.  You may find you need to go back and change your
-    earlier definitions to get things to work smoothly here.
-
-    (a) First, write a function to convert natural numbers to binary
-        numbers. *)
+(** Write a function to convert natural numbers to binary numbers. *)
 
 Fixpoint nat_to_bin (n:nat) : bin
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-(** Prove that, if we start with any [nat], convert it to binary, and
-    convert it back, we get the same [nat] we started with.  (Hint: If
-    your definition of [nat_to_bin] involved any extra functions, you
-    may need to prove a subsidiary lemma showing how such functions
-    relate to [nat_to_bin].) *)
+(** Prove that, if we start with any [nat], convert it to [bin], and
+    convert it back, we get the same [nat] which we started with.
+
+    Hint: This proof should go through smoothly using the previous
+    exercise about [incr] as a lemma. If not, revisit your definitions
+    of the functions involved and consider whether they are more
+    complicated than necessary: the shape of a proof by induction will
+    match the recursive structure of the program being verified, so
+    make the recursions as simple as possible. *)
 
 Theorem nat_bin_nat : forall n, bin_to_nat (nat_to_bin n) = n.
 Proof.
   (* FILL IN HERE *) Admitted.
 
-(** (b) One might naturally expect that we could also prove the
-        opposite direction -- that starting with a binary number,
-        converting to a natural, and then back to binary should yield
-        the same number we started with.  However, this is not the
-        case!  Explain (in a comment) what the problem is.  (Your
-        explanation will not be graded, but it's important that you
-        get it clear in your mind before going on to the next
-        part.) *)
+(** [] *)
+
+(* ################################################################# *)
+(** * Bin to Nat and Back to Bin (Advanced) *)
+
+(** The opposite direction -- starting with a [bin], converting to [nat],
+    then converting back to [bin] -- turns out to be problematic. That
+    is, the following theorem does not hold. *)
+
+Theorem bin_nat_bin_fails : forall b, nat_to_bin (bin_to_nat b) = b.
+Abort.
+
+(** Let's explore why that theorem fails, and how to prove a modified
+    version of it. We'll start with some lemmas that might seem
+    unrelated, but will turn out to be relevant. *)
+
+(** **** Exercise: 2 stars, advanced (double_bin) *)
+
+(** Prove this lemma about [double], which we defined earlier in the
+    chapter. *)
+
+Lemma double_incr : forall n : nat, double (S n) = S (S (double n)).
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** Now define a similar doubling function for [bin]. *)
+
+Definition double_bin (b:bin) : bin
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+(** Check that your function correctly doubles zero. *)
+
+Example double_bin_zero : double_bin Z = Z.
+(* FILL IN HERE *) Admitted.
+
+(** Prove this lemma, which corresponds to [double_incr]. *)
+
+Lemma double_incr_bin : forall b,
+    double_bin (incr b) = incr (incr (double_bin b)).
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** Let's return to our desired theorem: *)
+
+Theorem bin_nat_bin_fails : forall b, nat_to_bin (bin_to_nat b) = b.
+Abort.
+
+(** The theorem fails because there are some [bin] such that we won't
+    necessarily get back to the _original_ [bin], but instead to an
+    "equivalent" [bin].  (We deliberately leave that notion undefined
+    here for you to think about.)
+
+    Explain in a comment, below, why this failure occurs. Your
+    explanation will not be graded, but it's important that you get it
+    clear in your mind before going on to the next part. If you're
+    stuck on this, think about alternative implementations of
+    [double_bin] that might have failed to satisfy [double_bin_zero]
+    yet otherwise seem correct. *)
 
 (* FILL IN HERE *)
 
-(** (c) Define a normalization function -- i.e., a function
-        [normalize] going directly from [bin] to [bin] (i.e., _not_ by
-        converting to [nat] and back) such that, for any binary number
-        [b], converting [b] to a natural and then back to binary
-        yields [(normalize b)].  Prove it.
+(** To solve that problem, we can introduce a _normalization_ function
+    that selects the simplest [bin] out of all the equivalent
+    [bin]. Then we can prove that the conversion from [bin] to [nat] and
+    back again produces that normalized, simplest [bin]. *)
 
-        Warning: This part is a bit tricky -- you may end up defining
-        several auxiliary lemmas.  One good way to find out what you
-        need is to start by trying to prove the main statement, see
-        where you get stuck, and see if you can find a lemma --
-        perhaps requiring its own inductive proof -- that will allow
-        the main proof to make progress.
+(** **** Exercise: 4 stars, advanced (bin_nat_bin) *)
 
-        Hint 1: Don't define [normalize] using [nat_to_bin] and
-        [bin_to_nat].
+(** Define [normalize]. You will need to keep its definition as simple
+    as possible for later proofs to go smoothly. Do not use
+    [bin_to_nat] or [nat_to_bin], but do use [double_bin].
 
-        Hint 2 (this will probably only make sense after you've
-        thought about the exercise for a while by yourself): There are
-        multiple ways of defining the [normalize] function, and some
-        lead to substantially smoother proofs than others.  In
-        particular, one way to define [normalize] is to try to "cut
-        off" the normalization early, by checking whether all
-        remaining digits are zero before every recursive call, while
-        another strategy is to recurse all the way to the end of the
-        binary number and then treat zero as a special case on the
-        _result_ of the recursive call at each level.  The latter
-        seems to work more smoothly, perhaps because it examines each
-        digit of the binary number just once, while the former
-        involves repeatedly "looking ahead" at the remaining bits to
-        see if they are all zero.
-
-        More generally, the shape of a proof by induction will match the
-        recursive structure of the program you are verifying, so a good
-        strategy for designing algorithms that are easy to verify is to
-        make your recursions as simple as possible. *)
+    Hint: Structure the recursion such that it _always_ reaches the
+    end of the [bin] and process each bit only once. Do not try to
+    "look ahead" at future bits. *)
 
 Fixpoint normalize (b:bin) : bin
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+(** It would be wise to do some [Example] proofs to check that your definition of
+    [normalize] works the way you intend before you proceed. They won't be graded,
+    but fill them in below. *)
+
+(* FILL IN HERE *)
+
+(** Finally, prove the main theorem. The inductive cases could be a
+    bit tricky.
+
+    Hint 1: Start by trying to prove the main statement, see where you
+    get stuck, and see if you can find a lemma -- perhaps requiring
+    its own inductive proof -- that will allow the main proof to make
+    progress. You might end up with a couple of these.
+
+    Hint 2: Lemma [double_incr_bin] that you proved above will be
+    helpful, too.*)
 
 Theorem bin_nat_bin : forall b, nat_to_bin (bin_to_nat b) = normalize b.
 Proof.
@@ -700,4 +756,4 @@ Proof.
 
 (** [] *)
 
-(* 2022-01-30 18:21 *)
+(* 2022-01-30 18:27 *)

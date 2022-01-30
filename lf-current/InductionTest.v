@@ -117,17 +117,53 @@ Print Assumptions bin_to_nat_pres_incr.
 Goal True.
 idtac " ".
 
-idtac "-------------------  binary_inverse  --------------------".
+idtac "-------------------  nat_bin_nat  --------------------".
 idtac " ".
 
 idtac "#> nat_bin_nat".
-idtac "Advanced".
-idtac "Possible points: 4".
+idtac "Possible points: 3".
 check_type @nat_bin_nat ((forall n : nat, bin_to_nat (nat_to_bin n) = n)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions nat_bin_nat.
 Goal True.
+idtac " ".
+
+idtac "-------------------  double_bin  --------------------".
+idtac " ".
+
+idtac "#> double_incr".
+idtac "Advanced".
+idtac "Possible points: 0.5".
+check_type @double_incr ((forall n : nat, double (S n) = S (S (double n)))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions double_incr.
+Goal True.
+idtac " ".
+
+idtac "#> double_bin_zero".
+idtac "Advanced".
+idtac "Possible points: 0.5".
+check_type @double_bin_zero ((double_bin Z = Z)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions double_bin_zero.
+Goal True.
+idtac " ".
+
+idtac "#> double_incr_bin".
+idtac "Advanced".
+idtac "Possible points: 1".
+check_type @double_incr_bin (
+(forall b : bin, double_bin (incr b) = incr (incr (double_bin b)))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions double_incr_bin.
+Goal True.
+idtac " ".
+
+idtac "-------------------  bin_nat_bin  --------------------".
 idtac " ".
 
 idtac "#> bin_nat_bin".
@@ -142,8 +178,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 10".
-idtac "Max points - advanced: 22".
+idtac "Max points - standard: 13".
+idtac "Max points - advanced: 23".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -181,14 +217,20 @@ idtac "---------- mul_comm ---------".
 Print Assumptions mul_comm.
 idtac "---------- bin_to_nat_pres_incr ---------".
 Print Assumptions bin_to_nat_pres_incr.
+idtac "---------- nat_bin_nat ---------".
+Print Assumptions nat_bin_nat.
 idtac "".
 idtac "********** Advanced **********".
 idtac "---------- add_comm_informal ---------".
 idtac "MANUAL".
-idtac "---------- nat_bin_nat ---------".
-Print Assumptions nat_bin_nat.
+idtac "---------- double_incr ---------".
+Print Assumptions double_incr.
+idtac "---------- double_bin_zero ---------".
+Print Assumptions double_bin_zero.
+idtac "---------- double_incr_bin ---------".
+Print Assumptions double_incr_bin.
 idtac "---------- bin_nat_bin ---------".
 Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2022-01-30 18:21 *)
+(* 2022-01-30 18:27 *)

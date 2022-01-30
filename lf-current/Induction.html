@@ -784,10 +784,45 @@ Now prove commutativity of multiplication.  You will probably want
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab65"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (binary_commute)</h4>
- Recall the <span class="inlinecode"><span class="id" title="var">incr</span></span> and <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span> functions that you
-    wrote for the <span class="inlinecode"><span class="id" title="var">binary</span></span> exercise in the <a href="Basics.html"><span class="inlineref">Basics</span></a> chapter.  Prove
-    that the following diagram commutes:
+<a id="lab65"></a><h1 class="section">Nat to Bin and Back to Nat</h1>
+
+<div class="paragraph"> </div>
+
+ Recall the <span class="inlinecode"><span class="id" title="var">bin</span></span> type we defined in <a href="Basics.html"><span class="inlineref">Basics</span></a>: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Inductive</span> <a id="bin" class="idref" href="#bin"><span class="id" title="inductive">bin</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;| <a id="Z" class="idref" href="#Z"><span class="id" title="constructor">Z</span></a><br/>
+&nbsp;&nbsp;| <a id="B<sub>0</sub>" class="idref" href="#B<sub>0</sub>"><span class="id" title="constructor">B<sub>0</sub></span></a> (<a id="n:61" class="idref" href="#n:61"><span class="id" title="binder">n</span></a> : <a class="idref" href="Induction.html#bin:59"><span class="id" title="inductive">bin</span></a>)<br/>
+&nbsp;&nbsp;| <a id="B<sub>1</sub>" class="idref" href="#B<sub>1</sub>"><span class="id" title="constructor">B<sub>1</sub></span></a> (<a id="n:62" class="idref" href="#n:62"><span class="id" title="binder">n</span></a> : <a class="idref" href="Induction.html#bin:59"><span class="id" title="inductive">bin</span></a>)<br/>
+.<br/>
+</div>
+
+<div class="doc">
+Before you start working on the next exercise, replace the stub
+    definitions of <span class="inlinecode"><span class="id" title="var">incr</span></span> and <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>, below, with your solution
+    from <a href="Basics.html"><span class="inlineref">Basics</span></a>.  That will make it possible for this file to
+    be graded on its own. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Fixpoint</span> <a id="incr" class="idref" href="#incr"><span class="id" title="definition">incr</span></a> (<a id="m:63" class="idref" href="#m:63"><span class="id" title="binder">m</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Fixpoint</span> <a id="bin_to_nat" class="idref" href="#bin_to_nat"><span class="id" title="definition">bin_to_nat</span></a> (<a id="m:65" class="idref" href="#m:65"><span class="id" title="binder">m</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+In <a href="Basics.html"><span class="inlineref">Basics</span></a>, we did some unit testing of <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>, but we
+    didn't prove its correctness. Now we'll do so. 
+<div class="paragraph"> </div>
+
+<a id="lab66"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (binary_commute)</h4>
+ Prove that the following diagram commutes:
+
+<div class="paragraph"> </div>
+
 <pre>
                             incr
               bin --------------------<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> bin
@@ -804,23 +839,13 @@ Now prove commutativity of multiplication.  You will probably want
 
 <div class="paragraph"> </div>
 
-    Before you start working on this exercise, copy the definitions of
-    <span class="inlinecode"><span class="id" title="var">incr</span></span> and <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span> from your solution to the <span class="inlinecode"><span class="id" title="var">binary</span></span>
-    exercise here so that this file can be graded on its own.  If you
-    want to change your original definitions to make the property
-    easier to prove, feel free to do so! 
+    If you want to change your previous definitions of <span class="inlinecode"><span class="id" title="var">incr</span></span> or <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>
+    to make the property easier to prove, feel free to do so! 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Inductive</span> <a id="bin" class="idref" href="#bin"><span class="id" title="inductive">bin</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
-.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Fixpoint</span> <a id="incr" class="idref" href="#incr"><span class="id" title="definition">incr</span></a> (<a id="m:61" class="idref" href="#m:61"><span class="id" title="binder">m</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Fixpoint</span> <a id="bin_to_nat" class="idref" href="#bin_to_nat"><span class="id" title="definition">bin_to_nat</span></a> (<a id="m:63" class="idref" href="#m:63"><span class="id" title="binder">m</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Theorem</span> <a id="bin_to_nat_pres_incr" class="idref" href="#bin_to_nat_pres_incr"><span class="id" title="lemma">bin_to_nat_pres_incr</span></a> : <span class="id" title="keyword">∀</span> <a id="b:65" class="idref" href="#b:65"><span class="id" title="binder">b</span></a> : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Induction.html#b:65"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:65"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Theorem</span> <a id="bin_to_nat_pres_incr" class="idref" href="#bin_to_nat_pres_incr"><span class="id" title="lemma">bin_to_nat_pres_incr</span></a> : <span class="id" title="keyword">∀</span> <a id="b:67" class="idref" href="#b:67"><span class="id" title="binder">b</span></a> : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Induction.html#b:67"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1 <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:67"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -829,45 +854,131 @@ Now prove commutativity of multiplication.  You will probably want
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab66"></a><h4 class="section">Exercise: 5 stars, advanced (binary_inverse)</h4>
- This is a further continuation of the previous exercises about
-    binary numbers.  You may find you need to go back and change your
-    earlier definitions to get things to work smoothly here.
+<a id="lab67"></a><h4 class="section">Exercise: 3 stars, standard (nat_bin_nat)</h4>
 
 <div class="paragraph"> </div>
 
-    (a) First, write a function to convert natural numbers to binary
-        numbers. 
+ Write a function to convert natural numbers to binary numbers. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="nat_to_bin" class="idref" href="#nat_to_bin"><span class="id" title="definition">nat_to_bin</span></a> (<a id="n:66" class="idref" href="#n:66"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="nat_to_bin" class="idref" href="#nat_to_bin"><span class="id" title="definition">nat_to_bin</span></a> (<a id="n:68" class="idref" href="#n:68"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
 </div>
 
 <div class="doc">
-Prove that, if we start with any <span class="inlinecode"><span class="id" title="var">nat</span></span>, convert it to binary, and
-    convert it back, we get the same <span class="inlinecode"><span class="id" title="var">nat</span></span> we started with.  (Hint: If
-    your definition of <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span> involved any extra functions, you
-    may need to prove a subsidiary lemma showing how such functions
-    relate to <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span>.) 
+Prove that, if we start with any <span class="inlinecode"><span class="id" title="var">nat</span></span>, convert it to <span class="inlinecode"><span class="id" title="var">bin</span></span>, and
+    convert it back, we get the same <span class="inlinecode"><span class="id" title="var">nat</span></span> which we started with.
+
+<div class="paragraph"> </div>
+
+    Hint: This proof should go through smoothly using the previous
+    exercise about <span class="inlinecode"><span class="id" title="var">incr</span></span> as a lemma. If not, revisit your definitions
+    of the functions involved and consider whether they are more
+    complicated than necessary: the shape of a proof by induction will
+    match the recursive structure of the program being verified, so
+    make the recursions as simple as possible. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Theorem</span> <a id="nat_bin_nat" class="idref" href="#nat_bin_nat"><span class="id" title="lemma">nat_bin_nat</span></a> : <span class="id" title="keyword">∀</span> <a id="n:68" class="idref" href="#n:68"><span class="id" title="binder">n</span></a>, <a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> <a class="idref" href="Induction.html#n:68"><span class="id" title="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:68"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Theorem</span> <a id="nat_bin_nat" class="idref" href="#nat_bin_nat"><span class="id" title="lemma">nat_bin_nat</span></a> : <span class="id" title="keyword">∀</span> <a id="n:70" class="idref" href="#n:70"><span class="id" title="binder">n</span></a>, <a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> (<a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> <a class="idref" href="Induction.html#n:70"><span class="id" title="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#n:70"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab68"></a><h1 class="section">Bin to Nat and Back to Bin (Advanced)</h1>
+
+<div class="paragraph"> </div>
+
+ The opposite direction -- starting with a <span class="inlinecode"><span class="id" title="var">bin</span></span>, converting to <span class="inlinecode"><span class="id" title="var">nat</span></span>,
+    then converting back to <span class="inlinecode"><span class="id" title="var">bin</span></span> -- turns out to be problematic. That
+    is, the following theorem does not hold. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <a id="bin_nat_bin_fails" class="idref" href="#bin_nat_bin_fails"><span class="id" title="lemma">bin_nat_bin_fails</span></a> : <span class="id" title="keyword">∀</span> <a id="b:71" class="idref" href="#b:71"><span class="id" title="binder">b</span></a>, <a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> (<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:71"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#b:71"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+Let's explore why that theorem fails, and how to prove a modified
+    version of it. We'll start with some lemmas that might seem
+    unrelated, but will turn out to be relevant. 
+<div class="paragraph"> </div>
+
+<a id="lab69"></a><h4 class="section">Exercise: 2 stars, advanced (double_bin)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove this lemma about <span class="inlinecode"><span class="id" title="var">double</span></span>, which we defined earlier in the
+    chapter. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="double_incr" class="idref" href="#double_incr"><span class="id" title="lemma">double_incr</span></a> : <span class="id" title="keyword">∀</span> <a id="n:72" class="idref" href="#n:72"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <a class="idref" href="Induction.html#double"><span class="id" title="definition">double</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Induction.html#n:72"><span class="id" title="variable">n</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="Induction.html#double"><span class="id" title="definition">double</span></a> <a class="idref" href="Induction.html#n:72"><span class="id" title="variable">n</span></a>)).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 </div>
 
 <div class="doc">
-(b) One might naturally expect that we could also prove the
-        opposite direction -- that starting with a binary number,
-        converting to a natural, and then back to binary should yield
-        the same number we started with.  However, this is not the
-        case!  Explain (in a comment) what the problem is.  (Your
-        explanation will not be graded, but it's important that you
-        get it clear in your mind before going on to the next
-        part.) 
+Now define a similar doubling function for <span class="inlinecode"><span class="id" title="var">bin</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="double_bin" class="idref" href="#double_bin"><span class="id" title="definition">double_bin</span></a> (<a id="b:73" class="idref" href="#b:73"><span class="id" title="binder">b</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+Check that your function correctly doubles zero. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Example</span> <a id="double_bin_zero" class="idref" href="#double_bin_zero"><span class="id" title="definition">double_bin_zero</span></a> : <a class="idref" href="Induction.html#double_bin"><span class="id" title="axiom">double_bin</span></a> <a class="idref" href="Induction.html#Z"><span class="id" title="constructor">Z</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#Z"><span class="id" title="constructor">Z</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+Prove this lemma, which corresponds to <span class="inlinecode"><span class="id" title="var">double_incr</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="double_incr_bin" class="idref" href="#double_incr_bin"><span class="id" title="lemma">double_incr_bin</span></a> : <span class="id" title="keyword">∀</span> <a id="b:74" class="idref" href="#b:74"><span class="id" title="binder">b</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Induction.html#double_bin"><span class="id" title="axiom">double_bin</span></a> (<a class="idref" href="Induction.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Induction.html#b:74"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#incr"><span class="id" title="axiom">incr</span></a> (<a class="idref" href="Induction.html#incr"><span class="id" title="axiom">incr</span></a> (<a class="idref" href="Induction.html#double_bin"><span class="id" title="axiom">double_bin</span></a> <a class="idref" href="Induction.html#b:74"><span class="id" title="variable">b</span></a>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ Let's return to our desired theorem: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <a id="bin_nat_bin_fails" class="idref" href="#bin_nat_bin_fails"><span class="id" title="lemma">bin_nat_bin_fails</span></a> : <span class="id" title="keyword">∀</span> <a id="b:75" class="idref" href="#b:75"><span class="id" title="binder">b</span></a>, <a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> (<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:75"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#b:75"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Abort</span>.<br/>
+</div>
+
+<div class="doc">
+The theorem fails because there are some <span class="inlinecode"><span class="id" title="var">bin</span></span> such that we won't
+    necessarily get back to the <i>original</i> <span class="inlinecode"><span class="id" title="var">bin</span></span>, but instead to an
+    "equivalent" <span class="inlinecode"><span class="id" title="var">bin</span></span>.  (We deliberately leave that notion undefined
+    here for you to think about.)
+
+<div class="paragraph"> </div>
+
+    Explain in a comment, below, why this failure occurs. Your
+    explanation will not be graded, but it's important that you get it
+    clear in your mind before going on to the next part. If you're
+    stuck on this, think about alternative implementations of
+    <span class="inlinecode"><span class="id" title="var">double_bin</span></span> that might have failed to satisfy <span class="inlinecode"><span class="id" title="var">double_bin_zero</span></span>
+    yet otherwise seem correct. 
 </div>
 <div class="code">
 
@@ -875,55 +986,61 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-(c) Define a normalization function -- i.e., a function
-        <span class="inlinecode"><span class="id" title="var">normalize</span></span> going directly from <span class="inlinecode"><span class="id" title="var">bin</span></span> to <span class="inlinecode"><span class="id" title="var">bin</span></span> (i.e., <i>not</i> by
-        converting to <span class="inlinecode"><span class="id" title="var">nat</span></span> and back) such that, for any binary number
-        <span class="inlinecode"><span class="id" title="var">b</span></span>, converting <span class="inlinecode"><span class="id" title="var">b</span></span> to a natural and then back to binary
-        yields <span class="inlinecode">(<span class="id" title="var">normalize</span></span> <span class="inlinecode"><span class="id" title="var">b</span>)</span>.  Prove it.
+To solve that problem, we can introduce a <i>normalization</i> function
+    that selects the simplest <span class="inlinecode"><span class="id" title="var">bin</span></span> out of all the equivalent
+    <span class="inlinecode"><span class="id" title="var">bin</span></span>. Then we can prove that the conversion from <span class="inlinecode"><span class="id" title="var">bin</span></span> to <span class="inlinecode"><span class="id" title="var">nat</span></span> and
+    back again produces that normalized, simplest <span class="inlinecode"><span class="id" title="var">bin</span></span>. 
+<div class="paragraph"> </div>
+
+<a id="lab70"></a><h4 class="section">Exercise: 4 stars, advanced (bin_nat_bin)</h4>
 
 <div class="paragraph"> </div>
 
-        Warning: This part is a bit tricky -- you may end up defining
-        several auxiliary lemmas.  One good way to find out what you
-        need is to start by trying to prove the main statement, see
-        where you get stuck, and see if you can find a lemma --
-        perhaps requiring its own inductive proof -- that will allow
-        the main proof to make progress.
+ Define <span class="inlinecode"><span class="id" title="var">normalize</span></span>. You will need to keep its definition as simple
+    as possible for later proofs to go smoothly. Do not use
+    <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span> or <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span>, but do use <span class="inlinecode"><span class="id" title="var">double_bin</span></span>.
 
 <div class="paragraph"> </div>
 
-        Hint 1: Don't define <span class="inlinecode"><span class="id" title="var">normalize</span></span> using <span class="inlinecode"><span class="id" title="var">nat_to_bin</span></span> and
-        <span class="inlinecode"><span class="id" title="var">bin_to_nat</span></span>.
-
-<div class="paragraph"> </div>
-
-        Hint 2 (this will probably only make sense after you've
-        thought about the exercise for a while by yourself): There are
-        multiple ways of defining the <span class="inlinecode"><span class="id" title="var">normalize</span></span> function, and some
-        lead to substantially smoother proofs than others.  In
-        particular, one way to define <span class="inlinecode"><span class="id" title="var">normalize</span></span> is to try to "cut
-        off" the normalization early, by checking whether all
-        remaining digits are zero before every recursive call, while
-        another strategy is to recurse all the way to the end of the
-        binary number and then treat zero as a special case on the
-        <i>result</i> of the recursive call at each level.  The latter
-        seems to work more smoothly, perhaps because it examines each
-        digit of the binary number just once, while the former
-        involves repeatedly "looking ahead" at the remaining bits to
-        see if they are all zero.
-
-<div class="paragraph"> </div>
-
-        More generally, the shape of a proof by induction will match the
-        recursive structure of the program you are verifying, so a good
-        strategy for designing algorithms that are easy to verify is to
-        make your recursions as simple as possible. 
+    Hint: Structure the recursion such that it <i>always</i> reaches the
+    end of the <span class="inlinecode"><span class="id" title="var">bin</span></span> and process each bit only once. Do not try to
+    "look ahead" at future bits. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="normalize" class="idref" href="#normalize"><span class="id" title="definition">normalize</span></a> (<a id="b:69" class="idref" href="#b:69"><span class="id" title="binder">b</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Theorem</span> <a id="bin_nat_bin" class="idref" href="#bin_nat_bin"><span class="id" title="lemma">bin_nat_bin</span></a> : <span class="id" title="keyword">∀</span> <a id="b:71" class="idref" href="#b:71"><span class="id" title="binder">b</span></a>, <a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> (<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:71"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#normalize"><span class="id" title="axiom">normalize</span></a> <a class="idref" href="Induction.html#b:71"><span class="id" title="variable">b</span></a>.<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="normalize" class="idref" href="#normalize"><span class="id" title="definition">normalize</span></a> (<a id="b:76" class="idref" href="#b:76"><span class="id" title="binder">b</span></a>:<a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a>) : <a class="idref" href="Induction.html#bin"><span class="id" title="inductive">bin</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+It would be wise to do some <span class="inlinecode"><span class="id" title="keyword">Example</span></span> proofs to check that your definition of
+    <span class="inlinecode"><span class="id" title="var">normalize</span></span> works the way you intend before you proceed. They won't be graded,
+    but fill them in below. 
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+Finally, prove the main theorem. The inductive cases could be a
+    bit tricky.
+
+<div class="paragraph"> </div>
+
+    Hint 1: Start by trying to prove the main statement, see where you
+    get stuck, and see if you can find a lemma -- perhaps requiring
+    its own inductive proof -- that will allow the main proof to make
+    progress. You might end up with a couple of these.
+
+<div class="paragraph"> </div>
+
+    Hint 2: Lemma <span class="inlinecode"><span class="id" title="var">double_incr_bin</span></span> that you proved above will be
+    helpful, too.
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <a id="bin_nat_bin" class="idref" href="#bin_nat_bin"><span class="id" title="lemma">bin_nat_bin</span></a> : <span class="id" title="keyword">∀</span> <a id="b:78" class="idref" href="#b:78"><span class="id" title="binder">b</span></a>, <a class="idref" href="Induction.html#nat_to_bin"><span class="id" title="axiom">nat_to_bin</span></a> (<a class="idref" href="Induction.html#bin_to_nat"><span class="id" title="axiom">bin_to_nat</span></a> <a class="idref" href="Induction.html#b:78"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Induction.html#normalize"><span class="id" title="axiom">normalize</span></a> <a class="idref" href="Induction.html#b:78"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -931,7 +1048,7 @@ Prove that, if we start with any <span class="inlinecode"><span class="id" title
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-01-30&nbsp;18:21&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-01-30&nbsp;18:27&nbsp;*)</span><br/>
 </div>
 </div>
 
