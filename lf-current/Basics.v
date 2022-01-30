@@ -159,12 +159,8 @@ Proof. simpl. reflexivity.  Qed.
     assignments.  In order for these scripts to work correctly (and
     give you that you get full credit for your work!), please be
     careful to follow these rules:
-      - The grading scripts work by extracting marked regions of the
-        [.v] files that you submit.  It is therefore important that
-        you do not alter the "markup" that delimits exercises: the
-        Exercise header, the name of the exercise, the "empty square
-        bracket" marker at the end, etc.  Please leave this markup
-        exactly as you find it.
+      - Do not change the names of exercises. Otherwise the grading
+        scripts will be unable to find your solution.
       - Do not delete exercises.  If you skip an exercise (e.g.,
         because it is marked "optional," or because you can't solve it),
         it is OK to leave a partial proof in your [.v] file; in
@@ -172,8 +168,7 @@ Proof. simpl. reflexivity.  Qed.
         example [Abort]).
       - It is fine to use additional definitions (of helper functions,
         useful lemmas, etc.) in your solutions.  You can put these
-        between the exercise header and the theorem you are asked to
-        prove.
+        before the theorem you are asked to prove.
       - If you introduce a helper lemma that you end up being unable
         to prove, hence end it with [Admitted], then make sure to also
         end the main theorem in which you use it with [Admitted], not
@@ -1611,4 +1606,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-01-30 18:27 *)
+(* 2022-01-30 18:32 *)
