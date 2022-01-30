@@ -557,7 +557,6 @@ Proof.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (eqb_refl) *)
-
 Theorem eqb_refl : forall n : nat,
   (n =? n) = true.
 Proof.
@@ -701,4 +700,4 @@ Proof.
 
 (** [] *)
 
-(* 2022-01-29 23:18 *)
+(* 2022-01-30 18:21 *)

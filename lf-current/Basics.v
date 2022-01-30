@@ -1289,8 +1289,10 @@ Qed.
 (** **** Exercise: 2 stars, standard (andb_true_elim2)
 
     Prove the following claim, marking cases (and subcases) with
-    bullets when you use [destruct]. Hint: delay introducing the
-    hypothesis until after you have an opportunity to simplify it. *)
+    bullets when you use [destruct]. Hint: You will eventually need to
+    destruct both Booleans, as in the theorems above. But, delay
+    introducing the hypothesis until after you have an opportunity to
+    simplify it. *)
 
 Theorem andb_true_elim2 : forall b c : bool,
   andb b c = true -> c = true.
@@ -1609,4 +1611,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-01-29 23:18 *)
+(* 2022-01-30 18:21 *)
