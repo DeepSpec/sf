@@ -95,8 +95,17 @@ idtac " ".
 idtac "-------------------  mul_comm  --------------------".
 idtac " ".
 
+idtac "#> add_shuffle3".
+idtac "Possible points: 1".
+check_type @add_shuffle3 ((forall n m p : nat, n + (m + p) = m + (n + p))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions add_shuffle3.
+Goal True.
+idtac " ".
+
 idtac "#> mul_comm".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @mul_comm ((forall m n : nat, m * n = n * m)).
 idtac "Assumptions:".
 Abort.
@@ -213,6 +222,8 @@ idtac "---------- add_assoc ---------".
 Print Assumptions add_assoc.
 idtac "---------- double_plus ---------".
 Print Assumptions double_plus.
+idtac "---------- add_shuffle3 ---------".
+Print Assumptions add_shuffle3.
 idtac "---------- mul_comm ---------".
 Print Assumptions mul_comm.
 idtac "---------- bin_to_nat_pres_incr ---------".
@@ -233,4 +244,4 @@ idtac "---------- bin_nat_bin ---------".
 Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2022-02-04 18:17 *)
+(* 2022-02-08 19:39 *)
