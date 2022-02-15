@@ -448,12 +448,12 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 
 <div class="paragraph"> </div>
 
-    (Note: one natural and elegant way of writing <span class="inlinecode"><span class="id" title="var">alternate</span></span> will
-    fail to satisfy Coq's requirement that all <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span> definitions
-    be "obviously terminating."  If you find yourself in this rut,
-    look for a slightly more verbose solution that considers elements
-    of both lists at the same time.  One possible solution involves
-    defining a new kind of pairs, but this is not the only way.)  
+    Hint: there is an elegant way of writing <span class="inlinecode"><span class="id" title="var">alternate</span></span> that fails to
+    satisfy Coq's requirement that all <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span> definitions be
+    <i>structurally recursing</i>, as mentioned in <a href="Basics.html"><span class="inlineref">Basics</span></a>. If you
+    encounter that difficulty, consider pattern matching against both
+    lists at the same time with the "multiple pattern" syntax we've
+    seen before. 
 </div>
 <div class="code">
 
@@ -1510,7 +1510,7 @@ How <i>many</i> elements does the type <span class="inlinecode"><span class="id"
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-02-08&nbsp;19:39&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-02-15&nbsp;02:15&nbsp;*)</span><br/>
 </div>
 </div>
 

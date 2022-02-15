@@ -164,4 +164,4 @@ Proof using.
   introv M. induction l as [|y l']; simpl; rew_listx; rew_isTrue; fequals.
 Qed.
 
-(* 2022-02-08 19:48 *)
+(* 2022-02-15 02:24 *)

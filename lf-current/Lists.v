@@ -326,12 +326,12 @@ Example test_countoddmembers3:
     from the first list and elements from the second.  See the tests
     below for more specific examples.
 
-    (Note: one natural and elegant way of writing [alternate] will
-    fail to satisfy Coq's requirement that all [Fixpoint] definitions
-    be "obviously terminating."  If you find yourself in this rut,
-    look for a slightly more verbose solution that considers elements
-    of both lists at the same time.  One possible solution involves
-    defining a new kind of pairs, but this is not the only way.)  *)
+    Hint: there is an elegant way of writing [alternate] that fails to
+    satisfy Coq's requirement that all [Fixpoint] definitions be
+    _structurally recursing_, as mentioned in [Basics]. If you
+    encounter that difficulty, consider pattern matching against both
+    lists at the same time with the "multiple pattern" syntax we've
+    seen before. *)
 
 Fixpoint alternate (l1 l2 : natlist) : natlist
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1133,4 +1133,4 @@ Inductive baz : Type :=
 Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2022-02-08 19:39 *)
+(* 2022-02-15 02:15 *)
