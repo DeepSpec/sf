@@ -234,6 +234,16 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
+(** **** Exercise: 2 stars, standard (eqb_refl)
+
+    The following theorem relates the computational equality [=?] on
+    [nat] with the definitional equality [=] on [bool]. *)
+Theorem eqb_refl : forall n : nat,
+  (n =? n) = true.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
 (** **** Exercise: 2 stars, standard, optional (even_S)
 
     One inconvenient aspect of our definition of [even n] is the
@@ -562,13 +572,6 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (eqb_refl) *)
-Theorem eqb_refl : forall n : nat,
-  (n =? n) = true.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
-
 (** **** Exercise: 2 stars, standard, optional (add_shuffle3')
 
     The [replace] tactic allows you to specify a particular subterm to
@@ -762,4 +765,4 @@ Proof.
 
 (** [] *)
 
-(* 2022-02-15 14:23 *)
+(* 2022-02-15 14:25 *)

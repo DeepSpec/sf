@@ -457,12 +457,12 @@ Example test_remove_all3:  count 4 (remove_all 5 [2;1;4;5;1;4]) = 2.
 Example test_remove_all4:  count 5 (remove_all 5 [2;1;5;4;5;1;4;5;1;4]) = 0.
  (* FILL IN HERE *) Admitted.
 
-Fixpoint subset (s1 : bag) (s2 : bag) : bool
+Fixpoint included (s1 : bag) (s2 : bag) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Example test_subset1:              subset [1;2] [2;1;4;1] = true.
+Example test_included1:              included [1;2] [2;1;4;1] = true.
  (* FILL IN HERE *) Admitted.
-Example test_subset2:              subset [1;2;2] [2;1;4;1] = false.
+Example test_included2:              included [1;2;2] [2;1;4;1] = false.
  (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -1127,4 +1127,4 @@ Inductive baz : Type :=
 
 (** [] *)
 
-(* 2022-02-15 14:23 *)
+(* 2022-02-15 14:25 *)

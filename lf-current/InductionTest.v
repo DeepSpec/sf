@@ -83,6 +83,18 @@ Print Assumptions double_plus.
 Goal True.
 idtac " ".
 
+idtac "-------------------  eqb_refl  --------------------".
+idtac " ".
+
+idtac "#> eqb_refl".
+idtac "Possible points: 2".
+check_type @eqb_refl ((forall n : nat, (n =? n) = true)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions eqb_refl.
+Goal True.
+idtac " ".
+
 idtac "-------------------  add_comm_informal  --------------------".
 idtac " ".
 
@@ -187,8 +199,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 13".
-idtac "Max points - advanced: 23".
+idtac "Max points - standard: 15".
+idtac "Max points - advanced: 25".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -222,6 +234,8 @@ idtac "---------- add_assoc ---------".
 Print Assumptions add_assoc.
 idtac "---------- double_plus ---------".
 Print Assumptions double_plus.
+idtac "---------- eqb_refl ---------".
+Print Assumptions eqb_refl.
 idtac "---------- add_shuffle3 ---------".
 Print Assumptions add_shuffle3.
 idtac "---------- mul_comm ---------".
@@ -244,4 +258,4 @@ idtac "---------- bin_nat_bin ---------".
 Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2022-02-15 14:23 *)
+(* 2022-02-15 14:25 *)
