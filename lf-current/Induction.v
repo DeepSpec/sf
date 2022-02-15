@@ -257,8 +257,6 @@ Proof.
 (* FILL IN HERE *)
 *)
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_destruct_induction : option (nat*string) := None.
 (** [] *)
 
 (* ################################################################# *)
@@ -495,6 +493,21 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
+(** **** Exercise: 2 stars, standard, optional (plus_leb_compat_l)
+
+    If a hypothesis has the form [H: P -> a = b], then [rewrite H] will
+    rewrite [a] to [b] in the goal, and add [P] as a new subgoal. Use
+    that in the inductive step of this exercise. *)
+
+Check leb.
+
+Theorem plus_leb_compat_l : forall n m p : nat,
+  n <=? m = true -> (p + n) <=? (p + m) = true.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
 (** **** Exercise: 3 stars, standard, optional (more_exercises)
 
     Take a piece of paper.  For each of the following theorems, first
@@ -504,8 +517,6 @@ Proof.
     down your prediction.  Then fill in the proof.  (There is no need
     to turn in your piece of paper; this is just to encourage you to
     reflect before you hack!) *)
-
-Check leb.
 
 Theorem leb_refl : forall n:nat,
   (n <=? n) = true.
@@ -519,11 +530,6 @@ Proof.
 
 Theorem andb_false_r : forall b : bool,
   andb b false = false.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-Theorem plus_leb_compat_l : forall n m p : nat,
-  n <=? m = true -> (p + n) <=? (p + m) = true.
 Proof.
   (* FILL IN HERE *) Admitted.
 
@@ -756,4 +762,4 @@ Proof.
 
 (** [] *)
 
-(* 2022-02-15 02:15 *)
+(* 2022-02-15 02:16 *)
