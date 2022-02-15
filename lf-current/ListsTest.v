@@ -333,12 +333,27 @@ Print Assumptions NatList.remove_does_not_increase_count.
 Goal True.
 idtac " ".
 
+idtac "-------------------  involution_injective  --------------------".
+idtac " ".
+
+idtac "#> NatList.involution_injective".
+idtac "Advanced".
+idtac "Possible points: 3".
+check_type @NatList.involution_injective (
+(forall f : nat -> nat,
+ (forall n : nat, n = f (f n)) -> forall n1 n2 : nat, f n1 = f n2 -> n1 = n2)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions NatList.involution_injective.
+Goal True.
+idtac " ".
+
 idtac "-------------------  rev_injective  --------------------".
 idtac " ".
 
 idtac "#> NatList.rev_injective".
 idtac "Advanced".
-idtac "Possible points: 6".
+idtac "Possible points: 2".
 check_type @NatList.rev_injective (
 (forall l1 l2 : NatList.natlist, NatList.rev l1 = NatList.rev l2 -> l1 = l2)).
 idtac "Assumptions:".
@@ -413,7 +428,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 19".
-idtac "Max points - advanced: 31".
+idtac "Max points - advanced: 30".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -495,8 +510,10 @@ idtac "---------- NatList.test_alternate4 ---------".
 Print Assumptions NatList.test_alternate4.
 idtac "---------- NatList.remove_does_not_increase_count ---------".
 Print Assumptions NatList.remove_does_not_increase_count.
+idtac "---------- NatList.involution_injective ---------".
+Print Assumptions NatList.involution_injective.
 idtac "---------- NatList.rev_injective ---------".
 Print Assumptions NatList.rev_injective.
 Abort.
 
-(* 2022-02-15 14:26 *)
+(* 2022-02-15 14:28 *)

@@ -824,6 +824,8 @@ Theorem rev_app_distr: forall l1 l2 : natlist,
 Proof.
   (* FILL IN HERE *) Admitted.
 
+(** An _involution_ is a function that is its own inverse. That is,
+    applying the function twice yield the original input. *)
 Theorem rev_involutive : forall l : natlist,
   rev (rev l) = l.
 Proof.
@@ -920,10 +922,26 @@ Proof.
 
     [] *)
 
-(** **** Exercise: 4 stars, advanced (rev_injective)
+(** **** Exercise: 3 stars, advanced (involution_injective) *)
 
-    Prove that the [rev] function is injective. There is a hard way
-    and an easy way to do this. *)
+(** Prove that every involution is injective. Involutions were defined
+    above in [rev_involutive]. An _injective_ function is one-to-one:
+    it maps distinct inputs to distinct outputs, without any
+    collisions. *)
+
+Theorem involution_injective : forall (f : nat -> nat),
+    (forall n : nat, n = f (f n)) -> (forall n1 n2 : nat, f n1 = f n2 -> n1 = n2).
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 2 stars, advanced (rev_injective)
+
+    Prove that [rev] is injective. Do not prove this by induction --
+    that would be hard. Instead, re-use the same proof technique that
+    you used for [involution_injective]. Do not try to use that
+    exercise as a lemma; the types are not the same. *)
 
 Theorem rev_injective : forall (l1 l2 : natlist),
   rev l1 = rev l2 -> l1 = l2.
@@ -1127,4 +1145,4 @@ Inductive baz : Type :=
 
 (** [] *)
 
-(* 2022-02-15 14:26 *)
+(* 2022-02-15 14:28 *)
