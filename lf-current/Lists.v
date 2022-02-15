@@ -303,6 +303,12 @@ Example test_oddmembers:
   oddmembers [0;1;0;2;3;0;0] = [1;3].
   (* FILL IN HERE *) Admitted.
 
+(** For [countoddmembers], we're giving you a header that uses keyword
+    [Definition] instead of [Fixpoint].  The point of stating the
+    question this way is to encourage you to implement the function by
+    using already-defined functions, rather than writing your own
+    recursive definition. *)
+
 Definition countoddmembers (l:natlist) : nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
@@ -382,14 +388,9 @@ Example test_count2:              count 6 [1;2;3;1;4;1] = 0.
     [union] on multisets a little bit differently -- using max instead
     of sum -- which is why we don't call this operation [union].)
 
-    For [sum], we're giving you a header that does not give explicit
-    names to the arguments.  Moreover, it uses the keyword
-    [Definition] instead of [Fixpoint], so even if you had names for
-    the arguments, you wouldn't be able to process them recursively.
-    The point of stating the question this way is to encourage you to
-    think about whether [sum] can be implemented in another way --
-    perhaps by using one or more functions that have already been
-    defined. *)
+    We've deliberately given you a header that does not give explicit
+    names to the arguments.  Implement [sum] with an already-defined
+    function without changing the header. *)
 
 Definition sum : bag -> bag -> bag
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.

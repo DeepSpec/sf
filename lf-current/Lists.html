@@ -422,7 +422,18 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_oddmembers" class="idref" href="#NatList.test_oddmembers"><span class="id" title="definition">test_oddmembers</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Lists.html#NatList.oddmembers"><span class="id" title="axiom">oddmembers</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>0<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>0<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>2<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>0<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>0<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">[</span></a>1<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">;</span></a>3<a class="idref" href="Lists.html#62815778618d6f51cd0f9ac90bf0e8be"><span class="id" title="notation">]</span></a>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+For <span class="inlinecode"><span class="id" title="var">countoddmembers</span></span>, we're giving you a header that uses keyword
+    <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> instead of <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>.  The point of stating the
+    question this way is to encourage you to implement the function by
+    using already-defined functions, rather than writing your own
+    recursive definition. 
+</div>
+<div class="code">
+
 <span class="id" title="keyword">Definition</span> <a id="NatList.countoddmembers" class="idref" href="#NatList.countoddmembers"><span class="id" title="definition">countoddmembers</span></a> (<a id="l:45" class="idref" href="#l:45"><span class="id" title="binder">l</span></a>:<a class="idref" href="Lists.html#NatList.natlist"><span class="id" title="inductive">natlist</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="NatList.test_countoddmembers1" class="idref" href="#NatList.test_countoddmembers1"><span class="id" title="definition">test_countoddmembers1</span></a>:<br/>
@@ -519,14 +530,9 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 
 <div class="paragraph"> </div>
 
-    For <span class="inlinecode"><span class="id" title="var">sum</span></span>, we're giving you a header that does not give explicit
-    names to the arguments.  Moreover, it uses the keyword
-    <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> instead of <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>, so even if you had names for
-    the arguments, you wouldn't be able to process them recursively.
-    The point of stating the question this way is to encourage you to
-    think about whether <span class="inlinecode"><span class="id" title="var">sum</span></span> can be implemented in another way --
-    perhaps by using one or more functions that have already been
-    defined. 
+    We've deliberately given you a header that does not give explicit
+    names to the arguments.  Implement <span class="inlinecode"><span class="id" title="var">sum</span></span> with an already-defined
+    function without changing the header. 
 </div>
 <div class="code">
 
