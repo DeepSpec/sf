@@ -406,7 +406,7 @@ Example test_add1:                count 1 (add 1 [1;4;1]) = 3.
 Example test_add2:                count 5 (add 1 [1;4;1]) = 0.
  (* FILL IN HERE *) Admitted.
 
-Definition member (v : nat) (s : bag) : bool
+Fixpoint member (v : nat) (s : bag) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Example test_member1:             member 1 [1;4;1] = true.
@@ -1127,4 +1127,4 @@ Inductive baz : Type :=
 
 (** [] *)
 
-(* 2022-02-15 14:21 *)
+(* 2022-02-15 14:23 *)
