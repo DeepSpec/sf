@@ -781,7 +781,12 @@ Fixpoint exp (base power : nat) : nat :=
        factorial(0)  =  1
        factorial(n)  =  n * factorial(n-1)     (if n>0)
 
-    Translate this into Coq. *)
+    Translate this into Coq.
+
+    Make sure you put a [:=] between the header we've given you and
+    your definition.  If you see an error like "The reference
+    factorial was not found in the current environment," it means
+    you've forgotten the [:=]. *)
 
 Fixpoint factorial (n:nat) : nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1610,4 +1615,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2022-02-15 02:16 *)
+(* 2022-02-15 14:21 *)

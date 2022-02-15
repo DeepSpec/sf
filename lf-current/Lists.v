@@ -365,12 +365,7 @@ Definition bag := natlist.
 (** **** Exercise: 3 stars, standard, especially useful (bag_functions)
 
     Complete the following definitions for the functions [count],
-    [sum], [add], and [member] for bags.
-    
-    For each, make sure you put a [:=] between the header we've given
-    you and whatever you add.  If you see an error like "The reference
-    count was not found in the current environment," it means you've
-    forgotten the [:=]. *)
+    [sum], [add], and [member] for bags. *)
 
 Fixpoint count (v : nat) (s : bag) : nat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1129,8 +1124,6 @@ Inductive baz : Type :=
 
 (* FILL IN HERE *)
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_baz_num_elts : option (nat*string) := None.
 (** [] *)
 
-(* 2022-02-15 02:16 *)
+(* 2022-02-15 14:21 *)

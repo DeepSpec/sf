@@ -858,4 +858,4 @@ Proof using.
   { applys triple_set. }
 Qed.
 
-(* 2022-02-15 02:24 *)
+(* 2022-02-15 14:29 *)
