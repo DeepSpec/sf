@@ -96,14 +96,13 @@ Proof.
 
   symmetry. apply H.  Qed.
 
-(** **** Exercise: 3 stars, standard (apply_exercise1)
+(** **** Exercise: 2 stars, standard (apply_exercise1)
 
-    _Hint_: You can also use [apply] with previously defined lemmas,
-    not just hypotheses in the context.  You may find earlier lemmas
-    like [app_nil_r], [app_assoc], [rev_app_distr], [rev_involutive],
-    etc. helpful.  Also, remember that [Search] is your friend (though
-    it may not find earlier lemmas if they were posed as optional
-    problems and you chose not to finish the proofs). *)
+    You can use [apply] with previously defined theorems, not
+    just hypotheses in the context.  Use [Search] to find a
+    previously-defined theorem about [rev] from [Lists].  Use
+    that theorem as part of your (relatively short) solution to this
+    exercise. You do not need [induction]. *)
 
 Theorem rev_exercise1 : forall (l l' : list nat),
   l = rev l' ->
@@ -1195,4 +1194,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2022-02-16 01:29 *)
+(* 2022-02-16 01:30 *)
