@@ -1669,19 +1669,16 @@ When we come to the second equality test in the body
 <div class="paragraph"> </div>
 
 <a id="lab171"></a><h4 class="section">Exercise: 3 stars, advanced (split_combine)</h4>
- We proved, in an exercise above, that for all lists of pairs,
-    <span class="inlinecode"><span class="id" title="var">combine</span></span> is the inverse of <span class="inlinecode"><span class="id" title="tactic">split</span></span>.  How would you formalize the
-    statement that <span class="inlinecode"><span class="id" title="tactic">split</span></span> is the inverse of <span class="inlinecode"><span class="id" title="var">combine</span></span>?  When is this
-    property true?
+ We proved, in an exercise above, that <span class="inlinecode"><span class="id" title="var">combine</span></span> is the inverse of
+    <span class="inlinecode"><span class="id" title="tactic">split</span></span>.  Complete the definition of <span class="inlinecode"><span class="id" title="var">split_combine_statement</span></span>
+    below with a property that states that <span class="inlinecode"><span class="id" title="tactic">split</span></span> is the inverse of
+    <span class="inlinecode"><span class="id" title="var">combine</span></span>. Then, prove that the property holds.
 
 <div class="paragraph"> </div>
 
-    Complete the definition of <span class="inlinecode"><span class="id" title="var">split_combine_statement</span></span> below with a
-    property that states that <span class="inlinecode"><span class="id" title="tactic">split</span></span> is the inverse of
-    <span class="inlinecode"><span class="id" title="var">combine</span></span>. Then, prove that the property holds. (Be sure to leave
-    your induction hypothesis general by not doing <span class="inlinecode"><span class="id" title="tactic">intros</span></span> on more
-    things than necessary.  Hint: what property do you need of <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span>
-    and <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span></span> for <span class="inlinecode"><span class="id" title="tactic">split</span></span> <span class="inlinecode">(<span class="id" title="var">combine</span></span> <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">l<sub>2</sub></span>)</span> <span class="inlinecode">=</span> <span class="inlinecode">(<span class="id" title="var">l<sub>1</sub></span>,<span class="id" title="var">l<sub>2</sub></span>)</span> to be true?) 
+    Hint: Take a look at the definition of <span class="inlinecode"><span class="id" title="var">combine</span></span> in <a href="Poly.html"><span class="inlineref">Poly</span></a>.
+    Your property will need to account for the behavior of <span class="inlinecode"><span class="id" title="var">combine</span></span>
+    in its base cases, which possibly drop some list elements. 
 </div>
 <div class="code">
 
@@ -1775,7 +1772,7 @@ When we come to the second equality test in the body
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-02-16&nbsp;01:30&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-02-16&nbsp;01:31&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -1091,17 +1091,14 @@ Proof.
 
 (** **** Exercise: 3 stars, advanced (split_combine)
 
-    We proved, in an exercise above, that for all lists of pairs,
-    [combine] is the inverse of [split].  How would you formalize the
-    statement that [split] is the inverse of [combine]?  When is this
-    property true?
+    We proved, in an exercise above, that [combine] is the inverse of
+    [split].  Complete the definition of [split_combine_statement]
+    below with a property that states that [split] is the inverse of
+    [combine]. Then, prove that the property holds.
 
-    Complete the definition of [split_combine_statement] below with a
-    property that states that [split] is the inverse of
-    [combine]. Then, prove that the property holds. (Be sure to leave
-    your induction hypothesis general by not doing [intros] on more
-    things than necessary.  Hint: what property do you need of [l1]
-    and [l2] for [split (combine l1 l2) = (l1,l2)] to be true?) *)
+    Hint: Take a look at the definition of [combine] in [Poly].
+    Your property will need to account for the behavior of [combine]
+    in its base cases, which possibly drop some list elements. *)
 
 Definition split_combine_statement : Prop
   (* ("[: Prop]" means that we are giving a name to a
@@ -1194,4 +1191,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2022-02-16 01:30 *)
+(* 2022-02-16 01:31 *)
