@@ -1393,20 +1393,30 @@ Write down a theorem <span class="inlinecode"><span class="id" title="var">fold_
 <div class="paragraph"> </div>
 
 <a id="lab140"></a><h4 class="section">Exercise: 2 stars, advanced (currying)</h4>
- In Coq, a function <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">C</span></span> really has the type <span class="inlinecode"><span class="id" title="var">A</span></span>
-    <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">C</span>)</span>.  That is, if you give <span class="inlinecode"><span class="id" title="var">f</span></span> a value of type <span class="inlinecode"><span class="id" title="var">A</span></span>, it
-    will give you function <span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">C</span></span>.  If you then give <span class="inlinecode"><span class="id" title="var">f'</span></span> a
-    value of type <span class="inlinecode"><span class="id" title="var">B</span></span>, it will return a value of type <span class="inlinecode"><span class="id" title="var">C</span></span>.  This
-    allows for partial application, as in <span class="inlinecode"><span class="id" title="var">plus3</span></span>.  Processing a list
-    of arguments with functions that return functions is called
-    <i>currying</i>, in honor of the logician Haskell Curry.
+ The type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> can be read as a function that takes two
+    arguments, one of type <span class="inlinecode"><span class="id" title="var">X</span></span> and another of type <span class="inlinecode"><span class="id" title="var">Y</span></span>, and returns an
+    output of type <span class="inlinecode"><span class="id" title="var">Z</span></span>. But strictly speaking, that type is actually
+    <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span>)</span> when fully parenthesized.  So if <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>,
+    and you give <span class="inlinecode"><span class="id" title="var">f</span></span> an input of type <span class="inlinecode"><span class="id" title="var">X</span></span>, it will give you as output
+    a function of type <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>.  If you then give that function an
+    input of type <span class="inlinecode"><span class="id" title="var">Y</span></span>, it will return an output of type <span class="inlinecode"><span class="id" title="var">Z</span></span>. Thus,
+    every function takes only one input, but can return a function as
+    output. This is what enables partial application, as we saw above
+    with <span class="inlinecode"><span class="id" title="var">plus3</span></span>.
 
 <div class="paragraph"> </div>
 
-    Conversely, we can reinterpret the type <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">B</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">C</span></span> as <span class="inlinecode">(<span class="id" title="var">A</span></span> <span class="inlinecode">×</span>
-    <span class="inlinecode"><span class="id" title="var">B</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">C</span></span>.  This is called <i>uncurrying</i>.  With an uncurried binary
-    function, both arguments must be given at once as a pair; there is
-    no partial application. 
+    On the other hand, the type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> -- which is fully
+    parenthesized as <span class="inlinecode">(<span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> -- would require its single input
+    to be a pair.  Both arguments must be given at once; there is no
+    possibility of partial application.
+
+<div class="paragraph"> </div>
+
+    It is possible to convert a function between these two types.
+    Converting from <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> to <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> is called <i>currying</i>,
+    in honor of logician Haskell Curry.  Converting from <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>
+    to <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> is called <i>uncurrying</i>.  
 <div class="paragraph"> </div>
 
  We can define currying as follows: 
@@ -1644,7 +1654,7 @@ Complete the definitions of the following functions. Make sure
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises"><span class="id" title="module">Exercises</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-02-16&nbsp;01:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-02-16&nbsp;01:19&nbsp;*)</span><br/>
 </div>
 </div>
 

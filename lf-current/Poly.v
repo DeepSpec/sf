@@ -963,18 +963,26 @@ Definition manual_grade_for_fold_map : option (nat*string) := None.
 
 (** **** Exercise: 2 stars, advanced (currying)
 
-    In Coq, a function [f : A -> B -> C] really has the type [A
-    -> (B -> C)].  That is, if you give [f] a value of type [A], it
-    will give you function [f' : B -> C].  If you then give [f'] a
-    value of type [B], it will return a value of type [C].  This
-    allows for partial application, as in [plus3].  Processing a list
-    of arguments with functions that return functions is called
-    _currying_, in honor of the logician Haskell Curry.
+    The type [X -> Y -> Z] can be read as a function that takes two
+    arguments, one of type [X] and another of type [Y], and returns an
+    output of type [Z]. But strictly speaking, that type is actually
+    [X -> (Y -> Z)] when fully parenthesized.  So if [f : X -> Y -> Z],
+    and you give [f] an input of type [X], it will give you as output
+    a function of type [Y -> Z].  If you then give that function an
+    input of type [Y], it will return an output of type [Z]. Thus,
+    every function takes only one input, but can return a function as
+    output. This is what enables partial application, as we saw above
+    with [plus3].
 
-    Conversely, we can reinterpret the type [A -> B -> C] as [(A *
-    B) -> C].  This is called _uncurrying_.  With an uncurried binary
-    function, both arguments must be given at once as a pair; there is
-    no partial application. *)
+    On the other hand, the type [X * Y -> Z] -- which is fully
+    parenthesized as [(X * Y) -> Z] -- would require its single input
+    to be a pair.  Both arguments must be given at once; there is no
+    possibility of partial application.
+
+    It is possible to convert a function between these two types.
+    Converting from [X * Y -> Z] to [X -> Y -> Z] is called _currying_,
+    in honor of logician Haskell Curry.  Converting from [X -> Y -> Z]
+    to [X * Y -> Z] is called _uncurrying_.  *)
 
 (** We can define currying as follows: *)
 
@@ -1154,4 +1162,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2022-02-16 01:18 *)
+(* 2022-02-16 01:19 *)
