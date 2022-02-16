@@ -331,7 +331,7 @@ Proof. reflexivity. Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Supplying Type Arguments Explicitly *)
 
-(** One small problem with declaring arguments [Implicit] is
+(** One small problem with declaring arguments to be implicit is
     that, once in a while, Coq does not have enough local information
     to determine a type argument; in such cases, we need to tell Coq
     that we want to give the argument explicitly just this time.  For
@@ -1154,4 +1154,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2022-02-15 14:28 *)
+(* 2022-02-16 01:18 *)
