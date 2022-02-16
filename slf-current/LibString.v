@@ -18,4 +18,4 @@ Require Export Coq.Strings.String.
 Instance Inhab_string : Inhab string.
 Proof using. apply (Inhab_of_val EmptyString). Qed.
 
-(* 2022-02-16 01:39 *)
+(* 2022-02-16 01:40 *)

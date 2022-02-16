@@ -1113,11 +1113,7 @@ Proof.
 Definition manual_grade_for_split_combine : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (filter_exercise)
-
-    This one is a bit challenging.  Pay attention to the form of your
-    induction hypothesis. *)
-
+(** **** Exercise: 3 stars, advanced (filter_exercise) *)
 Theorem filter_exercise : forall (X : Type) (test : X -> bool)
                                  (x : X) (l lf : list X),
   filter test l = x :: lf ->
@@ -1191,4 +1187,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2022-02-16 01:31 *)
+(* 2022-02-16 01:32 *)
