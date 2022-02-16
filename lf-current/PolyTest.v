@@ -256,37 +256,49 @@ idtac "Possible points: 2".
 print_manual_grade Exercises.manual_grade_for_informal_proof.
 idtac " ".
 
-idtac "-------------------  church_succ  --------------------".
+idtac "-------------------  church_scc  --------------------".
 idtac " ".
 
-idtac "#> Exercises.Church.succ_2".
+idtac "#> Exercises.Church.scc_2".
 idtac "Advanced".
-idtac "Possible points: 0.5".
-check_type @Exercises.Church.succ_2 (
-(Exercises.Church.succ Exercises.Church.one = Exercises.Church.two)).
+idtac "Possible points: 1".
+check_type @Exercises.Church.scc_2 (
+(Exercises.Church.scc Exercises.Church.one = Exercises.Church.two)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions Exercises.Church.succ_2.
+Print Assumptions Exercises.Church.scc_2.
 Goal True.
 idtac " ".
 
-idtac "#> Exercises.Church.succ_3".
+idtac "#> Exercises.Church.scc_3".
 idtac "Advanced".
-idtac "Possible points: 0.5".
-check_type @Exercises.Church.succ_3 (
-(Exercises.Church.succ Exercises.Church.two = Exercises.Church.three)).
+idtac "Possible points: 1".
+check_type @Exercises.Church.scc_3 (
+(Exercises.Church.scc Exercises.Church.two = Exercises.Church.three)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions Exercises.Church.succ_3.
+Print Assumptions Exercises.Church.scc_3.
 Goal True.
 idtac " ".
 
 idtac "-------------------  church_plus  --------------------".
 idtac " ".
 
+idtac "#> Exercises.Church.plus_1".
+idtac "Advanced".
+idtac "Possible points: 1".
+check_type @Exercises.Church.plus_1 (
+(Exercises.Church.plus Exercises.Church.zero Exercises.Church.one =
+ Exercises.Church.one)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions Exercises.Church.plus_1.
+Goal True.
+idtac " ".
+
 idtac "#> Exercises.Church.plus_2".
 idtac "Advanced".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @Exercises.Church.plus_2 (
 (Exercises.Church.plus Exercises.Church.two Exercises.Church.three =
  Exercises.Church.plus Exercises.Church.three Exercises.Church.two)).
@@ -298,7 +310,7 @@ idtac " ".
 
 idtac "#> Exercises.Church.plus_3".
 idtac "Advanced".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @Exercises.Church.plus_3 (
 (Exercises.Church.plus
    (Exercises.Church.plus Exercises.Church.two Exercises.Church.two)
@@ -316,7 +328,7 @@ idtac " ".
 
 idtac "#> Exercises.Church.mult_1".
 idtac "Advanced".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @Exercises.Church.mult_1 (
 (Exercises.Church.mult Exercises.Church.one Exercises.Church.one =
  Exercises.Church.one)).
@@ -328,7 +340,7 @@ idtac " ".
 
 idtac "#> Exercises.Church.mult_2".
 idtac "Advanced".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @Exercises.Church.mult_2 (
 (Exercises.Church.mult Exercises.Church.zero
    (Exercises.Church.plus Exercises.Church.three Exercises.Church.three) =
@@ -356,7 +368,7 @@ idtac " ".
 
 idtac "#> Exercises.Church.exp_1".
 idtac "Advanced".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @Exercises.Church.exp_1 (
 (Exercises.Church.exp Exercises.Church.two Exercises.Church.two =
  Exercises.Church.plus Exercises.Church.two Exercises.Church.two)).
@@ -368,7 +380,7 @@ idtac " ".
 
 idtac "#> Exercises.Church.exp_2".
 idtac "Advanced".
-idtac "Possible points: 0.5".
+idtac "Possible points: 1".
 check_type @Exercises.Church.exp_2 (
 (Exercises.Church.exp Exercises.Church.three Exercises.Church.zero =
  Exercises.Church.one)).
@@ -396,7 +408,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 21".
-idtac "Max points - advanced: 31".
+idtac "Max points - advanced: 36".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -462,10 +474,12 @@ idtac "---------- Exercises.curry_uncurry ---------".
 Print Assumptions Exercises.curry_uncurry.
 idtac "---------- informal_proof ---------".
 idtac "MANUAL".
-idtac "---------- Exercises.Church.succ_2 ---------".
-Print Assumptions Exercises.Church.succ_2.
-idtac "---------- Exercises.Church.succ_3 ---------".
-Print Assumptions Exercises.Church.succ_3.
+idtac "---------- Exercises.Church.scc_2 ---------".
+Print Assumptions Exercises.Church.scc_2.
+idtac "---------- Exercises.Church.scc_3 ---------".
+Print Assumptions Exercises.Church.scc_3.
+idtac "---------- Exercises.Church.plus_1 ---------".
+Print Assumptions Exercises.Church.plus_1.
 idtac "---------- Exercises.Church.plus_2 ---------".
 Print Assumptions Exercises.Church.plus_2.
 idtac "---------- Exercises.Church.plus_3 ---------".
@@ -484,4 +498,4 @@ idtac "---------- Exercises.Church.exp_3 ---------".
 Print Assumptions Exercises.Church.exp_3.
 Abort.
 
-(* 2022-02-16 01:19 *)
+(* 2022-02-16 01:25 *)

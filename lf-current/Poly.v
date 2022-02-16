@@ -1044,6 +1044,9 @@ Proof.
 Definition manual_grade_for_informal_proof : option (nat*string) := None.
 (** [] *)
 
+(* ================================================================= *)
+(** ** Church Numerals (Advanced) *)
+
 (** The following exercises explore an alternative way of defining
     natural numbers, using the so-called _Church numerals_, named
     after mathematician Alonzo Church.  We can represent a natural
@@ -1072,38 +1075,84 @@ Definition zero : cnat :=
   fun (X : Type) (f : X -> X) (x : X) => x.
 
 (** More generally, a number [n] can be written as [fun X f x => f (f
-    ... (f x) ...)], with [n] occurrences of [f].  Notice in
-    particular how the [doit3times] function we've defined previously
-    is actually just the Church representation of [3]. *)
+    ... (f x) ...)], with [n] occurrences of [f].  Let's informally
+    notate that as [fun X f x => f^n x], with the convention that [f^0 x]
+    is just [x]. Note how the [doit3times] function we've defined
+    previously is actually just the Church representation of [3]. *)
 
 Definition three : cnat := @doit3times.
 
-(** Complete the definitions of the following functions. Make sure
-    that the corresponding unit tests pass by proving them with
+(** So [n X f x] represents "do it [n] times", where [n] is a Church
+    numerals and "it" means applying [f] starting with [x].
+
+    Another way to think about the Church representation is that
+    function [f] represents the successor operation on [X], and value
+    [x] represents the zero element of [X].  We could even rewrite
+    with those names to make it clearer: *)
+
+Definition zero' : cnat :=
+  fun (X : Type) (succ : X -> X) (zero : X) => zero.
+Definition one' : cnat :=
+  fun (X : Type) (succ : X -> X) (zero : X) => succ zero.
+Definition two' : cnat :=
+  fun (X : Type) (succ : X -> X) (zero : X) => succ (succ zero).
+
+(** If we passed in [S] as [succ] and [O] as [zero], we'd even get the Peano
+    naturals as a result: *)
+
+Example zero_church_peano : zero nat S O = 0.
+Proof. reflexivity. Qed.
+
+Example one_church_peano : one nat S O = 1.
+Proof. reflexivity. Qed.
+
+Example two_church_peano : two nat S O = 2.
+Proof. reflexivity. Qed.
+
+(** But the intellectually exciting implication of the Church numerals
+    is that we don't strictly need the natural numbers to be built-in
+    to a functional programming language, or even to be definable with
+    an inductive data type. It's possible to represent them purely (if
+    not efficiently) with functions.
+
+    Of course, it's not enough to represent numerals; we need to be
+    able to do arithmetic with them. Show that we can by completing
+    the definitions of the following functions. Make sure that the
+    corresponding unit tests pass by proving them with
     [reflexivity]. *)
 
-(** **** Exercise: 1 star, advanced (church_succ) *)
+(** **** Exercise: 2 stars, advanced (church_scc) *)
 
-(** Successor of a natural number: given a Church numeral [n],
-    the successor [succ n] is a function that iterates its
-    argument once more than [n]. *)
-Definition succ (n : cnat) : cnat
+(** Define a function that computes the successor of a Church numeral.
+    Given a Church numeral [n], its successor [scc n] should iterate
+    its function argument once more than [n]. That is, given [fun X f x
+    => f^n x] as input, [scc] should produce [fun X f x => f^(n+1) x] as
+    output. In other words, do it [n] times, then do it once more. *)
+
+Definition scc (n : cnat) : cnat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Example succ_1 : succ zero = one.
+Example scc_1 : scc zero = one.
 Proof. (* FILL IN HERE *) Admitted.
 
-Example succ_2 : succ one = two.
+Example scc_2 : scc one = two.
 Proof. (* FILL IN HERE *) Admitted.
 
-Example succ_3 : succ two = three.
+Example scc_3 : scc two = three.
 Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(** **** Exercise: 1 star, advanced (church_plus) *)
+(** **** Exercise: 3 stars, advanced (church_plus) *)
 
-(** Addition of two natural numbers: *)
+(** Define a function that computes the addition of two Church
+    numerals.  Given [fun X f^n x] and [fun X f^m x] as input, [plus]
+    should produce [fun X f^(n + m) x] as output.  In other words, do it
+    [n] times, then do it [m] more times.
+
+    Hint: the "zero" argument to a Church numeral need not be just
+    [x]. *)
+
 Definition plus (n m : cnat) : cnat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
@@ -1119,9 +1168,20 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced (church_mult) *)
+(** **** Exercise: 3 stars, advanced (church_mult) *)
 
-(** Multiplication: *)
+(** Define a function that computes the multiplication of two Church
+    numerals.
+
+    Hint: the "successor" argument to a Church numeral need not be
+    just [f].
+
+    Warning: Coq will not let you pass [cnat] itself as the type [X]
+    argument to a Church numeral; you will get a "Universe
+    inconsistency" error. That is Coq's way of preventing a paradox in
+    which a type contains itself. So, leave the type argument
+    unchanged. *)
+
 Definition mult (n m : cnat) : cnat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
@@ -1136,14 +1196,16 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced (church_exp) *)
+(** **** Exercise: 3 stars, advanced (church_exp) *)
 
 (** Exponentiation: *)
 
-(** (_Hint_: Polymorphism plays a crucial role here.  However,
-    choosing the right type to iterate over can be tricky.  If you hit
-    a "Universe inconsistency" error, try iterating over a different
-    type.  Iterating over [cnat] itself is usually problematic.) *)
+(** Define a function that computes the exponentiation of two Church
+    numerals.
+
+    Hint: the type argument to a Church numeral need not just be [X].
+    But again, you cannot pass [cnat] itself as the type argument.
+    Finding the right type can be tricky. *)
 
 Definition exp (n m : cnat) : cnat
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1162,4 +1224,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2022-02-16 01:19 *)
+(* 2022-02-16 01:25 *)
