@@ -270,7 +270,7 @@ End ExamplePrettyAssertions.
 
     - [forall m, {{X = m}} X := X + 1 {{X = m + 1}}], is a
       _proposition_ stating that the Hoare triple [{{X = m}} X := X +
-      m {{X = m * 2}}]) is valid for any choice of [m].  Note that [m]
+      m {{X = m + 1}}] is valid for any choice of [m].  Note that [m]
       in the two assertions and the command in the middle is a
       reference to the _Coq_ variable [m], which is bound outside the
       Hoare triple. *)
@@ -2304,4 +2304,4 @@ End HoareAssertAssume.
 (** [] *)
 
 
-(* 2022-02-16 01:33 *)
+(* 2022-02-25 13:35 *)
