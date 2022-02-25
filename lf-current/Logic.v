@@ -376,9 +376,11 @@ Proof.
 (** **** Exercise: 2 stars, standard, optional (not_implies_our_not)
 
     Show that Coq's definition of negation implies the intuitive one
-    mentioned above: *)
+    mentioned above. Hint: while getting accustomed to Coq's
+    definition of [not], you might find it helpful to [unfold not]
+    near the beginning of proofs. *)
 
-Fact not_implies_our_not : forall (P:Prop),
+Theorem not_implies_our_not : forall (P:Prop),
   ~ P -> (forall (Q:Prop), P -> Q).
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -756,10 +758,10 @@ Theorem leb_plus_exists : forall n m, n <=? m = true -> exists x, m = n+x.
 Proof.
 (* FILL IN HERE *) Admitted.
 
-Theorem plus_exists_le : forall n m, (exists x, m = n+x) -> n <=? m = true.
+Theorem plus_exists_leb : forall n m, (exists x, m = n+x) -> n <=? m = true.
 Proof.
-  (* Hint: An auxiliary lemma proved by induction may be useful. *)
   (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (* ################################################################# *)
@@ -1721,4 +1723,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2022-02-25 13:34 *)
+(* 2022-02-25 13:35 *)
