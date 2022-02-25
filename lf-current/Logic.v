@@ -473,6 +473,20 @@ Proof.
 Definition manual_grade_for_informal_not_PNP : option (nat*string) := None.
 (** [] *)
 
+(** **** Exercise: 2 stars, standard (de_morgan_not_or)
+
+    _De Morgan's Laws_, named for Augustus De Morgan, describe how
+    negation interacts with conjunction and disjunction.  The
+    following law says that "the negation of a disjunction is the
+    conjunction of the negations." There is a corresponding law
+    [de_morgan_not_and_not] that we will return to at the end of this
+    chapter. *)
+Theorem de_morgan_not_or : forall (P Q : Prop),
+    ~ (P \/ Q) -> ~P /\ ~Q.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
 (** Since inequality involves a negation, it also requires a little
     practice to be able to work with it fluently.  Here is one useful
     trick:
@@ -758,10 +772,10 @@ Theorem leb_plus_exists : forall n m, n <=? m = true -> exists x, m = n+x.
 Proof.
 (* FILL IN HERE *) Admitted.
 
-Theorem plus_exists_le : forall n m, (exists x, m = n+x) -> n <=? m = true.
+Theorem plus_exists_leb : forall n m, (exists x, m = n+x) -> n <=? m = true.
 Proof.
-  (* Hint: An auxiliary lemma proved by induction may be useful. *)
   (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (* ################################################################# *)
@@ -885,7 +899,7 @@ Proof.
     Complete the definition of the [combine_odd_even] function below.
     It takes as arguments two properties of numbers, [Podd] and
     [Peven], and it should return a property [P] such that [P n] is
-    equivalent to [Podd n] when [n] is odd and equivalent to [Peven n]
+    equivalent to [Podd n] when [n] is [odd] and equivalent to [Peven n]
     otherwise. *)
 
 Definition combine_odd_even (Podd Peven : nat -> Prop) : nat -> Prop
@@ -1651,22 +1665,17 @@ Qed.
     within Coq itself.  However, the following theorem implies that it
     is always safe to assume a decidability axiom (i.e., an instance
     of excluded middle) for any _particular_ Prop [P].  Why?  Because
-    we cannot prove the negation of such an axiom.  If we could, we
-    would have both [~ (P \/ ~P)] and [~ ~ (P \/ ~P)] (since [P]
-    implies [~ ~ P], by lemma [double_neg], which we proved above),
-    which would be a  contradiction.  But since we can't, it is safe
-    to add [P \/ ~P] as an axiom.
+    the negation of such an axiom leads to a contradiction.  If [~ (P
+    \/ ~P)] were provable, then by [de_morgan_not_or] as proved above,
+    [P /\ ~P] would be provable, which would be a contradiction. So, it
+    is safe to add [P \/ ~P] as an axiom for any particular [P].
 
     Succinctly: for any proposition P,
-       [Coq is consistent ==> (Coq + P \/ ~P) is consistent].
+      [Coq is consistent ==> (Coq + P \/ ~P) is consistent]. *)
 
-    (Hint: You may need to come up with a clever assertion as the
-    next step in the proof.) *)
-
-Theorem excluded_middle_irrefutable: forall (P:Prop),
+Theorem excluded_middle_irrefutable: forall (P : Prop),
   ~ ~ (P \/ ~ P).
 Proof.
-  unfold not. intros P H.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -1723,4 +1732,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2022-02-25 13:35 *)
+(* 2022-02-25 13:36 *)
