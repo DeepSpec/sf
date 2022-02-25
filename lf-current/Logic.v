@@ -758,10 +758,10 @@ Theorem leb_plus_exists : forall n m, n <=? m = true -> exists x, m = n+x.
 Proof.
 (* FILL IN HERE *) Admitted.
 
-Theorem plus_exists_leb : forall n m, (exists x, m = n+x) -> n <=? m = true.
+Theorem plus_exists_le : forall n m, (exists x, m = n+x) -> n <=? m = true.
 Proof.
+  (* Hint: An auxiliary lemma proved by induction may be useful. *)
   (* FILL IN HERE *) Admitted.
-
 (** [] *)
 
 (* ################################################################# *)
@@ -885,7 +885,7 @@ Proof.
     Complete the definition of the [combine_odd_even] function below.
     It takes as arguments two properties of numbers, [Podd] and
     [Peven], and it should return a property [P] such that [P n] is
-    equivalent to [Podd n] when [n] is [odd] and equivalent to [Peven n]
+    equivalent to [Podd n] when [n] is odd and equivalent to [Peven n]
     otherwise. *)
 
 Definition combine_odd_even (Podd Peven : nat -> Prop) : nat -> Prop
