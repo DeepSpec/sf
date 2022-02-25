@@ -337,6 +337,9 @@ End ExamplePrettyAssertions.
 
 (** We can formalize valid Hoare triples in Coq as follows: *)
 
+(* SOONER; BCP 21: What about renaming this [valid_hoare_triple]?  I
+   think that might have saved some of my students some confusion this
+   semester. *)
 Definition hoare_triple
            (P : Assertion) (c : com) (Q : Assertion) : Prop :=
   forall st st',
