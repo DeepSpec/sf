@@ -885,7 +885,7 @@ Proof.
     Complete the definition of the [combine_odd_even] function below.
     It takes as arguments two properties of numbers, [Podd] and
     [Peven], and it should return a property [P] such that [P n] is
-    equivalent to [Podd n] when [n] is odd and equivalent to [Peven n]
+    equivalent to [Podd n] when [n] is [odd] and equivalent to [Peven n]
     otherwise. *)
 
 Definition combine_odd_even (Podd Peven : nat -> Prop) : nat -> Prop
