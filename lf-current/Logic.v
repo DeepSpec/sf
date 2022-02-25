@@ -613,6 +613,20 @@ Proof.
     intros H. rewrite H. intros H'. discriminate H'.
 Qed.
 
+(** The [apply] tactic can also be used with [<->]. We can use
+    [apply] on an [<->] in either direction, without explicitly thinking
+    about the fact that it is really an [and] underneath. *)
+
+Lemma apply_iff_example1:
+  forall P Q R : Prop, (P <-> Q) -> (Q -> R) -> (P -> R).
+  intros P Q R Hiff H HP. apply H.  apply Hiff. apply HP.
+Qed.
+
+Lemma apply_iff_example2:
+  forall P Q R : Prop, (P <-> Q) -> (P -> R) -> (Q -> R).
+  intros P Q R Hiff H HQ. apply H.  apply Hiff. apply HQ.
+Qed.
+
 (** **** Exercise: 1 star, standard, optional (iff_properties)
 
     Using the above proof that [<->] is symmetric ([iff_sym]) as
@@ -695,16 +709,6 @@ Proof.
   intros n m p.
   rewrite mul_eq_0. rewrite mul_eq_0. rewrite or_assoc.
   reflexivity.
-Qed.
-
-(** The [apply] tactic can also be used with [<->]. When given an
-    equivalence as its argument, [apply] tries to guess which
-    direction of the equivalence will be useful. *)
-
-Lemma apply_iff_example :
-  forall n m : nat, n * m = 0 -> n = 0 \/ m = 0.
-Proof.
-  intros n m H. apply mul_eq_0. apply H.
 Qed.
 
 (* ================================================================= *)
@@ -1732,4 +1736,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2022-02-25 13:39 *)
+(* 2022-02-25 20:43 *)
