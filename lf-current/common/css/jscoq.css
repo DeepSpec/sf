@@ -124,3 +124,34 @@ body.terse #query-panel .Debug {
   border-top: 1px solid black;
   opacity: 0.2;
 }
+
+/*
+ * Proof script toggle stuff 
+ */
+
+div.togglescript {
+  font-size: 22px;
+  line-height: calc(60% + 6px);  /* per `.show` */
+  padding-left: 1em;
+}
+
+div.togglescript.hidden {
+  display: block;
+}
+div.togglescript.hidden > .show {
+  background: #888;
+  color: #ccc
+}
+div.togglescript.hidden > .show::before {
+    content: '-';
+}
+
+div.proofscript > .code-tight {
+  margin-top: .1em;
+}
+
+div.proofscript.hidden {
+  display: block; /* needed because CodeMirror does not like being initialized when hidden */
+  visibility: hidden;
+}
+

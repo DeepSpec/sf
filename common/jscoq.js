@@ -13,7 +13,7 @@ function jsCoqInject() {
 var jsCoqShow = location.search === '?jscoq=on' ||
                 location.search !== '?jscoq=off' && localStorage.jsCoqShow === 'true';
 
-var jscoq_ids  = ['#main > div.code, #main > div.HIDEFROMHTML > div.code'];
+var jscoq_ids  = ['#main > div.code, #main > div.HIDEFROMHTML > div.code, #main div.proofscript > div.code'];
 var jscoq_opts = {
     layout:    'flex',
     show:      jsCoqShow,
@@ -30,6 +30,7 @@ async function jsCoqLoad() {
     // - remove empty code fragments (coqdoc generates some spurious ones)
     $('#main > div.code').each(function() {
         if ($(this).text().match(/^\s*$/)) $(this).remove();
+        else spoilerAlert($(this));
     });
 
     // - make page div focusable so that keyboard scrolling works
@@ -50,7 +51,7 @@ async function jsCoqLoad() {
     Deprettify.REPLACES.push(   // LF,PLF define their own versions (for Imp)
         [/∨/g, '\\/'], [/∧/g, '/\\'], [/↔/g, '<->'],
         [/≤/g, '<='], [/≥/g, '>='], [/≠/g, '<>'], [/∈/g, '\\in'],
-        [/\\−∗/, '\\-*'] /* SLF */);
+        [/\\−∗/g, '\\-*'], [/\\−−∗/g, '\\--*'], [/\\∀/g, '\\forall'] /* SLF */);
 
     var coq = await JsCoq.start(jscoq_ids, jscoq_opts);
     window.coq = coq;
@@ -67,6 +68,20 @@ function jsCoqStart() {
 
 function isTerse() {
     return $('[src$="/slides.js"]').length > 0;
+}
+
+/**
+ * This is a minor hack to allow foldable code snippets to still be foldable.
+ * It really only works if the entire snippet is in (* FOLD *) ... (* /FOLD *).
+ */
+function spoilerAlert($el) {
+    var tog = $el.children('.togglescript:first-child'),
+        spoiler = tog.next('.proofscript');
+    if (tog.length > 0 && spoiler.length > 0) {
+        $el.removeClass('code');
+        spoiler.attr('onclick', '')
+            .append($('<div>').addClass('code').append(spoiler[0].childNodes));
+    }
 }
 
 if (location.search !== '?jscoq=no') {

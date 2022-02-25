@@ -289,6 +289,10 @@ h1 .inlinecode .id, h1.section span.inlinecode {
     color: rgb(60%,60%,60%);
 }
 
+div.hidden {
+    display: none;
+}
+
 /*
 .show {
     display: inline;
