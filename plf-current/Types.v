@@ -40,9 +40,9 @@ Hint Constructors multi : core.
         | false
         | if t then t else t
         | 0
-        | succ 0
+        | succ t
         | pred t
-        | ? t
+        | iszero t
 *)
 (** And here it is formally: *)
 Module TM.
@@ -176,6 +176,8 @@ Hint Constructors step : core.
        <{ succ (if true then true else true) }>
 
     can take a step (once, before becoming stuck). *)
+
+   
 
 (* ================================================================= *)
 (** ** Normal Forms and Values *)
@@ -698,4 +700,4 @@ Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 End TM.
 
-(* 2022-03-09 18:42 *)
+(* 2022-03-09 19:48 *)
