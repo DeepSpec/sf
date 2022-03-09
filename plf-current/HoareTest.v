@@ -374,4 +374,4 @@ idtac "---------- invalid_triple ---------".
 Print Assumptions invalid_triple.
 Abort.
 
-(* 2022-03-08 01:22 *)
+(* 2022-03-09 18:42 *)

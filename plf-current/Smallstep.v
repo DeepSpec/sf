@@ -558,7 +558,7 @@ Proof. (* a corollary of [strong_progress]... *)
   { apply strong_progress. }
   destruct G as [G | G].
   - (* l *) apply G.
-  - (* r *) exfalso. apply H. assumption.
+  - (* r *) contradiction.
 Qed.
 
 Corollary nf_same_as_value : forall t,
@@ -1838,4 +1838,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-03-08 01:21 *)
+(* 2022-03-09 18:41 *)
