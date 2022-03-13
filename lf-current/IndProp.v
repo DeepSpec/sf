@@ -160,7 +160,7 @@ Inductive Perm3 {X : Type} : list X -> list X -> Prop :=
 (** **** Exercise: 1 star, standard, optional (perm)
 
     According to this definition, is [[1;2;3]] a permutation of
-    [[3;2;1]]?  Is [[1;2;3]] it a permutation of itself? *)
+    [[3;2;1]]?  Is [[1;2;3]] a permutation of itself? *)
 
 (* FILL IN HERE
 
@@ -2340,4 +2340,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-03-09 19:47 *)
+(* 2022-03-13 21:27 *)
