@@ -1419,8 +1419,8 @@ Fixpoint ceval_fun_no_while (st : state) (c : com) : state :=
 (** ** Evaluation as a Relation *)
 
 (** Here's a better way: define [ceval] as a _relation_ rather than a
-    _function_ -- i.e., define it in [Prop] instead of [Type], as we
-    did for [aevalR] above. *)
+    _function_ -- i.e., make its result a [Prop] rather than a
+    [state], similar to what we did for [aevalR] above. *)
 
 (** This is an important change.  Besides freeing us from awkward
     workarounds, it gives us a ton more flexibility in the definition.
@@ -2060,4 +2060,4 @@ End BreakImp.
 
     [] *)
 
-(* 2022-03-13 21:28 *)
+(* 2022-03-27 23:47 *)
