@@ -47,23 +47,35 @@ idtac " ".
 idtac "-------------------  booltree_ind  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: booltree_ind".
-idtac "Possible points: 1".
-print_manual_grade manual_grade_for_booltree_ind.
+idtac "#> booltree_ind_type_correct".
+idtac "Possible points: 2".
+check_type @booltree_ind_type_correct (booltree_ind_type).
+idtac "Assumptions:".
+Abort.
+Print Assumptions booltree_ind_type_correct.
+Goal True.
 idtac " ".
 
 idtac "-------------------  toy_ind  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: toy_ind".
-idtac "Possible points: 1".
-print_manual_grade manual_grade_for_toy_ind.
+idtac "#> Toy_correct".
+idtac "Possible points: 2".
+check_type @Toy_correct (
+(exists (f : bool -> Toy) (g : nat -> Toy -> Toy),
+   forall P : Toy -> Prop,
+   (forall b : bool, P (f b)) ->
+   (forall (n : nat) (t : Toy), P t -> P (g n t)) -> forall t : Toy, P t)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions Toy_correct.
+Goal True.
 idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 4".
-idtac "Max points - advanced: 4".
+idtac "Max points - standard: 6".
+idtac "Max points - advanced: 6".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -89,12 +101,12 @@ idtac "".
 idtac "********** Standard **********".
 idtac "---------- plus_one_r' ---------".
 Print Assumptions plus_one_r'.
-idtac "---------- booltree_ind ---------".
-idtac "MANUAL".
-idtac "---------- toy_ind ---------".
-idtac "MANUAL".
+idtac "---------- booltree_ind_type_correct ---------".
+Print Assumptions booltree_ind_type_correct.
+idtac "---------- Toy_correct ---------".
+Print Assumptions Toy_correct.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-03-28 00:59 *)
+(* 2022-03-28 01:24 *)
