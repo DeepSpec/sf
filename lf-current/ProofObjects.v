@@ -617,16 +617,67 @@ Definition four' : 2 + 2 == 1 + 3 :=
 Definition singleton : forall (X:Type) (x:X), []++[x] == x::[]  :=
   fun (X:Type) (x:X) => eq_refl [x].
 
+(** By pattern-matching against [n1 == n2], we obtain a term [n]
+    that is known to be convertible to both [n1] and [n2]. The term
+    [eq_refl (S n)] establishes [(S n) == (S n)]. The first [n] can be
+    converted to [n1], and the second to [n2], which yields [(S n1) ==
+    (S n2)]. Coq handles all that conversion for us. *)
+
+Definition eq_add : forall (n1 n2 : nat), n1 == n2 -> (S n1) == (S n2) :=
+  fun n1 n2 Heq =>
+    match Heq with
+    | eq_refl n => eq_refl (S n)
+    end.
+
+(** A tactic-based proof runs into some difficulties if we try to use
+    our usual repertoire of tactics, such as [rewrite] and
+    [reflexivity]. Those work with *setoid* relations that Coq knows
+    about, such as [=], but not our [==]. We could prove to Coq that
+    [==] is a setoid, but a simpler way is to use [destruct] and
+    [apply] instead. *)
+
+Theorem eq_add' : forall (n1 n2 : nat), n1 == n2 -> (S n1) == (S n2).
+Proof.
+  intros n1 n2 Heq.
+  Fail rewrite Heq.
+  destruct Heq.
+  Fail reflexivity.
+  apply eq_refl.
+Qed.
+
+(** **** Exercise: 2 stars, standard (eq_cons)
+
+    Construct the proof object for this theorem. Use pattern matching
+    against the equality hypotheses. *)
+
+Definition eq_cons : forall (X : Type) (h1 h2 : X) (t1 t2 : list X),
+    h1 == h2 -> t1 == t2 -> h1 :: t1 == h2 :: t2
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+(** [] *)
+
 (** **** Exercise: 2 stars, standard (equality__leibniz_equality)
 
     The inductive definition of equality implies _Leibniz equality_:
     what we mean when we say "[x] and [y] are equal" is that every
-    property on [P] that is true of [x] is also true of [y].  *)
+    property on [P] that is true of [x] is also true of [y]. Prove
+    that. *)
 
 Lemma equality__leibniz_equality : forall (X : Type) (x y: X),
-  x == y -> forall P:X->Prop, P x -> P y.
+  x == y -> forall (P : X -> Prop), P x -> P y.
 Proof.
-(* FILL IN HERE *) Admitted.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard (equality__leibniz_equality_term)
+
+    Construct the proof object for the previous exercise.  All it
+    requires is anonymous functions and pattern-matching; the large
+    proof term constructed by tactics in the previous exercise is
+    needessly complicated. Hint: pattern-match as soon as possible. *)
+Definition equality__leibniz_equality_term : forall (X : Type) (x y: X),
+    x == y -> forall P : (X -> Prop), P x -> P y
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 (** [] *)
 
 (** **** Exercise: 3 stars, standard, optional (leibniz_equality__equality)
@@ -640,7 +691,6 @@ Lemma leibniz_equality__equality : forall (X : Type) (x y: X),
   (forall P:X->Prop, P x -> P y) -> x == y.
 Proof.
 (* FILL IN HERE *) Admitted.
-
 (** [] *)
 
 End EqualityPlayground.
@@ -766,4 +816,109 @@ Fail Definition falso : False := infinite_loop 0.
     validity from scratch.  Only theorems whose proofs pass the
     type-checker can be used in further proof developments.  *)
 
-(* 2022-03-27 23:47 *)
+(* ################################################################# *)
+(** * More Exercises *)
+
+(** Most of the following theorems were already proved with tactics in
+    [Logic].  Now construct the proof objects for them
+    directly. *)
+
+(** **** Exercise: 2 stars, standard (and_assoc) *)
+Definition and_assoc : forall P Q R : Prop,
+    P /\ (Q /\ R) -> (P /\ Q) /\ R
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
+
+(** **** Exercise: 3 stars, standard (or_distributes_over_and) *)
+Definition or_distributes_over_and : forall P Q R : Prop,
+    P \/ (Q /\ R) <-> (P \/ Q) /\ (P \/ R)
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
+
+(** **** Exercise: 3 stars, standard (negations) *)
+Definition double_neg : forall P : Prop,
+    P -> ~~P
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Definition contradiction_implies_anything : forall P Q : Prop,
+    (P /\ ~P) -> Q
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Definition de_morgan_not_or : forall P Q : Prop,
+    ~ (P \/ Q) -> ~P /\ ~Q
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard (currying) *)
+Definition curry : forall P Q R : Prop,
+    ((P /\ Q) -> R) -> (P -> (Q -> R))
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+
+Definition uncurry : forall P Q R : Prop,
+    (P -> (Q -> R)) -> ((P /\ Q) -> R)
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
+
+(* ################################################################# *)
+(** * Proof Irrelevance (Advanced) *)
+
+(** In [Logic] we saw that functional extensionality could be
+    added to Coq. A similar notion about propositions can also
+    be defined (and added as an axiom, if desired): *)
+
+Definition propositional_extensionality : Prop :=
+  forall (P Q : Prop), (P <-> Q) -> P = Q.
+
+(** Propositional extensionality asserts that if two propositions are
+    equivalent -- i.e., each implies the other -- then they are in
+    fact equal. The _proof objects_ for the propositions might be
+    syntactically different terms. But propositional extensionality
+    overlooks that, just as functional extensionality overlooks the
+    syntactic differences between functions. *)
+
+(** **** Exercise: 1 star, advanced (pe_implies_or_eq)
+
+    Prove the following consequence of propositional extensionality. *)
+
+Theorem pe_implies_or_eq :
+  propositional_extensionality ->
+  forall (P Q : Prop), (P \/ Q) = (Q \/ P).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, advanced (pe_implies_true_eq)
+
+    Prove that if a proposition [P] is provable, then it is equal to
+    [True] -- as a consequence of propositional extensionality. *)
+
+Lemma pe_implies_true_eq :
+  propositional_extensionality ->
+  forall (P : Prop), P -> True = P.
+Proof. (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 3 stars, advanced (pe_implies_pi)
+
+    Acknowledgment: this theorem and its proof technique are inspired
+    by Gert Smolka's manuscript Modeling and Proving in Computational
+    Type Theory Using the Coq Proof Assistant, 2021. *)
+
+(** Another, perhaps surprising, consequence of propositional
+    extensionality is that it implies _proof irrelevance_, which
+    asserts that all proof objects for a proposition are equal.*)
+
+Definition proof_irrelevance : Prop :=
+  forall (P : Prop) (pf1 pf2 : P), pf1 = pf2.
+
+(** Prove that fact. Use [pe_implies_true_eq] to establish that the
+    proposition [P] in [proof_irrelevance] is equal to [True]. Leverage
+    that equality to establish that both proofs objects [pf1] and
+    [pf2] must be just [I]. *)
+
+Theorem pe_implies_pi :
+  propositional_extensionality -> proof_irrelevance.
+Proof. (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(* 2022-03-28 00:59 *)
