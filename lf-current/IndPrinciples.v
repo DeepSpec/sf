@@ -950,11 +950,12 @@ Definition better_t_tree_ind_type : Prop
 Definition better_t_tree_ind : better_t_tree_ind_type
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-(** Finally, prove the theorem. Chances are that [induction...using
-    better_t_tree_ind] will give you an error about "Cannot recognize
-    an induction scheme", because the tuple is getting in the
-    way. Don't worry about it. Just use [apply better_t_tree_ind]
-    instead. *)
+(** Finally, prove the theorem. If [induction...using] gives you an
+    error about "Cannot recognize an induction scheme", don't worry
+    about it. The [induction] tactic is picky about the shape of the
+    theorem you pass to it, but it doesn't give you much information
+    to debug what is wrong about that shape.  You can use [apply]
+    instead, as we saw at the beginning of this file. *)
 
 Theorem reflect_involution : forall (X : Type) (t : t_tree X),
     reflect (reflect t) = t.
@@ -962,4 +963,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2022-03-28 01:24 *)
+(* 2022-03-28 16:21 *)
