@@ -26,8 +26,8 @@
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
-Hint Constructors Permutation.
-From Coq Require Export Lists.List.  (* for exercise involving [List.length] *)
+Hint Constructors Permutation : core.
+From Coq Require Export Lists.List.  (* for exercises involving [List.length] *)
 
 (* ################################################################# *)
 (** * The Selection-Sort Program  *)
@@ -69,7 +69,7 @@ Fail Fixpoint selsort (l : list nat) : list nat :=
     For example, [select 1 [0; 2]] is [(0, [1; 2])], but [[1; 2]] is
     not a part of [[0; 2]]. *)
 
-(** There are severals ways to fix this problem. One programming
+(** There are several ways to fix this problem. One programming
     pattern is to provide _fuel_: an extra argument that has no use in
     the algorithm except to bound the amount of recursion.  The [n]
     argument, below, is the fuel. When it reaches [0], the recursion
@@ -122,7 +122,7 @@ Inductive sorted: list nat -> Prop :=
  | sorted_1: forall i, sorted [i]
  | sorted_cons: forall i j l, i <= j -> sorted (j :: l) -> sorted (i :: j :: l).
 
-Hint Constructors sorted.
+Hint Constructors sorted : core.
 
 Definition is_a_sorting_algorithm (f: list nat -> list nat) := forall al,
     Permutation al (f al) /\ sorted (f al).
@@ -141,17 +141,31 @@ Example pairs_example : forall (a c x : nat) (b d l : list nat),
     (a, b) = (let (c, d) := select x l in (c, d)) ->
     (a, b) = select x l.
 Proof.
-  intros. destruct (select x l) eqn:E. auto.
+  intros. destruct (select x l) as [c' d'] eqn:E. auto.
 Qed.
 
-(** **** Exercise: 3 stars, standard (select_perm) *)
+(** **** Exercise: 2 stars, standard (select_perm) *)
 
-(** Prove that [select] returns a permutation of its
-    input. Proceed by induction on [l].  The [inv] tactic defined at
-    the end of [Perm] will be helpful. *)
+(** Prove that [select] returns a permutation of its input. Proceed by
+    induction on [l].  The [inv] tactic defined at the end of
+    [Perm] will be helpful. The [eauto] tactic] will be helpful
+    at finding instantiations for [perm_trans]. *)
 
 Lemma select_perm: forall x l y r,
-    (y, r) = select x l -> Permutation (x :: l) (y :: r).
+    select x l = (y, r) -> Permutation (x :: l) (y :: r).
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 1 star, standard (select_rest_length) *)
+
+(** Prove that [select] returns a list that has the correct
+    length. You can do this without induction if you make use of
+    [select_perm]. *)
+
+Lemma select_rest_length : forall x l y r,
+    select x l = (y, r) -> length l = length r.
 Proof.
   (* FILL IN HERE *) Admitted.
 
@@ -180,20 +194,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 2 stars, standard (select_rest_length) *)
-
-(** Prove that [select] returns a list that has the correct
-    length. You can do this without induction if you make use of
-    [select_perm]. *)
-
-Lemma select_rest_length : forall x l y r,
-    select x l = (y, r) -> length l = length r.
-Proof.
-  (* FILL IN HERE *) Admitted.
-
-(** [] *)
-
-(** **** Exercise: 3 stars, standard (select_fst_leq) *)
+(** **** Exercise: 2 stars, standard (select_fst_leq) *)
 
 (** Prove that the first component of [select x _] is no bigger than
     [x]. Proceed by induction on [al]. *)
@@ -206,17 +207,30 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (select_smallest) *)
-
-(** Prove that the first component of [select _ _] is no bigger
-    than any of the elements in the second component. To represent
-    that concept of comparing an element to a list, we introduce
-    a new notation: *)
+(** To represent the concept of comparing a number to a list, we
+    introduce a new notation: *)
 
 Definition le_all x xs := Forall (fun y => x <= y) xs.
+Hint Unfold le_all : core.
 Infix "<=*" := le_all (at level 70, no associativity).
 
-(** Proceed by induction on [al]. *)
+(** **** Exercise: 1 star, standard (le_all__le_one) *)
+
+(** Prove that if [y] is no more than any of the elements of [lst],
+    and if [n] is in [lst], then [y] is no more than [n]. Hint: a
+    library theorem about [Forall] and [In] will make this easy. *)
+
+Lemma le_all__le_one : forall lst y n,
+    y <=* lst -> In n lst -> y <= n.
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 2 stars, standard (select_smallest) *)
+
+(** Prove that the first component of [select _ _] is no bigger than
+    any of the elements in the second component. Proceed by induction
+    on [al]. *)
 
 Lemma select_smallest: forall al bl x y,
     select x al = (y, bl) ->
@@ -226,7 +240,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (select_in) *)
+(** **** Exercise: 2 stars, standard (select_in) *)
 
 (** Prove that the element returned by [select] must be one of the
     elements in its input. Proceed by induction on [al]. *)
@@ -243,7 +257,8 @@ Proof.
 
 (** Prove that adding an element to the beginning of a
     selection-sorted list maintains sortedness, as long as the element
-    is small enough and enough fuel is provided. *)
+    is small enough and enough fuel is provided. No induction is
+    needed. *)
 
 Lemma cons_of_small_maintains_sort: forall bl y n,
     n = length bl ->
@@ -255,9 +270,9 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (selsort_sorted) *)
+(** **** Exercise: 2 stars, standard (selsort_sorted) *)
 
-(** Prove that [selsort] produced a sorted list when given
+(** Prove that [selsort] produces a sorted list when given
     sufficient fuel.  Proceed by induction on [n].  This proof
     will make use of a few previous lemmas. *)
 
@@ -311,12 +326,11 @@ Proof.
     the definition.  But it complicated the implementation of
     [selsort] and the proofs about it.
 
-    Coq provides an experimental command [Function] that implements a
-    similar idea as fuel, but without requiring the function
-    definition to be structurally recursive.  Instead, the function is
-    annotated with a _measure_ that is decreasing at each recursive
-    call. To activate this experimental command, we need to load a
-    library. *)
+    Coq provides a command [Function] that implements a similar idea
+    as fuel, but without requiring the function definition to be
+    structurally recursive.  Instead, the function is annotated with a
+    _measure_ that is decreasing at each recursive call. To activate
+    such annotations, we need to load a library. *)
 
 Require Import Recdef.  (* needed for [measure] feature *)
 
@@ -339,11 +353,8 @@ end.
     call. *)
 
 Proof.
-  intros.
-  assert (Hperm: Permutation (x :: r) (y :: r')).
-  { apply select_perm. auto. }
-  apply Permutation_length in Hperm.
-  inv Hperm. simpl. lia.
+  intros l x r HL y r' Hsel.
+  apply select_rest_length in Hsel. inv Hsel. simpl. lia.
 Defined.
 
 (** The proof must end with [Defined] instead of [Qed].  That
@@ -368,7 +379,7 @@ Print selsort'_terminate.
 
 Check selsort'_equation.
 
-(** **** Exercise: 2 stars, standard (selsort'_perm) *)
+(** **** Exercise: 1 star, standard (selsort'_perm) *)
 
 (** Hint: Follow the same strategy as [selsort_perm]. In our solution,
     there was only a one-line change. *)
@@ -389,4 +400,4 @@ Proof.
 
 
 
-(* 2022-03-28 16:25 *)
+(* 2022-04-11 22:40 *)

@@ -36,13 +36,27 @@ idtac "-------------------  select_perm  --------------------".
 idtac " ".
 
 idtac "#> select_perm".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @select_perm (
 (forall (x : nat) (l : list nat) (y : nat) (r : list nat),
- (y, r) = select x l -> @Permutation.Permutation nat (x :: l) (y :: r))).
+ select x l = (y, r) -> @Permutation.Permutation nat (x :: l) (y :: r))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions select_perm.
+Goal True.
+idtac " ".
+
+idtac "-------------------  select_rest_length  --------------------".
+idtac " ".
+
+idtac "#> select_rest_length".
+idtac "Possible points: 1".
+check_type @select_rest_length (
+(forall (x : nat) (l : list nat) (y : nat) (r : list nat),
+ select x l = (y, r) -> @length nat l = @length nat r)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions select_rest_length.
 Goal True.
 idtac " ".
 
@@ -73,25 +87,11 @@ Print Assumptions selection_sort_perm.
 Goal True.
 idtac " ".
 
-idtac "-------------------  select_rest_length  --------------------".
-idtac " ".
-
-idtac "#> select_rest_length".
-idtac "Possible points: 2".
-check_type @select_rest_length (
-(forall (x : nat) (l : list nat) (y : nat) (r : list nat),
- select x l = (y, r) -> @length nat l = @length nat r)).
-idtac "Assumptions:".
-Abort.
-Print Assumptions select_rest_length.
-Goal True.
-idtac " ".
-
 idtac "-------------------  select_fst_leq  --------------------".
 idtac " ".
 
 idtac "#> select_fst_leq".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @select_fst_leq (
 (forall (al bl : list nat) (x y : nat), select x al = (y, bl) -> y <= x)).
 idtac "Assumptions:".
@@ -100,11 +100,24 @@ Print Assumptions select_fst_leq.
 Goal True.
 idtac " ".
 
+idtac "-------------------  le_all__le_one  --------------------".
+idtac " ".
+
+idtac "#> le_all__le_one".
+idtac "Possible points: 1".
+check_type @le_all__le_one (
+(forall (lst : list nat) (y n : nat), y <=* lst -> @In nat n lst -> y <= n)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions le_all__le_one.
+Goal True.
+idtac " ".
+
 idtac "-------------------  select_smallest  --------------------".
 idtac " ".
 
 idtac "#> select_smallest".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @select_smallest (
 (forall (al bl : list nat) (x y : nat), select x al = (y, bl) -> y <=* bl)).
 idtac "Assumptions:".
@@ -117,7 +130,7 @@ idtac "-------------------  select_in  --------------------".
 idtac " ".
 
 idtac "#> select_in".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @select_in (
 (forall (al bl : list nat) (x y : nat),
  select x al = (y, bl) -> @In nat y (x :: al))).
@@ -146,7 +159,7 @@ idtac "-------------------  selsort_sorted  --------------------".
 idtac " ".
 
 idtac "#> selsort_sorted".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @selsort_sorted (
 (forall (n : nat) (al : list nat),
  @length nat al = n -> sorted (selsort al n))).
@@ -184,7 +197,7 @@ idtac "-------------------  selsort'_perm  --------------------".
 idtac " ".
 
 idtac "#> selsort'_perm".
-idtac "Possible points: 2".
+idtac "Possible points: 1".
 check_type @selsort'_perm (
 (forall (n : nat) (l : list nat),
  @length nat l = n -> @Permutation.Permutation nat l (selsort' l))).
@@ -196,8 +209,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 28".
-idtac "Max points - advanced: 28".
+idtac "Max points - standard: 22".
+idtac "Max points - advanced: 22".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -232,14 +245,16 @@ idtac "".
 idtac "********** Standard **********".
 idtac "---------- select_perm ---------".
 Print Assumptions select_perm.
+idtac "---------- select_rest_length ---------".
+Print Assumptions select_rest_length.
 idtac "---------- selsort_perm ---------".
 Print Assumptions selsort_perm.
 idtac "---------- selection_sort_perm ---------".
 Print Assumptions selection_sort_perm.
-idtac "---------- select_rest_length ---------".
-Print Assumptions select_rest_length.
 idtac "---------- select_fst_leq ---------".
 Print Assumptions select_fst_leq.
+idtac "---------- le_all__le_one ---------".
+Print Assumptions le_all__le_one.
 idtac "---------- select_smallest ---------".
 Print Assumptions select_smallest.
 idtac "---------- select_in ---------".
@@ -258,4 +273,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-03-28 16:25 *)
+(* 2022-04-11 22:40 *)

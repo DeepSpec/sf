@@ -94,7 +94,7 @@
   representing undirected graphs, adjacency sets, and so on. 
 <div class="paragraph"> </div>
 
-<a id="lab277"></a><h1 class="section">Preliminaries: Representing Graphs</h1>
+<a id="lab278"></a><h1 class="section">Preliminaries: Representing Graphs</h1>
 
 <div class="paragraph"> </div>
 
@@ -158,7 +158,7 @@ And similarly for functional maps over positives
 </div>
 
 <div class="doc">
-<a id="lab278"></a><h1 class="section">Lemmas About Sets and Maps</h1>
+<a id="lab279"></a><h1 class="section">Lemmas About Sets and Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -231,7 +231,7 @@ Example:  Make a map from <i>node</i> (represented as <span class="inlinecode"><
 </div>
 
 <div class="doc">
-<a id="lab279"></a><h2 class="section">equivlistA</h2>
+<a id="lab280"></a><h2 class="section">equivlistA</h2>
 
 </div>
 <div class="code">
@@ -282,7 +282,7 @@ The predicate <span class="inlinecode"><span class="id" title="var">equivlistA</
 </div>
 
 <div class="doc">
-<a id="lab280"></a><h2 class="section">SortA_equivlistA_eqlistA</h2>
+<a id="lab281"></a><h2 class="section">SortA_equivlistA_eqlistA</h2>
  Suppose two lists <span class="inlinecode"><span class="id" title="var">al</span>,<span class="id" title="var">bl</span></span> are "equivalent:" they contain the same set of elements
     (modulo an equivalence relation <span class="inlinecode"><span class="id" title="var">eqA</span></span> on elements, perhaps in different orders, 
     and perhaps with different numbers of repetitions).  That is, suppose
@@ -386,7 +386,7 @@ If list <span class="inlinecode"><span class="id" title="var">l</span></span> is
 </div>
 
 <div class="doc">
-<a id="lab281"></a><h2 class="section">S.remove and S.elements</h2>
+<a id="lab282"></a><h2 class="section">S.remove and S.elements</h2>
  The <span class="inlinecode"><span class="id" title="var">FSets</span></span> interface (and therefore our <span class="inlinecode"><span class="id" title="keyword">Module</span></span> <span class="inlinecode"><span class="id" title="var">S</span></span>) provides these two functions: 
 </div>
 <div class="code">
@@ -416,7 +416,7 @@ That is, if <span class="inlinecode"><span class="id" title="var">i</span></span
     list that you get by filtering <span class="inlinecode"><span class="id" title="var">i</span></span> out of <span class="inlinecode"><span class="id" title="var">S.elements</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span>.  Go ahead and prove it! 
 <div class="paragraph"> </div>
 
-<a id="lab282"></a><h4 class="section">Exercise: 3 stars, standard (Sremove_elements)</h4>
+<a id="lab283"></a><h4 class="section">Exercise: 3 stars, standard (Sremove_elements)</h4>
 
 </div>
 <div class="code">
@@ -454,7 +454,7 @@ That is, if <span class="inlinecode"><span class="id" title="var">i</span></span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab283"></a><h2 class="section">Lists of (key,value) Pairs</h2>
+<a id="lab284"></a><h2 class="section">Lists of (key,value) Pairs</h2>
 
 <div class="paragraph"> </div>
 
@@ -471,7 +471,7 @@ Let's start with a little lemma about lists of pairs:  Suppose <span class="inli
      Then <span class="inlinecode"><span class="id" title="var">j</span></span> is in <span class="inlinecode"><span class="id" title="var">map</span></span> <span class="inlinecode"><span class="id" title="var">fst</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span>   iff   there is some e such that (j,e) is in l. 
 <div class="paragraph"> </div>
 
-<a id="lab284"></a><h4 class="section">Exercise: 2 stars, standard (InA_map_fst_key)</h4>
+<a id="lab285"></a><h4 class="section">Exercise: 2 stars, standard (InA_map_fst_key)</h4>
 
 </div>
 <div class="code">
@@ -485,7 +485,7 @@ Let's start with a little lemma about lists of pairs:  Suppose <span class="inli
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab285"></a><h4 class="section">Exercise: 3 stars, standard (Sorted_lt_key)</h4>
+<a id="lab286"></a><h4 class="section">Exercise: 3 stars, standard (Sorted_lt_key)</h4>
  The function <span class="inlinecode"><span class="id" title="var">M.lt_key</span></span> compares two elements of an <span class="inlinecode"><span class="id" title="var">M.elements</span></span> list,
     that is, two pairs of type <span class="inlinecode"><span class="id" title="var">positive</span>×<span class="id" title="var">A</span></span>, by just comparing their first elements
     using <span class="inlinecode"><span class="id" title="var">E.lt</span></span>.  Therefore, an elements list (of type <span class="inlinecode"><span class="id" title="var">list</span>(<span class="id" title="var">positive</span>×<span class="id" title="var">A</span>)</span> is <span class="inlinecode"><span class="id" title="var">Sorted</span></span>
@@ -504,7 +504,7 @@ Let's start with a little lemma about lists of pairs:  Suppose <span class="inli
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab286"></a><h2 class="section">Cardinality</h2>
+<a id="lab287"></a><h2 class="section">Cardinality</h2>
 
 <div class="paragraph"> </div>
 
@@ -513,7 +513,7 @@ Let's start with a little lemma about lists of pairs:  Suppose <span class="inli
    its domain set. 
 <div class="paragraph"> </div>
 
-<a id="lab287"></a><h4 class="section">Exercise: 4 stars, standard (cardinal_map)</h4>
+<a id="lab288"></a><h4 class="section">Exercise: 4 stars, standard (cardinal_map)</h4>
 
 </div>
 <div class="code">
@@ -544,7 +544,7 @@ Hint:  To prove this theorem, I used these lemmas.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab288"></a><h4 class="section">Exercise: 4 stars, standard (Sremove_cardinal_less)</h4>
+<a id="lab289"></a><h4 class="section">Exercise: 4 stars, standard (Sremove_cardinal_less)</h4>
 
 </div>
 <div class="code">
@@ -595,7 +595,7 @@ Hint:  To prove this theorem, I used these lemmas.
 </div>
 
 <div class="doc">
-<a id="lab289"></a><h4 class="section">Exercise: 4 stars, standard (Mremove_elements)</h4>
+<a id="lab290"></a><h4 class="section">Exercise: 4 stars, standard (Mremove_elements)</h4>
 
 </div>
 <div class="code">
@@ -620,7 +620,7 @@ Hint:  To prove this theorem, I used these lemmas.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab290"></a><h4 class="section">Exercise: 3 stars, standard (Mremove_cardinal_less)</h4>
+<a id="lab291"></a><h4 class="section">Exercise: 3 stars, standard (Mremove_cardinal_less)</h4>
 
 </div>
 <div class="code">
@@ -641,7 +641,7 @@ Look at the proof of <span class="inlinecode"><span class="id" title="var">Sremo
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab291"></a><h4 class="section">Exercise: 2 stars, standard (two_little_lemmas)</h4>
+<a id="lab292"></a><h4 class="section">Exercise: 2 stars, standard (two_little_lemmas)</h4>
 
 </div>
 <div class="code">
@@ -658,7 +658,7 @@ Look at the proof of <span class="inlinecode"><span class="id" title="var">Sremo
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab292"></a><h4 class="section">Exercise: 3 stars, standard (Sin_domain)</h4>
+<a id="lab293"></a><h4 class="section">Exercise: 3 stars, standard (Sin_domain)</h4>
 
 </div>
 <div class="code">
@@ -678,7 +678,7 @@ To reason about <span class="inlinecode"><span class="id" title="var">M.fold</sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab293"></a><h1 class="section">Now Begins the Graph Coloring Program</h1>
+<a id="lab294"></a><h1 class="section">Now Begins the Graph Coloring Program</h1>
 
 </div>
 <div class="code">
@@ -710,12 +710,12 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 </div>
 
 <div class="doc">
-<a id="lab294"></a><h2 class="section">Some Proofs in Support of Termination</h2>
+<a id="lab295"></a><h2 class="section">Some Proofs in Support of Termination</h2>
  We need to prove some lemmas related to the termination of the algorithm
   before we can actually define the <span class="inlinecode"><span class="id" title="keyword">Function</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab295"></a><h4 class="section">Exercise: 3 stars, standard (subset_nodes_sub)</h4>
+<a id="lab296"></a><h4 class="section">Exercise: 3 stars, standard (subset_nodes_sub)</h4>
 
 </div>
 <div class="code">
@@ -727,7 +727,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab296"></a><h4 class="section">Exercise: 3 stars, standard (select_terminates)</h4>
+<a id="lab297"></a><h4 class="section">Exercise: 3 stars, standard (select_terminates)</h4>
 
 </div>
 <div class="code">
@@ -742,7 +742,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab297"></a><h2 class="section">The Rest of the Algorithm</h2>
+<a id="lab298"></a><h2 class="section">The Rest of the Algorithm</h2>
 
 </div>
 <div class="code">
@@ -767,7 +767,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 </div>
 
 <div class="doc">
-<a id="lab298"></a><h1 class="section">Proof of Correctness of the Algorithm.</h1>
+<a id="lab299"></a><h1 class="section">Proof of Correctness of the Algorithm.</h1>
 
 <div class="paragraph"> </div>
 
@@ -784,7 +784,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 </div>
 
 <div class="doc">
-<a id="lab299"></a><h4 class="section">Exercise: 2 stars, standard (adj_ext)</h4>
+<a id="lab300"></a><h4 class="section">Exercise: 2 stars, standard (adj_ext)</h4>
 
 </div>
 <div class="code">
@@ -796,7 +796,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab300"></a><h4 class="section">Exercise: 3 stars, standard (in_colors_of_1)</h4>
+<a id="lab301"></a><h4 class="section">Exercise: 3 stars, standard (in_colors_of_1)</h4>
 
 </div>
 <div class="code">
@@ -809,7 +809,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab301"></a><h4 class="section">Exercise: 4 stars, standard (color_correct)</h4>
+<a id="lab302"></a><h4 class="section">Exercise: 4 stars, standard (color_correct)</h4>
 
 </div>
 <div class="code">
@@ -828,7 +828,7 @@ A node has "low degree" if the cardinality of its adjacency set is less than <sp
  That concludes the proof that the algorithm is correct. 
 <div class="paragraph"> </div>
 
-<a id="lab302"></a><h1 class="section">Trying Out the Algorithm on an Actual Test Case</h1>
+<a id="lab303"></a><h1 class="section">Trying Out the Algorithm on an Actual Test Case</h1>
 
 </div>
 <div class="code">
@@ -854,7 +854,7 @@ That is our graph coloring:  Node <span class="inlinecode">4</span> is colored w
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-03-28&nbsp;16:25&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-11&nbsp;22:40&nbsp;*)</span><br/>
 </div>
 </div>
 
