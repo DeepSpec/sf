@@ -17,6 +17,16 @@
     In later chapters, we'll apply these proof techniques to reasoning
     about algorithms and data structures. *)
 
+(* ################################################################# *)
+(** * The Coq Standard Library *)
+
+(** In this volume, we're going to import the definitions and theorems
+    we need directly from Coq's standard library, rather than from
+    chapters in Volume 1.  You should not notice much difference,
+    though, because we've been careful to name our own definitions and
+    theorems the same as their counterparts in the standard
+    library. *)
+
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.  (* for manual grading *)
 From Coq Require Export Bool.Bool.
@@ -596,4 +606,4 @@ Proof.
     [maybe_swap_correct] will be applied (at a larger scale) in
     the next few chapters. *)
 
-(* 2022-04-18 20:08 *)
+(* 2022-04-18 20:09 *)

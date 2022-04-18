@@ -71,7 +71,7 @@
 </div>
 
 <div class="doc">
-<a id="lab100"></a><h1 class="section">BST Implementation</h1>
+<a id="lab109"></a><h1 class="section">BST Implementation</h1>
 
 <div class="paragraph"> </div>
 
@@ -202,7 +202,7 @@ Although we can spot-check the behavior of BST operations with
 </div>
 
 <div class="doc">
-<a id="lab101"></a><h1 class="section">BST Invariant</h1>
+<a id="lab110"></a><h1 class="section">BST Invariant</h1>
 
 <div class="paragraph"> </div>
 
@@ -304,7 +304,7 @@ Let's check that <span class="inlinecode"><span class="id" title="var">BST</span
 </div>
 
 <div class="doc">
-<a id="lab102"></a><h4 class="section">Exercise: 1 star, standard (empty_tree_BST)</h4>
+<a id="lab111"></a><h4 class="section">Exercise: 1 star, standard (empty_tree_BST)</h4>
 
 <div class="paragraph"> </div>
 
@@ -322,7 +322,7 @@ Let's check that <span class="inlinecode"><span class="id" title="var">BST</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab103"></a><h4 class="section">Exercise: 3 stars, standard (insert_BST)</h4>
+<a id="lab112"></a><h4 class="section">Exercise: 3 stars, standard (insert_BST)</h4>
 
 <div class="paragraph"> </div>
 
@@ -368,7 +368,7 @@ Now prove the main theorem. Proceed by induction on the evidence
 </div>
 
 <div class="doc">
-<a id="lab104"></a><h1 class="section">Correctness of BST Operations</h1>
+<a id="lab113"></a><h1 class="section">Correctness of BST Operations</h1>
 
 <div class="paragraph"> </div>
 
@@ -501,7 +501,7 @@ Perhaps surprisingly, the proofs of these results do not
     "wrong". 
 <div class="paragraph"> </div>
 
-<a id="lab105"></a><h4 class="section">Exercise: 3 stars, standard, optional (bound_correct)</h4>
+<a id="lab114"></a><h4 class="section">Exercise: 3 stars, standard, optional (bound_correct)</h4>
 
 <div class="paragraph"> </div>
 
@@ -521,7 +521,7 @@ Perhaps surprisingly, the proofs of these results do not
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab106"></a><h4 class="section">Exercise: 1 star, standard, optional (bound_default)</h4>
+<a id="lab115"></a><h4 class="section">Exercise: 1 star, standard, optional (bound_default)</h4>
 
 <div class="paragraph"> </div>
 
@@ -541,7 +541,7 @@ Perhaps surprisingly, the proofs of these results do not
 
 
 <div class="doc">
-<a id="lab107"></a><h1 class="section">BSTs vs. Higher-order Functions (Optional)</h1>
+<a id="lab116"></a><h1 class="section">BSTs vs. Higher-order Functions (Optional)</h1>
 
 <div class="paragraph"> </div>
 
@@ -561,8 +561,8 @@ Perhaps surprisingly, the proofs of these results do not
 
 <span class="id" title="keyword">Check</span> <a class="idref" href="SearchTree.html#lookup_empty"><span class="id" title="lemma">lookup_empty</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:73" class="idref" href="#V:73"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="d:74" class="idref" href="#d:74"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:73"><span class="id" title="variable">V</span></a>) (<a id="k:75" class="idref" href="#k:75"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#lookup"><span class="id" title="definition">lookup</span></a> <a class="idref" href="SearchTree.html#d:74"><span class="id" title="variable">d</span></a> <a class="idref" href="SearchTree.html#k:75"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#empty_tree"><span class="id" title="definition">empty_tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#d:74"><span class="id" title="variable">d</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">t_apply_empty</span> : <span class="id" title="keyword">∀</span> (<a id="V:76" class="idref" href="#V:76"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="k:77" class="idref" href="#k:77"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="d:78" class="idref" href="#d:78"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:76"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">t_empty</span> <a class="idref" href="SearchTree.html#d:78"><span class="id" title="variable">d</span></a> <a class="idref" href="SearchTree.html#k:77"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#d:78"><span class="id" title="variable">d</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Maps.html#t_apply_empty"><span class="id" title="axiom">t_apply_empty</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:76" class="idref" href="#V:76"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="k:77" class="idref" href="#k:77"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="d:78" class="idref" href="#d:78"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:76"><span class="id" title="variable">V</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Maps.html#t_empty"><span class="id" title="definition">t_empty</span></a> <a class="idref" href="SearchTree.html#d:78"><span class="id" title="variable">d</span></a> <a class="idref" href="SearchTree.html#k:77"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#d:78"><span class="id" title="variable">d</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -577,8 +577,8 @@ Perhaps surprisingly, the proofs of these results do not
 
 <span class="id" title="keyword">Check</span> <a class="idref" href="SearchTree.html#lookup_insert_eq"><span class="id" title="lemma">lookup_insert_eq</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:79" class="idref" href="#V:79"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="t:80" class="idref" href="#t:80"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:79"><span class="id" title="variable">V</span></a>) (<a id="d:81" class="idref" href="#d:81"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:79"><span class="id" title="variable">V</span></a>) (<a id="k:82" class="idref" href="#k:82"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:83" class="idref" href="#v:83"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:79"><span class="id" title="variable">V</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#lookup"><span class="id" title="definition">lookup</span></a> <a class="idref" href="SearchTree.html#d:81"><span class="id" title="variable">d</span></a> <a class="idref" href="SearchTree.html#k:82"><span class="id" title="variable">k</span></a> (<a class="idref" href="SearchTree.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="SearchTree.html#k:82"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:83"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#t:80"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#v:83"><span class="id" title="variable">v</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">t_update_eq</span> : <span class="id" title="keyword">∀</span> (<a id="V:84" class="idref" href="#V:84"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="m:85" class="idref" href="#m:85"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">total_map</span> <a class="idref" href="SearchTree.html#V:84"><span class="id" title="variable">V</span></a>) (<a id="k:86" class="idref" href="#k:86"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:87" class="idref" href="#v:87"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:84"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:85"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:86"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:87"><span class="id" title="variable">v</span></a>) <a class="idref" href="SearchTree.html#k:86"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#v:87"><span class="id" title="variable">v</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Maps.html#t_update_eq"><span class="id" title="axiom">t_update_eq</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:84" class="idref" href="#V:84"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="m:85" class="idref" href="#m:85"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#total_map"><span class="id" title="definition">total_map</span></a> <a class="idref" href="SearchTree.html#V:84"><span class="id" title="variable">V</span></a>) (<a id="k:86" class="idref" href="#k:86"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:87" class="idref" href="#v:87"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:84"><span class="id" title="variable">V</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:85"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:86"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:87"><span class="id" title="variable">v</span></a>) <a class="idref" href="SearchTree.html#k:86"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#v:87"><span class="id" title="variable">v</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -595,8 +595,8 @@ Perhaps surprisingly, the proofs of these results do not
 <span class="id" title="keyword">Check</span> <a class="idref" href="SearchTree.html#lookup_insert_neq"><span class="id" title="lemma">lookup_insert_neq</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="V:88" class="idref" href="#V:88"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="t:89" class="idref" href="#t:89"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:88"><span class="id" title="variable">V</span></a>) (<a id="d:90" class="idref" href="#d:90"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:88"><span class="id" title="variable">V</span></a>) (<a id="k:91" class="idref" href="#k:91"><span class="id" title="binder">k</span></a> <a id="k':92" class="idref" href="#k':92"><span class="id" title="binder">k'</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:93" class="idref" href="#v:93"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:88"><span class="id" title="variable">V</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#k:91"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="SearchTree.html#k':92"><span class="id" title="variable">k'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#lookup"><span class="id" title="definition">lookup</span></a> <a class="idref" href="SearchTree.html#d:90"><span class="id" title="variable">d</span></a> <a class="idref" href="SearchTree.html#k':92"><span class="id" title="variable">k'</span></a> (<a class="idref" href="SearchTree.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="SearchTree.html#k:91"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:93"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#t:89"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#lookup"><span class="id" title="definition">lookup</span></a> <a class="idref" href="SearchTree.html#d:90"><span class="id" title="variable">d</span></a> <a class="idref" href="SearchTree.html#k':92"><span class="id" title="variable">k'</span></a> <a class="idref" href="SearchTree.html#t:89"><span class="id" title="variable">t</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">t_update_neq</span> : <span class="id" title="keyword">∀</span> (<a id="V:94" class="idref" href="#V:94"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="v:95" class="idref" href="#v:95"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:94"><span class="id" title="variable">V</span></a>) (<a id="k:96" class="idref" href="#k:96"><span class="id" title="binder">k</span></a> <a id="k':97" class="idref" href="#k':97"><span class="id" title="binder">k'</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:98" class="idref" href="#m:98"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">total_map</span> <a class="idref" href="SearchTree.html#V:94"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#k:96"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="SearchTree.html#k':97"><span class="id" title="variable">k'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> (<span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:98"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:96"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:95"><span class="id" title="variable">v</span></a>) <a class="idref" href="SearchTree.html#k':97"><span class="id" title="variable">k'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#m:98"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k':97"><span class="id" title="variable">k'</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Maps.html#t_update_neq"><span class="id" title="axiom">t_update_neq</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:94" class="idref" href="#V:94"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="v:95" class="idref" href="#v:95"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:94"><span class="id" title="variable">V</span></a>) (<a id="k:96" class="idref" href="#k:96"><span class="id" title="binder">k</span></a> <a id="k':97" class="idref" href="#k':97"><span class="id" title="binder">k'</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:98" class="idref" href="#m:98"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#total_map"><span class="id" title="definition">total_map</span></a> <a class="idref" href="SearchTree.html#V:94"><span class="id" title="variable">V</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#k:96"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="SearchTree.html#k':97"><span class="id" title="variable">k'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> (<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:98"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:96"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:95"><span class="id" title="variable">v</span></a>) <a class="idref" href="SearchTree.html#k':97"><span class="id" title="variable">k'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#m:98"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k':97"><span class="id" title="variable">k'</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -606,14 +606,14 @@ In <a href="Maps.html"><span class="inlineref">Maps</span></a>, we also proved t
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">t_update_shadow</span> : <span class="id" title="keyword">∀</span> (<a id="V:99" class="idref" href="#V:99"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="m:100" class="idref" href="#m:100"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">total_map</span> <a class="idref" href="SearchTree.html#V:99"><span class="id" title="variable">V</span></a>) (<a id="v<sub>1</sub>:101" class="idref" href="#v<sub>1</sub>:101"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:102" class="idref" href="#v<sub>2</sub>:102"><span class="id" title="binder">v<sub>2</sub></span></a> : <a class="idref" href="SearchTree.html#V:99"><span class="id" title="variable">V</span></a>) (<a id="k:103" class="idref" href="#k:103"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">t_update</span> (<span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:100"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:103"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:101"><span class="id" title="variable">v<sub>1</sub></span></a>) <a class="idref" href="SearchTree.html#k:103"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:102"><span class="id" title="variable">v<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:100"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:103"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:102"><span class="id" title="variable">v<sub>2</sub></span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">t_update_same</span> : <span class="id" title="keyword">∀</span> (<a id="V:104" class="idref" href="#V:104"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="k:105" class="idref" href="#k:105"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:106" class="idref" href="#m:106"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">total_map</span> <a class="idref" href="SearchTree.html#V:104"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:106"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:105"><span class="id" title="variable">k</span></a> (<a class="idref" href="SearchTree.html#m:106"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:105"><span class="id" title="variable">k</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#m:106"><span class="id" title="variable">m</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">t_update_permute</span> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="V:107" class="idref" href="#V:107"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="v<sub>1</sub>:108" class="idref" href="#v<sub>1</sub>:108"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:109" class="idref" href="#v<sub>2</sub>:109"><span class="id" title="binder">v<sub>2</sub></span></a> : <a class="idref" href="SearchTree.html#V:107"><span class="id" title="variable">V</span></a>) (<a id="k<sub>1</sub>:110" class="idref" href="#k<sub>1</sub>:110"><span class="id" title="binder">k<sub>1</sub></span></a> <a id="k<sub>2</sub>:111" class="idref" href="#k<sub>2</sub>:111"><span class="id" title="binder">k<sub>2</sub></span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:112" class="idref" href="#m:112"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">total_map</span> <a class="idref" href="SearchTree.html#V:107"><span class="id" title="variable">V</span></a>),<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Maps.html#t_update_shadow"><span class="id" title="axiom">t_update_shadow</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:99" class="idref" href="#V:99"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="m:100" class="idref" href="#m:100"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#total_map"><span class="id" title="definition">total_map</span></a> <a class="idref" href="SearchTree.html#V:99"><span class="id" title="variable">V</span></a>) (<a id="v<sub>1</sub>:101" class="idref" href="#v<sub>1</sub>:101"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:102" class="idref" href="#v<sub>2</sub>:102"><span class="id" title="binder">v<sub>2</sub></span></a> : <a class="idref" href="SearchTree.html#V:99"><span class="id" title="variable">V</span></a>) (<a id="k:103" class="idref" href="#k:103"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> (<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:100"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:103"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:101"><span class="id" title="variable">v<sub>1</sub></span></a>) <a class="idref" href="SearchTree.html#k:103"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:102"><span class="id" title="variable">v<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:100"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:103"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:102"><span class="id" title="variable">v<sub>2</sub></span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Maps.html#t_update_same"><span class="id" title="axiom">t_update_same</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:104" class="idref" href="#V:104"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="k:105" class="idref" href="#k:105"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:106" class="idref" href="#m:106"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#total_map"><span class="id" title="definition">total_map</span></a> <a class="idref" href="SearchTree.html#V:104"><span class="id" title="variable">V</span></a>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:106"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:105"><span class="id" title="variable">k</span></a> (<a class="idref" href="SearchTree.html#m:106"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:105"><span class="id" title="variable">k</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#m:106"><span class="id" title="variable">m</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Maps.html#t_update_permute"><span class="id" title="axiom">t_update_permute</span></a> :<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="V:107" class="idref" href="#V:107"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="v<sub>1</sub>:108" class="idref" href="#v<sub>1</sub>:108"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:109" class="idref" href="#v<sub>2</sub>:109"><span class="id" title="binder">v<sub>2</sub></span></a> : <a class="idref" href="SearchTree.html#V:107"><span class="id" title="variable">V</span></a>) (<a id="k<sub>1</sub>:110" class="idref" href="#k<sub>1</sub>:110"><span class="id" title="binder">k<sub>1</sub></span></a> <a id="k<sub>2</sub>:111" class="idref" href="#k<sub>2</sub>:111"><span class="id" title="binder">k<sub>2</sub></span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:112" class="idref" href="#m:112"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#total_map"><span class="id" title="definition">total_map</span></a> <a class="idref" href="SearchTree.html#V:107"><span class="id" title="variable">V</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#k<sub>2</sub>:111"><span class="id" title="variable">k<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="SearchTree.html#k<sub>1</sub>:110"><span class="id" title="variable">k<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">t_update</span> (<span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:112"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k<sub>2</sub>:111"><span class="id" title="variable">k<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:109"><span class="id" title="variable">v<sub>2</sub></span></a>) <a class="idref" href="SearchTree.html#k<sub>1</sub>:110"><span class="id" title="variable">k<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:108"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">t_update</span> (<span class="id" title="definition">t_update</span> <a class="idref" href="SearchTree.html#m:112"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k<sub>1</sub>:110"><span class="id" title="variable">k<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:108"><span class="id" title="variable">v<sub>1</sub></span></a>) <a class="idref" href="SearchTree.html#k<sub>2</sub>:111"><span class="id" title="variable">k<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:109"><span class="id" title="variable">v<sub>2</sub></span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> (<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:112"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k<sub>2</sub>:111"><span class="id" title="variable">k<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:109"><span class="id" title="variable">v<sub>2</sub></span></a>) <a class="idref" href="SearchTree.html#k<sub>1</sub>:110"><span class="id" title="variable">k<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:108"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> (<a class="idref" href="Maps.html#t_update"><span class="id" title="definition">t_update</span></a> <a class="idref" href="SearchTree.html#m:112"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k<sub>1</sub>:110"><span class="id" title="variable">k<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:108"><span class="id" title="variable">v<sub>1</sub></span></a>) <a class="idref" href="SearchTree.html#k<sub>2</sub>:111"><span class="id" title="variable">k<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:109"><span class="id" title="variable">v<sub>2</sub></span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -626,7 +626,7 @@ Let's prove analogues to these three theorems for search trees.
     <span class="inlinecode"><span class="id" title="var">lookup_insert_neq</span></span>. 
 <div class="paragraph"> </div>
 
-<a id="lab108"></a><h4 class="section">Exercise: 2 stars, standard, optional (lookup_insert_shadow)</h4>
+<a id="lab117"></a><h4 class="section">Exercise: 2 stars, standard, optional (lookup_insert_shadow)</h4>
 
 </div>
 <div class="code">
@@ -643,7 +643,7 @@ Let's prove analogues to these three theorems for search trees.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab109"></a><h4 class="section">Exercise: 2 stars, standard, optional (lookup_insert_same)</h4>
+<a id="lab118"></a><h4 class="section">Exercise: 2 stars, standard, optional (lookup_insert_same)</h4>
 
 </div>
 <div class="code">
@@ -659,7 +659,7 @@ Let's prove analogues to these three theorems for search trees.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab110"></a><h4 class="section">Exercise: 2 stars, standard, optional (lookup_insert_permute)</h4>
+<a id="lab119"></a><h4 class="section">Exercise: 2 stars, standard, optional (lookup_insert_permute)</h4>
 
 </div>
 <div class="code">
@@ -708,7 +708,7 @@ But the other two direct equalities on BSTs do not necessarily
     hold. 
 <div class="paragraph"> </div>
 
-<a id="lab111"></a><h4 class="section">Exercise: 2 stars, standard, optional (direct_equalities_break)</h4>
+<a id="lab120"></a><h4 class="section">Exercise: 2 stars, standard, optional (direct_equalities_break)</h4>
 
 <div class="paragraph"> </div>
 
@@ -734,7 +734,7 @@ But the other two direct equalities on BSTs do not necessarily
 
 
 <div class="doc">
-<a id="lab112"></a><h1 class="section">Converting a BST to a List</h1>
+<a id="lab121"></a><h1 class="section">Converting a BST to a List</h1>
 
 <div class="paragraph"> </div>
 
@@ -777,7 +777,7 @@ Here are three desirable properties for <span class="inlinecode"><span class="id
     Let's formally specify and verify them. 
 <div class="paragraph"> </div>
 
-<a id="lab113"></a><h2 class="section">Part 1: Same Bindings</h2>
+<a id="lab122"></a><h2 class="section">Part 1: Same Bindings</h2>
 
 <div class="paragraph"> </div>
 
@@ -852,7 +852,7 @@ The solution is to check first to see whether <span class="inlinecode"><span cla
 </div>
 
 <div class="doc">
-<a id="lab114"></a><h4 class="section">Exercise: 3 stars, standard (elements_complete)</h4>
+<a id="lab123"></a><h4 class="section">Exercise: 3 stars, standard (elements_complete)</h4>
 
 <div class="paragraph"> </div>
 
@@ -902,7 +902,7 @@ Proving correctness requires more work than completeness.
 </div>
 
 <div class="doc">
-<a id="lab115"></a><h4 class="section">Exercise: 2 stars, standard (elements_preserves_forall)</h4>
+<a id="lab124"></a><h4 class="section">Exercise: 2 stars, standard (elements_preserves_forall)</h4>
 
 <div class="paragraph"> </div>
 
@@ -934,7 +934,7 @@ Proving correctness requires more work than completeness.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab116"></a><h4 class="section">Exercise: 2 stars, standard (elements_preserves_relation)</h4>
+<a id="lab125"></a><h4 class="section">Exercise: 2 stars, standard (elements_preserves_relation)</h4>
 
 <div class="paragraph"> </div>
 
@@ -966,7 +966,7 @@ Proving correctness requires more work than completeness.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab117"></a><h4 class="section">Exercise: 4 stars, standard (elements_correct)</h4>
+<a id="lab126"></a><h4 class="section">Exercise: 4 stars, standard (elements_correct)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1008,7 +1008,7 @@ Proving correctness requires more work than completeness.
 </div>
 
 <div class="doc">
-<a id="lab118"></a><h4 class="section">Exercise: 2 stars, advanced (elements_complete_inverse)</h4>
+<a id="lab127"></a><h4 class="section">Exercise: 2 stars, advanced (elements_complete_inverse)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1030,7 +1030,7 @@ Proving correctness requires more work than completeness.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab119"></a><h4 class="section">Exercise: 4 stars, advanced (elements_correct_inverse)</h4>
+<a id="lab128"></a><h4 class="section">Exercise: 4 stars, advanced (elements_correct_inverse)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1062,7 +1062,7 @@ Prove the main result.  You don't need induction.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab120"></a><h2 class="section">Part 2: Sorted (Advanced)</h2>
+<a id="lab129"></a><h2 class="section">Part 2: Sorted (Advanced)</h2>
 
 <div class="paragraph"> </div>
 
@@ -1070,7 +1070,7 @@ Prove the main result.  You don't need induction.
     proof technique contributed by Lydia Symmons et al.
 <div class="paragraph"> </div>
 
-<a id="lab121"></a><h4 class="section">Exercise: 3 stars, advanced (sorted_app)</h4>
+<a id="lab130"></a><h4 class="section">Exercise: 3 stars, advanced (sorted_app)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1092,7 +1092,7 @@ Prove the main result.  You don't need induction.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab122"></a><h4 class="section">Exercise: 4 stars, advanced (sorted_elements)</h4>
+<a id="lab131"></a><h4 class="section">Exercise: 4 stars, advanced (sorted_elements)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1120,7 +1120,7 @@ Prove that <span class="inlinecode"><span class="id" title="var">elements</span>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab123"></a><h2 class="section">Part 3: No Duplicates (Advanced and Optional)</h2>
+<a id="lab132"></a><h2 class="section">Part 3: No Duplicates (Advanced and Optional)</h2>
 
 <div class="paragraph"> </div>
 
@@ -1147,7 +1147,7 @@ The library is missing a theorem, though, about <span class="inlinecode"><span c
 </div>
 
 <div class="doc">
-<a id="lab124"></a><h4 class="section">Exercise: 3 stars, advanced, optional (NoDup_append)</h4>
+<a id="lab133"></a><h4 class="section">Exercise: 3 stars, advanced, optional (NoDup_append)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1168,7 +1168,7 @@ The library is missing a theorem, though, about <span class="inlinecode"><span c
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab125"></a><h4 class="section">Exercise: 4 stars, advanced, optional (elements_nodup_keys)</h4>
+<a id="lab134"></a><h4 class="section">Exercise: 4 stars, advanced, optional (elements_nodup_keys)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1193,7 +1193,7 @@ The library is missing a theorem, though, about <span class="inlinecode"><span c
 </div>
 
 <div class="doc">
-<a id="lab126"></a><h1 class="section">A Faster <span class="inlinecode"><span class="id" title="var">elements</span></span> Implementation</h1>
+<a id="lab135"></a><h1 class="section">A Faster <span class="inlinecode"><span class="id" title="var">elements</span></span> Implementation</h1>
 
 <div class="paragraph"> </div>
 
@@ -1217,7 +1217,7 @@ The library is missing a theorem, though, about <span class="inlinecode"><span c
 </div>
 
 <div class="doc">
-<a id="lab127"></a><h4 class="section">Exercise: 3 stars, standard (fast_elements_eq_elements)</h4>
+<a id="lab136"></a><h4 class="section">Exercise: 3 stars, standard (fast_elements_eq_elements)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1266,7 +1266,7 @@ This corollary illustrates a general technique:  prove the correctness
 </div>
 
 <div class="doc">
-<a id="lab128"></a><h1 class="section">An Algebraic Specification of <span class="inlinecode"><span class="id" title="var">elements</span></span></h1>
+<a id="lab137"></a><h1 class="section">An Algebraic Specification of <span class="inlinecode"><span class="id" title="var">elements</span></span></h1>
 
 <div class="paragraph"> </div>
 
@@ -1318,7 +1318,7 @@ That's not satisfactory, because the definition of
     ugly verification. 
 <div class="paragraph"> </div>
 
-<a id="lab129"></a><h4 class="section">Exercise: 3 stars, standard, optional (kvs_insert_split)</h4>
+<a id="lab138"></a><h4 class="section">Exercise: 3 stars, standard, optional (kvs_insert_split)</h4>
 
 </div>
 <div class="code">
@@ -1341,7 +1341,7 @@ That's not satisfactory, because the definition of
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab130"></a><h4 class="section">Exercise: 3 stars, standard, optional (kvs_insert_elements)</h4>
+<a id="lab139"></a><h4 class="section">Exercise: 3 stars, standard, optional (kvs_insert_elements)</h4>
 
 </div>
 <div class="code">
@@ -1356,7 +1356,7 @@ That's not satisfactory, because the definition of
 
 
 <div class="doc">
-<a id="lab131"></a><h1 class="section">Model-based Specifications</h1>
+<a id="lab140"></a><h1 class="section">Model-based Specifications</h1>
 
 <div class="paragraph"> </div>
 
@@ -1442,12 +1442,12 @@ That's not satisfactory, because the definition of
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="map_of_list" class="idref" href="#map_of_list"><span class="id" title="definition">map_of_list</span></a> {<a id="V:254" class="idref" href="#V:254"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="el:255" class="idref" href="#el:255"><span class="id" title="binder">el</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="SearchTree.html#V:254"><span class="id" title="variable">V</span></a>)) : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#V:254"><span class="id" title="variable">V</span></a> :=<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="map_of_list" class="idref" href="#map_of_list"><span class="id" title="definition">map_of_list</span></a> {<a id="V:254" class="idref" href="#V:254"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="el:255" class="idref" href="#el:255"><span class="id" title="binder">el</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="SearchTree.html#V:254"><span class="id" title="variable">V</span></a>)) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#V:254"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="SearchTree.html#el:255"><span class="id" title="variable">el</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <span class="id" title="definition">empty</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">k</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">v</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">el'</span> ⇒ <span class="id" title="definition">update</span> (<a class="idref" href="SearchTree.html#map_of_list:256"><span class="id" title="definition">map_of_list</span></a> <span class="id" title="var">el'</span>) <span class="id" title="var">k</span> <span class="id" title="var">v</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="Maps.html#empty"><span class="id" title="definition">empty</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">k</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">v</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">el'</span> ⇒ <a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> (<a class="idref" href="SearchTree.html#map_of_list:256"><span class="id" title="definition">map_of_list</span></a> <span class="id" title="var">el'</span>) <span class="id" title="var">k</span> <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="Abs" class="idref" href="#Abs"><span class="id" title="definition">Abs</span></a> {<a id="V:258" class="idref" href="#V:258"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="t:259" class="idref" href="#t:259"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:258"><span class="id" title="variable">V</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#V:258"><span class="id" title="variable">V</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="Abs" class="idref" href="#Abs"><span class="id" title="definition">Abs</span></a> {<a id="V:258" class="idref" href="#V:258"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="t:259" class="idref" href="#t:259"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:258"><span class="id" title="variable">V</span></a>) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#V:258"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="SearchTree.html#map_of_list"><span class="id" title="definition">map_of_list</span></a> (<a class="idref" href="SearchTree.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="SearchTree.html#t:259"><span class="id" title="variable">t</span></a>).<br/>
 </div>
 
@@ -1467,7 +1467,7 @@ In general, model-based specifications may use an abstraction
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="find" class="idref" href="#find"><span class="id" title="definition">find</span></a> {<a id="V:260" class="idref" href="#V:260"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="d:261" class="idref" href="#d:261"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:260"><span class="id" title="variable">V</span></a>) (<a id="k:262" class="idref" href="#k:262"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:263" class="idref" href="#m:263"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#V:260"><span class="id" title="variable">V</span></a>) : <a class="idref" href="SearchTree.html#V:260"><span class="id" title="variable">V</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="find" class="idref" href="#find"><span class="id" title="definition">find</span></a> {<a id="V:260" class="idref" href="#V:260"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="d:261" class="idref" href="#d:261"><span class="id" title="binder">d</span></a> : <a class="idref" href="SearchTree.html#V:260"><span class="id" title="variable">V</span></a>) (<a id="k:262" class="idref" href="#k:262"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:263" class="idref" href="#m:263"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#V:260"><span class="id" title="variable">V</span></a>) : <a class="idref" href="SearchTree.html#V:260"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="SearchTree.html#m:263"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:262"><span class="id" title="variable">k</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">v</span> ⇒ <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> ⇒ <a class="idref" href="SearchTree.html#d:261"><span class="id" title="variable">d</span></a><br/>
@@ -1479,7 +1479,7 @@ We also need a <span class="inlinecode"><span class="id" title="var">bound</span
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="map_bound" class="idref" href="#map_bound"><span class="id" title="definition">map_bound</span></a> {<a id="V:264" class="idref" href="#V:264"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="k:265" class="idref" href="#k:265"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:266" class="idref" href="#m:266"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#V:264"><span class="id" title="variable">V</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="map_bound" class="idref" href="#map_bound"><span class="id" title="definition">map_bound</span></a> {<a id="V:264" class="idref" href="#V:264"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="k:265" class="idref" href="#k:265"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="m:266" class="idref" href="#m:266"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#V:264"><span class="id" title="variable">V</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="SearchTree.html#m:266"><span class="id" title="variable">m</span></a> <a class="idref" href="SearchTree.html#k:265"><span class="id" title="variable">k</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a><br/>
@@ -1506,7 +1506,7 @@ We now prove that each operation preserves (or establishes)
     to prove them. They can all be proved by induction on the list. 
 <div class="paragraph"> </div>
 
-<a id="lab132"></a><h4 class="section">Exercise: 2 stars, standard, optional (in_fst)</h4>
+<a id="lab141"></a><h4 class="section">Exercise: 2 stars, standard, optional (in_fst)</h4>
 
 </div>
 <div class="code">
@@ -1520,7 +1520,7 @@ We now prove that each operation preserves (or establishes)
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab133"></a><h4 class="section">Exercise: 2 stars, standard, optional (in_map_of_list)</h4>
+<a id="lab142"></a><h4 class="section">Exercise: 2 stars, standard, optional (in_map_of_list)</h4>
 
 </div>
 <div class="code">
@@ -1535,7 +1535,7 @@ We now prove that each operation preserves (or establishes)
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab134"></a><h4 class="section">Exercise: 2 stars, standard, optional (not_in_map_of_list)</h4>
+<a id="lab143"></a><h4 class="section">Exercise: 2 stars, standard, optional (not_in_map_of_list)</h4>
 
 </div>
 <div class="code">
@@ -1549,14 +1549,14 @@ We now prove that each operation preserves (or establishes)
 <div class="code">
 
 <span class="id" title="keyword">Lemma</span> <a id="empty_relate" class="idref" href="#empty_relate"><span class="id" title="lemma">empty_relate</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:279" class="idref" href="#V:279"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@<a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="SearchTree.html#V:279"><span class="id" title="variable">V</span></a> <a class="idref" href="SearchTree.html#empty_tree"><span class="id" title="definition">empty_tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">empty</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@<a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="SearchTree.html#V:279"><span class="id" title="variable">V</span></a> <a class="idref" href="SearchTree.html#empty_tree"><span class="id" title="definition">empty_tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Maps.html#empty"><span class="id" title="definition">empty</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab135"></a><h4 class="section">Exercise: 3 stars, standard, optional (bound_relate)</h4>
+<a id="lab144"></a><h4 class="section">Exercise: 3 stars, standard, optional (bound_relate)</h4>
 
 </div>
 <div class="code">
@@ -1572,7 +1572,7 @@ We now prove that each operation preserves (or establishes)
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab136"></a><h4 class="section">Exercise: 3 stars, standard, optional (lookup_relate)</h4>
+<a id="lab145"></a><h4 class="section">Exercise: 3 stars, standard, optional (lookup_relate)</h4>
 
 </div>
 <div class="code">
@@ -1587,12 +1587,12 @@ We now prove that each operation preserves (or establishes)
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab137"></a><h4 class="section">Exercise: 3 stars, standard, optional (insert_relate)</h4>
+<a id="lab146"></a><h4 class="section">Exercise: 3 stars, standard, optional (insert_relate)</h4>
 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a id="insert_relate" class="idref" href="#insert_relate"><span class="id" title="lemma">insert_relate</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:287" class="idref" href="#V:287"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="t:288" class="idref" href="#t:288"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:287"><span class="id" title="variable">V</span></a>) (<a id="k:289" class="idref" href="#k:289"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:290" class="idref" href="#v:290"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:287"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:288"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a> (<a class="idref" href="SearchTree.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="SearchTree.html#k:289"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:290"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#t:288"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">update</span> (<a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="SearchTree.html#t:288"><span class="id" title="variable">t</span></a>) <a class="idref" href="SearchTree.html#k:289"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:290"><span class="id" title="variable">v</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:288"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a> (<a class="idref" href="SearchTree.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="SearchTree.html#k:289"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:290"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#t:288"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> (<a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a> <a class="idref" href="SearchTree.html#t:288"><span class="id" title="variable">t</span></a>) <a class="idref" href="SearchTree.html#k:289"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:290"><span class="id" title="variable">v</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;TODO:&nbsp;find&nbsp;a&nbsp;direct&nbsp;proof&nbsp;that&nbsp;doesn't&nbsp;rely&nbsp;on&nbsp;<span class="inlinecode"><span class="id" title="var">kvs_insert_elements</span></span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="SearchTree.html#Abs"><span class="id" title="definition">Abs</span></a>.<br/>
@@ -1668,7 +1668,7 @@ We now prove that each operation preserves (or establishes)
 </div>
 
 <div class="doc">
-<a id="lab138"></a><h1 class="section">An Alternative Abstraction Relation (Optional, Advanced)</h1>
+<a id="lab147"></a><h1 class="section">An Alternative Abstraction Relation (Optional, Advanced)</h1>
 
 <div class="paragraph"> </div>
 
@@ -1688,7 +1688,7 @@ We now prove that each operation preserves (or establishes)
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="union" class="idref" href="#union"><span class="id" title="definition">union</span></a> {<a id="X:293" class="idref" href="#X:293"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:294" class="idref" href="#m<sub>1</sub>:294"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:295" class="idref" href="#m<sub>2</sub>:295"><span class="id" title="binder">m<sub>2</sub></span></a>: <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:293"><span class="id" title="variable">X</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:293"><span class="id" title="variable">X</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="union" class="idref" href="#union"><span class="id" title="definition">union</span></a> {<a id="X:293" class="idref" href="#X:293"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:294" class="idref" href="#m<sub>1</sub>:294"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:295" class="idref" href="#m<sub>2</sub>:295"><span class="id" title="binder">m<sub>2</sub></span></a>: <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:293"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:293"><span class="id" title="variable">X</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="k:296" class="idref" href="#k:296"><span class="id" title="binder">k</span></a> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="SearchTree.html#m<sub>1</sub>:294"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:296"><span class="id" title="variable">k</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:295"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:296"><span class="id" title="variable">k</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
@@ -1703,20 +1703,20 @@ We can prove some simple properties of lookup and update on unions,
     which will prove useful later. 
 <div class="paragraph"> </div>
 
-<a id="lab139"></a><h4 class="section">Exercise: 2 stars, standard, optional (union_collapse)</h4>
+<a id="lab148"></a><h4 class="section">Exercise: 2 stars, standard, optional (union_collapse)</h4>
 
 </div>
 <div class="code">
-<span class="id" title="keyword">Lemma</span> <a id="union_left" class="idref" href="#union_left"><span class="id" title="lemma">union_left</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:297" class="idref" href="#X:297"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:298" class="idref" href="#m<sub>1</sub>:298"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:299" class="idref" href="#m<sub>2</sub>:299"><span class="id" title="binder">m<sub>2</sub></span></a>: <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:297"><span class="id" title="variable">X</span></a>) <a id="k:300" class="idref" href="#k:300"><span class="id" title="binder">k</span></a>,<br/>
+<span class="id" title="keyword">Lemma</span> <a id="union_left" class="idref" href="#union_left"><span class="id" title="lemma">union_left</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:297" class="idref" href="#X:297"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:298" class="idref" href="#m<sub>1</sub>:298"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:299" class="idref" href="#m<sub>2</sub>:299"><span class="id" title="binder">m<sub>2</sub></span></a>: <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:297"><span class="id" title="variable">X</span></a>) <a id="k:300" class="idref" href="#k:300"><span class="id" title="binder">k</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#m<sub>2</sub>:299"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:300"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:298"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:299"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:300"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:298"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:300"><span class="id" title="variable">k</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="union_right" class="idref" href="#union_right"><span class="id" title="lemma">union_right</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:301" class="idref" href="#X:301"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:302" class="idref" href="#m<sub>1</sub>:302"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:303" class="idref" href="#m<sub>2</sub>:303"><span class="id" title="binder">m<sub>2</sub></span></a>: <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:301"><span class="id" title="variable">X</span></a>) <a id="k:304" class="idref" href="#k:304"><span class="id" title="binder">k</span></a>,<br/>
+<span class="id" title="keyword">Lemma</span> <a id="union_right" class="idref" href="#union_right"><span class="id" title="lemma">union_right</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:301" class="idref" href="#X:301"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:302" class="idref" href="#m<sub>1</sub>:302"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:303" class="idref" href="#m<sub>2</sub>:303"><span class="id" title="binder">m<sub>2</sub></span></a>: <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:301"><span class="id" title="variable">X</span></a>) <a id="k:304" class="idref" href="#k:304"><span class="id" title="binder">k</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#m<sub>1</sub>:302"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:304"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:302"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:303"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:304"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:303"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:304"><span class="id" title="variable">k</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="union_both" class="idref" href="#union_both"><span class="id" title="lemma">union_both</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:305" class="idref" href="#X:305"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:306" class="idref" href="#m<sub>1</sub>:306"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:307" class="idref" href="#m<sub>2</sub>:307"><span class="id" title="binder">m<sub>2</sub></span></a> : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:305"><span class="id" title="variable">X</span></a>) <a id="k:308" class="idref" href="#k:308"><span class="id" title="binder">k</span></a> <a id="v<sub>1</sub>:309" class="idref" href="#v<sub>1</sub>:309"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:310" class="idref" href="#v<sub>2</sub>:310"><span class="id" title="binder">v<sub>2</sub></span></a>,<br/>
+<span class="id" title="keyword">Lemma</span> <a id="union_both" class="idref" href="#union_both"><span class="id" title="lemma">union_both</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:305" class="idref" href="#X:305"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:306" class="idref" href="#m<sub>1</sub>:306"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:307" class="idref" href="#m<sub>2</sub>:307"><span class="id" title="binder">m<sub>2</sub></span></a> : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:305"><span class="id" title="variable">X</span></a>) <a id="k:308" class="idref" href="#k:308"><span class="id" title="binder">k</span></a> <a id="v<sub>1</sub>:309" class="idref" href="#v<sub>1</sub>:309"><span class="id" title="binder">v<sub>1</sub></span></a> <a id="v<sub>2</sub>:310" class="idref" href="#v<sub>2</sub>:310"><span class="id" title="binder">v<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#m<sub>1</sub>:306"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:308"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="SearchTree.html#v<sub>1</sub>:309"><span class="id" title="variable">v<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#m<sub>2</sub>:307"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:308"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="SearchTree.html#v<sub>2</sub>:310"><span class="id" title="variable">v<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:306"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:307"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:308"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
@@ -1728,18 +1728,18 @@ We can prove some simple properties of lookup and update on unions,
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab140"></a><h4 class="section">Exercise: 3 stars, standard, optional (union_update)</h4>
+<a id="lab149"></a><h4 class="section">Exercise: 3 stars, standard, optional (union_update)</h4>
 
 </div>
 <div class="code">
-<span class="id" title="keyword">Lemma</span> <a id="union_update_right" class="idref" href="#union_update_right"><span class="id" title="lemma">union_update_right</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:311" class="idref" href="#X:311"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:312" class="idref" href="#m<sub>1</sub>:312"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:313" class="idref" href="#m<sub>2</sub>:313"><span class="id" title="binder">m<sub>2</sub></span></a>: <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:311"><span class="id" title="variable">X</span></a>) <a id="k:314" class="idref" href="#k:314"><span class="id" title="binder">k</span></a> <a id="v:315" class="idref" href="#v:315"><span class="id" title="binder">v</span></a>,<br/>
+<span class="id" title="keyword">Lemma</span> <a id="union_update_right" class="idref" href="#union_update_right"><span class="id" title="lemma">union_update_right</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:311" class="idref" href="#X:311"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:312" class="idref" href="#m<sub>1</sub>:312"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:313" class="idref" href="#m<sub>2</sub>:313"><span class="id" title="binder">m<sub>2</sub></span></a>: <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:311"><span class="id" title="variable">X</span></a>) <a id="k:314" class="idref" href="#k:314"><span class="id" title="binder">k</span></a> <a id="v:315" class="idref" href="#v:315"><span class="id" title="binder">v</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#m<sub>1</sub>:312"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:314"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">update</span> (<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:312"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:313"><span class="id" title="variable">m<sub>2</sub></span></a>) <a class="idref" href="SearchTree.html#k:314"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:315"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:312"><span class="id" title="variable">m<sub>1</sub></span></a> (<span class="id" title="definition">update</span> <a class="idref" href="SearchTree.html#m<sub>2</sub>:313"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:314"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:315"><span class="id" title="variable">v</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> (<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:312"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:313"><span class="id" title="variable">m<sub>2</sub></span></a>) <a class="idref" href="SearchTree.html#k:314"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:315"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:312"><span class="id" title="variable">m<sub>1</sub></span></a> (<a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:313"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:314"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:315"><span class="id" title="variable">v</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="union_update_left" class="idref" href="#union_update_left"><span class="id" title="lemma">union_update_left</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:316" class="idref" href="#X:316"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:317" class="idref" href="#m<sub>1</sub>:317"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:318" class="idref" href="#m<sub>2</sub>:318"><span class="id" title="binder">m<sub>2</sub></span></a>: <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#X:316"><span class="id" title="variable">X</span></a>) <a id="k:319" class="idref" href="#k:319"><span class="id" title="binder">k</span></a> <a id="v:320" class="idref" href="#v:320"><span class="id" title="binder">v</span></a>,<br/>
+<span class="id" title="keyword">Lemma</span> <a id="union_update_left" class="idref" href="#union_update_left"><span class="id" title="lemma">union_update_left</span></a> : <span class="id" title="keyword">∀</span> {<a id="X:316" class="idref" href="#X:316"><span class="id" title="binder">X</span></a>} (<a id="m<sub>1</sub>:317" class="idref" href="#m<sub>1</sub>:317"><span class="id" title="binder">m<sub>1</sub></span></a> <a id="m<sub>2</sub>:318" class="idref" href="#m<sub>2</sub>:318"><span class="id" title="binder">m<sub>2</sub></span></a>: <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#X:316"><span class="id" title="variable">X</span></a>) <a id="k:319" class="idref" href="#k:319"><span class="id" title="binder">k</span></a> <a id="v:320" class="idref" href="#v:320"><span class="id" title="binder">v</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#m<sub>2</sub>:318"><span class="id" title="variable">m<sub>2</sub></span></a> <a class="idref" href="SearchTree.html#k:319"><span class="id" title="variable">k</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">update</span> (<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:317"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:318"><span class="id" title="variable">m<sub>2</sub></span></a>) <a class="idref" href="SearchTree.html#k:319"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:320"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> (<span class="id" title="definition">update</span> <a class="idref" href="SearchTree.html#m<sub>1</sub>:317"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:319"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:320"><span class="id" title="variable">v</span></a>) <a class="idref" href="SearchTree.html#m<sub>2</sub>:318"><span class="id" title="variable">m<sub>2</sub></span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> (<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:317"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#m<sub>2</sub>:318"><span class="id" title="variable">m<sub>2</sub></span></a>) <a class="idref" href="SearchTree.html#k:319"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:320"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> <a class="idref" href="SearchTree.html#m<sub>1</sub>:317"><span class="id" title="variable">m<sub>1</sub></span></a> <a class="idref" href="SearchTree.html#k:319"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:320"><span class="id" title="variable">v</span></a>) <a class="idref" href="SearchTree.html#m<sub>2</sub>:318"><span class="id" title="variable">m<sub>2</sub></span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -1754,15 +1754,15 @@ We can prove some simple properties of lookup and update on unions,
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="map_of_tree" class="idref" href="#map_of_tree"><span class="id" title="definition">map_of_tree</span></a> {<a id="V:321" class="idref" href="#V:321"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="t:322" class="idref" href="#t:322"><span class="id" title="binder">t</span></a>: <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:321"><span class="id" title="variable">V</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#V:321"><span class="id" title="variable">V</span></a> :=<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="map_of_tree" class="idref" href="#map_of_tree"><span class="id" title="definition">map_of_tree</span></a> {<a id="V:321" class="idref" href="#V:321"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="t:322" class="idref" href="#t:322"><span class="id" title="binder">t</span></a>: <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:321"><span class="id" title="variable">V</span></a>) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#V:321"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="SearchTree.html#t:322"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="SearchTree.html#E"><span class="id" title="constructor">E</span></a> ⇒ <span class="id" title="definition">empty</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="SearchTree.html#T"><span class="id" title="constructor">T</span></a> <span class="id" title="var">l</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">r</span> ⇒ <span class="id" title="definition">update</span> (<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="SearchTree.html#map_of_tree:323"><span class="id" title="definition">map_of_tree</span></a> <span class="id" title="var">l</span>) (<a class="idref" href="SearchTree.html#map_of_tree:323"><span class="id" title="definition">map_of_tree</span></a> <span class="id" title="var">r</span>)) <span class="id" title="var">k</span> <span class="id" title="var">v</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="SearchTree.html#E"><span class="id" title="constructor">E</span></a> ⇒ <a class="idref" href="Maps.html#empty"><span class="id" title="definition">empty</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="SearchTree.html#T"><span class="id" title="constructor">T</span></a> <span class="id" title="var">l</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">r</span> ⇒ <a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> (<a class="idref" href="SearchTree.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="SearchTree.html#map_of_tree:323"><span class="id" title="definition">map_of_tree</span></a> <span class="id" title="var">l</span>) (<a class="idref" href="SearchTree.html#map_of_tree:323"><span class="id" title="definition">map_of_tree</span></a> <span class="id" title="var">r</span>)) <span class="id" title="var">k</span> <span class="id" title="var">v</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab141"></a><h4 class="section">Exercise: 3 stars, advanced, optional (map_of_tree_prop)</h4>
+<a id="lab150"></a><h4 class="section">Exercise: 3 stars, advanced, optional (map_of_tree_prop)</h4>
 
 </div>
 <div class="code">
@@ -1783,17 +1783,17 @@ We can prove some simple properties of lookup and update on unions,
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="Abs'" class="idref" href="#Abs'"><span class="id" title="definition">Abs'</span></a> {<a id="V:330" class="idref" href="#V:330"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="t:331" class="idref" href="#t:331"><span class="id" title="binder">t</span></a>: <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:330"><span class="id" title="variable">V</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="SearchTree.html#V:330"><span class="id" title="variable">V</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="Abs'" class="idref" href="#Abs'"><span class="id" title="definition">Abs'</span></a> {<a id="V:330" class="idref" href="#V:330"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} (<a id="t:331" class="idref" href="#t:331"><span class="id" title="binder">t</span></a>: <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:330"><span class="id" title="variable">V</span></a>) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="SearchTree.html#V:330"><span class="id" title="variable">V</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="SearchTree.html#map_of_tree"><span class="id" title="definition">map_of_tree</span></a> <a class="idref" href="SearchTree.html#t:331"><span class="id" title="variable">t</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="empty_relate'" class="idref" href="#empty_relate'"><span class="id" title="lemma">empty_relate'</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:332" class="idref" href="#V:332"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;@<a class="idref" href="SearchTree.html#Abs'"><span class="id" title="definition">Abs'</span></a> <a class="idref" href="SearchTree.html#V:332"><span class="id" title="variable">V</span></a> <a class="idref" href="SearchTree.html#empty_tree"><span class="id" title="definition">empty_tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">empty</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@<a class="idref" href="SearchTree.html#Abs'"><span class="id" title="definition">Abs'</span></a> <a class="idref" href="SearchTree.html#V:332"><span class="id" title="variable">V</span></a> <a class="idref" href="SearchTree.html#empty_tree"><span class="id" title="definition">empty_tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Maps.html#empty"><span class="id" title="definition">empty</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab142"></a><h4 class="section">Exercise: 3 stars, advanced, optional (bound_relate')</h4>
+<a id="lab151"></a><h4 class="section">Exercise: 3 stars, advanced, optional (bound_relate')</h4>
 
 </div>
 <div class="code">
@@ -1808,7 +1808,7 @@ We can prove some simple properties of lookup and update on unions,
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab143"></a><h4 class="section">Exercise: 3 stars, advanced, optional (lookup_relate')</h4>
+<a id="lab152"></a><h4 class="section">Exercise: 3 stars, advanced, optional (lookup_relate')</h4>
 
 </div>
 <div class="code">
@@ -1822,12 +1822,12 @@ We can prove some simple properties of lookup and update on unions,
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab144"></a><h4 class="section">Exercise: 4 stars, advanced, optional (insert_relate')</h4>
+<a id="lab153"></a><h4 class="section">Exercise: 4 stars, advanced, optional (insert_relate')</h4>
 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a id="insert_relate'" class="idref" href="#insert_relate'"><span class="id" title="lemma">insert_relate'</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:340" class="idref" href="#V:340"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="k:341" class="idref" href="#k:341"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:342" class="idref" href="#v:342"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:340"><span class="id" title="variable">V</span></a>) (<a id="t:343" class="idref" href="#t:343"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:340"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:343"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#Abs'"><span class="id" title="definition">Abs'</span></a> (<a class="idref" href="SearchTree.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="SearchTree.html#k:341"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:342"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#t:343"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">update</span> (<a class="idref" href="SearchTree.html#Abs'"><span class="id" title="definition">Abs'</span></a> <a class="idref" href="SearchTree.html#t:343"><span class="id" title="variable">t</span></a>) <a class="idref" href="SearchTree.html#k:341"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:342"><span class="id" title="variable">v</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:343"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#Abs'"><span class="id" title="definition">Abs'</span></a> (<a class="idref" href="SearchTree.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="SearchTree.html#k:341"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:342"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#t:343"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> (<a class="idref" href="SearchTree.html#Abs'"><span class="id" title="definition">Abs'</span></a> <a class="idref" href="SearchTree.html#t:343"><span class="id" title="variable">t</span></a>) <a class="idref" href="SearchTree.html#k:341"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#v:342"><span class="id" title="variable">v</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -1841,7 +1841,7 @@ We can prove some simple properties of lookup and update on unions,
     an auxiliary lemma. 
 <div class="paragraph"> </div>
 
-<a id="lab145"></a><h4 class="section">Exercise: 3 stars, advanced, optional (map_of_list_app)</h4>
+<a id="lab154"></a><h4 class="section">Exercise: 3 stars, advanced, optional (map_of_list_app)</h4>
 
 </div>
 <div class="code">
@@ -1856,7 +1856,7 @@ We can prove some simple properties of lookup and update on unions,
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab146"></a><h4 class="section">Exercise: 4 stars, advanced, optional (elements_relate')</h4>
+<a id="lab155"></a><h4 class="section">Exercise: 4 stars, advanced, optional (elements_relate')</h4>
 
 </div>
 <div class="code">
@@ -1870,7 +1870,7 @@ We can prove some simple properties of lookup and update on unions,
 
 
 <div class="doc">
-<a id="lab147"></a><h1 class="section">Efficiency of Search Trees</h1>
+<a id="lab156"></a><h1 class="section">Efficiency of Search Trees</h1>
 
 <div class="paragraph"> </div>
 
@@ -1963,7 +1963,7 @@ We can prove some simple properties of lookup and update on unions,
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-18&nbsp;20:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-18&nbsp;20:09&nbsp;*)</span><br/>
 </div>
 </div>
 

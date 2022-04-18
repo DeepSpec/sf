@@ -77,7 +77,20 @@
 </div>
 
 <div class="doc">
-<a id="lab11"></a><h1 class="section">The Less-Than Order on the Natural Numbers</h1>
+<a id="lab11"></a><h1 class="section">The Coq Standard Library</h1>
+
+<div class="paragraph"> </div>
+
+ In this volume, we're going to import the definitions and theorems
+    we need directly from Coq's standard library, rather than from
+    chapters in Volume 1.  You should not notice much difference,
+    though, because we've been careful to name our own definitions and
+    theorems the same as their counterparts in the standard
+    library. 
+</div>
+
+<div class="doc">
+<a id="lab12"></a><h1 class="section">The Less-Than Order on the Natural Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -134,7 +147,7 @@ For unknown reasons, <span class="inlinecode"><span class="id" title="var">Nat</
 </div>
 
 <div class="doc">
-<a id="lab12"></a><h2 class="section">The Lia Tactic</h2>
+<a id="lab13"></a><h2 class="section">The Lia Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -247,7 +260,7 @@ Lia is a decision procedure for integer linear arithemetic.
 </div>
 
 <div class="doc">
-<a id="lab13"></a><h1 class="section">Swapping</h1>
+<a id="lab14"></a><h1 class="section">Swapping</h1>
 
 <div class="paragraph"> </div>
 
@@ -306,7 +319,7 @@ Of course we could finish the proof by reasoning directly about
     tests. 
 <div class="paragraph"> </div>
 
-<a id="lab14"></a><h2 class="section">Reflection</h2>
+<a id="lab15"></a><h2 class="section">Reflection</h2>
 
 <div class="paragraph"> </div>
 
@@ -420,7 +433,7 @@ But even that proof is a little unsatisfactory. The original expression,
     engineer, next. 
 <div class="paragraph"> </div>
 
-<a id="lab15"></a><h2 class="section">A Tactic for Boolean Destruction</h2>
+<a id="lab16"></a><h2 class="section">A Tactic for Boolean Destruction</h2>
 
 <div class="paragraph"> </div>
 
@@ -475,7 +488,7 @@ This tactic makes quick, easy-to-read work of our running example.
 </div>
 
 <div class="doc">
-<a id="lab16"></a><h2 class="section">Finishing the <span class="inlinecode"><span class="id" title="var">maybe_swap</span></span> Proof</h2>
+<a id="lab17"></a><h2 class="section">Finishing the <span class="inlinecode"><span class="id" title="var">maybe_swap</span></span> Proof</h2>
 
 <div class="paragraph"> </div>
 
@@ -518,7 +531,7 @@ When proving theorems about a program that uses Boolean
 </div>
 
 <div class="doc">
-<a id="lab17"></a><h1 class="section">Permutations</h1>
+<a id="lab18"></a><h1 class="section">Permutations</h1>
 
 <div class="paragraph"> </div>
 
@@ -567,7 +580,7 @@ You might wonder, "is that really the right definition?"  And
     prove some properties that permutations ought to have. 
 <div class="paragraph"> </div>
 
-<a id="lab18"></a><h4 class="section">Exercise: 2 stars, standard (Permutation_properties)</h4>
+<a id="lab19"></a><h4 class="section">Exercise: 2 stars, standard (Permutation_properties)</h4>
  Think of some desirable properties of the <span class="inlinecode"><span class="id" title="var">Permutation</span></span> relation
     and write them down informally in English, or a mix of Coq and
     English.  Here are four to get you started:
@@ -729,7 +742,7 @@ That example illustrates a general method for proving permutations
 
 <div class="paragraph"> </div>
 
-<a id="lab19"></a><h4 class="section">Exercise: 3 stars, standard (permut_example)</h4>
+<a id="lab20"></a><h4 class="section">Exercise: 3 stars, standard (permut_example)</h4>
  Use the permutation rules in the library to prove the following
     theorem.  The following <span class="inlinecode"><span class="id" title="keyword">Check</span></span> commands are a hint about useful
     lemmas.  You don't need all of them, and depending on your
@@ -755,7 +768,7 @@ That example illustrates a general method for proving permutations
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab20"></a><h4 class="section">Exercise: 2 stars, standard (not_a_permutation)</h4>
+<a id="lab21"></a><h4 class="section">Exercise: 2 stars, standard (not_a_permutation)</h4>
  Prove that <span class="inlinecode">[1;1]</span> is not a permutation of <span class="inlinecode">[1;2]</span>.
     Hints are given as <span class="inlinecode"><span class="id" title="keyword">Check</span></span> commands. 
 </div>
@@ -773,7 +786,7 @@ That example illustrates a general method for proving permutations
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab21"></a><h2 class="section">Correctness of <span class="inlinecode"><span class="id" title="var">maybe_swap</span></span></h2>
+<a id="lab22"></a><h2 class="section">Correctness of <span class="inlinecode"><span class="id" title="var">maybe_swap</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -821,7 +834,7 @@ And, we can prove that <span class="inlinecode"><span class="id" title="var">may
 </div>
 
 <div class="doc">
-<a id="lab22"></a><h1 class="section">An Inversion Tactic</h1>
+<a id="lab23"></a><h1 class="section">An Inversion Tactic</h1>
 
 <div class="paragraph"> </div>
 
@@ -837,7 +850,7 @@ And, we can prove that <span class="inlinecode"><span class="id" title="var">may
 </div>
 
 <div class="doc">
-<a id="lab23"></a><h4 class="section">Exercise: 3 stars, standard (Forall_perm)</h4>
+<a id="lab24"></a><h4 class="section">Exercise: 3 stars, standard (Forall_perm)</h4>
 
 <div class="paragraph"> </div>
 
@@ -860,7 +873,7 @@ And, we can prove that <span class="inlinecode"><span class="id" title="var">may
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab24"></a><h1 class="section">Summary: Comparisons and Permutations</h1>
+<a id="lab25"></a><h1 class="section">Summary: Comparisons and Permutations</h1>
 
 <div class="paragraph"> </div>
 
@@ -873,7 +886,7 @@ And, we can prove that <span class="inlinecode"><span class="id" title="var">may
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-18&nbsp;20:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-18&nbsp;20:09&nbsp;*)</span><br/>
 </div>
 </div>
 

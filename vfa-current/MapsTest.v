@@ -32,15 +32,57 @@ Import Check.
 
 Goal True.
 
-idtac "-------------------  eqb_idP  --------------------".
+idtac "-------------------  t_apply_empty  --------------------".
 idtac " ".
 
-idtac "#> eqb_idP".
-idtac "Possible points: 2".
-check_type @eqb_idP ((forall x y : nat, Bool.reflect (x = y) (PeanoNat.Nat.eqb x y))).
+idtac "#> t_apply_empty".
+idtac "Possible points: 1".
+check_type @t_apply_empty ((forall (A : Type) (x : nat) (v : A), @t_empty A v x = v)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions eqb_idP.
+Print Assumptions t_apply_empty.
+Goal True.
+idtac " ".
+
+idtac "-------------------  t_update_eq  --------------------".
+idtac " ".
+
+idtac "#> t_update_eq".
+idtac "Possible points: 1".
+check_type @t_update_eq (
+(forall (A : Type) (m : total_map A) (x : nat) (v : A),
+ @t_update A m x v x = v)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions t_update_eq.
+Goal True.
+idtac " ".
+
+idtac "-------------------  t_update_neq  --------------------".
+idtac " ".
+
+idtac "#> t_update_neq".
+idtac "Possible points: 1".
+check_type @t_update_neq (
+(forall (X : Type) (v : X) (x1 x2 : nat) (m : total_map X),
+ x1 <> x2 -> @t_update X m x1 v x2 = m x2)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions t_update_neq.
+Goal True.
+idtac " ".
+
+idtac "-------------------  t_update_shadow  --------------------".
+idtac " ".
+
+idtac "#> t_update_shadow".
+idtac "Possible points: 1".
+check_type @t_update_shadow (
+(forall (A : Type) (m : total_map A) (v1 v2 : A) (x : nat),
+ @t_update A (@t_update A m x v1) x v2 = @t_update A m x v2)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions t_update_shadow.
 Goal True.
 idtac " ".
 
@@ -48,7 +90,7 @@ idtac "-------------------  t_update_same  --------------------".
 idtac " ".
 
 idtac "#> t_update_same".
-idtac "Possible points: 2".
+idtac "Possible points: 1".
 check_type @t_update_same (
 (forall (X : Type) (x : nat) (m : total_map X), @t_update X m x (m x) = m)).
 idtac "Assumptions:".
@@ -61,7 +103,7 @@ idtac "-------------------  t_update_permute  --------------------".
 idtac " ".
 
 idtac "#> t_update_permute".
-idtac "Possible points: 3".
+idtac "Possible points: 1".
 check_type @t_update_permute (
 (forall (X : Type) (v1 v2 : X) (x1 x2 : nat) (m : total_map X),
  x2 <> x1 ->
@@ -75,8 +117,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 7".
-idtac "Max points - advanced: 7".
+idtac "Max points - standard: 6".
+idtac "Max points - advanced: 6".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -109,8 +151,14 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
-idtac "---------- eqb_idP ---------".
-Print Assumptions eqb_idP.
+idtac "---------- t_apply_empty ---------".
+Print Assumptions t_apply_empty.
+idtac "---------- t_update_eq ---------".
+Print Assumptions t_update_eq.
+idtac "---------- t_update_neq ---------".
+Print Assumptions t_update_neq.
+idtac "---------- t_update_shadow ---------".
+Print Assumptions t_update_shadow.
 idtac "---------- t_update_same ---------".
 Print Assumptions t_update_same.
 idtac "---------- t_update_permute ---------".
@@ -119,4 +167,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-04-18 20:08 *)
+(* 2022-04-18 20:10 *)

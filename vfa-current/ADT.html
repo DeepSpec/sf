@@ -81,7 +81,7 @@
 </div>
 
 <div class="doc">
-<a id="lab148"></a><h1 class="section">The Table ADT</h1>
+<a id="lab157"></a><h1 class="section">The Table ADT</h1>
 
 <div class="paragraph"> </div>
 
@@ -171,7 +171,7 @@ The following three axioms are an equational specification for
 </div>
 
 <div class="doc">
-<a id="lab149"></a><h1 class="section">Implementing <span class="inlinecode"><span class="id" title="var">Table</span></span> with Functions</h1>
+<a id="lab158"></a><h1 class="section">Implementing <span class="inlinecode"><span class="id" title="var">Table</span></span> with Functions</h1>
 
 <div class="paragraph"> </div>
 
@@ -263,7 +263,7 @@ As an example, let's instantiate <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab150"></a><h4 class="section">Exercise: 2 stars, standard, optional (NatFunTableExamples)</h4>
+<a id="lab159"></a><h4 class="section">Exercise: 2 stars, standard, optional (NatFunTableExamples)</h4>
 
 <div class="paragraph"> </div>
 
@@ -281,11 +281,11 @@ As an example, let's instantiate <span class="inlinecode"><span class="id" title
 
 
 <div class="doc">
-<a id="lab151"></a><h1 class="section">Implementing <span class="inlinecode"><span class="id" title="var">Table</span></span> with Lists</h1>
+<a id="lab160"></a><h1 class="section">Implementing <span class="inlinecode"><span class="id" title="var">Table</span></span> with Lists</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab152"></a><h4 class="section">Exercise: 3 stars, standard (lists_table)</h4>
+<a id="lab161"></a><h4 class="section">Exercise: 3 stars, standard (lists_table)</h4>
 
 <div class="paragraph"> </div>
 
@@ -342,7 +342,7 @@ Instantiate your table and prove the following facts.
 
 
 <div class="doc">
-<a id="lab153"></a><h1 class="section">Implementing <span class="inlinecode"><span class="id" title="var">Table</span></span> with BSTs</h1>
+<a id="lab162"></a><h1 class="section">Implementing <span class="inlinecode"><span class="id" title="var">Table</span></span> with BSTs</h1>
 
 <div class="paragraph"> </div>
 
@@ -390,7 +390,7 @@ The three basic equations we proved about <span class="inlinecode"><span class="
 </div>
 
 <div class="doc">
-<a id="lab154"></a><h1 class="section">Tables with an <span class="inlinecode"><span class="id" title="var">elements</span></span> Operation</h1>
+<a id="lab163"></a><h1 class="section">Tables with an <span class="inlinecode"><span class="id" title="var">elements</span></span> Operation</h1>
 
 <div class="paragraph"> </div>
 
@@ -398,7 +398,7 @@ The three basic equations we proved about <span class="inlinecode"><span class="
     <span class="inlinecode"><span class="id" title="var">bound</span></span> and <span class="inlinecode"><span class="id" title="var">elements</span></span> operation. 
 <div class="paragraph"> </div>
 
-<a id="lab155"></a><h2 class="section">A First Attempt at <span class="inlinecode"><span class="id" title="var">ETable</span></span></h2>
+<a id="lab164"></a><h2 class="section">A First Attempt at <span class="inlinecode"><span class="id" title="var">ETable</span></span></h2>
 
 </div>
 <div class="code">
@@ -496,7 +496,7 @@ Again stuck because of the BST invariant.
 </div>
 
 <div class="doc">
-<a id="lab156"></a><h2 class="section">A Revised <span class="inlinecode"><span class="id" title="var">ETable</span></span></h2>
+<a id="lab165"></a><h2 class="section">A Revised <span class="inlinecode"><span class="id" title="var">ETable</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -630,7 +630,7 @@ Now we can use the table.
 </div>
 
 <div class="doc">
-<a id="lab157"></a><h1 class="section">Encapsulation with the Coq Module System (Advanced)</h1>
+<a id="lab166"></a><h1 class="section">Encapsulation with the Coq Module System (Advanced)</h1>
 
 <div class="paragraph"> </div>
 
@@ -885,7 +885,7 @@ Note what we've happily achieved: we can reason about the behavior
     in interfaces attempt to achieve in real-world code. 
 <div class="paragraph"> </div>
 
-<a id="lab158"></a><h4 class="section">Exercise: 4 stars, advanced, optional (elements_spec)</h4>
+<a id="lab167"></a><h4 class="section">Exercise: 4 stars, advanced, optional (elements_spec)</h4>
 
 <div class="paragraph"> </div>
 
@@ -900,7 +900,7 @@ Note what we've happily achieved: we can reason about the behavior
 </div>
 
 <div class="doc">
-<a id="lab159"></a><h1 class="section">Model-based Specification</h1>
+<a id="lab168"></a><h1 class="section">Model-based Specification</h1>
 
 <div class="paragraph"> </div>
 
@@ -933,10 +933,10 @@ Note what we've happily achieved: we can reason about the behavior
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="map_update" class="idref" href="#map_update"><span class="id" title="definition">map_update</span></a> {<a id="V:174" class="idref" href="#V:174"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="k:175" class="idref" href="#k:175"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:176" class="idref" href="#v:176"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a>) (<a id="m:177" class="idref" href="#m:177"><span class="id" title="binder">m</span></a> : <span class="id" title="definition">partial_map</span> <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="definition">update</span> <a class="idref" href="ADT.html#m:177"><span class="id" title="variable">m</span></a> <a class="idref" href="ADT.html#k:175"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#v:176"><span class="id" title="variable">v</span></a>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="k:175" class="idref" href="#k:175"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:176" class="idref" href="#v:176"><span class="id" title="binder">v</span></a> : <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a>) (<a id="m:177" class="idref" href="#m:177"><span class="id" title="binder">m</span></a> : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a>) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="ADT.html#V:174"><span class="id" title="variable">V</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Maps.html#update"><span class="id" title="definition">update</span></a> <a class="idref" href="ADT.html#m:177"><span class="id" title="variable">m</span></a> <a class="idref" href="ADT.html#k:175"><span class="id" title="variable">k</span></a> <a class="idref" href="ADT.html#v:176"><span class="id" title="variable">v</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="map_find" class="idref" href="#map_find"><span class="id" title="definition">map_find</span></a> {<a id="V:178" class="idref" href="#V:178"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} := @<a class="idref" href="SearchTree.html#find"><span class="id" title="definition">find</span></a> <a class="idref" href="ADT.html#V:178"><span class="id" title="variable">V</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="empty_map" class="idref" href="#empty_map"><span class="id" title="definition">empty_map</span></a> {<a id="V:179" class="idref" href="#V:179"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} := @<span class="id" title="definition">Maps.empty</span> <a class="idref" href="ADT.html#V:179"><span class="id" title="variable">V</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="empty_map" class="idref" href="#empty_map"><span class="id" title="definition">empty_map</span></a> {<a id="V:179" class="idref" href="#V:179"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>} := @<a class="idref" href="Maps.html#empty"><span class="id" title="definition">Maps.empty</span></a> <a class="idref" href="ADT.html#V:179"><span class="id" title="variable">V</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -956,7 +956,7 @@ Now we can define an interface for tables that includes an
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.set" class="idref" href="#ETableAbs.set"><span class="id" title="axiom">set</span></a> : <a class="idref" href="ADT.html#ETableAbs.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ETableAbs.V"><span class="id" title="axiom">V</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.bound" class="idref" href="#ETableAbs.bound"><span class="id" title="axiom">bound</span></a> : <a class="idref" href="ADT.html#ETableAbs.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.elements" class="idref" href="#ETableAbs.elements"><span class="id" title="axiom">elements</span></a> : <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="ADT.html#ETableAbs.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="ADT.html#ETableAbs.V"><span class="id" title="axiom">V</span></a>).<br/><hr class='doublespaceincode'/>
-&nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.Abs" class="idref" href="#ETableAbs.Abs"><span class="id" title="axiom">Abs</span></a> : <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">partial_map</span> <a class="idref" href="ADT.html#ETableAbs.V"><span class="id" title="axiom">V</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.Abs" class="idref" href="#ETableAbs.Abs"><span class="id" title="axiom">Abs</span></a> : <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="ADT.html#ETableAbs.V"><span class="id" title="axiom">V</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> <a id="ETableAbs.rep_ok" class="idref" href="#ETableAbs.rep_ok"><span class="id" title="axiom">rep_ok</span></a> : <a class="idref" href="ADT.html#ETableAbs.table"><span class="id" title="axiom">table</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Axiom</span> <a id="ETableAbs.empty_ok" class="idref" href="#ETableAbs.empty_ok"><span class="id" title="axiom">empty_ok</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="ADT.html#ETableAbs.rep_ok"><span class="id" title="axiom">rep_ok</span></a> <a class="idref" href="ADT.html#ETableAbs.empty"><span class="id" title="axiom">empty</span></a>.<br/><hr class='doublespaceincode'/>
@@ -980,7 +980,7 @@ Now we can define an interface for tables that includes an
 </div>
 
 <div class="doc">
-<a id="lab160"></a><h4 class="section">Exercise: 4 stars, standard (list_etable_abs)</h4>
+<a id="lab169"></a><h4 class="section">Exercise: 4 stars, standard (list_etable_abs)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1004,7 +1004,7 @@ Now we can define an interface for tables that includes an
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListETableAbs.elements" class="idref" href="#ListETableAbs.elements"><span class="id" title="definition">elements</span></a> (<a id="t:217" class="idref" href="#t:217"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ListETableAbs.table"><span class="id" title="definition">table</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="ADT.html#ListETableAbs.key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="ADT.html#ListETableAbs.V"><span class="id" title="definition">V</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListETableAbs.Abs" class="idref" href="#ListETableAbs.Abs"><span class="id" title="definition">Abs</span></a> (<a id="t:218" class="idref" href="#t:218"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ListETableAbs.table"><span class="id" title="definition">table</span></a>) : <span class="id" title="definition">partial_map</span> <a class="idref" href="ADT.html#ListETableAbs.V"><span class="id" title="definition">V</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListETableAbs.Abs" class="idref" href="#ListETableAbs.Abs"><span class="id" title="definition">Abs</span></a> (<a id="t:218" class="idref" href="#t:218"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ListETableAbs.table"><span class="id" title="definition">table</span></a>) : <a class="idref" href="Maps.html#partial_map"><span class="id" title="definition">partial_map</span></a> <a class="idref" href="ADT.html#ListETableAbs.V"><span class="id" title="definition">V</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="ListETableAbs.rep_ok" class="idref" href="#ListETableAbs.rep_ok"><span class="id" title="definition">rep_ok</span></a> (<a id="t:219" class="idref" href="#t:219"><span class="id" title="binder">t</span></a> : <a class="idref" href="ADT.html#ListETableAbs.table"><span class="id" title="definition">table</span></a>) : <span class="id" title="keyword">Prop</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
@@ -1048,7 +1048,7 @@ Now we can define an interface for tables that includes an
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab161"></a><h4 class="section">Exercise: 3 stars, standard, optional (TreeTableModel)</h4>
+<a id="lab170"></a><h4 class="section">Exercise: 3 stars, standard, optional (TreeTableModel)</h4>
  Give an implementation of <span class="inlinecode"><span class="id" title="var">ETableAbs</span></span> using the abstraction
     function <span class="inlinecode"><span class="id" title="var">Abs</span></span> from <a href="SearchTree.html"><span class="inlineref">SearchTree</span></a>. All the proofs of the
     <span class="inlinecode"><span class="id" title="var">relate</span></span> axioms should be simple applications of the lemmas
@@ -1064,7 +1064,7 @@ Now we can define an interface for tables that includes an
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab162"></a><h4 class="section">Exercise: 2 stars, advanced, optional (TreeTableModel')</h4>
+<a id="lab171"></a><h4 class="section">Exercise: 2 stars, advanced, optional (TreeTableModel')</h4>
 
 <div class="paragraph"> </div>
 
@@ -1077,7 +1077,7 @@ Now we can define an interface for tables that includes an
 </div>
 
 <div class="doc">
-<a id="lab163"></a><h1 class="section">Summary of ADT Verification</h1>
+<a id="lab172"></a><h1 class="section">Summary of ADT Verification</h1>
 
 <div class="paragraph"> </div>
 
@@ -1130,7 +1130,7 @@ Now we can define an interface for tables that includes an
 </div>
 
 <div class="doc">
-<a id="lab164"></a><h1 class="section">Another ADT: Queue</h1>
+<a id="lab173"></a><h1 class="section">Another ADT: Queue</h1>
 
 <div class="paragraph"> </div>
 
@@ -1158,7 +1158,7 @@ Now we can define an interface for tables that includes an
 </div>
 
 <div class="doc">
-<a id="lab165"></a><h4 class="section">Exercise: 3 stars, standard (list_queue)</h4>
+<a id="lab174"></a><h4 class="section">Exercise: 3 stars, standard (list_queue)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1235,7 +1235,7 @@ Now we can define an interface for tables that includes an
 </div>
 
 <div class="doc">
-<a id="lab166"></a><h4 class="section">Exercise: 3 stars, standard (two_list_queue)</h4>
+<a id="lab175"></a><h4 class="section">Exercise: 3 stars, standard (two_list_queue)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1302,7 +1302,7 @@ Now we can define an interface for tables that includes an
 
 
 <div class="doc">
-<a id="lab167"></a><h1 class="section">Representation Invariants and Subset Types</h1>
+<a id="lab176"></a><h1 class="section">Representation Invariants and Subset Types</h1>
 
 <div class="paragraph"> </div>
 
@@ -1326,7 +1326,7 @@ Now we can define an interface for tables that includes an
     are known as <i>subset types</i>. 
 <div class="paragraph"> </div>
 
-<a id="lab168"></a><h2 class="section">Example: The Even Naturals</h2>
+<a id="lab177"></a><h2 class="section">Example: The Even Naturals</h2>
 
 <div class="paragraph"> </div>
 
@@ -1402,7 +1402,7 @@ That technique is often useful with subset types, because it
 </div>
 
 <div class="doc">
-<a id="lab169"></a><h2 class="section">Defining Subset Types</h2>
+<a id="lab178"></a><h2 class="section">Defining Subset Types</h2>
 
 <div class="paragraph"> </div>
 
@@ -1465,7 +1465,7 @@ The only difference is that <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-<a id="lab170"></a><h2 class="section">Example: Vectors</h2>
+<a id="lab179"></a><h2 class="section">Example: Vectors</h2>
 
 <div class="paragraph"> </div>
 
@@ -1485,7 +1485,7 @@ The type itself enforces the representation invariant, because a
     proving that the invariant holds. 
 <div class="paragraph"> </div>
 
-<a id="lab171"></a><h4 class="section">Exercise: 1 star, standard (a_vector)</h4>
+<a id="lab180"></a><h4 class="section">Exercise: 1 star, standard (a_vector)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1502,7 +1502,7 @@ The type itself enforces the representation invariant, because a
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab172"></a><h4 class="section">Exercise: 2 stars, standard (vector_cons_correct)</h4>
+<a id="lab181"></a><h4 class="section">Exercise: 2 stars, standard (vector_cons_correct)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1533,7 +1533,7 @@ Prove the correctness of your cons operation.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab173"></a><h4 class="section">Exercise: 2 stars, standard (vector_app_correct)</h4>
+<a id="lab182"></a><h4 class="section">Exercise: 2 stars, standard (vector_app_correct)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1562,7 +1562,7 @@ Prove the correctness of your append operation.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab174"></a><h2 class="section">Using Subset Types to Enforce the BST Invariant</h2>
+<a id="lab183"></a><h2 class="section">Using Subset Types to Enforce the BST Invariant</h2>
 
 <div class="paragraph"> </div>
 
@@ -1711,7 +1711,7 @@ Now the rest of the proofs require minor modifications to
 </div>
 
 <div class="doc">
-<a id="lab175"></a><h4 class="section">Exercise: 4 stars, advanced (ListsETable)</h4>
+<a id="lab184"></a><h4 class="section">Exercise: 4 stars, advanced (ListsETable)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1732,7 +1732,7 @@ Now the rest of the proofs require minor modifications to
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-18&nbsp;20:08&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-18&nbsp;20:09&nbsp;*)</span><br/>
 </div>
 </div>
 
