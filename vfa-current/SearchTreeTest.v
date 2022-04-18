@@ -48,7 +48,7 @@ idtac "-------------------  insert_BST  --------------------".
 idtac " ".
 
 idtac "#> ForallT_insert".
-idtac "Possible points: 3".
+idtac "Possible points: 1.5".
 check_type @ForallT_insert (
 (forall (V : Type) (P : key -> V -> Prop) (t : tree V),
  @ForallT V P t ->
@@ -60,7 +60,7 @@ Goal True.
 idtac " ".
 
 idtac "#> insert_BST".
-idtac "Possible points: 3".
+idtac "Possible points: 1.5".
 check_type @insert_BST (
 (forall (V : Type) (k : key) (v : V) (t : tree V),
  @BST V t -> @BST V (@insert V k v t))).
@@ -145,7 +145,7 @@ idtac " ".
 
 idtac "#> bound_value".
 idtac "Advanced".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @bound_value (
 (forall (V : Type) (k : key) (t : tree V),
  @bound V k t = true -> exists v : V, forall d : V, @lookup V d k t = v)).
@@ -157,7 +157,7 @@ idtac " ".
 
 idtac "#> elements_complete_inverse".
 idtac "Advanced".
-idtac "Possible points: 3".
+idtac "Possible points: 4".
 check_type @elements_complete_inverse (
 (forall (V : Type) (k : key) (v : V) (t : tree V),
  @BST V t ->
@@ -227,8 +227,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 23".
-idtac "Max points - advanced: 40".
+idtac "Max points - standard: 20".
+idtac "Max points - advanced: 37".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -293,4 +293,4 @@ idtac "---------- sorted_elements ---------".
 Print Assumptions sorted_elements.
 Abort.
 
-(* 2022-04-11 22:40 *)
+(* 2022-04-18 20:02 *)

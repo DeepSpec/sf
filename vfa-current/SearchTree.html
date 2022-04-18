@@ -280,7 +280,7 @@ Second, we define the BST invariant:
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST:32"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#l:34"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST:32"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#r:37"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST:32"><span class="id" title="inductive">BST</span></a> (<a class="idref" href="SearchTree.html#T"><span class="id" title="constructor">T</span></a> <a class="idref" href="SearchTree.html#l:34"><span class="id" title="variable">l</span></a> <a class="idref" href="SearchTree.html#x:35"><span class="id" title="variable">x</span></a> <a class="idref" href="SearchTree.html#v:36"><span class="id" title="variable">v</span></a> <a class="idref" href="SearchTree.html#r:37"><span class="id" title="variable">r</span></a>).<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a>.<br/>
+<span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> : <span class="id" title="var">core</span>.<br/>
 </div>
 
 <div class="doc">
@@ -322,7 +322,7 @@ Let's check that <span class="inlinecode"><span class="id" title="var">BST</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab102"></a><h4 class="section">Exercise: 4 stars, standard (insert_BST)</h4>
+<a id="lab102"></a><h4 class="section">Exercise: 3 stars, standard (insert_BST)</h4>
 
 <div class="paragraph"> </div>
 
@@ -374,10 +374,11 @@ Now prove the main theorem. Proceed by induction on the evidence
 
  To prove the correctness of <span class="inlinecode"><span class="id" title="var">lookup</span></span> and <span class="inlinecode"><span class="id" title="var">bound</span></span>, we need
     specifications for them.  We'll study two different techniques for
-    that in this chapter. 
+    that in this chapter.
+
 <div class="paragraph"> </div>
 
- The first is called <i>algebraic specification</i>.  With it, we write
+    The first is called <i>algebraic specification</i>.  With it, we write
     down equations relating the results of operations.  For example,
     we could write down equations like the following to specify the
     <span class="inlinecode">+</span> and <span class="inlinecode">×</span> operations:
@@ -520,7 +521,7 @@ Perhaps surprisingly, the proofs of these results do not
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab105"></a><h4 class="section">Exercise: 3 stars, standard, optional (bound_default)</h4>
+<a id="lab105"></a><h4 class="section">Exercise: 1 star, standard, optional (bound_default)</h4>
 
 <div class="paragraph"> </div>
 
@@ -599,7 +600,7 @@ Perhaps surprisingly, the proofs of these results do not
 </div>
 
 <div class="doc">
-In <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Maps.html"><span class="inlineref">Maps</span></a>, we also proved three other theorems about the
+In <a href="Maps.html"><span class="inlineref">Maps</span></a>, we also proved three other theorems about the
     behavior of functional maps on various combinations of updates and
     lookups: 
 </div>
@@ -707,7 +708,7 @@ But the other two direct equalities on BSTs do not necessarily
     hold. 
 <div class="paragraph"> </div>
 
-<a id="lab110"></a><h4 class="section">Exercise: 3 stars, standard, optional (direct_equalities_break)</h4>
+<a id="lab110"></a><h4 class="section">Exercise: 2 stars, standard, optional (direct_equalities_break)</h4>
 
 <div class="paragraph"> </div>
 
@@ -921,7 +922,7 @@ Proving correctness requires more work than completeness.
 
 <span class="id" title="keyword">Definition</span> <a id="uncurry" class="idref" href="#uncurry"><span class="id" title="definition">uncurry</span></a> {<a id="X:167" class="idref" href="#X:167"><span class="id" title="binder">X</span></a> <a id="Y:168" class="idref" href="#Y:168"><span class="id" title="binder">Y</span></a> <a id="Z:169" class="idref" href="#Z:169"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:170" class="idref" href="#f:170"><span class="id" title="binder">f</span></a> : <a class="idref" href="SearchTree.html#X:167"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#Y:168"><span class="id" title="variable">Y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#Z:169"><span class="id" title="variable">Z</span></a>) '<a id="pat:173" class="idref" href="#pat:173"><span class="id" title="binder">(</span></a><a id="pat:173" class="idref" href="#pat:173"><span class="id" title="binder">a</span></a><a id="pat:173" class="idref" href="#pat:173"><span class="id" title="binder">,</span></a> <a id="pat:173" class="idref" href="#pat:173"><span class="id" title="binder">b</span></a><a id="pat:173" class="idref" href="#pat:173"><span class="id" title="binder">)</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="SearchTree.html#f:170"><span class="id" title="variable">f</span></a> <a class="idref" href="SearchTree.html#a:172"><span class="id" title="variable">a</span></a> <a class="idref" href="SearchTree.html#b:171"><span class="id" title="variable">b</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Transparent</span> <a class="idref" href="SearchTree.html#uncurry"><span class="id" title="definition">uncurry</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Hint Transparent</span> <a class="idref" href="SearchTree.html#uncurry"><span class="id" title="definition">uncurry</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="elements_preserves_forall" class="idref" href="#elements_preserves_forall"><span class="id" title="lemma">elements_preserves_forall</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:174" class="idref" href="#V:174"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="P:175" class="idref" href="#P:175"><span class="id" title="binder">P</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="SearchTree.html#V:174"><span class="id" title="variable">V</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) (<a id="t:176" class="idref" href="#t:176"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:174"><span class="id" title="variable">V</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#ForallT"><span class="id" title="definition">ForallT</span></a> <a class="idref" href="SearchTree.html#P:175"><span class="id" title="variable">P</span></a> <a class="idref" href="SearchTree.html#t:176"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#Forall"><span class="id" title="inductive">Forall</span></a> (<a class="idref" href="SearchTree.html#uncurry"><span class="id" title="definition">uncurry</span></a> <a class="idref" href="SearchTree.html#P:175"><span class="id" title="variable">P</span></a>) (<a class="idref" href="SearchTree.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="SearchTree.html#t:176"><span class="id" title="variable">t</span></a>).<br/>
@@ -996,16 +997,17 @@ Proving correctness requires more work than completeness.
 
 </li>
 <li> inverse correctness: if a binding is not in <span class="inlinecode"><span class="id" title="var">elements</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> then
-      it's not in <span class="inlinecode"><span class="id" title="var">t</span></span>.
+      it's not in <span class="inlinecode"><span class="id" title="var">t</span></span>. 
 
 </li>
 </ul>
+</div>
+<div class="code">
 
-<div class="paragraph"> </div>
+<span class="comment">(*&nbsp;Let's&nbsp;prove&nbsp;that&nbsp;they&nbsp;do.&nbsp;*)</span><br/>
+</div>
 
-    Let's prove that they do. 
-<div class="paragraph"> </div>
-
+<div class="doc">
 <a id="lab117"></a><h4 class="section">Exercise: 2 stars, advanced (elements_complete_inverse)</h4>
 
 <div class="paragraph"> </div>
@@ -1017,7 +1019,7 @@ Proving correctness requires more work than completeness.
 
 <span class="id" title="keyword">Theorem</span> <a id="elements_complete_inverse" class="idref" href="#elements_complete_inverse"><span class="id" title="lemma">elements_complete_inverse</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="V:184" class="idref" href="#V:184"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="k:185" class="idref" href="#k:185"><span class="id" title="binder">k</span></a> : <a class="idref" href="SearchTree.html#key"><span class="id" title="definition">key</span></a>) (<a id="v:186" class="idref" href="#v:186"><span class="id" title="binder">v</span></a> : <a class="idref" href="SearchTree.html#V:184"><span class="id" title="variable">V</span></a>) (<a id="t:187" class="idref" href="#t:187"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:184"><span class="id" title="variable">V</span></a>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:187"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:187"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#bound"><span class="id" title="definition">bound</span></a> <a class="idref" href="SearchTree.html#k:185"><span class="id" title="variable">k</span></a> <a class="idref" href="SearchTree.html#t:187"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#In"><span class="id" title="definition">In</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="SearchTree.html#k:185"><span class="id" title="variable">k</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="SearchTree.html#v:186"><span class="id" title="variable">v</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> (<a class="idref" href="SearchTree.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="SearchTree.html#t:187"><span class="id" title="variable">t</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1111,8 +1113,7 @@ Prove that <span class="inlinecode"><span class="id" title="var">elements</span>
 
 <span class="id" title="keyword">Theorem</span> <a id="sorted_elements" class="idref" href="#sorted_elements"><span class="id" title="lemma">sorted_elements</span></a> : <span class="id" title="keyword">∀</span> (<a id="V:204" class="idref" href="#V:204"><span class="id" title="binder">V</span></a> : <span class="id" title="keyword">Type</span>) (<a id="t:205" class="idref" href="#t:205"><span class="id" title="binder">t</span></a> : <a class="idref" href="SearchTree.html#tree"><span class="id" title="inductive">tree</span></a> <a class="idref" href="SearchTree.html#V:204"><span class="id" title="variable">V</span></a>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="SearchTree.html#BST"><span class="id" title="inductive">BST</span></a> <a class="idref" href="SearchTree.html#t:205"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Sort.html#sorted"><span class="id" title="inductive">Sort.sorted</span></a> (<a class="idref" href="SearchTree.html#list_keys"><span class="id" title="definition">list_keys</span></a> (<a class="idref" href="SearchTree.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="SearchTree.html#t:205"><span class="id" title="variable">t</span></a>)).<br/>
-<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -1458,7 +1459,7 @@ In general, model-based specifications may use an abstraction
     one. 
 <div class="paragraph"> </div>
 
- One small difference between trees and functional maps is that
+ One difference between trees and functional maps is that
     applying the latter returns an <span class="inlinecode"><span class="id" title="var">option</span></span> <span class="inlinecode"><span class="id" title="var">V</span></span> which might be <span class="inlinecode"><span class="id" title="var">None</span></span>,
     whereas <span class="inlinecode"><span class="id" title="var">lookup</span></span> returns a default value if key is not bound
     lookup fails.  We can easily provide a function on functional
@@ -1486,8 +1487,8 @@ We also need a <span class="inlinecode"><span class="id" title="var">bound</span
 </div>
 
 <div class="doc">
-We now proceed to prove that each operation preserves (or establishes)
-    the abstraction relationship in an appropriate way:
+We now prove that each operation preserves (or establishes)
+    the abstraction function.
 
 <div class="paragraph"> </div>
 
@@ -1873,33 +1874,31 @@ We can prove some simple properties of lookup and update on unions,
 
 <div class="paragraph"> </div>
 
- All the theory we've developed so far has been about correctness.
-    But the reason we use binary search trees is that they are
-    efficient.  That is, if there are <span class="inlinecode"><span class="id" title="var">N</span></span> elements in a (reasonably
-    well balanced) BST, each insertion or lookup takes about <span class="inlinecode"><span class="id" title="var">log</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span>
-    time.
+ All the theory we've developed so far has been about
+    correctness.  But the reason we use binary search trees is that
+    they are efficient.  That is, if there are <span class="inlinecode"><span class="id" title="var">N</span></span> elements in a
+    (reasonably well balanced) BST, each insertion or lookup takes
+    about <span class="inlinecode"><span class="id" title="var">log</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span> time.
 
 <div class="paragraph"> </div>
 
-    What could go wrong?
-
+    What could go wrong? 
 <div class="paragraph"> </div>
 
-     1. The search tree might not be balanced.  In that case, each
+  1. The search tree might not be balanced.  In that case, each
         insertion or lookup will take as much as linear time.
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
 <li> SOLUTION: use an algorithm that ensures the trees stay
-          balanced.  We'll do that in <a href="Redblack.html"><span class="inlineref">Redblack</span></a>.
-
+          balanced.  We'll do that in <a href="Redblack.html"><span class="inlineref">Redblack</span></a>. 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-     2. Our keys are natural numbers, and Coq's <span class="inlinecode"><span class="id" title="var">nat</span></span> type takes linear
+   2. Our keys are natural numbers, and Coq's <span class="inlinecode"><span class="id" title="var">nat</span></span> type takes linear
         time per comparison.  That is, computing (j &lt;? k) takes time
         proportional to the value of <span class="inlinecode"><span class="id" title="var">k</span>-<span class="id" title="var">j</span></span>.
 
@@ -1908,14 +1907,13 @@ We can prove some simple properties of lookup and update on unions,
 <ul class="doclist">
 <li> SOLUTION: represent keys by a data type that has a more
           efficient comparison operator.  We used <span class="inlinecode"><span class="id" title="var">nat</span></span> in this chapter
-          because it's something easy to work with.
-
+          because it's something easy to work with. 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-     3. There's no notion of running time in Coq.  That is, we can't
+   3. There's no notion of running time in Coq.  That is, we can't
         say what it means that a Coq function "takes N steps to
         evaluate."  Therefore, we can't prove that binary search trees
         are efficient.
@@ -1940,14 +1938,13 @@ We can prove some simple properties of lookup and update on unions,
 
 </li>
 <li> SOLUTION 3: Apply bleeding-edge frameworks for reasoning
-          about run-time of programs represented in Coq.
-
+          about run-time of programs represented in Coq. 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-      4. Our functions in Coq are models of implementations in "real"
+   4. Our functions in Coq are models of implementations in "real"
          programming languages.  What if the real implementations
          differ from the Coq models?
 
@@ -1958,7 +1955,7 @@ We can prove some simple properties of lookup and update on unions,
 	   implementation (in Ocaml or Haskell) automatically from the
 	   Coq function.  Or, use Coq's <span class="inlinecode"><span class="id" title="keyword">Compute</span></span> or <span class="inlinecode"><span class="id" title="keyword">Eval</span></span>
 	   <span class="inlinecode"><span class="id" title="var">native_compute</span></span> feature to compile and run the programs
-	   efficiently inside Coq.  We'll explore <span class="inlinecode"><span class="id" title="var">extraction</span></span> in a
+	   efficiently inside Coq.  We'll explore <span class="inlinecode"><span class="id" title="var">extraction</span></span> in
 	   <a href="Extract.html"><span class="inlineref">Extract</span></a>. 
 
 </li>
@@ -1966,7 +1963,7 @@ We can prove some simple properties of lookup and update on unions,
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-11&nbsp;22:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-18&nbsp;20:02&nbsp;*)</span><br/>
 </div>
 </div>
 

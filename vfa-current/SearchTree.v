@@ -180,7 +180,7 @@ Inductive BST {V : Type} : tree V -> Prop :=
     BST r ->
     BST (T l x v r).
 
-Hint Constructors BST.
+Hint Constructors BST : core.
 
 (** Let's check that [BST] correctly classifies a couple of example
     trees: *)
@@ -210,7 +210,7 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 4 stars, standard (insert_BST) *)
+(** **** Exercise: 3 stars, standard (insert_BST) *)
 
 (** Prove that [insert] produces a BST, assuming it is given one.
 
@@ -246,9 +246,9 @@ Proof.
 
 (** To prove the correctness of [lookup] and [bound], we need
     specifications for them.  We'll study two different techniques for
-    that in this chapter. *)
+    that in this chapter.
 
-(** The first is called _algebraic specification_.  With it, we write
+    The first is called _algebraic specification_.  With it, we write
     down equations relating the results of operations.  For example,
     we could write down equations like the following to specify the
     [+] and [*] operations:
@@ -354,7 +354,7 @@ Qed.
 Definition manual_grade_for_bound_correct : option (nat*string) := None.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard, optional (bound_default) *)
+(** **** Exercise: 1 star, standard, optional (bound_default) *)
 
 (** Prove that if [bound] returns [false], then [lookup] returns
     the default value. Proceed by induction on the tree. *)
@@ -481,7 +481,7 @@ Qed.
 (** But the other two direct equalities on BSTs do not necessarily
     hold. *)
 
-(** **** Exercise: 3 stars, standard, optional (direct_equalities_break) *)
+(** **** Exercise: 2 stars, standard, optional (direct_equalities_break) *)
 
 (** Prove that the other equalities do not hold.  Hint: find a counterexample
     first on paper, then use the [exists] tactic to instantiate the theorem
@@ -607,7 +607,7 @@ Definition elements_correct_spec :=
 
     The standard library contains a helpful lemma about [Forall]: *)
 
-Check Forall_app. 
+Check Forall_app.
 
 (** **** Exercise: 2 stars, standard (elements_preserves_forall) *)
 
@@ -624,7 +624,7 @@ Check Forall_app.
 Definition uncurry {X Y Z : Type} (f : X -> Y -> Z) '(a, b) :=
   f a b.
 
-Hint Transparent uncurry.
+Hint Transparent uncurry : core.
 
 Lemma elements_preserves_forall : forall (V : Type) (P : key -> V -> Prop) (t : tree V),
     ForallT P t ->
@@ -674,9 +674,9 @@ Proof.
       in [elements t].
 
     - inverse correctness: if a binding is not in [elements t] then
-      it's not in [t].
+      it's not in [t]. *)
 
-    Let's prove that they do. *)
+(* Let's prove that they do. *)
 
 (** **** Exercise: 2 stars, advanced (elements_complete_inverse) *)
 
@@ -685,7 +685,7 @@ Proof.
 
 Theorem elements_complete_inverse :
   forall (V : Type) (k : key) (v : V) (t : tree V),
-    BST t -> 
+    BST t ->
     bound k t = false ->
     ~ In (k, v) (elements t).
 Proof.
@@ -748,8 +748,7 @@ Definition list_keys {V : Type} (lst : list (key * V)) :=
 
 Theorem sorted_elements : forall (V : Type) (t : tree V),
     BST t -> Sort.sorted (list_keys (elements t)).
-Proof.
-  (* FILL IN HERE *) Admitted.
+Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
@@ -997,7 +996,7 @@ Definition Abs {V : Type} (t : tree V) : partial_map V :=
     will do, assigning a unique abstract value to each concrete
     one. *)
 
-(** One small difference between trees and functional maps is that
+(** One difference between trees and functional maps is that
     applying the latter returns an [option V] which might be [None],
     whereas [lookup] returns a default value if key is not bound
     lookup fails.  We can easily provide a function on functional
@@ -1017,8 +1016,8 @@ Definition map_bound {V : Type} (k : key) (m : partial_map V) : bool :=
   | None => false
   end.
 
-(** We now proceed to prove that each operation preserves (or establishes)
-    the abstraction relationship in an appropriate way:
+(** We now prove that each operation preserves (or establishes)
+    the abstraction function.
 
     concrete        abstract
     --------        --------
@@ -1273,29 +1272,29 @@ Proof.
 (* ################################################################# *)
 (** * Efficiency of Search Trees *)
 
-(** All the theory we've developed so far has been about correctness.
-    But the reason we use binary search trees is that they are
-    efficient.  That is, if there are [N] elements in a (reasonably
-    well balanced) BST, each insertion or lookup takes about [log N]
-    time.
+(** All the theory we've developed so far has been about
+    correctness.  But the reason we use binary search trees is that
+    they are efficient.  That is, if there are [N] elements in a
+    (reasonably well balanced) BST, each insertion or lookup takes
+    about [log N] time.
 
-    What could go wrong?
+    What could go wrong? *)
 
-     1. The search tree might not be balanced.  In that case, each
+(**  1. The search tree might not be balanced.  In that case, each
         insertion or lookup will take as much as linear time.
 
         - SOLUTION: use an algorithm that ensures the trees stay
-          balanced.  We'll do that in [Redblack].
+          balanced.  We'll do that in [Redblack]. *)
 
-     2. Our keys are natural numbers, and Coq's [nat] type takes linear
+(**   2. Our keys are natural numbers, and Coq's [nat] type takes linear
         time per comparison.  That is, computing (j <? k) takes time
         proportional to the value of [k-j].
 
         - SOLUTION: represent keys by a data type that has a more
           efficient comparison operator.  We used [nat] in this chapter
-          because it's something easy to work with.
+          because it's something easy to work with. *)
 
-     3. There's no notion of running time in Coq.  That is, we can't
+(**   3. There's no notion of running time in Coq.  That is, we can't
         say what it means that a Coq function "takes N steps to
         evaluate."  Therefore, we can't prove that binary search trees
         are efficient.
@@ -1309,9 +1308,9 @@ Proof.
           explore that in [Redblack].
 
         - SOLUTION 3: Apply bleeding-edge frameworks for reasoning
-          about run-time of programs represented in Coq.
+          about run-time of programs represented in Coq. *)
 
-      4. Our functions in Coq are models of implementations in "real"
+(**   4. Our functions in Coq are models of implementations in "real"
          programming languages.  What if the real implementations
          differ from the Coq models?
 
@@ -1319,7 +1318,7 @@ Proof.
 	   implementation (in Ocaml or Haskell) automatically from the
 	   Coq function.  Or, use Coq's [Compute] or [Eval
 	   native_compute] feature to compile and run the programs
-	   efficiently inside Coq.  We'll explore [extraction] in a
+	   efficiently inside Coq.  We'll explore [extraction] in
 	   [Extract]. *)
 
-(* 2022-04-11 22:40 *)
+(* 2022-04-18 20:02 *)
