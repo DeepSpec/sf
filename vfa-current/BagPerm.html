@@ -80,7 +80,7 @@ We will say two bags are <i>equivalent</i> if they have the same number
 </div>
 
 <div class="doc">
-<a id="lab58"></a><h4 class="section">Exercise: 2 stars, standard (bag_eqv_properties)</h4>
+<a id="lab59"></a><h4 class="section">Exercise: 2 stars, standard (bag_eqv_properties)</h4>
 
 </div>
 <div class="code">
@@ -111,7 +111,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab59"></a><h1 class="section">Correctness</h1>
+<a id="lab60"></a><h1 class="section">Correctness</h1>
 
 <div class="paragraph"> </div>
 
@@ -127,7 +127,7 @@ The following little lemma is handy in a couple of places.
 </div>
 
 <div class="doc">
-<a id="lab60"></a><h4 class="section">Exercise: 3 stars, standard (insert_bag)</h4>
+<a id="lab61"></a><h4 class="section">Exercise: 3 stars, standard (insert_bag)</h4>
  First, prove the auxiliary lemma <span class="inlinecode"><span class="id" title="var">insert_bag</span></span>, which will be
     useful for proving <span class="inlinecode"><span class="id" title="var">sort_bag</span></span> below.  Your proof will be by
     induction.  
@@ -143,7 +143,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab61"></a><h4 class="section">Exercise: 2 stars, standard (sort_bag)</h4>
+<a id="lab62"></a><h4 class="section">Exercise: 2 stars, standard (sort_bag)</h4>
  Now prove that sort preserves bag contents. 
 </div>
 <div class="code">
@@ -167,7 +167,7 @@ The following little lemma is handy in a couple of places.
 </div>
 
 <div class="doc">
-<a id="lab62"></a><h4 class="section">Exercise: 1 star, standard (permutations_vs_multiset)</h4>
+<a id="lab63"></a><h4 class="section">Exercise: 1 star, standard (permutations_vs_multiset)</h4>
  Compare your proofs of <span class="inlinecode"><span class="id" title="var">insert_perm</span>,</span> <span class="inlinecode"><span class="id" title="var">sort_perm</span></span> with your proofs
     of <span class="inlinecode"><span class="id" title="var">insert_bag</span>,</span> <span class="inlinecode"><span class="id" title="var">sort_bag</span></span>.  Which proofs are simpler?
 
@@ -211,7 +211,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab63"></a><h1 class="section">Permutations and Multisets</h1>
+<a id="lab64"></a><h1 class="section">Permutations and Multisets</h1>
 
 <div class="paragraph"> </div>
 
@@ -224,7 +224,7 @@ The following little lemma is handy in a couple of places.
        <span class="inlinecode"><span class="id" title="var">Permutation</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span></span> <span class="inlinecode">↔</span> <span class="inlinecode"><span class="id" title="var">bag_eqv</span></span> <span class="inlinecode"><span class="id" title="var">al</span></span> <span class="inlinecode"><span class="id" title="var">bl</span>.</span> 
 <div class="paragraph"> </div>
 
-<a id="lab64"></a><h4 class="section">Exercise: 3 stars, standard (perm_bag)</h4>
+<a id="lab65"></a><h4 class="section">Exercise: 3 stars, standard (perm_bag)</h4>
  The forward direction is straighforward, by induction on the evidence for
     <span class="inlinecode"><span class="id" title="var">Permutation</span></span>: 
 </div>
@@ -246,7 +246,7 @@ The following little lemma is handy in a couple of places.
     The first three lemmas are used to prove the fourth one. 
 <div class="paragraph"> </div>
 
-<a id="lab65"></a><h4 class="section">Exercise: 2 stars, advanced (bag_nil_inv)</h4>
+<a id="lab66"></a><h4 class="section">Exercise: 2 stars, advanced (bag_nil_inv)</h4>
 
 </div>
 <div class="code">
@@ -259,7 +259,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab66"></a><h4 class="section">Exercise: 3 stars, advanced (bag_cons_inv)</h4>
+<a id="lab67"></a><h4 class="section">Exercise: 3 stars, advanced (bag_cons_inv)</h4>
 
 </div>
 <div class="code">
@@ -276,7 +276,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab67"></a><h4 class="section">Exercise: 2 stars, advanced (count_insert_other)</h4>
+<a id="lab68"></a><h4 class="section">Exercise: 2 stars, advanced (count_insert_other)</h4>
 
 </div>
 <div class="code">
@@ -290,7 +290,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab68"></a><h4 class="section">Exercise: 3 stars, advanced (bag_perm)</h4>
+<a id="lab69"></a><h4 class="section">Exercise: 3 stars, advanced (bag_perm)</h4>
 
 </div>
 <div class="code">
@@ -304,7 +304,7 @@ The following little lemma is handy in a couple of places.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab69"></a><h1 class="section">The Main Theorem: Equivalence of Multisets and Permutations</h1>
+<a id="lab70"></a><h1 class="section">The Main Theorem: Equivalence of Multisets and Permutations</h1>
 
 </div>
 <div class="code">
@@ -333,7 +333,7 @@ Therefore, it doesn't matter whether you prove your sorting
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-18&nbsp;20:02&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-18&nbsp;20:08&nbsp;*)</span><br/>
 </div>
 </div>
 

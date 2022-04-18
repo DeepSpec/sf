@@ -30,11 +30,11 @@ From Coq Require Export Permutation.
 (* ################################################################# *)
 (** * The Less-Than Order on the Natural Numbers *)
 
-(** In our proofs about searching and sorting algorithms, we often
-    have to reason about the less-than order on natural numbers.
-    greater-than. Recall that the Coq standard library contains both
-    propositional and Boolean less-than operators on natural numbers.
-    We write [x < y] for the proposition that [x] is less than [y]: *)
+(** In our proofs about searching and sorting algorithms, we
+    often have to reason about the less-than order on natural numbers.
+    Recall that the Coq standard library contains both propositional
+    and Boolean less-than operators on natural numbers.  We write [x <
+    y] for the proposition that [x] is less than [y]: *)
 
 Locate "_ < _". (* "x < y" := lt x y *)
 Check lt : nat -> nat -> Prop.
@@ -315,7 +315,7 @@ Ltac bdestruct X :=
   let H := fresh in let e := fresh "e" in
    evar (e: Prop);
    assert (H: reflect e X); subst e;
-    [eauto with bdestruct
+    [ auto with bdestruct
     | destruct H as [H|H];
        [ | try first [apply not_lt in H | apply not_le in H]]].
 
@@ -432,7 +432,7 @@ Proof.
   intros.
   (** Let's group [[u;t;t;e;r]] together on both sides.  Tactic
       [change t with u] replaces [t] with [u].  Terms [t] and [u] must
-      be _convertible_, here meaning that they evalute to the same
+      be _convertible_, here meaning that they evaluate to the same
       term. *)
   change [b;u;t;t;e;r] with ([b]++[u;t;t;e;r]).
   change [f;l;u;t;t;e;r] with ([f;l]++[u;t;t;e;r]).
@@ -489,8 +489,8 @@ Qed.
     Use the permutation rules in the library to prove the following
     theorem.  The following [Check] commands are a hint about useful
     lemmas.  You don't need all of them, and depending on your
-    approach you will find lemmas to be more useful than others. Use
-    [Search Permutation] to find others, if you like. *)
+    approach you will find some lemmas to be more useful than others.
+    Use [Search] to find others, if you like. *)
 
 Check perm_skip.
 Check perm_trans.
@@ -561,31 +561,19 @@ Proof.
 Qed.
 
 (* ################################################################# *)
-(** * Summary: Comparisons and Permutations *)
-
-(** To prove correctness of algorithms for sorting and searching,
-    we'll reason about comparisons and permutations using the tools
-    developed in this chapter.  The [maybe_swap] program is a tiny
-    little example of a sorting program.  The proof style in
-    [maybe_swap_correct] will be applied (at a larger scale) in
-    the next few chapters. *)
-
-(** **** Exercise: 3 stars, standard (Forall_perm)
-
-    To close, we define a utility tactic and lemma.  First, the
-    tactic. *)
+(** * An Inversion Tactic *)
 
 (** Coq's [inversion H] tactic is so good at extracting
     information from the hypothesis [H] that [H] sometimes becomes
     completely redundant, and one might as well [clear] it from the
     goal.  Then, since the [inversion] typically creates some equality
-    facts, why not then [subst] ?  Tactic [inv] does just that. *)
+    facts, why not [subst]?  Tactic [inv] does just that. *)
 
 Ltac inv H := inversion H; clear H; subst.
 
-(** Second, the lemma.  You will find [inv] useful in proving it.
+(** **** Exercise: 3 stars, standard (Forall_perm) *)
 
-    [Forall] is Coq library's version of the [All] proposition defined
+(** [Forall] is Coq library's version of the [All] proposition defined
     in [Logic], but defined as an inductive proposition rather
     than a fixpoint.  Prove this lemma by induction.  You will need to
     decide what to induct on: [al], [bl], [Permutation al bl], and
@@ -598,4 +586,14 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-04-18 20:02 *)
+(* ################################################################# *)
+(** * Summary: Comparisons and Permutations *)
+
+(** To prove correctness of algorithms for sorting and searching,
+    we'll reason about comparisons and permutations using the tools
+    developed in this chapter.  The [maybe_swap] program is a tiny
+    little example of a sorting program.  The proof style in
+    [maybe_swap_correct] will be applied (at a larger scale) in
+    the next few chapters. *)
+
+(* 2022-04-18 20:08 *)
