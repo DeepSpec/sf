@@ -96,9 +96,57 @@
 </div>
 
 <div class="doc">
-We won't analyze or prove anything about the efficiency of
-    <span class="inlinecode"><span class="id" title="var">sort</span></span>. Instead, we will verify its correctness: that it produces
-    the correct output for a given input. 
+What Sedgewick/Wayne and Cormen/Leiserson/Rivest don't acknowlege
+    is that the arrays-and-swaps model of sorting is not the only one
+    in the world.  We are writing <i>functional programs</i>, where our
+    sequences are (typically) represented as linked lists, and where
+    we do <i>not</i> destructively splice elements into those lists. 
+<div class="paragraph"> </div>
+
+ As usual with functional lists, the output of <span class="inlinecode"><span class="id" title="var">sort</span></span> may share
+    memory with the input.  For example: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Compute</span> <a class="idref" href="Sort.html#insert"><span class="id" title="definition">insert</span></a> 7 <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 8<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 12<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 14<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 18<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/>
+<span class="comment">(*&nbsp;=&nbsp;<span class="inlinecode">1;</span> <span class="inlinecode">3;</span> <span class="inlinecode">4;</span> <span class="inlinecode">7;</span> <span class="inlinecode">8;</span> <span class="inlinecode">12;</span> <span class="inlinecode">14;</span> <span class="inlinecode">18</span>&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+The tail of this list, <span class="inlinecode">12</span> <span class="inlinecode">::</span> <span class="inlinecode">14</span> <span class="inlinecode">::</span> <span class="inlinecode">18</span> <span class="inlinecode">::</span> <span class="inlinecode">[]</span>, is not disturbed or
+    rebuilt by the <span class="inlinecode"><span class="id" title="var">insert</span></span> algorithm.  The head <span class="inlinecode">1</span> <span class="inlinecode">::</span> <span class="inlinecode">3</span> <span class="inlinecode">::</span> <span class="inlinecode">4</span> <span class="inlinecode">::</span> <span class="inlinecode">7</span> <span class="inlinecode">::</span> <span class="inlinecode">...</span>
+    contains new nodes constructed by <span class="inlinecode"><span class="id" title="var">insert</span></span>.  The first three nodes
+    of the old list, <span class="inlinecode">1</span> <span class="inlinecode">::</span> <span class="inlinecode">3</span> <span class="inlinecode">::</span> <span class="inlinecode">4</span> <span class="inlinecode">::</span> <span class="inlinecode">...</span>, will likely be
+    garbage-collected if no other data structure is still pointing at
+    them.  Thus, in this typical case,
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Time cost = 4X
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> Space cost = (4-3)Y = Y
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    where X and Y are constants, independent of the length of the
+    tail.  The value Y is the number of bytes in one list node: 2 to 4
+    words, depending on how the implementation handles
+    constructor-tags.  We write (4-3) to indicate that four list nodes
+    are constructed, while three list nodes become eligible for
+    garbage collection.
+
+<div class="paragraph"> </div>
+
+    We will not prove such things about the time and space cost, but
+    they are true anyway, and we should keep them in consideration. 
 </div>
 
 <div class="doc">
@@ -144,10 +192,10 @@ We won't analyze or prove anything about the efficiency of
 </div>
 
 <div class="doc">
-This definition might not be the most obvious. Another definition,
-    perhaps more familiar, might be: for any two elements of the list
-    (regardless of whether they are adjacent), they should be in the
-    proper order.  Let's try formalizing that.
+This definition might not be the most obvious. Another
+    definition, perhaps more familiar, might be: for any two elements
+    of the list (regardless of whether they are adjacent), they should
+    be in the proper order.  Let's try formalizing that.
 
 <div class="paragraph"> </div>
 
@@ -155,9 +203,9 @@ This definition might not be the most obvious. Another definition,
     any valid indices <span class="inlinecode"><span class="id" title="var">i</span></span> and <span class="inlinecode"><span class="id" title="var">j</span></span>, if <span class="inlinecode"><span class="id" title="var">i</span></span> <span class="inlinecode">&lt;</span> <span class="inlinecode"><span class="id" title="var">j</span></span> then <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode"><span class="id" title="var">lst</span></span> <span class="inlinecode"><span class="id" title="var">i</span></span> <span class="inlinecode">≤</span>
     <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode"><span class="id" title="var">lst</span></span> <span class="inlinecode"><span class="id" title="var">j</span></span>, where <span class="inlinecode"><span class="id" title="var">index</span></span> <span class="inlinecode"><span class="id" title="var">lst</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> means the element of <span class="inlinecode"><span class="id" title="var">lst</span></span> at
     index <span class="inlinecode"><span class="id" title="var">n</span></span>.  Unfortunately, formalizing this idea becomes messy,
-    because any Coq implementing <span class="inlinecode"><span class="id" title="var">index</span></span> must be total: it must return
-    some result even if the index is out of range for the list.
-    The Coq standard library contains two such functions: 
+    because any Coq function implementing <span class="inlinecode"><span class="id" title="var">index</span></span> must be total: it
+    must return some result even if the index is out of range for the
+    list.  The Coq standard library contains two such functions: 
 </div>
 <div class="code">
 
@@ -388,7 +436,7 @@ Hint: Instead of doing induction on the list <span class="inlinecode"><span clas
 <div class="doc">
 Here, you can't do induction on the sortedness of the list,
     because <span class="inlinecode"><span class="id" title="var">sorted'</span></span> is not an inductive predicate. But the proof
-    is not hard. 
+    is less tricky than the previous. 
 </div>
 <div class="code">
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
@@ -464,7 +512,7 @@ If you complete the proofs above, you will note that the proof of
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-18&nbsp;20:09&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-19&nbsp;13:11&nbsp;*)</span><br/>
 </div>
 </div>
 

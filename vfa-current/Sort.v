@@ -44,10 +44,38 @@ Example sort_pi :
   = [1;1;2;3;3;4;5;5;5;6;9].
 Proof. simpl. reflexivity. Qed.
 
+(** What Sedgewick/Wayne and Cormen/Leiserson/Rivest don't acknowlege
+    is that the arrays-and-swaps model of sorting is not the only one
+    in the world.  We are writing _functional programs_, where our
+    sequences are (typically) represented as linked lists, and where
+    we do _not_ destructively splice elements into those lists. *)
 
-(** We won't analyze or prove anything about the efficiency of
-    [sort]. Instead, we will verify its correctness: that it produces
-    the correct output for a given input. *)
+(** As usual with functional lists, the output of [sort] may share
+    memory with the input.  For example: *)
+
+Compute insert 7 [1; 3; 4; 8; 12; 14; 18].
+(* = [1; 3; 4; 7; 8; 12; 14; 18] *)
+
+(** The tail of this list, [12 :: 14 :: 18 :: []], is not disturbed or
+    rebuilt by the [insert] algorithm.  The head [1 :: 3 :: 4 :: 7 :: ...]
+    contains new nodes constructed by [insert].  The first three nodes
+    of the old list, [1 :: 3 :: 4 :: ...], will likely be
+    garbage-collected if no other data structure is still pointing at
+    them.  Thus, in this typical case,
+
+     - Time cost = 4X
+
+     - Space cost = (4-3)Y = Y
+
+    where X and Y are constants, independent of the length of the
+    tail.  The value Y is the number of bytes in one list node: 2 to 4
+    words, depending on how the implementation handles
+    constructor-tags.  We write (4-3) to indicate that four list nodes
+    are constructed, while three list nodes become eligible for
+    garbage collection.
+
+    We will not prove such things about the time and space cost, but
+    they are true anyway, and we should keep them in consideration. *)
 
 (* ################################################################# *)
 (** * Specification of Correctness *)
@@ -71,20 +99,20 @@ Inductive sorted : list nat -> Prop :=
 | sorted_cons : forall x y l,
     x <= y -> sorted (y :: l) -> sorted (x :: y :: l).
 
-Hint Constructors sorted.
+Hint Constructors sorted : core.
 
-(** This definition might not be the most obvious. Another definition,
-    perhaps more familiar, might be: for any two elements of the list
-    (regardless of whether they are adjacent), they should be in the
-    proper order.  Let's try formalizing that.
+(** This definition might not be the most obvious. Another
+    definition, perhaps more familiar, might be: for any two elements
+    of the list (regardless of whether they are adjacent), they should
+    be in the proper order.  Let's try formalizing that.
 
     We can think in terms of indices into a list [lst], and say: for
     any valid indices [i] and [j], if [i < j] then [index lst i <=
     index lst j], where [index lst n] means the element of [lst] at
     index [n].  Unfortunately, formalizing this idea becomes messy,
-    because any Coq implementing [index] must be total: it must return
-    some result even if the index is out of range for the list.
-    The Coq standard library contains two such functions: *)
+    because any Coq function implementing [index] must be total: it
+    must return some result even if the index is out of range for the
+    list.  The Coq standard library contains two such functions: *)
 
 Check nth : forall A : Type, nat -> list A -> A -> A.
 Check nth_error : forall A : Type, list A -> nat -> option A.
@@ -222,7 +250,7 @@ Lemma sorted'_sorted : forall al, sorted' al -> sorted al.
 Proof.
 (** Here, you can't do induction on the sortedness of the list,
     because [sorted'] is not an inductive predicate. But the proof
-    is not hard. *)
+    is less tricky than the previous. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -276,4 +304,4 @@ Qed.
     difficulty of the correctness proofs_. *)
 
 
-(* 2022-04-18 20:09 *)
+(* 2022-04-19 13:11 *)
