@@ -15,27 +15,27 @@ let empty_tree =
 let rec lookup default x = function
 | E -> default
 | T (l, k, v, r) ->
-  if (<) x k
+  if ( < ) x k
   then lookup default x l
-  else if (<) k x then lookup default x r else v
+  else if ( < ) k x then lookup default x r else v
 
 (** val insert : key -> 'a1 -> 'a1 tree -> 'a1 tree **)
 
 let rec insert x v = function
 | E -> T (E, x, v, E)
 | T (l, y, v', r) ->
-  if (<) x y
+  if ( < ) x y
   then T ((insert x v l), y, v', r)
-  else if (<) y x then T (l, y, v', (insert x v r)) else T (l, x, v, r)
+  else if ( < ) y x then T (l, y, v', (insert x v r)) else T (l, x, v, r)
 
-(** val elements_tr : 'a1 tree -> (key*'a1) list -> (key*'a1) list **)
+(** val elements_aux : 'a1 tree -> (key * 'a1) list -> (key * 'a1) list **)
 
-let rec elements_tr t acc =
+let rec elements_aux t acc =
   match t with
   | E -> acc
-  | T (l, k, v, r) -> elements_tr l ((k,v)::(elements_tr r acc))
+  | T (l, k, v, r) -> elements_aux l ((k , v)::(elements_aux r acc))
 
-(** val elements : 'a1 tree -> (key*'a1) list **)
+(** val elements : 'a1 tree -> (key * 'a1) list **)
 
 let elements t =
-  elements_tr t []
+  elements_aux t []

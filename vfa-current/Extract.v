@@ -69,16 +69,16 @@ Recursive Extraction sort.
 Require Import ZArith.
 Open Scope Z_scope.
 
-Fixpoint insertZ (i : Z) (l : list Z) :=
+Fixpoint insZ (i : Z) (l : list Z) :=
   match l with
   | [] => [i]
-  | h :: t => if i <=? h then i :: h :: t else h :: insertZ i t
+  | h :: t => if i <=? h then i :: h :: t else h :: insZ i t
   end.
 
 Fixpoint sortZ (l : list Z) : list Z :=
   match l with
   | [] => []
-  | h :: t => insertZ h (sortZ t)
+  | h :: t => insZ h (sortZ t)
   end.
 
 Recursive Extraction sortZ.
@@ -118,15 +118,15 @@ Extract Inlined Constant int => "int".
 Parameter Abs : int -> Z.
 Axiom Abs_inj: forall (n m : int), Abs n = Abs m -> n = m.
 
-(** Nothing else is known so far about [int]. Let's add a less-than
+(** Nothing else is known so far about [int]. Let's add less-than
     operators, which are extracted to OCaml's: *)
 
 Parameter ltb: int -> int -> bool.
-Extract Inlined Constant ltb => "(<)".
+Extract Inlined Constant ltb => "( < )".
 Axiom ltb_lt : forall (n m : int), ltb n m = true <-> Abs n < Abs m.
 
 Parameter leb: int -> int -> bool.
-Extract Inlined Constant leb => "(<=)".
+Extract Inlined Constant leb => "( <= )".
 Axiom leb_le : forall (n m : int), leb n m = true <-> Abs n <= Abs m.
 
 (** Those axioms are sound: OCaml's [<] and [<=] are consistent with
@@ -134,11 +134,11 @@ Axiom leb_le : forall (n m : int), leb n m = true <-> Abs n <= Abs m.
     for [Abs], [ltb_lt], or [leb_le].  They will not appear in
     programs, only in proofs --which are not meant to be extracted. *)
 
-(** You could imagine doing the same thing we just did with [(+)], but
+(** You could imagine doing the same thing we just did with [( + )], but
     that would be wrong:
 
       Parameter ocaml_plus : int -> int -> int.
-      Extract Inlined Constant ocaml_plus => "(+)".
+      Extract Inlined Constant ocaml_plus => "( + )".
       Axiom ocaml_plus_plus: forall a b c: int,
         ocaml_plus a b = c <-> Abs a + Abs b = Abs c.
 
@@ -256,12 +256,14 @@ Inductive sorted : list int -> Prop :=
 | sorted_cons: forall x y l,
     Abs x <= Abs y -> sorted (y :: l) -> sorted (x :: y :: l).
 
-Hint Constructors sorted.
+Hint Constructors sorted : core.
 
 (** **** Exercise: 3 stars, standard (sort_int_correct) *)
 
 (** Prove the correctness of [sort_int] by adapting your solution to
-    [insertion_sort_correct] from [Sort]. *)
+    [insertion_sort_correct] from [Sort]. Note that notations
+    such as [<=?] refer to [nat] comparisons, so you might need to
+    adjust those in your proof. *)
 
 Theorem sort_int_correct : forall (al : list int),
     Permutation al (sort_int al) /\ sorted (sort_int al).
@@ -302,21 +304,21 @@ Fixpoint insert {V : Type} (x : key) (v : V) (t : tree V) : tree V :=
                       else T l x v r
   end.
 
-Fixpoint elements_tr {V : Type}
+Fixpoint elements_aux {V : Type}
          (t : tree V) (acc : list (key * V)) : list (key * V) :=
   match t with
   | E => acc
-  | T l k v r => elements_tr l ((k, v) :: elements_tr r acc)
+  | T l k v r => elements_aux l ((k, v) :: elements_aux r acc)
   end.
 
 Definition elements {V : Type} (t : tree V) : list (key * V) :=
-  elements_tr t [].
+  elements_aux t [].
 
 Theorem lookup_empty : forall (V : Type) (default : V) (k : key),
     lookup default k empty_tree = default.
 Proof. auto. Qed.
 
-(** **** Exercise: 2 stars, standard (lookup_insert_eq) *)
+(** **** Exercise: 1 star, standard (lookup_insert_eq) *)
 Theorem lookup_insert_eq :
   forall (V : Type) (default : V) (t : tree V) (k : key) (v : V),
     lookup default k (insert k v t) = v.
@@ -324,7 +326,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (lookup_insert_neq) *)
+(** **** Exercise: 2 stars, standard (lookup_insert_neq) *)
 Theorem lookup_insert_neq :
   forall (V : Type) (default : V) (t : tree V) (k k' : key) (v : V),
     k <> k' -> lookup default k' (insert k v t) = lookup default k' t.
@@ -332,7 +334,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, optional (int_elements) *)
+(** **** Exercise: 4 stars, standard, optional (int_elements) *)
 
 (** Port the definition of [BST] and re-prove the properties of
     [elements] for [int]-keyed trees. Send us your solution so
@@ -342,7 +344,7 @@ Proof.
 
 (** Now see the extraction in your IDE: *)
 
-Extract Inductive prod => "(*)"  [ "(,)" ]. (* extract pairs natively *)
+Extract Inductive prod => "( * )"  [ "( , )" ]. (* extract pairs natively *)
 Recursive Extraction empty_tree insert lookup elements.
 
 (* ################################################################# *)
@@ -386,4 +388,4 @@ Insert and lookup 20000 consecutive integers in 0.387535 seconds.
     balanced search trees to achieve logarithmic.  [Redblack]
     will do that. *)
 
-(* 2022-04-19 13:11 *)
+(* 2022-04-25 18:25 *)

@@ -19,9 +19,9 @@ let empty_tree =
 let rec lookup default x = function
 | E -> default
 | T (_, tl, k, v, tr) ->
-  if (<) x k
+  if ( < ) x k
   then lookup default x tl
-  else if (<) k x then lookup default x tr else v
+  else if ( < ) k x then lookup default x tr else v
 
 (** val balance : color -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree **)
 
@@ -245,9 +245,9 @@ let balance rb t1 k vk t2 =
 let rec ins x vx = function
 | E -> T (Red, E, x, vx, E)
 | T (c, a, y, vy, b) ->
-  if (<) x y
+  if ( < ) x y
   then balance c (ins x vx a) y vy b
-  else if (<) y x then balance c a y vy (ins x vx b) else T (c, a, x, vx, b)
+  else if ( < ) y x then balance c a y vy (ins x vx b) else T (c, a, x, vx, b)
 
 (** val make_black : 'a1 tree -> 'a1 tree **)
 
@@ -260,14 +260,14 @@ let make_black = function
 let insert x vx t =
   make_black (ins x vx t)
 
-(** val elements_tr : 'a1 tree -> (key*'a1) list -> (key*'a1) list **)
+(** val elements_tr : 'a1 tree -> (key * 'a1) list -> (key * 'a1) list **)
 
 let rec elements_tr t acc =
   match t with
   | E -> acc
-  | T (_, l, k, v, r) -> elements_tr l ((k,v)::(elements_tr r acc))
+  | T (_, l, k, v, r) -> elements_tr l ((k , v)::(elements_tr r acc))
 
-(** val elements : 'a1 tree -> (key*'a1) list **)
+(** val elements : 'a1 tree -> (key * 'a1) list **)
 
 let elements t =
   elements_tr t []

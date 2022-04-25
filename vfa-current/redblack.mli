@@ -21,6 +21,6 @@ val make_black : 'a1 tree -> 'a1 tree
 
 val insert : key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-val elements_tr : 'a1 tree -> (key*'a1) list -> (key*'a1) list
+val elements_tr : 'a1 tree -> (key * 'a1) list -> (key * 'a1) list
 
-val elements : 'a1 tree -> (key*'a1) list
+val elements : 'a1 tree -> (key * 'a1) list
