@@ -297,11 +297,11 @@ Theorem lookup_insert_eq : forall (V : Type) (t : tree V) (d : V) (k : key) (v :
     lookup d k (insert k v t)  = v.
 Proof.
   induction t; intros; simpl.
-  - bdestruct (k <? k); try lia; auto.
-  - bdestruct (k <? k0); bdestruct (k0 <? k); simpl; try lia; auto.
-    + bdestruct (k <? k0); bdestruct (k0 <? k); try lia; auto.
-    + bdestruct (k <? k0); bdestruct (k0 <? k); try lia; auto.
-    + bdestruct (k0 <? k0); try lia; auto.
+  - bdestruct (k <? k); bdestruct (k >? k); try lia; auto.
+  - bdestruct (k0 <? k); bdestruct (k0 >? k); simpl; try lia; auto.
+    + bdestruct (k0 <? k); bdestruct (k0 >? k); try lia; auto.
+    + bdestruct (k0 <? k); bdestruct (k0 >? k); try lia; auto.
+    + bdestruct (k0 <? k0); bdestruct (k0 >? k0); try lia; auto.
 Qed.
 
 (** The basic method of that proof is to repeatedly [bdestruct]
@@ -313,6 +313,8 @@ Ltac bdestruct_guard :=
   | |- context [ if ?X =? ?Y then _ else _ ] => bdestruct (X =? Y)
   | |- context [ if ?X <=? ?Y then _ else _ ] => bdestruct (X <=? Y)
   | |- context [ if ?X <? ?Y then _ else _ ] => bdestruct (X <? Y)
+  | |- context [ if ?X >=? ?Y then _ else _ ] => bdestruct (X >=? Y)
+  | |- context [ if ?X >? ?Y then _ else _ ] => bdestruct (X >? Y)
   end.
 
 Ltac bdall :=
@@ -1321,4 +1323,4 @@ Proof.
 	   efficiently inside Coq.  We'll explore [extraction] in
 	   [Extract]. *)
 
-(* 2022-04-25 18:25 *)
+(* 2022-04-25 18:26 *)

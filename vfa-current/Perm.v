@@ -65,13 +65,16 @@ Check Nat.ltb_lt : forall n m : nat, (n <? m) = true <-> n < m.
 
 Print Nat.lt. (* Nat.lt = lt *)
 
-(** For unknown reasons, [Nat] does not define notations
-    for [>?] or [>=?].  So we define them here: *)
+(** For unknown reasons, [Nat] does not define [>=?] or [>?].  So we
+    define them here: *)
 
-Notation  "a >=? b" := (Nat.leb b a)
-                          (at level 70) : nat_scope.
-Notation  "a >? b"  := (Nat.ltb b a)
-                         (at level 70) : nat_scope.
+Definition geb (n m : nat) := m <=? n.
+Hint Unfold geb : core.
+Infix ">=?" := geb (at level 70) : nat_scope.
+
+Definition gtb (n m : nat) := m <? n.
+Hint Unfold gtb : core.
+Infix ">?" := gtb (at level 70) : nat_scope.
 
 (* ================================================================= *)
 (** ** The Lia Tactic *)
@@ -194,8 +197,8 @@ Theorem maybe_swap_idempotent: forall al,
     maybe_swap (maybe_swap al) = maybe_swap al.
 Proof.
   intros [ | a [ | b al]]; simpl; try reflexivity.
-  destruct (b <? a) eqn:Hb_lt_a; simpl.
-  - destruct (a <? b) eqn:Ha_lt_b; simpl.
+  destruct (a >? b) eqn:H1; simpl.
+  - destruct (b >? a) eqn:H2; simpl.
     + (** Now what?  We have a contradiction in the hypotheses: it
           cannot hold that [a] is less than [b] and [b] is less than
           [a].  Unfortunately, [lia] cannot immediately show that
@@ -250,6 +253,18 @@ Proof.
 Qed.
 
 Lemma leb_reflect : forall x y, reflect (x <= y) (x <=? y).
+Proof.
+  intros x y. apply iff_reflect. symmetry.
+  apply Nat.leb_le.
+Qed.
+
+Lemma gtb_reflect : forall x y, reflect (x > y) (x >? y).
+Proof.
+  intros x y. apply iff_reflect. symmetry.
+  apply Nat.ltb_lt.
+Qed.
+
+Lemma geb_reflect : forall x y, reflect (x >= y) (x >=? y).
 Proof.
   intros x y. apply iff_reflect. symmetry.
   apply Nat.leb_le.
@@ -313,7 +328,7 @@ Qed.
     We call it [bdestruct], because we'll use it in our
     boolean-destruction tactic: *)
 
-Hint Resolve ltb_reflect leb_reflect eqb_reflect : bdestruct.
+Hint Resolve ltb_reflect leb_reflect gtb_reflect geb_reflect eqb_reflect : bdestruct.
 
 (** Here is the tactic, the body of which you do not need to
     understand.  Invoking [bdestruct] on Boolean expression [b] does
@@ -350,7 +365,7 @@ Theorem maybe_swap_idempotent: forall al,
 Proof.
   intros [ | a [ | b al]]; simpl; try reflexivity.
   bdestruct (a >? b); simpl.
-  (** Note how [b < a] is a hypothesis, rather than [b <? a = true]. *)
+  (** Note how [a > b] is a hypothesis, rather than [a >? b = true]. *)
   - bdestruct (b >? a); simpl.
     + (** [lia] can take care of the contradictory propositional inequalities. *)
       lia.
@@ -544,7 +559,7 @@ Proof.
   destruct al as [ | a [ | b al]].
   - simpl. apply perm_nil.
   - apply Permutation_refl.
-  - bdestruct (b <? a).
+  - bdestruct (a >? b).
     + apply perm_swap.
     + apply Permutation_refl.
 Qed.
@@ -606,4 +621,4 @@ Proof.
     [maybe_swap_correct] will be applied (at a larger scale) in
     the next few chapters. *)
 
-(* 2022-04-25 18:25 *)
+(* 2022-04-25 18:26 *)
