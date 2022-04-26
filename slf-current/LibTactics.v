@@ -5344,4 +5344,4 @@ Ltac autorewrite_in_star_patch cont :=
   cont tt;
   intro_until_mark.
 
-(* 2022-04-26 01:56 *)
+(* 2022-04-26 21:32 *)

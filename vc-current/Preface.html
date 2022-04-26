@@ -138,11 +138,11 @@
 
  Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
    describes the Coq installation you will need.  This edition was
-   built with Coq 8.13.0.
+   built with Coq 8.15.0.
 
 <div class="paragraph"> </div>
 
-   You will need VST 2.8 installed.  You can do that either by installing
+   You will need VST 2.9 installed.  You can do that either by installing
    it as part of the standard "Coq Platform" that is released with each
    new version of Coq, or using opam (the package is named coq-vst).
    At the end of this chapter is a test to make sure you have the right
@@ -157,7 +157,7 @@
 <li> opam update   (<i>as necessary</i>)
 
 </li>
-<li> opam install coq-vst.2.8 (<i>this will take 30 minutes or more</i>)
+<li> opam install coq-vst.2.9 (<i>this will take 30 minutes or more</i>)
 
 </li>
 </ul>
@@ -290,7 +290,7 @@
 <span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.veric.version</span>. <span class="comment">(*&nbsp;If&nbsp;this&nbsp;line&nbsp;fails,&nbsp;it&nbsp;means<br/>
 &nbsp;&nbsp;you&nbsp;don't&nbsp;have&nbsp;a&nbsp;VST&nbsp;installed.&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="release_needed" class="idref" href="#release_needed"><span class="id" title="definition">release_needed</span></a> := "2.8".<br/>
+<span class="id" title="keyword">Definition</span> <a id="release_needed" class="idref" href="#release_needed"><span class="id" title="definition">release_needed</span></a> := "2.9".<br/>
 <span class="id" title="keyword">Goal</span> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">release</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">=</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">release_needed</span></a>.<br/>
 <span class="id" title="tactic">reflexivity</span> ||<br/>
 <span class="id" title="keyword">let</span> <span class="id" title="var">need</span> := <span class="id" title="keyword">constr</span>:(<a class="idref" href="Preface.html#release_needed"><span class="id" title="definition">release_needed</span></a>) <span class="id" title="keyword">in</span> <span class="id" title="keyword">let</span> <span class="id" title="var">need</span> := <span class="id" title="tactic">eval</span> <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="var">need</span> <span class="id" title="keyword">in</span><br/>
@@ -323,7 +323,7 @@ see the README file in this directory."<br/>
 to install the properly configured clightgen outputs."<br/>
 "It is not necessary to have clightgen installed".<br/>
 <span class="id" title="keyword">Abort</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-04-26&nbsp;01:54&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-04-26&nbsp;21:29&nbsp;*)</span><br/>
 </div>
 </div>
 
