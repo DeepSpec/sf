@@ -1799,4 +1799,4 @@ Proof using. unfold hoarens, hoaren. rewrite* evalns_eq_evalns. Qed.
     using a big-step judgment, as done in this chapter with the predicate
     [evaln], appears to be a novel approach, as of Jan. 2021. *)
 
-(* 2022-04-25 18:31 *)
+(* 2022-04-26 01:57 *)

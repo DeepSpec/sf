@@ -155,16 +155,16 @@ Print Assumptions bound_value.
 Goal True.
 idtac " ".
 
-idtac "#> elements_complete_inverse".
+idtac "#> elements_correct_inverse".
 idtac "Advanced".
 idtac "Possible points: 4".
-check_type @elements_complete_inverse (
-(forall (V : Type) (k : key) (v : V) (t : tree V),
- @BST V t ->
- @bound V k t = false -> ~ @List.In (key * V) (k, v) (@elements V t))).
+check_type @elements_correct_inverse (
+(forall (V : Type) (k : key) (t : tree V),
+ (forall v : V, ~ @List.In (key * V) (k, v) (@elements V t)) ->
+ @bound V k t = false)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions elements_complete_inverse.
+Print Assumptions elements_correct_inverse.
 Goal True.
 idtac " ".
 
@@ -285,12 +285,12 @@ idtac "---------- elements_complete_inverse ---------".
 Print Assumptions elements_complete_inverse.
 idtac "---------- bound_value ---------".
 Print Assumptions bound_value.
-idtac "---------- elements_complete_inverse ---------".
-Print Assumptions elements_complete_inverse.
+idtac "---------- elements_correct_inverse ---------".
+Print Assumptions elements_correct_inverse.
 idtac "---------- sorted_app ---------".
 Print Assumptions sorted_app.
 idtac "---------- sorted_elements ---------".
 Print Assumptions sorted_elements.
 Abort.
 
-(* 2022-04-25 18:26 *)
+(* 2022-04-26 01:52 *)
