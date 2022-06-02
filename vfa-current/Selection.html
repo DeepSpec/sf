@@ -471,25 +471,7 @@ In the following exercises, you will prove that selection sort
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab86"></a><h4 class="section">Exercise: 5 stars, advanced, optional (selection_sort_is_correct_multiset)</h4>
-
-<div class="paragraph"> </div>
-
- Uncomment the next line, and prove the correctness of
-    <span class="inlinecode"><span class="id" title="var">selection_sort</span></span> using multisets instead of permutations.  We
-    haven't tried this yet!  Send us your proof so we can add it as a
-    solution. 
-</div>
-<div class="code">
-
-<span class="comment">(*&nbsp;From&nbsp;VFA&nbsp;Require&nbsp;Import&nbsp;Multiset.&nbsp;*)</span><br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="doc"> 
-<div class="paragraph"> </div>
-
-<a id="lab87"></a><h1 class="section">Recursive Functions That are Not Structurally Recursive</h1>
+<a id="lab86"></a><h1 class="section">Recursive Functions That are Not Structurally Recursive</h1>
 
 <div class="paragraph"> </div>
 
@@ -582,7 +564,7 @@ Instead, anywhere you want to unfold or simplify <span class="inlinecode"><span 
 </div>
 
 <div class="doc">
-<a id="lab88"></a><h4 class="section">Exercise: 1 star, standard (selsort'_perm)</h4>
+<a id="lab87"></a><h4 class="section">Exercise: 1 star, standard (selsort'_perm)</h4>
 
 <div class="paragraph"> </div>
 
@@ -601,19 +583,136 @@ Instead, anywhere you want to unfold or simplify <span class="inlinecode"><span 
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab89"></a><h4 class="section">Exercise: 5 stars, advanced, optional (selsort'_correct)</h4>
+<a id="lab88"></a><h4 class="section">Exercise: 1 star, standard (cons_of_small_maintains_sort')</h4>
 
 <div class="paragraph"> </div>
 
- Prove the correctness of <span class="inlinecode"><span class="id" title="var">selsort'</span></span>. We haven't tried this yet!
-    Send us your proof so we can add it as a solution. 
-<div class="paragraph"> </div>
-
- <font size=-2>&#9744;</font> 
+ Hint: Follow the same strategy as
+    <span class="inlinecode"><span class="id" title="var">cons_of_small_maintains_sort'</span></span>. In our solution, there was only a
+    one-line change. 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-04-26&nbsp;21:27&nbsp;*)</span><br/>
+<span class="id" title="keyword">Lemma</span> <a id="cons_of_small_maintains_sort'" class="idref" href="#cons_of_small_maintains_sort'"><span class="id" title="lemma">cons_of_small_maintains_sort'</span></a>: <span class="id" title="keyword">∀</span> <a id="bl:104" class="idref" href="#bl:104"><span class="id" title="binder">bl</span></a> <a id="y:105" class="idref" href="#y:105"><span class="id" title="binder">y</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Selection.html#y:105"><span class="id" title="variable">y</span></a> <a class="idref" href="Selection.html#12cce3e56e9b6a51ef7d353f839ebc56"><span class="id" title="notation">&lt;=*</span></a> <a class="idref" href="Selection.html#bl:104"><span class="id" title="variable">bl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Selection.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="Selection.html#selsort'"><span class="id" title="lemma">selsort'</span></a> <a class="idref" href="Selection.html#bl:104"><span class="id" title="variable">bl</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Selection.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="Selection.html#y:105"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="Selection.html#selsort'"><span class="id" title="lemma">selsort'</span></a> <a class="idref" href="Selection.html#bl:104"><span class="id" title="variable">bl</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab89"></a><h4 class="section">Exercise: 1 star, standard (selsort'_sorted)</h4>
+
+<div class="paragraph"> </div>
+
+ Hint: Follow the same strategy as <span class="inlinecode"><span class="id" title="var">selsort_sorted</span></span>. In our
+    solution, there were only three small changes. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="selsort'_sorted" class="idref" href="#selsort'_sorted"><span class="id" title="lemma">selsort'_sorted</span></a> : <span class="id" title="keyword">∀</span> <a id="n:106" class="idref" href="#n:106"><span class="id" title="binder">n</span></a> <a id="al:107" class="idref" href="#al:107"><span class="id" title="binder">al</span></a>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Selection.html#al:107"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Selection.html#n:106"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Selection.html#sorted"><span class="id" title="inductive">sorted</span></a> (<a class="idref" href="Selection.html#selsort'"><span class="id" title="lemma">selsort'</span></a> <a class="idref" href="Selection.html#al:107"><span class="id" title="variable">al</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab90"></a><h4 class="section">Exercise: 1 star, standard (selsort'_is_correct)</h4>
+
+<div class="paragraph"> </div>
+
+ Finish the proof of correctness! 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <a id="selsort'_is_correct" class="idref" href="#selsort'_is_correct"><span class="id" title="lemma">selsort'_is_correct</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="Selection.html#is_a_sorting_algorithm"><span class="id" title="definition">is_a_sorting_algorithm</span></a> <a class="idref" href="Selection.html#selsort'"><span class="id" title="lemma">selsort'</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab91"></a><h1 class="section">Selection Sort with Multisets (Optional)</h1>
+
+<div class="paragraph"> </div>
+
+ This section relies on <a href="https://softwarefoundations.cis.upenn.edu/vfa-current/Multiset.html"><span class="inlineref">Multiset</span></a>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">From</span> <span class="id" title="var">VFA</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Multiset.html#"><span class="id" title="library">Multiset</span></a>.<br/>
+</div>
+
+<div class="doc">
+Let's prove the correctness of <span class="inlinecode"><span class="id" title="var">selection_sort</span></span> using multisets
+    instead of permutations. These exercises and their proofs were
+    contributed by William Ma. 
+<div class="paragraph"> </div>
+
+<a id="lab92"></a><h4 class="section">Exercise: 3 stars, standard, optional (select_contents)</h4>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="select_contents" class="idref" href="#select_contents"><span class="id" title="lemma">select_contents</span></a> : <span class="id" title="keyword">∀</span> <a id="al:108" class="idref" href="#al:108"><span class="id" title="binder">al</span></a> <a id="bl:109" class="idref" href="#bl:109"><span class="id" title="binder">bl</span></a> <a id="x:110" class="idref" href="#x:110"><span class="id" title="binder">x</span></a> <a id="y:111" class="idref" href="#y:111"><span class="id" title="binder">y</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Selection.html#select"><span class="id" title="definition">select</span></a> <a class="idref" href="Selection.html#x:110"><span class="id" title="variable">x</span></a> <a class="idref" href="Selection.html#al:108"><span class="id" title="variable">al</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="Selection.html#y:111"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="Selection.html#bl:109"><span class="id" title="variable">bl</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="Multiset.html#singleton"><span class="id" title="definition">singleton</span></a> <a class="idref" href="Selection.html#x:110"><span class="id" title="variable">x</span></a>) (<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Selection.html#al:108"><span class="id" title="variable">al</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#union"><span class="id" title="definition">union</span></a> (<a class="idref" href="Multiset.html#singleton"><span class="id" title="definition">singleton</span></a> <a class="idref" href="Selection.html#y:111"><span class="id" title="variable">y</span></a>) (<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Selection.html#bl:109"><span class="id" title="variable">bl</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab93"></a><h4 class="section">Exercise: 3 stars, standard, optional (selection_sort_contents)</h4>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="selection_sort_contents" class="idref" href="#selection_sort_contents"><span class="id" title="lemma">selection_sort_contents</span></a> : <span class="id" title="keyword">∀</span> <a id="n:112" class="idref" href="#n:112"><span class="id" title="binder">n</span></a> <a id="l:113" class="idref" href="#l:113"><span class="id" title="binder">l</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Selection.html#l:113"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Selection.html#n:112"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> <a class="idref" href="Selection.html#l:113"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Multiset.html#contents"><span class="id" title="definition">contents</span></a> (<a class="idref" href="Selection.html#selection_sort"><span class="id" title="definition">selection_sort</span></a> <a class="idref" href="Selection.html#l:113"><span class="id" title="variable">l</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab94"></a><h4 class="section">Exercise: 2 stars, standard, optional (sorted_iff_sorted)</h4>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="sorted_iff_sorted" class="idref" href="#sorted_iff_sorted"><span class="id" title="lemma">sorted_iff_sorted</span></a> : <span class="id" title="keyword">∀</span> <a id="l:114" class="idref" href="#l:114"><span class="id" title="binder">l</span></a>, <a class="idref" href="Selection.html#sorted"><span class="id" title="inductive">sorted</span></a> <a class="idref" href="Selection.html#l:114"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Sort.html#sorted"><span class="id" title="inductive">Sort.sorted</span></a> <a class="idref" href="Selection.html#l:114"><span class="id" title="variable">l</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab95"></a><h4 class="section">Exercise: 1 star, standard, optional (selection_sort_correct')</h4>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Theorem</span> <a id="selection_sort_correct'" class="idref" href="#selection_sort_correct'"><span class="id" title="lemma">selection_sort_correct'</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="Multiset.html#is_a_sorting_algorithm'"><span class="id" title="definition">is_a_sorting_algorithm'</span></a> <a class="idref" href="Selection.html#selection_sort"><span class="id" title="definition">selection_sort</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="code">
+
+<span class="comment">(*&nbsp;2022-06-02&nbsp;21:08&nbsp;*)</span><br/>
 </div>
 </div>
 

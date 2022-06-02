@@ -207,10 +207,49 @@ Print Assumptions selsort'_perm.
 Goal True.
 idtac " ".
 
+idtac "-------------------  cons_of_small_maintains_sort'  --------------------".
 idtac " ".
 
-idtac "Max points - standard: 22".
-idtac "Max points - advanced: 22".
+idtac "#> cons_of_small_maintains_sort'".
+idtac "Possible points: 1".
+check_type @cons_of_small_maintains_sort' (
+(forall (bl : list nat) (y : nat),
+ y <=* bl -> sorted (selsort' bl) -> sorted (y :: selsort' bl))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions cons_of_small_maintains_sort'.
+Goal True.
+idtac " ".
+
+idtac "-------------------  selsort'_sorted  --------------------".
+idtac " ".
+
+idtac "#> selsort'_sorted".
+idtac "Possible points: 1".
+check_type @selsort'_sorted (
+(forall (n : nat) (al : list nat), @length nat al = n -> sorted (selsort' al))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions selsort'_sorted.
+Goal True.
+idtac " ".
+
+idtac "-------------------  selsort'_is_correct  --------------------".
+idtac " ".
+
+idtac "#> selsort'_is_correct".
+idtac "Possible points: 1".
+check_type @selsort'_is_correct ((is_a_sorting_algorithm selsort')).
+idtac "Assumptions:".
+Abort.
+Print Assumptions selsort'_is_correct.
+Goal True.
+idtac " ".
+
+idtac " ".
+
+idtac "Max points - standard: 25".
+idtac "Max points - advanced: 25".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -269,8 +308,14 @@ idtac "---------- selection_sort_is_correct ---------".
 Print Assumptions selection_sort_is_correct.
 idtac "---------- selsort'_perm ---------".
 Print Assumptions selsort'_perm.
+idtac "---------- cons_of_small_maintains_sort' ---------".
+Print Assumptions cons_of_small_maintains_sort'.
+idtac "---------- selsort'_sorted ---------".
+Print Assumptions selsort'_sorted.
+idtac "---------- selsort'_is_correct ---------".
+Print Assumptions selsort'_is_correct.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-04-26 21:27 *)
+(* 2022-06-02 21:08 *)

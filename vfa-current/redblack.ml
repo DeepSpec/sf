@@ -16,17 +16,15 @@ let empty_tree =
 
 (** val lookup : 'a1 -> key -> 'a1 tree -> 'a1 **)
 
-let rec lookup default x = function
-| E -> default
+let rec lookup d x = function
+| E -> d
 | T (_, tl, k, v, tr) ->
-  if ( < ) x k
-  then lookup default x tl
-  else if ( < ) k x then lookup default x tr else v
+  if ( < ) x k then lookup d x tl else if ( < ) k x then lookup d x tr else v
 
 (** val balance : color -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree **)
 
-let balance rb t1 k vk t2 =
-  match rb with
+let balance c t1 k vk t2 =
+  match c with
   | Red -> T (Red, t1, k, vk, t2)
   | Black ->
     (match t1 with
@@ -40,73 +38,111 @@ let balance rb t1 k vk t2 =
               | E ->
                 (match d with
                  | E -> T (Black, t1, k, vk, t2)
-                 | T (c1, c, z, vz, d0) ->
+                 | T (c1, c2, z, vz, d0) ->
                    (match c1 with
                     | Red ->
-                      T (Red, (T (Black, t1, k, vk, b)), y, vy, (T (Black, c,
-                        z, vz, d0)))
+                      T (Red, (T (Black, t1, k, vk, b)), y, vy, (T (Black,
+                        c2, z, vz, d0)))
                     | Black -> T (Black, t1, k, vk, t2)))
-              | T (c1, b0, y0, vy0, c) ->
+              | T (c1, b0, y0, vy0, c2) ->
                 (match c1 with
                  | Red ->
-                   T (Red, (T (Black, t1, k, vk, b0)), y0, vy0, (T (Black, c,
-                     y, vy, d)))
+                   T (Red, (T (Black, t1, k, vk, b0)), y0, vy0, (T (Black,
+                     c2, y, vy, d)))
                  | Black ->
                    (match d with
                     | E -> T (Black, t1, k, vk, t2)
-                    | T (c2, c3, z, vz, d0) ->
-                      (match c2 with
+                    | T (c3, c4, z, vz, d0) ->
+                      (match c3 with
                        | Red ->
                          T (Red, (T (Black, t1, k, vk, b)), y, vy, (T (Black,
-                           c3, z, vz, d0)))
+                           c4, z, vz, d0)))
                        | Black -> T (Black, t1, k, vk, t2)))))
            | Black -> T (Black, t1, k, vk, t2)))
-     | T (c0, a, x, vx, c) ->
+     | T (c0, a, x, vx, c1) ->
        (match c0 with
         | Red ->
           (match a with
            | E ->
-             (match c with
+             (match c1 with
               | E ->
                 (match t2 with
                  | E -> T (Black, t1, k, vk, t2)
-                 | T (c1, b, y, vy, d) ->
-                   (match c1 with
+                 | T (c2, b, y, vy, d) ->
+                   (match c2 with
                     | Red ->
                       (match b with
                        | E ->
                          (match d with
                           | E -> T (Black, t1, k, vk, t2)
-                          | T (c2, c3, z, vz, d0) ->
-                            (match c2 with
+                          | T (c3, c4, z, vz, d0) ->
+                            (match c3 with
                              | Red ->
                                T (Red, (T (Black, t1, k, vk, b)), y, vy, (T
-                                 (Black, c3, z, vz, d0)))
+                                 (Black, c4, z, vz, d0)))
                              | Black -> T (Black, t1, k, vk, t2)))
-                       | T (c2, b0, y0, vy0, c3) ->
-                         (match c2 with
+                       | T (c3, b0, y0, vy0, c4) ->
+                         (match c3 with
                           | Red ->
                             T (Red, (T (Black, t1, k, vk, b0)), y0, vy0, (T
-                              (Black, c3, y, vy, d)))
+                              (Black, c4, y, vy, d)))
                           | Black ->
                             (match d with
                              | E -> T (Black, t1, k, vk, t2)
-                             | T (c4, c5, z, vz, d0) ->
-                               (match c4 with
+                             | T (c5, c6, z, vz, d0) ->
+                               (match c5 with
                                 | Red ->
                                   T (Red, (T (Black, t1, k, vk, b)), y, vy,
-                                    (T (Black, c5, z, vz, d0)))
+                                    (T (Black, c6, z, vz, d0)))
                                 | Black -> T (Black, t1, k, vk, t2)))))
                     | Black -> T (Black, t1, k, vk, t2)))
-              | T (c1, b, y, vy, c2) ->
-                (match c1 with
+              | T (c2, b, y, vy, c3) ->
+                (match c2 with
                  | Red ->
-                   T (Red, (T (Black, a, x, vx, b)), y, vy, (T (Black, c2, k,
+                   T (Red, (T (Black, a, x, vx, b)), y, vy, (T (Black, c3, k,
                      vk, t2)))
                  | Black ->
                    (match t2 with
                     | E -> T (Black, t1, k, vk, t2)
-                    | T (c3, b0, y0, vy0, d) ->
+                    | T (c4, b0, y0, vy0, d) ->
+                      (match c4 with
+                       | Red ->
+                         (match b0 with
+                          | E ->
+                            (match d with
+                             | E -> T (Black, t1, k, vk, t2)
+                             | T (c5, c6, z, vz, d0) ->
+                               (match c5 with
+                                | Red ->
+                                  T (Red, (T (Black, t1, k, vk, b0)), y0,
+                                    vy0, (T (Black, c6, z, vz, d0)))
+                                | Black -> T (Black, t1, k, vk, t2)))
+                          | T (c5, b1, y1, vy1, c6) ->
+                            (match c5 with
+                             | Red ->
+                               T (Red, (T (Black, t1, k, vk, b1)), y1, vy1,
+                                 (T (Black, c6, y0, vy0, d)))
+                             | Black ->
+                               (match d with
+                                | E -> T (Black, t1, k, vk, t2)
+                                | T (c7, c8, z, vz, d0) ->
+                                  (match c7 with
+                                   | Red ->
+                                     T (Red, (T (Black, t1, k, vk, b0)), y0,
+                                       vy0, (T (Black, c8, z, vz, d0)))
+                                   | Black -> T (Black, t1, k, vk, t2)))))
+                       | Black -> T (Black, t1, k, vk, t2)))))
+           | T (c2, a0, x0, vx0, b) ->
+             (match c2 with
+              | Red ->
+                T (Red, (T (Black, a0, x0, vx0, b)), x, vx, (T (Black, c1, k,
+                  vk, t2)))
+              | Black ->
+                (match c1 with
+                 | E ->
+                   (match t2 with
+                    | E -> T (Black, t1, k, vk, t2)
+                    | T (c3, b0, y, vy, d) ->
                       (match c3 with
                        | Red ->
                          (match b0 with
@@ -116,127 +152,89 @@ let balance rb t1 k vk t2 =
                              | T (c4, c5, z, vz, d0) ->
                                (match c4 with
                                 | Red ->
-                                  T (Red, (T (Black, t1, k, vk, b0)), y0,
-                                    vy0, (T (Black, c5, z, vz, d0)))
+                                  T (Red, (T (Black, t1, k, vk, b0)), y, vy,
+                                    (T (Black, c5, z, vz, d0)))
                                 | Black -> T (Black, t1, k, vk, t2)))
-                          | T (c4, b1, y1, vy1, c5) ->
+                          | T (c4, b1, y0, vy0, c5) ->
                             (match c4 with
                              | Red ->
-                               T (Red, (T (Black, t1, k, vk, b1)), y1, vy1,
-                                 (T (Black, c5, y0, vy0, d)))
+                               T (Red, (T (Black, t1, k, vk, b1)), y0, vy0,
+                                 (T (Black, c5, y, vy, d)))
                              | Black ->
                                (match d with
                                 | E -> T (Black, t1, k, vk, t2)
                                 | T (c6, c7, z, vz, d0) ->
                                   (match c6 with
                                    | Red ->
-                                     T (Red, (T (Black, t1, k, vk, b0)), y0,
-                                       vy0, (T (Black, c7, z, vz, d0)))
-                                   | Black -> T (Black, t1, k, vk, t2)))))
-                       | Black -> T (Black, t1, k, vk, t2)))))
-           | T (c1, a0, x0, vx0, b) ->
-             (match c1 with
-              | Red ->
-                T (Red, (T (Black, a0, x0, vx0, b)), x, vx, (T (Black, c, k,
-                  vk, t2)))
-              | Black ->
-                (match c with
-                 | E ->
-                   (match t2 with
-                    | E -> T (Black, t1, k, vk, t2)
-                    | T (c2, b0, y, vy, d) ->
-                      (match c2 with
-                       | Red ->
-                         (match b0 with
-                          | E ->
-                            (match d with
-                             | E -> T (Black, t1, k, vk, t2)
-                             | T (c3, c4, z, vz, d0) ->
-                               (match c3 with
-                                | Red ->
-                                  T (Red, (T (Black, t1, k, vk, b0)), y, vy,
-                                    (T (Black, c4, z, vz, d0)))
-                                | Black -> T (Black, t1, k, vk, t2)))
-                          | T (c3, b1, y0, vy0, c4) ->
-                            (match c3 with
-                             | Red ->
-                               T (Red, (T (Black, t1, k, vk, b1)), y0, vy0,
-                                 (T (Black, c4, y, vy, d)))
-                             | Black ->
-                               (match d with
-                                | E -> T (Black, t1, k, vk, t2)
-                                | T (c5, c6, z, vz, d0) ->
-                                  (match c5 with
-                                   | Red ->
                                      T (Red, (T (Black, t1, k, vk, b0)), y,
-                                       vy, (T (Black, c6, z, vz, d0)))
+                                       vy, (T (Black, c7, z, vz, d0)))
                                    | Black -> T (Black, t1, k, vk, t2)))))
                        | Black -> T (Black, t1, k, vk, t2)))
-                 | T (c2, b0, y, vy, c3) ->
-                   (match c2 with
+                 | T (c3, b0, y, vy, c4) ->
+                   (match c3 with
                     | Red ->
                       T (Red, (T (Black, a, x, vx, b0)), y, vy, (T (Black,
-                        c3, k, vk, t2)))
+                        c4, k, vk, t2)))
                     | Black ->
                       (match t2 with
                        | E -> T (Black, t1, k, vk, t2)
-                       | T (c4, b1, y0, vy0, d) ->
-                         (match c4 with
+                       | T (c5, b1, y0, vy0, d) ->
+                         (match c5 with
                           | Red ->
                             (match b1 with
                              | E ->
                                (match d with
                                 | E -> T (Black, t1, k, vk, t2)
-                                | T (c5, c6, z, vz, d0) ->
-                                  (match c5 with
+                                | T (c6, c7, z, vz, d0) ->
+                                  (match c6 with
                                    | Red ->
                                      T (Red, (T (Black, t1, k, vk, b1)), y0,
-                                       vy0, (T (Black, c6, z, vz, d0)))
+                                       vy0, (T (Black, c7, z, vz, d0)))
                                    | Black -> T (Black, t1, k, vk, t2)))
-                             | T (c5, b2, y1, vy1, c6) ->
-                               (match c5 with
+                             | T (c6, b2, y1, vy1, c7) ->
+                               (match c6 with
                                 | Red ->
                                   T (Red, (T (Black, t1, k, vk, b2)), y1,
-                                    vy1, (T (Black, c6, y0, vy0, d)))
+                                    vy1, (T (Black, c7, y0, vy0, d)))
                                 | Black ->
                                   (match d with
                                    | E -> T (Black, t1, k, vk, t2)
-                                   | T (c7, c8, z, vz, d0) ->
-                                     (match c7 with
+                                   | T (c8, c9, z, vz, d0) ->
+                                     (match c8 with
                                       | Red ->
                                         T (Red, (T (Black, t1, k, vk, b1)),
-                                          y0, vy0, (T (Black, c8, z, vz, d0)))
+                                          y0, vy0, (T (Black, c9, z, vz, d0)))
                                       | Black -> T (Black, t1, k, vk, t2)))))
                           | Black -> T (Black, t1, k, vk, t2)))))))
         | Black ->
           (match t2 with
            | E -> T (Black, t1, k, vk, t2)
-           | T (c1, b, y, vy, d) ->
-             (match c1 with
+           | T (c2, b, y, vy, d) ->
+             (match c2 with
               | Red ->
                 (match b with
                  | E ->
                    (match d with
                     | E -> T (Black, t1, k, vk, t2)
-                    | T (c2, c3, z, vz, d0) ->
-                      (match c2 with
+                    | T (c3, c4, z, vz, d0) ->
+                      (match c3 with
                        | Red ->
                          T (Red, (T (Black, t1, k, vk, b)), y, vy, (T (Black,
-                           c3, z, vz, d0)))
+                           c4, z, vz, d0)))
                        | Black -> T (Black, t1, k, vk, t2)))
-                 | T (c2, b0, y0, vy0, c3) ->
-                   (match c2 with
+                 | T (c3, b0, y0, vy0, c4) ->
+                   (match c3 with
                     | Red ->
                       T (Red, (T (Black, t1, k, vk, b0)), y0, vy0, (T (Black,
-                        c3, y, vy, d)))
+                        c4, y, vy, d)))
                     | Black ->
                       (match d with
                        | E -> T (Black, t1, k, vk, t2)
-                       | T (c4, c5, z, vz, d0) ->
-                         (match c4 with
+                       | T (c5, c6, z, vz, d0) ->
+                         (match c5 with
                           | Red ->
                             T (Red, (T (Black, t1, k, vk, b)), y, vy, (T
-                              (Black, c5, z, vz, d0)))
+                              (Black, c6, z, vz, d0)))
                           | Black -> T (Black, t1, k, vk, t2)))))
               | Black -> T (Black, t1, k, vk, t2)))))
 
@@ -260,14 +258,14 @@ let make_black = function
 let insert x vx t =
   make_black (ins x vx t)
 
-(** val elements_tr : 'a1 tree -> (key * 'a1) list -> (key * 'a1) list **)
+(** val elements_aux : 'a1 tree -> (key * 'a1) list -> (key * 'a1) list **)
 
-let rec elements_tr t acc =
+let rec elements_aux t acc =
   match t with
   | E -> acc
-  | T (_, l, k, v, r) -> elements_tr l ((k , v)::(elements_tr r acc))
+  | T (_, l, k, v, r) -> elements_aux l ((k , v)::(elements_aux r acc))
 
 (** val elements : 'a1 tree -> (key * 'a1) list **)
 
 let elements t =
-  elements_tr t []
+  elements_aux t []

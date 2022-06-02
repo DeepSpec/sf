@@ -305,17 +305,6 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced, optional (selection_sort_is_correct_multiset) *)
-
-(** Uncomment the next line, and prove the correctness of
-    [selection_sort] using multisets instead of permutations.  We
-    haven't tried this yet!  Send us your proof so we can add it as a
-    solution. *)
-
-(* From VFA Require Import Multiset. *)
-
-(** [] *)
-
 (* ################################################################# *)
 (** * Recursive Functions That are Not Structurally Recursive *)
 
@@ -391,12 +380,84 @@ Proof.
 
 (** [] *)
 
-(** **** Exercise: 5 stars, advanced, optional (selsort'_correct) *)
+(** **** Exercise: 1 star, standard (cons_of_small_maintains_sort') *)
 
-(** Prove the correctness of [selsort']. We haven't tried this yet!
-    Send us your proof so we can add it as a solution. *)
+(** Hint: Follow the same strategy as
+    [cons_of_small_maintains_sort']. In our solution, there was only a
+    one-line change. *)
+
+Lemma cons_of_small_maintains_sort': forall bl y,
+    y <=* bl ->
+    sorted (selsort' bl) ->
+    sorted (y :: selsort' bl).
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 1 star, standard (selsort'_sorted) *)
+
+(** Hint: Follow the same strategy as [selsort_sorted]. In our
+    solution, there were only three small changes. *)
+
+Lemma selsort'_sorted : forall n al,
+    length al = n -> sorted (selsort' al).
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 1 star, standard (selsort'_is_correct) *)
+
+(** Finish the proof of correctness! *)
+
+Theorem selsort'_is_correct :
+  is_a_sorting_algorithm selsort'.
+Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
 
-(* 2022-04-26 21:27 *)
+(* ################################################################# *)
+(** * Selection Sort with Multisets (Optional) *)
+
+(** This section relies on [Multiset]. *)
+
+From VFA Require Import Multiset.
+
+(** Let's prove the correctness of [selection_sort] using multisets
+    instead of permutations. These exercises and their proofs were
+    contributed by William Ma. *)
+
+(** **** Exercise: 3 stars, standard, optional (select_contents) *)
+
+Lemma select_contents : forall al bl x y,
+  select x al = (y, bl) ->
+  union (singleton x) (contents al) = union (singleton y) (contents bl).
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 3 stars, standard, optional (selection_sort_contents) *)
+
+Lemma selection_sort_contents : forall n l,
+  length l = n ->
+  contents l = contents (selection_sort l).
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (sorted_iff_sorted) *)
+
+Lemma sorted_iff_sorted : forall l, sorted l <-> Sort.sorted l.
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (selection_sort_correct') *)
+
+Theorem selection_sort_correct' :
+  is_a_sorting_algorithm' selection_sort.
+Proof. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(* 2022-06-02 21:08 *)
