@@ -418,9 +418,11 @@
         Testing in Coq," the Author of Record is Benjamin C. Pierce.
         For Volume 3, "Verified Functional Algorithms," and volume 5,
         "Verifiable C," the Author of Record is Andrew W. Appel. For
-        components outside of designated volumes (e.g., typesetting
-        and grading tools and other software infrastructure), the
-        Author of Record is Benjamin Pierce.
+        Volume 6, "Separation Logic Foundations," the author of record
+        is Arthur Chargueraud. For components outside of designated
+        volumes (e.g., typesetting and grading tools and other
+        software infrastructure), the Author of Record is Benjamin
+        Pierce.
 
     To get started, please send an email to Benjamin Pierce,
     describing yourself and how you plan to use the materials and
@@ -447,4 +449,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2022-07-08 04:11 *)
+(* 2022-07-08 20:01 *)

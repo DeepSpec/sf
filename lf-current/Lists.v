@@ -941,7 +941,7 @@ Proof.
     Prove that [rev] is injective. Do not prove this by induction --
     that would be hard. Instead, re-use the same proof technique that
     you used for [involution_injective]. Do not try to use that
-    exercise as a lemma; the types are not the same. *)
+    exercise directly as a lemma: the types are not the same. *)
 
 Theorem rev_injective : forall (l1 l2 : natlist),
   rev l1 = rev l2 -> l1 = l2.
@@ -1145,4 +1145,4 @@ Inductive baz : Type :=
 
 (** [] *)
 
-(* 2022-07-08 04:11 *)
+(* 2022-07-08 20:01 *)

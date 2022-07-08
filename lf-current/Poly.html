@@ -1393,30 +1393,30 @@ Write down a theorem <span class="inlinecode"><span class="id" title="var">fold_
 <div class="paragraph"> </div>
 
 <a id="lab140"></a><h4 class="section">Exercise: 2 stars, advanced (currying)</h4>
- The type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> can be read as a function that takes two
-    arguments, one of type <span class="inlinecode"><span class="id" title="var">X</span></span> and another of type <span class="inlinecode"><span class="id" title="var">Y</span></span>, and returns an
-    output of type <span class="inlinecode"><span class="id" title="var">Z</span></span>. But strictly speaking, that type is actually
-    <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span>)</span> when fully parenthesized.  So if <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>,
-    and you give <span class="inlinecode"><span class="id" title="var">f</span></span> an input of type <span class="inlinecode"><span class="id" title="var">X</span></span>, it will give you as output
-    a function of type <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>.  If you then give that function an
-    input of type <span class="inlinecode"><span class="id" title="var">Y</span></span>, it will return an output of type <span class="inlinecode"><span class="id" title="var">Z</span></span>. Thus,
-    every function takes only one input, but can return a function as
-    output. This is what enables partial application, as we saw above
-    with <span class="inlinecode"><span class="id" title="var">plus3</span></span>.
+ The type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> can be read as describing functions that
+    take two arguments, one of type <span class="inlinecode"><span class="id" title="var">X</span></span> and another of type <span class="inlinecode"><span class="id" title="var">Y</span></span>, and
+    return an output of type <span class="inlinecode"><span class="id" title="var">Z</span></span>. Strictly speaking, this type is
+    written <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode">(<span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span>)</span> when fully parenthesized.  That is, if we
+    have <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>, and we give <span class="inlinecode"><span class="id" title="var">f</span></span> an input of type <span class="inlinecode"><span class="id" title="var">X</span></span>, it
+    will give us as output a function of type <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>.  If we then
+    give that function an input of type <span class="inlinecode"><span class="id" title="var">Y</span></span>, it will return an output
+    of type <span class="inlinecode"><span class="id" title="var">Z</span></span>. That is, every function in Coq takes only one input,
+    but some functions return a function as output. This is precisely
+    what enables partial application, as we saw above with <span class="inlinecode"><span class="id" title="var">plus3</span></span>.
 
 <div class="paragraph"> </div>
 
-    On the other hand, the type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> -- which is fully
-    parenthesized as <span class="inlinecode">(<span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> -- would require its single input
-    to be a pair.  Both arguments must be given at once; there is no
-    possibility of partial application.
+    By contrast, functions of type <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> -- which when fully
+    parenthesized is written <span class="inlinecode">(<span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span>)</span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> -- require their single
+    input to be a pair.  Both arguments must be given at once; there
+    is no possibility of partial application.
 
 <div class="paragraph"> </div>
 
     It is possible to convert a function between these two types.
-    Converting from <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> to <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> is called <i>currying</i>,
-    in honor of logician Haskell Curry.  Converting from <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span>
-    to <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> is called <i>uncurrying</i>.  
+    Converting from <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> to <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> is called
+    <i>currying</i>, in honor of the logician Haskell Curry.  Converting
+    from <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> to <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">×</span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">Z</span></span> is called <i>uncurrying</i>.  
 <div class="paragraph"> </div>
 
  We can define currying as follows: 
@@ -1505,10 +1505,10 @@ Thought exercise: before running the following commands, can you
 <div class="paragraph"> </div>
 
  The following exercises explore an alternative way of defining
-    natural numbers, using the so-called <i>Church numerals</i>, named
-    after mathematician Alonzo Church.  We can represent a natural
-    number <span class="inlinecode"><span class="id" title="var">n</span></span> as a function that takes a function <span class="inlinecode"><span class="id" title="var">f</span></span> as a parameter
-    and returns <span class="inlinecode"><span class="id" title="var">f</span></span> iterated <span class="inlinecode"><span class="id" title="var">n</span></span> times. 
+    natural numbers using the <i>Church numerals</i>, which are named after
+    their inventor, the mathematician Alonzo Church.  We can represent
+    a natural number <span class="inlinecode"><span class="id" title="var">n</span></span> as a function that takes a function <span class="inlinecode"><span class="id" title="var">f</span></span> as a
+    parameter and returns <span class="inlinecode"><span class="id" title="var">f</span></span> iterated <span class="inlinecode"><span class="id" title="var">n</span></span> times. 
 </div>
 <div class="code">
 
@@ -1640,9 +1640,9 @@ But the intellectually exciting implication of the Church numerals
 <div class="paragraph"> </div>
 
  Define a function that computes the addition of two Church
-    numerals.  Given <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">m</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> as input, <span class="inlinecode"><span class="id" title="var">plus</span></span>
-    should produce <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span>^(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode"><span class="id" title="var">x</span></span> as output.  In other words, do it
-    <span class="inlinecode"><span class="id" title="var">n</span></span> times, then do it <span class="inlinecode"><span class="id" title="var">m</span></span> more times.
+    numerals.  Given <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">m</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> as
+    input, <span class="inlinecode"><span class="id" title="var">plus</span></span> should produce <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode"><span class="id" title="var">x</span></span> as output.
+    In other words, do it <span class="inlinecode"><span class="id" title="var">n</span></span> times, then do it <span class="inlinecode"><span class="id" title="var">m</span></span> more times.
 
 <div class="paragraph"> </div>
 
@@ -1683,7 +1683,7 @@ But the intellectually exciting implication of the Church numerals
     Warning: Coq will not let you pass <span class="inlinecode"><span class="id" title="var">cnat</span></span> itself as the type <span class="inlinecode"><span class="id" title="var">X</span></span>
     argument to a Church numeral; you will get a "Universe
     inconsistency" error. That is Coq's way of preventing a paradox in
-    which a type contains itself. So, leave the type argument
+    which a type contains itself. So leave the type argument
     unchanged. 
 </div>
 <div class="code">
@@ -1735,7 +1735,7 @@ But the intellectually exciting implication of the Church numerals
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises"><span class="id" title="module">Exercises</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-07-08&nbsp;04:11&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-07-08&nbsp;20:01&nbsp;*)</span><br/>
 </div>
 </div>
 

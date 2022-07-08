@@ -963,26 +963,26 @@ Definition manual_grade_for_fold_map : option (nat*string) := None.
 
 (** **** Exercise: 2 stars, advanced (currying)
 
-    The type [X -> Y -> Z] can be read as a function that takes two
-    arguments, one of type [X] and another of type [Y], and returns an
-    output of type [Z]. But strictly speaking, that type is actually
-    [X -> (Y -> Z)] when fully parenthesized.  So if [f : X -> Y -> Z],
-    and you give [f] an input of type [X], it will give you as output
-    a function of type [Y -> Z].  If you then give that function an
-    input of type [Y], it will return an output of type [Z]. Thus,
-    every function takes only one input, but can return a function as
-    output. This is what enables partial application, as we saw above
-    with [plus3].
+    The type [X -> Y -> Z] can be read as describing functions that
+    take two arguments, one of type [X] and another of type [Y], and
+    return an output of type [Z]. Strictly speaking, this type is
+    written [X -> (Y -> Z)] when fully parenthesized.  That is, if we
+    have [f : X -> Y -> Z], and we give [f] an input of type [X], it
+    will give us as output a function of type [Y -> Z].  If we then
+    give that function an input of type [Y], it will return an output
+    of type [Z]. That is, every function in Coq takes only one input,
+    but some functions return a function as output. This is precisely
+    what enables partial application, as we saw above with [plus3].
 
-    On the other hand, the type [X * Y -> Z] -- which is fully
-    parenthesized as [(X * Y) -> Z] -- would require its single input
-    to be a pair.  Both arguments must be given at once; there is no
-    possibility of partial application.
+    By contrast, functions of type [X * Y -> Z] -- which when fully
+    parenthesized is written [(X * Y) -> Z] -- require their single
+    input to be a pair.  Both arguments must be given at once; there
+    is no possibility of partial application.
 
     It is possible to convert a function between these two types.
-    Converting from [X * Y -> Z] to [X -> Y -> Z] is called _currying_,
-    in honor of logician Haskell Curry.  Converting from [X -> Y -> Z]
-    to [X * Y -> Z] is called _uncurrying_.  *)
+    Converting from [X * Y -> Z] to [X -> Y -> Z] is called
+    _currying_, in honor of the logician Haskell Curry.  Converting
+    from [X -> Y -> Z] to [X * Y -> Z] is called _uncurrying_.  *)
 
 (** We can define currying as follows: *)
 
@@ -1048,10 +1048,10 @@ Definition manual_grade_for_informal_proof : option (nat*string) := None.
 (** ** Church Numerals (Advanced) *)
 
 (** The following exercises explore an alternative way of defining
-    natural numbers, using the so-called _Church numerals_, named
-    after mathematician Alonzo Church.  We can represent a natural
-    number [n] as a function that takes a function [f] as a parameter
-    and returns [f] iterated [n] times. *)
+    natural numbers using the _Church numerals_, which are named after
+    their inventor, the mathematician Alonzo Church.  We can represent
+    a natural number [n] as a function that takes a function [f] as a
+    parameter and returns [f] iterated [n] times. *)
 
 Module Church.
 Definition cnat := forall X : Type, (X -> X) -> X -> X.
@@ -1146,9 +1146,9 @@ Proof. (* FILL IN HERE *) Admitted.
 (** **** Exercise: 3 stars, advanced (church_plus) *)
 
 (** Define a function that computes the addition of two Church
-    numerals.  Given [fun X f^n x] and [fun X f^m x] as input, [plus]
-    should produce [fun X f^(n + m) x] as output.  In other words, do it
-    [n] times, then do it [m] more times.
+    numerals.  Given [fun X f x => f^n x] and [fun X f x => f^m x] as
+    input, [plus] should produce [fun X f x => f^(n + m) x] as output.
+    In other words, do it [n] times, then do it [m] more times.
 
     Hint: the "zero" argument to a Church numeral need not be just
     [x]. *)
@@ -1179,7 +1179,7 @@ Proof. (* FILL IN HERE *) Admitted.
     Warning: Coq will not let you pass [cnat] itself as the type [X]
     argument to a Church numeral; you will get a "Universe
     inconsistency" error. That is Coq's way of preventing a paradox in
-    which a type contains itself. So, leave the type argument
+    which a type contains itself. So leave the type argument
     unchanged. *)
 
 Definition mult (n m : cnat) : cnat
@@ -1224,4 +1224,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2022-07-08 04:11 *)
+(* 2022-07-08 20:01 *)
