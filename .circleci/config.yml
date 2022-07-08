@@ -60,6 +60,10 @@ jobs:
           command: make
           working_directory: vfa-current
       - run:
+          name: Separation Logic Foundations
+          command: make
+          working_directory: slf-current
+      - run:
           name: QuickChick
           command: make
           working_directory: qc-current
@@ -88,12 +92,6 @@ workflows:
   test:
     jobs:
       - build-docker
-      - build:
-          name: Coq 8.12
-          coq: '8.12'
-          vc: true
-          requires:
-            - build-docker
       - build:
           name: Coq 8.13
           coq: '8.13'
