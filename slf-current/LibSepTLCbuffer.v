@@ -19,4 +19,4 @@ Generalizable Variables A B.
 Global Opaque Z.mul.
 Global Opaque Z.add.
 
-(* 2022-07-08 20:09 *)
+(* 2022-07-09 20:37 *)
