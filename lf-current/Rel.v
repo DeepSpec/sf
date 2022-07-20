@@ -97,23 +97,39 @@ Proof.
     - apply le_S. apply le_n. }
   discriminate Nonsense.   Qed.
 
-(** **** Exercise: 2 stars, standard, optional (total_relation_not_partial)
+(** **** Exercise: 2 stars, standard, optional (total_relation_not_partial_function)
 
     Show that the [total_relation] defined in (an exercise in)
     [IndProp] is not a partial function. *)
 
-(* FILL IN HERE
+(** Copy the definition of [total_relation] from your [IndProp]
+    here so that this file can be graded on its own.  *)
+Inductive total_relation : nat -> nat -> Prop :=
+  (* FILL IN HERE *)
+.
 
-    [] *)
+Theorem total_relation_not_partial_function :
+  ~ (partial_function total_relation).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (empty_relation_partial)
+(** **** Exercise: 2 stars, standard, optional (empty_relation_partial_function)
 
     Show that the [empty_relation] defined in (an exercise in)
     [IndProp] is a partial function. *)
 
-(* FILL IN HERE
+(** Copy the definition of [empty_relation] from your [IndProp]
+    here so that this file can be graded on its own.  *)
+Inductive empty_relation : nat -> nat -> Prop :=
+  (* FILL IN HERE *)
+.
 
-    [] *)
+Theorem empty_relation_partial_function :
+  partial_function empty_relation.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Reflexive Relations *)
