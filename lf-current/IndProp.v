@@ -1908,10 +1908,18 @@ Proof.
        forall l, pal l -> l = rev l.
 *)
 
+Inductive pal {X:Type} : list X -> Prop :=
 (* FILL IN HERE *)
+.
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_pal_pal_app_rev_pal_rev : option (nat*string) := None.
+Theorem pal_app_rev : forall (X:Type) (l : list X),
+  pal (l ++ (rev l)).
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+Theorem pal_rev : forall (X:Type) (l: list X) , pal l -> l = rev l.
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 5 stars, standard, optional (palindrome_converse)
@@ -1923,9 +1931,11 @@ Definition manual_grade_for_pal_pal_app_rev_pal_rev : option (nat*string) := Non
      forall l, l = rev l -> pal l.
 *)
 
-(* FILL IN HERE
-
-    [] *)
+Theorem palindrome_converse: forall {X: Type} (l: list X),
+    l = rev l -> pal l.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
 (** **** Exercise: 4 stars, advanced, optional (NoDup)
 
@@ -2358,4 +2368,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-07-20 20:55 *)
+(* 2022-07-20 20:57 *)
