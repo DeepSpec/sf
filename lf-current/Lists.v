@@ -471,7 +471,7 @@ Example test_included2:              included [1;2;2] [2;1;4;1] = false.
     Adding a value to a bag should increase the value's count by one.
     State this as a theorem and prove it. *)
 (*
-Theorem bag_theorem : ...
+Theorem add_inc_count : ...
 Proof.
   ...
 Qed.
@@ -1145,4 +1145,4 @@ Inductive baz : Type :=
 
 (** [] *)
 
-(* 2022-07-20 20:51 *)
+(* 2022-07-20 20:52 *)

@@ -478,6 +478,9 @@ Definition manual_grade_for_add_comm_informal : option (nat*string) := None.
 
     Proof: (* FILL IN HERE *)
 *)
+
+(* Do not modify the following line: *)
+Definition manual_grade_for_eqb_refl_informal : option (nat*string) := None.
 (** [] *)
 
 (* ################################################################# *)
@@ -765,4 +768,4 @@ Proof.
 
 (** [] *)
 
-(* 2022-07-20 20:51 *)
+(* 2022-07-20 20:52 *)
