@@ -1303,10 +1303,11 @@ Inductive step : tm -> tm -> Prop :=
       value or can take a step.
 
     Formally prove or disprove these two properties for the combined
-    language. *)
+    language.  (That is, state a theorem saying that the property
+    holds or does not hold, and prove your theorem.) *)
 
 (** **** Exercise: 3 stars, standard (combined_step_deterministic) *)
-Theorem combined_step_deterministic: (deterministic step) \/ ~ (deterministic step).
+Theorem combined_step_deterministic: FILL_IN_HERE.
 Proof.
   (* FILL IN HERE *) Admitted.
 
@@ -1314,10 +1315,10 @@ Proof.
 
 (** **** Exercise: 3 stars, standard (combined_strong_progress) *)
 Theorem combined_strong_progress :
-  (forall t, value t \/ (exists t', t --> t'))
-  \/ ~ (forall t, value t \/ (exists t', t --> t')).
+  FILL_IN_HERE.
 Proof.
   (* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 End Combined.
@@ -1837,4 +1838,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-07-20 20:59 *)
+(* 2022-07-20 20:58 *)
