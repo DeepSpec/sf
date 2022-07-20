@@ -1365,7 +1365,9 @@ Hint Constructors has_type : core.
 (* ================================================================= *)
 (** ** Examples *)
 
-(** This section presents formalized versions of the examples from
+(** **** Exercise: 5 stars, standard, optional (STLCExtended_examples)
+
+    This section presents formalized versions of the examples from
     above (plus several more).
 
     For each example, uncomment proofs and replace [Admitted] by
@@ -1452,7 +1454,7 @@ Proof.
   auto 10.
 (* FILL IN HERE *) Admitted.
 
-Example numtest_reduces :
+Example reduces :
   tm_test -->* 5.
 Proof.
 (* 
@@ -1592,6 +1594,7 @@ Proof.
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
+
 End ListTest.
 
 (* ----------------------------------------------------------------- *)
@@ -1691,6 +1694,7 @@ Proof.
   unfold equal. normalize.
 *)
 (* FILL IN HERE *) Admitted.
+(* GRADE_THEOREM 0.25: reduces *)
 
 Example reduces2 :
   <{equal 4 5}> -->* 0.
@@ -1699,6 +1703,7 @@ Proof.
   unfold equal. normalize.
 *)
 (* FILL IN HERE *) Admitted.
+(* GRADE_THEOREM 0.25: reduces2 *)
 
 End FixTest3.
 
@@ -1739,6 +1744,7 @@ Proof.
 
 End FixTest4.
 End Examples.
+(** [] *)
 
 (* ================================================================= *)
 (** ** Properties of Typing *)
@@ -2076,4 +2082,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2022-07-20 21:01 *)
+(* 2022-07-20 21:03 *)
