@@ -2082,4 +2082,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2022-07-20 21:03 *)
+(* 2022-07-20 21:17 *)

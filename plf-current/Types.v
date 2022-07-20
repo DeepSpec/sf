@@ -552,19 +552,23 @@ Qed.
 (* ================================================================= *)
 (** ** Additional Exercises *)
 
-(** **** Exercise: 2 stars, standard, especially useful (subject_expansion)
+(** **** Exercise: 3 stars, standard, especially useful (subject_expansion)
 
     Having seen the subject reduction property, one might
     wonder whether the opposite property -- subject _expansion_ --
     also holds.  That is, is it always the case that, if [t --> t']
     and [|- t' \in T], then [|- t \in T]?  If so, prove it.  If
-    not, give a counter-example.  (You do not need to prove your
-    counter-example in Coq, but feel free to do so.)
+    not, give a counter-example.
 
     (* FILL IN HERE *)
 *)
-(* Do not modify the following line: *)
-Definition manual_grade_for_subject_expansion : option (nat*string) := None.
+
+Theorem subject_expansion:
+  (forall t t' T, t --> t' /\ |- t' \in T -> |- t \in T)
+  \/
+  ~ (forall t t' T, t --> t' /\ |- t' \in T -> |- t \in T).
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (variation1)
@@ -700,4 +704,4 @@ Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 End TM.
 
-(* 2022-07-20 21:03 *)
+(* 2022-07-20 21:17 *)

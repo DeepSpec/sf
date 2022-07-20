@@ -119,9 +119,18 @@ idtac " ".
 idtac "-------------------  subject_expansion  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: TM.subject_expansion".
-idtac "Possible points: 2".
-print_manual_grade TM.manual_grade_for_subject_expansion.
+idtac "#> TM.subject_expansion".
+idtac "Possible points: 3".
+check_type @TM.subject_expansion (
+((forall (t t' : TM.tm) (T : TM.ty),
+  TM.step t t' /\ TM.has_type t' T -> TM.has_type t T) \/
+ ~
+ (forall (t t' : TM.tm) (T : TM.ty),
+  TM.step t t' /\ TM.has_type t' T -> TM.has_type t T))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions TM.subject_expansion.
+Goal True.
 idtac " ".
 
 idtac "-------------------  variation1  --------------------".
@@ -159,8 +168,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 20".
-idtac "Max points - advanced: 32".
+idtac "Max points - standard: 21".
+idtac "Max points - advanced: 33".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -191,8 +200,8 @@ idtac "---------- TM.preservation ---------".
 Print Assumptions TM.preservation.
 idtac "---------- TM.preservation' ---------".
 Print Assumptions TM.preservation'.
-idtac "---------- subject_expansion ---------".
-idtac "MANUAL".
+idtac "---------- TM.subject_expansion ---------".
+Print Assumptions TM.subject_expansion.
 idtac "---------- variation1 ---------".
 idtac "MANUAL".
 idtac "---------- variation2 ---------".
@@ -209,4 +218,4 @@ idtac "---------- prog_pres_bigstep ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2022-07-20 21:04 *)
+(* 2022-07-20 21:17 *)
