@@ -442,7 +442,7 @@ Proof.
   (* repeat rewrite Nat.add_comm. *)
 Admitted.
 
-(** Wait -- did we just writing an infinite loop in Coq?!?!
+(** Wait -- did we just write an infinite loop in Coq?!?!
 
     Sort of.
 
@@ -2060,4 +2060,4 @@ End BreakImp.
 
     [] *)
 
-(* 2022-07-09 20:31 *)
+(* 2022-07-20 20:05 *)

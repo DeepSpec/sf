@@ -132,4 +132,4 @@ idtac "---------- factorial_correct ---------".
 Print Assumptions factorial_correct.
 Abort.
 
-(* 2022-07-09 20:31 *)
+(* 2022-07-20 20:05 *)
