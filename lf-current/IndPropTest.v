@@ -249,10 +249,18 @@ idtac " ".
 idtac "-------------------  filter_challenge  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: filter_challenge".
+idtac "#> merge_filter".
 idtac "Advanced".
 idtac "Possible points: 6".
-print_manual_grade manual_grade_for_filter_challenge.
+check_type @merge_filter (
+(forall (X : Set) (test : X -> bool) (l l1 l2 : list X),
+ @merge X l1 l2 l ->
+ @All X (fun n : X => test n = true) l1 ->
+ @All X (fun n : X => test n = false) l2 -> @filter X test l = l1)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions merge_filter.
+Goal True.
 idtac " ".
 
 idtac " ".
@@ -320,8 +328,8 @@ idtac "---------- subseq_trans ---------".
 Print Assumptions subseq_trans.
 idtac "---------- Pumping.weak_pumping ---------".
 Print Assumptions Pumping.weak_pumping.
-idtac "---------- filter_challenge ---------".
-idtac "MANUAL".
+idtac "---------- merge_filter ---------".
+Print Assumptions merge_filter.
 Abort.
 
-(* 2022-07-20 20:53 *)
+(* 2022-07-20 20:56 *)

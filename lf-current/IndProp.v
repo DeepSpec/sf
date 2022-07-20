@@ -731,12 +731,11 @@ Theorem empty_relation_is_empty : forall n m, ~ empty_relation n m.
     will, in the second case, add the induction hypothesis that the
     goal holds when [e2] is replaced with [n']. *)
 
-(** **** Exercise: 3 stars, standard, optional (le_exercises)
-
-    Here are a number of facts about the [<=] and [<] relations that
+(** Here are a number of facts about the [<=] and [<] relations that
     we are going to need later in the course.  The proofs make good
     practice exercises. *)
 
+(** **** Exercise: 5 stars, standard, optional (le_and_lt_facts) *)
 Lemma le_trans : forall m n o, m <= n -> n <= o -> m <= o.
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -807,7 +806,9 @@ Theorem plus_lt : forall n1 n2 m,
   n1 < m /\ n2 < m.
 Proof.
 (* FILL IN HERE *) Admitted.
+(** [] *)
 
+(** **** Exercise: 4 stars, standard, optional (more_le_exercises) *)
 Theorem leb_complete : forall n m,
   n <=? m = true -> n <= m.
 Proof.
@@ -820,16 +821,15 @@ Theorem leb_correct : forall n m,
 Proof.
   (* FILL IN HERE *) Admitted.
 
-Theorem leb_true_trans : forall n m o,
-  n <=? m = true -> m <=? o = true -> n <=? o = true.
-  (** Hint: This one one can easily be proved without using [induction]. *)
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+(** Hint: The next two can easily be proved without using [induction]. *)
 
-(** **** Exercise: 2 stars, standard, optional (leb_iff) *)
 Theorem leb_iff : forall n m,
   n <=? m = true <-> n <= m.
+Proof.
+  (* FILL IN HERE *) Admitted.
+
+Theorem leb_true_trans : forall n m o,
+  n <=? m = true -> m <=? o = true -> n <=? o = true.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1855,15 +1855,23 @@ Definition manual_grade_for_nostutter : option (nat*string) := None.
     in [l1] satisfies [test] and no item in [l2] satisfies test.  Then
     [filter test l = l1].
 
-    Translate this specification into a Coq theorem and prove
-    it.  (You'll need to begin by defining what it means for one list
-    to be a merge of two others.  Do this with an inductive relation,
-    not a [Fixpoint].)  *)
+    First define what it means for one list to be a merge of two
+    others.  Do this with an inductive relation, not a [Fixpoint].  *)
+
+Inductive merge {X:Type} : list X -> list X -> list X -> Prop :=
+(* FILL IN HERE *)
+.
+
+Theorem merge_filter : forall (X : Set) (test: X->bool) (l l1 l2 : list X),
+  merge l1 l2 l ->
+  All (fun n => test n = true) l1 ->
+  All (fun n => test n = false) l2 ->
+  filter test l = l1.
+Proof.
+  (* FILL IN HERE *) Admitted.
 
 (* FILL IN HERE *)
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_filter_challenge : option (nat*string) := None.
 (** [] *)
 
 (** **** Exercise: 5 stars, advanced, optional (filter_challenge_2)
@@ -2350,4 +2358,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-07-20 20:53 *)
+(* 2022-07-20 20:55 *)
