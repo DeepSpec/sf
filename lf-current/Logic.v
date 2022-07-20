@@ -1524,17 +1524,14 @@ Proof.
 
 (** **** Exercise: 2 stars, standard, especially useful (All_forallb)
 
-    Recall the function [forallb], from the exercise
-    [forall_exists_challenge] in chapter [Tactics]: *)
+    Prove the theorem below, which relates [forallb], from the
+    exercise [forall_exists_challenge] in chapter [Tactics], to
+    the [All] property defined above. *)
 
-Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool :=
-  match l with
-  | [] => true
-  | x :: l' => andb (test x) (forallb test l')
-  end.
-
-(** Prove the theorem below, which relates [forallb] to the [All]
-    property defined above. *)
+(** Copy the definition of [forallb] from your [Tactics] here
+    so that this file can be graded on its own. *)
+Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Theorem forallb_true_iff : forall X test (l : list X),
   forallb test l = true <-> All (fun x => test x = true) l.
@@ -1736,4 +1733,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2022-07-20 20:52 *)
+(* 2022-07-20 20:53 *)
