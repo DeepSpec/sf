@@ -414,12 +414,15 @@ Qed.
     and it also fails for STLC.  That is, it is not always the case that,
     if [t --> t'] and [empty |- t' \in T], then [empty |- t \in T].
     Show this by giving a counter-example that does _not involve
-    conditionals_.
-
-    You can state your counterexample informally in words, with a brief
-    explanation. *)
+    conditionals_. *)
 
 (* FILL IN HERE *)
+
+Theorem not_subject_expansion:
+  exists t t' T, t --> t' /\ (empty |- t' \in T) /\ ~ (empty |- t \in T).
+Proof.
+  (* Write "exists <{ ... }>" to use STLC notation. *)
+  (* FILL IN HERE *) Admitted.
 
 (* Do not modify the following line: *)
 Definition manual_grade_for_subject_expansion_stlc : option (nat*string) := None.
@@ -1026,4 +1029,4 @@ Proof with eauto. (* FILL IN HERE *) Admitted.
 
 End STLCArith.
 
-(* 2022-07-20 20:58 *)
+(* 2022-07-20 21:01 *)

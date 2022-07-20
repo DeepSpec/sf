@@ -148,7 +148,8 @@ idtac " ".
 idtac "#> Combined.combined_step_deterministic".
 idtac "Possible points: 3".
 check_type @Combined.combined_step_deterministic (
-(@deterministic Combined.tm Combined.step)).
+(@deterministic Combined.tm Combined.step \/
+ ~ @deterministic Combined.tm Combined.step)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Combined.combined_step_deterministic.
@@ -161,7 +162,9 @@ idtac " ".
 idtac "#> Combined.combined_strong_progress".
 idtac "Possible points: 3".
 check_type @Combined.combined_strong_progress (
-(~
+((forall t : Combined.tm,
+  Combined.value t \/ (exists t' : Combined.tm, Combined.step t t')) \/
+ ~
  (forall t : Combined.tm,
   Combined.value t \/ (exists t' : Combined.tm, Combined.step t t')))).
 idtac "Assumptions:".
@@ -249,4 +252,4 @@ idtac "---------- compiler_is_correct ---------".
 Print Assumptions compiler_is_correct.
 Abort.
 
-(* 2022-07-20 20:59 *)
+(* 2022-07-20 21:02 *)
