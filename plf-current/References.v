@@ -1043,13 +1043,17 @@ Definition context := partial_map ty.
    [\x:Nat. (!(loc 1)) x, \x:Nat. (!(loc 0)) x]
 *)
 
-(** **** Exercise: 2 stars, standard (cyclic_store)
+(** **** Exercise: 3 stars, standard (cyclic_store)
 
     Can you find a term whose reduction will create this particular
     cyclic store? *)
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_cyclic_store : option (nat*string) := None.
+Theorem cyclic_store:
+  exists t,
+    t / nil -->*
+    <{ unit }> / (<{ \x:Nat, (!(loc 1)) x }> :: <{ \x:Nat, (!(loc 0)) x }> :: nil).
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** These problems arise from the fact that our proposed
@@ -1933,4 +1937,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2022-07-21 14:21 *)
+(* 2022-07-21 14:22 *)
