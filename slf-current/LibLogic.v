@@ -814,6 +814,22 @@ Tactic Notation "tests_basic" ":" constr(E) :=
 
 (* ---------------------------------------------------------------------- *)
 (* ================================================================= *)
+(** ** Tactic [case_classic] *)
+
+(** [case_classic] performs a case analysis on the first expression of the
+    form [classicT ?E] that appears in the goal. *)
+
+Tactic Notation "case_classic" "as" simple_intropattern(C) :=
+  match goal with
+  | |- context [ classicT ?E ] => destruct (classicT E) as [C|C]
+  | H: context [ classicT ?E ] |- _ => destruct (classicT E) as [C|C]
+  end; tryfalse.
+
+Tactic Notation "case_classic" :=
+  let C := fresh "C" in case_classic as C.
+
+(* ---------------------------------------------------------------------- *)
+(* ================================================================= *)
 (** ** Tactic [absurds] *)
 
 (** [absurds] applies to a goal [G] and replaces it with [(~ G) -> False].
@@ -1160,4 +1176,4 @@ Arguments forall_conj_inv_10 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] 
 Arguments forall_conj_inv_11 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] [A11] [P] [Q].
 
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)

@@ -415,43 +415,79 @@ Proof using. (* FILL IN HERE *) Admitted.
 Definition hoaren (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
   forall (s:state), H s -> evaln s t Q.
 
-(** A Separation Logic triple, written [triplen t H Q], asserts that the term
-    [t] satisfies a Hoare triple with precondition [H \* H'] and postcondition
-    [Q \* H'], for any heap predicate [H'] describing the "rest of the word".
-    Compared with the definition of [triple], we simply replaced [hoare] with
-    [hoaren]. *)
+(** In prior chapters, we defined a Separation Logic triple, written [triplen t H Q],
+    by quantifying over the "rest of the word". Concretely, we used the definition
+    [forall (H':hprop), hoare t (H \* H') (Q \*+ H')]. Doing so was necessary because
+    the definition we had for [hoare] did not satisfy the frame rule.
+
+    It turns out that [hoaren] does satisfy the frame rule. Thus, we can define
+    Separation Logic triples directly as the predicate [hoaren]. *)
 
 Definition triplen (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
-  forall (H':hprop), hoaren t (H \* H') (Q \*+ H').
+  forall (s:state), H s -> evaln s t Q.
 
-(* ================================================================= *)
-(** ** Triple-Style Reasoning Rules for a Non-Deterministic Semantics. *)
+(** The most important step of the proof is to argue that [evaln] is stable
+    by extension with a disjoint piece of heap. This proof is by induction.
+    The most (and only) interesting step is that of allocation.
+    In a derivation built using [evaln_ref], we are given an assumption about
+    all locations [p] fresh from [h1]. What we are trying to build is a fact
+    mentioning all locations [p] fresh from [h1 \u h2]. We are thus restricting
+    the set of [p] that can be considered for allocation, hence the result holds. *)
 
-(** To derive reasoning rules for triples, we proceed in two steps, just as in
-    the previous chapters: first, we establish rules for [hoaren], then we
-    derive rules for [triplen]. For the first part, the proofs are very similar
-    to those form previous chapters. For the second part, the proofs are
-    exactly the same as in the previous chapters. *)
-
-(** Structural rules *)
-
-Lemma hoaren_conseq : forall t H' Q' H Q,
-  hoaren t H' Q' ->
-  H ==> H' ->
-  Q' ===> Q ->
-  hoaren t H Q.
+Lemma evaln_frame : forall h1 h2 t Q,
+  evaln h1 t Q ->
+  Fmap.disjoint h1 h2 ->
+  evaln (h1 \u h2) t (Q \*+ (= h2)).
 Proof using.
-  unfolds hoaren. introv M MH MQ HF. applys* evaln_conseq.
+  introv M HD. gen h2. induction M; intros;
+    try solve [ hint hstar_intro; constructors* ].
+  { rename M into M1, H into M2, IHM into IH1, H0 into IH2.
+    specializes IH1 HD. applys evaln_let IH1. introv HK.
+    lets (h1'&h2'&K1'&K2'&KD&KU): hstar_inv HK. subst. applys* IH2. }
+  { rename H into M. applys evaln_ref. intros p Hp.
+    rewrite Fmap.indom_union_eq in Hp. rew_logic in Hp. destruct Hp as [Hp1 Hp2].
+    rewrite* Fmap.update_union_not_r. applys hstar_intro.
+    { applys* M. } { auto. } { applys* Fmap.disjoint_update_not_r. } }
+  { applys evaln_get. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.read_union_l. applys* hstar_intro. } }
+  { applys evaln_set. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.update_union_l. applys hstar_intro.
+      { auto. } { auto. } { applys* Fmap.disjoint_update_l. } } }
+  { applys evaln_free. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.remove_disjoint_union_l. applys hstar_intro.
+      { auto. } { auto. } { applys* Fmap.disjoint_remove_l. } } }
 Qed.
 
-Lemma hoaren_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall x, hoaren t (J x) Q) ->
-  hoaren t (hexists J) Q.
+(** From [evaln_frame], we can derive the standard frame rule for [triplen]. *)
+
+Lemma triplen_frame : forall t H Q H',
+  triplen t H Q ->
+  triplen t (H \* H') (Q \*+ H').
+Proof.
+  introv M. intros h HF. lets (h1&h2&M1&M2&MD&MU): hstar_inv (rm HF).
+  subst. specializes M M1. applys evaln_conseq.
+  { applys evaln_frame M MD. } { xsimpl. intros h' ->. applys M2. }
+Qed.
+
+(** Other structural rules *)
+
+Lemma triplen_conseq : forall t H' Q' H Q,
+  triplen t H' Q' ->
+  H ==> H' ->
+  Q' ===> Q ->
+  triplen t H Q.
+Proof using.
+  unfolds triplen. introv M MH MQ HF. applys* evaln_conseq.
+Qed.
+
+Lemma triplen_hexists : forall t (A:Type) (J:A->hprop) Q,
+  (forall x, triplen t (J x) Q) ->
+  triplen t (hexists J) Q.
 Proof using. introv M. intros h (x&Hh). applys M Hh. Qed.
 
-Lemma hoaren_hpure : forall t (P:Prop) H Q,
-  (P -> hoaren t H Q) ->
-  hoaren t (\[P] \* H) Q.
+Lemma triplen_hpure : forall t (P:Prop) H Q,
+  (P -> triplen t H Q) ->
+  triplen t (\[P] \* H) Q.
 Proof using.
   introv M. intros h (h1&h2&M1&M2&D&U). destruct M1 as (M1&HP).
   lets E: hempty_inv HP. subst. rewrite Fmap.union_empty_l. applys~ M.
@@ -459,46 +495,46 @@ Qed.
 
 (** Rules for term constructs *)
 
-Lemma hoaren_val : forall v H Q,
+Lemma triplen_val : forall v H Q,
   H ==> Q v ->
-  hoaren (trm_val v) H Q.
+  triplen (trm_val v) H Q.
 Proof using. introv M. intros h K. applys* evaln_val. Qed.
 
-Lemma hoaren_fix : forall f x t1 H Q,
+Lemma triplen_fix : forall f x t1 H Q,
   H ==> Q (val_fix f x t1) ->
-  hoaren (trm_fix f x t1) H Q.
+  triplen (trm_fix f x t1) H Q.
 Proof using. introv M. intros h K. applys* evaln_fix. Qed.
 
-Lemma hoaren_app_fix : forall v1 v2 f x t1 H Q,
+Lemma triplen_app_fix : forall v1 v2 f x t1 H Q,
   v1 = val_fix f x t1 ->
-  hoaren (subst x v2 (subst f v1 t1)) H Q ->
-  hoaren (trm_app v1 v2) H Q.
+  triplen (subst x v2 (subst f v1 t1)) H Q ->
+  triplen (trm_app v1 v2) H Q.
 Proof using. introv E M. intros h K. applys* evaln_app_fix. Qed.
 
-Lemma hoaren_let : forall x t1 t2 H Q Q1,
-  hoaren t1 H Q1 ->
-  (forall v1, hoaren (subst x v1 t2) (Q1 v1) Q) ->
-  hoaren (trm_let x t1 t2) H Q.
+Lemma triplen_let : forall x t1 t2 H Q Q1,
+  triplen t1 H Q1 ->
+  (forall v1, triplen (subst x v1 t2) (Q1 v1) Q) ->
+  triplen (trm_let x t1 t2) H Q.
 Proof using. introv M1 M2. intros h K. applys* evaln_let. Qed.
 
-Lemma hoaren_if : forall (b:bool) t1 t2 H Q,
-  hoaren (if b then t1 else t2) H Q ->
-  hoaren (trm_if b t1 t2) H Q.
+Lemma triplen_if : forall (b:bool) t1 t2 H Q,
+  triplen (if b then t1 else t2) H Q ->
+  triplen (trm_if b t1 t2) H Q.
 Proof using. introv M. intros h K. applys* evaln_if. Qed.
 
 (** Rules for primitive operations *)
 
-Lemma hoaren_add : forall H n1 n2,
-  hoaren (val_add n1 n2)
+Lemma triplen_add : forall H n1 n2,
+  triplen (val_add n1 n2)
     H
     (fun r => \[r = val_int (n1 + n2)] \* H).
 Proof using.
   intros. intros h K. applys* evaln_add. rewrite* hstar_hpure_l.
 Qed.
 
-Lemma hoaren_rand : forall n,
+Lemma triplen_rand : forall n,
   n > 0 ->
-  hoaren (val_rand n)
+  triplen (val_rand n)
     \[]
     (fun r => \exists n1, \[0 <= n1 < n] \* \[r = val_int n1]).
 Proof using.
@@ -508,8 +544,8 @@ Proof using.
   split*. applys* hpure_intro.
 Qed.
 
-Lemma hoaren_ref : forall H v,
-  hoaren (val_ref v)
+Lemma triplen_ref : forall H v,
+  triplen (val_ref v)
     H
     (fun r => (\exists p, \[r = val_loc p] \* p ~~> v) \* H).
 Proof using.
@@ -520,8 +556,8 @@ Proof using.
   { applys* disjoint_single_of_not_indom. }
 Qed.
 
-Lemma hoaren_get : forall H v p,
-  hoaren (val_get p)
+Lemma triplen_get : forall H v p,
+  triplen (val_get p)
     ((p ~~> v) \* H)
     (fun r => \[r = v] \* (p ~~> v) \* H).
 Proof using.
@@ -535,8 +571,8 @@ Proof using.
     { applys* hstar_intro. } }
 Qed.
 
-Lemma hoaren_set : forall H w p v,
-  hoaren (val_set (val_loc p) v)
+Lemma triplen_set : forall H w p v,
+  triplen (val_set (val_loc p) v)
     ((p ~~> w) \* H)
     (fun r => \[r = val_unit] \* (p ~~> v) \* H).
 Proof using.
@@ -554,8 +590,8 @@ Proof using.
       { auto. applys indom_single. } } }
 Qed.
 
-Lemma hoaren_free : forall H p v,
-  hoaren (val_free (val_loc p))
+Lemma triplen_free : forall H p v,
+  triplen (val_free (val_loc p))
     ((p ~~> v) \* H)
     (fun r => \[r = val_unit] \* H).
 Proof using.
@@ -569,22 +605,6 @@ Proof using.
       { intros Dl. applys* Fmap.disjoint_inv_not_indom_both D Dl. } } }
 Qed.
 
-(** The proofs of reasoning rules for [triplens] are exactly the same as in
-    the chapter [Rules]. For example, we show below the proof of the
-    reasoning rule for let-bindings. *)
-
-Lemma triplen_let : forall x t1 t2 H Q Q1,
-  triplen t1 H Q1 ->
-  (forall v1, triplen (subst x v1 t2) (Q1 v1) Q) ->
-  triplen (trm_let x t1 t2) H Q.
-Proof using.
-  introv M1 M2. intros HF. applys hoaren_let.
-  { applys M1. }
-  { intros v. applys hoaren_conseq M2; xsimpl. }
-Qed.
-
-(** Statements and proofs of reasoning rules for other term constructs
-    can be directly adapted from those in the file [LibSepReference]. *)
 
 (* ################################################################# *)
 (** * More Details *)
@@ -606,141 +626,142 @@ Qed.
     It thus corresponds exactly to the notion of weakest precondition for Hoare
     Logic.
 
-    The judgment [hoarewpn t Q], defined below, simply reorder the arguments
+    The judgment [hoarewpns t Q], defined below, simply reorder the arguments
     of [evaln] so as to produce this weakest-precondition operator. Note that
     this is a Hoare Logic style predicate, which talks about the full state. *)
 
-Definition hoarewpn (t:trm) (Q:val->hprop) : hprop :=
+Definition wpn (t:trm) (Q:val->hprop) : hprop :=
   fun s => evaln s t Q.
 
-(** On top of [hoarewpn], we can define the Separation Logic version of weakest
-    precondition, written [wpn t Q]. At a high level, [wpn] extends [hoarewpn]
-    with a description of "the rest of the world". More precisely, [wpn t Q]
-    describes a heap predicate, that, if extended with a heap predicate [H]
-    describing the rest of the world, yields the weakest precondition with
-    respect to the postcondition [Q \*+ H], that is, [Q] extended with [H]. *)
-
-Definition wpn (t:trm) (Q:val->hprop) : hprop :=
-  \forall H, H \-* (hoarewpn t (Q \*+ H)).
-
-(** This definition is associated with the following introduction rule,
-    which reads as follows: to prove [H ==> wpn t Q], which asserts that
-    [t] admits [H] as precondition and [Q] as postcondition, it suffices
-    to prove that, for any [H'] describing the rest of the world, the
-    entailment [H \* H'==> hoarewpn t (Q \*+ H')] holds, asserting that
-    the term [t] admits, in Hoare logic, the precondition [H \* H'] and
-    the postcondition [Q \*+ H']. *)
-
-Lemma wpn_of_hoarewpn : forall H t Q,
-  (forall H', H \* H' ==> hoarewpn t (Q \*+ H')) ->
-  H ==> wpn t Q.
-Proof using.
-  introv M. unfolds wpn. applys himpl_hforall_r. intros H'.
-  applys himpl_hwand_r. rewrite hstar_comm. applys M.
-Qed.
-
-(** **** Exercise: 4 stars, standard, especially useful (wpn_equiv)
-
-    Prove the standard equivalence [(H ==> wp t Q) <-> (triple t H Q)]
-    to relate the predicates [wpn] and [triplen].
-    Hint: using lemma [wpn_of_hoarewpn] can be helpful. *)
+(** We can check the standard equivalence [(H ==> wp t Q) <-> (triple t H Q)],
+    for the predicates [wpn] and [triplen]. *)
 
 Lemma wpn_equiv : forall H t Q,
   (H ==> wpn t Q) <-> (triplen t H Q).
-Proof using. (* FILL IN HERE *) Admitted.
-
-(** [] *)
+Proof using. unfolds triplen, wpn. iff M; autos*. Qed.
 
 (** Remark: as mentioned in the chapter [WPsem], it is possible to define
     the predicate [triplen t H Q] as [H ==> wpn t Q], that is, to define
-    [triplen] as a notion derived from [hoarewpn] and [wpn]. *)
+    [triplen] as a notion derived from [wpn] and [wpn]. *)
 
 (* ================================================================= *)
-(** ** Hoare Logic WP-Style Rules for a Non-Deterministic Semantics. *)
+(** ** WP-Style Rules for a Non-Deterministic Semantics. *)
 
 (** Given that the semantics expressed by the predicate [evaln] has a weakest-
     precondition flavor, there are good chances that deriving weakest-
     precondition style reasoning rules from [evaln] could be even easier than
     deriving the rules for [triplen]. Thus, let us investigate whether this is
-    indeed the case, by stating and proving reasoning rules for the judgments
-    [hoarewpn] and [wpn]. We begin with rules for [hoarewpn]. *)
+    indeed the case, by stating and proving reasoning rules for the judgment
+    [wpn]. *)
 
 (** Structural rules *)
 
-Lemma hoarewpn_conseq : forall t Q1 Q2,
-  Q1 ===> Q2 ->
-  (hoarewpn t Q1) ==> (hoarewpn t Q2).
+Lemma wpn_frame : forall t H Q,
+  (wpn t Q) \* H ==> wpn t (Q \*+ H).
 Proof using.
-  introv W. unfold hoarewpn. intros h K. applys evaln_conseq K W.
+  intros. unfold wpn. intros h HF.
+  lets (h1&h2&M1&M2&MD&MU): hstar_inv (rm HF).
+  subst. applys evaln_conseq.
+  { applys evaln_frame M1 MD. }
+  { xsimpl. intros h' ->. applys M2. }
 Qed.
+
+Lemma wpn_conseq : forall t Q1 Q2,
+  Q1 ===> Q2 ->
+  (wpn t Q1) ==> (wpn t Q2).
+Proof using.
+  introv W. unfold wpn. intros h K. applys evaln_conseq K W.
+Qed.
+
+(** Derived structural rules *)
+
+Lemma wpn_ramified : forall t Q1 Q2,
+  (wpn t Q1) \* (Q1 \--* Q2) ==> (wpn t Q2).
+Proof using.
+  intros. applys himpl_trans.
+  { applys wpn_frame. }
+  { applys wpn_conseq. xsimpl. }
+Qed.
+
+Lemma wpn_conseq_frame : forall t H Q1 Q2,
+  Q1 \*+ H ===> Q2 ->
+  (wpn t Q1) \* H ==> (wpn t Q2).
+Proof using.
+  introv M. rewrite <- qwand_equiv in M. xchange M. applys wpn_ramified.
+Qed.
+
+Lemma wpn_ramified_trans : forall t H Q1 Q2,
+  H ==> (wpn t Q1) \* (Q1 \--* Q2) ->
+  H ==> (wpn t Q2).
+Proof using. introv M. xchange M. applys wpn_ramified. Qed.
 
 (** Rules for term constructs *)
 
-Lemma hoarewpn_val : forall v Q,
-  Q v ==> hoarewpn (trm_val v) Q.
+Lemma wpn_val : forall v Q,
+  Q v ==> wpn (trm_val v) Q.
 Proof using.
-  unfold hoarewpn. intros. intros h K. applys* evaln_val.
+  unfold wpn. intros. intros h K. applys* evaln_val.
 Qed.
 
-Lemma hoarewpn_fix : forall f x t Q,
-  Q (val_fix f x t) ==> hoarewpn (trm_fix f x t) Q.
+Lemma wpn_fix : forall f x t Q,
+  Q (val_fix f x t) ==> wpn (trm_fix f x t) Q.
 Proof using.
-  unfold hoarewpn. intros. intros h K. applys* evaln_fix.
+  unfold wpn. intros. intros h K. applys* evaln_fix.
 Qed.
 
-Lemma hoarewpn_app_fix : forall f x v1 v2 t1 Q,
+Lemma wpn_app_fix : forall f x v1 v2 t1 Q,
   v1 = val_fix f x t1 ->
-  hoarewpn (subst x v2 (subst f v1 t1)) Q ==> hoarewpn (trm_app v1 v2) Q.
+  wpn (subst x v2 (subst f v1 t1)) Q ==> wpn (trm_app v1 v2) Q.
 Proof using.
-  unfold hoarewpn. intros. intros h K. applys* evaln_app_fix.
+  unfold wpn. intros. intros h K. applys* evaln_app_fix.
 Qed.
 
-Lemma hoarewpn_let : forall x t1 t2 Q,
-      hoarewpn t1 (fun v => hoarewpn (subst x v t2) Q)
-  ==> hoarewpn (trm_let x t1 t2) Q.
+Lemma wpn_let : forall x t1 t2 Q,
+      wpn t1 (fun v => wpn (subst x v t2) Q)
+  ==> wpn (trm_let x t1 t2) Q.
 Proof using.
-  unfold hoarewpn. intros. intros h K. applys* evaln_let.
+  unfold wpn. intros. intros h K. applys* evaln_let.
 Qed.
 
-Lemma hoarewpn_if : forall b t1 t2 Q,
-  hoarewpn (if b then t1 else t2) Q ==> hoarewpn (trm_if b t1 t2) Q.
+Lemma wpn_if : forall b t1 t2 Q,
+  wpn (if b then t1 else t2) Q ==> wpn (trm_if b t1 t2) Q.
 Proof using.
-  unfold hoarewpn. intros. intros h K. applys* evaln_if.
+  unfold wpn. intros. intros h K. applys* evaln_if.
 Qed.
 
 (** Rules for primitives. We state their specifications following the
     presentation described near the end of chapter [Wand]. *)
 
-Lemma hoarewpn_add : forall Q n1 n2,
-  (Q (val_int (n1 + n2))) ==> hoarewpn (val_add (val_int n1) (val_int n2)) Q.
+Lemma wpn_add : forall Q n1 n2,
+  (Q (val_int (n1 + n2))) ==> wpn (val_add (val_int n1) (val_int n2)) Q.
 Proof using.
-  unfolds hoarewpn. intros. intros h K. applys* evaln_add.
+  unfolds wpn. intros. intros h K. applys* evaln_add.
 Qed.
 
-Lemma hoarewpn_rand : forall Q n,
+Lemma wpn_rand : forall Q n,
   n > 0 ->
       (\forall n1, \[0 <= n1 < n] \-* Q (val_int n1))
-  ==> hoarewpn (val_rand (val_int n)) Q.
+  ==> wpn (val_rand (val_int n)) Q.
 Proof using.
-  unfolds hoarewpn. introv N. xsimpl. intros h K.
+  unfolds wpn. introv N. xsimpl. intros h K.
   applys* evaln_rand. intros n1 H1. lets K': hforall_inv K n1.
   rewrite* hwand_hpure_l in K'.
 Qed.
 
-Lemma hoarewpn_ref : forall Q v,
-  (\forall p, (p ~~> v) \-* Q (val_loc p)) ==> hoarewpn (val_ref v) Q.
+Lemma wpn_ref : forall Q v,
+  (\forall p, (p ~~> v) \-* Q (val_loc p)) ==> wpn (val_ref v) Q.
 Proof using.
-  unfolds hoarewpn. intros. intros h K. applys* evaln_ref. intros p D.
+  unfolds wpn. intros. intros h K. applys* evaln_ref. intros p D.
   lets K': hforall_inv (rm K) p.
   applys hwand_inv (single p v) K'.
   { applys hsingle_intro. }
   { applys* disjoint_single_of_not_indom. }
 Qed.
 
-Lemma hoarewpn_get : forall v p Q,
-  (p ~~> v) \* (p ~~> v \-* Q v) ==> hoarewpn (val_get p) Q.
+Lemma wpn_get : forall v p Q,
+  (p ~~> v) \* (p ~~> v \-* Q v) ==> wpn (val_get p) Q.
 Proof using.
-  unfolds hoarewpn. intros. intros h K.
+  unfolds wpn. intros. intros h K.
   lets (h1&h2&P1&P2&D&->): hstar_inv (rm K).
   forwards*: hwand_inv h1 P2.
   lets E1: hsingle_inv P1. lets I1: indom_single p v.
@@ -749,10 +770,10 @@ Proof using.
   { subst h1. rewrite* Fmap.read_union_l. rewrite* Fmap.read_single. }
 Qed.
 
-Lemma hoarewpn_set : forall v w p Q,
-  (p ~~> v) \* (p ~~> w \-* Q val_unit) ==> hoarewpn (val_set p w) Q.
+Lemma wpn_set : forall v w p Q,
+  (p ~~> v) \* (p ~~> w \-* Q val_unit) ==> wpn (val_set p w) Q.
 Proof using.
-  unfolds hoarewpn. intros. intros h K.
+  unfolds wpn. intros. intros h K.
   lets (h1&h2&P1&P2&D&->): hstar_inv (rm K).
   lets E1: hsingle_inv P1. lets I1: indom_single p v.
   forwards: hwand_inv (single p w) P2.
@@ -763,10 +784,10 @@ Proof using.
     { subst h1. rewrite* Fmap.update_union_l. rewrite* update_single. } }
 Qed.
 
-Lemma hoarewpn_free : forall v p Q,
-  (p ~~> v) \* (Q val_unit) ==> hoarewpn (val_free p) Q.
+Lemma wpn_free : forall v p Q,
+  (p ~~> v) \* (Q val_unit) ==> wpn (val_free p) Q.
 Proof using.
-  unfolds hoarewpn. intros. intros h K.
+  unfolds wpn. intros. intros h K.
   lets (h1&h2&P1&P2&D&->): hstar_inv (rm K).
   lets E1: hsingle_inv P1. lets I1: indom_single p v.
   applys_eq evaln_free.
@@ -775,134 +796,9 @@ Proof using.
     intros Dl. applys* Fmap.disjoint_inv_not_indom_both D Dl. }
 Qed.
 
-(* ================================================================= *)
-(** ** Separation Logic WP-Style Rules for a Non-Deterministic Semantics. *)
-
-(** In the previous section, we established reasoning rules for [hoarewpn].
-    Based on these rules, we are ready to derive reasoning rules for [wpn]. *)
-
-(** Structural rules *)
-
-Lemma wpn_conseq_frame : forall t H Q1 Q2,
-  Q1 \*+ H ===> Q2 ->
-  (wpn t Q1) \* H ==> (wpn t Q2).
-Proof using.
-  introv M. unfold wpn. xsimpl.
-  intros H'. xchange (hforall_specialize (H \* H')).
-  applys hoarewpn_conseq. xchange M.
-Qed.
-
-Lemma wpn_ramified_trans : forall t H Q1 Q2,
-  H ==> (wpn t Q1) \* (Q1 \--* Q2) ->
-  H ==> (wpn t Q2).
-Proof using.
-  introv M. xchange M. applys wpn_conseq_frame. applys qwand_cancel.
-Qed.
-
-(** Rules for term constructs *)
-
-Lemma wpn_val : forall v Q,
-  Q v ==> wpn (trm_val v) Q.
-Proof using.
-  intros. unfold wpn. xsimpl. intros H'.
-  xchange (>> hoarewpn_val (Q \*+ H')).
-Qed.
-
-Lemma wpn_fix : forall f x t Q,
-  Q (val_fix f x t) ==> wpn (trm_fix f x t) Q.
-Proof using.
-  intros. unfold wpn. xsimpl. intros H'.
-  xchange (>> hoarewpn_fix (Q \*+ H')).
-Qed.
-
-Lemma wpn_app_fix : forall f x v1 v2 t1 Q,
-  v1 = val_fix f x t1 ->
-  wpn (subst x v2 (subst f v1 t1)) Q ==> wpn (trm_app v1 v2) Q.
-Proof using.
-  intros. unfold wpn. xsimpl. intros H'.
-  xchange (hforall_specialize H').
-  applys* hoarewpn_app_fix.
-Qed.
-
-(** **** Exercise: 4 stars, standard, especially useful (wpn_let)
-
-    Derive the reasoning rule [wpn_let] from [hoarewpn_let]. *)
-
-Lemma wpn_let : forall x t1 t2 Q,
-  wpn t1 (fun v => wpn (subst x v t2) Q) ==> wpn (trm_let x t1 t2) Q.
-Proof using. (* FILL IN HERE *) Admitted.
-
-(** [] *)
-
-Lemma wpn_if : forall b t1 t2 Q,
-  wpn (if b then t1 else t2) Q ==> wpn (trm_if b t1 t2) Q.
-Proof using.
-  intros. unfold wpn. xsimpl. intros H'.
-  xchange (hforall_specialize H').
-  applys hoarewpn_if.
-Qed.
-
-(** Rules for primitives. *)
-
-Lemma wpn_add : forall Q n1 n2,
-  (Q (val_int (n1 + n2))) ==> wpn (val_add (val_int n1) (val_int n2)) Q.
-Proof using.
-  intros. unfold wpn. xsimpl. intros H'.
-  xchange (>> hoarewpn_add (Q \*+ H')).
-Qed.
-
-Lemma wpn_rand : forall Q n,
-  n > 0 ->
-      (\forall n1, \[0 <= n1 < n] \-* Q (val_int n1))
-  ==> wpn (val_rand (val_int n)) Q.
-Proof using.
-  introv N. unfold wpn. xsimpl. intros H'.
-  applys himpl_trans; [| applys* hoarewpn_rand ].
-  xsimpl. intros n1. xchange (hforall_specialize n1).
-  intros H1. rewrite* hwand_hpure_l.
-Qed.
-
-Lemma wpn_ref : forall Q v,
-  (\forall p, (p ~~> v) \-* Q (val_loc p)) ==> wpn (val_ref v) Q.
-Proof using.
-  intros. unfold wpn. xsimpl. intros H'.
-  applys himpl_trans; [| applys hoarewpn_ref ].
-  xsimpl. intros p. xchange (hforall_specialize p).
-Qed.
-
-Lemma wpn_get : forall v p Q,
-  (p ~~> v) \* (p ~~> v \-* Q v) ==> wpn (val_get p) Q.
-Proof using.
-  intros. unfold wpn.
-  applys himpl_hforall_r. intros H'. applys himpl_hwand_r.
-  rewrite hstar_comm.
-  applys himpl_trans; [| applys hoarewpn_get v ]. simpl.
-  rewrite hstar_assoc. applys himpl_frame_r.
-  xsimpl.
-Qed.
-
-Lemma wpn_set : forall v w p Q,
-  (p ~~> v) \* (p ~~> w \-* Q val_unit) ==> wpn (val_set p w) Q.
-Proof using.
-  intros. unfold wpn.
-  applys himpl_hforall_r. intros H'. applys himpl_hwand_r.
-  rewrite hstar_comm.
-  applys himpl_trans; [| applys hoarewpn_set v ]. simpl.
-  rewrite hstar_assoc. applys himpl_frame_r.
-  xsimpl.
-Qed.
-
-Lemma wpn_free : forall v p Q,
-  (p ~~> v) \* (Q val_unit) ==> wpn (val_free p) Q.
-Proof using.
-  intros. unfold wpn.
-  applys himpl_hforall_r. intros H'. applys himpl_hwand_r.
-  applys himpl_trans; [| applys hoarewpn_free v ]. xsimpl.
-Qed.
-
 (** Rules for primitives, alternative presentation using triples. *)
 
-Lemma triplen_add : forall n1 n2,
+Lemma triplen_add' : forall n1 n2,
   triplen (val_add n1 n2)
     \[]
     (fun r => \[r = val_int (n1 + n2)]).
@@ -911,7 +807,7 @@ Proof using.
   applys himpl_trans; [| applys wpn_add ]. xsimpl*.
 Qed.
 
-Lemma triplen_rand : forall n,
+Lemma triplen_rand' : forall n,
   n > 0 ->
   triplen (val_rand n)
     \[]
@@ -921,7 +817,7 @@ Proof using.
   applys himpl_trans; [| applys* wpn_rand ]. xsimpl*.
 Qed.
 
-Lemma triplen_ref : forall v,
+Lemma triplen_ref' : forall v,
   triplen (val_ref v)
     \[]
     (fun r => \exists p, \[r = val_loc p] \* p ~~> v).
@@ -930,7 +826,7 @@ Proof using.
   applys himpl_trans; [| applys wpn_ref ]. xsimpl*.
 Qed.
 
-Lemma triplen_get : forall v p,
+Lemma triplen_get' : forall v p,
   triplen (val_get p)
     (p ~~> v)
     (fun r => \[r = v] \* (p ~~> v)).
@@ -939,7 +835,7 @@ Proof using.
   applys himpl_trans; [| applys wpn_get ]. xsimpl*.
 Qed.
 
-Lemma triplen_set : forall w p v,
+Lemma triplen_set' : forall w p v,
   triplen (val_set (val_loc p) v)
     (p ~~> w)
     (fun _ => p ~~> v).
@@ -948,7 +844,7 @@ Proof using.
   applys himpl_trans; [| applys wpn_set ]. xsimpl*.
 Qed.
 
-Lemma triplen_free : forall p v,
+Lemma triplen_free' : forall p v,
   triplen (val_free (val_loc p))
     (p ~~> v)
     (fun _ => \[]).
@@ -981,7 +877,6 @@ Proof using. (* FILL IN HERE *) Admitted.
     treatment of non-determinism using a small-step semantics. Moreover, we
     establish equivalence proofs relating (non-deterministic) small-step and
     big-step semantics. *)
-
 
 (* ================================================================= *)
 (** ** Interpretation of [evaln] w.r.t. [eval] and [terminates] *)
@@ -1392,31 +1287,59 @@ Proof using. (* FILL IN HERE *) Admitted.
       in the first part of this chapter. *)
 
 (* ================================================================= *)
-(** ** Triples for Small-Step Semantics *)
+(** ** Reasoning Rules for [evalns] *)
 
-(** The judgment [hoaren t H Q] defines Hoare triples in terms of the small-
-    step-based judgment [evalns]. It mimics the definition of [hoaren], which
-    was used for defining triples with respect to the big-step judgment
-    [evaln]. *)
+(** Reasoning rules have a big-step flavor, thus to derive them we first need
+    to derive big-step style reasoning rules for [evalns]. *)
 
-Definition hoarens (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
-  forall (s:state), H s -> evalns s t Q.
+(** Again, the key step is to argue for the frame property, first for [evalns],
+    then for [triplens]. *)
 
-(** The judgment [triplens] is the counterpart of [triplen], introducing
-    Separation Logic triples defined w.r.t. [hoarens]. *)
+Section EvalnsProperties.
+Hint Constructors step.
 
-Definition triplens (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
-  forall (H':hprop), hoarens t (H \* H') (Q \*+ H').
-
-(** There is nothing new in deriving rules for [triplens] from rules for
-    [hoarens]. Thus, in what follows, we'll focus on the novel aspects, which
-    consists of deriving reasoning rules for [evalns] and for [hoarens], with
-    respect to the small-step semantics captured by the relation [step]. *)
-
-(* ================================================================= *)
-(** ** Reasoning Rules for [seval] *)
-
-(** First, we establish reasoning rules for [evalns]. *)
+Lemma evalns_frame : forall h1 h2 t Q,
+  evalns h1 t Q ->
+  Fmap.disjoint h1 h2 ->
+  evalns (h1 \u h2) t (Q \*+ (= h2)).
+Proof using.
+  introv M HD. gen h2. induction M; intros.
+  { applys evalns_val. applys* hstar_intro. }
+  { rename H into M1, H0 into M2, H1 into IH2.
+    applys evalns_step.
+    { clear M2 IH2. destruct M1 as (s'&t'&R).
+      induction R; tryfalse; try solve [ do 2 esplit; constructors* ].
+      { forwards* (s'&t'&R'): IHR.  }
+      { lets (p'&F&_): exists_fresh null (Fmap.union s h2). do 2 esplit.
+        applys step_ref v p'. eauto. }
+      { do 2 esplit. applys step_get. applys* Fmap.indom_union_l. }
+      { do 2 esplit. applys step_set. applys* Fmap.indom_union_l. }
+      { do 2 esplit. applys step_free. applys* Fmap.indom_union_l. } }
+    { introv R. cuts (s1'&E'&D'&R'):
+       (exists s1', s' = s1' \u h2 /\ Fmap.disjoint s1' h2 /\ step s t s1' t').
+      { subst. applys* IH2. }
+      clear M2 IH2.
+      gen_eq su: (s \u h2). gen s.
+      induction R; intros; subst; eauto.
+      { destruct M1 as (s0&t0&R0). (* inverts R0; tryfalse. *)
+        rename R into R1. forwards* (s1'&E&D&R1'): IHR s.
+        inverts R0. { eauto. } { inverts R1. } }
+      { rename H into D. rewrite Fmap.indom_union_eq in D. rew_logic in D.
+        destruct D as (D1&D2). esplit. splits.
+        { rewrite* Fmap.update_union_not_r. }
+        { applys* Fmap.disjoint_update_not_r. }
+        { eauto. } }
+      { destruct M1 as (se&te&Re). inverts Re; tryfalse.
+        rewrite* Fmap.read_union_l. }
+      { destruct M1 as (se&te&Re). inverts Re; tryfalse. esplit. splits.
+        { rewrite* Fmap.update_union_l. }
+        { applys* Fmap.disjoint_update_l. }
+        { eauto. } }
+      { destruct M1 as (se&te&Re). inverts Re; tryfalse. esplit. splits.
+        { rewrite* remove_disjoint_union_l. }
+        { applys* Fmap.disjoint_remove_l. }
+        { eauto. } } } }
+Qed.
 
 (** The structural rules for [evalns] asserts that [evalns s t Q] is
     covariant in the postcondition [Q]. *)
@@ -1479,19 +1402,55 @@ Proof using.
   { introv R. inverts R; tryfalse. { applys M. } }
 Qed.
 
+Lemma evalns_ref : forall s v,
+  evalns s (val_ref v) (fun r => (\exists p, \[r = p] \* p ~~> v) \* (= s)).
+Proof using.
+  intros. applys evalns_step.
+  { forwards~ (p&D&N): (exists_fresh null s).
+    esplit. exists (val_loc p). applys* step_ref. }
+  { introv R. inverts R; tryfalse. applys evalns_val.
+    unfold update. applys~ hstar_intro.
+    { exists p. rewrite~ hstar_hpure_l. split~. { applys~ hsingle_intro. } }
+    { applys* disjoint_single_of_not_indom. } }
+Qed.
+
+End EvalnsProperties.
+
 (* ================================================================= *)
-(** ** Reasoning Rules for [hoarens] *)
+(** ** Triples for Small-Step Semantics *)
+
+(** The judgment [triplens t H Q] mimics the definition of [hoaren], which
+    was used for defining triples with respect to the big-step judgment
+    [evaln]. *)
+
+Definition triplens (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
+  forall (s:state), H s -> evalns s t Q.
+
+(** From [evalns_frame], we can derive the standard frame rule for [triplens],
+    exactly like we did in the lemma [triplen_frame]. *)
+
+Lemma triplens_frame : forall t H Q H',
+  triplens t H Q ->
+  triplens t (H \* H') (Q \*+ H').
+Proof.
+  introv M. intros h HF. lets (h1&h2&M1&M2&MD&MU): hstar_inv (rm HF).
+  subst. specializes M M1. applys evalns_conseq.
+  { applys evalns_frame M MD. } { xsimpl. intros h' ->. applys M2. }
+Qed.
+
+(* ================================================================= *)
+(** ** Reasoning Rules for [triplens] *)
 
 (** Let's now prove reasoning rules for the Hoare triples judgment
-    [hoarens]. *)
+    [triplens]. *)
 
 (** The consequence rule exploits the covariance result for [evalns]. *)
 
-Lemma hoarens_conseq : forall t H' Q' H Q,
-  hoarens t H' Q' ->
+Lemma triplens_conseq : forall t H' Q' H Q,
+  triplens t H' Q' ->
   H ==> H' ->
   Q' ===> Q ->
-  hoarens t H Q.
+  triplens t H Q.
 Proof using.
   introv M MH MQ HF. applys evalns_conseq M MQ. applys* MH.
 Qed.
@@ -1499,14 +1458,14 @@ Qed.
 (** The other two structural rules, which operate on the precondition, admit
     exactly the same proofs as in the previous chapters. *)
 
-Lemma hoarens_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall x, hoarens t (J x) Q) ->
-  hoarens t (hexists J) Q.
+Lemma triplens_hexists : forall t (A:Type) (J:A->hprop) Q,
+  (forall x, triplens t (J x) Q) ->
+  triplens t (hexists J) Q.
 Proof using. introv M. intros h (x&Hh). applys M Hh. Qed.
 
-Lemma hoarens_hpure : forall t (P:Prop) H Q,
-  (P -> hoarens t H Q) ->
-  hoarens t (\[P] \* H) Q.
+Lemma triplens_hpure : forall t (P:Prop) H Q,
+  (P -> triplens t H Q) ->
+  triplens t (\[P] \* H) Q.
 Proof using.
   introv M. intros h (h1&h2&M1&M2&D&U). destruct M1 as (M1&HP).
   lets E: hempty_inv HP. subst. rewrite Fmap.union_empty_l. applys~ M.
@@ -1515,42 +1474,42 @@ Qed.
 (** The reasoning rules for terms follow directly from the reasoning rules
     established for [evalns]. *)
 
-Lemma hoarens_val : forall v H Q,
+Lemma triplens_val : forall v H Q,
   H ==> Q v ->
-  hoarens (trm_val v) H Q.
+  triplens (trm_val v) H Q.
 Proof using. introv M. intros h K. applys* evalns_val. Qed.
 
-Lemma hoarens_fix : forall f x t1 H Q,
+Lemma triplens_fix : forall f x t1 H Q,
   H ==> Q (val_fix f x t1) ->
-  hoarens (trm_fix f x t1) H Q.
+  triplens (trm_fix f x t1) H Q.
 Proof using. introv M. intros h K. applys* evalns_fix. Qed.
 
-Lemma hoarens_app_fix : forall v1 v2 f x t1 H Q,
+Lemma triplens_app_fix : forall v1 v2 f x t1 H Q,
   v1 = val_fix f x t1 ->
-  hoarens (subst x v2 (subst f v1 t1)) H Q ->
-  hoarens (trm_app v1 v2) H Q.
+  triplens (subst x v2 (subst f v1 t1)) H Q ->
+  triplens (trm_app v1 v2) H Q.
 Proof using. introv E M. intros h K. applys* evalns_app_fix. Qed.
 
-Lemma hoarens_let : forall x t1 t2 H Q Q1,
-  hoarens t1 H Q1 ->
-  (forall v1, hoarens (subst x v1 t2) (Q1 v1) Q) ->
-  hoarens (trm_let x t1 t2) H Q.
+Lemma triplens_let : forall x t1 t2 H Q Q1,
+  triplens t1 H Q1 ->
+  (forall v1, triplens (subst x v1 t2) (Q1 v1) Q) ->
+  triplens (trm_let x t1 t2) H Q.
 Proof using.
   introv M1 M2. intros h K. applys* evalns_let.
   { introv K'. applys* M2. }
 Qed.
 
-Lemma hoarens_if : forall (b:bool) t1 t2 H Q,
-  hoarens (if b then t1 else t2) H Q ->
-  hoarens (trm_if b t1 t2) H Q.
+Lemma triplens_if : forall (b:bool) t1 t2 H Q,
+  triplens (if b then t1 else t2) H Q ->
+  triplens (trm_if b t1 t2) H Q.
 Proof using. introv M1. intros h K. applys* evalns_if. Qed.
 
 (** The evaluation rules for primitive operations are proved in a way that is
     extremely similar to the proofs used for the big-step case, i.e., to the
     proofs establishing the reasoning rules for [hoaren]. *)
 
-Lemma hoarens_add : forall H n1 n2,
-  hoarens (val_add n1 n2)
+Lemma triplens_add : forall H n1 n2,
+  triplens (val_add n1 n2)
     H
     (fun r => \[r = val_int (n1 + n2)] \* H).
 Proof using.
@@ -1559,9 +1518,9 @@ Proof using.
   { introv R. inverts R. applys evalns_val. rewrite~ hstar_hpure_l. }
 Qed.
 
-Lemma hoarens_rand : forall n,
+Lemma triplens_rand : forall n,
   n > 0 ->
-  hoarens (val_rand n)
+  triplens (val_rand n)
     \[]
     (fun r => \exists n1, \[0 <= n1 < n] \* \[r = val_int n1]).
 Proof using.
@@ -1572,22 +1531,17 @@ Proof using.
     split~. applys* hpure_intro. }
 Qed.
 
-Lemma hoarens_ref : forall H v,
-  hoarens (val_ref v)
+Lemma triplens_ref : forall H v,
+  triplens (val_ref v)
     H
     (fun r => (\exists p, \[r = val_loc p] \* p ~~> v) \* H).
 Proof using.
-  intros. intros s K. applys evalns_step.
-  { forwards~ (p&D&N): (exists_fresh null s).
-    esplit. exists (val_loc p). applys* step_ref. }
-  { introv R. inverts R; tryfalse. applys evalns_val.
-    unfold update. applys~ hstar_intro.
-    { exists p. rewrite~ hstar_hpure_l. split~. { applys~ hsingle_intro. } }
-    { applys* disjoint_single_of_not_indom. } }
+  intros. intros h K. applys evalns_conseq. applys* evalns_ref.
+  { intros r. xpull. intros ? ->. xsimpl*. intros ? ->. auto. }
 Qed.
 
-Lemma hoarens_get : forall H v p,
-  hoarens (val_get p)
+Lemma triplens_get : forall H v p,
+  triplens (val_get p)
     ((p ~~> v) \* H)
     (fun r => \[r = v] \* (p ~~> v) \* H).
 Proof using.
@@ -1600,8 +1554,8 @@ Proof using.
     { applys* hstar_intro. } }
 Qed.
 
-Lemma hoarens_set : forall H w p v,
-  hoarens (val_set (val_loc p) v)
+Lemma triplens_set : forall H w p v,
+  triplens (val_set (val_loc p) v)
     ((p ~~> w) \* H)
     (fun r => \[r = val_unit] \* (p ~~> v) \* H).
 Proof using.
@@ -1616,8 +1570,8 @@ Proof using.
       { applys* disjoint_single_set. } } }
 Qed.
 
-Lemma hoarens_free : forall H p v,
-  hoarens (val_free (val_loc p))
+Lemma triplens_free : forall H p v,
+  triplens (val_free (val_loc p))
     ((p ~~> v) \* H)
     (fun r => \[r = val_unit] \* H).
 Proof using.
@@ -1631,14 +1585,175 @@ Proof using.
       applys indom_single. } }
 Qed.
 
-(** From there, reasoning rules for [triplens] can be derived from the rules
-    for [hoarens] exactly like in previous chapters, i.e., using exactly the
-    same proofs as for deriving rules for [triple] from rules for [hoare]. *)
+
+(* ================================================================= *)
+(** ** Weakest-Precondition for Small-Step Semantics. *)
+
+(** The definition of [wpn] can be adpated to use [evalns] instead of [evaln]. *)
+
+Definition wpns (t:trm) (Q:val->hprop) : hprop :=
+  fun s => evalns s t Q.
+
+(** Structural rules *)
+
+Lemma wpns_frame : forall t H Q,
+  (wpns t Q) \* H ==> wpns t (Q \*+ H).
+Proof using.
+  intros. unfold wpn. intros h HF.
+  lets (h1&h2&M1&M2&MD&MU): hstar_inv (rm HF).
+  subst. applys evalns_conseq.
+  { applys evalns_frame M1 MD. }
+  { xsimpl. intros h' ->. applys M2. }
+Qed.
+
+Lemma wpns_conseq : forall t Q1 Q2,
+  Q1 ===> Q2 ->
+  (wpns t Q1) ==> (wpns t Q2).
+Proof using.
+  introv W. unfold wpn. intros h K. applys evalns_conseq K W.
+Qed.
+
+Lemma wpns_ramified : forall t Q1 Q2,
+  (wpns t Q1) \* (Q1 \--* Q2) ==> (wpns t Q2).
+Proof using.
+  intros. applys himpl_trans.
+  { applys wpns_frame. }
+  { applys wpns_conseq. xsimpl. }
+Qed.
+
+(** Rules for term constructs *)
+
+Section WpnsRules.
+Hint Constructors step.
+
+Lemma wpns_val : forall v Q,
+  Q v ==> wpns (trm_val v) Q.
+Proof using. unfold wpns. intros. intros h K. applys* evalns_val. Qed.
+
+Lemma wpns_fix : forall f x t Q,
+  Q (val_fix f x t) ==> wpns (trm_fix f x t) Q.
+Proof using. unfold wpns. intros. intros h K. applys* evalns_fix. Qed.
+
+Lemma wpns_app_fix : forall f x v1 v2 t1 Q,
+  v1 = val_fix f x t1 ->
+  wpns (subst x v2 (subst f v1 t1)) Q ==> wpns (trm_app v1 v2) Q.
+Proof using. unfold wpns. intros. intros h K. applys* evalns_app_fix. Qed.
+
+Lemma wpns_let : forall x t1 t2 Q,
+      wpns t1 (fun v => wpns (subst x v t2) Q)
+  ==> wpns (trm_let x t1 t2) Q.
+Proof using. unfold wpns. intros. intros h K. applys* evalns_let. Qed.
+
+Lemma wpns_if : forall b t1 t2 Q,
+  wpns (if b then t1 else t2) Q ==> wpns (trm_if b t1 t2) Q.
+Proof using. unfold wpns. intros. intros h K. applys* evalns_if. Qed.
+
+(** Rules for primitives. We state their specifications following the
+    presentation described near the end of chapter [Wand]. *)
+
+(*
+Lemma wpns_add : forall Q n1 n2,
+  (Q (val_int (n1 + n2))) ==> wpns (val_add (val_int n1) (val_int n2)) Q.
+Proof using.
+  unfolds wpns. intros. intros h K. applys* evaln_add.
+Qed.
+
+Lemma wpns_rand : forall Q n,
+  n > 0 ->
+      (\forall n1, \[0 <= n1 < n] \-* Q (val_int n1))
+  ==> wpns (val_rand (val_int n)) Q.
+Proof using.
+  unfolds wpns. introv N. xsimpl. intros h K.
+  applys* evaln_rand. intros n1 H1. lets K': hforall_inv K n1.
+  rewrite* hwand_hpure_l in K'.
+Qed.
+TODO:
+*)
+
+(* TODO: move *)
+Lemma hwand_elim : forall H1 H2 h,
+  (H1 \-* H2) h ->
+  (forall h1, Fmap.disjoint h h1 -> H1 h1 -> H2 (h1 \u h)).
+Proof using.
+  introv M. lets (R&_): hwand_equiv (=h) H1 H2.
+  forwards N: R. { intros ? ->. auto. }
+  intros h1 Hh1 D. applys N. applys* hstar_intro.
+Qed.
+
+Lemma evalns_ref' : forall Q v s,
+  (\forall p, p ~~> v \-* Q p) s ->
+  evalns s (val_ref v) Q.
+Proof using.
+  introv K. applys evalns_step.
+  { forwards~ (p&D&N): (exists_fresh null s).
+    esplit. exists (val_loc p). applys* step_ref. }
+  { introv R. inverts R; tryfalse. applys evalns_val.
+    lets: hforall_specialize p K.
+    unfold update. applys hwand_elim H.
+    { apply disjoint_sym. applys* Fmap.disjoint_single_of_not_indom. }
+    { applys hsingle_intro. } }
+Qed.
+
+Lemma wpns_ref' : forall Q v,
+  (\forall p, (p ~~> v) \-* Q (val_loc p)) ==> wpns (val_ref v) Q.
+Proof using. unfold wpns. intros. intros h K. applys* evalns_ref'. Qed.
+
+Lemma wpns_ref : forall Q v,
+  (\forall p, (p ~~> v) \-* Q (val_loc p)) ==> wpns (val_ref v) Q.
+Proof using.
+  unfolds wpns. intros. intros h K.
+  applys evalns_conseq. applys* evalns_ref. xpull.
+  intros ? p ->. lets: hforall_specialize p K.
+  rewrite <- hwand_equiv. intros ? ->. auto.
+Qed.
+
+(* TODO
+Lemma wpns_get : forall v p Q,
+  (p ~~> v) \* (p ~~> v \-* Q v) ==> wpns (val_get p) Q.
+Proof using.
+  unfolds wpns. intros. intros h K.
+  lets (h1&h2&P1&P2&D&->): hstar_inv (rm K).
+  forwards*: hwand_inv h1 P2.
+  lets E1: hsingle_inv P1. lets I1: indom_single p v.
+  applys evaln_get.
+  { applys* Fmap.indom_union_l. subst. applys indom_single. }
+  { subst h1. rewrite* Fmap.read_union_l. rewrite* Fmap.read_single. }
+Qed.
+
+Lemma wpns_set : forall v w p Q,
+  (p ~~> v) \* (p ~~> w \-* Q val_unit) ==> wpns (val_set p w) Q.
+Proof using.
+  unfolds wpns. intros. intros h K.
+  lets (h1&h2&P1&P2&D&->): hstar_inv (rm K).
+  lets E1: hsingle_inv P1. lets I1: indom_single p v.
+  forwards: hwand_inv (single p w) P2.
+  { applys hsingle_intro. }
+  { subst h1. applys Fmap.disjoint_single_set D. }
+    { applys evaln_set.
+    { applys* Fmap.indom_union_l. subst. applys indom_single. }
+    { subst h1. rewrite* Fmap.update_union_l. rewrite* update_single. } }
+Qed.
+
+Lemma wpns_free : forall v p Q,
+  (p ~~> v) \* (Q val_unit) ==> wpns (val_free p) Q.
+Proof using.
+  unfolds wpns. intros. intros h K.
+  lets (h1&h2&P1&P2&D&->): hstar_inv (rm K).
+  lets E1: hsingle_inv P1. lets I1: indom_single p v.
+  applys_eq evaln_free.
+  { applys* Fmap.indom_union_l. subst. applys indom_single. }
+  { subst h1. rewrite~ Fmap.remove_union_single_l.
+    intros Dl. applys* Fmap.disjoint_inv_not_indom_both D Dl. }
+Qed.
+
+*)
+
+End WpnsRules.
 
 (* ================================================================= *)
 (** ** Equivalence Between Non-Deterministic Small-Step and Big-Step Sem. *)
 
-(** We end this chapter with the proof of equivalence between [hoarens] and
+(** We end this chapter with the proof of equivalence between [triplens] and
     [hoaren], establishing a formal relationship between triples defined with
     respect to a small-step semantics and those defined with respect to a
     big-step semantics. *)
@@ -1769,9 +1884,9 @@ Qed.
     the small-step characterization of Hoare triples, for the general case of
     a non-deterministic language. *)
 
-Lemma phoare_eq_hoarens :
-  hoarens = hoaren.
-Proof using. unfold hoarens, hoaren. rewrite* evalns_eq_evalns. Qed.
+Lemma phoare_eq_triplens :
+  triplens = hoaren.
+Proof using. unfold triplens, hoaren. rewrite* evalns_eq_evalns. Qed.
 
 (* ================================================================= *)
 (** ** Historical Notes *)
@@ -1794,9 +1909,15 @@ Proof using. unfold hoarens, hoaren. rewrite* evalns_eq_evalns. Qed.
     a non-deterministic semantics. Reasoning about traces is, however,
     beyond the scope of this course.
 
-    Non-determinism is most often described using a small-step semantics.
-    Capturing the semantics of triples for a non-deterministic languages
-    using a big-step judgment, as done in this chapter with the predicate
-    [evaln], appears to be a novel approach, as of Jan. 2021. *)
+    The predicates [evaln] (big-step) first appeared in the paper entitled
+    Axiomatic Semantics for Compiler Verification, by Steven Schäfer, Sigurd
+    Schneider, and Gert Smolka (CPP'2016). This predicate, as well as [evalns]
+    (small-step) are exploited in the paper "Integration Verification Across
+    Software and Hardware for a Simple Embedded System" (PLDI'21). The meta-
+    theory of these judgments is described in details in the paper:
+    "Omnisemantics: Smoother Handling of Nondeterminism" (2022) by Arthur
+    Charguéraud, Adam Chlipala, Andres Erbsen, and Samuel Gruetter.
+    http://www.chargueraud.org/research/2022/omnisemantics/omnisemantics.pdf *)
 
-(* 2022-07-21 14:32 *)
+(*  *)
+(* 2022-07-21 14:40 *)

@@ -686,7 +686,7 @@ Module WpFromHoare.
       forall (H':hprop), hoare t (H \* H') (Q \*+ H').
 
     In what follows, we conduct the proofs by assuming a concrete definition
-    for [wp] that lends itself better to automated  proofs. *)
+    for [wp] that lends itself better to automated proofs. *)
 
 Definition wp (t:trm) := fun (Q:val->hprop) =>
   \exists H, H \* \[triple t H Q].
@@ -791,6 +791,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 End WpFromHoare.
 
+
 (* ================================================================= *)
 (** ** Historical Notes *)
 
@@ -806,4 +807,4 @@ End WpFromHoare.
     (https://iris-project.org/), developed since 2015, exploits weakest
     preconditions to state reasoning rules. See the [Postscript]. *)
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)

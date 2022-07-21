@@ -40,6 +40,11 @@
   In Internation Conference on Function Programming (ICFP).
   https://dl.acm.org/doi/abs/10.1145/3408998
 
+[Charguéraud et al 2022]
+  Arthur Charguéraud, Adam Chlipala, Andres Erbsen, and Samuel Gruetter.
+  Omnisemantics: Smoother Handling of Nondeterminism (Draft).
+  http://www.chargueraud.org/research/2022/omnisemantics/omnisemantics.pdf.
+
 [Chlipala et al 2009]
   Adam Chlipala, Gregory Malecha, Greg Morrisett, Avraham Shinnar,
    and Ryan Wisnesky.
@@ -133,7 +138,12 @@
   John C. Reynolds.
   Intuitionistic Reasoning about Shared Mutable Data Structure
   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.11.5999&rep=rep1&type=pdf
-  July 2001
+
+[Schäfer et al 2016]
+  Steven Schäfer, Sigurd Schneider, Gert Smolka.
+  Axiomatic Semantics for Compiler Verification.
+  In Conference on Certified Programs and Proofs (CPP).
+  https://dl.acm.org/doi/10.1145/2854065.2854083
 
 [Tuerk 2010]
   Thomas Tuerk.
@@ -157,4 +167,4 @@
 
 (** $Date$ *)
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)

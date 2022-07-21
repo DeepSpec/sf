@@ -1051,7 +1051,7 @@ Definition test_counter : val :=
 
 (** **** Exercise: 2 stars, standard, optional (triple_test_counter)
 
-    Prove the example function manipulating abstract counters. In the 
+    Prove the example function manipulating abstract counters. In the
     specification below, the [\exists H, H] part corresponds to the
     two counters, which we currently have no way of deallocating.
     The necessary mechanism for garbage collection will be introduced
@@ -1257,6 +1257,83 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (* ================================================================= *)
+(** ** A Continuation-Passing-Style, Factorial Function *)
+
+(** This section and the next one present examples of functions involving
+    "continuations". As a warm-up, we first consider consider a function that
+    does not involve any mutable state.
+
+    The function [cps_facto_aux n k] performs a call of the function [k] on
+    the value [facto n]. The function [cps_facto n] computes the value of
+    [facto n] by applying [cps_facto_aux] to the identity function.
+
+OCaml:
+
+    let rec cps_facto_aux n k =
+      if n <= 1
+        then k 1
+        else cps_facto_aux (n-1) (fun r -> k (n * r))
+
+    let cps_facto n =
+      cps_facto_aux n (fun r -> r)
+*)
+
+Definition cps_facto_aux : val :=
+  <{ fix 'f 'n 'k =>
+       let 'b = 'n <= 1 in
+       if 'b
+         then 'k 1
+         else let 'k2 = (fun_ 'r => let 'r2 = 'n * 'r in 'k 'r2) in
+              let 'n2 = 'n - 1 in
+              'f 'n2 'k2 }>.
+
+Definition cps_facto : val :=
+  <{ fun 'n  =>
+       let 'k = (fun_ 'r => 'r) in
+       cps_facto_aux 'n 'k }>.
+
+(*
+Hint: you can use the syntax
+    [xapp (>> IH F')] to instantiate the induction hypothesis [IH] on a specific
+    function [F']. *)
+
+Import Facto.
+
+(** **** Exercise: 4 stars, standard, optional (triple_cps_facto_aux)
+
+    Verify [cps_facto_aux]. Hints: To set up the induction, use the usual pattern
+    [induction_wf IH: (downto 0) n]. To reason about the function definition,
+    use [xfun]. To reason about the recursive call, use the syntax [xapp (>> IH F2)]
+    to specify the function [F2] that describes the behavior of the continuation [k2].
+    For the mathematical reasoning, use the same pattern as in the proof of [factorec],
+    applying the tactics [rewrite facto_init] and [rewrite (@facto_step n)]. *)
+
+Lemma triple_cps_facto_aux : forall (n:int) (k:val) (F:int->int),
+  n >= 0 ->
+  (forall (a:int), triple (k a) \[] (fun r => \[r = F a])) ->
+  triple (cps_facto_aux n k)
+    \[]
+    (fun r => \[r = F (facto n)]).
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (triple_cps_facto)
+
+    Verify [cps_facto]. Hint: use the syntax [xapp (>> triple_cps_append_aux F)]
+    to provide the function [F] that describes the behavior of the identity
+    continuation. *)
+
+Lemma triple_cps_facto : forall n,
+  n >= 0 ->
+  triple (cps_facto n)
+    \[]
+    (fun r => \[r = facto n]).
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(* ================================================================= *)
 (** ** A Continuation-Passing-Style, In-Place Concatenation Function *)
 
 (** This section presents an example verification of a function involving
@@ -1368,4 +1445,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)

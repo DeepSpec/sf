@@ -1356,7 +1356,7 @@ Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
     [fun (r:val) => \exists (p:loc), \[r = val_loc p] \* H)]. *)
 
 Notation "'funloc' p '=>' H" :=
-  (fun r => \exists p, \[r = val_loc p] \* H)
+  (fun (r:val) => \exists p, \[r = val_loc p] \* H)
   (at level 200, p ident, format "'funloc'  p  '=>'  H") : hprop_scope.
 
 (* ================================================================= *)
@@ -3195,7 +3195,7 @@ Tactic Notation "xwp" :=
         | applys xwp_lemma_fun2; [ reflexivity | reflexivity | ]
         | applys xwp_lemma_fix2; [ reflexivity | splits; reflexivity | ]
         | applys xwp_lemma_fun3; [ reflexivity | splits; reflexivity | ]
-        | applys xwp_lemma_fix3; [ reflexivity | splits; reflexivity | ] 
+        | applys xwp_lemma_fix3; [ reflexivity | splits; reflexivity | ]
         | fail 1 "xwp only applies to functions defined using [val_fun] or [val_fix], with at most 3 arguments" ];
   xwp_simpl.
 
@@ -3686,4 +3686,4 @@ Qed.
 
 End DemoPrograms.
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)

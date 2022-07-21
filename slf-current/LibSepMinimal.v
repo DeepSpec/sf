@@ -503,10 +503,10 @@ Proof.
   { applys* Fmap.indom_union_l. }
 Qed.
 
-Lemma eval_set_sep : forall s1 s2 h2 p v1 v2,
-  s1 = Fmap.union (Fmap.single p v1) h2 ->
-  s2 = Fmap.union (Fmap.single p v2) h2 ->
-  Fmap.disjoint (Fmap.single p v1) h2 ->
+Lemma eval_set_sep : forall s1 s2 s3 p v1 v2,
+  s1 = Fmap.union (Fmap.single p v1) s3 ->
+  s2 = Fmap.union (Fmap.single p v2) s3 ->
+  Fmap.disjoint (Fmap.single p v1) s3 ->
   eval s1 (val_set (val_loc p) v2) s2 val_unit.
 Proof.
   introv -> -> D. forwards Dv: Fmap.indom_single p v1. applys_eq eval_set.
@@ -556,8 +556,8 @@ Lemma hoare_hpure : forall t (P:Prop) H Q,
   (P -> hoare t H Q) ->
   hoare t (\[P] \* H) Q.
 Proof.
-  introv M. intros h (h1&h2&(M1&HP)&M2&D&U). hnf in HP. subst.
-  rewrite Fmap.union_empty_l. applys* M.
+  introv M. intros h HF.
+  rewrite hstar_hpure_l in HF. destruct HF as [HP Hh]. applys* M.
 Qed.
 
 (* ================================================================= *)
@@ -858,4 +858,4 @@ Proof using.
   { applys triple_set. }
 Qed.
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)

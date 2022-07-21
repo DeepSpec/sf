@@ -560,7 +560,7 @@ Parameter triple_ref : forall (v:val),
     we introduce a specific notation, of the form [funloc p => H]. *)
 
 Notation "'funloc' p '=>' H" :=
-  (fun r => \exists p, \[r = val_loc p] \* H)
+  (fun (r:val) => \exists p, \[r = val_loc p] \* H)
   (at level 200, p ident, format "'funloc'  p  '=>'  H").
 
 (** Using this notation, the specification [triple_ref] can be reformulated
@@ -791,7 +791,9 @@ End Facto.
 OCaml:
 
     let rec factorec n =
-      if n <= 1 then 1 else n * factorec (n-1)
+      if n <= 1
+        then 1
+        else n * factorec (n-1)
 
     The corresponding code in A-normal form is slightly more verbose. *)
 
@@ -1164,4 +1166,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2022-07-21 14:32 *)
+(* 2022-07-21 14:40 *)
