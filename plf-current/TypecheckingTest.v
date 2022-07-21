@@ -32,17 +32,44 @@ Import Check.
 
 Goal True.
 
-idtac "-------------------  typechecker_extensions  --------------------".
+idtac "-------------------  type_check_defn  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: TypecheckerExtensions.type_checking_sound".
-idtac "Possible points: 4".
-print_manual_grade TypecheckerExtensions.manual_grade_for_type_checking_sound.
-idtac " ".
-
-idtac "#> Manually graded: TypecheckerExtensions.type_checking_complete".
+idtac "#> Manually graded: TypecheckerExtensions.type_check_defn".
 idtac "Possible points: 6".
-print_manual_grade TypecheckerExtensions.manual_grade_for_type_checking_complete.
+print_manual_grade TypecheckerExtensions.manual_grade_for_type_check_defn.
+idtac " ".
+
+idtac "-------------------  ext_type_checking_sound  --------------------".
+idtac " ".
+
+idtac "#> TypecheckerExtensions.type_checking_sound".
+idtac "Possible points: 2".
+check_type @TypecheckerExtensions.type_checking_sound (
+(forall (Gamma : MoreStlc.STLCExtended.context)
+   (t : MoreStlc.STLCExtended.tm) (T : MoreStlc.STLCExtended.ty),
+ TypecheckerExtensions.type_check Gamma t = return T ->
+ MoreStlc.STLCExtended.has_type Gamma t T)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions TypecheckerExtensions.type_checking_sound.
+Goal True.
+idtac " ".
+
+idtac "-------------------  ext_type_checking_complete  --------------------".
+idtac " ".
+
+idtac "#> TypecheckerExtensions.type_checking_complete".
+idtac "Possible points: 2".
+check_type @TypecheckerExtensions.type_checking_complete (
+(forall (Gamma : MoreStlc.STLCExtended.context)
+   (t : MoreStlc.STLCExtended.tm) (T : MoreStlc.STLCExtended.ty),
+ MoreStlc.STLCExtended.has_type Gamma t T ->
+ TypecheckerExtensions.type_check Gamma t = return T)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions TypecheckerExtensions.type_checking_complete.
+Goal True.
 idtac " ".
 
 idtac " ".
@@ -69,12 +96,14 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
-idtac "---------- type_checking_sound ---------".
+idtac "---------- type_check_defn ---------".
 idtac "MANUAL".
-idtac "---------- type_checking_complete ---------".
-idtac "MANUAL".
+idtac "---------- TypecheckerExtensions.type_checking_sound ---------".
+Print Assumptions TypecheckerExtensions.type_checking_sound.
+idtac "---------- TypecheckerExtensions.type_checking_complete ---------".
+Print Assumptions TypecheckerExtensions.type_checking_complete.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-07-20 21:17 *)
+(* 2022-07-21 14:21 *)

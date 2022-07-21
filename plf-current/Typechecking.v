@@ -244,17 +244,11 @@ End STLCChecker.
 (* ################################################################# *)
 (** * Exercises *)
 
-(** **** Exercise: 5 stars, standard (typechecker_extensions)
-
-    In this exercise we'll extend the typechecker to deal with the
+(** In this exercise we'll extend the typechecker to deal with the
     extended features discussed in chapter [MoreStlc].  Your job
     is to fill in the omitted cases in the following. *)
 
 Module TypecheckerExtensions.
-(* Do not modify the following line: *)
-Definition manual_grade_for_type_checking_sound : option (nat*string) := None.
-(* Do not modify the following line: *)
-Definition manual_grade_for_type_checking_complete : option (nat*string) := None.
 Import MoreStlc.
 Import STLCExtended.
 
@@ -294,6 +288,7 @@ Proof.
     try (apply IHT1 in Hbeq; subst; auto).
  Qed.
 
+(** **** Exercise: 4 stars, standard (type_check_defn) *)
 Fixpoint type_check (Gamma : context) (t : tm) : option ty :=
   match t with
   | tm_var x =>
@@ -346,18 +341,16 @@ Fixpoint type_check (Gamma : context) (t : tm) : option ty :=
   
   (* sums *)
   (* FILL IN HERE *)
-  (* lists (the [tlcase] is given for free) *)
+  (* lists (the [tm_lcase] is given for free) *)
   (* FILL IN HERE *)
   | <{ case t0 of | nil => t1 | x21 :: x22 => t2 }> =>
-      match type_check Gamma t0 with
-      | Some <{{List T}}> =>
-          match type_check Gamma t1,
-                type_check (x21 |-> T ; x22 |-> <{{List T}}> ; Gamma) t2 with
-          | Some T1', Some T2' =>
-              if eqb_ty T1' T2' then return T1' else fail
-          | _,_ => None
-          end
-      | _ => None
+      T0 <- type_check Gamma t0 ;;
+      match T0 with
+      | <{{List T}}> =>
+          T1 <- type_check Gamma t1 ;;
+          T2 <- type_check (x21 |-> T ; x22 |-> <{{List T}}> ; Gamma) t2 ;;
+          if eqb_ty T1 T2 then return T1 else fail
+      | _ => fail
       end
   (* unit *)
   (* FILL IN HERE *)
@@ -369,6 +362,9 @@ Fixpoint type_check (Gamma : context) (t : tm) : option ty :=
   (* FILL IN HERE *)
   | _ => None  (* ... and delete this line when you complete the exercise. *)
   end.
+(* Do not modify the following line: *)
+Definition manual_grade_for_type_check_defn : option (nat*string) := None.
+(** [] *)
 
 (** Just for fun, we'll do the soundness proof with just a bit more
     automation than above, using these "mega-tactics": *)
@@ -392,6 +388,7 @@ Ltac case_equality S T :=
   destruct (eqb_ty S T) eqn: Heqb;
   inversion H0; apply eqb_ty__eq in Heqb; subst; subst; eauto.
 
+(** **** Exercise: 2 stars, standard (ext_type_checking_sound) *)
 Theorem type_checking_sound : forall Gamma t T,
   type_check Gamma t = Some T ->
   has_type Gamma t T.
@@ -427,6 +424,10 @@ Proof with eauto.
     invert_typecheck Gamma t3 T3.
     destruct T1; try solve_by_invert.
     case_equality T2 T3.
+  (* Complete the following cases. *)
+  (* sums *)
+  (* FILL IN HERE *)
+  (* lists (the [tm_lcase] is given for free) *)
   (* FILL IN HERE *)
   - (* tlcase *)
     rename s into x31, s0 into x32.
@@ -435,9 +436,18 @@ Proof with eauto.
     remember (x31 |-> T11 ; x32 |-> <{{List T11}}> ; Gamma) as Gamma'2.
     invert_typecheck Gamma'2 t3 T3.
     case_equality T2 T3.
+  (* unit *)
   (* FILL IN HERE *)
-Qed.
+  (* pairs *)
+  (* FILL IN HERE *)
+  (* let *)
+  (* FILL IN HERE *)
+  (* fix *)
+  (* FILL IN HERE *)
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
+(** **** Exercise: 2 stars, standard (ext_type_checking_complete) *)
 Theorem type_checking_complete : forall Gamma t T,
   has_type Gamma t T ->
   type_check Gamma t = Some T.
@@ -454,16 +464,13 @@ Proof.
     try (rewrite (eqb_ty_refl T3));
     eauto.
     - destruct (Gamma _); [assumption| solve_by_invert].
-      Admitted. (* ... and delete this line *)
-(* 
-Qed. (* ... and uncomment this one *)
-*)
-End TypecheckerExtensions.
+  (* The above proof script suffices for the reference solution. *)
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 5 stars, standard, optional (stlc_step_function)
+End TypecheckerExtensions.
 
-    Above, we showed how to write a typechecking function and prove it
+(** Above, we showed how to write a typechecking function and prove it
     sound and complete for the typing relation.  Do the same for the
     operational semantics -- i.e., write a _function_ [stepf] of type
     [tm -> option tm] and prove that it is sound and complete with
@@ -473,22 +480,196 @@ Module StepFunction.
 Import MoreStlc.
 Import STLCExtended.
 
-(* Operational semantics as a Coq function. *)
-Fixpoint stepf (t : tm) : option tm
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** **** Exercise: 2 stars, standard, optional (valuef_defn) *)
+(* We must first also redefine [value] as a function. *)
+Fixpoint valuef (t : tm) : bool :=
+  match t with
+  | tm_var _ => false
+  | <{ \_:_, _ }> => true
+  | <{ _ _ }> => false
+  | tm_const _ => true
+  | <{ succ _ }> | <{ pred _ }> | <{ _ * _ }> | <{ if0 _ then _ else _ }> => false
+  (* Complete the following cases *)
+  (* sums *)
+  (* FILL IN HERE *)
+  | _ => false  (* ... and delete this line when you complete the exercise. *)
+  end.
+(* Do not modify the following line: *)
+Definition manual_grade_for_valuef_defn : option (nat*string) := None.
+(** [] *)
 
+(* A little helper to concisely check some boolean properties
+   (in this case, that some term is a value, with [valuef]). *)
+Definition assert (b : bool) (a : option tm) : option tm :=
+  if b then a else None.
+
+(** **** Exercise: 3 stars, standard, optional (stepf_defn) *)
+(* Operational semantics as a Coq function. *)
+Fixpoint stepf (t : tm) : option tm :=
+  match t with
+  (* pure STLC *)
+  | tm_var x => None (* We only define step for closed terms *)
+  | <{ \x1:T1, t2 }> => None (* Abstraction is a value *)
+  | <{ t1 t2 }> =>
+    match stepf t1, stepf t2, t1 with
+    | Some t1', _, _ => Some <{ t1' t2 }>
+    (* otherwise [t1] is a normal form *)
+    | None, Some t2', _ => assert (valuef t1) (Some <{ t1 t2' }>)
+    (* otherwise [t1], [t2] are normal forms *)
+    | None, None, <{ \x:T, t11 }> =>
+      assert (valuef t2) (Some <{ [x:=t2]t11 }>)
+    | _, _, _ => None
+    end
+  (* numbers *)
+  | tm_const _ => None (* number value *)
+  | <{ succ t1 }> =>
+    match stepf t1, t1 with
+    | Some t1', _ => Some <{ succ t1' }>
+    (* otherwise [t1] is a normal form *)
+    | None, tm_const n => Some (tm_const (S n))
+    | None, _ => None
+    end
+  | <{ pred t1 }> =>
+    match stepf t1, t1 with
+    | Some t1', _ => Some <{ pred t1' }>
+    (* otherwise [t1] is a normal form *)
+    | None, tm_const n => Some (tm_const (n - 1))
+    | _, _ => None
+    end
+  | <{ t1 * t2 }>  =>
+    match stepf t1, stepf t2, t1, t2 with
+    | Some t1', _, _, _ => Some <{ t1' * t2 }>
+    (* otherwise [t1] is a normal form *)
+    | None, Some t2', _, _ =>
+      assert (valuef t1) (Some <{ t1 * t2' }>)
+    | None, None, tm_const n1, tm_const n2 => Some (tm_const (mult n1 n2))
+    | _, _, _, _ => None
+    end
+  | <{ if0 guard then t else f }> =>
+    match stepf guard, guard with
+    | Some guard', _ => Some <{ if0 guard' then t else f }>
+    (* otherwise [guard] is a normal form *)
+    | None, tm_const 0 => Some t
+    | None, tm_const (S _) => Some f
+    | _, _ => None
+    end
+  (* Complete the following cases. *)
+  (* sums *)
+  (* FILL IN HERE *)
+  (* lists (the [tm_lcase] is given for free) *)
+  (* FILL IN HERE *)
+  | <{ case t0 of | nil => t1 | x21 :: x22 => t2 }> =>
+    match stepf t0, t0 with
+    | Some t0', _ => Some <{ case t0' of | nil => t1 | x21 :: x22 => t2 }>
+    (* otherwise [t0] is a normal form *)
+    | None, <{ nil _ }> => Some t1
+    | None, <{ vh :: vt }> =>
+      assert (valuef vh) (assert (valuef vt)
+        (Some <{ [x22:=vt]([x21:=vh]t2) }> ))
+    | None, _ => None
+    end
+  (* unit *)
+  (* FILL IN HERE *)
+  (* pairs *)
+  (* FILL IN HERE *)
+  (* let *)
+  (* FILL IN HERE *)
+  (* fix *)
+  (* FILL IN HERE *)
+   | _ => None  (* ... and delete this line when you complete the exercise. *)
+  end.
+(* Do not modify the following line: *)
+Definition manual_grade_for_stepf_defn : option (nat*string) := None.
+(** [] *)
+
+(* To prove that [stepf] is equivalent to [step], we start with
+   a couple of intermediate lemmas. *)
+
+(* We show that [valuef] is sound and complete with respect to [value]. *)
+
+(** **** Exercise: 2 stars, standard, optional (sound_valuef) *)
+(* [valuef] is sound with respect to [value] *)
+Lemma sound_valuef : forall t,
+    valuef t = true -> value t.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (complete_valuef) *)
+(* [valuef] is complete with respect to [value].
+   This proof by induction is quite easily done by simplification. *)
+Lemma complete_valuef : forall t,
+    value t -> valuef t = true.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(* Soundness of [stepf]:
+
+   Theorem sound_stepf : forall t t',
+       stepf t = Some t'  ->  t --> t'.
+
+   By induction on [t]. We automate the handling of each case with
+   the following tactic [auto_stepf]. *)
+
+Tactic Notation "auto_stepf" ident(H) :=
+  (* Step 1: In every case, the left hand side of the hypothesis
+     [H : stepf t = Some t'] simplifies to some combination of
+     [match u with ... end], [assert u (...)] (for some [u]).
+     The tactic [auto_stepf] then destructs [u] as required.
+     We repeat this step as long as it is possible. *)
+  repeat
+    match type of H with
+    | (match ?u with _ => _ end = _) =>
+      let e := fresh "e" in
+      destruct u eqn:e
+    | (assert ?u _ = _) =>
+      (* In this case, [u] is always of the form [valuef t0]
+         for some term [t0]. If [valuef t0 = true], we immediately
+         deduce [value t0] via [sound_valuef]. If [valuef t0 = false],
+         then that equation simplifies to [None = Some t'], which is
+         contradictory and can be eliminated with [discriminate]. *)
+      let e := fresh "e" in
+      destruct u eqn:e;
+      simpl in H; (* [assert true (...)] must be simplified
+                     explicitly. *)
+      [apply sound_valuef in e | discriminate]
+    end;
+  (* Step 2: We are now left with either [H : None = Some t'] or
+     [Some (...) = Some t'], and the rest of the proof is a
+     straightforward combination of the induction hypotheses. *)
+  (discriminate + (inversion H; subst; auto)).
+
+(** **** Exercise: 2 stars, standard, optional (sound_stepf) *)
 (* Soundness of [stepf]. *)
 Theorem sound_stepf : forall t t',
     stepf t = Some t'  ->  t --> t'.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  intros t.
+  induction t; simpl; intros t' H;
+    auto_stepf H.
+ (* The above proof script suffices for the reference solution. *)
+ (* FILL IN HERE *) Admitted.
+(** [] *)
 
+(** **** Exercise: 2 stars, standard, optional (value_stepf_nf) *)
+(* Now for completeness, another lemma will be useful:
+   every value is a normal form for [stepf]. *)
+Lemma value_stepf_nf : forall t,
+    value t -> stepf t = None.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (complete_stepf) *)
 (* Completeness of [stepf]. *)
 Theorem complete_stepf : forall t t',
     t --> t'  ->  stepf t = Some t'.
-Proof. (* FILL IN HERE *) Admitted.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
 End StepFunction.
-(** [] *)
 
 (** **** Exercise: 5 stars, standard, optional (stlc_impl)
 
@@ -505,4 +686,4 @@ Import StepFunction.
 End StlcImpl.
 (** [] *)
 
-(* 2022-07-20 21:17 *)
+(* 2022-07-21 14:21 *)
