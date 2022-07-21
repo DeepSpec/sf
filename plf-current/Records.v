@@ -432,6 +432,7 @@ Example typing_nonexample_2 : forall y,
       ( i1 := y :: i2 := y :: nil )  \in T.
 Proof.
   (* FILL IN HERE *) Admitted.
+(** [] *)
 
 (* ================================================================= *)
 (** ** Properties of Typing *)
@@ -731,8 +732,7 @@ Proof with eauto.
     inversion HE; subst...
     apply T_RCons... eapply step_preserves_record_tm...
 Qed.
-(** [] *)
 
 End STLCExtendedRecords.
 
-(* 2022-07-21 14:22 *)
+(* 2022-07-21 14:25 *)
