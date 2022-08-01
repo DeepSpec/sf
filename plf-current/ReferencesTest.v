@@ -72,9 +72,16 @@ idtac " ".
 idtac "-------------------  store_not_unique  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: STLCRef.store_not_unique".
-idtac "Possible points: 2".
-print_manual_grade STLCRef.manual_grade_for_store_not_unique.
+idtac "#> STLCRef.store_not_unique".
+idtac "Possible points: 3".
+check_type @STLCRef.store_not_unique (
+(exists (st : STLCRef.store) (ST1 ST2 : STLCRef.store_ty),
+   STLCRef.store_well_typed ST1 st /\
+   STLCRef.store_well_typed ST2 st /\ ST1 <> ST2)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions STLCRef.store_not_unique.
+Goal True.
 idtac " ".
 
 idtac "-------------------  preservation_informal  --------------------".
@@ -111,8 +118,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 18".
-idtac "Max points - advanced: 18".
+idtac "Max points - standard: 19".
+idtac "Max points - advanced: 19".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -139,8 +146,8 @@ idtac "---------- type_safety_violation ---------".
 idtac "MANUAL".
 idtac "---------- STLCRef.cyclic_store ---------".
 Print Assumptions STLCRef.cyclic_store.
-idtac "---------- store_not_unique ---------".
-idtac "MANUAL".
+idtac "---------- STLCRef.store_not_unique ---------".
+Print Assumptions STLCRef.store_not_unique.
 idtac "---------- preservation_informal ---------".
 idtac "MANUAL".
 idtac "---------- STLCRef.RefsAndNontermination.factorial ---------".
@@ -151,4 +158,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-07-21 14:34 *)
+(* 2022-08-01 18:56 *)

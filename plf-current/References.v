@@ -1260,7 +1260,7 @@ Definition store_well_typed (ST:store_ty) (st:store) :=
     typing to the typing relation.  This allows us to type circular
     stores like the one we saw above. *)
 
-(** **** Exercise: 2 stars, standard (store_not_unique)
+(** **** Exercise: 3 stars, standard (store_not_unique)
 
     Can you find a store [st], and two
     different store typings [ST1] and [ST2] such that both
@@ -1268,8 +1268,13 @@ Definition store_well_typed (ST:store_ty) (st:store) :=
 
 (* FILL IN HERE *)
 
-(* Do not modify the following line: *)
-Definition manual_grade_for_store_not_unique : option (nat*string) := None.
+Theorem store_not_unique:
+  exists st, exists ST1, exists ST2,
+    store_well_typed ST1 st /\
+    store_well_typed ST2 st /\
+    ST1 <> ST2.
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** We can now state something closer to the desired preservation
@@ -1937,4 +1942,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2022-07-21 14:34 *)
+(* 2022-08-01 18:55 *)
