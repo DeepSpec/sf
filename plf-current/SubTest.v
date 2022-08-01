@@ -123,32 +123,49 @@ idtac " ".
 idtac "-------------------  sub_inversion_arrow  --------------------".
 idtac " ".
 
-idtac "#> sub_inversion_arrow".
+idtac "#> STLCSub.sub_inversion_arrow".
 idtac "Possible points: 3".
-check_type @sub_inversion_arrow (
-(forall U V1 V2 : ty,
- U <: <{ V1 -> V2 }> ->
- exists U1 U2 : ty, U = <{ U1 -> U2 }> /\ V1 <: U1 /\ U2 <: V2)).
+check_type @STLCSub.sub_inversion_arrow (
+(forall U V1 V2 : STLCSub.ty,
+ STLCSub.subtype U (STLCSub.Ty_Arrow V1 V2) ->
+ exists U1 U2 : STLCSub.ty,
+   U = STLCSub.Ty_Arrow U1 U2 /\
+   STLCSub.subtype V1 U1 /\ STLCSub.subtype U2 V2)).
 idtac "Assumptions:".
 Abort.
-Print Assumptions sub_inversion_arrow.
+Print Assumptions STLCSub.sub_inversion_arrow.
 Goal True.
 idtac " ".
 
 idtac "-------------------  variations  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: variations".
+idtac "#> Manually graded: STLCSub.variations".
 idtac "Possible points: 2".
-print_manual_grade manual_grade_for_variations.
+print_manual_grade STLCSub.manual_grade_for_variations.
 idtac " ".
 
 idtac "-------------------  products  --------------------".
 idtac " ".
 
-idtac "#> Manually graded: products".
-idtac "Possible points: 10".
-print_manual_grade manual_grade_for_products.
+idtac "#> Manually graded: STLCSub.products_value_step".
+idtac "Possible points: 2".
+print_manual_grade STLCSub.manual_grade_for_products_value_step.
+idtac " ".
+
+idtac "#> Manually graded: STLCSub.products_subtype_has_type".
+idtac "Possible points: 2".
+print_manual_grade STLCSub.manual_grade_for_products_subtype_has_type.
+idtac " ".
+
+idtac "#> Manually graded: STLCSub.products_progress".
+idtac "Possible points: 3".
+print_manual_grade STLCSub.manual_grade_for_products_progress.
+idtac " ".
+
+idtac "#> Manually graded: STLCSub.products_preservation".
+idtac "Possible points: 3".
+print_manual_grade STLCSub.manual_grade_for_products_preservation.
 idtac " ".
 
 idtac " ".
@@ -197,14 +214,20 @@ idtac "---------- smallest_2 ---------".
 idtac "MANUAL".
 idtac "---------- pair_permutation ---------".
 idtac "MANUAL".
-idtac "---------- sub_inversion_arrow ---------".
-Print Assumptions sub_inversion_arrow.
+idtac "---------- STLCSub.sub_inversion_arrow ---------".
+Print Assumptions STLCSub.sub_inversion_arrow.
 idtac "---------- variations ---------".
 idtac "MANUAL".
-idtac "---------- products ---------".
+idtac "---------- products_value_step ---------".
+idtac "MANUAL".
+idtac "---------- products_subtype_has_type ---------".
+idtac "MANUAL".
+idtac "---------- products_progress ---------".
+idtac "MANUAL".
+idtac "---------- products_preservation ---------".
 idtac "MANUAL".
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-08-01 18:56 *)
+(* 2022-08-01 18:57 *)

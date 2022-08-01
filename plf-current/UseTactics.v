@@ -747,13 +747,12 @@ End SortExamples.
     the arguments provided. *)
 
 Module ExamplesLets.
-  Import Sub.
 
 (* To illustrate the working of [lets], assume that we want to
    exploit the following lemma. *)
 
 Import Maps.
-Import Sub.
+Import Sub.STLCSub.
 Import String.
 
 Axiom typing_inversion_var : forall Gamma (x:string) T,
@@ -921,4 +920,4 @@ End ExamplesLets.
 
 *)
 
-(* 2022-08-01 18:55 *)
+(* 2022-08-01 18:57 *)

@@ -427,6 +427,9 @@ Definition manual_grade_for_arrow_sub_wrong : option (nat*string) := None.
 (* ================================================================= *)
 (** ** Exercises *)
 
+(** The following "thought exercises" are repeated later as formal
+    exercises. *)
+
 (** **** Exercise: 1 star, standard, optional (subtype_instances_tf_1)
 
     Suppose we have types [S], [T], [U], and [V] with [S <: T]
@@ -675,12 +678,20 @@ Definition manual_grade_for_pair_permutation : option (nat*string) := None.
 (* ################################################################# *)
 (** * Formal Definitions *)
 
+Module STLCSub.
+
 (** Most of the definitions needed to formalize what we've discussed
     above -- in particular, the syntax and operational semantics of
     the language -- are identical to what we saw in the last chapter.
     We just need to extend the typing relation with the subsumption
     rule and add a new [Inductive] definition for the subtyping
     relation.  Let's first do the identical bits. *)
+
+(** We include products in the syntax of types and terms, but not,
+    for the moment, anywhere else; the [products] exercise below will 
+    ask you to extend the definitions of the value relation, operational 
+    semantics, subtyping relation, and typing relation and to extend 
+    the proofs of progress and preservation to fully support products. *)
 
 (* ================================================================= *)
 (** ** Core Definitions *)
@@ -702,6 +713,7 @@ Inductive ty : Type :=
   | Ty_Base  : string -> ty
   | Ty_Arrow : ty -> ty -> ty
   | Ty_Unit  : ty
+  | Ty_Prod : ty -> ty -> ty
 .
 
 Inductive tm : Type :=
@@ -711,11 +723,13 @@ Inductive tm : Type :=
   | tm_true : tm
   | tm_false : tm
   | tm_if : tm -> tm -> tm -> tm
-  | tm_unit : tm 
+  | tm_unit : tm
+  | tm_pair : tm -> tm -> tm
+  | tm_fst : tm -> tm
+  | tm_snd : tm -> tm
 .
 
 Declare Custom Entry stlc.
-
 Notation "<{ e }>" := e (e custom stlc at level 99).
 Notation "( x )" := x (in custom stlc, x at level 99).
 Notation "x" := x (in custom stlc at level 0, x constr at level 0).
@@ -748,6 +762,16 @@ Notation "'Base' x" := (Ty_Base x) (in custom stlc at level 0).
 
 Notation "'Top'" := (Ty_Top) (in custom stlc at level 0).
 
+Notation "X * Y" :=
+  (Ty_Prod X Y) (in custom stlc at level 2, X custom stlc, Y custom stlc at level 0).
+Notation "( x ',' y )" := (tm_pair x y) (in custom stlc at level 0,
+                                                x custom stlc at level 99,
+                                                y custom stlc at level 99).
+Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 0).
+Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 0).
+
+Notation "{ x }" := x (in custom stlc at level 1, x constr).
+
 (* ----------------------------------------------------------------- *)
 (** *** Substitution *)
 
@@ -771,7 +795,13 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   | <{if t1 then t2 else t3}> =>
       <{if ([x:=s] t1) then ([x:=s] t2) else ([x:=s] t3)}>
   | <{unit}> =>
-      <{unit}> 
+      <{unit}>
+  | <{ (t1, t2) }> =>
+      <{( [x:=s] t1, [x:=s] t2 )}>
+  | <{t0.fst}> =>
+      <{ ([x:=s] t0).fst}>
+  | <{t0.snd}> =>
+      <{ ([x:=s] t0).snd}>
   end
 where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
 
@@ -1048,6 +1078,41 @@ Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
+(** There are additional _inversion lemmas_ for the other types:
+       - [Unit] is the only subtype of [Unit], and
+       - [Base n] is the only subtype of [Base n], and
+       - [Top] is the only supertype of [Top]. *)
+
+(** **** Exercise: 2 stars, standard, optional (sub_inversion_Unit) *)
+Lemma sub_inversion_Unit : forall U,
+     U <: <{Unit}> ->
+     U = <{Unit}>.
+Proof with auto.
+  intros U Hs.
+  remember <{Unit}> as V.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (sub_inversion_Base) *)
+Lemma sub_inversion_Base : forall U s,
+     U <: <{Base s}> ->
+     U = <{Base s}>.
+Proof with auto.
+  intros U s Hs.
+  remember <{Base s}> as V.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (sub_inversion_Top) *)
+Lemma sub_inversion_Top : forall U,
+     <{ Top }> <: U ->
+     U = <{ Top }>.
+Proof with auto.
+  intros U Hs.
+  remember <{Top}> as V.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
 (* ================================================================= *)
 (** ** Canonical Forms *)
 
@@ -1265,6 +1330,15 @@ Lemma typing_inversion_app : forall Gamma t1 t2 T2,
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
+
+Lemma typing_inversion_unit : forall Gamma T,
+  Gamma |- unit \in T ->
+    <{Unit}> <: T.
+Proof with eauto.
+  intros Gamma T Htyp. remember <{ unit }> as tu.
+  induction Htyp;
+    inversion Heqtu; subst; intros...
+Qed.
 
 (** The inversion lemmas for typing and for subtyping between arrow
     types can be packaged up as a useful "combination lemma" telling
@@ -1500,13 +1574,15 @@ Definition manual_grade_for_variations : option (nat*string) := None.
     defined is a relatively straightforward matter.  Carry out this
     extension by modifying the definitions and proofs above:
 
-    - Add constructors for pairs, first and second projections,
-      and product types to the definitions of [ty] and [tm], and
-      extend the surrounding definitions accordingly
-      (refer to chapter [MoreSTLC]):
+    - Constructors for pairs, first and second projections, and
+      product types have already been added to the definitions of
+      [ty] and [tm].  Also, the definition of substitution has been
+      extended.
+
+    - Extend the surrounding definitions accordingly (refer to chapter
+      [MoreSTLC]):
 
         - value relation
-        - substitution
         - operational semantics
         - typing relation
 
@@ -1520,27 +1596,274 @@ Definition manual_grade_for_variations : option (nat*string) := None.
       supporting lemmas to deal with the new constructs.  (You'll also
       need to add a couple of completely new lemmas.) *)
 
-(** The following notation definitions might be useful. You can
-    uncomment them and move them together with the rest of the
-    notation definitions above after you've extended the
-    definitions of [ty] and [tm].  (It seems to work best to put
-    these at the top of the notation declarations, right after
-    the [Custom Entry] declaration.)
-
-    Notation "X '*' Y" :=
-      (Ty_Prod X Y) (in custom stlc at level 2, left associativity).
-    Notation "( x ',' y )" := (tm_pair x y) (in custom stlc at level 0,
-                                                    x custom stlc at level 99,
-                                                    y custom stlc at level 99).
-    Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 0).
-    Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 0).
-
-*)
-
 (* FILL IN HERE *)
 
 (* Do not modify the following line: *)
-Definition manual_grade_for_products : option (nat*string) := None.
+Definition manual_grade_for_products_value_step : option (nat*string) := None.
+(* Do not modify the following line: *)
+Definition manual_grade_for_products_subtype_has_type : option (nat*string) := None.
+(* Do not modify the following line: *)
+Definition manual_grade_for_products_progress : option (nat*string) := None.
+(* Do not modify the following line: *)
+Definition manual_grade_for_products_preservation : option (nat*string) := None.
 (** [] *)
 
-(* 2022-08-01 18:55 *)
+(* ================================================================= *)
+(** ** Formalized "Thought Exercises" *)
+
+(** The following are formal exercises based on the previous "thought
+    exercises." *)
+
+Module FormalThoughtExercises.
+Import Examples.
+Notation p := "p".
+Notation a := "a".
+
+Definition TF P := P \/ ~P.
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1a) *)
+Theorem formal_subtype_instances_tf_1a:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{T->S}> <: <{T->S}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1b) *)
+Theorem formal_subtype_instances_tf_1b:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{Top->U}> <: <{S->Top}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1c) *)
+Theorem formal_subtype_instances_tf_1c:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{(C->C)->(A*B)}> <: <{(C->C)->(Top*B)}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1d) *)
+Theorem formal_subtype_instances_tf_1d:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{T->(T->U)}> <: <{S->(S->V)}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1e) *)
+Theorem formal_subtype_instances_tf_1e:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{(T->T)->U}> <: <{(S->S)->V}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1f) *)
+Theorem formal_subtype_instances_tf_1f:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{((T->S)->T)->U}> <: <{((S->T)->S)->V}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 1 star, standard, optional (formal_subtype_instances_tf_1g) *)
+Theorem formal_subtype_instances_tf_1g:
+  TF (forall S T U V, S <: T -> U <: V ->
+         <{S*V}> <: <{T*U}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_instances_tf_2a) *)
+Theorem formal_subtype_instances_tf_2a:
+  TF (forall S T,
+         S <: T ->
+         <{S->S}> <: <{T->T}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_instances_tf_2b) *)
+Theorem formal_subtype_instances_tf_2b:
+  TF (forall S,
+         S <: <{A->A}> ->
+         exists T,
+           S = <{T->T}> /\ T <: A).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_instances_tf_2d)
+
+    Hint: Assert a generalization of the statement to be proved and
+    use induction on a type (rather than on a subtyping
+    derviation). *)
+Theorem formal_subtype_instances_tf_2d:
+  TF (exists S,
+         S <: <{S->S}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_instances_tf_2e) *)
+Theorem formal_subtype_instances_tf_2e:
+  TF (exists S,
+         <{S->S}> <: S).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfa) *)
+Theorem formal_subtype_concepts_tfa:
+  TF (exists T, forall S, S <: T).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfb) *)
+Theorem formal_subtype_concepts_tfb:
+  TF (exists T, forall S, T <: S).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfc) *)
+Theorem formal_subtype_concepts_tfc:
+  TF (exists T1 T2, forall S1 S2, <{S1*S2}> <: <{T1*T2}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfd) *)
+Theorem formal_subtype_concepts_tfd:
+  TF (exists T1 T2, forall S1 S2, <{T1*T2}> <: <{S1*S2}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfe) *)
+Theorem formal_subtype_concepts_tfe:
+  TF (exists T1 T2, forall S1 S2, <{S1->S2}> <: <{T1->T2}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tff) *)
+Theorem formal_subtype_concepts_tff:
+  TF (exists T1 T2, forall S1 S2, <{T1->T2}> <: <{S1->S2}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfg) *)
+
+Theorem formal_subtype_concepts_tfg:
+  TF (exists f : nat -> ty,
+         (forall i j, i <> j -> f i <> f j) /\
+         (forall i, f (S i) <: f i)).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 2 stars, standard, optional (formal_subtype_concepts_tfh) *)
+Theorem formal_subtype_concepts_tfh:
+  TF (exists f : nat -> ty,
+         (forall i j, i <> j -> f i <> f j) /\
+         (forall i, f i <: f (S i))).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 3 stars, standard, optional (formal_proper_subtypes) *)
+Theorem formal_proper_subtypes:
+  TF (forall T,
+         ~(T = <{Bool}> \/ (exists n, T = <{Base n}>) \/ T = <{Unit}>) ->
+         exists S,
+           S <: T /\ S <> T).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+Definition smallest_largest HT :=
+  (* There exists a smallest and a largest. *)
+  (exists TS TL, forall T, TS <: T /\ T <: TL <-> HT T)
+  \/
+  (* There exists a smallest, but no largest. *)
+  ((exists TS, forall T, TS <: T <-> HT T) /\
+   ~(exists TL, forall T, T <: TL <-> HT T))
+  \/
+  (* There exists a largest, but not smallest. *)
+  (~(exists TS, forall T, TS <: T <-> HT T) /\
+   (exists TL, forall T, T <: TL <-> HT T))
+  \/
+  (* There exists neither a smallest nor a largest. *)
+  (~(exists TS, forall T, TS <: T <-> HT T) /\
+   ~(exists TL, forall T, T <: TL <-> HT T)).
+
+(** **** Exercise: 3 stars, advanced, optional (formal_small_large_1) *)
+Theorem formal_small_large_1:
+  smallest_largest
+  (fun T =>
+   empty |- <{(\p:T*Top, p.fst) ((\z:A, z), unit)}> \in <{A->A}>).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 3 stars, advanced, optional (formal_small_large_2) *)
+Theorem formal_small_large_2:
+  smallest_largest
+  (fun T =>
+   empty |- <{(\p:(A->A)*(B->B), p) ((\z:A, z), (\z:B, z))}> \in T).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 4 stars, advanced, optional (formal_small_large_3) *)
+Theorem formal_small_large_3:
+  smallest_largest
+  (fun T =>
+   (a |-> A) |- <{(\p:A*T, (p.snd) (p.fst)) (a, \z:A, z)}> \in A).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 4 stars, advanced, optional (formal_small_large_4) *)
+Theorem formal_small_large_4:
+  smallest_largest
+  (fun T =>
+   exists S,
+     empty |- <{\p:A*T, (p.snd) (p.fst)}> \in S).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+Definition smallest P :=
+  TF (exists TS, forall T, TS <: T <-> P T).
+
+(** **** Exercise: 3 stars, standard, optional (formal_smallest_1) *)
+Theorem formal_smallest_1:
+  smallest
+  (fun T =>
+   exists S t,
+     empty |- <{ (\x:T, x x) t }> \in S).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+(** **** Exercise: 3 stars, standard, optional (formal_smallest_2) *)
+Theorem formal_smallest_2:
+  smallest
+  (fun T =>
+   empty |- <{(\x:Top, x) ((\z:A, z), (\z:B, z))}> \in T).
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
+
+End FormalThoughtExercises.
+
+End STLCSub.
+
+(* 2022-08-01 18:57 *)

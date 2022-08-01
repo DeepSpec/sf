@@ -1029,4 +1029,4 @@ Proof with eauto. (* FILL IN HERE *) Admitted.
 
 End STLCArith.
 
-(* 2022-08-01 18:55 *)
+(* 2022-08-01 18:57 *)
