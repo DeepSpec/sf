@@ -701,7 +701,7 @@ and the following typing rule:
                       ------------------            (T_Zap)
                       Gamma |- zap \in T
 
-    Which of the following properties of the STLC remain truee in
+    Which of the following properties of the STLC remain true in
     the presence of these rules?  For each property, write either
     "remains true" or "becomes false." If a property becomes
     false, give a counterexample.
@@ -1029,4 +1029,4 @@ Proof with eauto. (* FILL IN HERE *) Admitted.
 
 End STLCArith.
 
-(* 2022-08-01 18:57 *)
+(* 2022-08-05 17:12 *)

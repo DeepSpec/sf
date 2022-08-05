@@ -660,8 +660,8 @@ Note on notations: You might be wondering why we need parentheses
     substitute the <i>open</i> term
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">s</span> = \<span class="id" title="var">x</span>:<span class="id" title="var">Bool</span>, <span class="id" title="var">r</span>
-</span>    where <span class="inlinecode"><span class="id" title="var">r</span></span> is a <i>free</i> reference to some global resource, for
-    the variable <span class="inlinecode"><span class="id" title="var">z</span></span> in the term
+</span>    (where <span class="inlinecode"><span class="id" title="var">r</span></span> is a <i>free</i> reference to some global resource) for
+    the free variable <span class="inlinecode"><span class="id" title="var">z</span></span> in the term
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t</span> = \<span class="id" title="var">r</span>:<span class="id" title="var">Bool</span>, <span class="id" title="var">z</span>
 </span>    where <span class="inlinecode"><span class="id" title="var">r</span></span> is a bound variable, we would get
@@ -676,12 +676,12 @@ Note on notations: You might be wondering why we need parentheses
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">the</span> <span class="id" title="var">bound</span> <span class="id" title="var">variable</span> <span class="id" title="keyword">in</span> [<span class="id" title="var">t</span>], <span class="id" title="var">e.g</span>., <span class="id" title="keyword">let</span><br/>
 [[<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t'</span> = \<span class="id" title="var">w</span>:<span class="id" title="var">Bool</span>, <span class="id" title="var">z</span>
-</span>    then <span class="inlinecode">[<span class="id" title="var">x</span>:=<span class="id" title="var">s</span>]<span class="id" title="var">t'</span></span> is
+</span>    then <span class="inlinecode">[<span class="id" title="var">z</span>:=<span class="id" title="var">s</span>]<span class="id" title="var">t'</span></span> is
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<span class="id" title="var">w</span>:<span class="id" title="var">Bool</span>, \<span class="id" title="var">x</span>:<span class="id" title="var">Bool</span>, <span class="id" title="var">r</span>
-</span>    which does not behave the same as this:
+</span>    which does not behave the same as the original substitution into t:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">x</span>:=<span class="id" title="var">s</span>]<span class="id" title="var">t</span> = \<span class="id" title="var">r</span>:<span class="id" title="var">Bool</span>, \<span class="id" title="var">x</span>:<span class="id" title="var">Bool</span>, <span class="id" title="var">r</span>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">z</span>:=<span class="id" title="var">s</span>]<span class="id" title="var">t</span> = \<span class="id" title="var">r</span>:<span class="id" title="var">Bool</span>, \<span class="id" title="var">x</span>:<span class="id" title="var">Bool</span>, <span class="id" title="var">r</span>
 </span>    That is, renaming a bound variable in <span class="inlinecode"><span class="id" title="var">t</span></span> changes how <span class="inlinecode"><span class="id" title="var">t</span></span> behaves
     under substitution. 
 <div class="paragraph"> </div>
@@ -1300,7 +1300,7 @@ More examples:
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-08-01&nbsp;18:57&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-05&nbsp;17:12&nbsp;*)</span><br/>
 </div>
 </div>
 

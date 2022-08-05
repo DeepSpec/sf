@@ -1920,4 +1920,4 @@ Proof using. unfold triplens, hoaren. rewrite* evalns_eq_evalns. Qed.
     http://www.chargueraud.org/research/2022/omnisemantics/omnisemantics.pdf *)
 
 (*  *)
-(* 2022-08-01 19:03 *)
+(* 2022-08-05 17:18 *)

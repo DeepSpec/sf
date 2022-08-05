@@ -414,8 +414,8 @@ Check <{[x:=true] x}>.
 
       s = \x:Bool, r
 
-    where [r] is a _free_ reference to some global resource, for
-    the variable [z] in the term
+    (where [r] is a _free_ reference to some global resource) for
+    the free variable [z] in the term
 
       t = \r:Bool, z
 
@@ -424,7 +424,7 @@ Check <{[x:=true] x}>.
       \r:Bool, \x:Bool, r
 []
     where the free reference to [r] in [s] has been "captured" by
-    the binder at the beginning of [t].
+    the binder at the beginning of [t]. 
 
     Why would this be bad?  Because it violates the principle that the
     names of bound variables do not matter.  For example, if we rename
@@ -432,13 +432,13 @@ Check <{[x:=true] x}>.
 
       t' = \w:Bool, z
 
-    then [[x:=s]t'] is
+    then [[z:=s]t'] is
 
       \w:Bool, \x:Bool, r
 
-    which does not behave the same as this:
+    which does not behave the same as the original substitution into t:
 
-      [x:=s]t = \r:Bool, \x:Bool, r
+      [z:=s]t = \r:Bool, \x:Bool, r
 
     That is, renaming a bound variable in [t] changes how [t] behaves
     under substitution. *)
@@ -863,4 +863,4 @@ Proof.
 
 End STLC.
 
-(* 2022-08-01 18:57 *)
+(* 2022-08-05 17:12 *)
