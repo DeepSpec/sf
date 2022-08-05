@@ -1825,4 +1825,4 @@ Definition manual_grade_for_nand_intuition : option (nat*string) := None.
 
     - Ltac functions and [match goal] *)
 
-(* 2022-08-05 17:10 *)
+(* 2022-08-05 17:14 *)

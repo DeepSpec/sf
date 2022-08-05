@@ -1942,4 +1942,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2022-08-05 17:12 *)
+(* 2022-08-05 17:15 *)
