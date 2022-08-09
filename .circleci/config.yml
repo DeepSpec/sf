@@ -22,6 +22,10 @@ jobs:
             docker build -t deepspec/sfdev:8.13 - < Dockerfile.8.13
             docker push deepspec/sfdev:8.13
             fi
+            if fgrep -q '[docker 8.15]' \<<< $changes; then
+            docker build -t deepspec/sfdev:8.15 - < Dockerfile.8.15
+            docker push deepspec/sfdev:8.15
+            fi
           working_directory: .circleci
           no_output_timeout: 2h
   build:
