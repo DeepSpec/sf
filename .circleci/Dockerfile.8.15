@@ -6,5 +6,6 @@ RUN opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
          menhir.20220210 \
          coq-quickchick \
          coq-vst.$VST_NEEDED \
- && git clone https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta \
- && (cd QuickChick*; make; make install)
+ && wget https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta \
+ && unzip v.2.0+beta.zip \
+ && (cd QuickChick-v.2.0-beta; make; make install)
