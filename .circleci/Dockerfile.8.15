@@ -1,11 +1,13 @@
 FROM coqorg/coq:8.15.2-ocaml-4.14.0-flambda
 ENV OPAMYES true
 ENV VST_NEEDED 2.9
-RUN opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
+RUN \
+    opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
+ && apt-get install -y wget \
+ && wget https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta.zip \
+ && unzip v.2.0+beta.zip \
  && opam install -j `nproc` \
          menhir.20220210 \
          coq-quickchick \
          coq-vst.$VST_NEEDED \
- && wget https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta \
- && unzip v.2.0+beta.zip \
  && (cd QuickChick-v.2.0-beta; make; make install)
