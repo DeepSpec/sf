@@ -40,7 +40,7 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#"><span class="id" title="library">Stlc</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#"><span class="id" title="library">Smallstep</span></a>.<br/>
 <span class="id" title="keyword">Module</span> <a id="STLCProp" class="idref" href="#STLCProp"><span class="id" title="module">STLCProp</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">STLC</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1065,7 +1065,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">t <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> zap</td>
   <td></td>
-</td>
+</tr>
 </table></center>and the following typing rule:
 <center><table class="infrule">
 <tr class="infruleassumption">
@@ -1079,7 +1079,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; zap &#x2208; T</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Which of the following properties of the STLC remain true in
     the presence of these rules?  For each property, write either
     "remains true" or "becomes false." If a property becomes
@@ -1132,7 +1132,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">(\x:A, x) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> foo</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -1145,7 +1145,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">foo <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> true</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Which of the following properties of the STLC remain true in
     the presence of this rule?  For each one, write either
     "remains true" or else "becomes false." If a property becomes
@@ -1237,7 +1237,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">(if true then t<sub>1</sub> else t<sub>2</sub>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> true</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Which of the following properties of the STLC remain true in
     the presence of this rule?  For each one, write either
     "remains true" or else "becomes false." If a property becomes
@@ -1273,7 +1273,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> &#x2208; Bool<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>2</sub> &#x2208; Bool</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1285,7 +1285,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> t<sub>2</sub> &#x2208; Bool</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Which of the following properties of the STLC remain true in
     the presence of this rule?  For each one, write either
     "remains true" or else "becomes false." If a property becomes
@@ -1321,7 +1321,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> &#x2208; Bool</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>2</sub> &#x2208; Bool</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1333,7 +1333,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> t<sub>2</sub> &#x2208; Bool</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Which of the following properties of the STLC remain true in
     the presence of this rule?  For each one, write either
     "remains true" or else "becomes false." If a property becomes
@@ -1377,7 +1377,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <tr class="infruleassumption">
   <td class="infrule">&#x22A2; \x:Bool,t &#x2208; Bool</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Which of the following properties of the STLC remain true in
     the presence of this rule?  For each one, write either
     "remains true" or else "becomes false." If a property becomes
@@ -1423,7 +1423,7 @@ Conversely, an <i>open</i> term is one that may contain free
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="STLCArith" class="idref" href="#STLCArith"><span class="id" title="module">STLCArith</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">STLC</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1614,7 +1614,7 @@ In this extended exercise, your job is to finish formalizing the
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="StlcProp.html#STLCArith"><span class="id" title="module">STLCArith</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

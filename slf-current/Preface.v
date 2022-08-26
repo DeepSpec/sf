@@ -330,7 +330,7 @@
     volume       =   "6",
     year         =   "2022",
     publisher    =   "Electronic textbook",
-    note         =   {Version 1.2, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 1.3, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -342,4 +342,4 @@
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2022-08-05 17:21 *)
+(* 2022-08-26 19:30 *)

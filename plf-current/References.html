@@ -80,7 +80,7 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#"><span class="id" title="library">Smallstep</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Nat</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat"><span class="id" title="module">Nat</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -342,7 +342,7 @@ Intuitively:
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; ref t<sub>1</sub> : Ref T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> : Ref T<sub>1</sub></td>
@@ -355,12 +355,12 @@ Intuitively:
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; !t<sub>1</sub> : T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> : Ref T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>2</sub> : T<sub>2</sub></td>
   <td class="infrulenamecol" rowspan="3">
@@ -372,7 +372,7 @@ Intuitively:
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> := t<sub>2</sub> : Unit</td>
   <td></td>
-</td>
+</tr>
 </table></center>    The rule for locations will require a bit more machinery, and this
     will motivate some changes to the other rules; we'll come back to
     this later. 
@@ -899,7 +899,7 @@ To update the store, we use the <span class="inlinecode"><span class="id" title=
 <span class="id" title="keyword">Fixpoint</span> <a id="STLCRef.replace" class="idref" href="#STLCRef.replace"><span class="id" title="definition">replace</span></a> {<a id="A:21" class="idref" href="#A:21"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>} (<a id="n:22" class="idref" href="#n:22"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="x:23" class="idref" href="#x:23"><span class="id" title="binder">x</span></a>:<a class="idref" href="References.html#A:21"><span class="id" title="variable">A</span></a>) (<a id="l:24" class="idref" href="#l:24"><span class="id" title="binder">l</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="References.html#A:21"><span class="id" title="variable">A</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="References.html#A:21"><span class="id" title="variable">A</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="References.html#l:24"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>    ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><br/>
-&nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">t</span> ⇒<br/>
+&nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.t"><span class="id" title="definition">t</span></a> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="References.html#n:22"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a>    ⇒ <a class="idref" href="References.html#x:23"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">t</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> ⇒ <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="References.html#replace:25"><span class="id" title="definition">replace</span></a> <span class="id" title="var">n'</span> <a class="idref" href="References.html#x:23"><span class="id" title="variable">x</span></a> <span class="id" title="var">t</span><br/>
@@ -996,7 +996,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">ref v / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> loc |st| / st,v</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
@@ -1009,7 +1009,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">ref t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> ref t<sub>1</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">l < |st|</td>
@@ -1022,7 +1022,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">!(loc l) / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> lookup l st / st</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
@@ -1035,7 +1035,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">!t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> !t<sub>1</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">l < |st|</td>
@@ -1048,7 +1048,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">loc l := v / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> unit / replace l v st</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
@@ -1061,7 +1061,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> := t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' := t<sub>2</sub> / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>2</sub>' / st'</td>
@@ -1074,7 +1074,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">v<sub>1</sub> := t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> v<sub>1</sub> := t<sub>2</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1106,7 +1106,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">(\x:T<sub>2</sub>.t1) v<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> [x:=v<sub>2</sub>]t<sub>1</sub> / st</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' / st'</td>
@@ -1119,7 +1119,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' t<sub>2</sub> / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">value v<sub>1</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>2</sub>' / st'</td>
@@ -1132,7 +1132,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">v<sub>1</sub> t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> v<sub>1</sub> t<sub>2</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Note that the first rule here returns the store unchanged, since
     function application, in itself, has no side effects.  The other
     two rules simply propagate side effects from premise to
@@ -1170,7 +1170,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">!t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> !t<sub>1</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Once <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> has finished reducing, we should have an expression of
     the form <span class="inlinecode">!<span class="id" title="var">l</span></span>, where <span class="inlinecode"><span class="id" title="var">l</span></span> is some location.  (A term that attempts
     to dereference any other sort of value, such as a function or
@@ -1191,7 +1191,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">!(loc l) / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> lookup l st / st</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1210,7 +1210,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> := t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>' := t<sub>2</sub> / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>2</sub>' / st'</td>
@@ -1223,7 +1223,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">v<sub>1</sub> := t<sub>2</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> v<sub>1</sub> := t<sub>2</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Once we have finished with <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span>, we have an expression of
     the form <span class="inlinecode"><span class="id" title="var">l</span>:=<span class="id" title="var">v</span></span>, which we execute by updating the store to make
     location <span class="inlinecode"><span class="id" title="var">l</span></span> contain <span class="inlinecode"><span class="id" title="var">v</span></span>:
@@ -1239,7 +1239,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">loc l := v / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> unit / [l:=v]st</td>
   <td></td>
-</td>
+</tr>
 </table></center>    The notation <span class="inlinecode">[<span class="id" title="var">l</span>:=<span class="id" title="var">v</span>]<span class="id" title="var">st</span></span> means "the store that maps <span class="inlinecode"><span class="id" title="var">l</span></span> to <span class="inlinecode"><span class="id" title="var">v</span></span>
     and maps all other locations to the same thing as <span class="inlinecode"><span class="id" title="var">st</span>.</span>"  Note
     that the term resulting from this reduction step is just <span class="inlinecode"><span class="id" title="var">unit</span></span>;
@@ -1261,7 +1261,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">ref t<sub>1</sub> / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> ref t<sub>1</sub>' / st'</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Then, to reduce the <span class="inlinecode"><span class="id" title="var">ref</span></span> itself, we choose a fresh location at
     the end of the current store -- i.e., location <span class="inlinecode">|<span class="id" title="var">st</span>|</span> -- and yield
     a new store that extends <span class="inlinecode"><span class="id" title="var">st</span></span> with the new value <span class="inlinecode"><span class="id" title="var">v</span></span>.
@@ -1277,7 +1277,7 @@ As might be expected, we will also need some technical
 <tr class="infruleassumption">
   <td class="infrule">ref v / st <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> loc |st| / st,v</td>
   <td></td>
-</td>
+</tr>
 </table></center>    The value resulting from this step is the newly allocated location
     itself.  (Formally, <span class="inlinecode"><span class="id" title="var">st</span>,<span class="id" title="var">v</span></span> means <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">v</span>::<span class="id" title="var">nil</span></span> -- i.e., to add
     a new reference cell to the store, we append it to the end.)
@@ -1404,8 +1404,7 @@ One slightly ugly point should be noted here: In the
 
 <div class="paragraph"> </div>
 
- <div style="background-color:lightgray; color:red; margin:10px; padding:10px; "> Tersify! 
-</div>  Having extended our syntax and reduction rules to accommodate
+ Having extended our syntax and reduction rules to accommodate
     references, our last job is to write down typing rules for the new
     constructs (and, of course, to check that these rules are sound!).
     Naturalurally, the key question is, "What is the type of a location?"
@@ -1446,7 +1445,7 @@ One slightly ugly point should be noted here: In the
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; loc l : Ref T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    That is, to find the type of a location <span class="inlinecode"><span class="id" title="var">l</span></span>, we look up the
     current contents of <span class="inlinecode"><span class="id" title="var">l</span></span> in the store and calculate the type <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span>
     of the contents.  The type of the location is then <span class="inlinecode"><span class="id" title="var">Ref</span></span> <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span>.
@@ -1474,7 +1473,7 @@ One slightly ugly point should be noted here: In the
 <tr class="infruleassumption">
   <td class="infrule">Gamma; st &#x22A2; loc l : Ref T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    and all the rest of the typing rules in the system are extended
     similarly with stores.  (The other rules do not need to do anything
     interesting with their stores -- just pass them from premise to
@@ -1580,7 +1579,7 @@ Suppose we are given a store typing <span class="inlinecode"><span class="id" ti
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; loc l : Ref (lookup l ST)</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1616,7 +1615,7 @@ Suppose we are given a store typing <span class="inlinecode"><span class="id" ti
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; loc l : Ref (lookup l ST)</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; t<sub>1</sub> : T<sub>1</sub></td>
@@ -1629,7 +1628,7 @@ Suppose we are given a store typing <span class="inlinecode"><span class="id" ti
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; ref t<sub>1</sub> : Ref T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; t<sub>1</sub> : Ref T<sub>1</sub></td>
@@ -1642,12 +1641,12 @@ Suppose we are given a store typing <span class="inlinecode"><span class="id" ti
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; !t<sub>1</sub> : T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; t<sub>1</sub> : Ref T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; t<sub>2</sub> : T<sub>2</sub></td>
   <td class="infrulenamecol" rowspan="3">
@@ -1659,7 +1658,7 @@ Suppose we are given a store typing <span class="inlinecode"><span class="id" ti
 <tr class="infruleassumption">
   <td class="infrule">Gamma; ST &#x22A2; t<sub>1</sub> := t<sub>2</sub> : Unit</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </div>
 <div class="code">
@@ -2480,7 +2479,7 @@ And here, at last, is the preservation theorem:
 <span class="id" title="keyword">Definition</span> <a id="STLCRef.ExampleVariables.s" class="idref" href="#STLCRef.ExampleVariables.s"><span class="id" title="definition">s</span></a> := "s".<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef.ExampleVariables"><span class="id" title="module">ExampleVariables</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="STLCRef.RefsAndNontermination" class="idref" href="#STLCRef.RefsAndNontermination"><span class="id" title="module">RefsAndNontermination</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">ExampleVariables</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="References.html#STLCRef.ExampleVariables"><span class="id" title="module">ExampleVariables</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="STLCRef.RefsAndNontermination.loop_fun" class="idref" href="#STLCRef.RefsAndNontermination.loop_fun"><span class="id" title="definition">loop_fun</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="References.html#35fac1f60887e7b37d44f938e80b2dc<sub>6</sub>"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="References.html#fcbb07911888b1a4b268f628a4d64735"><span class="id" title="notation">\</span></a><a class="idref" href="References.html#STLCRef.ExampleVariables.x"><span class="id" title="definition">x</span></a> <a class="idref" href="References.html#fcbb07911888b1a4b268f628a4d64735"><span class="id" title="notation">:</span></a> <a class="idref" href="References.html#STLCRef.:stlc::'Unit'"><span class="id" title="notation">Unit</span></a><a class="idref" href="References.html#fcbb07911888b1a4b268f628a4d64735"><span class="id" title="notation">,</span></a> <a class="idref" href="References.html#0975a85e562f22315b420c8d1c95dd<sub>06</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="References.html#70f28e5c58264a9753710970e9df6ba<sub>2</sub>"><span class="id" title="notation">!</span></a><a class="idref" href="References.html#STLCRef.ExampleVariables.r"><span class="id" title="definition">r</span></a><a class="idref" href="References.html#0975a85e562f22315b420c8d1c95dd<sub>06</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="References.html#STLCRef.:stlc::'unit'"><span class="id" title="notation">unit</span></a> <a class="idref" href="References.html#35fac1f60887e7b37d44f938e80b2dc<sub>6</sub>"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="STLCRef.RefsAndNontermination.loop" class="idref" href="#STLCRef.RefsAndNontermination.loop"><span class="id" title="definition">loop</span></a> :=<br/>
@@ -2643,7 +2642,7 @@ Qed.<br/>
 
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef.RefsAndNontermination"><span class="id" title="module">RefsAndNontermination</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef"><span class="id" title="module">STLCRef</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

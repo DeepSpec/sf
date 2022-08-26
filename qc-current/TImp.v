@@ -77,14 +77,14 @@ Definition fresh (al:list id) : id :=
 
 (** We will also need a way of testing for equality, which we can 
     derive with the standard [dec_eq] tactic. *)
-Instance eq_id_dec (x1 x2 : id) : Dec (x1 = x2).
+#[export] Instance eq_id_dec (x1 x2 : id) : Dec (x1 = x2).
 Proof. dec_eq. Defined.
 
 (** One advantage of using natural numbers as identifiers is that 
     we can take advantage of the [Show] instance of [nat] to print 
     them. *)
 
-Instance show_id : Show id :=
+#[export] Instance show_id : Show id :=
   { show x := let '(Id n) := x in show n }.
 
 (** To generate identifiers for TImp, we will not just generate
@@ -114,7 +114,7 @@ Fixpoint get_fresh_ids n l :=
     in the chapter. For now, let's leave the [Shrink] instance
     as a no-op.
  *)
-Instance shrinkId : Shrink id :=
+#[export] Instance shrinkId : Shrink id :=
   { shrink x := [] }.
 
 (* ================================================================= *)
@@ -157,7 +157,7 @@ Check Showty.
     [decidable] and we can use the [dec_eq] tactic to automate 
     the process. *)
 
-Instance eq_dec_ty (x y : ty) : Dec (x = y).
+#[export] Instance eq_dec_ty (x y : ty) : Dec (x = y).
 Proof. dec_eq. Defined.
 
 (* ================================================================= *)
@@ -228,7 +228,7 @@ Inductive bound_to {A} : Map A -> id -> A -> Prop :=
     [Context] subsection), which deal with partially automating the
     proofs for such instances. *)
 
-Instance dec_bound_to {A : Type} Gamma x (T : A) 
+#[export] Instance dec_bound_to {A : Type} Gamma x (T : A) 
          `{D : forall (x y : A), Dec (x = y)} 
           : Dec (bound_to Gamma x T).
 Proof. 
@@ -279,7 +279,7 @@ Ltac solve_sum := solve_left; solve_right.
 
 (** We can now prove the [Dec] instance quite concisely. *)
 
-Instance dec_bound_to {A : Type} Gamma x (T : A) 
+#[export] Instance dec_bound_to {A : Type} Gamma x (T : A) 
          `{D : forall (x y : A), Dec (x = y)}
   : Dec (bound_to Gamma x T).
 Proof. 
@@ -404,7 +404,7 @@ where "Gamma '||-' e '\IN' T" := (has_type Gamma e T).
 
 (** Once again, we need a decidable instance for the typing relation of
     TImp. You can skip to the next exercise if you are not interested in
-    specific proof details. *)
+    specific proof details. Or read later in the chapter about how to automatically derive such instances! *)
 
 (** We will need a bit more automation for this proof. We will
     have a lot of hypotheses of the form: 
@@ -437,7 +437,7 @@ Ltac solve_inductives Gamma :=
 (** Typing in TImp is decidable: given an expression [e], a context [Gamma] 
     and a type [T], we can decide whether [has_type Gamma e T] holds. *)
 
-Instance dec_has_type (e : exp) (Gamma : context) (T : ty) 
+#[export] Instance dec_has_type (e : exp) (Gamma : context) (T : ty) 
   : Dec (Gamma ||- e \IN T).
 Proof with solve_sum.
   constructor.
@@ -497,20 +497,11 @@ Definition bindGenOpt {A B : Type}
   | None => ret None
   end.
 
-(** This pattern is common enough that QuickChick introduces explicit monadic 
-    notations. *)
+(** This pattern is common enough that QuickChick introduces explicit
+monadic notations, using a double arrow, that have to be explicitly
+imported. *)
 
-Print GOpt.
-(** 
-    GOpt = fun A : Type => G (option A)
-         : Type -> Type
-*)
-
-Check Monad_GOpt. 
-(** 
-    Monad_GOpt
-         : Monad GOpt
-*)
+Import BindOptNotation.
 
 (** This brings us to our first interesting generator -- one for typed
     expressions.  We assume that [Gamma] and [T] are inputs to the
@@ -538,9 +529,9 @@ End TypePlayground1.
     [x] such that [bound_to Gamma x T]. But we already have such a
     generator!  We just need to wrap it in an [EVar].  *)
 
-Definition gen_typed_evar (Gamma : context) (T : ty) : GOpt exp :=
-  x <- gen_typed_id_from_context Gamma T;;
-  ret (EVar x).
+Definition gen_typed_evar (Gamma : context) (T : ty) : G (option exp) :=
+  x <-- gen_typed_id_from_context Gamma T;;
+  ret (Some (EVar x)).
 
 (** (Note that this is the [ret] of the [GOpt] monad.) *)
 
@@ -567,11 +558,11 @@ End TypePlayground2.
     [T = TNat], while [Ty_True] and [Ty_False] can only be used if [T
     = TBool].  *)
 
-Definition base' Gamma T : list (GOpt exp) := 
+Definition base' Gamma T : list (G (option exp)) := 
       gen_typed_evar Gamma T ::
       match T with 
       | TNat  => [ n <- arbitrary;; ret (Some (ENum n))]
-      | TBool => [ ret ETrue ; ret EFalse ]
+      | TBool => [ ret (Some ETrue) ; ret (Some EFalse) ]
       end.
 
 (** We now need to go from a list of (optional) generators to a 
@@ -594,8 +585,8 @@ Definition base Gamma T :=
       (2, gen_typed_evar Gamma T) ::
       match T with 
       | TNat  => [ (2, n <- arbitrary;; ret (Some (ENum n)))]
-      | TBool => [ (1, ret ETrue)
-                 ; (1, ret EFalse) ]
+      | TBool => [ (1, ret (Some ETrue))
+                 ; (1, ret (Some EFalse)) ]
       end.
 
 Definition gen_has_type_2 Gamma T := backtrack (base Gamma T).
@@ -622,7 +613,7 @@ End TypePlayground3.
     input type [T] must be [TNat], otherwise it is not
     applicable. Once again, this leads to a match on [T]: *)
 
-Fixpoint gen_has_type_3 size Gamma T : GOpt exp := 
+Fixpoint gen_has_type_3 size Gamma T : G (option exp) := 
   match size with 
   | O => gen_typed_evar Gamma T
   | S size' => 
@@ -630,9 +621,9 @@ Fixpoint gen_has_type_3 size Gamma T : GOpt exp :=
       ([ (1, gen_typed_evar Gamma T) ] 
       ++ match T with 
          | TNat => 
-           [ (size, e1 <- gen_has_type_3 size' Gamma TNat;;
-                    e2 <- gen_has_type_3 size' Gamma TNat;;
-                    ret (EPlus e1 e2)) ]
+           [ (size, e1 <-- gen_has_type_3 size' Gamma TNat;;
+                    e2 <-- gen_has_type_3 size' Gamma TNat;;
+                    ret (Some (EPlus e1 e2))) ]
          | _ => []
          end)
   end.
@@ -642,32 +633,32 @@ Fixpoint gen_has_type_3 size Gamma T : GOpt exp :=
 
 Fixpoint gen_exp_typed_sized
             (size : nat) (Gamma : context) (T : ty) 
-       : GOpt exp :=
+       : G (option exp) :=
   let base := base Gamma T in
   let recs size' := 
     match T with 
     | TNat =>
-      [ (size, e1 <- gen_exp_typed_sized size' Gamma TNat ;; 
-            e2 <- gen_exp_typed_sized size' Gamma TNat ;; 
-            ret (EPlus e1 e2)) 
-      ; (size, e1 <- gen_exp_typed_sized size' Gamma TNat ;; 
-            e2 <- gen_exp_typed_sized size' Gamma TNat ;; 
-            ret (EMinus e1 e2)) 
-      ; (size, e1 <- gen_exp_typed_sized size' Gamma TNat ;; 
-            e2 <- gen_exp_typed_sized size' Gamma TNat ;; 
-            ret (EMult e1 e2)) ]
+      [ (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+            e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+            ret (Some (EPlus e1 e2)) )
+      ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+            e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+            ret (Some (EMinus e1 e2)) )
+      ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+            e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+            ret (Some (EMult e1 e2)))]
     | TBool => 
-    [ (size, e1 <- gen_exp_typed_sized size' Gamma TNat ;; 
-             e2 <- gen_exp_typed_sized size' Gamma TNat ;; 
-             ret (EEq e1 e2)) 
-       ; (size, e1 <- gen_exp_typed_sized size' Gamma TNat ;; 
-             e2 <- gen_exp_typed_sized size' Gamma TNat ;; 
-             ret (ELe e1 e2)) 
-       ; (size, e1 <- gen_exp_typed_sized size' Gamma TBool ;; 
-             ret (ENot e1))
-       ; (size, e1 <- gen_exp_typed_sized size' Gamma TBool ;; 
-             e2 <- gen_exp_typed_sized size' Gamma TBool ;; 
-             ret (EAnd e1 e2)) ]
+    [ (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+             e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+             ret (Some (EEq e1 e2)) )
+       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+             e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+             ret (Some (ELe e1 e2)) )
+       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TBool ;; 
+             ret (Some (ENot e1)))
+       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TBool ;; 
+             e2 <-- gen_exp_typed_sized size' Gamma TBool ;; 
+             ret (Some (EAnd e1 e2))) ]
     end in
   match size with 
   | O => 
@@ -719,7 +710,7 @@ Inductive has_type_value : value -> ty -> Prop :=
   | TyVNat  : forall n, has_type_value (VNat  n) TNat
   | TyVBool : forall b, has_type_value (VBool b) TBool.
 
-Instance dec_has_type_value v T : Dec (has_type_value v T).
+#[export] Instance dec_has_type_value v T : Dec (has_type_value v T).
 Proof. constructor; unfold ssrbool.decidable.
 destruct v; destruct T; solve_sum.
 Defined.
@@ -753,7 +744,7 @@ Inductive well_typed_state : context -> state -> Prop :=
     has_type_value v T -> well_typed_state Gamma st ->
     well_typed_state ((x,T)::Gamma) ((x,v)::st).
 
-Instance dec_well_typed_state Gamma st : Dec (well_typed_state Gamma st).
+#[export] Instance dec_well_typed_state Gamma st : Dec (well_typed_state Gamma st).
 Proof. 
 constructor; unfold ssrbool.decidable.
 generalize dependent Gamma.
@@ -1169,7 +1160,7 @@ Ltac solve_det :=
 (** Now, here is a brute-force decision procedure for the typing
     relation (which amounts to a simple typechecker). *) 
 
-Instance dec_well_typed_com (Gamma : context) (c : com) 
+#[export] Instance dec_well_typed_com (Gamma : context) (c : com) 
   : Dec (well_typed_com Gamma c).
 Proof with eauto.
   constructor. unfold ssrbool.decidable.
@@ -1358,6 +1349,15 @@ Print GenSizedSuchThathas_type_value.
     generator, but the end result is actually exactly the same 
     distribution! *)
 
+(** Moreover, QuickChick can also derive DecOpt instances automatically, as well as proofs of correctness! *)
+
+Derive DecOpt for (has_type_value v T).
+
+Print DecOpthas_type_value.
+
+(* For more information as to how that's possible, look at the PLDI
+'22 paper [Computing Correctly with Inductive Relations] *)
+
 (* ================================================================= *)
 (** ** (More) Typeclasses for Generation *)
 
@@ -1378,11 +1378,13 @@ Class GenSuchThat (A : Type) (P : A -> Prop) :=
 
 (** ...convenient notation,... *)
 
+(* 
 Notation "'genST' x" := (@arbitraryST _ x _) (at level 70).
+ *)
 
 (** ...and a coercion between the two: *)
 
-Instance GenSuchThatOfBounded (A : Type) (P : A -> Prop) 
+#[export] Instance GenSuchThatOfBounded (A : Type) (P : A -> Prop) 
          (H : GenSizedSuchThat A P)
   : GenSuchThat A P := 
   { arbitraryST := sized arbitrarySizeST }.
@@ -1415,4 +1417,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2022-08-05 17:24 *)
+(* 2022-08-26 19:22 *)

@@ -137,7 +137,7 @@ The predicate <span class="inlinecode"><span class="id" title="var">haffine</spa
 </div>
 <div class="code">
 
-<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">heap_scope</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">heap_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="f9a9eae51bffbbd6103a717921ced73e" class="idref" href="#f9a9eae51bffbbd6103a717921ced73e"><span class="id" title="notation">&quot;</span></a>H<sub>1</sub> ==&gt; H<sub>2</sub>" := (<a class="idref" href="LibSepSimpl.html#XsimplParams.himpl"><span class="id" title="axiom">himpl</span></a> <span class="id" title="var">H<sub>1</sub></span> <span class="id" title="var">H<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 55) : <span class="id" title="var">heap_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="10463f10020320a4419c2a588b631fb<sub>9</sub>" class="idref" href="#10463f10020320a4419c2a588b631fb<sub>9</sub>"><span class="id" title="notation">&quot;</span></a>Q<sub>1</sub> ===&gt; Q<sub>2</sub>" := (<a class="idref" href="LibSepSimpl.html#XsimplParams.qimpl"><span class="id" title="definition">qimpl</span></a> <span class="id" title="var">Q<sub>1</sub></span> <span class="id" title="var">Q<sub>2</sub></span>)<br/>
@@ -330,7 +330,7 @@ Characterization of <span class="inlinecode"><span class="id" title="var">hgc</s
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="XsimplSetup" class="idref" href="#XsimplSetup"><span class="id" title="module">XsimplSetup</span></a> (<span class="id" title="var">HP</span> : <a class="idref" href="LibSepSimpl.html#XsimplParams"><span class="id" title="module">XsimplParams</span></a>).<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">HP</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="LibSepSimpl.html#HP"><span class="id" title="module">HP</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">heap_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">H</span> : <a class="idref" href="LibSepSimpl.html#HP.hprop"><span class="id" title="axiom">hprop</span></a>.<br/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>.<br/><hr class='doublespaceincode'/>
@@ -1900,7 +1900,7 @@ Error reporting support for <span class="inlinecode"><span class="id" title="var
 <span class="id" title="keyword">Tactic Notation</span> "xsimpll" := <span class="id" title="var">xsimpl_step_l</span> <span class="id" title="var">tt</span>.<br/>
 <span class="id" title="keyword">Tactic Notation</span> "xsimplr" := <span class="id" title="var">xsimpl_step_r</span> <span class="id" title="var">tt</span>.<br/>
 <span class="id" title="keyword">Tactic Notation</span> "xsimpllr" := <span class="id" title="var">xsimpl_step_lr</span> <span class="id" title="var">tt</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">xsimpl_scope</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">xsimpl_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="3d05be3302825f1c984d71d64545fa6c" class="idref" href="#3d05be3302825f1c984d71d64545fa6c"><span class="id" title="notation">&quot;</span></a>'HSIMPL' Hla Hlw Hlt =====&gt; Hra Hrg Hrt" := (<a class="idref" href="LibSepSimpl.html#XsimplSetup.Xsimpl"><span class="id" title="definition">Xsimpl</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">Hla</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">Hlw</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">Hlt</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">Hra</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">Hrg</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">Hrt</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)<br/>
 &nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69, <span class="id" title="var">Hla</span>, <span class="id" title="var">Hlw</span>, <span class="id" title="var">Hlt</span>, <span class="id" title="var">Hra</span>, <span class="id" title="var">Hrg</span>, <span class="id" title="var">Hrt</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0,<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="var">format</span> "'[v' 'HSIMPL' '/' Hla  '/' Hlw  '/' Hlt  '/' =====&gt; '/' Hra  '/' Hrg  '/' Hrt ']'")<br/>
@@ -2117,7 +2117,7 @@ Error reporting support for <span class="inlinecode"><span class="id" title="var
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">xchange</span> (<span class="id" title="notation">&gt;&gt;</span> <span class="id" title="var">hforall_specialize</span> 2). <span class="id" title="var">xsimpl</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="LibSepSimpl.html#XsimplSetup"><span class="id" title="module">XsimplSetup</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:21&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:30&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -59,7 +59,7 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">returnGen</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">returnGen</span>.<br/>
 </div>
 
 <div class="doc">
@@ -93,7 +93,7 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">bindGen</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">bindGen</span>.<br/>
 </div>
 
 <div class="doc">
@@ -112,10 +112,10 @@
 <div class="code">
 
 <span class="id" title="keyword">Section</span> <a id="GMonadDef" class="idref" href="#GMonadDef"><span class="id" title="section">GMonadDef</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="GMonad" class="idref" href="#GMonad"><span class="id" title="instance">GMonad</span></a> : `{<span class="id" title="class">Monad</span> <span class="id" title="axiom">G</span>} | 3 :=<br/>
+<span class="id" title="keyword">Instance</span> <a id="GMonad" class="idref" href="#GMonad"><span class="id" title="instance">GMonad</span></a> : `{<span class="id" title="class">Monad</span> <span class="id" title="definition">G</span>} | 3 :=<br/>
 &nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">ret</span> := @<span class="id" title="axiom">returnGen</span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">bind</span> := @<span class="id" title="axiom">bindGen</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">ret</span> := @<span class="id" title="definition">returnGen</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">bind</span> := @<span class="id" title="definition">bindGen</span><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="QC.html#GMonadDef"><span class="id" title="section">GMonadDef</span></a>.<br/>
 </div>
@@ -130,20 +130,26 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> @<span class="id" title="axiom">choose</span>.<br/>
+<span class="id" title="keyword">Check</span> @<span class="id" title="method">choose</span>.<br/>
 </div>
 
 <div class="doc">
 <pre>     ===&gt; 
      @choose
-     : forall A : Type, ChoosableFromInterval A <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> A * A <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> G A 
+     : forall G : Type <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> Type,
+       Producer G <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>
+       forall A : Type,
+       ChoosableFromInterval A <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> A * A <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> G A
 </pre>
 
 <div class="paragraph"> </div>
 
  The <span class="inlinecode"><span class="id" title="var">ChoosableFromInterval</span></span> typeclass describes primitive types
     <span class="inlinecode"><span class="id" title="var">A</span></span>, like natural numbers and integers (<span class="inlinecode"><span class="id" title="var">Z</span></span>), for which it makes
-    sense to randomly generate elements from a given interval. 
+    sense to randomly generate elements from a given interval. The
+    <span class="inlinecode"><span class="id" title="var">Producer</span></span> typeclass is another QuickChick abstraction that
+    generalizes generators and also encompasses enumerators --- you can safely ignore it for now.
+
 </div>
 <div class="code">
 
@@ -191,7 +197,7 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">listOf</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">listOf</span>.<br/>
 </div>
 
 <div class="doc">
@@ -235,7 +241,7 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">vectorOf</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">vectorOf</span>.<br/>
 </div>
 
 <div class="doc">
@@ -284,7 +290,7 @@
 <span class="id" title="keyword">Module</span> <a id="DefineG" class="idref" href="#DefineG"><span class="id" title="module">DefineG</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="DefineG.G" class="idref" href="#DefineG.G"><span class="id" title="inductive">G</span></a> (<a id="A:1" class="idref" href="#A:1"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> :=<br/>
 | <a id="DefineG.MkG" class="idref" href="#DefineG.MkG"><span class="id" title="constructor">MkG</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="axiom">RandomSeed</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#A:1"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#G:2"><span class="id" title="inductive">G</span></a> <a class="idref" href="QC.html#A:1"><span class="id" title="variable">A</span></a>.<br/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="QC.html#DefineG.MkG"><span class="id" title="constructor">MkG</span></a> {<span class="id" title="var">A</span>}.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="QC.html#DefineG.MkG"><span class="id" title="constructor">MkG</span></a> {<span class="id" title="var">A</span>}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="QC.html#DefineG"><span class="id" title="module">DefineG</span></a>.<br/>
 </div>
 
@@ -320,7 +326,7 @@ In order for commands like <span class="inlinecode"><span class="id" title="var"
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="show_color" class="idref" href="#show_color"><span class="id" title="instance">show_color</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="show_color" class="idref" href="#show_color"><span class="id" title="instance">show_color</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
 &nbsp;&nbsp;{| <span class="id" title="method">show</span> <a id="c:6" class="idref" href="#c:6"><span class="id" title="binder">c</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#c:6"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#Red"><span class="id" title="constructor">Red</span></a>    ⇒ "Red"<br/>
@@ -338,7 +344,7 @@ To generate a random color, we just need to pick one of the
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">elems_</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">elems_</span>.<br/>
 </div>
 
 <div class="doc">
@@ -348,8 +354,8 @@ To generate a random color, we just need to pick one of the
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="genColor'" class="idref" href="#genColor'"><span class="id" title="definition">genColor'</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="axiom">elems_</span> <a class="idref" href="QC.html#Red"><span class="id" title="constructor">Red</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a> <a class="idref" href="QC.html#Red"><span class="id" title="constructor">Red</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="QC.html#Green"><span class="id" title="constructor">Green</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="QC.html#Blue"><span class="id" title="constructor">Blue</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="QC.html#Yellow"><span class="id" title="constructor">Yellow</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="genColor'" class="idref" href="#genColor'"><span class="id" title="definition">genColor'</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">elems_</span> <a class="idref" href="QC.html#Red"><span class="id" title="constructor">Red</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a> <a class="idref" href="QC.html#Red"><span class="id" title="constructor">Red</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="QC.html#Green"><span class="id" title="constructor">Green</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="QC.html#Blue"><span class="id" title="constructor">Blue</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="QC.html#Yellow"><span class="id" title="constructor">Yellow</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Sample&nbsp;genColor'.&nbsp;*)</span><br/>
 </div>
 
@@ -393,7 +399,7 @@ To generate a random color, we just need to pick one of the
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="genColor" class="idref" href="#genColor"><span class="id" title="definition">genColor</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="genColor" class="idref" href="#genColor"><span class="id" title="definition">genColor</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">elems</span> <span class="id" title="notation">[</span> <a class="idref" href="QC.html#Red"><span class="id" title="constructor">Red</span></a> <span class="id" title="notation">;</span> <a class="idref" href="QC.html#Green"><span class="id" title="constructor">Green</span></a> <span class="id" title="notation">;</span> <a class="idref" href="QC.html#Blue"><span class="id" title="constructor">Blue</span></a> <span class="id" title="notation">;</span> <a class="idref" href="QC.html#Yellow"><span class="id" title="constructor">Yellow</span></a> <span class="id" title="notation">]</span>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Sample&nbsp;genColor.&nbsp;*)</span><br/>
 </div>
@@ -419,8 +425,8 @@ To generate a random color, we just need to pick one of the
 <span class="id" title="keyword">Inductive</span> <a id="Tree" class="idref" href="#Tree"><span class="id" title="inductive">Tree</span></a> <a id="A:8" class="idref" href="#A:8"><span class="id" title="binder">A</span></a> :=<br/>
 | <a id="Leaf" class="idref" href="#Leaf"><span class="id" title="constructor">Leaf</span></a> : <a class="idref" href="QC.html#Tree:9"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:8"><span class="id" title="variable">A</span></a><br/>
 | <a id="Node" class="idref" href="#Node"><span class="id" title="constructor">Node</span></a> : <a class="idref" href="QC.html#A:8"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#Tree:9"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:8"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#Tree:9"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:8"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#Tree:9"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:8"><span class="id" title="variable">A</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a> {<span class="id" title="var">A</span>}.<br/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="QC.html#Node"><span class="id" title="constructor">Node</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a> {<span class="id" title="var">A</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="QC.html#Node"><span class="id" title="constructor">Node</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
 </div>
 
 <div class="doc">
@@ -433,7 +439,7 @@ Before getting to generators for trees, we again give a
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="showTree" class="idref" href="#showTree"><span class="id" title="instance">showTree</span></a> {<a id="A:11" class="idref" href="#A:11"><span class="id" title="binder">A</span></a>} `{<a id="H:12" class="idref" href="#H:12"><span class="id" title="binder">_</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#A:11"><span class="id" title="variable">A</span></a>} : <span class="id" title="class">Show</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:11"><span class="id" title="variable">A</span></a>) :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="showTree" class="idref" href="#showTree"><span class="id" title="instance">showTree</span></a> {<a id="A:11" class="idref" href="#A:11"><span class="id" title="binder">A</span></a>} `{<a id="H:12" class="idref" href="#H:12"><span class="id" title="binder">_</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#A:11"><span class="id" title="variable">A</span></a>} : <span class="id" title="class">Show</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:11"><span class="id" title="variable">A</span></a>) :=<br/>
 &nbsp;&nbsp;{| <span class="id" title="method">show</span> := <span class="id" title="keyword">let</span> <span class="id" title="keyword">fix</span> <a id="aux:16" class="idref" href="#aux:16"><span class="id" title="binder">aux</span></a> <a id="t:13" class="idref" href="#t:13"><span class="id" title="binder">t</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#t:13"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a> ⇒ "Leaf"<br/>
@@ -451,7 +457,7 @@ This brings us to our first generator <i>combinator</i>, called <span class="inl
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">oneOf_</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">oneOf_</span>.<br/>
 </div>
 
 <div class="doc">
@@ -510,7 +516,7 @@ This brings us to our first generator <i>combinator</i>, called <span class="inl
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="genTreeSized" class="idref" href="#genTreeSized"><span class="id" title="definition">genTreeSized</span></a> {<a id="A:17" class="idref" href="#A:17"><span class="id" title="binder">A</span></a>} (<a id="sz:18" class="idref" href="#sz:18"><span class="id" title="binder">sz</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="g:19" class="idref" href="#g:19"><span class="id" title="binder">g</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#A:17"><span class="id" title="variable">A</span></a>) : <span class="id" title="axiom">G</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:17"><span class="id" title="variable">A</span></a>) :=<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="genTreeSized" class="idref" href="#genTreeSized"><span class="id" title="definition">genTreeSized</span></a> {<a id="A:17" class="idref" href="#A:17"><span class="id" title="binder">A</span></a>} (<a id="sz:18" class="idref" href="#sz:18"><span class="id" title="binder">sz</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="g:19" class="idref" href="#g:19"><span class="id" title="binder">g</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#A:17"><span class="id" title="variable">A</span></a>) : <span class="id" title="definition">G</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:17"><span class="id" title="variable">A</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#sz:18"><span class="id" title="variable">sz</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <span class="id" title="method">ret</span> <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">sz'</span> ⇒<br/>
@@ -562,11 +568,11 @@ This brings us to our first generator <i>combinator</i>, called <span class="inl
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Check</span> <span class="id" title="axiom">freq_</span>.<br/>
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">freq_</span>.<br/>
 </div>
 
 <div class="doc">
-<pre>     ===&gt; freq_ : G ?A <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> seq (nat * G ?A) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> G ?A 
+<pre>     ===&gt; freq_ : G ?A <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> list (nat * G ?A) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> G ?A 
 </pre>
 
 <div class="paragraph"> </div>
@@ -580,11 +586,11 @@ This brings us to our first generator <i>combinator</i>, called <span class="inl
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="genTreeSized'" class="idref" href="#genTreeSized'"><span class="id" title="definition">genTreeSized'</span></a> {<a id="A:22" class="idref" href="#A:22"><span class="id" title="binder">A</span></a>} (<a id="sz:23" class="idref" href="#sz:23"><span class="id" title="binder">sz</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="g:24" class="idref" href="#g:24"><span class="id" title="binder">g</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#A:22"><span class="id" title="variable">A</span></a>) : <span class="id" title="axiom">G</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:22"><span class="id" title="variable">A</span></a>) :=<br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="genTreeSized'" class="idref" href="#genTreeSized'"><span class="id" title="definition">genTreeSized'</span></a> {<a id="A:22" class="idref" href="#A:22"><span class="id" title="binder">A</span></a>} (<a id="sz:23" class="idref" href="#sz:23"><span class="id" title="binder">sz</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="g:24" class="idref" href="#g:24"><span class="id" title="binder">g</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#A:22"><span class="id" title="variable">A</span></a>) : <span class="id" title="definition">G</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:22"><span class="id" title="variable">A</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#sz:23"><span class="id" title="variable">sz</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <span class="id" title="method">ret</span> <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">sz'</span> ⇒<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">freq</span> <span class="id" title="notation">[</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>  <span class="id" title="method">ret</span> <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <span class="id" title="notation">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">freq</span> <span class="id" title="notation">[</span> <span class="id" title="notation">(</span>1<span class="id" title="notation">,</span>  <span class="id" title="method">ret</span> <a class="idref" href="QC.html#Leaf"><span class="id" title="constructor">Leaf</span></a><span class="id" title="notation">)</span> <span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="QC.html#sz:23"><span class="id" title="variable">sz</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="definition">liftM3</span> <a class="idref" href="QC.html#Node"><span class="id" title="constructor">Node</span></a> <a class="idref" href="QC.html#g:24"><span class="id" title="variable">g</span></a> (<a class="idref" href="QC.html#genTreeSized':25"><span class="id" title="definition">genTreeSized'</span></a> <span class="id" title="var">sz'</span> <a class="idref" href="QC.html#g:24"><span class="id" title="variable">g</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="QC.html#genTreeSized':25"><span class="id" title="definition">genTreeSized'</span></a> <span class="id" title="var">sz'</span> <a class="idref" href="QC.html#g:24"><span class="id" title="variable">g</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">]</span><br/>
@@ -680,7 +686,7 @@ To formulate a property about <span class="inlinecode"><span class="id" title="v
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="eq_dec_tree" class="idref" href="#eq_dec_tree"><span class="id" title="instance">eq_dec_tree</span></a> (<a id="t<sub>1</sub>:31" class="idref" href="#t<sub>1</sub>:31"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:32" class="idref" href="#t<sub>2</sub>:32"><span class="id" title="binder">t<sub>2</sub></span></a> : <a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="QC.html#t<sub>1</sub>:31"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="QC.html#t<sub>2</sub>:32"><span class="id" title="variable">t<sub>2</sub></span></a>).<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="eq_dec_tree" class="idref" href="#eq_dec_tree"><span class="id" title="instance">eq_dec_tree</span></a> (<a id="t<sub>1</sub>:31" class="idref" href="#t<sub>1</sub>:31"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:32" class="idref" href="#t<sub>2</sub>:32"><span class="id" title="binder">t<sub>2</sub></span></a> : <a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="QC.html#t<sub>1</sub>:31"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="QC.html#t<sub>2</sub>:32"><span class="id" title="variable">t<sub>2</sub></span></a>).<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">constructor</span>; <span class="id" title="var">dec_eq</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
@@ -724,7 +730,7 @@ First, we need a type of test results -- let's call it <span class="inlinecode">
 <div class="code">
 
 <span class="id" title="keyword">Inductive</span> <a id="CheckerPlayground1.Result" class="idref" href="#CheckerPlayground1.Result"><span class="id" title="inductive">Result</span></a> := <a id="CheckerPlayground1.Success" class="idref" href="#CheckerPlayground1.Success"><span class="id" title="constructor">Success</span></a> | <a id="CheckerPlayground1.Failure" class="idref" href="#CheckerPlayground1.Failure"><span class="id" title="constructor">Failure</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground1.showResult" class="idref" href="#CheckerPlayground1.showResult"><span class="id" title="instance">showResult</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#CheckerPlayground1.Result"><span class="id" title="inductive">Result</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground1.showResult" class="idref" href="#CheckerPlayground1.showResult"><span class="id" title="instance">showResult</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#CheckerPlayground1.Result"><span class="id" title="inductive">Result</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">show</span> <a id="r:36" class="idref" href="#r:36"><span class="id" title="binder">r</span></a> := <span class="id" title="keyword">match</span> <a class="idref" href="QC.html#r:36"><span class="id" title="variable">r</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="QC.html#CheckerPlayground1.Success"><span class="id" title="constructor">Success</span></a> ⇒ "Success" | <a class="idref" href="QC.html#CheckerPlayground1.Failure"><span class="id" title="constructor">Failure</span></a> ⇒ "Failure" <span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;}.<br/>
@@ -735,7 +741,7 @@ Then we can define the type <span class="inlinecode"><span class="id" title="var
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="CheckerPlayground1.Checker" class="idref" href="#CheckerPlayground1.Checker"><span class="id" title="definition">Checker</span></a> := <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#CheckerPlayground1.Result"><span class="id" title="inductive">Result</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="CheckerPlayground1.Checker" class="idref" href="#CheckerPlayground1.Checker"><span class="id" title="definition">Checker</span></a> := <span class="id" title="definition">G</span> <a class="idref" href="QC.html#CheckerPlayground1.Result"><span class="id" title="inductive">Result</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -774,7 +780,7 @@ It is easy to give a <span class="inlinecode"><span class="id" title="var">bool<
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground1.checkableBool" class="idref" href="#CheckerPlayground1.checkableBool"><span class="id" title="instance">checkableBool</span></a> : <a class="idref" href="QC.html#CheckerPlayground1.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground1.checkableBool" class="idref" href="#CheckerPlayground1.checkableBool"><span class="id" title="instance">checkableBool</span></a> : <a class="idref" href="QC.html#CheckerPlayground1.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#CheckerPlayground1.checker"><span class="id" title="method">checker</span></a> <a id="b:41" class="idref" href="#b:41"><span class="id" title="binder">b</span></a> := <span class="id" title="keyword">if</span> <a class="idref" href="QC.html#b:41"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <span class="id" title="method">ret</span> <a class="idref" href="QC.html#CheckerPlayground1.Success"><span class="id" title="constructor">Success</span></a> <span class="id" title="keyword">else</span> <span class="id" title="method">ret</span> <a class="idref" href="QC.html#CheckerPlayground1.Failure"><span class="id" title="constructor">Failure</span></a><br/>
 &nbsp;&nbsp;}.<br/>
@@ -832,8 +838,8 @@ That is, the boolean value <span class="inlinecode"><span class="id" title="var"
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="CheckerPlayground2" class="idref" href="#CheckerPlayground2"><span class="id" title="module">CheckerPlayground2</span></a>.<br/>
-<span class="id" title="keyword">Export</span> <span class="id" title="var">CheckerPlayground1</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground2.checkableDec" class="idref" href="#CheckerPlayground2.checkableDec"><span class="id" title="instance">checkableDec</span></a> `{<a id="P:42" class="idref" href="#P:42"><span class="id" title="binder">P</span></a> : <span class="id" title="keyword">Prop</span>} `{<a id="H:43" class="idref" href="#H:43"><span class="id" title="binder">Dec</span></a> <a id="H:43" class="idref" href="#H:43"><span class="id" title="binder">P</span></a>} : <a class="idref" href="QC.html#CheckerPlayground1.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="QC.html#P:42"><span class="id" title="variable">P</span></a> :=<br/>
+<span class="id" title="keyword">Export</span> <a class="idref" href="QC.html#CheckerPlayground1"><span class="id" title="module">CheckerPlayground1</span></a>.<br/><hr class='doublespaceincode'/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground2.checkableDec" class="idref" href="#CheckerPlayground2.checkableDec"><span class="id" title="instance">checkableDec</span></a> `{<a id="P:42" class="idref" href="#P:42"><span class="id" title="binder">P</span></a> : <span class="id" title="keyword">Prop</span>} `{<a id="H:43" class="idref" href="#H:43"><span class="id" title="binder">Dec</span></a> <a id="H:43" class="idref" href="#H:43"><span class="id" title="binder">P</span></a>} : <a class="idref" href="QC.html#CheckerPlayground1.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="QC.html#P:42"><span class="id" title="variable">P</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#CheckerPlayground1.checker"><span class="id" title="method">checker</span></a> <a id="p:44" class="idref" href="#p:44"><span class="id" title="binder">p</span></a> := <span class="id" title="keyword">if</span> <span class="id" title="var">P</span><span class="id" title="notation">?</span> <span class="id" title="keyword">then</span> <span class="id" title="method">ret</span> <a class="idref" href="QC.html#CheckerPlayground1.Success"><span class="id" title="constructor">Success</span></a> <span class="id" title="keyword">else</span> <span class="id" title="method">ret</span> <a class="idref" href="QC.html#CheckerPlayground1.Failure"><span class="id" title="constructor">Failure</span></a><br/>
 &nbsp;&nbsp;}.<br/>
@@ -897,7 +903,7 @@ The somewhat astononishing thing about the <span class="inlinecode"><span class=
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="CheckerPlayground3" class="idref" href="#CheckerPlayground3"><span class="id" title="module">CheckerPlayground3</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">CheckerPlayground2</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="QC.html#CheckerPlayground2"><span class="id" title="module">CheckerPlayground2</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -917,7 +923,7 @@ Now let's go back to <span class="inlinecode"><span class="id" title="var">mirro
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="CheckerPlayground3.forAll" class="idref" href="#CheckerPlayground3.forAll"><span class="id" title="definition">forAll</span></a> {<a id="A:47" class="idref" href="#A:47"><span class="id" title="binder">A</span></a> <a id="B:48" class="idref" href="#B:48"><span class="id" title="binder">B</span></a> : <span class="id" title="keyword">Type</span>} `{<a id="H:49" class="idref" href="#H:49"><span class="id" title="binder">Checkable</span></a> <a id="H:49" class="idref" href="#H:49"><span class="id" title="binder">B</span></a>}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="g:50" class="idref" href="#g:50"><span class="id" title="binder">g</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#A:47"><span class="id" title="variable">A</span></a>) (<a id="f:51" class="idref" href="#f:51"><span class="id" title="binder">f</span></a> : <a class="idref" href="QC.html#A:47"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#B:48"><span class="id" title="variable">B</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="g:50" class="idref" href="#g:50"><span class="id" title="binder">g</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#A:47"><span class="id" title="variable">A</span></a>) (<a id="f:51" class="idref" href="#f:51"><span class="id" title="binder">f</span></a> : <a class="idref" href="QC.html#A:47"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#B:48"><span class="id" title="variable">B</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="QC.html#CheckerPlayground1.Checker"><span class="id" title="definition">Checker</span></a> :=<br/>
 &nbsp;&nbsp;<a id="a:52" class="idref" href="#a:52"><span class="id" title="binder">a</span></a> <span class="id" title="notation">&lt;-</span> <a class="idref" href="QC.html#g:50"><span class="id" title="variable">g</span></a> <span class="id" title="notation">;;</span><br/>
 &nbsp;&nbsp;<a class="idref" href="QC.html#CheckerPlayground1.checker"><span class="id" title="method">checker</span></a> (<a class="idref" href="QC.html#f:51"><span class="id" title="variable">f</span></a> <a class="idref" href="QC.html#a:52"><span class="id" title="variable">a</span></a>).<br/><hr class='doublespaceincode'/>
@@ -1030,19 +1036,19 @@ Sample&nbsp;(CheckerPlayground3.forAll<br/>
 <span class="id" title="keyword">Inductive</span> <a id="CheckerPlayground4.Result" class="idref" href="#CheckerPlayground4.Result"><span class="id" title="inductive">Result</span></a> :=<br/>
 &nbsp;&nbsp;| <a id="CheckerPlayground4.Success" class="idref" href="#CheckerPlayground4.Success"><span class="id" title="constructor">Success</span></a> : <a class="idref" href="QC.html#Result:56"><span class="id" title="inductive">Result</span></a><br/>
 &nbsp;&nbsp;| <a id="CheckerPlayground4.Failure" class="idref" href="#CheckerPlayground4.Failure"><span class="id" title="constructor">Failure</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:58" class="idref" href="#A:58"><span class="id" title="binder">A</span></a>} `{<a id="H:59" class="idref" href="#H:59"><span class="id" title="binder">Show</span></a> <a id="H:59" class="idref" href="#H:59"><span class="id" title="binder">A</span></a>}, <a class="idref" href="QC.html#A:58"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#Result:56"><span class="id" title="inductive">Result</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.showResult" class="idref" href="#CheckerPlayground4.showResult"><span class="id" title="instance">showResult</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#CheckerPlayground4.Result"><span class="id" title="inductive">Result</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.showResult" class="idref" href="#CheckerPlayground4.showResult"><span class="id" title="instance">showResult</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#CheckerPlayground4.Result"><span class="id" title="inductive">Result</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">show</span> <a id="r:60" class="idref" href="#r:60"><span class="id" title="binder">r</span></a> := <span class="id" title="keyword">match</span> <a class="idref" href="QC.html#r:60"><span class="id" title="variable">r</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#CheckerPlayground4.Success"><span class="id" title="constructor">Success</span></a> ⇒ "Success"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#CheckerPlayground4.Failure"><span class="id" title="constructor">Failure</span></a> <span class="id" title="var">a</span> ⇒ "Failure: " <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#169ad156fbc6036a53a0338819a2b301"><span class="id" title="notation">++</span></a> <span class="id" title="method">show</span> <span class="id" title="var">a</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="CheckerPlayground4.Checker" class="idref" href="#CheckerPlayground4.Checker"><span class="id" title="definition">Checker</span></a> := <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#CheckerPlayground4.Result"><span class="id" title="inductive">Result</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="CheckerPlayground4.Checker" class="idref" href="#CheckerPlayground4.Checker"><span class="id" title="definition">Checker</span></a> := <span class="id" title="definition">G</span> <a class="idref" href="QC.html#CheckerPlayground4.Result"><span class="id" title="inductive">Result</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Class</span> <a id="CheckerPlayground4.Checkable" class="idref" href="#CheckerPlayground4.Checkable"><span class="id" title="record">Checkable</span></a> <a id="A:62" class="idref" href="#A:62"><span class="id" title="binder">A</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a id="CheckerPlayground4.checker" class="idref" href="#CheckerPlayground4.checker"><span class="id" title="projection">checker</span></a> : <a class="idref" href="QC.html#A:62"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#CheckerPlayground4.Checker"><span class="id" title="definition">Checker</span></a><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.showUnit" class="idref" href="#CheckerPlayground4.showUnit"><span class="id" title="instance">showUnit</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.showUnit" class="idref" href="#CheckerPlayground4.showUnit"><span class="id" title="instance">showUnit</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">show</span> <a id="u:65" class="idref" href="#u:65"><span class="id" title="binder">u</span></a> := "tt"<br/>
 &nbsp;&nbsp;}.<br/>
@@ -1055,11 +1061,11 @@ The failure cases in the <span class="inlinecode"><span class="id" title="var">b
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.checkableBool" class="idref" href="#CheckerPlayground4.checkableBool"><span class="id" title="instance">checkableBool</span></a> : <a class="idref" href="QC.html#CheckerPlayground4.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.checkableBool" class="idref" href="#CheckerPlayground4.checkableBool"><span class="id" title="instance">checkableBool</span></a> : <a class="idref" href="QC.html#CheckerPlayground4.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#CheckerPlayground4.checker"><span class="id" title="method">checker</span></a> <a id="b:66" class="idref" href="#b:66"><span class="id" title="binder">b</span></a> := <span class="id" title="keyword">if</span> <a class="idref" href="QC.html#b:66"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <span class="id" title="method">ret</span> <a class="idref" href="QC.html#CheckerPlayground4.Success"><span class="id" title="constructor">Success</span></a> <span class="id" title="keyword">else</span> <span class="id" title="method">ret</span> (<a class="idref" href="QC.html#CheckerPlayground4.Failure"><span class="id" title="constructor">Failure</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>)<br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.checkableDec" class="idref" href="#CheckerPlayground4.checkableDec"><span class="id" title="instance">checkableDec</span></a> `{<a id="P:67" class="idref" href="#P:67"><span class="id" title="binder">P</span></a> : <span class="id" title="keyword">Prop</span>} `{<a id="H:68" class="idref" href="#H:68"><span class="id" title="binder">Dec</span></a> <a id="H:68" class="idref" href="#H:68"><span class="id" title="binder">P</span></a>} : <a class="idref" href="QC.html#CheckerPlayground4.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="QC.html#P:67"><span class="id" title="variable">P</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CheckerPlayground4.checkableDec" class="idref" href="#CheckerPlayground4.checkableDec"><span class="id" title="instance">checkableDec</span></a> `{<a id="P:67" class="idref" href="#P:67"><span class="id" title="binder">P</span></a> : <span class="id" title="keyword">Prop</span>} `{<a id="H:68" class="idref" href="#H:68"><span class="id" title="binder">Dec</span></a> <a id="H:68" class="idref" href="#H:68"><span class="id" title="binder">P</span></a>} : <a class="idref" href="QC.html#CheckerPlayground4.Checkable"><span class="id" title="class">Checkable</span></a> <a class="idref" href="QC.html#P:67"><span class="id" title="variable">P</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#CheckerPlayground4.checker"><span class="id" title="method">checker</span></a> <a id="p:69" class="idref" href="#p:69"><span class="id" title="binder">p</span></a> := <span class="id" title="keyword">if</span> <span class="id" title="var">P</span><span class="id" title="notation">?</span> <span class="id" title="keyword">then</span> <span class="id" title="method">ret</span> <a class="idref" href="QC.html#CheckerPlayground4.Success"><span class="id" title="constructor">Success</span></a> <span class="id" title="keyword">else</span> <span class="id" title="method">ret</span> (<a class="idref" href="QC.html#CheckerPlayground4.Failure"><span class="id" title="constructor">Failure</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>)<br/>
 &nbsp;&nbsp;}.<br/>
@@ -1073,7 +1079,7 @@ The interesting case is the <span class="inlinecode"><span class="id" title="var
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="CheckerPlayground4.forAll" class="idref" href="#CheckerPlayground4.forAll"><span class="id" title="definition">forAll</span></a> {<a id="A:70" class="idref" href="#A:70"><span class="id" title="binder">A</span></a> <a id="B:71" class="idref" href="#B:71"><span class="id" title="binder">B</span></a> : <span class="id" title="keyword">Type</span>} `{<a id="H:72" class="idref" href="#H:72"><span class="id" title="binder">Show</span></a> <a id="H:72" class="idref" href="#H:72"><span class="id" title="binder">A</span></a>} `{<a id="H<sub>0</sub>:73" class="idref" href="#H<sub>0</sub>:73"><span class="id" title="binder">Checkable</span></a> <a id="H<sub>0</sub>:73" class="idref" href="#H<sub>0</sub>:73"><span class="id" title="binder">B</span></a>}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="g:74" class="idref" href="#g:74"><span class="id" title="binder">g</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#A:70"><span class="id" title="variable">A</span></a>) (<a id="f:75" class="idref" href="#f:75"><span class="id" title="binder">f</span></a> : <a class="idref" href="QC.html#A:70"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#B:71"><span class="id" title="variable">B</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="g:74" class="idref" href="#g:74"><span class="id" title="binder">g</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#A:70"><span class="id" title="variable">A</span></a>) (<a id="f:75" class="idref" href="#f:75"><span class="id" title="binder">f</span></a> : <a class="idref" href="QC.html#A:70"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#B:71"><span class="id" title="variable">B</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <a class="idref" href="QC.html#CheckerPlayground4.Checker"><span class="id" title="definition">Checker</span></a> :=<br/>
 &nbsp;&nbsp;<a id="a:76" class="idref" href="#a:76"><span class="id" title="binder">a</span></a> <span class="id" title="notation">&lt;-</span> <a class="idref" href="QC.html#g:74"><span class="id" title="variable">g</span></a> <span class="id" title="notation">;;</span><br/>
 &nbsp;&nbsp;<a id="r:77" class="idref" href="#r:77"><span class="id" title="binder">r</span></a> <span class="id" title="notation">&lt;-</span> <a class="idref" href="QC.html#CheckerPlayground4.checker"><span class="id" title="method">checker</span></a> (<a class="idref" href="QC.html#f:75"><span class="id" title="variable">f</span></a> <a class="idref" href="QC.html#a:76"><span class="id" title="variable">a</span></a>) <span class="id" title="notation">;;</span><br/>
@@ -1192,7 +1198,7 @@ QuickChick<br/>
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="shrinkColor" class="idref" href="#shrinkColor"><span class="id" title="instance">shrinkColor</span></a> : <span class="id" title="class">Shrink</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="shrinkColor" class="idref" href="#shrinkColor"><span class="id" title="instance">shrinkColor</span></a> : <span class="id" title="class">Shrink</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">shrink</span> <a id="c:79" class="idref" href="#c:79"><span class="id" title="binder">c</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#c:79"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
@@ -1281,7 +1287,7 @@ Most of the time, shrinking functions should try to return
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> (<span class="id" title="keyword">fun</span> <a id="l':87" class="idref" href="#l':87"><span class="id" title="binder">l'</span></a> ⇒ <a class="idref" href="QC.html#Node"><span class="id" title="constructor">Node</span></a> <span class="id" title="var">x</span> <a class="idref" href="QC.html#l':87"><span class="id" title="variable">l'</span></a> <span class="id" title="var">r</span>) (<a class="idref" href="QC.html#shrinkTreeAux:84"><span class="id" title="definition">shrinkTreeAux</span></a> <a class="idref" href="QC.html#s:82"><span class="id" title="variable">s</span></a> <span class="id" title="var">l</span>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> (<span class="id" title="keyword">fun</span> <a id="r':88" class="idref" href="#r':88"><span class="id" title="binder">r'</span></a> ⇒ <a class="idref" href="QC.html#Node"><span class="id" title="constructor">Node</span></a> <span class="id" title="var">x</span> <span class="id" title="var">l</span> <a class="idref" href="QC.html#r':88"><span class="id" title="variable">r'</span></a>) (<a class="idref" href="QC.html#shrinkTreeAux:84"><span class="id" title="definition">shrinkTreeAux</span></a> <a class="idref" href="QC.html#s:82"><span class="id" title="variable">s</span></a> <span class="id" title="var">r</span>)<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="shrinkTree" class="idref" href="#shrinkTree"><span class="id" title="instance">shrinkTree</span></a> {<a id="A:89" class="idref" href="#A:89"><span class="id" title="binder">A</span></a>} `{<a id="H:90" class="idref" href="#H:90"><span class="id" title="binder">Shrink</span></a> <a id="H:90" class="idref" href="#H:90"><span class="id" title="binder">A</span></a>} : <span class="id" title="class">Shrink</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:89"><span class="id" title="variable">A</span></a>) := <br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="shrinkTree" class="idref" href="#shrinkTree"><span class="id" title="instance">shrinkTree</span></a> {<a id="A:89" class="idref" href="#A:89"><span class="id" title="binder">A</span></a>} `{<a id="H:90" class="idref" href="#H:90"><span class="id" title="binder">Shrink</span></a> <a id="H:90" class="idref" href="#H:90"><span class="id" title="binder">A</span></a>} : <span class="id" title="class">Shrink</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:89"><span class="id" title="variable">A</span></a>) := <br/>
 &nbsp;&nbsp;{| <span class="id" title="method">shrink</span> <a id="x:91" class="idref" href="#x:91"><span class="id" title="binder">x</span></a> := <a class="idref" href="QC.html#shrinkTreeAux"><span class="id" title="definition">shrinkTreeAux</span></a> <span class="id" title="method">shrink</span> <a class="idref" href="QC.html#x:91"><span class="id" title="variable">x</span></a> |}.<br/>
 </div>
 
@@ -1329,8 +1335,8 @@ With <span class="inlinecode"><span class="id" title="var">shrinkTree</span></sp
 | <a id="TLeaf" class="idref" href="#TLeaf"><span class="id" title="constructor">TLeaf</span></a> : <a class="idref" href="QC.html#TernaryTree:93"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="QC.html#A:92"><span class="id" title="variable">A</span></a><br/>
 | <a id="TNode" class="idref" href="#TNode"><span class="id" title="constructor">TNode</span></a> : <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#A:92"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#TernaryTree:93"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="QC.html#A:92"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#TernaryTree:93"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="QC.html#A:92"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#TernaryTree:93"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="QC.html#A:92"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#TernaryTree:93"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="QC.html#A:92"><span class="id" title="variable">A</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="QC.html#TLeaf"><span class="id" title="constructor">TLeaf</span></a> {<span class="id" title="var">A</span>}.<br/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="QC.html#TNode"><span class="id" title="constructor">TNode</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="QC.html#TLeaf"><span class="id" title="constructor">TLeaf</span></a> {<span class="id" title="var">A</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="QC.html#TNode"><span class="id" title="constructor">TNode</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1432,7 +1438,7 @@ We can traverse a path by iterating over the <span class="inlinecode"><span clas
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="QC.html#TLeaf"><span class="id" title="constructor">TLeaf</span></a><br/>
 &nbsp;&nbsp;| <a class="idref" href="QC.html#TNode"><span class="id" title="constructor">TNode</span></a> <span class="id" title="var">x</span> <span class="id" title="var">l</span> <span class="id" title="var">m</span> <span class="id" title="var">r</span> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#p:108"><span class="id" title="variable">p</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">tl</span> ⇒ <a class="idref" href="QC.html#traverse_path:110"><span class="id" title="definition">traverse_path</span></a> <span class="id" title="var">tl</span> (<a class="idref" href="QC.html#traverse_node"><span class="id" title="definition">traverse_node</span></a> <span class="id" title="var">h</span> <span class="id" title="var">l</span> <span class="id" title="var">m</span> <span class="id" title="var">r</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">h</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#tl"><span class="id" title="definition">tl</span></a> ⇒ <a class="idref" href="QC.html#traverse_path:110"><span class="id" title="definition">traverse_path</span></a> <span class="id" title="var">tl</span> (<a class="idref" href="QC.html#traverse_node"><span class="id" title="definition">traverse_node</span></a> <span class="id" title="var">h</span> <span class="id" title="var">l</span> <span class="id" title="var">m</span> <span class="id" title="var">r</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="QC.html#t:109"><span class="id" title="variable">t</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
@@ -1457,7 +1463,7 @@ Before we can state some properties about paths in ternary trees, it's
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="eq_dec_tern_tree" class="idref" href="#eq_dec_tern_tree"><span class="id" title="instance">eq_dec_tern_tree</span></a> (<a id="t<sub>1</sub>:115" class="idref" href="#t<sub>1</sub>:115"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:116" class="idref" href="#t<sub>2</sub>:116"><span class="id" title="binder">t<sub>2</sub></span></a> : <a class="idref" href="QC.html#TernaryTree"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="QC.html#t<sub>1</sub>:115"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="QC.html#t<sub>2</sub>:116"><span class="id" title="variable">t<sub>2</sub></span></a>).<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="eq_dec_tern_tree" class="idref" href="#eq_dec_tern_tree"><span class="id" title="instance">eq_dec_tern_tree</span></a> (<a id="t<sub>1</sub>:115" class="idref" href="#t<sub>1</sub>:115"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:116" class="idref" href="#t<sub>2</sub>:116"><span class="id" title="binder">t<sub>2</sub></span></a> : <a class="idref" href="QC.html#TernaryTree"><span class="id" title="inductive">TernaryTree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="QC.html#t<sub>1</sub>:115"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="QC.html#t<sub>2</sub>:116"><span class="id" title="variable">t<sub>2</sub></span></a>).<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">constructor</span>; <span class="id" title="var">dec_eq</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
@@ -1482,16 +1488,16 @@ Before using this property to test <span class="inlinecode"><span class="id" tit
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="showDirection" class="idref" href="#showDirection"><span class="id" title="instance">showDirection</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#direction"><span class="id" title="inductive">direction</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="showDirection" class="idref" href="#showDirection"><span class="id" title="instance">showDirection</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#direction"><span class="id" title="inductive">direction</span></a> :=<br/>
 &nbsp;&nbsp;{| <span class="id" title="method">show</span> <a id="x:119" class="idref" href="#x:119"><span class="id" title="binder">x</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#x:119"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#Left"><span class="id" title="constructor">Left</span></a> ⇒ "Left"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#Middle"><span class="id" title="constructor">Middle</span></a> ⇒ "Middle"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#Right"><span class="id" title="constructor">Right</span></a> ⇒ "Right"<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span> |}.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="genDirection" class="idref" href="#genDirection"><span class="id" title="definition">genDirection</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#direction"><span class="id" title="inductive">direction</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="genDirection" class="idref" href="#genDirection"><span class="id" title="definition">genDirection</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#direction"><span class="id" title="inductive">direction</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="notation">elems</span> <span class="id" title="notation">[</span><a class="idref" href="QC.html#Left"><span class="id" title="constructor">Left</span></a><span class="id" title="notation">;</span> <a class="idref" href="QC.html#Middle"><span class="id" title="constructor">Middle</span></a><span class="id" title="notation">;</span> <a class="idref" href="QC.html#Right"><span class="id" title="constructor">Right</span></a><span class="id" title="notation">]</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="shrinkDirection" class="idref" href="#shrinkDirection"><span class="id" title="instance">shrinkDirection</span></a> : <span class="id" title="class">Shrink</span> <a class="idref" href="QC.html#direction"><span class="id" title="inductive">direction</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="shrinkDirection" class="idref" href="#shrinkDirection"><span class="id" title="instance">shrinkDirection</span></a> : <span class="id" title="class">Shrink</span> <a class="idref" href="QC.html#direction"><span class="id" title="inductive">direction</span></a> :=<br/>
 &nbsp;&nbsp;{| <span class="id" title="method">shrink</span> <a id="d:121" class="idref" href="#d:121"><span class="id" title="binder">d</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#d:121"><span class="id" title="variable">d</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="QC.html#Left"><span class="id" title="constructor">Left</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><br/>
@@ -1507,10 +1513,10 @@ For generating a list of paths, we'll use the built-in function
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="showPath" class="idref" href="#showPath"><span class="id" title="instance">showPath</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#path"><span class="id" title="definition">path</span></a> := <span class="id" title="instance">showList</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="genPath" class="idref" href="#genPath"><span class="id" title="definition">genPath</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#path"><span class="id" title="definition">path</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="axiom">listOf</span> <a class="idref" href="QC.html#genDirection"><span class="id" title="definition">genDirection</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Instance</span> <a id="shrinkPath" class="idref" href="#shrinkPath"><span class="id" title="instance">shrinkPath</span></a> : <span class="id" title="class">Shrink</span> <a class="idref" href="QC.html#path"><span class="id" title="definition">path</span></a> := <span class="id" title="instance">shrinkList</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="showPath" class="idref" href="#showPath"><span class="id" title="instance">showPath</span></a> : <span class="id" title="class">Show</span> <a class="idref" href="QC.html#path"><span class="id" title="definition">path</span></a> := <span class="id" title="instance">showList</span>.<br/><hr class='doublespaceincode'/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="genPath" class="idref" href="#genPath"><span class="id" title="instance">genPath</span></a> : <span class="id" title="class">Gen</span> <a class="idref" href="QC.html#path"><span class="id" title="definition">path</span></a> :=<br/>
+&nbsp;&nbsp;{<span class="id" title="method">arbitrary</span> := <span class="id" title="definition">listOf</span> <a class="idref" href="QC.html#genDirection"><span class="id" title="definition">genDirection</span></a> }.<br/><hr class='doublespaceincode'/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="shrinkPath" class="idref" href="#shrinkPath"><span class="id" title="instance">shrinkPath</span></a> : <span class="id" title="class">Shrink</span> <a class="idref" href="QC.html#path"><span class="id" title="definition">path</span></a> := <span class="id" title="instance">shrinkList</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1546,7 +1552,7 @@ For generating a list of paths, we'll use the built-in function
 <span class="id" title="keyword">Module</span> <a id="DefineGen" class="idref" href="#DefineGen"><span class="id" title="module">DefineGen</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Class</span> <a id="DefineGen.Gen" class="idref" href="#DefineGen.Gen"><span class="id" title="record">Gen</span></a> (<a id="A:123" class="idref" href="#A:123"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) :=<br/>
 &nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a id="DefineGen.arbitrary" class="idref" href="#DefineGen.arbitrary"><span class="id" title="projection">arbitrary</span></a> : <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#A:123"><span class="id" title="variable">A</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="DefineGen.arbitrary" class="idref" href="#DefineGen.arbitrary"><span class="id" title="projection">arbitrary</span></a> : <span class="id" title="definition">G</span> <a class="idref" href="QC.html#A:123"><span class="id" title="variable">A</span></a><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="QC.html#DefineGen"><span class="id" title="module">DefineGen</span></a>.<br/>
 </div>
@@ -1559,7 +1565,7 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">Gen</span></s
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="gen_color" class="idref" href="#gen_color"><span class="id" title="instance">gen_color</span></a> : <span class="id" title="class">Gen</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="gen_color" class="idref" href="#gen_color"><span class="id" title="instance">gen_color</span></a> : <span class="id" title="class">Gen</span> <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">arbitrary</span> := <a class="idref" href="QC.html#genColor"><span class="id" title="definition">genColor</span></a><br/>
 &nbsp;&nbsp;}.<br/>
@@ -1572,7 +1578,7 @@ Next, for convenience we package <span class="inlinecode"><span class="id" title
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="DefineArbitrary" class="idref" href="#DefineArbitrary"><span class="id" title="module">DefineArbitrary</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">DefineGen</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="QC.html#DefineGen"><span class="id" title="module">DefineGen</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Class</span> <a id="DefineArbitrary.Arbitrary" class="idref" href="#DefineArbitrary.Arbitrary"><span class="id" title="record">Arbitrary</span></a> (<a id="A:126" class="idref" href="#A:126"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) `{<a id="H:127" class="idref" href="#H:127"><span class="id" title="binder">Gen</span></a> <a id="H:127" class="idref" href="#H:127"><span class="id" title="binder">A</span></a>} `{<a id="H<sub>0</sub>:128" class="idref" href="#H<sub>0</sub>:128"><span class="id" title="binder">Shrink</span></a> <a id="H<sub>0</sub>:128" class="idref" href="#H<sub>0</sub>:128"><span class="id" title="binder">A</span></a>}.<br/>
 </div>
 
@@ -1612,7 +1618,7 @@ Since we have already defined <span class="inlinecode"><span class="id" title="v
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="eq_dec_color" class="idref" href="#eq_dec_color"><span class="id" title="instance">eq_dec_color</span></a> (<a id="x:132" class="idref" href="#x:132"><span class="id" title="binder">x</span></a> <a id="y:133" class="idref" href="#y:133"><span class="id" title="binder">y</span></a> : <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="QC.html#x:132"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="QC.html#y:133"><span class="id" title="variable">y</span></a>).<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="eq_dec_color" class="idref" href="#eq_dec_color"><span class="id" title="instance">eq_dec_color</span></a> (<a id="x:132" class="idref" href="#x:132"><span class="id" title="binder">x</span></a> <a id="y:133" class="idref" href="#y:133"><span class="id" title="binder">y</span></a> : <a class="idref" href="QC.html#color"><span class="id" title="inductive">color</span></a>) : <span class="id" title="class">Dec</span> (<a class="idref" href="QC.html#x:132"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="QC.html#y:133"><span class="id" title="variable">y</span></a>).<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="var">dec_eq</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
@@ -1621,7 +1627,7 @@ Putting it all together:
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;&nbsp;QuickChick&nbsp;every_color_is_red.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;QuickChick&nbsp;every_color_is_red.&nbsp;*)</span><br/>
 </div>
 
 <div class="doc">
@@ -1658,7 +1664,7 @@ Putting it all together:
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="DefineSized" class="idref" href="#DefineSized"><span class="id" title="module">DefineSized</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">DefineG</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="QC.html#DefineG"><span class="id" title="module">DefineG</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="DefineSized.sized" class="idref" href="#DefineSized.sized"><span class="id" title="definition">sized</span></a> {<a id="A:134" class="idref" href="#A:134"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:135" class="idref" href="#f:135"><span class="id" title="binder">f</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="QC.html#DefineG.G"><span class="id" title="inductive">G</span></a> <a class="idref" href="QC.html#A:134"><span class="id" title="variable">A</span></a>) : <a class="idref" href="QC.html#DefineG.G"><span class="id" title="inductive">G</span></a> <a class="idref" href="QC.html#A:134"><span class="id" title="variable">A</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="QC.html#DefineG.MkG"><span class="id" title="constructor">MkG</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="n:136" class="idref" href="#n:136"><span class="id" title="binder">n</span></a> <a id="r:137" class="idref" href="#r:137"><span class="id" title="binder">r</span></a> ⇒<br/>
@@ -1678,7 +1684,7 @@ To streamline assembling generators, it is convenient to introduce
 <span class="id" title="keyword">Module</span> <a id="DefineGenSized" class="idref" href="#DefineGenSized"><span class="id" title="module">DefineGenSized</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Class</span> <a id="DefineGenSized.GenSized" class="idref" href="#DefineGenSized.GenSized"><span class="id" title="record">GenSized</span></a> (<a id="A:138" class="idref" href="#A:138"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) :=<br/>
 &nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a id="DefineGenSized.arbitrarySized" class="idref" href="#DefineGenSized.arbitrarySized"><span class="id" title="projection">arbitrarySized</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="axiom">G</span> <a class="idref" href="QC.html#A:138"><span class="id" title="variable">A</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="DefineGenSized.arbitrarySized" class="idref" href="#DefineGenSized.arbitrarySized"><span class="id" title="projection">arbitrarySized</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">G</span> <a class="idref" href="QC.html#A:138"><span class="id" title="variable">A</span></a><br/>
 &nbsp;&nbsp;}.<br/>
 </div>
 
@@ -1688,9 +1694,9 @@ We can then define a generic <span class="inlinecode"><span class="id" title="va
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="DefineGenSized.GenOfGenSized" class="idref" href="#DefineGenSized.GenOfGenSized"><span class="id" title="instance">GenOfGenSized</span></a> {<a id="A:141" class="idref" href="#A:141"><span class="id" title="binder">A</span></a>} `{<a id="H:142" class="idref" href="#H:142"><span class="id" title="binder">GenSized</span></a> <a id="H:142" class="idref" href="#H:142"><span class="id" title="binder">A</span></a>} : <span class="id" title="class">Gen</span> <a class="idref" href="QC.html#A:141"><span class="id" title="variable">A</span></a> :=<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="DefineGenSized.GenOfGenSized" class="idref" href="#DefineGenSized.GenOfGenSized"><span class="id" title="instance">GenOfGenSized</span></a> {<a id="A:141" class="idref" href="#A:141"><span class="id" title="binder">A</span></a>} `{<a id="H:142" class="idref" href="#H:142"><span class="id" title="binder">GenSized</span></a> <a id="H:142" class="idref" href="#H:142"><span class="id" title="binder">A</span></a>} : <span class="id" title="class">Gen</span> <a class="idref" href="QC.html#A:141"><span class="id" title="variable">A</span></a> :=<br/>
 &nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">arbitrary</span> := <span class="id" title="axiom">sized</span> <a class="idref" href="QC.html#DefineGenSized.arbitrarySized"><span class="id" title="method">arbitrarySized</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">arbitrary</span> := <span class="id" title="method">sized</span> <a class="idref" href="QC.html#DefineGenSized.arbitrarySized"><span class="id" title="method">arbitrarySized</span></a><br/>
 &nbsp;&nbsp;}.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="QC.html#DefineGenSized"><span class="id" title="module">DefineGenSized</span></a>.<br/>
 </div>
@@ -1701,7 +1707,7 @@ Now we can make a <span class="inlinecode"><span class="id" title="var">Gen</spa
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Instance</span> <a id="genTree" class="idref" href="#genTree"><span class="id" title="instance">genTree</span></a> {<a id="A:143" class="idref" href="#A:143"><span class="id" title="binder">A</span></a>} `{<a id="H:144" class="idref" href="#H:144"><span class="id" title="binder">Gen</span></a> <a id="H:144" class="idref" href="#H:144"><span class="id" title="binder">A</span></a>} : <span class="id" title="class">GenSized</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:143"><span class="id" title="variable">A</span></a>) := <br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="genTree" class="idref" href="#genTree"><span class="id" title="instance">genTree</span></a> {<a id="A:143" class="idref" href="#A:143"><span class="id" title="binder">A</span></a>} `{<a id="H:144" class="idref" href="#H:144"><span class="id" title="binder">Gen</span></a> <a id="H:144" class="idref" href="#H:144"><span class="id" title="binder">A</span></a>} : <span class="id" title="class">GenSized</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="QC.html#A:143"><span class="id" title="variable">A</span></a>) := <br/>
 &nbsp;&nbsp;{| <span class="id" title="method">arbitrarySized</span> <a id="n:145" class="idref" href="#n:145"><span class="id" title="binder">n</span></a> := <a class="idref" href="QC.html#genTreeSized'"><span class="id" title="definition">genTreeSized'</span></a> <a class="idref" href="QC.html#n:145"><span class="id" title="variable">n</span></a> <span class="id" title="method">arbitrary</span> |}.<br/>
 </div>
 
@@ -1722,7 +1728,7 @@ Finally, with the <span class="inlinecode"><span class="id" title="var">Arbitrar
 <div class="code">
 
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;QuickChick&nbsp;tern_mirror_path_flip.&nbsp;*)</span><br/>
+<span class="comment">(*QuickChick&nbsp;tern_mirror_path_flip.&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -1736,11 +1742,11 @@ Finally, with the <span class="inlinecode"><span class="id" title="var">Arbitrar
     it can get tedious when we are testing code that involves many new
     <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> type declarations.  To streamline this process,
     <span class="inlinecode"><span class="id" title="var">QuickChick</span></span> provides some automation for deriving such instances
-    for "plain datatypes" automatically! 
+    for simple datatypes automatically! 
 </div>
 <div class="code">
 
-<span class="id" title="var">Derive</span> <span class="id" title="var">Arbitrary</span> <span class="id" title="keyword">for</span> <span class="id" title="var">Tree</span>.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">Arbitrary</span> <span class="id" title="keyword">for</span> <span class="id" title="var">Tree</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1752,7 +1758,7 @@ Finally, with the <span class="inlinecode"><span class="id" title="var">Arbitrar
 <div class="code">
 <span class="id" title="keyword">Print</span> <a class="idref" href="QC.html#GenSizedTree"><span class="id" title="instance">GenSizedTree</span></a>.<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="QC.html#ShrinkTree"><span class="id" title="instance">ShrinkTree</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Derive</span> <span class="id" title="keyword">Show</span> <span class="id" title="keyword">for</span> <span class="id" title="var">Tree</span>.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="keyword">Show</span> <span class="id" title="keyword">for</span> <span class="id" title="var">Tree</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1829,8 +1835,8 @@ We can write a dummy property <span class="inlinecode"><span class="id" title="v
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="treeProp" class="idref" href="#treeProp"><span class="id" title="definition">treeProp</span></a> (<a id="g:177" class="idref" href="#g:177"><span class="id" title="binder">g</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="axiom">G</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="axiom">G</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)) <a id="n:178" class="idref" href="#n:178"><span class="id" title="binder">n</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<a class="idref" href="QC.html#g:177"><span class="id" title="variable">g</span></a> <a class="idref" href="QC.html#n:178"><span class="id" title="variable">n</span></a> (<span class="id" title="axiom">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="QC.html#n:178"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)) (<span class="id" title="keyword">fun</span> <a id="t:179" class="idref" href="#t:179"><span class="id" title="binder">t</span></a> ⇒ <span class="id" title="definition">collect</span> (<a class="idref" href="QC.html#size"><span class="id" title="definition">size</span></a> <a class="idref" href="QC.html#t:179"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="treeProp" class="idref" href="#treeProp"><span class="id" title="definition">treeProp</span></a> (<a id="g:177" class="idref" href="#g:177"><span class="id" title="binder">g</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">G</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">G</span> (<a class="idref" href="QC.html#Tree"><span class="id" title="inductive">Tree</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)) <a id="n:178" class="idref" href="#n:178"><span class="id" title="binder">n</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<a class="idref" href="QC.html#g:177"><span class="id" title="variable">g</span></a> <a class="idref" href="QC.html#n:178"><span class="id" title="variable">n</span></a> (<span class="id" title="method">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="QC.html#n:178"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)) (<span class="id" title="keyword">fun</span> <a id="t:179" class="idref" href="#t:179"><span class="id" title="binder">t</span></a> ⇒ <span class="id" title="definition">collect</span> (<a class="idref" href="QC.html#size"><span class="id" title="definition">size</span></a> <a class="idref" href="QC.html#t:179"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;QuickChick&nbsp;(treeProp&nbsp;genTreeSized&nbsp;5).&nbsp;*)</span><br/>
 </div>
 
@@ -1967,15 +1973,36 @@ Consider a function that inserts a natural number into a sorted list.
 </div>
 
 <div class="doc">
-We could test <span class="inlinecode"><span class="id" title="var">insert</span></span> using the following <i>conditional</i> property: 
+We could test <span class="inlinecode"><span class="id" title="var">insert</span></span> using a <i>conditional</i> property, which uses _==&gt;_ to encode implication:
+ 
 </div>
 <div class="code">
 
+<span class="id" title="keyword">Check</span> <span class="id" title="definition">implication</span>.<br/>
+<span class="comment">(*&nbsp;<br/>
+&lt;&lt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;===&gt;&nbsp;implication&nbsp;:&nbsp;bool&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;Checker&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;Checker<br/>
+&gt;&gt;<br/>
+*)</span><br/>
+</div>
+
+<div class="doc">
+   The <i>implication</i> function takes a boolean (the precondition) and a
+   Checker (the conclusion of the property); if the boolean is true,
+   it tests the Checker, otherwise, it rejects the current test. The _==&gt;_ notation is in <i>Checker_scope</i>. 
+
+<div class="paragraph"> </div>
+
+ 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Checker_scope</span>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="insert_spec" class="idref" href="#insert_spec"><span class="id" title="definition">insert_spec</span></a> (<a id="x:188" class="idref" href="#x:188"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:189" class="idref" href="#l:189"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
 &nbsp;&nbsp;<a class="idref" href="QC.html#sorted"><span class="id" title="definition">sorted</span></a> <a class="idref" href="QC.html#l:189"><span class="id" title="variable">l</span></a> <span class="id" title="notation">==&gt;</span> <a class="idref" href="QC.html#sorted"><span class="id" title="definition">sorted</span></a> (<a class="idref" href="QC.html#insert"><span class="id" title="definition">insert</span></a> <a class="idref" href="QC.html#x:188"><span class="id" title="variable">x</span></a> <a class="idref" href="QC.html#l:189"><span class="id" title="variable">l</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="test_insert_spec" class="idref" href="#test_insert_spec"><span class="id" title="definition">test_insert_spec</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="axiom">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) (<span class="id" title="keyword">fun</span> <a id="x:190" class="idref" href="#x:190"><span class="id" title="binder">x</span></a> ⇒<br/>
-&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="axiom">listOf</span> (<span class="id" title="axiom">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)) (<span class="id" title="keyword">fun</span> <a id="l:191" class="idref" href="#l:191"><span class="id" title="binder">l</span></a> ⇒                            <br/>
+&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="method">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) (<span class="id" title="keyword">fun</span> <a id="x:190" class="idref" href="#x:190"><span class="id" title="binder">x</span></a> ⇒<br/>
+&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="definition">listOf</span> (<span class="id" title="method">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)) (<span class="id" title="keyword">fun</span> <a id="l:191" class="idref" href="#l:191"><span class="id" title="binder">l</span></a> ⇒                            <br/>
 &nbsp;&nbsp;<a class="idref" href="QC.html#insert_spec"><span class="id" title="definition">insert_spec</span></a> <a class="idref" href="QC.html#x:190"><span class="id" title="variable">x</span></a> <a class="idref" href="QC.html#l:191"><span class="id" title="variable">l</span></a>)).<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;QuickChick&nbsp;test_insert_spec.&nbsp;*)</span><br/>
 </div>
@@ -2009,8 +2036,8 @@ We could test <span class="inlinecode"><span class="id" title="var">insert</span
 <span class="id" title="keyword">Definition</span> <a id="insert_spec'" class="idref" href="#insert_spec'"><span class="id" title="definition">insert_spec'</span></a> (<a id="x:192" class="idref" href="#x:192"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="l:193" class="idref" href="#l:193"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="definition">collect</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#length"><span class="id" title="abbreviation">List.length</span></a> <a class="idref" href="QC.html#l:193"><span class="id" title="variable">l</span></a>) (<a class="idref" href="QC.html#insert_spec"><span class="id" title="definition">insert_spec</span></a> <a class="idref" href="QC.html#x:192"><span class="id" title="variable">x</span></a> <a class="idref" href="QC.html#l:193"><span class="id" title="variable">l</span></a>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="test_insert_spec'" class="idref" href="#test_insert_spec'"><span class="id" title="definition">test_insert_spec'</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="axiom">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) (<span class="id" title="keyword">fun</span> <a id="x:194" class="idref" href="#x:194"><span class="id" title="binder">x</span></a> ⇒<br/>
-&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="axiom">listOf</span> (<span class="id" title="axiom">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)) (<span class="id" title="keyword">fun</span> <a id="l:195" class="idref" href="#l:195"><span class="id" title="binder">l</span></a> ⇒                            <br/>
+&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="method">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>) (<span class="id" title="keyword">fun</span> <a id="x:194" class="idref" href="#x:194"><span class="id" title="binder">x</span></a> ⇒<br/>
+&nbsp;&nbsp;<span class="id" title="definition">forAll</span> (<span class="id" title="definition">listOf</span> (<span class="id" title="method">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>0<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a>10<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>)) (<span class="id" title="keyword">fun</span> <a id="l:195" class="idref" href="#l:195"><span class="id" title="binder">l</span></a> ⇒                            <br/>
 &nbsp;&nbsp;<a class="idref" href="QC.html#insert_spec'"><span class="id" title="definition">insert_spec'</span></a> <a class="idref" href="QC.html#x:194"><span class="id" title="variable">x</span></a> <a class="idref" href="QC.html#l:195"><span class="id" title="variable">l</span></a>)).<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;QuickChick&nbsp;test_insert_spec'.&nbsp;*)</span><br/>
 </div>
@@ -2055,15 +2082,15 @@ We could test <span class="inlinecode"><span class="id" title="var">insert</span
 <div class="code">
 
 <span class="id" title="keyword">Fixpoint</span> <a id="genSortedList" class="idref" href="#genSortedList"><span class="id" title="definition">genSortedList</span></a> (<a id="low:196" class="idref" href="#low:196"><span class="id" title="binder">low</span></a> <a id="high:197" class="idref" href="#high:197"><span class="id" title="binder">high</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="size:198" class="idref" href="#size:198"><span class="id" title="binder">size</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="axiom">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="definition">G</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="QC.html#size:198"><span class="id" title="variable">size</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">size'</span> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <a class="idref" href="QC.html#high:197"><span class="id" title="variable">high</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#6b7621b45fff0af5e2b2cbb2bc2d4e1d"><span class="id" title="notation">&lt;?</span></a> <a class="idref" href="QC.html#low:196"><span class="id" title="variable">low</span></a> <span class="id" title="keyword">then</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">freq</span> <span class="id" title="notation">[</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="QC.html#size:198"><span class="id" title="variable">size</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a id="x:201" class="idref" href="#x:201"><span class="id" title="binder">x</span></a> <span class="id" title="notation">&lt;-</span> <span class="id" title="axiom">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="QC.html#low:196"><span class="id" title="variable">low</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="QC.html#high:197"><span class="id" title="variable">high</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a><span class="id" title="notation">;;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">freq</span> <span class="id" title="notation">[</span> <span class="id" title="notation">(</span>1<span class="id" title="notation">,</span> <span class="id" title="method">ret</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><span class="id" title="notation">)</span> <span class="id" title="notation">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="QC.html#size:198"><span class="id" title="variable">size</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a id="x:201" class="idref" href="#x:201"><span class="id" title="binder">x</span></a> <span class="id" title="notation">&lt;-</span> <span class="id" title="method">choose</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="QC.html#low:196"><span class="id" title="variable">low</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="QC.html#high:197"><span class="id" title="variable">high</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a><span class="id" title="notation">;;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="xs:202" class="idref" href="#xs:202"><span class="id" title="binder">xs</span></a> <span class="id" title="notation">&lt;-</span> <a class="idref" href="QC.html#genSortedList:199"><span class="id" title="definition">genSortedList</span></a> <a class="idref" href="QC.html#x:201"><span class="id" title="variable">x</span></a> <a class="idref" href="QC.html#high:197"><span class="id" title="variable">high</span></a> <span class="id" title="var">size'</span><span class="id" title="notation">;;</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="method">ret</span> (<a class="idref" href="QC.html#x:201"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="QC.html#xs:202"><span class="id" title="variable">xs</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <span class="id" title="notation">]</span> <span class="id" title="keyword">end</span>.<br/>
 </div>
@@ -2262,7 +2289,7 @@ We would expect that if we insert an element that is within
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:24&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:22&nbsp;*)</span><br/>
 </div>
 </div>
 

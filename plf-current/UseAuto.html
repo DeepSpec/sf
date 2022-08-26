@@ -925,7 +925,7 @@ In the examples that follow, only <span class="inlinecode"><span class="id" titl
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="DeterministicImp" class="idref" href="#DeterministicImp"><span class="id" title="module">DeterministicImp</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="module">Imp</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1110,10 +1110,10 @@ To polish the proof script, it remains to factorize the calls
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <a class="idref" href="StlcProp.html#"><span class="id" title="library">StlcProp</span></a>.<br/>
 <span class="id" title="keyword">Module</span> <a id="PreservationProgressStlc" class="idref" href="#PreservationProgressStlc"><span class="id" title="module">PreservationProgressStlc</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Stlc</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">StlcProp</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">STLC</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">STLCProp</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#"><span class="id" title="module">Stlc</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="StlcProp.html#"><span class="id" title="module">StlcProp</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="StlcProp.html#STLCProp"><span class="id" title="module">STLCProp</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1327,7 +1327,7 @@ If we try to combine the two proofs into a single one,
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="References.html#"><span class="id" title="library">References</span></a>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
 <span class="id" title="keyword">Module</span> <a id="PreservationProgressReferences" class="idref" href="#PreservationProgressReferences"><span class="id" title="module">PreservationProgressReferences</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">STLCRef</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="References.html#STLCRef"><span class="id" title="module">STLCRef</span></a>.<br/>
 <span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">store_weakening</span> <span class="id" title="var">extends_refl</span> : <span class="id" title="var">core</span>.<br/>
 </div>
 
@@ -1608,7 +1608,7 @@ The optimized proof of preservation is summarized next.
 
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <a class="idref" href="Sub.html#"><span class="id" title="library">Sub</span></a>.<br/>
 <span class="id" title="keyword">Module</span> <a id="SubtypingInversion" class="idref" href="#SubtypingInversion"><span class="id" title="module">SubtypingInversion</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Sub.STLCSub</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Sub.html#STLCSub"><span class="id" title="module">Sub.STLCSub</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -2491,7 +2491,7 @@ One of the strengths of <span class="inlinecode"><span class="id" title="tactic"
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

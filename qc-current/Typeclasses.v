@@ -89,10 +89,14 @@ Class Show A : Type :=
     We can declare that [bool] is such a type by giving an [Instance]
     declaration that witnesses this function: *)
 
-Instance showBool : Show bool :=
+#[export] Instance showBool : Show bool :=
   {
     show := fun b:bool => if b then "true" else "false"
   }.
+
+(** Here, the [export] pragma instructs Coq to export this instance
+    whenever this module is loaded. Other options are [local] (which
+    never exports the instance), and [global] (which always does). *)
 
 Compute (show true).
 
@@ -101,7 +105,7 @@ Compute (show true).
 
 Inductive primary := Red | Green | Blue.
 
-Instance showPrimary : Show primary :=
+#[export] Instance showPrimary : Show primary :=
   {
     show :=
       fun c:primary =>
@@ -140,7 +144,7 @@ Fixpoint string_of_nat_aux (time n : nat) (acc : string) : string :=
 Definition string_of_nat (n : nat) : string :=
   string_of_nat_aux n n "".
 
-Instance showNat : Show nat :=
+#[export] Instance showNat : Show nat :=
   {
     show := string_of_nat
   }.
@@ -214,7 +218,7 @@ Notation "x =? y" := (eqb x y) (at level 70).
 
 (** And here are some basic instances: *)
 
-Instance eqBool : Eq bool :=
+#[export] Instance eqBool : Eq bool :=
   {
     eqb := fun (b c : bool) =>
        match b, c with
@@ -225,7 +229,7 @@ Instance eqBool : Eq bool :=
        end
   }.
 
-Instance eqNat : Eq nat :=
+#[export] Instance eqNat : Eq nat :=
   {
     eqb := Nat.eqb
   }.
@@ -258,7 +262,7 @@ Instance eqNat : Eq nat :=
     our [Show] instance by two types.  Moreover, we'll need to
     constrain both of these types to be instances of [Show]. *)
 
-Instance showPair {A B : Type} `{Show A} `{Show B} : Show (A * B) :=
+#[export] Instance showPair {A B : Type} `{Show A} `{Show B} : Show (A * B) :=
   {
     show p :=
       let (a,b) := p in
@@ -269,7 +273,7 @@ Compute (show (true,42)).
 
 (** Similarly, here is an [Eq] instance for pairs... *)
 
-Instance eqPair {A B : Type} `{Eq A} `{Eq B} : Eq (A * B) :=
+#[export] Instance eqPair {A B : Type} `{Eq A} `{Eq B} : Eq (A * B) :=
   {
     eqb p1 p2 :=
       let (p1a,p1b) := p1 in
@@ -286,7 +290,7 @@ Fixpoint showListAux {A : Type} (s : A -> string) (l : list A) : string :=
     | cons h t => append (append (s h) ", ") (showListAux s t)
   end.
 
-Instance showList {A : Type} `{Show A} : Show (list A) :=
+#[export] Instance showList {A : Type} `{Show A} : Show (list A) :=
   {
     show l := append "[" (append (showListAux show l) "]")
   }.
@@ -353,7 +357,7 @@ Check Ord.
 (** When we define instances of [Ord], we just have to implement the
     [le] operation. *)
 
-Instance natOrd : Ord nat :=
+#[export] Instance natOrd : Ord nat :=
   {
     le := Nat.leb
   }.
@@ -820,7 +824,7 @@ Class EqDec (A : Type) {H : Eq A} :=
 (** To build an instance of [EqDec], we must now supply an appropriate
     proof. *)
 
-Instance eqdecNat : EqDec nat :=
+#[export] Instance eqdecNat : EqDec nat :=
   {
     eqb_eq := Nat.eqb_eq
   }.
@@ -830,7 +834,7 @@ Instance eqdecNat : EqDec nat :=
     proof mode and ask the user to use tactics to construct
     inhabitants for the fields. *)
 
-Instance eqdecBool' : EqDec bool.
+#[export] Instance eqdecBool' : EqDec bool.
 Proof.
   constructor.
   intros x y. destruct x; destruct y; simpl; unfold iff; auto.
@@ -928,7 +932,7 @@ Class Dec (P : Prop) : Type :=
     assuming that [x] and [y] belong to a type with an [EqDec]
     instance. *)
 
-Instance EqDec__Dec {A} `{H : EqDec A} (x y : A) : Dec (x = y).
+#[export] Instance EqDec__Dec {A} `{H : EqDec A} (x y : A) : Dec (x = y).
 Proof.
   constructor.
   unfold decidable.
@@ -940,7 +944,7 @@ Defined.
 (** Similarly, we can lift decidability through logical operators like
     conjunction: *)
 
-Instance Dec_conj {P Q} {H : Dec P} {I : Dec Q} : Dec (P /\ Q).
+#[export] Instance Dec_conj {P Q} {H : Dec P} {I : Dec Q} : Dec (P /\ Q).
 Proof.
   constructor. unfold decidable.
   destruct H as [D]; destruct D;
@@ -1065,7 +1069,7 @@ Open Scope monad_scope.
 (** For example, we can define a monad instance for [option] like
     this: *)
 
-Instance optionMonad : Monad option :=
+#[export] Instance optionMonad : Monad option :=
   {
     ret T x :=
       Some x ;
@@ -1240,7 +1244,7 @@ Fail Check (foo true).
 
 Inductive baz := Baz : nat -> baz.
 
-Instance baz1 : Show baz :=
+#[export] Instance baz1 : Show baz :=
   {
     show b :=
       match b with
@@ -1248,7 +1252,7 @@ Instance baz1 : Show baz :=
       end
   }.
 
-Instance baz2 : Show baz :=
+#[export] Instance baz2 : Show baz :=
   {
     show b :=
       match b with
@@ -1275,27 +1279,28 @@ Compute (show (Baz 42)).
 (** One way to deal with overlapping instances is to "curate" the hint
     database by explicitly adding and removing specific instances.
 
-    To remove things, use [Remove Hints]: *)
+    To remove things, use [Remove Hints].
+    Once again, [local], [global], and [export] pragmas ca apply: *)
 
-Remove Hints baz1 baz2 : typeclass_instances.
+#[export] Remove Hints baz1 baz2 : typeclass_instances.
 
 (** To add them back (or to add arbitrary constants that have the
     right type to be intances -- i.e., their type ends with an applied
     typeclass -- but that were not created by [Instance] declarations),
     use [Existing Instance]: *)
 
-Existing Instance baz1.
+#[export] Existing Instance baz1.
 Compute (show (Baz 42)).
 (* ==>
      = "Baz: 42"
      : string    *)
 
-Remove Hints baz1 : typeclass_instances.
+#[export] Remove Hints baz1 : typeclass_instances.
 
 (** Another way of controlling which instances are chosen by proof
     search is to assign _priorities_ to overlapping instances: *)
 
-Instance baz3 : Show baz | 2 :=
+#[export] Instance baz3 : Show baz | 2 :=
   {
     show b :=
       match b with
@@ -1303,7 +1308,7 @@ Instance baz3 : Show baz | 2 :=
       end
   }.
 
-Instance baz4 : Show baz | 3 :=
+#[export] Instance baz4 : Show baz | 3 :=
   {
     show b :=
       match b with
@@ -1326,7 +1331,7 @@ Compute (show (Baz 42)).
 (** [Existing Instance] declarations can also be given explicit
     priorities. *)
 
-Existing Instance baz1 | 0.
+#[export] Existing Instance baz1 | 0.
 Compute (show (Baz 42)).
 (* ==>
      = "Baz: 42"
@@ -1417,14 +1422,14 @@ Class MyMap (A B : Type) : Type :=
 
 (** Declare instances for getting from [bool] to [nat]... *)
 
-Instance MyMap1 : MyMap bool nat :=
+#[export] Instance MyMap1 : MyMap bool nat :=
   {
     mymap b := if b then 0 else 42
   }.
 
 (** ... and from [nat] to [string]: *)
 
-Instance MyMap2 : MyMap nat string :=
+#[export] Instance MyMap2 : MyMap nat string :=
   {
     mymap := fun n : nat =>
       if le n 20 then "Pretty small" else "Pretty big"
@@ -1445,7 +1450,7 @@ Fail Definition e3 : string := mymap false.
     combines an instance from [A] to [B] and an instance from [B] to
     [C]: *)
 
-Instance MyMap_trans {A B C : Type} `{MyMap A B} `{MyMap B C} : MyMap A C :=
+#[export] Instance MyMap_trans {A B C : Type} `{MyMap A B} `{MyMap B C} : MyMap A C :=
   { mymap a := mymap (mymap a) }.
 
 (** This does get us from [bool] to [string] automatically: *)
@@ -1762,4 +1767,4 @@ Definition e4 : list nat := mymap false.
        {http://learnyouahaskell.com/making-our-own-types-and-typeclasses}
 *)
 
-(* 2022-08-05 17:24 *)
+(* 2022-08-26 19:22 *)
