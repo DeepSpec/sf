@@ -18,6 +18,10 @@ jobs:
             docker build -t deepspec/sfdev:8.15 - < Dockerfile.8.15
             docker push deepspec/sfdev:8.15
             fi
+            if fgrep -q '[docker dev]' \<<< $changes; then
+            docker build -t deepspec/sfdev:dev - < Dockerfile.dev
+            docker push deepspec/sfdev:dev
+            fi
           working_directory: .circleci
           no_output_timeout: 2h
   build:
@@ -92,5 +96,10 @@ workflows:
           name: Coq 8.15
           coq: '8.15'
           vc: true
+          requires:
+            - build-docker
+      - build:
+          name: Coq dev
+          coq: dev
           requires:
             - build-docker

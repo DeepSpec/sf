@@ -1,6 +1,6 @@
-FROM coqorg/coq:8.15
+FROM coqorg/coq:dev
 ENV OPAMYES true
-ENV VST_NEEDED 2.9
+ENV VST_NEEDED 2.11
 RUN \
     sudo apt-get update \
  && sudo apt-get install wget \
@@ -10,7 +10,7 @@ RUN \
  && opam install -j `nproc` \
          menhir.20220210 \
 #         coq-quickchick \
-         coq-vst.$VST_NEEDED \
+#         coq-vst.$VST_NEEDED \
  && (cd QuickChick-v.2.0-beta; make; make install) \
  && rm -rf QuickChick-v.2.0-beta \
  && sudo apt-get remove wget
