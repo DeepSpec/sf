@@ -39,7 +39,7 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Bool.Bool.html#"><span class="id" title="library">Bool.Bool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#"><span class="id" title="library">Arith.PeanoNat</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">Nat</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#"><span class="id" title="library">Arith.PeanoNat</span></a>. <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat"><span class="id" title="module">Nat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <span class="id" title="library">Imp</span>.<br/>
 </div>
@@ -255,7 +255,7 @@ For example,
 
 <span class="id" title="keyword">Definition</span> <a id="assert_implies" class="idref" href="#assert_implies"><span class="id" title="definition">assert_implies</span></a> (<a id="P:5" class="idref" href="#P:5"><span class="id" title="binder">P</span></a> <a id="Q:6" class="idref" href="#Q:6"><span class="id" title="binder">Q</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="st:7" class="idref" href="#st:7"><span class="id" title="binder">st</span></a>, <a class="idref" href="Hoare.html#P:5"><span class="id" title="variable">P</span></a> <a class="idref" href="Hoare.html#st:7"><span class="id" title="variable">st</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hoare.html#Q:6"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hoare.html#st:7"><span class="id" title="variable">st</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">hoare_spec_scope</span>.<br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">hoare_spec_scope</span>.<br/>
 <span class="id" title="keyword">Notation</span> <a id="::hoare_spec_scope:x_'-&gt;&gt;'_x" class="idref" href="#::hoare_spec_scope:x_'-&gt;&gt;'_x"><span class="id" title="notation">&quot;</span></a>P <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span> Q" := (<a class="idref" href="Hoare.html#assert_implies"><span class="id" title="definition">assert_implies</span></a> <span class="id" title="var">P</span> <span class="id" title="var">Q</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80) : <span class="id" title="var">hoare_spec_scope</span>.<br/>
 <span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">hoare_spec_scope</span>.<br/>
@@ -304,13 +304,13 @@ For example,
 <span class="id" title="keyword">Coercion</span> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">Aexp_of_nat</span></a> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">:</span></a> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">nat</span></a> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">&gt;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">Aexp</span></a>.<br/>
 <span class="id" title="keyword">Coercion</span> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">Aexp_of_aexp</span></a> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">:</span></a> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">aexp</span></a> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">&gt;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">Aexp</span></a>.<br/>
 <span class="id" title="keyword">Add</span> <span class="id" title="keyword">Printing</span> <span class="id" title="keyword">Coercion</span> <span class="id" title="var">Aexp_of_nat</span> <span class="id" title="var">Aexp_of_aexp</span> <span class="id" title="var">assert_of_Prop</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="Hoare.html#assert_of_Prop"><span class="id" title="definition">assert_of_Prop</span></a> /.<br/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">Aexp_of_nat</span></a> /.<br/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">Aexp_of_aexp</span></a> /.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="Hoare.html#assert_of_Prop"><span class="id" title="definition">assert_of_Prop</span></a> /.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="Hoare.html#Aexp_of_nat"><span class="id" title="definition">Aexp_of_nat</span></a> /.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="Hoare.html#Aexp_of_aexp"><span class="id" title="definition">Aexp_of_aexp</span></a> /.<br/>
 <span class="id" title="keyword">Add</span> <span class="id" title="keyword">Printing</span> <span class="id" title="keyword">Coercion</span> <span class="id" title="var">Aexp_of_nat</span> <span class="id" title="var">Aexp_of_aexp</span> <span class="id" title="var">assert_of_Prop</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">assertion_scope</span>.<br/>
-<span class="id" title="keyword">Bind</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">assertion_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Assertion</span>.<br/>
-<span class="id" title="keyword">Bind</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">assertion_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Aexp</span>.<br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">assertion_scope</span>.<br/>
+<span class="id" title="keyword">Bind Scope</span> <span class="id" title="var">assertion_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Assertion</span>.<br/>
+<span class="id" title="keyword">Bind Scope</span> <span class="id" title="var">assertion_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Aexp</span>.<br/>
 <span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">assertion_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">assertion</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="assert" class="idref" href="#assert"><span class="id" title="abbreviation">assert</span></a> <span class="id" title="var">P</span> := (<span class="id" title="var">P</span>%<span class="id" title="var">assertion</span> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a>).<br/>
 <span class="id" title="keyword">Notation</span> <a id="mkAexp" class="idref" href="#mkAexp"><span class="id" title="abbreviation">mkAexp</span></a> <span class="id" title="var">a</span> := (<span class="id" title="var">a</span>%<span class="id" title="var">assertion</span> : <a class="idref" href="Hoare.html#Aexp"><span class="id" title="definition">Aexp</span></a>).<br/><hr class='doublespaceincode'/>
@@ -591,7 +591,7 @@ One small limitation of this approach is that we don't have
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ P <span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub> <span style='letter-spacing:-.4em;'>{</span>{ Q <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ Q <span style='letter-spacing:-.4em;'>}</span>} c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{ R <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td class="infrulenamecol" rowspan="3">
@@ -603,7 +603,7 @@ One small limitation of this approach is that we don't have
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ P <span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub>;c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{ R <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </div>
 <div class="code">
@@ -825,7 +825,7 @@ That is, <span class="inlinecode"><span class="id" title="var">P</span></span> <
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{Q [X <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> a]<span style='letter-spacing:-.4em;'>}</span>} X := a <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -919,7 +919,7 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ True <span style='letter-spacing:-.4em;'>}</span>} X := a <span style='letter-spacing:-.4em;'>{</span>{ X = a <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Give a counterexample showing that this rule is incorrect and
     argue informally that it is really a counterexample.  (Hint:
     The rule universally quantifies over the arithmetic expression
@@ -957,15 +957,15 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{fun st => P st /\ st X = m<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">X := a</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{fun st => P (X !<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> m ; st) /\ st X = aeval (X !<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> m ; st) a <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>    Note that we need to write out the postcondition in "desugared"
     form, because it needs to talk about two different states: we use
     the original value of <span class="inlinecode"><span class="id" title="var">X</span></span> to reconstruct the state <span class="inlinecode"><span class="id" title="var">st'</span></span> before the
@@ -1008,19 +1008,19 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{fun st => P st<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">X := a</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{fun st => exists m, P (X !<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> m ; st) /\</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">st X = aeval (X !<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> m ; st) a <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </div>
 <div class="code">
@@ -1069,7 +1069,7 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P'<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">P <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='letter-spacing:-.2em;'><<</span><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> P'</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1081,7 +1081,7 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1093,7 +1093,7 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P'<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">P <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> P'</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1105,12 +1105,12 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q'<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Q' <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> Q</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1122,7 +1122,7 @@ Of course, what we'd probably prefer is to prove this
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1216,11 +1216,11 @@ Finally, here is a combined rule of consequence that allows us to
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P'<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q'<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">P <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> P'</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Q' <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> Q</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1232,7 +1232,7 @@ Finally, here is a combined rule of consequence that allows us to
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </div>
 <div class="code">
@@ -1680,7 +1680,7 @@ Informally, a nice way of displaying a proof using the sequencing
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1692,7 +1692,7 @@ Informally, a nice way of displaying a proof using the sequencing
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} if b then c<sub>1</sub> else c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1722,7 +1722,7 @@ Informally, a nice way of displaying a proof using the sequencing
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P /\&nbsp;&nbsp;&nbsp;b<span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P /\ ~ b<span style='letter-spacing:-.4em;'>}</span>} c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td class="infrulenamecol" rowspan="3">
@@ -1734,7 +1734,7 @@ Informally, a nice way of displaying a proof using the sequencing
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} if b then c<sub>1</sub> else c<sub>2</sub> end <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -1751,7 +1751,7 @@ Informally, a nice way of displaying a proof using the sequencing
 <span class="id" title="keyword">Definition</span> <a id="bassn" class="idref" href="#bassn"><span class="id" title="definition">bassn</span></a> <a id="b:110" class="idref" href="#b:110"><span class="id" title="binder">b</span></a> : <a class="idref" href="Hoare.html#Assertion"><span class="id" title="definition">Assertion</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="st:111" class="idref" href="#st:111"><span class="id" title="binder">st</span></a> ⇒ (<span class="id" title="definition">beval</span> <a class="idref" href="Hoare.html#st:111"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#b:110"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="notation">true</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Coercion</span> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">:</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bexp</span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">&gt;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">Assertion</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> /.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="Hoare.html#bassn"><span class="id" title="definition">bassn</span></a> /.<br/>
 </div>
 
 <div class="doc">
@@ -2525,7 +2525,7 @@ For full credit, make sure (informally) that your rule can be used
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{Q [X <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> a]<span style='letter-spacing:-.4em;'>}</span>} X:=a <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -2538,12 +2538,12 @@ For full credit, make sure (informally) that your rule can be used
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ P <span style='letter-spacing:-.4em;'>}</span>} skip <span style='letter-spacing:-.4em;'>{</span>{ P <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ P <span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub> <span style='letter-spacing:-.4em;'>{</span>{ Q <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ Q <span style='letter-spacing:-.4em;'>}</span>} c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{ R <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td class="infrulenamecol" rowspan="3">
@@ -2555,12 +2555,12 @@ For full credit, make sure (informally) that your rule can be used
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ P <span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub>;c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{ R <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P /\&nbsp;&nbsp;&nbsp;b<span style='letter-spacing:-.4em;'>}</span>} c<sub>1</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P /\ ~ b<span style='letter-spacing:-.4em;'>}</span>} c<sub>2</sub> <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td class="infrulenamecol" rowspan="3">
@@ -2572,7 +2572,7 @@ For full credit, make sure (informally) that your rule can be used
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} if b then c<sub>1</sub> else c<sub>2</sub> end <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P /\ b<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>}</td>
@@ -2585,16 +2585,16 @@ For full credit, make sure (informally) that your rule can be used
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} while b do c end <span style='letter-spacing:-.4em;'>{</span>{P /\ ~ b<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P'<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q'<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">P <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> P'</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">Q' <span class="nowrap"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> Q</td>
   <td class="infrulenamecol" rowspan="3">
@@ -2606,7 +2606,7 @@ For full credit, make sure (informally) that your rule can be used
 <tr class="infruleassumption">
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{P<span style='letter-spacing:-.4em;'>}</span>} c <span style='letter-spacing:-.4em;'>{</span>{Q<span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
-</td>
+</tr>
 </table></center> 
 <div class="paragraph"> </div>
 
@@ -3129,7 +3129,7 @@ Use your rules to prove the following triple.
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -39,7 +39,7 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>. <span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>. <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ListNotations"><span class="id" title="module">ListNotations</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Maps</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Imp</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="FILL_IN_HERE" class="idref" href="#FILL_IN_HERE"><span class="id" title="definition">FILL_IN_HERE</span></a> := <span class="id" title="notation">&lt;{</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><span class="id" title="notation">}&gt;</span>.<br/>
@@ -171,12 +171,12 @@ Here is the same evaluator, written in exactly the same
 <tr class="infruleassumption">
   <td class="infrule">C n ==> n</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> ==> v<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">t<sub>2</sub> ==> v<sub>2</sub></td>
   <td class="infrulenamecol" rowspan="3">
@@ -188,7 +188,7 @@ Here is the same evaluator, written in exactly the same
 <tr class="infruleassumption">
   <td class="infrule">P t<sub>1</sub> t<sub>2</sub> ==> v<sub>1</sub> + v<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </div>
 <div class="code">
@@ -219,7 +219,7 @@ Now, here is the corresponding <i>small-step</i> evaluation relation.  <center><
 <tr class="infruleassumption">
   <td class="infrule">P (C v<sub>1</sub>) (C v<sub>2</sub>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> C (v<sub>1</sub> + v<sub>2</sub>)</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>'</td>
@@ -232,7 +232,7 @@ Now, here is the corresponding <i>small-step</i> evaluation relation.  <center><
 <tr class="infruleassumption">
   <td class="infrule">P t<sub>1</sub> t<sub>2</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> P t<sub>1</sub>' t<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>2</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>2</sub>'</td>
@@ -245,7 +245,7 @@ Now, here is the corresponding <i>small-step</i> evaluation relation.  <center><
 <tr class="infruleassumption">
   <td class="infrule">P (C v<sub>1</sub>) t<sub>2</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> P (C v<sub>1</sub>) t<sub>2</sub>'</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </div>
 <div class="code">
@@ -433,7 +433,7 @@ Our main examples of such relations in this chapter will be
 <span class="id" title="keyword">Definition</span> <a id="deterministic" class="idref" href="#deterministic"><span class="id" title="definition">deterministic</span></a> {<a id="X:24" class="idref" href="#X:24"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="R:25" class="idref" href="#R:25"><span class="id" title="binder">R</span></a> : <a class="idref" href="Smallstep.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="Smallstep.html#X:24"><span class="id" title="variable">X</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="x:26" class="idref" href="#x:26"><span class="id" title="binder">x</span></a> <a id="y<sub>1</sub>:27" class="idref" href="#y<sub>1</sub>:27"><span class="id" title="binder">y<sub>1</sub></span></a> <a id="y<sub>2</sub>:28" class="idref" href="#y<sub>2</sub>:28"><span class="id" title="binder">y<sub>2</sub></span></a> : <a class="idref" href="Smallstep.html#X:24"><span class="id" title="variable">X</span></a>, <a class="idref" href="Smallstep.html#R:25"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:26"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y<sub>1</sub>:27"><span class="id" title="variable">y<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#R:25"><span class="id" title="variable">R</span></a> <a class="idref" href="Smallstep.html#x:26"><span class="id" title="variable">x</span></a> <a class="idref" href="Smallstep.html#y<sub>2</sub>:28"><span class="id" title="variable">y<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Smallstep.html#y<sub>1</sub>:27"><span class="id" title="variable">y<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Smallstep.html#y<sub>2</sub>:28"><span class="id" title="variable">y<sub>2</sub></span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="SimpleArith2" class="idref" href="#SimpleArith2"><span class="id" title="module">SimpleArith2</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">SimpleArith1</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#SimpleArith1"><span class="id" title="module">SimpleArith1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="SimpleArith2.step_deterministic" class="idref" href="#SimpleArith2.step_deterministic"><span class="id" title="lemma">step_deterministic</span></a>:<br/>
 &nbsp;&nbsp;<a class="idref" href="Smallstep.html#deterministic"><span class="id" title="definition">deterministic</span></a> <a class="idref" href="Smallstep.html#SimpleArith1.step"><span class="id" title="inductive">step</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -514,7 +514,7 @@ The proof of the previous theorem can now be simplified...
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="SimpleArith3" class="idref" href="#SimpleArith3"><span class="id" title="module">SimpleArith3</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">SimpleArith1</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#SimpleArith1"><span class="id" title="module">SimpleArith1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="SimpleArith3.step_deterministic_alt" class="idref" href="#SimpleArith3.step_deterministic_alt"><span class="id" title="lemma">step_deterministic_alt</span></a>: <a class="idref" href="Smallstep.html#deterministic"><span class="id" title="definition">deterministic</span></a> <a class="idref" href="Smallstep.html#SimpleArith1.step"><span class="id" title="inductive">step</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y<sub>1</sub></span> <span class="id" title="var">y<sub>2</sub></span> <span class="id" title="var">Hy<sub>1</sub></span> <span class="id" title="var">Hy<sub>2</sub></span>.<br/>
@@ -620,7 +620,7 @@ Having introduced the idea of values, we can use it in the
 <tr class="infruleassumption">
   <td class="infrule">P (C v<sub>1</sub>) (C v<sub>2</sub>) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> C (v<sub>1</sub> + v<sub>2</sub>)</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">t<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>1</sub>'</td>
@@ -633,12 +633,12 @@ Having introduced the idea of values, we can use it in the
 <tr class="infruleassumption">
   <td class="infrule">P t<sub>1</sub> t<sub>2</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> P t<sub>1</sub>' t<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">value v<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">t<sub>2</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> t<sub>2</sub>'</td>
   <td class="infrulenamecol" rowspan="3">
@@ -650,7 +650,7 @@ Having introduced the idea of values, we can use it in the
 <tr class="infruleassumption">
   <td class="infrule">P v<sub>1</sub> t<sub>2</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> P v<sub>1</sub> t<sub>2</sub>'</td>
   <td></td>
-</td>
+</tr>
 </table></center> 
 <div class="paragraph"> </div>
 
@@ -2579,7 +2579,7 @@ This time, the trace is:
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

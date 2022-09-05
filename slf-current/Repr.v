@@ -1445,4 +1445,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2022-08-05 17:21 *)
+(* 2022-08-26 19:30 *)

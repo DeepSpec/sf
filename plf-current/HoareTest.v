@@ -92,9 +92,8 @@ idtac " ".
 idtac "#> assn_sub_ex1'".
 idtac "Possible points: 1".
 check_type @assn_sub_ex1' (
-({{fun st : state => Aexp_of_aexp (AId X) st <= Aexp_of_nat 5 st}}
- X := (ANum 2) * (AId X)
- {{fun st : state => Aexp_of_aexp (AId X) st <= Aexp_of_nat 10 st}})).
+({{Aexp_of_aexp (AId X) <= Aexp_of_nat 5}} X := (ANum 2) * (AId X)
+ {{Aexp_of_aexp (AId X) <= Aexp_of_nat 10}})).
 idtac "Assumptions:".
 Abort.
 Print Assumptions assn_sub_ex1'.
@@ -104,11 +103,10 @@ idtac " ".
 idtac "#> assn_sub_ex2'".
 idtac "Possible points: 1".
 check_type @assn_sub_ex2' (
-({{(fun st0 : state => (Aexp_of_nat 0 st0 <= Aexp_of_nat 3 st0)%nat) /\
-   (fun st0 : state => (Aexp_of_nat 3 st0 <= Aexp_of_nat 5 st0)%nat)}}
+({{Aexp_of_nat 0 <= Aexp_of_nat 3 /\ Aexp_of_nat 3 <= Aexp_of_nat 5}}
  X := (ANum 3)
- {{(fun st0 : state => (Aexp_of_nat 0 st0 <= Aexp_of_aexp (AId X) st0)%nat) /\
-   (fun st0 : state => (Aexp_of_aexp (AId X) st0 <= Aexp_of_nat 5 st0)%nat)}})).
+ {{Aexp_of_nat 0 <= Aexp_of_aexp (AId X) /\
+   Aexp_of_aexp (AId X) <= Aexp_of_nat 5}})).
 idtac "Assumptions:".
 Abort.
 Print Assumptions assn_sub_ex2'.
@@ -122,8 +120,8 @@ idtac "#> hoare_asgn_example4".
 idtac "Possible points: 2".
 check_type @hoare_asgn_example4 (
 ({{assert_of_Prop True}} X := (ANum 1); Y := (ANum 2)
- {{(fun st0 : state => (Aexp_of_aexp (AId X) st0 = Aexp_of_nat 1 st0)%type) /\
-   (fun st0 : state => (Aexp_of_aexp (AId Y) st0 = Aexp_of_nat 2 st0)%type)}})).
+ {{Aexp_of_aexp (AId X) = Aexp_of_nat 1 /\
+   Aexp_of_aexp (AId Y) = Aexp_of_nat 2}})).
 idtac "Assumptions:".
 Abort.
 Print Assumptions hoare_asgn_example4.
@@ -136,9 +134,8 @@ idtac " ".
 idtac "#> swap_exercise".
 idtac "Possible points: 3".
 check_type @swap_exercise (
-({{fun st : state => Aexp_of_aexp (AId X) st <= Aexp_of_aexp (AId Y) st}}
- swap_program
- {{fun st : state => Aexp_of_aexp (AId Y) st <= Aexp_of_aexp (AId X) st}})).
+({{Aexp_of_aexp (AId X) <= Aexp_of_aexp (AId Y)}} swap_program
+ {{Aexp_of_aexp (AId Y) <= Aexp_of_aexp (AId X)}})).
 idtac "Assumptions:".
 Abort.
 Print Assumptions swap_exercise.
@@ -154,9 +151,8 @@ idtac "Possible points: 6".
 check_type @invalid_triple (
 (~
  (forall (a : aexp) (n : nat),
-  {{fun st : state => Aexp_of_aexp a st = Aexp_of_nat n st}}
-  X := (ANum 3); Y := a
-  {{fun st : state => Aexp_of_aexp (AId Y) st = Aexp_of_nat n st}}))).
+  {{Aexp_of_aexp a = Aexp_of_nat n}} X := (ANum 3); Y := a
+  {{Aexp_of_aexp (AId Y) = Aexp_of_nat n}}))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions invalid_triple.
@@ -172,11 +168,7 @@ check_type @if_minus_plus (
 ({{assert_of_Prop True}}
  if (AId X) <= (AId Y) then Z := (AId Y) - (AId X)
  else Y := (AId X) + (AId Z) end
- {{fun st : state =>
-   Aexp_of_aexp (AId Y) st =
-   mkAexp
-     (fun st0 : state =>
-      (Aexp_of_aexp (AId X) st0 + Aexp_of_aexp (AId Z) st0)%nat) st}})).
+ {{Aexp_of_aexp (AId Y) = Aexp_of_aexp (AId X) + Aexp_of_aexp (AId Z)}})).
 idtac "Assumptions:".
 Abort.
 Print Assumptions if_minus_plus.
@@ -223,13 +215,9 @@ idtac "#> If1.hoare_if1_good".
 idtac "Possible points: 2".
 check_type @If1.hoare_if1_good (
 (If1.hoare_triple
-   (fun st : state =>
-    mkAexp
-      (fun st0 : state =>
-       (Aexp_of_aexp (AId X) st0 + Aexp_of_aexp (AId Y) st0)%nat) st =
-    Aexp_of_aexp (AId Z) st)
+   (Aexp_of_aexp (AId X) + Aexp_of_aexp (AId Y) = Aexp_of_aexp (AId Z))
    (If1.CIf1 <{ (AId Y) <> (ANum 0) }> (If1.CAsgn X <{ (AId X) + (AId Y) }>))
-   (fun st : state => Aexp_of_aexp (AId X) st = Aexp_of_aexp (AId Z) st))).
+   (Aexp_of_aexp (AId X) = Aexp_of_aexp (AId Z)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions If1.hoare_if1_good.
@@ -374,4 +362,4 @@ idtac "---------- invalid_triple ---------".
 Print Assumptions invalid_triple.
 Abort.
 
-(* 2022-08-05 17:15 *)
+(* 2022-08-26 19:24 *)

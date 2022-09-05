@@ -59,7 +59,7 @@ Coq comes with a set of builtin tactics, such as <span class="inlinecode"><span 
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <a class="idref" href="References.html#"><span class="id" title="library">References</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <a class="idref" href="Hoare.html#"><span class="id" title="library">Hoare</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <a class="idref" href="Sub.html#"><span class="id" title="library">Sub</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">LibTactics</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="LibTactics.html#"><span class="id" title="module">LibTactics</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -120,10 +120,10 @@ Remark: SSReflect is another package providing powerful tactics.
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="IntrovExamples" class="idref" href="#IntrovExamples"><span class="id" title="module">IntrovExamples</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Equiv</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Stlc</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Maps</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Imp</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Equiv.html#"><span class="id" title="module">Equiv</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#"><span class="id" title="module">Stlc</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -208,9 +208,9 @@ Remark: the tactic <span class="inlinecode"><span class="id" title="var">introv<
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="InvertsExamples" class="idref" href="#InvertsExamples"><span class="id" title="module">InvertsExamples</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Equiv</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Maps</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Imp</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Equiv.html#"><span class="id" title="module">Equiv</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -338,10 +338,10 @@ A more involved example appears next. In particular, this example
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="InvertsExamples1" class="idref" href="#InvertsExamples1"><span class="id" title="module">InvertsExamples1</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="keyword">Types</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Stlc</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">STLC</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Types.html#"><span class="id" title="module">Types</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#"><span class="id" title="module">Stlc</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Maps</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="InvertsExamples1.typing_nonexample_1" class="idref" href="#InvertsExamples1.typing_nonexample_1"><span class="id" title="definition">typing_nonexample_1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="T:31" class="idref" href="#T:31"><span class="id" title="binder">T</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">&#x22A2;</span></a><br/>
@@ -409,9 +409,9 @@ Note: in the rare cases where one needs to perform an inversion
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="NaryExamples" class="idref" href="#NaryExamples"><span class="id" title="module">NaryExamples</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">References</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Smallstep</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">STLCRef</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="References.html#"><span class="id" title="module">References</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="Smallstep.html#"><span class="id" title="module">Smallstep</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="References.html#STLCRef"><span class="id" title="module">STLCRef</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -679,7 +679,7 @@ When we have a mismatch on two arguments, the tactic <span class="inlinecode"><s
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="UnfoldsExample" class="idref" href="#UnfoldsExample"><span class="id" title="module">UnfoldsExample</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Hoare</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="Hoare.html#"><span class="id" title="module">Hoare</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -777,9 +777,9 @@ The tactic <span class="inlinecode"><span class="id" title="var">tryfalse</span>
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="GenExample" class="idref" href="#GenExample"><span class="id" title="module">GenExample</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Stlc</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">STLC</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#"><span class="id" title="module">Stlc</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="Stlc.html#STLC"><span class="id" title="module">STLC</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="module">Maps</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="GenExample.substitution_preserves_typing" class="idref" href="#GenExample.substitution_preserves_typing"><span class="id" title="lemma">substitution_preserves_typing</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:72" class="idref" href="#Gamma:72"><span class="id" title="binder">Gamma</span></a> <a id="x:73" class="idref" href="#x:73"><span class="id" title="binder">x</span></a> <a id="U:74" class="idref" href="#U:74"><span class="id" title="binder">U</span></a> <a id="t:75" class="idref" href="#t:75"><span class="id" title="binder">t</span></a> <a id="v:76" class="idref" href="#v:76"><span class="id" title="binder">v</span></a> <a id="T:77" class="idref" href="#T:77"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#x:73"><span class="id" title="variable">x</span></a> <span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>&#x22A2;</span><span style='font-size:90%;'>&gt;</span></span></span></span></span> <a class="idref" href="UseTactics.html#U:74"><span class="id" title="variable">U</span></a> <span class="id" title="notation">;</span> <a class="idref" href="UseTactics.html#Gamma:72"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="UseTactics.html#t:75"><span class="id" title="variable">t</span></a> <a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="UseTactics.html#T:77"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="UseTactics.html#v:76"><span class="id" title="variable">v</span></a> <a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Stlc.html#092ca644792e367ec17fc46e3cfd4c<sub>33</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="UseTactics.html#U:74"><span class="id" title="variable">U</span></a>   <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -867,7 +867,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">admit_goal</spa
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Imp</span>.<br/>
 <span class="id" title="keyword">Theorem</span> <a id="SkipExample.ceval_deterministic" class="idref" href="#SkipExample.ceval_deterministic"><span class="id" title="lemma">ceval_deterministic</span></a>: <span class="id" title="keyword">∀</span> <a id="c:86" class="idref" href="#c:86"><span class="id" title="binder">c</span></a> <a id="st:87" class="idref" href="#st:87"><span class="id" title="binder">st</span></a> <a id="st<sub>1</sub>:88" class="idref" href="#st<sub>1</sub>:88"><span class="id" title="binder">st<sub>1</sub></span></a> <a id="st<sub>2</sub>:89" class="idref" href="#st<sub>2</sub>:89"><span class="id" title="binder">st<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:87"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:86"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>1</sub>:88"><span class="id" title="variable">st<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#st:87"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="UseTactics.html#c:86"><span class="id" title="variable">c</span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="UseTactics.html#st<sub>2</sub>:89"><span class="id" title="variable">st<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -906,7 +906,7 @@ The tactic <span class="inlinecode"><span class="id" title="var">admit_goal</spa
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="SortExamples" class="idref" href="#SortExamples"><span class="id" title="module">SortExamples</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="var">Imp</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <span class="id" title="module">Imp</span>.<br/>
 </div>
 
 <div class="doc">
@@ -989,9 +989,9 @@ The tactic <span class="inlinecode"><span class="id" title="var">sort</span></sp
 <span class="id" title="keyword">Module</span> <a id="ExamplesLets" class="idref" href="#ExamplesLets"><span class="id" title="module">ExamplesLets</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;To&nbsp;illustrate&nbsp;the&nbsp;working&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">lets</span></span>,&nbsp;assume&nbsp;that&nbsp;we&nbsp;want&nbsp;to<br/>
 &nbsp;&nbsp;&nbsp;exploit&nbsp;the&nbsp;following&nbsp;lemma.&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Maps</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Sub.STLCSub</span>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">String</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Import</span> <span class="id" title="module">Maps</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Sub.html#STLCSub"><span class="id" title="module">Sub.STLCSub</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="module">String</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Axiom</span> <a id="ExamplesLets.typing_inversion_var" class="idref" href="#ExamplesLets.typing_inversion_var"><span class="id" title="axiom">typing_inversion_var</span></a> : <span class="id" title="keyword">∀</span> <a id="Gamma:94" class="idref" href="#Gamma:94"><span class="id" title="binder">Gamma</span></a> (<a id="x:95" class="idref" href="#x:95"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) <a id="T:96" class="idref" href="#T:96"><span class="id" title="binder">T</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="UseTactics.html#Gamma:94"><span class="id" title="variable">Gamma</span></a> <a class="idref" href="Sub.html#69590139008481740ce065d7ece3d5b<sub>5</sub>"><span class="id" title="notation">&#x22A2;</span></a> <a class="idref" href="UseTactics.html#x:95"><span class="id" title="variable">x</span></a> <a class="idref" href="Sub.html#69590139008481740ce065d7ece3d5b<sub>5</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Sub.html#69590139008481740ce065d7ece3d5b<sub>5</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="UseTactics.html#T:96"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="S:97" class="idref" href="#S:97"><span class="id" title="binder">S</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
@@ -1256,7 +1256,7 @@ Note: one can write <span class="inlinecode"><span class="id" title="var">lets</
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

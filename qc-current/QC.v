@@ -83,12 +83,18 @@ Check @choose.
 
      ===> 
      @choose
-     : forall A : Type, ChoosableFromInterval A -> A * A -> G A 
+     : forall G : Type -> Type,
+       Producer G ->
+       forall A : Type,
+       ChoosableFromInterval A -> A * A -> G A
 *)
 
 (** The [ChoosableFromInterval] typeclass describes primitive types
     [A], like natural numbers and integers ([Z]), for which it makes
-    sense to randomly generate elements from a given interval. *)
+    sense to randomly generate elements from a given interval. The
+    [Producer] typeclass is another QuickChick abstraction that
+    generalizes generators and also encompasses enumerators --- you can safely ignore it for now.
+*)
 
 Print ChoosableFromInterval. 
 (**
@@ -218,7 +224,7 @@ Inductive color := Red | Green | Blue | Yellow.
 (** In order for commands like [Sample] to display colors, we should
     make [color] an instance of the [Show] typeclass: *)
 
-Instance show_color : Show color :=
+#[export] Instance show_color : Show color :=
   {| show c :=
        match c with
          | Red    => "Red"
@@ -301,7 +307,7 @@ Arguments Node {A} _ _ _.
     alternatively define [aux] with a separate top-level
     [Fixpoint].) *) 
 
-Instance showTree {A} `{_ : Show A} : Show (Tree A) :=
+#[export] Instance showTree {A} `{_ : Show A} : Show (Tree A) :=
   {| show := let fix aux t :=
        match t with
          | Leaf => "Leaf"
@@ -409,7 +415,7 @@ Fixpoint genTreeSized {A} (sz : nat) (g : G A) : G (Tree A) :=
 Check freq_.
 (**
 
-     ===> freq_ : G ?A -> seq (nat * G ?A) -> G ?A 
+     ===> freq_ : G ?A -> list (nat * G ?A) -> G ?A 
 *)
 
 (** As with [oneOf], we usually use a convenient derived notation,
@@ -501,7 +507,7 @@ Fixpoint mirror {A : Type} (t : Tree A) : Tree A :=
     equality test on trees.  We can obtain that with minimal effort
     using the [Dec] typeclass and the [dec_eq] tactic. *)
 
-Instance eq_dec_tree (t1 t2 : Tree nat) : Dec (t1 = t2).
+#[export] Instance eq_dec_tree (t1 t2 : Tree nat) : Dec (t1 = t2).
 Proof. constructor; dec_eq. Defined.
 
 (** We expect that mirroring a tree twice should yield the original
@@ -529,7 +535,7 @@ Module CheckerPlayground1.
 
 Inductive Result := Success | Failure.
 
-Instance showResult : Show Result :=
+#[export] Instance showResult : Show Result :=
   {
     show r := match r with Success => "Success" | Failure => "Failure" end
   }.
@@ -562,7 +568,7 @@ Class Checkable A :=
 
 (** It is easy to give a [bool] instance for [Checkable]. *)
 
-Instance checkableBool : Checkable bool :=
+#[export] Instance checkableBool : Checkable bool :=
   {
     checker b := if b then ret Success else ret Failure
   }.
@@ -605,7 +611,7 @@ End CheckerPlayground1.
 Module CheckerPlayground2.
 Export CheckerPlayground1.
 
-Instance checkableDec `{P : Prop} `{Dec P} : Checkable P :=
+#[export] Instance checkableDec `{P : Prop} `{Dec P} : Checkable P :=
   {
     checker p := if P? then ret Success else ret Failure
   }.
@@ -746,7 +752,7 @@ Inductive Result :=
   | Success : Result
   | Failure : forall {A} `{Show A}, A -> Result.
 
-Instance showResult : Show Result :=
+#[export] Instance showResult : Show Result :=
   {
     show r := match r with
                 Success => "Success"
@@ -761,7 +767,7 @@ Class Checkable A :=
     checker : A -> Checker
   }.
 
-Instance showUnit : Show unit :=
+#[export] Instance showUnit : Show unit :=
   {
     show u := "tt"
   }.
@@ -770,12 +776,12 @@ Instance showUnit : Show unit :=
     record anything except the [Failure], so we put [tt] (the sole
     value of type [unit]) as the "failure reason." *)
 
-Instance checkableBool : Checkable bool :=
+#[export] Instance checkableBool : Checkable bool :=
   {
     checker b := if b then ret Success else ret (Failure tt)
   }.
 
-Instance checkableDec `{P : Prop} `{Dec P} : Checkable P :=
+#[export] Instance checkableDec `{P : Prop} `{Dec P} : Checkable P :=
   {
     checker p := if P? then ret Success else ret (Failure tt)
   }.
@@ -881,7 +887,7 @@ QuickChick
 
 (** Here is a shrinker for [color]s. *)
 
-Instance shrinkColor : Shrink color :=
+#[export] Instance shrinkColor : Shrink color :=
   {
     shrink c :=
       match c with
@@ -955,7 +961,7 @@ Fixpoint shrinkTreeAux {A}
                     map (fun r' => Node x l r') (shrinkTreeAux s r)
   end.
 
-Instance shrinkTree {A} `{Shrink A} : Shrink (Tree A) := 
+#[export] Instance shrinkTree {A} `{Shrink A} : Shrink (Tree A) := 
   {| shrink x := shrinkTreeAux shrink x |}.
 
 (** With [shrinkTree] in hand, we can use the [forAllShrink] property
@@ -1077,7 +1083,7 @@ Definition path_mirror := map (fun t => match t with
 (** Before we can state some properties about paths in ternary trees, it's
     useful to have a decidable equality for ternary trees of [nat]s. *)
 
-Instance eq_dec_tern_tree (t1 t2 : TernaryTree nat) : Dec (t1 = t2).
+#[export] Instance eq_dec_tern_tree (t1 t2 : TernaryTree nat) : Dec (t1 = t2).
 Proof. constructor; dec_eq. Defined.
 
 (** Traversing a path in a tree should be the same as traversing the
@@ -1094,7 +1100,7 @@ Definition tern_mirror_path_flip (t:TernaryTree nat) (p:path) :=
     [direction] are simple to write; the [shrink] will by default go
     left. *)
 
-Instance showDirection : Show direction :=
+#[export] Instance showDirection : Show direction :=
   {| show x :=
        match x with
        | Left => "Left"
@@ -1105,7 +1111,7 @@ Instance showDirection : Show direction :=
 Definition genDirection : G direction :=
   elems [Left; Middle; Right].
 
-Instance shrinkDirection : Shrink direction :=
+#[export] Instance shrinkDirection : Shrink direction :=
   {| shrink d :=
        match d with
        | Left => []
@@ -1117,12 +1123,12 @@ Instance shrinkDirection : Shrink direction :=
     of elements of that type.  We do the same for [show] and [shrink]
     with [showList] and [shrinkList] respectively. *)
 
-Instance showPath : Show path := showList.
+#[export] Instance showPath : Show path := showList.
 
-Definition genPath : G path :=
-  listOf genDirection.
+#[export] Instance genPath : Gen path :=
+  {arbitrary := listOf genDirection }.
 
-Instance shrinkPath : Shrink path := shrinkList.
+#[export] Instance shrinkPath : Shrink path := shrinkList.
 
 (** **** Exercise: 4 stars, standard (bug_finding_tern_tree)
 
@@ -1159,7 +1165,7 @@ End DefineGen.
     their individual names -- we can just call them all
     [arbitrary]. *)
 
-Instance gen_color : Gen color :=
+#[export] Instance gen_color : Gen color :=
   {
     arbitrary := genColor
   }.
@@ -1193,12 +1199,12 @@ Conjecture every_color_is_red : forall c, c = Red.
     To show that the conclusion is decidable, we need to define a
     [Dec] instance for equality on colors. *)
 
-Instance eq_dec_color (x y : color) : Dec (x = y).
+#[export] Instance eq_dec_color (x y : color) : Dec (x = y).
 Proof. dec_eq. Defined.
 
 (** Putting it all together: *)
 
-(*  QuickChick every_color_is_red.
+(* QuickChick every_color_is_red.
 
      ===>
        QuickChecking every_color_is_red
@@ -1245,7 +1251,7 @@ Class GenSized (A : Type) :=
 (** We can then define a generic [Gen] instance for types that have a
     [GenSized] instance, using [sized]: *)
 
-Instance GenOfGenSized {A} `{GenSized A} : Gen A :=
+#[export] Instance GenOfGenSized {A} `{GenSized A} : Gen A :=
   {
     arbitrary := sized arbitrarySized
   }.
@@ -1255,7 +1261,7 @@ End DefineGenSized.
 (** Now we can make a [Gen] instance for trees by providing just an
     implementation of [arbitrarySized]. *)
 
-Instance genTree {A} `{Gen A} : GenSized (Tree A) := 
+#[export] Instance genTree {A} `{Gen A} : GenSized (Tree A) := 
   {| arbitrarySized n := genTreeSized' n arbitrary |}.
 
 (** Finally, with the [Arbitrary] instance for trees, we can supply
@@ -1270,7 +1276,7 @@ Instance genTree {A} `{Gen A} : GenSized (Tree A) :=
 
 (* FILL IN HERE *)
 
-(* QuickChick tern_mirror_path_flip.
+(*QuickChick tern_mirror_path_flip.
 
     [] *)
 
@@ -1281,7 +1287,7 @@ Instance genTree {A} `{Gen A} : GenSized (Tree A) :=
     it can get tedious when we are testing code that involves many new
     [Inductive] type declarations.  To streamline this process,
     [QuickChick] provides some automation for deriving such instances
-    for "plain datatypes" automatically! *)
+    for simple datatypes automatically! *)
 
 Derive Arbitrary for Tree.
 (**
@@ -1440,7 +1446,7 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
     those with sparse preconditions (i.e. ones that are satisfied
     rarely with respect to their input domain). *)
 
-Open Scope bool.
+Open Scope bool. Open Scope nat.
 
 (** Consider a function that inserts a natural number into a sorted list. *)
 
@@ -1460,8 +1466,23 @@ Fixpoint insert (x : nat) (l : list nat) :=
              else y :: insert x ys 
   end.
 
-(** We could test [insert] using the following _conditional_ property: *)
+(** We could test [insert] using a _conditional_ property, which uses _==>_ to encode implication:
+ *)
 
+Check implication.
+(* 
+
+     ===> implication : bool -> Checker -> Checker
+*)
+
+(**
+   The _implication_ function takes a boolean (the precondition) and a
+   Checker (the conclusion of the property); if the boolean is true,
+   it tests the Checker, otherwise, it rejects the current test. The _==>_ notation is in _Checker_scope_. 
+
+ *)
+
+Open Scope Checker_scope.
 Definition insert_spec (x : nat) (l : list nat) :=
   sorted l ==> sorted (insert x l).
 
@@ -1689,4 +1710,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2022-08-05 17:24 *)
+(* 2022-08-26 19:22 *)

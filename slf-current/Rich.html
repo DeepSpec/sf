@@ -870,7 +870,7 @@ The soundness proof of <span class="inlinecode"><span class="id" title="var">wpg
 <span class="id" title="keyword">Notation</span> <a id="WhileLoops.:wp:wp_scope:'If_trm'_x_'Then'_x_'Else'_x" class="idref" href="#WhileLoops.:wp:wp_scope:'If_trm'_x_'Then'_x_'Else'_x"><span class="id" title="notation">&quot;</span></a>'If_trm' F<sub>0</sub> 'Then' F<sub>1</sub> 'Else' F<sub>2</sub>" :=<br/>
 &nbsp;&nbsp;((<a class="idref" href="Rich.html#WhileLoops.wpgen_if_trm"><span class="id" title="definition">wpgen_if_trm</span></a> <span class="id" title="var">F<sub>0</sub></span> <span class="id" title="var">F<sub>1</sub></span> <span class="id" title="var">F<sub>2</sub></span>))<br/>
 &nbsp;&nbsp;(<span class="id" title="keyword">in</span> <span class="id" title="var">custom</span> <span class="id" title="var">wp</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69) : <span class="id" title="var">wp_scope</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">wpgen_scope</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">wpgen_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="WhileLoops.:wp:wp_scope:'While'_x_'Do'_x_'Done'" class="idref" href="#WhileLoops.:wp:wp_scope:'While'_x_'Do'_x_'Done'"><span class="id" title="notation">&quot;</span></a>'While' F<sub>1</sub> 'Do' F<sub>2</sub> 'Done'" :=<br/>
 &nbsp;&nbsp;((<a class="idref" href="Rich.html#WhileLoops.wpgen_while"><span class="id" title="definition">wpgen_while</span></a> <span class="id" title="var">F<sub>1</sub></span> <span class="id" title="var">F<sub>2</sub></span>))<br/>
 &nbsp;&nbsp;(<span class="id" title="keyword">in</span> <span class="id" title="var">custom</span> <span class="id" title="var">wp</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69, <span class="id" title="var">F<sub>2</sub></span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 68,<br/>
@@ -929,7 +929,7 @@ Note: a similar construction could be set up for dealing with for loops.
 <div class="code">
 
 <span class="id" title="keyword">Section</span> <a id="WhileLoops.DemoLoopFrame" class="idref" href="#WhileLoops.DemoLoopFrame"><span class="id" title="section">DemoLoopFrame</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">ProgramSyntax</span> <span class="id" title="var">Basic</span> <span class="id" title="var">Repr</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="LibSepReference.html#ProgramSyntax"><span class="id" title="module">ProgramSyntax</span></a> <a class="idref" href="Basic.html#"><span class="id" title="module">Basic</span></a> <a class="idref" href="Repr.html#"><span class="id" title="module">Repr</span></a>.<br/>
 <span class="id" title="keyword">Global Opaque</span> <a class="idref" href="Repr.html#MList"><span class="id" title="definition">MList</span></a>.<br/>
 </div>
 
@@ -1789,7 +1789,7 @@ The following demo shows how the term <span class="inlinecode"><span class="id" 
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:21&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:30&nbsp;*)</span><br/>
 </div>
 </div>
 

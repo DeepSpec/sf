@@ -215,7 +215,7 @@
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> &#x2208; T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    This rule says, intuitively, that it is OK to "forget" some of
     what we know about a term. 
 <div class="paragraph"> </div>
@@ -256,7 +256,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S <: T</td>
   <td></td>
-</td>
+</tr>
 </table></center>    ... and a rule of <i>reflexivity</i>, since certainly any type <span class="inlinecode"><span class="id" title="var">T</span></span> is
     as good as itself:
 <center><table class="infrule">
@@ -271,7 +271,7 @@
 <tr class="infruleassumption">
   <td class="infrule">T <: T</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -294,7 +294,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> * S<sub>2</sub> <: T<sub>1</sub> * T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -336,7 +336,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> S<sub>2</sub> <: S<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -354,7 +354,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> S<sub>2</sub> <: T<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    But notice that the argument types are subtypes "the other way round":
     in order to conclude that <span class="inlinecode"><span class="id" title="var">S<sub>1</sub></span>→<span class="id" title="var">S<sub>2</sub></span></span> to be a subtype of <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span>→<span class="id" title="var">T<sub>2</sub></span></span>, it
     must be the case that <span class="inlinecode"><span class="id" title="var">T<sub>1</sub></span></span> is a subtype of <span class="inlinecode"><span class="id" title="var">S<sub>1</sub></span></span>.  The arrow
@@ -428,11 +428,11 @@
 <tr class="infruleassumption">
   <td class="infrule">forall jk in j<sub>1</sub>..jn,</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">exists ip in i<sub>1</sub>..im, such that</td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">jk=ip and Sp <: Tk</td>
   <td class="infrulenamecol" rowspan="3">
@@ -444,7 +444,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...im:Sm} <: {j<sub>1</sub>:T<sub>1</sub>...jn:Tn}</td>
   <td></td>
-</td>
+</tr>
 </table></center>    That is, the record on the left should have all the field labels of
     the one on the right (and possibly more), while the types of the
     common fields should be in the subtype relation.
@@ -469,7 +469,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:T<sub>1</sub>...in:Tn} <: {i<sub>1</sub>:T<sub>1</sub>...im:Tm}</td>
   <td></td>
-</td>
+</tr>
 </table></center>    We can use <span class="inlinecode"><span class="id" title="var">S_RcdWidth</span></span> to drop later fields of a multi-field
     record while keeping earlier fields, showing for example that
     <span class="inlinecode">{<span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>,<span class="id" title="var">name</span>:<span class="id" title="var">String</span>}</span> <span class="inlinecode">&lt;:</span> <span class="inlinecode">{<span class="id" title="var">age</span>:<span class="id" title="var">Nat</span>}</span>. 
@@ -489,7 +489,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...in:Sn} <: {i<sub>1</sub>:T<sub>1</sub>...in:Tn}</td>
   <td></td>
-</td>
+</tr>
 </table></center>    For example, we can use <span class="inlinecode"><span class="id" title="var">S_RcdDepth</span></span> and <span class="inlinecode"><span class="id" title="var">S_RcdWidth</span></span> together to
     show that <span class="inlinecode">{<span class="id" title="var">y</span>:<span class="id" title="var">Student</span>,</span> <span class="inlinecode"><span class="id" title="var">x</span>:<span class="id" title="var">Nat</span>}</span> <span class="inlinecode">&lt;:</span> <span class="inlinecode">{<span class="id" title="var">y</span>:<span class="id" title="var">Person</span>}</span>. 
 <div class="paragraph"> </div>
@@ -511,7 +511,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...in:Sn} <: {j<sub>1</sub>:T<sub>1</sub>...jn:Tn}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -561,7 +561,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> S<sub>2</sub> <: T<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    Give a concrete example of functions <span class="inlinecode"><span class="id" title="var">f</span></span> and <span class="inlinecode"><span class="id" title="var">g</span></span> with the following
     types...
 <br/>
@@ -607,7 +607,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S <: Top</td>
   <td></td>
-</td>
+</tr>
 </table></center>    The <span class="inlinecode"><span class="id" title="var">Top</span></span> type is an analog of the <span class="inlinecode"><span class="id" title="var">Object</span></span> type in Java and C#. 
 </div>
 
@@ -641,7 +641,7 @@
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t<sub>1</sub> &#x2208; T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>      to the typing relation, and
 
 <div class="paragraph"> </div>
@@ -661,7 +661,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S <: T</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -674,7 +674,7 @@
 <tr class="infruleassumption">
   <td class="infrule">T <: T</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -687,7 +687,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S <: Top</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <: T<sub>1</sub>&nbsp;&nbsp;&nbsp;&nbsp;S<sub>2</sub> <: T<sub>2</sub></td>
@@ -700,7 +700,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> * S<sub>2</sub> <: T<sub>1</sub> * T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">T<sub>1</sub> <: S<sub>1</sub>&nbsp;&nbsp;&nbsp;&nbsp;S<sub>2</sub> <: T<sub>2</sub></td>
@@ -713,7 +713,7 @@
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> S<sub>2</sub> <: T<sub>1</sub> <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">n > m</td>
@@ -726,7 +726,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:T<sub>1</sub>...in:Tn} <: {i<sub>1</sub>:T<sub>1</sub>...im:Tm}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <: T<sub>1</sub>  ...  Sn <: Tn</td>
@@ -739,7 +739,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...in:Sn} <: {i<sub>1</sub>:T<sub>1</sub>...in:Tn}</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...in:Sn} is a permutation of {j<sub>1</sub>:T<sub>1</sub>...jn:Tn}</td>
@@ -752,7 +752,7 @@
 <tr class="infruleassumption">
   <td class="infrule">{i<sub>1</sub>:S<sub>1</sub>...in:Sn} <: {j<sub>1</sub>:T<sub>1</sub>...jn:Tn}</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </li>
 </ul>
@@ -1188,7 +1188,7 @@ of the five types above. It may be unrelated to some of them.
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub>*S<sub>2</sub> <: T<sub>1</sub>*T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    intuitively corresponds to the "depth" subtyping rule for records.
     Extending the analogy, we might consider adding a "permutation" rule
 <center><table class="infrule">
@@ -1203,7 +1203,7 @@ of the five types above. It may be unrelated to some of them.
 <tr class="infruleassumption">
   <td class="infrule">T<sub>1</sub>*T<sub>2</sub> <: T<sub>2</sub>*T<sub>1</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>    for products.  Is this a good idea? Briefly explain why or why not.
 
 <div class="paragraph"> </div>
@@ -1584,7 +1584,7 @@ Now use the definition of the subtype relation to prove the following:
 <span class="id" title="keyword">where</span> <a id="69590139008481740ce065d7ece3d5b<sub>5</sub>" class="idref" href="#69590139008481740ce065d7ece3d5b<sub>5</sub>"><span class="id" title="notation">&quot;</span></a>Gamma '&#x22A2;' t '&#x2208;' T" := (<a class="idref" href="Sub.html#has_type:47"><span class="id" title="inductive">has_type</span></a> <span class="id" title="var">Gamma</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="Sub.html#has_type"><span class="id" title="inductive">has_type</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="STLCSub.Examples2" class="idref" href="#STLCSub.Examples2"><span class="id" title="module">Examples2</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Examples</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Sub.html#STLCSub.Examples"><span class="id" title="module">Examples</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -2400,7 +2400,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t &#x2208; S<sub>1</sub><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>S<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> <: T<sub>1</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T<sub>1</sub> <: S<sub>1</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S<sub>2</sub> <: T<sub>2</sub></td>
   <td class="infrulenamecol" rowspan="3">
@@ -2412,7 +2412,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">Gamma &#x22A2; t &#x2208; T<sub>1</sub><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2431,7 +2431,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">unit <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> (\x:Top. x)</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2450,7 +2450,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">Unit <: Top<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Top</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2469,7 +2469,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">Top<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Top <: Unit</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2488,7 +2488,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">(unit t) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> (t unit)</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2507,7 +2507,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">(unit t) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> (t unit)</td>
   <td></td>
-</td>
+</tr>
 </table></center><center><table class="infrule">
 <tr class="infruleassumption">
   <td class="infrule">&nbsp;&nbsp;</td>
@@ -2520,7 +2520,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">empty &#x22A2; unit &#x2208; Top<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Top</td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2539,7 +2539,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>S<sub>2</sub> <: T<sub>1</sub><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>
 </li>
 </ul>
@@ -2612,7 +2612,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <tr class="infruleassumption">
   <td class="infrule">S<sub>1</sub> * S<sub>2</sub> <: T<sub>1</sub> * T<sub>2</sub></td>
   <td></td>
-</td>
+</tr>
 </table></center>
 <div class="paragraph"> </div>
 
@@ -2652,7 +2652,7 @@ The inversion lemmas for typing and for subtyping between arrow
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="STLCSub.FormalThoughtExercises" class="idref" href="#STLCSub.FormalThoughtExercises"><span class="id" title="module">FormalThoughtExercises</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Examples</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Sub.html#STLCSub.Examples"><span class="id" title="module">Examples</span></a>.<br/>
 <span class="id" title="keyword">Notation</span> <a id="STLCSub.FormalThoughtExercises.p" class="idref" href="#STLCSub.FormalThoughtExercises.p"><span class="id" title="abbreviation">p</span></a> := "p".<br/>
 <span class="id" title="keyword">Notation</span> <a id="STLCSub.FormalThoughtExercises.a" class="idref" href="#STLCSub.FormalThoughtExercises.a"><span class="id" title="abbreviation">a</span></a> := "a".<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="STLCSub.FormalThoughtExercises.TF" class="idref" href="#STLCSub.FormalThoughtExercises.TF"><span class="id" title="definition">TF</span></a> <a id="P:133" class="idref" href="#P:133"><span class="id" title="binder">P</span></a> := <a class="idref" href="Sub.html#P:133"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e<sub>25</sub>"><span class="id" title="notation">∨</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a><a class="idref" href="Sub.html#P:133"><span class="id" title="variable">P</span></a>.<br/>
@@ -3083,7 +3083,7 @@ The inversion lemmas for typing and for subtyping between arrow
 
 <span class="id" title="keyword">End</span> <a class="idref" href="Sub.html#STLCSub.FormalThoughtExercises"><span class="id" title="module">FormalThoughtExercises</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Sub.html#STLCSub"><span class="id" title="module">STLCSub</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:15&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
 </div>
 </div>
 

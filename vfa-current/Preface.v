@@ -69,7 +69,7 @@
 
 (** Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
     describes the Coq installation you will need.  This edition was
-    built with Coq 8.13.
+    built with Coq 8.15.
 
     In addition, two of the chapters ask you to compile and run an
     OCaml program; having OCaml installed on your computer is helpful,
@@ -150,7 +150,7 @@
     volume       =   "3",
     year         =   "2022",
     publisher    =   "Electronic textbook",
-    note         =   {Version 1.5.1, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 1.5.2, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -162,4 +162,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2022-08-05 17:17 *)
+(* 2022-08-26 19:27 *)

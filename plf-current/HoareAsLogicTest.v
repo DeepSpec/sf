@@ -96,8 +96,10 @@ idtac "#> wp_invariant".
 idtac "Possible points: 2".
 check_type @wp_invariant (
 (forall (b : Imp.bexp) (c : Imp.com) (Q : Hoare.Assertion),
- valid (fun st : Imp.state => wp (Imp.CWhile b c) Q st /\ Hoare.bassn b st) c
-   (wp (Imp.CWhile b c) Q))).
+ valid
+   (fun st : Imp.state =>
+    (wp (Imp.CWhile b c) Q : Hoare.Assertion) st /\
+    (Hoare.bassn b : Hoare.Assertion) st) c (wp (Imp.CWhile b c) Q))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions wp_invariant.
@@ -158,4 +160,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2022-08-05 17:15 *)
+(* 2022-08-26 19:24 *)

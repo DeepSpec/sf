@@ -274,7 +274,7 @@ This elimination rule can be equivalently reformulated in the following
 <span class="id" title="keyword">Lemma</span> <a id="WandDef.hwand_cancel" class="idref" href="#WandDef.hwand_cancel"><span class="id" title="lemma">hwand_cancel</span></a> : <span class="id" title="keyword">∀</span> <a id="H<sub>1</sub>:17" class="idref" href="#H<sub>1</sub>:17"><span class="id" title="binder">H<sub>1</sub></span></a> <a id="H<sub>2</sub>:18" class="idref" href="#H<sub>2</sub>:18"><span class="id" title="binder">H<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Wand.html#H<sub>1</sub>:17"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="LibSepReference.html#6e7aeeae3643da4efcca62b993bbca40"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="LibSepReference.html#6e7aeeae3643da4efcca62b993bbca40"><span class="id" title="notation">(</span></a><a class="idref" href="Wand.html#H<sub>1</sub>:17"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Wand.html#cadd6f49c30621202b890edaa339e04b"><span class="id" title="notation"><span class='gray-font'>\</span><span class="nowrap">&minus;&lowast;</span></span></a> <a class="idref" href="Wand.html#H<sub>2</sub>:18"><span class="id" title="variable">H<sub>2</sub></span></a><a class="idref" href="LibSepReference.html#6e7aeeae3643da4efcca62b993bbca40"><span class="id" title="notation">)</span></a> <a class="idref" href="LibSepReference.html#c7ebd77e939e3f02c508e57b470dc021"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Wand.html#H<sub>2</sub>:18"><span class="id" title="variable">H<sub>2</sub></span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="var">applys</span> <a class="idref" href="Wand.html#WandDef.himpl_hwand_r_inv"><span class="id" title="lemma">himpl_hwand_r_inv</span></a>. <span class="id" title="var">applys</span> <a class="idref" href="LibSepReference.html#SepSimplArgs.himpl_refl"><span class="id" title="lemma">himpl_refl</span></a>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="var">Arguments</span> <a class="idref" href="Wand.html#WandDef.hwand_cancel"><span class="id" title="lemma">hwand_cancel</span></a> : <span class="id" title="tactic">clear</span> <span class="id" title="var">implicits</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="Wand.html#WandDef.hwand_cancel"><span class="id" title="lemma">hwand_cancel</span></a> : <span class="id" title="tactic">clear</span> <span class="id" title="var">implicits</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1085,7 +1085,7 @@ A generalization of <span class="inlinecode"><span class="id" title="var">xfun</
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Import</span> <span class="id" title="var">DemoPrograms</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="LibSepReference.html#DemoPrograms"><span class="id" title="module">DemoPrograms</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1185,7 +1185,7 @@ We next illustrate a call to <span class="inlinecode"><span class="id" title="va
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="WandBenefits" class="idref" href="#WandBenefits"><span class="id" title="module">WandBenefits</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">WandDef</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Wand.html#WandDef"><span class="id" title="module">WandDef</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1287,7 +1287,7 @@ Now, let us apply the ramified frame rule to carry out the same
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="WandProperties" class="idref" href="#WandProperties"><span class="id" title="module">WandProperties</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">WandDef</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Wand.html#WandDef"><span class="id" title="module">WandDef</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1717,7 +1717,7 @@ The equivalence proofs are given here for reference. It is not needed
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="NewQwand" class="idref" href="#NewQwand"><span class="id" title="module">NewQwand</span></a>.<br/>
-<span class="id" title="keyword">Export</span> <span class="id" title="var">WandDef</span>.<br/>
+<span class="id" title="keyword">Export</span> <a class="idref" href="Wand.html#WandDef"><span class="id" title="module">WandDef</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1828,7 +1828,7 @@ Universal quantifers that appear in the precondition of a triple
 </div>
 <div class="code">
 
-<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">qwand_scope</span>.<br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">qwand_scope</span>.<br/>
 <span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">qwand_scope</span>.<br/>
 </div>
 
@@ -2458,7 +2458,7 @@ Likewise for the other three operations: the triple-based specification
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="WpFromHoare" class="idref" href="#WpFromHoare"><span class="id" title="module">WpFromHoare</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">NewQwand</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Wand.html#NewQwand"><span class="id" title="module">NewQwand</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -2502,7 +2502,7 @@ Recall from the last section of the chapter <a href="WPsem.html"><span class="in
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="ConjDisj" class="idref" href="#ConjDisj"><span class="id" title="module">ConjDisj</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">NewQwand</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Wand.html#NewQwand"><span class="id" title="module">NewQwand</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -2648,7 +2648,7 @@ The operator <span class="inlinecode"><span class="id" title="var">hor</span></s
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="ConjDisj.HorExample" class="idref" href="#ConjDisj.HorExample"><span class="id" title="module">HorExample</span></a>.<br/>
-<span class="id" title="keyword">Import</span> <span class="id" title="var">Repr</span>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="Repr.html#"><span class="id" title="module">Repr</span></a>.<br/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">q</span> : <a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>.<br/>
 </div>
 
@@ -2900,7 +2900,7 @@ In practice, it saves a lot of effort to use the derived definitions,
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-05&nbsp;17:21&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2022-08-26&nbsp;19:30&nbsp;*)</span><br/>
 </div>
 </div>
 

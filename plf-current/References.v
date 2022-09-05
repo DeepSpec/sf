@@ -973,9 +973,7 @@ Definition context := partial_map ty.
 (* ================================================================= *)
 (** ** Store typings *)
 
-(**  Tersify! 
-
-    Having extended our syntax and reduction rules to accommodate
+(** Having extended our syntax and reduction rules to accommodate
     references, our last job is to write down typing rules for the new
     constructs (and, of course, to check that these rules are sound!).
     Naturalurally, the key question is, "What is the type of a location?"
@@ -1942,4 +1940,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2022-08-05 17:15 *)
+(* 2022-08-26 19:24 *)
