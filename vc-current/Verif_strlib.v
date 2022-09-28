@@ -603,11 +603,11 @@ Definition example_call_strcpy_spec :=
   PRE [  ]
     PROP ()
     PARAMS() GLOBALS (gv)
-    SEP (cstring Ews (Hello' ++ [Byte.zero]) (gv ___stringlit_1))
+    SEP (cstring Ews Hello' (gv ___stringlit_1))
   POST [ tint ]
     PROP ()
     RETURN (Vint (Int.repr (Z.of_N (Ascii.N_of_ascii "H"%char))))
-    SEP (cstring Ews (Hello' ++ [Byte.zero]) (gv ___stringlit_1)).
+    SEP (cstring Ews Hello' (gv ___stringlit_1)).
 
 Lemma body_example_call_strcpy: semax_body Vprog Gprog 
          f_example_call_strcpy example_call_strcpy_spec.
