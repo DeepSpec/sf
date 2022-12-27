@@ -1872,7 +1872,7 @@ Notation "t1 '/' st '-->+' t2 '/' st'" :=
 Ltac print_goal := match goal with |- ?x => idtac x end.
 Ltac reduce :=
     repeat (print_goal; eapply multi_step ;
-            [ (eauto 10; fail) | (instantiate; compute)];
+            [ (eauto 10; fail) | compute ];
             try solve [apply multi_refl]).
 
 (** Next, we use [reduce] to show that [loop] steps to
