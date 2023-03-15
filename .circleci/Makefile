@@ -1,4 +1,4 @@
-all: latest 8.13 8.12
+all: latest 8.15 8.16
 
 %:      IMAGE=ysli/sfdev:$@
 %:      DOCKERFILE=Dockerfile.$@
