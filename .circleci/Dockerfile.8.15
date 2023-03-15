@@ -1,6 +1,6 @@
 FROM coqorg/coq:8.15.2-ocaml-4.14.0-flambda
 ENV OPAMYES true
-ENV VST_NEEDED 2.10
+ENV VST_NEEDED 2.11.1
 RUN \
     sudo apt update \
  && sudo apt install wget \
