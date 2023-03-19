@@ -1,5 +1,6 @@
 all: 8.15 8.16
-# all: 8.15 8.16
+
+# all: 8.15 8.16 dev
 
 %:      IMAGE=ysli/sfdev:$@
 %:      DOCKERFILE=Dockerfile.$@
