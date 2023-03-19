@@ -1,4 +1,4 @@
-FROM coqorg/coq:8.16.1-ocaml-4.14.1-flambda
+FROM coqorg/coq:8.16.1
 ENV OPAMYES true
 ENV VST_NEEDED 2.11.1
 RUN \
