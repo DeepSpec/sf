@@ -1784,7 +1784,7 @@ Tactic Notation "print_goal" :=
 
 Tactic Notation "normalize" :=
   repeat (print_goal; eapply multi_step ;
-            [ (eauto 10; fail) | (instantiate; simpl)]);
+            [ (eauto 10; fail) | simpl ]);
   apply multi_refl.
 
 Example step_example1'' :

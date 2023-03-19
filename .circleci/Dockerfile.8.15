@@ -1,6 +1,6 @@
 FROM coqorg/coq:8.15
 ENV OPAMYES true
-ENV VST_NEEDED 2.9
+ENV VST_NEEDED 2.11.1
 RUN \
     sudo apt-get update \
  && sudo apt-get install wget \
