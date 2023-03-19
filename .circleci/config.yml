@@ -18,6 +18,10 @@ jobs:
             docker build -t deepspec/sfdev:8.15 - < Dockerfile.8.15
             docker push deepspec/sfdev:8.15
             fi
+            if fgrep -q '[docker 8.16]' \<<< $changes; then
+            docker build -t deepspec/sfdev:8.16 - < Dockerfile.8.16
+            docker push deepspec/sfdev:8.16
+            fi
             if fgrep -q '[docker dev]' \<<< $changes; then
             docker build -t deepspec/sfdev:dev - < Dockerfile.dev
             docker push deepspec/sfdev:dev
