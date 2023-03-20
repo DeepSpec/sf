@@ -8,6 +8,7 @@ RUN \
  && unzip v.2.0+beta.zip \
  && opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
  && opam install -j `nproc` \
+         ocamlbuild \
          menhir.20220210 \
          coq-vst.$VST_NEEDED \
 #         coq-quickchick \
