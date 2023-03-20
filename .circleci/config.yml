@@ -103,6 +103,12 @@ workflows:
           requires:
             - build-docker
       - build:
+          name: Coq 8.16
+          coq: '8.16'
+          vc: true
+          requires:
+            - build-docker
+      - build:
           name: Coq dev
           coq: dev
           requires:
