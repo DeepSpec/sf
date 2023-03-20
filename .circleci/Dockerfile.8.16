@@ -10,6 +10,7 @@ RUN \
  && opam install -j `nproc` \
          ocamlbuild \
          menhir.20220210 \
+         coq-mathcomp-ssreflect \
          coq-vst.$VST_NEEDED \
 #         coq-quickchick \
  && (cd QuickChick-v.2.0-beta; make; make install)
