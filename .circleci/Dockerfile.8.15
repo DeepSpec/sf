@@ -9,6 +9,7 @@ RUN \
  && opam install -j `nproc` \
          menhir.20220210 \
          ocamlbuild \
+         coq-mathcomp-ssreflect \
          coq-ext-lib \
          coq-simple-io \
          coq-vst.$VST_NEEDED \
