@@ -16,7 +16,7 @@ RUN \
          coq-quickchick \
  && (cd QuickChick-v.2.0-beta; make; make install) \
  && rm -rf QuickChick-v.2.0-beta \
- && sudo apt-get remove wget
+# && sudo apt-get remove wget
 
 
 # BCP 2023: This is probably not needed at all -- delete
