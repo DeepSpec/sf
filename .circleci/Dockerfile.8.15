@@ -14,8 +14,7 @@ RUN \
          coq-simple-io \
          coq-vst.$VST_NEEDED \
  && (cd QuickChick-v.2.0-beta; make; make install) \
- && rm -rf QuickChick-v.2.0-beta \
- && sudo apt-get remove wget
+ && rm -rf QuickChick-v.2.0-beta 
 
 
 # BCP 2023: This is probably not needed at all -- delete
