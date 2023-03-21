@@ -14,8 +14,8 @@ RUN \
          coq-mathcomp-ssreflect \
          coq-vst.$VST_NEEDED \
          coq-quickchick \
- && (cd QuickChick-v.2.0-beta; make; make install) \
- && rm -rf QuickChick-v.2.0-beta
+ && (cd QuickChick-v.2.0-beta.16; make; make install) \
+ && rm -rf QuickChick-v.2.0-beta.16
 
 
 # BCP 2023: This is probably not needed at all -- delete
