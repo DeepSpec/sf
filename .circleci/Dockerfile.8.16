@@ -4,8 +4,8 @@ ENV VST_NEEDED 2.11.1
 RUN \
     sudo apt update \
  && sudo apt install wget \
- && wget https://github.com/QuickChick/QuickChick/releases/tag/v.2.0%2Bbeta.16
- && unzip v.2.0+beta.zip \
+ && wget https://github.com/QuickChick/QuickChick/releases/tag/v.2.0%2Bbeta.16 \
+ && unzip v.2.0+beta.16.zip \
  && opam install -j `nproc` \
          ocamlbuild \
          coq-ext-lib \
