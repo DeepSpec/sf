@@ -9,9 +9,10 @@ RUN \
 # && opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
  && opam install -j `nproc` \
          ocamlbuild \
+         coq-ext-lib \
+         coq-simple-io \
          menhir.20220210 \
-#         coq-quickchick \
-#         coq-vst.$VST_NEEDED \
+         coq-vst.$VST_NEEDED \
  && (cd QuickChick-v.2.0-beta; make; make install) \
  && rm -rf QuickChick-v.2.0-beta \
  && sudo apt-get remove wget
