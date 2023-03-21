@@ -14,7 +14,7 @@ RUN \
          coq-mathcomp-ssreflect \
          coq-vst.$VST_NEEDED \
          coq-quickchick \
- && (cd QuickChick-v.2.0-beta; make; make install)
+ && (cd QuickChick-v.2.0-beta; make; make install) \
  && rm -rf QuickChick-v.2.0-beta \
  && sudo apt-get remove wget
 
