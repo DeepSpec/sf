@@ -6,12 +6,16 @@ RUN \
  && sudo apt-get install wget \
  && wget https://github.com/QuickChick/QuickChick/archive/refs/tags/v.2.0+beta.zip \
  && unzip v.2.0+beta.zip \
-# && opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
  && opam install -j `nproc` \
          menhir.20220210 \
+         ocamlbuild \
+         coq-mathcomp-ssreflect \
          coq-ext-lib \
          coq-simple-io \
          coq-vst.$VST_NEEDED \
  && (cd QuickChick-v.2.0-beta; make; make install) \
- && rm -rf QuickChick-v.2.0-beta \
- && sudo apt-get remove wget
+ && rm -rf QuickChick-v.2.0-beta 
+
+
+# BCP 2023: This is probably not needed at all -- delete
+# && opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
