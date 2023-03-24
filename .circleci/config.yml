@@ -115,8 +115,8 @@ workflows:
           vc: true
           requires:
             - build-docker
-      - build:
-          name: Coq dev
-          coq: dev
-          requires:
-            - build-docker
+#      - build:
+#          name: Coq dev
+#          coq: dev
+#          requires:
+#            - build-docker
