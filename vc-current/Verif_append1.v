@@ -31,7 +31,7 @@ Require VC.Preface. (* Check for the right version of VST *)
 
 Require Import VST.floyd.proofauto.
 Require Import VC.append.
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 Definition Vprog : varspecs. mk_varspecs prog. Defined.
 
 (* ================================================================= *)
@@ -491,4 +491,4 @@ forward_if. (* if (x == NULL) *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

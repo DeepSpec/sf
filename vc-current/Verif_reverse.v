@@ -40,7 +40,7 @@ this chapter.    Let's prove this program correct!
 Require VC.Preface. (* Check for the right version of VST *)
 Require Import VST.floyd.proofauto.
 Require Import VC.reverse.
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 Definition Vprog : varspecs. mk_varspecs prog. Defined.
 
 (* ================================================================= *)
@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

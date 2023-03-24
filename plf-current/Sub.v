@@ -5,6 +5,7 @@ From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Types.
 From PLF Require Import Smallstep.
+Set Default Goal Selector "!".
 
 (* ################################################################# *)
 (** * Concepts *)
@@ -123,9 +124,9 @@ From PLF Require Import Smallstep.
     The second step is actually very simple.  We add just a single rule
     to the typing relation: the so-called _rule of subsumption_:
 
-                         Gamma |- t1 \in T1     T1 <: T2
-                         -------------------------------            (T_Sub)
-                               Gamma |- t1 \in T2
+                         Gamma |-- t1 \in T1     T1 <: T2
+                         --------------------------------           (T_Sub)
+                               Gamma |-- t1 \in T2
 
     This rule says, intuitively, that it is OK to "forget" some of
     what we know about a term. *)
@@ -385,9 +386,9 @@ Definition manual_grade_for_arrow_sub_wrong : option (nat*string) := None.
 
     - adding the rule of subsumption
 
-                         Gamma |- t1 \in T1     T1 <: T2
-                         -------------------------------             (T_Sub)
-                               Gamma |- t1 \in T2
+                         Gamma |-- t1 \in T1     T1 <: T2
+                         --------------------------------            (T_Sub)
+                               Gamma |-- t1 \in T2
 
       to the typing relation, and
 
@@ -566,7 +567,7 @@ Definition manual_grade_for_proper_subtypes : option (nat*string) := None.
      have [Unit] among the base types and [unit] as a constant of this
      type.)
 
-       empty |- (\p:T*Top. p.fst) ((\z:A.z), unit) \in A->A
+       empty |-- (\p:T*Top. p.fst) ((\z:A.z), unit) \in A->A
 
    - What is the _largest_ type [T] that makes the same assertion true?
 
@@ -580,7 +581,7 @@ Definition manual_grade_for_small_large_1 : option (nat*string) := None.
    - What is the _smallest_ type [T] that makes the following
      assertion true?
 
-       empty |- (\p:(A->A * B->B). p) ((\z:A.z), (\z:B.z)) \in T
+       empty |-- (\p:(A->A * B->B). p) ((\z:A.z), (\z:B.z)) \in T
 
    - What is the _largest_ type [T] that makes the same assertion true?
 
@@ -594,7 +595,7 @@ Definition manual_grade_for_small_large_2 : option (nat*string) := None.
    - What is the _smallest_ type [T] that makes the following
      assertion true?
 
-       a:A |- (\p:(A*T). (p.snd) (p.fst)) (a, \z:A.z) \in A
+       a:A |-- (\p:(A*T). (p.snd) (p.fst)) (a, \z:A.z) \in A
 
    - What is the _largest_ type [T] that makes the same assertion true?
 
@@ -607,7 +608,7 @@ Definition manual_grade_for_small_large_2 : option (nat*string) := None.
      following assertion true?
 
        exists S,
-         empty |- (\p:(A*T). (p.snd) (p.fst)) \in S
+         empty |-- (\p:(A*T). (p.snd) (p.fst)) \in S
 
    - What is the _largest_ type [T] that makes the same
      assertion true?
@@ -624,7 +625,7 @@ Definition manual_grade_for_small_large_4 : option (nat*string) := None.
     the following assertion true?
 
       exists S t,
-        empty |- (\x:T. x x) t \in S
+        empty |-- (\x:T. x x) t \in S
 *)
 
 (* Do not modify the following line: *)
@@ -636,7 +637,7 @@ Definition manual_grade_for_smallest_1 : option (nat*string) := None.
     What is the _smallest_ type [T] that makes the following
     assertion true?
 
-      empty |- (\x:Top. x) ((\z:A.z) , (\z:B.z)) \in T
+      empty |-- (\x:Top. x) ((\z:A.z) , (\z:B.z)) \in T
 *)
 
 (* Do not modify the following line: *)
@@ -688,9 +689,9 @@ Module STLCSub.
     relation.  Let's first do the identical bits. *)
 
 (** We include products in the syntax of types and terms, but not,
-    for the moment, anywhere else; the [products] exercise below will 
-    ask you to extend the definitions of the value relation, operational 
-    semantics, subtyping relation, and typing relation and to extend 
+    for the moment, anywhere else; the [products] exercise below will
+    ask you to extend the definitions of the value relation, operational
+    semantics, subtyping relation, and typing relation and to extend
     the proofs of progress and preservation to fully support products. *)
 
 (* ================================================================= *)
@@ -962,7 +963,7 @@ End Examples.
 
 Definition context := partial_map ty.
 
-Reserved Notation "Gamma '|-' t '\in' T" (at level 40,
+Reserved Notation "Gamma '|--' t '\in' T" (at level 40,
                                           t custom stlc, T custom stlc at level 0).
 
 Inductive has_type : context -> tm -> ty -> Prop :=
@@ -970,32 +971,32 @@ Inductive has_type : context -> tm -> ty -> Prop :=
   (* pure STLC *)
   | T_Var : forall Gamma x T1,
       Gamma x = Some T1 ->
-      Gamma |- x \in T1
+      Gamma |-- x \in T1
   | T_Abs : forall Gamma x T1 T2 t1,
-      (x |-> T2 ; Gamma) |- t1 \in T1 ->
-      Gamma |- \x:T2, t1 \in (T2 -> T1)
+      (x |-> T2 ; Gamma) |-- t1 \in T1 ->
+      Gamma |-- \x:T2, t1 \in (T2 -> T1)
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma |- t1 \in (T2 -> T1) ->
-      Gamma |- t2 \in T2 ->
-      Gamma |- t1 t2 \in T1
+      Gamma |-- t1 \in (T2 -> T1) ->
+      Gamma |-- t2 \in T2 ->
+      Gamma |-- t1 t2 \in T1
   | T_True : forall Gamma,
-       Gamma |- true \in Bool
+       Gamma |-- true \in Bool
   | T_False : forall Gamma,
-       Gamma |- false \in Bool
+       Gamma |-- false \in Bool
   | T_If : forall t1 t2 t3 T1 Gamma,
-       Gamma |- t1 \in Bool ->
-       Gamma |- t2 \in T1 ->
-       Gamma |- t3 \in T1 ->
-       Gamma |- if t1 then t2 else t3 \in T1
+       Gamma |-- t1 \in Bool ->
+       Gamma |-- t2 \in T1 ->
+       Gamma |-- t3 \in T1 ->
+       Gamma |-- if t1 then t2 else t3 \in T1
   | T_Unit : forall Gamma,
-      Gamma |- unit \in Unit
+      Gamma |-- unit \in Unit
   (* New rule of subsumption: *)
   | T_Sub : forall Gamma t1 T1 T2,
-      Gamma |- t1 \in T1 ->
+      Gamma |-- t1 \in T1 ->
       T1 <: T2 ->
-      Gamma |- t1 \in T2
+      Gamma |-- t1 \in T2
 
-where "Gamma '|-' t '\in' T" := (has_type Gamma t T).
+where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
 
 Hint Constructors has_type : core.
 
@@ -1007,20 +1008,20 @@ Import Examples.
     formal statement in Coq and prove it. *)
 
 (** **** Exercise: 1 star, standard, optional (typing_example_0) *)
-(* empty |- ((\z:A.z), (\z:B.z)) \in (A->A * B->B) *)
+(* empty |-- ((\z:A.z), (\z:B.z)) \in (A->A * B->B) *)
 (* FILL IN HERE
 
     [] *)
 
 (** **** Exercise: 2 stars, standard, optional (typing_example_1) *)
-(* empty |- (\x:(Top * B->B). x.snd) ((\z:A.z), (\z:B.z))
+(* empty |-- (\x:(Top * B->B). x.snd) ((\z:A.z), (\z:B.z))
          \in B->B *)
 (* FILL IN HERE
 
     [] *)
 
 (** **** Exercise: 2 stars, standard, optional (typing_example_2) *)
-(* empty |- (\z:(C->C)->(Top * B->B). (z (\x:C.x)).snd)
+(* empty |-- (\z:(C->C)->(Top * B->B). (z (\x:C.x)).snd)
               (\z:C->C. ((\z:A.z), (\z:B.z)))
          \in B->B *)
 (* FILL IN HERE
@@ -1132,7 +1133,7 @@ Proof with auto.
     because there's another rule that can be used to show that a value
     has a function type: subsumption.  Fortunately, this possibility
     doesn't change things much: if the last rule used to show [Gamma
-    |- t1 \in T11->T12] is subsumption, then there is some
+    |-- t1 \in T11->T12] is subsumption, then there is some
     _sub_-derivation whose subject is also [t1], and we can reason by
     induction until we finally bottom out at a use of [T_Abs].
 
@@ -1142,7 +1143,7 @@ Proof with auto.
 
 (** **** Exercise: 3 stars, standard, optional (canonical_forms_of_arrow_types) *)
 Lemma canonical_forms_of_arrow_types : forall Gamma s T1 T2,
-  Gamma |- s \in (T1->T2) ->
+  Gamma |-- s \in (T1->T2) ->
   value s ->
   exists x S1 s2,
      s = <{\x:S1,s2}>.
@@ -1154,7 +1155,7 @@ Proof with eauto.
     [tm_true] and [tm_false]. *)
 
 Lemma canonical_forms_of_Bool : forall Gamma s,
-  Gamma |- s \in Bool ->
+  Gamma |-- s \in Bool ->
   value s ->
   s = tm_true \/ s = tm_false.
 Proof with eauto.
@@ -1172,10 +1173,10 @@ Qed.
     pure STLC, except that in several places we invoke canonical forms
     lemmas...
 
-    _Theorem_ (Progress): For any term [t] and type [T], if [empty |-
+    _Theorem_ (Progress): For any term [t] and type [T], if [empty |--
     t \in T] then [t] is a value or [t --> t'] for some term [t'].
 
-    _Proof_: Let [t] and [T] be given, with [empty |- t \in T].  Proceed
+    _Proof_: Let [t] and [T] be given, with [empty |-- t \in T].  Proceed
     by induction on the typing derivation.
 
     The cases for [T_Abs], [T_Unit], [T_True] and [T_False] are
@@ -1186,7 +1187,7 @@ Qed.
 
     - If the last step in the typing derivation uses rule [T_App],
       then there are terms [t1] [t2] and types [T1] and [T2] such that
-      [t = t1 t2], [T = T2], [empty |- t1 \in T1 -> T2], and [empty |-
+      [t = t1 t2], [T = T2], [empty |-- t1 \in T1 -> T2], and [empty |--
       t2 \in T1].  Moreover, by the induction hypothesis, either [t1] is
       a value or it steps, and either [t2] is a value or it steps.
       There are three possibilities to consider:
@@ -1206,8 +1207,8 @@ Qed.
 
     - If the final step of the derivation uses rule [T_Test], then there
       are terms [t1], [t2], and [t3] such that [t = tm_if t1 then t2 else
-      t3], with [empty |- t1 \in Bool] and with [empty |- t2 \in T] and
-      [empty |- t3 \in T].  Moreover, by the induction hypothesis,
+      t3], with [empty |-- t1 \in Bool] and with [empty |-- t2 \in T] and
+      [empty |-- t3 \in T].  Moreover, by the induction hypothesis,
       either [t1] is a value or it steps.
 
        - If [t1] is a value, then by the canonical forms lemma for
@@ -1217,14 +1218,14 @@ Qed.
        - If [t1] can step, then so can [t], by rule [ST_Test].
 
     - If the final step of the derivation is by [T_Sub], then there is
-      a type [T2] such that [T1 <: T2] and [empty |- t1 \in T1].  The desired
+      a type [T2] such that [T1 <: T2] and [empty |-- t1 \in T1].  The desired
       result is exactly the induction hypothesis for the typing
       subderivation. *)
 
 (** Formally: *)
 
 Theorem progress : forall t T,
-     empty |- t \in T ->
+     empty |-- t \in T ->
      value t \/ exists t', t --> t'.
 Proof with eauto.
   intros t T Ht.
@@ -1267,40 +1268,40 @@ Qed.
     derive the same [has_type] statement.
 
     The following inversion lemma tells us that, if we have a
-    derivation of some typing statement [Gamma |- \x:S1.t2 \in T] whose
+    derivation of some typing statement [Gamma |-- \x:S1.t2 \in T] whose
     subject is an abstraction, then there must be some subderivation
     giving a type to the body [t2]. *)
 
-(** _Lemma_: If [Gamma |- \x:S1.t2 \in T], then there is a type [S2]
-    such that [x|->S1; Gamma |- t2 \in S2] and [S1 -> S2 <: T].
+(** _Lemma_: If [Gamma |-- \x:S1.t2 \in T], then there is a type [S2]
+    such that [x|->S1; Gamma |-- t2 \in S2] and [S1 -> S2 <: T].
 
     (Notice that the lemma does _not_ say, "then [T] itself is an arrow
     type" -- this is tempting, but false!)
 
     _Proof_: Let [Gamma], [x], [S1], [t2] and [T] be given as
-     described.  Proceed by induction on the derivation of [Gamma |-
+     described.  Proceed by induction on the derivation of [Gamma |--
      \x:S1.t2 \in T].  Cases [T_Var], [T_App], are vacuous as those
      rules cannot be used to give a type to a syntactic abstraction.
 
      - If the last step of the derivation is a use of [T_Abs] then
        there is a type [T12] such that [T = S1 -> T12] and [x:S1;
-       Gamma |- t2 \in T12].  Picking [T12] for [S2] gives us what we
+       Gamma |-- t2 \in T12].  Picking [T12] for [S2] gives us what we
        need, since [S1 -> T12 <: S1 -> T12] follows from [S_Refl].
 
      - If the last step of the derivation is a use of [T_Sub] then
-       there is a type [S] such that [S <: T] and [Gamma |- \x:S1.t2
+       there is a type [S] such that [S <: T] and [Gamma |-- \x:S1.t2
        \in S].  The IH for the typing subderivation tells us that there
-       is some type [S2] with [S1 -> S2 <: S] and [x:S1; Gamma |- t2
+       is some type [S2] with [S1 -> S2 <: S] and [x:S1; Gamma |-- t2
        \in S2].  Picking type [S2] gives us what we need, since [S1 ->
        S2 <: T] then follows by [S_Trans]. *)
 
 (** Formally: *)
 
 Lemma typing_inversion_abs : forall Gamma x S1 t2 T,
-     Gamma |- \x:S1,t2 \in T ->
+     Gamma |-- \x:S1,t2 \in T ->
      exists S2,
        <{S1->S2}> <: T
-       /\ (x |-> S1 ; Gamma) |- t2 \in S2.
+       /\ (x |-> S1 ; Gamma) |-- t2 \in S2.
 Proof with eauto.
   intros Gamma x S1 t2 T H.
   remember <{\x:S1,t2}> as t.
@@ -1314,7 +1315,7 @@ Proof with eauto.
 
 (** **** Exercise: 3 stars, standard, optional (typing_inversion_var) *)
 Lemma typing_inversion_var : forall Gamma (x:string) T,
-  Gamma |- x \in T ->
+  Gamma |-- x \in T ->
   exists S,
     Gamma x = Some S /\ S <: T.
 Proof with eauto.
@@ -1323,16 +1324,16 @@ Proof with eauto.
 
 (** **** Exercise: 3 stars, standard, optional (typing_inversion_app) *)
 Lemma typing_inversion_app : forall Gamma t1 t2 T2,
-  Gamma |- t1 t2 \in T2 ->
+  Gamma |-- t1 t2 \in T2 ->
   exists T1,
-    Gamma |- t1 \in (T1->T2) /\
-    Gamma |- t2 \in T1.
+    Gamma |-- t1 \in (T1->T2) /\
+    Gamma |-- t2 \in T1.
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
 Lemma typing_inversion_unit : forall Gamma T,
-  Gamma |- unit \in T ->
+  Gamma |-- unit \in T ->
     <{Unit}> <: T.
 Proof with eauto.
   intros Gamma T Htyp. remember <{ unit }> as tu.
@@ -1345,9 +1346,9 @@ Qed.
     us exactly what we'll actually require below. *)
 
 Lemma abs_arrow : forall x S1 s2 T1 T2,
-  empty |- \x:S1,s2 \in (T1->T2) ->
+  empty |-- \x:S1,s2 \in (T1->T2) ->
      T1 <: S1
-  /\ (x |-> S1 ; empty) |- s2 \in T2.
+  /\ (x |-> S1 ; empty) |-- s2 \in T2.
 Proof with eauto.
   intros x S1 s2 T1 T2 Hty.
   apply typing_inversion_abs in Hty.
@@ -1363,8 +1364,8 @@ Proof with eauto.
 
 Lemma weakening : forall Gamma Gamma' t T,
      includedin Gamma Gamma' ->
-     Gamma  |- t \in T  ->
-     Gamma' |- t \in T.
+     Gamma  |-- t \in T  ->
+     Gamma' |-- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
@@ -1372,8 +1373,8 @@ Proof.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
-     empty |- t \in T  ->
-     Gamma |- t \in T.
+     empty |-- t \in T  ->
+     Gamma |-- t \in T.
 Proof.
   intros Gamma t T.
   eapply weakening.
@@ -1390,9 +1391,9 @@ Qed.
     substitution_preserves_typing_from_typing_ind in StlcProp.v). *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
-   (x |-> U ; Gamma) |- t \in T ->
-   empty |- v \in U   ->
-   Gamma |- [x:=v]t \in T.
+   (x |-> U ; Gamma) |-- t \in T ->
+   empty |-- v \in U   ->
+   Gamma |-- [x:=v]t \in T.
 Proof.
   intros Gamma x U t v T Ht Hv.
   remember (x |-> U; Gamma) as Gamma'.
@@ -1409,10 +1410,10 @@ Proof.
     information from typing assumptions. *)
 
 (** _Theorem_ (Preservation): If [t], [t'] are terms and [T] is a type
-    such that [empty |- t \in T] and [t --> t'], then [empty |- t' \in
+    such that [empty |-- t \in T] and [t --> t'], then [empty |-- t' \in
     T].
 
-    _Proof_: Let [t] and [T] be given such that [empty |- t \in T].  We
+    _Proof_: Let [t] and [T] be given such that [empty |-- t \in T].  We
     proceed by induction on the structure of this typing derivation,
     leaving [t'] general.  The cases [T_Abs], [T_Unit], [T_True], and
     [T_False] cases are vacuous because abstractions and constants
@@ -1421,8 +1422,8 @@ Proof.
 
      - If the final step of the derivation is by [T_App], then there
        are terms [t1] and [t2] and types [T1] and [T2] such that
-       [t = t1 t2], [T = T2], [empty |- t1 \in T1 -> T2], and
-       [empty |- t2 \in T1].
+       [t = t1 t2], [T = T2], [empty |-- t1 \in T1 -> T2], and
+       [empty |-- t2 \in T1].
 
        By the definition of the step relation, there are three ways
        [t1 t2] can step.  Cases [ST_App1] and [ST_App2] follow
@@ -1433,37 +1434,37 @@ Proof.
        \x:S.t12] for some type [S] and term [t12], and [t' =
        [x:=t2]t12].
 
-       By lemma [abs_arrow], we have [T1 <: S] and [x:S1 |- s2 \in T2].
+       By lemma [abs_arrow], we have [T1 <: S] and [x:S1 |-- s2 \in T2].
        It then follows by the substitution lemma
-       ([substitution_preserves_typing]) that [empty |- [x:=t2]
+       ([substitution_preserves_typing]) that [empty |-- [x:=t2]
        t12 \in T2] as desired.
 
       - If the final step of the derivation uses rule [T_Test], then
         there are terms [t1], [t2], and [t3] such that [t = tm_if t1 then
-        t2 else t3], with [empty |- t1 \in Bool] and with [empty |- t2
-        \in T] and [empty |- t3 \in T].  Moreover, by the induction
-        hypothesis, if [t1] steps to [t1'] then [empty |- t1' : Bool].
+        t2 else t3], with [empty |-- t1 \in Bool] and with [empty |-- t2
+        \in T] and [empty |-- t3 \in T].  Moreover, by the induction
+        hypothesis, if [t1] steps to [t1'] then [empty |-- t1' : Bool].
         There are three cases to consider, depending on which rule was
         used to show [t --> t'].
 
            - If [t --> t'] by rule [ST_Test], then [t' = tm_if t1' then t2
              else t3] with [t1 --> t1'].  By the induction hypothesis,
-             [empty |- t1' \in Bool], and so [empty |- t' \in T] by
+             [empty |-- t1' \in Bool], and so [empty |-- t' \in T] by
              [T_Test].
 
            - If [t --> t'] by rule [ST_TestTrue] or [ST_TestFalse], then
-             either [t' = t2] or [t' = t3], and [empty |- t' \in T]
+             either [t' = t2] or [t' = t3], and [empty |-- t' \in T]
              follows by assumption.
 
      - If the final step of the derivation is by [T_Sub], then there
-       is a type [S] such that [S <: T] and [empty |- t \in S].  The
+       is a type [S] such that [S <: T] and [empty |-- t \in S].  The
        result is immediate by the induction hypothesis for the typing
        subderivation and an application of [T_Sub].  [] *)
 
 Theorem preservation : forall t t' T,
-     empty |- t \in T  ->
+     empty |-- t \in T  ->
      t --> t'  ->
-     empty |- t' \in T.
+     empty |-- t' \in T.
 Proof with eauto.
   intros t t' T HT. generalize dependent t'.
   remember empty as Gamma.
@@ -1520,10 +1521,10 @@ Qed.
 
     - Suppose we add the following typing rule:
 
-                           Gamma |- t \in S1->S2
+                           Gamma |-- t \in S1->S2
                     S1 <: T1     T1 <: S1      S2 <: T2
                     -----------------------------------    (T_Funny1)
-                           Gamma |- t \in T1->T2
+                           Gamma |-- t \in T1->T2
 
     - Suppose we add the following reduction rule:
 
@@ -1550,8 +1551,8 @@ Qed.
                              ---------------------       (ST_Funny5)
                              (unit t) --> (t unit)
 
-                           --------------------------    (T_Funny6)
-                           empty |- unit \in Top->Top
+                           ---------------------------     (T_Funny6)
+                           empty |-- unit \in Top->Top
 
     - Suppose we _change_ the arrow subtyping rule to:
 
@@ -1807,7 +1808,7 @@ Definition smallest_largest HT :=
 Theorem formal_small_large_1:
   smallest_largest
   (fun T =>
-   empty |- <{(\p:T*Top, p.fst) ((\z:A, z), unit)}> \in <{A->A}>).
+   empty |-- <{(\p:T*Top, p.fst) ((\z:A, z), unit)}> \in <{A->A}>).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1816,7 +1817,7 @@ Proof.
 Theorem formal_small_large_2:
   smallest_largest
   (fun T =>
-   empty |- <{(\p:(A->A)*(B->B), p) ((\z:A, z), (\z:B, z))}> \in T).
+   empty |-- <{(\p:(A->A)*(B->B), p) ((\z:A, z), (\z:B, z))}> \in T).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1825,7 +1826,7 @@ Proof.
 Theorem formal_small_large_3:
   smallest_largest
   (fun T =>
-   (a |-> A) |- <{(\p:A*T, (p.snd) (p.fst)) (a, \z:A, z)}> \in A).
+   (a |-> A) |-- <{(\p:A*T, (p.snd) (p.fst)) (a, \z:A, z)}> \in A).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1835,7 +1836,7 @@ Theorem formal_small_large_4:
   smallest_largest
   (fun T =>
    exists S,
-     empty |- <{\p:A*T, (p.snd) (p.fst)}> \in S).
+     empty |-- <{\p:A*T, (p.snd) (p.fst)}> \in S).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1848,7 +1849,7 @@ Theorem formal_smallest_1:
   smallest
   (fun T =>
    exists S t,
-     empty |- <{ (\x:T, x x) t }> \in S).
+     empty |-- <{ (\x:T, x x) t }> \in S).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1857,7 +1858,7 @@ Proof.
 Theorem formal_smallest_2:
   smallest
   (fun T =>
-   empty |- <{(\x:Top, x) ((\z:A, z), (\z:B, z))}> \in T).
+   empty |-- <{(\x:Top, x) ((\z:A, z), (\z:B, z))}> \in T).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -1866,4 +1867,4 @@ End FormalThoughtExercises.
 
 End STLCSub.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

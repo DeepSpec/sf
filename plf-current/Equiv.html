@@ -45,6 +45,7 @@
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#"><span class="id" title="library">Lists.List</span></a>. <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ListNotations"><span class="id" title="module">ListNotations</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Logic.FunctionalExtensionality.html#"><span class="id" title="library">Logic.FunctionalExtensionality</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">PLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <span class="id" title="library">Imp</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Default</span> <span class="id" title="keyword">Goal</span> <span class="id" title="var">Selector</span> "!".<br/>
 </div>
 
 <div class="doc">
@@ -268,8 +269,8 @@ For commands, the situation is a little more subtle.  We
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;&lt;-&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Seq</span> <span class="id" title="keyword">with</span> <span class="id" title="var">st</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Skip</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Skip</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -307,9 +308,13 @@ For commands, the situation is a little more subtle.  We
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">c<sub>2</sub></span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">assumption</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">discriminate</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;&lt;-&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_IfTrue</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="tactic">assumption</span>. <span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_IfTrue</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">assumption</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
 
@@ -397,7 +402,7 @@ Of course, no (human) programmer would write a conditional whose
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">c<sub>2</sub></span> <span class="id" title="var">Hb</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
@@ -467,7 +472,7 @@ Of course, no (human) programmer would write a conditional whose
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span> <span class="id" title="var">Hb</span>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;E_WhileFalse&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Skip</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;E_WhileTrue&nbsp;*)</span><br/>
@@ -609,16 +614,23 @@ Of course, no (human) programmer would write a conditional whose
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">Hce</span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;loop&nbsp;doesn't&nbsp;run&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_IfFalse</span>. <span class="id" title="tactic">assumption</span>. <span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Skip</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_IfFalse</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Skip</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;loop&nbsp;runs&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_IfTrue</span>. <span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Seq</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">st'</span> := <span class="id" title="var">st'0</span>). <span class="id" title="tactic">assumption</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_IfTrue</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_Seq</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">st'</span> := <span class="id" title="var">st'0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- <span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;&lt;-&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">Hce</span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;loop&nbsp;runs&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H<sub>5</sub></span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_WhileTrue</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">st'</span> := <span class="id" title="var">st'0</span>).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>. <span class="id" title="tactic">assumption</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;loop&nbsp;doesn't&nbsp;run&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">H<sub>5</sub></span>; <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">apply</span> <span class="id" title="constructor">E_WhileFalse</span>. <span class="id" title="tactic">assumption</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -2294,7 +2306,7 @@ Finally, find a non-trivial property which is preserved by
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-26&nbsp;19:24&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-03-24&nbsp;02:23&nbsp;*)</span><br/>
 </div>
 </div>
 

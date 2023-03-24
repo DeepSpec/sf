@@ -8,6 +8,7 @@ From Coq Require Import Arith.EqNat.
 From Coq Require Import Arith.PeanoNat. Import Nat.
 From Coq Require Import Lia.
 From PLF Require Export Imp.
+Set Default Goal Selector "!".
 
 (** In the final chaper of _Logical Foundations_ (_Software
     Foundations_, volume 1), we began applying the mathematical tools
@@ -550,7 +551,7 @@ Definition assn_sub X a (P:Assertion) : Assertion :=
     P (X !-> aeval st a ; st).
 
 Notation "P [ X |-> a ]" := (assn_sub X a P)
-  (at level 10, X at next level, a custom com).
+  (at level 10, X at next level, a custom com) : hoare_spec_scope.
 
 (** That is, [P [X |-> a]] stands for an assertion -- let's call it
     [P'] -- that is just like [P] except that, wherever [P] looks up
@@ -822,9 +823,9 @@ Qed.
 
 Example hoare_asgn_example1 :
   {{True}} X := 1 {{X = 1}}.
-Proof.
+Proof. 
   (* WORKED IN CLASS *)
-  apply hoare_consequence_pre with (P' := (X = 1) [X |-> 1]).
+  eapply hoare_consequence_pre. 
   - apply hoare_asgn.
   - unfold "->>", assn_sub, t_update.
     intros st _. simpl. reflexivity.
@@ -2191,7 +2192,8 @@ Theorem hoare_consequence_pre : forall (P P' Q : Assertion) c,
 Proof.
   intros P P' Q c Hhoare Himp.
   intros st st' Hc HP. apply (Hhoare st st').
-  assumption. apply Himp. assumption. Qed.
+  - assumption.
+  - apply Himp. assumption. Qed.
 
 Theorem hoare_consequence_post : forall (P Q Q' : Assertion) c,
   {{P}} c {{Q'}} ->
@@ -2231,7 +2233,9 @@ Theorem hoare_skip : forall P,
      {{P}} skip {{P}}.
 Proof.
   intros P st st' H HP. inversion H. subst.
-  eexists. split. reflexivity. assumption.
+  eexists. split.
+  - reflexivity.
+  - assumption.
 Qed.
 
 Theorem hoare_if : forall P Q (b:bexp) c1 c2,
@@ -2243,13 +2247,15 @@ Proof.
   inversion HE; subst.
   - (* b is true *)
     apply (HTrue st st').
-      assumption.
-      split. assumption. assumption.
+    + assumption.
+    + split; assumption. 
   - (* b is false *)
     apply (HFalse st st').
-      assumption.
-      split. assumption.
-      apply bexp_eval_false. assumption. Qed.
+    + assumption.
+    + split.
+      * assumption.
+      * apply bexp_eval_false. assumption.
+Qed.
 
 Theorem hoare_while : forall P (b:bexp) c,
   {{P /\ b}} c {{P}} ->
@@ -2260,18 +2266,21 @@ Proof.
   induction He;
     try (inversion Heqwcom); subst; clear Heqwcom.
   - (* E_WhileFalse *)
-    eexists. split. reflexivity. split.
-    assumption. apply bexp_eval_false. assumption.
+    eexists. split.
+    + reflexivity.
+    + split; try assumption.
+      apply bexp_eval_false. assumption.
   - (* E_WhileTrueNormal *)
     clear IHHe1.
-    apply IHHe2. reflexivity.
-    clear IHHe2 He2 r.
-    unfold hoare_triple in Hhoare.
-    apply Hhoare in He1.
-    + destruct He1 as [st1 [Heq Hst1] ].
+    apply IHHe2.
+    + reflexivity.
+    + clear IHHe2 He2 r.
+      unfold hoare_triple in Hhoare.
+      apply Hhoare in He1.
+      * destruct He1 as [st1 [Heq Hst1] ].
         inversion Heq; subst.
         assumption.
-    + split; assumption.
+      * split; assumption.
   - (* E_WhileTrueError *)
      exfalso. clear IHHe.
      unfold hoare_triple in Hhoare.
@@ -2301,4 +2310,5 @@ End HoareAssertAssume.
 (** [] *)
 
 
-(* 2022-08-26 19:24 *)
+
+(* 2023-03-24 02:23 *)

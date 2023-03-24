@@ -8,6 +8,7 @@ From Coq Require Import Lia.
 From Coq Require Import Lists.List. Import ListNotations.
 From PLF Require Import Maps.
 From PLF Require Import Imp.
+Set Default Goal Selector "!".
 
 Definition FILL_IN_HERE := <{True}>.
 
@@ -507,7 +508,7 @@ Proof.
         apply ST_PlusConstConst.
       * (* r *)
         exists (P t1 t2').
-        apply ST_Plus2. apply IHt1. apply Ht2.
+        apply ST_Plus2; auto.
     + (* r *)
       exists (P t1' t2).
       apply ST_Plus1. apply Ht1.
@@ -564,7 +565,9 @@ Qed.
 Corollary nf_same_as_value : forall t,
   normal_form step t <-> value t.
 Proof.
-  split. apply nf_is_value. apply value_is_nf.
+  split.
+  - apply nf_is_value.
+  - apply value_is_nf.
 Qed.
 
 (** Why is this interesting?
@@ -931,7 +934,9 @@ Theorem multi_R : forall (X : Type) (R : relation X) (x y : X),
     R x y -> (multi R) x y.
 Proof.
   intros X R x y H.
-  apply multi_step with y. apply H. apply multi_refl.
+  apply multi_step with y.
+  - apply H.
+  - apply multi_refl.
 Qed.
 
 (** Third, [multi R] is _transitive_. *)
@@ -946,8 +951,9 @@ Proof.
   induction G.
     - (* multi_refl *) assumption.
     - (* multi_step *)
-      apply multi_step with y. assumption.
-      apply IHG. assumption.
+      apply multi_step with y.
+      + assumption.
+      + apply IHG. assumption.
 Qed.
 
 (** In particular, for the [multi step] relation on terms, if
@@ -972,7 +978,9 @@ Proof.
   apply multi_step with
             (P (C (0 + 3))
                (C (2 + 4))).
-  { apply ST_Plus2. apply v_const. apply ST_PlusConstConst. }
+  { apply ST_Plus2.
+    - apply v_const.
+    - apply ST_PlusConstConst. }
   apply multi_R.
   apply ST_PlusConstConst.
 Qed.
@@ -988,8 +996,9 @@ Lemma test_multistep_1':
       C ((0 + 3) + (2 + 4)).
 Proof.
   eapply multi_step. { apply ST_Plus1. apply ST_PlusConstConst. }
-  eapply multi_step. { apply ST_Plus2. apply v_const.
-                       apply ST_PlusConstConst. }
+  eapply multi_step. { apply ST_Plus2.
+                       - apply v_const.
+                       - apply ST_PlusConstConst. }
   eapply multi_step. { apply ST_PlusConstConst. }
   apply multi_refl.
 Qed.
@@ -1145,7 +1154,9 @@ Proof.
       apply multi_trans with (P (C v1) t2).
       * apply multistep_congr_1. apply Hsteps1.
       * apply multi_trans with (P (C v1) (C v2)).
-        { apply multistep_congr_2. apply v_const. apply Hsteps2. }
+        { apply multistep_congr_2.
+          - apply v_const.
+          - apply Hsteps2. }
         apply multi_R. apply ST_PlusConstConst.
     + (* r *)
       apply nf_same_as_value. apply v_const.
@@ -1575,20 +1586,36 @@ Example par_loop_example_0:
 Proof.
   unfold par_loop.
   eexists. split.
-  eapply multi_step. apply CS_Par1.
-    apply CS_Asgn.
-  eapply multi_step. apply CS_Par2. apply CS_While.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq1. apply AS_Id.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq. simpl.
-  eapply multi_step. apply CS_Par2. apply CS_IfFalse.
-  eapply multi_step. apply CS_ParDone.
-  eapply multi_refl.
-  reflexivity.
+  - eapply multi_step.
+    + apply CS_Par1.  apply CS_Asgn.
+    + eapply multi_step.
+      * apply CS_Par2. apply CS_While.
+      * eapply multi_step.
+        -- apply CS_Par2. apply CS_IfStep.
+           apply BS_Eq1. apply AS_Id.
+        -- eapply multi_step.
+           ++ apply CS_Par2. apply CS_IfStep.
+              apply BS_Eq.
+           ++ simpl. eapply multi_step.
+              ** apply CS_Par2. apply CS_IfFalse.
+              ** eapply multi_step.
+               --- apply CS_ParDone.
+               --- eapply multi_refl.
+  - reflexivity.
 Qed.
 
 (** It can also terminate with [X] set to [2]: *)
+
+(** The following proofs are particularly "deep" -- they require
+    following the small step semantics in a particular strategy to
+    exhibit the desired behavior. For that reason, they are a bit
+    awkward to write with "forced bullets". Nevertheless, we keep them
+    because they emphasize that the witness for an evaluation by
+    small-step semantics has a size that is proportional to the number
+    of steps taken.  It would be an interesting exercise to write Coq
+    tactics that can help automate the construction of such proofs,
+    but such a tactic would need to "search" among the many
+    possibilities. *)
 
 Example par_loop_example_2:
   exists st',
@@ -1597,44 +1624,65 @@ Example par_loop_example_2:
 Proof.
   unfold par_loop.
   eexists. split.
-  eapply multi_step. apply CS_Par2. apply CS_While.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq1. apply AS_Id.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq. simpl.
-  eapply multi_step. apply CS_Par2. apply CS_IfTrue.
-  eapply multi_step. apply CS_Par2. apply CS_SeqStep.
-    apply CS_AsgnStep. apply AS_Plus1. apply AS_Id.
-  eapply multi_step. apply CS_Par2. apply CS_SeqStep.
-    apply CS_AsgnStep. apply AS_Plus.
-  eapply multi_step. apply CS_Par2. apply CS_SeqStep.
-    apply CS_Asgn.
-  eapply multi_step. apply CS_Par2. apply CS_SeqFinish.
-
-  eapply multi_step. apply CS_Par2. apply CS_While.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq1. apply AS_Id.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq. simpl.
-  eapply multi_step. apply CS_Par2. apply CS_IfTrue.
-  eapply multi_step. apply CS_Par2. apply CS_SeqStep.
-    apply CS_AsgnStep. apply AS_Plus1. apply AS_Id.
-  eapply multi_step. apply CS_Par2. apply CS_SeqStep.
-    apply CS_AsgnStep. apply AS_Plus.
-  eapply multi_step. apply CS_Par2. apply CS_SeqStep.
-    apply CS_Asgn.
-
-  eapply multi_step. apply CS_Par1. apply CS_Asgn.
-  eapply multi_step. apply CS_Par2. apply CS_SeqFinish.
-  eapply multi_step. apply CS_Par2. apply CS_While.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq1. apply AS_Id.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq. simpl.
-  eapply multi_step. apply CS_Par2. apply CS_IfFalse.
-  eapply multi_step. apply CS_ParDone.
-  eapply multi_refl.
-  reflexivity. Qed.
+  - eapply multi_step.
+    + apply CS_Par2. apply CS_While.
+    + eapply multi_step.
+      * apply CS_Par2. apply CS_IfStep.
+        apply BS_Eq1. apply AS_Id.
+      * eapply multi_step.
+        -- apply CS_Par2. apply CS_IfStep.
+           apply BS_Eq.
+        -- simpl. eapply multi_step.
+           ++ apply CS_Par2. apply CS_IfTrue.
+           ++ eapply multi_step.
+              ** apply CS_Par2. apply CS_SeqStep.
+                 apply CS_AsgnStep. apply AS_Plus1. apply AS_Id.
+              ** eapply multi_step.
+                 --- apply CS_Par2. apply CS_SeqStep.
+                     apply CS_AsgnStep. apply AS_Plus.
+                 --- eapply multi_step.
+                     +++ apply CS_Par2. apply CS_SeqStep.
+                         apply CS_Asgn.
+                     +++ eapply multi_step.
+                         *** apply CS_Par2. apply CS_SeqFinish.
+                         *** eapply multi_step.
+                             ---- apply CS_Par2. apply CS_While.
+                             ---- eapply multi_step.
+                                  ++++ apply CS_Par2. apply CS_IfStep.
+                                       apply BS_Eq1. apply AS_Id.
+                                  ++++ eapply multi_step.
+                                       **** apply CS_Par2. apply CS_IfStep.
+                                            apply BS_Eq.
+                                       **** simpl.
+                                            eapply multi_step.
+                                            ----- apply CS_Par2. apply CS_IfTrue.
+                                            ----- eapply multi_step.
+                                            +++++ apply CS_Par2. apply CS_SeqStep.
+                                            apply CS_AsgnStep. apply AS_Plus1. apply AS_Id.
+                                            +++++ eapply multi_step.
+                                            ***** apply CS_Par2. apply CS_SeqStep.
+                                            apply CS_AsgnStep. apply AS_Plus.
+                                            ***** eapply multi_step.
+                                            ------ apply CS_Par2. apply CS_SeqStep.
+                                            apply CS_Asgn.
+                                            ------ eapply multi_step.
+                                            ++++++ apply CS_Par1. apply CS_Asgn.
+                                            ++++++ eapply multi_step.
+                                            ****** apply CS_Par2. apply CS_SeqFinish.
+                                            ****** eapply multi_step.
+                                            ------- apply CS_Par2. apply CS_While.
+                                            ------- eapply multi_step.
+                                            +++++++ apply CS_Par2. apply CS_IfStep.
+                                            apply BS_Eq1. apply AS_Id.
+                                            +++++++ eapply multi_step.
+                                            ******* apply CS_Par2. apply CS_IfStep.
+                                            apply BS_Eq.
+                                            ******* simpl. eapply multi_step.
+                                            -------- apply CS_Par2. apply CS_IfFalse.
+                                            -------- eapply multi_step.
+                                            ++++++++ apply CS_ParDone.
+                                            ++++++++ eapply multi_refl.
+  - reflexivity. Qed.
 
 (** More generally... *)
 
@@ -1665,23 +1713,31 @@ Theorem par_loop_any_X:
 Proof.
   intros n.
   destruct (par_body_n n empty_st).
-    split; reflexivity.
-
-  rename x into st.
+  - split; reflexivity.
+  - rename x into st.
   inversion H as [H' [HX HY] ]; clear H.
   exists (Y !-> 1 ; st). split.
-  eapply multi_trans with (par_loop,st). apply H'.
-  eapply multi_step. apply CS_Par1. apply CS_Asgn.
-  eapply multi_step. apply CS_Par2. apply CS_While.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq1. apply AS_Id. rewrite t_update_eq.
-  eapply multi_step. apply CS_Par2. apply CS_IfStep.
-    apply BS_Eq. simpl.
-  eapply multi_step. apply CS_Par2. apply CS_IfFalse.
-  eapply multi_step. apply CS_ParDone.
-  apply multi_refl.
-
-  rewrite t_update_neq. assumption. intro X; inversion X.
+    + eapply multi_trans with (par_loop,st).
+      * apply H'.
+      * eapply multi_step.
+        -- apply CS_Par1. apply CS_Asgn.
+        -- eapply multi_step.
+           ++ apply CS_Par2. apply CS_While.
+           ++ eapply multi_step.
+              ** apply CS_Par2. apply CS_IfStep.
+                 apply BS_Eq1. apply AS_Id.
+              ** rewrite t_update_eq.
+                 eapply multi_step.
+                 --- apply CS_Par2. apply CS_IfStep.
+                     apply BS_Eq.
+                 --- simpl. eapply multi_step.
+                     +++ apply CS_Par2. apply CS_IfFalse.
+                     +++ eapply multi_step.
+                         *** apply CS_ParDone.
+                         *** apply multi_refl.
+    + rewrite t_update_neq.
+      * assumption.
+      * intro X; inversion X.
 Qed.
 
 End CImp.
@@ -1752,12 +1808,12 @@ Example step_example1 :
   -->* (C 10).
 Proof.
   apply multi_step with (P (C 3) (C 7)).
-    apply ST_Plus2.
-      apply v_const.
-      apply ST_PlusConstConst.
-  apply multi_step with (C 10).
-    apply ST_PlusConstConst.
-  apply multi_refl.
+  - apply ST_Plus2.
+    + apply v_const.
+    + apply ST_PlusConstConst.
+  - apply multi_step with (C 10).
+    + apply ST_PlusConstConst.
+    + apply multi_refl.
 Qed.
 
 (** Proofs that one term normalizes to another must repeatedly apply
@@ -1770,8 +1826,8 @@ Example step_example1' :
   (P (C 3) (P (C 3) (C 4)))
   -->* (C 10).
 Proof.
-  eapply multi_step. auto. simpl.
-  eapply multi_step. auto. simpl.
+  eapply multi_step; auto. simpl.
+  eapply multi_step; auto. simpl.
   apply multi_refl.
 Qed.
 
@@ -1784,7 +1840,7 @@ Tactic Notation "print_goal" :=
 
 Tactic Notation "normalize" :=
   repeat (print_goal; eapply multi_step ;
-            [ (eauto 10; fail) | simpl ]);
+            [ (eauto 10; fail) | simpl]);
   apply multi_refl.
 
 Example step_example1'' :
@@ -1837,4 +1893,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

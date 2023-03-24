@@ -52,6 +52,8 @@ Require VC.Spec_stdlib VC.Spec_stack VC.Spec_triang.
 (** First, gain access to the VSUs that we have built. *)
 Require VC.VSU_stdlib VC.VSU_stack VC.VSU_triang.
 
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+
 (** Those VSUs are parametrized by Abstract Predicate Definitions (APDs),
   - [M],  the internal data representation of the malloc/free library, and
   - [STACK], the internal data representation of the stack module.
@@ -196,7 +198,7 @@ Locate f_main.  (* VC main2.f_main *)
 (** In order to prove a semax_body, we need a CompSpecs (which is an implicit
   parameter of @semax_body).  We compute this in the ordinary way from
    VC.main2.prog, just as you would in any module.  *)
-Instance Compspecs: compspecs. make_compspecs VC.main2.prog. Defined.
+#[export] Instance Compspecs: compspecs. make_compspecs VC.main2.prog. Defined.
 
 (** It's important to build this [Instance] _after_ the [Require] statements just above,
  so that this is the [compspecs] instance that typeclass-resolution will find, instead
@@ -346,4 +348,4 @@ Eval red in (WholeProgSafeType WholeComp tt).
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stdlib2] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

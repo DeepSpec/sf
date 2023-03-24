@@ -129,7 +129,7 @@ As you can see, malloc can allocate blocks whose size ranges from
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.VSU</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.stdlib2</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a>.<br/>
-<span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">stdlib2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">stdlib2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
 <div class="doc">
@@ -229,7 +229,7 @@ As usual, we define representation relations.  First, for the free list,
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a id="N" class="idref" href="#N"><span class="id" title="definition">N</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj1_sig"><span class="id" title="definition">proj1_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> 80000).<br/>
 <span class="id" title="keyword">Definition</span> <a id="N_eq" class="idref" href="#N_eq"><span class="id" title="definition">N_eq</span></a> : <a class="idref" href="VSU_stdlib2.html#N"><span class="id" title="definition">N</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><span class="id" title="var">_</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj2_sig"><span class="id" title="definition">proj2_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> <span class="id" title="var">_</span>).<br/>
-<span class="id" title="keyword">Hint Rewrite</span> <a class="idref" href="VSU_stdlib2.html#N_eq"><span class="id" title="definition">N_eq</span></a> : <span class="id" title="var">rep_lia</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="VSU_stdlib2.html#N_eq"><span class="id" title="definition">N_eq</span></a> : <span class="id" title="var">rep_lia</span>.<br/>
 </div>
 
 <div class="doc">
@@ -312,7 +312,7 @@ Now, throw away N'' and we'll combine the two tricks together:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="constructor">Tarray</span> <span class="id" title="var">_</span> <span class="id" title="var">n</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">n</span> | <span class="id" title="var">_</span> ⇒ 0 <span class="id" title="keyword">end</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">in</span> <span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="keyword">in</span> <span class="id" title="var">x</span> <span class="id" title="keyword">in</span> <span class="id" title="tactic">exact</span> <span class="id" title="var">x</span>))).<br/>
 <span class="id" title="keyword">Definition</span> <a id="Digression.N_eq" class="idref" href="#Digression.N_eq"><span class="id" title="definition">N_eq</span></a> : <a class="idref" href="VSU_stdlib2.html#Digression.N"><span class="id" title="definition">N</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><span class="id" title="var">_</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#proj2_sig"><span class="id" title="definition">proj2_sig</span></a> (<span class="id" title="lemma">opaque_constant</span> <span class="id" title="var">_</span>).<br/>
-<span class="id" title="keyword">Hint Rewrite</span> <a class="idref" href="VSU_stdlib2.html#Digression.N_eq"><span class="id" title="definition">N_eq</span></a> : <span class="id" title="var">rep_lia</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="VSU_stdlib2.html#Digression.N_eq"><span class="id" title="definition">N_eq</span></a> : <span class="id" title="var">rep_lia</span>.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="VSU_stdlib2.html#Digression.N_eq"><span class="id" title="definition">N_eq</span></a>. <span class="comment">(*&nbsp;:&nbsp;N&nbsp;=&nbsp;80000&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="VSU_stdlib2.html#Digression"><span class="id" title="module">Digression</span></a>.<br/>
 </div>
@@ -455,7 +455,7 @@ Now, throw away N'' and we'll combine the two tricks together:
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-26&nbsp;19:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-03-24&nbsp;02:27&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -82,7 +82,7 @@ Require Import VC.stack2.
   the different .c files that will be linked together,  may have
   different structs and unions.  Here we process the compspecs
   of _this_ module. Here, [prog] is really VC.stack2.prog.  *)
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 
 (** Recall that our ASIs are parameterized by the APDs they use;
   and we used a Section for that purpose in [Spec_stack].
@@ -236,7 +236,7 @@ forward_call (malloc_spec_sub M t) gv.
   (or [Espec]) that characterizes the interaction.  All the VSUs of the
   program must use the same Espec.   Since this program doesn't do
   any I/O, it can use the standard trivial Espec, as follows: *)
-Existing Instance NullExtension.Espec.
+#[export] Existing Instance NullExtension.Espec.
 
 (** Notice that all the [semax_body] proofs above didn't depend at all
   on which Espec we use, so they're portable to any Espec.  That wouldn't
@@ -282,4 +282,4 @@ End Stack_VSU.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_triang] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

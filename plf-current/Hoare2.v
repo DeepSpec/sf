@@ -10,6 +10,7 @@ From Coq Require Import Arith.PeanoNat. Import Nat.
 From Coq Require Import Lia.
 From PLF Require Export Imp.
 From PLF Require Import Hoare.
+Set Default Goal Selector "!".
 
 Definition FILL_IN_HERE := <{True}>.
 
@@ -1743,10 +1744,16 @@ Definition dpow2_dec (n : nat) :=
 
 Lemma pow2_plus_1 : forall n,
   pow2 (n+1) = pow2 n + pow2 n.
-Proof. induction n; simpl. reflexivity. lia. Qed.
+Proof.
+  induction n; simpl.
+  - reflexivity.
+  - lia.
+Qed.
 
 Lemma pow2_le_1 : forall n, pow2 n >= 1.
-Proof. induction n. simpl. constructor. simpl. lia. Qed.
+Proof.
+  induction n; simpl; [constructor | lia].
+Qed.
 
 (** The main correctness theorem: *)
 
@@ -1979,4 +1986,4 @@ Theorem dfib_correct : forall n,
 
     [] *)
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

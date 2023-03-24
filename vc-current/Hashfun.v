@@ -120,7 +120,7 @@
 
 Require Import VST.floyd.functional_base.
 
-Instance EqDec_string: EqDec (list byte) := list_eq_dec Byte.eq_dec. 
+#[export] Instance EqDec_string: EqDec (list byte) := list_eq_dec Byte.eq_dec. 
 
 Fixpoint hashfun_aux (h: Z) (s: list byte) : Z :=
  match s with
@@ -136,7 +136,7 @@ Definition hashtable_contents := list (list (list byte * Z)).
 Definition N := 109.
 Lemma N_eq : N = 109. 
 Proof. reflexivity. Qed.
-Hint Rewrite N_eq : rep_lia.
+#[export] Hint Rewrite N_eq : rep_lia.
 Global Opaque N.
 
 Definition empty_table : hashtable_contents :=
@@ -188,7 +188,7 @@ Lemma Zlength_hashtable_incr:
       Zlength (hashtable_incr sigma cts) = Zlength cts.
 Proof.
 (* FILL IN HERE *) Admitted.
-Hint Rewrite Zlength_hashtable_incr using list_solve : sublist.
+#[export] Hint Rewrite Zlength_hashtable_incr using list_solve : sublist.
 (** [] *)
 
 (** **** Exercise: 3 stars, standard (hashfun_snoc) *)
@@ -328,4 +328,4 @@ Proof.
 
 End IntHashTable.
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

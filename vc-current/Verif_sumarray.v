@@ -124,7 +124,7 @@ Require VC.Preface.  (* Check for the right version of VST *)
 
 Require Import VST.floyd.proofauto.
 Require Import VC.sumarray.
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 Definition Vprog : varspecs.  mk_varspecs prog. Defined.
 
 (** The first line imports Verifiable C and its _Floyd_ proof-automation
@@ -753,7 +753,7 @@ Qed.
   any input/output, so we can use a trivial [Espec].  We provide this to
   the [semax_prog] proofs (below, in the [prog_correct] lemma) as follows: *)
 
-Existing Instance NullExtension.Espec.
+#[export] Existing Instance NullExtension.Espec.
 (** This is a _typeclass instance_.  If you're not familiar with typeclasses,
   don't worry, just treat this as "boilerplate" that you can ignore. *)
 
@@ -777,4 +777,4 @@ Qed.
 
 (** Recommended: read VC.pdf Chapters 22-47 (up to _Pointer comparisons_) *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

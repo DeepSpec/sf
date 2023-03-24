@@ -225,18 +225,18 @@ Notation " e1 ':=' e2 " := (tm_assign e1 e2) (in custom stlc at level 21).
 (** Informally, the typing rules for allocation, dereferencing, and
     assignment will look like this:
 
-                           Gamma |- t1 : T1
-                       ------------------------                       (T_Ref)
-                       Gamma |- ref t1 : Ref T1
+                           Gamma |-- t1 : T1
+                       -------------------------                      (T_Ref)
+                       Gamma |-- ref t1 : Ref T1
 
-                        Gamma |- t1 : Ref T1
-                        --------------------                        (T_Deref)
-                          Gamma |- !t1 : T1
+                        Gamma |-- t1 : Ref T1
+                        ---------------------                       (T_Deref)
+                          Gamma |-- !t1 : T1
 
-                        Gamma |- t1 : Ref T2
-                          Gamma |- t2 : T2
-                       ------------------------                    (T_Assign)
-                       Gamma |- t1 := t2 : Unit
+                        Gamma |-- t1 : Ref T2
+                          Gamma |-- t2 : T2
+                       -------------------------                   (T_Assign)
+                       Gamma |-- t1 := t2 : Unit
 
     The rule for locations will require a bit more machinery, and this
     will motivate some changes to the other rules; we'll come back to
@@ -976,8 +976,10 @@ Definition context := partial_map ty.
 (** Having extended our syntax and reduction rules to accommodate
     references, our last job is to write down typing rules for the new
     constructs (and, of course, to check that these rules are sound!).
-    Naturalurally, the key question is, "What is the type of a location?"
+Naturally, the key question is, "What is the type of a location?"
+*)
 
+(**
     First of all, notice that this question doesn't arise when
     typechecking terms that programmers actually
     write.  Concrete location constants arise only in terms that are
@@ -999,10 +1001,11 @@ Definition context := partial_map ty.
     has type [Unit->Unit]. This observation leads us immediately to a
     first attempt at a typing rule for locations:
 
-                             Gamma |- lookup  l st : T1
-                            ----------------------------
-                             Gamma |- loc l : Ref T1
-
+                             Gamma |-- lookup  l st : T1
+                             ---------------------------
+                             Gamma |-- loc l : Ref T1
+*)
+(**
     That is, to find the type of a location [l], we look up the
     current contents of [l] in the store and calculate the type [T1]
     of the contents.  The type of the location is then [Ref T1].
@@ -1014,13 +1017,14 @@ Definition context := partial_map ty.
     (between contexts, _stores_, terms, and types).  Since the store is,
     intuitively, part of the context in which we calculate the type of a
     term, let's write this four-place relation with the store to the left
-    of the turnstile: [Gamma; st |- t : T].  Our rule for typing
+    of the turnstile: [Gamma; st |-- t : T].  Our rule for typing
     references now has the form
 
-                     Gamma; st |- lookup l st : T1
-                   --------------------------------
-                     Gamma; st |- loc l : Ref T1
-
+                     Gamma; st |-- lookup l st : T1
+                     ------------------------------
+                      Gamma; st |-- loc l : Ref T1
+*)
+(**
     and all the rest of the typing rules in the system are extended
     similarly with stores.  (The other rules do not need to do anything
     interesting with their stores -- just pass them from premise to
@@ -1040,7 +1044,6 @@ Definition context := partial_map ty.
 
    [\x:Nat. (!(loc 1)) x, \x:Nat. (!(loc 0)) x]
 *)
-
 (** **** Exercise: 3 stars, standard (cyclic_store)
 
     Can you find a term whose reduction will create this particular
@@ -1095,9 +1098,10 @@ Definition store_Tlookup (n:nat) (ST:store_ty) :=
     can be reformulated in terms of store typings like this:
 
                                  l < |ST|
-                   -------------------------------------
-                   Gamma; ST |- loc l : Ref (lookup l ST)
-
+                   ----------------------------------------------
+                   Gamma; ST |-- loc l : Ref (store_Tlookup l ST)
+*)
+(**
     That is, as long as [l] is a valid location, we can compute the
     type of [l] just by looking it up in [ST].  Typing is again a
     four-place relation, but it is parameterized on a store _typing_
@@ -1114,71 +1118,71 @@ Definition store_Tlookup (n:nat) (ST:store_ty) :=
 (**
 
                                l < |ST|
-                  --------------------------------------              (T_Loc)
-                  Gamma; ST |- loc l : Ref (lookup l ST)
+                  ----------------------------------------------        (T_Loc)
+                  Gamma; ST |-- loc l : Ref (store_Tlookup l ST)
 
-                         Gamma; ST |- t1 : T1
-                     ----------------------------                       (T_Ref)
-                     Gamma; ST |- ref t1 : Ref T1
+                         Gamma; ST |-- t1 : T1
+                     -----------------------------                      (T_Ref)
+                     Gamma; ST |-- ref t1 : Ref T1
 
-                      Gamma; ST |- t1 : Ref T1
-                      -------------------------                         (T_Deref)
-                        Gamma; ST |- !t1 : T1
+                      Gamma; ST |-- t1 : Ref T1
+                      -------------------------                       (T_Deref)
+                        Gamma; ST |-- !t1 : T1
 
-                      Gamma; ST |- t1 : Ref T2
-                        Gamma; ST |- t2 : T2
-                    ----------------------------                     (T_Assign)
-                    Gamma; ST |- t1 := t2 : Unit
+                      Gamma; ST |-- t1 : Ref T2
+                        Gamma; ST |-- t2 : T2
+                    -----------------------------                    (T_Assign)
+                    Gamma; ST |-- t1 := t2 : Unit
 *)
 
-Reserved Notation "Gamma ';' ST '|-' t '\in' T"
+Reserved Notation "Gamma ';' ST '|--' t '\in' T"
                   (at level 40, t custom stlc, T custom stlc at level 0).
 
 Inductive has_type (ST : store_ty) : context -> tm -> ty -> Prop :=
   | T_Var : forall Gamma x T1,
       Gamma x = Some T1 ->
-      Gamma ; ST |- x \in T1
+      Gamma ; ST |-- x \in T1
   | T_Abs : forall Gamma x T1 T2 t1,
-      update Gamma x T2 ; ST |- t1 \in T1 ->
-      Gamma ; ST |- \x:T2, t1 \in (T2 -> T1)
+      update Gamma x T2 ; ST |-- t1 \in T1 ->
+      Gamma ; ST |-- \x:T2, t1 \in (T2 -> T1)
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma ; ST |- t1 \in (T2 -> T1) ->
-      Gamma ; ST |- t2 \in T2 ->
-      Gamma ; ST |- t1 t2 \in T1
+      Gamma ; ST |-- t1 \in (T2 -> T1) ->
+      Gamma ; ST |-- t2 \in T2 ->
+      Gamma ; ST |-- t1 t2 \in T1
   | T_Nat : forall Gamma (n : nat),
-      Gamma ; ST |- n \in Nat
+      Gamma ; ST |-- n \in Nat
   | T_Succ : forall Gamma t1,
-      Gamma ; ST |- t1 \in Nat ->
-      Gamma ; ST |- succ t1 \in Nat
+      Gamma ; ST |-- t1 \in Nat ->
+      Gamma ; ST |-- succ t1 \in Nat
   | T_Pred : forall Gamma t1,
-      Gamma ; ST |- t1 \in Nat ->
-      Gamma ; ST |- pred t1 \in Nat
+      Gamma ; ST |-- t1 \in Nat ->
+      Gamma ; ST |-- pred t1 \in Nat
   | T_Mult : forall Gamma t1 t2,
-      Gamma ; ST |- t1 \in Nat ->
-      Gamma ; ST |- t2 \in Nat ->
-      Gamma ; ST |- t1 * t2 \in Nat
+      Gamma ; ST |-- t1 \in Nat ->
+      Gamma ; ST |-- t2 \in Nat ->
+      Gamma ; ST |-- t1 * t2 \in Nat
   | T_If0 : forall Gamma t1 t2 t3 T0,
-      Gamma ; ST |- t1 \in Nat ->
-      Gamma ; ST |- t2 \in T0 ->
-      Gamma ; ST |- t3 \in T0 ->
-      Gamma ; ST |- if0 t1 then t2 else t3 \in T0
+      Gamma ; ST |-- t1 \in Nat ->
+      Gamma ; ST |-- t2 \in T0 ->
+      Gamma ; ST |-- t3 \in T0 ->
+      Gamma ; ST |-- if0 t1 then t2 else t3 \in T0
   | T_Unit : forall Gamma,
-      Gamma ; ST |- unit \in Unit
+      Gamma ; ST |-- unit \in Unit
   | T_Loc : forall Gamma l,
       l < length ST ->
-      Gamma ; ST |- (loc l) \in (Ref {store_Tlookup l ST })
+      Gamma ; ST |-- (loc l) \in (Ref {store_Tlookup l ST })
   | T_Ref : forall Gamma t1 T1,
-      Gamma ; ST |- t1 \in T1 ->
-      Gamma ; ST |- (ref t1) \in (Ref T1)
+      Gamma ; ST |-- t1 \in T1 ->
+      Gamma ; ST |-- (ref t1) \in (Ref T1)
   | T_Deref : forall Gamma t1 T1,
-      Gamma ; ST |- t1 \in (Ref T1) ->
-      Gamma ; ST |- (! t1) \in T1
+      Gamma ; ST |-- t1 \in (Ref T1) ->
+      Gamma ; ST |-- (! t1) \in T1
   | T_Assign : forall Gamma t1 t2 T2,
-      Gamma ; ST |- t1 \in (Ref T2) ->
-      Gamma ; ST |- t2 \in T2 ->
-      Gamma ; ST |- (t1 := t2) \in Unit
+      Gamma ; ST |-- t1 \in (Ref T2) ->
+      Gamma ; ST |-- t2 \in T2 ->
+      Gamma ; ST |-- (t1 := t2) \in Unit
 
-where "Gamma ';' ST '|-' t '\in' T" := (has_type ST Gamma t T).
+where "Gamma ';' ST '|--' t '\in' T" := (has_type ST Gamma t T).
 
 Hint Constructors has_type : core.
 
@@ -1187,7 +1191,7 @@ Hint Constructors has_type : core.
     actually conforms to the store typing that we assume for purposes
     of typechecking.  This proviso exactly parallels the situation
     with free variables in the basic STLC: the substitution lemma
-    promises that, if [Gamma |- t : T], then we can replace the free
+    promises that, if [Gamma |-- t : T], then we can replace the free
     variables in [t] with values of the types listed in [Gamma] to
     obtain a closed term of type [T], which, by the type preservation
     theorem will reduce to a final result of type [T] if it yields
@@ -1228,9 +1232,9 @@ Hint Constructors has_type : core.
     related -- i.e., this is wrong: *)
 
 Theorem preservation_wrong1 : forall ST T t st t' st',
-  empty ; ST |- t \in T ->
+  empty ; ST |-- t \in T ->
   t / st --> t' / st' ->
-  empty ; ST |- t' \in T.
+  empty ; ST |-- t' \in T.
 Abort.
 
 (** If we typecheck with respect to some set of assumptions about the
@@ -1247,9 +1251,9 @@ Abort.
 Definition store_well_typed (ST:store_ty) (st:store) :=
   length ST = length st /\
   (forall l, l < length st ->
-     empty; ST |- { store_lookup l st } \in {store_Tlookup l ST }).
+     empty; ST |-- { store_lookup l st } \in {store_Tlookup l ST }).
 
-(** Informally, we will write [ST |- st] for [store_well_typed ST st]. *)
+(** Informally, we will write [ST |-- st] for [store_well_typed ST st]. *)
 
 (** Intuitively, a store [st] is consistent with a store typing
     [ST] if every value in the store has the type predicted by the
@@ -1262,7 +1266,7 @@ Definition store_well_typed (ST:store_ty) (st:store) :=
 
     Can you find a store [st], and two
     different store typings [ST1] and [ST2] such that both
-    [ST1 |- st] and [ST2 |- st]? *)
+    [ST1 |-- st] and [ST2 |-- st]? *)
 
 (* FILL IN HERE *)
 
@@ -1279,10 +1283,10 @@ Proof.
     property: *)
 
 Theorem preservation_wrong2 : forall ST T t st t' st',
-  empty ; ST |- t \in T ->
+  empty ; ST |-- t \in T ->
   t / st --> t' / st' ->
   store_well_typed ST st ->
-  empty ; ST |- t' \in T.
+  empty ; ST |-- t' \in T.
 Abort.
 
 (** This statement is fine for all of the reduction rules except
@@ -1374,12 +1378,12 @@ Qed.
     preservation property: *)
 
 Definition preservation_theorem := forall ST t t' T st st',
-  empty ; ST |- t \in T ->
+  empty ; ST |-- t \in T ->
   store_well_typed ST st ->
   t / st --> t' / st' ->
   exists ST',
      extends ST' ST /\
-     empty ; ST' |- t' \in T /\
+     empty ; ST' |-- t' \in T /\
      store_well_typed ST' st'.
 
 (** Note that the preservation theorem merely asserts that there is
@@ -1409,8 +1413,8 @@ Definition preservation_theorem := forall ST t t' T st st',
 
 Lemma weakening : forall Gamma Gamma' ST t T,
      includedin Gamma Gamma' ->
-     Gamma  ; ST |- t \in T  ->
-     Gamma' ; ST |- t \in T.
+     Gamma  ; ST |-- t \in T  ->
+     Gamma' ; ST |-- t \in T.
 Proof.
   intros Gamma Gamma' ST t T H Ht.
   generalize dependent Gamma'.
@@ -1418,8 +1422,8 @@ Proof.
 Qed.
 
 Lemma weakening_empty : forall Gamma ST t T,
-     empty ; ST |- t \in T  ->
-     Gamma ; ST |- t \in T.
+     empty ; ST |-- t \in T  ->
+     Gamma ; ST |-- t \in T.
 Proof.
   intros Gamma ST t T.
   eapply weakening.
@@ -1427,9 +1431,9 @@ Proof.
 Qed.
 
 Lemma substitution_preserves_typing : forall Gamma ST x U t v T,
-  (update Gamma x U); ST |- t \in T ->
-  empty ; ST |- v \in U   ->
-  Gamma ; ST |- [x:=v]t \in T.
+  (update Gamma x U); ST |-- t \in T ->
+  empty ; ST |-- v \in U   ->
+  Gamma ; ST |-- [x:=v]t \in T.
 Proof.
   intros Gamma ST x U t v T Ht Hv.
   generalize dependent Gamma. generalize dependent T.
@@ -1465,7 +1469,7 @@ Qed.
 Lemma assign_pres_store_typing : forall ST st l t,
   l < length st ->
   store_well_typed ST st ->
-  empty ; ST |- t \in {store_Tlookup l ST} ->
+  empty ; ST |-- t \in {store_Tlookup l ST} ->
   store_well_typed ST (replace l t st).
 Proof with auto.
   intros ST st l t Hlen HST Ht.
@@ -1498,8 +1502,8 @@ Qed.
 
 Lemma store_weakening : forall Gamma ST ST' t T,
   extends ST' ST ->
-  Gamma ; ST |- t \in T ->
-  Gamma ; ST' |- t \in T.
+  Gamma ; ST |-- t \in T ->
+  Gamma ; ST' |-- t \in T.
 Proof with eauto.
   intros. induction H0; eauto.
   - (* T_Loc *)
@@ -1515,7 +1519,7 @@ Qed.
 
 Lemma store_well_typed_app : forall ST st t1 T1,
   store_well_typed ST st ->
-  empty ; ST |- t1 \in T1 ->
+  empty ; ST |-- t1 \in T1 ->
   store_well_typed (ST ++ T1::nil) (st ++ t1::nil).
 Proof with auto.
   intros.
@@ -1562,12 +1566,12 @@ Qed.
 (** And here, at last, is the preservation theorem: *)
 
 Theorem preservation : forall ST t t' T st st',
-  empty ; ST |- t \in T ->
+  empty ; ST |-- t \in T ->
   store_well_typed ST st ->
   t / st --> t' / st' ->
   exists ST',
      extends ST' ST /\
-     empty ; ST' |- t' \in T /\
+     empty ; ST' |-- t' \in T /\
      store_well_typed ST' st'.
 Proof with eauto using store_weakening, extends_refl.
   remember empty as Gamma.
@@ -1677,7 +1681,7 @@ Definition manual_grade_for_preservation_informal : option (nat*string) := None.
     with a few new cases for the new syntactic constructs. *)
 
 Theorem progress : forall ST t T st,
-  empty ; ST |- t \in T ->
+  empty ; ST |-- t \in T ->
   store_well_typed ST st ->
   (value t \/ exists t' st', t / st --> t' / st').
 Proof with eauto.
@@ -1822,7 +1826,7 @@ Definition loop :=
   <{ (\r : Ref (Unit -> Unit), (( r := loop_fun ); ( (! r) unit ) )) (ref (\x : Unit, unit)) }> .
 (** This term is well typed: *)
 
-Lemma loop_typeable : exists T, empty; nil |- loop \in T.
+Lemma loop_typeable : exists T, empty; nil |-- loop \in T.
 Proof with eauto.
   eexists. unfold loop. unfold loop_fun.
   eapply T_App...
@@ -1872,7 +1876,7 @@ Notation "t1 '/' st '-->+' t2 '/' st'" :=
 Ltac print_goal := match goal with |- ?x => idtac x end.
 Ltac reduce :=
     repeat (print_goal; eapply multi_step ;
-            [ (eauto 10; fail) | compute ];
+            [ (eauto 10; fail) | compute];
             try solve [apply multi_refl]).
 
 (** Next, we use [reduce] to show that [loop] steps to
@@ -1909,7 +1913,7 @@ Qed.
 Definition factorial : tm
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Lemma factorial_type : empty; nil |- factorial \in (Nat -> Nat).
+Lemma factorial_type : empty; nil |-- factorial \in (Nat -> Nat).
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 
@@ -1940,4 +1944,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

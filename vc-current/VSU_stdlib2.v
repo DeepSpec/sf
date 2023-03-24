@@ -78,7 +78,7 @@ Require Import VST.floyd.proofauto.
 Require Import VST.floyd.VSU.
 Require Import VC.stdlib2.
 Require Import VC.Spec_stdlib.
-Instance CompSpecs : compspecs. make_compspecs stdlib2.prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs stdlib2.prog. Defined.
 
 (** As usual, we define representation relations.  First, for the free list,
     which is just a linked list much as in [VSU_stack].*)
@@ -153,7 +153,7 @@ Lemma  malloc_token_sz_local_facts :
   rep_lia can unfold.     See VC.pdf, chapter 65 "Opaque Constants". *)
 Definition N : Z := proj1_sig (opaque_constant 80000).
 Definition N_eq : N=_ := proj2_sig (opaque_constant _).
-Hint Rewrite N_eq : rep_lia.
+#[export] Hint Rewrite N_eq : rep_lia.
 
 (* ----------------------------------------------------------------- *)
 (** *** Digression (feel free to skip this) *)
@@ -203,7 +203,7 @@ Definition N := proj1_sig (opaque_constant
                                           Tarray _ n _ => n | _ => 0 end)
                                     in let x := eval compute in x in exact x))).
 Definition N_eq : N=_ := proj2_sig (opaque_constant _).
-Hint Rewrite N_eq : rep_lia.
+#[export] Hint Rewrite N_eq : rep_lia.
 Check N_eq.  (* : N = 80000 *)
 
 End Digression.
@@ -300,4 +300,4 @@ Qed.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_main2] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

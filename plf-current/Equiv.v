@@ -11,6 +11,7 @@ From Coq Require Import Lia.
 From Coq Require Import Lists.List. Import ListNotations.
 From Coq Require Import Logic.FunctionalExtensionality.
 From PLF Require Export Imp.
+Set Default Goal Selector "!".
 
 (** *** Before You Get Started:
 
@@ -161,8 +162,8 @@ Proof.
     assumption.
   - (* <- *)
     apply E_Seq with st.
-    apply E_Skip.
-    assumption.
+    + apply E_Skip.
+    + assumption.
 Qed.
 
 (** **** Exercise: 2 stars, standard (skip_right)
@@ -189,9 +190,13 @@ Proof.
   intros c1 c2.
   split; intros H.
   - (* -> *)
-    inversion H; subst. assumption. discriminate.
+    inversion H; subst.
+    + assumption.
+    + discriminate.
   - (* <- *)
-    apply E_IfTrue. reflexivity. assumption.  Qed.
+    apply E_IfTrue.
+    + reflexivity.
+    + assumption.  Qed.
 
 (** Of course, no (human) programmer would write a conditional whose
     condition is literally [true].  But they might write one whose
@@ -244,7 +249,7 @@ Proof.
   intros b c1 c2 Hb.
   split; intros H.
   - (* -> *)
-    inversion H. subst.
+    inversion H; subst.
     + (* b evaluates to true *)
       assumption.
     + (* b evaluates to false (contradiction) *)
@@ -294,7 +299,7 @@ Theorem while_false : forall b c,
 Proof.
   intros b c Hb. split; intros H.
   - (* -> *)
-    inversion H. subst.
+    inversion H; subst.
     + (* E_WhileFalse *)
       apply E_Skip.
     + (* E_WhileTrue *)
@@ -399,16 +404,23 @@ Proof.
   - (* -> *)
     inversion Hce; subst.
     + (* loop doesn't run *)
-      apply E_IfFalse. assumption. apply E_Skip.
+      apply E_IfFalse.
+      * assumption.
+      * apply E_Skip.
     + (* loop runs *)
-      apply E_IfTrue. assumption.
-      apply E_Seq with (st' := st'0). assumption. assumption.
+      apply E_IfTrue.
+      * assumption.
+      * apply E_Seq with (st' := st'0).
+        -- assumption.
+        -- assumption.
   - (* <- *)
     inversion Hce; subst.
     + (* loop runs *)
       inversion H5; subst.
       apply E_WhileTrue with (st' := st'0).
-      assumption. assumption. assumption.
+      * assumption.
+      * assumption.
+      * assumption.
     + (* loop doesn't run *)
       inversion H5; subst. apply E_WhileFalse. assumption.  Qed.
 
@@ -1756,4 +1768,4 @@ Theorem zprop_preserving : forall c c',
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

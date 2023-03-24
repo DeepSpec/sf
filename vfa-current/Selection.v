@@ -37,8 +37,7 @@ From Coq Require Export Lists.List.  (* for exercises involving [List.length] *)
     to select the smallest element. *)
 
 (* [select x l] is [(y, l')], where [y] is the smallest element
-   of [x :: l], and [l'] is all the remaining elements of [x :: l]
-   in their original order. *)
+   of [x :: l], and [l'] is all the remaining elements of [x :: l]. *)
 Fixpoint select (x: nat) (l: list nat) : nat * list nat :=
   match l with
   | [] => (x, [])
@@ -460,4 +459,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2022-08-26 19:27 *)
+(* 2023-03-24 02:26 *)

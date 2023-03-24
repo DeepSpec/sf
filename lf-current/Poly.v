@@ -950,8 +950,8 @@ Proof.
 Definition fold_map {X Y: Type} (f: X -> Y) (l: list X) : list Y
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-(** Write down a theorem [fold_map_correct] in Coq stating that
-    [fold_map] is correct, and prove it.  (Hint: again, remember that
+(** Write down a theorem [fold_map_correct] stating that [fold_map] is
+    correct, and prove it in Coq.  (Hint: again, remember that
     [reflexivity] simplifies expressions a bit more aggressively than
     [simpl].) *)
 
@@ -1224,4 +1224,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2022-08-26 19:23 *)
+(* 2023-03-24 02:22 *)
