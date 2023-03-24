@@ -106,7 +106,8 @@
  First, gain access to the VSUs that we have built. 
 </div>
 <div class="code">
-<span class="id" title="keyword">Require</span> <a class="idref" href="VSU_stdlib.html#"><span class="id" title="library">VC.VSU_stdlib</span></a> <a class="idref" href="VSU_stack.html#"><span class="id" title="library">VC.VSU_stack</span></a> <a class="idref" href="VSU_triang.html#"><span class="id" title="library">VC.VSU_triang</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="VSU_stdlib.html#"><span class="id" title="library">VC.VSU_stdlib</span></a> <a class="idref" href="VSU_stack.html#"><span class="id" title="library">VC.VSU_stack</span></a> <a class="idref" href="VSU_triang.html#"><span class="id" title="library">VC.VSU_triang</span></a>.<br/><hr class='doublespaceincode'/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
 <div class="doc">
@@ -342,7 +343,7 @@ In order to prove a semax_body, we need a CompSpecs (which is an implicit
    VC.main2.prog, just as you would in any module.  
 </div>
 <div class="code">
-<span class="id" title="keyword">Instance</span> <a id="Compspecs" class="idref" href="#Compspecs"><span class="id" title="instance">Compspecs</span></a>: <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">VC.main2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="Compspecs" class="idref" href="#Compspecs"><span class="id" title="instance">Compspecs</span></a>: <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">VC.main2.prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
 <div class="doc">
@@ -597,7 +598,7 @@ or in other words, there exists a complete set <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2022-08-26&nbsp;19:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-03-24&nbsp;02:27&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -30,6 +30,7 @@ From Coq Require Import Lia.
 From Coq Require Import Lists.List. Import ListNotations.
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
+Set Default Goal Selector "!".
 
 (* ################################################################# *)
 (** * Arithmetic and Boolean Expressions *)
@@ -532,8 +533,8 @@ Qed.
 (* ================================================================= *)
 (** ** The [lia] Tactic *)
 
-(** The [lia] tactic implements a decision procedure for a subset of
-    first-order logic called _Presburger arithmetic_.
+(** The [lia] tactic implements a decision procedure for integer linear
+    arithmetic, a subset of propositional logic and arithmetic.
 
     If the goal is a universally quantified formula made out of
 
@@ -812,16 +813,16 @@ Proof.
      apply E_ANum.
    + (* APlus *)
      apply E_APlus.
-      apply IHa1. reflexivity.
-      apply IHa2. reflexivity.
+     * apply IHa1. reflexivity.
+     * apply IHa2. reflexivity.
    + (* AMinus *)
      apply E_AMinus.
-      apply IHa1. reflexivity.
-      apply IHa2. reflexivity.
+     * apply IHa1. reflexivity.
+     * apply IHa2. reflexivity.
    + (* AMult *)
      apply E_AMult.
-      apply IHa1. reflexivity.
-      apply IHa2. reflexivity.
+     * apply IHa1. reflexivity.
+     * apply IHa2. reflexivity.
 Qed.
 
 (** Again, we can make the proof quite a bit shorter using some
@@ -1233,8 +1234,7 @@ Print fact_in_coq.
     - [Set Printing All] (undo with [Unset Printing All])
 
     These commands can also be used in the middle of a proof, to
-    elaborate the current goal and context.
- *)
+    elaborate the current goal and context. *)
 
 Unset Printing Notations.
 Print fact_in_coq.
@@ -1530,8 +1530,8 @@ Proof.
     apply E_Asgn. reflexivity.
   - (* if command *)
     apply E_IfFalse.
-    reflexivity.
-    apply E_Asgn. reflexivity.
+    + reflexivity.
+    + apply E_Asgn. reflexivity.
 Qed.
 
 (** **** Exercise: 2 stars, standard (ceval_example2) *)
@@ -2060,4 +2060,4 @@ End BreakImp.
 
     [] *)
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

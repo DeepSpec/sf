@@ -19,7 +19,7 @@ Require Import VC.Spec_stdlib.
 Require Import VC.Spec_stack.
 Require Import VC.Spec_triang.
 Require Import VC.triang2.
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 
 (* ================================================================= *)
 (** ** Parameters for the VSU *)
@@ -141,4 +141,4 @@ End Triang_VSU.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stdlib] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

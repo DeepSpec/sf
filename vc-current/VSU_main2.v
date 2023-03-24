@@ -38,6 +38,7 @@ Require VC.stdlib2 VC.stack2 VC.triang2.
 Require VC.Spec_stdlib VC.Spec_stack VC.Spec_triang.
 
 Require VC.VSU_stdlib2 VC.VSU_stack VC.VSU_triang.
+#[export] Instance Compspecs: compspecs. make_compspecs VC.main2.prog. Defined.
 
 Definition M : Spec_stdlib.MallocFreeAPD := VSU_stdlib2.M.
 Definition STACK : Spec_stack.StackAPD := VSU_stack.STACK M.
@@ -118,8 +119,6 @@ Definition main_spec :=
     RETURN (Vint (Int.repr 55))
     SEP(TT).
 
-Instance Compspecs: compspecs. make_compspecs VC.main2.prog. Defined.
-
 Definition Vprog: varspecs := QPvarspecs whole_prog.
 
 Definition Main_imports: funspecs := Spec_triang.TriangASI M.
@@ -143,4 +142,4 @@ Proof. proveWholeProgSafe. Qed.
 
 Eval red in WholeProgSafeType WholeComp tt.
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

@@ -16,6 +16,7 @@ Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
+Set Default Goal Selector "!".
 
 Hint Resolve update_eq : core.
 
@@ -422,9 +423,9 @@ Check <{[x:=true] x}>.
     where [r] is a bound variable, we would get
 
       \r:Bool, \x:Bool, r
-[]
+
     where the free reference to [r] in [s] has been "captured" by
-    the binder at the beginning of [t]. 
+    the binder at the beginning of [t].
 
     Why would this be bad?  Because it violates the principle that the
     names of bound variables do not matter.  For example, if we rename
@@ -559,10 +560,10 @@ Lemma step_example1 :
   <{idBB idB}> -->* idB.
 Proof.
   eapply multi_step.
-    apply ST_AppAbs.
+  - apply ST_AppAbs.
     apply v_abs.
-  simpl.
-  apply multi_refl.  Qed.
+  - simpl.
+    apply multi_refl.  Qed.
 
 (** Example:
 
@@ -578,11 +579,12 @@ Lemma step_example2 :
   <{idBB (idBB idB)}> -->* idB.
 Proof.
   eapply multi_step.
-    apply ST_App2. auto.
-    apply ST_AppAbs. auto.
-  eapply multi_step.
-    apply ST_AppAbs. simpl. auto.
-  simpl. apply multi_refl.  Qed.
+  - apply ST_App2.
+    + auto.
+    + apply ST_AppAbs. auto.
+  - eapply multi_step.
+    + apply ST_AppAbs. simpl. auto.
+    + simpl. apply multi_refl.  Qed.
 
 (** Example:
 
@@ -600,11 +602,12 @@ Lemma step_example3 :
   <{idBB notB true}> -->* <{false}>.
 Proof.
   eapply multi_step.
-    apply ST_App1. apply ST_AppAbs. auto. simpl.
-  eapply multi_step.
-    apply ST_AppAbs. auto. simpl.
-  eapply multi_step.
-    apply ST_IfTrue. apply multi_refl.  Qed.
+  - apply ST_App1. apply ST_AppAbs. auto.
+  - simpl. eapply multi_step.
+    + apply ST_AppAbs. auto.
+    + simpl. eapply multi_step.
+      * apply ST_IfTrue.
+      * apply multi_refl.  Qed.
 
 (** Example:
 
@@ -624,14 +627,13 @@ Lemma step_example4 :
   <{idBB (notB true)}> -->* <{false}>.
 Proof.
   eapply multi_step.
-    apply ST_App2. auto.
-    apply ST_AppAbs. auto. simpl.
-  eapply multi_step.
-    apply ST_App2. auto.
-    apply ST_IfTrue.
-  eapply multi_step.
-    apply ST_AppAbs. auto. simpl.
-  apply multi_refl.  Qed.
+  - apply ST_App2; auto.
+  - eapply multi_step.
+    + apply ST_App2; auto.
+      apply ST_IfTrue.
+    + eapply multi_step.
+      * apply ST_AppAbs. auto.
+      * simpl. apply multi_refl.  Qed.
 
 (** We can use the [normalize] tactic defined in the [Smallstep] chapter
     to simplify these proofs. *)
@@ -686,7 +688,7 @@ Proof.
     variables.
 
     This leads us to a three-place _typing judgment_, informally
-    written [Gamma |- t \in T], where [Gamma] is a
+    written [Gamma |-- t \in T], where [Gamma] is a
     "typing context" -- a mapping from variables to their types. *)
 
 (** Following the usual notation for partial maps, we write [(X |->
@@ -700,57 +702,57 @@ Definition context := partial_map ty.
 
 (** 
                               Gamma x = T1
-                            -----------------                            (T_Var)
-                            Gamma |- x \in T1
+                            ------------------                           (T_Var)
+                            Gamma |-- x \in T1
 
-                        x |-> T2 ; Gamma |- t1 \in T1
-                        -----------------------------                    (T_Abs)
-                         Gamma |- \x:T2,t1 \in T2->T1
+                        x |-> T2 ; Gamma |-- t1 \in T1
+                        ------------------------------                   (T_Abs)
+                         Gamma |-- \x:T2,t1 \in T2->T1
 
-                        Gamma |- t1 \in T2->T1
-                          Gamma |- t2 \in T2
+                        Gamma |-- t1 \in T2->T1
+                          Gamma |-- t2 \in T2
                          ----------------------                          (T_App)
-                         Gamma |- t1 t2 \in T1
+                         Gamma |-- t1 t2 \in T1
 
-                         ---------------------                          (T_True)
-                         Gamma |- true \in Bool
+                         -----------------------                         (T_True)
+                         Gamma |-- true \in Bool
 
-                         ---------------------                         (T_False)
-                         Gamma |- false \in Bool
+                         ------------------------                        (T_False)
+                         Gamma |-- false \in Bool
 
-       Gamma |- t1 \in Bool    Gamma |- t2 \in T1    Gamma |- t3 \in T1
-       ----------------------------------------------------------------   (T_If)
-                  Gamma |- if t1 then t2 else t3 \in T1
+    Gamma |-- t1 \in Bool    Gamma |-- t2 \in T1    Gamma |-- t3 \in T1
+    -------------------------------------------------------------------  (T_If)
+                  Gamma |-- if t1 then t2 else t3 \in T1
 
-    We can read the three-place relation [Gamma |- t \in T] as:
+    We can read the three-place relation [Gamma |-- t \in T] as:
     "under the assumptions in Gamma, the term [t] has the type [T]." *)
 
-Reserved Notation "Gamma '|-' t '\in' T"
+Reserved Notation "Gamma '|--' t '\in' T"
             (at level 101,
              t custom stlc, T custom stlc at level 0).
-
+ Print Grammar constr.
 Inductive has_type : context -> tm -> ty -> Prop :=
   | T_Var : forall Gamma x T1,
       Gamma x = Some T1 ->
-      Gamma |- x \in T1
+      Gamma |-- x \in T1
   | T_Abs : forall Gamma x T1 T2 t1,
-      x |-> T2 ; Gamma |- t1 \in T1 ->
-      Gamma |- \x:T2, t1 \in (T2 -> T1)
+      x |-> T2 ; Gamma |-- t1 \in T1 ->
+      Gamma |-- \x:T2, t1 \in (T2 -> T1)
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma |- t1 \in (T2 -> T1) ->
-      Gamma |- t2 \in T2 ->
-      Gamma |- t1 t2 \in T1
+      Gamma |-- t1 \in (T2 -> T1) ->
+      Gamma |-- t2 \in T2 ->
+      Gamma |-- t1 t2 \in T1
   | T_True : forall Gamma,
-       Gamma |- true \in Bool
+       Gamma |-- true \in Bool
   | T_False : forall Gamma,
-       Gamma |- false \in Bool
+       Gamma |-- false \in Bool
   | T_If : forall t1 t2 t3 T1 Gamma,
-       Gamma |- t1 \in Bool ->
-       Gamma |- t2 \in T1 ->
-       Gamma |- t3 \in T1 ->
-       Gamma |- if t1 then t2 else t3 \in T1
+       Gamma |-- t1 \in Bool ->
+       Gamma |-- t2 \in T1 ->
+       Gamma |-- t3 \in T1 ->
+       Gamma |-- if t1 then t2 else t3 \in T1
 
-where "Gamma '|-' t '\in' T" := (has_type Gamma t T).
+where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
 
 Hint Constructors has_type : core.
 
@@ -758,24 +760,24 @@ Hint Constructors has_type : core.
 (** ** Examples *)
 
 Example typing_example_1 :
-  empty |- \x:Bool, x \in (Bool -> Bool).
+  empty |-- \x:Bool, x \in (Bool -> Bool).
 Proof. eauto. Qed.
 
 (** Note that, since we added the [has_type] constructors to the hints
     database, [auto] can actually solve this one immediately. *)
 
 Example typing_example_1' :
-  empty |- \x:Bool, x \in (Bool -> Bool).
+  empty |-- \x:Bool, x \in (Bool -> Bool).
 Proof. auto.  Qed.
 
 (** More examples:
 
-       empty |- \x:A, \y:A->A, y (y x)
+       empty |-- \x:A, \y:A->A, y (y x)
              \in A -> (A->A) -> A.
 *)
 
 Example typing_example_2 :
-  empty |-
+  empty |--
     \x:Bool,
        \y:Bool->Bool,
           (y (y x)) \in
@@ -788,7 +790,7 @@ Proof. eauto 20. Qed.
     [eapply] (or [...]). *)
 
 Example typing_example_2_full :
-  empty |-
+  empty |--
     \x:Bool,
        \y:Bool->Bool,
           (y (y x)) \in
@@ -802,14 +804,14 @@ Proof.
     Formally prove the following typing derivation holds:
 
     
-       empty |- \x:Bool->B, \y:Bool->Bool, \z:Bool,
+       empty |-- \x:Bool->B, \y:Bool->Bool, \z:Bool,
                    y (x z)
              \in T.
 *)
 
 Example typing_example_3 :
   exists T,
-    empty |-
+    empty |--
       \x:Bool->Bool,
          \y:Bool->Bool,
             \z:Bool,
@@ -824,12 +826,12 @@ Proof.
     to the term [\x:Bool, \y:Bool, x y] -- i.e.,
 
     ~ exists T,
-        empty |- \x:Bool, \y:Bool, x y \in T.
+        empty |-- \x:Bool, \y:Bool, x y \in T.
 *)
 
 Example typing_nonexample_1 :
   ~ exists T,
-      empty |-
+      empty |--
         \x:Bool,
             \y:Bool,
                (x y) \in
@@ -850,12 +852,12 @@ Qed.
     Another nonexample:
 
     ~ (exists S T,
-          empty |- \x:S, x x \in T).
+          empty |-- \x:S, x x \in T).
 *)
 
 Example typing_nonexample_3 :
   ~ (exists S T,
-        empty |-
+        empty |--
           \x:S, x x \in T).
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -863,4 +865,4 @@ Proof.
 
 End STLC.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

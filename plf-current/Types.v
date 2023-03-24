@@ -14,6 +14,7 @@ Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Arith.Arith.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
+Set Default Goal Selector "!".
 
 Hint Constructors multi : core.
 
@@ -177,8 +178,6 @@ Hint Constructors step : core.
 
     can take a step (once, before becoming stuck). *)
 
-   
-
 (* ================================================================= *)
 (** ** Normal Forms and Values *)
 
@@ -250,69 +249,69 @@ Inductive ty : Type :=
   | Nat : ty.
 
 (** In informal notation, the typing relation is often written
-    [|- t \in T] and pronounced "[t] has type [T]."  The [|-] symbol
+    [|-- t \in T] and pronounced "[t] has type [T]."  The [|--] symbol
     is called a "turnstile."  Below, we're going to see richer typing
     relations where one or more additional "context" arguments are
     written to the left of the turnstile.  For the moment, the context
     is always empty.
 
     
-                           ---------------                     (T_True)
-                           |- true \in Bool
+                           -----------------                   (T_True)
+                           |-- true \in Bool
 
-                          ---------------                      (T_False)
-                          |- false \in Bool
+                          ------------------                   (T_False)
+                          |-- false \in Bool
 
-             |- t1 \in Bool    |- t2 \in T    |- t3 \in T
-             --------------------------------------------     (T_If)
-                    |- if t1 then t2 else t3 \in T
+           |-- t1 \in Bool    |-- t2 \in T    |-- t3 \in T
+           -----------------------------------------------     (T_If)
+                   |-- if t1 then t2 else t3 \in T
 
                              --------------                    (T_0)
-                             |- 0 \in Nat
+                             |-- 0 \in Nat
 
-                            |- t1 \in Nat
-                          -----------------                    (T_Succ)
-                          |- succ t1 \in Nat
+                            |-- t1 \in Nat
+                          -------------------                  (T_Succ)
+                          |-- succ t1 \in Nat
 
-                            |- t1 \in Nat
-                          -----------------                    (T_Pred)
-                          |- pred t1 \in Nat
+                            |-- t1 \in Nat
+                          -------------------                  (T_Pred)
+                          |-- pred t1 \in Nat
 
-                            |- t1 \in Nat
-                        --------------------                 (T_Iszero)
-                          |-  iszero t1 \in Bool
+                            |-- t1 \in Nat
+                          ----------------------               (T_Iszero)
+                          |-- iszero t1 \in Bool
 *)
 
-Reserved Notation "'|-' t '\in' T" (at level 40).
+Reserved Notation "'|--' t '\in' T" (at level 40).
 
 Inductive has_type : tm -> ty -> Prop :=
   | T_True :
-       |- <{ true }> \in Bool
+       |-- <{ true }> \in Bool
   | T_False :
-       |- <{ false }> \in Bool
+       |-- <{ false }> \in Bool
   | T_If : forall t1 t2 t3 T,
-       |- t1 \in Bool ->
-       |- t2 \in T ->
-       |- t3 \in T ->
-       |- <{ if t1 then t2 else t3 }> \in T
+       |-- t1 \in Bool ->
+       |-- t2 \in T ->
+       |-- t3 \in T ->
+       |-- <{ if t1 then t2 else t3 }> \in T
   | T_0 :
-       |- <{ 0 }> \in Nat
+       |-- <{ 0 }> \in Nat
   | T_Succ : forall t1,
-       |- t1 \in Nat ->
-       |- <{ succ t1 }> \in Nat
+       |-- t1 \in Nat ->
+       |-- <{ succ t1 }> \in Nat
   | T_Pred : forall t1,
-       |- t1 \in Nat ->
-       |- <{ pred t1 }> \in Nat
+       |-- t1 \in Nat ->
+       |-- <{ pred t1 }> \in Nat
   | T_Iszero : forall t1,
-       |- t1 \in Nat ->
-       |- <{ iszero t1 }> \in Bool
+       |-- t1 \in Nat ->
+       |-- <{ iszero t1 }> \in Bool
 
-where "'|-' t '\in' T" := (has_type t T).
+where "'|--' t '\in' T" := (has_type t T).
 
 Hint Constructors has_type : core.
 
 Example has_type_1 :
-  |- <{ if false then 0 else (succ 0) }> \in Nat.
+  |-- <{ if false then 0 else (succ 0) }> \in Nat.
 Proof.
   apply T_If.
   - apply T_False.
@@ -330,14 +329,14 @@ Qed.
     not calculate the type of its normal form. *)
 
 Example has_type_not :
-  ~ ( |- <{ if false then 0 else true}> \in Bool ).
+  ~ ( |-- <{ if false then 0 else true}> \in Bool ).
 Proof.
   intros Contra. solve_by_inverts 2.  Qed.
 
 (** **** Exercise: 1 star, standard, optional (succ_hastype_nat__hastype_nat) *)
 Example succ_hastype_nat__hastype_nat : forall t,
-  |- <{succ t}> \in Nat ->
-  |- t \in Nat.
+  |-- <{succ t}> \in Nat ->
+  |-- t \in Nat.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -350,7 +349,7 @@ Proof.
     relation. *)
 
 Lemma bool_canonical : forall t,
-  |- t \in Bool -> value t -> bvalue t.
+  |-- t \in Bool -> value t -> bvalue t.
 Proof.
   intros t HT [Hb | Hn].
   - assumption.
@@ -360,7 +359,7 @@ Proof.
 Qed.
 
 Lemma nat_canonical : forall t,
-  |- t \in Nat -> value t -> nvalue t.
+  |-- t \in Nat -> value t -> nvalue t.
 Proof.
   intros t HT [Hb | Hn].
   - inversion Hb; subst; inversion HT.
@@ -377,7 +376,7 @@ Qed.
 
 (** **** Exercise: 3 stars, standard (finish_progress) *)
 Theorem progress : forall t T,
-  |- t \in T ->
+  |-- t \in T ->
   value t \/ exists t', t --> t'.
 
 (** Complete the formal proof of the [progress] property.  (Make sure
@@ -406,18 +405,18 @@ Proof.
 
     Complete the corresponding informal proof: *)
 
-(** _Theorem_: If [|- t \in T], then either [t] is a value or else
+(** _Theorem_: If [|-- t \in T], then either [t] is a value or else
     [t --> t'] for some [t']. *)
 
-(** _Proof_: By induction on a derivation of [|- t \in T].
+(** _Proof_: By induction on a derivation of [|-- t \in T].
 
     - If the last rule in the derivation is [T_If], then [t = if t1
-      then t2 else t3], with [|- t1 \in Bool], [|- t2 \in T] and [|- t3
+      then t2 else t3], with [|-- t1 \in Bool], [|-- t2 \in T] and [|-- t3
       \in T].  By the IH, either [t1] is a value or else [t1] can step
       to some [t1'].
 
       - If [t1] is a value, then by the canonical forms lemmas
-        and the fact that [|- t1 \in Bool] we have that [t1]
+        and the fact that [|-- t1 \in Bool] we have that [t1]
         is a [bvalue] -- i.e., it is either [true] or [false].
         If [t1 = true], then [t] steps to [t2] by [ST_IfTrue],
         while if [t1 = false], then [t] steps to [t3] by
@@ -446,9 +445,9 @@ Definition manual_grade_for_finish_progress_informal : option (nat*string) := No
 
 (** **** Exercise: 2 stars, standard (finish_preservation) *)
 Theorem preservation : forall t t' T,
-  |- t \in T ->
+  |-- t \in T ->
   t --> t' ->
-  |- t' \in T.
+  |-- t' \in T.
 
 (** Complete the formal proof of the [preservation] property.  (Again,
     make sure you understand the informal proof fragment in the
@@ -475,12 +474,12 @@ Proof.
 
     Complete the following informal proof: *)
 
-(** _Theorem_: If [|- t \in T] and [t --> t'], then [|- t' \in T]. *)
+(** _Theorem_: If [|-- t \in T] and [t --> t'], then [|-- t' \in T]. *)
 
-(** _Proof_: By induction on a derivation of [|- t \in T].
+(** _Proof_: By induction on a derivation of [|-- t \in T].
 
     - If the last rule in the derivation is [T_If], then [t = if t1
-      then t2 else t3], with [|- t1 \in Bool], [|- t2 \in T] and [|- t3
+      then t2 else t3], with [|-- t1 \in Bool], [|-- t2 \in T] and [|-- t3
       \in T].
 
       Inspecting the rules for the small-step reduction relation and
@@ -489,15 +488,15 @@ Proof.
       [ST_IfTrue], [ST_IfFalse], or [ST_If].
 
       - If the last rule was [ST_IfTrue], then [t' = t2].  But we
-        know that [|- t2 \in T], so we are done.
+        know that [|-- t2 \in T], so we are done.
 
       - If the last rule was [ST_IfFalse], then [t' = t3].  But we
-        know that [|- t3 \in T], so we are done.
+        know that [|-- t3 \in T], so we are done.
 
       - If the last rule was [ST_If], then [t' = if t1' then t2
-        else t3], where [t1 --> t1'].  We know [|- t1 \in Bool] so,
-        by the IH, [|- t1' \in Bool].  The [T_If] rule then gives us
-        [|- if t1' then t2 else t3 \in T], as required.
+        else t3], where [t1 --> t1'].  We know [|-- t1 \in Bool] so,
+        by the IH, [|-- t1' \in Bool].  The [T_If] rule then gives us
+        [|-- if t1' then t2 else t3 \in T], as required.
 
     - (* FILL IN HERE *)
 *)
@@ -515,9 +514,9 @@ Definition manual_grade_for_finish_preservation_informal : option (nat*string) :
     not exactly the same. *)
 
 Theorem preservation' : forall t t' T,
-  |- t \in T ->
+  |-- t \in T ->
   t --> t' ->
-  |- t' \in T.
+  |-- t' \in T.
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -538,7 +537,7 @@ Definition multistep := (multi step).
 Notation "t1 '-->*' t2" := (multistep t1 t2) (at level 40).
 
 Corollary soundness : forall t t' T,
-  |- t \in T ->
+  |-- t \in T ->
   t -->* t' ->
   ~(stuck t').
 Proof.
@@ -557,16 +556,16 @@ Qed.
     Having seen the subject reduction property, one might
     wonder whether the opposite property -- subject _expansion_ --
     also holds.  That is, is it always the case that, if [t --> t']
-    and [|- t' \in T], then [|- t \in T]?  If so, prove it.  If
+    and [|-- t' \in T], then [|-- t \in T]?  If so, prove it.  If
     not, give a counter-example.
 
     (* FILL IN HERE *)
 *)
 
 Theorem subject_expansion:
-  (forall t t' T, t --> t' /\ |- t' \in T -> |- t \in T)
+  (forall t t' T, t --> t' /\ |-- t' \in T -> |-- t \in T)
   \/
-  ~ (forall t t' T, t --> t' /\ |- t' \in T -> |- t \in T).
+  ~ (forall t t' T, t --> t' /\ |-- t' \in T -> |-- t \in T).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -576,8 +575,8 @@ Proof.
     Suppose that we add this new rule to the typing relation:
 
       | T_SuccBool : forall t,
-           |- t \in Bool ->
-           |- <{ succ t }> \in Bool
+           |-- t \in Bool ->
+           |-- <{ succ t }> \in Bool
 
    Which of the following properties remain true in the presence of
    this rule?  For each one, write either "remains true" or
@@ -641,7 +640,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
     Suppose instead that we add this rule:
 
       | T_Funny4 :
-            |- <{ 0 }> \in Bool
+            |-- <{ 0 }> \in Bool
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -654,7 +653,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
     Suppose instead that we add this rule:
 
       | T_Funny5 :
-            |- <{ pred 0 }> \in Bool
+            |-- <{ pred 0 }> \in Bool
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -704,4 +703,4 @@ Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 End TM.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

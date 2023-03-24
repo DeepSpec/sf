@@ -469,7 +469,7 @@ Example test_included2:              included [1;2;2] [2;1;4;1] = false.
 (** **** Exercise: 2 stars, standard, especially useful (add_inc_count)
 
     Adding a value to a bag should increase the value's count by one.
-    State this as a theorem and prove it. *)
+    State this as a theorem and prove it in Coq. *)
 (*
 Theorem add_inc_count : ...
 Proof.
@@ -1145,4 +1145,4 @@ Inductive baz : Type :=
 
 (** [] *)
 
-(* 2022-08-26 19:23 *)
+(* 2023-03-24 02:22 *)

@@ -35,6 +35,7 @@ Require Export Coq.Strings.String.
 From Coq Require Import Logic.FunctionalExtensionality.
 From Coq Require Import Lists.List.
 Import ListNotations.
+Set Default Goal Selector "!".
 
 (** Documentation for the standard library can be found at
     https://coq.inria.fr/library/.
@@ -311,8 +312,10 @@ Theorem update_neq : forall (A : Type) (m : partial_map A) x1 x2 v,
   (x2 |-> v ; m) x1 = m x1.
 Proof.
   intros A m x1 x2 v H.
-  unfold update. rewrite t_update_neq. reflexivity.
-  apply H. Qed.
+  unfold update. rewrite t_update_neq.
+  - reflexivity.
+  - apply H.
+Qed.
 
 Lemma update_shadow : forall (A : Type) (m : partial_map A) x v1 v2,
   (x |-> v2 ; x |-> v1 ; m) = (x |-> v2 ; m).
@@ -358,9 +361,10 @@ Proof.
   destruct (eqb_spec x y) as [Hxy | Hxy].
   - rewrite Hxy.
     rewrite update_eq. rewrite update_eq. intro H1. apply H1.
-  - rewrite update_neq. rewrite update_neq.
-    + apply H.
-    + apply Hxy.
+  - rewrite update_neq.
+    + rewrite update_neq.
+      * apply H.
+      * apply Hxy.
     + apply Hxy.
 Qed.
 
@@ -370,4 +374,4 @@ Qed.
     used to keep track of which program variables are defined in a
     given scope. *)
 
-(* 2022-08-26 19:23 *)
+(* 2023-03-24 02:22 *)

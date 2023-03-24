@@ -4,7 +4,7 @@ Require VC.Preface. (* Check for the right version of VST *)
 Require Import VST.floyd.proofauto.
 Require Import VST.floyd.library.
 Require Import VC.stack.
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 Definition Vprog : varspecs.  mk_varspecs prog. Defined.
 
 (** Here are some functions (in [stack.c]) that are clients of the stack ADT.  First, push the numbers 1,2,...,n onto a stack, then pop the numbers off the stack and add them up.  This computes the nth triangular number, 1+2+...+n = n(n+1)/2.
@@ -482,4 +482,4 @@ sep_apply (create_mem_mgr gv).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

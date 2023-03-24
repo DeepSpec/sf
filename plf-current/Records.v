@@ -51,13 +51,13 @@ From PLF Require Import Stlc.
 
    Typing:
 
-               Gamma |- t1 : T1     ...     Gamma |- tn : Tn
-             --------------------------------------------------         (T_Rcd)
-             Gamma |- {i1=t1, ..., in=tn} : {i1:T1, ..., in:Tn}
+              Gamma |-- t1 : T1     ...     Gamma |-- tn : Tn
+             ---------------------------------------------------        (T_Rcd)
+             Gamma |-- {i1=t1, ..., in=tn} : {i1:T1, ..., in:Tn}
 
-                       Gamma |- t0 : {..., i:Ti, ...}
-                       ------------------------------                   (T_Proj)
-                             Gamma |- t0.i : Ti
+                       Gamma |-- t0 : {..., i:Ti, ...}
+                       -------------------------------                  (T_Proj)
+                            Gamma |-- t0.i : Ti
 *)
 
 (* ################################################################# *)
@@ -364,37 +364,37 @@ Fixpoint Tlookup (i:string) (Tr:ty) : option ty :=
 
 Definition context := partial_map ty.
 
-Reserved Notation "Gamma '|-' t '\in' T" (at level 40,
+Reserved Notation "Gamma '|--' t '\in' T" (at level 40,
                                           t custom stlc, T custom stlc_ty at level 0).
 
 Inductive has_type (Gamma : context) :tm -> ty -> Prop :=
   | T_Var : forall x T,
       Gamma x = Some T ->
       well_formed_ty T ->
-      Gamma |- x \in T
+      Gamma |-- x \in T
   | T_Abs : forall x T11 T12 t12,
       well_formed_ty T11 ->
-      (x |-> T11; Gamma) |- t12 \in T12 ->
-      Gamma |- \x : T11, t12 \in (T11 -> T12)
+      (x |-> T11; Gamma) |-- t12 \in T12 ->
+      Gamma |-- \x : T11, t12 \in (T11 -> T12)
   | T_App : forall T1 T2 t1 t2,
-      Gamma |- t1 \in (T1 -> T2) ->
-      Gamma |- t2 \in T1 ->
-      Gamma |- ( t1 t2) \in T2
+      Gamma |-- t1 \in (T1 -> T2) ->
+      Gamma |-- t2 \in T1 ->
+      Gamma |-- ( t1 t2) \in T2
   (* records: *)
   | T_Proj : forall i t Ti Tr,
-      Gamma |- t \in Tr ->
+      Gamma |-- t \in Tr ->
       Tlookup i Tr = Some Ti ->
-      Gamma |- (t --> i) \in Ti
+      Gamma |-- (t --> i) \in Ti
  | T_RNil :
-      Gamma |- nil \in nil
+      Gamma |-- nil \in nil
   | T_RCons : forall i t T tr Tr,
-      Gamma |- t \in T ->
-      Gamma |- tr \in Tr ->
+      Gamma |-- t \in T ->
+      Gamma |-- tr \in Tr ->
       record_ty Tr ->
       record_tm tr ->
-      Gamma |- ( i := t :: tr) \in ( i : T :: Tr)
+      Gamma |-- ( i := t :: tr) \in ( i : T :: Tr)
 
-where "Gamma '|-' t '\in' T" := (has_type Gamma t T).
+where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
 
 Hint Constructors has_type : core.
 
@@ -412,14 +412,14 @@ Hint Constructors has_type : core.
     saying. *)
 
 Lemma typing_example_2 :
-  empty |- (\a : ( i1 : (A -> A) :: i2 : (B -> B) :: nil), a --> i2)
+  empty |-- (\a : ( i1 : (A -> A) :: i2 : (B -> B) :: nil), a --> i2)
             ( i1 := (\a : A, a) :: i2 := (\a : B,a ) :: nil )  \in (B -> B).
 Proof.
   (* FILL IN HERE *) Admitted.
 
 Example typing_nonexample :
   ~ exists T,
-     (a |-> <{{  i2 : (A -> A) :: nil   }}>) |-
+     (a |-> <{{  i2 : (A -> A) :: nil   }}>) |--
        ( i1 := (\a : B, a) :: a ) \in
                T.
 Proof.
@@ -427,7 +427,7 @@ Proof.
 
 Example typing_nonexample_2 : forall y,
   ~ exists T,
-    (y |-> A) |-
+    (y |-> A) |--
      (\a : ( i1 : A  :: nil ), a --> i1 )
       ( i1 := y :: i2 := y :: nil )  \in T.
 Proof.
@@ -466,7 +466,7 @@ Proof.
 Qed.
 
 Lemma has_type__wf : forall Gamma t T,
-  Gamma |- t \in T -> well_formed_ty T.
+  Gamma |-- t \in T -> well_formed_ty T.
 Proof with eauto.
   intros Gamma t T Htyp.
   induction Htyp...
@@ -479,9 +479,9 @@ Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Field Lookup *)
 
-(** Lemma: If [empty |- v : T] and [Tlookup i T] returns [Some Ti],
+(** Lemma: If [empty |-- v : T] and [Tlookup i T] returns [Some Ti],
      then [tlookup i v] returns [Some ti] for some term [ti] such
-     that [empty |- ti \in Ti].
+     that [empty |-- ti \in Ti].
 
     Proof: By induction on the typing derivation [Htyp].  Since
       [Tlookup i T = Some Ti], [T] must be a record type, this and
@@ -514,9 +514,9 @@ Qed.
 
 Lemma lookup_field_in_value : forall v T i Ti,
   value v ->
-  empty |- v \in T ->
+  empty |-- v \in T ->
   Tlookup i T = Some Ti ->
-  exists ti, tlookup i v = Some ti /\ empty |- ti \in Ti.
+  exists ti, tlookup i v = Some ti /\ empty |-- ti \in Ti.
 Proof with eauto.
   intros v T i Ti Hval Htyp Hget.
   remember empty as Gamma.
@@ -534,10 +534,10 @@ Proof with eauto.
 (** *** Progress *)
 
 Theorem progress : forall t T,
-     empty |- t \in T ->
+     empty |-- t \in T ->
      value t \/ exists t', t --> t'.
 Proof with eauto.
-  (* Theorem: Suppose empty |- t : T.  Then either
+  (* Theorem: Suppose empty |-- t : T.  Then either
        1. t is a value, or
        2. t --> t' for some t'.
      Proof: By induction on the given typing derivation. *)
@@ -548,7 +548,7 @@ Proof with eauto.
   - (* T_Var *)
     (* The final rule in the given typing derivation cannot be
        [T_Var], since it can never be the case that
-       [empty |- x : T] (since the context is empty). *)
+       [empty |-- x : T] (since the context is empty). *)
     inversion H.
   - (* T_Abs *)
     (* If the [T_Abs] rule was the last used, then
@@ -557,8 +557,8 @@ Proof with eauto.
   - (* T_App *)
     (* If the last rule applied was T_App, then [t = t1 t2],
        and we know from the form of the rule that
-         [empty |- t1 : T1 -> T2]
-         [empty |- t2 : T1]
+         [empty |-- t1 : T1 -> T2]
+         [empty |-- t2 : T1]
        By the induction hypothesis, each of t1 and t2 either is a value
        or can take a step. *)
     right.
@@ -583,7 +583,7 @@ Proof with eauto.
   - (* T_Proj *)
     (* If the last rule in the given derivation is [T_Proj], then
        [t = rproj t i] and
-           [empty |- t : (TRcd Tr)]
+           [empty |-- t : (TRcd Tr)]
        By the IH, [t] either is a value or takes a step. *)
     right. destruct IHHt...
     + (* rcd is value *)
@@ -604,8 +604,8 @@ Proof with eauto.
     left...
   - (* T_RCons *)
     (* If the last rule is [T_RCons], then [t = rcons i t tr] and
-         [empty |- t : T]
-         [empty |- tr : Tr]
+         [empty |-- t : T]
+         [empty |-- tr : Tr]
        By the IH, each of [t] and [tr] either is a value or can
        take a step. *)
     destruct IHHt1...
@@ -635,8 +635,8 @@ Proof with eauto.
 
 Lemma weakening : forall Gamma Gamma' t T,
      includedin Gamma Gamma' ->
-     Gamma  |- t \in T  ->
-     Gamma' |- t \in T.
+     Gamma  |-- t \in T  ->
+     Gamma' |-- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
@@ -644,8 +644,8 @@ Proof.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
-     empty |- t \in T  ->
-     Gamma |- t \in T.
+     empty |-- t \in T  ->
+     Gamma |-- t \in T.
 Proof.
   intros Gamma t T.
   eapply weakening.
@@ -662,9 +662,9 @@ Qed.
     whetherit is a record term. *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
-  (x |-> U ; Gamma) |- t \in T ->
-  empty |- v \in U   ->
-  Gamma |- [x:=v]t \in T.
+  (x |-> U ; Gamma) |-- t \in T ->
+  empty |-- v \in U   ->
+  Gamma |-- [x:=v]t \in T.
 Proof.
   intros Gamma x U t v T Ht Hv.
   generalize dependent Gamma. generalize dependent T.
@@ -693,9 +693,9 @@ Proof.
 Qed.
 
 Theorem preservation : forall t t' T,
-  empty |- t \in T  ->
+  empty |-- t \in T  ->
   t --> t'  ->
-  empty |- t' \in T.
+  empty |-- t' \in T.
 Proof with eauto.
   intros t t' T HT. generalize dependent t'.
   remember empty as Gamma.
@@ -714,7 +714,7 @@ Proof with eauto.
        in the former case, so we only consider [T_ProjRcd].
 
        Here we have that [t] is a record value.  Since rule
-       [T_Proj] was used, we know [empty |- t \in Tr] and
+       [T_Proj] was used, we know [empty |-- t \in Tr] and
        [Tlookup i Tr = Some Ti] for some [i] and [Tr].
        We may therefore apply lemma [lookup_field_in_value]
        to find the record element this projection steps to. *)
@@ -735,4 +735,4 @@ Qed.
 
 End STLCExtendedRecords.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

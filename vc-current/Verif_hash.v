@@ -11,7 +11,7 @@ Require VC.Preface. (* Check for the right version of VST *)
 Require Import VST.floyd.proofauto.
 Require Import VST.floyd.library.
 Require Import  VC.hash.
-Instance CompSpecs : compspecs. make_compspecs prog. Defined.
+#[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 Definition Vprog : varspecs.  mk_varspecs prog. Defined.
 Require Import VC.hints.  (* Import special hints for this tutorial. *)
 
@@ -1140,4 +1140,4 @@ erewrite (wand_slice_array h (h+1) N _ (tptr tcell))
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2022-08-26 19:28 *)
+(* 2023-03-24 02:27 *)

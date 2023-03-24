@@ -425,42 +425,42 @@ Proof with eauto.
 
 Definition context := partial_map ty.
 
-Reserved Notation "Gamma '|-' t '\in' T" (at level 40,
+Reserved Notation "Gamma '|--' t '\in' T" (at level 40,
                                           t custom stlc at level 99, T custom stlc_ty at level 0).
 
 Inductive has_type : context -> tm -> ty -> Prop :=
   | T_Var : forall Gamma (x : string) T,
       Gamma x = Some T ->
       well_formed_ty T ->
-      Gamma |- x \in T
+      Gamma |-- x \in T
   | T_Abs : forall Gamma x T11 T12 t12,
       well_formed_ty T11 ->
-      (x |-> T11; Gamma) |- t12 \in T12 ->
-      Gamma |- (\ x : T11, t12) \in (T11 -> T12)
+      (x |-> T11; Gamma) |-- t12 \in T12 ->
+      Gamma |-- (\ x : T11, t12) \in (T11 -> T12)
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma |- t1 \in (T1 -> T2) ->
-      Gamma |- t2 \in T1 ->
-      Gamma |- t1 t2 \in T2
+      Gamma |-- t1 \in (T1 -> T2) ->
+      Gamma |-- t2 \in T1 ->
+      Gamma |-- t1 t2 \in T2
   | T_Proj : forall Gamma i t T Ti,
-      Gamma |- t \in T ->
+      Gamma |-- t \in T ->
       Tlookup i T = Some Ti ->
-      Gamma |- t --> i \in Ti
+      Gamma |-- t --> i \in Ti
   (* Subsumption *)
   | T_Sub : forall Gamma t S T,
-      Gamma |- t \in S ->
+      Gamma |-- t \in S ->
       subtype S T ->
-      Gamma |- t \in T
+      Gamma |-- t \in T
   (* Rules for record terms *)
   | T_RNil : forall Gamma,
-      Gamma |- nil \in nil
+      Gamma |-- nil \in nil
   | T_RCons : forall Gamma i t T tr Tr,
-      Gamma |- t \in T ->
-      Gamma |- tr \in Tr ->
+      Gamma |-- t \in T ->
+      Gamma |-- tr \in Tr ->
       record_ty Tr ->
       record_tm tr ->
-      Gamma |- i := t :: tr \in (i : T :: Tr)
+      Gamma |-- i := t :: tr \in (i : T :: Tr)
 
-where "Gamma '|-' t '\in' T" := (has_type Gamma t T).
+where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
 
 Hint Constructors has_type : core.
 
@@ -475,16 +475,16 @@ Definition trcd_kj :=
   <{ k := (\z : A, z) :: j := (\z : B, z) :: nil }>.
 
 Example typing_example_0 :
-  empty |- trcd_kj \in TRcd_kj.
-(* empty |- {k=(\z:A.z), j=(\z:B.z)} : {k:A->A,j:B->B} *)
+  empty |-- trcd_kj \in TRcd_kj.
+(* empty |-- {k=(\z:A.z), j=(\z:B.z)} : {k:A->A,j:B->B} *)
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (typing_example_1) *)
 Example typing_example_1 :
-  empty |- (\x : TRcd_j, x --> j) trcd_kj \in (B -> B).
-(* empty |- (\x:{k:A->A,j:B->B}. x.j)
+  empty |-- (\x : TRcd_j, x --> j) trcd_kj \in (B -> B).
+(* empty |-- (\x:{k:A->A,j:B->B}. x.j)
               {k=(\z:A.z), j=(\z:B.z)}
          : B->B *)
 Proof with eauto.
@@ -493,9 +493,9 @@ Proof with eauto.
 
 (** **** Exercise: 2 stars, standard, optional (typing_example_2) *)
 Example typing_example_2 :
-  empty |- (\ z : (C -> C) -> TRcd_j, (z (\ x : C, x) ) --> j )
+  empty |-- (\ z : (C -> C) -> TRcd_j, (z (\ x : C, x) ) --> j )
             ( \z : (C -> C), trcd_kj ) \in (B -> B).
-(* empty |- (\z:(C->C)->{j:B->B}. (z (\x:C.x)).j)
+(* empty |-- (\z:(C->C)->{j:B->B}. (z (\x:C.x)).j)
               (\z:C->C. {k=(\z:A.z), j=(\z:B.z)})
            : B->B *)
 Proof with eauto.
@@ -538,9 +538,9 @@ Qed.
 
 Lemma lookup_field_in_value : forall v T i Ti,
   value v ->
-  empty |- v \in T ->
+  empty |-- v \in T ->
   Tlookup i T = Some Ti ->
-  exists vi, tlookup i v = Some vi /\ empty |- vi \in Ti.
+  exists vi, tlookup i v = Some vi /\ empty |-- vi \in Ti.
 Proof with eauto.
   remember empty as Gamma.
   intros t T i Ti Hval Htyp. generalize dependent Ti.
@@ -564,7 +564,7 @@ Proof with eauto.
 
 (** **** Exercise: 3 stars, standard (canonical_forms_of_arrow_types) *)
 Lemma canonical_forms_of_arrow_types : forall Gamma s T1 T2,
-     Gamma |- s \in (T1 -> T2) ->
+     Gamma |-- s \in (T1 -> T2) ->
      value s ->
      exists x S1 s2,
         s = <{ \ x  : S1, s2 }>.
@@ -573,7 +573,7 @@ Proof with eauto.
 (** [] *)
 
 Theorem progress : forall t T,
-     empty |- t \in T ->
+     empty |-- t \in T ->
      value t \/ exists t', t --> t'.
 Proof with eauto.
   intros t T Ht.
@@ -614,10 +614,10 @@ Proof with eauto.
       right. destruct H1 as [t' Hstp].
       exists <{ i := t' :: tr}>...  Qed.
 
-(** _Theorem_ : For any term [t] and type [T], if [empty |- t : T]
+(** _Theorem_ : For any term [t] and type [T], if [empty |-- t : T]
     then [t] is a value or [t --> t'] for some term [t'].
 
-    _Proof_: Let [t] and [T] be given such that [empty |- t : T].  We
+    _Proof_: Let [t] and [T] be given such that [empty |-- t : T].  We
     proceed by induction on the given typing derivation.
 
       - The cases where the last step in the typing derivation is
@@ -627,7 +627,7 @@ Proof with eauto.
 
       - If the last step in the typing derivation is by [T_App], then
         there are terms [t1] [t2] and types [T1] [T2] such that [t =
-        t1 t2], [T = T2], [empty |- t1 : T1 -> T2] and [empty |- t2 :
+        t1 t2], [T = T2], [empty |-- t1 : T1 -> T2] and [empty |-- t2 :
         T1].
 
         The induction hypotheses for these typing derivations yield
@@ -649,7 +649,7 @@ Proof with eauto.
 
       - If the last step of the derivation is by [T_Proj], then there
         are a term [tr], a type [Tr], and a label [i] such that [t =
-        tr.i], [empty |- tr : Tr], and [Tlookup i Tr = Some T].
+        tr.i], [empty |-- tr : Tr], and [Tlookup i Tr = Some T].
 
         By the IH, either [tr] is a value or it steps.  If [tr -->
         tr'] for some term [tr'], then [tr.i --> tr'.i] by rule
@@ -660,14 +660,14 @@ Proof with eauto.
         It follows that [tr.i --> ti] by rule [ST_ProjRcd].
 
       - If the final step of the derivation is by [T_Sub], then there
-        is a type [S] such that [S <: T] and [empty |- t : S].  The
+        is a type [S] such that [S <: T] and [empty |-- t : S].  The
         desired result is exactly the induction hypothesis for the
         typing subderivation.
 
       - If the final step of the derivation is by [T_RCons], then
         there exist some terms [t1] [tr], types [T1 Tr] and a label
         [t] such that [t = {i=t1, tr}], [T = {i:T1, Tr}], [record_ty
-        tr], [record_tm Tr], [empty |- t1 : T1] and [empty |- tr :
+        tr], [record_tm Tr], [empty |-- t1 : T1] and [empty |-- tr :
         Tr].
 
         The induction hypotheses for these typing derivations yield
@@ -690,9 +690,9 @@ Proof with eauto.
 (** *** Inversion Lemma *)
 
 Lemma typing_inversion_abs : forall Gamma x S1 t2 T,
-     Gamma |- \ x : S1, t2 \in T ->
+     Gamma |-- \ x : S1, t2 \in T ->
      (exists S2, <{{ S1 -> S2 }}> <: T
-              /\ (x |-> S1; Gamma) |- t2 \in S2).
+              /\ (x |-> S1; Gamma) |-- t2 \in S2).
 Proof with eauto.
   intros Gamma x S1 t2 T H.
   remember <{ \ x : S1, t2 }> as t.
@@ -706,9 +706,9 @@ Proof with eauto.
     Qed.
 
 Lemma abs_arrow : forall x S1 s2 T1 T2,
-  empty |- \x : S1, s2 \in (T1 -> T2) ->
+  empty |-- \x : S1, s2 \in (T1 -> T2) ->
      T1 <: S1
-  /\ (x |-> S1) |- s2 \in T2.
+  /\ (x |-> S1) |-- s2 \in T2.
 Proof with eauto.
   intros x S1 s2 T1 T2 Hty.
   apply typing_inversion_abs in Hty.
@@ -724,8 +724,8 @@ Proof with eauto.
 
 Lemma weakening : forall Gamma Gamma' t T,
      includedin Gamma Gamma' ->
-     Gamma  |- t \in T  ->
-     Gamma' |- t \in T.
+     Gamma  |-- t \in T  ->
+     Gamma' |-- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
@@ -733,8 +733,8 @@ Proof.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
-     empty |- t \in T  ->
-     Gamma |- t \in T.
+     empty |-- t \in T  ->
+     Gamma |-- t \in T.
 Proof.
   intros Gamma t T.
   eapply weakening.
@@ -745,9 +745,9 @@ Qed.
 (** *** Preservation *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
-   (x |-> U ; Gamma) |- t \in T ->
-   empty |- v \in U   ->
-   Gamma |- [x:=v]t \in T.
+   (x |-> U ; Gamma) |-- t \in T ->
+   empty |-- v \in U   ->
+   Gamma |-- [x:=v]t \in T.
 Proof.
 Proof.
   intros Gamma x U t v T Ht Hv.
@@ -778,9 +778,9 @@ Proof.
 Qed.
 
 Theorem preservation : forall t t' T,
-     empty |- t \in T  ->
+     empty |-- t \in T  ->
      t --> t'  ->
-     empty |- t' \in T.
+     empty |-- t' \in T.
 Proof with eauto.
   intros t t' T HT. generalize dependent t'.
   remember empty as Gamma.
@@ -802,9 +802,9 @@ Proof with eauto.
     eauto using step_preserves_record_tm.  Qed.
 
 (** _Theorem_: If [t], [t'] are terms and [T] is a type such that
-     [empty |- t : T] and [t --> t'], then [empty |- t' : T].
+     [empty |-- t : T] and [t --> t'], then [empty |-- t' : T].
 
-    _Proof_: Let [t] and [T] be given such that [empty |- t : T].  We go
+    _Proof_: Let [t] and [T] be given such that [empty |-- t : T].  We go
      by induction on the structure of this typing derivation, leaving
      [t'] general.  Cases [T_Abs] and [T_RNil] are vacuous because
      abstractions and [{}] don't step.  Case [T_Var] is vacuous as well,
@@ -812,7 +812,7 @@ Proof with eauto.
 
      - If the final step of the derivation is by [T_App], then there
        are terms [t1] [t2] and types [T1] [T2] such that [t = t1 t2],
-       [T = T2], [empty |- t1 : T1 -> T2] and [empty |- t2 : T1].
+       [T = T2], [empty |-- t1 : T1 -> T2] and [empty |-- t2 : T1].
 
        By inspection of the definition of the step relation, there are
        three ways [t1 t2] can step.  Cases [ST_App1] and [ST_App2]
@@ -823,16 +823,16 @@ Proof with eauto.
        [t1 = \x:S.t12] for some type [S] and term [t12], and
        [t' = [x:=t2]t12].
 
-       By Lemma [abs_arrow], we have [T1 <: S] and [x:S1 |- s2 : T2].
+       By Lemma [abs_arrow], we have [T1 <: S] and [x:S1 |-- s2 : T2].
        It then follows by lemma [substitution_preserves_typing] that
-       [empty |- [x:=t2] t12 : T2] as desired.
+       [empty |-- [x:=t2] t12 : T2] as desired.
 
      - If the final step of the derivation is by [T_Proj], then there
        is a term [tr], type [Tr] and label [i] such that [t = tr.i],
-       [empty |- tr : Tr], and [Tlookup i Tr = Some T].
+       [empty |-- tr : Tr], and [Tlookup i Tr = Some T].
 
        The IH for the typing derivation gives us that, for any term
-       [tr'], if [tr --> tr'] then [empty |- tr' Tr].  Inspection of
+       [tr'], if [tr --> tr'] then [empty |-- tr' Tr].  Inspection of
        the definition of the step relation reveals that there are two
        ways a projection can step.  Case [ST_Proj1] follows
        immediately by the IH.
@@ -840,17 +840,17 @@ Proof with eauto.
        Instead suppose [tr --> i] steps by [ST_ProjRcd].  Then [tr] is a
        value and there is some term [vi] such that
        [tlookup i tr = Some vi] and [t' = vi].  But by lemma
-       [lookup_field_in_value], [empty |- vi : Ti] as desired.
+       [lookup_field_in_value], [empty |-- vi : Ti] as desired.
 
      - If the final step of the derivation is by [T_Sub], then there
-       is a type [S] such that [S <: T] and [empty |- t : S].  The
+       is a type [S] such that [S <: T] and [empty |-- t : S].  The
        result is immediate by the induction hypothesis for the typing
        subderivation and an application of [T_Sub].
 
      - If the final step of the derivation is by [T_RCons], then there
        exist some terms [t1] [tr], types [T1 Tr] and a label [t] such
        that [t = i:=t1 :: tr}], [T = i:T1 :: Tr], [record_ty tr],
-       [record_tm Tr], [empty |- t1 : T1] and [empty |- tr : Tr].
+       [record_tm Tr], [empty |-- t1 : T1] and [empty |-- tr : Tr].
 
        By the definition of the step relation, [t] must have stepped
        by [ST_Rcd_Head] or [ST_Rcd_Tail].  In the first case, the
@@ -861,4 +861,4 @@ Proof with eauto.
 
 End RecordSub.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

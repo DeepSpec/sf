@@ -247,7 +247,7 @@ Qed.
 
 Definition context := partial_map ty.
 
-Reserved Notation "Gamma '|-' t '\in' T" (at level 40,
+Reserved Notation "Gamma '|--' t '\in' T" (at level 40,
                                           t custom stlc, T custom stlc at level 0).
 
 Inductive has_type : context -> tm -> ty -> Prop :=
@@ -255,35 +255,35 @@ Inductive has_type : context -> tm -> ty -> Prop :=
   (* pure STLC *)
   | T_Var : forall Gamma x T1,
       Gamma x = Some T1 ->
-      Gamma |- x \in T1
+      Gamma |-- x \in T1
   | T_Abs : forall Gamma x T1 T2 t1,
-    (x |-> T2 ; Gamma) |- t1 \in T1 ->
-      Gamma |- \x:T2, t1 \in (T2 -> T1)
+      (x |-> T2 ; Gamma) |-- t1 \in T1 ->
+      Gamma |-- \x:T2, t1 \in (T2 -> T1)
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma |- t1 \in (T2 -> T1) ->
-      Gamma |- t2 \in T2 ->
-      Gamma |- t1 t2 \in T1
+      Gamma |-- t1 \in (T2 -> T1) ->
+      Gamma |-- t2 \in T2 ->
+      Gamma |-- t1 t2 \in T1
   | T_True : forall Gamma,
-       Gamma |- true \in Bool
+       Gamma |-- true \in Bool
   | T_False : forall Gamma,
-       Gamma |- false \in Bool
+       Gamma |-- false \in Bool
   | T_If : forall t1 t2 t3 T1 Gamma,
-       Gamma |- t1 \in Bool ->
-       Gamma |- t2 \in T1 ->
-       Gamma |- t3 \in T1 ->
-       Gamma |- if t1 then t2 else t3 \in T1
+      Gamma |-- t1 \in Bool ->
+      Gamma |-- t2 \in T1 ->
+      Gamma |-- t3 \in T1 ->
+      Gamma |-- if t1 then t2 else t3 \in T1
   | T_Pair : forall Gamma t1 t2 T1 T2,
-      Gamma |- t1 \in T1 ->
-      Gamma |- t2 \in T2 ->
-      Gamma |- (t1, t2) \in (T1 * T2)
+      Gamma |-- t1 \in T1 ->
+      Gamma |-- t2 \in T2 ->
+      Gamma |-- (t1, t2) \in (T1 * T2)
   | T_Fst : forall Gamma t0 T1 T2,
-      Gamma |- t0 \in (T1 * T2) ->
-      Gamma |- t0.fst \in T1
+      Gamma |-- t0 \in (T1 * T2) ->
+      Gamma |-- t0.fst \in T1
   | T_Snd : forall Gamma t0 T1 T2,
-      Gamma |- t0 \in (T1 * T2) ->
-      Gamma |- t0.snd \in T2
+      Gamma |-- t0 \in (T1 * T2) ->
+      Gamma |-- t0.snd \in T2
 
-where "Gamma '|-' t '\in' T" := (has_type Gamma t T).
+where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
 
 Hint Constructors has_type : core.
 
@@ -297,8 +297,8 @@ Hint Extern 2 (_ = _) => compute; reflexivity : core.
 
 Lemma weakening : forall Gamma Gamma' t T,
      includedin Gamma Gamma' ->
-     Gamma  |- t \in T  ->
-     Gamma' |- t \in T.
+     Gamma  |-- t \in T  ->
+     Gamma' |-- t \in T.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
@@ -306,8 +306,8 @@ Proof.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
-     empty |- t \in T  ->
-     Gamma |- t \in T.
+     empty |-- t \in T  ->
+     Gamma |-- t \in T.
 Proof.
   intros Gamma t T.
   eapply weakening.
@@ -318,9 +318,9 @@ Qed.
 (** *** Substitution *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
-  (x |-> U ; Gamma) |- t \in T ->
-  empty |- v \in U   ->
-  Gamma |- [x:=v]t \in T.
+  (x |-> U ; Gamma) |-- t \in T ->
+  empty |-- v \in U   ->
+  Gamma |-- [x:=v]t \in T.
 Proof with eauto.
   intros Gamma x U t v T Ht Hv.
   generalize dependent Gamma. generalize dependent T.
@@ -349,9 +349,9 @@ Qed.
 (** *** Preservation *)
 
  Theorem preservation : forall t t' T,
-   empty |- t \in T  ->
+   empty |-- t \in T  ->
    t --> t'  ->
-   empty |- t' \in T.
+   empty |-- t' \in T.
 Proof with eauto.
 intros t t' T HT. generalize dependent t'.
 remember empty as Gamma.
@@ -413,9 +413,9 @@ Definition closed (t:tm) :=
   forall x, ~ appears_free_in x t.
 
 Lemma context_invariance : forall Gamma Gamma' t S,
-     Gamma |- t \in S  ->
+     Gamma |-- t \in S  ->
      (forall x, appears_free_in x t -> Gamma x = Gamma' x)  ->
-     Gamma' |- t \in S.
+     Gamma' |-- t \in S.
 Proof.
   intros.
   generalize dependent Gamma'.
@@ -444,7 +444,7 @@ Proof.
 
 Lemma free_in_context : forall x t T Gamma,
    appears_free_in x t ->
-   Gamma |- t \in T ->
+   Gamma |-- t \in T ->
    exists T', Gamma x = Some T'.
 Proof with eauto.
   intros x t T Gamma Hafi Htyp.
@@ -456,7 +456,7 @@ Proof with eauto.
 Qed.
 
 Corollary typable_empty__closed : forall t T,
-    empty |- t \in T  ->
+    empty |-- t \in T  ->
     closed t.
 Proof.
   intros. unfold closed. intros x H1.
@@ -466,60 +466,27 @@ Proof.
 (* ----------------------------------------------------------------- *)
 (** *** Determinism *)
 
+(** To prove determinsm, we introduce a helpful tactic.  It identifies
+    cases in which a value takes a step and solves them by using
+    value__normal.  *)
+
+Ltac solve_by_value_nf :=
+  match goal with | H : value ?v, H' : ?v --> ?v' |- _ =>
+  exfalso; apply value__normal in H; eauto
+  end.
+
 Lemma step_deterministic :
    deterministic step.
 Proof with eauto.
    unfold deterministic.
    intros t t' t'' E1 E2.
    generalize dependent t''.
-   induction E1; intros t'' E2; inversion E2; subst; clear E2...
-  (* ST_AppAbs *)
-   - inversion H3.
-   - exfalso; apply value__normal in H...
-   (* ST_App1 *)
-   - inversion E1.
-   -  f_equal...
-   - exfalso; apply value__normal in H1...
-   (* ST_App2 *)
-   - exfalso; apply value__normal in H3...
-   - exfalso; apply value__normal in H...
-   - f_equal...
-   - (* ST_IfTrue *)
-       inversion H3.
-   - (* ST_IfFalse *)
-       inversion H3.
-   (* ST_If *)
-   - inversion E1.
-   - inversion E1.
-   - f_equal...
-   (* ST_Pair1 *)
-   - f_equal...
-   - exfalso; apply value__normal in H1...
-   (* ST_Pair2 *)
-   - exfalso; apply value__normal in H...
-   - f_equal...
-   (* ST_Fst1 *)
-   - f_equal...
-   - exfalso.
-     inversion E1; subst.
-     + apply value__normal in H0...
-     + apply value__normal in H1...
-   (* ST_FstPair *)
-   - exfalso.
-     inversion H2; subst.
-     + apply value__normal in H...
-     + apply value__normal in H0...
-   (* ST_Snd1 *)
-   - f_equal...
-   - exfalso.
-     inversion E1; subst.
-     + apply value__normal in H0...
-     + apply value__normal in H1...
-   (* ST_SndPair *)
-   - exfalso.
-     inversion H2; subst.
-     + apply value__normal in H...
-     + apply value__normal in H0...
+   induction E1; intros t'' E2; inversion E2; subst; clear E2;
+   try solve_by_invert; try f_equal; try solve_by_value_nf; eauto.
+   - inversion E1; subst; solve_by_value_nf.
+   - inversion H2; subst; solve_by_value_nf.
+   - inversion E1; subst; solve_by_value_nf.
+   - inversion H2; subst; solve_by_value_nf.
 Qed.
 
 (* ################################################################# *)
@@ -594,10 +561,10 @@ Qed.
     Inductive proposition like this:
 
       Inductive R : ty -> tm -> Prop :=
-      | R_bool : forall b t, empty |- t \in Bool ->
+      | R_bool : forall b t, empty |-- t \in Bool ->
                       halts t ->
                       R Bool t
-      | R_arrow : forall T1 T2 t, empty |- t \in (Arrow T1 T2) ->
+      | R_arrow : forall T1 T2 t, empty |-- t \in (Arrow T1 T2) ->
                       halts t ->
                       (forall s, R T1 s -> R T2 (app t s)) ->
                       R (Arrow T1 T2) t.
@@ -621,7 +588,7 @@ Qed.
     [Fixpoint]: *)
 
 Fixpoint R (T:ty) (t:tm) : Prop :=
-  empty |- t \in T /\ halts t /\
+  empty |-- t \in T /\ halts t /\
   (match T with
    | <{ Bool }>  => True
    | <{ T1 -> T2 }> => (forall s, R T1 s -> R T2 <{t s}> )
@@ -640,7 +607,7 @@ Proof.
   destruct T; unfold R in H; destruct H as [_ [H _]]; assumption.
 Qed.
 
-Lemma R_typable_empty : forall {T} {t}, R T t -> empty |- t \in T.
+Lemma R_typable_empty : forall {T} {t}, R T t -> empty |-- t \in T.
 Proof.
   intros.
   destruct T; unfold R in H; destruct H as [H _]; assumption.
@@ -720,12 +687,12 @@ Qed.
    [T] before stepping as an additional hypothesis. *)
 
 Lemma step_preserves_R' : forall T t t',
-  empty |- t \in T -> (t --> t') -> R T t' -> R T t.
+  empty |-- t \in T -> (t --> t') -> R T t' -> R T t.
 Proof.
   (* FILL IN HERE *) Admitted.
 
 Lemma multistep_preserves_R' : forall T t t',
-  empty |- t \in T -> (t -->* t') -> R T t' -> R T t.
+  empty |-- t \in T -> (t -->* t') -> R T t' -> R T t.
 Proof.
   intros T t t' HT STM.
   induction STM; intros.
@@ -754,12 +721,12 @@ Qed.
     _instances_ of an open term [t].  Informally, the statement of the
     lemma will look like this:
 
-    If [x1:T1,..xn:Tn |- t : T] and [v1,...,vn] are values such that
+    If [x1:T1,..xn:Tn |-- t : T] and [v1,...,vn] are values such that
     [R T1 v1], [R T2 v2], ..., [R Tn vn], then
     [R T ([x1:=v1][x2:=v2]...[xn:=vn]t)].
 
     The proof will proceed by induction on the typing derivation
-    [x1:T1,..xn:Tn |- t : T]; the most interesting case will be the one
+    [x1:T1,..xn:Tn |-- t : T]; the most interesting case will be the one
     for abstraction. *)
 
 (* ----------------------------------------------------------------- *)
@@ -1086,8 +1053,8 @@ Qed.
 
 Lemma msubst_preserves_typing : forall c e,
      instantiation c e ->
-     forall Gamma t S, (mupdate Gamma c) |- t \in S ->
-     Gamma |- { (msubst e t) } \in S.
+     forall Gamma t S, (mupdate Gamma c) |-- t \in S ->
+     Gamma |-- { (msubst e t) } \in S.
 Proof.
     intros c e H. induction H; intros.
     simpl in H. simpl. auto.
@@ -1100,7 +1067,7 @@ Qed.
 (** And at long last, the main lemma. *)
 
 Lemma msubst_R : forall c env t T,
-    (mupdate empty c) |- t \in T ->
+    (mupdate empty c) |-- t \in T ->
     instantiation c env ->
     R T (msubst env t).
 Proof.
@@ -1123,7 +1090,7 @@ Proof.
     rewrite msubst_abs.
     (* We'll need variants of the following fact several times, so its simplest to
        establish it just once. *)
-    assert (WT : empty |- \x : T2, {msubst (drop x env0) t1 } \in (T2 -> T1) ).
+    assert (WT : empty |-- \x : T2, {msubst (drop x env0) t1 } \in (T2 -> T1) ).
     { eapply T_Abs. eapply msubst_preserves_typing.
       { eapply instantiation_drop; eauto. }
       eapply context_invariance.
@@ -1168,7 +1135,7 @@ Proof.
 
 (** And the final theorem: *)
 
-Theorem normalization : forall t T, empty |- t \in T -> halts t.
+Theorem normalization : forall t T, empty |-- t \in T -> halts t.
 Proof.
   intros.
   replace t with (msubst nil t) by reflexivity.
@@ -1177,4 +1144,4 @@ Proof.
   eapply V_nil.
 Qed.
 
-(* 2022-08-26 19:24 *)
+(* 2023-03-24 02:23 *)

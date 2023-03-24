@@ -3,7 +3,7 @@
 #########################################################################
 
 This directory contains both Coq scripts (.v files) and more readable
-HTML files for Verified Functional Algorithms, by Andrew W. Appel et al.,
+HTML files for Verifiable C, by Andrew W. Appel et al.,
 volume [VC] of the Software Foundations series.
 
   - Preface.v or Preface.html

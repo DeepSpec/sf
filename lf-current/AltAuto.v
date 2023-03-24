@@ -1744,70 +1744,70 @@ Proof. imp_intuition. Qed.
 Example imp3 : forall (P Q R : Prop), (P -> Q -> R) -> (Q -> P -> R).
 Proof. imp_intuition. Qed.
 
-(** Suppose we were to add a new logical connective: [nand], the "not
-    and" connective, aka _Sheffer stroke_. *)
+(** Suppose we were to add a new logical connective: [nor], the "not
+    or" connective. *)
 
-Inductive nand (P Q : Prop) :=
-| stroke : ~P -> ~Q -> nand P Q.
+Inductive nor (P Q : Prop) :=
+| stroke : ~P -> ~Q -> nor P Q.
 
-(** Classically, [nand P Q] would be equivalent to [~(P /\ Q)].  But
+(** Classically, [nor P Q] would be equivalent to [~(P \/ Q)].  But
     constructively, only one direction of that is provable. *)
 
-Theorem nand_not_and : forall (P Q : Prop),
-    nand P Q -> ~ (P /\ Q).
+Theorem nor_not_or : forall (P Q : Prop),
+    nor P Q -> ~ (P \/ Q).
 Proof.
-  intros P Q Hnand [HP HQ]. destruct Hnand as [HNP HNQ]. auto.
+  intros. destruct H. unfold not. intros. destruct H. auto. auto.
 Qed.
 
-(** Some other usual theorems about [nand] are still provable,
+(** Some other usual theorems about [nor] are still provable,
     though. *)
 
-Theorem nand_comm : forall (P Q : Prop),
-    nand P Q <-> nand Q P.
+Theorem nor_comm : forall (P Q : Prop),
+    nor P Q <-> nor Q P.
 Proof.
   intros P Q. split.
   - intros H. destruct H. apply stroke; assumption.
   - intros H. destruct H. apply stroke; assumption.
 Qed.
 
-Theorem nand_not : forall (P : Prop),
-    nand P P <-> ~P.
+Theorem nor_not : forall (P : Prop),
+    nor P P <-> ~P.
 Proof.
   intros P. split.
   - intros H. destruct H. assumption.
   - intros H. apply stroke; assumption.
 Qed.
 
-(** **** Exercise: 4 stars, advanced (nand_intuition) *)
+(** **** Exercise: 4 stars, advanced (nor_intuition) *)
 
-(** Create your own tactic [nand_intuition]. It should be able to
-    prove the three theorems above -- [nand_not_and], [nand_comm], and
-    [nand_not] -- fully automatically. You may not use [intuition] or
+(** Create your own tactic [nor_intuition]. It should be able to
+    prove the three theorems above -- [nor_not_and], [nor_comm], and
+    [nor_not] -- fully automatically. You may not use [intuition] or
     any other automated solvers in your solution.
 
     Begin by copying the code from [imp_intuition]. You will then need
     to expand it to handle conjunctions, negations, bi-implications,
-    and [nand]. *)
+    and [nor]. *)
 
-(* Ltac nand_intuition := ... *)
+(* Ltac nor_intuition := ... *)
 
 (** Each of the three theorems below, and many others involving these
     logical connectives, should be provable with just
-    [Proof. nand_intuition. Qed.] *)
+    [Proof. nor_intuition. Qed.] *)
 
-Theorem nand_comm' : forall (P Q : Prop),
-    nand P Q <-> nand Q P.
+Theorem nor_comm' : forall (P Q : Prop),
+    nor P Q <-> nor Q P.
 Proof. (* FILL IN HERE *) Admitted.
 
-Theorem nand_not' : forall (P : Prop),
-    nand P P <-> ~P.
+Theorem nor_not' : forall (P : Prop),
+    nor P P <-> ~P.
 Proof. (* FILL IN HERE *) Admitted.
 
-Theorem nand_not_and' : forall (P Q : Prop),
-    nand P Q -> ~ (P /\ Q).
+Theorem nor_not_and' : forall (P Q : Prop),
+    nor P Q -> ~ (P /\ Q).
 Proof. (* FILL IN HERE *) Admitted.
 (* Do not modify the following line: *)
-Definition manual_grade_for_nand_intuition : option (nat*string) := None.
+Definition manual_grade_for_nor_intuition : option (nat*string) := None.
 (** [] *)
 
 (* ################################################################# *)
@@ -1825,4 +1825,4 @@ Definition manual_grade_for_nand_intuition : option (nat*string) := None.
 
     - Ltac functions and [match goal] *)
 
-(* 2022-08-26 19:23 *)
+(* 2023-03-24 02:22 *)

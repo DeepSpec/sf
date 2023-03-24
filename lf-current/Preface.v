@@ -257,7 +257,7 @@
 (** Coq runs on Windows, Linux, and macOS.  You will need:
 
     - A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.15.
+      These files have been tested with Coq 8.16.
 
     - An IDE for interacting with Coq.  Currently, there are two
       choices:
@@ -363,7 +363,7 @@
     title        =   "Logical Foundations",
     series       =   "Software Foundations",
     volume       =   "1",
-    year         =   "2022",
+    year         =   "2023",
     publisher    =   "Electronic textbook",
     note         =   {Version 6.2, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
@@ -376,9 +376,9 @@
 (** ** Sample Exams *)
 
 (** A large compendium of exams from many offerings of
-    CIS500 ("Software Foundations") at the University of Pennsylvania
+    CIS5000 ("Software Foundations") at the University of Pennsylvania
     can be found at
-    {https://www.seas.upenn.edu/~cis500/current/exams/index.html}.
+    {https://www.seas.upenn.edu/~cis5000/current/exams/index.html}.
     There has been some drift of notations over the years, but most of
     the problems are still relevant to the current text. *)
 
@@ -449,4 +449,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2022-08-26 19:23 *)
+(* 2023-03-24 02:22 *)
