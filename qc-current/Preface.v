@@ -11,7 +11,7 @@
     beta release of QuickChick-2.0 that you will need to build 
     from source. It is available here:
 
-       {https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta}
+       {https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta.16}
 
     The [QuickChickInterface] chapter serves as a reference
     manual for QuickChick.  The rest of the book explains its features
@@ -46,4 +46,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2023-03-24 02:33 *)
+(* 2023-03-25 17:24 *)
