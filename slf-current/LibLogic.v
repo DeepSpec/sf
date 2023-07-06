@@ -40,6 +40,7 @@ Definition sig_proof (A : Type) (P : A->Prop) (e : sig P) : P (sig_val e) :=
 Class Inhab (A:Type) : Prop :=
   { Inhab_intro : (exists (x:A), True) }.
 
+#[global]
 Hint Mode Inhab + : typeclass_instances.
 
 (* ---------------------------------------------------------------------- *)
@@ -81,6 +82,7 @@ Proof using. intros A x. constructor. exists x. auto. Qed.
 
 (** Arrows are inhabited if their codomain is inhabited. *)
 
+#[global]
 Instance Inhab_impl : forall A B {I:Inhab B},
   Inhab (A -> B).
 Proof using. intros. apply (Inhab_of_val (fun _ => arbitrary)). Qed.
@@ -519,6 +521,7 @@ Proof using. tautop. Qed.
 
 End EqTrueFalse.
 
+#[global]
 Hint Resolve prop_eq_True prop_eq_False.
 
 (* ---------------------------------------------------------------------- *)
@@ -567,6 +570,7 @@ Proof using. tautop. Qed.
 
 End NeqProp.
 
+#[global]
 Hint Resolve True_neq_False.
 
 (* ---------------------------------------------------------------------- *)
@@ -709,6 +713,7 @@ End IffProp.
 
 (* Remark: [not_impl] needs to have higher priority than [not_forall],
    and samewise for [not_forall_not_eq] and [not_exists_not_eq]. *)
+#[global]
 Hint Rewrite
   not_not_eq not_and_eq not_or_eq not_impl_eq not_True_eq not_False_eq
   not_forall_eq not_forall_not_eq
@@ -887,6 +892,7 @@ Definition pred_or (A : Type) (P Q : A -> Prop) :=
 Definition pred_impl (A : Type) (P Q : A -> Prop) :=
   fun x => P x -> Q x.
 
+#[global]
 Hint Unfold pred_true pred_false.
 
 (* ---------------------------------------------------------------------- *)
@@ -946,6 +952,7 @@ Proof using. extens*. Qed.
 Definition unique_st (A : Type) (P : A -> Prop) (x : A) :=
   P x /\ forall y, P y -> y = x.
 
+#[global]
 Hint Unfold unique_st.
 
 (** [ex_unique P] asserts that there exists a unique element for which
@@ -957,12 +964,12 @@ Definition ex_unique (A : Type) (P : A -> Prop) :=
 (** [exists! x, P] is the notation for [ex_unique P]. *)
 
 Notation "'exists' ! x , P" := (ex_unique (fun x => P))
-  (at level 200, x ident, right associativity,
+  (at level 200, x name, right associativity,
     format "'[' 'exists' !  '/  ' x ,  '/  ' P ']'") : type_scope.
 
 Notation "'exists' ! x : A , P" :=
   (ex_unique (fun x:A => P))
-  (at level 200, x ident, right associativity,
+  (at level 200, x name, right associativity,
     format "'[' 'exists' !  '/  ' x  :  A ,  '/  ' P ']'") : type_scope.
 
 (** [at_most_one P] asserts that there exists at most one element for
@@ -1176,4 +1183,4 @@ Arguments forall_conj_inv_10 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] 
 Arguments forall_conj_inv_11 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] [A11] [P] [Q].
 
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

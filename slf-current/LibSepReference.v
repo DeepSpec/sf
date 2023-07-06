@@ -438,7 +438,7 @@ Notation "Q1 \--* Q2" := (qwand Q1 Q2)
 (** We set up [auto] to process goals of the form [h1 = h2] by calling
     [fmap_eq], which proves equality modulo associativity and commutativity. *)
 
-Hint Extern 1 (_ = _ :> heap) => fmap_eq.
+#[global] Hint Extern 1 (_ = _ :> heap) => fmap_eq.
 
 (** We also set up [auto] to process goals of the form [Fmap.disjoint h1 h2]
     by calling the tactic [fmap_disjoint], which essentially normalizes all
@@ -450,7 +450,7 @@ Import Fmap.DisjointHints.
 Tactic Notation "fmap_disjoint_pre" :=
   subst; rew_disjoint; jauto_set.
 
-Hint Extern 1 (Fmap.disjoint _ _) => fmap_disjoint_pre.
+#[global] Hint Extern 1 (Fmap.disjoint _ _) => fmap_disjoint_pre.
 
 (* ----------------------------------------------------------------- *)
 (** *** Properties of [himpl] and [qimpl] *)
@@ -459,7 +459,7 @@ Lemma himpl_refl : forall H,
   H ==> H.
 Proof using. introv M. auto. Qed.
 
-Hint Resolve himpl_refl.
+#[global] Hint Resolve himpl_refl.
 
 Lemma himpl_trans : forall H2 H1 H3,
   (H1 ==> H2) ->
@@ -488,7 +488,7 @@ Lemma qimpl_refl : forall A (Q:A->hprop),
   Q ===> Q.
 Proof using. intros. unfolds*. Qed.
 
-Hint Resolve qimpl_refl.
+#[global] Hint Resolve qimpl_refl.
 
 (* ----------------------------------------------------------------- *)
 (** *** Properties of [hempty] *)
@@ -1357,7 +1357,7 @@ Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
 
 Notation "'funloc' p '=>' H" :=
   (fun (r:val) => \exists p, \[r = val_loc p] \* H)
-  (at level 200, p ident, format "'funloc'  p  '=>'  H") : hprop_scope.
+  (at level 200, p name, format "'funloc'  p  '=>'  H") : hprop_scope.
 
 (* ================================================================= *)
 (** ** Structural Rules *)
@@ -2448,9 +2448,9 @@ Qed.
 
 (** Database of hints for [xapp]. *)
 
-Hint Resolve triple_get triple_set triple_ref triple_free : triple.
+#[global] Hint Resolve triple_get triple_set triple_ref triple_free : triple.
 
-Hint Resolve triple_add triple_div triple_neg triple_opp triple_eq
+#[global] Hint Resolve triple_add triple_div triple_neg triple_opp triple_eq
    triple_neq triple_sub triple_mul triple_mod triple_le triple_lt
    triple_ge triple_gt triple_ptr_add triple_ptr_add_nat : triple.
 
@@ -3402,7 +3402,7 @@ Parameter triple_new_hrecord_2 : forall k1 k2 v1 v2,
     \[]
     (funloc p => p ~~~> `{ k1 := v1 ; k2 := v2 }).
 
-Hint Resolve val_new_hrecord_2 : triple.
+#[global] Hint Resolve val_new_hrecord_2 : triple.
 
 (** [val_new_record_3 k1 k2 k3 v1 v2 v3], written
     [`{ k1 := v1 ; k2 := v2 ; k3 := v3 }],
@@ -3424,7 +3424,7 @@ Parameter triple_new_hrecord_3 : forall k1 k2 k3 v1 v2 v3,
     \[]
     (funloc p => p ~~~> `{ k1 := v1 ; k2 := v2 ; k3 := v3 }).
 
-Hint Resolve val_new_hrecord_3 : triple.
+#[global] Hint Resolve val_new_hrecord_3 : triple.
 
 (* ----------------------------------------------------------------- *)
 (** *** Deallocation of Records *)
@@ -3443,7 +3443,7 @@ Parameter triple_dealloc_hrecord : forall kvs p,
     (hrecord kvs p)
     (fun _ => \[]).
 
-Hint Resolve triple_dealloc_hrecord : triple.
+#[global] Hint Resolve triple_dealloc_hrecord : triple.
 
 (* ----------------------------------------------------------------- *)
 (** *** Extending [xapp] to Support Record Access Operations *)
@@ -3543,7 +3543,7 @@ Qed.
 (** We register this specification so that it may be automatically invoked
     in further examples. *)
 
-Hint Resolve triple_incr : triple.
+#[global] Hint Resolve triple_incr : triple.
 
 (** Alternative definition using variable names without quotes, obtained
     by importing the module [Vars] from [LibSepVar.v]. *)
@@ -3593,7 +3593,7 @@ Proof using.
   xwp. xapp. xapp. xapp. xsimpl*.
 Qed.
 
-Hint Resolve triple_decr : triple.
+#[global] Hint Resolve triple_decr : triple.
 
 (* ----------------------------------------------------------------- *)
 (** *** Definition and Verification of [mysucc]. *)
@@ -3686,4 +3686,4 @@ Qed.
 
 End DemoPrograms.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

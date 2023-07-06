@@ -54,12 +54,14 @@ Lemma total_preorder_refl : forall A (le:binary A),
   refl le.
 Proof using. introv [Tr To]. intros x. destruct~ (To x x). Qed.
 
+#[global]
 Hint Resolve total_preorder_refl.
 
 Coercion total_preorder_to_preorder A (R:binary A)
   (O:total_preorder R) : preorder R.
 Proof using. lets [M _]: O. constructor~. Qed.
 
+#[global]
 Hint Resolve total_preorder_to_preorder.
 
 (** Transformations *)
@@ -111,6 +113,7 @@ Coercion order_to_preorder A (R:binary A)
   (O:order R) : preorder R.
 Proof using. destruct* O. constructors*. Qed.
 
+#[global]
 Hint Resolve order_to_preorder.
 
 (** Transformations *)
@@ -153,6 +156,7 @@ Coercion order_wrt_to_preorder A (E:binary A) (R:binary A)
   (O:order_wrt E R) : preorder R.
 Proof using. destruct* O. constructors*. Qed.
 
+#[global]
 Hint Resolve order_wrt_to_preorder.
 
 (** Transformations *)
@@ -214,6 +218,7 @@ Proof using. destruct* O. constructors*. applys* order_trans. Qed.
 
 Definition total_order_to_order := total_order_order.
 
+#[global]
 Hint Resolve total_order_to_order total_order_to_total_preorder.
 
 (** Transformations *)
@@ -390,6 +395,7 @@ Proof using.
   autos~ strict_total_order_irrefl strict_total_order_asym.
 Qed.
 
+#[global]
 Hint Resolve strict_total_order_to_strict_order.
 
 (** Transformation *)
@@ -481,10 +487,13 @@ Notation "x < y < z" := (x < y /\ y < z)
 (* ================================================================= *)
 (** ** The operators [ge], [lt] and [gt] are deduced from [le] *)
 
+#[global]
 Instance ge_of_le : forall `{Le A}, Ge A.
   constructor. apply (inverse le). Defined.
+#[global]
 Instance lt_of_le : forall `{Le A}, Lt A.
   constructor. apply (strict le). Defined.
+#[global]
 Instance gt_of_le : forall `{Le A}, Gt A.
   constructor. apply (inverse lt). Defined.
 
@@ -504,11 +513,13 @@ Global Opaque ge_of_le lt_of_le gt_of_le.
 
 (** Local tactic [rew_to_le] *)
 
+#[global]
 Hint Rewrite @gt_is_inverse_strict_le @ge_is_inverse_le @lt_is_strict_le : rew_to_le.
 
 Tactic Notation "rew_to_le" :=
   autorewrite with rew_to_le in *.
 
+#[global]
 Hint Rewrite @ge_is_inverse_le @gt_is_inverse_lt : rew_to_le_lt.
 
 Tactic Notation "rew_to_le_lt" :=
@@ -1156,4 +1167,4 @@ Lemma max_r : forall `{Le A} (n m:A),
   max n m = m.
 Proof using. introv T M. unfold max. case_if*. Qed.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

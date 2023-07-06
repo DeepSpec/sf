@@ -144,7 +144,7 @@ Definition state : Type := fmap loc val.
     command, whose details are not relevant for understanding the rest of
     the chapter. *)
 
-Instance Inhab_val : Inhab val.
+Global Instance Inhab_val : Inhab val.
 Proof using. apply (Inhab_of_val val_unit). Qed.
 
 (* ----------------------------------------------------------------- *)
@@ -2002,4 +2002,4 @@ End MatchStyle.
     we refer to Section 10.3 from the paper:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

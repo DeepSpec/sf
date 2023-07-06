@@ -794,7 +794,7 @@ Proof using.
   unfold map_union, union, map_union. simpl. case_if~.
   { subst. case_eq (fmap_data h1 y); auto_false.
     { intros w Hw. false M. auto_false. } }
-Qed. 
+Qed.
 
 (* ================================================================= *)
 (** ** Removal *)
@@ -842,9 +842,11 @@ Arguments union_comm_of_agree [A] [B].
     with [empty]. *)
 
 Module Export DisjointHints.
+#[export]
 Hint Resolve disjoint_sym disjoint_empty_l disjoint_empty_r.
 End DisjointHints.
 
+#[global]
 Hint Rewrite
   disjoint_union_eq_l
   disjoint_union_eq_r
@@ -875,6 +877,7 @@ Qed.
 (* ================================================================= *)
 (** ** Tactic [rew_map] for Normalizing Expressions *)
 
+#[global]
 Hint Rewrite
   union_assoc
   union_empty_l
@@ -1042,6 +1045,7 @@ Proof using. intros. math_rewrite (l+1 = S l)%nat. applys conseq_cons. Qed.
 
 Global Opaque conseq.
 
+#[global]
 Hint Rewrite conseq_nil conseq_cons : rew_listx.
 
 (* ================================================================= *)
@@ -1181,4 +1185,4 @@ Qed.
 
 End FmapFresh.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

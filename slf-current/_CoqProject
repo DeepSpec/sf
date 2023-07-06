@@ -1,3 +1,4 @@
 -Q . SLF
 -arg -w 
--arg -implicits-in-term,-redundant-canonical-projection,-several-object-files,-ambiguous-paths,-implicit-core-hint-db,-file-no-extension,-custom-entry-overriden,-custom-entry-overridden,-deprecated-hint-without-locality,-deprecated-ident-entry,-deprecated-hint-rewrite-without-locality,-deprecated-instance-without-locality
+-arg -implicit-core-hint-db,-ambiguous-paths
+

@@ -418,7 +418,7 @@ The proof uses the tactic <span class="inlinecode"><span class="id" title="var">
 </div>
 <div class="code">
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">xwp</span>. <span class="id" title="var">xval</span>. <span class="id" title="var">xchanges</span>* &lt;- (<a class="idref" href="Repr.html#MList_nil"><span class="id" title="lemma">MList_nil</span></a> <a class="idref" href="LibSepReference.html#null"><span class="id" title="definition">null</span></a>). <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_mnil</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_mnil</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -482,7 +482,7 @@ In practice, this second specification is more often useful than the first
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_mcons'</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_mcons'</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1083,7 +1083,7 @@ The third lemma reformulates <span class="inlinecode"><span class="id" title="va
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">T</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">T</span>; <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">t'</span> <span class="id" title="var">H</span>; <span class="id" title="var">inversions</span>¬<span class="id" title="var">H</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">tree_sub_wf</span> : <span class="id" title="keyword">wf</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">tree_sub_wf</span> : <span class="id" title="keyword">wf</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1127,7 +1127,7 @@ A second specification, derived from the first, asserts that, if provided
 &nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Repr.html#MTree"><span class="id" title="definition">MTree</span></a> <a class="idref" href="Repr.html#T<sub>1</sub>:107"><span class="id" title="variable">T<sub>1</sub></span></a> <a class="idref" href="Repr.html#p<sub>1</sub>:110"><span class="id" title="variable">p<sub>1</sub></span></a> <a class="idref" href="LibSepReference.html#6e7aeeae3643da4efcca62b993bbca40"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Repr.html#MTree"><span class="id" title="definition">MTree</span></a> <a class="idref" href="Repr.html#T<sub>2</sub>:108"><span class="id" title="variable">T<sub>2</sub></span></a> <a class="idref" href="Repr.html#p<sub>2</sub>:111"><span class="id" title="variable">p<sub>2</sub></span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Basic.html#41749fe005eef2f7f0316a63bdabe5a<sub>8</sub>"><span class="id" title="notation">funloc</span></a> <a id="p:114" class="idref" href="#p:114"><span class="id" title="binder">p</span></a> <a class="idref" href="Basic.html#41749fe005eef2f7f0316a63bdabe5a<sub>8</sub>"><span class="id" title="notation">⇒</span></a> <a class="idref" href="Repr.html#MTree"><span class="id" title="definition">MTree</span></a> (<a class="idref" href="Repr.html#Node"><span class="id" title="constructor">Node</span></a> <a class="idref" href="Repr.html#n:109"><span class="id" title="variable">n</span></a> <a class="idref" href="Repr.html#T<sub>1</sub>:107"><span class="id" title="variable">T<sub>1</sub></span></a> <a class="idref" href="Repr.html#T<sub>2</sub>:108"><span class="id" title="variable">T<sub>2</sub></span></a>) <a class="idref" href="Repr.html#p:112"><span class="id" title="variable">p</span></a>).<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_mnode'</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_mnode'</span> : <span class="id" title="var">triple</span>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
@@ -1942,7 +1942,7 @@ The goal is to establish the following specification for <span class="inlinecode
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-06-20&nbsp;15:29&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-07-06&nbsp;19:48&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -2,6 +2,7 @@
 
 Set Implicit Arguments.
 From SLF Require Import LibSepReference LibSepTLCbuffer.
+#[global]
 Hint Rewrite conseq_cons' : rew_listx.
 
 Implicit Types P : Prop.
@@ -256,7 +257,7 @@ Parameter triple_array_length_header : forall k p,
     (hheader k p)
     (fun r => \[r = (k:int)] \* hheader k p).
 
-Hint Resolve triple_array_get triple_array_set triple_array_length : triple.
+#[global] Hint Resolve triple_array_get triple_array_set triple_array_length : triple.
 
 (* ================================================================= *)
 (** ** Representation of Individual Records Fields *)
@@ -617,7 +618,7 @@ Parameter triple_alloc_hrecord : forall ks,
     \[]
     (funloc p => hrecord (LibListExec.map (fun k => (k,val_uninit)) ks) p).
 
-Hint Resolve triple_alloc_hrecord : triple.
+#[global] Hint Resolve triple_alloc_hrecord : triple.
 
 (** For example, the allocation of a list cell is specified as follows. *)
 
@@ -645,7 +646,7 @@ Parameter triple_dealloc_hrecord : forall kvs p,
     (hrecord kvs p)
     (fun _ => \[]).
 
-Hint Resolve triple_dealloc_hrecord : triple.
+#[global] Hint Resolve triple_dealloc_hrecord : triple.
 
 (** To improve readability, we introduce the notation [Delete p]
     for record deallocation. *)
@@ -1269,7 +1270,7 @@ Proof using.
   intros. unfold triple. intros H'. applys hoare_conseq hoare_length; xsimpl~.
 Qed.
 
-Hint Resolve triple_length : triple.
+#[global] Hint Resolve triple_length : triple.
 
 (* ================================================================= *)
 (** ** Encoding of Array Operations using Pointer Arithmetic *)
@@ -1635,4 +1636,4 @@ Qed.
 
 End Realization.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

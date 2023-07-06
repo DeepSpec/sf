@@ -28,18 +28,19 @@
     researchers.
 
     A large fraction of the contents of this course is also written up
-    in traditional LaTeX-style presentation, in the ICFP'20 article:
-    _Separation Logic for Sequential Programs_, by Arthur Charguéraud.
-    The long version of this paper is available at this link:
-    http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf
+    in traditional LaTeX-style presentation, in Arthur Charguéraud's
+    habilitation manuscript:
+    http://www.chargueraud.org/research/2023/hdr/chargueraud_hdr.pdf
+    (a subset of which was published in the ICFP'20 article:
+    _Separation Logic for Sequential Programs_).
 
-    This paper includes, in particular, a 5-page historical survey of
-    contributions to mechanized presentations of Separation Logic,
+    The manuscript includes, in particular, a 5-page historical survey
+    of contributions to mechanized presentations of Separation Logic,
     featuring 100+ citations. For a broader survey of Separation
     Logic, we recommend Peter O'Hearn's 2019 survey, which is
-    available from: https://dl.acm.org/doi/10.1145/3211968 --
-    including the _supplemental material_ linked near the bottom of
-    that page. *)
+    available from: https://dl.acm.org/doi/10.1145/3211968 -- including
+    an interesting _supplemental material_ appendix, accessible by following
+    the link that appears near the bottom of that ACM web page. *)
 
 (* ################################################################# *)
 (** * Separation Logic *)
@@ -274,8 +275,7 @@
 
 (** The [Preface] of Software Foundations Volume 1 (_Logical
     Foundations_) describes how to install Coq. The files you are
-    reading have been tested with Coq version 8.13, 8.14, 8.15.
-    Versions prior to 8.12 are no longer supported. *)
+    reading have been tested with Coq version 8.16 and 8.17. *)
 
 (* ================================================================= *)
 (** ** Note for CoqIDE Users *)
@@ -342,4 +342,4 @@
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

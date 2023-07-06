@@ -232,7 +232,7 @@ Lemma triple_mnil :
     followed with [xsimpl*]. *)
 Proof using. xwp. xval. xchanges* <- (MList_nil null). Qed.
 
-Hint Resolve triple_mnil : triple.
+#[global] Hint Resolve triple_mnil : triple.
 
 (** Observe that the specification [triple_mnil] does not mention the [null]
     pointer anywhere. This specification may thus be used to specify the
@@ -279,7 +279,7 @@ Qed.
     invoke [xapp triple_mcons] for exploiting the first specification, where
     needed. *)
 
-Hint Resolve triple_mcons' : triple.
+#[global] Hint Resolve triple_mcons' : triple.
 
 (* ================================================================= *)
 (** ** Copy Function for Lists *)
@@ -759,7 +759,7 @@ Proof using.
   intros T. induction T; constructor; intros t' H; inversions~ H.
 Qed.
 
-Hint Resolve tree_sub_wf : wf.
+#[global] Hint Resolve tree_sub_wf : wf.
 
 (** For allocating fresh tree nodes as a 3-field record, we introduce the
     operation [mnode n p1 p2], defined and specified as follows. *)
@@ -792,7 +792,7 @@ Lemma triple_mnode' : forall T1 T2 n p1 p2,
     (funloc p => MTree (Node n T1 T2) p).
 Proof using. (* FILL IN HERE *) Admitted.
 
-Hint Resolve triple_mnode' : triple.
+#[global] Hint Resolve triple_mnode' : triple.
 
 (** [] *)
 
@@ -1445,4 +1445,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     found in section 10.2 of
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

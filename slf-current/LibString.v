@@ -15,7 +15,8 @@ Require Export Coq.Strings.String.
 (* ################################################################# *)
 (** * Inhabited *)
 
+#[global]
 Instance Inhab_string : Inhab string.
 Proof using. apply (Inhab_of_val EmptyString). Qed.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

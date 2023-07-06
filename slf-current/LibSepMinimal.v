@@ -154,8 +154,8 @@ Inductive eval : heap -> trm -> heap -> val -> Prop :=
     we set up automation so that it performs some tidying: substitution,
     removal of empty heaps, normalization with respect to associativity. *)
 
-Hint Rewrite union_assoc union_empty_l union_empty_r : fmap.
-Hint Extern 1 (_ = _ :> heap) => subst; autorewrite with fmap.
+#[global] Hint Rewrite union_assoc union_empty_l union_empty_r : fmap.
+#[global] Hint Extern 1 (_ = _ :> heap) => subst; autorewrite with fmap.
 
 (** For goals asserting disjointness between heaps, i.e., of the form
     [Fmap.disjoint h1 h2], we set up automation to perform simplifications:
@@ -164,9 +164,9 @@ Hint Extern 1 (_ = _ :> heap) => subst; autorewrite with fmap.
     [jauto_set] used here comes from the TLC library; essentially, it destructs
     conjunctions and existentials. *)
 
-Hint Resolve Fmap.disjoint_empty_l Fmap.disjoint_empty_r.
-Hint Rewrite disjoint_union_eq_l disjoint_union_eq_r : disjoint.
-Hint Extern 1 (Fmap.disjoint _ _) =>
+#[global] Hint Resolve Fmap.disjoint_empty_l Fmap.disjoint_empty_r.
+#[global] Hint Rewrite disjoint_union_eq_l disjoint_union_eq_r : disjoint.
+#[global] Hint Extern 1 (Fmap.disjoint _ _) =>
   subst; autorewrite with rew_disjoint in *; jauto_set.
 
 (* ################################################################# *)
@@ -299,7 +299,7 @@ Lemma qimpl_refl : forall Q,
   Q ===> Q.
 Proof. intros Q v. applys himpl_refl. Qed.
 
-Hint Resolve himpl_refl qimpl_refl.
+#[global] Hint Resolve himpl_refl qimpl_refl.
 
 (* ================================================================= *)
 (** ** Properties of [hstar] *)
@@ -450,7 +450,7 @@ Qed.
 
 (** [xsimpl] performs immediate simplifications on entailment relations. *)
 
-Hint Rewrite hstar_assoc hstar_hempty_l hstar_hempty_r : hstar.
+#[global] Hint Rewrite hstar_assoc hstar_hempty_l hstar_hempty_r : hstar.
 
 Tactic Notation "xsimpl" :=
   try solve [ apply qimpl_refl ];
@@ -858,4 +858,4 @@ Proof using.
   { applys triple_set. }
 Qed.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

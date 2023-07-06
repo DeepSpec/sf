@@ -173,7 +173,7 @@ Qed.
     [incr], the [xapp] tactic will be able to automatically invoke the lemma
     [triple_incr]. *)
 
-Hint Resolve triple_incr : triple.
+#[global] Hint Resolve triple_incr : triple.
 
 (** To minimize the amount of syntactic noise in specifications, we leverage
     an advanced feature of Coq's coercion mechanism. Concretely, instead of
@@ -343,7 +343,7 @@ Qed.
 (** Because we will make use of the function [incr_two] later in this chapter,
     we register the specification [triple_incr_two] in the [triple] database. *)
 
-Hint Resolve triple_incr_two : triple.
+#[global] Hint Resolve triple_incr_two : triple.
 
 (** A quick point of vocabulary before moving on: Separation Logic expressions
     such as [p ~~> n] or [\[]] or [H1 \* H2] are called "heap predicates",
@@ -561,7 +561,7 @@ Parameter triple_ref : forall (v:val),
 
 Notation "'funloc' p '=>' H" :=
   (fun (r:val) => \exists p, \[r = val_loc p] \* H)
-  (at level 200, p ident, format "'funloc'  p  '=>'  H").
+  (at level 200, p name, format "'funloc'  p  '=>'  H").
 
 (** Using this notation, the specification [triple_ref] can be reformulated
     more concisely, as follows. *)
@@ -748,7 +748,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-Hint Resolve triple_get_and_free : triple.
+#[global] Hint Resolve triple_get_and_free : triple.
 
 (* ################################################################# *)
 (** * Recursive Functions *)
@@ -1166,4 +1166,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

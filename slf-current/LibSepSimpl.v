@@ -256,6 +256,7 @@ Local Open Scope heap_scope.
 Implicit Types H : hprop.
 Implicit Types P : Prop.
 
+#[global]
 Hint Resolve himpl_refl.
 
 (* ================================================================= *)
@@ -278,7 +279,7 @@ Lemma qimpl_refl : forall A (Q:A->hprop),
   Q ===> Q.
 Proof using. intros. hnfs*. Qed.
 
-Hint Resolve qimpl_refl.
+#[global] Hint Resolve qimpl_refl.
 
 Lemma qimpl_trans : forall A (Q2 Q1 Q3:A->hprop),
   (Q1 ===> Q2) ->
@@ -360,6 +361,7 @@ Lemma star_post_empty : forall B (Q:B->hprop),
   Q \*+ \[] = Q.
 Proof using. extens. intros. rewrite* hstar_hempty_r. Qed.
 
+#[global]
 Hint Rewrite hstar_hempty_l hstar_hempty_r
             hstar_assoc star_post_empty hwand_hempty_l : rew_heap.
 
@@ -384,6 +386,7 @@ Tactic Notation "rew_heap" "*" "in" "*" :=
 Tactic Notation "rew_heap" "*" "in" hyp(H) :=
   rew_heap in H; auto_star.
 
+#[global]
 Hint Rewrite hstar_assoc : rew_heap_assoc.
 
 Tactic Notation "rew_heap_assoc" :=
@@ -1991,4 +1994,4 @@ Qed.
 
 End XsimplSetup.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

@@ -1277,7 +1277,7 @@ This definition is, up to unfolding of the new intermediate definitions,
 &nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69) : <span class="id" title="var">wpgen_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="321f87d5a3363707e9951f717202b7a<sub>6</sub>" class="idref" href="#321f87d5a3363707e9951f717202b7a<sub>6</sub>"><span class="id" title="notation">&quot;</span></a>'Let'' x ':=' F<sub>1</sub> 'in' F<sub>2</sub>" :=<br/>
 &nbsp;&nbsp;((<a class="idref" href="WPgen.html#wpgen_let"><span class="id" title="definition">wpgen_let</span></a> <span class="id" title="var">F<sub>1</sub></span> (<span class="id" title="keyword">fun</span> <a id="x:106" class="idref" href="#x:106"><span class="id" title="binder">x</span></a> ⇒ <span class="id" title="var">F<sub>2</sub></span>)))<br/>
-&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69, <span class="id" title="var">x</span> <span class="id" title="var">ident</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69, <span class="id" title="var">x</span> <span class="id" title="var">name</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>,<br/>
 &nbsp;&nbsp;<span class="id" title="var">format</span> "'[v' '[' 'Let''  x  ':='  F<sub>1</sub>  'in' ']'  '/'  '[' F<sub>2</sub> ']' ']'")<br/>
 &nbsp;&nbsp;: <span class="id" title="var">wpgen_scope</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Notation</span> <a id="::wpgen_scope:'If'''_x_'Then'_x_'Else'_x" class="idref" href="#::wpgen_scope:'If'''_x_'Then'_x_'Else'_x"><span class="id" title="notation">&quot;</span></a>'If'' b 'Then' F<sub>1</sub> 'Else' F<sub>2</sub>" :=<br/>
@@ -1991,7 +1991,7 @@ Explicitly providing arguments to <span class="inlinecode"><span class="id" titl
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_get</span> <span class="id" title="var">triple_set</span> <span class="id" title="var">triple_ref</span> <span class="id" title="var">triple_free</span> <span class="id" title="var">triple_add</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_get</span> <span class="id" title="var">triple_set</span> <span class="id" title="var">triple_ref</span> <span class="id" title="var">triple_free</span> <span class="id" title="var">triple_add</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -2058,7 +2058,7 @@ In order to enable automatically exploiting the specification
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_incr</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_incr</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -3081,7 +3081,7 @@ We also prove the variant lemma which is useful for handling recursive
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-06-20&nbsp;15:29&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-07-06&nbsp;19:48&nbsp;*)</span><br/>
 </div>
 </div>
 

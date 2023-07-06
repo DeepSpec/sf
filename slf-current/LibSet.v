@@ -101,6 +101,7 @@ Notation "x \notindom E" := (x \notin ((dom E) : set _))
 (* ================================================================= *)
 (** ** Inhabited *)
 
+#[global]
 Instance Inhab_set : forall A, Inhab (set A).
 Proof using. intros. apply (Inhab_of_val (@empty_impl A)). Qed.
 
@@ -111,33 +112,43 @@ Proof using. intros. apply (Inhab_of_val (@empty_impl A)). Qed.
 Lemma in_inst : forall A, BagIn A (set A).
 Proof using. constructor. exact (@in_impl A). Defined.
 
+#[global]
 Hint Extern 1 (BagIn _ (set _)) => apply in_inst : typeclass_instances.
 (* -- LATER: could this be an instance like all others ? *)
 
+#[global]
 Instance empty_inst : forall A, BagEmpty (set A).
   constructor. apply (@empty_impl A). Defined.
 
+#[global]
 Instance single_inst : forall A, BagSingle A (set A).
   constructor. rapply (@single_impl A). Defined.
 
+#[global]
 Instance union_inst : forall A, BagUnion (set A).
   constructor. rapply (@union_impl A). Defined.
 
+#[global]
 Instance inter_inst : forall A, BagInter (set A).
   constructor. rapply (@inter_impl A). Defined.
 
+#[global]
 Instance remove_inst : forall A, BagRemove (set A) (set A).
   constructor. rapply (@remove_impl A). Defined.
 
+#[global]
 Instance incl_inst : forall A, BagIncl (set A).
   constructor. rapply (@incl_impl A). Defined.
 
+#[global]
 Instance disjoint_inst : forall A, BagDisjoint (set A).
   constructor. rapply (@disjoint_impl A). Defined.
 
+#[global]
 Instance fold_inst : forall A B, BagFold B (A->B) (set A).
   constructor. rapply (@fold_impl A B). Defined.
 
+#[global]
 Instance card_inst : forall A, BagCard (set A).
   constructor. rapply (@card_impl A). Defined.
 
@@ -169,21 +180,21 @@ Definition list_covers A (E:set A) (L:list A) :=
 Declare Scope set_scope.
 
 Notation "\set{ x | P }" := (@set_st _ (fun x => P))
- (at level 0, x ident, P at level 200) : set_scope.
+ (at level 0, x name, P at level 200) : set_scope.
 Notation "\set{ x : A | P }" := (@set_st A (fun x => P))
- (at level 0, x ident, P at level 200) : set_scope.
+ (at level 0, x name, P at level 200) : set_scope.
 Notation "\set{ x '\in' E | P }" := (@set_st _ (fun x => x \in E /\ P))
- (at level 0, x ident, P at level 200) : set_scope.
+ (at level 0, x name, P at level 200) : set_scope.
 
 Notation "\set{= e | x '\in' E }" :=
  (@set_st _ (fun a => exists_ x \in E, a = e ))
- (at level 0, x ident, E at level 200) : set_scope.
+ (at level 0, x name, E at level 200) : set_scope.
 Notation "\set{= e | x '\in' E , y ''\in' F }" :=
  (@set_st _ (fun a => exists_ x \in E, exists_ y \in F, a = e ))
- (at level 0, x ident, F at level 200) : set_scope.
+ (at level 0, x name, F at level 200) : set_scope.
 Notation "\set{= e | x y '\in' E }" :=
  (@set_st _ (fun a => exists_ x y \in E, a = e ))
- (at level 0, x ident, y ident, E at level 200) : set_scope.
+ (at level 0, x name, y name, E at level 200) : set_scope.
 
 (* ********************************************************************** *)
 (* ################################################################# *)
@@ -477,6 +488,23 @@ Proof using.
   rewrite* mem_app_eq.
 Qed.
 
+Lemma finite_union_inv : forall E F,
+  finite (E \u F) ->
+  finite E /\ finite F.
+Proof using.
+  introv H. lets (L&HL): finite_inv_list_covers H. split.
+  { apply finite_of_ex_list_covers. exists L.
+    unfolds list_covers. intros x M. applys HL. apply in_union_l. auto. }
+  { apply finite_of_ex_list_covers. exists L.
+    unfolds list_covers. intros x M. applys HL. apply in_union_r. auto. }
+Qed.
+
+Lemma finite_union_eq : forall E F,
+  finite (E \u F) = (finite E /\ finite F).
+Proof using.
+  extens. iff. applys* finite_union_inv. applys* finite_union.
+Qed.
+
 Lemma finite_inter : forall E F,
   finite E \/ finite F ->
   finite (E \n F).
@@ -485,6 +513,16 @@ Proof using.
   lets (L&EQ): finite_inv_list_covers H. exists L. unfold list_covers. set_unf. autos*.
   lets (L&EQ): finite_inv_list_covers H. exists L. unfold list_covers. set_unf. autos*.
 Qed.
+
+Lemma finite_inter_l : forall E F,
+  finite E ->
+  finite (E \n F).
+Proof using. intros. applys* finite_inter. Qed.
+
+Lemma finite_inter_r : forall E F,
+  finite F ->
+  finite (E \n F).
+Proof using. intros. applys* finite_inter. Qed.
 
 Lemma finite_incl : forall E F,
   E \c F ->
@@ -638,6 +676,7 @@ Qed.
 
 End Instances.
 
+#[global]
 Hint Resolve finite_empty finite_single finite_union
   finite_inter finite_incl finite_remove : finite.
 
@@ -693,6 +732,7 @@ Proof using. apply disjoint_eq. Qed.
 
 End Autorewrite.
 
+#[global]
 Hint Rewrite in_set_st_eq set_in_empty_eq set_in_single_eq
   set_in_inter_eq set_in_union_eq set_in_remove_eq set_in_extens_eq
   set_incl_in_eq set_disjoint_eq : rew_set.
@@ -876,21 +916,23 @@ Proof using.
   applys~ LibList.fold_equiv. intros. rewrite EQ2. rewrite* EQ1.
 Qed.
 
-Lemma fold_induction:
-  forall A B (m : monoid_op B) (f : A -> B) (P : B -> Prop),
+Lemma fold_induction :
+  forall A B (m : monoid_op B) (f : A -> B) (P : B -> Prop) (E : set A),
   Comm_monoid m ->
   P (monoid_neutral m) ->
-  (forall x a, P x -> P (monoid_oper m (f a) x)) ->
-  forall E,
+  (forall x a, a \in E -> P x -> P (monoid_oper m (f a) x)) ->
   finite E ->
   P (fold m f E).
 Proof using. (* --todo: cleanup proof *)
   introv Hm Hbase Hstep Hfinite.
-  assert (forall xs, P (LibList.fold m f xs)).
-  { induction xs; rew_listx; eauto. }
+  assert (forall xs, LibList.Forall (fun x => x \in E) xs -> P (LibList.fold m f xs)).
+  { induction xs; rew_listx*. }
   forwards: list_repr_to_list_of_finite Hfinite.
   erewrite fold_eq_fold_list_repr by eauto.
-  eauto.
+  applys H. sets L: (to_list E). destruct H0 as (_&M).
+  asserts M': (forall x : A, mem x L -> x \in E). { intros. applys* M. } clear M.
+  { induction L. { constructor. } { constructor.
+    { applys* M'. } { applys IHL. introv Lx. applys* M'. } } }
 Qed.
 
 Lemma fold_congruence : forall A B (m:monoid_op B) (f g:A -> B) (E:set A),
@@ -959,6 +1001,7 @@ Qed.
 
 (** Rewriting tactics [rew_set] *)
 
+#[global]
 Hint Rewrite in_set_st_eq : rew_set.
 
 Tactic Notation "rew_set" :=
@@ -1053,7 +1096,9 @@ Proof using. introv M N I. applys N. applys~ M. Qed.
 
 End ForeachProp.
 
+#[global]
 Hint Resolve foreach_empty foreach_single foreach_union.
+#[global]
 Hint Rewrite foreach_union_eq foreach_single_eq : rew_foreach.
 
 Tactic Notation "rew_foreach" :=
@@ -1097,4 +1142,4 @@ Tactic Notation "rew_foreach" "*" "in" "*" :=
 *)
 
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

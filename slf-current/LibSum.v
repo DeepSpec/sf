@@ -40,9 +40,11 @@ Arguments inr {A} {B}.
 (* ================================================================= *)
 (** ** Inhabited *)
 
+#[global]
 Instance sum_inhab_l : forall `{Inhab A} B, Inhab (A + B).
 Proof using. intros. apply (Inhab_of_val (inl arbitrary)). Qed.
 
+#[global]
 Instance sum_inhab_r : forall `{Inhab B} A, Inhab (A + B).
 Proof using. intros. apply (Inhab_of_val (inr arbitrary)). Qed.
 
@@ -121,4 +123,4 @@ Definition fun_get22 f :=
 
 End Fget.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

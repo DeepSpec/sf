@@ -975,7 +975,7 @@ Notation "'Val' v" :=
 
 Notation "'Let'' x ':=' F1 'in' F2" :=
   ((wpgen_let F1 (fun x => F2)))
-  (at level 69, x ident, right associativity,
+  (at level 69, x name, right associativity,
   format "'[v' '[' 'Let''  x  ':='  F1  'in' ']'  '/'  '[' F2 ']' ']'")
   : wpgen_scope.
 
@@ -1521,7 +1521,7 @@ Tactic Notation "xapp" constr(E) :=
     [triple], can be populated using the [Hint Resolve ... : triple]
     command, as illustrated below. *)
 
-Hint Resolve triple_get triple_set triple_ref triple_free triple_add : triple.
+#[global] Hint Resolve triple_get triple_set triple_ref triple_free triple_add : triple.
 
 (** The argument-free variants [xapp_subst] and [xapp] are implemented
     by invoking [eauto with triple] to retrieve the relevant
@@ -1569,7 +1569,7 @@ Qed.
     includes a function call to [triple], we add it to the hint
     database [triple]. *)
 
-Hint Resolve triple_incr : triple.
+#[global] Hint Resolve triple_incr : triple.
 
 (** **** Exercise: 2 stars, standard, especially useful (triple_succ_using_incr_with_xapps)
 
@@ -2319,4 +2319,4 @@ End IsubstProp.
     serves that purpose. The definition of [wpgen] as stated in this chapter
     will probably be the matter of a publication in 2021. *)
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

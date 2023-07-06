@@ -282,7 +282,7 @@ The reader may be curious to know what the notation <span class="inlinecode"><sp
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_incr</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_incr</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -524,7 +524,7 @@ Because we will make use of the function <span class="inlinecode"><span class="i
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_incr_two</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_incr_two</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -814,7 +814,7 @@ The pattern <span class="inlinecode"><span class="id" title="keyword">fun</span>
 
 <span class="id" title="keyword">Notation</span> <a id="41749fe005eef2f7f0316a63bdabe5a<sub>8</sub>" class="idref" href="#41749fe005eef2f7f0316a63bdabe5a<sub>8</sub>"><span class="id" title="notation">&quot;</span></a>'funloc' p '=&gt;' H" :=<br/>
 &nbsp;&nbsp;(<span class="id" title="keyword">fun</span> (<a id="r:32" class="idref" href="#r:32"><span class="id" title="binder">r</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>) ⇒ <a class="idref" href="LibSepReference.html#961b41dcd8e5f7d3252676574333c51d"><span class="id" title="notation">\</span></a><a class="idref" href="LibSepReference.html#961b41dcd8e5f7d3252676574333c51d"><span class="id" title="notation">∃</span></a> <a id="p:33" class="idref" href="#p:33"><span class="id" title="binder">p</span></a><a class="idref" href="LibSepReference.html#961b41dcd8e5f7d3252676574333c51d"><span class="id" title="notation">,</span></a> <a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Basic.html#r:32"><span class="id" title="variable">r</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#val_loc"><span class="id" title="constructor">val_loc</span></a> <span class="id" title="var">p</span><a class="idref" href="LibSepReference.html#d090ebaffe5a082b6a27552ccf013e<sub>09</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="LibSepReference.html#6e7aeeae3643da4efcca62b993bbca40"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <span class="id" title="var">H</span>)<br/>
-&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">p</span> <span class="id" title="var">ident</span>, <span class="id" title="var">format</span> "'funloc'  p  '=&gt;'  H").<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">p</span> <span class="id" title="var">name</span>, <span class="id" title="var">format</span> "'funloc'  p  '=&gt;'  H").<br/>
 </div>
 
 <div class="doc">
@@ -1056,7 +1056,7 @@ The third solution consists of considering a generalized version of
 
 <div class="code">
 
-<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">triple_get_and_free</span> : <span class="id" title="var">triple</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">triple_get_and_free</span> : <span class="id" title="var">triple</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1743,7 +1743,7 @@ The specification of <span class="inlinecode"><span class="id" title="var">step_
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-06-20&nbsp;15:29&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-07-06&nbsp;19:48&nbsp;*)</span><br/>
 </div>
 </div>
 

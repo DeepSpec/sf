@@ -36,6 +36,7 @@ Arguments None {A}.
 (* ================================================================= *)
 (** ** Inhabited *)
 
+#[global]
 Instance Inhab_option : forall A, Inhab (option A).
 Proof using. intros. apply (Inhab_of_val None). Qed.
 
@@ -167,4 +168,4 @@ Arguments apply_on_eq_some_inv [A] [B] [f] [o] [x].
 
 
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

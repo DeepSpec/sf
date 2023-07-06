@@ -337,6 +337,7 @@ Lemma fun_eta_5 : forall A1 A2 A3 A4 A5 B (f : A1 -> A2 -> A3 -> A4 -> A5 -> B),
   (fun x1 x2 x3 x4 x5 => f x1 x2 x3 x4 x5) = f.
 Proof using. intros. apply~ fun_ext_4. Qed.
 
+#[global]
 Hint Rewrite fun_eta_1 fun_eta_2 fun_eta_3 fun_eta_4 fun_eta_5 : rew_eta.
 
 
@@ -708,6 +709,15 @@ Lemma streicher_K :
   forall (p : x = x), P p.
 Proof using. intros. rewrite~ (reflexive_identity_proofs_unique p). Qed.
 
+(** Coercion for rewriting a type equality in a term *)
+
+Definition rewrite_type (A B:Type) (E:A=B) (V:A) : B :=
+  eq_rect A (fun T => T) V B E.
+
+Lemma rewrite_type_self : forall A (E:A=A) (V:A),
+  rewrite_type E V = V.
+Proof using. intros. unfold rewrite_type. rewrite* eq_rect_refl_eq. Qed.
+
 (* ---------------------------------------------------------------------- *)
 (* ================================================================= *)
 (** ** Injectivity of equality on dependent pairs *)
@@ -912,4 +922,4 @@ Proof using.
   apply~ eq_dep_of_JMeq.
 Qed.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:47 *)

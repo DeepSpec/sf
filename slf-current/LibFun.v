@@ -106,6 +106,7 @@ End Combinators.
 (** Tactic for simplifying function compositions *)
 (* --TODO: not used; might become deprecated *)
 
+#[global]
 Hint Rewrite compose_id_l compose_id_r compose_assoc : rew_compose.
 Tactic Notation "rew_compose" :=
   autorewrite with rew_compose.
@@ -202,6 +203,7 @@ Qed.
 
 End FunctionImage.
 
+#[global]
 Hint Resolve finite_image : finite.
 
 (* ********************************************************************** *)
@@ -258,4 +260,4 @@ Proof using. introv I. induction n; introv Hx; autos*. Qed.
 (* --TODO: rename applyn to iter *)
 (* --TODO: migrate iteration of functionals from LibFix to here *)
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

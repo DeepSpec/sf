@@ -30,6 +30,7 @@ From SLF Require Import LibTactics LibLogic LibOperation.
 (* ================================================================= *)
 (** ** Inhabited *)
 
+#[global]
 Instance Inhab_bool : Inhab bool.
 Proof using. constructor. apply (Inhab_of_val true). Qed.
 
@@ -324,6 +325,7 @@ Opaque eqb neg and or.
 (** [rew_neg_neg] is a tactic that simplifies all double negations
     of booleans, i.e. replaces [!!b] with [b]. *)
 
+#[global]
 Hint Rewrite neg_neg : rew_neg_neg.
 
 Tactic Notation "rew_neg_neg" :=
@@ -353,6 +355,7 @@ Tactic Notation "rew_neg_neg" "*" "in" "*" :=
 (** [rew_bool] simplifies boolean expressions, using rewriting
     lemmas in the database [rew_bool] defined below. *)
 
+#[global]
 Hint Rewrite
   eqb_same eqb_true_l eqb_true_r eqb_false_l eqb_false_r
   neg_false neg_true neg_neg neg_and neg_or
@@ -384,4 +387,4 @@ Tactic Notation "rew_bool" "~" "in" "*" :=
 Tactic Notation "rew_bool" "*" "in" "*" :=
   rew_bool in *; auto_star.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

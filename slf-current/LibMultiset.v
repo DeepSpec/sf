@@ -68,30 +68,38 @@ Definition card_impl A (E:multiset A) :=
 Lemma in_inst : forall A, BagIn A (multiset A).
 Proof using. constructor. exact (@in_impl A). Defined.
 
+#[global]
 Hint Extern 1 (BagIn _ (multiset _)) => apply in_inst
   : typeclass_instances.
 
+#[global]
 Instance empty_inst : forall A, BagEmpty (multiset A).
   constructor. rapply (@empty_impl A). Defined.
 
+#[global]
 Instance single_inst : forall A, BagSingle A (multiset A) .
   constructor. rapply (@single_impl A). Defined.
 
+#[global]
 Instance union_inst : forall A, BagUnion (multiset A).
   constructor. rapply (@union_impl A). Defined.
 
+#[global]
 Instance incl_inst : forall A, BagIncl (multiset A).
   constructor. rapply (@incl_impl A). Defined.
 
+#[global]
 Instance fold_inst : forall A B, BagFold B (A->nat->B) (multiset A).
   constructor. rapply (@fold_impl A B). Defined.
 
+#[global]
 Instance card_inst : forall A, BagCard (multiset A).
   constructor. rapply (@card_impl A). Defined.
 
 Global Opaque multiset empty_inst single_inst in_inst
  union_inst incl_inst fold_inst card_inst.
 
+#[global]
 Instance Inhab_multiset : forall A, Inhab (multiset A).
 Proof using. intros. apply (Inhab_of_val (@empty_impl A)). Qed.
 
@@ -131,10 +139,15 @@ Proof using.
   iff. tests: (E x = 0). right~. left~. destruct H; math.
 Qed.
 
+Global Instance incl_refl_inst : Incl_refl (T:=multiset A).
+Proof using.
+  constructor. intros x. unfold incl_inst, incl_impl, incl. intros. math.
+Qed.
+
 Global Instance incl_inv_inst : Incl_inv (A:=A) (T:=multiset A).
 Proof using.
   constructor. intros x. introv M N.
-  unfold incl_inst, incl_impl,incl, in_inst, in_impl, is_in in *.
+  unfold incl_inst, incl_impl, incl, in_inst, in_impl, is_in in *.
   specializes M x. math.
 Qed.
 
@@ -172,14 +185,18 @@ Proof using.
   unfold empty_impl, multiset. math.
 Qed.
 
+Global Instance union_incl_union_inst : Union_incl_union (T:=multiset A).
+Proof using.
+  constructor.
+  unfold incl_inst, incl_impl, union_inst, union_impl, multiset. simpl.
+  introv H1 H2. intros x. specializes H1 x. specializes H2 x. math.
+Qed.
+
+(* TODO: will be proved with respect to the new version of list_repr_impl
 Global Instance card_empty_inst : Card_empty (T:=multiset A).
-Proof using. admit. (*-- TODO: under construction *) Admitted.
-
 Global Instance card_single_inst : Card_single (A:=A) (T:=multiset A).
-Proof using. admit. (*-- TODO: under construction *) Admitted.
-
 Global Instance card_union_inst : Card_union (T:=multiset A).
-Proof using. admit. (*-- TODO: under construction *) Admitted.
+*)
 
 End Instances.
 
@@ -270,7 +287,9 @@ Proof using. intros. apply union_empty_r. Qed.
 Lemma for_multiset_empty_incl : forall A (E:multiset A), \{} \c E.
 Proof using. intros. apply empty_incl. Qed.
 
+#[global]
 Hint Rewrite <- for_multiset_union_assoc : rew_permut_simpl.
+#[global]
 Hint Rewrite for_multiset_union_empty_l for_multiset_union_empty_r : rew_permut_simpl.
 Ltac rew_permut_simpl :=
   autorewrite with rew_permut_simpl.
@@ -427,7 +446,11 @@ Proof using. intros. subst. apply permut_get_2. Qed.
 Lemma permut_tactic_simpl_incl : forall A (l1 l2 l3 l4:multiset A),
   (l1 \u l3) \c l4 ->
   (l1 \u (l2 \u l3)) \c (l2 \u l4).
-Admitted. (* --TODO URGENT: reason on this tedious inclusion... *)
+Proof using.
+  introv H. rewrites (union_comm l2 l3). rewrite union_assoc.
+  sets l0: (l1 \u l3). rewrite union_comm. apply union_incl_union.
+  { apply incl_refl. } { auto. }
+Qed.
 
 Ltac get_premut_tactic_simpl tt :=
   match goal with
@@ -630,6 +653,7 @@ Lemma notin_empty : forall x,
 Proof using. intros. unfold notin. rewrite in_empty_eq. auto. Qed.
 
 End InversionsTactic.
+#[global]
 Hint Resolve notin_empty.
 
 Ltac in_union_meta :=
@@ -730,4 +754,4 @@ Tactic Notation "multiset_empty" :=
 Tactic Notation "multiset_empty" constr(E) :=
   let H := fresh "M" in lets H:E; multiset_empty in H.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)

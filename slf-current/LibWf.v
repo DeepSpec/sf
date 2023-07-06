@@ -38,6 +38,7 @@ Definition wf := well_founded.
 (** [auto with wf] attempts to unfold the names of
     the relations given as argument to [wf]. *)
 
+#[global]
 Hint Extern 1 (wf ?R) => progress (unfold R) : wf.
 
 (** [solve_wf] is a shorthand for solving goals using
@@ -86,6 +87,7 @@ Proof using. intros. unfold measure, trans. intros. nat_math. Qed.
 
 End Measure.
 
+#[global]
 Hint Resolve wf_measure : wf.
 
 (* ---------------------------------------------------------------------- *)
@@ -104,6 +106,7 @@ Proof using.
   intros [x1 x2] H. apply Acc_intro. intros [y1 y2] Lt. apply~ H.
 Qed.
 
+#[global]
 Hint Resolve wf_measure2 : wf.
 
 (* ----------------------------------------------------------------------
@@ -131,6 +134,7 @@ Lemma wf_empty : forall A,
   wf (@empty A).
 Proof using. intros_all. constructor. introv H. false. Qed.
 
+#[global]
 Hint Resolve wf_empty : wf.
 
 (* ---------------------------------------------------------------------- *)
@@ -166,6 +170,7 @@ Proof using.
     intros. applys H. math.
 Qed.
 
+#[global]
 Hint Resolve wf_peano_lt : wf.
 
 (* ---------------------------------------------------------------------- *)
@@ -180,6 +185,7 @@ Proof using.
   induction x using peano_induction. apply~ Acc_intro.
 Qed.
 
+#[global]
 Hint Resolve wf_lt : wf.
 
 (* ---------------------------------------------------------------------- *)
@@ -232,8 +238,11 @@ Proof using.
   unfolds. applys lt_abs_abs; math.
 Qed.
 
+#[global]
 Hint Resolve wf_downto : wf.
+#[global]
 Hint Unfold downto.
+#[global]
 Hint Extern 1 (downto _ _ _) => math : maths.
 
 (* ---------------------------------------------------------------------- *)
@@ -262,8 +271,11 @@ Proof using.
   applys lt_abs_abs; math.
 Qed.
 
+#[global]
 Hint Resolve wf_upto : wf.
+#[global]
 Hint Unfold upto.
+#[global]
 Hint Extern 1 (upto _ _ _) => math : maths.
 
 (* ********************************************************************** *)
@@ -355,6 +367,7 @@ Qed.
 
 End UnprojWf.
 
+#[global]
 Hint Resolve
   wf_unproj21 wf_unproj22
   wf_unproj31 wf_unproj32 wf_unproj33
@@ -399,6 +412,7 @@ Proof using.
   intros. apply~ wf_lexico3. apply~ wf_lexico2.
 Qed.
 
+#[global]
 Hint Resolve wf_lexico2 wf_lexico3 wf_lexico4 : wf.
 
 (* ********************************************************************** *)
@@ -467,6 +481,7 @@ Lemma wf_prod4_of_wf_4 : forall (A1 A2 A3 A4:Type)
   wf (prod4 R1 R2 R3 R4).
 Proof using. intros. apply~ wf_prod2_of_wf_2. Qed.
 
+#[global]
 Hint Resolve
   wf_prod2_of_wf_1 wf_prod2_of_wf_2
   wf_prod3_of_wf_1 wf_prod3_of_wf_2 wf_prod3_of_wf_3
@@ -485,6 +500,7 @@ Proof using.
   intros y Hy. subst a. hnf in Hy. applys* IH.
 Qed.
 
+#[global]
 Hint Resolve wf_rel_preimage : wf.
 
 (* ********************************************************************** *)
@@ -580,4 +596,4 @@ Proof using.
   induction 1; eauto using Acc_inv.
 Qed.
 
-(* 2023-06-20 15:29 *)
+(* 2023-07-06 19:48 *)
