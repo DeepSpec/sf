@@ -913,7 +913,7 @@ Definition proof_irrelevance : Prop :=
 
 (** Prove that fact. Use [pe_implies_true_eq] to establish that the
     proposition [P] in [proof_irrelevance] is equal to [True]. Leverage
-    that equality to establish that both proofs objects [pf1] and
+    that equality to establish that both proof objects [pf1] and
     [pf2] must be just [I]. *)
 
 Theorem pe_implies_pi :
@@ -921,4 +921,4 @@ Theorem pe_implies_pi :
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-08-22 20:25 *)
+(* 2023-08-22 20:28 *)

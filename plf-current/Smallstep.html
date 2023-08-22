@@ -355,8 +355,9 @@ Things to notice:
  We will be working with several different single-step relations,
     so it is helpful to generalize a bit and state a few definitions
     and theorems about relations in general.  (The optional chapter
-    <span class="inlinecode"><span class="id" title="var">Rel.v</span></span> develops some of these ideas in a bit more detail; it may
-    be useful if the treatment here feels too terse.) 
+    <span class="inlinecode"><span class="id" title="var">Rel.v</span></span> in <i>Logical Foundations</i> develops some of these ideas in
+    a bit more detail; it may be useful if the treatment here feels
+    too terse.) 
 <div class="paragraph"> </div>
 
  A <i>binary relation</i> on a set <span class="inlinecode"><span class="id" title="var">X</span></span> is a family of propositions
@@ -706,6 +707,13 @@ Having introduced the idea of values, we can use it in the
 
 
 </li>
+<li> The cases when both derivations end with <span class="inlinecode"><span class="id" title="var">ST_Plus1</span></span> or
+      <span class="inlinecode"><span class="id" title="var">ST_Plus2</span></span> follow by the induction hypothesis.
+
+<div class="paragraph"> </div>
+
+
+</li>
 <li> It cannot happen that one is <span class="inlinecode"><span class="id" title="var">ST_PlusConstConst</span></span> and the other
       is <span class="inlinecode"><span class="id" title="var">ST_Plus1</span></span> or <span class="inlinecode"><span class="id" title="var">ST_Plus2</span></span>, since this would imply that <span class="inlinecode"><span class="id" title="var">x</span></span> has
       the form <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span> where both <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span> are constants (by
@@ -719,14 +727,7 @@ Having introduced the idea of values, we can use it in the
 <li> Similarly, it cannot happen that one is <span class="inlinecode"><span class="id" title="var">ST_Plus1</span></span> and the other
       is <span class="inlinecode"><span class="id" title="var">ST_Plus2</span></span>, since this would imply that <span class="inlinecode"><span class="id" title="var">x</span></span> has the form <span class="inlinecode"><span class="id" title="var">P</span></span>
       <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>2</sub></span></span> where <span class="inlinecode"><span class="id" title="var">t<sub>1</sub></span></span> both has the form <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">t<sub>11</sub></span></span> <span class="inlinecode"><span class="id" title="var">t<sub>12</sub></span></span> and is a
-      value (hence has the form <span class="inlinecode"><span class="id" title="var">C</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>).
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> The cases when both derivations end with <span class="inlinecode"><span class="id" title="var">ST_Plus1</span></span> or
-      <span class="inlinecode"><span class="id" title="var">ST_Plus2</span></span> follow by the induction hypothesis. <font size=-2>&#9744;</font> 
+      value (hence has the form <span class="inlinecode"><span class="id" title="var">C</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>). <font size=-2>&#9744;</font> 
 </li>
 </ul>
 
@@ -2640,7 +2641,7 @@ This time, the trace is:
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-08-22&nbsp;20:26&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-08-22&nbsp;20:29&nbsp;*)</span><br/>
 </div>
 </div>
 

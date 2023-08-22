@@ -212,8 +212,9 @@ End SimpleArith1.
 (** We will be working with several different single-step relations,
     so it is helpful to generalize a bit and state a few definitions
     and theorems about relations in general.  (The optional chapter
-    [Rel.v] develops some of these ideas in a bit more detail; it may
-    be useful if the treatment here feels too terse.) *)
+    [Rel.v] in _Logical Foundations_ develops some of these ideas in
+    a bit more detail; it may be useful if the treatment here feels
+    too terse.) *)
 
 (** A _binary relation_ on a set [X] is a family of propositions
     parameterized by two elements of [X] -- i.e., a proposition about
@@ -439,6 +440,9 @@ Inductive step : tm -> tm -> Prop :=
 
     - If both are [ST_PlusConstConst], the result is immediate.
 
+    - The cases when both derivations end with [ST_Plus1] or
+      [ST_Plus2] follow by the induction hypothesis.
+
     - It cannot happen that one is [ST_PlusConstConst] and the other
       is [ST_Plus1] or [ST_Plus2], since this would imply that [x] has
       the form [P t1 t2] where both [t1] and [t2] are constants (by
@@ -448,10 +452,7 @@ Inductive step : tm -> tm -> Prop :=
     - Similarly, it cannot happen that one is [ST_Plus1] and the other
       is [ST_Plus2], since this would imply that [x] has the form [P
       t1 t2] where [t1] both has the form [P t11 t12] and is a
-      value (hence has the form [C n]).
-
-    - The cases when both derivations end with [ST_Plus1] or
-      [ST_Plus2] follow by the induction hypothesis. [] *)
+      value (hence has the form [C n]). [] *)
 
 (** Most of this proof is the same as the one above.  But to get
     maximum benefit from the exercise you should try to write your
@@ -1893,4 +1894,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-08-22 20:26 *)
+(* 2023-08-22 20:29 *)

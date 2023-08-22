@@ -177,8 +177,8 @@ Inductive derivable : Assertion -> com -> Assertion -> Type :=
       derivable P <{skip}> P
   | H_Asgn : forall Q V a,
       derivable (Q [V |-> a]) <{V := a}> Q
-  | H_Seq  : forall P c Q d R,
-      derivable P c Q -> derivable Q d R -> derivable P <{c;d}> R
+  | H_Seq : forall P c Q d R,
+      derivable Q d R -> derivable P c Q -> derivable P <{c;d}> R
   | H_If : forall P Q b c1 c2,
     derivable (fun st => P st /\ bassn b st) c1 Q ->
     derivable (fun st => P st /\ ~(bassn b st)) c2 Q ->
@@ -186,7 +186,7 @@ Inductive derivable : Assertion -> com -> Assertion -> Type :=
   | H_While : forall P b c,
     derivable (fun st => P st /\ bassn b st) c P ->
     derivable P <{while b do c end}> (fun st => P st /\ ~ (bassn b st))
-  | H_Consequence  : forall (P Q P' Q' : Assertion) c,
+  | H_Consequence : forall (P Q P' Q' : Assertion) c,
     derivable P' c Q' ->
     (forall st, P st -> P' st) ->
     (forall st, Q' st -> Q st) ->
@@ -392,4 +392,4 @@ Proof.
     of Coq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2023-08-22 20:26 *)
+(* 2023-08-22 20:29 *)

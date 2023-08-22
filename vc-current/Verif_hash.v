@@ -1140,4 +1140,4 @@ erewrite (wand_slice_array h (h+1) N _ (tptr tcell))
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-08-22 20:31 *)
+(* 2023-08-22 20:34 *)

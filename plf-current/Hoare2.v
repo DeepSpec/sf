@@ -94,7 +94,7 @@ Definition FILL_IN_HERE := <{True}>.
     invariants. In the remainder of this section we explain in detail
     how to construct decorations for several short programs, all of
     which are loop-free or have simple loop invariants. We'll return
-    finding more interesting loop invariants later in the chapter. *)
+    to finding more interesting loop invariants later in the chapter. *)
 
 (* ================================================================= *)
 (** ** Example: Swapping *)
@@ -1154,7 +1154,7 @@ Proof.
     during the loop, while [m] and [n] are constant, so the assertion
     we chose didn't have much chance of being an invariant!
 
-    To do better, we need to generalize (8) to some statement that is
+    To do better, we need to generalize (7) to some statement that is
     equivalent to (8) when [X] is [0], since this will be the case
     when the loop terminates, and that "fills the gap" in some
     appropriate way when [X] is nonzero.  Looking at how the loop
@@ -1297,10 +1297,9 @@ Fixpoint parity x :=
 
     Hint: There are actually several possible loop invariants that all
     lead to good proofs; one that leads to a particularly simple proof
-    is [parity X = parity m /\ 2 <= X] -- or more formally, using the
+    is [parity X = parity m] -- or more formally, using the
     [ap] operator to lift the application of the [parity] function
-    into the syntax of assertions, [{{ ap parity X = parity m /\ 2 <=
-    X }}]. *)
+    into the syntax of assertions, [{{ ap parity X = parity m }}]. *)
 
 Definition parity_dec (m:nat) : decorated :=
   <{
@@ -1322,13 +1321,11 @@ Lemma parity_ge_2 : forall x,
   2 <= x ->
   parity (x - 2) = parity x.
 Proof.
-  induction x; intros; simpl.
+  destruct x; intros; simpl.
   - reflexivity.
-  - destruct x.
+  - destruct x; simpl.
     + lia.
-    + inversion H; subst; simpl.
-      * reflexivity.
-      * rewrite sub_0_r. reflexivity.
+    + rewrite sub_0_r. reflexivity.
 Qed.
 
 Lemma parity_lt_2 : forall x,
@@ -1371,7 +1368,7 @@ Proof.
             Z := 0
     (3)            {{ Z*Z <= m /\ m<(Z+1)*(Z+1) }};
             while (Z+1)*(Z+1) <= X do
-    (4)            {{ Z*Z<=m /\ (Z+1)*(Z+1)<=X }} ->>            (c - WRONG!)
+    (4)            {{ Z*Z<=m /\ m<(Z+1)*(Z+1) /\ (Z+1)*(Z+1)<=X }} ->>            (c - WRONG!)
     (5)            {{ (Z+1)*(Z+1)<=m /\ m<((Z+1)+1)*((Z+1)+1) }}
               Z := Z+1
     (6)            {{ Z*Z<=m /\ m<(Z+1)*(Z+1) }}
@@ -1492,15 +1489,15 @@ Proof. (* FILL IN HERE *) Admitted.
 
     {{ X = m }} ->>                                        (a - OK)
     {{ 0 = 0*m /\ X = m }}
-      Y := 0;
-                    {{ 0 = Y*m /\ X = m }}
-      Z := 0;
-                    {{ Z = Y*m /\ X = m }}
+      Y := 0
+                    {{ 0 = Y*m /\ X = m }};
+      Z := 0
+                    {{ Z = Y*m /\ X = m }};
       while Y <> X do
                     {{ Z = Y*m /\ X = m /\ Y <> X }} ->>   (c - OK)
                     {{ Z+X = (Y+1)*m /\ X = m }}
-        Z := Z + X;
-                    {{ Z = (Y+1)*m /\ X = m }}
+        Z := Z + X
+                    {{ Z = (Y+1)*m /\ X = m }};
         Y := Y + 1
                     {{ Z = Y*m /\ X = m }}
       end
@@ -1552,14 +1549,14 @@ Compute fact 5. (* ==> 120 *)
     and subtraction can behave differently than with real numbers.
     Excluding both operations from your loop invariant is advisable!
 
-    Then state a theorem named [factorial_outer_triple_valid] that says
+    Then state a theorem named [factorial_correct] that says
     [factorial_dec] is correct, and prove the theorem.  If all goes
     well, [verify] will leave you with just two subgoals, each of
     which requires establishing some mathematical property of [fact],
     rather than proving anything about your program.
 
     Hint: if those two subgoals become tedious to prove, give some
-    though to how you could restate your assertions such that the
+    thought to how you could restate your assertions such that the
     mathematical operations are more amenable to manipulation in Coq.
     For example, recall that [1 + ...] is easier to work with than
     [... + 1]. *)
@@ -1613,17 +1610,6 @@ Definition minimum_dec (a b : nat) : decorated :=
     {{ FILL_IN_HERE }} ->>
     {{ Z = min a b }}
   }>.
-
-(* HIDE
-    - The first implication holds by substitution and algebra.
-    - The second holds because:
-        + by lemma2 we can rewrite [Z+1 + min (X-1) (Y-1)] as
-          [Z+1 + (min x y) - 1]
-        + by lemma1 and [X<>0 /\ Y<>0], [min x y <> 0],
-          so [(min x y) - 1] is not zero-truncated.
-        + so we can rewrite [Z+1 + (min x y) - 1] as [Z + min x y].
-    - The third holds because the second conjunct implies [X] and [Y]
-      are both [0]. *)
 
 Theorem minimum_correct : forall a b,
   outer_triple_valid (minimum_dec a b).
@@ -1968,7 +1954,8 @@ Definition dfib (n : nat) : decorated :=
 
 Theorem dfib_correct : forall n,
   outer_triple_valid (dfib n).
-(* FILL IN HERE *) Admitted.
+Proof.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** **** Exercise: 5 stars, advanced, optional (improve_dcom)
@@ -1986,4 +1973,4 @@ Theorem dfib_correct : forall n,
 
     [] *)
 
-(* 2023-08-22 20:26 *)
+(* 2023-08-22 20:29 *)

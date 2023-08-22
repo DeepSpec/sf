@@ -1285,7 +1285,7 @@ Proof.
 (** ** Working with Decidable Properties *)
 
 (** Since [Prop] includes _both_ decidable and undecidable properties,
-    we have two choices when when we want to formalize a property that
+    we have two choices when we want to formalize a property that
     happens to be decidable: we can express it as a boolean
     computation or as a function into [Prop].
 
@@ -1733,4 +1733,4 @@ Definition implies_to_or := forall P Q:Prop,
 
     [] *)
 
-(* 2023-08-22 20:25 *)
+(* 2023-08-22 20:28 *)
