@@ -36,7 +36,6 @@
 
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-parsing,-deprecated-hint-without-locality".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="Logic.html#"><span class="id" title="library">Logic</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -670,7 +669,7 @@ Here's how <span class="inlinecode"><span class="id" title="tactic">inversion</s
 <li> The ones that are left represent the cases that must be proved
         to establish the original goal.  For those, <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> adds
         to the proof context all equations that must hold of the
-        arguments given to <span class="inlinecode"><span class="id" title="var">P</span></span> -- e.g., <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">S</span></span> <span class="inlinecode"><span class="id" title="var">n'</span>)</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span> in the proof of
+        arguments given to <span class="inlinecode"><span class="id" title="var">P</span></span> -- e.g., <span class="inlinecode"><span class="id" title="var">n'</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n</span></span> in the proof of
         <span class="inlinecode"><span class="id" title="var">evSS_ev</span></span>). 
 </li>
 </ul>
@@ -988,7 +987,7 @@ The "strictly less than" relation <span class="inlinecode"><span class="id" titl
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="Playground.lt" class="idref" href="#Playground.lt"><span class="id" title="definition">lt</span></a> (<a id="n:83" class="idref" href="#n:83"><span class="id" title="binder">n</span></a> <a id="m:84" class="idref" href="#m:84"><span class="id" title="binder">m</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) := <a class="idref" href="IndProp.html#Playground.le"><span class="id" title="inductive">le</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="IndProp.html#n:83"><span class="id" title="variable">n</span></a>) <a class="idref" href="IndProp.html#m:84"><span class="id" title="variable">m</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Notation</span> <a id="Playground.:::x_'&lt;'_x" class="idref" href="#Playground.:::x_'&lt;'_x"><span class="id" title="notation">&quot;</span></a>m &lt; n" := (<a class="idref" href="IndProp.html#Playground.lt"><span class="id" title="definition">lt</span></a> <span class="id" title="var">m</span> <span class="id" title="var">n</span>).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Notation</span> <a id="Playground.:::x_'&lt;'_x" class="idref" href="#Playground.:::x_'&lt;'_x"><span class="id" title="notation">&quot;</span></a>n &lt; m" := (<a class="idref" href="IndProp.html#Playground.lt"><span class="id" title="definition">lt</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span>).<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="IndProp.html#Playground"><span class="id" title="module">Playground</span></a>.<br/>
 </div>
 
@@ -3247,7 +3246,7 @@ A function <span class="inlinecode"><span class="id" title="var">m</span></span>
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-07-06&nbsp;19:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-08-22&nbsp;20:25&nbsp;*)</span><br/>
 </div>
 </div>
 

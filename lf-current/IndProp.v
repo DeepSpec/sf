@@ -2,7 +2,6 @@
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From LF Require Export Logic.
-From Coq Require Import Lia.
 
 (* ################################################################# *)
 (** * Inductively Defined Propositions *)
@@ -450,7 +449,7 @@ Proof.
       - The ones that are left represent the cases that must be proved
         to establish the original goal.  For those, [inversion] adds
         to the proof context all equations that must hold of the
-        arguments given to [P] -- e.g., [S (S n') = n] in the proof of
+        arguments given to [P] -- e.g., [n' = n] in the proof of
         [evSS_ev]). *)
 
 (** The [ev_double] exercise above shows that our new notion of
@@ -687,7 +686,7 @@ Proof.
 
 Definition lt (n m : nat) := le (S n) m.
 
-Notation "m < n" := (lt m n).
+Notation "n < m" := (lt n m).
 
 End Playground.
 
@@ -2365,4 +2364,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-07-06 19:40 *)
+(* 2023-08-22 20:25 *)

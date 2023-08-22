@@ -2319,4 +2319,4 @@ End IsubstProp.
     serves that purpose. The definition of [wpgen] as stated in this chapter
     will probably be the matter of a publication in 2021. *)
 
-(* 2023-07-06 19:48 *)
+(* 2023-08-22 20:33 *)
