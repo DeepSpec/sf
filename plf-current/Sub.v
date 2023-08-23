@@ -1867,4 +1867,4 @@ End FormalThoughtExercises.
 
 End STLCSub.
 
-(* 2023-08-22 20:29 *)
+(* 2023-08-23 13:58 *)

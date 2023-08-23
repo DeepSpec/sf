@@ -31,6 +31,7 @@ Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import Strings.String.  (* for manual grading *)
 From Coq Require Export Bool.Bool.
 From Coq Require Export Arith.Arith.
+From Coq Require Export Arith.PeanoNat.
 From Coq Require Export Arith.EqNat.
 From Coq Require Export Lia.
 From Coq Require Export Lists.List.
@@ -95,10 +96,15 @@ Proof.
   (* try to remember the name of the lemma about negation and [<=] *)
   Search (~ _ <= _ -> _).
   apply not_le in H0.
+  (* [>] is defined using [<]. Let's convert all inequalities to [<]. *)
+  unfold gt in H0.
+  unfold gt.
   (* try to remember the name of the transitivity lemma about [>] *)
-  Search (_ > _ -> _ > _ -> _ > _).
-  apply gt_trans with j.
-  apply gt_trans with (k-3).
+  Search (_ < _ -> _ < _ -> _ < _).
+  apply Nat.lt_trans with j.
+  apply H.
+  apply Nat.lt_trans with (k-3).
+  apply H0.
   (* Is [k] greater than [k-3]? On the integers, sure. But we're working
      with natural numbers, which truncate subtraction at zero. *)
 Abort.
@@ -127,13 +133,13 @@ Proof. (* try again! *)
   unfold gt.
   (* try to remember the name ... *)
   Search (_ < _ -> _ <= _ -> _ < _).
-  apply lt_le_trans with j.
+  apply Nat.lt_le_trans with j.
   apply H.
-  apply le_trans with (k-3).
+  apply Nat.le_trans with (k-3).
   Search (_ < _ -> _ <= _).
-  apply lt_le_weak.
+  apply Nat.lt_le_incl.
   auto.
-  apply le_minus.
+  apply Nat.le_sub_l.
 Qed.
 
 (** That was tedious.  Here's a much easier way: *)
@@ -621,4 +627,4 @@ Proof.
     [maybe_swap_correct] will be applied (at a larger scale) in
     the next few chapters. *)
 
-(* 2023-08-22 20:32 *)
+(* 2023-08-23 14:01 *)
