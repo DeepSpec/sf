@@ -1662,7 +1662,7 @@ Qed.
 
       while X = 2 do X := 1 end
 
-    since we will never enter the loop. *)
+    since the program will never enter the loop. *)
 
 (** The program
 
@@ -2311,4 +2311,4 @@ End HoareAssertAssume.
 
 
 
-(* 2023-08-23 13:58 *)
+(* 2023-08-23 15:20 *)

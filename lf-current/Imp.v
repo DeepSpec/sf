@@ -1310,8 +1310,8 @@ Locate ";".
 Locate "while".
 (* ===>
     Notation
-      "'while' x 'do' y 'end'" := CWhile x y : com_scope (default interpretation)
-      "'_' '!->' v" := t_empty v (default interpretation)
+      "'while' x 'do' y 'end'" :=
+          CWhile x y : com_scope (default interpretation)
 *)
 
 (* ================================================================= *)
@@ -2060,4 +2060,4 @@ End BreakImp.
 
     [] *)
 
-(* 2023-08-23 13:57 *)
+(* 2023-08-23 15:19 *)

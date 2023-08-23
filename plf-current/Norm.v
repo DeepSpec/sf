@@ -137,8 +137,8 @@ Notation "X * Y" :=
 Notation "( x ',' y )" := (tm_pair x y) (in custom stlc at level 0,
                                                 x custom stlc at level 99,
                                                 y custom stlc at level 99).
-Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 0).
-Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 0).
+Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 1).
+Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 1).
 
 (* ----------------------------------------------------------------- *)
 (** *** Substitution *)
@@ -1144,4 +1144,4 @@ Proof.
   eapply V_nil.
 Qed.
 
-(* 2023-08-23 13:59 *)
+(* 2023-08-23 15:20 *)

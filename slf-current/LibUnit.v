@@ -49,4 +49,4 @@ Proof using. intros. destruct tt1. destruct~ tt2. Qed.
 
 
 
-(* 2023-08-23 14:05 *)
+(* 2023-08-23 15:26 *)

@@ -736,7 +736,7 @@ Proof. reflexivity. Qed.
 
 (** - A conditional
 
-      if b then {{P1}} d1 else {{P2}} d2 end
+      if b then {{P1}} d1 else {{P2}} d2 end {{Q}}
 
       is locally consistent with respect to precondition [P] if
 
@@ -747,6 +747,10 @@ Proof. reflexivity. Qed.
          (3) [d1] is locally consistent with respect to [P1]
 
          (4) [d2] is locally consistent with respect to [P2]
+
+         (5) [post d1 ->> Q]
+
+         (6) [post d2 ->> Q]
 *)
 (** - A loop
 
@@ -1973,4 +1977,4 @@ Proof.
 
     [] *)
 
-(* 2023-08-23 13:58 *)
+(* 2023-08-23 15:20 *)

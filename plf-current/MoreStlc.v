@@ -1056,8 +1056,8 @@ Notation "X * Y" :=
 Notation "( x ',' y )" := (tm_pair x y) (in custom stlc at level 0,
                                                 x custom stlc at level 99,
                                                 y custom stlc at level 99).
-Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 0).
-Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 0).
+Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 1).
+Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 1).
 
 Notation "'List' T" :=
   (Ty_List T) (in custom stlc_ty at level 4).
@@ -2083,4 +2083,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2023-08-23 13:58 *)
+(* 2023-08-23 15:20 *)

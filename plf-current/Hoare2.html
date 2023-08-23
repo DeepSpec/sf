@@ -989,7 +989,7 @@ Remember that the outer Hoare triple of a decorated program is
 <ul class="doclist">
 <li> A conditional
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">b</span> <span class="id" title="keyword">then</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P<sub>1</sub></span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">d<sub>1</sub></span> <span class="id" title="keyword">else</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P<sub>2</sub></span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">d<sub>2</sub></span> <span class="id" title="keyword">end</span>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">b</span> <span class="id" title="keyword">then</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P<sub>1</sub></span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">d<sub>1</sub></span> <span class="id" title="keyword">else</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">P<sub>2</sub></span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">d<sub>2</sub></span> <span class="id" title="keyword">end</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Q</span><span style='letter-spacing:-.4em;'>}</span>}
 </span>      is locally consistent with respect to precondition <span class="inlinecode"><span class="id" title="var">P</span></span> if
 
 <div class="paragraph"> </div>
@@ -1007,6 +1007,14 @@ Remember that the outer Hoare triple of a decorated program is
 <div class="paragraph"> </div>
 
          (4) <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span> is locally consistent with respect to <span class="inlinecode"><span class="id" title="var">P<sub>2</sub></span></span>
+
+<div class="paragraph"> </div>
+
+         (5) <span class="inlinecode"><span class="id" title="var">post</span></span> <span class="inlinecode"><span class="id" title="var">d<sub>1</sub></span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>
+
+<div class="paragraph"> </div>
+
+         (6) <span class="inlinecode"><span class="id" title="var">post</span></span> <span class="inlinecode"><span class="id" title="var">d<sub>2</sub></span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>
 
 </li>
 </ul>
@@ -2474,7 +2482,7 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-08-23&nbsp;13:58&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-08-23&nbsp;15:20&nbsp;*)</span><br/>
 </div>
 </div>
 
