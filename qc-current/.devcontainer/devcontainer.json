@@ -1,0 +1,23 @@
+{
+  "image": "eskehoy/aufsv22:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": ["maximedenes.vscoq"],
+      "settings": {
+        "files.exclude": {
+          "**/*.aux": true,
+          "**/*.glob": true,
+          "**/*.vo": true,
+          "**/*.vos": true,
+          "**/*.vok": true,
+          "**/.*.cache": true
+        },
+        "coq.loadCoqProject": true,
+        "[coq]": {
+          "editor.tabSize": 2,
+          "editor.insertSpaces": true
+        }
+      }
+    }
+  }
+}

@@ -1482,13 +1482,13 @@ Proof.
 (** [] *)
 
 (* ================================================================= *)
-(** ** Course Late Policies Formalized *)
+(** ** Course Late Policies, Formalized *)
 
 (** Suppose that a course has a grading policy based on late days such
     that a student's final letter grade is lowered if they submit too
     many homework assignments late.
 
-    In this series of problems, we model that situation using the
+    In this series of problems, we model this situation using the
     features of Coq that we have seen so far and prove some basic
     facts about the grading policy.  *)
 
@@ -1516,7 +1516,7 @@ Inductive grade : Type :=
     with natural numbers, we could define [bool]-valued functions
     [grade_eqb], [grade_ltb], etc., and that would work fine.
     However, we can also define a slightly more informative type for
-    comparing two values, as shown below.  This datatype as three
+    comparing two values, as shown below.  This datatype has three
     constructors that can be used to indicate whether two values are
     "equal", "less than", or "greater than" one another. (This
     definition also appears in the Coq standard libary.)  *)
@@ -2009,4 +2009,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2023-08-23 15:19 *)
+(* 2023-08-23 20:23 *)

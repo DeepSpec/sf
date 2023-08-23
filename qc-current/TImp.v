@@ -1417,4 +1417,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2023-08-23 15:29 *)
+(* 2023-08-23 20:33 *)

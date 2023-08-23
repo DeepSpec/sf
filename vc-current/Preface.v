@@ -69,7 +69,7 @@
 
 (** Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
    describes the Coq installation you will need.  This edition was
-   built with Coq 8.16.
+   built with Coq 8.17.
 
    You will need VST 2.11.1 installed.  You can do that either by installing
    it as part of the standard "Coq Platform" that is released with each
@@ -208,4 +208,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2023-08-23 15:24 *)
+(* 2023-08-23 20:28 *)
