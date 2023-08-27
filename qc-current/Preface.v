@@ -8,11 +8,10 @@
 
 (** For working with this material, you will need to install
     QuickChick. For this version, we are going to be using a 
-    beta release of QuickChick-2.0 that you will need to build 
-    from source. It is available here:
+    QuickChick-2.0, which can be installed by simply running:
 
-       {https://github.com/QuickChick/QuickChick/releases/tag/v.2.0+beta.16}
-
+    [ opam install coq-quickchick ]
+   
     The [QuickChickInterface] chapter serves as a reference
     manual for QuickChick.  The rest of the book explains its features
     more gently. *)
@@ -46,4 +45,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2023-08-23 20:33 *)
+(* 2023-08-27 20:29 *)
