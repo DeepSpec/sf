@@ -1,0 +1,13 @@
+FROM coqorg/coq:8.17.1
+ENV OPAMYES true
+ENV VST_NEEDED 2.11.1
+
+RUN \
+    opam install -j `nproc` \
+         ocamlbuild \
+         coq-ext-lib \
+         coq-simple-io \
+         menhir.20220210 \
+         coq-mathcomp-ssreflect \
+         coq-vst.$VST_NEEDED \
+         coq-quickchick 
