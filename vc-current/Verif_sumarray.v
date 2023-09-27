@@ -777,4 +777,4 @@ Qed.
 
 (** Recommended: read VC.pdf Chapters 22-47 (up to _Pointer comparisons_) *)
 
-(* 2023-08-27 20:24 *)
+(* 2023-09-27 19:43 *)

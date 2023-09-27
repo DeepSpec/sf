@@ -115,8 +115,8 @@ Compute (next_weekday (next_weekday saturday)).
 
 (** (We show Coq's responses in comments, but, if you have a
     computer handy, this would be an excellent moment to fire up the
-    Coq interpreter under your favorite IDE -- either CoqIde or Proof
-    General -- and try it for yourself.  Load this file, [Basics.v],
+    Coq interpreter under your favorite IDE -- VSCoq, Proof General,
+    or CoqIDE -- and try it for yourself.  Load this file, [Basics.v],
     from the book's Coq sources, find the above example, submit it to
     Coq, and observe the result.) *)
 
@@ -2009,4 +2009,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2023-08-27 20:19 *)
+(* 2023-09-27 19:38 *)

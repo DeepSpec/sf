@@ -52,4 +52,4 @@ Axiom indefinite_description : forall (A : Type) (P : A->Prop),
   ex P ->
   sig P.
 
-(* 2023-08-27 20:26 *)
+(* 2023-09-27 19:46 *)
