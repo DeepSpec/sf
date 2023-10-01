@@ -367,24 +367,48 @@
 
 <div class="paragraph"> </div>
 
- Coq runs on Windows, Linux, and macOS.  You will need:
+ Coq runs on Windows, Linux, and macOS.  The files in this book
+    have been tested with Coq 8.17.
+
+<div class="paragraph"> </div>
+
+    You will need:
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
 <li> A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.17.
+      The "Coq Platform" usually offers the smoothest installation
+      experience.
+
+<div class="paragraph"> </div>
+
+      If you use the VSCode + Docker option described below, you don't
+      need to install Coq separately.
 
 <div class="paragraph"> </div>
 
 
 </li>
-<li> An IDE for interacting with Coq.  Currently, there are two
-      choices:
+<li> An IDE for interacting with Coq.  There are several choices:
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
+<li> The VSCoq extension for Visual Studio Code offers a simple
+          interface via a familiar IDE.  This option is the
+          recommended default.
+
+<div class="paragraph"> </div>
+
+          VSCoq can be used as an ordinary IDE or it can be combined
+          with Docker (see below) for a lightweight installation
+          experience.
+
+<div class="paragraph"> </div>
+
+
+</li>
 <li> Proof General is an Emacs-based IDE.  It tends to be
           preferred by users who are already comfortable with Emacs.
           It requires a separate installation (google "Proof
@@ -392,8 +416,8 @@
 
 <div class="paragraph"> </div>
 
-          Adventurous users of Coq within Emacs may want to check
-          out extensions such as <span class="inlinecode"><span class="id" title="var">company</span>-<span class="id" title="var">coq</span></span> and <span class="inlinecode"><span class="id" title="var">control</span>-<span class="id" title="var">lock</span></span>.
+          Adventurous users of Coq within Emacs may want to check out
+          extensions such as <span class="inlinecode"><span class="id" title="var">company</span>-<span class="id" title="var">coq</span></span> and <span class="inlinecode"><span class="id" title="var">control</span>-<span class="id" title="var">lock</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -408,20 +432,101 @@
 <div class="paragraph"> </div>
 
           Users who like CoqIDE should consider running it with the
-          "asynchronous" and "error resilience" modes disabled:
-<br/>
+          "asynchronous" and "error resilience" modes disabled: <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> \<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Foo.v</span> &amp;
-</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Foo.v</span> &amp; ]] *)<br/>
+<br/>
+</div>
+
+<div class="doc">
+
 </li>
 </ul>
 
+</li>
+</ul>
+<a id="lab9"></a><h3 class="section">Using Coq with VSCode and Docker</h3>
+
+<div class="paragraph"> </div>
+
+ The Visual Studio Code IDE can cooperate with the Docker
+    virtualization platform to compile Coq scripts without the need
+    for any separate Coq installation.  To get things set up, follow
+    these steps:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Install Docker from <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">www.docker.com</span>/<span class="id" title="var">get</span>-<span class="id" title="var">started</span>/</span> or
+      make sure your existing installation is up to date.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> Make sure Docker is running.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> Install VSCode from <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">code.visualstudio.com</span></span> and start it
+      running.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> Install VSCode's Remote Containers Extention from <span class="inlinecode"></span>
+        <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">marketplace.visualstudio.com</span>/<span class="id" title="var">items</span>?<span class="id" title="var">itemName</span>=<span class="id" title="var">ms</span>-<span class="id" title="var">vscode</span>-<span class="id" title="var">remote.remote</span>-<span class="id" title="var">containers</span></span>
+        <span class="inlinecode"></span>
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> Set up a directory for this SF volume by downloading the
+      provided <span class="inlinecode">.<span class="id" title="var">tgz</span></span> file.  Besides the <span class="inlinecode">.<span class="id" title="var">v</span></span> file for each chapter,
+      this directory will contain a <span class="inlinecode">.<span class="id" title="var">devcontainer</span></span> subdirectory with
+      instructions for VSCode about where to find an appropriate
+      Docker image and a <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> file, whose presence triggers
+      the VSCoq extension.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> In VSCode, use <span class="inlinecode"><span class="id" title="var">File</span></span> <span class="inlinecode">&gt;</span> <span class="inlinecode"><span class="id" title="keyword">Open</span></span> <span class="inlinecode"><span class="id" title="var">Folder</span></span> to open the new directory.
+      VSCode should ask you whether you want to run the project in the
+      associated Docker container.  (If it does not ask you, you can
+      open the command palette by pressing F<sub>1</sub> and run the command “Dev
+      Containers: Reopen in Container”.)
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> Check that VSCoq is working by double-clicking the file
+      <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> from the list on the left (you should see a blinking
+      cursor in the window that opens; if not you can click in that
+      window to select it), and pressing <span class="inlinecode"><span class="id" title="var">alt</span>+<span class="id" title="var">downarrow</span></span> (on MacOS,
+      <span class="inlinecode"><span class="id" title="var">control</span>+<span class="id" title="var">option</span>+<span class="id" title="var">downarrow</span></span>) a few times.  You should see the
+      cursor move through the file and the region above the cursor get
+      highlighted.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> To see what other key bindings are available, press F<sub>1</sub> and then
+      type <span class="inlinecode"><span class="id" title="var">Coq</span>:</span>, or visit the VSCoq web pages:
+      <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">github.com</span>/<span class="id" title="var">coq</span>-<span class="id" title="var">community</span>/<span class="id" title="var">vscoq</span>/<span class="id" title="var">tree</span>/<span class="id" title="var">vscoq1</span></span>.  
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-<a id="lab9"></a><h2 class="section">Exercises</h2>
+<a id="lab10"></a><h2 class="section">Exercises</h2>
 
 <div class="paragraph"> </div>
 
@@ -490,7 +595,7 @@
     search engines. 
 <div class="paragraph"> </div>
 
-<a id="lab10"></a><h2 class="section">Downloading the Coq Files</h2>
+<a id="lab11"></a><h2 class="section">Downloading the Coq Files</h2>
 
 <div class="paragraph"> </div>
 
@@ -506,7 +611,7 @@
     you get any local updates during the semester. 
 <div class="paragraph"> </div>
 
-<a id="lab11"></a><h2 class="section">Chapter Dependencies</h2>
+<a id="lab12"></a><h2 class="section">Chapter Dependencies</h2>
 
 <div class="paragraph"> </div>
 
@@ -515,7 +620,7 @@
 </div>
 
 <div class="doc">
-<a id="lab12"></a><h2 class="section">Recommended Citation Format</h2>
+<a id="lab13"></a><h2 class="section">Recommended Citation Format</h2>
 
 <div class="paragraph"> </div>
 
@@ -543,11 +648,11 @@
 </div>
 
 <div class="doc">
-<a id="lab13"></a><h1 class="section">Resources</h1>
+<a id="lab14"></a><h1 class="section">Resources</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab14"></a><h2 class="section">Sample Exams</h2>
+<a id="lab15"></a><h2 class="section">Sample Exams</h2>
 
 <div class="paragraph"> </div>
 
@@ -559,7 +664,7 @@
     the problems are still relevant to the current text. 
 <div class="paragraph"> </div>
 
-<a id="lab15"></a><h2 class="section">Lecture Videos</h2>
+<a id="lab16"></a><h2 class="section">Lecture Videos</h2>
 
 <div class="paragraph"> </div>
 
@@ -572,7 +677,7 @@
 </div>
 
 <div class="doc">
-<a id="lab16"></a><h1 class="section">Note for Instructors and Contributors</h1>
+<a id="lab17"></a><h1 class="section">Note for Instructors and Contributors</h1>
 
 <div class="paragraph"> </div>
 
@@ -628,7 +733,7 @@
 </div>
 
 <div class="doc">
-<a id="lab17"></a><h1 class="section">Translations</h1>
+<a id="lab18"></a><h1 class="section">Translations</h1>
 
 <div class="paragraph"> </div>
 
@@ -639,7 +744,7 @@
 </div>
 
 <div class="doc">
-<a id="lab18"></a><h1 class="section">Thanks</h1>
+<a id="lab19"></a><h1 class="section">Thanks</h1>
 
 <div class="paragraph"> </div>
 
@@ -649,9 +754,9 @@
     Specification</i>. 
 </div>
 <div class="code">
-
-<span class="comment">(*&nbsp;2023-09-27&nbsp;19:38&nbsp;*)</span><br/>
-</div>
+<br/>
+<span class="comment">(*&nbsp;2023-10-01&nbsp;12:46&nbsp;*)</span><br/>
+</span></div>
 </div>
 
 <div id="footer">

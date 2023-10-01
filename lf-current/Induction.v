@@ -33,8 +33,8 @@ From LF Require Export Basics.
      - In Proof General or CoqIDE, the compilation should happen
        automatically when you submit the [Require] line above to PG.
 
-     - For VSCode users, open the terminal pane at the bottom 
-       and then use the command line instructions below. 
+     - For VSCode users, open the terminal pane at the bottom
+       and then use the command line instructions below.
        (If you downloaded the project setup .tgz file, just doing `make`
        should build all the code.)
 
@@ -141,20 +141,20 @@ Abort.
     inductively defined sets, we often need a more powerful reasoning
     principle: _induction_.
 
-    Recall (from high school, a discrete math course, etc.) the
-    _principle of induction over natural numbers_: If [P(n)] is some
-    proposition involving a natural number [n] and we want to show
-    that [P] holds for all numbers [n], we can reason like this:
+    Recall (from a discrete math course, probably) the _principle of
+    induction over natural numbers_: If [P(n)] is some proposition
+    involving a natural number [n] and we want to show that [P] holds for
+    all numbers [n], we can reason like this:
          - show that [P(O)] holds;
-         - show that, for any [n'], if [P(n')] holds, then so does
-           [P(S n')];
+         - show that, for any [n'], if [P(n')] holds, then so does [P(S
+           n')];
          - conclude that [P(n)] holds for all [n].
 
     In Coq, the steps are the same: we begin with the goal of proving
     [P(n)] for all [n] and break it down (by applying the [induction]
-    tactic) into two separate subgoals: one where we must show [P(O)]
-    and another where we must show [P(n') -> P(S n')].  Here's how
-    this works for the theorem at hand: *)
+    tactic) into two separate subgoals: one where we must show [P(O)] and
+    another where we must show [P(n') -> P(S n')].  Here's how this works
+    for the theorem at hand: *)
 
 Theorem add_0_r : forall n:nat, n + 0 = n.
 Proof.
@@ -762,7 +762,7 @@ Fixpoint normalize (b:bin) : bin
     Hint: Start by trying to prove the main statement, see where you
     get stuck, and see if you can find a lemma -- perhaps requiring
     its own inductive proof -- that will allow the main proof to make
-    progress. We have one lemma for the [B0] case (which also makes 
+    progress. We have one lemma for the [B0] case (which also makes
     use of [double_incr_bin]) and another for the [B1] case. *)
 
 Theorem bin_nat_bin : forall b, nat_to_bin (bin_to_nat b) = normalize b.
@@ -771,4 +771,4 @@ Proof.
 
 (** [] *)
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:46 *)

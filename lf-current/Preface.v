@@ -254,21 +254,35 @@
 (* ================================================================= *)
 (** ** System Requirements *)
 
-(** Coq runs on Windows, Linux, and macOS.  You will need:
+(** Coq runs on Windows, Linux, and macOS.  The files in this book
+    have been tested with Coq 8.17.
+
+    You will need:
 
     - A current installation of Coq, available from the Coq home page.
-      These files have been tested with Coq 8.17.
+      The "Coq Platform" usually offers the smoothest installation
+      experience.
 
-    - An IDE for interacting with Coq.  Currently, there are two
-      choices:
+      If you use the VSCode + Docker option described below, you don't
+      need to install Coq separately.
+
+    - An IDE for interacting with Coq.  There are several choices:
+
+        - The VSCoq extension for Visual Studio Code offers a simple
+          interface via a familiar IDE.  This option is the
+          recommended default.
+
+          VSCoq can be used as an ordinary IDE or it can be combined
+          with Docker (see below) for a lightweight installation
+          experience.
 
         - Proof General is an Emacs-based IDE.  It tends to be
           preferred by users who are already comfortable with Emacs.
           It requires a separate installation (google "Proof
           General").
 
-          Adventurous users of Coq within Emacs may want to check
-          out extensions such as [company-coq] and [control-lock].
+          Adventurous users of Coq within Emacs may want to check out
+          extensions such as [company-coq] and [control-lock].
 
         - CoqIDE is a simpler stand-alone IDE.  It is distributed with
           Coq, so it should be available once you have Coq installed.
@@ -277,11 +291,54 @@
           libraries and such.
 
           Users who like CoqIDE should consider running it with the
-          "asynchronous" and "error resilience" modes disabled:
-
+          "asynchronous" and "error resilience" modes disabled: [[
           coqide -async-proofs off \
-                 -async-proofs-command-error-resilience off Foo.v &
-*)
+          -async-proofs-command-error-resilience off Foo.v & ]] *)
+
+(* ----------------------------------------------------------------- *)
+(** *** Using Coq with VSCode and Docker *)
+
+(** The Visual Studio Code IDE can cooperate with the Docker
+    virtualization platform to compile Coq scripts without the need
+    for any separate Coq installation.  To get things set up, follow
+    these steps:
+
+    - Install Docker from [https://www.docker.com/get-started/] or
+      make sure your existing installation is up to date.
+
+    - Make sure Docker is running.
+
+    - Install VSCode from [https://code.visualstudio.com] and start it
+      running.
+
+    - Install VSCode's Remote Containers Extention from [
+        https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+        ]
+
+    - Set up a directory for this SF volume by downloading the
+      provided [.tgz] file.  Besides the [.v] file for each chapter,
+      this directory will contain a [.devcontainer] subdirectory with
+      instructions for VSCode about where to find an appropriate
+      Docker image and a [_CoqProject] file, whose presence triggers
+      the VSCoq extension.
+
+    - In VSCode, use [File > Open Folder] to open the new directory.
+      VSCode should ask you whether you want to run the project in the
+      associated Docker container.  (If it does not ask you, you can
+      open the command palette by pressing F1 and run the command “Dev
+      Containers: Reopen in Container”.)
+
+    - Check that VSCoq is working by double-clicking the file
+      [Basics.v] from the list on the left (you should see a blinking
+      cursor in the window that opens; if not you can click in that
+      window to select it), and pressing [alt+downarrow] (on MacOS,
+      [control+option+downarrow]) a few times.  You should see the
+      cursor move through the file and the region above the cursor get
+      highlighted.
+
+    - To see what other key bindings are available, press F1 and then
+      type [Coq:], or visit the VSCoq web pages:
+      [https://github.com/coq-community/vscoq/tree/vscoq1].  *)
 
 (* ================================================================= *)
 (** ** Exercises *)
@@ -449,4 +506,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:46 *)

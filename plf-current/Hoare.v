@@ -823,9 +823,9 @@ Qed.
 
 Example hoare_asgn_example1 :
   {{True}} X := 1 {{X = 1}}.
-Proof. 
+Proof.
   (* WORKED IN CLASS *)
-  eapply hoare_consequence_pre. 
+  eapply hoare_consequence_pre.
   - apply hoare_asgn.
   - unfold "->>", assn_sub, t_update.
     intros st _. simpl. reflexivity.
@@ -1179,7 +1179,8 @@ Proof.
     Technical hint: Hypothesis [H] below begins [forall a n, ...].
     You'll want to instantiate that with the particular [a] and [n]
     you've invented.  You can do that with [assert] and [apply], but
-    Coq offers an even easier tactic: [specialize].  If you write
+    you may remember (from [Tactics.v] in Logical Foundations)
+    that Coq offers an even easier tactic: [specialize].  If you write
 
        specialize H with (a := your_a) (n := your_n)
 
@@ -2311,4 +2312,4 @@ End HoareAssertAssume.
 
 
 
-(* 2023-09-27 19:39 *)
+(* 2023-10-01 12:48 *)

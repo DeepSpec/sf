@@ -13,7 +13,7 @@
 (** * Introduction *)
 
 (** The functional style of programming is founded on simple, everyday
-    mathematical intuition: If a procedure or method has no side
+    mathematical intuitions: If a procedure or method has no side
     effects, then (ignoring efficiency) all we need to understand
     about it is how it maps inputs to outputs -- that is, we can think
     of it as just a concrete method for computing a mathematical
@@ -36,7 +36,7 @@
     all of these features.
 
     The first half of this chapter introduces the most essential
-    elements of Coq's native functional programming language, called
+    elements of Coq's native functional programming language,
     _Gallina_.  The second half introduces some basic _tactics_ that
     can be used to prove properties of Gallina programs. *)
 
@@ -46,7 +46,7 @@
 (* ================================================================= *)
 (** ** Enumerated Types *)
 
-(** One notable aspect of Coq is that its set of built-in
+(** One notable thing about Coq is that its set of built-in
     features is _extremely_ small.  For example, instead of providing
     the usual palette of atomic data types (booleans, integers,
     strings, etc.), Coq offers a powerful mechanism for defining new
@@ -94,18 +94,16 @@ Definition next_weekday (d:day) : day :=
   | sunday    => monday
   end.
 
-(** One point to note is that the argument and return types of
-    this function are explicitly declared.  Like most functional
-    programming languages, Coq can often figure out these types for
-    itself when they are not given explicitly -- i.e., it can do _type
-    inference_ -- but we'll generally include them to make reading
-    easier. *)
+(** Note that the argument and return types of this function are
+    explicitly declared here.  Like most functional programming
+    languages, Coq can often figure out these types for itself when
+    they are not given explicitly -- i.e., it can do _type inference_
+    -- but we'll generally include them to make reading easier. *)
 
-(** Having defined a function, we should next check that it
-    works on some examples.  There are actually three different ways
-    to do the examples in Coq.  First, we can use the command
-    [Compute] to evaluate a compound expression involving
-    [next_weekday]. *)
+(** Having defined a function, we can check that it works on
+    some examples.  There are actually three different ways to do
+    examples in Coq.  First, we can use the command [Compute] to
+    evaluate a compound expression involving [next_weekday]. *)
 
 Compute (next_weekday friday).
 (* ==> monday : day *)
@@ -113,12 +111,12 @@ Compute (next_weekday friday).
 Compute (next_weekday (next_weekday saturday)).
 (* ==> tuesday : day *)
 
-(** (We show Coq's responses in comments, but, if you have a
-    computer handy, this would be an excellent moment to fire up the
-    Coq interpreter under your favorite IDE -- VSCoq, Proof General,
-    or CoqIDE -- and try it for yourself.  Load this file, [Basics.v],
-    from the book's Coq sources, find the above example, submit it to
-    Coq, and observe the result.) *)
+(** (We show Coq's responses in comments; if you have a computer
+    handy, this would be an excellent moment to fire up the Coq
+    interpreter under your favorite IDE (see the [Preface] for
+    installation instructions) and try it for yourself.  Load this
+    file, [Basics.v], from the book's Coq sources, find the above
+    example, submit it to Coq, and observe the result.) *)
 
 (** Second, we can record what we _expect_ the result to be in the
     form of a Coq example: *)
@@ -126,30 +124,33 @@ Compute (next_weekday (next_weekday saturday)).
 Example test_next_weekday:
   (next_weekday (next_weekday saturday)) = tuesday.
 
-(** This declaration does two things: it makes an
-    assertion (that the second weekday after [saturday] is [tuesday]),
-    and it gives the assertion a name that can be used to refer to it
-    later.  Having made the assertion, we can also ask Coq to verify
-    it like this: *)
+(** This declaration does two things: it makes an assertion
+    (that the second weekday after [saturday] is [tuesday]), and it
+    gives the assertion a name that can be used to refer to it later.
+    Having made the assertion, we can also ask Coq to verify it like
+    this: *)
 
 Proof. simpl. reflexivity.  Qed.
 
 (** The details are not important just now, but essentially this
-    can be read as "The assertion we've just made can be proved by
-    observing that both sides of the equality evaluate to the same
-    thing."
+    little script can be read as "The assertion we've just made can be
+    proved by observing that both sides of the equality evaluate to
+    the same thing." *)
 
-    Third, we can ask Coq to _extract_, from our [Definition], a
-    program in another, more conventional, programming
-    language (OCaml, Scheme, or Haskell) with a high-performance
-    compiler.  This facility is very interesting, since it gives us a
-    path from proved-correct algorithms written in Gallina to
-    efficient machine code.  (Of course, we are trusting the
-    correctness of the OCaml/Haskell/Scheme compiler, and of Coq's
-    extraction facility itself, but this is still a big step forward
-    from the way most software is developed today.) Indeed, this is
-    one of the main uses for which Coq was developed.  We'll come back
-    to this topic in later chapters. *)
+(** Third, we can ask Coq to _extract_, from our [Definition], a
+    program in a more conventional programming language (OCaml,
+    Scheme, or Haskell) with a high-performance compiler.  This
+    facility is very useful, since it gives us a path from
+    proved-correct algorithms written in Gallina to efficient machine
+    code.
+
+    (Of course, we are trusting the correctness of the
+    OCaml/Haskell/Scheme compiler, and of Coq's extraction facility
+    itself, but this is still a big step forward from the way most
+    software is developed today!)
+
+    Indeed, this is one of the main uses for which Coq was developed.
+    We'll come back to this topic in later chapters. *)
 
 (* ================================================================= *)
 (** ** Homework Submission Guidelines *)
@@ -157,22 +158,23 @@ Proof. simpl. reflexivity.  Qed.
 (** If you are using _Software Foundations_ in a course, your
     instructor may use automatic scripts to help grade your homework
     assignments.  In order for these scripts to work correctly (and
-    give you that you get full credit for your work!), please be
+    ensure that you get full credit for your work!), please be
     careful to follow these rules:
+
       - Do not change the names of exercises. Otherwise the grading
         scripts will be unable to find your solution.
       - Do not delete exercises.  If you skip an exercise (e.g.,
         because it is marked "optional," or because you can't solve it),
         it is OK to leave a partial proof in your [.v] file; in
-        this case, please make sure it ends with [Admitted] (not, for
-        example [Abort]).
+        this case, please make sure it ends with the keyword [Admitted]
+        (not, for example [Abort]).
       - It is fine to use additional definitions (of helper functions,
         useful lemmas, etc.) in your solutions.  You can put these
         before the theorem you are asked to prove.
       - If you introduce a helper lemma that you end up being unable
         to prove, hence end it with [Admitted], then make sure to also
         end the main theorem in which you use it with [Admitted], not
-        [Qed].  That will help you get partial credit, in case you
+        [Qed].  This will help you get partial credit, in case you
         use that main theorem to solve a later exercise.
 
     You will also notice that each chapter (like [Basics.v]) is
@@ -196,14 +198,14 @@ Proof. simpl. reflexivity.  Qed.
       - If you submit multiple versions of the assignment, you may
         notice that they are given different names.  This is fine: The
         most recent submission is the one that will be graded.
-      - To hand in multiple files at the same time (if more than one
-        chapter is assigned in the same week), you need to make a
-        single submission with all the files at once using the button
-        "Add another file" just above the comment box. *)
+      - If you want to hand in multiple files at the same time (if more
+        than one chapter is assigned in the same week), you need to make a
+        single submission with all the files at once using the
+        "Add another file" button just above the comment box. *)
 
 (** The [Require Export] statement on the next line tells Coq to use
     the [String] module from the standard library.  We'll use strings
-    ourselves in later chapters, but we need to [Require] it here so
+    for various things in later chapters, but we need to [Require] it here so
     that the grading scripts can use it for internal purposes. *)
 From Coq Require Export String.
 
@@ -242,15 +244,15 @@ Definition orb (b1:bool) (b2:bool) : bool :=
 (** (Although we are rolling our own booleans here for the sake
     of building up everything from scratch, Coq does, of course,
     provide a default implementation of the booleans, together with a
-    multitude of useful functions and lemmas.  Whenever possible,
-    we'll name our own definitions and theorems so that they exactly
-    coincide with the ones in the standard library.) *)
+    multitude of useful functions and lemmas.  Whereever possible,
+    we've named our own definitions and theorems to match the ones in
+    the standard library.) *)
 
 (** The last two of these illustrate Coq's syntax for
     multi-argument function definitions.  The corresponding
-    multi-argument application syntax is illustrated by the following
-    "unit tests," which constitute a complete specification -- a truth
-    table -- for the [orb] function: *)
+    multi-argument _application_ syntax is illustrated by the
+    following "unit tests," which constitute a complete specification
+    -- a truth table -- for the [orb] function: *)
 
 Example test_orb1:  (orb true  false) = true.
 Proof. simpl. reflexivity.  Qed.
@@ -275,7 +277,7 @@ Proof. simpl. reflexivity. Qed.
     to delimit fragments of Coq code within comments; this convention,
     also used by the [coqdoc] documentation tool, keeps them visually
     separate from the surrounding text.  In the HTML version of the
-    files, these pieces of text appear in a [different font]. *)
+    files, these pieces of text appear in a different font. *)
 
 (** These examples are also an opportunity to introduce one more small
     feature of Coq's programming language: conditional expressions... *)
@@ -293,17 +295,18 @@ Definition orb' (b1:bool) (b2:bool) : bool :=
   else b2.
 
 (** Coq's conditionals are exactly like those found in any other
-    language, with one small generalization.  Since the [bool] type is
-    not built in, Coq actually supports conditional expressions over
-    _any_ inductively defined type with exactly two clauses in its
-    definition.  The guard is considered true if it evaluates to the
-    "constructor" of the first clause of the [Inductive]
-    definition (which just happens to be called [true] in this case)
-    and false if it evaluates to the second. *)
+    language, with one small generalization:
+
+    Since the [bool] type is not built in, Coq actually supports
+    conditional expressions over _any_ inductively defined type with
+    exactly two clauses in its definition.  The guard is considered
+    true if it evaluates to the "constructor" of the first clause of
+    the [Inductive] definition (which just happens to be called [true]
+    in this case) and false if it evaluates to the second. *)
 
 (** **** Exercise: 1 star, standard (nandb)
 
-    The command [Admitted] can be used as a placeholder for an
+    The [Admitted] command can be used as a placeholder for an
     incomplete proof.  We use it in exercises to indicate the parts
     that we're leaving for you -- i.e., your job is to replace
     [Admitted]s with real proofs.
@@ -356,16 +359,16 @@ Example test_andb34:                 (andb3 true true false) = false.
 (* ================================================================= *)
 (** ** Types *)
 
-(** Every expression in Coq has a type, describing what sort of
+(** Every expression in Coq has a type describing what sort of
     thing it computes. The [Check] command asks Coq to print the type
     of an expression. *)
 
 Check true.
 (* ===> true : bool *)
 
-(** If the expression after [Check] is followed by a colon and a type,
-    Coq will verify that the type of the expression matches the given
-    type and halt with an error if not. *)
+(** If the thing after [Check] is followed by a colon and a type
+    declaration, Coq will verify that the type of the expression
+    matches the given type and halt with an error if not. *)
 
 Check true
   : bool.
@@ -417,12 +420,12 @@ Inductive color : Type :=
     _Constructor expressions_ are formed by applying a constructor
     to zero or more other constructors or constructor expressions,
     obeying the declared number and types of the constructor arguments.
-    E.g.,
+    E.g., these are valid constructor expressions...
         - [red]
         - [true]
         - [primary red]
         - etc.
-    But not
+    ...but these are not:
         - [red primary]
         - [true red]
         - [primary (primary red)]
@@ -436,9 +439,9 @@ Inductive color : Type :=
     - [red], [green], and [blue] belong to the set [rgb];
     - [black] and [white] belong to the set [color];
     - if [p] is a constructor expression belonging to the set [rgb],
-      then [primary p] (pronounced "the constructor [primary] applied
-      to the argument [p]") is a constructor expression belonging to
-      the set [color]; and
+      then [primary p] ("the constructor [primary] applied to the
+      argument [p]") is a constructor expression belonging to the set
+      [color]; and
     - constructor expressions formed in these ways are the _only_ ones
       belonging to the sets [rgb] and [color]. *)
 
@@ -453,8 +456,8 @@ Definition monochrome (c : color) : bool :=
   end.
 
 (** Since the [primary] constructor takes an argument, a pattern
-    matching [primary] should include either a variable (as above --
-    note that we can choose its name freely) or a constant of
+    matching [primary] should include either a variable, as we just
+    did (note that we can choose its name freely), or a constant of
     appropriate type (as below). *)
 
 Definition isred (c : color) : bool :=
@@ -466,30 +469,30 @@ Definition isred (c : color) : bool :=
   end.
 
 (** The pattern "[primary _]" here is shorthand for "the constructor
-    [primary] applied to any [rgb] constructor except [red]."  (The
-    wildcard pattern [_] has the same effect as the dummy pattern
-    variable [p] in the definition of [monochrome].) *)
+    [primary] applied to any [rgb] constructor except [red]." *)
+
+(** (The wildcard pattern [_] has the same effect as the dummy
+    pattern variable [p] in the definition of [monochrome].) *)
 
 (* ================================================================= *)
 (** ** Modules *)
 
 (** Coq provides a _module system_ to aid in organizing large
-    developments.  We won't need most of its features,
-    but one is useful: If we enclose a collection of declarations
-    between [Module X] and [End X] markers, then, in the remainder of
-    the file after the [End], these definitions are referred to by
-    names like [X.foo] instead of just [foo].  We will use this
-    feature to limit the scope of definitions, so that we are free to
-    reuse names. *)
+    developments.  We won't need most of its features, but one is
+    useful here: If we enclose a collection of declarations between
+    [Module X] and [End X] markers, then, in the remainder of the file
+    after the [End], these definitions are referred to by names like
+    [X.foo] instead of just [foo].  We will use this feature to limit
+    the scope of definitions, so that we are free to reuse names. *)
 
 Module Playground.
-  Definition myblue : rgb := blue.
+  Definition foo : rgb := blue.
 End Playground.
 
-Definition myblue : bool := true.
+Definition foo : bool := true.
 
-Check Playground.myblue : rgb.
-Check myblue : bool.
+Check Playground.foo : rgb.
+Check foo : bool.
 
 (* ================================================================= *)
 (** ** Tuples *)
@@ -505,8 +508,8 @@ Module TuplePlayground.
     a tuple of four bits. *)
 
 Inductive bit : Type :=
-  | B0
-  | B1.
+  | B1
+  | B0.
 
 Inductive nybble : Type :=
   | bits (b0 b1 b2 b3 : bit).
@@ -516,8 +519,10 @@ Check (bits B1 B0 B1 B0)
 
 (** The [bits] constructor acts as a wrapper for its contents.
     Unwrapping can be done by pattern-matching, as in the [all_zero]
-    function which tests a nybble to see if all its bits are [B0].  We
-    use underscore (_) as a _wildcard pattern_ to avoid inventing
+    function below, which tests a nybble to see if all its bits are
+    [B0].
+
+    We use underscore (_) as a _wildcard pattern_ to avoid inventing
     variable names that will not be used. *)
 
 Definition all_zero (nb : nybble) : bool :=
@@ -549,15 +554,16 @@ Module NatPlayground.
     the other hand, are an infinite set, so we'll need to use a
     slightly richer form of type declaration to represent them.
 
-    There are many representations of numbers to choose from. We are
-    most familiar with decimal notation (base 10), using the digits 0
-    through 9, for example, to form the number 123.  You may have
-    encountered hexadecimal notation (base 16), in which the same
-    number is represented as 7B, or octal (base 8), where it is 173,
-    or binary (base 2), where it is 1111011. Using an enumerated type
-    to represent digits, we could use any of these as our
-    representation natural numbers. Indeed, there are circumstances
-    where each of these choices would be useful.
+    There are many representations of numbers to choose from. You are
+    almost certainly most familiar with decimal notation (base 10),
+    using the digits 0 through 9, for example, to form the number 123.
+    You may very likely also have encountered hexadecimal
+    notation (base 16), in which the same number is represented as 7B,
+    or octal (base 8), where it is 173, or binary (base 2), where it
+    is 1111011. Using an enumerated type to represent digits, we could
+    use any of these as our representation natural numbers. Indeed,
+    there are circumstances where each of these choices would be
+    useful.
 
     The binary representation is valuable in computer hardware because
     the digits can be represented with just two distinct voltage
@@ -566,14 +572,13 @@ Module NatPlayground.
 
     In fact, there is a representation of numbers that is even simpler
     than binary, namely unary (base 1), in which only a single digit
-    is used (as our ancient forebears might have done to count days by
-    making scratches on the walls of their caves). To represent unary
-    numbers with a Coq datatype, we use two constructors. The
-    capital-letter [O] constructor represents zero.  When the [S]
-    constructor is applied to the representation of the natural number
-    n, the result is the representation of n+1, where [S] stands for
-    "successor" (or "scratch").  Here is the complete datatype
-    definition. *)
+    is used (as our forebears might have done to count days by making
+    scratches on the walls of their caves). To represent unary numbers
+    with a Coq datatype, we use two constructors. The capital-letter
+    [O] constructor represents zero. The [S] constructor can be
+    applied to the representation of the natural number n, yieldimng
+    the representation of n+1, where [S] stands for "successor" (or
+    "scratch").  Here is the complete datatype definition: *)
 
 Inductive nat : Type :=
   | O
@@ -586,9 +591,9 @@ Inductive nat : Type :=
       - [O] is a natural number (remember this is the letter "[O],"
         not the numeral "[0]").
       - [S] can be put in front of a natural number to yield another
-        one -- if [n] is a natural number, then [S n] is too. *)
+        one -- i.e., if [n] is a natural number, then [S n] is too. *)
 
-(** Again, let's look at this in a little more detail.  The definition
+(** Again, let's look at this a bit more closely.  The definition
     of [nat] says how expressions in the set [nat] can be built:
 
     - the constructor expression [O] belongs to the set [nat];
@@ -599,27 +604,27 @@ Inductive nat : Type :=
       ones belonging to the set [nat]. *)
 
 (** These conditions are the precise force of the [Inductive]
-    declaration.  They imply that the constructor expression [O], the
-    constructor expression [S O], the constructor expression [S (S
-    O)], the constructor expression [S (S (S O))], and so on all
-    belong to the set [nat], while other constructor expressions, like
-    [true], [andb true false], [S (S false)], and [O (O (O S))] do
-    not.
+    declaration that we gave to Coq.  They imply that the constructor
+    expression [O], the constructor expression [S O], the constructor
+    expression [S (S O)], the constructor expression [S (S (S O))],
+    and so on all belong to the set [nat], while other constructor
+    expressions like [true], [andb true false], [S (S false)], and
+    [O (O (O S))] do not.
 
     A critical point here is that what we've done so far is just to
     define a _representation_ of numbers: a way of writing them down.
     The names [O] and [S] are arbitrary, and at this point they have
     no special meaning -- they are just two different marks that we
-    can use to write down numbers (together with a rule that says any
+    can use to write down numbers, together with a rule that says any
     [nat] will be written as some string of [S] marks followed by an
-    [O]).  If we like, we can write essentially the same definition
+    [O].  If we like, we can write essentially the same definition
     this way: *)
 
-Inductive nat' : Type :=
+Inductive otherNat : Type :=
   | stop
-  | tick (foo : nat').
+  | tick (foo : otherNat).
 
-(** The _interpretation_ of these marks comes from how we use them to
+(** The _interpretation_ of these marks arises from how we use them to
     compute. *)
 
 (** We can do this by writing functions that pattern match on
@@ -641,11 +646,11 @@ Definition pred (n : nat) : nat :=
 
 End NatPlayground.
 
-(** Because natural numbers are such a pervasive form of data,
-    Coq provides a tiny bit of built-in magic for parsing and printing
-    them: ordinary decimal numerals can be used as an alternative to
-    the "unary" notation defined by the constructors [S] and [O].  Coq
-    prints numbers in decimal form by default: *)
+(** Because natural numbers are such a pervasive kind of data,
+    Coq does provide a tiny bit of built-in magic for parsing and
+    printing them: ordinary decimal numerals can be used as an
+    alternative to the "unary" notation defined by the constructors
+    [S] and [O].  Coq prints numbers in decimal form by default: *)
 
 Check (S (S (S (S O)))).
 (* ===> 4 : nat *)
@@ -677,12 +682,12 @@ Check minustwo : nat -> nat.
     argument, it does not _do_ anything at all!  It is just a way of
     writing down numbers.
 
-    (Think about standard decimal numerals: the numeral [1] is not a
+    Think about standard decimal numerals: the numeral [1] is not a
     computation; it's a piece of data.  When we write [111] to mean
     the number one hundred and eleven, we are using [1], three times,
-    to write down a concrete representation of a number.)
+    to write down a concrete representation of a number.
 
-    Now let's go on and define some more functions over numbers.
+    Let's go on and define some more functions over numbers.
 
     For most interesting computations involving numbers, simple
     pattern matching is not enough: we also need recursion.  For
@@ -710,7 +715,7 @@ Proof. simpl. reflexivity.  Qed.
 
 (** (You may notice if you step through these proofs that
     [simpl] actually has no effect on the goal -- all of the work is
-    done by [reflexivity].  We'll discuss why that is shortly.)
+    done by [reflexivity].  We'll discuss why shortly.)
 
     Naturally, we can also define multi-argument functions by
     recursion.  *)
@@ -723,12 +728,12 @@ Fixpoint plus (n : nat) (m : nat) : nat :=
   | S n' => S (plus n' m)
   end.
 
-(** Adding three to two now gives us five, as we'd expect. *)
+(** Adding three to two gives us five (whew!): *)
 
 Compute (plus 3 2).
 (* ===> 5 : nat *)
 
-(** The steps of simplification that Coq performs can be
+(** The steps of simplification that Coq performs here can be
     visualized as follows: *)
 
 (*      [plus 3 2]
@@ -757,7 +762,7 @@ Fixpoint mult (n m : nat) : nat :=
 Example test_mult1: (mult 3 3) = 9.
 Proof. simpl. reflexivity.  Qed.
 
-(** You can match two expressions at once by putting a comma
+(** We can match two expressions at once by putting a comma
     between them: *)
 
 Fixpoint minus (n m:nat) : nat :=
@@ -784,7 +789,7 @@ Fixpoint exp (base power : nat) : nat :=
 
     Translate this into Coq.
 
-    Make sure you put a [:=] between the header we've given you and
+    Make sure you put a [:=] between the header we've provided and
     your definition.  If you see an error like "The reference
     factorial was not found in the current environment," it means
     you've forgotten the [:=]. *)
@@ -799,8 +804,8 @@ Example test_factorial2:          (factorial 5) = (mult 10 12).
 (** [] *)
 
 (** Again, we can make numerical expressions easier to read and write
-    by introducing notations for addition, multiplication, and
-    subtraction. *)
+    by introducing notations for addition, subtraction, and
+    multiplication. *)
 
 Notation "x + y" := (plus x y)
                        (at level 50, left associativity)
@@ -821,15 +826,15 @@ Check ((0 + 1) + 1) : nat.
     this chapter.)
 
     Note that these declarations do not change the definitions we've
-    already made: they are simply instructions to the Coq parser to
-    accept [x + y] in place of [plus x y] and, conversely, to the Coq
+    already made: they are simply instructions to Coq's parser to
+    accept [x + y] in place of [plus x y] and, conversely, to its
     pretty-printer to display [plus x y] as [x + y]. *)
 
 (** When we say that Coq comes with almost nothing built-in, we really
-    mean it: even equality testing is a user-defined operation!
+    mean it: even testing equality is a user-defined operation!
     Here is a function [eqb], which tests natural numbers for
     [eq]uality, yielding a [b]oolean.  Note the use of nested
-    [match]es (we could also have used a simultaneous match, as we did
+    [match]es (we could also have used a simultaneous match, as
     in [minus].) *)
 
 Fixpoint eqb (n m : nat) : bool :=
@@ -873,12 +878,12 @@ Notation "x <=? y" := (leb x y) (at level 70) : nat_scope.
 Example test_leb3': (4 <=? 2) = false.
 Proof. simpl. reflexivity.  Qed.
 
-(** We now have two symbols that look like equality: [=] and
-    [=?].  We'll have much more to say about the differences and
-    similarities between them later. For now, the main thing to notice
-    is that [x = y] is a logical _claim_ -- a "proposition" -- that we
-    can try to prove, while [x =? y] is an _expression_ whose
-    value (either [true] or [false]) we can compute. *)
+(** We now have two symbols that both look like equality: [=]
+    and [=?].  We'll have much more to say about their differences and
+    similarities later. For now, the main thing to notice is that
+    [x = y] is a logical _claim_ -- a "proposition" -- that we can try to
+    prove, while [x =? y] is a boolean _expression_ whose value (either
+    [true] or [false]) we can compute. *)
 
 (** **** Exercise: 1 star, standard (ltb)
 
@@ -904,40 +909,41 @@ Example test_ltb3:             (ltb 4 2) = false.
 (* ################################################################# *)
 (** * Proof by Simplification *)
 
-(** Now that we've defined a few datatypes and functions, let's
-    turn to stating and proving properties of their behavior.
+(** Now that we've looked at a few datatypes and functions,
+    let's turn to stating and proving properties of their behavior.
+
     Actually, we've already started doing this: each [Example] in the
-    previous sections makes a precise claim about the behavior of some
+    previous sections made a precise claim about the behavior of some
     function on some particular inputs.  The proofs of these claims
     were always the same: use [simpl] to simplify both sides of the
     equation, then use [reflexivity] to check that both sides contain
     identical values.
 
-    The same sort of "proof by simplification" can be used to prove
-    more interesting properties as well.  For example, the fact that
-    [0] is a "neutral element" for [+] on the left can be proved just
-    by observing that [0 + n] reduces to [n] no matter what [n] is -- a
-    fact that can be read directly off the definition of [plus]. *)
+    The same sort of "proof by simplification" can be used to
+    establish more interesting properties as well.  For example, the
+    fact that [0] is a "neutral element" for [+] on the left can be
+    proved just by observing that [0 + n] reduces to [n] no matter
+    what [n] is -- a fact that can be read off directly from the
+    definition of [plus]. *)
 
 Theorem plus_O_n : forall n : nat, 0 + n = n.
 Proof.
   intros n. simpl. reflexivity.  Qed.
 
-(** (You may notice that the above statement looks different in
-    the [.v] file in your IDE than it does in the HTML rendition in
-    your browser. In [.v] files, we write the universal quantifier
-    [forall] using the reserved identifier "forall."  When the [.v]
-    files are converted to HTML, this gets transformed into the
-    standard upside-down-A symbol.)
+(** (You may notice that the above statement looks different if
+    you look at the [.v] file in your IDE than it does if you view the
+    HTML rendition in your browser. In [.v] files, we write the
+    universal quantifier [forall] using the reserved identifier
+    "forall."  When the [.v] files are converted to HTML, this gets
+    transformed into the standard upside-down-A symbol.)
 
     This is a good place to mention that [reflexivity] is a bit more
     powerful than we have acknowledged. In the examples we have seen,
-    the calls to [simpl] were actually not needed, because
-    [reflexivity] can perform some simplification automatically when
+    the calls to [simpl] were actually not required because
+    [reflexivity] will do some simplification automatically when
     checking that two sides are equal; [simpl] was just added so that
-    we could see the intermediate state -- after simplification but
-    before finishing the proof.  Here is a shorter proof of the
-    theorem: *)
+    we could see the intermediate state, after simplification but
+    before finishing the proof.  Here is a shorter proof: *)
 
 Theorem plus_O_n' : forall n : nat, 0 + n = n.
 Proof.
@@ -968,19 +974,21 @@ Proof.
     prove theorems of this form, we generally start by saying "Suppose
     [n] is some number..."  Formally, this is achieved in the proof by
     [intros n], which moves [n] from the quantifier in the goal to a
-    _context_ of current assumptions. Note that we could have used
-    another identifier instead of [n] in the [intros] clause, (though
-    of course this might be confusing to human readers of the proof): *)
+    _context_ of current assumptions.
+
+    Incidentally, we could have used another identifier instead of [n]
+    in the [intros] clause, (though of course this might be confusing
+    to human readers of the proof): *)
 
 Theorem plus_O_n'' : forall n : nat, 0 + n = n.
 Proof.
   intros m. reflexivity. Qed.
 
-(** The keywords [intros], [simpl], and [reflexivity] are examples of
-    _tactics_.  A tactic is a command that is used between [Proof] and
-    [Qed] to guide the process of checking some claim we are making.
-    We will see several more tactics in the rest of this chapter and
-    many more in future chapters. *)
+(** The keywords [intros], [simpl], and [reflexivity] are
+    examples of _tactics_.  A tactic is a command that is used between
+    [Proof] and [Qed] to guide the process of checking some claim we
+    are making.  We will see several more tactics in the rest of this
+    chapter and many more in future chapters. *)
 
 (** Other similar theorems can be proved with the same pattern. *)
 
@@ -1044,14 +1052,14 @@ Proof.
 
     (The arrow symbol in the [rewrite] has nothing to do with
     implication: it tells Coq to apply the rewrite from left to right.
-    In fact, you can omit the arrow, and Coq will default to rewriting
-    in this direction.  To rewrite from right to left, you can use
-    [rewrite <-].  Try making this change in the above proof and see
-    what difference it makes.) *)
-
+    In fact, we can omit the arrow, and Coq will default to rewriting
+    left to right.  To rewrite from right to left, use [rewrite <-].
+    Try making this change in the above proof and see what changes.) *)
 (** **** Exercise: 1 star, standard (plus_id_exercise)
 
-    Remove "[Admitted.]" and fill in the proof. *)
+    Remove "[Admitted.]" and fill in the proof.  (Note that the
+    theorem has _two_ hypotheses -- [n = m] and [m = o] -- each to the
+    left of an implication arrow.) *)
 
 Theorem plus_id_exercise : forall n m o : nat,
   n = m -> m = o -> n + m = m + o.
@@ -1060,15 +1068,17 @@ Proof.
 (** [] *)
 
 (** The [Admitted] command tells Coq that we want to skip trying
-    to prove this theorem and just accept it as a given.  This can be
-    useful for developing longer proofs, since we can state subsidiary
+    to prove this theorem and just accept it as a given.  This is
+    often useful for developing longer proofs: we can state subsidiary
     lemmas that we believe will be useful for making some larger
     argument, use [Admitted] to accept them on faith for the moment,
     and continue working on the main argument until we are sure it
     makes sense; then we can go back and fill in the proofs we
-    skipped.  Be careful, though: every time you say [Admitted] you
-    are leaving a door open for total nonsense to enter Coq's nice,
-    rigorous, formally checked world! *)
+    skipped.
+
+    Be careful, though: every time you say [Admitted] you are leaving
+    a door open for total nonsense to enter Coq's nice, rigorous,
+    formally checked world! *)
 
 (** The [Check] command can also be used to examine the statements of
     previously declared lemmas and theorems.  The two examples below
@@ -1085,7 +1095,8 @@ Check mult_n_Sm.
 (** We can use the [rewrite] tactic with a previously proved theorem
     instead of a hypothesis from the context. If the statement of the
     previously proved theorem involves quantified variables, as in the
-    example below, Coq tries to instantiate them by matching with the
+    example below, Coq will try to fill in appropriate values for them
+    by matching the body of the previous theorem statement against the
     current goal. *)
 
 Theorem mult_n_0_m_0 : forall p q : nat,
@@ -1098,8 +1109,8 @@ Proof.
 
 (** **** Exercise: 1 star, standard (mult_n_1)
 
-    Use those two lemmas about multiplication that we just checked to
-    prove the following theorem.  Hint: recall that [1] is [S O]. *)
+    Use [mult_n_Sm] and [mult_n_0] to prove the following
+    theorem.  (Recall that [1] is [S O].) *)
 
 Theorem mult_n_1 : forall p : nat,
   p * 1 = p.
@@ -1127,16 +1138,16 @@ Abort.
 
 (** The reason for this is that the definitions of both [eqb]
     and [+] begin by performing a [match] on their first argument.
-    But here, the first argument to [+] is the unknown number [n] and
-    the argument to [eqb] is the compound expression [n + 1]; neither
-    can be simplified.
+    Here, the first argument to [+] is the unknown number [n] and the
+    argument to [eqb] is the compound expression [n + 1]; neither can
+    be simplified.
 
     To make progress, we need to consider the possible forms of [n]
     separately.  If [n] is [O], then we can calculate the final result
     of [(n + 1) =? 0] and check that it is, indeed, [false].  And if
-    [n = S n'] for some [n'], then, although we don't know exactly
-    what number [n + 1] represents, we can calculate that, at least,
-    it will begin with one [S], and this is enough to calculate that,
+    [n = S n'] for some [n'], then -- although we don't know exactly
+    what number [n + 1] represents -- we can calculate that at least
+    it will begin with one [S]; and this is enough to calculate that,
     again, [(n + 1) =? 0] will yield [false].
 
     The tactic that tells Coq to consider, separately, the cases where
@@ -1156,19 +1167,19 @@ Proof.
     tells Coq what variable names to introduce in each subgoal.  In
     general, what goes between the square brackets is a _list of
     lists_ of names, separated by [|].  In this case, the first
-    component is empty, since the [O] constructor is nullary (it
-    doesn't have any arguments).  The second component gives a single
-    name, [n'], since [S] is a unary constructor.
+    component is empty, since the [O] constructor doesn't take any
+    arguments.  The second component gives a single name, [n'], since
+    [S] is a unary constructor.
 
     In each subgoal, Coq remembers the assumption about [n] that is
     relevant for this subgoal -- either [n = 0] or [n = S n'] for some
     n'.  The [eqn:E] annotation tells [destruct] to give the name [E]
-    to this equation.  Leaving off the [eqn:E] annotation causes Coq
+    to this equation.  (Leaving off the [eqn:E] annotation causes Coq
     to elide these assumptions in the subgoals.  This slightly
     streamlines proofs where the assumptions are not explicitly used,
     but it is better practice to keep them for the sake of
     documentation, as they can help keep you oriented when working
-    with the subgoals.
+    with the subgoals.)
 
     The [-] signs on the second and third lines are called _bullets_,
     and they mark the parts of the proof that correspond to the two
@@ -1181,14 +1192,15 @@ Proof.
     [eqb], and then simplifying the [match].
 
     Marking cases with bullets is optional: if bullets are not
-    present, Coq simply asks you to prove each subgoal in sequence,
+    present, Coq simply expects you to prove each subgoal in sequence,
     one at a time. But it is a good idea to use bullets.  For one
     thing, they make the structure of a proof apparent, improving
-    readability. Also, bullets instruct Coq to ensure that a subgoal
-    is complete before trying to verify the next one, preventing
-    proofs for different subgoals from getting mixed up. These issues
-    become especially important in large developments, where fragile
-    proofs lead to long debugging sessions.
+    readability. Moreover, bullets instruct Coq to ensure that a
+    subgoal is complete before trying to verify the next one,
+    preventing proofs for different subgoals from getting mixed
+    up. These issues become especially important in larger
+    developments, where fragile proofs can lead to long debugging
+    sessions!
 
     There are no hard and fast rules for how proofs should be
     formatted in Coq -- e.g., where lines should be broken and how
@@ -1203,7 +1215,8 @@ Proof.
     tend to the extremes, either writing each tactic on its own line
     or writing entire proofs on a single line.  Good style lies
     somewhere in the middle.  One reasonable guideline is to limit
-    yourself to 80-character lines.
+    yourself to 80- (or, if you have a wide screen or good eyes,
+    120-) character lines.
 
     The [destruct] tactic can be used with any inductively defined
     datatype.  For example, we use it next to prove that boolean
@@ -1292,12 +1305,12 @@ Qed.
     Prove the following claim, marking cases (and subcases) with
     bullets when you use [destruct].
 
-    Hint: You will eventually need to destruct both Booleans, as in
-    the theorems above. But, delay introducing the hypothesis until
-    after you have an opportunity to simplify it.
+    Hint: You will eventually need to destruct both booleans, as in
+    the theorems above. But its best to delay introducing the
+    hypothesis until after you have an opportunity to simplify it.
 
-    Hint 2: When you reach contradiction in the hypotheses, focus
-    on how to [rewrite] with that contradiction. *)
+    Hint 2: When you reach a contradiction in the hypotheses, focus on
+    how to [rewrite] with that contradiction. *)
 
 Theorem andb_true_elim2 : forall b c : bool,
   andb b c = true -> c = true.
@@ -1351,8 +1364,8 @@ Proof.
 
 (** (In general, sections marked Optional are not needed to follow the
     rest of the book, except possibly other Optional sections.  On a
-    first reading, you might want to skim these sections so that you
-    know what's there for future reference.)
+    first reading, you might want to just skim these sections so that
+    you know what's there for future reference.)
 
     Recall the notation definitions for infix plus and times: *)
 
@@ -1372,22 +1385,22 @@ Notation "x * y" := (mult x y)
     [*] say that the expression [1+2*3*4] is shorthand for
     [(1+((2*3)*4))]. Coq uses precedence levels from 0 to 100, and
     _left_, _right_, or _no_ associativity.  We will see more examples
-    of this later, e.g., in the [Lists]
-    chapter.
+    of this later, e.g., in the [Lists] chapter.
 
     Each notation symbol is also associated with a _notation scope_.
     Coq tries to guess what scope is meant from context, so when it
-    sees [S(O*O)] it guesses [nat_scope], but when it sees the product
-    type [bool*bool] (which we'll see in later chapters) it guesses
-    [type_scope].  Occasionally, it is necessary to help it out with
-    percent-notation by writing [(x*y)%nat], and sometimes in what Coq
-    prints it will use [%nat] to indicate what scope a notation is in.
+    sees [S (O*O)] it guesses [nat_scope], but when it sees the pair
+    type type [bool*bool] (which we'll see in a later chapter) it
+    guesses [type_scope].  Occasionally, it is necessary to help it
+    out by writing, for example, [(x*y)%nat], and sometimes in what
+    Coq prints it will use [%nat] to indicate what scope a notation is
+    in.
 
-    Notation scopes also apply to numeral notation ([3], [4], [5], [42],
-    etc.), so you may sometimes see [0%nat], which means [O] (the
-    natural number [0] that we're using in this chapter), or [0%Z],
-    which means the integer zero (which comes from a different part of
-    the standard library).
+    Notation scopes also apply to numeral notations ([3], [4], [5],
+    [42], etc.), so you may sometimes see [0%nat], which means
+    [O] (the natural number [0] that we're using in this chapter), or
+    [0%Z], which means the integer zero (which comes from a different
+    part of the standard library).
 
     Pro tip: Coq's notation mechanism is not especially powerful.
     Don't expect too much from it. *)
@@ -1409,7 +1422,7 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
     that we make recursive calls only on strictly smaller values of
     [n].  This implies that all calls to [plus'] will eventually
     terminate.  Coq demands that some argument of _every_ [Fixpoint]
-    definition is "decreasing."
+    definition be "decreasing."
 
     This requirement is a fundamental feature of Coq's design: In
     particular, it guarantees that every function that can be defined
@@ -1422,10 +1435,11 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
     To get a concrete sense of this, find a way to write a sensible
     [Fixpoint] definition (of a simple function on numbers, say) that
     _does_ terminate on all inputs, but that Coq will reject because
-    of this restriction.  (If you choose to turn in this optional
-    exercise as part of a homework assignment, make sure you comment
-    out your solution so that it doesn't cause Coq to reject the whole
-    file!) *)
+    of this restriction.
+
+    (If you choose to turn in this optional exercise as part of a
+    homework assignment, make sure you comment out your solution so
+    that it doesn't cause Coq to reject the whole file!) *)
 
 (* FILL IN HERE
 
@@ -1467,7 +1481,7 @@ Definition manual_grade_for_negation_fn_applied_twice : option (nat*string) := N
 
 (** **** Exercise: 3 stars, standard, optional (andb_eq_orb)
 
-    Prove the following theorem.  (Hint: This one can be a bit tricky,
+    Prove the following theorem.  (Hint: This can be a bit tricky,
     depending on how you approach it.  You will probably need both
     [destruct] and [rewrite], but destructing everything in sight is
     not the best way.) *)
@@ -1484,13 +1498,13 @@ Proof.
 (* ================================================================= *)
 (** ** Course Late Policies, Formalized *)
 
-(** Suppose that a course has a grading policy based on late days such
-    that a student's final letter grade is lowered if they submit too
+(** Suppose that a course has a grading policy based on late days,
+    where a student's final letter grade is lowered if they submit too
     many homework assignments late.
 
-    In this series of problems, we model this situation using the
-    features of Coq that we have seen so far and prove some basic
-    facts about the grading policy.  *)
+    In the next series of problems, we model this situation using the
+    features of Coq that we have seen so far and prove some simple
+    facts about this grading policy.  *)
 
 Module LateDays.
 
@@ -1521,19 +1535,20 @@ Inductive grade : Type :=
     "equal", "less than", or "greater than" one another. (This
     definition also appears in the Coq standard libary.)  *)
 
-Inductive comparison : Set :=
-  | Eq : comparison        (* "equal" *)
-  | Lt : comparison        (* "less than" *)
-  | Gt : comparison.       (* "greater than" *)
+Inductive comparison : Type :=
+  | Eq         (* "equal" *)
+  | Lt         (* "less than" *)
+  | Gt.        (* "greater than" *)
 
-(** Using pattern matching, it is not too difficult to define the
+(** Using pattern matching, it is not difficult to define the
     comparison operation for two letters [l1] and [l2] (see below).
     This definition uses two features of [match] patterns: First,
     recall that we can match against _two_ values simultaneously by
     separating them and the corresponding patterns with comma [,].
     This is simply a convenient abbreviation for nested pattern
-    matching.  For example, the first two cases are just shorthand for
-    the nested version shown on the right:
+    matching.  For example, the match expression on the left below is
+    just shorthand for the lower-level "expanded version" shown on the
+    right:
 
   match l1, l2 with          match l1 with
   | A, A => Eq               | A => match l2 with
@@ -1542,11 +1557,10 @@ Inductive comparison : Set :=
                                     end
                              end
 *)
-
 (** As another shorthand, we can also match one of several
-    possibilites by using [|] as short hand.  For example the pattern
-    [C , (A | B)] stands for two cases: [C, A] and [C, B] and will
-    match either possibility.  *)
+    possibilites by using [|] in the pattern.  For example the pattern
+    [C , (A | B)] stands for two cases: [C, A] and [C, B]. *)
+
 Definition letter_comparison (l1 l2 : letter) : comparison :=
   match l1, l2 with
   | A, A => Eq
@@ -1576,10 +1590,7 @@ Compute letter_comparison B F.
 (** As a further sanity check, we can prove that the
     [letter_comparison] function does indeed give the result [Eq] when
     comparing a letter [l] against itself.  *)
-(** **** Exercise: 1 star, standard (letter_comparison)
-
-    Prove the following theorem. *)
-
+(** **** Exercise: 1 star, standard (letter_comparison) *)
 Theorem letter_comparison_Eq :
   forall l, letter_comparison l l = Eq.
 Proof.
@@ -1602,12 +1613,12 @@ Definition modifier_comparison (m1 m2 : modifier) : comparison :=
 
 (** **** Exercise: 2 stars, standard (grade_comparison)
 
-    Use pattern matching to complete the following definition.  Note
-    that the ordering on grades is sometimes called "lexicographic"
-    ordering: we first compare the letters and, only in the case that
-    the letters are equal do we need to consider the modifiers.
-    (I.e. all grade variants of [A] are greater than all
-    grade variants of [B].)
+    Use pattern matching to complete the following definition.
+
+    (This ordering on grades is sometimes called "lexicographic"
+    ordering: we first compare the letters, and we only consider the
+    modifiers in the case that the letters are equal.  I.e. all grade
+    variants of [A] are greater than all grade variants of [B].)
 
     Hint: match against [g1] and [g2] simultaneously, but don't try to
     enumerate all the cases.  Instead do case analysis on the result
@@ -1618,7 +1629,7 @@ Definition grade_comparison (g1 g2 : grade) : comparison
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 (** The following "unit tests" of your [grade_comparison] function
-    should pass after you have defined it correctly. *)
+    should pass once you have defined it correctly. *)
 
 Example test_grade_comparison1 :
   (grade_comparison (Grade A Minus) (Grade B Plus)) = Gt.
@@ -1639,25 +1650,25 @@ Example test_grade_comparison4 :
 (** [] *)
 
 (** Now that we have a definition of grades and how they compare to
-    one another, let us implement the late penalty fuction. *)
+    one another, let us implement a late-penalty fuction. *)
 
 (** First, we define what it means to lower the [letter] component of
-    a grade. Note that, since [F] is already the lowest grade
-    possible, we just leave it untouched.  *)
+    a grade.  Since [F] is already the lowest grade possible, we just
+    leave it alone.  *)
 Definition lower_letter (l : letter) : letter :=
   match l with
   | A => B
   | B => C
   | C => D
   | D => F
-  | F => F  (* Note that you can't go lower than [F] *)
+  | F => F  (* Can't go lower than [F]! *)
   end.
 
-(** Already our formalization can help us understand some corner cases
+(** Our formalization can already help us understand some corner cases
     of the grading policy.  For example, we might expect that if we
     use the [lower_letter] function its result will actually be lower,
     as claimed in the following theorem.  But this theorem is not
-    provable!  Why? *)
+    provable!  (Do you see why?) *)
 Theorem lower_letter_lowers: forall (l : letter),
   letter_comparison (lower_letter l) l = Lt.
 Proof.
@@ -1678,11 +1689,11 @@ Proof.
   simpl. reflexivity.
 Qed.
 
-(** Now we can state a better version of the lower letter theorem that
-    actually is provable.  In this version, the hypothesis about [F]
-    says that [F] is strictly smaller than [l], which rules out the
-    problematic case above. In other words, as long as [l] is bigger
-    than [F], it will be lowered. *)
+(** With this insight, we can state a better version of the lower
+    letter theorem that actually is provable.  In this version, the
+    hypothesis about [F] says that [F] is strictly smaller than [l],
+    which rules out the problematic case above. In other words, as
+    long as [l] is bigger than [F], it will be lowered. *)
 (** **** Exercise: 2 stars, standard (lower_letter_lowers)
 
     Prove the following theorem. *)
@@ -1699,18 +1710,20 @@ Proof.
 (** **** Exercise: 2 stars, standard (lower_grade)
 
     We can now use the [lower_letter] definition as a helper to define
-    what it means to lower a grade by one step.  Implement the
+    what it means to lower a grade by one step.  Complete the
     definition below so that it sends a grade [g] to one step lower
-    unless it is already [Grade F Minus], which should remain
-    unchanged.  Once you have implemented this definition correctly,
-    the subsequent example "unit tests" should hold trivially.
+    (unless it is already [Grade F Minus], which should remain
+    unchanged).  Once you have implemented it correctly, the subsequent
+    "unit test" examples should hold trivially.
 
     Hint: To make this a succinct definition that is easy to prove
     properties about, you will probably want to use nested pattern
     matching. The outer match should not match on the specific letter
     component of the grade -- it should consider only the modifier.
     You should definitely _not_ try to enumerate all of the
-    cases. (Our solution is under 10 lines of code, total.) *)
+    cases.
+
+    Our solution is under 10 lines of code total. *)
 Definition lower_grade (g : grade) : grade
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
@@ -1749,9 +1762,9 @@ Example lower_grade_thrice :
 Proof.
 (* FILL IN HERE *) Admitted.
 
-(** Note: Coq makes no distinction between an [Example] and a
-    [Theorem]. We state this one as a [Theorem] only as a hint that we
-    will use it in proofs below. *)
+(** Coq makes no distinction between an [Example] and a [Theorem]. We
+    state the following as a [Theorem] only as a hint that we will use
+    it in proofs below. *)
 Theorem lower_grade_F_Minus : lower_grade (Grade F Minus) = (Grade F Minus).
 Proof.
 (* FILL IN HERE *) Admitted.
@@ -1769,17 +1782,17 @@ Proof.
 
 (** **** Exercise: 3 stars, standard (lower_grade_lowers)
 
-    Now prove the following theorem, which says that, as long as the
-    grade starts out above F-, the [lower_grade] option does indeed
-    lower the grade.  As usual, destructing everything in sight is
-    _not_ a good idea.  Judicious use of [destruct], along with
-    rewriting is a better strategy.
+    Prove the following theorem, which says that, as long as the grade
+    starts out above F-, the [lower_grade] option does indeed lower
+    the grade.  As usual, destructing everything in sight is _not_ a
+    good idea.  Judicious use of [destruct] along with rewriting is a
+    better strategy.
 
-    Hint: If you define your [grade_comparison] function as suggested,
-    you will need to rewrite using [letter_comparison_Eq] in two
-    cases.  The remaining case is the only one in which you need to
-    destruct a [letter].  The case for [F] will probably benefit from
-    [lower_grade_F_Minus].  *)
+    Hint: If you defined your [grade_comparison] function as
+    suggested, you will need to rewrite using [letter_comparison_Eq]
+    in two cases.  The remaining case is the only one in which you
+    need to destruct a [letter].  The case for [F] will probably
+    benefit from [lower_grade_F_Minus].  *)
 Theorem lower_grade_lowers :
   forall (g : grade),
     grade_comparison (Grade F Minus) g = Lt ->
@@ -1790,7 +1803,7 @@ Proof.
 (** [] *)
 
 (** Now that we have implemented and tested a function that lowers a
-    grade by one step, we can implement a specific late days policy.
+    grade by one step, we can implement a specific late-days policy.
     Given a number of [late_days], the [apply_late_policy] function
     computes the final grade from [g], the initial grade.
 
@@ -1812,7 +1825,7 @@ Definition apply_late_policy (late_days : nat) (g : grade) : grade :=
     able to make progress on a proof.  Soon, we will see how to do this
     in a much simpler way automatically, but for now, it is easy to prove
     that a use of any definition like [apply_late_policy] is equal to its
-    right hand side. (It follows just from reflexivity.)
+    right hand side just by using reflexivity.
 
     This result is useful because it allows us to use [rewrite] to
     expose the internals of the definition. *)
@@ -1828,17 +1841,14 @@ Proof.
   intros. reflexivity.
 Qed.
 
-(** Let's prove some properties about this policy... *)
+(** Now let's prove some properties about this policy. *)
 
-(** This theorem states that if a student accrues no more than 8 late
-   days throughout the semester, your grade is unaffected. It is
-   easy to prove, once you use the [apply_late_policy_unfold]
-   you can rewrite using the hypothesis. *)
+(** The next theorem states that if a student accrues no more than eight
+    late days throughout the semester, their grade is unaffected. It
+    is easy to prove: once you use the [apply_late_policy_unfold] you
+    can rewrite using the hypothesis. *)
 
-(** **** Exercise: 2 stars, standard (no_penalty_for_mostly_on_time)
-
-    Prove the following theorem. *)
-
+(** **** Exercise: 2 stars, standard (no_penalty_for_mostly_on_time) *)
 Theorem no_penalty_for_mostly_on_time :
   forall (late_days : nat) (g : grade),
     (late_days <? 9 = true) ->
@@ -1848,14 +1858,10 @@ Proof.
 
 (** [] *)
 
-(** The following theorem proves that, as long as a student has
-    between 9 and 16 late days, their final grade is lowered by one
-    step. *)
+(** The following theorem states that, if a student has between 9 and
+    16 late days, their final grade is lowered by one step. *)
 
-(** **** Exercise: 2 stars, standard (graded_lowered_once)
-
-    Prove the following theorem. *)
-
+(** **** Exercise: 2 stars, standard (graded_lowered_once) *)
 Theorem grade_lowered_once :
   forall (late_days : nat) (g : grade),
     (late_days <? 9 = false) ->
@@ -1895,7 +1901,9 @@ End LateDays.
 
     Note that the low-order bit is on the left and the high-order bit
     is on the right -- the opposite of the way binary numbers are
-    usually written.  This choice makes them easier to manipulate. *)
+    usually written.  This choice makes them easier to manipulate.
+
+    (Comprehension check: What unary numeral does [B0 Z] represent?) *)
 
 Inductive bin : Type :=
   | Z
@@ -1945,23 +1953,20 @@ Example test_bin_incr6 :
 
 (** Each SF chapter comes with a test file containing scripts that
     check whether you have solved the required exercises. If you're
-    using SF as part of a course, your instructors will likely be
+    using SF as part of a course, your instructor will likely be
     running these test files to autograde your solutions. You can also
     use these test files, if you like, to make sure you haven't missed
     anything.
 
-    Important: This step is _optional_: if you've completed all the
+    (Important: This step is _optional_: if you've completed all the
     non-optional exercises and Coq accepts your answers, this already
-    shows that you are in good shape.
+    shows that you are in good shape.)
 
     The test file for this chapter is [BasicsTest.v]. To run it, make
-    sure you have saved [Basics.v] to disk.  Then do this:
-
-       coqc -Q . LF Basics.v
-       coqc -Q . LF BasicsTest.v
-
-    (Make sure you do this in a directory that also contains a file named
-    [_CoqProject] containing the single line [-Q . LF].)
+    sure you have saved [Basics.v] to disk.  Then do this: [[ coqc -Q
+    . LF Basics.v coqc -Q . LF BasicsTest.v ]] (Make sure you do this
+    in a directory that also contains a file named [_CoqProject]
+    containing the single line [-Q . LF].)
 
     If you accidentally deleted an exercise or changed its name, then
     [make BasicsTest.vo] will fail with an error that tells you the
@@ -1979,7 +1984,7 @@ Example test_bin_incr6 :
       If the _type_ is not [ok], it means you proved the wrong thing:
       most likely, you accidentally modified the theorem statement
       while you were proving it.  The autograder won't give you any
-      points for that, so make sure to correct the theorem.
+      points in this case, so make sure to correct the theorem.
 
       The _assumptions_ are any unproved theorems which your solution
       relies upon.  "Closed under the global context" is a fancy way
@@ -1991,13 +1996,14 @@ Example test_bin_incr6 :
 
     - Third, you will see the maximum number of points in standard and
       advanced versions of the assignment.  That number is based on
-      the number of stars in the non-optional exercises.
+      the number of stars in the non-optional exercises.  (In the
+      present file, there are no advanced exercises.)
 
     - Fourth, you will see a list of "Allowed Axioms".  These are
-      unproved theorems that your solution is permitted to depend
-      upon.  You'll probably see something about
-      [functional_extensionality] for this chapter; we'll cover what
-      that means in a later chapter.
+      unproven theorems that your solution is permitted to depend
+      upon, aside from the fundamental axioms of Coq's logic.  You'll
+      probably see something about [functional_extensionality] for
+      this chapter; we'll cover what that means in a later chapter.
 
     - Finally, you will see a summary of whether you have solved each
       exercise.  Note that summary does not include the critical
@@ -2009,4 +2015,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:46 *)

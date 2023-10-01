@@ -1625,7 +1625,8 @@ Informally, a nice way of displaying a proof using the sequencing
     Technical hint: Hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span> below begins <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span class="id" title="var">n</span>,</span> <span class="inlinecode">...</span>.
     You'll want to instantiate that with the particular <span class="inlinecode"><span class="id" title="var">a</span></span> and <span class="inlinecode"><span class="id" title="var">n</span></span>
     you've invented.  You can do that with <span class="inlinecode"><span class="id" title="tactic">assert</span></span> and <span class="inlinecode"><span class="id" title="tactic">apply</span></span>, but
-    Coq offers an even easier tactic: <span class="inlinecode"><span class="id" title="tactic">specialize</span></span>.  If you write
+    you may remember (from <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Tactics.v.html"><span class="inlineref">Tactics.v</span></a> in Logical Foundations)
+    that Coq offers an even easier tactic: <span class="inlinecode"><span class="id" title="tactic">specialize</span></span>.  If you write
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> <span class="id" title="var">H</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">a</span> := <span class="id" title="var">your_a</span>) (<span class="id" title="var">n</span> := <span class="id" title="var">your_n</span>)
 </span>    the hypothesis will be instantiated on <span class="inlinecode"><span class="id" title="var">your_a</span></span> and <span class="inlinecode"><span class="id" title="var">your_n</span></span>.
@@ -3138,7 +3139,7 @@ Use your rules to prove the following triple.
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-09-27&nbsp;19:39&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-10-01&nbsp;12:48&nbsp;*)</span><br/>
 </div>
 </div>
 

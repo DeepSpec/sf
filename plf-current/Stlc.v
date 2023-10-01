@@ -18,8 +18,6 @@ From PLF Require Import Maps.
 From PLF Require Import Smallstep.
 Set Default Goal Selector "!".
 
-Hint Resolve update_eq : core.
-
 (* ################################################################# *)
 (** * Overview *)
 
@@ -865,4 +863,4 @@ Proof.
 
 End STLC.
 
-(* 2023-09-27 19:39 *)
+(* 2023-10-01 12:48 *)

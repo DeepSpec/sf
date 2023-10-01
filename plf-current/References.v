@@ -1,5 +1,7 @@
 (** * References: Typing Mutable References *)
 
+Set Warnings "-deprecated-syntactic-definition".
+
 (** Up to this point, we have considered a variety of _pure_
     language features, including functional abstraction, basic types
     such as numbers and booleans, and structured types such as records
@@ -1944,4 +1946,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2023-09-27 19:39 *)
+(* 2023-10-01 12:48 *)

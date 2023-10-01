@@ -16,13 +16,13 @@ From LF Require Export Logic.
     To begin, some examples... *)
 
 (* ================================================================= *)
-(** ** The Collatz Conjecture *)
+(** ** Example: The Collatz Conjecture *)
 
 (** The _Collatz Conjecture_ is a famous open problem in number
     theory.
 
-    Its statement is surprisingly simple.  First, we define a function
-    [f] on numbers, as follows: *)
+    Its statement is quite simple.  First, we define a function [f]
+    on numbers, as follows: *)
 
 Fixpoint div2 (n : nat) :=
   match n with
@@ -35,66 +35,89 @@ Definition f (n : nat) :=
   if even n then div2 n
   else (3 * n) + 1.
 
-(** Next, we look at what happens when we repeatedly apply [f] to some
-    given starting number.  For example, [f 12] is [6], and [f 6] is
-    [3], so by repeatedly applying [f] we get the sequence [12, 6, 3,
-    10, 5, 16, 8, 4, 2, 1].
+(** Next, we look at what happens when we repeatedly apply [f] to
+    some given starting number.  For example, [f 12] is [6], and [f
+    6] is [3], so by repeatedly applying [f] we get the sequence
+    [12, 6, 3, 10, 5, 16, 8, 4, 2, 1].
 
-    Similarly, if we start with [19], we get the longer sequence [19,
-    58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8,
-    4, 2, 1].
+    Similarly, if we start with [19], we get the longer sequence
+    [19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5,
+    16, 8, 4, 2, 1].
 
-    Both of these sequences eventually reach [1].  The question posed
-    by Collatz was: Does the sequence starting from _any_ natural
-    number eventually reach [1]? *)
+    Both of these sequences eventually reach [1].  The question
+    posed by Collatz was: Is the sequence starting from _any_
+    natural number guaranteed to reach [1] eventually? *)
 
 (** To formalize this question in Coq, we might try to define a
-    recursive _function_ that computes the total number of steps that
-    it takes for such a sequence to reach [1]. *)
+    recursive _function_ that calculates the total number of steps
+    that it takes for such a sequence to reach [1]. *)
 
 Fail Fixpoint reaches_1_in (n : nat) :=
-  if n =? 1 then 0
+  if n =? 1 then true
   else 1 + reaches_1_in (f n).
 
 (** This definition is rejected by Coq's termination checker, since
     the argument to the recursive call, [f n], is not "obviously
     smaller" than [n].
 
-    Indeed, this isn't just a silly limitation of the termination
-    checker.  Functions in Coq are required to be total, and checking
-    that this particular function is total would be equivalent to
-    settling the Collatz conjecture! *)
+    Indeed, this isn't just a pointless limitation: functions in Coq
+    are required to be total, to ensure logical consistency.
+
+    Moreover, we can't fix it by devising a more clever termination
+    checker: deciding whether this particular function is total
+    would be equivalent to settling the Collatz conjecture! *)
 
 (** Fortunately, there is another way to do it: We can express the
     concept "reaches [1] eventually" as an _inductively defined
     property_ of numbers: *)
 
-Inductive reaches_1 : nat -> Prop :=
-  | term_done : reaches_1 1
-  | term_more (n : nat) : reaches_1 (f n) -> reaches_1 n.
+Inductive Collatz_holds_for : nat -> Prop :=
+  | Chf_done : Collatz_holds_for 1
+  | Chf_more (n : nat) : Collatz_holds_for (f n) -> Collatz_holds_for n.
 
-(** The details of such definitions are written will be explained
-    below; for the moment, the way to read this one is: "The number
-    [1] reaches [1], and any number [n] reaches [1] if [f n] does." *)
+(** What we've done here is to use Coq's [Inductive] definition
+    mechanism to characterize the property "Collatz holds for..." by
+    stating two different ways in which it can hold: (1) Collatz holds
+    for [1] and (2) if Collatz holds for [f n] then it holds for
+    [n]. *)
+
+(** For particular numbers, we can now argue that the Collatz sequence
+    reaches [1] like this (again, we'll go through the details of how
+    it works a bit later in the chapter): *)
+
+Example Collatz_holds_for_12 : Collatz_holds_for 12.
+Proof.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_more. unfold f. simpl.
+  apply Chf_done.  Qed.
 
 (** The Collatz conjecture then states that the sequence beginning
     from _any_ number reaches [1]: *)
 
-Conjecture collatz : forall n, reaches_1 n.
+Conjecture collatz : forall n, Collatz_holds_for n.
 
 (** If you succeed in proving this conjecture, you've got a bright
-    future as a number theorist.  But don't spend too long on it --
-    it's been open since 1937! *)
+    future as a number theorist!  But don't spend too long on it --
+    it's been open since 1937. *)
 
 (* ================================================================= *)
-(** ** Transitive Closure *)
+(** ** Example: Ordering *)
 
 (** A binary _relation_ on a set [X] is a family of propositions
-    parameterized by two elements of [X] -- i.e., a proposition about
-    pairs of elements of [X].  *)
+    parameterized by two elements of [X] -- i.e., a proposition
+    about pairs of elements of [X].  *)
 
-(** For example, a familiar binary relation on [nat] is [le], the
-    less-than-or-equal-to relation. *)
+(** For example, one familiar binary relation on [nat] is [le], the
+    less-than-or-equal-to relation.  We've already seen how to define
+    it as a boolean computation.  Here is a "direct" propositional
+    definition. *)
 
 Module LePlayground.
 
@@ -108,10 +131,35 @@ Inductive le : nat -> nat -> Prop :=
   | le_n (n : nat)   : le n n
   | le_S (n m : nat) : le n m -> le n (S m).
 
+Notation "n <= m" := (le n m) (at level 70).
+
+Example le_3_5 : 3 <= 5.
+Proof.
+  apply le_S. apply le_S. apply le_n. Qed.
+
 End LePlayground.
 
-(** The _transitive closure_ of a relation [R] is the smallest
-    relation that contains [R] and that is transitive.  *)
+Module LePlayground1.
+
+(** (By "reserving" the notation before defining the [Inductive], we
+    can use it in the definition.) *)
+
+Reserved Notation "n <= m" (at level 70).
+
+Inductive le : nat -> nat -> Prop :=
+  | le_n (n : nat)   : n <= n
+  | le_S (n m : nat) : n <= m -> n <= (S m)
+
+  where "n <= m" := (le n m).
+
+End LePlayground1.
+
+(* ================================================================= *)
+(** ** Example: Transitive Closure *)
+
+(** As another example, the _transitive closure_ of a relation [R]
+    is the smallest relation that contains [R] and that is
+    transitive.  *)
 
 Inductive clos_trans {X: Type} (R: X->X->Prop) : X->X->Prop :=
   | t_step (x y : X) :
@@ -121,6 +169,27 @@ Inductive clos_trans {X: Type} (R: X->X->Prop) : X->X->Prop :=
       clos_trans R x y ->
       clos_trans R y z ->
       clos_trans R x z.
+
+(** For example, suppose we define a "parent of" relation on a group
+    of people... *)
+
+Inductive Person : Type := Sage | Cleo | Ridley | Moss.
+
+Inductive parent_of : Person -> Person -> Prop :=
+  po_SC : parent_of Sage Cleo
+| po_SR : parent_of Sage Ridley
+| po_CM : parent_of Cleo Moss.
+
+(** Then we can define "ancestor of" as its transitive closure: *)
+
+Definition ancestor_of : Person -> Person -> Prop :=
+  clos_trans parent_of.
+
+Example ancestor_of1 : ancestor_of Sage Moss.
+Proof.
+  unfold ancestor_of. apply t_trans with Cleo.
+  - apply t_step. apply po_SC.
+  - apply t_step. apply po_CM. Qed.
 
 (** **** Exercise: 1 star, standard, optional (close_refl_trans)
 
@@ -133,7 +202,7 @@ Inductive clos_trans {X: Type} (R: X->X->Prop) : X->X->Prop :=
     [] *)
 
 (* ================================================================= *)
-(** ** Permutations *)
+(** ** Example: Permutations *)
 
 (** The familiar mathematical concept of _permutation_ also has an
     elegant formulation as an inductive relation.  For simplicity,
@@ -165,8 +234,14 @@ Inductive Perm3 {X : Type} : list X -> list X -> Prop :=
 
     [] *)
 
+Example Perm3_example1 : Perm3 [1;2;3] [2;3;1].
+Proof.
+  apply perm3_trans with [2;1;3].
+  - apply perm3_swap12.
+  - apply perm3_swap23.   Qed.
+
 (* ================================================================= *)
-(** ** Evenness (yet again) *)
+(** ** Example: Evenness (yet again) *)
 
 (** We've already seen two ways of stating a proposition that a number
     [n] is even: We can say
@@ -185,8 +260,9 @@ Inductive Perm3 {X : Type} : list X -> list X -> Prop :=
 (** (Defining evenness in this way may seem a bit confusing,
     since we have already seen another perfectly good way of doing
     it -- "[n] is even if it is equal to the result of doubling some
-    number". But it makes a convenient running example because it is
-    simple and compact.) *)
+    number". It makes a convenient running example because it is
+    simple and compact, but we will see more compelling examples in
+    future chapters.) *)
 
 (** To illustrate how this new definition of evenness works,
     let's imagine using it to show that [4] is even. First, we give
@@ -292,7 +368,7 @@ Proof.
     _destruct_ such evidence, reasoning about how it could have been
     built.
 
-    Introducing [ev] with an [Inductive] declaration tells Coq not
+    Defining [ev] with an [Inductive] declaration tells Coq not
     only that the constructors [ev_0] and [ev_SS] are valid ways to
     build evidence that some number is [ev], but also that these two
     constructors are the _only_ ways to build evidence that numbers
@@ -512,7 +588,7 @@ Abort.
 (* ================================================================= *)
 (** ** Induction on Evidence *)
 
-(** If this story feels familiar, it is no coincidence: We've
+(** If this story feels familiar, it is no coincidence: We
     encountered similar problems in the [Induction] chapter, when
     trying to use case analysis to prove results that required
     induction.  And once again the solution is... induction! *)
@@ -975,12 +1051,12 @@ Inductive bin : Type :=
   | B1 (n : bin).
 End bin1.
 
-(** ... which omits the result types because they are all bin. *)
+(** ... which omits the result types because they are all the same (i.e., [bin]). *)
 
 (** It is completely equivalent to this... *)
 Module bin2.
 Inductive bin : Type :=
-  | Z : bin
+  | Z            : bin
   | B0 (n : bin) : bin
   | B1 (n : bin) : bin.
 End bin2.
@@ -1069,8 +1145,7 @@ Arguments Star {T} _.
 
 (** We can easily translate this informal definition into an
     [Inductive] one as follows.  We use the notation [s =~ re] in
-    place of [exp_match s re].  (By "reserving" the notation before
-    defining the [Inductive], we can use it in the definition.) *)
+    place of [exp_match s re]. *)
 
 Reserved Notation "s =~ re" (at level 80).
 
@@ -1180,7 +1255,7 @@ Proof.
 Qed.
 
 (** (Note the use of [app_nil_r] to change the goal of the theorem to
-    exactly the same shape expected by [MStarApp].) *)
+    exactly the shape expected by [MStarApp].) *)
 
 (** **** Exercise: 3 stars, standard (exp_match_ex1)
 
@@ -1324,12 +1399,8 @@ Proof.
 
 (** Now, just doing an [inversion] on [H1] won't get us very far in
     the recursive cases. (Try it!). So we need induction (on
-    evidence!). Here is a naive first attempt.
+    evidence!). Here is a naive first attempt. *)
 
-    (We can begin by generalizing [s2], since it's pretty clear that we
-    are going to have to walk over both [s1] and [s2] in parallel.) *)
-
-  generalize dependent s2.
   induction H1
     as [|x'|s1 re1 s2' re2 Hmatch1 IH1 Hmatch2 IH2
         |s1 re1 re2 Hmatch IH|re1 s2' re2 Hmatch IH
@@ -1345,7 +1416,7 @@ Proof.
     [MEmpty]... *)
 
   - (* MEmpty *)
-    simpl. intros s2 H. apply H.
+    simpl. intros H. apply H.
 
 (** ... but most cases get stuck.  For [MChar], for instance, we
     must show
@@ -1355,7 +1426,7 @@ Proof.
 
     which is clearly impossible. *)
 
-  - (* MChar. *) intros s2 H. simpl. (* Stuck... *)
+  - (* MChar. *) intros H. simpl. (* Stuck... *)
 Abort.
 
 (** The problem here is that [induction] over a Prop hypothesis
@@ -1400,7 +1471,6 @@ Proof.
 
 (** We now have [Heqre' : re' = Star re]. *)
 
-  generalize dependent s2.
   induction H1
     as [|x'|s1 re1 s2' re2 Hmatch1 IH1 Hmatch2 IH2
         |s1 re1 re2 Hmatch IH|re1 s2' re2 Hmatch IH
@@ -1421,14 +1491,14 @@ Proof.
     results from the equality generated by [remember]. *)
 
   - (* MStar0 *)
-    intros s H. apply H.
+    intros H. apply H.
 
   - (* MStarApp *)
-    intros s2 H1. rewrite <- app_assoc.
+    intros H1. rewrite <- app_assoc.
     apply MStarApp.
     + apply Hmatch1.
     + apply IH2.
-      * apply Heqre'. 
+      * apply Heqre'.
       * apply H1.
 Qed.
 
@@ -1612,11 +1682,10 @@ End Pumping.
 (* ################################################################# *)
 (** * Case Study: Improving Reflection *)
 
-(** We've seen in the [Logic] chapter that we often need to
-    relate boolean computations to statements in [Prop].  But
-    performing this conversion as we did there can result in
-    tedious proof scripts.  Consider the proof of the following
-    theorem: *)
+(** We've seen in the [Logic] chapter that we sometimes
+    need to relate boolean computations to statements in [Prop].  But
+    performing this conversion as we did there can result in tedious
+    proof scripts.  Consider the proof of the following theorem: *)
 
 Theorem filter_not_empty_In : forall n l,
   filter (fun x => n =? x) l <> [] ->
@@ -1690,12 +1759,12 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** We can think of [reflect] as a kind of variant of the usual "if
-    and only if" connective; the advantage of [reflect] is that, by
-    destructing a hypothesis or lemma of the form [reflect P b], we
-    can perform case analysis on [b] while _at the same time_
-    generating appropriate hypothesis in the two branches ([P] in the
-    first subgoal and [~ P] in the second). *)
+(** We can think of [reflect] as a variant of the usual "if and only
+    if" connective; the advantage of [reflect] is that, by destructing
+    a hypothesis or lemma of the form [reflect P b], we can perform
+    case analysis on [b] while _at the same time_ generating
+    appropriate hypothesis in the two branches ([P] in the first
+    subgoal and [~ P] in the second). *)
 
 (** Let's use [reflect] to produce a smoother proof of
     [filter_not_empty_In].
@@ -1755,11 +1824,11 @@ Proof.
     We'll see many more examples in later chapters and in _Programming
     Language Foundations_.
 
-    This use of [reflect] was popularized by _SSReflect_, a Coq
+    This way of using [reflect] was popularized by _SSReflect_, a Coq
     library that has been used to formalize important results in
     mathematics, including the 4-color theorem and the Feit-Thompson
     theorem.  The name SSReflect stands for _small-scale reflection_,
-    i.e., the pervasive use of reflection to simplify small proof
+    i.e., the pervasive use of reflection to streamline small proof
     steps by turning them into boolean computations. *)
 
 (* ################################################################# *)
@@ -2364,4 +2433,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:47 *)

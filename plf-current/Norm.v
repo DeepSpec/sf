@@ -435,7 +435,7 @@ Proof.
       auto.
 Qed.
 
-(* A handy consequence of [eqb_neq] *)
+(* A handy consequence of [eqb_neq]. *)
 Theorem false_eqb_string : forall x y : string,
    x <> y -> String.eqb x y = false.
 Proof.
@@ -1144,4 +1144,4 @@ Proof.
   eapply V_nil.
 Qed.
 
-(* 2023-09-27 19:39 *)
+(* 2023-10-01 12:48 *)

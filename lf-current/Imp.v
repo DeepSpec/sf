@@ -826,7 +826,7 @@ Proof.
 Qed.
 
 (** Again, we can make the proof quite a bit shorter using some
-    tactics. *)
+    tacticals. *)
 
 Theorem aeval_iff_aevalR' : forall a n,
   (a ==> n) <-> aeval a = n.
@@ -988,8 +988,10 @@ End aevalR_extended.
 
 (** Let's return to defining Imp, where the next thing we need to do
     is to enrich our arithmetic and boolean expressions with
-    variables. To keep things simple, we'll assume that all variables
-    are global and that they only hold numbers. *)
+    variables.
+
+    To keep things simple, we'll assume that all variables are global
+    and that they only hold numbers. *)
 
 (* ================================================================= *)
 (** ** States *)
@@ -1053,7 +1055,9 @@ Inductive bexp : Type :=
 
 (** To make Imp programs easier to read and write, we introduce some
     notations and implicit coercions.  You do not need to understand
-    exactly what these declarations do.  Briefly, though:
+    exactly what these declarations do.
+
+    Briefly, though:
        - The [Coercion] declaration stipulates that a function (or
          constructor) can be implicitly used by the type system to
          coerce a value of the input type to a value of the output
@@ -1112,7 +1116,8 @@ Definition example_bexp : bexp := <{ true && ~(X <= 4) }>.
     handle variables in the obvious way, taking a state [st] as an
     extra argument: *)
 
-Fixpoint aeval (st : state) (* <--- NEW *) (a : aexp) : nat :=
+Fixpoint aeval (st : state) (* <--- NEW *)
+               (a : aexp) : nat :=
   match a with
   | ANum n => n
   | AId x => st x                                (* <--- NEW *)
@@ -1121,7 +1126,8 @@ Fixpoint aeval (st : state) (* <--- NEW *) (a : aexp) : nat :=
   | <{a1 * a2}> => (aeval st a1) * (aeval st a2)
   end.
 
-Fixpoint beval (st : state) (* <--- NEW *) (b : bexp) : bool :=
+Fixpoint beval (st : state) (* <--- NEW *)
+               (b : bexp) : bool :=
   match b with
   | <{true}>      => true
   | <{false}>     => false
@@ -1160,7 +1166,7 @@ Proof. reflexivity. Qed.
 (* ################################################################# *)
 (** * Commands *)
 
-(** Now we are ready define the syntax and behavior of Imp
+(** Now we are ready to define the syntax and behavior of Imp
     _commands_ (or _statements_). *)
 
 (* ================================================================= *)
@@ -1169,8 +1175,11 @@ Proof. reflexivity. Qed.
 (** Informally, commands [c] are described by the following BNF
     grammar.
 
-     c := skip | x := a | c ; c | if b then c else c end
-         | while b do c end
+     c := skip
+        | x := a
+        | c ; c
+        | if b then c else c end
+        | while b do c end
 *)
 
 (** Here is the formal definition of the abstract syntax of
@@ -1202,7 +1211,7 @@ Notation "'if' x 'then' y 'else' z 'end'" :=
             y at level 99, z at level 99) : com_scope.
 Notation "'while' x 'do' y 'end'" :=
          (CWhile x y)
-            (in custom com at level 89, x at level 99, y at level 99) : com_scope.
+           (in custom com at level 89, x at level 99, y at level 99) : com_scope.
 
 (** For example, here is the factorial function again, written as a
     formal Coq definition.  When this command terminates, the variable
@@ -2060,4 +2069,4 @@ End BreakImp.
 
     [] *)
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:47 *)

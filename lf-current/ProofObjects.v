@@ -148,11 +148,10 @@ Qed.
     evidence we've built is stored in the global context under the name
     given in the [Theorem] command. *)
 
-(** Tactic proofs are useful and convenient, but they are not
-    essential in Coq: in principle, we can always construct the
-    required evidence by hand. Then we can use [Definition] (rather
-    than [Theorem]) to give a global name directly to this
-    evidence. *)
+(** Tactic proofs are convenient, but they are not essential in Coq:
+    in principle, we can always just construct the required evidence
+    by hand. Then we can use [Definition] (rather than [Theorem]) to
+    introduce a global name for this evidence. *)
 
 Definition ev_4''' : ev 4 :=
   ev_SS 2 (ev_SS 0 ev_0).
@@ -299,7 +298,7 @@ Print add1.
 Compute add1 2.
 (* ==> 3 : nat *)
 
-(** Notice that we terminate the [Definition] with a [.] rather than
+(** Notice that we terminated the [Definition] with a [.] rather than
     with [:=] followed by a term.  This tells Coq to enter _proof
     scripting mode_ to build an object of type [nat -> nat].  Also, we
     terminate the proof with [Defined] rather than [Qed]; this makes
@@ -320,7 +319,7 @@ Compute add1 2.
     quantification (with implication as a special case) is built into
     Coq; all the others are defined inductively.
 
-    We'll see how in this section. *)
+    Let's see how. *)
 
 Module Props.
 
@@ -328,8 +327,8 @@ Module Props.
 (** ** Conjunction *)
 
 (** To prove that [P /\ Q] holds, we must present evidence for both
-    [P] and [Q].  Thus, it makes sense to define a proof object for [P
-    /\ Q] as consisting of a pair of two proofs: one for [P] and
+    [P] and [Q].  Thus, it makes sense to define a proof object for
+    [P /\ Q] to consist of a pair of two proofs: one for [P] and
     another one for [Q]. This leads to the following definition. *)
 
 Module And.
@@ -529,9 +528,10 @@ Inductive False : Prop := .
 (** That is, [False] is an inductive type with _no_ constructors --
     i.e., no way to build evidence for it. For example, there is
     no way to complete the following definition such that it
-    succeeds (rather than fails). *)
+    succeeds. *)
 
-Fail Definition contra : False :=
+Fail
+  Definition contra : False :=
   0 = 1.
 
 (** But it is possible to destruct [False] by pattern matching. There can
@@ -544,9 +544,9 @@ Definition false_implies_zero_eq_one : False -> 0 = 1 :=
 
 (** Since there are no branches to evaluate, the [match] expression
     can be considered to have any type we want, including [0 = 1].
-    Indeed, it's impossible to ever cause the [match] to be evaluated,
-    because we can never construct a value of type [False] to pass to
-    the function. *)
+    Fortunately, it's impossible to ever cause the [match] to be
+    evaluated, because we can never construct a value of type [False]
+    to pass to the function. *)
 
 (** **** Exercise: 1 star, standard (ex_falso_quodlibet')
 
@@ -750,9 +750,9 @@ End EqualityPlayground.
 (* ################################################################# *)
 (** * Coq's Trusted Computing Base *)
 
-(** One issue that arises with any automated proof assistant is
-    "why trust it?": what if there is a bug in the implementation that
-    renders all its reasoning suspect?
+(** One question that arises with any automated proof assistant
+    is "why should we trust it?" -- i.e., what if there is a bug in
+    the implementation that renders all its reasoning suspect?
 
     While it is impossible to allay such concerns completely, the fact
     that Coq is based on the Curry-Howard correspondence gives it a
@@ -921,4 +921,4 @@ Theorem pe_implies_pi :
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:47 *)

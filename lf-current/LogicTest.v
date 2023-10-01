@@ -217,18 +217,6 @@ Print Assumptions All_In.
 Goal True.
 idtac " ".
 
-idtac "-------------------  tr_rev_correct  --------------------".
-idtac " ".
-
-idtac "#> tr_rev_correct".
-idtac "Possible points: 6".
-check_type @tr_rev_correct ((forall X : Type, @tr_rev X = @rev X)).
-idtac "Assumptions:".
-Abort.
-Print Assumptions tr_rev_correct.
-Goal True.
-idtac " ".
-
 idtac "-------------------  even_double_conv  --------------------".
 idtac " ".
 
@@ -304,6 +292,18 @@ check_type @forallb_true_iff (
 idtac "Assumptions:".
 Abort.
 Print Assumptions forallb_true_iff.
+Goal True.
+idtac " ".
+
+idtac "-------------------  tr_rev_correct  --------------------".
+idtac " ".
+
+idtac "#> tr_rev_correct".
+idtac "Possible points: 6".
+check_type @tr_rev_correct ((forall X : Type, @tr_rev X = @rev X)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions tr_rev_correct.
 Goal True.
 idtac " ".
 
@@ -388,8 +388,6 @@ idtac "---------- In_app_iff ---------".
 Print Assumptions In_app_iff.
 idtac "---------- All_In ---------".
 Print Assumptions All_In.
-idtac "---------- tr_rev_correct ---------".
-Print Assumptions tr_rev_correct.
 idtac "---------- even_double_conv ---------".
 Print Assumptions even_double_conv.
 idtac "---------- andb_true_iff ---------".
@@ -402,6 +400,8 @@ idtac "---------- eqb_list_true_iff ---------".
 Print Assumptions eqb_list_true_iff.
 idtac "---------- forallb_true_iff ---------".
 Print Assumptions forallb_true_iff.
+idtac "---------- tr_rev_correct ---------".
+Print Assumptions tr_rev_correct.
 idtac "---------- excluded_middle_irrefutable ---------".
 Print Assumptions excluded_middle_irrefutable.
 idtac "".
@@ -414,4 +414,4 @@ idtac "---------- not_exists_dist ---------".
 Print Assumptions not_exists_dist.
 Abort.
 
-(* 2023-09-27 19:38 *)
+(* 2023-10-01 12:47 *)

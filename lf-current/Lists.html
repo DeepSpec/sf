@@ -39,13 +39,13 @@
 </div>
 
 <div class="doc">
-<a id="lab82"></a><h1 class="section">Pairs of Numbers</h1>
+<a id="lab83"></a><h1 class="section">Pairs of Numbers</h1>
 
 <div class="paragraph"> </div>
 
  In an <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> type definition, each constructor can take
     any number of arguments -- none (as with <span class="inlinecode"><span class="id" title="var">true</span></span> and <span class="inlinecode"><span class="id" title="var">O</span></span>), one (as
-    with <span class="inlinecode"><span class="id" title="var">S</span></span>), or more than one (as with <span class="inlinecode"><span class="id" title="var">nybble</span></span>, and here): 
+    with <span class="inlinecode"><span class="id" title="var">S</span></span>), or more than one (as with <span class="inlinecode"><span class="id" title="var">nybble</span></span>, and the following): 
 </div>
 <div class="code">
 
@@ -82,8 +82,8 @@ Functions for extracting the first and second components of a pair
 </div>
 
 <div class="doc">
-Since pairs will be used heavily in what follows, it is nice
-    to be able to write them with the standard mathematical notation
+Since pairs will be used heavily in what follows, it will be
+    convenient to write them with the standard mathematical notation
     <span class="inlinecode">(<span class="id" title="var">x</span>,<span class="id" title="var">y</span>)</span> instead of <span class="inlinecode"><span class="id" title="var">pair</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>.  We can tell Coq to allow this with
     a <span class="inlinecode"><span class="id" title="keyword">Notation</span></span> declaration. 
 </div>
@@ -147,13 +147,9 @@ Note that pattern-matching on a pair (with parentheses: <span class="inlinecode"
 </span>
 <div class="paragraph"> </div>
 
- Now let's try to prove a few simple facts about pairs.
-
-<div class="paragraph"> </div>
-
-    If we state properties of pairs in a slightly peculiar way, we can
-    sometimes complete their proofs with just reflexivity (and its
-    built-in simplification): 
+ If we state properties of pairs in a slightly peculiar way, we can
+    sometimes complete their proofs with just reflexivity and its
+    built-in simplification: 
 </div>
 <div class="code">
 
@@ -164,8 +160,8 @@ Note that pattern-matching on a pair (with parentheses: <span class="inlinecode"
 </div>
 
 <div class="doc">
-But just <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is not enough if we state the lemma in the
-    most natural way: 
+But just <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is not enough if we state the lemma in a more
+    natural way: 
 </div>
 <div class="code">
 
@@ -190,13 +186,13 @@ Instead, we need to expose the structure of <span class="inlinecode"><span class
 </div>
 
 <div class="doc">
-Notice that, unlike its behavior with <span class="inlinecode"><span class="id" title="var">nat</span></span>s, where it
-    generates two subgoals, <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> generates just one subgoal
-    here.  That's because <span class="inlinecode"><span class="id" title="var">natprod</span></span>s can only be constructed in one
-    way. 
+Notice that, by contrast with the behavior of <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> on
+    <span class="inlinecode"><span class="id" title="var">nat</span></span>s, where it generates two subgoals, <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> generates just
+    one subgoal here.  That's because <span class="inlinecode"><span class="id" title="var">natprod</span></span>s can only be
+    constructed in one way. 
 <div class="paragraph"> </div>
 
-<a id="lab83"></a><h4 class="section">Exercise: 1 star, standard (snd_fst_is_swap)</h4>
+<a id="lab84"></a><h4 class="section">Exercise: 1 star, standard (snd_fst_is_swap)</h4>
 
 </div>
 <div class="code">
@@ -210,7 +206,7 @@ Notice that, unlike its behavior with <span class="inlinecode"><span class="id" 
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab84"></a><h4 class="section">Exercise: 1 star, standard, optional (fst_swap_is_snd)</h4>
+<a id="lab85"></a><h4 class="section">Exercise: 1 star, standard, optional (fst_swap_is_snd)</h4>
 
 </div>
 <div class="code">
@@ -223,7 +219,7 @@ Notice that, unlike its behavior with <span class="inlinecode"><span class="id" 
 
 
 <div class="doc">
-<a id="lab85"></a><h1 class="section">Lists of Numbers</h1>
+<a id="lab86"></a><h1 class="section">Lists of Numbers</h1>
 
 <div class="paragraph"> </div>
 
@@ -247,10 +243,10 @@ For example, here is a three-element list:
 </div>
 
 <div class="doc">
-As with pairs, it is more convenient to write lists in
-    familiar programming notation.  The following declarations
-    allow us to use <span class="inlinecode">::</span> as an infix <span class="inlinecode"><span class="id" title="var">cons</span></span> operator and square
-    brackets as an "outfix" notation for constructing lists. 
+As with pairs, it is convenient to write lists in familiar
+    notation.  The following declarations allow us to use <span class="inlinecode">::</span> as an
+    infix <span class="inlinecode"><span class="id" title="var">cons</span></span> operator and square brackets as an "outfix" notation
+    for constructing lists. 
 </div>
 <div class="code">
 
@@ -281,19 +277,19 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
     For example, since we defined <span class="inlinecode">+</span> as infix notation for the <span class="inlinecode"><span class="id" title="var">plus</span></span>
     function at level 50,
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> "x + y" := (<span class="id" title="var">plus</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).
+<span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> "x + y" := (<span class="id" title="var">plus</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).
 </span>    the <span class="inlinecode">+</span> operator will bind tighter than <span class="inlinecode">::</span>, so <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode">::</span> <span class="inlinecode">[3]</span>
-    will be parsed, as we'd expect, as <span class="inlinecode">(1</span> <span class="inlinecode">+</span> <span class="inlinecode">2)</span> <span class="inlinecode">::</span> <span class="inlinecode">[3]</span> rather than
-    <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">(2</span> <span class="inlinecode">::</span> <span class="inlinecode">[3])</span>.
+    will be parsed, as we'd expect, as <span class="inlinecode">(1</span> <span class="inlinecode">+</span> <span class="inlinecode">2)</span> <span class="inlinecode">::</span> <span class="inlinecode">[3]</span> rather than <span class="inlinecode">1</span>
+    <span class="inlinecode">+</span> <span class="inlinecode">(2</span> <span class="inlinecode">::</span> <span class="inlinecode">[3])</span>.
 
 <div class="paragraph"> </div>
 
     (Expressions like "<span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode">::</span> <span class="inlinecode">[3]</span>" can be a little confusing when
-    you read them in a <span class="inlinecode">.<span class="id" title="var">v</span></span> file.  The inner brackets, around 3, indicate
-    a list, but the outer brackets, which are invisible in the HTML
-    rendering, are there to instruct the "coqdoc" tool that the bracketed
-    part should be displayed as Coq code rather than running text.)
+    you read them in a <span class="inlinecode">.<span class="id" title="var">v</span></span> file.  The inner brackets, around 3,
+    indicate a list, but the outer brackets, which are invisible in
+    the HTML rendering, are there to instruct the "coqdoc" tool that
+    the bracketed part should be displayed as Coq code rather than
+    running text.)
 
 <div class="paragraph"> </div>
 
@@ -301,17 +297,24 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
     standard square-bracket notation for lists; the right-hand side of
     the third one illustrates Coq's syntax for declaring n-ary
     notations and translating them to nested sequences of binary
-    constructors. 
+    constructors.
+
 <div class="paragraph"> </div>
 
-<a id="lab86"></a><h3 class="section">Repeat</h3>
+    Again, don't worry if some of these parsing details are puzzling:
+    all the notations you'll need in this course will be defined for
+    you.
+
+<div class="paragraph"> </div>
+
+<a id="lab87"></a><h3 class="section">Repeat</h3>
 
 <div class="paragraph"> </div>
 
  Next let's look at several functions for constructing and
-    manipulating lists.  First, the <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> function takes a number
-    <span class="inlinecode"><span class="id" title="var">n</span></span> and a <span class="inlinecode"><span class="id" title="var">count</span></span> and returns a list of length <span class="inlinecode"><span class="id" title="var">count</span></span> in which
-    every element is <span class="inlinecode"><span class="id" title="var">n</span></span>. 
+    manipulating lists.  First, the <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> function, which takes a
+    number <span class="inlinecode"><span class="id" title="var">n</span></span> and a <span class="inlinecode"><span class="id" title="var">count</span></span> and returns a list of length <span class="inlinecode"><span class="id" title="var">count</span></span> in
+    which every element is <span class="inlinecode"><span class="id" title="var">n</span></span>. 
 </div>
 <div class="code">
 
@@ -323,7 +326,7 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 
 <div class="doc">
-<a id="lab87"></a><h3 class="section">Length</h3>
+<a id="lab88"></a><h3 class="section">Length</h3>
 
 <div class="paragraph"> </div>
 
@@ -339,11 +342,11 @@ The "<span class="inlinecode"><span class="id" title="tactic">at</span></span> <
 </div>
 
 <div class="doc">
-<a id="lab88"></a><h3 class="section">Append</h3>
+<a id="lab89"></a><h3 class="section">Append</h3>
 
 <div class="paragraph"> </div>
 
- The <span class="inlinecode"><span class="id" title="var">app</span></span> function concatenates (appends) two lists. 
+ The <span class="inlinecode"><span class="id" title="var">app</span></span> function appends (concatenates) two lists. 
 </div>
 <div class="code">
 
@@ -371,7 +374,7 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 
 <div class="doc">
-<a id="lab89"></a><h3 class="section">Head and Tail</h3>
+<a id="lab90"></a><h3 class="section">Head and Tail</h3>
 
 <div class="paragraph"> </div>
 
@@ -402,11 +405,11 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 
 <div class="doc">
-<a id="lab90"></a><h3 class="section">Exercises</h3>
+<a id="lab91"></a><h3 class="section">Exercises</h3>
 
 <div class="paragraph"> </div>
 
-<a id="lab91"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (list_funs)</h4>
+<a id="lab92"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (list_funs)</h4>
  Complete the definitions of <span class="inlinecode"><span class="id" title="var">nonzeros</span></span>, <span class="inlinecode"><span class="id" title="var">oddmembers</span></span>, and
     <span class="inlinecode"><span class="id" title="var">countoddmembers</span></span> below. Have a look at the tests to understand
     what these functions should do. 
@@ -426,11 +429,11 @@ Since <span class="inlinecode"><span class="id" title="var">app</span></span> wi
 </div>
 
 <div class="doc">
-For <span class="inlinecode"><span class="id" title="var">countoddmembers</span></span>, we're giving you a header that uses keyword
-    <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> instead of <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>.  The point of stating the
-    question this way is to encourage you to implement the function by
-    using already-defined functions, rather than writing your own
-    recursive definition. 
+For the next problem, <span class="inlinecode"><span class="id" title="var">countoddmembers</span></span>, we're giving you a header
+    that uses the keyword <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> instead of <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span>.  The
+    point of stating the question this way is to encourage you to
+    implement the function by using already-defined functions, rather
+    than writing your own recursive definition. 
 </div>
 <div class="code">
 
@@ -451,7 +454,7 @@ For <span class="inlinecode"><span class="id" title="var">countoddmembers</span>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab92"></a><h4 class="section">Exercise: 3 stars, advanced (alternate)</h4>
+<a id="lab93"></a><h4 class="section">Exercise: 3 stars, advanced (alternate)</h4>
  Complete the following definition of <span class="inlinecode"><span class="id" title="var">alternate</span></span>, which
     interleaves two lists into one, alternating between elements taken
     from the first list and elements from the second.  See the tests
@@ -459,10 +462,10 @@ For <span class="inlinecode"><span class="id" title="var">countoddmembers</span>
 
 <div class="paragraph"> </div>
 
-    Hint: there is an elegant way of writing <span class="inlinecode"><span class="id" title="var">alternate</span></span> that fails to
+    Hint: there are natural ways of writing <span class="inlinecode"><span class="id" title="var">alternate</span></span> that fail to
     satisfy Coq's requirement that all <span class="inlinecode"><span class="id" title="keyword">Fixpoint</span></span> definitions be
-    <i>structurally recursing</i>, as mentioned in <a href="Basics.html"><span class="inlineref">Basics</span></a>. If you
-    encounter that difficulty, consider pattern matching against both
+    <i>structurally recursive</i>, as mentioned in <a href="Basics.html"><span class="inlineref">Basics</span></a>. If you
+    encounter this difficulty, consider pattern matching against both
     lists at the same time with the "multiple pattern" syntax we've
     seen before. 
 </div>
@@ -487,13 +490,13 @@ For <span class="inlinecode"><span class="id" title="var">countoddmembers</span>
 
 
 <div class="doc">
-<a id="lab93"></a><h3 class="section">Bags via Lists</h3>
+<a id="lab94"></a><h3 class="section">Bags via Lists</h3>
 
 <div class="paragraph"> </div>
 
  A <span class="inlinecode"><span class="id" title="var">bag</span></span> (or <span class="inlinecode"><span class="id" title="var">multiset</span></span>) is like a set, except that each element
-    can appear multiple times rather than just once.  One possible
-    representation for a bag of numbers is as a list. 
+    can appear multiple times rather than just once.  One way of
+    representating a bag of numbers is as a list. 
 </div>
 <div class="code">
 
@@ -501,7 +504,7 @@ For <span class="inlinecode"><span class="id" title="var">countoddmembers</span>
 </div>
 
 <div class="doc">
-<a id="lab94"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (bag_functions)</h4>
+<a id="lab95"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (bag_functions)</h4>
  Complete the following definitions for the functions <span class="inlinecode"><span class="id" title="var">count</span></span>,
     <span class="inlinecode"><span class="id" title="var">sum</span></span>, <span class="inlinecode"><span class="id" title="var">add</span></span>, and <span class="inlinecode"><span class="id" title="var">member</span></span> for bags. 
 </div>
@@ -512,7 +515,7 @@ For <span class="inlinecode"><span class="id" title="var">countoddmembers</span>
 </div>
 
 <div class="doc">
-All these proofs can be done just by <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>. 
+All these proofs can be completed with <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>. 
 </div>
 <div class="code">
 
@@ -524,15 +527,16 @@ All these proofs can be done just by <span class="inlinecode"><span class="id" t
 
 <div class="doc">
 Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span> is similar to set <span class="inlinecode"><span class="id" title="var">union</span></span>: <span class="inlinecode"><span class="id" title="var">sum</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> contains all
-    the elements of <span class="inlinecode"><span class="id" title="var">a</span></span> and of <span class="inlinecode"><span class="id" title="var">b</span></span>.  (Mathematicians usually define
-    <span class="inlinecode"><span class="id" title="var">union</span></span> on multisets a little bit differently -- using max instead
-    of sum -- which is why we don't call this operation <span class="inlinecode"><span class="id" title="var">union</span></span>.)
+    the elements of <span class="inlinecode"><span class="id" title="var">a</span></span> and those of <span class="inlinecode"><span class="id" title="var">b</span></span>.  (Mathematicians usually
+    define <span class="inlinecode"><span class="id" title="var">union</span></span> on multisets a little bit differently -- using max
+    instead of sum -- which is why we don't call this operation
+    <span class="inlinecode"><span class="id" title="var">union</span></span>.)
 
 <div class="paragraph"> </div>
 
     We've deliberately given you a header that does not give explicit
-    names to the arguments.  Implement <span class="inlinecode"><span class="id" title="var">sum</span></span> with an already-defined
-    function without changing the header. 
+    names to the arguments.  Implement <span class="inlinecode"><span class="id" title="var">sum</span></span> in terms of an
+    already-defined function, without changing the header. 
 </div>
 <div class="code">
 
@@ -558,7 +562,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab95"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_more_functions)</h4>
+<a id="lab96"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_more_functions)</h4>
  Here are some more <span class="inlinecode"><span class="id" title="var">bag</span></span> functions for you to practice with. 
 <div class="paragraph"> </div>
 
@@ -606,7 +610,7 @@ Multiset <span class="inlinecode"><span class="id" title="var">sum</span></span>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab96"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (add_inc_count)</h4>
+<a id="lab97"></a><h4 class="section">Exercise: 2 stars, standard, especially useful (add_inc_count)</h4>
  Adding a value to a bag should increase the value's count by one.
     State this as a theorem and prove it in Coq. 
 </div>
@@ -624,14 +628,14 @@ Qed.<br/>
 
 
 <div class="doc">
-<a id="lab97"></a><h1 class="section">Reasoning About Lists</h1>
+<a id="lab98"></a><h1 class="section">Reasoning About Lists</h1>
 
 <div class="paragraph"> </div>
 
  As with numbers, simple facts about list-processing
     functions can sometimes be proved entirely by simplification.  For
-    example, just the simplification performed by <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is
-    enough for this theorem... 
+    example, the simplification performed by <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span> is enough
+    for this theorem... 
 </div>
 <div class="code">
 
@@ -676,15 +680,15 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
 <div class="paragraph"> </div>
 
  (Micro-Sermon: As we get deeper into this material, simply
-    <i>reading</i> proof scripts will not get you very far!  It is
-    important to step through the details of each one using Coq and
+    <i>reading</i> proof scripts will not help you very much.  Rather, it
+    is important to step through the details of each one using Coq and
     think about what each step achieves.  Otherwise it is more or less
     guaranteed that the exercises will make no sense when you get to
     them.  'Nuff said.) 
 </div>
 
 <div class="doc">
-<a id="lab98"></a><h2 class="section">Induction on Lists</h2>
+<a id="lab99"></a><h2 class="section">Induction on Lists</h2>
 
 <div class="paragraph"> </div>
 
@@ -693,11 +697,11 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
     the idea is equally simple.  Each <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> declaration defines
     a set of data values that can be built up using the declared
     constructors.  For example, a boolean can be either <span class="inlinecode"><span class="id" title="var">true</span></span> or
-    <span class="inlinecode"><span class="id" title="var">false</span></span>; a number can be either <span class="inlinecode"><span class="id" title="var">O</span></span> or <span class="inlinecode"><span class="id" title="var">S</span></span> applied to another
-    number; and a list can be either <span class="inlinecode"><span class="id" title="var">nil</span></span> or <span class="inlinecode"><span class="id" title="var">cons</span></span> applied to a
-    number and a list.   Moreover, applications of the declared
-    constructors to one another are the <i>only</i> possible shapes
-    that elements of an inductively defined set can have.
+    <span class="inlinecode"><span class="id" title="var">false</span></span>; a number can be either <span class="inlinecode"><span class="id" title="var">O</span></span> or else <span class="inlinecode"><span class="id" title="var">S</span></span> applied to another
+    number; and a list can be either <span class="inlinecode"><span class="id" title="var">nil</span></span> or else <span class="inlinecode"><span class="id" title="var">cons</span></span> applied to a
+    number and a list.  Moreover, applications of the declared
+    constructors to one another are the <i>only</i> possible shapes that
+    elements of an inductively defined set can have.
 
 <div class="paragraph"> </div>
 
@@ -705,7 +709,7 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
     inductively defined sets: a number is either <span class="inlinecode"><span class="id" title="var">O</span></span> or else it is <span class="inlinecode"><span class="id" title="var">S</span></span>
     applied to some <i>smaller</i> number; a list is either <span class="inlinecode"><span class="id" title="var">nil</span></span> or else
     it is <span class="inlinecode"><span class="id" title="var">cons</span></span> applied to some number and some <i>smaller</i> list;
-    etc. So, if we have in mind some proposition <span class="inlinecode"><span class="id" title="var">P</span></span> that mentions a
+    etc.  Thus, if we have in mind some proposition <span class="inlinecode"><span class="id" title="var">P</span></span> that mentions a
     list <span class="inlinecode"><span class="id" title="var">l</span></span> and we want to argue that <span class="inlinecode"><span class="id" title="var">P</span></span> holds for <i>all</i> lists, we
     can reason as follows:
 
@@ -729,7 +733,11 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
 
     Since larger lists can always be broken down into smaller ones,
     eventually reaching <span class="inlinecode"><span class="id" title="var">nil</span></span>, these two arguments together establish
-    the truth of <span class="inlinecode"><span class="id" title="var">P</span></span> for all lists <span class="inlinecode"><span class="id" title="var">l</span></span>.  Here's a concrete example: 
+    the truth of <span class="inlinecode"><span class="id" title="var">P</span></span> for all lists <span class="inlinecode"><span class="id" title="var">l</span></span>.
+
+<div class="paragraph"> </div>
+
+    Here's a concrete example: 
 </div>
 <div class="code">
 
@@ -744,10 +752,10 @@ Here, the <span class="inlinecode"><span class="id" title="var">nil</span></span
 </div>
 
 <div class="doc">
-Notice that, as when doing induction on natural numbers, the
-    <span class="inlinecode"><span class="id" title="keyword">as</span>...</span> clause provided to the <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic gives a name to
-    the induction hypothesis corresponding to the smaller list <span class="inlinecode"><span class="id" title="var">l<sub>1</sub>'</span></span>
-    in the <span class="inlinecode"><span class="id" title="var">cons</span></span> case.
+Notice that, as we saw with induction on natural numbers,
+    the <span class="inlinecode"><span class="id" title="keyword">as</span>...</span> clause provided to the <span class="inlinecode"><span class="id" title="tactic">induction</span></span> tactic gives a name
+    to the induction hypothesis corresponding to the smaller list
+    <span class="inlinecode"><span class="id" title="var">l<sub>1</sub>'</span></span> in the <span class="inlinecode"><span class="id" title="var">cons</span></span> case.
 
 <div class="paragraph"> </div>
 
@@ -756,10 +764,10 @@ Notice that, as when doing induction on natural numbers, the
     reading the proof in an interactive Coq session and you can see
     the current goal and context at each point, but this state is not
     visible in the written-down parts of the Coq proof.  So a
-    natural-language proof -- one written for human readers -- will
-    need to include more explicit signposts; in particular, it will
-    help the reader stay oriented if we remind them exactly what the
-    induction hypothesis is in the second case. 
+    natural-language proof -- one written for human readers -- should
+    include more explicit signposts; in particular, it will help the
+    reader stay oriented if we remind them exactly what the induction
+    hypothesis is in the second case. 
 <div class="paragraph"> </div>
 
  For comparison, here is an informal proof of the same theorem. 
@@ -799,13 +807,13 @@ Notice that, as when doing induction on natural numbers, the
 
 <div class="paragraph"> </div>
 
-<a id="lab99"></a><h3 class="section">Reversing a List</h3>
+<a id="lab100"></a><h3 class="section">Reversing a List</h3>
 
 <div class="paragraph"> </div>
 
  For a slightly more involved example of inductive proof over
-    lists, suppose we use <span class="inlinecode"><span class="id" title="var">app</span></span> to define a list-reversing
-    function <span class="inlinecode"><span class="id" title="var">rev</span></span>: 
+    lists, suppose we use <span class="inlinecode"><span class="id" title="var">app</span></span> to define a list-reversing function
+    <span class="inlinecode"><span class="id" title="var">rev</span></span>: 
 </div>
 <div class="code">
 
@@ -821,10 +829,9 @@ Notice that, as when doing induction on natural numbers, the
 </div>
 
 <div class="doc">
-For something a bit more challenging than the proofs
-    we've seen so far, let's prove that reversing a list does not
-    change its length.  Our first attempt gets stuck in the successor
-    case... 
+For something a bit more challenging, let's prove that
+    reversing a list does not change its length.  Our first attempt
+    gets stuck in the successor case... 
 </div>
 <div class="code">
 
@@ -869,10 +876,9 @@ So let's take the equation relating <span class="inlinecode">++</span> and <span
 <div class="doc">
 Note that, to make the lemma as general as possible, we
     quantify over <i>all</i> <span class="inlinecode"><span class="id" title="var">natlist</span></span>s, not just those that result from an
-    application of <span class="inlinecode"><span class="id" title="var">rev</span></span>.  This should seem natural, because the truth
-    of the goal clearly doesn't depend on the list having been
-    reversed.  Moreover, it is easier to prove the more general
-    property. 
+    application of <span class="inlinecode"><span class="id" title="var">rev</span></span>.  This seems natural, because the truth of
+    the goal clearly doesn't depend on the list having been reversed.
+    Moreover, it is easier to prove the more general property. 
 <div class="paragraph"> </div>
 
  Now we can complete the original proof. 
@@ -910,8 +916,8 @@ For comparison, here are informal proofs of these two theorems:
 <li> First, suppose <span class="inlinecode"><span class="id" title="var">l<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode">[]</span>.  We must show
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">length</span> ([] ++ <span class="id" title="var">l<sub>2</sub></span>) = <span class="id" title="var">length</span> [] + <span class="id" title="var">length</span> <span class="id" title="var">l<sub>2</sub></span>,
-</span>      which follows directly from the definitions of
-      <span class="inlinecode"><span class="id" title="var">length</span></span>, <span class="inlinecode">++</span>, and <span class="inlinecode"><span class="id" title="var">plus</span></span>.
+</span>      which follows directly from the definitions of <span class="inlinecode"><span class="id" title="var">length</span></span>,
+      <span class="inlinecode">++</span>, and <span class="inlinecode"><span class="id" title="var">plus</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -980,22 +986,22 @@ For comparison, here are informal proofs of these two theorems:
 
 <div class="paragraph"> </div>
 
-    <i>Proof</i>: First, observe that <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode">(<span class="id" title="var">l</span></span> <span class="inlinecode">++</span> <span class="inlinecode">[<span class="id" title="var">n</span>])</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l</span>)</span>
-     for any <span class="inlinecode"><span class="id" title="var">l</span></span>, by a straightforward induction on <span class="inlinecode"><span class="id" title="var">l</span></span>.  The main
-     property again follows by induction on <span class="inlinecode"><span class="id" title="var">l</span></span>, using the observation
-     together with the induction hypothesis in the case where <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span>
-     <span class="inlinecode"><span class="id" title="var">n'</span>::<span class="id" title="var">l'</span></span>. <font size=-2>&#9744;</font> 
+    <i>Proof</i>: First observe, by a straightforward induction on <span class="inlinecode"><span class="id" title="var">l</span></span>,
+     that <span class="inlinecode"><span class="id" title="var">length</span></span> <span class="inlinecode">(<span class="id" title="var">l</span></span> <span class="inlinecode">++</span> <span class="inlinecode">[<span class="id" title="var">n</span>])</span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">S</span></span> <span class="inlinecode">(<span class="id" title="var">length</span></span> <span class="inlinecode"><span class="id" title="var">l</span>)</span> for any <span class="inlinecode"><span class="id" title="var">l</span></span>.  The main
+     property then follows by another induction on <span class="inlinecode"><span class="id" title="var">l</span></span>, using the
+     observation together with the induction hypothesis in the case
+     where <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">n'</span>::<span class="id" title="var">l'</span></span>. <font size=-2>&#9744;</font> 
 <div class="paragraph"> </div>
 
  Which style is preferable in a given situation depends on
     the sophistication of the expected audience and how similar the
     proof at hand is to ones that they will already be familiar with.
-    The more pedantic style is a good default for our present
-    purposes. 
+    The more pedantic style is a good default for our present purposes
+    because we're trying to be ultra-clear about the details. 
 </div>
 
 <div class="doc">
-<a id="lab100"></a><h2 class="section"><span class="inlinecode"><span class="id" title="keyword">Search</span></span></h2>
+<a id="lab101"></a><h2 class="section"><span class="inlinecode"><span class="id" title="keyword">Search</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -1007,10 +1013,13 @@ For comparison, here are informal proofs of these two theorems:
 
 <div class="paragraph"> </div>
 
-    Coq's <span class="inlinecode"><span class="id" title="keyword">Search</span></span> command is quite helpful with this.  Let's say
-    you've forgotten the name of a theorem about <span class="inlinecode"><span class="id" title="var">rev</span></span>.  The command
-    <span class="inlinecode"><span class="id" title="keyword">Search</span></span> <span class="inlinecode"><span class="id" title="var">rev</span></span> will cause Coq to display a list of all theorems
-    involving <span class="inlinecode"><span class="id" title="var">rev</span></span>. 
+    Coq's <span class="inlinecode"><span class="id" title="keyword">Search</span></span> command is quite helpful with this.
+
+<div class="paragraph"> </div>
+
+    Let's say you've forgotten the name of a theorem about <span class="inlinecode"><span class="id" title="var">rev</span></span>.  The
+    command <span class="inlinecode"><span class="id" title="keyword">Search</span></span> <span class="inlinecode"><span class="id" title="var">rev</span></span> will cause Coq to display a list of all
+    theorems involving <span class="inlinecode"><span class="id" title="var">rev</span></span>. 
 </div>
 <div class="code">
 
@@ -1047,27 +1056,21 @@ You can also make the search more precise by using variables in
 </div>
 
 <div class="doc">
-The question mark in front of the variable is needed to indicate
-    that it is a variable in the search pattern, rather than a
-    variable that is expected to be in scope currently. 
+(The question mark in front of the variable is needed to indicate
+    that it is a variable in the search pattern, rather than a defined
+    identifier that is expected to be in scope currently.) 
 <div class="paragraph"> </div>
 
  Keep <span class="inlinecode"><span class="id" title="keyword">Search</span></span> in mind as you do the following exercises and
-    throughout the rest of the book; it can save you a lot of time!
-
-<div class="paragraph"> </div>
-
-    Your IDE likely has its own functionality to help with searching.
-    For example, in ProofGeneral, you can run <span class="inlinecode"><span class="id" title="keyword">Search</span></span> with <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">a</span></span>
-    <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">a</span></span>, and paste its response into your buffer with <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-;</span>. 
+    throughout the rest of the book; it can save you a lot of time! 
 </div>
 
 <div class="doc">
-<a id="lab101"></a><h2 class="section">List Exercises, Part 1</h2>
+<a id="lab102"></a><h2 class="section">List Exercises, Part 1</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab102"></a><h4 class="section">Exercise: 3 stars, standard (list_exercises)</h4>
+<a id="lab103"></a><h4 class="section">Exercise: 3 stars, standard (list_exercises)</h4>
  More practice with lists: 
 </div>
 <div class="code">
@@ -1121,7 +1124,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab103"></a><h4 class="section">Exercise: 2 stars, standard (eqblist)</h4>
+<a id="lab104"></a><h4 class="section">Exercise: 2 stars, standard (eqblist)</h4>
  Fill in the definition of <span class="inlinecode"><span class="id" title="var">eqblist</span></span>, which compares
     lists of numbers for equality.  Prove that <span class="inlinecode"><span class="id" title="var">eqblist</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span>
     yields <span class="inlinecode"><span class="id" title="var">true</span></span> for every list <span class="inlinecode"><span class="id" title="var">l</span></span>. 
@@ -1148,7 +1151,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 
 
 <div class="doc">
-<a id="lab104"></a><h2 class="section">List Exercises, Part 2</h2>
+<a id="lab105"></a><h2 class="section">List Exercises, Part 2</h2>
 
 <div class="paragraph"> </div>
 
@@ -1156,7 +1159,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
     definitions about bags above. 
 <div class="paragraph"> </div>
 
-<a id="lab105"></a><h4 class="section">Exercise: 1 star, standard (count_member_nonzero)</h4>
+<a id="lab106"></a><h4 class="section">Exercise: 1 star, standard (count_member_nonzero)</h4>
 
 </div>
 <div class="code">
@@ -1187,7 +1190,7 @@ An exercise about your implementation of <span class="inlinecode"><span class="i
 
 <div class="doc">
 Before doing the next exercise, make sure you've filled in the
-   definition of <span class="inlinecode"><span class="id" title="var">remove_one</span></span> above. <a id="lab106"></a><h4 class="section">Exercise: 3 stars, advanced (remove_does_not_increase_count)</h4>
+   definition of <span class="inlinecode"><span class="id" title="var">remove_one</span></span> above. <a id="lab107"></a><h4 class="section">Exercise: 3 stars, advanced (remove_does_not_increase_count)</h4>
 
 </div>
 <div class="code">
@@ -1201,7 +1204,7 @@ Before doing the next exercise, make sure you've filled in the
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab107"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_count_sum)</h4>
+<a id="lab108"></a><h4 class="section">Exercise: 3 stars, standard, optional (bag_count_sum)</h4>
  Write down an interesting theorem <span class="inlinecode"><span class="id" title="var">bag_count_sum</span></span> about bags
     involving the functions <span class="inlinecode"><span class="id" title="var">count</span></span> and <span class="inlinecode"><span class="id" title="var">sum</span></span>, and prove it using
     Coq.  (You may find that the difficulty of the proof depends on
@@ -1218,14 +1221,17 @@ Before doing the next exercise, make sure you've filled in the
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab108"></a><h4 class="section">Exercise: 3 stars, advanced (involution_injective)</h4>
+<a id="lab109"></a><h4 class="section">Exercise: 3 stars, advanced (involution_injective)</h4>
 
 <div class="paragraph"> </div>
 
- Prove that every involution is injective. Involutions were defined
-    above in <span class="inlinecode"><span class="id" title="var">rev_involutive</span></span>. An <i>injective</i> function is one-to-one:
-    it maps distinct inputs to distinct outputs, without any
-    collisions. 
+ Prove that every involution is injective.
+
+<div class="paragraph"> </div>
+
+    Involutions were defined above in <span class="inlinecode"><span class="id" title="var">rev_involutive</span></span>. An <i>injective</i>
+    function is one-to-one: it maps distinct inputs to distinct
+    outputs, without any collisions. 
 </div>
 <div class="code">
 
@@ -1239,11 +1245,11 @@ Before doing the next exercise, make sure you've filled in the
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab109"></a><h4 class="section">Exercise: 2 stars, advanced (rev_injective)</h4>
+<a id="lab110"></a><h4 class="section">Exercise: 2 stars, advanced (rev_injective)</h4>
  Prove that <span class="inlinecode"><span class="id" title="var">rev</span></span> is injective. Do not prove this by induction --
     that would be hard. Instead, re-use the same proof technique that
-    you used for <span class="inlinecode"><span class="id" title="var">involution_injective</span></span>. Do not try to use that
-    exercise directly as a lemma: the types are not the same. 
+    you used for <span class="inlinecode"><span class="id" title="var">involution_injective</span></span>. (But: Don't try to use that
+    exercise directly as a lemma: the types are not the same!) 
 </div>
 <div class="code">
 
@@ -1256,7 +1262,7 @@ Before doing the next exercise, make sure you've filled in the
 
 
 <div class="doc">
-<a id="lab110"></a><h1 class="section">Options</h1>
+<a id="lab111"></a><h1 class="section">Options</h1>
 
 <div class="paragraph"> </div>
 
@@ -1288,7 +1294,11 @@ This solution is not so good: If <span class="inlinecode"><span class="id" title
 
 <span class="id" title="keyword">Inductive</span> <a id="NatList.natoption" class="idref" href="#NatList.natoption"><span class="id" title="inductive">natoption</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
 &nbsp;&nbsp;| <a id="NatList.Some" class="idref" href="#NatList.Some"><span class="id" title="constructor">Some</span></a> (<a id="n:108" class="idref" href="#n:108"><span class="id" title="binder">n</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
-&nbsp;&nbsp;| <a id="NatList.None" class="idref" href="#NatList.None"><span class="id" title="constructor">None</span></a>.<br/>
+&nbsp;&nbsp;| <a id="NatList.None" class="idref" href="#NatList.None"><span class="id" title="constructor">None</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="comment">(*&nbsp;Note&nbsp;that&nbsp;we've&nbsp;capitalized&nbsp;the&nbsp;constructor&nbsp;names&nbsp;<span class="inlinecode"><span class="id" title="var">None</span></span>&nbsp;and<br/>
+&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">Some</span></span>,&nbsp;following&nbsp;their&nbsp;definition&nbsp;in&nbsp;Coq's&nbsp;standard&nbsp;library.&nbsp;&nbsp;In<br/>
+&nbsp;&nbsp;&nbsp;general,&nbsp;constructor&nbsp;(and&nbsp;variable)&nbsp;names&nbsp;can&nbsp;begin&nbsp;with&nbsp;either<br/>
+&nbsp;&nbsp;&nbsp;capital&nbsp;or&nbsp;lowercase&nbsp;letters.&nbsp;*)</span><br/>
 </div>
 
 <div class="doc">
@@ -1328,8 +1338,8 @@ We can then change the above definition of <span class="inlinecode"><span class=
 
 <div class="doc">
 (In the HTML version, the boilerplate proofs of these
-    examples are elided.  Click on a box if you want to see one.)
-
+    examples are elided.  Click on a box if you want to see the
+    details.) 
 <div class="paragraph"> </div>
 
  The function below pulls the <span class="inlinecode"><span class="id" title="var">nat</span></span> out of a <span class="inlinecode"><span class="id" title="var">natoption</span></span>, returning
@@ -1345,7 +1355,7 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab111"></a><h4 class="section">Exercise: 2 stars, standard (hd_error)</h4>
+<a id="lab112"></a><h4 class="section">Exercise: 2 stars, standard (hd_error)</h4>
  Using the same idea, fix the <span class="inlinecode"><span class="id" title="var">hd</span></span> function from earlier so we don't
     have to pass a default element for the <span class="inlinecode"><span class="id" title="var">nil</span></span> case.  
 </div>
@@ -1365,7 +1375,7 @@ We can then change the above definition of <span class="inlinecode"><span class=
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab112"></a><h4 class="section">Exercise: 1 star, standard, optional (option_elim_hd)</h4>
+<a id="lab113"></a><h4 class="section">Exercise: 1 star, standard, optional (option_elim_hd)</h4>
  This exercise relates your new <span class="inlinecode"><span class="id" title="var">hd_error</span></span> to the old <span class="inlinecode"><span class="id" title="var">hd</span></span>. 
 </div>
 <div class="code">
@@ -1383,7 +1393,7 @@ We can then change the above definition of <span class="inlinecode"><span class=
 </div>
 
 <div class="doc">
-<a id="lab113"></a><h1 class="section">Partial Maps</h1>
+<a id="lab114"></a><h1 class="section">Partial Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -1420,7 +1430,7 @@ Internally, an <span class="inlinecode"><span class="id" title="var">id</span></
 </div>
 
 <div class="doc">
-<a id="lab114"></a><h4 class="section">Exercise: 1 star, standard (eqb_id_refl)</h4>
+<a id="lab115"></a><h4 class="section">Exercise: 1 star, standard (eqb_id_refl)</h4>
 
 </div>
 <div class="code">
@@ -1483,7 +1493,7 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 </div>
 
 <div class="doc">
-<a id="lab115"></a><h4 class="section">Exercise: 1 star, standard (update_eq)</h4>
+<a id="lab116"></a><h4 class="section">Exercise: 1 star, standard (update_eq)</h4>
 
 </div>
 <div class="code">
@@ -1498,7 +1508,7 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab116"></a><h4 class="section">Exercise: 1 star, standard (update_neq)</h4>
+<a id="lab117"></a><h4 class="section">Exercise: 1 star, standard (update_neq)</h4>
 
 </div>
 <div class="code">
@@ -1511,33 +1521,8 @@ Last, the <span class="inlinecode"><span class="id" title="var">find</span></spa
 </div>
 
 <div class="code">
-<span class="id" title="keyword">End</span> <a class="idref" href="Lists.html#PartialMap"><span class="id" title="module">PartialMap</span></a>.<br/>
-</div>
-
-<div class="doc">
-<a id="lab117"></a><h4 class="section">Exercise: 2 stars, standard, optional (baz_num_elts)</h4>
- Consider the following inductive definition: 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Inductive</span> <a id="baz" class="idref" href="#baz"><span class="id" title="inductive">baz</span></a> : <span class="id" title="keyword">Type</span> :=<br/>
-&nbsp;&nbsp;| <a id="Baz1" class="idref" href="#Baz1"><span class="id" title="constructor">Baz1</span></a> (<a id="x:149" class="idref" href="#x:149"><span class="id" title="binder">x</span></a> : <a class="idref" href="Lists.html#baz:147"><span class="id" title="inductive">baz</span></a>)<br/>
-&nbsp;&nbsp;| <a id="Baz2" class="idref" href="#Baz2"><span class="id" title="constructor">Baz2</span></a> (<a id="y:150" class="idref" href="#y:150"><span class="id" title="binder">y</span></a> : <a class="idref" href="Lists.html#baz:147"><span class="id" title="inductive">baz</span></a>) (<a id="b:151" class="idref" href="#b:151"><span class="id" title="binder">b</span></a> : <a class="idref" href="Basics.html#bool"><span class="id" title="inductive">bool</span></a>).<br/>
-</div>
-
-<div class="doc">
-How <i>many</i> elements does the type <span class="inlinecode"><span class="id" title="var">baz</span></span> have? (Explain in words,
-    in a comment.) 
-</div>
-<div class="code">
-
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
-<font size=-2>&#9744;</font>
-</div>
-
-<div class="code">
-
-<span class="comment">(*&nbsp;2023-09-27&nbsp;19:38&nbsp;*)</span><br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Lists.html#PartialMap"><span class="id" title="module">PartialMap</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="comment">(*&nbsp;2023-10-01&nbsp;12:46&nbsp;*)</span><br/>
 </div>
 </div>
 
