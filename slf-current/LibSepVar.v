@@ -510,4 +510,4 @@ Ltac var_neq :=
 #[global]
 Hint Extern 1 (?x <> ?y) => var_neq.
 
-(* 2023-10-18 22:58 *)
+(* 2023-10-18 23:05 *)

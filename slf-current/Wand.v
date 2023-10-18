@@ -2148,4 +2148,4 @@ End SummaryHprop.
     have advertised for the interest of this rule. The ramified frame
     rule was integrated in CFML 2.0 in 2018. *)
 
-(* 2023-10-18 22:58 *)
+(* 2023-10-18 23:05 *)
