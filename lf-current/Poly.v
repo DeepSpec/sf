@@ -844,11 +844,11 @@ Fixpoint fold {X Y: Type} (f : X->Y->Y) (l : list X) (b : Y)
 Check (fold andb) : list bool -> bool -> bool.
 
 Example fold_example1 :
-  fold mult [1;2;3;4] 1 = 24.
+  fold andb [true;true;false;true] true = false.
 Proof. reflexivity. Qed.
 
 Example fold_example2 :
-  fold andb [true;true;false;true] true = false.
+  fold mult [1;2;3;4] 1 = 24.
 Proof. reflexivity. Qed.
 
 Example fold_example3 :
