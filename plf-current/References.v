@@ -1544,11 +1544,11 @@ Proof with auto.
       injection Heq as Heq; subst.
       rewrite app_nth2; try lia.
       rewrite <- Hlen.
-      rewrite minus_diag. simpl.
+      rewrite sub_diag. simpl.
       apply store_weakening with ST...
       { apply extends_app. }
       rewrite app_nth2; [|lia].
-      rewrite minus_diag. simpl. assumption.
+      rewrite sub_diag. simpl. assumption.
 Qed.
 
 (* ================================================================= *)
@@ -1946,4 +1946,4 @@ Qed.
 End RefsAndNontermination.
 End STLCRef.
 
-(* 2023-10-03 20:42 *)
+(* 2023-10-18 22:52 *)

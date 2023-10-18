@@ -657,7 +657,7 @@ Proof. intros pe_st1 pe_st2 V.
   - (* -> *)
     intro. destruct H. unfold pe_disagree_at in H0. rewrite Heq in H0.
     destruct (pe_lookup pe_st2 V).
-    rewrite <- beq_nat_refl in H0. inversion H0.
+    rewrite -> eqb_refl in H0. inversion H0.
     inversion H0.
   - (* <- *)
     assert (Hagree: pe_disagree_at pe_st1 pe_st2 V = false).
@@ -1673,4 +1673,4 @@ Proof. intros.
       eapply E_Some; eauto. apply pe_block_correct. apply Hkeval.
 Qed.
 
-(* 2023-10-03 20:42 *)
+(* 2023-10-18 22:52 *)

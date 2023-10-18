@@ -201,11 +201,11 @@ Example example_test_ceval :
      = Some (2, 0, 4).
 Proof. reflexivity. Qed.
 
-(** **** Exercise: 2 stars, standard, especially useful (pup_to_n)
+(** **** Exercise: 1 star, standard, optional (pup_to_n)
 
     Write an Imp program that sums the numbers from [1] to
-   [X] (inclusive: [1 + 2 + ... + X]) in the variable [Y].  Make sure
-   your solution satisfies the test that follows. *)
+   [X] (inclusive -- i.e., [1 + 2 + ... + X]) in the variable [Y].  Make
+   sure your solution satisfies the test that follows. *)
 
 Definition pup_to_n : com
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -290,7 +290,7 @@ Proof.
           injection H1 as H2. rewrite <- H2.
           apply E_WhileFalse. apply Heqr. Qed.
 
-(** **** Exercise: 4 stars, standard (ceval_step__ceval_inf)
+(** **** Exercise: 4 stars, advanced (ceval_step__ceval_inf)
 
     Write an informal proof of [ceval_step__ceval], following the
     usual template.  (The template for case analysis on an inductively
@@ -393,4 +393,4 @@ Proof.
   rewrite E1 in E2. inversion E2. reflexivity.
   lia. lia.  Qed.
 
-(* 2023-10-03 20:41 *)
+(* 2023-10-18 22:50 *)

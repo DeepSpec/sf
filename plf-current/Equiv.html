@@ -167,7 +167,21 @@
     full Imp language -- in particular, assignment -- we need to
     consider the role of mutable state and develop a more
     sophisticated notion of correctness, which we'll call <i>behavioral
-    equivalence</i>.. 
+    equivalence</i>. 
+<div class="paragraph"> </div>
+
+ For example:
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> is behaviorally equivalent to <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span>
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">-</span> <span class="inlinecode"><span class="id" title="var">X</span></span> is behaviorally equivalent to <span class="inlinecode">0</span>
+
+</li>
+<li> <span class="inlinecode">(<span class="id" title="var">X</span></span> <span class="inlinecode">-</span> <span class="inlinecode">1)</span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> is <i>not</i> behaviorally equivalent to <span class="inlinecode"><span class="id" title="var">X</span></span>   
+
+</li>
+</ul>
 </div>
 
 <div class="doc">
@@ -239,7 +253,17 @@ For commands, the situation is a little more subtle.  We
 
 <span class="id" title="keyword">Definition</span> <a id="cequiv" class="idref" href="#cequiv"><span class="id" title="definition">cequiv</span></a> (<a id="c<sub>1</sub>:7" class="idref" href="#c<sub>1</sub>:7"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:8" class="idref" href="#c<sub>2</sub>:8"><span class="id" title="binder">c<sub>2</sub></span></a> : <span class="id" title="inductive">com</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="st:9" class="idref" href="#st:9"><span class="id" title="binder">st</span></a> <a id="st':10" class="idref" href="#st':10"><span class="id" title="binder">st'</span></a> : <span class="id" title="definition">state</span>),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:9"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:7"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':10"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:9"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:8"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':10"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:9"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:7"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':10"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:9"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:8"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':10"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
+</div>
+
+<div class="doc">
+We can also define an asymmetric variant of this relation: We say
+    that <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> <i>refines</i> <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> if they produce the same final states
+    <i>when <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> terminates</i> (but <span class="inlinecode"><span class="id" title="var">c<sub>1</sub></span></span> may not terminate in some cases
+    where <span class="inlinecode"><span class="id" title="var">c<sub>2</sub></span></span> does). 
+</div>
+<div class="code">
+
 <span class="id" title="keyword">Definition</span> <a id="refines" class="idref" href="#refines"><span class="id" title="definition">refines</span></a> (<a id="c<sub>1</sub>:11" class="idref" href="#c<sub>1</sub>:11"><span class="id" title="binder">c<sub>1</sub></span></a> <a id="c<sub>2</sub>:12" class="idref" href="#c<sub>2</sub>:12"><span class="id" title="binder">c<sub>2</sub></span></a> : <span class="id" title="inductive">com</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="st:13" class="idref" href="#st:13"><span class="id" title="binder">st</span></a> <a id="st':14" class="idref" href="#st':14"><span class="id" title="binder">st'</span></a> : <span class="id" title="definition">state</span>),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:13"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>1</sub>:11"><span class="id" title="variable">c<sub>1</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':14"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Equiv.html#st:13"><span class="id" title="variable">st</span></a> <span class="id" title="notation">=[</span> <a class="idref" href="Equiv.html#c<sub>2</sub>:12"><span class="id" title="variable">c<sub>2</sub></span></a> <span class="id" title="notation">]=&gt;</span> <a class="idref" href="Equiv.html#st':14"><span class="id" title="variable">st'</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a>.<br/>
@@ -251,7 +275,7 @@ For commands, the situation is a little more subtle.  We
 <div class="paragraph"> </div>
 
  For examples of command equivalence, let's start by looking at
-    some trivial program equivalences involving <span class="inlinecode"><span class="id" title="var">skip</span></span>: 
+    a trivial program equivalence involving <span class="inlinecode"><span class="id" title="var">skip</span></span>: 
 </div>
 <div class="code">
 
@@ -597,7 +621,7 @@ Of course, no (human) programmer would write a conditional whose
 <div class="paragraph"> </div>
 
     Loop unrolling is an important transformation in any real
-    compiler, so its correctness is of more than academic interest! 
+    compiler: its correctness is of more than academic interest! 
 </div>
 <div class="code">
 
@@ -709,7 +733,7 @@ Of course, no (human) programmer would write a conditional whose
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="prog_a" class="idref" href="#prog_a"><span class="id" title="definition">prog_a</span></a> : <span class="id" title="inductive">com</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <span class="id" title="notation">¬</span><span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">≤</span> 0<span class="id" title="notation">)</span> <span class="id" title="notation">do</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="notation">while</span> <span class="id" title="definition">X</span> <span class="id" title="notation">&gt;</span> 0 <span class="id" title="notation">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="prog_b" class="idref" href="#prog_b"><span class="id" title="definition">prog_b</span></a> : <span class="id" title="inductive">com</span> :=<br/>
@@ -1075,7 +1099,7 @@ The congruence property for loops is a little more interesting,
 <div class="paragraph"> </div>
 
  For example, here are two equivalent programs and a proof of their
-    equivalence... 
+    equivalence using these congruence theorems... 
 </div>
 <div class="code">
 
@@ -1083,11 +1107,11 @@ The congruence property for loops is a little more interesting,
 &nbsp;&nbsp;<a class="idref" href="Equiv.html#cequiv"><span class="id" title="definition">cequiv</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Program&nbsp;1:&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 0<span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <span class="id" title="notation">then</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0 <span class="id" title="notation">then</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">else</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 42 <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Program&nbsp;2:&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 0<span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <span class="id" title="notation">then</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">X</span>   <span class="comment">(*&nbsp;&lt;---&nbsp;Changed&nbsp;here&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="definition">X</span> <span class="id" title="notation">=</span> 0 <span class="id" title="notation">then</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">X</span>   <span class="comment">(*&nbsp;&lt;---&nbsp;Changed&nbsp;here&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">else</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 42 <span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Equiv.html#CSeq_congruence"><span class="id" title="axiom">CSeq_congruence</span></a>.<br/>
@@ -1095,7 +1119,7 @@ The congruence property for loops is a little more interesting,
 &nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="Equiv.html#CIf_congruence"><span class="id" title="axiom">CIf_congruence</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Equiv.html#refl_bequiv"><span class="id" title="lemma">refl_bequiv</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Equiv.html#CAsgn_congruence"><span class="id" title="lemma">CAsgn_congruence</span></a>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Equiv.html#aequiv"><span class="id" title="definition">aequiv</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Minus.html#minus_diag"><span class="id" title="abbreviation">minus_diag</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.sub_diag"><span class="id" title="lemma">sub_diag</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Equiv.html#refl_cequiv"><span class="id" title="lemma">refl_cequiv</span></a>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -1325,20 +1349,20 @@ To fold constants in a command, we apply the appropriate folding
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Original&nbsp;program:&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 4 <span class="id" title="notation">+</span> 5<span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> 3<span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">((</span><span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span> <span class="id" title="notation">=</span> <span class="id" title="notation">(</span>2 <span class="id" title="notation">+</span> 4<span class="id" title="notation">))</span> <span class="id" title="notation">then</span> <span class="id" title="notation">skip</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span> <span class="id" title="notation">=</span> <span class="id" title="notation">(</span>2 <span class="id" title="notation">+</span> 4<span class="id" title="notation">)</span> <span class="id" title="notation">then</span> <span class="id" title="notation">skip</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">else</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0 <span class="id" title="notation">end</span><span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span>0 <span class="id" title="notation">≤</span> <span class="id" title="notation">(</span>4 <span class="id" title="notation">-</span> <span class="id" title="notation">(</span>2 <span class="id" title="notation">+</span> 1<span class="id" title="notation">)))</span> <span class="id" title="notation">then</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> 0 <span class="id" title="notation">≤</span> <span class="id" title="notation">(</span>4 <span class="id" title="notation">-</span> <span class="id" title="notation">(</span>2 <span class="id" title="notation">+</span> 1<span class="id" title="notation">))</span> <span class="id" title="notation">then</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">else</span> <span class="id" title="notation">skip</span> <span class="id" title="notation">end</span><span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">while</span> <span class="id" title="notation">(</span><span class="id" title="definition">Y</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <span class="id" title="notation">do</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">while</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">=</span> 0 <span class="id" title="notation">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="comment">(*&nbsp;After&nbsp;constant&nbsp;folding:&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">&lt;{</span> <span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> 9<span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">-</span> 3<span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">((</span><span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span> <span class="id" title="notation">=</span> 6<span class="id" title="notation">)</span> <span class="id" title="notation">then</span> <span class="id" title="notation">skip</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">if</span> <span class="id" title="notation">(</span><span class="id" title="definition">X</span> <span class="id" title="notation">-</span> <span class="id" title="definition">Y</span><span class="id" title="notation">)</span> <span class="id" title="notation">=</span> 6 <span class="id" title="notation">then</span> <span class="id" title="notation">skip</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">else</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0 <span class="id" title="notation">end</span><span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">Y</span> <span class="id" title="notation">:=</span> 0<span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">while</span> <span class="id" title="notation">(</span><span class="id" title="definition">Y</span> <span class="id" title="notation">=</span> 0<span class="id" title="notation">)</span> <span class="id" title="notation">do</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">while</span> <span class="id" title="definition">Y</span> <span class="id" title="notation">=</span> 0 <span class="id" title="notation">do</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">X</span> <span class="id" title="notation">:=</span> <span class="id" title="definition">X</span> <span class="id" title="notation">+</span> 1<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">end</span> <span class="id" title="notation">}&gt;</span>.<br/>
 <div class="togglescript" id="proofcontrol22" onclick="toggleDisplay('proof22');toggleDisplay('proofcontrol22')"><span class="show"></span></div>
@@ -2196,7 +2220,8 @@ Intuitively, <span class="inlinecode"><span class="id" title="var">p<sub>1</sub>
 <div class="paragraph"> </div>
 
 <a id="lab49"></a><h4 class="section">Exercise: 3 stars, standard, optional (swap_noninterfering_assignments)</h4>
- (Hint: You'll need <span class="inlinecode"><span class="id" title="var">functional_extensionality</span></span> for this one.) 
+ (Hint: You may or may not -- depending how you approach it -- need
+    to use <span class="inlinecode"><span class="id" title="var">functional_extensionality</span></span> explicitly for this one.) 
 </div>
 <div class="code">
 
@@ -2306,7 +2331,7 @@ Finally, find a non-trivial property which is preserved by
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-10-03&nbsp;20:42&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-10-18&nbsp;22:52&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -2249,7 +2249,7 @@ Proof.
   - (* b is true *)
     apply (HTrue st st').
     + assumption.
-    + split; assumption. 
+    + split; assumption.
   - (* b is false *)
     apply (HFalse st st').
     + assumption.
@@ -2312,4 +2312,4 @@ End HoareAssertAssume.
 
 
 
-(* 2023-10-03 20:42 *)
+(* 2023-10-18 22:52 *)

@@ -2185,11 +2185,11 @@ We can use the <span class="inlinecode"><span class="id" title="var">store_weake
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">injection</span> <span class="id" title="var">Heq</span> <span class="id" title="keyword">as</span> <span class="id" title="var">Heq</span>; <span class="id" title="tactic">subst</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#app_nth2"><span class="id" title="lemma">app_nth2</span></a>; <span class="id" title="tactic">try</span> <span class="id" title="var">lia</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">Hlen</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Minus.html#minus_diag"><span class="id" title="abbreviation">minus_diag</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.sub_diag"><span class="id" title="lemma">sub_diag</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="References.html#STLCRef.store_weakening"><span class="id" title="lemma">store_weakening</span></a> <span class="id" title="keyword">with</span> <span class="id" title="var">ST</span>...<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">apply</span> <a class="idref" href="References.html#STLCRef.extends_app"><span class="id" title="lemma">extends_app</span></a>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#app_nth2"><span class="id" title="lemma">app_nth2</span></a>; [|<span class="id" title="var">lia</span>].<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Minus.html#minus_diag"><span class="id" title="abbreviation">minus_diag</span></a>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.PeanoNat.html#Nat.sub_diag"><span class="id" title="lemma">sub_diag</span></a>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">assumption</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
@@ -2662,7 +2662,7 @@ Qed.<br/>
 
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef.RefsAndNontermination"><span class="id" title="module">RefsAndNontermination</span></a>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="References.html#STLCRef"><span class="id" title="module">STLCRef</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-10-03&nbsp;20:42&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-10-18&nbsp;22:52&nbsp;*)</span><br/>
 </div>
 </div>
 

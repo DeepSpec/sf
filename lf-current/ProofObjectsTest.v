@@ -345,4 +345,4 @@ idtac "---------- pe_implies_pi ---------".
 Print Assumptions pe_implies_pi.
 Abort.
 
-(* 2023-10-03 20:41 *)
+(* 2023-10-18 22:51 *)

@@ -105,7 +105,7 @@ Up to now, we've used the more manual part of Coq's tactic
 </div>
 
 <div class="doc">
-<a id="lab440"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> Tactic</h1>
+<a id="lab441"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> Tactic</h1>
 
 <div class="paragraph"> </div>
 
@@ -123,8 +123,8 @@ Up to now, we've used the more manual part of Coq's tactic
 </div>
 
 <div class="doc">
-The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> tactic frees us from this drudgery by <i>searching</i> for a
-    sequence of applications that will prove the goal: 
+The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> tactic tries to free us from this drudgery by <i>searching</i>
+    for a sequence of applications that will prove the goal: 
 </div>
 <div class="code">
 
@@ -138,9 +138,12 @@ The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> 
 <div class="doc">
 The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> tactic solves goals that are solvable by any combination of
 <ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="tactic">intros</span></span> and
+<li> <span class="inlinecode"><span class="id" title="tactic">intros</span></span>
 
 </li>
+</ul>
+    and
+<ul class="doclist">
 <li> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> (of hypotheses from the local context, by default). 
 </li>
 </ul>
@@ -170,11 +173,11 @@ The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> 
 
 <div class="doc">
 Proof search could, in principle, take an arbitrarily long time,
-    so there are limits to how far <span class="inlinecode"><span class="id" title="tactic">auto</span></span> will search by default. 
+    so there are limits to how deep <span class="inlinecode"><span class="id" title="tactic">auto</span></span> will search by default. 
 <div class="paragraph"> </div>
 
- If <span class="inlinecode"><span class="id" title="tactic">auto</span></span> is not solving our goal as expected
-    we can use <span class="inlinecode"><span class="id" title="tactic">debug</span></span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span> to see a trace 
+ If <span class="inlinecode"><span class="id" title="tactic">auto</span></span> is not solving our goal as expected we can use <span class="inlinecode"><span class="id" title="tactic">debug</span></span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span>
+    to see a trace. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Example</span> <a id="auto_example_3" class="idref" href="#auto_example_3"><span class="id" title="definition">auto_example_3</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:17" class="idref" href="#P:17"><span class="id" title="binder">P</span></a> <a id="Q:18" class="idref" href="#Q:18"><span class="id" title="binder">Q</span></a> <a id="R:19" class="idref" href="#R:19"><span class="id" title="binder">R</span></a> <a id="S:20" class="idref" href="#S:20"><span class="id" title="binder">S</span></a> <a id="T:21" class="idref" href="#T:21"><span class="id" title="binder">T</span></a> <a id="U:22" class="idref" href="#U:22"><span class="id" title="binder">U</span></a>: <span class="id" title="keyword">Prop</span>),<br/>
@@ -190,7 +193,8 @@ Proof search could, in principle, take an arbitrarily long time,
 &nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/><hr class='doublespaceincode'/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;Let's&nbsp;see&nbsp;where&nbsp;<span class="inlinecode"><span class="id" title="tactic">auto</span></span>&nbsp;gets&nbsp;stuck&nbsp;using&nbsp;<span class="inlinecode"><span class="id" title="tactic">debug</span></span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">debug</span> <span class="id" title="tactic">auto</span>.<br/><hr class='doublespaceincode'/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;Optional&nbsp;argument&nbsp;says&nbsp;how&nbsp;deep&nbsp;to&nbsp;search&nbsp;(default&nbsp;is&nbsp;5)&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Optional&nbsp;argument&nbsp;to&nbsp;<span class="inlinecode"><span class="id" title="tactic">auto</span></span>&nbsp;says&nbsp;how&nbsp;deep&nbsp;to&nbsp;search<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(default&nbsp;is&nbsp;5)&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">auto</span> 6.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -280,7 +284,11 @@ Of course, in any given development there will probably be
  It is also possible to define specialized hint databases (besides
     <span class="inlinecode"><span class="id" title="var">core</span></span>) that can be activated only when needed; indeed, it is good
     style to create your own hint databases instead of polluting
-    <span class="inlinecode"><span class="id" title="var">core</span></span>.  See the Coq reference manual for details. 
+    <span class="inlinecode"><span class="id" title="var">core</span></span>.
+
+<div class="paragraph"> </div>
+
+    See the Coq reference manual for details. 
 </div>
 <div class="code">
 
@@ -325,25 +333,22 @@ Of course, in any given development there will probably be
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">c</span> <span class="id" title="var">st</span> <span class="id" title="var">st<sub>1</sub></span> <span class="id" title="var">st<sub>2</sub></span> <span class="id" title="var">E<sub>1</sub></span> <span class="id" title="var">E<sub>2</sub></span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="tactic">dependent</span> <span class="id" title="var">st<sub>2</sub></span>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">E<sub>1</sub></span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">st<sub>2</sub></span> <span class="id" title="var">E<sub>2</sub></span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">E<sub>2</sub></span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">E<sub>1</sub></span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">st<sub>2</sub></span> <span class="id" title="var">E<sub>2</sub></span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">E<sub>2</sub></span>; <span class="id" title="tactic">subst</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="comment">(*&nbsp;&lt;----&nbsp;here's&nbsp;one&nbsp;good&nbsp;place&nbsp;for&nbsp;auto&nbsp;*)</span><br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;E_Seq&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>1</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfFalse&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;(contradiction)&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileFalse&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;(contradiction)&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;E_WhileTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="comment">(*&nbsp;&lt;----&nbsp;here's&nbsp;another&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfTrue&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfFalse&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileFalse&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue,&nbsp;with&nbsp;b&nbsp;false&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>4</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue,&nbsp;with&nbsp;b&nbsp;true&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>3</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="comment">(*&nbsp;&lt;----&nbsp;and&nbsp;another&nbsp;*)</span><br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -370,26 +375,22 @@ When we are using a particular tactic many times in a proof, we
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">st<sub>2</sub></span> <span class="id" title="var">E<sub>2</sub></span>; <span class="id" title="tactic">inversion</span> <span class="id" title="var">E<sub>2</sub></span>; <span class="id" title="tactic">subst</span>...<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;E_Seq&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>1</sub></span>) <span class="id" title="keyword">in</span> ×...<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfFalse&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;(contradiction)&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileFalse&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;(contradiction)&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;E_WhileTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfTrue&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfFalse&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>5</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileFalse&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>2</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue,&nbsp;with&nbsp;b&nbsp;false&nbsp;--&nbsp;contradiction!&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">H</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>4</sub></span>. <span class="id" title="tactic">discriminate</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue,&nbsp;with&nbsp;b&nbsp;true&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>3</sub></span>) <span class="id" title="keyword">in</span> ×...<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
 
 <div class="doc">
-<a id="lab441"></a><h1 class="section">Searching For Hypotheses</h1>
+<a id="lab442"></a><h1 class="section">Searching For Hypotheses</h1>
 
 <div class="paragraph"> </div>
 
@@ -433,18 +434,14 @@ When we are using a particular tactic many times in a proof, we
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>1</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">rwd</span> <span class="id" title="var">H</span> <span class="id" title="var">H<sub>5</sub></span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;E_IfFalse&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;(contradiction)&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">rwd</span> <span class="id" title="var">H</span> <span class="id" title="var">H<sub>5</sub></span>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileFalse&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;(contradiction)&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">rwd</span> <span class="id" title="var">H</span> <span class="id" title="var">H<sub>2</sub></span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;E_WhileTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;false&nbsp;(contradiction)&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue&nbsp;-&nbsp;b&nbsp;false&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">rwd</span> <span class="id" title="var">H</span> <span class="id" title="var">H<sub>4</sub></span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;*)</span><br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;EWhileTrue&nbsp;-&nbsp;b&nbsp;true&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>3</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
@@ -489,10 +486,9 @@ This <span class="inlinecode"><span class="id" title="keyword">match</span></spa
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;E_Seq&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>1</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>.<br/>
-&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;b&nbsp;evaluates&nbsp;to&nbsp;true&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>3</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;E_WhileTrue&nbsp;-&nbsp;b&nbsp;true&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">IHE1_1</span> <span class="id" title="var">st'0</span> <span class="id" title="var">H<sub>3</sub></span>) <span class="id" title="keyword">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
@@ -677,7 +673,7 @@ These examples just give a flavor of what "hyper-automation"
     your proofs, both to avoid tedium and to "future proof" them. 
 <div class="paragraph"> </div>
 
-<a id="lab442"></a><h1 class="section">Tactics <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> and <span class="inlinecode"><span class="id" title="tactic">eauto</span></span></h1>
+<a id="lab443"></a><h1 class="section">The <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> and <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> tactics</h1>
 
 <div class="paragraph"> </div>
 
@@ -778,8 +774,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eapply</span></span
     Below is an example of <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>.  Before using it, we need to give
     some hints to <span class="inlinecode"><span class="id" title="tactic">auto</span></span> about using the constructors of <span class="inlinecode"><span class="id" title="var">ceval</span></span>
     and the definitions of <span class="inlinecode"><span class="id" title="var">state</span></span> and <span class="inlinecode"><span class="id" title="var">total_map</span></span> as part of its
-    proof search.
-
+    proof search. 
 </div>
 <div class="code">
 
@@ -809,7 +804,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
     ordinary variants don't do the job. 
 <div class="paragraph"> </div>
 
-<a id="lab443"></a><h1 class="section">Constraints on Existential Variables</h1>
+<a id="lab444"></a><h1 class="section">Constraints on Existential Variables</h1>
 
 <div class="paragraph"> </div>
 
@@ -915,7 +910,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">P</span> <span class="id" title="var">Q</span> <span class="id" title="var">HP</span> <span class="id" title="var">HQ</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">HP</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">y</span> <span class="id" title="var">HP'</span>]. <span class="id" title="tactic">eauto</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-10-03&nbsp;20:41&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-10-18&nbsp;22:50&nbsp;*)</span><br/>
 </div>
 </div>
 
