@@ -1,0 +1,122 @@
+---
+version: 2.1
+
+jobs:
+  build-docker:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker containers
+          command: |
+            changes=$(git log --pretty=%s HEAD^..HEAD)
+            if fgrep -q '[docker' \<<< $changes; then
+            echo "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USER" --password-stdin
+            fi
+
+            if fgrep -q '[docker 8.15]' \<<< $changes; then
+            echo "Building 8.15"
+            docker build -t deepspec/sfdev:8.15 - < Dockerfile.8.15
+            docker push deepspec/sfdev:8.15
+            fi
+            if fgrep -q '[docker 8.16]' \<<< $changes; then
+            echo "Building 8.16"
+            docker build -t deepspec/sfdev:8.16 - < Dockerfile.8.16
+            docker push deepspec/sfdev:8.16
+            fi
+            if fgrep -q '[docker dev]' \<<< $changes; then
+            echo "Building dev"
+            docker build -t deepspec/sfdev:dev - < Dockerfile.dev
+            docker push deepspec/sfdev:dev
+            fi
+          working_directory: .circleci
+          no_output_timeout: 2h
+    # The resource_class feature allows configuring CPU and RAM resources for each  job.
+    # Different resource classes are available for different executors.
+    # https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
+  build:
+    parameters:
+      coq:
+        type: string
+      vc:
+        type: boolean
+        default: false
+    docker:
+      - image: deepspec/sfdev:<<parameters.coq>>
+    resource_class: medium
+    environment:
+      OPAMJOBS: 2
+      OPAMVERBOSE: 1
+      OPAMYES: true
+      TERM: xterm
+    steps:
+      - checkout
+      - run:
+          name: Configure environment
+          command: echo . ~/.profile >> $BASH_ENV
+      - run:
+          name: List installed packages
+          command: opam list
+      - run:
+          name: Logical Foundations
+          command: make
+          working_directory: lf-current
+      - run:
+          name: Programming Language Foundations
+          command: make
+          working_directory: plf-current
+      - run:
+          name: Verified Functional Algorithms
+          command: make
+          working_directory: vfa-current
+      - run:
+          name: Separation Logic Foundations
+          command: make
+          working_directory: slf-current
+      - run:
+          name: QuickChick
+          command: make
+          working_directory: qc-current
+      - run:
+          name: Tarballs
+          command: |
+            for v in lf plf vfa qc
+            do tar -xf $v-current/$v.tgz
+            make -C $v
+            done
+      - when:
+          condition: <<parameters.vc>>
+          steps:
+            - run:
+                name: Verified C
+                command: make
+                working_directory: vc-current
+            - run:
+                name: Verified C Tarball
+                command: |
+                  tar -xf vc-current/vc.tgz
+                  make -C vc
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build-docker
+      - build:
+          name: Coq 8.15
+          coq: '8.15'
+          vc: true
+          requires:
+            - build-docker
+      - build:
+          name: Coq 8.16
+          coq: '8.16'
+          vc: true
+          requires:
+            - build-docker
+#      - build:
+#          name: Coq dev
+#          coq: dev
+#          requires:
+#            - build-docker

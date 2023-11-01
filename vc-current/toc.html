@@ -1,0 +1,706 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Table of contents</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body><script>
+$( function() {
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+
+    $("#accordion").accordion({
+      collapsible : true,
+      active : false,
+      icons : icons,
+      heightStyle : 'content'
+    });
+
+    // Enable navigation links in section headers
+    $('#accordion').each(function() {
+      this.addEventListener('click', ev => {
+        if ($(ev.target).closest('a').length > 0) ev.stopPropagation();
+      }, {capture: true});
+    });
+  } );
+</script>
+
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+</div>
+
+<div id="main">
+
+<div id="toc">
+<div id="accordion">
+<h2><a href="Preface.html">Preface</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Preface.html#lab1">Welcome</a>
+
+</li>
+<li><a href="Preface.html#lab2">Practicalities</a>
+<div>
+<ul class="doclist">
+<li><a href="Preface.html#lab3">System Requirements</a>
+
+</li>
+<li><a href="Preface.html#lab4">Downloading the Coq Files</a>
+
+</li>
+<li><a href="Preface.html#lab5">Installation</a>
+
+</li>
+<li><a href="Preface.html#lab6">Exercises</a>
+
+</li>
+<li><a href="Preface.html#lab7">Recommended Citation Format</a>
+
+</li>
+<li><a href="Preface.html#lab8">For Instructors and Contributors</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Preface.html#lab9">Thanks</a>
+
+</li>
+<li><a href="Preface.html#lab10">Check that we have the right version of VST</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_sumarray.html">Introduction to Verifiable C &nbsp;&nbsp; (<i>Verif_sumarray</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Verif_sumarray.html#lab11">Verified Software Toolchain</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab12">How to use this textbook</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab13">A C program to add up an array</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab14">Workflow</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab15">Let's verify!</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab19">API spec for the sumarray.c program</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab22">Packaging the Gprog and Vprog</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab23">Proof of the sumarray program</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab33">Global variables and main()</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab34">Tying all the functions together</a>
+
+</li>
+<li><a href="Verif_sumarray.html#lab35">Additional recommended reading</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_reverse.html">Linked lists in Verifiable C &nbsp;&nbsp; (<i>Verif_reverse</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Verif_reverse.html#lab36">Running Example</a>
+
+</li>
+<li><a href="Verif_reverse.html#lab37">Inductive definition of linked lists</a>
+
+</li>
+<li><a href="Verif_reverse.html#lab38">Hint databases for spatial operators</a>
+
+</li>
+<li><a href="Verif_reverse.html#lab40">Specification of the <span class="inlinecode"><span class="id" title="var">reverse</span></span> function.</a>
+
+</li>
+<li><a href="Verif_reverse.html#lab41">Proof of the <span class="inlinecode"><span class="id" title="var">reverse</span></span> function</a>
+
+</li>
+<li><a href="Verif_reverse.html#lab42">The loop invariant</a>
+
+</li>
+<li><a href="Verif_reverse.html#lab43">Why separation logic?</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_stack.html">Stack ADT implemented by linked lists &nbsp;&nbsp; (<i>Verif_stack</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Verif_stack.html#lab44">Let's verify!</a>
+
+</li>
+<li><a href="Verif_stack.html#lab45">Malloc and free</a>
+
+</li>
+<li><a href="Verif_stack.html#lab46">Specification of linked lists</a>
+
+</li>
+<li><a href="Verif_stack.html#lab48">Specification of stack data structure</a>
+
+</li>
+<li><a href="Verif_stack.html#lab50">Function specifications for the stack operations</a>
+
+</li>
+<li><a href="Verif_stack.html#lab51">Proofs of the function bodies</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_triang.html">A client of the stack functions &nbsp;&nbsp; (<i>Verif_triang</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Verif_triang.html#lab55">Proofs with integers</a>
+
+</li>
+<li><a href="Verif_triang.html#lab60">Specification of the stack-client functions</a>
+
+</li>
+<li><a href="Verif_triang.html#lab61">Proofs of the stack-client function-bodies</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_append1.html">List segments &nbsp;&nbsp; (<i>Verif_append1</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Verif_append1.html#lab68">Specification of the <span class="inlinecode"><span class="id" title="var">append</span></span> function.</a>
+
+</li>
+<li><a href="Verif_append1.html#lab69">List segments.</a>
+
+</li>
+<li><a href="Verif_append1.html#lab73">Proof of the <span class="inlinecode"><span class="id" title="var">append</span></span> function</a>
+
+</li>
+<li><a href="Verif_append1.html#lab77">Additional exercises: more proofs about list segments</a>
+
+</li>
+<li><a href="Verif_append1.html#lab82">Additional exercises: loop-free list segments</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_append2.html">Magic wand, partial data structure &nbsp;&nbsp; (<i>Verif_append2</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Verif_append2.html#lab88">Separating Implication</a>
+
+</li>
+<li><a href="Verif_append2.html#lab92">List segments by magic wand</a>
+
+</li>
+<li><a href="Verif_append2.html#lab95">Proof of the <span class="inlinecode"><span class="id" title="var">append</span></span> function by <span class="inlinecode"><span class="id" title="var">wlseg</span></span></a>
+
+</li>
+<li><a href="Verif_append2.html#lab97">The general idea: magic wand as frame</a>
+
+</li>
+<li><a href="Verif_append2.html#lab98">Case study: list segments for linked list box</a>
+
+</li>
+<li><a href="Verif_append2.html#lab102">Comparison and connection: <span class="inlinecode"><span class="id" title="var">lseg</span></span> vs. <span class="inlinecode"><span class="id" title="var">wlseg</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_strlib.html">String functions &nbsp;&nbsp; (<i>Verif_strlib</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Verif_strlib.html#lab103">Standard boilerplate</a>
+
+</li>
+<li><a href="Verif_strlib.html#lab104">Representation of null-terminated strings.</a>
+
+</li>
+<li><a href="Verif_strlib.html#lab105">Reasoning about the contents of C strings</a>
+
+</li>
+<li><a href="Verif_strlib.html#lab106">Function specs</a>
+<div>
+<ul class="doclist">
+<li><a href="Verif_strlib.html#lab107">A digression about size_t</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Verif_strlib.html#lab109">Proof of the <span class="inlinecode"><span class="id" title="var">strlen</span></span> function</a>
+
+</li>
+<li><a href="Verif_strlib.html#lab111">Proof of the <span class="inlinecode"><span class="id" title="var">strcpy</span></span> function</a>
+<div>
+<ul class="doclist">
+<li><a href="Verif_strlib.html#lab114">data_at is not injective!</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Hashfun.html">Functional model of hash tables &nbsp;&nbsp; (<i>Hashfun</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Hashfun.html#lab118">A functional model</a>
+
+</li>
+<li><a href="Hashfun.html#lab123">Functional model satisfies the high-level specification</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Verif_hash.html">Correctness proof of hash.c &nbsp;&nbsp; (<i>Verif_hash</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Verif_hash.html#lab129">Function specifications</a>
+
+</li>
+<li><a href="Verif_hash.html#lab137">Proofs of the functions <span class="inlinecode"><span class="id" title="var">hash</span></span>, <span class="inlinecode"><span class="id" title="var">copy_string</span></span>, <span class="inlinecode"><span class="id" title="var">new_cell</span></span></a>
+
+</li>
+<li><a href="Verif_hash.html#lab141">Proof of the <span class="inlinecode"><span class="id" title="var">new_table</span></span> function</a>
+<div>
+<ul class="doclist">
+<li><a href="Verif_hash.html#lab142">Auxiliary lemmas about data-structure predicates</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Verif_hash.html#lab146">Proof of the <span class="inlinecode"><span class="id" title="var">get</span></span> function</a>
+
+</li>
+<li><a href="Verif_hash.html#lab149">Proof of the <span class="inlinecode"><span class="id" title="var">incr_list</span></span> function</a>
+
+</li>
+<li><a href="Verif_hash.html#lab152">field_compatible</a>
+<div>
+<ul class="doclist">
+<li><a href="Verif_hash.html#lab153">Where does field_compatible come from?</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Verif_hash.html#lab154">Proof of the <span class="inlinecode"><span class="id" title="var">incr</span></span> function</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_intro.html">Introduction to Verified Software Units &nbsp;&nbsp; (<i>VSU_intro</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="VSU_intro.html#lab156">Looking back: single-module programs</a>
+
+</li>
+<li><a href="VSU_intro.html#lab157">Next: modular verification of modular programs</a>
+
+</li>
+<li><a href="VSU_intro.html#lab158">A Stack/Triang program to verify</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_intro.html#lab163">Let's verify!</a>
+
+</li>
+<li><a href="VSU_intro.html#lab164">Warning</a>
+
+</li>
+<li><a href="VSU_intro.html#lab165">Next Chapter: <a href="Spec_stack.html"><span class="inlineref">Spec_stack</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Spec_stack.html">VSU specification of the Stack module &nbsp;&nbsp; (<i>Spec_stack</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Spec_stack.html#lab166">Let's verify!</a>
+<div>
+<ul class="doclist">
+<li><a href="Spec_stack.html#lab167">Abstract Predicate Declaration (APD)</a>
+
+</li>
+<li><a href="Spec_stack.html#lab168">Abstract Specification Interface (ASI)</a>
+
+</li>
+<li><a href="Spec_stack.html#lab169">Next Chapter: <a href="Spec_triang.html"><span class="inlineref">Spec_triang</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Spec_triang.html">VSU specification of the Triang module &nbsp;&nbsp; (<i>Spec_triang</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Spec_triang.html#lab172">Let's verify!</a>
+<div>
+<ul class="doclist">
+<li><a href="Spec_triang.html#lab173">Abstract Predicate Declaration (APD)</a>
+
+</li>
+<li><a href="Spec_triang.html#lab174">Abstract Specification Interface (ASI)</a>
+
+</li>
+<li><a href="Spec_triang.html#lab177">Next Chapter: <a href="Spec_stdlib.html"><span class="inlineref">Spec_stdlib</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Spec_stdlib.html">Specification of external malloc, free, exit functions &nbsp;&nbsp; (<i>Spec_stdlib</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Spec_stdlib.html#lab178">Abstract Predicate Definition</a>
+
+</li>
+<li><a href="Spec_stdlib.html#lab179">Abstract Specification Interface</a>
+
+</li>
+<li><a href="Spec_stdlib.html#lab180">Type-based specification of malloc and free</a>
+<div>
+<ul class="doclist">
+<li><a href="Spec_stdlib.html#lab181">How to use the type-based <span class="inlinecode"><span class="id" title="var">malloc_spec</span></span></a>
+
+</li>
+<li><a href="Spec_stdlib.html#lab182">Next Chapter: <a href="VSU_stack.html"><span class="inlineref">VSU_stack</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_stack.html">VSU verification of the Stack module &nbsp;&nbsp; (<i>VSU_stack</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="VSU_stack.html#lab183">stack2.c</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="VSU_stack.html#lab184">Building the VSU</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stack.html#lab185">First, instantiate the APD</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="VSU_stack.html#lab187">Internal functions</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stack.html#lab188">Constructing Vprog and Gprog</a>
+
+</li>
+<li><a href="VSU_stack.html#lab189">Proofs of the function bodies</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="VSU_stack.html#lab191">Construction of the VSU</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stack.html#lab192">Next Chapter: <a href="VSU_triang.html"><span class="inlineref">VSU_triang</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_triang.html">VSU verification of the Triang module &nbsp;&nbsp; (<i>VSU_triang</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="VSU_triang.html#lab193">Imports</a>
+
+</li>
+<li><a href="VSU_triang.html#lab194">Parameters for the VSU</a>
+
+</li>
+<li><a href="VSU_triang.html#lab199">Next Chapter: <a href="VSU_stdlib.html"><span class="inlineref">VSU_stdlib</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_stdlib.html">Axiomatization of malloc/free/exit &nbsp;&nbsp; (<i>VSU_stdlib</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="VSU_stdlib.html#lab200">Internal functions</a>
+
+</li>
+<li><a href="VSU_stdlib.html#lab201">Definining the pieces of a VSU</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="VSU_stdlib.html#lab202">Constructing the Component and the VSU</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stdlib.html#lab203">Next Chapter: <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_main.html">linking all the VSUs together with main VSU &nbsp;&nbsp; (<i>VSU_main</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="VSU_main.html#lab204">The VSU for main</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_main.html#lab205">Funspec for main function</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="VSU_main.html#lab206">Proof of body_main</a>
+
+</li>
+<li><a href="VSU_main.html#lab207">The Main Component, the Whole Component</a>
+
+</li>
+<li><a href="VSU_main.html#lab208">Soundness!</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_main.html#lab209">Next Chapter: <a href="VSU_stdlib2.html"><span class="inlineref">VSU_stdlib2</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_stdlib2.html">Malloc/free/exit programmed in C &nbsp;&nbsp; (<i>VSU_stdlib2</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stdlib2.html#lab210">The C program</a>
+
+</li>
+<li><a href="VSU_stdlib2.html#lab211">The normal boilerplate</a>
+
+</li>
+<li><a href="VSU_stdlib2.html#lab212">malloc_token</a>
+
+</li>
+<li><a href="VSU_stdlib2.html#lab216">Defining the mem_mgr APD</a>
+
+</li>
+<li><a href="VSU_stdlib2.html#lab217">Constructing Vprog and Gprog</a>
+
+</li>
+<li><a href="VSU_stdlib2.html#lab221">Initializers for global data</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stdlib2.html#lab223">Defining the pieces of a VSU</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="VSU_stdlib2.html#lab224">Constructing the Component and the VSU</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_stdlib2.html#lab225">Next Chapter: <a href="VSU_main2.html"><span class="inlineref">VSU_main2</span></a></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="VSU_main2.html">linking with stdlib2 instead of with stdlib &nbsp;&nbsp; (<i>VSU_main2</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="VSU_main2.html#lab226">The VSU for main</a>
+<div>
+<ul class="doclist">
+<li><a href="VSU_main2.html#lab227">An alternate way to adjust the Exports of a VSU</a>
+
+</li>
+<li><a href="VSU_main2.html#lab228">End of digression about restrictExports</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Postscript.html">Postcript and bibliography &nbsp;&nbsp; (<i>Postscript</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><div>
+<ul class="doclist">
+<li><a href="Postscript.html#lab229">Small examples</a>
+
+</li>
+<li><a href="Postscript.html#lab230">Modules</a>
+
+</li>
+<li><a href="Postscript.html#lab231">Input/output</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Postscript.html#lab232">Looking around</a>
+<div>
+<ul class="doclist">
+<li><a href="Postscript.html#lab233">Static analyzers</a>
+
+</li>
+<li><a href="Postscript.html#lab234">Functional correctness verifiers -- functional languages</a>
+
+</li>
+<li><a href="Postscript.html#lab235">Functional correctness verifiers -- imperative languages</a>
+
+</li>
+<li><a href="Postscript.html#lab236">Functional correctness verifiers -- C</a>
+
+</li>
+<li><a href="Postscript.html#lab237">Foundational soundness</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Postscript.html#lab238">Conclusion</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="Bib.html">Bibliography &nbsp;&nbsp; (<i>Bib</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Bib.html#lab239">Resources cited in this volume</a>
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Spec_triang: VSU specification of the Triang module</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Spec_triang<span class="subtitle">VSU specification of the Triang module</span></h1>
+
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ We will now write the ASI (abstract specification interface) of
+  the <span class="inlinecode"><span class="id" title="var">triang2</span></span> module. 
+<div class="paragraph"> </div>
+
+<a id="lab170"></a><h3 class="section">triang2.h</h3>
+
+<div class="paragraph"> </div>
+
+<pre>
+#include &lt;stddef.h&gt;
+int triang (int n);
+</pre>
+
+<div class="paragraph"> </div>
+
+This header file suggests that the <span class="inlinecode"><span class="id" title="var">triang</span></span> module exports just one function, 
+that computes the triangular number of its input, that is, 1+2+...+n.
+
+<div class="paragraph"> </div>
+
+<a id="lab171"></a><h3 class="section">triang2.c</h3>
+
+<div class="paragraph"> </div>
+
+<pre>
+#include &lt;stddef.h&gt;
+#include "stdlib.h"
+#include "stack2.h"
+#include "triang2.h"
+
+void push_increasing (struct stack *st, int n) {
+  int i=0;
+  while (i&lt;n) { i++; push(st,i); }
+}
+
+int pop_and_add (struct stack *st, int n) {
+  int i=0;
+  int t, s=0;
+  while (i&lt;n) { t=pop(st); s += t; i++; }
+  return s;
+}
+
+int triang(int n) {
+  struct stack *st;
+  int i,t,s;
+  st = newstack();
+  push_increasing(st, n);
+  s = pop_and_add(st, n);
+  return s;
+}  
+</pre>
+
+<div class="paragraph"> </div>
+
+In the file <span class="inlinecode"><span class="id" title="var">triang2.c</span></span>, the functions <span class="inlinecode"><span class="id" title="var">push_increasing</span></span> and <span class="inlinecode"><span class="id" title="var">pop_and_add</span></span>
+are identical to the ones in <a href="Verif_stack.html"><span class="inlineref">Verif_stack</span></a>.  These are <i>internal</i>
+functions to the module, not exported.  In a typical C program, you
+might make these functions <i>static</i> to restrict visibility, but we won't
+do that here, for two reasons:
+<ul class="doclist">
+<li> We will use VSU's specification facilities to enforce locality in the proof;
+
+</li>
+<li> One might build the <span class="inlinecode"><span class="id" title="var">triang</span></span> module from more than one .c file, with
+    the different .c files referencing "internal" functions from each other.
+    In this case, <i>static</i> won't work in C, but our VSU can still specify
+    the module structure.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a id="lab172"></a><h1 class="section">Let's verify!</h1>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.triang2</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stack.html#"><span class="id" title="library">VC.Spec_stack</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab173"></a><h2 class="section">Abstract Predicate Declaration (APD)</h2>
+
+<div class="paragraph"> </div>
+
+ This module does not use any abstract data types in its 
+  external interface.  The only type used in <span class="inlinecode"><span class="id" title="var">int</span></span> <span class="inlinecode"><span class="id" title="var">triang</span></span> <span class="inlinecode">(<span class="id" title="var">int</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span> is
+  the <span class="inlinecode"><span class="id" title="var">int</span></span> type.  So this module does not need any APDs at all.
+
+<div class="paragraph"> </div>
+
+  Conversely, a module whose API uses more than one abstract
+  data type might have more than one APD.  There is no 1-1
+  matching between APDs and ASIs. 
+<div class="paragraph"> </div>
+
+<a id="lab174"></a><h2 class="section">Abstract Specification Interface (ASI)</h2>
+
+<div class="paragraph"> </div>
+
+ As usual, we make a Section to introduce the APD parameters 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Section</span> <a id="TriangASI" class="idref" href="#TriangASI"><span class="id" title="section">TriangASI</span></a>.<br/>
+</div>
+
+<div class="doc">
+We need to mention the MallocFreeAPD because the <span class="inlinecode"><span class="id" title="var">triang</span></span>
+  function uses <span class="inlinecode"><span class="id" title="var">mem_mgr</span></span> in its pre and postconditions. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Variable</span> <a id="TriangASI.M" class="idref" href="#TriangASI.M"><span class="id" title="variable">M</span></a>: <a class="idref" href="Spec_stdlib.html#MallocFreeAPD"><span class="id" title="record">MallocFreeAPD</span></a>.<br/>
+</div>
+
+<div class="doc">
+Although the <i>implementation</i> of this module uses the StackAPD,
+  that use is purely internal, and does not need to be mentioned
+  in the external interface specification. 
+<div class="paragraph"> </div>
+
+<a id="lab175"></a><h4 class="section">Exercise: 2 stars, standard (triang_spec)</h4>
+ Adjust this funspec until it properly specifies the triang function.
+   Suggestion: the PROP clause of the precondition could very reasonably
+   limit the size of the input to approximately the square root of the
+   maxium integer, so that the triangular number does not overflow. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="triang_spec" class="idref" href="#triang_spec"><span class="id" title="definition">triang_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
+&nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_triang</span><br/>
+&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:3" class="idref" href="#gv:3"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span> <span class="comment">(*...&nbsp;more&nbsp;WITH&nbsp;variables...&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">]</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">(</span><br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">)</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PARAMS</span><span class="id" title="notation">(</span> <br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">)</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">GLOBALS</span><span class="id" title="notation">(</span><a class="idref" href="Spec_triang.html#gv:2"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="Spec_triang.html#TriangASI.M"><span class="id" title="variable">M</span></a> <a class="idref" href="Spec_triang.html#gv:2"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Suggestion:&nbsp;this&nbsp;postcondition&nbsp;does&nbsp;not&nbsp;need&nbsp;an&nbsp;EX,&nbsp;but&nbsp;you&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;may&nbsp;add&nbsp;one&nbsp;if&nbsp;you&nbsp;wish&nbsp;to.&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">(</span> <br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">)</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="Spec_triang.html#TriangASI.M"><span class="id" title="variable">M</span></a> <a class="idref" href="Spec_triang.html#gv:3"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span>.<br/>
+</div>
+
+<div class="doc">
+If you don't get this quite right, you will notice it either when
+  you prove <a href="VSU_triang.html"><span class="inlineref">VSU_triang</span></a> (verification of <span class="inlinecode"><span class="id" title="var">triang.c</span></span>) or when
+  you prove <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a> (verification of the client).  In that case,
+  just come back here and adjust the funspec. 
+<div class="paragraph"> </div>
+
+ <font size=-2>&#9744;</font> 
+<div class="paragraph"> </div>
+
+ Because the functions <span class="inlinecode"><span class="id" title="var">push_increasing</span></span> and <span class="inlinecode"><span class="id" title="var">pop_and_add</span></span> are not
+  exported from the module -- they are used only internally by <span class="inlinecode"><span class="id" title="var">triang</span></span>,
+  their funspecs need not be mentioned here. 
+<div class="paragraph"> </div>
+
+<a id="lab176"></a><h3 class="section">Completing the Triang ASI</h3>
+
+<div class="paragraph"> </div>
+
+ Now the "Triang Abstract Specification Interface" is just a list of the 
+   exported funspecs 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="TriangASI" class="idref" href="#TriangASI"><span class="id" title="definition">TriangASI</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a>  <a class="idref" href="Spec_triang.html#triang_spec"><span class="id" title="definition">triang_spec</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="section">TriangASI</span></a>.<br/>
+</div>
+
+<div class="doc">
+And remember that StackASI is parameterized by the Variables of the Section: 
+</div>
+<div class="code">
+<span class="id" title="keyword">Check</span> <a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">TriangASI</span></a>. <span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;MallocFreeAPD&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;funspecs&nbsp;*)</span><br/>
+</div>
+
+<div class="doc">
+<a id="lab177"></a><h2 class="section">Next Chapter: <a href="Spec_stdlib.html"><span class="inlineref">Spec_stdlib</span></a></h2>
+
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2023-10-27&nbsp;14:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

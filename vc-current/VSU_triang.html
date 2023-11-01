@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>VSU_triang: VSU verification of the Triang module</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">VSU_triang<span class="subtitle">VSU verification of the Triang module</span></h1>
+
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+ In this chapter we construct the VSU proving that <span class="inlinecode"><span class="id" title="var">triang2.c</span></span>
+  implements the specification from <span class="inlinecode"><span class="id" title="var">Spec_triang</span></span>. 
+<div class="paragraph"> </div>
+
+<a id="lab193"></a><h2 class="section">Imports</h2>
+
+<div class="paragraph"> </div>
+
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> We import the standard <span class="inlinecode"><span class="id" title="var">floyd.proofauto</span></span> and <span class="inlinecode"><span class="id" title="var">floyd.VSU</span></span>.
+
+</li>
+<li> This module calls upon functions from <span class="inlinecode"><span class="id" title="var">stack2.c</span></span>, so it needs to import <span class="inlinecode"><span class="id" title="var">Spec_stack</span></span>.
+
+</li>
+<li> The module implements the <span class="inlinecode"><span class="id" title="var">TriangASI</span></span>, so it needs to import <span class="inlinecode"><span class="id" title="var">Spec_triang</span></span>, which defines that.
+
+</li>
+<li> This module uses the <span class="inlinecode"><span class="id" title="var">MallocFreeAPD</span></span>, but not (directly) the <span class="inlinecode"><span class="id" title="var">MallocFreeASI</span></span>.  That is, it uses the <span class="inlinecode"><span class="id" title="var">mem_mgr</span></span> predicate but doesn't call any of the malloc or free functions.  If we had defined the APD in a separate file from the ASI, we would need to import only one of those files.  As it is, we import <span class="inlinecode"><span class="id" title="var">Spec_stdlib</span></span>.
+
+</li>
+<li> And we must import the C program, <span class="inlinecode"><span class="id" title="var">triang2</span></span>.
+
+</li>
+</ul>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.VSU</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stack.html#"><span class="id" title="library">VC.Spec_stack</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_triang.html#"><span class="id" title="library">VC.Spec_triang</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.triang2</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab194"></a><h2 class="section">Parameters for the VSU</h2>
+
+<div class="paragraph"> </div>
+
+ As usual, we make a Section to parameterize the VSU by the
+ imported APDs. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Section</span> <a id="Triang_VSU" class="idref" href="#Triang_VSU"><span class="id" title="section">Triang_VSU</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a id="Triang_VSU.M" class="idref" href="#Triang_VSU.M"><span class="id" title="variable">M</span></a>: <a class="idref" href="Spec_stdlib.html#MallocFreeAPD"><span class="id" title="record">MallocFreeAPD</span></a>.<br/>
+<span class="id" title="keyword">Variable</span> <a id="Triang_VSU.STACK" class="idref" href="#Triang_VSU.STACK"><span class="id" title="variable">STACK</span></a>: <a class="idref" href="Spec_stack.html#StackAPD"><span class="id" title="record">StackAPD</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab195"></a><h4 class="section">Exercise: 3 stars, standard (Triang_private)</h4>
+ Write funspecs for the two private internal functions, and list them in
+    <span class="inlinecode"><span class="id" title="var">Triang_private</span></span>.   Hint: copy and adapt from <a href="Verif_triang.html"><span class="inlineref">Verif_triang</span></a>,
+    bringing in supporting definitions (such as <span class="inlinecode"><span class="id" title="var">decreasing</span></span>) as needed.
+    Refer to <span class="inlinecode"><span class="id" title="var">Stack_private</span></span> in <a href="VSU_stack.html"><span class="inlineref">VSU_stack</span></a> for an example.
+ 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="push_increasing_spec" class="idref" href="#push_increasing_spec"><span class="id" title="definition">push_increasing_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> <br/>
+&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="pop_and_add_spec" class="idref" href="#pop_and_add_spec"><span class="id" title="definition">pop_and_add_spec</span></a>  : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> <br/>
+&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_private" class="idref" href="#Triang_private"><span class="id" title="definition">Triang_private</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">]</span></a>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Triang_imports" class="idref" href="#Triang_imports"><span class="id" title="definition">Triang_imports</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_stack.html#StackASI"><span class="id" title="definition">StackASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.STACK"><span class="id" title="variable">STACK</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_internals" class="idref" href="#Triang_internals"><span class="id" title="definition">Triang_internals</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_triang.html#Triang_private"><span class="id" title="definition">Triang_private</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">TriangASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_Gprog" class="idref" href="#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_triang.html#Triang_imports"><span class="id" title="definition">Triang_imports</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="VSU_triang.html#Triang_internals"><span class="id" title="definition">Triang_internals</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_Vprog" class="idref" href="#Triang_Vprog"><span class="id" title="definition">Triang_Vprog</span></a> : <span class="id" title="definition">varspecs</span>. <span class="id" title="var">mk_varspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab196"></a><h4 class="section">Exercise: 2 stars, standard (body_push_increasing)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove the semax_body lemma for push_increasing.
+   You'll want to copy definitions and lemmas from your solution
+   to <a href="Verif_triang.html"><span class="inlineref">Verif_triang</span></a>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="body_push_increasing" class="idref" href="#body_push_increasing"><span class="id" title="lemma">body_push_increasing</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_triang.html#Triang_Vprog"><span class="id" title="definition">Triang_Vprog</span></a> <a class="idref" href="VSU_triang.html#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">f_push_increasing</span> <a class="idref" href="VSU_triang.html#push_increasing_spec"><span class="id" title="axiom">push_increasing_spec</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab197"></a><h4 class="section">Exercise: 2 stars, standard (body_pop_and_add)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove the semax_body lemma for pop_and_add.
+   You'll want to copy definitions and lemmas from your solution
+   to <a href="Verif_triang.html"><span class="inlineref">Verif_triang</span></a>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="body_pop_and_add" class="idref" href="#body_pop_and_add"><span class="id" title="lemma">body_pop_and_add</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_triang.html#Triang_Vprog"><span class="id" title="definition">Triang_Vprog</span></a> <a class="idref" href="VSU_triang.html#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a> <span class="id" title="definition">f_pop_and_add</span> <a class="idref" href="VSU_triang.html#pop_and_add_spec"><span class="id" title="axiom">pop_and_add_spec</span></a>.<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab198"></a><h4 class="section">Exercise: 3 stars, standard (body_triang)</h4>
+ Prove the correctness of the triang function. 
+
+<div class="paragraph"> </div>
+
+   When you get near the end, you may come upon the proof goal,
+   <span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="var">stackrep</span></span> <span class="inlinecode"><span class="id" title="var">STACK</span></span> <span class="inlinecode"><span class="id" title="var">nil</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode"><span class="nowrap">&vert;--</span></span> <span class="inlinecode"><span class="id" title="var">emp</span></span> <span class="inlinecode"></span>
+
+<div class="paragraph"> </div>
+
+   This goal arises because the current assertion is,
+    <span class="inlinecode"></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">SEP</span>(<span class="id" title="var">mem_mgr</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> <span class="inlinecode"><span class="id" title="var">gv</span>;</span>  <span class="inlinecode"><span class="id" title="var">stackrep</span></span> <span class="inlinecode"><span class="id" title="var">STACK</span></span> <span class="inlinecode"><span class="id" title="var">nil</span></span> <span class="inlinecode"><span class="id" title="var">st</span>)</span>  <span class="inlinecode"></span>
+   but the postcondition of triang contains just,
+   <span class="inlinecode"></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">SEP</span>(<span class="id" title="var">mem_mgr</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> <span class="inlinecode"><span class="id" title="var">gv</span>)</span> <span class="inlinecode"></span>.
+
+<div class="paragraph"> </div>
+
+  This is a symptom of the fact that the specifications and abstractions
+  don't actually fit together!   There are three possible ways to fix
+  the problem:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Adjust the postcondition of <span class="inlinecode"><span class="id" title="var">triang</span></span> to <span class="inlinecode">...<span class="id" title="var">SEP</span>(<span class="id" title="var">mem_mgr</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> <span class="inlinecode"><span class="id" title="var">gv</span>;</span> <span class="inlinecode"><span class="id" title="var">TT</span>)</span>,
+     which means that <span class="inlinecode"><span class="id" title="var">triang</span></span> is permitted to have a "space leak".
+     That is, <span class="inlinecode"><span class="id" title="var">triang</span></span> may allocate things that it does not free.
+
+</li>
+<li> Adjust the StackAPD with one more field in its Coq record:
+     <span class="inlinecode"><span class="id" title="var">stackrep_nil</span>:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">st</span>,</span> <span class="inlinecode"><span class="id" title="var">stackrep</span></span> <span class="inlinecode"><span class="id" title="var">STACK</span></span> <span class="inlinecode">[]</span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode"><span class="nowrap">&vert;--</span></span> <span class="inlinecode"><span class="id" title="var">emp</span></span>.
+     This specifies that, whatever is the low-level representation
+     of a stack, the empty stack will always use no memory.
+     Although that is true of our <span class="inlinecode"><span class="id" title="var">stack2.c</span></span> implementation, one
+     can easily imagine other implementations of stacks in which
+     that is not true.  Therefore, this design choice limits the
+     generality of the interface.
+
+</li>
+<li> Adjust the Stack API with another function, <span class="inlinecode"><span class="id" title="var">freestack</span></span>,
+     perhaps with precondition <span class="inlinecode"><span class="id" title="var">SEP</span>(<span class="id" title="var">mem_mgr</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> <span class="inlinecode"><span class="id" title="var">gv</span>;</span> <span class="inlinecode"><span class="id" title="var">stackrep</span></span> <span class="inlinecode"><span class="id" title="var">STACK</span></span> <span class="inlinecode"><span class="id" title="var">st</span>)</span>
+     and postcondition <span class="inlinecode"><span class="id" title="var">SEP</span>(<span class="id" title="var">mem_mgr</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> <span class="inlinecode"><span class="id" title="var">gv</span>)</span>.  Then call this at the
+     end of the <span class="inlinecode"><span class="id" title="var">triang</span></span> function.
+
+<div class="paragraph"> </div>
+
+   Any one of these choices is a legitimate software-engineering
+   design decision, but the point is that <i>some</i> choice must be made,
+   otherwise this collection of modules (stack, triang) can't be verified.
+
+<div class="paragraph"> </div>
+
+   As a work-around, you can finish the verification of body_triang
+   by assuming this axiom: 
+
+</li>
+</ul>
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="stackrep_nil" class="idref" href="#stackrep_nil"><span class="id" title="axiom">stackrep_nil</span></a>: <span class="id" title="keyword">∀</span> <a id="st:3" class="idref" href="#st:3"><span class="id" title="binder">st</span></a>, <a class="idref" href="Spec_stack.html#stackrep"><span class="id" title="projection">stackrep</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.STACK"><span class="id" title="variable">STACK</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="VSU_triang.html#st:3"><span class="id" title="variable">st</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="method">emp</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="body_triang" class="idref" href="#body_triang"><span class="id" title="lemma">body_triang</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_triang.html#Triang_Vprog"><span class="id" title="definition">Triang_Vprog</span></a> <a class="idref" href="VSU_triang.html#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a> <span class="id" title="definition">f_triang</span> (<a class="idref" href="Spec_triang.html#triang_spec"><span class="id" title="definition">triang_spec</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a>).<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="TriangVSU" class="idref" href="#TriangVSU"><span class="id" title="definition">TriangVSU</span></a>: @<span class="id" title="definition">VSU</span> <span class="id" title="definition">NullExtension.Espec</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="VSU_triang.html#Triang_imports"><span class="id" title="definition">Triang_imports</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) (<a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">TriangASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a>) <span class="id" title="method">emp</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+</div>
+
+<div class="doc">
+with the right definition of <span class="inlinecode"><span class="id" title="var">body_push_increasing</span></span> etc. this will work: 
+</div>
+<div class="code">
+<span class="comment">(*&nbsp;mkVSU&nbsp;prog&nbsp;Triang_internals.<br/>
+&nbsp;+&nbsp;solve_SF_internal&nbsp;body_push_increasing.<br/>
+&nbsp;&nbsp;&nbsp;solve_SF_internal&nbsp;body_push_increasing.<br/>
+&nbsp;+&nbsp;solve_SF_internal&nbsp;body_pop_and_add.<br/>
+&nbsp;+&nbsp;solve_SF_internal&nbsp;body_triang.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">End</span> <a class="idref" href="VSU_triang.html#Triang_VSU"><span class="id" title="section">Triang_VSU</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab199"></a><h2 class="section">Next Chapter: <a href="VSU_stdlib.html"><span class="inlineref">VSU_stdlib</span></a></h2>
+
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2023-10-27&nbsp;14:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

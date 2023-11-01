@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>VSU_intro: Introduction to Verified Software Units</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">VSU_intro<span class="subtitle">Introduction to Verified Software Units</span></h1>
+
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+<a id="lab156"></a><h1 class="section">Looking back: single-module programs</h1>
+
+<div class="paragraph"> </div>
+
+ You've now seen how to verify programs that use many of C's data
+  structures (arrays, pointers, structs, integers) and control
+  structures (functions, if-then-else, loops), and abstraction 
+  structures (data abstraction, module interfaces).  The capstone exercise
+  (hash tables) demonstrated all of these at once, in addition to a
+  key concept: layering the proof using a functional model,
+  so that proofs about the properties of the functional model (<a href="Hashfun.html"><span class="inlineref">Hashfun</span></a>)
+  cleanly separate from the implementation proof (<a href="Verif_hash.html"><span class="inlineref">Verif_hash</span></a>) showing
+  that the C program refines the functional model. 
+<div class="paragraph"> </div>
+
+<a id="lab157"></a><h1 class="section">Next: modular verification of modular programs</h1>
+
+<div class="paragraph"> </div>
+
+ VST's facility for verifying modular programs is called "Verified 
+   Software Units,"  designed and implemented by Lennart Beringer.
+
+<div class="paragraph"> </div>
+
+   A program module in C
+<ul class="doclist">
+<li> is implemented in one or more .c files;
+
+</li>
+<li> exports some set of functions (an API) described in a .h file
+
+</li>
+<li> (perhaps) has some private functions that are not exported
+
+</li>
+<li> imports from other modules, various sets of functions described in .h files
+
+</li>
+<li> (perhaps) manipulates data structures whose representations should be kept private from client modules
+
+</li>
+<li> (perhaps) has global variables of its own that (perhaps) other modules should not directly manipulate
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+  Although the C programming language has the notion of <span class="inlinecode"><span class="id" title="var">static</span></span> functions
+  and variables that are "global" only within a .c file, and not exported from
+  that .c file, we will not rely on this feature; 
+<ul class="doclist">
+<li> in part because a single "module" may be implemented in more than one .c file, to which the <span class="inlinecode"><span class="id" title="var">static</span></span> keyword does not generalize;
+
+</li>
+<li> in part because we will use Verifiable C's  "VSU" facility to enforce this kind of locality.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+  Therefore the private functions and private variables of a module will
+  be <span class="inlinecode"><span class="id" title="var">extern</span></span> in the C sense.
+
+<div class="paragraph"> </div>
+
+  The C programs you have already seen in previous chapters -- stack, strlib, hash --
+  are already written as program modules in this sense.  But the VST
+  verifications in <a href="Verif_stack.html"><span class="inlineref">Verif_stack</span></a>, <a href="Verif_hash.html"><span class="inlineref">Verif_hash</span></a>, don't enforce
+  data abstraction, and don't show you how to link the modules together.
+  That is a job for VSU - Verified Software Units -- and the next chapters
+  show how to verify those same .c programs in the VSU style.
+
+<div class="paragraph"> </div>
+
+   VSU verification of a module (for example, "Stack") usually comprises these separate files:
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">Model_stack.v</span></span>,  the functional model, just in the sense that <span class="inlinecode"><span class="id" title="var">hash.v</span></span> is the
+       functional model for our hash table.  But the functional model for stacks
+       is so simple -- just Coq lists -- that we will merge that into Spec_stack.v.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Spec_stack.v</span></span>, the API specification of the stack module.  This is the one that
+       clients import; it contains (for example) funspecs and the names of
+       abstract data types (ADTs).  The important thing is that it contains
+       nothing about the <i>implementation</i> of the function bodies, or
+       the representations of ADTs, or any mention of internal functions
+       that are not meant to be exported through the API.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">VSU_stack.v</span></span> is the proof that the implementation of the stack module,
+        <span class="inlinecode"><span class="id" title="var">stack.c</span></span>, correctly implements the API spec in <span class="inlinecode"><span class="id" title="var">Spec_stack.v</span></span>.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a id="lab158"></a><h1 class="section">A Stack/Triang program to verify</h1>
+
+<div class="paragraph"> </div>
+
+ As an exercise in VSU verification, we will use the <span class="inlinecode"><span class="id" title="var">stack.c</span></span> program
+  that was introduced in <a href="Verif_stack.html"><span class="inlineref">Verif_stack</span></a> and <a href="Verif_triang.html"><span class="inlineref">Verif_triang</span></a>.  
+  But first we'll break it up into modules: <a id="lab159"></a><h3 class="section">stdlib.h</h3>
+
+<div class="paragraph"> </div>
+
+<pre>
+  #include &lt;stddef.h&gt;
+  extern void * malloc (size_t n);
+  extern void free (void *p);
+  extern void exit(int n);
+</pre>
+<a id="lab160"></a><h3 class="section">stack2.h</h3>
+
+<div class="paragraph"> </div>
+
+<pre>
+  struct stack;
+  struct stack *newstack(void);
+  void push (struct stack *p, int i);
+  int pop (struct stack *p);
+</pre>
+<a id="lab161"></a><h3 class="section">triang2.h</h3>
+
+<div class="paragraph"> </div>
+
+<pre>
+  int triang (int n);
+</pre>
+<a id="lab162"></a><h3 class="section">main2.c</h3>
+
+<div class="paragraph"> </div>
+
+<pre>
+  #include "triang2.h"
+  int main(void) { return triang(10); }
+</pre>
+
+<div class="paragraph"> </div>
+
+ With, of course, stack2.c and triang2.c that implement
+ modules corresponding to stack2.h and triang2.h. 
+<div class="paragraph"> </div>
+
+<a id="lab163"></a><h2 class="section">Let's verify!</h2>
+ And with that preamble, you can move on to the next chapter,
+   <a href="Spec_stack.html"><span class="inlineref">Spec_stack</span></a>.
+
+<div class="paragraph"> </div>
+
+<a id="lab164"></a><h2 class="section">Warning</h2>
+
+<div class="paragraph"> </div>
+
+ VSU is still a new feature, and some of the VSU tactics don't give
+   very good error diagnostics when something goes wrong.
+
+<div class="paragraph"> </div>
+
+<a id="lab165"></a><h2 class="section">Next Chapter: <a href="Spec_stack.html"><span class="inlineref">Spec_stack</span></a></h2>
+
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2023-10-27&nbsp;14:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

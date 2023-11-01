@@ -1,0 +1,1593 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Table of contents</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/slf.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body><script>
+$( function() {
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+
+    $("#accordion").accordion({
+      collapsible : true,
+      active : false,
+      icons : icons,
+      heightStyle : 'content'
+    });
+
+    // Enable navigation links in section headers
+    $('#accordion').each(function() {
+      this.addEventListener('click', ev => {
+        if ($(ev.target).closest('a').length > 0) ev.stopPropagation();
+      }, {capture: true});
+    });
+  } );
+</script>
+
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 6: Separation Logic Foundations</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+</div>
+
+<div id="main">
+
+<div id="toc">
+<div id="accordion">
+<h2><a href="Preface.html">Introduction to the Course &nbsp;&nbsp; (<i>Preface</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Preface.html#lab1">Welcome</a>
+
+</li>
+<li><a href="Preface.html#lab2">Separation Logic</a>
+
+</li>
+<li><a href="Preface.html#lab3">Separation Logic in a proof assistant</a>
+
+</li>
+<li><a href="Preface.html#lab4">Several Possible Depths of Reading</a>
+
+</li>
+<li><a href="Preface.html#lab5">List of Chapters</a>
+
+</li>
+<li><a href="Preface.html#lab6">Other Distributed Files</a>
+
+</li>
+<li><a href="Preface.html#lab7">Practicalities</a>
+<div>
+<ul class="doclist">
+<li><a href="Preface.html#lab8">System Requirements</a>
+
+</li>
+<li><a href="Preface.html#lab9">Note for CoqIDE Users</a>
+
+</li>
+<li><a href="Preface.html#lab10">Feedback Welcome</a>
+
+</li>
+<li><a href="Preface.html#lab11">Exercises</a>
+
+</li>
+<li><a href="Preface.html#lab12">Recommended Citation Format</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Preface.html#lab13">Thanks</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="Basic.html">Basic Proofs in Separation Logic &nbsp;&nbsp; (<i>Basic</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Basic.html#lab14">A First Taste</a>
+<div>
+<ul class="doclist">
+<li><a href="Basic.html#lab15">Parsing of Programs</a>
+
+</li>
+<li><a href="Basic.html#lab16">Specification of the Increment Function</a>
+
+</li>
+<li><a href="Basic.html#lab17">Verification of the Increment Function</a>
+
+</li>
+<li><a href="Basic.html#lab18">A Function with a Return Value</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Basic.html#lab21">Separation Logic Operators</a>
+<div>
+<ul class="doclist">
+<li><a href="Basic.html#lab22">Increment of Two References</a>
+
+</li>
+<li><a href="Basic.html#lab23">Aliased Arguments</a>
+
+</li>
+<li><a href="Basic.html#lab24">A Function that Takes Two References and Increments One</a>
+
+</li>
+<li><a href="Basic.html#lab25">Transfer from one Reference to Another</a>
+
+</li>
+<li><a href="Basic.html#lab28">Specification of Allocation</a>
+
+</li>
+<li><a href="Basic.html#lab29">Allocation of a Reference with Greater Contents</a>
+
+</li>
+<li><a href="Basic.html#lab31">Deallocation in Separation Logic</a>
+
+</li>
+<li><a href="Basic.html#lab32">Combined Reading and Freeing of a Reference</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Basic.html#lab34">Recursive Functions</a>
+<div>
+<ul class="doclist">
+<li><a href="Basic.html#lab35">Axiomatization of the Mathematical Factorial Function</a>
+
+</li>
+<li><a href="Basic.html#lab36">A Partial Recursive Function, Without State</a>
+
+</li>
+<li><a href="Basic.html#lab37">A Recursive Function with State</a>
+
+</li>
+<li><a href="Basic.html#lab39">Trying to Prove Incorrect Specifications</a>
+
+</li>
+<li><a href="Basic.html#lab41">A Recursive Function Involving two References</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Basic.html#lab43">Summary</a>
+
+</li>
+<li><a href="Basic.html#lab44">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="Repr.html">Representation Predicates &nbsp;&nbsp; (<i>Repr</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Repr.html#lab45">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Repr.html#lab46">Formalization of the List Representation Predicate</a>
+
+</li>
+<li><a href="Repr.html#lab47">Alternative Characterizations of <span class="inlinecode"><span class="id" title="var">MList</span></span></a>
+
+</li>
+<li><a href="Repr.html#lab48">In-place Concatenation of Two Mutable Lists</a>
+
+</li>
+<li><a href="Repr.html#lab49">Smart Constructors for Linked Lists</a>
+
+</li>
+<li><a href="Repr.html#lab50">Copy Function for Lists</a>
+
+</li>
+<li><a href="Repr.html#lab51">Length Function for Lists</a>
+
+</li>
+<li><a href="Repr.html#lab53">Alternative Length Function for Lists</a>
+
+</li>
+<li><a href="Repr.html#lab55">In-Place Reversal Function for Lists</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Repr.html#lab57">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Repr.html#lab58">Sized Stack</a>
+
+</li>
+<li><a href="Repr.html#lab62">Formalization of the Tree Representation Predicate</a>
+
+</li>
+<li><a href="Repr.html#lab63">Alternative Characterization of <span class="inlinecode"><span class="id" title="var">MTree</span></span></a>
+
+</li>
+<li><a href="Repr.html#lab64">Additional Tooling for <span class="inlinecode"><span class="id" title="var">MTree</span></span></a>
+
+</li>
+<li><a href="Repr.html#lab66">Tree Copy</a>
+
+</li>
+<li><a href="Repr.html#lab68">Computing the Sum of the Items in a Tree</a>
+
+</li>
+<li><a href="Repr.html#lab70">Verification of a Counter Function with Local State</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Repr.html#lab73">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Repr.html#lab74">Specification of a Higher-Order Repeat Operator</a>
+
+</li>
+<li><a href="Repr.html#lab75">Specification of an Iterator on Mutable Lists</a>
+
+</li>
+<li><a href="Repr.html#lab77">Computing the Length of a Mutable List using an Iterator</a>
+
+</li>
+<li><a href="Repr.html#lab79">A Continuation-Passing-Style, Factorial Function</a>
+
+</li>
+<li><a href="Repr.html#lab82">A Continuation-Passing-Style, In-Place Concatenation Function</a>
+
+</li>
+<li><a href="Repr.html#lab85">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Hprop.html">Heap Predicates &nbsp;&nbsp; (<i>Hprop</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Hprop.html#lab86">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Hprop.html#lab87">Syntax and Semantics</a>
+
+</li>
+<li><a href="Hprop.html#lab88">Description of the State</a>
+
+</li>
+<li><a href="Hprop.html#lab89">Heap Predicates</a>
+
+</li>
+<li><a href="Hprop.html#lab90">Extensionality for Heap Predicates</a>
+
+</li>
+<li><a href="Hprop.html#lab91">Type and Syntax for Postconditions</a>
+
+</li>
+<li><a href="Hprop.html#lab92">Separation Logic Triples and the Frame Rule</a>
+
+</li>
+<li><a href="Hprop.html#lab94">Example of a Triple: the Increment Function</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Hprop.html#lab95">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Hprop.html#lab96">Example Applications of the Frame Rule</a>
+
+</li>
+<li><a href="Hprop.html#lab97">Power of the Frame Rule with Respect to Allocation</a>
+
+</li>
+<li><a href="Hprop.html#lab98">Notation for Heap Union</a>
+
+</li>
+<li><a href="Hprop.html#lab99">Introduction and Inversion Lemmas for Basic Operators</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Hprop.html#lab101">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Hprop.html#lab102">Alternative, Equivalent Definitions for Separation Logic Triples</a>
+
+</li>
+<li><a href="Hprop.html#lab104">Alternative Definitions for Heap Predicates</a>
+
+</li>
+<li><a href="Hprop.html#lab105">Additional Explanations for the Definition of <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span></a>
+
+</li>
+<li><a href="Hprop.html#lab106">Formulation of the Extensionality Axioms</a>
+
+</li>
+<li><a href="Hprop.html#lab108">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Himpl.html">Heap Entailment &nbsp;&nbsp; (<i>Himpl</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Himpl.html#lab109">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Himpl.html#lab110">Definition of Entailment</a>
+
+</li>
+<li><a href="Himpl.html#lab112">Entailment for Postconditions</a>
+
+</li>
+<li><a href="Himpl.html#lab113">Fundamental Properties of Separation Logic Operators</a>
+
+</li>
+<li><a href="Himpl.html#lab117">Introduction and Elimination Rules w.r.t. Entailments</a>
+
+</li>
+<li><a href="Himpl.html#lab122">Extracting Information from Heap Predicates</a>
+
+</li>
+<li><a href="Himpl.html#lab123">Consequence, Frame, and their Combination</a>
+
+</li>
+<li><a href="Himpl.html#lab125">The Extraction Rules for Triples</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Himpl.html#lab126">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Himpl.html#lab127">Identifying True and False Entailments</a>
+
+</li>
+<li><a href="Himpl.html#lab128">Proving Entailments by Hand</a>
+
+</li>
+<li><a href="Himpl.html#lab132">The <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> Tactic</a>
+
+</li>
+<li><a href="Himpl.html#lab138">The <span class="inlinecode"><span class="id" title="var">xchange</span></span> Tactic</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Himpl.html#lab140">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Himpl.html#lab141">Proofs for the Separation Algebra</a>
+
+</li>
+<li><a href="Himpl.html#lab146">Proof of the Consequence Rule</a>
+
+</li>
+<li><a href="Himpl.html#lab148">Proof of the Extraction Rules for Triples</a>
+
+</li>
+<li><a href="Himpl.html#lab154">Alternative Structural Rule for Existentials</a>
+
+</li>
+<li><a href="Himpl.html#lab155">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Rules.html">Reasoning Rules &nbsp;&nbsp; (<i>Rules</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Rules.html#lab156">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Rules.html#lab157">Semantic of Terms</a>
+
+</li>
+<li><a href="Rules.html#lab164">Review of the Structural Rules</a>
+
+</li>
+<li><a href="Rules.html#lab166">Rules for Terms</a>
+
+</li>
+<li><a href="Rules.html#lab175">Specification of Primitive Operations</a>
+
+</li>
+<li><a href="Rules.html#lab178">Verification Proof in Separation Logic</a>
+
+</li>
+<li><a href="Rules.html#lab184">What's Next</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Rules.html#lab185">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Rules.html#lab186">Alternative Specification Style for Pure Preconditions</a>
+
+</li>
+<li><a href="Rules.html#lab188">The Combined Let-Frame Rule</a>
+
+</li>
+<li><a href="Rules.html#lab190">Proofs for the Rules for Terms</a>
+
+</li>
+<li><a href="Rules.html#lab195">Proofs for the Arithmetic Primitive Operations</a>
+
+</li>
+<li><a href="Rules.html#lab199">Proofs for Primitive Operations Operating on the State</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Rules.html#lab202">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Rules.html#lab203">Reasoning Rules for Recursive Functions</a>
+
+</li>
+<li><a href="Rules.html#lab220">Alternative Specification Style for Result Values.</a>
+
+</li>
+<li><a href="Rules.html#lab221">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="WPsem.html">Semantics of Weakest Preconditions &nbsp;&nbsp; (<i>WPsem</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="WPsem.html#lab222">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="WPsem.html#lab223">Notion of Weakest Precondition</a>
+
+</li>
+<li><a href="WPsem.html#lab224">Structural Rules in Weakest-Precondition Style</a>
+
+</li>
+<li><a href="WPsem.html#lab228">Reasoning Rules for Terms, in Weakest-Precondition Style</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="WPsem.html#lab232">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="WPsem.html#lab233">Other Reasoning Rules for Terms</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="WPsem.html#lab238">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="WPsem.html#lab239">A Concrete Definition for Weakest Precondition</a>
+
+</li>
+<li><a href="WPsem.html#lab241">Equivalence Between all Definitions Of <span class="inlinecode"><span class="id" title="var">wp</span></span></a>
+
+</li>
+<li><a href="WPsem.html#lab242">An Alternative Definition for Weakest Precondition</a>
+
+</li>
+<li><a href="WPsem.html#lab244">Extraction Rule for Existentials</a>
+
+</li>
+<li><a href="WPsem.html#lab246">Combined Structural Rule</a>
+
+</li>
+<li><a href="WPsem.html#lab249">Alternative Statement of the Rule for Conditionals</a>
+
+</li>
+<li><a href="WPsem.html#lab251">Definition of <span class="inlinecode"><span class="id" title="var">wp</span></span> Directly from <span class="inlinecode"><span class="id" title="var">hoare</span></span></a>
+
+</li>
+<li><a href="WPsem.html#lab253">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="WPgen.html">Weakest Precondition Generator &nbsp;&nbsp; (<i>WPgen</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="WPgen.html#lab254">First Pass</a>
+
+</li>
+<li><a href="WPgen.html#lab255">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="WPgen.html#lab256">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> for Term Rules</a>
+
+</li>
+<li><a href="WPgen.html#lab265">Computing with <span class="inlinecode"><span class="id" title="var">wpgen</span></span></a>
+
+</li>
+<li><a href="WPgen.html#lab273">Optimizing the Readability of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Output</a>
+
+</li>
+<li><a href="WPgen.html#lab279">Extension of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> to Handle Structural Rules</a>
+
+</li>
+<li><a href="WPgen.html#lab286">Lemmas for Handling <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Goals</a>
+
+</li>
+<li><a href="WPgen.html#lab287">An Example Proof</a>
+
+</li>
+<li><a href="WPgen.html#lab289">Making Proof Scripts More Concise</a>
+
+</li>
+<li><a href="WPgen.html#lab291">Further Improvements to the <span class="inlinecode"><span class="id" title="var">xapp</span></span> Tactic.</a>
+
+</li>
+<li><a href="WPgen.html#lab292">Demo of a Practical Proof using x-Tactics.</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="WPgen.html#lab294">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="WPgen.html#lab295">Tactics <span class="inlinecode"><span class="id" title="var">xconseq</span></span> and <span class="inlinecode"><span class="id" title="var">xframe</span></span></a>
+
+</li>
+<li><a href="WPgen.html#lab298">Soundness Proof for <span class="inlinecode"><span class="id" title="var">wpgen</span></span></a>
+
+</li>
+<li><a href="WPgen.html#lab306">Guessing the Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></a>
+
+</li>
+<li><a href="WPgen.html#lab307">Proof of Properties of Iterated Substitution</a>
+
+</li>
+<li><a href="WPgen.html#lab308">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Wand.html">The Magic Wand Operator &nbsp;&nbsp; (<i>Wand</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Wand.html#lab309">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Wand.html#lab310">Intuition for the Magic Wand</a>
+
+</li>
+<li><a href="Wand.html#lab311">Definition of the Magic Wand</a>
+
+</li>
+<li><a href="Wand.html#lab312">Characteristic Property of the Magic Wand</a>
+
+</li>
+<li><a href="Wand.html#lab314">Magic Wand for Postconditions</a>
+
+</li>
+<li><a href="Wand.html#lab315">Frame Expressed with <span class="inlinecode"><span class="id" title="var">hwand</span></span>: the Ramified Frame Rule</a>
+
+</li>
+<li><a href="Wand.html#lab316">Ramified Frame Rule in Weakest-Precondition Style</a>
+
+</li>
+<li><a href="Wand.html#lab318">Automation with <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> for <span class="inlinecode"><span class="id" title="var">hwand</span></span> Expressions</a>
+
+</li>
+<li><a href="Wand.html#lab319">Evaluation of <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Recursively in Locally Defined Functions</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Wand.html#lab325">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Wand.html#lab326">Benefits of the Ramified Rule over the Consequence-Frame Rule</a>
+
+</li>
+<li><a href="Wand.html#lab327">Properties of <span class="inlinecode"><span class="id" title="var">hwand</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Wand.html#lab336">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Wand.html#lab337">Equivalence Between Alternative Definitions of the Magic Wand</a>
+
+</li>
+<li><a href="Wand.html#lab338">Operator <span class="inlinecode"><span class="id" title="var">hforall</span></span></a>
+
+</li>
+<li><a href="Wand.html#lab339">Alternative Definition of <span class="inlinecode"><span class="id" title="var">qwand</span></span></a>
+
+</li>
+<li><a href="Wand.html#lab342">Equivalence between Alternative Definitions of the Magic Wand</a>
+
+</li>
+<li><a href="Wand.html#lab343">Simplified Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></a>
+
+</li>
+<li><a href="Wand.html#lab344">Texan Triples</a>
+
+</li>
+<li><a href="Wand.html#lab351">Direct Proof of <span class="inlinecode"><span class="id" title="var">wp_ramified</span></span> Directly from Hoare Triples</a>
+
+</li>
+<li><a href="Wand.html#lab352">Conjunction and Disjunction Operators on <span class="inlinecode"><span class="id" title="var">hprop</span></span></a>
+
+</li>
+<li><a href="Wand.html#lab360">Summary of All Separation Logic Operators</a>
+
+</li>
+<li><a href="Wand.html#lab361">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Affine.html">Affine Separation Logic &nbsp;&nbsp; (<i>Affine</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Affine.html#lab362">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Affine.html#lab363">Motivation for the Discard Rule</a>
+
+</li>
+<li><a href="Affine.html#lab364">Statement of the Discard Rule</a>
+
+</li>
+<li><a href="Affine.html#lab365">Fine-grained Control on Collectable Predicates</a>
+
+</li>
+<li><a href="Affine.html#lab366">Definition of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> and of <span class="inlinecode"><span class="id" title="var">haffine</span></span></a>
+
+</li>
+<li><a href="Affine.html#lab367">Definition of the "Affine Top" Heap Predicates</a>
+
+</li>
+<li><a href="Affine.html#lab370">Properties of the <span class="inlinecode">\<span class="id" title="var">GC</span></span> Predicate</a>
+
+</li>
+<li><a href="Affine.html#lab371">Instantiation of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> for a Fully Affine Logic</a>
+
+</li>
+<li><a href="Affine.html#lab372">Instantiation of <span class="inlinecode"><span class="id" title="var">heap_affine</span></span> for a Fully Linear Logic</a>
+
+</li>
+<li><a href="Affine.html#lab373">Refined Definition of Separation Logic Triples</a>
+
+</li>
+<li><a href="Affine.html#lab374">Soundness of the Existing Rules</a>
+
+</li>
+<li><a href="Affine.html#lab377">Soundness of the Discard Rules</a>
+
+</li>
+<li><a href="Affine.html#lab384">Discard Rules in WP Style</a>
+
+</li>
+<li><a href="Affine.html#lab386">Exploiting the Discard Rule in Proofs</a>
+
+</li>
+<li><a href="Affine.html#lab387">Example Proof Involving Discarded Heap Predicates</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Affine.html#lab388">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Affine.html#lab389">Revised Definition of <span class="inlinecode"><span class="id" title="var">mkstruct</span></span></a>
+
+</li>
+<li><a href="Affine.html#lab392">The Tactic <span class="inlinecode"><span class="id" title="var">xaffine</span></span>, and Behavior of <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> on <span class="inlinecode">\<span class="id" title="var">GC</span></span></a>
+
+</li>
+<li><a href="Affine.html#lab393">The Proof Tactics for Applying the Discard Rules</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Affine.html#lab394">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Affine.html#lab395">Alternative Statement for Distribution of <span class="inlinecode"><span class="id" title="var">haffine</span></span> on Quantifiers</a>
+
+</li>
+<li><a href="Affine.html#lab396">Pre and Post Rules</a>
+
+</li>
+<li><a href="Affine.html#lab397">Low-level Definition of Refined Triples</a>
+
+</li>
+<li><a href="Affine.html#lab398">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Struct.html">Arrays and Records &nbsp;&nbsp; (<i>Struct</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Struct.html#lab399">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Struct.html#lab400">Representation of a Set of Consecutive Cells</a>
+
+</li>
+<li><a href="Struct.html#lab401">Representation of an Array with a Block Header</a>
+
+</li>
+<li><a href="Struct.html#lab402">Specification of Allocation</a>
+
+</li>
+<li><a href="Struct.html#lab403">Specification of the Deallocation</a>
+
+</li>
+<li><a href="Struct.html#lab404">Specification of Array Operations</a>
+
+</li>
+<li><a href="Struct.html#lab405">Representation of Individual Records Fields</a>
+
+</li>
+<li><a href="Struct.html#lab406">Representation of Records</a>
+
+</li>
+<li><a href="Struct.html#lab407">Example with Mutable Linked Lists</a>
+
+</li>
+<li><a href="Struct.html#lab408">Reading in Record Fields</a>
+
+</li>
+<li><a href="Struct.html#lab409">Writing in Record Fields</a>
+
+</li>
+<li><a href="Struct.html#lab410">Allocation of Records</a>
+
+</li>
+<li><a href="Struct.html#lab411">Deallocation of Records</a>
+
+</li>
+<li><a href="Struct.html#lab412">Combined Record Allocation and Initialization</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Struct.html#lab413">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Struct.html#lab414">Extending <span class="inlinecode"><span class="id" title="var">xapp</span></span> to Support Record Access Operations</a>
+
+</li>
+<li><a href="Struct.html#lab415">Deallocation Function for Lists</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Struct.html#lab417">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Struct.html#lab418">Refined Source Language</a>
+
+</li>
+<li><a href="Struct.html#lab419">Realization of <span class="inlinecode"><span class="id" title="var">hheader</span></span></a>
+
+</li>
+<li><a href="Struct.html#lab420">Introduction and Elimination Lemmas for <span class="inlinecode"><span class="id" title="var">hcells</span></span> and <span class="inlinecode"><span class="id" title="var">harray</span></span></a>
+
+</li>
+<li><a href="Struct.html#lab421">Proving the Specification of Allocation and Deallocation</a>
+
+</li>
+<li><a href="Struct.html#lab422">Splitting Lemmas for <span class="inlinecode"><span class="id" title="var">hcells</span></span></a>
+
+</li>
+<li><a href="Struct.html#lab423">Specification of Pointer Arithmetic</a>
+
+</li>
+<li><a href="Struct.html#lab424">Specification of the <span class="inlinecode"><span class="id" title="var">length</span></span> Operation to Read the Header</a>
+
+</li>
+<li><a href="Struct.html#lab425">Encoding of Array Operations using Pointer Arithmetic</a>
+
+</li>
+<li><a href="Struct.html#lab426">Encoding of Record Operations using Pointer Arithmetic</a>
+
+</li>
+<li><a href="Struct.html#lab427">Specification of Record Operations w.r.t. <span class="inlinecode"><span class="id" title="var">hfields</span></span> and <span class="inlinecode"><span class="id" title="var">hrecord</span></span></a>
+
+</li>
+<li><a href="Struct.html#lab428">Specification of Record Allocation and Deallocation</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Rich.html">Assertions, Loops, N-ary Functions &nbsp;&nbsp; (<i>Rich</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Rich.html#lab429">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Rich.html#lab430">Reasoning Rule for Assertions</a>
+
+</li>
+<li><a href="Rich.html#lab431">Semantics of Conditionals not in Administrative Normal Form</a>
+
+</li>
+<li><a href="Rich.html#lab432">Semantics and Basic Evaluation Rules for While-Loops</a>
+
+</li>
+<li><a href="Rich.html#lab433">Separation-Logic-friendly Reasoning Rule for While-Loops</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Rich.html#lab434">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Rich.html#lab435">Semantics and Basic Evaluation Rules for For-Loops</a>
+
+</li>
+<li><a href="Rich.html#lab438">Treatment of Generalized Conditionals and Loops in <span class="inlinecode"><span class="id" title="var">wpgen</span></span></a>
+
+</li>
+<li><a href="Rich.html#lab439">Notation and Tactics for Manipulating While-Loops</a>
+
+</li>
+<li><a href="Rich.html#lab440">Example of the Application of Frame During Loop Iterations</a>
+
+</li>
+<li><a href="Rich.html#lab441">Reasoning Rule for Loops in an Affine Logic</a>
+
+</li>
+<li><a href="Rich.html#lab442">Curried Functions of Several Arguments</a>
+
+</li>
+<li><a href="Rich.html#lab443">Primitive n-ary Functions</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Rich.html#lab444">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Rich.html#lab445">A Coercion for Parsing Primitive N-ary Applications</a>
+
+</li>
+<li><a href="Rich.html#lab446">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Nondet.html">Triples for Nondeterministic Languages &nbsp;&nbsp; (<i>Nondet</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Nondet.html#lab447">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Nondet.html#lab448">Non-Deterministic Big-Step Semantics: the Predicate <span class="inlinecode"><span class="id" title="var">evaln</span></span></a>
+
+</li>
+<li><a href="Nondet.html#lab451">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span></a>
+
+</li>
+<li><a href="Nondet.html#lab456">Triples for Non-Deterministic Big-Step Semantics</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Nondet.html#lab457">More Details</a>
+<div>
+<ul class="doclist">
+<li><a href="Nondet.html#lab458">Weakest-Precondition Style Presentation.</a>
+
+</li>
+<li><a href="Nondet.html#lab459">WP-Style Rules for a Non-Deterministic Semantics.</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Nondet.html#lab461">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Nondet.html#lab462">Interpretation of <span class="inlinecode"><span class="id" title="var">evaln</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">terminates</span></span></a>
+
+</li>
+<li><a href="Nondet.html#lab465">Small-Step Evaluation Relation</a>
+
+</li>
+<li><a href="Nondet.html#lab466">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evalns</span></span>: Attempts</a>
+
+</li>
+<li><a href="Nondet.html#lab467">Small-Step Characterization of <span class="inlinecode"><span class="id" title="var">evaln</span></span>: A Solution</a>
+
+</li>
+<li><a href="Nondet.html#lab469">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">evalns</span></span></a>
+
+</li>
+<li><a href="Nondet.html#lab471">Triples for Small-Step Semantics</a>
+
+</li>
+<li><a href="Nondet.html#lab472">Reasoning Rules for <span class="inlinecode"><span class="id" title="var">triplens</span></span></a>
+
+</li>
+<li><a href="Nondet.html#lab473">Weakest-Precondition for Small-Step Semantics.</a>
+
+</li>
+<li><a href="Nondet.html#lab474">Equivalence Between Non-Deterministic Small-Step and Big-Step Sem.</a>
+
+</li>
+<li><a href="Nondet.html#lab475">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Partial.html">Triples for Partial Correctness &nbsp;&nbsp; (<i>Partial</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Partial.html#lab476">First Pass</a>
+<div>
+<ul class="doclist">
+<li><a href="Partial.html#lab477">Big-Step Characterization of Partial Correctness</a>
+
+</li>
+<li><a href="Partial.html#lab479">From Total to Partial Correctness</a>
+
+</li>
+<li><a href="Partial.html#lab480">Characterization of Divergence</a>
+
+</li>
+<li><a href="Partial.html#lab481">Big-Step-Based Reasoning Rules</a>
+
+</li>
+<li><a href="Partial.html#lab482">Big-Step-Based Reasoning Rules for Divergence</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="Partial.html#lab484">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="Partial.html#lab485">Interpretation of <span class="inlinecode"><span class="id" title="var">evalnp</span></span> w.r.t. <span class="inlinecode"><span class="id" title="tactic">eval</span></span> and <span class="inlinecode"><span class="id" title="var">safe</span></span></a>
+
+</li>
+<li><a href="Partial.html#lab488">Small-Step Characterization of Partial Correctness</a>
+
+</li>
+<li><a href="Partial.html#lab491">Reasoning Rules w.r.t. Small-Step Characterization</a>
+
+</li>
+<li><a href="Partial.html#lab493">Small-Step Characterization of Divergence</a>
+
+</li>
+<li><a href="Partial.html#lab498">Coinductive, Small-Step Characterization of Partial Correctness</a>
+
+</li>
+<li><a href="Partial.html#lab501">Equivalence Between the Two Small-Step Charact. of Partial Correctness</a>
+
+</li>
+<li><a href="Partial.html#lab502">Equivalence Between Small-Step and Big-Step Partial Correctness Semantics</a>
+
+</li>
+<li><a href="Partial.html#lab503">Historical Notes</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="Postscript.html">Conclusion and Perspectives &nbsp;&nbsp; (<i>Postscript</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Postscript.html#lab504">Beyond the Scope of This Course</a>
+
+</li>
+<li><a href="Postscript.html#lab505">Historical Notes</a>
+
+</li>
+<li><a href="Postscript.html#lab506">Tools Leveraging Separation Logic</a>
+
+</li>
+<li><a href="Postscript.html#lab507">Related Courses</a>
+
+</li>
+<li><a href="Postscript.html#lab508">Acknowledgments</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="Bib.html">Bibliography &nbsp;&nbsp; (<i>Bib</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="Bib.html#lab509">Resources cited in this volume</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="LibSepReference.html">Appendix - The Full Construction &nbsp;&nbsp; (<i>LibSepReference</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab510">Imports</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab511">Extensionality Axioms</a>
+
+</li>
+<li><a href="LibSepReference.html#lab512">Variables</a>
+
+</li>
+<li><a href="LibSepReference.html#lab513">Finite Maps</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab514">Source Language</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab515">Syntax</a>
+
+</li>
+<li><a href="LibSepReference.html#lab516">Coq Tweaks</a>
+
+</li>
+<li><a href="LibSepReference.html#lab517">Substitution</a>
+
+</li>
+<li><a href="LibSepReference.html#lab518">Semantics</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab519">Heap Predicates</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab520">Hprop and Entailment</a>
+
+</li>
+<li><a href="LibSepReference.html#lab521">Definition of Heap Predicates</a>
+
+</li>
+<li><a href="LibSepReference.html#lab522">Basic Properties of Separation Logic Operators</a>
+
+</li>
+<li><a href="LibSepReference.html#lab536">Properties of <span class="inlinecode"><span class="id" title="var">haffine</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab537">Reasoning Rules</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab538">Evaluation Rules for Primitives in Separation Style</a>
+
+</li>
+<li><a href="LibSepReference.html#lab539">Hoare Reasoning Rules</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab540">Definition of total correctness Hoare Triples.</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab541">Definition of Separation Logic Triples.</a>
+
+</li>
+<li><a href="LibSepReference.html#lab542">Structural Rules</a>
+
+</li>
+<li><a href="LibSepReference.html#lab543">Rules for Terms</a>
+
+</li>
+<li><a href="LibSepReference.html#lab544">Triple-Style Specification for Primitive Functions</a>
+
+</li>
+<li><a href="LibSepReference.html#lab545">Alternative Definition of <span class="inlinecode"><span class="id" title="var">wp</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab549">WP Generator</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab550">Definition of Context as List of Bindings</a>
+
+</li>
+<li><a href="LibSepReference.html#lab551">Multi-Substitution</a>
+
+</li>
+<li><a href="LibSepReference.html#lab554">Definition of <span class="inlinecode"><span class="id" title="var">wpgen</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab559">Practical Proofs</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab560">Lemmas for Tactics to Manipulate <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Formulae</a>
+
+</li>
+<li><a href="LibSepReference.html#lab561">Tactics to Manipulate <span class="inlinecode"><span class="id" title="var">wpgen</span></span> Formulae</a>
+
+</li>
+<li><a href="LibSepReference.html#lab562">Notations for Triples and <span class="inlinecode"><span class="id" title="var">wpgen</span></span></a>
+
+</li>
+<li><a href="LibSepReference.html#lab563">Notation for Concrete Terms</a>
+
+</li>
+<li><a href="LibSepReference.html#lab564">Scopes, Coercions and Notations for Concrete Programs</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab565">Bonus</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab566">Disjunction: Definition and Properties of <span class="inlinecode"><span class="id" title="var">hor</span></span></a>
+
+</li>
+<li><a href="LibSepReference.html#lab567">Conjunction: Definition and Properties of <span class="inlinecode"><span class="id" title="var">hand</span></span></a>
+
+</li>
+<li><a href="LibSepReference.html#lab568">Treatment of Functions of 2 and 3 Arguments</a>
+
+</li>
+<li><a href="LibSepReference.html#lab573">Bonus: Triples for Applications to Several Arguments</a>
+
+</li>
+<li><a href="LibSepReference.html#lab574">Specification of Record Operations</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepReference.html#lab582">Demo Programs</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepReference.html#lab584">The Decrement Function</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="LibSepFmap.html">Appendix - Finite Maps &nbsp;&nbsp; (<i>LibSepFmap</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="LibSepFmap.html#lab588">Representation of Finite Maps</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepFmap.html#lab589">Representation of Potentially-Infinite Maps as Partial Functions</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab593">Representation of Finite Maps as Dependent Pairs</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab596">Predicates on Finite Maps</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepFmap.html#lab597">Poperties of Operations on Finite Maps</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepFmap.html#lab598">Equality</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab599">Domain</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab600">Disjoint and Domain</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab601">Disjointness</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab602">Union</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab603">Compatibility</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab604">Read</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab605">Update</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab606">Removal</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepFmap.html#lab607">Tactics for Finite Maps</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepFmap.html#lab608">Tactic <span class="inlinecode"><span class="id" title="var">disjoint</span></span> for proving disjointness results</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab609">Tactic <span class="inlinecode"><span class="id" title="var">rew_map</span></span> for Normalizing Expressions</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab610">Tactic <span class="inlinecode"><span class="id" title="var">fmap_eq</span></span> for Proving Equalities</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepFmap.html#lab611">Existence of Fresh Locations</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepFmap.html#lab612">Consecutive Locations</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab613">Existence of Fresh Locations</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab614">Existence of a Smallest Fresh Locations</a>
+
+</li>
+<li><a href="LibSepFmap.html#lab615">Existence of Nonempty Heaps</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="LibSepVar.html">Appendix - Program Variables &nbsp;&nbsp; (<i>LibSepVar</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="LibSepVar.html#lab616">Representation of Program Variables</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepVar.html#lab617">Representation of Variables</a>
+
+</li>
+<li><a href="LibSepVar.html#lab618">Tactic <span class="inlinecode"><span class="id" title="var">case_var</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepVar.html#lab619">Representation of List of Variables</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepVar.html#lab620">Definition of Distinct Variables</a>
+
+</li>
+<li><a href="LibSepVar.html#lab621">Definition of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</a>
+
+</li>
+<li><a href="LibSepVar.html#lab622">Generation of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepVar.html#lab623">Notation for Program Variables</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepVar.html#lab624">Program Variables Expressed Using Definitions</a>
+
+</li>
+<li><a href="LibSepVar.html#lab625">Program Variables Expressed Using Notation, with a Quote Symbol</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepVar.html#lab626">Optional Material</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepVar.html#lab627">Bonuse: the Tactic <span class="inlinecode"><span class="id" title="var">var_neq</span></span></a>
+
+</li>
+</ul>
+</div>
+
+</li>
+</ul>
+</div>
+<h2><a href="LibSepSimpl.html">Appendix - Simplification of Entailments &nbsp;&nbsp; (<i>LibSepSimpl</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="LibSepSimpl.html#lab628">A Functor for Separation Logic Entailment</a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab629">Assumptions of the functor</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepSimpl.html#lab630">Operators</a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab631">Notation</a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab632">Properties Assumed by the Functor</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepSimpl.html#lab633">Body of the Functor</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepSimpl.html#lab634">Properties of <span class="inlinecode"><span class="id" title="var">himpl</span></span></a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab635">Properties of <span class="inlinecode"><span class="id" title="var">qimpl</span></span></a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab636">Properties of <span class="inlinecode"><span class="id" title="var">hstar</span></span></a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab637">Representation Predicates</a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab638"><span class="inlinecode"><span class="id" title="var">rew_heap</span></span> Tactic to Normalize Expressions with <span class="inlinecode"><span class="id" title="var">hstar</span></span></a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab639">Auxiliary Tactics Used by <span class="inlinecode"><span class="id" title="var">xpull</span></span> and <span class="inlinecode"><span class="id" title="var">xsimpl</span></span></a>
+
+</li>
+<li><a href="LibSepSimpl.html#lab640">Tactics <span class="inlinecode"><span class="id" title="var">xsimpl</span></span> and <span class="inlinecode"><span class="id" title="var">xpull</span></span> for Heap Entailments</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepSimpl.html#lab654">Demos</a>
+
+</li>
+</ul>
+</div>
+<h2><a href="LibSepMinimal.html">Appendix - Minimalistic Soundness Proof &nbsp;&nbsp; (<i>LibSepMinimal</i>)</a></h2>
+<div>
+<ul class="doclist">
+<li><a href="LibSepMinimal.html#lab663">Source Language</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepMinimal.html#lab664">Syntax</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab665">Semantics</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab666">Automation for Heap Equality and Heap Disjointness</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepMinimal.html#lab667">Heap Predicates and Entailment</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepMinimal.html#lab668">Extensionality Axioms</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab669">Core Heap Predicates</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab670">Entailment</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab671">Properties of <span class="inlinecode"><span class="id" title="var">hstar</span></span></a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab672">Properties of <span class="inlinecode"><span class="id" title="var">hpure</span></span></a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab673">Properties of <span class="inlinecode"><span class="id" title="var">hexists</span></span></a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab674">Properties of <span class="inlinecode"><span class="id" title="var">hforall</span></span></a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab675">Properties of <span class="inlinecode"><span class="id" title="var">hsingle</span></span></a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab676">Basic Tactics for Simplifying Entailments</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab677">Reformulation of the Evaluation Rules for Primitive Operations.</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepMinimal.html#lab678">Hoare Logic</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepMinimal.html#lab679">Definition of Total Correctness Hoare Triples</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab680">Structural Rules for Hoare Triples</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab681">Reasoning Rules for Terms, for Hoare Triples</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab682">Specification of Primitive Operations, for Hoare Triples.</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepMinimal.html#lab683">Separation Logic</a>
+<div>
+<ul class="doclist">
+<li><a href="LibSepMinimal.html#lab684">Definition of Separation Logic triples</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab685">Structural Rules</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab686">Reasoning Rules for Terms</a>
+
+</li>
+<li><a href="LibSepMinimal.html#lab687">Specification of Primitive Operations</a>
+
+</li>
+</ul>
+</div>
+
+</li>
+<li><a href="LibSepMinimal.html#lab688">Bonus: Example Proof</a>
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

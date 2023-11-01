@@ -1,0 +1,1210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>Hprop: Heap Predicates</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/slf.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 6: Separation Logic Foundations</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+   <li class='section_name'><a href='deps.html'>Roadmap</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Hprop<span class="subtitle">Heap Predicates</span></h1>
+
+
+<div class="code">
+
+<span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">SLF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="LibSepReference.html#"><span class="id" title="library">LibSepReference</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="LibSepReference.html#ProgramSyntax"><span class="id" title="module">ProgramSyntax</span></a>.<br/>
+</div>
+
+<div class="doc">
+Tweak to simplify the use of definitions and lemmas from <span class="inlinecode"><span class="id" title="var">LibSepFmap.v</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.single"><span class="id" title="definition">Fmap.single</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.union"><span class="id" title="definition">Fmap.union</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.disjoint"><span class="id" title="definition">Fmap.disjoint</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.union_comm_of_disjoint"><span class="id" title="lemma">Fmap.union_comm_of_disjoint</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.union_empty_l"><span class="id" title="lemma">Fmap.union_empty_l</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.union_empty_r"><span class="id" title="lemma">Fmap.union_empty_r</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.union_assoc"><span class="id" title="lemma">Fmap.union_assoc</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.disjoint_empty_l"><span class="id" title="lemma">Fmap.disjoint_empty_l</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.disjoint_empty_r"><span class="id" title="lemma">Fmap.disjoint_empty_r</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.disjoint_union_eq_l"><span class="id" title="lemma">Fmap.disjoint_union_eq_l</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="LibSepReference.html#Fmap.disjoint_union_eq_r"><span class="id" title="lemma">Fmap.disjoint_union_eq_r</span></a> {<span class="id" title="var">A</span>} {<span class="id" title="var">B</span>}.<br/>
+</div>
+
+<div class="doc">
+<a id="lab86"></a><h1 class="section">First Pass</h1>
+
+<div class="paragraph"> </div>
+
+ This chapter presents the definition of the key heap predicate
+    operators from Separation Logic:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class='gray-font'>\</span>[]</span> denotes the empty heap predicate,
+
+</li>
+<li> <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span> denotes a pure fact,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode"><span class="id" title="var">v</span></span> denotes a predicate that characterizes a singleton heap,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span> denotes the separating conjunction,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span> <span class="inlinecode"><span class='gray-font'>\</span>*+</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span> denotes the separating conjunction,
+                   between a postcondition and a heap predicate,
+
+</li>
+<li> <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">H</span></span> denotes an existential quantifier.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+   This chapter also introduces the formal definition of triples:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> a Hoare triple, written <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, features a precondition <span class="inlinecode"><span class="id" title="var">H</span></span> and
+     a postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> that describe the whole memory state in which the
+     execution of the term <span class="inlinecode"><span class="id" title="var">t</span></span> takes place.
+
+</li>
+<li> a Separation Logic triple, written <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, features a pre- and
+     a postcondition that describes only the piece of the memory state
+     in which the execution of the term <span class="inlinecode"><span class="id" title="var">t</span></span> takes place.
+
+</li>
+</ul>
+ 
+<div class="paragraph"> </div>
+
+ In the programming language that we consider, a concrete
+    memory state is described as a finite map from locations
+    to values.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> A location has type <span class="inlinecode"><span class="id" title="var">loc</span></span>.
+
+</li>
+<li> A value has type <span class="inlinecode"><span class="id" title="var">val</span></span>.
+
+</li>
+<li> A state has type <span class="inlinecode"><span class="id" title="var">state</span></span>.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    Details will be presented in the chapter <a href="Rules.html"><span class="inlineref">Rules</span></a>.
+
+<div class="paragraph"> </div>
+
+    To help distinguish between full states and pieces of state,
+    we let the type <span class="inlinecode"><span class="id" title="var">heap</span></span> be a synonym for <span class="inlinecode"><span class="id" title="var">state</span></span> but with
+    the intention of representing only a piece of state.
+    Throughout the course, we write <span class="inlinecode"><span class="id" title="var">s</span></span> for a full memory state
+    (of type <span class="inlinecode"><span class="id" title="var">state</span></span>), and we write <span class="inlinecode"><span class="id" title="var">h</span></span> for a piece of memory state
+    (of type <span class="inlinecode"><span class="id" title="var">heap</span></span>).
+
+<div class="paragraph"> </div>
+
+    In Separation Logic, a piece of state is described by a
+    "heap predicate", i.e., a predicate over heaps.
+    A heap predicate has type <span class="inlinecode"><span class="id" title="var">hprop</span></span>, defined as <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>,
+    which is equivalent to <span class="inlinecode"><span class="id" title="var">state</span>→<span class="id" title="keyword">Prop</span></span>.
+
+<div class="paragraph"> </div>
+
+    By convention, throughout the course:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">H</span></span> denotes a heap predicate of type <span class="inlinecode"><span class="id" title="var">hprop</span></span>; it describes a
+      piece of state,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Q</span></span> denotes a postcondition, of type <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span>; it describes
+      both a result value and a piece of state. Observe that
+      <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span> is equivalent to <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">state</span>→<span class="id" title="keyword">Prop</span></span>. 
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+ This chapter and the following ones exploit a few additional TLC tactics
+   to enable concise proofs.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">applys</span></span> is an enhanced version of <span class="inlinecode"><span class="id" title="tactic">eapply</span></span>.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">applys_eq</span></span> is a variant of <span class="inlinecode"><span class="id" title="var">applys</span></span> that enables matching the
+     arguments of the predicate that appears in the goal "up to equality"
+     rather than "up to conversion".
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">specializes</span></span> is an enhanced version of <span class="inlinecode"><span class="id" title="tactic">specialize</span></span>.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">lets</span></span> and <span class="inlinecode"><span class="id" title="var">forwards</span></span> are forward-chaining tactics that
+     enable instantiating a lemma.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+   What these tactics do should be fairly intuitive where they are used.
+   Note that all exercises can be carried out without using TLC tactics.
+   For details, the chapter <span class="inlinecode"><span class="id" title="var">UseTactics.v</span></span> from the "Programming Language
+   Foundations" volume explains the behavior of these tactics.
+
+<div class="paragraph"> </div>
+
+
+</div>
+
+<div class="doc">
+<a id="lab87"></a><h2 class="section">Syntax and Semantics</h2>
+
+<div class="paragraph"> </div>
+
+ We assume an imperative programming language with a formal semantics.
+    We do not need to know about the details of the language construct for now.
+    All we need to know is that there exists:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> a type of terms, written <span class="inlinecode"><span class="id" title="var">trm</span></span>,
+
+</li>
+<li> a type of values, written <span class="inlinecode"><span class="id" title="var">val</span></span>,
+
+</li>
+<li> a type of states, written <span class="inlinecode"><span class="id" title="var">state</span></span> (i.e., finite map from <span class="inlinecode"><span class="id" title="var">loc</span></span> to <span class="inlinecode"><span class="id" title="var">val</span></span>),
+
+</li>
+<li> a big-step evaluation judgment, written <span class="inlinecode"><span class="id" title="tactic">eval</span></span> <span class="inlinecode"><span class="id" title="var">s<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">s<sub>2</sub></span></span> <span class="inlinecode"><span class="id" title="var">v</span></span>, asserting that,
+      starting from state <span class="inlinecode"><span class="id" title="var">s<sub>1</sub></span></span>, the evaluation of the term <span class="inlinecode"><span class="id" title="var">t</span></span> terminates in
+      the state <span class="inlinecode"><span class="id" title="var">s<sub>2</sub></span></span> and produces the value <span class="inlinecode"><span class="id" title="var">v</span></span>.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="tactic">eval</span> : <span class="id" title="var">state</span> → <span class="id" title="var">trm</span> → <span class="id" title="var">state</span> → <span class="id" title="var">val</span> → <span class="id" title="keyword">Prop</span>.
+</span>
+</li>
+</ul>
+    The corresponding definitions are described in the chapter <a href="Rules.html"><span class="inlineref">Rules</span></a>.
+
+<div class="paragraph"> </div>
+
+ At this point, we don't need to know the exact grammar of terms and values.
+    Let's just give one example to make things concrete. Consider the function:
+    <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="keyword">if</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="keyword">then</span></span> <span class="inlinecode">0</span> <span class="inlinecode"><span class="id" title="keyword">else</span></span> <span class="inlinecode">1</span>.
+
+<div class="paragraph"> </div>
+
+    In the language that we consider, it can be written in raw syntax as
+    follows. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="example_val" class="idref" href="#example_val"><span class="id" title="definition">example_val</span></a> : <a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#val_fun"><span class="id" title="constructor">val_fun</span></a> "x" (<a class="idref" href="LibSepReference.html#trm_if"><span class="id" title="constructor">trm_if</span></a> (<a class="idref" href="LibSepReference.html#trm_var"><span class="id" title="constructor">trm_var</span></a> "x")<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="LibSepReference.html#trm_val"><span class="id" title="constructor">trm_val</span></a> (<a class="idref" href="LibSepReference.html#val_int"><span class="id" title="constructor">val_int</span></a> 0))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="LibSepReference.html#trm_val"><span class="id" title="constructor">trm_val</span></a> (<a class="idref" href="LibSepReference.html#val_int"><span class="id" title="constructor">val_int</span></a> 1))).<br/>
+</div>
+
+<div class="doc">
+Thanks to a set of coercions and notation, this term can be written in a
+    somewhat more readable way, as follows. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="example_val'" class="idref" href="#example_val'"><span class="id" title="definition">example_val'</span></a> : <a class="idref" href="LibSepReference.html#trm"><span class="id" title="inductive">trm</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#e0b85224b7295b880f5ac68dccd380d<sub>1</sub>"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="LibSepReference.html#580b26347bf7760f2fc76a1944e0af<sub>93</sub>"><span class="id" title="notation">fun</span></a> "x" <a class="idref" href="LibSepReference.html#580b26347bf7760f2fc76a1944e0af<sub>93</sub>"><span class="id" title="notation">⇒</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#:trm:trm_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> "x" <a class="idref" href="LibSepReference.html#:trm:trm_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> 0 <a class="idref" href="LibSepReference.html#:trm:trm_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> 1 <a class="idref" href="LibSepReference.html#e0b85224b7295b880f5ac68dccd380d<sub>1</sub>"><span class="id" title="notation">}&gt;</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab88"></a><h2 class="section">Description of the State</h2>
+
+<div class="paragraph"> </div>
+
+ Locations, of type <span class="inlinecode"><span class="id" title="var">loc</span></span>, denote the addresses of allocated objects.
+    Locations are a particular kind of values.
+
+<div class="paragraph"> </div>
+
+    A state is a finite map from locations to values.
+
+<div class="paragraph"> </div>
+
+    The file <span class="inlinecode"><span class="id" title="var">LibSepFmap.v</span></span> provides a self-contained formalization of finite
+    maps, but we do not need to know about the details. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="state" class="idref" href="#state"><span class="id" title="definition">state</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="LibSepFmap.html#fmap"><span class="id" title="record">fmap</span></a> <a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a> <a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>.<br/>
+</div>
+
+<div class="doc">
+By convention, we use the type <span class="inlinecode"><span class="id" title="var">state</span></span> describes a full state of memory,
+    and introduce the type <span class="inlinecode"><span class="id" title="var">heap</span></span> to describe just a piece of state. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="heap" class="idref" href="#heap"><span class="id" title="definition">heap</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="Hprop.html#state"><span class="id" title="definition">state</span></a>.<br/>
+</div>
+
+<div class="doc">
+In particular, the library <span class="inlinecode"><span class="id" title="var">LibSepFmap.v</span></span>, whose module name is abbreviated
+    as <span class="inlinecode"><span class="id" title="var">Fmap</span></span>, exports the following definitions.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">Fmap.empty</span></span> denotes the empty state,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Fmap.single</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> denotes a singleton state, that is, a unique cell
+      at location <span class="inlinecode"><span class="id" title="var">p</span></span> with contents <span class="inlinecode"><span class="id" title="var">v</span></span>,
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Fmap.union</span></span> <span class="inlinecode"><span class="id" title="var">h<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span> denotes the union of the two states <span class="inlinecode"><span class="id" title="var">h<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span>.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">Fmap.disjoint</span></span> <span class="inlinecode"><span class="id" title="var">h<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span> asserts that <span class="inlinecode"><span class="id" title="var">h<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span> have disjoint domains.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    The types of these definitions are as follows.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.empty</span> : <span class="id" title="var">heap</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.single</span> : <span class="id" title="var">loc</span> → <span class="id" title="var">val</span> → <span class="id" title="var">heap</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.union</span> : <span class="id" title="var">heap</span> → <span class="id" title="var">heap</span> → <span class="id" title="var">heap</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.disjoint</span> : <span class="id" title="var">heap</span> → <span class="id" title="var">heap</span> → <span class="id" title="keyword">Prop</span>.
+</span>    Note that the union operation is commutative only when its two arguments
+    have disjoint domains. Throughout the Separation Logic course, we will
+    only consider disjoint unions, for which commutativity holds. 
+</div>
+
+<div class="doc">
+<a id="lab89"></a><h2 class="section">Heap Predicates</h2>
+
+<div class="paragraph"> </div>
+
+ In Separation Logic, the state is described using "heap predicates".
+    A heap predicate is a predicate over a piece of state.
+    Let <span class="inlinecode"><span class="id" title="var">hprop</span></span> denote the type of heap predicates. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hprop" class="idref" href="#hprop"><span class="id" title="definition">hprop</span></a> := <a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>.<br/>
+</div>
+
+<div class="doc">
+Thereafter, let <span class="inlinecode"><span class="id" title="var">H</span></span> range over heap predicates. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Type</span> <span class="id" title="var">H</span> : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>.<br/>
+</div>
+
+<div class="doc">
+An essential aspect of Separation Logic is that all heap predicates
+    defined and used in practice are built using a few basic combinators.
+    In other words, except for the definition of the combinators themselves,
+    we will never define a custom heap predicate directly as a function
+    of the state. 
+<div class="paragraph"> </div>
+
+ We next describe the most important combinators of Separation Logic. 
+<div class="paragraph"> </div>
+
+ The <span class="inlinecode"><span class="id" title="var">hempty</span></span> predicate, usually written <span class="inlinecode"><span class='gray-font'>\</span>[]</span>, characterizes an empty
+    state. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hempty" class="idref" href="#hempty"><span class="id" title="definition">hempty</span></a> : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="h:1" class="idref" href="#h:1"><span class="id" title="binder">h</span></a>:<a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a>) ⇒ (<a class="idref" href="Hprop.html#h:1"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.empty"><span class="id" title="definition">Fmap.empty</span></a>).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Notation</span> <a id="cb6b4bc70cb30142f9711e4deb4cb93a" class="idref" href="#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation">&quot;</span></a><span class='gray-font'>\</span>[]" := (<a class="idref" href="Hprop.html#hempty"><span class="id" title="definition">hempty</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/>
+</div>
+
+<div class="doc">
+The pure fact predicate, written <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span>, characterizes an empty state
+    and moreover asserts that the proposition <span class="inlinecode"><span class="id" title="var">P</span></span> is true. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hpure" class="idref" href="#hpure"><span class="id" title="definition">hpure</span></a> (<a id="P:2" class="idref" href="#P:2"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="h:3" class="idref" href="#h:3"><span class="id" title="binder">h</span></a>:<a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a>) ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#h:3"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.empty"><span class="id" title="definition">Fmap.empty</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#P:2"><span class="id" title="variable">P</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Notation</span> <a id="53316c5a9a53e765aefbae8243c4b1dc" class="idref" href="#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">&quot;</span></a><span class='gray-font'>\</span>[ P ]" := (<a class="idref" href="Hprop.html#hpure"><span class="id" title="definition">hpure</span></a> <span class="id" title="var">P</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">format</span> "<span class='gray-font'>\</span>[ P ]").<br/>
+</div>
+
+<div class="doc">
+The singleton heap predicate, written <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode"><span class="id" title="var">v</span></span>, characterizes a
+    state with a single allocated cell, at location <span class="inlinecode"><span class="id" title="var">p</span></span>, storing the
+    value <span class="inlinecode"><span class="id" title="var">v</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hsingle" class="idref" href="#hsingle"><span class="id" title="definition">hsingle</span></a> (<a id="p:4" class="idref" href="#p:4"><span class="id" title="binder">p</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="v:5" class="idref" href="#v:5"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>) : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="h:6" class="idref" href="#h:6"><span class="id" title="binder">h</span></a>:<a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a>) ⇒ (<a class="idref" href="Hprop.html#h:6"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.single"><span class="id" title="definition">Fmap.single</span></a> <a class="idref" href="Hprop.html#p:4"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#v:5"><span class="id" title="variable">v</span></a>).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Notation</span> <a id="7322bfa5d36ce5cf12f68db819774432" class="idref" href="#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">&quot;</span></a>p '~~&gt;' v" := (<a class="idref" href="Hprop.html#hsingle"><span class="id" title="definition">hsingle</span></a> <span class="id" title="var">p</span> <span class="id" title="var">v</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 32).<br/>
+</div>
+
+<div class="doc">
+The "separating conjunction", written <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span>, characterizes a
+    state that can be decomposed in two disjoint parts, one that
+    satisfies <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span>, and another that satisfies <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span>.
+    In the definition below, the two parts are named <span class="inlinecode"><span class="id" title="var">h<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hstar" class="idref" href="#hstar"><span class="id" title="definition">hstar</span></a> (<a id="H<sub>1</sub>:7" class="idref" href="#H<sub>1</sub>:7"><span class="id" title="binder">H<sub>1</sub></span></a> <a id="H<sub>2</sub>:8" class="idref" href="#H<sub>2</sub>:8"><span class="id" title="binder">H<sub>2</sub></span></a> : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="h:9" class="idref" href="#h:9"><span class="id" title="binder">h</span></a>:<a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a>) ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="h<sub>1</sub>:10" class="idref" href="#h<sub>1</sub>:10"><span class="id" title="binder">h<sub>1</sub></span></a> <a id="h<sub>2</sub>:11" class="idref" href="#h<sub>2</sub>:11"><span class="id" title="binder">h<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#H<sub>1</sub>:7"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:10"><span class="id" title="variable">h<sub>1</sub></span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:8"><span class="id" title="variable">H<sub>2</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:11"><span class="id" title="variable">h<sub>2</sub></span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepReference.html#Fmap.disjoint"><span class="id" title="definition">Fmap.disjoint</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:10"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:11"><span class="id" title="variable">h<sub>2</sub></span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#h:9"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.union"><span class="id" title="definition">Fmap.union</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:10"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:11"><span class="id" title="variable">h<sub>2</sub></span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Notation</span> <a id="1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>" class="idref" href="#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">&quot;</span></a>H<sub>1</sub> '<span class='gray-font'>\</span>*' H<sub>2</sub>" := (<a class="idref" href="Hprop.html#hstar"><span class="id" title="definition">hstar</span></a> <span class="id" title="var">H<sub>1</sub></span> <span class="id" title="var">H<sub>2</sub></span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 41, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>).<br/>
+</div>
+
+<div class="doc">
+The existential quantifier for heap predicates, written <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">H</span></span>
+    characterizes a heap that satisfies <span class="inlinecode"><span class="id" title="var">H</span></span> for some <span class="inlinecode"><span class="id" title="var">x</span></span>.
+    The variable <span class="inlinecode"><span class="id" title="var">x</span></span> has type <span class="inlinecode"><span class="id" title="var">A</span></span>, for some arbitrary type <span class="inlinecode"><span class="id" title="var">A</span></span>.
+
+<div class="paragraph"> </div>
+
+    The notation <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">H</span></span> stands for <span class="inlinecode"><span class="id" title="var">hexists</span></span> <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">H</span>)</span>.
+    The generalized notation <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">xn</span>,</span> <span class="inlinecode"><span class="id" title="var">H</span></span> is also available.
+
+<div class="paragraph"> </div>
+
+    The definition of <span class="inlinecode"><span class="id" title="var">hexists</span></span> is a bit technical. It is not essential
+    to master it at this point. Additional explanations are provided
+    near the end of this chapter. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hexists" class="idref" href="#hexists"><span class="id" title="definition">hexists</span></a> (<a id="A:12" class="idref" href="#A:12"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="J:13" class="idref" href="#J:13"><span class="id" title="binder">J</span></a>:<a class="idref" href="Hprop.html#A:12"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="h:14" class="idref" href="#h:14"><span class="id" title="binder">h</span></a>:<a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a>) ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:15" class="idref" href="#x:15"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#J:13"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#x:15"><span class="id" title="variable">x</span></a> <a class="idref" href="Hprop.html#h:14"><span class="id" title="variable">h</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Notation</span> <a id="427157b8047cdf158af6c4e7232eb7ce" class="idref" href="#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">&quot;</span></a>'\exists' x<sub>1</sub> .. xn , H" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> (<span class="id" title="keyword">fun</span> <a id="x<sub>1</sub>:16" class="idref" href="#x<sub>1</sub>:16"><span class="id" title="binder">x<sub>1</sub></span></a> ⇒ .. (<a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a> (<span class="id" title="keyword">fun</span> <a id="xn:17" class="idref" href="#xn:17"><span class="id" title="binder">xn</span></a> ⇒ <span class="id" title="var">H</span>)) ..))<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 39, <span class="id" title="var">x<sub>1</sub></span> <span class="id" title="var">binder</span>, <span class="id" title="var">H</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">format</span> "'[' '\exists' '/ '  x<sub>1</sub>  ..  xn , '/ '  H ']'").<br/>
+</div>
+
+<div class="doc">
+Universal quantification in <span class="inlinecode"><span class="id" title="var">hprop</span></span> is only useful for more advanced
+    features of Separation Logic. We postpone its introduction to <a href="Wand.html"><span class="inlineref">Wand</span></a>. 
+<div class="paragraph"> </div>
+
+ All the definitions above are eventually turned <span class="inlinecode"><span class="id" title="keyword">Opaque</span></span>, after
+    the appropriate introduction and elimination lemmas are
+    established for them. Thus, at some point it is no longer
+    possible to involve, say <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">hstar</span></span>. Opacity ensures that
+    all the proofs that are constructed do not depend on the
+    details of how these definitions of heap predicates are set up. 
+</div>
+
+<div class="doc">
+<a id="lab90"></a><h2 class="section">Extensionality for Heap Predicates</h2>
+
+<div class="paragraph"> </div>
+
+ To work in Separation Logic, it is extremely convenient to be
+    able to state equalities between heap predicates. For example,
+    in the next chapter, we will establish the associativity property
+    for the star operator, that is: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Parameter</span> <a id="hstar_assoc" class="idref" href="#hstar_assoc"><span class="id" title="axiom">hstar_assoc</span></a> : <span class="id" title="keyword">∀</span> <a id="H<sub>1</sub>:18" class="idref" href="#H<sub>1</sub>:18"><span class="id" title="binder">H<sub>1</sub></span></a> <a id="H<sub>2</sub>:19" class="idref" href="#H<sub>2</sub>:19"><span class="id" title="binder">H<sub>2</sub></span></a> <a id="H<sub>3</sub>:20" class="idref" href="#H<sub>3</sub>:20"><span class="id" title="binder">H<sub>3</sub></span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#H<sub>1</sub>:18"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:19"><span class="id" title="variable">H<sub>2</sub></span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H<sub>3</sub>:20"><span class="id" title="variable">H<sub>3</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#H<sub>1</sub>:18"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#H<sub>2</sub>:19"><span class="id" title="variable">H<sub>2</sub></span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H<sub>3</sub>:20"><span class="id" title="variable">H<sub>3</sub></span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a>.<br/>
+</div>
+
+<div class="doc">
+How can we prove a goal of the form <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span> when <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span>
+    have type <span class="inlinecode"><span class="id" title="var">hprop</span></span>, that is, <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>?
+
+<div class="paragraph"> </div>
+
+    Intuitively, <span class="inlinecode"><span class="id" title="var">H</span></span> and <span class="inlinecode"><span class="id" title="var">H'</span></span> are equal if and only if they
+    characterize exactly the same set of heaps, that is, if
+    <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode">(<span class="id" title="var">h</span>:<span class="id" title="var">heap</span>),</span> <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode">↔</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>.
+
+<div class="paragraph"> </div>
+
+    This reasoning principle, a specific form of extensionality
+    property, is not available by default in Coq. But we can safely
+    assume it if we extend the logic of Coq with a standard axiom
+    called "predicate extensionality". 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="predicate_extensionality" class="idref" href="#predicate_extensionality"><span class="id" title="axiom">predicate_extensionality</span></a> : <span class="id" title="keyword">∀</span> (<a id="A:22" class="idref" href="#A:22"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>) (<a id="P:23" class="idref" href="#P:23"><span class="id" title="binder">P</span></a> <a id="Q:24" class="idref" href="#Q:24"><span class="id" title="binder">Q</span></a>:<a class="idref" href="Hprop.html#A:22"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><span class="id" title="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:25" class="idref" href="#x:25"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#P:23"><span class="id" title="variable">P</span></a> <a class="idref" href="Hprop.html#x:25"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Hprop.html#Q:24"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hprop.html#x:25"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#P:23"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#Q:24"><span class="id" title="variable">Q</span></a>.<br/>
+</div>
+
+<div class="doc">
+By specializing <span class="inlinecode"><span class="id" title="var">P</span></span> and <span class="inlinecode"><span class="id" title="var">Q</span></span> above to the type <span class="inlinecode"><span class="id" title="var">hprop</span></span>, we obtain
+    exactly the desired extensionality principle. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hprop_eq" class="idref" href="#hprop_eq"><span class="id" title="lemma">hprop_eq</span></a> : <span class="id" title="keyword">∀</span> (<a id="H<sub>1</sub>:27" class="idref" href="#H<sub>1</sub>:27"><span class="id" title="binder">H<sub>1</sub></span></a> <a id="H<sub>2</sub>:28" class="idref" href="#H<sub>2</sub>:28"><span class="id" title="binder">H<sub>2</sub></span></a>:<a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="h:29" class="idref" href="#h:29"><span class="id" title="binder">h</span></a>:<a class="idref" href="Hprop.html#heap"><span class="id" title="definition">heap</span></a>), <a class="idref" href="Hprop.html#H<sub>1</sub>:27"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h:29"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:28"><span class="id" title="variable">H<sub>2</sub></span></a> <a class="idref" href="Hprop.html#h:29"><span class="id" title="variable">h</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#H<sub>1</sub>:27"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:28"><span class="id" title="variable">H<sub>2</sub></span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="Hprop.html#predicate_extensionality"><span class="id" title="axiom">predicate_extensionality</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+More information about extensionality axioms may be found further
+    in this file. 
+</div>
+
+<div class="doc">
+<a id="lab91"></a><h2 class="section">Type and Syntax for Postconditions</h2>
+
+<div class="paragraph"> </div>
+
+ A postcondition characterizes both an output value and an output state.
+    In Separation Logic, a postcondition is thus a relation of type
+    <span class="inlinecode"><span class="id" title="var">val</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">state</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>, which is equivalent to <span class="inlinecode"><span class="id" title="var">val</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">hprop</span></span>.
+
+<div class="paragraph"> </div>
+
+    Thereafter, we let <span class="inlinecode"><span class="id" title="var">Q</span></span> range over postconditions. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Type</span> <span class="id" title="var">Q</span> : <a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>.<br/>
+</div>
+
+<div class="doc">
+One common operation is to augment a postcondition with a piece of state.
+    This operation is described by the operator <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*+</span> <span class="inlinecode"><span class="id" title="var">H</span></span>, which is just a
+    convenient notation for <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode">(<span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H</span>)</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Notation</span> <a id="9c07dc3fe866f600abcbb5cdf7c0a7fa" class="idref" href="#9c07dc3fe866f600abcbb5cdf7c0a7fa"><span class="id" title="notation">&quot;</span></a>Q <span class='gray-font'>\</span>*+ H" := (<span class="id" title="keyword">fun</span> <a id="x:30" class="idref" href="#x:30"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="Hprop.html#hstar"><span class="id" title="definition">hstar</span></a> (<span class="id" title="var">Q</span> <a class="idref" href="Hprop.html#x:30"><span class="id" title="variable">x</span></a>) <span class="id" title="var">H</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/>
+</div>
+
+<div class="doc">
+Intuitively, in order to prove that two postconditions <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span>
+    and <span class="inlinecode"><span class="id" title="var">Q<sub>2</sub></span></span> are equal, it suffices to show that the heap predicates
+    <span class="inlinecode"><span class="id" title="var">Q<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> and <span class="inlinecode"><span class="id" title="var">Q<sub>2</sub></span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> (both of type <span class="inlinecode"><span class="id" title="var">hprop</span></span>) are equal for any value <span class="inlinecode"><span class="id" title="var">v</span></span>.
+
+<div class="paragraph"> </div>
+
+    Again, the extensionality property that we need is not built-in to Coq.
+    We need the axiom called "functional extensionality", stated next. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="functional_extensionality" class="idref" href="#functional_extensionality"><span class="id" title="axiom">functional_extensionality</span></a> : <span class="id" title="keyword">∀</span> <a id="A:31" class="idref" href="#A:31"><span class="id" title="binder">A</span></a> <a id="B:32" class="idref" href="#B:32"><span class="id" title="binder">B</span></a> (<a id="f:33" class="idref" href="#f:33"><span class="id" title="binder">f</span></a> <a id="g:34" class="idref" href="#g:34"><span class="id" title="binder">g</span></a>:<a class="idref" href="Hprop.html#A:31"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#B:32"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:35" class="idref" href="#x:35"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#f:33"><span class="id" title="variable">f</span></a> <a class="idref" href="Hprop.html#x:35"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#g:34"><span class="id" title="variable">g</span></a> <a class="idref" href="Hprop.html#x:35"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#f:33"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#g:34"><span class="id" title="variable">g</span></a>.<br/>
+</div>
+
+<div class="doc">
+The desired equality property for postconditions follows directly
+    from that axiom. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="qprop_eq" class="idref" href="#qprop_eq"><span class="id" title="lemma">qprop_eq</span></a> : <span class="id" title="keyword">∀</span> (<a id="Q<sub>1</sub>:37" class="idref" href="#Q<sub>1</sub>:37"><span class="id" title="binder">Q<sub>1</sub></span></a> <a id="Q<sub>2</sub>:38" class="idref" href="#Q<sub>2</sub>:38"><span class="id" title="binder">Q<sub>2</sub></span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="v:39" class="idref" href="#v:39"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>), <a class="idref" href="Hprop.html#Q<sub>1</sub>:37"><span class="id" title="variable">Q<sub>1</sub></span></a> <a class="idref" href="Hprop.html#v:39"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#Q<sub>2</sub>:38"><span class="id" title="variable">Q<sub>2</sub></span></a> <a class="idref" href="Hprop.html#v:39"><span class="id" title="variable">v</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#Q<sub>1</sub>:37"><span class="id" title="variable">Q<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#Q<sub>2</sub>:38"><span class="id" title="variable">Q<sub>2</sub></span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="Hprop.html#functional_extensionality"><span class="id" title="axiom">functional_extensionality</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab92"></a><h2 class="section">Separation Logic Triples and the Frame Rule</h2>
+
+<div class="paragraph"> </div>
+
+ A Separation Logic triple is a generalization of a Hoare triple
+    that integrate built-in support for an essential rule called
+    "the frame rule". Before we give the definition of a Separation
+    Logic triple, let us first give the definition of a Hoare triple
+    and state the much-desired frame rule. 
+<div class="paragraph"> </div>
+
+ A (total correctness) Hoare triple, written <span class="inlinecode">{<span class="id" title="var">H</span>}</span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">{<span class="id" title="var">Q</span>}</span> on paper,
+    and here written <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>, asserts that starting from a state
+    <span class="inlinecode"><span class="id" title="var">s</span></span> satisfying the precondition <span class="inlinecode"><span class="id" title="var">H</span></span>, the term <span class="inlinecode"><span class="id" title="var">t</span></span> evaluates to a
+    value <span class="inlinecode"><span class="id" title="var">v</span></span> and to a state <span class="inlinecode"><span class="id" title="var">s'</span></span> that, together, satisfy the
+    postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>. It is formalized in Coq as shown below. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hoare" class="idref" href="#hoare"><span class="id" title="definition">hoare</span></a> (<a id="t:40" class="idref" href="#t:40"><span class="id" title="binder">t</span></a>:<a class="idref" href="LibSepReference.html#trm"><span class="id" title="inductive">trm</span></a>) (<a id="H:41" class="idref" href="#H:41"><span class="id" title="binder">H</span></a>:<a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) (<a id="Q:42" class="idref" href="#Q:42"><span class="id" title="binder">Q</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="s:43" class="idref" href="#s:43"><span class="id" title="binder">s</span></a>:<a class="idref" href="Hprop.html#state"><span class="id" title="definition">state</span></a>), <a class="idref" href="Hprop.html#H:41"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#s:43"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">(</span></a><a id="s':44" class="idref" href="#s':44"><span class="id" title="binder">s'</span></a>:<a class="idref" href="Hprop.html#state"><span class="id" title="definition">state</span></a>) (<a id="v:45" class="idref" href="#v:45"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">),</span></a> <a class="idref" href="LibSepReference.html#eval"><span class="id" title="inductive">eval</span></a> <a class="idref" href="Hprop.html#s:43"><span class="id" title="variable">s</span></a> <a class="idref" href="Hprop.html#t:40"><span class="id" title="variable">t</span></a> <a class="idref" href="Hprop.html#s':44"><span class="id" title="variable">s'</span></a> <a class="idref" href="Hprop.html#v:45"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#Q:42"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hprop.html#v:45"><span class="id" title="variable">v</span></a> <a class="idref" href="Hprop.html#s':44"><span class="id" title="variable">s'</span></a>.<br/>
+</div>
+
+<div class="doc">
+Note that <span class="inlinecode"><span class="id" title="var">Q</span></span> has type <span class="inlinecode"><span class="id" title="var">val</span>→<span class="id" title="var">hprop</span></span>, thus <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> has type <span class="inlinecode"><span class="id" title="var">hprop</span></span>.
+    Recall that <span class="inlinecode"><span class="id" title="var">hprop</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">heap</span>→<span class="id" title="keyword">Prop</span></span>. Thus <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> has type <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.
+    Note also that the judgment <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> captures the property that the
+    execution of <span class="inlinecode"><span class="id" title="var">t</span></span> terminates, because it is defined in terms of the big-step
+    evaluation judgment <span class="inlinecode"><span class="id" title="tactic">eval</span></span> <span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">s'</span></span> <span class="inlinecode"><span class="id" title="var">v</span></span>, which itself captures termination. 
+<div class="paragraph"> </div>
+
+<a id="lab93"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (hoare_conseq)</h4>
+ To gain familiarity with the <span class="inlinecode"><span class="id" title="var">hoare</span></span> judgment, prove the consequence rule
+    for Hoare triples. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hoare_conseq" class="idref" href="#hoare_conseq"><span class="id" title="lemma">hoare_conseq</span></a> : <span class="id" title="keyword">∀</span> <a id="t:46" class="idref" href="#t:46"><span class="id" title="binder">t</span></a> <a id="H:47" class="idref" href="#H:47"><span class="id" title="binder">H</span></a> <a id="Q:48" class="idref" href="#Q:48"><span class="id" title="binder">Q</span></a> <a id="H':49" class="idref" href="#H':49"><span class="id" title="binder">H'</span></a> <a id="Q':50" class="idref" href="#Q':50"><span class="id" title="binder">Q'</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Hprop.html#t:46"><span class="id" title="variable">t</span></a> <a class="idref" href="Hprop.html#H':49"><span class="id" title="variable">H'</span></a> <a class="idref" href="Hprop.html#Q':50"><span class="id" title="variable">Q'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#H:47"><span class="id" title="variable">H</span></a> <a class="idref" href="LibSepReference.html#c7ebd77e939e3f02c508e57b470dc021"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="Hprop.html#H':49"><span class="id" title="variable">H'</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#Q':50"><span class="id" title="variable">Q'</span></a> <a class="idref" href="LibSepReference.html#9351a4f098e275023c32e0091e608189"><span class="id" title="notation">===&gt;</span></a> <a class="idref" href="Hprop.html#Q:48"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Hprop.html#t:46"><span class="id" title="variable">t</span></a> <a class="idref" href="Hprop.html#H:47"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#Q:48"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+ The frame rule asserts that if one can derive a specification of
+    the form <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> for a term <span class="inlinecode"><span class="id" title="var">t</span></span>, then one should be able
+    to automatically derive <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode">(<span class="id" title="var">H</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H'</span>)</span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">(<span class="id" title="var">Q</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*+</span> <span class="inlinecode"><span class="id" title="var">H'</span>)</span> for any <span class="inlinecode"><span class="id" title="var">H'</span></span>.
+
+<div class="paragraph"> </div>
+
+    Intuitively, if <span class="inlinecode"><span class="id" title="var">t</span></span> executes safely in a heap <span class="inlinecode"><span class="id" title="var">H</span></span>, it should behave
+    similarly in any extension of <span class="inlinecode"><span class="id" title="var">H</span></span> with a disjoint part <span class="inlinecode"><span class="id" title="var">H'</span></span>. Moreover,
+    its evaluation should leave this piece of state <span class="inlinecode"><span class="id" title="var">H'</span></span> unmodified
+    throughout the execution of <span class="inlinecode"><span class="id" title="var">t</span></span>.
+
+<div class="paragraph"> </div>
+
+    The following definition of a Separation Logic triple builds upon
+    that of a Hoare triple by "baking in" the frame rule. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="triple" class="idref" href="#triple"><span class="id" title="definition">triple</span></a> (<a id="t:51" class="idref" href="#t:51"><span class="id" title="binder">t</span></a>:<a class="idref" href="LibSepReference.html#trm"><span class="id" title="inductive">trm</span></a>) (<a id="H:52" class="idref" href="#H:52"><span class="id" title="binder">H</span></a>:<a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) (<a id="Q:53" class="idref" href="#Q:53"><span class="id" title="binder">Q</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="H':54" class="idref" href="#H':54"><span class="id" title="binder">H'</span></a>:<a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>), <a class="idref" href="Hprop.html#hoare"><span class="id" title="definition">hoare</span></a> <a class="idref" href="Hprop.html#t:51"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#H:52"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H':54"><span class="id" title="variable">H'</span></a>) (<a class="idref" href="Hprop.html#Q:53"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hprop.html#9c07dc3fe866f600abcbb5cdf7c0a7fa"><span class="id" title="notation"><span class='gray-font'>\</span>*+</span></a> <a class="idref" href="Hprop.html#H':54"><span class="id" title="variable">H'</span></a>).<br/>
+</div>
+
+<div class="doc">
+This definition inherently satisfies the frame rule, as we show
+    below. The proof essentially exploits the associativity of the star
+    operator. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="triple_frame" class="idref" href="#triple_frame"><span class="id" title="lemma">triple_frame</span></a> : <span class="id" title="keyword">∀</span> <a id="t:55" class="idref" href="#t:55"><span class="id" title="binder">t</span></a> <a id="H:56" class="idref" href="#H:56"><span class="id" title="binder">H</span></a> <a id="Q:57" class="idref" href="#Q:57"><span class="id" title="binder">Q</span></a> <a id="H':58" class="idref" href="#H':58"><span class="id" title="binder">H'</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Hprop.html#t:55"><span class="id" title="variable">t</span></a> <a class="idref" href="Hprop.html#H:56"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#Q:57"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Hprop.html#t:55"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#H:56"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H':58"><span class="id" title="variable">H'</span></a>) (<a class="idref" href="Hprop.html#Q:57"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hprop.html#9c07dc3fe866f600abcbb5cdf7c0a7fa"><span class="id" title="notation"><span class='gray-font'>\</span>*+</span></a> <a class="idref" href="Hprop.html#H':58"><span class="id" title="variable">H'</span></a>).<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <span class="id" title="keyword">in</span> *. <span class="id" title="tactic">rename</span> <span class="id" title="var">H'</span> <span class="id" title="var">into</span> <span class="id" title="var">H<sub>1</sub></span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">H<sub>2</sub></span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">specializes</span> <span class="id" title="var">M</span> (<span class="id" title="var">H<sub>1</sub></span> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <span class="id" title="var">H<sub>2</sub></span>).<br/>
+</div>
+
+<div class="doc">
+At this point, <span class="inlinecode"><span class="id" title="var">M</span></span> matches the goal up to rewriting for associativity.
+    We can exploit the consequence rule to complete the proof. 
+</div>
+<div class="code">
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="Hprop.html#hoare_conseq"><span class="id" title="axiom">hoare_conseq</span></a>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">apply</span> <span class="id" title="var">M</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">rewrite</span> <a class="idref" href="Hprop.html#hstar_assoc"><span class="id" title="axiom">hstar_assoc</span></a>. <span class="id" title="tactic">auto</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">v</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="Hprop.html#hstar_assoc"><span class="id" title="axiom">hstar_assoc</span></a>. <span class="id" title="tactic">auto</span>. }<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab94"></a><h2 class="section">Example of a Triple: the Increment Function</h2>
+
+<div class="paragraph"> </div>
+
+ Recall the function <span class="inlinecode"><span class="id" title="var">incr</span></span> introduced in the chapter <a href="Basic.html"><span class="inlineref">Basic</span></a>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Parameter</span> <a id="incr" class="idref" href="#incr"><span class="id" title="axiom">incr</span></a> : <a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>.<br/>
+</div>
+
+<div class="doc">
+An application of this function, written <span class="inlinecode"><span class="id" title="var">incr</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span>, is technically
+    a term of the form <span class="inlinecode"><span class="id" title="var">trm_app</span></span> <span class="inlinecode">(<span class="id" title="var">trm_val</span></span> <span class="inlinecode"><span class="id" title="var">incr</span>)</span> <span class="inlinecode">(<span class="id" title="var">trm_val</span></span> <span class="inlinecode">(<span class="id" title="var">val_loc</span></span> <span class="inlinecode"><span class="id" title="var">p</span>))</span>,
+    where <span class="inlinecode"><span class="id" title="var">trm_val</span></span> injects values in the grammar of terms, and
+    <span class="inlinecode"><span class="id" title="var">val_loc</span></span> injects locations in the grammar of locations.
+
+<div class="paragraph"> </div>
+
+    The abbreviation <span class="inlinecode"><span class="id" title="var">incr</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> parses correctly because <span class="inlinecode"><span class="id" title="var">trm_app</span></span>,
+    <span class="inlinecode"><span class="id" title="var">trm_val</span></span>, and <span class="inlinecode"><span class="id" title="var">val_loc</span></span> are registered as coercions. Let us
+    check this claim with Coq. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="incr_applied" class="idref" href="#incr_applied"><span class="id" title="lemma">incr_applied</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:60" class="idref" href="#p:60"><span class="id" title="binder">p</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="n:61" class="idref" href="#n:61"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#trm_app"><span class="id" title="constructor">trm_app</span></a> (<a class="idref" href="LibSepReference.html#trm_val"><span class="id" title="constructor">trm_val</span></a> <a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a>) (<a class="idref" href="LibSepReference.html#trm_val"><span class="id" title="constructor">trm_val</span></a> (<a class="idref" href="LibSepReference.html#val_loc"><span class="id" title="constructor">val_loc</span></a> <a class="idref" href="Hprop.html#p:60"><span class="id" title="variable">p</span></a>))<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Hprop.html#p:60"><span class="id" title="variable">p</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+The operation <span class="inlinecode"><span class="id" title="var">incr</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> is specified using a triple as shown
+    below. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Parameter</span> <a id="triple_incr" class="idref" href="#triple_incr"><span class="id" title="axiom">triple_incr</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:62" class="idref" href="#p:62"><span class="id" title="binder">p</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="n:63" class="idref" href="#n:63"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Hprop.html#p:62"><span class="id" title="variable">p</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hprop.html#p:62"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#n:63"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="r:64" class="idref" href="#r:64"><span class="id" title="binder">r</span></a> ⇒ <a class="idref" href="Hprop.html#p:62"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#n:63"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1<a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a>).<br/>
+</div>
+
+<div class="doc">
+<a id="lab95"></a><h1 class="section">More Details</h1>
+
+</div>
+
+<div class="doc">
+<a id="lab96"></a><h2 class="section">Example Applications of the Frame Rule</h2>
+
+<div class="paragraph"> </div>
+
+ The frame rule asserts that a triple remains true in any
+    extended heap.
+
+<div class="paragraph"> </div>
+
+    Calling <span class="inlinecode"><span class="id" title="var">incr</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> in a state where the memory consists of
+    two memory cells, one at location <span class="inlinecode"><span class="id" title="var">p</span></span> storing an integer <span class="inlinecode"><span class="id" title="var">n</span></span>
+    and one at location <span class="inlinecode"><span class="id" title="var">q</span></span> storing an integer <span class="inlinecode"><span class="id" title="var">m</span></span> has the effect
+    of updating the contents of the cell <span class="inlinecode"><span class="id" title="var">p</span></span> to <span class="inlinecode"><span class="id" title="var">n</span>+1</span>, while
+    leaving the contents of <span class="inlinecode"><span class="id" title="var">q</span></span> unmodified. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="triple_incr_2" class="idref" href="#triple_incr_2"><span class="id" title="lemma">triple_incr_2</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:66" class="idref" href="#p:66"><span class="id" title="binder">p</span></a> <a id="q:67" class="idref" href="#q:67"><span class="id" title="binder">q</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="n:68" class="idref" href="#n:68"><span class="id" title="binder">n</span></a> <a id="m:69" class="idref" href="#m:69"><span class="id" title="binder">m</span></a>:<span class="id" title="notation">int</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Hprop.html#p:66"><span class="id" title="variable">p</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#p:66"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#n:68"><span class="id" title="variable">n</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#q:67"><span class="id" title="variable">q</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#m:69"><span class="id" title="variable">m</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#p:66"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#n:68"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1<a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#q:67"><span class="id" title="variable">q</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#m:69"><span class="id" title="variable">m</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a>).<br/>
+</div>
+
+<div class="doc">
+The above specification lemma is derivable from the specification
+    lemma <span class="inlinecode"><span class="id" title="var">triple_incr</span></span> by applying the frame rule to augment
+    both the precondition and the postcondition with <span class="inlinecode"><span class="id" title="var">q</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode"><span class="id" title="var">m</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">lets</span> <span class="id" title="var">M</span>: <a class="idref" href="Hprop.html#triple_incr"><span class="id" title="axiom">triple_incr</span></a> <span class="id" title="var">p</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">lets</span> <span class="id" title="var">N</span>: <a class="idref" href="Hprop.html#triple_frame"><span class="id" title="lemma">triple_frame</span></a> (<span class="id" title="var">q</span> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <span class="id" title="var">m</span>) <span class="id" title="var">M</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">N</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;A&nbsp;shorter,&nbsp;backward-reasoning&nbsp;proof:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">intros</span>.</span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">triple_frame</span>.</span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">triple_incr</span>.</span>&nbsp;*)</span><br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Here, we have framed on <span class="inlinecode"><span class="id" title="var">q</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode"><span class="id" title="var">m</span></span>, but we could similarly
+   frame on any heap predicate <span class="inlinecode"><span class="id" title="var">H</span></span>, as captured by the following
+   specification lemma. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Parameter</span> <a id="triple_incr_3" class="idref" href="#triple_incr_3"><span class="id" title="axiom">triple_incr_3</span></a> : <span class="id" title="keyword">∀</span> (<a id="p:70" class="idref" href="#p:70"><span class="id" title="binder">p</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="n:71" class="idref" href="#n:71"><span class="id" title="binder">n</span></a>:<span class="id" title="notation">int</span>) (<a id="H:72" class="idref" href="#H:72"><span class="id" title="binder">H</span></a>:<a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="Hprop.html#incr"><span class="id" title="axiom">incr</span></a> <a class="idref" href="Hprop.html#p:70"><span class="id" title="variable">p</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#p:70"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#n:71"><span class="id" title="variable">n</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H:72"><span class="id" title="variable">H</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#p:70"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#n:71"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1<a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H:72"><span class="id" title="variable">H</span></a>).<br/>
+</div>
+
+<div class="doc">
+Remark: in practice, we always prefer writing
+    "small-footprint specifications", such as <span class="inlinecode"><span class="id" title="var">triple_incr</span></span>,
+    that describe the minimal piece of state necessary for
+    the function to execute. Indeed, other specifications that
+    describe a larger piece of state can be derived by application
+    of the frame rule. 
+</div>
+
+<div class="doc">
+<a id="lab97"></a><h2 class="section">Power of the Frame Rule with Respect to Allocation</h2>
+
+<div class="paragraph"> </div>
+
+ Consider the specification lemma for an allocation operation.
+    This rule states that, starting from the empty heap, one
+    obtains a single memory cell at some location <span class="inlinecode"><span class="id" title="var">p</span></span> with
+    contents <span class="inlinecode"><span class="id" title="var">v</span></span>.
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Parameter</span> <a id="triple_ref" class="idref" href="#triple_ref"><span class="id" title="axiom">triple_ref</span></a> : <span class="id" title="keyword">∀</span> (<a id="v:74" class="idref" href="#v:74"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="LibSepReference.html#val_ref"><span class="id" title="constructor">val_ref</span></a> <a class="idref" href="Hprop.html#v:74"><span class="id" title="variable">v</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="LibSepReference.html#d1e35cef49ddf53b46b670034b3362a<sub>0</sub>"><span class="id" title="notation">funloc</span></a> <a id="p:77" class="idref" href="#p:77"><span class="id" title="binder">p</span></a> <a class="idref" href="LibSepReference.html#d1e35cef49ddf53b46b670034b3362a<sub>0</sub>"><span class="id" title="notation">⇒</span></a> <a class="idref" href="Hprop.html#p:75"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#v:74"><span class="id" title="variable">v</span></a>).<br/>
+</div>
+
+<div class="doc">
+Applying the frame rule to the above specification, and to
+    another memory cell, say <span class="inlinecode"><span class="id" title="var">l'</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode"><span class="id" title="var">v'</span></span>, we obtain: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Parameter</span> <a id="triple_ref_with_frame" class="idref" href="#triple_ref_with_frame"><span class="id" title="axiom">triple_ref_with_frame</span></a> : <span class="id" title="keyword">∀</span> (<a id="l':79" class="idref" href="#l':79"><span class="id" title="binder">l'</span></a>:<a class="idref" href="LibSepReference.html#loc"><span class="id" title="definition">loc</span></a>) (<a id="v':80" class="idref" href="#v':80"><span class="id" title="binder">v'</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>) (<a id="v:81" class="idref" href="#v:81"><span class="id" title="binder">v</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> (<a class="idref" href="LibSepReference.html#val_ref"><span class="id" title="constructor">val_ref</span></a> <a class="idref" href="Hprop.html#v:81"><span class="id" title="variable">v</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="Hprop.html#l':79"><span class="id" title="variable">l'</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#v':80"><span class="id" title="variable">v'</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="LibSepReference.html#d1e35cef49ddf53b46b670034b3362a<sub>0</sub>"><span class="id" title="notation">funloc</span></a> <a id="p:84" class="idref" href="#p:84"><span class="id" title="binder">p</span></a> <a class="idref" href="LibSepReference.html#d1e35cef49ddf53b46b670034b3362a<sub>0</sub>"><span class="id" title="notation">⇒</span></a> <a class="idref" href="Hprop.html#p:82"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#v:81"><span class="id" title="variable">v</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#l':79"><span class="id" title="variable">l'</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#v':80"><span class="id" title="variable">v'</span></a>).<br/>
+</div>
+
+<div class="doc">
+This derived specification captures the fact that the newly
+    allocated cell at address <span class="inlinecode"><span class="id" title="var">p</span></span> is distinct from the previously
+    allocated cell at address <span class="inlinecode"><span class="id" title="var">l'</span></span>.
+
+<div class="paragraph"> </div>
+
+    More generally, through the frame rule, we can derive that
+    any piece of freshly allocated data is distinct from any
+    piece of previously existing data.
+
+<div class="paragraph"> </div>
+
+    This independence principle is extremely powerful. It is an
+    inherent strength of Separation Logic. 
+</div>
+
+<div class="doc">
+<a id="lab98"></a><h2 class="section">Notation for Heap Union</h2>
+
+<div class="paragraph"> </div>
+
+ Thereafter, to improve readability of statements in proofs,
+    we introduce the following notation for heap union. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Notation</span> <a id="11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>" class="idref" href="#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">&quot;</span></a>h<sub>1</sub> \u h<sub>2</sub>" := (<a class="idref" href="LibSepReference.html#Fmap.union"><span class="id" title="definition">Fmap.union</span></a> <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 37, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>).<br/>
+</div>
+
+<div class="doc">
+<a id="lab99"></a><h2 class="section">Introduction and Inversion Lemmas for Basic Operators</h2>
+
+<div class="paragraph"> </div>
+
+ The following lemmas help getting a better understanding of the meaning
+    of the Separation Logic combinators. For each operator, we present one
+    introduction lemma and one inversion lemma. The proofs below use the
+    tactic <span class="inlinecode"><span class="id" title="tactic">hnf</span></span> (head normal form), which unfolds the head constants. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">P</span> : <span class="id" title="keyword">Prop</span>.<br/>
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">v</span> : <a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a>.<br/>
+</div>
+
+<div class="doc">
+The introduction lemmas show how to prove goals of the form <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>,
+    for various forms of the heap predicate <span class="inlinecode"><span class="id" title="var">H</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hempty_intro" class="idref" href="#hempty_intro"><span class="id" title="lemma">hempty_intro</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a> <a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation">Fmap.empty</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">hnf</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hpure_intro" class="idref" href="#hpure_intro"><span class="id" title="lemma">hpure_intro</span></a> : <span class="id" title="keyword">∀</span> <a id="P:86" class="idref" href="#P:86"><span class="id" title="binder">P</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#P:86"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Hprop.html#P:86"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">Fmap.empty</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hsingle_intro" class="idref" href="#hsingle_intro"><span class="id" title="lemma">hsingle_intro</span></a> : <span class="id" title="keyword">∀</span> <a id="p:87" class="idref" href="#p:87"><span class="id" title="binder">p</span></a> <a id="v:88" class="idref" href="#v:88"><span class="id" title="binder">v</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#p:87"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#v:88"><span class="id" title="variable">v</span></a><a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">Fmap.single</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">v</span></a><a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">hnf</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hstar_intro" class="idref" href="#hstar_intro"><span class="id" title="lemma">hstar_intro</span></a> : <span class="id" title="keyword">∀</span> <a id="H<sub>1</sub>:89" class="idref" href="#H<sub>1</sub>:89"><span class="id" title="binder">H<sub>1</sub></span></a> <a id="H<sub>2</sub>:90" class="idref" href="#H<sub>2</sub>:90"><span class="id" title="binder">H<sub>2</sub></span></a> <a id="h<sub>1</sub>:91" class="idref" href="#h<sub>1</sub>:91"><span class="id" title="binder">h<sub>1</sub></span></a> <a id="h<sub>2</sub>:92" class="idref" href="#h<sub>2</sub>:92"><span class="id" title="binder">h<sub>2</sub></span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#H<sub>1</sub>:89"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:91"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#H<sub>2</sub>:90"><span class="id" title="variable">H<sub>2</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:92"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#Fmap.disjoint"><span class="id" title="definition">Fmap.disjoint</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:91"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:92"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#H<sub>1</sub>:89"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:90"><span class="id" title="variable">H<sub>2</sub></span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">u</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">h<sub>2</sub></span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">∃</span>* <span class="id" title="var">h<sub>1</sub></span> <span class="id" title="var">h<sub>2</sub></span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hexists_intro" class="idref" href="#hexists_intro"><span class="id" title="lemma">hexists_intro</span></a> : <span class="id" title="keyword">∀</span> <a id="A:93" class="idref" href="#A:93"><span class="id" title="binder">A</span></a> (<a id="x:94" class="idref" href="#x:94"><span class="id" title="binder">x</span></a>:<a class="idref" href="Hprop.html#A:93"><span class="id" title="variable">A</span></a>) (<a id="J:95" class="idref" href="#J:95"><span class="id" title="binder">J</span></a>:<a class="idref" href="Hprop.html#A:93"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="h:96" class="idref" href="#h:96"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#J:95"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#x:94"><span class="id" title="variable">x</span></a> <a class="idref" href="Hprop.html#h:96"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:97" class="idref" href="#x:97"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#J:95"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#x:97"><span class="id" title="variable">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">h</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span>. <span class="id" title="tactic">eauto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+The inversion lemmas show how to extract information from hypotheses
+    of the form <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span>, for various forms of the heap predicate <span class="inlinecode"><span class="id" title="var">H</span></span>.
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hempty_inv" class="idref" href="#hempty_inv"><span class="id" title="lemma">hempty_inv</span></a> : <span class="id" title="keyword">∀</span> <a id="h:98" class="idref" href="#h:98"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a> <a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#h:98"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.empty"><span class="id" title="definition">Fmap.empty</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hpure_inv" class="idref" href="#hpure_inv"><span class="id" title="lemma">hpure_inv</span></a> : <span class="id" title="keyword">∀</span> <a id="P:99" class="idref" href="#P:99"><span class="id" title="binder">P</span></a> <a id="h:100" class="idref" href="#h:100"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Hprop.html#P:99"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#P:99"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#h:100"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.empty"><span class="id" title="definition">Fmap.empty</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="var">M</span>. <span class="id" title="var">autos</span>*. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hsingle_inv" class="idref" href="#hsingle_inv"><span class="id" title="lemma">hsingle_inv</span></a>: <span class="id" title="keyword">∀</span> <a id="p:101" class="idref" href="#p:101"><span class="id" title="binder">p</span></a> <a id="v:102" class="idref" href="#v:102"><span class="id" title="binder">v</span></a> <a id="h:103" class="idref" href="#h:103"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#p:101"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">~~&gt;</span></a> <a class="idref" href="Hprop.html#v:102"><span class="id" title="variable">v</span></a><a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#7322bfa5d36ce5cf12f68db819774432"><span class="id" title="notation">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#h:103"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepReference.html#Fmap.single"><span class="id" title="definition">Fmap.single</span></a> <a class="idref" href="Hprop.html#p:101"><span class="id" title="variable">p</span></a> <a class="idref" href="Hprop.html#v:102"><span class="id" title="variable">v</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hstar_inv" class="idref" href="#hstar_inv"><span class="id" title="lemma">hstar_inv</span></a> : <span class="id" title="keyword">∀</span> <a id="H<sub>1</sub>:104" class="idref" href="#H<sub>1</sub>:104"><span class="id" title="binder">H<sub>1</sub></span></a> <a id="H<sub>2</sub>:105" class="idref" href="#H<sub>2</sub>:105"><span class="id" title="binder">H<sub>2</sub></span></a> <a id="h:106" class="idref" href="#h:106"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#H<sub>1</sub>:104"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:105"><span class="id" title="variable">H<sub>2</sub></span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="h<sub>1</sub>:107" class="idref" href="#h<sub>1</sub>:107"><span class="id" title="binder">h<sub>1</sub></span></a> <a id="h<sub>2</sub>:108" class="idref" href="#h<sub>2</sub>:108"><span class="id" title="binder">h<sub>2</sub></span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#H<sub>1</sub>:104"><span class="id" title="variable">H<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:107"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#H<sub>2</sub>:105"><span class="id" title="variable">H<sub>2</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:108"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepReference.html#Fmap.disjoint"><span class="id" title="definition">Fmap.disjoint</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:107"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:108"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#h:106"><span class="id" title="variable">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:107"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">u</span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:108"><span class="id" title="variable">h<sub>2</sub></span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">eauto</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Lemma</span> <a id="hexists_inv" class="idref" href="#hexists_inv"><span class="id" title="lemma">hexists_inv</span></a> : <span class="id" title="keyword">∀</span> <a id="A:109" class="idref" href="#A:109"><span class="id" title="binder">A</span></a> (<a id="J:110" class="idref" href="#J:110"><span class="id" title="binder">J</span></a>:<a class="idref" href="Hprop.html#A:109"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) <a id="h:111" class="idref" href="#h:111"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a id="x:112" class="idref" href="#x:112"><span class="id" title="binder">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#J:110"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#x:112"><span class="id" title="variable">x</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="x:113" class="idref" href="#x:113"><span class="id" title="binder">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="Hprop.html#J:110"><span class="id" title="variable">J</span></a> <a class="idref" href="Hprop.html#x:113"><span class="id" title="variable">x</span></a> <a class="idref" href="Hprop.html#h:111"><span class="id" title="variable">h</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">hnf</span> <span class="id" title="keyword">in</span> <span class="id" title="var">M</span>. <span class="id" title="tactic">eauto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab100"></a><h4 class="section">Exercise: 4 stars, standard, especially useful (hstar_hpure_l)</h4>
+
+<div class="paragraph"> </div>
+
+ Prove that a heap <span class="inlinecode"><span class="id" title="var">h</span></span> satisfies <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">P</span>]</span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H</span></span> if and only if
+    <span class="inlinecode"><span class="id" title="var">P</span></span> is true and <span class="inlinecode"><span class="id" title="var">h</span></span> it satisfies <span class="inlinecode"><span class="id" title="var">H</span></span>. The proof requires
+    two lemmas on finite maps from <span class="inlinecode"><span class="id" title="var">LibSepFmap.v</span></span>:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.union_empty_l</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">h</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.empty</span> \<span class="id" title="var">u</span> <span class="id" title="var">h</span> = <span class="id" title="var">h</span>.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">Fmap.disjoint_empty_l</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">h</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Fmap.disjoint</span> <span class="id" title="var">Fmap.empty</span> <span class="id" title="var">h</span>.
+</span>    Note that <span class="inlinecode"><span class="id" title="tactic">auto</span></span> can apply <span class="inlinecode"><span class="id" title="var">Fmap.disjoint_empty_l</span></span> automatically.
+
+<div class="paragraph"> </div>
+
+    Hint: begin the proof by appyling <span class="inlinecode"><span class="id" title="var">propositional_extensionality</span></span>.
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hstar_hpure_l" class="idref" href="#hstar_hpure_l"><span class="id" title="lemma">hstar_hpure_l</span></a> : <span class="id" title="keyword">∀</span> <a id="P:114" class="idref" href="#P:114"><span class="id" title="binder">P</span></a> <a id="H:115" class="idref" href="#H:115"><span class="id" title="binder">H</span></a> <a id="h:116" class="idref" href="#h:116"><span class="id" title="binder">h</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Hprop.html#P:114"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation"><span class='gray-font'>\</span>*</span></a> <a class="idref" href="Hprop.html#H:115"><span class="id" title="variable">H</span></a><a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">)</span></a> <a class="idref" href="Hprop.html#1c2e0971edf6e9b6c6dd4a5951d04f<sub>36</sub>"><span class="id" title="notation">h</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#P:114"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#H:115"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#h:116"><span class="id" title="variable">h</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+
+<div class="doc">
+<a id="lab101"></a><h1 class="section">Optional Material</h1>
+
+</div>
+
+<div class="doc">
+<a id="lab102"></a><h2 class="section">Alternative, Equivalent Definitions for Separation Logic Triples</h2>
+
+<div class="paragraph"> </div>
+
+ We have previously defined <span class="inlinecode"><span class="id" title="var">triple</span></span> on top of <span class="inlinecode"><span class="id" title="var">hoare</span></span>,
+    with the help of the separating conjunction operator, as:
+    <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode">(<span class="id" title="var">H'</span>:<span class="id" title="var">hprop</span>),</span> <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode">(<span class="id" title="var">H</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*</span> <span class="inlinecode"><span class="id" title="var">H'</span>)</span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">(<span class="id" title="var">Q</span></span> <span class="inlinecode"><span class='gray-font'>\</span>*+</span> <span class="inlinecode"><span class="id" title="var">H'</span>)</span>.
+    In what follows, we give an equivalent characterization,
+    expressed directly in terms of heaps and heap unions.
+
+<div class="paragraph"> </div>
+
+    The alternative definition of <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> asserts that if
+    <span class="inlinecode"><span class="id" title="var">h<sub>1</sub></span></span> satisfies the precondition <span class="inlinecode"><span class="id" title="var">H</span></span> and <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span> describes the rest
+    of the state, then the evaluation of <span class="inlinecode"><span class="id" title="var">t</span></span> produces a value <span class="inlinecode"><span class="id" title="var">v</span></span> in
+    a final state made that can be decomposed between a part <span class="inlinecode"><span class="id" title="var">h<sub>1</sub>'</span></span>
+    and <span class="inlinecode"><span class="id" title="var">h<sub>2</sub></span></span> unchanged, in such a way that <span class="inlinecode"><span class="id" title="var">v</span></span> and <span class="inlinecode"><span class="id" title="var">h<sub>1</sub>'</span></span> together
+    satisfy the postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span>. Formally: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="triple_lowlevel" class="idref" href="#triple_lowlevel"><span class="id" title="definition">triple_lowlevel</span></a> (<a id="t:117" class="idref" href="#t:117"><span class="id" title="binder">t</span></a>:<a class="idref" href="LibSepReference.html#trm"><span class="id" title="inductive">trm</span></a>) (<a id="H:118" class="idref" href="#H:118"><span class="id" title="binder">H</span></a>:<a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) (<a id="Q:119" class="idref" href="#Q:119"><span class="id" title="binder">Q</span></a>:<a class="idref" href="LibSepReference.html#val"><span class="id" title="inductive">val</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="h<sub>1</sub>:120" class="idref" href="#h<sub>1</sub>:120"><span class="id" title="binder">h<sub>1</sub></span></a> <a id="h<sub>2</sub>:121" class="idref" href="#h<sub>2</sub>:121"><span class="id" title="binder">h<sub>2</sub></span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#Fmap.disjoint"><span class="id" title="definition">Fmap.disjoint</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:120"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:121"><span class="id" title="variable">h<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#H:118"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>:120"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="h<sub>1</sub>':122" class="idref" href="#h<sub>1</sub>':122"><span class="id" title="binder">h<sub>1</sub>'</span></a> <a id="v:123" class="idref" href="#v:123"><span class="id" title="binder">v</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepReference.html#Fmap.disjoint"><span class="id" title="definition">Fmap.disjoint</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>':122"><span class="id" title="variable">h<sub>1</sub>'</span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:121"><span class="id" title="variable">h<sub>2</sub></span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepReference.html#eval"><span class="id" title="inductive">eval</span></a> (<a class="idref" href="Hprop.html#h<sub>1</sub>:120"><span class="id" title="variable">h<sub>1</sub></span></a> <a class="idref" href="Hprop.html#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">u</span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:121"><span class="id" title="variable">h<sub>2</sub></span></a>) <a class="idref" href="Hprop.html#t:117"><span class="id" title="variable">t</span></a> (<a class="idref" href="Hprop.html#h<sub>1</sub>':122"><span class="id" title="variable">h<sub>1</sub>'</span></a> <a class="idref" href="Hprop.html#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#11dbc5cc324072f557c3f348a31ba1a<sub>0</sub>"><span class="id" title="notation">u</span></a> <a class="idref" href="Hprop.html#h<sub>2</sub>:121"><span class="id" title="variable">h<sub>2</sub></span></a>) <a class="idref" href="Hprop.html#v:123"><span class="id" title="variable">v</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="Hprop.html#Q:119"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hprop.html#v:123"><span class="id" title="variable">v</span></a> <a class="idref" href="Hprop.html#h<sub>1</sub>':122"><span class="id" title="variable">h<sub>1</sub>'</span></a>.<br/>
+</div>
+
+<div class="doc">
+Let us establish the equivalence between this alternative
+    definition of <span class="inlinecode"><span class="id" title="var">triple</span></span> and the original one. 
+<div class="paragraph"> </div>
+
+<a id="lab103"></a><h4 class="section">Exercise: 3 stars, standard, optional (triple_iff_triple_lowlevel)</h4>
+ Prove the equivalence between <span class="inlinecode"><span class="id" title="var">triple</span></span> and <span class="inlinecode"><span class="id" title="var">triple_low_level</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="triple_iff_triple_lowlevel" class="idref" href="#triple_iff_triple_lowlevel"><span class="id" title="lemma">triple_iff_triple_lowlevel</span></a> : <span class="id" title="keyword">∀</span> <a id="t:124" class="idref" href="#t:124"><span class="id" title="binder">t</span></a> <a id="H:125" class="idref" href="#H:125"><span class="id" title="binder">H</span></a> <a id="Q:126" class="idref" href="#Q:126"><span class="id" title="binder">Q</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#triple"><span class="id" title="definition">triple</span></a> <a class="idref" href="Hprop.html#t:124"><span class="id" title="variable">t</span></a> <a class="idref" href="Hprop.html#H:125"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#Q:126"><span class="id" title="variable">Q</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Hprop.html#triple_lowlevel"><span class="id" title="definition">triple_lowlevel</span></a> <a class="idref" href="Hprop.html#t:124"><span class="id" title="variable">t</span></a> <a class="idref" href="Hprop.html#H:125"><span class="id" title="variable">H</span></a> <a class="idref" href="Hprop.html#Q:126"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+
+<div class="doc">
+<a id="lab104"></a><h2 class="section">Alternative Definitions for Heap Predicates</h2>
+
+<div class="paragraph"> </div>
+
+ In what follows, we discuss alternative, equivalent definitions for
+    the fundamental heap predicates. We write these equivalence using
+    equalities of the form <span class="inlinecode"><span class="id" title="var">H<sub>1</sub></span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">H<sub>2</sub></span></span>. Recall that lemma <span class="inlinecode"><span class="id" title="var">hprop_eq</span></span> enables
+    deriving such equalities by invoking predicate extensionality. 
+<div class="paragraph"> </div>
+
+ The empty heap predicate <span class="inlinecode"><span class='gray-font'>\</span>[]</span> is equivalent to the pure fact predicate
+    <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">True</span>]</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hempty_eq_hpure_true" class="idref" href="#hempty_eq_hpure_true"><span class="id" title="lemma">hempty_eq_hpure_true</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Hprop.html#hempty"><span class="id" title="definition">hempty</span></a>, <a class="idref" href="Hprop.html#hpure"><span class="id" title="definition">hpure</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="Hprop.html#hprop_eq"><span class="id" title="lemma">hprop_eq</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">h</span>. <span class="id" title="var">iff</span> <span class="id" title="var">Hh</span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">destruct</span> <span class="id" title="var">Hh</span>. <span class="id" title="tactic">auto</span>. }<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Thus, <span class="inlinecode"><span class="id" title="var">hempty</span></span> could be defined in terms of <span class="inlinecode"><span class="id" title="var">hpure</span></span>, as <span class="inlinecode"><span class="id" title="var">hpure</span></span> <span class="inlinecode"><span class="id" title="var">True</span></span>,
+    written <span class="inlinecode"><span class='gray-font'>\</span>[<span class="id" title="var">True</span>]</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hempty'" class="idref" href="#hempty'"><span class="id" title="definition">hempty'</span></a> : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a>.<br/>
+</div>
+
+<div class="doc">
+The pure fact predicate <span class="inlinecode">[\<span class="id" title="var">P</span>]</span> is equivalent to the existential
+    quantification over a proof of <span class="inlinecode"><span class="id" title="var">P</span></span> in the empty heap, that is,
+    to the heap predicate <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode">(<span class="id" title="var">p</span>:<span class="id" title="var">P</span>),</span> <span class="inlinecode"><span class='gray-font'>\</span>[]</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="hpure_eq_hexists_proof" class="idref" href="#hpure_eq_hexists_proof"><span class="id" title="lemma">hpure_eq_hexists_proof</span></a> : <span class="id" title="keyword">∀</span> <a id="P:127" class="idref" href="#P:127"><span class="id" title="binder">P</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation"><span class='gray-font'>\</span>[</span></a><a class="idref" href="Hprop.html#P:127"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#53316c5a9a53e765aefbae8243c4b1dc"><span class="id" title="notation">]</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(</span></a><a id="p:128" class="idref" href="#p:128"><span class="id" title="binder">p</span></a>:<a class="idref" href="Hprop.html#P:127"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">),</span></a> <a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Hprop.html#hempty"><span class="id" title="definition">hempty</span></a>, <a class="idref" href="Hprop.html#hpure"><span class="id" title="definition">hpure</span></a>, <a class="idref" href="Hprop.html#hexists"><span class="id" title="definition">hexists</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">P</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Hprop.html#hprop_eq"><span class="id" title="lemma">hprop_eq</span></a>. <span class="id" title="tactic">intros</span> <span class="id" title="var">h</span>. <span class="id" title="var">iff</span> <span class="id" title="var">Hh</span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">destruct</span> <span class="id" title="var">Hh</span> <span class="id" title="keyword">as</span> (<span class="id" title="var">E</span>&amp;<span class="id" title="var">p</span>). <span class="id" title="tactic">∃</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">auto</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">destruct</span> <span class="id" title="var">Hh</span> <span class="id" title="keyword">as</span> (<span class="id" title="var">p</span>&amp;<span class="id" title="var">E</span>). <span class="id" title="tactic">auto</span>. }<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Thus, <span class="inlinecode"><span class="id" title="var">hpure</span></span> could be defined in terms of <span class="inlinecode"><span class="id" title="var">hexists</span></span> and <span class="inlinecode"><span class="id" title="var">hempty</span></span>, as
+    <span class="inlinecode"><span class="id" title="var">hexists</span></span> <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode">(<span class="id" title="var">p</span>:<span class="id" title="var">P</span>)</span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">hempty</span>)</span>, also written <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode">(<span class="id" title="var">p</span>:<span class="id" title="var">P</span>),</span> <span class="inlinecode"><span class='gray-font'>\</span>[]</span>.
+    In fact, this is how <span class="inlinecode"><span class="id" title="var">hpure</span></span> is defined in the rest of the course. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="hpure'" class="idref" href="#hpure'"><span class="id" title="definition">hpure'</span></a> (<a id="P:129" class="idref" href="#P:129"><span class="id" title="binder">P</span></a>:<span class="id" title="keyword">Prop</span>) : <a class="idref" href="Hprop.html#hprop"><span class="id" title="definition">hprop</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">\</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">∃</span></a> <a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">(</span></a><a id="p:130" class="idref" href="#p:130"><span class="id" title="binder">p</span></a>:<a class="idref" href="Hprop.html#P:129"><span class="id" title="variable">P</span></a><a class="idref" href="Hprop.html#427157b8047cdf158af6c4e7232eb7ce"><span class="id" title="notation">),</span></a> <a class="idref" href="Hprop.html#cb6b4bc70cb30142f9711e4deb4cb93a"><span class="id" title="notation"><span class='gray-font'>\</span>[]</span></a>.<br/>
+</div>
+
+<div class="doc">
+It is useful to minimize the number of combinators, both for elegance
+    and to reduce the proof effort.
+
+<div class="paragraph"> </div>
+
+    Since we cannot do without <span class="inlinecode"><span class="id" title="var">hexists</span></span>, we have a choice between
+    considering either <span class="inlinecode"><span class="id" title="var">hpure</span></span> or <span class="inlinecode"><span class="id" title="var">hempty</span></span> as primitive, and the other
+    one as derived. The predicate <span class="inlinecode"><span class="id" title="var">hempty</span></span> is simpler and appears as
+    more fundamental.
+
+<div class="paragraph"> </div>
+
+    Hence, in the subsequent chapters (and in the CFML tool),
+    we define <span class="inlinecode"><span class="id" title="var">hpure</span></span> in terms of <span class="inlinecode"><span class="id" title="var">hexists</span></span> and <span class="inlinecode"><span class="id" title="var">hempty</span></span>,
+    like in the definition of <span class="inlinecode"><span class="id" title="var">hpure'</span></span> shown above.
+    In other words, we assume the definition:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">hpure</span> (<span class="id" title="var">P</span>:<span class="id" title="keyword">Prop</span>) : <span class="id" title="var">hprop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class='gray-font'>\</span><span class="id" title="tactic">∃</span> (<span class="id" title="var">p</span>:<span class="id" title="var">P</span>), <span class='gray-font'>\</span>[].
+</span>
+</div>
+
+<div class="doc">
+<a id="lab105"></a><h2 class="section">Additional Explanations for the Definition of <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span></h2>
+
+<div class="paragraph"> </div>
+
+ The heap predicate <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode">(<span class="id" title="var">n</span>:<span class="id" title="var">int</span>),</span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">~~&gt;</span> <span class="inlinecode">(<span class="id" title="var">val_int</span></span> <span class="inlinecode"><span class="id" title="var">n</span>)</span>
+    characterizes a state that contains a single memory cell,
+    at address <span class="inlinecode"><span class="id" title="var">p</span></span>, storing the integer value <span class="inlinecode"><span class="id" title="var">n</span></span>, for "some"
+    (unspecified) integer <span class="inlinecode"><span class="id" title="var">n</span></span>.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Parameter</span> (<span class="id" title="var">p</span>:<span class="id" title="var">loc</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Check</span> (<span class='gray-font'>\</span><span class="id" title="tactic">∃</span> (<span class="id" title="var">n</span>:<span class="id" title="var">int</span>), <span class="id" title="var">p</span> ~~&gt; (<span class="id" title="var">val_int</span> <span class="id" title="var">n</span>)) : <span class="id" title="var">hprop</span>.
+</span>    The type of <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span>, which operates on <span class="inlinecode"><span class="id" title="var">hprop</span></span>,is very similar
+    to that of <span class="inlinecode"><span class="id" title="tactic">∃</span></span>, which operates on <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>. The key difference is
+    that a witness for a <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> can depend on the current heap, whereas
+    a witness for a <span class="inlinecode"><span class="id" title="tactic">∃</span></span> cannot.
+
+<div class="paragraph"> </div>
+
+    The notation <span class="inlinecode"><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> stands for <span class="inlinecode"><span class="id" title="var">ex</span></span> <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">P</span>)</span>,
+    where <span class="inlinecode"><span class="id" title="var">ex</span></span> has the following type:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">ex</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, (<span class="id" title="var">A</span> → <span class="id" title="keyword">Prop</span>) → <span class="id" title="keyword">Prop</span>.
+</span>    Likewise, <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">H</span></span> stands for <span class="inlinecode"><span class="id" title="var">hexists</span></span> <span class="inlinecode">(<span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">H</span>)</span>,
+    where <span class="inlinecode"><span class="id" title="var">hexists</span></span> has the following type:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Check</span> <span class="id" title="var">hexists</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>, (<span class="id" title="var">A</span> → <span class="id" title="var">hprop</span>) → <span class="id" title="var">hprop</span>.
+</span>
+<div class="paragraph"> </div>
+
+ Remark: the notation for <span class="inlinecode"><span class='gray-font'>\</span><span class="id" title="tactic">∃</span></span> is directly adapted from that
+    of <span class="inlinecode"><span class="id" title="tactic">∃</span></span>, which supports the quantification an arbitrary number
+    of variables, and is defined in <span class="inlinecode"><span class="id" title="var">Coq.Init.Logic</span></span> as follows.
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> "'exists' x .. y , p" := (<span class="id" title="var">ex</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ .. (<span class="id" title="var">ex</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">y</span> ⇒ <span class="id" title="var">p</span>)) ..))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">x</span> <span class="id" title="var">binder</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">format</span> "'[' 'exists' '/ ' x .. y , '/ ' p ']'").
+</span>
+</div>
+
+<div class="doc">
+<a id="lab106"></a><h2 class="section">Formulation of the Extensionality Axioms</h2>
+
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Module</span> <a id="Extensionality" class="idref" href="#Extensionality"><span class="id" title="module">Extensionality</span></a>.<br/>
+</div>
+
+<div class="doc">
+To establish extensionality of entailment, we have used
+    the predicate extensionality axiom. In fact, this axiom
+    can be derived by combining the axiom of "functional extensionality"
+    with another one called "propositional extensionality". 
+<div class="paragraph"> </div>
+
+ The axiom of "propositional extensionality" asserts that
+    two propositions that are logically equivalent (in the sense
+    that they imply each other) can be considered equal. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="Extensionality.propositional_extensionality" class="idref" href="#Extensionality.propositional_extensionality"><span class="id" title="axiom">propositional_extensionality</span></a> : <span class="id" title="keyword">∀</span> (<a id="P:131" class="idref" href="#P:131"><span class="id" title="binder">P</span></a> <a id="Q:132" class="idref" href="#Q:132"><span class="id" title="binder">Q</span></a>:<span class="id" title="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Hprop.html#P:131"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Hprop.html#Q:132"><span class="id" title="variable">Q</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#P:131"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#Q:132"><span class="id" title="variable">Q</span></a>.<br/>
+</div>
+
+<div class="doc">
+The axiom of "functional extensionality" asserts that
+    two functions are equal if they provide equal result
+    for every argument. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="Extensionality.functional_extensionality" class="idref" href="#Extensionality.functional_extensionality"><span class="id" title="axiom">functional_extensionality</span></a> : <span class="id" title="keyword">∀</span> <a id="A:134" class="idref" href="#A:134"><span class="id" title="binder">A</span></a> <a id="B:135" class="idref" href="#B:135"><span class="id" title="binder">B</span></a> (<a id="f:136" class="idref" href="#f:136"><span class="id" title="binder">f</span></a> <a id="g:137" class="idref" href="#g:137"><span class="id" title="binder">g</span></a>:<a class="idref" href="Hprop.html#A:134"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="Hprop.html#B:135"><span class="id" title="variable">B</span></a>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:138" class="idref" href="#x:138"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#f:136"><span class="id" title="variable">f</span></a> <a class="idref" href="Hprop.html#x:138"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#g:137"><span class="id" title="variable">g</span></a> <a class="idref" href="Hprop.html#x:138"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#f:136"><span class="id" title="variable">f</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#g:137"><span class="id" title="variable">g</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab107"></a><h4 class="section">Exercise: 1 star, standard, especially useful (predicate_extensionality_derived)</h4>
+ Using the two axioms <span class="inlinecode"><span class="id" title="var">propositional_extensionality</span></span>
+    and <span class="inlinecode"><span class="id" title="var">functional_extensionality</span></span>, show how to derive
+    <span class="inlinecode"><span class="id" title="var">predicate_extensionality</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="Extensionality.predicate_extensionality_derived" class="idref" href="#Extensionality.predicate_extensionality_derived"><span class="id" title="lemma">predicate_extensionality_derived</span></a> : <span class="id" title="keyword">∀</span> <a id="A:140" class="idref" href="#A:140"><span class="id" title="binder">A</span></a> (<a id="P:141" class="idref" href="#P:141"><span class="id" title="binder">P</span></a> <a id="Q:142" class="idref" href="#Q:142"><span class="id" title="binder">Q</span></a>:<a class="idref" href="Hprop.html#A:140"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><span class="id" title="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="x:143" class="idref" href="#x:143"><span class="id" title="binder">x</span></a>, <a class="idref" href="Hprop.html#P:141"><span class="id" title="variable">P</span></a> <a class="idref" href="Hprop.html#x:143"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="Hprop.html#Q:142"><span class="id" title="variable">Q</span></a> <a class="idref" href="Hprop.html#x:143"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="Hprop.html#P:141"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Hprop.html#Q:142"><span class="id" title="variable">Q</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="code">
+
+<span class="id" title="keyword">End</span> <a class="idref" href="Hprop.html#Extensionality"><span class="id" title="module">Extensionality</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab108"></a><h2 class="section">Historical Notes</h2>
+
+<div class="paragraph"> </div>
+
+ In this chapter, we defined the predicate <span class="inlinecode"><span class="id" title="var">triple</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> for Separation
+    Logic triples on top of the predicate <span class="inlinecode"><span class="id" title="var">hoare</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span> for Hoare triples,
+    by quantifying universally on a heap predicate <span class="inlinecode"><span class="id" title="var">H'</span></span>, which describes the
+    "rest of the word". This technique, known as the "baked-in frame rule",
+    was introduced by <a href="Bib.html#Birkedal,-Torp-Smith and Yang 2006"><span class="inlineref">[Birkedal, Torp-Smith and Yang 2006]</span></a>, who developed
+    the first Separation Logic for a higher-order programming language. It was
+    later employed successfully in numerous formalizations of Separation Logic.
+
+<div class="paragraph"> </div>
+
+    Compared to the use of a "low-level" definition of Separation Logic triples
+    such as the predicate <span class="inlinecode"><span class="id" title="var">triple_lowlevel</span></span>, which quantifies over disjoint
+    pieces of heaps, the "high-level" definition that bakes in the frame rule
+    leads to more elegant, simpler proofs. 
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2023-10-27&nbsp;14:02&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

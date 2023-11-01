@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="common/css/sf.css" rel="stylesheet" type="text/css" />
+<title>VSU_stdlib: Axiomatization of malloc/free/exit</title>
+<link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
+<script src="common/jquery-ui/external/jquery/jquery.js"></script>
+<script src="common/jquery-ui/jquery-ui.js"></script>
+<script src="common/toggleproofs.js"></script>
+<link href="common/css/vc.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+<div id='logoinheader'><a href='https://softwarefoundations.cis.upenn.edu'>
+<img src='common/media/image/sf_logo_sm.png' alt='Software Foundations Logo'></a></div>
+<div class='booktitleinheader'><a href='index.html'>Volume 5: Verifiable C</a></div>
+<ul id='menu'>
+   <li class='section_name'><a href='toc.html'>Table of Contents</a></li>
+   <li class='section_name'><a href='coqindex.html'>Index</a></li>
+</ul>
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">VSU_stdlib<span class="subtitle">Axiomatization of malloc/free/exit</span></h1>
+
+
+<div class="code">
+
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.proofauto</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.floyd.VSU</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VC.stdlib</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Spec_stdlib.html#"><span class="id" title="library">VC.Spec_stdlib</span></a>.<br/><hr class='doublespaceincode'/>
+#[<span class="id" title="var">export</span>] <span class="id" title="keyword">Instance</span> <a id="CompSpecs" class="idref" href="#CompSpecs"><span class="id" title="instance">CompSpecs</span></a> : <span class="id" title="class">compspecs</span>. <span class="id" title="var">make_compspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+</div>
+
+<div class="doc">
+The VSU for external axiomatized functions is much like any
+ other VSU, except that we use <span class="inlinecode"><span class="id" title="keyword">Axiom</span></span>s instead of <span class="inlinecode"><span class="id" title="keyword">Definition</span></span>s
+ and <span class="inlinecode"><span class="id" title="keyword">Lemma</span></span>s.
+
+<div class="paragraph"> </div>
+
+ Because this VSU does not import any APDs, we don't need a <span class="inlinecode"><span class="id" title="keyword">Section</span></span>.
+
+<div class="paragraph"> </div>
+
+ Normally at this point, we would construct an <span class="inlinecode"><span class="id" title="var">M</span></span> showing how the
+ <span class="inlinecode"><span class="id" title="var">mem_mgr</span></span> predicate is implemented.  But here we just axiomatize: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="M" class="idref" href="#M"><span class="id" title="axiom">M</span></a>: <a class="idref" href="Spec_stdlib.html#MallocFreeAPD"><span class="id" title="record">MallocFreeAPD</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Axiom</span> <a id="make_mem_mgr" class="idref" href="#make_mem_mgr"><span class="id" title="axiom">make_mem_mgr</span></a>: <span class="id" title="keyword">∀</span> <a id="gv:2" class="idref" href="#gv:2"><span class="id" title="binder">gv</span></a>, <span class="id" title="method">emp</span> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a> <a class="idref" href="VSU_stdlib.html#gv:2"><span class="id" title="variable">gv</span></a>.<br/>
+</div>
+
+<div class="doc">
+Normally at this point, we would prove a <span class="inlinecode"><span class="id" title="var">semax_body</span></span> lemma for each
+  function that the module exports.  But here, we use <span class="inlinecode"><span class="id" title="var">body_lemma_of_funspec</span></span>
+  for external functions; and we write this as an axiom: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Axiom</span> <a id="body_malloc" class="idref" href="#body_malloc"><span class="id" title="axiom">body_malloc</span></a>:<br/>
+&nbsp;<span class="id" title="keyword">∀</span> {<a id="Espec:4" class="idref" href="#Espec:4"><span class="id" title="binder">Espec</span></a>: <span class="id" title="class">OracleKind</span>} {<a id="cs:5" class="idref" href="#cs:5"><span class="id" title="binder">cs</span></a>: <span class="id" title="class">compspecs</span>} ,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="definition">VST.floyd.library.body_lemma_of_funspec</span> <span class="id" title="constructor">EF_malloc</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> (<a class="idref" href="Spec_stdlib.html#malloc_spec_sz"><span class="id" title="definition">malloc_spec_sz</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a>)).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Axiom</span> <a id="body_free" class="idref" href="#body_free"><span class="id" title="axiom">body_free</span></a>:<br/>
+&nbsp;<span class="id" title="keyword">∀</span> {<a id="Espec:7" class="idref" href="#Espec:7"><span class="id" title="binder">Espec</span></a>: <span class="id" title="class">OracleKind</span>} {<a id="cs:8" class="idref" href="#cs:8"><span class="id" title="binder">cs</span></a>: <span class="id" title="class">compspecs</span>} ,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="definition">VST.floyd.library.body_lemma_of_funspec</span> <span class="id" title="constructor">EF_free</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> (<a class="idref" href="Spec_stdlib.html#free_spec_sz"><span class="id" title="definition">free_spec_sz</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a>)).<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Axiom</span> <a id="body_exit" class="idref" href="#body_exit"><span class="id" title="axiom">body_exit</span></a>:<br/>
+&nbsp;<span class="id" title="keyword">∀</span> {<a id="Espec:10" class="idref" href="#Espec:10"><span class="id" title="binder">Espec</span></a>: <span class="id" title="class">OracleKind</span>},<br/>
+&nbsp;&nbsp;<span class="id" title="definition">VST.floyd.library.body_lemma_of_funspec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="constructor">EF_external</span> "exit" (<span class="id" title="constructor">mksignature</span> (<span class="id" title="constructor">AST.Tint</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>) <span class="id" title="constructor">AST.Tvoid</span> <span class="id" title="definition">cc_default</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> (<a class="idref" href="Spec_stdlib.html#exit_spec"><span class="id" title="definition">exit_spec</span></a>)).<br/>
+</div>
+
+<div class="doc">
+<a id="lab200"></a><h2 class="section">Internal functions</h2>
+
+<div class="paragraph"> </div>
+
+ There is one internal (nonexported) function, so as usual we must write
+  a funspec for it.  That is, the <span class="inlinecode"><span class="id" title="var">placeholder</span></span>, which is a useless function
+  whose only purpose was to force <span class="inlinecode"><span class="id" title="var">clightgen</span></span> to keep the external declarations
+  for <span class="inlinecode"><span class="id" title="var">malloc</span></span>, <span class="inlinecode"><span class="id" title="var">free</span></span>, <span class="inlinecode"><span class="id" title="var">exit</span></span>.  Because nobody will call <span class="inlinecode"><span class="id" title="var">placeholder</span>()</span>, we
+ can give it a trivial funspec whose precondition is <span class="inlinecode"><span class="id" title="var">False</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="placeholder_spec" class="idref" href="#placeholder_spec"><span class="id" title="definition">placeholder_spec</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="definition">_placeholder</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="definition">vacuous_funspec</span> (<span class="id" title="constructor">Internal</span> <span class="id" title="definition">f_placeholder</span>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab201"></a><h2 class="section">Definining the pieces of a VSU</h2>
+ And now, in the usual way, we can put totether the pieces: 
+</div>
+<div class="code">
+
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_ASI" class="idref" href="#MF_ASI"><span class="id" title="definition">MF_ASI</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_stdlib.html#MallocFreeASI"><span class="id" title="definition">MallocFreeASI</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_imported_specs" class="idref" href="#MF_imported_specs"><span class="id" title="definition">MF_imported_specs</span></a>:<span class="id" title="definition">funspecs</span> :=  <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_internal_specs" class="idref" href="#MF_internal_specs"><span class="id" title="definition">MF_internal_specs</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stdlib.html#placeholder_spec"><span class="id" title="definition">placeholder_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a><a class="idref" href="VSU_stdlib.html#MF_ASI"><span class="id" title="definition">MF_ASI</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_globals" class="idref" href="#MF_globals"><span class="id" title="definition">MF_globals</span></a>: <span class="id" title="definition">globals</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">mpred</span>:= <a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">Spec_stdlib.mem_mgr</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MFVprog" class="idref" href="#MFVprog"><span class="id" title="definition">MFVprog</span></a> : <span class="id" title="definition">varspecs</span>. <span class="id" title="var">mk_varspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MFGprog" class="idref" href="#MFGprog"><span class="id" title="definition">MFGprog</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stdlib.html#MF_imported_specs"><span class="id" title="definition">MF_imported_specs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="VSU_stdlib.html#MF_internal_specs"><span class="id" title="definition">MF_internal_specs</span></a>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab202"></a><h1 class="section">Constructing the Component and the VSU</h1>
+
+<div class="paragraph"> </div>
+
+ This lemma is required for the <span class="inlinecode"><span class="id" title="var">solve_SF_external</span></span> <span class="inlinecode">(<span class="id" title="var">body_malloc</span>)</span> below.
+     The basic purpose is to ensure that the postcondition of the external
+     function ensures a return value that's strictly compatible with the calling
+     conventions specified by the C-language return-type of the function.
+     The particular form of the lemma is derived from the proof goal
+     of solve_SF_external below.
+ 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="semax_func_cons_malloc_aux" class="idref" href="#semax_func_cons_malloc_aux"><span class="id" title="lemma">semax_func_cons_malloc_aux</span></a> {<a id="cs:12" class="idref" href="#cs:12"><span class="id" title="binder">cs</span></a>: <span class="id" title="class">compspecs</span>} (<a id="gv:13" class="idref" href="#gv:13"><span class="id" title="binder">gv</span></a>: <span class="id" title="definition">globals</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="gx:14" class="idref" href="#gx:14"><span class="id" title="binder">gx</span></a> : <span class="id" title="definition">genviron</span>) (<a id="ret:15" class="idref" href="#ret:15"><span class="id" title="binder">ret</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <span class="id" title="inductive">val</span>) <a id="n:16" class="idref" href="#n:16"><span class="id" title="binder">n</span></a>:<br/>
+&nbsp;<span class="id" title="notation">(</span><span class="id" title="notation">EX</span> <a id="x:17" class="idref" href="#x:17"><span class="id" title="binder">x</span></a> : <span class="id" title="inductive">val</span><span class="id" title="notation">,</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">(</span><span class="id" title="notation">PROP</span> <span class="id" title="notation">(</span> <span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><a class="idref" href="VSU_stdlib.html#x:17"><span class="id" title="variable">x</span></a><span class="id" title="notation">)</span> <span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a> <a class="idref" href="VSU_stdlib.html#gv:13"><span class="id" title="variable">gv</span></a><span class="id" title="notation">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="definition">eq_dec</span> <a class="idref" href="VSU_stdlib.html#x:17"><span class="id" title="variable">x</span></a> <span class="id" title="definition">nullval</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">then</span> <span class="id" title="method">emp</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span> <a class="idref" href="Spec_stdlib.html#malloc_token_sz"><span class="id" title="projection">malloc_token_sz</span></a> <a class="idref" href="VSU_stdlib.html#M"><span class="id" title="axiom">M</span></a> <span class="id" title="definition">Ews</span> <a class="idref" href="VSU_stdlib.html#n:16"><span class="id" title="variable">n</span></a> <a class="idref" href="VSU_stdlib.html#x:17"><span class="id" title="variable">x</span></a> <span class="id" title="notation">×</span> <span class="id" title="definition">memory_block</span> <span class="id" title="definition">Ews</span> <a class="idref" href="VSU_stdlib.html#n:16"><span class="id" title="variable">n</span></a> <a class="idref" href="VSU_stdlib.html#x:17"><span class="id" title="variable">x</span></a><span class="id" title="notation">)</span><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">(</span><span class="id" title="notation">make_ext_rval</span> <span class="id" title="notation">gx</span> <span class="id" title="notation">(</span><span class="id" title="notation">rettype_of_type</span> <span class="id" title="notation">(</span><span class="id" title="notation">tptr</span> <span class="id" title="notation">tvoid</span><span class="id" title="notation">))</span> <span class="id" title="notation">ret</span><span class="id" title="notation">)</span><span class="id" title="notation">)</span> <span class="id" title="notation">&amp;&amp;</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">!!</span> <span class="id" title="definition">Builtins0.val_opt_has_rettype</span> <a class="idref" href="VSU_stdlib.html#ret:15"><span class="id" title="variable">ret</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="definition">rettype_of_type</span> (<span class="id" title="definition">tptr</span> <span class="id" title="definition">tvoid</span>))<br/>
+&nbsp;<span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="notation">!!</span> <span class="id" title="definition">tc_option_val</span> (<span class="id" title="definition">tptr</span> <span class="id" title="definition">tvoid</span>) <a class="idref" href="VSU_stdlib.html#ret:15"><span class="id" title="variable">ret</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;<span class="id" title="var">Intros</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="lemma">insert_local</span>.<br/>
+&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">lower_andp</span>.<br/>
+&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="lemma">derives_extract_prop</span>; <span class="id" title="tactic">intro</span>.<br/>
+&nbsp;<span class="id" title="tactic">red</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>0</sub></span>; <span class="id" title="var">unfold_lift</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>0</sub></span>; <span class="id" title="tactic">destruct</span> <span class="id" title="var">H<sub>0</sub></span>.<br/>
+&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ret</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">contradiction</span>.<br/>
+&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="definition">eval_id</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>0</sub></span>; <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">H<sub>0</sub></span>. <span class="id" title="tactic">subst</span> <span class="id" title="var">v</span>.<br/>
+&nbsp;<span class="id" title="var">if_tac</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H<sub>0</sub></span>; <span class="id" title="var">entailer</span>!.<br/>
+&nbsp;<span class="id" title="var">renormalize</span>. <span class="id" title="var">entailer</span>!.<br/>
+&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="MF_E" class="idref" href="#MF_E"><span class="id" title="definition">MF_E</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_stdlib.html#MF_ASI"><span class="id" title="definition">MF_ASI</span></a>.<br/>
+</div>
+
+<div class="doc">
+ Each VSU may have private global variables that constitute its
+  "local state".  This <span class="inlinecode"><span class="id" title="var">VSU_initializer</span></span> lemma calculates how to
+  reason about their initial values.   But the module stdlib.c does 
+  not have any global variables, so this <span class="inlinecode"><span class="id" title="var">initialize</span></span> lemma is
+  rather trivial here.  See <span class="inlinecode"><span class="id" title="var">VSU_stdlib2.v</span></span>, lemma <span class="inlinecode"><span class="id" title="var">initialize</span></span>,
+  for a more interesting example. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Lemma</span> <a id="initialize" class="idref" href="#initialize"><span class="id" title="lemma">initialize</span></a>: <span class="id" title="definition">VSU_initializer</span> <span class="id" title="definition">prog</span> <a class="idref" href="VSU_stdlib.html#MF_globals"><span class="id" title="definition">MF_globals</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">InitGPred_tac</span>.<br/>
+<span class="id" title="tactic">apply</span> <a class="idref" href="VSU_stdlib.html#make_mem_mgr"><span class="id" title="axiom">make_mem_mgr</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+Now that all the subcomponents are ready, we can bundle up the VSU: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="MallocFreeVSU" class="idref" href="#MallocFreeVSU"><span class="id" title="definition">MallocFreeVSU</span></a>: @<span class="id" title="definition">VSU</span> <span class="id" title="definition">NullExtension.Espec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="VSU_stdlib.html#MF_E"><span class="id" title="definition">MF_E</span></a> <a class="idref" href="VSU_stdlib.html#MF_imported_specs"><span class="id" title="definition">MF_imported_specs</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) <a class="idref" href="VSU_stdlib.html#MF_ASI"><span class="id" title="definition">MF_ASI</span></a> <a class="idref" href="VSU_stdlib.html#MF_globals"><span class="id" title="definition">MF_globals</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mkVSU</span> <span class="id" title="definition">prog</span> <a class="idref" href="VSU_stdlib.html#MF_internal_specs"><span class="id" title="definition">MF_internal_specs</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">solve_SF_external</span> (@<a class="idref" href="VSU_stdlib.html#body_malloc"><span class="id" title="axiom">body_malloc</span></a> <span class="id" title="definition">NullExtension.Espec</span> <a class="idref" href="VSU_stdlib.html#CompSpecs"><span class="id" title="instance">CompSpecs</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<a class="idref" href="VSU_stdlib.html#semax_func_cons_malloc_aux"><span class="id" title="lemma">semax_func_cons_malloc_aux</span></a> <span class="id" title="var">gv</span> <span class="id" title="var">gx</span> <span class="id" title="var">ret</span> <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">solve_SF_external</span> (@<a class="idref" href="VSU_stdlib.html#body_free"><span class="id" title="axiom">body_free</span></a> <span class="id" title="definition">NullExtension.Espec</span> <a class="idref" href="VSU_stdlib.html#CompSpecs"><span class="id" title="instance">CompSpecs</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">solve_SF_external</span> (@<a class="idref" href="VSU_stdlib.html#body_exit"><span class="id" title="axiom">body_exit</span></a> <span class="id" title="definition">NullExtension.Espec</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="VSU_stdlib.html#initialize"><span class="id" title="lemma">initialize</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+<a id="lab203"></a><h2 class="section">Next Chapter: <a href="VSU_main.html"><span class="inlineref">VSU_main</span></a></h2>
+
+</div>
+<div class="code">
+
+<span class="comment">(*&nbsp;2023-10-27&nbsp;14:00&nbsp;*)</span><br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
