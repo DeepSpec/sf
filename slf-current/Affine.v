@@ -1309,4 +1309,4 @@ End LowLevel.
     direct approach to controlling linearity was introduced in the context of
     CFML, in work by [Guéneau, Jourdan, Charguéraud, and Pottier 2019] (in Bib.v) *)
 
-(* 2023-10-27 14:02 *)
+(* 2023-11-04 19:24 *)
