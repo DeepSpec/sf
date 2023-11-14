@@ -122,11 +122,11 @@
 </div>
 
 <div class="doc">
-<i>Values</i> are <span class="inlinecode">&lt;{<span class="id" title="var">true</span>}&gt;</span>, <span class="inlinecode">&lt;{<span class="id" title="var">false</span>}&gt;</span>, and numeric values... 
+<i>Values</i> are <span class="inlinecode"><span class="id" title="var">true</span></span>, <span class="inlinecode"><span class="id" title="var">false</span></span>, and numeric values... 
 </div>
 <div class="code">
 <span class="id" title="keyword">Inductive</span> <a id="TM.bvalue" class="idref" href="#TM.bvalue"><span class="id" title="inductive">bvalue</span></a> : <a class="idref" href="Types.html#TM.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;| <a id="TM.bv_True" class="idref" href="#TM.bv_True"><span class="id" title="constructor">bv_True</span></a> : <a class="idref" href="Types.html#bvalue:3"><span class="id" title="inductive">bvalue</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'true'"><span class="id" title="notation">true</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">}&gt;</span></a><br/>
+&nbsp;&nbsp;| <a id="TM.bv_true" class="idref" href="#TM.bv_true"><span class="id" title="constructor">bv_true</span></a> : <a class="idref" href="Types.html#bvalue:3"><span class="id" title="inductive">bvalue</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'true'"><span class="id" title="notation">true</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">}&gt;</span></a><br/>
 &nbsp;&nbsp;| <a id="TM.bv_false" class="idref" href="#TM.bv_false"><span class="id" title="constructor">bv_false</span></a> : <a class="idref" href="Types.html#bvalue:3"><span class="id" title="inductive">bvalue</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'false'"><span class="id" title="notation">false</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="TM.nvalue" class="idref" href="#TM.nvalue"><span class="id" title="inductive">nvalue</span></a> : <a class="idref" href="Types.html#TM.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="TM.nv_0" class="idref" href="#TM.nv_0"><span class="id" title="constructor">nv_0</span></a> : <a class="idref" href="Types.html#nvalue:5"><span class="id" title="inductive">nvalue</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'0'"><span class="id" title="notation">0</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">}&gt;</span></a><br/>
@@ -280,8 +280,7 @@
  ... and then formally: 
 </div>
 <div class="code">
-
-<span class="id" title="keyword">Reserved Notation</span> &quot;t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t'" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
+<hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="TM.step" class="idref" href="#TM.step"><span class="id" title="inductive">step</span></a> : <a class="idref" href="Types.html#TM.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Types.html#TM.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="TM.ST_IfTrue" class="idref" href="#TM.ST_IfTrue"><span class="id" title="constructor">ST_IfTrue</span></a> : <span class="id" title="keyword">∀</span> <a id="t<sub>1</sub>:11" class="idref" href="#t<sub>1</sub>:11"><span class="id" title="binder">t<sub>1</sub></span></a> <a id="t<sub>2</sub>:12" class="idref" href="#t<sub>2</sub>:12"><span class="id" title="binder">t<sub>2</sub></span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'true'"><span class="id" title="notation">true</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> <a class="idref" href="Types.html#t<sub>1</sub>:11"><span class="id" title="variable">t<sub>1</sub></span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> <a class="idref" href="Types.html#t<sub>2</sub>:12"><span class="id" title="variable">t<sub>2</sub></span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">}&gt;</span></a> <a class="idref" href="Types.html#TM.:::x_'--&gt;'_x"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span></span></a> <a class="idref" href="Types.html#t<sub>1</sub>:11"><span class="id" title="variable">t<sub>1</sub></span></a><br/>
@@ -318,10 +317,10 @@
 Notice that the <span class="inlinecode"><span class="id" title="var">step</span></span> relation doesn't care about whether the
     expression being stepped makes global sense -- it just checks that
     the operation in the <i>next</i> reduction step is being applied to the
-    right kinds of operands.  For example, the term &lt;{ succ true }&gt; cannot
+    right kinds of operands.  For example, the term <span class="inlinecode"><span class="id" title="var">succ</span></span> <span class="inlinecode"><span class="id" title="var">true</span></span> cannot
     take a step, but the almost as obviously nonsensical term
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;{ <span class="id" title="var">succ</span> (<span class="id" title="keyword">if</span> <span class="id" title="var">true</span> <span class="id" title="keyword">then</span> <span class="id" title="var">true</span> <span class="id" title="keyword">else</span> <span class="id" title="var">true</span>) }&gt;
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">succ</span> (<span class="id" title="keyword">if</span> <span class="id" title="var">true</span> <span class="id" title="keyword">then</span> <span class="id" title="var">true</span> <span class="id" title="keyword">else</span> <span class="id" title="var">true</span>)
 </span>    can take a step (once, before becoming stuck). 
 </div>
 
@@ -335,7 +334,10 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
     chapter fails here.  That is, there are terms that are normal
     forms (they can't take a step) but not values (they are not
     included in our definition of possible "results of reduction").
-    Such terms are said to be <i>stuck</i>. 
+
+<div class="paragraph"> </div>
+
+    Such terms are <i>stuck</i>. 
 </div>
 <div class="code">
 
@@ -360,10 +362,13 @@ Notice that the <span class="inlinecode"><span class="id" title="var">step</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
- However, although values and normal forms are <i>not</i> the same in
-    this language, the set of values is a subset of the set of normal
-    forms.  This is important because it shows we did not accidentally
-    define things so that some value could still take a step. 
+ However, although values and normal forms are <i>not</i> the same in this
+    language, the set of values is a subset of the set of normal forms.
+
+<div class="paragraph"> </div>
+
+    This is important because it shows we did not accidentally define
+    things so that some value could still take a step. 
 <div class="paragraph"> </div>
 
 <a id="lab189"></a><h4 class="section">Exercise: 3 stars, standard (value_is_nf)</h4>
@@ -522,8 +527,7 @@ In informal notation, the typing relation is often written
 </table></center>
 </div>
 <div class="code">
-
-<span class="id" title="keyword">Reserved Notation</span> &quot;'<span class="nowrap">&vert;--</span>' t '&#x2208;' T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
+<hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="TM.has_type" class="idref" href="#TM.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="Types.html#TM.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Types.html#TM.ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="TM.T_True" class="idref" href="#TM.T_True"><span class="id" title="constructor">T_True</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Types.html#3a0ff81ff05c617e3b019636afe42303"><span class="id" title="notation"><span class="nowrap">&vert;--</span></span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="Types.html#TM.:tm:tm_scope:'true'"><span class="id" title="notation">true</span></a> <a class="idref" href="Types.html#d0fb5c2ace8d127472c53eefbdee4581"><span class="id" title="notation">}&gt;</span></a> <a class="idref" href="Types.html#3a0ff81ff05c617e3b019636afe42303"><span class="id" title="notation">\</span></a><a class="idref" href="Types.html#3a0ff81ff05c617e3b019636afe42303"><span class="id" title="notation">in</span></a> <a class="idref" href="Types.html#TM.Bool"><span class="id" title="constructor">Bool</span></a><br/>
@@ -599,7 +603,7 @@ In informal notation, the typing relation is often written
 
 <div class="paragraph"> </div>
 
- The following two lemmas capture the fundamental property that the
+ The following two lemmas capture the fundamental fact that the
     definitions of boolean and numeric values agree with the typing
     relation. 
 </div>
@@ -636,10 +640,13 @@ In informal notation, the typing relation is often written
 
 <div class="paragraph"> </div>
 
- The typing relation enjoys two critical properties.  The first is
-    that well-typed normal forms are not stuck -- or conversely, if a
-    term is well typed, then either it is a value or it can take at
-    least one step.  We call this <i>progress</i>. 
+ The typing relation enjoys two critical properties.
+
+<div class="paragraph"> </div>
+
+    The first is that well-typed normal forms are not stuck -- or
+    conversely, if a term is well typed, then either it is a value or it
+    can take at least one step.  We call this <i>progress</i>. 
 <div class="paragraph"> </div>
 
 <a id="lab195"></a><h4 class="section">Exercise: 3 stars, standard (finish_progress)</h4>
@@ -1068,8 +1075,8 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 
 <a id="lab211"></a><h4 class="section">Exercise: 1 star, standard (remove_pred0)</h4>
  The reduction rule <span class="inlinecode"><span class="id" title="var">ST_Pred0</span></span> is a bit counter-intuitive: we
-    might feel that it makes more sense for the predecessor of <span class="inlinecode">&lt;{0}&gt;</span> to
-    be undefined, rather than being defined to be <span class="inlinecode">&lt;{0}&gt;</span>.  Can we
+    might feel that it makes more sense for the predecessor of <span class="inlinecode">0</span> to
+    be undefined, rather than being defined to be <span class="inlinecode">0</span>.  Can we
     achieve this simply by removing the rule from the definition of
     <span class="inlinecode"><span class="id" title="var">step</span></span>?  Would doing so create any problems elsewhere?
 
@@ -1111,7 +1118,7 @@ Complete the formal proof of the <span class="inlinecode"><span class="id" title
 
 <div class="code">
 <span class="id" title="keyword">End</span> <a class="idref" href="Types.html#TM"><span class="id" title="module">TM</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-11-04&nbsp;19:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-11-14&nbsp;18:30&nbsp;*)</span><br/>
 </div>
 </div>
 

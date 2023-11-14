@@ -672,11 +672,11 @@ Proof. (* FILL IN HERE *) Admitted.
       ------------------------------ (hoare_asgn_wrong)
       {{ True }} X := a {{ X = a }}
 
-    Give a counterexample showing that this rule is incorrect and
-    argue informally that it is really a counterexample.  (Hint:
-    The rule universally quantifies over the arithmetic expression
-    [a], and your counterexample needs to exhibit an [a] for which
-    the rule doesn't work.) *)
+    Give a counterexample showing that this rule is incorrect and use
+    it to complete the proof belkow, showing that it is really a
+    counterexample.  (Hint: The rule universally quantifies over the
+    arithmetic expression [a], and your counterexample needs to
+    exhibit an [a] for which the rule doesn't work.) *)
 
 Theorem hoare_asgn_wrong : exists a:aexp,
   ~ {{ True }} X := a {{ X = a }}.
@@ -1150,12 +1150,16 @@ Proof.
 
       {{X <= Y}} c {{Y <= X}}
 
-    Your proof should not need to use [unfold
-    valid_hoare_triple].  (Hint: Remember that the assignment rule
-    works best when it's applied "back to front," from the
-    postcondition to the precondition.  So your proof will want to
-    start at the end and work back to the beginning of your program.
-    And remember that [eapply] is your friend.)  *)
+    Your proof should not need to use [unfold valid_hoare_triple].
+
+    Hints:
+       - Remember that Imp commands need to be enclosed in <{...}>
+         brackets.
+       - Remember that the assignment rule works best when it's
+         applied "back to front," from the postcondition to the
+         precondition.  So your proof will want to start at the end
+         and work back to the beginning of your program.
+       - Remember that [eapply] is your friend.)  *)
 
 Definition swap_program : com
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -1575,9 +1579,14 @@ Qed.
 
 (** Use your [if1] rule to prove the following (valid) Hoare triple.
 
-    Hint: [assertion_auto''] will once again get you most but not all the
-    way to a completely automated proof.  You can finish manually, or
-    tweak the tactic further. *)
+    Hint: [assertion_auto''] will once again get you most but not all
+    the way to a completely automated proof.  You can finish manually,
+    or tweak the tactic further.
+
+    Hint: If you see a message like [Unable to unify "Imp.ceval
+    Imp.CSkip st st'" with...], it probably means you are using a
+    definition or theorem [e.g., hoare_skip] from above this exercise
+    without re-proving it for the new version of Imp with if1. *)
 
 Lemma hoare_if1_good :
   {{ X + Y = Z }}
@@ -2321,4 +2330,4 @@ End HoareAssertAssume.
 
 
 
-(* 2023-11-04 19:18 *)
+(* 2023-11-14 18:30 *)

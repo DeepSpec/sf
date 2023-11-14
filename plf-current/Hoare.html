@@ -932,11 +932,11 @@ Of course, what we'd probably prefer is to prove this
   <td class="infrule"><span style='letter-spacing:-.4em;'>{</span>{ True <span style='letter-spacing:-.4em;'>}</span>} X := a <span style='letter-spacing:-.4em;'>{</span>{ X = a <span style='letter-spacing:-.4em;'>}</span>}</td>
   <td></td>
 </tr>
-</table></center>    Give a counterexample showing that this rule is incorrect and
-    argue informally that it is really a counterexample.  (Hint:
-    The rule universally quantifies over the arithmetic expression
-    <span class="inlinecode"><span class="id" title="var">a</span></span>, and your counterexample needs to exhibit an <span class="inlinecode"><span class="id" title="var">a</span></span> for which
-    the rule doesn't work.) 
+</table></center>    Give a counterexample showing that this rule is incorrect and use
+    it to complete the proof belkow, showing that it is really a
+    counterexample.  (Hint: The rule universally quantifies over the
+    arithmetic expression <span class="inlinecode"><span class="id" title="var">a</span></span>, and your counterexample needs to
+    exhibit an <span class="inlinecode"><span class="id" title="var">a</span></span> for which the rule doesn't work.) 
 </div>
 <div class="code">
 
@@ -1597,12 +1597,26 @@ Informally, a nice way of displaying a proof using the sequencing
     show that it satisfies the following specification:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span> ≤ <span class="id" title="var">Y</span><span style='letter-spacing:-.4em;'>}</span>} <span class="id" title="var">c</span> <span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">Y</span> ≤ <span class="id" title="var">X</span><span style='letter-spacing:-.4em;'>}</span>}
-</span>    Your proof should not need to use <span class="inlinecode"><span class="id" title="tactic">unfold</span></span>
-    <span class="inlinecode"><span class="id" title="var">valid_hoare_triple</span></span>.  (Hint: Remember that the assignment rule
-    works best when it's applied "back to front," from the
-    postcondition to the precondition.  So your proof will want to
-    start at the end and work back to the beginning of your program.
-    And remember that <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> is your friend.)  
+</span>    Your proof should not need to use <span class="inlinecode"><span class="id" title="tactic">unfold</span></span> <span class="inlinecode"><span class="id" title="var">valid_hoare_triple</span></span>.
+
+<div class="paragraph"> </div>
+
+    Hints:
+<ul class="doclist">
+<li> Remember that Imp commands need to be enclosed in &lt;{...}&gt;
+         brackets.
+
+</li>
+<li> Remember that the assignment rule works best when it's
+         applied "back to front," from the postcondition to the
+         precondition.  So your proof will want to start at the end
+         and work back to the beginning of your program.
+
+</li>
+<li> Remember that <span class="inlinecode"><span class="id" title="tactic">eapply</span></span> is your friend.)  
+
+</li>
+</ul>
 </div>
 <div class="code">
 
@@ -2011,10 +2025,7 @@ For later proofs, it will help to extend <span class="inlinecode"><span class="i
     <span class="inlinecode"><span class="id" title="var">if<sub>1</sub></span></span>. Let the rules for <span class="inlinecode"><span class="id" title="keyword">if</span></span> guide you.
 </div>
 <div class="code">
-
-<span class="id" title="keyword">Reserved Notation</span> &quot;st '=[' c ']=&gt;'' st'"<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">c</span> <span class="id" title="var">custom</span> <span class="id" title="var">com</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 99,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st</span> <span class="id" title="keyword">constr</span>, <span class="id" title="var">st'</span> <span class="id" title="keyword">constr</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>).<br/><hr class='doublespaceincode'/>
+<hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="If<sub>1</sub>.ceval" class="idref" href="#If<sub>1</sub>.ceval"><span class="id" title="inductive">ceval</span></a> : <a class="idref" href="Hoare.html#If<sub>1</sub>.com"><span class="id" title="inductive">com</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="If<sub>1</sub>.E_Skip" class="idref" href="#If<sub>1</sub>.E_Skip"><span class="id" title="constructor">E_Skip</span></a> : <span class="id" title="keyword">∀</span> <a id="st:124" class="idref" href="#st:124"><span class="id" title="binder">st</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Hoare.html#st:124"><span class="id" title="variable">st</span></a> <a class="idref" href="Hoare.html#2bd5832dff0b8e46c42539b178101547"><span class="id" title="notation">=[</span></a> <a class="idref" href="Hoare.html#If<sub>1</sub>.:com::'skip'"><span class="id" title="notation">skip</span></a> <a class="idref" href="Hoare.html#2bd5832dff0b8e46c42539b178101547"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Hoare.html#st:124"><span class="id" title="variable">st</span></a><br/>
@@ -2159,9 +2170,16 @@ For full credit, prove formally (<span class="inlinecode"><span class="id" title
 
 <div class="paragraph"> </div>
 
-    Hint: <span class="inlinecode"><span class="id" title="var">assertion_auto''</span></span> will once again get you most but not all the
-    way to a completely automated proof.  You can finish manually, or
-    tweak the tactic further. 
+    Hint: <span class="inlinecode"><span class="id" title="var">assertion_auto''</span></span> will once again get you most but not all
+    the way to a completely automated proof.  You can finish manually,
+    or tweak the tactic further.
+
+<div class="paragraph"> </div>
+
+    Hint: If you see a message like <span class="inlinecode"><span class="id" title="var">Unable</span></span> <span class="inlinecode"><span class="id" title="var">to</span></span> <span class="inlinecode"><span class="id" title="var">unify</span></span> <span class="inlinecode">&quot;<span class="id" title="var">Imp.ceval</span></span>
+    <span class="inlinecode"><span class="id" title="var">Imp.CSkip</span></span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode"><span class="id" title="var">st'</span>&quot;</span> <span class="inlinecode"><span class="id" title="keyword">with</span>...</span>, it probably means you are using a
+    definition or theorem <span class="inlinecode"><span class="id" title="var">e.g</span>.,</span> <span class="inlinecode"><span class="id" title="var">hoare_skip</span></span> from above this exercise
+    without re-proving it for the new version of Imp with if<sub>1</sub>. 
 </div>
 <div class="code">
 
@@ -3160,7 +3178,7 @@ Use your rules to prove the following triple.
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-11-04&nbsp;19:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-11-14&nbsp;18:30&nbsp;*)</span><br/>
 </div>
 </div>
 

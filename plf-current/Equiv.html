@@ -1974,10 +1974,7 @@ To formalize Himp, we first add a clause to the definition of
    to formalize the behavior of the <span class="inlinecode"><span class="id" title="var">HAVOC</span></span> command? 
 </div>
 <div class="code">
-
-<span class="id" title="keyword">Reserved Notation</span> &quot;st '=[' c ']=&gt;' st'"<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="var">c</span> <span class="id" title="var">custom</span> <span class="id" title="var">com</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 99, <span class="id" title="var">st</span> <span class="id" title="keyword">constr</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">st'</span> <span class="id" title="keyword">constr</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>).<br/><hr class='doublespaceincode'/>
+<hr class='doublespaceincode'/>
 <span class="id" title="keyword">Inductive</span> <a id="Himp.ceval" class="idref" href="#Himp.ceval"><span class="id" title="inductive">ceval</span></a> : <a class="idref" href="Equiv.html#Himp.com"><span class="id" title="inductive">com</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="definition">state</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="Himp.E_Skip" class="idref" href="#Himp.E_Skip"><span class="id" title="constructor">E_Skip</span></a> : <span class="id" title="keyword">∀</span> <a id="st:141" class="idref" href="#st:141"><span class="id" title="binder">st</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Equiv.html#st:141"><span class="id" title="variable">st</span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">=[</span></a> <a class="idref" href="Equiv.html#Himp.:com::'skip'"><span class="id" title="notation">skip</span></a> <a class="idref" href="Equiv.html#e8def6e1c7a66877a96e361d5569b34e"><span class="id" title="notation">]=&gt;</span></a> <a class="idref" href="Equiv.html#st:141"><span class="id" title="variable">st</span></a><br/>
@@ -2331,7 +2328,7 @@ Finally, find a non-trivial property which is preserved by
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-11-04&nbsp;19:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-11-14&nbsp;18:30&nbsp;*)</span><br/>
 </div>
 </div>
 

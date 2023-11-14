@@ -60,11 +60,10 @@ In this chapter, we develop the fundamental theory of the Simply
     reduction and types is to identify the possible <i>canonical
     forms</i> (i.e., well-typed values) belonging to each type.  For
     <span class="inlinecode"><span class="id" title="var">Bool</span></span>, these are again the boolean values <span class="inlinecode"><span class="id" title="var">true</span></span> and <span class="inlinecode"><span class="id" title="var">false</span></span>; for
-    arrow types, they are lambda-abstractions.
-
+    arrow types, they are lambda-abstractions. 
 <div class="paragraph"> </div>
 
-    Formally, we will need these lemmas only for terms that are not
+ Formally, we will need these lemmas only for terms that are not
     only well typed but <i>closed</i> -- i.e., well typed in the empty
     context. 
 </div>
@@ -1488,27 +1487,26 @@ In this extended exercise, your job is to finish formalizing the
 
 <div class="paragraph"> </div>
 
-    Fill in the core definitions for STLCArith, by starting
-    with the rules and terms which are the same as STLC.
-    Then prove the key lemmas and theorems we provide.
-    You will need to define and prove helper lemmas, as before.
+    Fill in the core definitions for STLCArith, by starting with the rules
+    and terms which are the same as STLC.  Then prove the key lemmas and
+    theorems we provide.  You will need to define and prove helper lemmas,
+    as before.
 
 <div class="paragraph"> </div>
 
-    It will be necessary to also fill in "Reserved Notation",
-    "Notation", and "Hint Constructors".
+    It will be necessary to also fill in "Reserved Notation", "Notation",
+    and "Hint Constructors".
 
 <div class="paragraph"> </div>
 
-    Hint: If you get an error "STLC.tm" found instead of term "tm" then Coq is picking
-    up the old notation for ie: subst instead of the new notation
-    for STLCArith, so you need to overwrite the old with the notation
-    before you can use it.
+    Hint: If you get an error "STLC.tm" found instead of term "tm" then Coq
+    is picking up the old notation for ie: subst instead of the new
+    notation for STLCArith, so you need to overwrite the old with the
+    notation before you can use it.
 
 <div class="paragraph"> </div>
 
-    Make sure Coq accepts the whole file before submitting
-
+    Make sure Coq accepts the whole file before submitting. 
 </div>
 <div class="code">
 
@@ -1526,7 +1524,8 @@ In this extended exercise, your job is to finish formalizing the
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 .<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="StlcProp.html#value"><span class="id" title="inductive">value</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Reserved Notation</span> &quot;t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t'" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/><hr class='doublespaceincode'/>
+
+<br/>
 <span class="id" title="keyword">Inductive</span> <a id="STLCArith.step" class="idref" href="#STLCArith.step"><span class="id" title="inductive">step</span></a> : <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <span class="id" title="keyword">where</span> <a id="STLCArith.:::x_'--&gt;'_x" class="idref" href="#STLCArith.:::x_'--&gt;'_x"><span class="id" title="notation">&quot;</span></a>t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t'" := (<a class="idref" href="StlcProp.html#step:90"><span class="id" title="inductive">step</span></a> <span class="id" title="var">t</span> <span class="id" title="var">t'</span>).<br/><hr class='doublespaceincode'/>
@@ -1541,7 +1540,8 @@ In this extended exercise, your job is to finish formalizing the
 <br/>
 <span class="comment">(*&nbsp;Typing&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="STLCArith.context" class="idref" href="#STLCArith.context"><span class="id" title="definition">context</span></a> := <span class="id" title="definition">partial_map</span> <a class="idref" href="StlcProp.html#STLCArith.ty"><span class="id" title="inductive">ty</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Reserved Notation</span> &quot;Gamma '<span class="nowrap">&vert;--</span>' t '&#x2208;' T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 101, <span class="id" title="var">t</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span>, <span class="id" title="var">T</span> <span class="id" title="var">custom</span> <span class="id" title="var">stlc</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/><hr class='doublespaceincode'/>
+
+<br/>
 <span class="id" title="keyword">Inductive</span> <a id="STLCArith.has_type" class="idref" href="#STLCArith.has_type"><span class="id" title="inductive">has_type</span></a> : <a class="idref" href="StlcProp.html#STLCArith.context"><span class="id" title="definition">context</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="StlcProp.html#STLCArith.ty"><span class="id" title="inductive">ty</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <span class="id" title="keyword">where</span> <a id="870cb72954f64f46f3d85fe14cc61377" class="idref" href="#870cb72954f64f46f3d85fe14cc61377"><span class="id" title="notation">&quot;</span></a>Gamma '<span class="nowrap">&vert;--</span>' t '&#x2208;' T" := (<a class="idref" href="StlcProp.html#has_type:93"><span class="id" title="inductive">has_type</span></a> <span class="id" title="var">Gamma</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>).<br/><hr class='doublespaceincode'/>
@@ -1615,7 +1615,7 @@ In this extended exercise, your job is to finish formalizing the
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="StlcProp.html#STLCArith"><span class="id" title="module">STLCArith</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-11-04&nbsp;19:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-11-14&nbsp;18:30&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -47,15 +47,15 @@
 
 <div class="paragraph"> </div>
 
- The simply typed lambda-calculus has enough structure to make its
-    theoretical properties interesting, but it is not much of a
+ The simply typed lambda-calculus has a rich enough structure to make
+    its theoretical properties interesting, but it is not much of a
     programming language!
 
 <div class="paragraph"> </div>
 
-    In this chapter, we begin to close the gap with real-world
-    languages by introducing a number of familiar features that have
-    straightforward treatments at the level of typing. 
+    In this chapter, we begin to close the gap with real-world languages by
+    introducing a number of familiar features that have straightforward
+    treatments at the level of typing. 
 <div class="paragraph"> </div>
 
 <a id="lab265"></a><h2 class="section">Numbers</h2>
@@ -885,8 +885,8 @@
 
  Another facility found in most programming languages (including
     Coq) is the ability to define recursive functions.  For example,
-    we would like to be able to define the factorial function like
-    this:
+    we would like to be able to define and use the factorial function
+    like this:
 <pre>
       let fact = \x:Nat,
              if x=0 then 1 else x * (fact (pred x))) in
@@ -894,10 +894,13 @@
 </pre>
    Note that the right-hand side of this binder mentions <span class="inlinecode"><span class="id" title="var">fact</span></span>, the
    variable being bound -- something that is not allowed according
-   to the way we defined <span class="inlinecode"><span class="id" title="keyword">let</span></span> above.  (The body of a <span class="inlinecode"><span class="id" title="keyword">let</span></span> is
-   typechecked in the same context as the <span class="inlinecode"><span class="id" title="keyword">let</span></span> itself, which means
-   that the recursive occurrence of <span class="inlinecode"><span class="id" title="var">fact</span></span> in the body will not have
-   a type in the context when it is looked up by the <span class="inlinecode"><span class="id" title="var">T_Var</span></span> rule.) 
+   to the way we defined <span class="inlinecode"><span class="id" title="keyword">let</span></span> above. 
+<div class="paragraph"> </div>
+
+ (The body of a <span class="inlinecode"><span class="id" title="keyword">let</span></span> is typechecked in the same context as the
+   <span class="inlinecode"><span class="id" title="keyword">let</span></span> itself, which means that the recursive occurrence of <span class="inlinecode"><span class="id" title="var">fact</span></span> in the
+   body will not have a type in the context when it is looked up by the
+   <span class="inlinecode"><span class="id" title="var">T_Var</span></span> rule.) 
 </div>
 <div class="code">
 
@@ -1125,6 +1128,11 @@ Here is another way of presenting recursive functions that is
 
 <div class="paragraph"> </div>
 
+ The simply typed lambda-calculus with fixed points is a famous and
+    extensively studied system. It is often called <i>PCF</i> because it is a
+    simple language of "partial computable functions". 
+<div class="paragraph"> </div>
+
 <a id="lab272"></a><h4 class="section">Exercise: 1 star, standard, optional (halve_fix)</h4>
  Translate this informal recursive definition into one using <span class="inlinecode"><span class="id" title="keyword">fix</span></span>:
 <pre>
@@ -1169,7 +1177,7 @@ Here is another way of presenting recursive functions that is
         (\eq:Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool,
            \m:Nat, \n:Nat,
              if m=0 then iszero n
-             else if n=0 then fls
+             else if n=0 then false
              else eq (pred m) (pred n))
 </pre>
  And finally, here is an example where <span class="inlinecode"><span class="id" title="keyword">fix</span></span> is used to define a
@@ -1179,8 +1187,8 @@ Here is another way of presenting recursive functions that is
       evenodd =
         fix
           (\eo: (Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool * Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool),
-             let e = \n:Nat, if n=0 then tru else eo.snd (pred n) in
-             let o = \n:Nat, if n=0 then fls else eo.fst (pred n) in
+             let e = \n:Nat, if n=0 then true  else eo.snd (pred n) in
+             let o = \n:Nat, if n=0 then false else eo.fst (pred n) in
              (e,o))
 
       even = evenodd.fst
@@ -1781,7 +1789,6 @@ Note that, for brevity, we've omitted booleans and instead
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#value:10"><span class="id" title="inductive">value</span></a> <a class="idref" href="MoreStlc.html#v<sub>2</sub>:24"><span class="id" title="variable">v<sub>2</sub></span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#value:10"><span class="id" title="inductive">value</span></a> <a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#v<sub>1</sub>:23"><span class="id" title="variable">v<sub>1</sub></span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="MoreStlc.html#v<sub>2</sub>:24"><span class="id" title="variable">v<sub>2</sub></span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Hint Constructors</span> <a class="idref" href="MoreStlc.html#value"><span class="id" title="inductive">value</span></a> : <span class="id" title="var">core</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Reserved Notation</span> &quot;t '<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>' t'" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40).<br/>
 </div>
 
 <div class="doc">
@@ -2117,7 +2124,7 @@ Next, a bit of Coq hackery to automate searching for typing
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">((</span></a>5<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">,</span></a>6<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">),</span></a>7<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::x_'.fst'"><span class="id" title="notation">.</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::x_'.fst'"><span class="id" title="notation">fst.snd</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.ProdTest.typechecks" class="idref" href="#STLCExtended.Examples.ProdTest.typechecks"><span class="id" title="definition">typechecks</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation"><span class="nowrap">&vert;--</span></span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.ProdTest.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.ProdTest.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span> 15. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.ProdTest.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.ProdTest.reduces" class="idref" href="#STLCExtended.Examples.ProdTest.reduces"><span class="id" title="definition">reduces</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.Examples.ProdTest.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#9cd10f7cb4dfdde0d448b6577b0f7bdd"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> 6.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -2141,7 +2148,7 @@ Next, a bit of Coq hackery to automate searching for typing
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'succ'_x"><span class="id" title="notation">succ</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.x"><span class="id" title="abbreviation">x</span></a><a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.LetTest.typechecks" class="idref" href="#STLCExtended.Examples.LetTest.typechecks"><span class="id" title="definition">typechecks</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation"><span class="nowrap">&vert;--</span></span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.LetTest.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.LetTest.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span> 15.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.LetTest.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span>.<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.LetTest.reduces" class="idref" href="#STLCExtended.Examples.LetTest.reduces"><span class="id" title="definition">reduces</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.Examples.LetTest.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#9cd10f7cb4dfdde0d448b6577b0f7bdd"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> 6.<br/>
@@ -2166,7 +2173,7 @@ Next, a bit of Coq hackery to automate searching for typing
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#67071c1f1e0255702ad90f4cb618f115"><span class="id" title="notation">|</span></a> <a class="idref" href="MoreStlc.html#67071c1f1e0255702ad90f4cb618f115"><span class="id" title="notation">inr</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.y"><span class="id" title="abbreviation">y</span></a> <a class="idref" href="MoreStlc.html#67071c1f1e0255702ad90f4cb618f115"><span class="id" title="notation">⇒</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.y"><span class="id" title="abbreviation">y</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.Sumtest1.typechecks" class="idref" href="#STLCExtended.Examples.Sumtest1.typechecks"><span class="id" title="definition">typechecks</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation"><span class="nowrap">&vert;--</span></span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest1.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest1.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span> 15. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest1.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.Sumtest1.reduces" class="idref" href="#STLCExtended.Examples.Sumtest1.reduces"><span class="id" title="definition">reduces</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest1.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#9cd10f7cb4dfdde0d448b6577b0f7bdd"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> 5.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -2191,7 +2198,7 @@ Next, a bit of Coq hackery to automate searching for typing
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.Examples.processSum"><span class="id" title="abbreviation">processSum</span></a> <a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'inl'_x_x"><span class="id" title="notation">inl</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a> 5<a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.processSum"><span class="id" title="abbreviation">processSum</span></a> <a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'inr'_x_x"><span class="id" title="notation">inr</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a> 5<a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.Sumtest2.typechecks" class="idref" href="#STLCExtended.Examples.Sumtest2.typechecks"><span class="id" title="definition">typechecks</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation"><span class="nowrap">&vert;--</span></span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest2.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#ac6d203e510f5b00c2daaeb576a325b<sub>8</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a> <a class="idref" href="MoreStlc.html#07385bcfe759c5c52b9f596e53f2c0f<sub>5</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#ac6d203e510f5b00c2daaeb576a325b<sub>8</sub>"><span class="id" title="notation">)</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest2.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span> 15. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest2.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span> 10. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.Sumtest2.reduces" class="idref" href="#STLCExtended.Examples.Sumtest2.reduces"><span class="id" title="definition">reduces</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.Examples.Sumtest2.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#9cd10f7cb4dfdde0d448b6577b0f7bdd"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> <a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">(</span></a>5<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">,</span></a> 0<a class="idref" href="MoreStlc.html#eef70aee8539936ab329e19df9d91f<sub>17</sub>"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -2220,7 +2227,7 @@ Next, a bit of Coq hackery to automate searching for typing
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#de876c64e601b25611daf48d0a4b5481"><span class="id" title="notation">|</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.x"><span class="id" title="abbreviation">x</span></a> <a class="idref" href="MoreStlc.html#de876c64e601b25611daf48d0a4b5481"><span class="id" title="notation">::</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.y"><span class="id" title="abbreviation">y</span></a> <a class="idref" href="MoreStlc.html#de876c64e601b25611daf48d0a4b5481"><span class="id" title="notation">⇒</span></a> <a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#STLCExtended.Examples.x"><span class="id" title="abbreviation">x</span></a> <a class="idref" href="MoreStlc.html#43eb4b39e17c20cb1da938909e269aa<sub>6</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.x"><span class="id" title="abbreviation">x</span></a><a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">)</span></a><a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">}&gt;</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.ListTest.typechecks" class="idref" href="#STLCExtended.Examples.ListTest.typechecks"><span class="id" title="definition">typechecks</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">empty</span> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation"><span class="nowrap">&vert;--</span></span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.ListTest.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#2a191a5524a6fd0500db9e76465037f<sub>5</sub>"><span class="id" title="notation">in</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a>.<br/>
-<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.ListTest.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span> 20. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.ListTest.tm_test"><span class="id" title="definition">tm_test</span></a>. <span class="id" title="tactic">eauto</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="STLCExtended.Examples.ListTest.reduces" class="idref" href="#STLCExtended.Examples.ListTest.reduces"><span class="id" title="definition">reduces</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.Examples.ListTest.tm_test"><span class="id" title="definition">tm_test</span></a> <a class="idref" href="MoreStlc.html#9cd10f7cb4dfdde0d448b6577b0f7bdd"><span class="id" title="notation"><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:6%;'><span style='letter-spacing:-.2em;'>-</span><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>&gt;</span><span style='vertical-align:15%;'>*</span></span></span></span></a> 25.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -2238,10 +2245,6 @@ Next, a bit of Coq hackery to automate searching for typing
 <div class="code">
 
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.FixTest1" class="idref" href="#STLCExtended.Examples.FixTest1"><span class="id" title="module">FixTest1</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;fact&nbsp;:=&nbsp;fix<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(\f:nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>nat.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\a:nat.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;a=0&nbsp;then&nbsp;1&nbsp;else&nbsp;a&nbsp;*&nbsp;(f&nbsp;(pred&nbsp;a)))&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.FixTest1.fact" class="idref" href="#STLCExtended.Examples.FixTest1.fact"><span class="id" title="definition">fact</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'fix'_x"><span class="id" title="notation">fix</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#STLCExtended.Examples.f"><span class="id" title="abbreviation">f</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">:</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">,</span></a><br/>
@@ -2267,14 +2270,6 @@ Next, a bit of Coq hackery to automate searching for typing
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest1"><span class="id" title="module">FixTest1</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.FixTest2" class="idref" href="#STLCExtended.Examples.FixTest2"><span class="id" title="module">FixTest2</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;map&nbsp;:=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\g:nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>nat.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(\f:<span class="inlinecode"><span class="id" title="var">nat</span></span><span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span><span class="inlinecode"><span class="id" title="var">nat</span></span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\l:<span class="inlinecode"><span class="id" title="var">nat</span></span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;l&nbsp;of<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="inlinecode"></span>&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;<span class="inlinecode"></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;x::l&nbsp;<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>&nbsp;(g&nbsp;x)::(f&nbsp;l))&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.FixTest2.map" class="idref" href="#STLCExtended.Examples.FixTest2.map"><span class="id" title="definition">map</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a> <a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#STLCExtended.Examples.g"><span class="id" title="abbreviation">g</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">:</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">,</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'fix'_x"><span class="id" title="notation">fix</span></a><br/>
@@ -2297,13 +2292,6 @@ Next, a bit of Coq hackery to automate searching for typing
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest2"><span class="id" title="module">FixTest2</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.FixTest3" class="idref" href="#STLCExtended.Examples.FixTest3"><span class="id" title="module">FixTest3</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;equal&nbsp;=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(\eq:Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Bool.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\m:Nat.&nbsp;\n:Nat.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tm_test0&nbsp;m&nbsp;then&nbsp;(tm_test0&nbsp;n&nbsp;then&nbsp;1&nbsp;else&nbsp;0)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;tm_test0&nbsp;n&nbsp;then&nbsp;0<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;eq&nbsp;(pred&nbsp;m)&nbsp;(pred&nbsp;n))&nbsp;&nbsp;&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.FixTest3.equal" class="idref" href="#STLCExtended.Examples.FixTest3.equal"><span class="id" title="definition">equal</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'fix'_x"><span class="id" title="notation">fix</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#12c502a9ec79bd3b5587ea74d3c86fae"><span class="id" title="notation">(</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">\</span></a><a class="idref" href="MoreStlc.html#STLCExtended.Examples.eq"><span class="id" title="abbreviation">eq</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">:</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::x_'-&gt;'_x"><span class="id" title="notation">→</span></a><a class="idref" href="MoreStlc.html#STLCExtended.:stlc_ty::'Nat'"><span class="id" title="notation">Nat</span></a><a class="idref" href="MoreStlc.html#1ad52bf8598c9e0c39505628d95be60b"><span class="id" title="notation">,</span></a><br/>
@@ -2333,16 +2321,6 @@ Next, a bit of Coq hackery to automate searching for typing
 <span class="comment">(*&nbsp;GRADE_THEOREM&nbsp;0.25:&nbsp;reduces2&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.FixTest3"><span class="id" title="module">FixTest3</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Module</span> <a id="STLCExtended.Examples.FixTest4" class="idref" href="#STLCExtended.Examples.FixTest4"><span class="id" title="module">FixTest4</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;let&nbsp;evenodd&nbsp;=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fix<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(\eo:&nbsp;(Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Nat&nbsp;*&nbsp;Nat<span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>Nat).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;e&nbsp;=&nbsp;\n:Nat.&nbsp;tm_test0&nbsp;n&nbsp;then&nbsp;1&nbsp;else&nbsp;eo.tm_snd&nbsp;(pred&nbsp;n)&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;o&nbsp;=&nbsp;\n:Nat.&nbsp;tm_test0&nbsp;n&nbsp;then&nbsp;0&nbsp;else&nbsp;eo.tm_fst&nbsp;(pred&nbsp;n)&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e,o))&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;even&nbsp;=&nbsp;evenodd.tm_fst&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;odd&nbsp;&nbsp;=&nbsp;evenodd.tm_snd&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(even&nbsp;3,&nbsp;even&nbsp;4)<br/>
-*)</span><br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="STLCExtended.Examples.FixTest4.eotest" class="idref" href="#STLCExtended.Examples.FixTest4.eotest"><span class="id" title="definition">eotest</span></a> :=<br/>
 <a class="idref" href="MoreStlc.html#9593265f23640347d8baf3ded78adc0e"><span class="id" title="notation">&lt;{</span></a><a class="idref" href="MoreStlc.html#70f8b4f45f8b8110132e9be18ff33560"><span class="id" title="notation">let</span></a> <a class="idref" href="MoreStlc.html#STLCExtended.Examples.evenodd"><span class="id" title="abbreviation">evenodd</span></a> <a class="idref" href="MoreStlc.html#70f8b4f45f8b8110132e9be18ff33560"><span class="id" title="notation">=</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MoreStlc.html#STLCExtended.:stlc::'fix'_x"><span class="id" title="notation">fix</span></a><br/>
@@ -2735,7 +2713,7 @@ Next, a bit of Coq hackery to automate searching for typing
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended"><span class="id" title="module">STLCExtended</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-11-04&nbsp;19:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2023-11-14&nbsp;18:30&nbsp;*)</span><br/>
 </div>
 </div>
 

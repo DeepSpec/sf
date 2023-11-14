@@ -17,6 +17,7 @@
     correct. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
+Set Warnings "-non-recursive".
 From Coq Require Import Bool.Bool.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
@@ -686,4 +687,4 @@ Import StepFunction.
 End StlcImpl.
 (** [] *)
 
-(* 2023-11-04 19:18 *)
+(* 2023-11-14 18:30 *)
