@@ -2002,4 +2002,4 @@ End MatchStyle.
     we refer to Section 10.3 from the paper:
     http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
 
-(* 2023-11-14 18:37 *)
+(* 2023-11-17 19:26 *)

@@ -107,10 +107,10 @@ Fixpoint evalF (t : tm) : nat :=
                                ---------                               (E_Const)
                                C n ==> n
 
-                               t1 ==> v1
-                               t2 ==> v2
+                               t1 ==> n1
+                               t2 ==> n2
                            -------------------                         (E_Plus)
-                           P t1 t2 ==> v1 + v2
+                           P t1 t2 ==> n1 + n2
 *)
 
 Reserved Notation " t '==>' n " (at level 50, left associativity).
@@ -118,10 +118,10 @@ Reserved Notation " t '==>' n " (at level 50, left associativity).
 Inductive eval : tm -> nat -> Prop :=
   | E_Const : forall n,
       C n ==> n
-  | E_Plus : forall t1 t2 v1 v2,
-      t1 ==> v1 ->
-      t2 ==> v2 ->
-      P t1 t2 ==> (v1 + v2)
+  | E_Plus : forall t1 t2 n1 n2,
+      t1 ==> n1 ->
+      t2 ==> n2 ->
+      P t1 t2 ==> (n1 + n2)
 
 where " t '==>' n " := (eval t n).
 
@@ -131,7 +131,7 @@ Module SimpleArith1.
 
     
                      -------------------------------        (ST_PlusConstConst)
-                     P (C v1) (C v2) --> C (v1 + v2)
+                     P (C n1) (C n2) --> C (n1 + n2)
 
                               t1 --> t1'
                          --------------------                        (ST_Plus1)
@@ -139,20 +139,20 @@ Module SimpleArith1.
 
                               t2 --> t2'
                       ----------------------------                   (ST_Plus2)
-                      P (C v1) t2 --> P (C v1) t2'
+                      P (C n1) t2 --> P (C n1) t2'
 *)
 
 Reserved Notation " t '-->' t' " (at level 40).
 
 Inductive step : tm -> tm -> Prop :=
-  | ST_PlusConstConst : forall v1 v2,
-      P (C v1) (C v2) --> C (v1 + v2)
+  | ST_PlusConstConst : forall n1 n2,
+      P (C n1) (C n2) --> C (n1 + n2)
   | ST_Plus1 : forall t1 t1' t2,
       t1 --> t1' ->
       P t1 t2 --> P t1' t2
-  | ST_Plus2 : forall v1 t2 t2',
+  | ST_Plus2 : forall n1 t2 t2',
       t2 --> t2' ->
-      P (C v1) t2 --> P (C v1) t2'
+      P (C n1) t2 --> P (C n1) t2'
 
   where " t '-->' t' " := (step t t').
 
@@ -392,7 +392,7 @@ Inductive value : tm -> Prop :=
 
 (** 
                      -------------------------------        (ST_PlusConstConst)
-                     P (C v1) (C v2) --> C (v1 + v2)
+                     P (C n1) (C n2) --> C (n1 + n2)
 
                               t1 --> t1'
                          --------------------                        (ST_Plus1)
@@ -419,9 +419,9 @@ Inductive value : tm -> Prop :=
 Reserved Notation " t '-->' t' " (at level 40).
 
 Inductive step : tm -> tm -> Prop :=
-  | ST_PlusConstConst : forall v1 v2,
-          P (C v1) (C v2)
-      --> C (v1 + v2)
+  | ST_PlusConstConst : forall n1 n2,
+          P (C n1) (C n2)
+      --> C (n1 + n2)
   | ST_Plus1 : forall t1 t1' t2,
         t1 --> t1' ->
         P t1 t2 --> P t1' t2
@@ -598,13 +598,13 @@ Module Temp1.
 
 Inductive value : tm -> Prop :=
   | v_const : forall n, value (C n)
-  | v_funny : forall t1 v2,
-                value (P t1 (C v2)).              (* <--- *)
+  | v_funny : forall t1 n,
+                value (P t1 (C n)).              (* <--- *)
 
 Reserved Notation " t '-->' t' " (at level 40).
 Inductive step : tm -> tm -> Prop :=
-  | ST_PlusConstConst : forall v1 v2,
-      P (C v1) (C v2) --> C (v1 + v2)
+  | ST_PlusConstConst : forall n1 n2,
+      P (C n1) (C n2) --> C (n1 + n2)
   | ST_Plus1 : forall t1 t1' t2,
       t1 --> t1' ->
       P t1 t2 --> P t1' t2
@@ -638,8 +638,8 @@ Reserved Notation " t '-->' t' " (at level 40).
 Inductive step : tm -> tm -> Prop :=
   | ST_Funny : forall n,
       C n --> P (C n) (C 0)                  (* <--- NEW *)
-  | ST_PlusConstConst : forall v1 v2,
-      P (C v1) (C v2) --> C (v1 + v2)
+  | ST_PlusConstConst : forall n1 n2,
+      P (C n1) (C n2) --> C (n1 + n2)
   | ST_Plus1 : forall t1 t1' t2,
       t1 --> t1' ->
       P t1 t2 --> P t1' t2
@@ -675,8 +675,8 @@ Inductive value : tm -> Prop :=
 Reserved Notation " t '-->' t' " (at level 40).
 
 Inductive step : tm -> tm -> Prop :=
-  | ST_PlusConstConst : forall v1 v2,
-      P (C v1) (C v2) --> C (v1 + v2)
+  | ST_PlusConstConst : forall n1 n2,
+      P (C n1) (C n2) --> C (n1 + n2)
   | ST_Plus1 : forall t1 t1' t2,
       t1 --> t1' ->
       P t1 t2 --> P t1' t2
@@ -1119,7 +1119,7 @@ Proof.
     consider:
 
     - [t = C n] for some [n].  Here [t] doesn't take a step, and we
-      have [t' = t].  We caxn derive the left-hand side by reflexivity
+      have [t' = t].  We can derive the left-hand side by reflexivity
       and the right-hand side by observing (a) that values are normal
       forms (by [nf_same_as_value]) and (b) that [t] is a value (by
       [v_const]).
@@ -1127,12 +1127,12 @@ Proof.
     - [t = P t1 t2] for some [t1] and [t2].  By the IH, [t1] and [t2]
       reduce to normal forms [t1'] and [t2'].  Recall that normal
       forms are values (by [nf_same_as_value]); we therefore know that
-      [t1' = C v1] and [t2' = C v2], for some [v1] and [v2].  We can
+      [t1' = C n1] and [t2' = C n2], for some [n1] and [n2].  We can
       combine the [-->*] derivations for [t1] and [t2] using
       [multi_congr_1] and [multi_congr_2] to prove that [P t1 t2]
-      reduces in many steps to [t' = C (v1 + v2)].
+      reduces in many steps to [t' = C (n1 + n2)].
 
-      Finally, [C (v1 + v2)] is a value, which is in turn a normal
+      Finally, [C (n1 + n2)] is a value, which is in turn a normal
       form by [nf_same_as_value]. [] *)
 Theorem step_normalizing :
   normalizing step.
@@ -1152,14 +1152,14 @@ Proof.
     destruct IHt2 as [t2' [Hsteps2 Hnormal2] ].
     apply nf_same_as_value in Hnormal1.
     apply nf_same_as_value in Hnormal2.
-    destruct Hnormal1 as [v1].
-    destruct Hnormal2 as [v2].
-    exists (C (v1 + v2)).
+    destruct Hnormal1 as [n1].
+    destruct Hnormal2 as [n2].
+    exists (C (n1 + n2)).
     split.
     + (* l *)
-      apply multi_trans with (P (C v1) t2).
+      apply multi_trans with (P (C n1) t2).
       * apply multistep_congr_1. apply Hsteps1.
-      * apply multi_trans with (P (C v1) (C v2)).
+      * apply multi_trans with (P (C n1) (C n2)).
         { apply multistep_congr_2.
           - apply v_const.
           - apply Hsteps2. }
@@ -1910,4 +1910,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-11-14 18:30 *)
+(* 2023-11-17 19:19 *)
