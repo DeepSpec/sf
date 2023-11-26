@@ -288,4 +288,4 @@ idtac "---------- contents_perm ---------".
 Print Assumptions contents_perm.
 Abort.
 
-(* 2023-11-17 19:22 *)
+(* 2023-11-26 21:15 *)

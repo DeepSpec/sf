@@ -2058,4 +2058,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2023-11-17 19:19 *)
+(* 2023-11-26 21:12 *)

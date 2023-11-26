@@ -105,7 +105,7 @@ Proof.
 (** When you define a Function, you must provide a [measure], that is,
     a function from your argument-type (in this case Z) to the natural
     numbers, and then you must prove that each recursive call within
-    the function body decreases the measure.  In this ecase, there's
+    the function body decreases the measure.  In this case, there's
     only one recursive call, so there's just one proof obligation:
     show that if [n>0] then  [Z.to_nat (n-1) < Z.to_nat n].  *)
 lia.
@@ -482,4 +482,4 @@ sep_apply (create_mem_mgr gv).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-11-17 19:23 *)
+(* 2023-11-26 21:16 *)

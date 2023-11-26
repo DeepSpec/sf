@@ -757,7 +757,7 @@ Proof. reflexivity. Qed.
 *)
 
 (** - The sequential composition of [d1] and [d2] is locally
-      consistent with respect [P] if [d1] is locally consistent with
+      consistent with respect to [P] if [d1] is locally consistent with
       respect to [P] and [d2] is locally consistent with respect to
       the postcondition of [d1]. *)
 
@@ -2025,4 +2025,4 @@ Proof.
 End Himp2.
 (** [] *)
 
-(* 2023-11-17 19:19 *)
+(* 2023-11-26 21:12 *)

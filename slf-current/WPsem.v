@@ -807,4 +807,4 @@ End WpFromHoare.
     (https://iris-project.org/), developed since 2015, exploits weakest
     preconditions to state reasoning rules. See the [Postscript]. *)
 
-(* 2023-11-17 19:26 *)
+(* 2023-11-26 21:18 *)
