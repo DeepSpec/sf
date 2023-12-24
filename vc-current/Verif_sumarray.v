@@ -76,8 +76,8 @@
 (* ================================================================= *)
 (** ** Workflow *)
 
-(** SEE ALSO: VC.pdf Chapter 3 (_Workflow_),
-     Chapter 4 (_Verifiable C_), Chapter 5 (_clightgen_), Chapter 6 (_ASTs_) *)
+(** SEE ALSO: VC.pdf Chapter 3 (Workflow),
+     Chapter 4 (_Verifiable C and clightgen_), Chapter 5 (_ASTs_) *)
 
 (** To verify a C program, such as [sumarray.c], use the CompCert
   front end to parse it into an Abstract Syntax Tree (AST).
@@ -98,7 +98,7 @@
 (* ================================================================= *)
 (** ** Let's verify! *)
 
-(** SEE ALSO: VC.pdf Chapter 8 (_Functional model, API spec_) *)
+(** SEE ALSO: VC.pdf Chapter 7 (_Functional model, API spec_) *)
 
 (** This file, [Verif_sumarray.v], contains a _specification_
     of the functional correctness of the program [sumarray.c],
@@ -303,7 +303,7 @@ Definition main_spec :=
 (* ================================================================= *)
 (** ** Packaging the Gprog and Vprog *)
 
-(** SEE ALSO: VC.pdf Chapter 9 (_Proof of the sumarray program_) *)
+(** SEE ALSO: VC.pdf Chapter 8 (_Proof of the sumarray program_) *)
 
 (** To prove the correctness of a whole program,
   - 1. Collect the function-API specs together into [Gprog].
@@ -358,7 +358,7 @@ Proof.
 (* ----------------------------------------------------------------- *)
 (** *** start_function *)
 
-(** SEE ALSO: VC.pdf Chapter 10 (_start_function_)
+(** SEE ALSO: VC.pdf Chapter 9 (_start_function_)
 
  The predicate [semax_body] states the Hoare triple of the function body,
  [Delta |- {Pre} c {Post}], where [Pre] and [Post] are taken from the
@@ -386,7 +386,7 @@ start_function. (* Always do this at the beginning of a semax_body proof *)
 (* ----------------------------------------------------------------- *)
 (** *** Forward symbolic execution *)
 
-(** SEE ALSO: VC.pdf Chapter 11 (_forward_).
+(** SEE ALSO: VC.pdf Chapter 10 (_forward_).
 
   We do Hoare logic proof by forward symbolic execution.  At the beginning 
   of this function body, our proof goal is a Hoare triple about the statement
@@ -474,7 +474,7 @@ forward.  (* s = 0; *)
 (* ----------------------------------------------------------------- *)
 (** *** While loops, forward_while *)
 
-(** SEE ALSO: VC.pdf Chapter 13 (_if, while, for_) and Chapter 14 (_while loops_).
+(** SEE ALSO: VC.pdf Chapter 12 (_if, while, for_) and Chapter 13 (_while loops_).
 
    To do symbolic execution through a [while] loop, use the
    [forward_while] tactic; you must supply a loop invariant. *)
@@ -502,8 +502,8 @@ forward_while
 (* ----------------------------------------------------------------- *)
 (** *** Proving separation-logic entailments *)
 
-(** SEE ALSO: VC.pdf Chapter 15 (_PROP LOCAL SEP_) and Chapter
-     16 (_Entailments_)
+(** SEE ALSO: VC.pdf Chapter 14 (_PROP LOCAL SEP_) and Chapter
+     15 (_Entailments_)
 
   This proof goal is an _entailment_,  [ENTAIL Delta, P |-- Q],  meaning 
   "in context [Delta], any state that satisfies [P] will also satisfy [Q]."
@@ -567,7 +567,7 @@ Qed.
     that the loop body preserves the loop invariant.
    We must forward-symbolic-execute through the loop body. *)
 
-(** SEE ALSO: VC.pdf Chapter 17 (_Array subscripts_) *)
+(** SEE ALSO: VC.pdf Chapter 16 (_Array subscripts_) *)
 
 (** Examine the proof goal at the beginning of the loop body.  Above the
     line is the variable [i], introduced automatically by [forward_while]
@@ -638,7 +638,7 @@ forward. (* [x = a[i];] *)
 forward. (* s += x; *)
 forward. (* i++; *)
 
-(** SEE ALSO: VC.pdf Chapter 18 (_At the end of the loop body_) *)
+(** SEE ALSO: VC.pdf Chapter 17 (_At the end of the loop body_) *)
 
 (** We have reached the end of the loop body, and it's
    time to prove that the _current precondition_  (which is the
@@ -666,7 +666,7 @@ forward. (* i++; *)
 (** After the loop, our precondition is the conjunction of the loop 
     invariant and the negation of the loop test.  *)
 
-(** SEE ALSO: VC.pdf Chapter 19 (_Returning from a function_) *)
+(** SEE ALSO: VC.pdf Chapter 18 (_Returning from a function_) *)
 
 - hint.
 
@@ -690,7 +690,7 @@ Qed.
 (* ================================================================= *)
 (** ** Global variables and main() *)
 
-(** SEE ALSO: VC.pdf Chapter 20 (_Global variables and main_) *)
+(** SEE ALSO: VC.pdf Chapter 19 (_Global variables and main_) *)
 (* Contents of the extern global initialized array "_four" *)
 Definition four_contents := [1; 2; 3; 4].
 
@@ -720,7 +720,7 @@ Proof.
            (gv _four)
 *)
 
-(** SEE ALSO: VC.pdf Chapter 21 (_Function calls_)
+(** SEE ALSO: VC.pdf Chapter 20 (_Function calls_)
 
   We are ready to prove the function-call, [s = sumarray(four,4);]
   We use the [forward_call] tactic, and for the argument we must supply
@@ -745,7 +745,7 @@ Qed.
 (* ================================================================= *)
 (** ** Tying all the functions together *)
 
-(** SEE ALSO: VC.pdf Chapter 22 (_Tying all the functions together_)
+(** SEE ALSO: VC.pdf Chapter 21 (_Tying all the functions together_)
 
   The C program may do input/output, affecting the state of the
   outside world.  This state is described (abstractly) by the [Espec],
@@ -775,6 +775,6 @@ Qed.
 (* ================================================================= *)
 (** ** Additional recommended reading *)
 
-(** Recommended: read VC.pdf Chapters 23-49 (up to _Pointer comparisons_) *)
+(** Recommended: read VC.pdf Chapters 22-47 (up to _Pointer comparisons_) *)
 
 (* 2023-12-24 12:58 *)
