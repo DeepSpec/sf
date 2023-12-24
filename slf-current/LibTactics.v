@@ -5230,4 +5230,4 @@ Ltac autorewrite_in_star_patch cont :=
 
 (* End of experimental features *)
 
-(* 2023-11-27 14:59 *)
+(* 2023-12-24 13:00 *)

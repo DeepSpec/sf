@@ -94,7 +94,7 @@ can be illustrated by the following diagram.
 
 (** To describe this loop invariant, we need a separation logic predicate to
 describe the partial linked list from address [x] to address [t] with contents
-[s1a]. This must a be new predicate different from [listrep] because [listrep]
+[s1a]. This must be a new predicate different from [listrep] because [listrep]
 describes linked lists ending with [NULL] which is not the case here. We call
 this new predicate [lseg], pronounced "list-segment". *)
 
@@ -491,4 +491,4 @@ forward_if. (* if (x == NULL) *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-11-27 14:56 *)
+(* 2023-12-24 12:58 *)

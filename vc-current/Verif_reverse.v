@@ -31,7 +31,7 @@ by flipping through the slides of Reverse-Slides.pdf, distributed with
 this chapter.    Let's prove this program correct!
 *)
 
-(** SEE ALSO VC.pdf Chapter 46 (_Proof of the reverse program_) *)
+(** SEE ALSO VC.pdf Chapter 50 (_Proof of the reverse program_) *)
 
 (** As usual, we import the Verifiable C system [VST.floyd.proofauto],
     then the program to be verified, in this case [reverse].  Then we
@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2023-11-27 14:56 *)
+(* 2023-12-24 12:58 *)
