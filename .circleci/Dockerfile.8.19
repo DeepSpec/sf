@@ -1,0 +1,9 @@
+FROM coqorg/coq:8.19
+ENV OPAMYES true
+RUN opam install -j `nproc` \
+         ocamlbuild \
+         coq-ext-lib \
+         coq-simple-io \
+         menhir \
+         coq-mathcomp-ssreflect \
+         coq-quickchick

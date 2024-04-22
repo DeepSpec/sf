@@ -1,6 +1,6 @@
 FROM coqorg/coq:8.17.1
 ENV OPAMYES true
-ENV VST_NEEDED 2.11.1
+ENV VST_NEEDED 2.12
 
 RUN \
     opam install -j `nproc` \
