@@ -124,8 +124,8 @@ workflows:
           coq: '8.19'
           requires:
             - build-docker
-#      - build:
-#          name: Coq dev
-#          coq: dev
-#          requires:
-#            - build-docker
+      - build:
+          name: Coq dev
+          coq: dev
+          requires:
+            - build-docker
