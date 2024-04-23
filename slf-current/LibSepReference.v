@@ -1,11 +1,9 @@
 (** * LibSepReference: Appendix - The Full Construction *)
 
-(** This file provides a pretty-much end-to-end construction of
-    a weakest-precondition style characteristic formula generator
-    (the function named [wpgen] in [WPgen]), for a core
-    programming language with programs assumed to be in A-normal form.
-
-    This file is included by the chapters from the course. *)
+(** This file provides an end-to-end construction of a weakest-precondition
+    style characteristic formula generator (the function named [wpgen] in
+    chapter [WPgen]), for a core programming language with programs assumed
+    to be in A-normal form, including support for records with up to 3 fields. *)
 
 Set Implicit Arguments.
 From SLF Require Export LibCore.
@@ -63,7 +61,6 @@ Inductive prim : Type :=
   | val_get : prim
   | val_set : prim
   | val_free : prim
-  | val_rand : prim
   | val_neg : prim
   | val_opp : prim
   | val_eq : prim
@@ -73,6 +70,7 @@ Inductive prim : Type :=
   | val_mul : prim
   | val_div : prim
   | val_mod : prim
+  | val_rand : prim
   | val_le : prim
   | val_lt : prim
   | val_ge : prim
@@ -119,18 +117,11 @@ with trm : Type :=
   | trm_let : var -> trm -> trm -> trm
   | trm_if : trm -> trm -> trm -> trm.
 
-(** A state consists of a finite map from location to values. Records and
-    arrays are represented as sets of consecutive cells, preceeded by a
-    header field describing the length of the block. *)
+(** A state, a.k.a. [heap], consists of a finite map from location to values.
+    Records and arrays are represented as sets of consecutive cells, preceeded
+    by a header field describing the length of the block. *)
 
-Definition state : Type := fmap loc val.
-
-(** The type [heap], a.k.a. [state]. By convention, the "state" refers to the
-    full memory state when describing the semantics, while the "heap"
-    potentially refers to only a fraction of the memory state, when definining
-    Separation Logic predicates. *)
-
-Definition heap : Type := state.
+Definition heap : Type := fmap loc val.
 
 (* ================================================================= *)
 (** ** Coq Tweaks *)
@@ -148,13 +139,15 @@ Implicit Types p : loc.
 Implicit Types n : int.
 Implicit Types v w r vf vx : val.
 Implicit Types t : trm.
-Implicit Types h : heap.
-Implicit Types s : state.
+Implicit Types h s : heap.
 
-(** The types of values and heap values are inhabited. *)
+(** The types of values and terms are inhabited. *)
 
 Global Instance Inhab_val : Inhab val.
 Proof using. apply (Inhab_of_val val_unit). Qed.
+
+Global Instance Inhab_trm : Inhab trm.
+Proof using. apply (Inhab_of_val (trm_val val_unit)). Qed.
 
 (** Coercions to improve conciseness in the statment of evaluation rules. *)
 
@@ -168,7 +161,12 @@ Coercion trm_var : var >-> trm.
 Coercion trm_app : trm >-> Funclass.
 
 (* ================================================================= *)
-(** ** Substitution *)
+(** ** Values and Substitutions *)
+
+(** The predicate [trm_is_val t] asserts that [t] is a value. *)
+
+Definition trm_is_val (t:trm) : Prop :=
+  match t with trm_val v => True | _ => False end.
 
 (** The standard capture-avoiding substitution, written [subst x v t]. *)
 
@@ -187,132 +185,338 @@ Fixpoint subst (y:var) (v':val) (t:trm) : trm :=
   end.
 
 (* ================================================================= *)
-(** ** Semantics *)
+(** ** Small-Step Semantics *)
+
+(** The judgment [step s t s' t'] asserts that the configuration [(s,t)]
+    can take one reduction step towards the program configuration [(s',t')]. *)
+
+Inductive step : heap -> trm -> heap -> trm -> Prop :=
+
+  (* Context rules *)
+  | step_seq_ctx : forall s1 s2 t1 t1' t2,
+      step s1 t1 s2 t1' ->
+      step s1 (trm_seq t1 t2) s2 (trm_seq t1' t2)
+  | step_let_ctx : forall s1 s2 x t1 t1' t2,
+      step s1 t1 s2 t1' ->
+      step s1 (trm_let x t1 t2) s2 (trm_let x t1' t2)
+  | step_app_arg1 : forall s1 s2 t1 t1' t2,
+      step s1 t1 s2 t1' ->
+      step s1 (trm_app t1 t2) s2 (trm_app t1' t2)
+  | step_app_arg2 : forall s1 s2 v1 t2 t2',
+      step s1 t2 s2 t2' ->
+      step s1 (trm_app v1 t2) s2 (trm_app v1 t2')
+
+  (* Reductions *)
+  | step_fun : forall s x t1,
+      step s (trm_fun x t1) s (val_fun x t1)
+  | step_fix : forall s f x t1,
+      step s (trm_fix f x t1) s (val_fix f x t1)
+  | step_app_fun : forall s v1 v2 x t1,
+      v1 = val_fun x t1 ->
+      step s (trm_app v1 v2) s (subst x v2 t1)
+  | step_app_fix : forall s v1 v2 f x t1,
+      v1 = val_fix f x t1 ->
+      step s (trm_app v1 v2) s (subst x v2 (subst f v1 t1))
+  | step_if : forall s b t1 t2,
+      step s (trm_if (val_bool b) t1 t2) s (if b then t1 else t2)
+  | step_seq : forall s t2 v1,
+      step s (trm_seq v1 t2) s t2
+  | step_let : forall s x t2 v1,
+      step s (trm_let x v1 t2) s (subst x v1 t2)
+
+  (* Unary operations *)
+  | step_neg : forall s b,
+      step s (val_neg (val_bool b)) s (val_bool (neg b))
+  | step_opp : forall s n,
+      step s (val_opp (val_int n)) s (val_int (- n))
+  | step_rand : forall s n n1,
+      0 <= n1 < n ->
+      step s (val_rand (val_int n)) s (val_int n1)
+
+  (* Binary operations *)
+  | step_eq : forall s v1 v2,
+      step s (val_eq v1 v2) s (val_bool (isTrue (v1 = v2)))
+  | step_neq : forall s v1 v2,
+      step s (val_neq v1 v2) s (val_bool (isTrue (v1 <> v2)))
+  | step_add : forall s n1 n2,
+      step s (val_add (val_int n1) (val_int n2)) s (val_int (n1 + n2))
+  | step_sub : forall s n1 n2,
+      step s (val_sub (val_int n1) (val_int n2)) s (val_int (n1 - n2))
+  | step_mul : forall s n1 n2,
+      step s (val_mul (val_int n1) (val_int n2)) s (val_int (n1 * n2))
+  | step_div : forall s n1 n2,
+      n2 <> 0 ->
+      step s (val_div (val_int n1) (val_int n2)) s (Z.quot n1 n2)
+  | step_mod : forall s n1 n2,
+      n2 <> 0 ->
+      step s (val_mod (val_int n1) (val_int n2)) s (Z.rem n1 n2)
+  | step_le : forall s n1 n2,
+      step s (val_le (val_int n1) (val_int n2)) s (val_bool (isTrue (n1 <= n2)))
+  | step_lt : forall s n1 n2,
+      step s (val_lt (val_int n1) (val_int n2)) s (val_bool (isTrue (n1 < n2)))
+  | step_ge : forall s n1 n2,
+      step s (val_ge (val_int n1) (val_int n2)) s (val_bool (isTrue (n1 >= n2)))
+  | step_gt : forall s n1 n2,
+      step s (val_gt (val_int n1) (val_int n2)) s (val_bool (isTrue (n1 > n2)))
+  | step_ptr_add : forall s p1 p2 n,
+      (p2:int) = p1 + n ->
+      step s (val_ptr_add (val_loc p1) (val_int n)) s (val_loc p2)
+
+  (* Heap operations *)
+  | step_ref : forall s v p,
+      ~ Fmap.indom s p ->
+      step s (val_ref v) (Fmap.update s p v) (val_loc p)
+  | step_get : forall s p,
+      Fmap.indom s p ->
+      step s (val_get (val_loc p)) s (Fmap.read s p)
+  | step_set : forall s p v,
+      Fmap.indom s p ->
+      step s (val_set (val_loc p) v) (Fmap.update s p v) val_unit
+  | step_free : forall s p,
+      Fmap.indom s p ->
+      step s (val_free (val_loc p)) (Fmap.remove s p) val_unit.
+
+(** The judgment [steps s t s' t'] corresponds to the reflexive-transitive
+  closure of [step]. Concretely, this judgment asserts that the configuration
+  [(s,t)] can reduce in zero, one, or several steps to [(s',t')]. *)
+
+Inductive steps : heap -> trm -> heap -> trm -> Prop :=
+  | steps_refl : forall s t,
+      steps s t s t
+  | steps_step : forall s1 s2 s3 t1 t2 t3,
+      step s1 t1 s2 t2 ->
+      steps s2 t2 s3 t3 ->
+      steps s1 t1 s3 t3.
+
+Lemma steps_of_step : forall s1 s2 t1 t2,
+  step s1 t1 s2 t2 ->
+  steps s1 t1 s2 t2.
+Proof using. introv M. applys steps_step M. applys steps_refl. Qed.
+
+Lemma steps_trans : forall s1 s2 s3 t1 t2 t3,
+  steps s1 t1 s2 t2 ->
+  steps s2 t2 s3 t3 ->
+  steps s1 t1 s3 t3.
+Proof using. introv M1. induction M1; introv M2. { auto. } { constructors*. } Qed.
+
+(** The predicate [reducible s t] asserts that the configuration [(s,t)]
+    can take a step. *)
+
+Definition reducible (s:heap) (t:trm) : Prop :=
+  exists s' t', step s t s' t'.
+
+(** The predicate [notstuck s t] asserts that [t] is a value or is reducible. *)
+
+Definition notstuck (s:heap) (t:trm) : Prop :=
+  trm_is_val t \/ reducible s t.
+
+(* ================================================================= *)
+(** ** Omni-Big-Step Semantics of primitive operations *)
 
 (** Evaluation rules for unary operations are captured by the predicate
-    [redupop op v1 v2], which asserts that [op v1] evaluates to [v2]. *)
+    [evalunop op v1 P], which asserts that [op v1] evaluates to a value
+    [v2] satisfying [P]. *)
 
-Inductive evalunop : prim -> val -> val -> Prop :=
+Inductive evalunop : prim -> val -> (val->Prop) -> Prop :=
   | evalunop_neg : forall b1,
-      evalunop val_neg (val_bool b1) (val_bool (neg b1))
+      evalunop val_neg (val_bool b1) (= val_bool (neg b1))
   | evalunop_opp : forall n1,
-      evalunop val_opp (val_int n1) (val_int (- n1)).
+      evalunop val_opp (val_int n1) (= val_int (- n1))
+  | evalunop_rand : forall n,
+      n > 0 ->
+      evalunop val_rand (val_int n) (fun r => exists n1, r = val_int n1 /\ 0 <= n1 < n).
 
 (** Evaluation rules for binary operations are captured by the predicate
-    [redupop op v1 v2 v3], which asserts that [op v1 v2] evaluates to [v3]. *)
+    [redupop op v1 v2 P], which asserts that [op v1 v2] evaluates to a
+    value [v3] satisfying [P]. *)
 
-Inductive evalbinop : val -> val -> val -> val -> Prop :=
+Inductive evalbinop : val -> val -> val -> (val->Prop) -> Prop :=
   | evalbinop_eq : forall v1 v2,
-      evalbinop val_eq v1 v2 (val_bool (isTrue (v1 = v2)))
+      evalbinop val_eq v1 v2 (= val_bool (isTrue (v1 = v2)))
   | evalbinop_neq : forall v1 v2,
-      evalbinop val_neq v1 v2 (val_bool (isTrue (v1 <> v2)))
+      evalbinop val_neq v1 v2 (= val_bool (isTrue (v1 <> v2)))
   | evalbinop_add : forall n1 n2,
-      evalbinop val_add (val_int n1) (val_int n2) (val_int (n1 + n2))
+      evalbinop val_add (val_int n1) (val_int n2) (= val_int (n1 + n2))
   | evalbinop_sub : forall n1 n2,
-      evalbinop val_sub (val_int n1) (val_int n2) (val_int (n1 - n2))
+      evalbinop val_sub (val_int n1) (val_int n2) (= val_int (n1 - n2))
   | evalbinop_mul : forall n1 n2,
-      evalbinop val_mul (val_int n1) (val_int n2) (val_int (n1 * n2))
+      evalbinop val_mul (val_int n1) (val_int n2) (= val_int (n1 * n2))
   | evalbinop_div : forall n1 n2,
       n2 <> 0 ->
-      evalbinop val_div (val_int n1) (val_int n2) (val_int (Z.quot n1 n2))
+      evalbinop val_div (val_int n1) (val_int n2) (= val_int (Z.quot n1 n2))
   | evalbinop_mod : forall n1 n2,
       n2 <> 0 ->
-      evalbinop val_mod (val_int n1) (val_int n2) (val_int (Z.rem n1 n2))
+      evalbinop val_mod (val_int n1) (val_int n2) (= val_int (Z.rem n1 n2))
   | evalbinop_le : forall n1 n2,
-      evalbinop val_le (val_int n1) (val_int n2) (val_bool (isTrue (n1 <= n2)))
+      evalbinop val_le (val_int n1) (val_int n2) (= val_bool (isTrue (n1 <= n2)))
   | evalbinop_lt : forall n1 n2,
-      evalbinop val_lt (val_int n1) (val_int n2) (val_bool (isTrue (n1 < n2)))
+      evalbinop val_lt (val_int n1) (val_int n2) (= val_bool (isTrue (n1 < n2)))
   | evalbinop_ge : forall n1 n2,
-      evalbinop val_ge (val_int n1) (val_int n2) (val_bool (isTrue (n1 >= n2)))
+      evalbinop val_ge (val_int n1) (val_int n2) (= val_bool (isTrue (n1 >= n2)))
   | evalbinop_gt : forall n1 n2,
-      evalbinop val_gt (val_int n1) (val_int n2) (val_bool (isTrue (n1 > n2)))
+      evalbinop val_gt (val_int n1) (val_int n2) (= val_bool (isTrue (n1 > n2)))
   | evalbinop_ptr_add : forall p1 p2 n,
       (p2:int) = p1 + n ->
-      evalbinop val_ptr_add (val_loc p1) (val_int n) (val_loc p2).
+      evalbinop val_ptr_add (val_loc p1) (val_int n) (= val_loc p2).
 
-(** The predicate [trm_is_val t] asserts that [t] is a value. *)
+(* ================================================================= *)
+(** ** Omni-Big-Step Semantics *)
 
-Definition trm_is_val (t:trm) : Prop :=
-  match t with trm_val v => True | _ => False end.
+Section Eval.
 
-(** Big-step evaluation judgement, written [eval s t s' v]. *)
+(** The predicate [purepost s P] converts a predicate [P:val->Prop] into
+    a postcondition of type [val->heap->Prop] that holds in the state [s]. *)
 
-Inductive eval : heap -> trm -> heap -> val -> Prop :=
-  | eval_val : forall s v,
-      eval s (trm_val v) s v
-  | eval_fun : forall s x t1,
-      eval s (trm_fun x t1) s (val_fun x t1)
-  | eval_fix : forall s f x t1,
-      eval s (trm_fix f x t1) s (val_fix f x t1)
-  | eval_app_args : forall s1 s2 s3 s4 t1 t2 v1 v2 r,
-      (~ trm_is_val t1 \/ ~ trm_is_val t2) ->
-      eval s1 t1 s2 v1 ->
-      eval s2 t2 s3 v2 ->
-      eval s3 (trm_app v1 v2) s4 r ->
-      eval s1 (trm_app t1 t2) s4 r
-  | eval_app_fun : forall s1 s2 v1 v2 x t1 v,
+Definition purepost (s:heap) (P:val->Prop) : val->heap->Prop :=
+  fun v s' => P v /\ s' = s.
+
+Definition purepostin (s:heap) (P:val->Prop) (Q:val->heap->Prop) : Prop :=
+  (* equivalent to [purepost S P ===> Q] *)
+  forall v, P v -> Q v s.
+
+(** Omni-Big-step evaluation judgement, written [eval s t Q]. *)
+
+Implicit Types Q : val->heap->Prop.
+
+Inductive eval : heap -> trm -> (val->heap->Prop) -> Prop :=
+  | eval_val : forall s v Q,
+      Q v s ->
+      eval s (trm_val v) Q
+  | eval_fun : forall s x t1 Q,
+      Q (val_fun x t1) s ->
+      eval s (trm_fun x t1) Q
+  | eval_fix : forall s f x t1 Q,
+      Q (val_fix f x t1) s ->
+      eval s (trm_fix f x t1) Q
+  | eval_app_arg1 : forall s1 t1 t2 Q1 Q,
+      ~ trm_is_val t1 ->
+      eval s1 t1 Q1 ->
+      (forall v1 s2, Q1 v1 s2 -> eval s2 (trm_app v1 t2) Q) ->
+      eval s1 (trm_app t1 t2) Q
+  | eval_app_arg2 : forall s1 v1 t2 Q1 Q,
+      ~ trm_is_val t2 ->
+      eval s1 t2 Q1 ->
+      (forall v2 s2, Q1 v2 s2 -> eval s2 (trm_app v1 v2) Q) ->
+      eval s1 (trm_app v1 t2) Q
+  | eval_app_fun : forall s1 v1 v2 x t1 Q,
       v1 = val_fun x t1 ->
-      eval s1 (subst x v2 t1) s2 v ->
-      eval s1 (trm_app v1 v2) s2 v
-  | eval_app_fix : forall s1 s2 v1 v2 f x t1 v,
+      eval s1 (subst x v2 t1) Q ->
+      eval s1 (trm_app v1 v2) Q
+  | eval_app_fix : forall s v1 v2 f x t1 Q,
       v1 = val_fix f x t1 ->
-      eval s1 (subst x v2 (subst f v1 t1)) s2 v ->
-      eval s1 (trm_app v1 v2) s2 v
-  | eval_seq : forall s1 s2 s3 t1 t2 v1 v,
-      eval s1 t1 s2 v1 ->
-      eval s2 t2 s3 v ->
-      eval s1 (trm_seq t1 t2) s3 v
-  | eval_let : forall s1 s2 s3 x t1 t2 v1 r,
-      eval s1 t1 s2 v1 ->
-      eval s2 (subst x v1 t2) s3 r ->
-      eval s1 (trm_let x t1 t2) s3 r
-  | eval_if : forall s1 s2 b v t1 t2,
-      eval s1 (if b then t1 else t2) s2 v ->
-      eval s1 (trm_if (val_bool b) t1 t2) s2 v
-  | eval_unop : forall op m v1 v,
-      evalunop op v1 v ->
-      eval m (op v1) m v
-  | eval_binop : forall op m v1 v2 v,
-      evalbinop op v1 v2 v ->
-      eval m (op v1 v2) m v
-  | eval_ref : forall s v p,
-      ~ Fmap.indom s p ->
-      eval s (val_ref v) (Fmap.update s p v) (val_loc p)
-  | eval_get : forall s p v,
+      eval s (subst x v2 (subst f v1 t1)) Q ->
+      eval s (trm_app v1 v2) Q
+  | eval_seq : forall Q1 s t1 t2 Q,
+      eval s t1 Q1 ->
+      (forall v1 s2, Q1 v1 s2 -> eval s2 t2 Q) ->
+      eval s (trm_seq t1 t2) Q
+  | eval_let : forall Q1 s x t1 t2 Q,
+      eval s t1 Q1 ->
+      (forall v1 s2, Q1 v1 s2 -> eval s2 (subst x v1 t2) Q) ->
+      eval s (trm_let x t1 t2) Q
+  | eval_if : forall s (b:bool) t1 t2 Q,
+      eval s (if b then t1 else t2) Q ->
+      eval s (trm_if (val_bool b) t1 t2) Q
+  | eval_unop : forall op s v1 P Q,
+      evalunop op v1 P ->
+      purepostin s P Q ->
+      eval s (op v1) Q
+  | eval_binop : forall op s v1 v2 P Q,
+      evalbinop op v1 v2 P ->
+      purepostin s P Q ->
+      eval s (op v1 v2) Q
+  | eval_ref : forall s v Q,
+      (forall p, ~ Fmap.indom s p ->
+          Q (val_loc p) (Fmap.update s p v)) ->
+      eval s (val_ref v) Q
+  | eval_get : forall s p Q,
       Fmap.indom s p ->
-      v = Fmap.read s p ->
-      eval s (val_get (val_loc p)) s v
-  | eval_set : forall s p v,
+      Q (Fmap.read s p) s ->
+      eval s (val_get (val_loc p)) Q
+  | eval_set : forall s p v Q,
       Fmap.indom s p ->
-      eval s (val_set (val_loc p) v) (Fmap.update s p v) val_unit
-  | eval_free : forall s p,
+      Q val_unit (Fmap.update s p v) ->
+      eval s (val_set (val_loc p) v) Q
+  | eval_free : forall s p Q,
       Fmap.indom s p ->
-      eval s (val_free (val_loc p)) (Fmap.remove s p) val_unit.
+      Q val_unit (Fmap.remove s p) ->
+      eval s (val_free (val_loc p)) Q.
 
-(** Specialized evaluation rules for addition and division, for avoiding the
-    indirection via [eval_binop] in the course. *)
+(** Specialized rule for values, to instantiate the postcondition *)
 
-Lemma eval_add : forall s n1 n2,
-  eval s (val_add (val_int n1) (val_int n2)) s (val_int (n1 + n2)).
-Proof using. intros. applys eval_binop. applys evalbinop_add. Qed.
+Lemma eval_val_minimal : forall s v,
+  eval s (trm_val v) (fun v' s' => (v' = v) /\ (s' = s)).
+Proof using. intros. applys* eval_val. Qed.
 
-Lemma eval_div : forall s n1 n2,
+(** Specialized evaluation rules for selected operations, to avoid the
+    indirection via [eval_unop] and [eval_binop] in the course. *)
+
+Lemma eval_add : forall s n1 n2 Q,
+  Q (val_int (n1 + n2)) s ->
+  eval s (val_add (val_int n1) (val_int n2)) Q.
+Proof using.
+  intros. applys* eval_binop.
+  { applys* evalbinop_add. }
+  { intros ? ->. auto. }
+Qed.
+
+Lemma eval_div : forall s n1 n2 Q,
   n2 <> 0 ->
-  eval s (val_div (val_int n1) (val_int n2)) s (val_int (Z.quot n1 n2)).
-Proof using. intros. applys eval_binop. applys* evalbinop_div. Qed.
+  Q (val_int (Z.quot n1 n2)) s ->
+  eval s (val_div (val_int n1) (val_int n2)) Q.
+Proof using.
+  intros. applys* eval_binop.
+  { applys* evalbinop_div. }
+  { intros ? ->. auto. }
+Qed.
+
+Lemma eval_rand : forall s n Q,
+  n > 0 ->
+  (forall n1, 0 <= n1 < n -> Q n1 s) ->
+  eval s (val_rand (val_int n)) Q.
+Proof using.
+  intros. applys* eval_unop.
+  { applys* evalunop_rand. }
+  { intros ? (?&->&?). auto. }
+Qed.
+
+(** Derived rule for reasoning about an applications, without need to
+    perform a case analysis on whether the entities are already values. *)
+
+Lemma eval_app_arg1' : forall s1 t1 t2 Q1 Q,
+  eval s1 t1 Q1 ->
+  (forall v1 s2, Q1 v1 s2 -> eval s2 (trm_app v1 t2) Q) ->
+  eval s1 (trm_app t1 t2) Q.
+Proof using.
+  introv M1 M2. tests C1: (trm_is_val t1).
+  { destruct t1; tryfalse. inverts M1. applys* M2. }
+  { applys* eval_app_arg1. }
+Qed.
+
+Lemma eval_app_arg2' : forall s1 v1 t2 Q1 Q,
+  eval s1 t2 Q1 ->
+  (forall v2 s2, eval s2 (trm_app v1 v2) Q) ->
+  eval s1 (trm_app v1 t2) Q.
+Proof using.
+  introv M1 M2. tests C1: (trm_is_val t2).
+  { destruct t2; tryfalse. inverts M1. applys* M2. }
+  { applys* eval_app_arg2. }
+Qed.
 
 (** [eval_like t1 t2] asserts that [t2] evaluates like [t1]. In particular,
     this relation hold whenever [t2] reduces in small-step to [t1]. *)
 
 Definition eval_like (t1 t2:trm) : Prop :=
-  forall s s' v, eval s t1 s' v -> eval s t2 s' v.
+  forall s Q, eval s t1 Q -> eval s t2 Q.
+
+End Eval.
 
 (* ################################################################# *)
 (** * Heap Predicates *)
 
-(** We next define heap predicates and establish their properties.
-    All this material is wrapped in a module, allowing us to instantiate
-    the functor from [LibSepSimpl] that defines the tactic [xsimpl]. *)
+(** We next define heap predicates and establish their properties. All this
+    material is wrapped in a module, allowing us to instantiate the functor from
+    chapter [LibSepSimpl] that defines the tactic [xsimpl]. *)
 Module SepSimplArgs.
 
 (* ================================================================= *)
@@ -998,7 +1202,7 @@ Ltac math_0 ::=
 (* ================================================================= *)
 (** ** Properties of [haffine] *)
 
-(** In this file, we set up an affine logic. The lemma [haffine_any] asserts
+(** The lemma [haffine_any] asserts
     that [haffine H] holds for any [H]. Nevertheless, let us state corollaries
     of [haffine_any] for specific heap predicates, to illustrate how the
     [xaffine] tactic works in chapter [Affine]. *)
@@ -1059,297 +1263,13 @@ Implicit Types H : hprop.
 Implicit Types Q : val->hprop.
 
 (* ================================================================= *)
-(** ** Evaluation Rules for Primitives in Separation Style *)
-
-(** These lemmas reformulated the big-step evaluation rule in a
-    Separation-Logic friendly presentation, that is, by using disjoint
-    unions as much as possible. *)
-
-Lemma eval_ref_sep : forall s1 s2 v p,
-  s2 = Fmap.single p v ->
-  Fmap.disjoint s2 s1 ->
-  eval s1 (val_ref v) (Fmap.union s2 s1) (val_loc p).
-Proof using.
-  introv -> D. forwards Dv: Fmap.indom_single p v.
-  rewrite <- Fmap.update_eq_union_single. applys~ eval_ref.
-  { intros N. applys~ Fmap.disjoint_inv_not_indom_both D N. }
-Qed.
-
-Lemma eval_get_sep : forall s s2 p v,
-  s = Fmap.union (Fmap.single p v) s2 ->
-  eval s (val_get (val_loc p)) s v.
-Proof using.
-  introv ->. forwards Dv: Fmap.indom_single p v.
-  applys eval_get.
-  { applys~ Fmap.indom_union_l. }
-  { rewrite~ Fmap.read_union_l. rewrite~ Fmap.read_single. }
-Qed.
-
-Lemma eval_set_sep : forall s1 s2 h2 p w v,
-  s1 = Fmap.union (Fmap.single p w) h2 ->
-  s2 = Fmap.union (Fmap.single p v) h2 ->
-  Fmap.disjoint (Fmap.single p w) h2 ->
-  eval s1 (val_set (val_loc p) v) s2 val_unit.
-Proof using.
-  introv -> -> D. forwards Dv: Fmap.indom_single p w.
-  applys_eq eval_set.
-  { rewrite~ Fmap.update_union_l. fequals.
-    rewrite~ Fmap.update_single. }
-  { applys~ Fmap.indom_union_l. }
-Qed.
-
-Lemma eval_free_sep : forall s1 s2 v p,
-  s1 = Fmap.union (Fmap.single p v) s2 ->
-  Fmap.disjoint (Fmap.single p v) s2 ->
-  eval s1 (val_free p) s2 val_unit.
-Proof using.
-  introv -> D. forwards Dv: Fmap.indom_single p v.
-  applys_eq eval_free.
-  { rewrite~ Fmap.remove_union_single_l.
-    intros Dl. applys Fmap.disjoint_inv_not_indom_both D Dl.
-    applys Fmap.indom_single. }
-  { applys~ Fmap.indom_union_l. }
-Qed.
-
-(* ================================================================= *)
-(** ** Hoare Reasoning Rules *)
-
-(* ################################################################# *)
-(** * Definition of total correctness Hoare Triples. *)
-
-Definition hoare (t:trm) (H:hprop) (Q:val->hprop) :=
-  forall h, H h -> exists h' v, eval h t h' v /\ Q v h'.
-
-(** Structural rules for [hoare] triples. *)
-
-Lemma hoare_conseq : forall t H' Q' H Q,
-  hoare t H' Q' ->
-  H ==> H' ->
-  Q' ===> Q ->
-  hoare t H Q.
-Proof using.
-  introv M MH MQ HF. forwards (h'&v&R&K): M h. { applys* MH. }
-  exists h' v. splits~. { applys* MQ. }
-Qed.
-
-Lemma hoare_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall x, hoare t (J x) Q) ->
-  hoare t (hexists J) Q.
-Proof using. introv M. intros h (x&Hh). applys M Hh. Qed.
-
-Lemma hoare_hpure : forall t (P:Prop) H Q,
-  (P -> hoare t H Q) ->
-  hoare t (\[P] \* H) Q.
-Proof using.
-  introv M. intros h (h1&h2&M1&M2&D&U). destruct M1 as (M1&HP).
-  lets E: hempty_inv HP. subst. rewrite Fmap.union_empty_l. applys~ M.
-Qed.
-
-(** Other structural rules, not required for setting up [wpgen]. *)
-
-Lemma hoare_hforall : forall t (A:Type) (J:A->hprop) Q,
-  (exists x, hoare t (J x) Q) ->
-  hoare t (hforall J) Q.
-Proof using.
-  introv (x&M) Hh. applys* hoare_conseq (hforall J) Q M.
-  applys* himpl_hforall_l.
-Qed.
-
-Lemma hoare_hwand_hpure_l : forall t (P:Prop) H Q,
-  P ->
-  hoare t H Q ->
-  hoare t (\[P] \-* H) Q.
-Proof using. introv HP M. rewrite* hwand_hpure_l. Qed.
-
-(** Reasoning rules for [hoare] triples. These rules follow directly
-    from the big-step evaluation rules. *)
-
-Lemma hoare_eval_like : forall t1 t2 H Q,
-  eval_like t1 t2 ->
-  hoare t1 H Q ->
-  hoare t2 H Q.
-Proof using.
-  introv E M1 K0. forwards (s'&v&R1&K1): M1 K0.
-  exists s' v. split. { applys E R1. } { applys K1. }
-Qed.
-
-Lemma hoare_val : forall v H Q,
-  H ==> Q v ->
-  hoare (trm_val v) H Q.
-Proof using.
-  introv M. intros h K. exists h v. splits.
-  { applys eval_val. }
-  { applys* M. }
-Qed.
-
-Lemma hoare_fun : forall x t1 H Q,
-  H ==> Q (val_fun x t1) ->
-  hoare (trm_fun x t1) H Q.
-Proof using.
-  introv M. intros h K. exists h __. splits.
-  { applys~ eval_fun. }
-  { applys* M. }
-Qed.
-
-Lemma hoare_fix : forall f x t1 H Q,
-  H ==> Q (val_fix f x t1) ->
-  hoare (trm_fix f x t1) H Q.
-Proof using.
-  introv M. intros h K. exists h __. splits.
-  { applys~ eval_fix. }
-  { applys* M. }
-Qed.
-
-Lemma hoare_app_fun : forall v1 v2 x t1 H Q,
-  v1 = val_fun x t1 ->
-  hoare (subst x v2 t1) H Q ->
-  hoare (trm_app v1 v2) H Q.
-Proof using.
-  introv E M. intros s K0. forwards (s'&v&R1&K1): (rm M) K0.
-  exists s' v. splits. { applys eval_app_fun E R1. } { applys K1. }
-Qed.
-
-Lemma hoare_app_fix : forall v1 v2 f x t1 H Q,
-  v1 = val_fix f x t1 ->
-  hoare (subst x v2 (subst f v1 t1)) H Q ->
-  hoare (trm_app v1 v2) H Q.
-Proof using.
-  introv E M. intros s K0. forwards (s'&v&R1&K1): (rm M) K0.
-  exists s' v. splits. { applys eval_app_fix E R1. } { applys K1. }
-Qed.
-
-Lemma hoare_seq : forall t1 t2 H Q H1,
-  hoare t1 H (fun r => H1) ->
-  hoare t2 H1 Q ->
-  hoare (trm_seq t1 t2) H Q.
-Proof using.
-  introv M1 M2 Hh.
-  forwards* (h1'&v1&R1&K1): (rm M1).
-  forwards* (h2'&v2&R2&K2): (rm M2).
-  exists h2' v2. splits~. { applys~ eval_seq R1 R2. }
-Qed.
-
-Lemma hoare_let : forall x t1 t2 H Q Q1,
-  hoare t1 H Q1 ->
-  (forall v1, hoare (subst x v1 t2) (Q1 v1) Q) ->
-  hoare (trm_let x t1 t2) H Q.
-Proof using.
-  introv M1 M2 Hh.
-  forwards* (h1'&v1&R1&K1): (rm M1).
-  forwards* (h2'&v2&R2&K2): (rm M2).
-  exists h2' v2. splits~. { applys~ eval_let R2. }
-Qed.
-
-Lemma hoare_if : forall (b:bool) t1 t2 H Q,
-  hoare (if b then t1 else t2) H Q ->
-  hoare (trm_if b t1 t2) H Q.
-Proof using.
-  introv M1. intros h Hh. forwards* (h1'&v1&R1&K1): (rm M1).
-  exists h1' v1. splits~. { applys* eval_if. }
-Qed.
-
-(** Operations on the state. *)
-
-Lemma hoare_ref : forall H v,
-  hoare (val_ref v)
-    H
-    (fun r => (\exists p, \[r = val_loc p] \* p ~~> v) \* H).
-Proof using.
-  intros. intros s1 K0.
-  forwards~ (p&D&N): (Fmap.single_fresh 0%nat s1 v).
-  exists (Fmap.union (Fmap.single p v) s1) (val_loc p). split.
-  { applys~ eval_ref_sep D. }
-  { applys~ hstar_intro.
-    { exists p. rewrite~ hstar_hpure_l. split~. { applys~ hsingle_intro. } } }
-Qed.
-
-Lemma hoare_get : forall H v p,
-  hoare (val_get p)
-    ((p ~~> v) \* H)
-    (fun r => \[r = v] \* (p ~~> v) \* H).
-Proof using.
-  intros. intros s K0. exists s v. split.
-  { destruct K0 as (s1&s2&P1&P2&D&U).
-    lets E1: hsingle_inv P1. subst s1. applys eval_get_sep U. }
-  { rewrite~ hstar_hpure_l. }
-Qed.
-
-Lemma hoare_set : forall H w p v,
-  hoare (val_set (val_loc p) v)
-    ((p ~~> w) \* H)
-    (fun r => \[r = val_unit] \* (p ~~> v) \* H).
-Proof using.
-  intros. intros s1 K0.
-  destruct K0 as (h1&h2&P1&P2&D&U).
-  lets E1: hsingle_inv P1.
-  exists (Fmap.union (Fmap.single p v) h2) val_unit. split.
-  { subst h1. applys eval_set_sep U D. auto. }
-  { rewrite hstar_hpure_l. split~.
-    { applys~ hstar_intro.
-      { applys~ hsingle_intro. }
-      { subst h1. applys Fmap.disjoint_single_set D. } } }
-Qed.
-
-Lemma hoare_free : forall H p v,
-  hoare (val_free (val_loc p))
-    ((p ~~> v) \* H)
-    (fun r => \[r = val_unit] \* H).
-Proof using.
-  intros. intros s1 K0.
-  destruct K0 as (h1&h2&P1&P2&D&U).
-  lets E1: hsingle_inv P1.
-  exists h2 val_unit. split.
-  { subst h1. applys eval_free_sep U D. }
-  { rewrite hstar_hpure_l. split~. }
-Qed.
-
-(** Other operations. *)
-
-Lemma hoare_unop : forall v H op v1,
-  evalunop op v1 v ->
-  hoare (op v1)
-    H
-    (fun r => \[r = v] \* H).
-Proof using.
-  introv R. intros h Hh. exists h v. splits.
-  { applys* eval_unop. }
-  { rewrite* hstar_hpure_l. }
-Qed.
-
-Lemma hoare_binop : forall v H op v1 v2,
-  evalbinop op v1 v2 v ->
-  hoare (op v1 v2)
-    H
-    (fun r => \[r = v] \* H).
-Proof using.
-  introv R. intros h Hh. exists h v. splits.
-  { applys* eval_binop. }
-  { rewrite* hstar_hpure_l. }
-Qed.
-
-(** Bonus: example of proofs for a specific primitive operation. *)
-
-Lemma hoare_add : forall H n1 n2,
-  hoare (val_add n1 n2)
-    H
-    (fun r => \[r = val_int (n1 + n2)] \* H).
-Proof.
-  dup.
-  { intros. applys hoare_binop. applys evalbinop_add. }
-  { intros. intros s K0. exists s (val_int (n1 + n2)). split.
-    { applys eval_binop. applys evalbinop_add. }
-    { rewrite* hstar_hpure_l. } }
-Qed.
-
-(* ================================================================= *)
 (** ** Definition of Separation Logic Triples. *)
 
-(** A Separation Logic triple [triple t H Q] may be defined either in
-    terms of Hoare triples, or in terms of [wp], as [H ==> wp t Q].
-    We prefer the former route, which we find more elementary. *)
+(** The Separation Logic triple [triple t H Q] is defined in terms of
+    the omni-big-step semantics predicate [eval s t Q]. *)
 
 Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
-  forall (H':hprop), hoare t (H \* H') (Q \*+ H').
+  forall s, H s -> eval s t Q.
 
 (** We introduce a handy notation for postconditions of functions
     that return a pointer:  [funloc p => H] is short for
@@ -1358,6 +1278,330 @@ Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
 Notation "'funloc' p '=>' H" :=
   (fun (r:val) => \exists p, \[r = val_loc p] \* H)
   (at level 200, p name, format "'funloc'  p  '=>'  H") : hprop_scope.
+
+(* ================================================================= *)
+(** ** Soundness of Triples w.r.t. the Small-Step Semantics *)
+
+(** If one considers the omni-big-step semantics to be the starting point
+    of a development, then the definition of [triple] is obviously sound
+    with respect to that semantics, as it concludes [eval s t Q].
+    If, however, one considers the small-step semantics to be the starting
+    point, then to establish soundness it is required to prove that
+    [triple t H Q] ensures that all possible evaluations of [t] in a
+    heap satisfy [H] are: (1) terminating, (2) always reaching a value,
+    and (3) this value and the final state obtained satisfy the postconditon [Q]. *)
+
+(** The judgment [terminates s t] is defined inductively. The execution
+    starting from [(s,t)] terminates if, for any possible step leads to
+    a configuration that terminates. Note that a configuration that has
+    reached a value cannot take a step, hence is considered terminating. *)
+
+Inductive terminates : heap->trm->Prop :=
+  | terminates_step : forall s t,
+      (forall s' t', step s t s' t' -> terminates s' t') ->
+      terminates s t.
+
+(** The judgment [safe s t] asserts that no execution may reach a stuck
+    term. In other words, for any configuration [(s',t')] reachable from
+    [(s,t)], it is the case that the configuration [(s',t')] is either
+    a value or is reducible. *)
+
+Definition safe (s:heap) (t:trm) : Prop :=
+  forall s' t', steps s t s' t' -> notstuck s' t'.
+
+(** The judgment [correct s t Q] asserts that if the execution of [(s,t)] reaches
+    a final configuration, then this final configuration satisfies [Q]. *)
+
+Definition correct (s:heap) (t:trm) (Q:val->hprop) : Prop :=
+  forall s' v, steps s t s' v -> Q v s'.
+
+(** The aim is to show that [triple t H Q] entails that, for any [s] satisfying [H],
+   [terminates s t] and [safe s t] and [correct s t Q] holds. *)
+
+(** The judgment [seval s t Q] asserts that any execution of [(s,t)]
+    terminates and reaches a configuration satisfying [Q]. In the "base" case,
+    [seval s v Q] holds if the terminal configuration [(s,v)] satisfies [Q].
+    In the "step" case, [seval s t Q] holds if (1) the configuration [(s,t)]
+    is reducible, and (2) if for any step that [(s,t)] may take to [(s',t')],
+    the predicate [seval s' t' Q] holds. *)
+
+Inductive seval : heap->trm->(val->hprop)->Prop :=
+  | seval_val : forall s v Q,
+      Q v s ->
+      seval s v Q
+  | seval_step : forall s t Q,
+      reducible s t -> (* (exists s' t', step s t s' t') *)
+      (forall s' t', step s t s' t' -> seval s' t' Q) ->
+      seval s t Q.
+
+(** The judgment [seval s t Q] satisfies the 3 targeted soundness properties. *)
+
+Lemma seval_terminates : forall s t Q,
+  seval s t Q ->
+  terminates s t.
+Proof using.
+  introv M. induction M; constructors; introv R.
+  { inverts R. }
+  { eauto. }
+Qed.
+
+Lemma seval_safe : forall s t Q,
+  seval s t Q ->
+  safe s t.
+Proof using.
+  introv M R. gen Q. induction R; intros.
+  { inverts M. { left. hnfs*. } { right*. } }
+  { rename H into S. inverts M. { inverts S. } { applys* IHR. } }
+Qed.
+
+Lemma seval_correct : forall s t Q,
+  seval s t Q ->
+  correct s t Q.
+Proof using.
+  introv M. induction M; introv R.
+  { inverts R as. { auto. } { introv S. inverts S. } }
+  { rename H1 into IH. inverts R. { lets (?&?&R): H. inverts R. } applys* IH. }
+Qed.
+
+(** [false_step] is a handy tactic to get rid of goals with assumptions
+    of the form [step s v s' t'] or [step s (op v) s' t'] for a binary operator [op]. *)
+
+Ltac false_step :=
+  solve [ match goal with
+  | K: step _ (trm_app (trm_val (val_prim _)) (trm_val _)) _ _ |- _ =>
+      inversion K; clear K; subst; false_step
+  | K: step _ (trm_val _) _ _ |- _ =>
+      inversion K; clear K; subst
+  | _ => false
+  end ].
+
+(** The proof that [eval s t Q] entails [seval s t Q] begins with a bunch
+    of auxiliary lemmas. *)
+
+Lemma seval_fun : forall s x t1 Q,
+  Q (val_fun x t1) s ->
+  seval s (trm_fun x t1) Q.
+Proof using.
+  introv M. applys seval_step.
+  { do 2 esplit. constructor. }
+  { introv R. inverts R. { applys seval_val. applys M. } }
+Qed.
+
+Lemma seval_fix : forall s f x t1 Q,
+  Q (val_fix f x t1) s ->
+  seval s (trm_fix f x t1) Q.
+Proof using.
+  introv M. applys seval_step.
+  { do 2 esplit. constructor. }
+  { introv R. inverts R. { applys seval_val. applys M. } }
+Qed.
+
+Lemma seval_app_fun : forall s x v1 v2 t1 Q,
+  v1 = val_fun x t1 ->
+  seval s (subst x v2 t1) Q ->
+  seval s (trm_app v1 v2) Q.
+Proof using.
+  introv E M. applys seval_step.
+  { do 2 esplit. applys* step_app_fun. }
+  { introv R. invert R; try solve [intros; false | introv R; inverts R].     introv -> -> -> -> -> R. inverts E. applys M. }
+Qed.
+
+Lemma seval_app_fix : forall s f x v1 v2 t1 Q,
+  v1 = val_fix f x t1 ->
+  seval s (subst x v2 (subst f v1 t1)) Q ->
+  seval s (trm_app v1 v2) Q.
+Proof using.
+  introv E M. applys seval_step.
+  { do 2 esplit. applys* step_app_fix. }
+  { introv R. invert R; try solve [intros; false | introv R; inverts R].     introv -> -> -> -> -> R. inverts E. applys M. }
+Qed.
+
+Lemma seval_seq : forall s t1 t2 Q1 Q,
+  seval s t1 Q1 ->
+  (forall s1 v1, Q1 v1 s1 -> seval s1 t2 Q) ->
+  seval s (trm_seq t1 t2) Q.
+Proof using.
+  introv M1 M2. gen_eq Q1': Q1.
+  induction M1; intros; subst.
+  { apply seval_step.
+    { do 2 esplit. applys step_seq. }
+    { introv R. inverts R as R'. { inverts R'. } applys* M2. } }
+  { rename t into t1, H1 into IH.
+    destruct H as (s'&t'&RE). applys seval_step.
+    { do 2 esplit. constructors. applys RE. }
+    { introv R. inverts R as R'.
+      { applys* IH R' M2. }
+      { false. inverts RE. } } }
+Qed.
+
+Lemma seval_let : forall s x t1 t2 Q1 Q,
+  seval s t1 Q1 ->
+  (forall s1 v1, Q1 v1 s1 -> seval s1 (subst x v1 t2) Q) ->
+  seval s (trm_let x t1 t2) Q.
+Proof using.
+  introv M1 M2. gen_eq Q1': Q1.
+  induction M1; intros; subst.
+  { apply seval_step.
+    { do 2 esplit. applys step_let. }
+    { introv R. inverts R as R'. { inverts R'. } applys* M2. } }
+  { rename t into t1, H1 into IH.
+    destruct H as (s'&t'&RE). applys seval_step.
+    { do 2 esplit. constructors. applys RE. }
+    { introv R. inverts R as R'.
+      { applys* IH R' M2. }
+      { false. inverts RE. } } }
+Qed.
+
+Lemma seval_app_arg1 : forall t1 t2 Q1 s1 Q,
+  seval s1 t1 Q1 ->
+  (forall v1 s2, Q1 v1 s2 -> seval s2 (v1 t2) Q) ->
+  seval s1 (t1 t2) Q.
+Proof using.
+  introv M1 M2. gen_eq Q1': Q1.
+  induction M1; intros; subst.
+  { applys* M2. }
+  { rename t into t1, H1 into IH.
+    destruct H as (s'&t'&RE). applys seval_step.
+    { do 2 esplit. applys step_app_arg1. applys RE. }
+    { introv R. inverts R as R'; try solve [inverts RE]; try false_step.
+      { applys* IH R'. } } }
+Qed.
+
+Lemma seval_app_arg2 : forall v1 t2 Q1 s1 Q,
+  seval s1 t2 Q1 ->
+  (forall v2 s2, Q1 v2 s2 -> seval s2 (v1 v2) Q) ->
+  seval s1 (v1 t2) Q.
+Proof using.
+  introv M1 M2. gen_eq Q1': Q1.
+  induction M1; intros; subst.
+  { applys* M2. }
+  { rename t into t1, H1 into IH.
+    destruct H as (s'&t'&RE). applys seval_step.
+    { do 2 esplit. applys step_app_arg2. applys RE. }
+    { introv R. inverts R as R'; try solve [inverts RE]; try false_step.
+      { applys* IH R'. } } }
+Qed.
+
+Lemma seval_if : forall s b t1 t2 Q,
+  seval s (if b then t1 else t2) Q ->
+  seval s (trm_if b t1 t2) Q.
+Proof using.
+  introv M. applys seval_step.
+  { do 2 esplit. constructors*. }
+  { introv R. inverts R; tryfalse. { applys M. } }
+Qed.
+
+Lemma seval_of_eval : forall s t Q,
+  eval s t Q ->
+  seval s t Q.
+Proof using.
+  introv M. induction M.
+  { applys* seval_val. }
+  { applys* seval_fun. }
+  { applys* seval_fix. }
+  { applys* seval_app_arg1. }
+  { applys* seval_app_arg2. }
+  { applys* seval_app_fun. }
+  { applys* seval_app_fix. }
+  { applys* seval_seq. }
+  { applys* seval_let. }
+  { applys* seval_if. }
+  { rename H into HE, H0 into K. unfolds purepostin.
+    applys seval_step.
+    { inverts HE; try solve [do 2 esplit; constructor; eauto].
+      { exists s 0. applys step_rand. math. } }
+    { introv R. inverts R; try false_step; inverts HE; applys* seval_val. } }
+   { rename H into HE, H0 into K. unfolds purepostin.
+    applys seval_step.
+    { inverts HE; try solve [do 2 esplit; constructor; eauto]. }
+    { introv R. inverts R; do 2 (try inverts_if_head step); inverts HE; applys* seval_val.
+      (* alternative: inverts HE; inverts R; try false_step; applys* seval_val. *)
+      { math_rewrite (p2 = p3). { applys eq_nat_of_eq_int. math. } eauto. } } }
+  { applys seval_step.
+    { forwards~ (p&D&N): (exists_fresh null s).
+      do 2 esplit. applys* step_ref. }
+    { introv R. do 2 (try inverts_if_head step). applys* seval_val. } }
+  { applys seval_step.
+    { do 2 esplit. applys* step_get. }
+    { introv R. do 2 (try inverts_if_head step). applys* seval_val. } }
+  { applys seval_step.
+    { do 2 esplit. applys* step_set. }
+    { introv R. do 3 (try inverts_if_head step). applys* seval_val. } }
+  { applys seval_step.
+    { do 2 esplit. applys* step_free. }
+    { introv R. do 2 (try inverts_if_head step). applys* seval_val. } }
+Qed.
+
+(** Final soundness theorem with respect to the small-step semantics. *)
+
+Lemma triple_sound : forall t H Q,
+  triple t H Q ->
+  forall s, H s -> terminates s t /\ safe s t /\ correct s t Q.
+Proof using.
+  introv M Hs. specializes M Hs. lets M': seval_of_eval M. splits.
+  { applys* seval_terminates. }
+  { applys* seval_safe. }
+  { applys* seval_correct. }
+Qed.
+
+(* ================================================================= *)
+(** ** Structural Properties of the [eval] Predicate *)
+
+Section EvalProp.
+Hint Constructors eval.
+
+(** Covariance property *)
+
+Lemma eval_conseq : forall s t Q1 Q2,
+  eval s t Q1 ->
+  Q1 ===> Q2 ->
+  eval s t Q2.
+Proof using.
+  introv M W.
+  asserts W': (forall v h, Q1 v h -> Q2 v h). { auto. } clear W.
+  induction M; try solve [ constructors* ].
+  { applys* eval_unop. unfolds* purepostin. }
+  { applys* eval_binop. unfolds* purepostin. }
+Qed.
+
+(** Frame property *)
+
+Lemma eval_frame : forall h1 h2 t Q,
+  eval h1 t Q ->
+  Fmap.disjoint h1 h2 ->
+  eval (h1 \u h2) t (Q \*+ (= h2)).
+Proof using.
+  introv M HD. gen h2. induction M; intros;
+    try solve [ hint hstar_intro; constructors* ].
+  { rename M into M1, H into M2, IHM into IH1, H1 into IH2.
+    specializes IH1 HD. applys* eval_app_arg1 IH1. introv HK.
+    lets (h1'&h2'&K1'&K2'&KD&KU): hstar_inv HK. subst. applys* IH2. }
+  { rename M into M1, H into M2, IHM into IH1, H1 into IH2.
+    specializes IH1 HD. applys* eval_app_arg2 IH1. introv HK.
+    lets (h1'&h2'&K1'&K2'&KD&KU): hstar_inv HK. subst. applys* IH2. }
+  { rename M into M1, H into M2, IHM into IH1, H0 into IH2.
+    specializes IH1 HD. applys eval_seq IH1. introv HK.
+    lets (h1'&h2'&K1'&K2'&KD&KU): hstar_inv HK. subst. applys* IH2. }
+  { rename M into M1, H into M2, IHM into IH1, H0 into IH2.
+    specializes IH1 HD. applys eval_let IH1. introv HK.
+    lets (h1'&h2'&K1'&K2'&KD&KU): hstar_inv HK. subst. applys* IH2. }
+  { applys* eval_unop. unfolds* purepostin. introv Hv. applys* hstar_intro. }
+  { applys* eval_binop. unfolds* purepostin. introv Hv. applys* hstar_intro. }
+  { rename H into M. applys eval_ref. intros p Hp.
+    rewrite Fmap.indom_union_eq in Hp. rew_logic in Hp. destruct Hp as [Hp1 Hp2].
+    rewrite* Fmap.update_union_not_r. applys hstar_intro.
+    { applys* M. } { auto. } { applys* Fmap.disjoint_update_not_r. } }
+  { applys eval_get. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.read_union_l. applys* hstar_intro. } }
+  { applys eval_set. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.update_union_l. applys hstar_intro.
+      { auto. } { auto. } { applys* Fmap.disjoint_update_l. } } }
+  { applys eval_free. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.remove_disjoint_union_l. applys hstar_intro.
+      { auto. } { auto. } { applys* Fmap.disjoint_remove_l. } } }
+Qed.
+
+End EvalProp.
 
 (* ================================================================= *)
 (** ** Structural Rules *)
@@ -1369,63 +1613,55 @@ Lemma triple_conseq : forall t H' Q' H Q,
   H ==> H' ->
   Q' ===> Q ->
   triple t H Q.
-Proof using.
-  introv M MH MQ. intros HF. applys hoare_conseq M.
-  { xchanges MH. }
-  { intros x. xchanges (MQ x). }
-Qed.
+Proof using. unfolds triple. introv M MH MQ HF. applys* eval_conseq. Qed.
 
 Lemma triple_frame : forall t H Q H',
   triple t H Q ->
   triple t (H \* H') (Q \*+ H').
-Proof using.
-  introv M. intros HF. applys hoare_conseq (M (HF \* H')); xsimpl.
+Proof.
+  introv M. intros h HF. lets (h1&h2&M1&M2&MD&MU): hstar_inv (rm HF).
+  subst. specializes M M1. applys eval_conseq.
+  { applys eval_frame M MD. } { xsimpl. intros h' ->. applys M2. }
 Qed.
 
-(** Details for the proof of the frame rule. *)
-
-Lemma triple_frame' : forall t H Q H',
-  triple t H Q ->
-  triple t (H \* H') (Q \*+ H').
-Proof using.
-  introv M. unfold triple in *. rename H' into H1. intros H2.
-  applys hoare_conseq. applys M (H1 \* H2).
-  { rewrite hstar_assoc. auto. }
-  { intros v. rewrite hstar_assoc. auto. }
-Qed.
-
-(** Extraction rules. *)
-
-Lemma triple_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall x, triple t (J x) Q) ->
-  triple t (hexists J) Q.
-Proof using.
-  introv M. intros HF. rewrite hstar_hexists.
-  applys hoare_hexists. intros. applys* M.
-Qed.
+(** Extraction Rules *)
 
 Lemma triple_hpure : forall t (P:Prop) H Q,
   (P -> triple t H Q) ->
   triple t (\[P] \* H) Q.
 Proof using.
-  introv M. intros HF. rewrite hstar_assoc.
-  applys hoare_hpure. intros. applys* M.
-Qed. (* Note: can also be proved from [triple_hexists] *)
+  introv M. intros h (h1&h2&M1&M2&D&U). destruct M1 as (M1&HP).
+  lets E: hempty_inv HP. subst. rewrite Fmap.union_empty_l. applys~ M.
+Qed.
 
-Lemma triple_hforall : forall A (x:A) t (J:A->hprop) Q,
+Lemma triple_hexists : forall t (A:Type) (J:A->hprop) Q,
+  (forall (x:A), triple t (J x) Q) ->
+  triple t (hexists J) Q.
+Proof using. introv M. intros h (x&Hh). applys M Hh. Qed.
+
+Lemma triple_hforall : forall t (A:Type) (x:A) (J:A->hprop) Q,
   triple t (J x) Q ->
   triple t (hforall J) Q.
-Proof using.
-  introv M. applys* triple_conseq M. applys hforall_specialize.
-Qed.
+Proof using. introv M. applys* triple_conseq M. applys hforall_specialize. Qed.
 
 Lemma triple_hwand_hpure_l : forall t (P:Prop) H Q,
   P ->
   triple t H Q ->
   triple t (\[P] \-* H) Q.
-Proof using.
-  introv HP M. applys* triple_conseq M. rewrite* hwand_hpure_l.
-Qed.
+Proof using. introv HP M. applys* triple_conseq M. rewrite* hwand_hpure_l. Qed.
+
+(** A corollary of [triple_hpure] useful for the course *)
+
+Parameter triple_hpure' : forall t (P:Prop) Q,
+  (P -> triple t \[] Q) ->
+  triple t \[P] Q.
+
+(** Heap-naming rule *)
+
+Lemma triple_named_heap : forall t H Q,
+  (forall h, H h -> triple t (= h) Q) ->
+  triple t H Q.
+Proof using. introv M Hs. applys M Hs. auto. Qed.
 
 (** Combined and ramified rules. *)
 
@@ -1447,26 +1683,6 @@ Proof using.
   { rewrite~ <- qwand_equiv. }
 Qed.
 
-(** Named heaps. *)
-
-Lemma hexists_named_eq : forall H,
-  H = (\exists h, \[H h] \* (= h)).
-Proof using.
-  intros. apply himpl_antisym.
-  { intros h K. applys hexists_intro h.
-    rewrite* hstar_hpure_l. }
-  { xpull. intros h K. intros ? ->. auto. }
-Qed.
-
-Lemma triple_named_heap : forall t H Q,
-  (forall h, H h -> triple t (= h) Q) ->
-  triple t H Q.
-Proof using.
-  introv M. rewrite (hexists_named_eq H).
-  applys triple_hexists. intros h.
-  applys* triple_hpure.
-Qed.
-
 (* ================================================================= *)
 (** ** Rules for Terms *)
 
@@ -1474,50 +1690,38 @@ Lemma triple_eval_like : forall t1 t2 H Q,
   eval_like t1 t2 ->
   triple t1 H Q ->
   triple t2 H Q.
-Proof using.
-  introv E M1. intros H'. applys hoare_eval_like E. applys M1.
-Qed.
+Proof using. introv E M1 Hv. applys* E. Qed.
 
 Lemma triple_val : forall v H Q,
   H ==> Q v ->
   triple (trm_val v) H Q.
-Proof using.
-  introv M. intros HF. applys hoare_val. { xchanges M. }
-Qed.
+Proof using. introv M Hs. applys* eval_val. Qed.
+
+Lemma triple_val_minimal : forall v,
+  triple (trm_val v) \[] (fun r => \[r = v]).
+Proof using. intros. applys triple_val. xsimpl*. Qed.
 
 Lemma triple_fun : forall x t1 H Q,
   H ==> Q (val_fun x t1) ->
   triple (trm_fun x t1) H Q.
-Proof using.
-  introv M. intros HF. applys~ hoare_fun. { xchanges M. }
-Qed.
+Proof using. introv M Hs. applys* eval_fun. Qed.
 
 Lemma triple_fix : forall f x t1 H Q,
   H ==> Q (val_fix f x t1) ->
   triple (trm_fix f x t1) H Q.
-Proof using.
-  introv M. intros HF. applys~ hoare_fix. { xchanges M. }
-Qed.
+Proof using. introv M Hs. applys* eval_fix. Qed.
 
 Lemma triple_seq : forall t1 t2 H Q H1,
   triple t1 H (fun v => H1) ->
   triple t2 H1 Q ->
   triple (trm_seq t1 t2) H Q.
-Proof using.
-  introv M1 M2. intros HF. applys hoare_seq.
-  { applys M1. }
-  { applys hoare_conseq M2; xsimpl. }
-Qed.
+Proof using. introv M1 M2 Hs. applys* eval_seq. Qed.
 
 Lemma triple_let : forall x t1 t2 Q1 H Q,
   triple t1 H Q1 ->
   (forall v1, triple (subst x v1 t2) (Q1 v1) Q) ->
   triple (trm_let x t1 t2) H Q.
-Proof using.
-  introv M1 M2. intros HF. applys hoare_let.
-  { applys M1. }
-  { intros v. applys hoare_conseq M2; xsimpl. }
-Qed.
+Proof using. introv M1 M2 Hs. applys* eval_let. Qed.
 
 Lemma triple_let_val : forall x v1 t2 H Q,
   triple (subst x v1 t2) H Q ->
@@ -1531,19 +1735,13 @@ Qed.
 Lemma triple_if : forall (b:bool) t1 t2 H Q,
   triple (if b then t1 else t2) H Q ->
   triple (trm_if b t1 t2) H Q.
-Proof using.
-  introv M1. intros HF. applys hoare_if. applys M1.
-Qed.
+Proof using. introv M Hs. applys* eval_if. Qed.
 
 Lemma triple_app_fun : forall x v1 v2 t1 H Q,
   v1 = val_fun x t1 ->
   triple (subst x v2 t1) H Q ->
   triple (trm_app v1 v2) H Q.
-Proof using.
-  (* can also be proved using [triple_eval_like] *)
-  unfold triple. introv E M1. intros H'.
-  applys hoare_app_fun E. applys M1.
-Qed.
+Proof using. introv E M Hs. applys* eval_app_fun. Qed.
 
 Lemma triple_app_fun_direct : forall x v2 t1 H Q,
   triple (subst x v2 t1) H Q ->
@@ -1554,28 +1752,26 @@ Lemma triple_app_fix : forall v1 v2 f x t1 H Q,
   v1 = val_fix f x t1 ->
   triple (subst x v2 (subst f v1 t1)) H Q ->
   triple (trm_app v1 v2) H Q.
-Proof using.
-  (* can also be proved using [triple_eval_like] *)
-  unfold triple. introv E M1. intros H'.
-  applys hoare_app_fix E. applys M1.
-Qed.
+Proof using. introv E M Hs. applys* eval_app_fix. Qed.
 
 Lemma triple_app_fix_direct : forall v2 f x t1 H Q,
+  f <> x ->
   triple (subst x v2 (subst f (val_fix f x t1) t1)) H Q ->
   triple (trm_app (val_fix f x t1) v2) H Q.
-Proof using. introv M. applys* triple_app_fix. Qed.
+Proof using. introv N M. applys* triple_app_fix. Qed.
 
 (* ================================================================= *)
-(** ** Triple-Style Specification for Primitive Functions *)
-
-(** Operations on the state. *)
+(** ** Rules for Heap-Manipulating Primitive Operations *)
 
 Lemma triple_ref : forall v,
   triple (val_ref v)
     \[]
-    (funloc p => p ~~> v).
+    (fun r => \exists p, \[r = val_loc p] \* p ~~> v).
 Proof using.
-  intros. unfold triple. intros H'. applys hoare_conseq hoare_ref; xsimpl~.
+  intros. intros s1 K. applys eval_ref. intros p D.
+  lets ->: hempty_inv K. rewrite Fmap.update_empty.
+  applys hexists_intro p. rewrite hstar_hpure_l. split*.
+  applys hsingle_intro.
 Qed.
 
 Lemma triple_get : forall v p,
@@ -1583,41 +1779,77 @@ Lemma triple_get : forall v p,
     (p ~~> v)
     (fun r => \[r = v] \* (p ~~> v)).
 Proof using.
-  intros. unfold triple. intros H'. applys hoare_conseq hoare_get; xsimpl~.
+  intros. intros s K. lets ->: hsingle_inv K.
+  applys eval_get.
+  { applys* Fmap.indom_single. }
+  { rewrite hstar_hpure_l. split*. rewrite* Fmap.read_single. }
 Qed.
 
 Lemma triple_set : forall w p v,
   triple (val_set (val_loc p) v)
     (p ~~> w)
-    (fun _ => p ~~> v).
+    (fun r => \[r = val_unit] \* (p ~~> v)).
 Proof using.
-  intros. unfold triple. intros H'. applys hoare_conseq hoare_set; xsimpl~.
+  intros. intros s1 K. lets ->: hsingle_inv K. lets Hp: indom_single p v.
+  applys eval_set.
+  { applys* Fmap.indom_single. }
+  { rewrite hstar_hpure_l. split*. rewrite Fmap.update_single. applys hsingle_intro. }
+Qed.
+
+Lemma triple_free' : forall p v,
+  triple (val_free (val_loc p))
+    (p ~~> v)
+    (fun r => \[r = val_unit]).
+Proof using.
+  intros. intros s1 K. lets ->: hsingle_inv K. lets Hp: indom_single p v.
+  applys eval_free.
+  { applys* Fmap.indom_single. }
+  { rewrite* Fmap.remove_single. applys* hpure_intro. }
 Qed.
 
 Lemma triple_free : forall p v,
   triple (val_free (val_loc p))
     (p ~~> v)
-    (fun _ => \[]).
+    (fun r => \[]).
+Proof using. intros. applys triple_conseq triple_free'; xsimpl*. Qed.
+
+(* ================================================================= *)
+(** ** Rules for Other Primitive Operations *)
+
+Lemma triple_unop' : forall op v1 (P:val->Prop) Q, (* DEPRECATED? *)
+  evalunop op v1 P ->
+  (forall v, P v -> Q v Fmap.empty) -> (* purepostin heap_empty P Q ->*)
+  triple (op v1) \[] Q.
 Proof using.
-  intros. unfold triple. intros H'. applys hoare_conseq hoare_free; xsimpl~.
+  introv M R Hs. lets ->: hempty_inv Hs. applys eval_unop M. hnfs*.
 Qed.
 
-(** Other operations. *)
-
-Lemma triple_unop : forall v op v1,
-  evalunop op v1 v ->
-  triple (op v1) \[] (fun r => \[r = v]).
+Lemma triple_binop' : forall op v1 v2 (P:val->Prop) Q, (* DEPRECATED? *)
+  evalbinop op v1 v2 P ->
+  (forall v, P v -> Q v Fmap.empty) ->
+  triple (op v1 v2) \[] Q.
 Proof using.
-  introv R. unfold triple. intros H'.
-  applys* hoare_conseq hoare_unop. xsimpl*.
+  introv M R Hs. lets ->: hempty_inv Hs. applys eval_binop M. hnfs*.
 Qed.
 
-Lemma triple_binop : forall v op v1 v2,
-  evalbinop op v1 v2 v ->
-  triple (op v1 v2) \[] (fun r => \[r = v]).
+Lemma triple_unop : forall op v1 (P:val->Prop),
+  evalunop op v1 P ->
+  triple (op v1) \[] (fun r => \[P r]).
 Proof using.
-  introv R. unfold triple. intros H'.
-  applys* hoare_conseq hoare_binop. xsimpl*.
+  introv M Hs. lets ->: hempty_inv Hs.
+  applys eval_conseq (fun v s => P v /\ s = Fmap.empty).
+  { applys* eval_unop M. hnfs*. }
+  { intros v s (?&->). applys* hpure_intro. }
+Qed.
+
+Lemma triple_binop : forall op v1 v2 (P:val->Prop),
+  evalbinop op v1 v2 P ->
+  triple (op v1 v2) \[] (fun r => \[P r]).
+Proof using.
+  introv M Hs. lets ->: hempty_inv Hs.
+  applys eval_conseq (fun v s => P v /\ s = Fmap.empty).
+  { applys* eval_binop M. hnfs*. }
+  { intros v s (?&->). applys* hpure_intro. }
 Qed.
 
 Lemma triple_add : forall n1 n2,
@@ -1632,6 +1864,13 @@ Lemma triple_div : forall n1 n2,
     \[]
     (fun r => \[r = val_int (Z.quot n1 n2)]).
 Proof using. intros. applys* triple_binop. applys* evalbinop_div. Qed.
+
+Lemma triple_rand : forall n,
+  n > 0 ->
+  triple (val_rand n)
+    \[]
+    (fun r => \[exists n1, r = val_int n1 /\ 0 <= n1 < n]).
+Proof using. intros. applys* triple_unop. applys* evalunop_rand. Qed.
 
 Lemma triple_neg : forall (b1:bool),
   triple (val_neg b1)
@@ -1720,65 +1959,55 @@ Proof using.
     applys eq_nat_of_eq_int. rewrite abs_nonneg; math. }
 Qed.
 
-(* ================================================================= *)
-(** ** Alternative Definition of [wp] *)
-
-(* ----------------------------------------------------------------- *)
-(** *** Definition of the Weakest-Precondition Judgment. *)
-
-(** [wp] is defined on top of [hoare] triples. More precisely [wp t Q]
-    is a heap predicate such that [H ==> wp t Q] if and only if
-    [triple t H Q], where [triple t H Q] is defined as
-    [forall H', hoare t (H \* H') (Q \*+ H')]. *)
-
-Definition wp (t:trm) := fun (Q:val->hprop) =>
-  \exists H, H \* \[forall H', hoare t (H \* H') (Q \*+ H')].
-
-(** Equivalence with triples. *)
-
-Lemma wp_equiv : forall t H Q,
-  (H ==> wp t Q) <-> (triple t H Q).
-Proof using.
-  unfold wp, triple. iff M.
-  { intros H'. applys hoare_conseq. 2:{ applys himpl_frame_l M. }
-     { clear M. rewrite hstar_hexists. applys hoare_hexists. intros H''.
-       rewrite (hstar_comm H''). rewrite hstar_assoc.
-       applys hoare_hpure. intros N. applys N. }
-     { auto. } }
-  { xsimpl H. apply M. }
-Qed.
-
 (* ----------------------------------------------------------------- *)
 (** *** Structural Rule for [wp] *)
 
-(** The ramified frame rule. *)
+(** Definition of [wp] *)
 
-Lemma wp_ramified : forall Q1 Q2 t,
-  (wp t Q1) \* (Q1 \--* Q2) ==> (wp t Q2).
-Proof using.
-  intros. unfold wp. xpull. intros H M.
-  xsimpl (H \* (Q1 \--* Q2)). intros H'.
-  applys hoare_conseq M; xsimpl.
-Qed.
+Definition wp (t:trm) (Q:val->hprop) : hprop :=
+  fun s => eval s t Q.
 
-Arguments wp_ramified : clear implicits.
+(** Equivalence between [wp] and [triple] *)
 
-(** Corollaries. *)
+Lemma wp_equiv : forall t H Q,
+  (H ==> wp t Q) <-> (triple t H Q).
+Proof using. intros. unfold wp, triple. iff*. Qed.
+
+(** Consequence rule for [wp]. *)
 
 Lemma wp_conseq : forall t Q1 Q2,
   Q1 ===> Q2 ->
   wp t Q1 ==> wp t Q2.
-Proof using.
-  introv M. applys himpl_trans_r (wp_ramified Q1 Q2). xsimpl. xchanges M.
-Qed.
+Proof using. unfold wp. introv M. intros s Hs. applys* eval_conseq. Qed.
+
+(** Frame rule for [wp]. *)
 
 Lemma wp_frame : forall t H Q,
   (wp t Q) \* H ==> wp t (Q \*+ H).
-Proof using. intros. applys himpl_trans_r wp_ramified. xsimpl. Qed.
+Proof using.
+  intros. unfold wp. intros h HF.
+  lets (h1&h2&M1&M2&MD&MU): hstar_inv (rm HF).
+  subst. applys eval_conseq.
+  { applys eval_frame M1 MD. }
+  { xsimpl. intros h' ->. applys M2. }
+Qed.
 
-Lemma wp_ramified_frame : forall t Q1 Q2,
+(** Corollaries, including ramified frame rule. *)
+
+Lemma wp_ramified : forall t Q1 Q2,
   (wp t Q1) \* (Q1 \--* Q2) ==> (wp t Q2).
-Proof using. intros. applys himpl_trans_r wp_ramified. xsimpl. Qed.
+Proof using.
+  intros. applys himpl_trans.
+  { applys wp_frame. }
+  { applys wp_conseq. xsimpl. }
+Qed.
+
+Lemma wp_conseq_frame : forall t H Q1 Q2,
+  Q1 \*+ H ===> Q2 ->
+  (wp t Q1) \* H ==> (wp t Q2).
+Proof using.
+  introv M. rewrite <- qwand_equiv in M. xchange M. applys wp_ramified.
+Qed.
 
 Lemma wp_ramified_trans : forall t H Q1 Q2,
   H ==> (wp t Q1) \* (Q1 \--* Q2) ->
@@ -1791,63 +2020,41 @@ Proof using. introv M. xchange M. applys wp_ramified. Qed.
 Lemma wp_eval_like : forall t1 t2 Q,
   eval_like t1 t2 ->
   wp t1 Q ==> wp t2 Q.
-Proof using.
-  introv E. unfold wp. xpull. intros H M. xsimpl H.
-  intros H'. applys hoare_eval_like E M.
-Qed.
+Proof using. introv E Hs. applys* E Hs. Qed.
 
 Lemma wp_val : forall v Q,
   Q v ==> wp (trm_val v) Q.
-Proof using. intros. unfold wp. xsimpl; intros H'. applys hoare_val. xsimpl. Qed.
+Proof using. unfold wp. intros. intros h K. applys* eval_val. Qed.
 
 Lemma wp_fun : forall x t Q,
   Q (val_fun x t) ==> wp (trm_fun x t) Q.
-Proof using. intros. unfold wp. xsimpl; intros H'. applys hoare_fun. xsimpl. Qed.
+Proof using. unfold wp. intros. intros h K. applys* eval_fun. Qed.
 
 Lemma wp_fix : forall f x t Q,
   Q (val_fix f x t) ==> wp (trm_fix f x t) Q.
-Proof using. intros. unfold wp. xsimpl; intros H'. applys hoare_fix. xsimpl. Qed.
+Proof using. unfold wp. intros. intros h K. applys* eval_fix. Qed.
 
 Lemma wp_app_fun : forall x v1 v2 t1 Q,
   v1 = val_fun x t1 ->
   wp (subst x v2 t1) Q ==> wp (trm_app v1 v2) Q.
-Proof using. introv EQ1. unfold wp. xsimpl; intros. applys* hoare_app_fun. Qed.
-(* variant: introv EQ1. applys wp_eval_like. introv R. applys* eval_app_fun. *)
+Proof using. unfold wp. intros. intros h K. applys* eval_app_fun. Qed.
 
 Lemma wp_app_fix : forall f x v1 v2 t1 Q,
   v1 = val_fix f x t1 ->
   wp (subst x v2 (subst f v1 t1)) Q ==> wp (trm_app v1 v2) Q.
-Proof using. introv EQ1. unfold wp. xsimpl; intros. applys* hoare_app_fix. Qed.
-(* variant: introv EQ1. applys wp_eval_like. introv R. applys* eval_app_fix. *)
+Proof using. unfold wp. intros. intros h K. applys* eval_app_fix. Qed.
 
 Lemma wp_seq : forall t1 t2 Q,
   wp t1 (fun r => wp t2 Q) ==> wp (trm_seq t1 t2) Q.
-Proof using.
-  intros. unfold wp at 1. xsimpl. intros H' M1.
-  unfold wp at 1. xsimpl. intros H''.
-  applys hoare_seq. applys (rm M1). unfold wp.
-  repeat rewrite hstar_hexists. applys hoare_hexists; intros H'''.
-  rewrite (hstar_comm H'''); repeat rewrite hstar_assoc.
-  applys hoare_hpure; intros M2. applys hoare_conseq M2; xsimpl.
-Qed.
+Proof using. unfold wp. intros. intros h K. applys* eval_seq. Qed.
 
 Lemma wp_let : forall x t1 t2 Q,
   wp t1 (fun v => wp (subst x v t2) Q) ==> wp (trm_let x t1 t2) Q.
-Proof using.
-  intros. unfold wp at 1. xsimpl. intros H' M1.
-  unfold wp at 1. xsimpl. intros H''.
-  applys hoare_let. applys (rm M1). intros v. simpl. unfold wp.
-  repeat rewrite hstar_hexists. applys hoare_hexists; intros H'''.
-  rewrite (hstar_comm H'''). rewrite hstar_assoc.
-  applys hoare_hpure; intros M2. applys hoare_conseq M2; xsimpl.
-Qed.
+Proof using. unfold wp. intros. intros h K. applys* eval_let. Qed.
 
 Lemma wp_if : forall b t1 t2 Q,
   wp (if b then t1 else t2) Q ==> wp (trm_if b t1 t2) Q.
-Proof using.
-  intros. repeat unfold wp. xsimpl; intros H M H'.
-  applys hoare_if. applys M.
-Qed.
+Proof using. unfold wp. intros. intros h K. applys* eval_if. Qed.
 
 Lemma wp_if_case : forall b t1 t2 Q,
   (if b then wp t1 Q else wp t2 Q) ==> wp (trm_if b t1 t2) Q.
@@ -2017,13 +2224,13 @@ Fixpoint isubst (E:ctx) (t:trm) : trm :=
         isubst ((x,v)::E) t = subst x v (isubst (rem x E) t)
 *)
 
-(** The first targeted lemma. *)
+(** [isubst_nil] explains that the empty substitution is the identity. *)
 
 Lemma isubst_nil : forall t,
   isubst nil t = t.
 Proof using. intros t. induction t; simpl; fequals. Qed.
 
-(** The next lemma relates [subst] and [isubst]. *)
+(** [subst_eq_isubst_one] relates [subst] and [isubst]. *)
 
 Lemma subst_eq_isubst_one : forall x v t,
   subst x v t = isubst ((x,v)::nil) t.
@@ -2051,7 +2258,7 @@ Proof using.
   { rewrite~ EQ. }
 Qed.
 
-(** The next lemma asserts that [isubst] distribute over concatenation. *)
+(** [isubst_app] asserts that [isubst] distribute over concatenation. *)
 
 Lemma isubst_app : forall t E1 E2,
   isubst (E1 ++ E2) t = isubst E2 (isubst E1 t).
@@ -2069,6 +2276,15 @@ Proof using.
   { fequals*. }
   { fequals*. { rewrite* rem_app. } }
   { fequals*. }
+Qed.
+
+(** [isubst_cons] is a corollary *)
+
+Lemma isubst_cons : forall x v xvs t,
+  isubst ((x,v)::xvs) t = isubst xvs (subst x v t).
+Proof using.
+  intros. rewrite <- app_cons_one_r. rewrite isubst_app.
+  rewrite* <- subst_eq_isubst_one.
 Qed.
 
 (** The next lemma asserts that the concatenation order is irrelevant
@@ -2198,6 +2414,9 @@ Definition wpgen_if (t:trm) (F1 F2:formula) : formula := fun Q =>
 Definition wpgen_if_trm (F0 F1 F2:formula) : formula :=
   wpgen_let F0 (fun v => mkstruct (wpgen_if v F1 F2)).
 
+Definition wpgen_app (t:trm) : formula := fun Q =>
+  \exists H, H \* \[triple t H Q].
+
 (* ----------------------------------------------------------------- *)
 (** *** Recursive Definition of [wpgen] *)
 
@@ -2214,7 +2433,7 @@ Fixpoint wpgen (E:ctx) (t:trm) : formula :=
   | trm_if t0 t1 t2 => wpgen_if (isubst E t0) (wpgen E t1) (wpgen E t2)
   | trm_seq t1 t2 => wpgen_seq (wpgen E t1) (wpgen E t2)
   | trm_let x t1 t2 => wpgen_let (wpgen E t1) (fun v => wpgen ((x,v)::E) t2)
-  | trm_app t1 t2 => wp (isubst E t)
+  | trm_app t1 t2 => wpgen_app (isubst E t)
   end.
 
 (* ----------------------------------------------------------------- *)
@@ -2276,8 +2495,8 @@ Lemma wpgen_fix_sound : forall f x t1 Fof,
   (forall vf vx, formula_sound (subst x vx (subst f vf t1)) (Fof vf vx)) ->
   formula_sound (trm_fix f x t1) (wpgen_fix Fof).
 Proof using.
-  introv M. intros Q. unfolds wpgen_fix. applys himpl_hforall_l (val_fix f x t1).
-  xchange hwand_hpure_l.
+  introv M. intros Q. unfolds wpgen_fix.
+  applys himpl_hforall_l (val_fix f x t1). xchange hwand_hpure_l.
   { intros. applys himpl_trans_r. { applys* wp_app_fix. } { applys* M. } }
   { applys wp_fix. }
 Qed.
@@ -2309,22 +2528,28 @@ Proof using.
   applys himpl_trans wp_if. case_if. { applys S1. } { applys S2. }
 Qed.
 
+Lemma wpgen_app_sound : forall t,
+  formula_sound t (wpgen_app t).
+Proof using.
+  intros t Q. unfold wpgen_app. xpull. intros H M. rewrite wp_equiv. apply M.
+Qed.
+
 (** The main inductive proof for the soundness theorem. *)
 
 Lemma wpgen_sound : forall E t,
   formula_sound (isubst E t) (wpgen E t).
 Proof using.
   intros. gen E. induction t; intros; simpl;
-   applys mkstruct_sound.
+   try applys mkstruct_sound.
   { applys wpgen_val_sound. }
   { rename v into x. unfold wpgen_var. case_eq (lookup x E).
     { intros v EQ. applys wpgen_val_sound. }
     { intros N. applys wpgen_fail_sound. } }
-  { rename v into x. applys wpgen_fun_sound.
+  { applys wpgen_fun_sound.
     { intros vx. rewrite* <- isubst_rem. } }
-  { rename v into f, v0 into x. applys wpgen_fix_sound.
-    { intros vf vx. rewrite* <- isubst_rem_2. } }
-  { applys wp_sound. }
+  { applys* wpgen_fix_sound.
+    { fold isubst. intros vf vx. rewrite* <- isubst_rem_2. } }
+  { applys wpgen_app_sound. }
   { applys* wpgen_seq_sound. }
   { rename v into x. applys* wpgen_let_sound.
     { intros v. rewrite* <- isubst_rem. } }
@@ -2379,16 +2604,16 @@ Proof using. introv M. xchange M. Qed.
 Lemma xif_lemma : forall b H F1 F2 Q,
   (b = true -> H ==> F1 Q) ->
   (b = false -> H ==> F2 Q) ->
-  H ==> (wpgen_if b F1 F2) Q.
+  H ==> wpgen_if b F1 F2 Q.
 Proof using. introv M1 M2. unfold wpgen_if. xsimpl* b. case_if*. Qed.
 
 Lemma xapp_lemma : forall t Q1 H1 H Q,
   triple t H1 Q1 ->
   H ==> H1 \* (Q1 \--* protect Q) ->
-  H ==> wp t Q.
+  H ==> wpgen_app t Q.
 Proof using.
-  introv M W. rewrite <- wp_equiv in M. xchange W. xchange M.
-  applys wp_ramified_frame.
+  introv M W. unfold wpgen_app. xsimpl.
+  applys triple_ramified_frame M. applys W.
 Qed.
 
 Lemma xfun_spec_lemma : forall (S:val->Prop) H Q Fof,
@@ -2412,6 +2637,27 @@ Proof using.
   introv K. rewrite <- wp_equiv. xchange K. applys N.
 Qed.
 
+Lemma xfix_spec_lemma : forall (S:val->Prop) H Q Fof,
+  (forall vf,
+    (forall vx H' Q', (H' ==> Fof vf vx Q') -> triple (trm_app vf vx) H' Q') ->
+    S vf) ->
+  (forall vf, S vf -> (H ==> Q vf)) ->
+  H ==> wpgen_fix Fof Q.
+Proof using.
+  introv M1 M2. unfold wpgen_fix. xsimpl. intros vf N.
+  applys M2. applys M1. introv K. rewrite <- wp_equiv. xchange K. applys N.
+Qed.
+
+Lemma xfix_nospec_lemma : forall H Q Fof,
+  (forall vf,
+     (forall vx H' Q', (H' ==> Fof vf vx Q') -> triple (trm_app vf vx) H' Q') ->
+     (H ==> Q vf)) ->
+  H ==> wpgen_fix Fof Q.
+Proof using.
+  introv M. unfold wpgen_fix. xsimpl. intros vf N. applys M.
+  introv K. rewrite <- wp_equiv. xchange K. applys N.
+Qed.
+
 Lemma xwp_lemma_fun : forall v1 v2 x t H Q,
   v1 = val_fun x t ->
   H ==> wpgen ((x,v2)::nil) t Q ->
@@ -2424,27 +2670,29 @@ Qed.
 
 Lemma xwp_lemma_fix : forall v1 v2 f x t H Q,
   v1 = val_fix f x t ->
+  f <> x ->
   H ==> wpgen ((f,v1)::(x,v2)::nil) t Q ->
   triple (trm_app v1 v2) H Q.
 Proof using.
-  introv M1 M2. rewrite <- wp_equiv. xchange M2.
+  introv M1 N M2. rewrite <- wp_equiv. xchange M2.
   xchange (>> wpgen_sound (((f,v1)::nil) ++ (x,v2)::nil) t Q).
   rewrite isubst_app. do 2 rewrite <- subst_eq_isubst_one.
   applys* wp_app_fix.
 Qed.
 
 Lemma xtriple_lemma : forall t H (Q:val->hprop),
-  H ==> mkstruct (wp t) Q ->
+  H ==> mkstruct (wpgen_app t) Q ->
   triple t H Q.
 Proof using.
-  introv M. rewrite <- wp_equiv. xchange M. unfold mkstruct.
-  xpull. intros Q'. applys wp_ramified_frame.
+  introv M. rewrite <- wp_equiv. xchange M. unfold mkstruct, wpgen_app.
+  xpull. intros Q' H' N. rewrite <- wp_equiv in N. xchange N.
+  applys wp_ramified.
 Qed.
 
 (* ================================================================= *)
 (** ** Tactics to Manipulate [wpgen] Formulae *)
 
-(** The tactic are presented in [WPgen]. *)
+(** The tactic are presented in chapter [WPgen]. *)
 
 (** Database of hints for [xapp]. *)
 
@@ -2496,7 +2744,9 @@ Tactic Notation "xtriple" :=
 Tactic Notation "xtriple_if_needed" :=
   try match goal with |- triple ?t ?H ?Q => applys xtriple_lemma end.
 
-(** [xapp_simpl] performs the final step of the tactic [xapp]. *)
+(** [xapp_simpl] performs the final step of the tactic [xapp].
+    It leverages [xsimpl_no_cancel_wand tt] which is a restricted version of
+    [xsimpl] that does not attempt to cancel out magic wands. *)
 
 Lemma xapp_simpl_lemma : forall F H Q,
   H ==> F Q ->
@@ -2505,7 +2755,7 @@ Proof using. introv M. xchange M. unfold protect. xsimpl. Qed.
 
 Tactic Notation "xapp_simpl" :=
   first [ applys xapp_simpl_lemma (* handles specification coming from [xfun] *)
-        | xsimpl; unfold protect; xapp_try_clear_unit_result ].
+        | xsimpl_no_cancel_wand tt; unfold protect; xapp_try_clear_unit_result ].
 
 Tactic Notation "xapp_pre" :=
   xtriple_if_needed; xseq_xlet_if_needed; xstruct_if_needed.
@@ -2523,7 +2773,7 @@ Tactic Notation "xapp_nosubst" constr(E) :=
 (** [xapp_apply_spec] implements the heart of [xapp], when called without
     argument. If finds out the specification triple, either in the hint data
     base named [triple], or in the context by looking for an induction
-    hypothesis. Disclaimer: as explained in [WPgen], the simple
+    hypothesis. Disclaimer: as explained in chapter [WPgen], the simple
     implementation of [xapp_apply_spec] which we use here does not apply when
     the specification includes premises that cannot be solved by [eauto];
     it such cases, the tactic [xapp E] must be called, providing the
@@ -2567,17 +2817,23 @@ Tactic Notation "xapp" constr(E) :=
 Tactic Notation "xapp" :=
   xapp_nosubst; xapp_try_subst.
 
-Tactic Notation "xapp_debug" :=
+Tactic Notation "xapp_view" :=
   xseq_xlet_if_needed; xstruct_if_needed; applys xapp_lemma.
 
 (** [xapp] is essentially equivalent to
-    [ xapp_debug; [ xapp_apply_spec | xapp_simpl ] ]. *)
+    [ xapp_view; [ xapp_apply_spec | xapp_simpl ] ]. *)
+
+(** [xfun] handles local functions, only for functions of one argument. *)
 
 Tactic Notation "xfun" constr(S) :=
-  xseq_xlet_if_needed; xstruct_if_needed; applys xfun_spec_lemma S.
+  xseq_xlet_if_needed; xstruct_if_needed;
+  first [ applys xfun_spec_lemma S
+        | applys xfix_spec_lemma S ].
 
 Tactic Notation "xfun" :=
-  xseq_xlet_if_needed; xstruct_if_needed; applys xfun_nospec_lemma.
+  xseq_xlet_if_needed; xstruct_if_needed;
+  first [ applys xfun_nospec_lemma
+        | applys xfix_nospec_lemma ].
 
 (** [xvars] may be called for unfolding "program variables as definitions",
     which take the form [Vars.x], and revealing the underlying string. *)
@@ -2591,6 +2847,7 @@ Tactic Notation "xvars" :=
 Ltac xwp_simpl :=
   xvars;
   cbn beta delta [
+     LibListExec.combine List.combine
      wpgen wpgen_var isubst lookup var_eq
      string_dec string_rec string_rect
      sumbool_rec sumbool_rect
@@ -2598,11 +2855,48 @@ Ltac xwp_simpl :=
      Bool.bool_dec bool_rec bool_rect ] iota zeta;
   simpl.
 
-Tactic Notation "xwp" :=
+(** [xwp] evaluates [wpgen] for the term appearing in the goal.
+    This implementation of [xwp] is for functions of arity one only,
+    refined further on for arbitrary arities. *)
+
+Tactic Notation "xwp_arity_one_only" :=
   intros;
   first [ applys xwp_lemma_fun; [ reflexivity | ]
         | applys xwp_lemma_fix; [ reflexivity | ] ];
   xwp_simpl.
+
+(* ================================================================= *)
+(** ** Additional Tooling for [xapp] *)
+
+(** [xapp*] is a convenient notation for [xapp; auto_star].
+    [xapp* E] is a convenient notation for [xapp E; auto_star]. *)
+
+Tactic Notation "xapp" "*" :=
+  xapp; auto_star.
+
+Tactic Notation "xapp" "*" constr(E) :=
+  xapp E; auto_star.
+
+(** [xapp_debug] is a tactic to help debugging a call to [xapp]. *)
+
+Tactic Notation "xapp_debug" :=
+  let step msg := (idtac msg; match goal with |- ?H => idtac H end) in
+  xapp_pre;
+  step "============= goal after [xapp_pre] ==============";
+  first
+  [ applys xapp_lemma;
+     [ step "============= triple for [xapp_apply_spec] ==============";
+       first [ xapp_apply_spec; fail 1
+             | idtac "=====================================================";
+               idtac "===> [xapp_apply_spec] failed!";
+               idtac "===> [eauto with triple] could not solve find a specification";
+               idtac "===> try [xapp_view. eapply myspec.] or [xapp myspec]. ";
+               idtac "===> if side-conditions are not solved by [eauto], [xapp] won't work."]
+     | idtac ]
+  | applys xapp_lemma;
+    [ xapp_apply_spec
+    | step "============= entailment for [xapp_simpl] ==============";
+       xapp_simpl  ] ].
 
 (* ================================================================= *)
 (** ** Notations for Triples and [wpgen] *)
@@ -2676,13 +2970,13 @@ Notation "'Seq' F1 ; F2" :=
    right associativity,
    format "'[v' 'Seq'  '[' F1 ']'  ; '/' '[' F2 ']' ']'") : wp_scope.
 
-Notation "'App' f v1" :=
-  ((wp (trm_app f v1)))
-  (in custom wp at level 68, f, v1 at level 0) : wp_scope.
-
-Notation "'App' f v1 v2" :=
-  ((wp (trm_app (trm_app f v1) v2)))
-  (in custom wp at level 68, f, v1, v2 at level 0) : wp_scope.
+Notation "'App' t0 t1 .. tn" :=
+ ((wpgen_app (trm_app .. (trm_app t0 t1) .. tn)))
+  (in custom wp at level 68,
+   t0 constr at level 0,
+   t1 constr at level 0,
+   tn constr at level 0)
+  : wp_scope.
 
 Notation "'If_' v 'Then' F1 'Else' F2" :=
   ((wpgen_if v F1 F2))
@@ -2700,13 +2994,13 @@ Notation "'Fun' x '=>' F1" :=
    right associativity,
   format "'[v' '[' 'Fun'  x  '=>'  F1  ']' ']'") : wp_scope.
 
-Notation "'Fix' f x '=>' F1" :=
-  ((wpgen_fix (fun f x => F1)))
+Notation "'Fix' vf x '=>' F1" :=
+  ((wpgen_fix (fun vf x => F1)))
   (in custom wp at level 69,
-   f name, x name,
+   vf name, x name,
    F1 custom wp at level 99,
    right associativity,
-   format "'[v' '[' 'Fix'  f  x  '=>'  F1  ']' ']'") : wp_scope.
+   format "'[v' '[' 'Fix'  vf  x  '=>'  F1  ']' ']'") : wp_scope.
 
 (* ================================================================= *)
 (** ** Notation for Concrete Terms *)
@@ -2775,19 +3069,41 @@ Notation "'let' x '=' t1 'in' t2" :=
    right associativity,
    format "'[v' '[' 'let'  x  '='  t1  'in' ']' '/' '[' t2 ']' ']'") : trm_scope.
 
-Notation "'fix' f x1 '=>' t" :=
-  (val_fix f x1 t)
-  (in custom trm at level 69,
-   f, x1 at level 0,
-   t custom trm at level 99,
-   format "'fix'  f  x1  '=>'  t") : val_scope.
+(* Let-functions *)
 
-Notation "'fix_' f x1 '=>' t" :=
-  (trm_fix f x1 t)
+Notation "'let' f x1 '=' t1 'in' t2" :=
+  (trm_let f (trm_fun x1 t1) t2)
   (in custom trm at level 69,
+   t1 custom trm,
+   t2 custom trm,
    f, x1 at level 0,
-   t custom trm at level 99,
-   format "'fix_'  f  x1  '=>'  t") : trm_scope.
+   format "'let'  f  x1  '='  t1  'in'  t2") : val_scope.
+
+Notation "'let' f x1 .. xn '=' t1 'in' t2" :=
+  (trm_let f (trm_fun x1 .. (trm_fun xn t1) ..) t2)
+  (in custom trm at level 69,
+   t1 custom trm,
+   t2 custom trm,
+   f, x1, xn at level 0,
+   format "'let'  f  x1  ..  xn  '='  t1  'in'  t2") : val_scope.
+
+Notation "'let' 'rec' f x1 '=' t1 'in' t2" :=
+  (trm_let f (trm_fix f x1 t1) t2)
+  (in custom trm at level 69,
+   t1 custom trm,
+   t2 custom trm,
+   f, x1 at level 0,
+   format "'let'  'rec'  f  x1  '='  t1  'in'  t2") : val_scope.
+
+Notation "'let' 'rec' f x1 x2 .. xn '=' t1 'in' t2" :=
+  (trm_let f (trm_fix f x1 (trm_fun x2 .. (trm_fun xn t1) ..)) t2)
+  (in custom trm at level 69,
+   t1 custom trm,
+   t2 custom trm,
+   f, x1, x2, xn at level 0,
+   format "'let'  'rec'  f  x1  x2  ..  xn  '='  t1  'in'  t2") : val_scope.
+
+(* On-the-fly functions, as values *)
 
 Notation "'fun' x1 '=>' t" :=
   (val_fun x1 t)
@@ -2796,12 +3112,56 @@ Notation "'fun' x1 '=>' t" :=
    t custom trm at level 99,
    format "'fun'  x1  '=>'  t") : val_scope.
 
+Notation "'fun' x1 x2 .. xn '=>' t" :=
+  (val_fun x1 (trm_fun x2 .. (trm_fun xn t) ..))
+  (in custom trm at level 69,
+   t custom trm,
+   x1, x2, xn at level 0,
+   format "'fun'  x1  x2  ..  xn  '=>'  t") : val_scope.
+
+Notation "'fix' f x1 '=>' t" :=
+  (val_fix f x1 t)
+  (in custom trm at level 69,
+   f, x1 at level 0,
+   t custom trm at level 99,
+   format "'fix'  f  x1  '=>'  t") : val_scope.
+
+Notation "'fix' f x1 x2 .. xn '=>' t" :=
+  (val_fix f x1 (trm_fun x2 .. (trm_fun xn t) ..))
+  (in custom trm at level 69,
+   t custom trm,
+   f, x1, x2, xn at level 0,
+   format "'fix'  f  x1  x2  ..  xn  '=>'  t") : val_scope.
+
+(* On-the-fly functions, as terms *)
+
 Notation "'fun_' x1 '=>' t" :=
   (trm_fun x1 t)
   (in custom trm at level 69,
    x1 at level 0,
    t custom trm at level 99,
    format "'fun_'  x1  '=>'  t") : trm_scope.
+
+Notation "'fun_' x1 .. xn '=>' t" :=
+  (trm_fun x1 .. (trm_fun xn t) ..)
+  (in custom trm at level 69,
+   t custom trm,
+   x1, xn at level 0,
+   format "'fun_'  x1  ..  xn  '=>'  t") : trm_scope.
+
+Notation "'fix_' vf x1 '=>' t" :=
+  (trm_fix vf x1 t)
+  (in custom trm at level 69,
+   vf, x1 at level 0,
+   t custom trm at level 99,
+   format "'fix_'  vf x1  '=>'  t") : trm_scope.
+
+Notation "'fix_' vf x1 x2 .. xn '=>' t" :=
+  (trm_fix vf x1 (trm_fun x2 .. (trm_fun xn t) ..))
+  (in custom trm at level 69,
+   t custom trm,
+   vf, x1, x2, xn at level 0,
+   format "'fix_'  vf  x1  x2  ..  xn  '=>'  t") : trm_scope.
 
 Notation "()" :=
   (trm_val val_unit)
@@ -2815,15 +3175,15 @@ Notation "()" :=
 
 Notation "'ref'" :=
   (trm_val (val_prim val_ref))
-  (in custom trm at level 0) : trm_scope.
+  (in custom trm at level 0, only parsing) : trm_scope.
 
 Notation "'free'" :=
   (trm_val (val_prim val_free))
-  (in custom trm at level 0) : trm_scope.
+  (in custom trm at level 0, only parsing) : trm_scope.
 
 Notation "'not'" :=
   (trm_val (val_prim val_neg))
-  (in custom trm at level 0) : trm_scope.
+  (in custom trm at level 0, only parsing) : trm_scope.
 
 Notation "! t" :=
   (val_get t)
@@ -2883,6 +3243,79 @@ Notation "t1 > t2" :=
   (val_gt t1 t2)
   (in custom trm at level 60) : trm_scope.
 
+(* TESTING
+Module TestingNotation.
+Local Open Scope val_scope.
+Local Open Scope trm_scope.
+
+Definition test_app1 t1 t2 : trm :=
+  <{ t1 t2 }>.
+
+Definition test_app2 t1 t2 t3 : trm :=
+  <{ t1 t2 t3 }>.
+
+Definition test_fun1 x1 t : val :=
+  <{ fun x1 => t }>.
+
+Definition test_fun2 x1 x2 t : val :=
+  <{ fun x1 x2 => t }>.
+
+Definition test_fun3 x1 x2 x3 t : val :=
+  <{ fun x1 x2 x3 => t }>.
+
+Definition test_fix1 f x1 t : val :=
+  <{ fun f x1 => t }>.
+
+Definition test_fix2 f x1 x2 t : val :=
+  <{ fun f x1 x2 => t }>.
+
+Definition test_fix3 f x1 x2 x3 t : val :=
+  <{ fun f x1 x2 x3 => t }>.
+
+Definition test_trmfun_1 f x1 : trm :=
+  <{ fun_ f x1 => x1 }>.
+
+Definition test_trmfun_2 f x1 x2 : trm :=
+  <{ fun_ f x1 x2 => x1 }>.
+
+Definition test_trmfun_3 f x1 x2 x3 : trm :=
+  <{ fun_ f x1 x2 x3 => x1 }>.
+
+Definition test_trmfix1 f x1 t : trm :=
+  <{ fix_ f x1 => t }>.
+
+Definition test_trmfix2 f x1 x2 t : trm :=
+  <{ fix_ f x1 x2 => t }>.
+
+Definition test_trmfix3 f x1 x2 x3 t : trm :=
+  <{ fix_ f x1 x2 x3 => t }>.
+
+Definition test_letfun_1 f x1 t : trm :=
+  <{ let f x1 = x1 in t }>.
+
+Definition test_letfun_2 f x1 x2 t : trm :=
+  <{ let f x1 x2 = x1 in t }>.
+
+Definition test_letfun_3 f x1 x2 x3 t : trm :=
+  <{ let f x1 x2 x3 = x1 in t }>.
+
+Definition test_letfix_1 f x1 t : trm :=
+  <{ let rec f x1 = x1 in t }>.
+
+Definition test_letfix_2 f x1 x2 t : trm :=
+  <{ let rec f x1 x2 = x1 in t }>.
+
+Definition test_letfix_3 f x1 x2 x3 t : trm :=
+  <{ let rec f x1 x2 x3 = x1 in t }>.
+
+Print test_app1.
+Print test_app2.
+Print test_trmfix3.
+Print test_fun3.
+
+End TestingNotation.
+*)
+
 (* ================================================================= *)
 (** ** Scopes, Coercions and Notations for Concrete Programs *)
 
@@ -2902,7 +3335,7 @@ Coercion string_to_var (x:string) : var := x.
 End ProgramSyntax.
 
 (* ################################################################# *)
-(** * Bonus *)
+(** * Additional Separation Logic Operators *)
 
 (* ================================================================= *)
 (** ** Disjunction: Definition and Properties of [hor] *)
@@ -2987,242 +3420,390 @@ Lemma triple_hand_r : forall t H1 H2 Q,
   triple t (hand H1 H2) Q.
 Proof using. introv M1. unfold hand. applys~ triple_hforall false. Qed.
 
+(* ################################################################# *)
+(** * Generalization to N-ary Functions *)
+
 (* ================================================================= *)
-(** ** Treatment of Functions of 2 and 3 Arguments *)
+(** ** Smart Constructors for N-ary Functions and Applications *)
 
-(** As explained in chapter [Struct], there are different ways to
-    support functions of several arguments: curried functions, n-ary
-    functions, or functions expecting a tuple as argument.
+Definition vars : Type := list var.
+Definition vals : Type := list val.
+Definition trms : Type := list trm.
 
-    For simplicity, we here follow the approach based on curried
-    function, specialized for arity 2 and 3. It is possible to state
-    arity-generic definitions and lemmas, but the definitions become
-    much more technical.
+(** [trm_apps f ts] builds the application of the function [f] to the list
+    of terms [ts]. *)
 
-    From an engineering point of view, it is easier and more efficient
-    to follow the approach using n-ary functions, as the CFML tool does. *)
+Fixpoint trm_apps (f:trm) (ts:trms) : trm :=
+  match ts with
+  | nil => f
+  | ti::ts' => trm_apps (trm_app f ti) ts'
+  end.
 
-(* ----------------------------------------------------------------- *)
-(** *** Syntax for Functions of 2 or 3 Arguments. *)
+(** [trm_funs xs t] builds a term describing a function that expects
+    arguments with names [xs], and that has [t] for body. *)
 
-Notation "'fun' x1 x2 '=>' t" :=
-  (val_fun x1 (trm_fun x2 t))
-  (in custom trm at level 69,
-   x1, x2 at level 0,
-   format "'fun'  x1  x2  '=>'  t") : val_scope.
+Fixpoint trm_funs (xs:vars) (t:trm) : trm :=
+  match xs with
+  | nil => t
+  | x1::xs' => trm_fun x1 (trm_funs xs' t)
+  end.
 
-Notation "'fix' f x1 x2 '=>' t" :=
-  (val_fix f x1 (trm_fun x2 t))
-  (in custom trm at level 69,
-   f, x1, x2 at level 0,
-   format "'fix'  f  x1  x2  '=>'  t") : val_scope.
+(** [val_funs xs t] is similar to [trm_funs xs t] but produces a value. *)
 
-Notation "'fun_' x1 x2 '=>' t" :=
-  (trm_fun x1 (trm_fun x2 t))
-  (in custom trm at level 69,
-   x1, x2 at level 0,
-   format "'fun_'  x1  x2  '=>'  t") : trm_scope.
+Definition val_funs (xs:vars) (t:trm) : val :=
+  match xs with
+  | nil => arbitrary
+  | x1::xs' => val_fun x1 (trm_funs xs' t)
+  end.
 
-Notation "'fix_' f x1 x2 '=>' t" :=
-  (trm_fix f x1 (trm_fun x2 t))
-  (in custom trm at level 69,
-   f, x1, x2 at level 0,
-   format "'fix_'  f  x1  x2  '=>'  t") : trm_scope.
+(** [trm_fixs f xs t] builds a term describing a recursive function
+    named [f] that expects  arguments with names [xs], and that has [t]
+    for body. *)
 
-Notation "'fun' x1 x2 x3 '=>' t" :=
-  (val_fun x1 (trm_fun x2 (trm_fun x3 t)))
-  (in custom trm at level 69,
-   x1, x2, x3 at level 0,
-   format "'fun'  x1  x2  x3  '=>'  t") : val_scope.
+Definition trm_fixs (f:var) (xs:vars) (t:trm) : trm :=
+  match xs with
+  | nil => arbitrary
+  | x1::xs' => trm_fix f x1 (trm_funs xs' t)
+  end.
 
-Notation "'fix' f x1 x2 x3 '=>' t" :=
-  (val_fix f x1 (trm_fun x2 (trm_fun x3 t)))
-  (in custom trm at level 69,
-   f, x1, x2, x3 at level 0,
-   format "'fix'  f  x1  x2  x3  '=>'  t") : val_scope.
+(** [val_fixs xs t] is similar to [trm_fixs xs t] but produces a value. *)
 
-Notation "'fun_' x1 x2 x3 '=>' t" :=
-  (trm_fun x1 (trm_fun x2 (trm_fun x3 t)))
-  (in custom trm at level 69,
-   x1, x2, x3 at level 0, format "'fun_'  x1  x2  x3  '=>'  t") : trm_scope.
+Definition val_fixs (f:var) (xs:vars) (t:trm) : val :=
+  match xs with
+  | nil => arbitrary
+  | x1::xs' => val_fix f x1 (trm_funs xs' t)
+  end.
 
-Notation "'fix_' f x1 x2 x3 '=>' t" :=
-  (trm_fix f x1 (trm_fun x2 (trm_fun x3 t)))
-  (in custom trm at level 69,
-   f, x1, x2, x3 at level 0, format "'fix_'  f  x1  x2  x3  '=>'  t") : trm_scope.
+(** [var_funs xs n] asserts that [xs] is a nonempty list made of
+    [n] distinct variable names. *)
 
-(* ----------------------------------------------------------------- *)
-(** *** Evaluation Rules for Applications to 2 or 3 Arguments. *)
+Definition var_funs (xs:vars) (n:nat) : Prop :=
+     LibList.noduplicates xs
+  /\ length xs = n
+  /\ xs <> nil.
 
-(** [eval_like] judgment for applications to several arguments. *)
+(** [trms_vals vs] converts a list of values [vs] into a list of terms
+    made of the corresponding values, each converted using [trm_val]. *)
 
-Lemma eval_like_app_fun2 : forall v0 v1 v2 x1 x2 t1,
-  v0 = val_fun x1 (trm_fun x2 t1) ->
-  x1 <> x2 ->
-  eval_like (subst x2 v2 (subst x1 v1 t1)) (v0 v1 v2).
+Coercion trms_vals (vs:vals) : trms :=
+  LibList.map trm_val vs.
+
+Lemma trms_vals_nil :
+  trms_vals nil = nil.
+Proof using. auto. Qed.
+
+Lemma trms_vals_cons : forall v vs,
+  trms_vals (v :: vs) = trm_val v :: trms_vals vs.
+Proof using. intros. unfold trms_vals. rew_listx*. Qed.
+
+#[local] Hint Rewrite trms_vals_nil trms_vals_cons : rew_listx.
+
+(* ================================================================= *)
+(** ** Evaluation Rules for N-ary Constructs *)
+
+(** [subst_trm_funs] distributes [subst] over [trm_funs]. *)
+
+Lemma subst_trm_funs : forall xs x v t1,
+  ~ mem x xs ->
+  subst x v (trm_funs xs t1) = trm_funs xs (subst x v t1).
 Proof using.
-  introv E N. introv R. applys* eval_app_args.
-  { applys eval_app_fun E. simpl. rewrite var_eq_spec. case_if. applys eval_fun. }
-  { applys* eval_val. }
-  { applys* eval_app_fun. }
+  intros xs. induction xs as [|x xs']; introv N.
+  { auto. }
+  { rew_listx in N. rew_logic in N. destruct N. simpl. case_var. fequals*. }
 Qed.
 
-Lemma eval_like_app_fix2 : forall v0 v1 v2 f x1 x2 t1,
-  v0 = val_fix f x1 (trm_fun x2 t1) ->
-  (x1 <> x2 /\ f <> x2) ->
-  eval_like (subst x2 v2 (subst x1 v1 (subst f v0 t1))) (v0 v1 v2).
+(** Evaluation rule for reducing [trm_funs] into [val_funs] *)
+
+Lemma eval_like_trm_funs : forall xs t1,
+  xs <> nil ->
+  eval_like (val_funs xs t1) (trm_funs xs t1).
 Proof using.
-  introv E (N1&N2). introv R. applys* eval_app_args.
-  { applys eval_app_fix E. simpl. do 2 (rewrite var_eq_spec; case_if). applys eval_fun. }
-  { applys* eval_val. }
-  { applys* eval_app_fun. }
+  introv N M. destruct xs; tryfalse. simpls. inverts M. applys* eval_fun.
 Qed.
 
-Lemma eval_like_app_fun3 : forall v0 v1 v2 v3 x1 x2 x3 t1,
-  v0 = val_fun x1 (trm_fun x2 (trm_fun x3 t1)) ->
-  (x1 <> x2  /\ x1 <> x3 /\ x2 <> x3) ->
-  eval_like (subst x3 v3 (subst x2 v2 (subst x1 v1 t1))) (v0 v1 v2 v3).
+(** Auxiliary lemma: evaluation rule for reducing the first argument
+    of a [val_funs] applied to an argument. *)
+
+Lemma eval_like_app_val_funs_cons : forall x xs t1 t0 v,
+  eval_like (val_funs (x :: xs) t1) t0 ->
+  ~ mem x xs ->
+  xs <> nil ->
+  eval_like (val_funs xs (subst x v t1)) (t0 v).
 Proof using.
-  introv E (N1&N2&N3). introv R. applys* eval_app_args.
-  { applys* eval_like_app_fun2 E. simpl. do 2 (rewrite var_eq_spec; case_if). applys eval_fun. }
-  { applys eval_val. }
-  { applys* eval_app_fun. }
+  introv R Nx Hx M. unfolds eval_like. applys eval_app_arg1'.
+  { applys R. applys eval_val_minimal. }
+  { simpl. intros ? ? (->&->). applys* eval_app_fun.
+    rewrite* subst_trm_funs. applys* eval_like_trm_funs. }
 Qed.
 
-Lemma eval_like_app_fix3 : forall v0 v1 v2 v3 f x1 x2 x3 t1,
-  v0 = val_fix f x1 (trm_fun x2 (trm_fun x3 t1)) ->
-  (x1 <> x2 /\ f <> x2 /\ f <> x3 /\ x1 <> x3 /\ x2 <> x3) ->
-  eval_like (subst x3 v3 (subst x2 v2 (subst x1 v1 (subst f v0 t1)))) (v0 v1 v2 v3).
+(** Auxiliary lemma: evaluation rule for reducing a [val_funs] applied
+    to its last argument. *)
+
+Lemma eval_like_app_val_funs_one : forall x t1 t0 v,
+  eval_like ((val_funs (x::nil) t1)) t0 ->
+  eval_like (subst x v t1) (trm_app t0 v).
 Proof using.
-  introv E (N1&N2&N3&N4&N5). introv R. applys* eval_app_args.
-  { applys* eval_like_app_fix2 E. simpl. do 3 (rewrite var_eq_spec; case_if). applys eval_fun. }
-  { applys eval_val. }
-  { applys* eval_app_fun. }
+  introv R N. applys eval_app_arg1'.
+  { applys R. applys eval_val_minimal. }
+  { simpl. intros ? ? (->&->). applys* eval_app_fun. }
 Qed.
 
-(* ----------------------------------------------------------------- *)
-(** *** Reasoning Rules for Applications to 2 or 3 Arguments *)
+(** Evaluation rule for the application of a [val_funs] with [n] variables
+    to a list of [n] values. *)
 
-(** Weakest preconditions for applications to several arguments. *)
-
-Lemma wp_app_fun2 : forall x1 x2 v0 v1 v2 t1 Q,
-  v0 = val_fun x1 (trm_fun x2 t1) ->
-  x1 <> x2 ->
-  wp (subst x2 v2 (subst x1 v1 t1)) Q ==> wp (trm_app v0 v1 v2) Q.
-Proof using. introv EQ1 N. applys wp_eval_like. applys* eval_like_app_fun2. Qed.
-
-Lemma wp_app_fix2 : forall f x1 x2 v0 v1 v2 t1 Q,
-  v0 = val_fix f x1 (trm_fun x2 t1) ->
-  (x1 <> x2 /\ f <> x2) ->
-  wp (subst x2 v2 (subst x1 v1 (subst f v0 t1))) Q ==> wp (trm_app v0 v1 v2) Q.
-Proof using. introv EQ1 N. applys wp_eval_like. applys* eval_like_app_fix2. Qed.
-
-Lemma wp_app_fun3 : forall x1 x2 x3 v0 v1 v2 v3 t1 Q,
-  v0 = val_fun x1 (trm_fun x2 (trm_fun x3 t1)) ->
-  (x1 <> x2 /\ x1 <> x3 /\ x2 <> x3) ->
-  wp (subst x3 v3 (subst x2 v2 (subst x1 v1 t1))) Q ==> wp (trm_app v0 v1 v2 v3) Q.
-Proof using. introv EQ1 N. applys wp_eval_like. applys* eval_like_app_fun3. Qed.
-
-Lemma wp_app_fix3 : forall f x1 x2 x3 v0 v1 v2 v3 t1 Q,
-  v0 = val_fix f x1 (trm_fun x2 (trm_fun x3 t1)) ->
-  (x1 <> x2 /\ f <> x2 /\ f <> x3 /\ x1 <> x3 /\ x2 <> x3) ->
-  wp (subst x3 v3 (subst x2 v2 (subst x1 v1 (subst f v0 t1)))) Q ==> wp (trm_app v0 v1 v2 v3) Q.
-Proof using. introv EQ1 N. applys wp_eval_like. applys* eval_like_app_fix3. Qed.
-
-(* ----------------------------------------------------------------- *)
-(** *** Generalization of [xwp] to Handle Functions of Two Arguments *)
-
-(** Generalization of [xwp] to handle functions of arity 2 and 3,
-    and to handle weakening of an existing specification. *)
-
-Lemma xwp_lemma_fun2 : forall v0 v1 v2 x1 x2 t H Q,
-  v0 = val_fun x1 (trm_fun x2 t) ->
-  var_eq x1 x2 = false ->
-  H ==> wpgen ((x1,v1)::(x2,v2)::nil) t Q ->
-  triple (v0 v1 v2) H Q.
+Lemma eval_like_trm_apps_funs : forall xs t0 vs t1,
+  eval_like (val_funs xs t1) t0 ->
+  var_funs xs (length vs) ->
+  eval_like (isubst (combine xs vs) t1) (trm_apps t0 (trms_vals vs)).
 Proof using.
-  introv M1 N M2. rewrite var_eq_spec in N. rew_bool_eq in *.
-  rewrite <- wp_equiv. xchange M2.
-  xchange (>> wpgen_sound (((x1,v1)::nil) ++ ((x2,v2)::nil)) t Q).
-  rewrite isubst_app. do 2 rewrite <- subst_eq_isubst_one.
-  applys* wp_app_fun2.
+  introv E (R1&R2&R3). gen t1 t0 vs. induction xs; intros.
+  { false*. }
+  { inverts R1. destruct vs as [|v vs]; rew_list in *; tryfalse.
+    rew_listx. rewrite isubst_cons. simpl.
+    tests: (xs = nil).
+    { destruct vs as [|]; tryfalse.
+      rew_listx. rewrite isubst_nil. simpl.
+      applys* eval_like_app_val_funs_one. }
+    { applys* IHxs. applys* eval_like_app_val_funs_cons. } }
 Qed.
 
-Lemma xwp_lemma_fix2 : forall f v0 v1 v2 x1 x2 t H Q,
-  v0 = val_fix f x1 (trm_fun x2 t) ->
-  (var_eq x1 x2 = false /\ var_eq f x2 = false) ->
-  H ==> wpgen ((f,v0)::(x1,v1)::(x2,v2)::nil) t Q ->
-  triple (v0 v1 v2) H Q.
+(** Evaluation rule for application of a recursive n-ary function of the form
+    [val_fix f (trm_funs xs t1)] to a list of values of the appropriate length. *)
+
+Lemma eval_like_trm_apps_fixs : forall f xs vs t1 v0,
+  v0 = val_fixs f xs t1 ->
+  var_funs xs (length vs) ->
+  ~ mem f xs ->
+  xs <> nil ->
+  eval_like (isubst (combine (f::xs) (v0::vs)) t1) (trm_apps v0 (trms_vals vs)).
 Proof using.
-  introv M1 N M2. repeat rewrite var_eq_spec in N. rew_bool_eq in *.
-  rewrite <- wp_equiv. xchange M2.
-  xchange (>> wpgen_sound (((f,v0)::nil) ++ ((x1,v1)::nil) ++ ((x2,v2)::nil)) t Q).
-  do 2 rewrite isubst_app. do 3 rewrite <- subst_eq_isubst_one.
-  applys* wp_app_fix2.
+  introv E F N1 N2. rew_listx. rewrite isubst_cons.
+  destruct F as (F1&F2&F3).
+  destruct xs as [|x xs']; tryfalse.
+  destruct vs as [|v vs']; tryfalse.
+  tests C: (xs' = nil).
+  { destruct vs' as [|]; tryfalse.
+    rew_listx. rewrite isubst_cons, isubst_nil. simpl.
+    introv M. applys* eval_app_fix. }
+  { rew_listx. rewrite isubst_cons. simpl. rew_listx in N1.
+    rew_logic in N1. destruct N1 as (Nf&N1). inverts F1 as (Fx&F1).
+    applys eval_like_trm_apps_funs.
+    { introv M. applys* eval_app_fix.
+      inverts M. rewrite* subst_trm_funs. rewrite* subst_trm_funs.
+      applys* eval_like_trm_funs. applys* eval_val. }
+    { rew_list in F2. splits*. } }
 Qed.
 
-Lemma xwp_lemma_fun3 : forall v0 v1 v2 v3 x1 x2 x3 t H Q,
-  v0 = val_fun x1 (trm_fun x2 (trm_fun x3 t)) ->
-  (var_eq x1 x2 = false /\ var_eq x1 x3 = false /\ var_eq x2 x3 = false) ->
-  H ==> wpgen ((x1,v1)::(x2,v2)::(x3,v3)::nil) t Q ->
-  triple (v0 v1 v2 v3) H Q.
+(* ================================================================= *)
+(** ** Tooling for N-ary Functions and Applications *)
+
+(** [var_funs_exec xs n] is a computable version of [var_funs xs n]. *)
+
+Section Var_funs_exec.
+Import LibListExec.RewListExec.
+
+Definition var_funs_exec (xs:vars) (n:nat) : bool :=
+     LibListExec.noduplicates var_eq xs
+  && (LibNat.beq (LibListExec.length xs) n
+  && LibListExec.is_not_nil xs).
+
+Lemma var_funs_exec_eq : forall xs (n:nat),
+  var_funs_exec xs n = isTrue (var_funs xs n).
 Proof using.
-  introv M1 N M2. repeat rewrite var_eq_spec in N. rew_bool_eq in *.
-  rewrite <- wp_equiv. xchange M2.
-  xchange (>> wpgen_sound (((x1,v1)::nil) ++ ((x2,v2)::nil) ++ ((x3,v3)::nil)) t Q).
-  do 2 rewrite isubst_app. do 3 rewrite <- subst_eq_isubst_one.
-  applys* wp_app_fun3.
+  intros. hint var_eq_spec.
+  unfold var_funs_exec, var_funs.
+  rewrite LibNat.beq_eq. rew_list_exec; auto.
+  extens; rew_istrue. splits*.
 Qed.
 
-Lemma xwp_lemma_fix3 : forall f v0 v1 v2 v3 x1 x2 x3 t H Q,
-  v0 = val_fix f x1 (trm_fun x2 (trm_fun x3 t)) ->
-  (   var_eq x1 x2 = false /\ var_eq f x2 = false /\ var_eq f x3 = false
-   /\ var_eq x1 x3 = false /\ var_eq x2 x3 = false) ->
-  H ==> wpgen ((f,v0)::(x1,v1)::(x2,v2)::(x3,v3)::nil) t Q ->
-  triple (v0 v1 v2 v3) H Q.
+End Var_funs_exec.
+
+(** [trms_to_vals] is the reciprocal of [trms_vals], in the sense that
+    [trms_to_vals ts = Some vs] ensurse that [ts = trms_vals vs]. *)
+
+Fixpoint trms_to_vals (ts:trms) : option vals :=
+  match ts with
+  | nil => Some nil
+  | (trm_val v)::ts' =>
+      match trms_to_vals ts' with
+      | None => None
+      | Some vs' => Some (v::vs')
+      end
+  | _ => None
+  end.
+
+Lemma trms_to_vals_spec : forall ts vs,
+  trms_to_vals ts = Some vs ->
+  ts = trms_vals vs.
 Proof using.
-  introv M1 N M2. repeat rewrite var_eq_spec in N. rew_bool_eq in *.
-  rewrite <- wp_equiv. xchange M2.
-  xchange (>> wpgen_sound (((f,v0)::nil) ++ ((x1,v1)::nil) ++ ((x2,v2)::nil) ++ ((x3,v3)::nil)) t Q).
-  do 3 rewrite isubst_app. do 4 rewrite <- subst_eq_isubst_one.
-  applys* wp_app_fix3.
+  intros ts. induction ts as [|t ts']; simpl; introv E.
+  { inverts E. auto. }
+  { destruct t; inverts E as E. cases (trms_to_vals ts') as C; inverts E.
+    rename v0 into vs'. rewrite* (IHts' vs'). }
+Qed.
+
+(** [trm_apps_of_trm t] is a tactic that takes a term [t] and returns a
+    corresponding term in the form [trm_apps f ts], assuming it is possible. *)
+
+Ltac trm_apps_of_trm t :=
+  let rec aux acc t :=
+    match t with
+    | trm_app ?t0 ?t1 =>
+        let acc' := constr:(t1::acc) in
+        aux acc' t0
+    | _ => constr:(trm_apps t acc)
+    end in
+  aux (@nil trm) t.
+
+Lemma trm_apps_of_trm_demo : forall (f x1 x2 x3:trm) H Q,
+  triple (f x1 x2 x3) H Q.
+Proof using.
+  intros.
+  match goal with |- triple ?t _ _ =>
+    let r := trm_apps_of_trm t in
+    change t with r end.
+Abort.
+
+(** [prove_eq_trm_apps] applies to a goal of the form [t = trm_apps ?f ?vs],
+    and solve it by instantiating [f] and [vs], assuming it is possible. *)
+
+Ltac prove_eq_trm_apps :=
+  match goal with |- ?t = trm_apps _ _ =>
+    let r := trm_apps_of_trm t in
+    apply (refl_equal r) end.
+
+Lemma prove_eq_trm_apps_demo : forall (f x1 x2 x3:trm),
+  (forall t ts, f x1 x2 x3 = trm_apps t ts -> (t,ts) = (t,ts) -> True) ->
+  True.
+Proof using. intros. eapply H. prove_eq_trm_apps. Abort.
+
+(** [trm_funs_of_trm t] is a tactic that takes a term [t] and returns a
+    corresponding term in the form [trm_funs xs t1], assuming it is possible. *)
+
+Ltac trm_funs_of_trm t :=
+  let rec aux t :=
+    match t with
+    | trm_fun ?x ?t1 =>
+        match aux t1 with
+        | trm_funs ?xs ?t0 => constr:(trm_funs (x::xs) t0)
+        | ?t0 => constr:(trm_funs (x::nil) t0)
+        end
+    | _ => constr:(t)
+    end in
+  let t := eval hnf in t in
+  aux t.
+
+(** [val_funs_of_trm t] is a tactic that takes a term [t] and returns a
+    corresponding term in the form [val_funs xs t1], assuming it is possible. *)
+
+Ltac val_funs_of_trm t :=
+  let t := eval hnf in t in
+  match t with
+  | val_fun ?x ?t1 =>
+      match trm_funs_of_trm t1 with
+      | trm_funs ?xs ?t0 => constr:(val_funs (x::xs) t0)
+      | ?t0 => constr:(val_funs (x::nil) t0)
+      end
+  | _ => constr:(t)
+  end.
+
+(** [prove_eq_val_funs] applies to a goal of the form [v = val_funs ?xs ?t1]
+    and solves it is possible by instantiating [xs] and [t1] *)
+
+Ltac prove_eq_val_funs :=
+  match goal with |- ?t = val_funs _ _ =>
+    let r := val_funs_of_trm t in
+    apply (refl_equal r) end.
+
+Lemma prove_eq_val_funs_demo : forall (x1 x2:var) (t0:trm),
+  (forall xs t, val_fun x1 (trm_fun x2 t0) = val_funs xs t -> (xs,t) = (xs,t) -> True) ->
+  True.
+Proof using. intros. eapply H. prove_eq_val_funs. Abort.
+
+(** [val_fixs_of_trm t] is a tactic that takes a term [t] and returns a
+    corresponding term in the form [val_fixs xs t1], if possible. *)
+
+Ltac val_fixs_of_trm t :=
+  let t := eval hnf in t in
+  match t with
+  | val_fix ?f ?x ?t1 =>
+      match trm_funs_of_trm t1 with
+      | trm_funs ?xs ?t0 => constr:(val_fixs f (x::xs) t0)
+      | _ => constr:(val_fixs f (x::nil) t1)
+      end
+  | _ => constr:(t)
+  end.
+
+(** [prove_eq_val_fix_trm_funs] applies to a goal of the form
+    [v = val_fix ?f (trm_funs ?xs ?t1)] and solves it is possible. *)
+
+Ltac prove_eq_val_fix_trm_funs :=
+  match goal with |- ?t = val_fixs _ _ _ =>
+    let r := val_fixs_of_trm t in
+    apply (refl_equal r) end.
+
+Lemma prove_eq_val_fix_trm_funs_demo : forall (x1 x2:var) (t0:trm),
+  (forall f xs t, val_fix f x1 (trm_fun x2 t0) = val_fixs f xs t -> (f,xs,t) = (f,xs,t) -> True) ->
+  True.
+Proof using. intros. eapply H. prove_eq_val_fix_trm_funs. Abort.
+
+(* ================================================================= *)
+(** ** Implementation of the Tactic [xwp] *)
+
+Lemma xwp_lemma_funs : forall t v0 ts vs xs t1 H Q,
+  t = trm_apps v0 ts ->
+  v0 = val_funs xs t1 ->
+  trms_to_vals ts = Some vs ->
+  var_funs_exec xs (LibList.length vs) ->
+  H ==> (wpgen (LibListExec.combine xs vs) t1) Q ->
+  triple t H Q.
+Proof using.
+  introv -> E M1 F M2. rewrite var_funs_exec_eq in F. rew_bool_eq in F.
+  lets HL: (proj32 F). rewrite* LibListExec.combine_eq in M2.
+  lets ->: trms_to_vals_spec (rm M1).
+  rewrite <- wp_equiv. xchange (rm M2). xchange wpgen_sound.
+  applys wp_eval_like. applys* eval_like_trm_apps_funs.
+  { subst. introv M. applys M. }
+Qed.
+
+Lemma xwp_lemma_fixs : forall t v0 ts vs f xs t1 H Q,
+  t = trm_apps v0 ts ->
+  v0 = val_fixs f xs t1 ->
+  trms_to_vals ts = Some vs ->
+  var_funs_exec xs (LibList.length vs) ->
+  negb (LibListExec.mem var_eq f xs) ->
+  H ==> (wpgen (LibListExec.combine (f::xs) (v0::vs)) t1) Q ->
+  triple t H Q.
+Proof using.
+  introv -> E M1 F N1 M2. rewrite var_funs_exec_eq in F. rew_bool_eq in F.
+  lets HL: (proj32 F). rewrite* LibListExec.combine_eq in M2; [|rew_list*].
+  lets Nxs: (proj33 F). lets ->: trms_to_vals_spec (rm M1).
+  rewrite LibListExec.mem_eq in N1; [| applys var_eq_spec ]. rew_bool_eq in N1.
+  rewrite <- wp_equiv. xchange (rm M2). xchange wpgen_sound.
+  applys wp_eval_like. applys* eval_like_trm_apps_fixs.
 Qed.
 
 Tactic Notation "xwp" :=
   intros;
-  first [ applys xwp_lemma_fun; [ reflexivity | ]
-        | applys xwp_lemma_fix; [ reflexivity | ]
-        | applys xwp_lemma_fun2; [ reflexivity | reflexivity | ]
-        | applys xwp_lemma_fix2; [ reflexivity | splits; reflexivity | ]
-        | applys xwp_lemma_fun3; [ reflexivity | splits; reflexivity | ]
-        | applys xwp_lemma_fix3; [ reflexivity | splits; reflexivity | ]
-        | fail 1 "xwp only applies to functions defined using [val_fun] or [val_fix], with at most 3 arguments" ];
+  first [ applys xwp_lemma_funs;
+          [ prove_eq_trm_apps
+          | prove_eq_val_funs
+          | reflexivity
+          | try reflexivity
+          | ]
+        | applys xwp_lemma_fixs;
+          [ prove_eq_trm_apps
+          | prove_eq_val_fix_trm_funs
+          | reflexivity
+          | try reflexivity
+          | try reflexivity
+          | ] ];
   xwp_simpl.
 
 (* ================================================================= *)
-(** ** Bonus: Triples for Applications to Several Arguments *)
+(** ** Specification of Array Operations *)
 
-(** Triples for applications to 2 arguments. Similar rules can be stated and
-    proved for 3 arguments. These rules are not needed for the verification
-    framework. *)
-
-Lemma triple_app_fun2 : forall v0 v1 v2 x1 x2 t1 H Q,
-  v0 = val_fun x1 (trm_fun x2 t1) ->
-  x1 <> x2 ->
-  triple (subst x2 v2 (subst x1 v1 t1)) H Q ->
-  triple (v0 v1 v2) H Q.
-Proof using.
-  introv E N M1. applys triple_eval_like M1. applys* eval_like_app_fun2.
-Qed.
-
-Lemma triple_app_fix2 : forall f x1 x2 v0 v1 v2 t1 H Q,
-  v0 = val_fix f x1 (trm_fun x2 t1) ->
-  (x1 <> x2 /\ f <> x2) ->
-  triple (subst x2 v2 (subst x1 v1 (subst f v0 t1))) H Q ->
-  triple (v0 v1 v2) H Q.
-Proof using.
-  introv E N M1. applys triple_eval_like M1. applys* eval_like_app_fix2.
-Qed.
+(** See chapter [Array]. *)
 
 (* ================================================================= *)
 (** ** Specification of Record Operations *)
@@ -3456,14 +4037,14 @@ Parameter xapp_get_field_lemma : forall H k p Q,
      match hfields_lookup k kvs with
      | None => \[False]
      | Some v => ((fun r => \[r = v] \* hrecord kvs p) \--* protect Q) end ->
-  H ==> wp (val_get_field k p) Q.
+  H ==> wpgen_app (val_get_field k p) Q.
 
 Parameter xapp_set_field_lemma : forall H k p v Q,
   H ==> \exists kvs, (hrecord kvs p) \*
      match hfields_update k v kvs with
      | None => \[False]
      | Some kvs' => ((fun _ => hrecord kvs' p) \--* protect Q) end ->
-  H ==> wp (val_set_field k p v) Q.
+  H ==> wpgen_app (val_set_field k p v) Q.
 
 Ltac xapp_nosubst_for_records tt ::=
   first [ applys xapp_set_field_lemma; xsimpl; simpl; xapp_simpl
@@ -3566,8 +4147,8 @@ Proof using.
   xwp. xapp. xapp. xapp. xsimpl*.
 Qed.
 
-(* ================================================================= *)
-(** ** The Decrement Function *)
+(* ----------------------------------------------------------------- *)
+(** *** The Decrement Function *)
 
 Definition decr : val :=
   <{ fun 'p =>
@@ -3684,6 +4265,27 @@ Proof using.
   replace (n+1+1) with (n+2); [|math]. xsimpl.
 Qed.
 
+(* ----------------------------------------------------------------- *)
+(** *** Demo of a Function with Multiple Arguments. *)
+
+Definition project_32 : val :=
+  <{ fun 'a 'b 'c => 'b }>.
+
+Lemma triple_project_32 : forall (a b c : int),
+  triple (project_32 a b c)
+    \[]
+    (fun r => \[r = b]).
+Proof using. xwp. xval. xsimpl*. Qed.
+
+Definition project_32_rec : val :=
+  <{ fix 'f 'a 'b 'c => if false then 'f 'b end }>.
+
+Lemma triple_project_32_rec : forall (a b c : int),
+  triple (project_32_rec a b c)
+    \[]
+    (fun _ => \[]).
+Proof using. xwp. xif; auto_false. intros _. xval. xsimpl. Qed.
+
 End DemoPrograms.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

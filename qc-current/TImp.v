@@ -53,7 +53,7 @@ From QC Require Import QC.
 (* ================================================================= *)
 (** ** Identifiers *)
 
-(** For the type of identifiers of TImp we will use a wrapper around 
+(** For the type of identifiers of TImp we will use a wrapper around
     plain natural numbers. *)
 
 Inductive id :=
@@ -62,26 +62,26 @@ Inductive id :=
 (** We will need one identifier-specific operation, [fresh]: given any
     finite set of identifiers, we can produce one that is distinct
     from all other identifiers in the set.
-   
+
     To compute a fresh [id] given a list of [id]s we can just produce
     the number that is 1 larger than the maximum element: *)
 
 Fixpoint max_elt (al:list id) : nat :=
   match al with
-  | nil => 0 
+  | nil => 0
   | (Id n')::al' => max n' (max_elt al')
   end.
 
 Definition fresh (al:list id) : id :=
   Id (S (max_elt al)).
 
-(** We will also need a way of testing for equality, which we can 
+(** We will also need a way of testing for equality, which we can
     derive with the standard [dec_eq] tactic. *)
 #[export] Instance eq_id_dec (x1 x2 : id) : Dec (x1 = x2).
 Proof. dec_eq. Defined.
 
-(** One advantage of using natural numbers as identifiers is that 
-    we can take advantage of the [Show] instance of [nat] to print 
+(** One advantage of using natural numbers as identifiers is that
+    we can take advantage of the [Show] instance of [nat] to print
     them. *)
 
 #[export] Instance show_id : Show id :=
@@ -106,11 +106,11 @@ Fixpoint get_fresh_ids n l :=
     Write a [Gen] instance for [id] using the [elems_]
     combinator and [get_fresh_ids].  *)
 
-(* FILL IN HERE *)   
+(* FILL IN HERE *)
 (** [] *)
 
-(** There remains the question of how to [shrink] [id]s. 
-    We will answer that question when [id]s are used later 
+(** There remains the question of how to [shrink] [id]s.
+    We will answer that question when [id]s are used later
     in the chapter. For now, let's leave the [Shrink] instance
     as a no-op.
  *)
@@ -122,7 +122,7 @@ Fixpoint get_fresh_ids n l :=
 
 (** Here is the type of TImp types: *)
 
-Inductive ty := TBool | TNat. 
+Inductive ty := TBool | TNat.
 
 (** That is, TImp has two kinds of values: booleans and natural
     numbers. *)
@@ -154,7 +154,7 @@ Check Showty.
     automatically by QuickChick.  However, the boilerplate we have to
     write is largely straightforward. As we saw in the previous
     chapters, [Dec] is a typeclass wrapper around ssreflect's
-    [decidable] and we can use the [dec_eq] tactic to automate 
+    [decidable] and we can use the [dec_eq] tactic to automate
     the process. *)
 
 #[export] Instance eq_dec_ty (x y : ty) : Dec (x = y).
@@ -177,7 +177,7 @@ Proof. dec_eq. Defined.
        - [set] : To update the binding of an element.
        - [dom] : To get the list of keys in the map. *)
 
-    
+
 
 (** The implementation of a map is a simple association list.  If a
     list contains multiple tuples with the same key, then the binding
@@ -190,8 +190,8 @@ Definition Map A := list (id * A).
 
 Definition map_empty {A} : Map A := [].
 
-(** To [get] the binding of an identifier [x], we just need to walk 
-    through the list and find the first [cons] cell where the key 
+(** To [get] the binding of an identifier [x], we just need to walk
+    through the list and find the first [cons] cell where the key
     is equal to [x], if any. *)
 
 Fixpoint map_get {A} (m : Map A) x : option A :=
@@ -200,8 +200,8 @@ Fixpoint map_get {A} (m : Map A) x : option A :=
   | (k, v) :: m' => if x = k ? then Some v else map_get m' x
   end.
 
-(** To [set] the binding of an identifier, we just need to [cons] 
-    it at the front of the list. *) 
+(** To [set] the binding of an identifier, we just need to [cons]
+    it at the front of the list. *)
 
 Definition map_set {A} (m:Map A) (x:id) (v:A) : Map A := (x, v) :: m.
 
@@ -212,8 +212,8 @@ Fixpoint map_dom {A} (m:Map A) : list id :=
   | (k', v) :: m' => k' :: map_dom m'
   end.
 
-(** We next introduce a simple inductive relation, [bound_to m x a], that 
-    holds precisely when the binding of some identifier [x] is equal to [a] in 
+(** We next introduce a simple inductive relation, [bound_to m x a], that
+    holds precisely when the binding of some identifier [x] is equal to [a] in
     [m] *)
 
 Inductive bound_to {A} : Map A -> id -> A -> Prop :=
@@ -228,19 +228,19 @@ Inductive bound_to {A} : Map A -> id -> A -> Prop :=
     [Context] subsection), which deal with partially automating the
     proofs for such instances. *)
 
-#[export] Instance dec_bound_to {A : Type} Gamma x (T : A) 
-         `{D : forall (x y : A), Dec (x = y)} 
+#[export] Instance dec_bound_to {A : Type} Gamma x (T : A)
+         `{D : forall (x y : A), Dec (x = y)}
           : Dec (bound_to Gamma x T).
-Proof. 
-  constructor. unfold ssrbool.decidable. 
+Proof.
+  constructor. unfold ssrbool.decidable.
   destruct (map_get Gamma x) eqn:Get.
-      
+
 (** After unfolding [decidable] and destructing [map_get Gamma x], we are
     left with two subgoals. In the first, we know that [map_get Gamma x =
     Some a] and effectively want to decide whether [map_get Gamma x = Some
     T] or not. Which means we need to decide whether [a = T]. Thankfully,
     we can decide that using our hypothesis [D]. *)
-  
+
   - destruct (D a T) as [[Eq | NEq]]; subst.
 
 (** At this point, the first goal can be immediately decided positevely
@@ -253,12 +253,12 @@ Proof.
     + right; intro Contra; inversion Contra; subst; clear Contra.
       congruence.
 
-(** Both of these tactic patterns are very common in non-trival [Dec] 
+(** Both of these tactic patterns are very common in non-trival [Dec]
     instances. It is worth we automating them a bit using LTac. *)
 
 Abort.
 
-(** A lot of the time, we can immediately decide a property positivly 
+(** A lot of the time, we can immediately decide a property positivly
     using constructor applications. That is captured in [solve_left]. *)
 
 Ltac solve_left  := try solve [left; econstructor; eauto].
@@ -267,28 +267,27 @@ Ltac solve_left  := try solve [left; econstructor; eauto].
     _doesn't_ hold by assuming it, doing inversion, and using
     [congruence]. *)
 
-Ltac solve_right := 
+Ltac solve_right :=
   let Contra := fresh "Contra" in
-  try solve [right; intro Contra; inversion Contra; subst; 
+  try solve [right; intro Contra; inversion Contra; subst;
              clear Contra; eauto; congruence].
 
-(** We group both in a single tactic, which does nothing at all if 
+(** We group both in a single tactic, which does nothing at all if
     it fails to solve a goal, thanks to [try solve]. *)
 
 Ltac solve_sum := solve_left; solve_right.
 
 (** We can now prove the [Dec] instance quite concisely. *)
 
-#[export] Instance dec_bound_to {A : Type} Gamma x (T : A) 
+#[export] Instance dec_bound_to {A : Type} Gamma x (T : A)
          `{D : forall (x y : A), Dec (x = y)}
   : Dec (bound_to Gamma x T).
-Proof. 
-  constructor. unfold ssrbool.decidable. 
+Proof.
+  constructor. unfold ssrbool.decidable.
   destruct (map_get Gamma x) eqn:Get; solve_sum.
   destruct (D a T) as [[Eq | NEq]]; subst; solve_sum.
 Defined.
 
-  
 (* ================================================================= *)
 (** ** Contexts *)
 
@@ -303,14 +302,14 @@ Definition context := Map ty.
     whose type is equal to [T] and then, for each [(a,T')] that
     remains, return the name [a]. We use the [oneOf_] combinator to
     pick an generator from this list at random.
-    
+
     Since the filtered list might be empty we return an [option],
     we use [ret None] as the default element for [oneOf_].
  *)
 
 Definition gen_typed_id_from_context (Gamma : context) (T : ty)
             : G (option id) :=
-  oneOf_ (ret None) 
+  oneOf_ (ret None)
          (List.map (fun '(x,T') => ret (Some x))
                    (List.filter (fun '(x,T') => T = T'?) Gamma)).
 
@@ -323,7 +322,7 @@ Definition gen_typed_id_from_context (Gamma : context) (T : ty)
     with the ranges which creates the (list-based) map.
 *)
 
-Definition gen_context (n : nat) : G context := 
+Definition gen_context (n : nat) : G context :=
   let domain := get_fresh_ids n [] in
   range <- vectorOf n arbitrary ;;
   ret (List.combine domain range).
@@ -364,39 +363,39 @@ Derive Show for exp.
 
 Reserved Notation "Gamma '||-' e '\IN' T" (at level 40).
 
-Inductive has_type : context -> exp -> ty -> Prop := 
-| Ty_Var : forall x T Gamma, 
+Inductive has_type : context -> exp -> ty -> Prop :=
+| Ty_Var : forall x T Gamma,
     bound_to Gamma x T -> Gamma ||- EVar x \IN T
-| Ty_Num : forall Gamma n, 
+| Ty_Num : forall Gamma n,
     Gamma ||- ENum n \IN TNat
-| Ty_Plus : forall Gamma e1 e2, 
+| Ty_Plus : forall Gamma e1 e2,
     Gamma ||- e1 \IN TNat -> Gamma ||- e2 \IN TNat ->
-    Gamma ||- EPlus e1 e2 \IN TNat                                    
-| Ty_Minus : forall Gamma e1 e2, 
+    Gamma ||- EPlus e1 e2 \IN TNat
+| Ty_Minus : forall Gamma e1 e2,
     Gamma ||- e1 \IN TNat -> Gamma ||- e2 \IN TNat ->
-    Gamma ||- EMinus e1 e2 \IN TNat                                    
-| Ty_Mult : forall Gamma e1 e2, 
+    Gamma ||- EMinus e1 e2 \IN TNat
+| Ty_Mult : forall Gamma e1 e2,
     Gamma ||- e1 \IN TNat -> Gamma ||- e2 \IN TNat ->
-    Gamma ||- EMult e1 e2 \IN TNat                                    
+    Gamma ||- EMult e1 e2 \IN TNat
 | Ty_True : forall Gamma, Gamma ||- ETrue \IN TBool
 | Ty_False : forall Gamma, Gamma ||- EFalse \IN TBool
-| Ty_Eq : forall Gamma e1 e2, 
+| Ty_Eq : forall Gamma e1 e2,
     Gamma ||- e1 \IN TNat -> Gamma ||- e2 \IN TNat ->
     Gamma ||- EEq e1 e2 \IN TBool
-| Ty_Le : forall Gamma e1 e2, 
+| Ty_Le : forall Gamma e1 e2,
     Gamma ||- e1 \IN TNat -> Gamma ||- e2 \IN TNat ->
     Gamma ||- ELe e1 e2 \IN TBool
-| Ty_Not : forall Gamma e, 
+| Ty_Not : forall Gamma e,
     Gamma ||- e \IN TBool ->  Gamma ||- ENot e \IN TBool
-| Ty_And : forall Gamma e1 e2, 
+| Ty_And : forall Gamma e1 e2,
     Gamma ||- e1 \IN TBool -> Gamma ||- e2 \IN TBool ->
     Gamma ||- EAnd e1 e2 \IN TBool
 
 where "Gamma '||-' e '\IN' T" := (has_type Gamma e T).
 
-(** While the typing relation is almost entirely standard, there is a 
+(** While the typing relation is almost entirely standard, there is a
     choice to make about the [Ty_Eq] rule. The [Ty_Eq] constructor
-    above requires that the arguments to an equality check are both 
+    above requires that the arguments to an equality check are both
     arithmetic expressions (just like it was in Imp), which simplifies
     some of the discussion in the remainder of the chapter. We could
     have allowed for equality checks between booleans as well - that will
@@ -407,37 +406,36 @@ where "Gamma '||-' e '\IN' T" := (has_type Gamma e T).
     specific proof details. Or read later in the chapter about how to automatically derive such instances! *)
 
 (** We will need a bit more automation for this proof. We will
-    have a lot of hypotheses of the form: 
+    have a lot of hypotheses of the form:
 
    IH : forall (T : ty) (Gamma : context),
           ssrbool.decidable (Gamma ||- e1 \IN T)
 
- 
     Using a brute-force approach, we instantiate such [IH]
-    with both [TNat] and [TBool], destruct them and then 
-    call [solve_sum]. 
-     
-    The [pose proof] tactic introduces a new hypothesis 
-    in our context, while [clear IH] removes it so that 
-    we don't try the same instantiations again and 
+    with both [TNat] and [TBool], destruct them and then
+    call [solve_sum].
+
+    The [pose proof] tactic introduces a new hypothesis
+    in our context, while [clear IH] removes it so that
+    we don't try the same instantiations again and
     again.
 *)
 
 Ltac solve_inductives Gamma :=
-  repeat (match goal with 
+  repeat (match goal with
       [ IH : forall _ _, _ |- _ ] =>
-      let H1 := fresh "H1" in 
+      let H1 := fresh "H1" in
       pose proof (IH TNat Gamma) as H1;
-      let H2 := fresh "H2" in 
+      let H2 := fresh "H2" in
       pose proof (IH TBool Gamma) as H2;
       clear IH;
       destruct H1; destruct H2; solve_sum
     end).
 
-(** Typing in TImp is decidable: given an expression [e], a context [Gamma] 
+(** Typing in TImp is decidable: given an expression [e], a context [Gamma]
     and a type [T], we can decide whether [has_type Gamma e T] holds. *)
 
-#[export] Instance dec_has_type (e : exp) (Gamma : context) (T : ty) 
+#[export] Instance dec_has_type (e : exp) (Gamma : context) (T : ty)
   : Dec (Gamma ||- e \IN T).
 Proof with solve_sum.
   constructor.
@@ -453,9 +451,9 @@ Defined.
 (** **** Exercise: 3 stars, standard (arbitraryExp)
 
     Derive [Arbitrary] for expressions.  To see how good it is at
-    generating _well-typed_ expressions, write a conditional property 
-    [cond_prop] that is (trivially) always true, with the precondition 
-    that some expression is well-typed. Try to check that property like 
+    generating _well-typed_ expressions, write a conditional property
+    [cond_prop] that is (trivially) always true, with the precondition
+    that some expression is well-typed. Try to check that property like
     this:
 
     QuickChickWith (updMaxSize stdArgs 3) cond_prop.
@@ -484,16 +482,16 @@ Defined.
     then we might not be able to finish (if the context is empty or
     only binds booleans). *)
 
-(** To chain together two generators with types of the form 
-    [G (option ...)], we need to execute the first generator, match 
+(** To chain together two generators with types of the form
+    [G (option ...)], we need to execute the first generator, match
     on its result, and, when it is a [Some], apply the second generator. *)
 
-Definition bindGenOpt {A B : Type} 
+Definition bindGenOpt {A B : Type}
              (gma : G (option A)) (k : A -> G (option B))
            : G (option B) :=
   ma <- gma ;;
-  match ma with 
-  | Some a => k a 
+  match ma with
+  | Some a => k a
   | None => ret None
   end.
 
@@ -516,8 +514,8 @@ Import BindOptNotation.
 
 Module TypePlayground1.
 
-Inductive has_type : context -> exp -> ty -> Prop := 
-  | Ty_Var : forall x T Gamma, 
+Inductive has_type : context -> exp -> ty -> Prop :=
+  | Ty_Var : forall x T Gamma,
       bound_to Gamma x T -> has_type Gamma (EVar x) T.
 
 End TypePlayground1.
@@ -535,7 +533,7 @@ Definition gen_typed_evar (Gamma : context) (T : ty) : G (option exp) :=
 
 (** (Note that this is the [ret] of the [GOpt] monad.) *)
 
-(** Now let's consider an extended typing relation, extending the 
+(** Now let's consider an extended typing relation, extending the
     previous one with all of the constructors of [has_type] that do
     not recursively require [has_type] as a side-condition. These will
     be the _base cases_ for our final generator. *)
@@ -543,9 +541,9 @@ Definition gen_typed_evar (Gamma : context) (T : ty) : G (option exp) :=
 Module TypePlayground2.
 
 Inductive has_type : context -> exp -> ty -> Prop :=
-| Ty_Var : forall x T Gamma, 
+| Ty_Var : forall x T Gamma,
     bound_to Gamma x T -> has_type Gamma (EVar x) T
-| Ty_Num : forall Gamma n, 
+| Ty_Num : forall Gamma n,
     has_type Gamma  (ENum n) TNat
 | Ty_True : forall Gamma, has_type Gamma ETrue TBool
 | Ty_False : forall Gamma, has_type Gamma EFalse TBool.
@@ -558,14 +556,14 @@ End TypePlayground2.
     [T = TNat], while [Ty_True] and [Ty_False] can only be used if [T
     = TBool].  *)
 
-Definition base' Gamma T : list (G (option exp)) := 
+Definition base' Gamma T : list (G (option exp)) :=
       gen_typed_evar Gamma T ::
-      match T with 
+      match T with
       | TNat  => [ n <- arbitrary;; ret (Some (ENum n))]
       | TBool => [ ret (Some ETrue) ; ret (Some EFalse) ]
       end.
 
-(** We now need to go from a list of (optional) generators to a 
+(** We now need to go from a list of (optional) generators to a
     single generator. We could do that using the [oneOf] combinator (which
     chooses uniformly), or the [freq] combinator (by adding weights).
 
@@ -580,10 +578,10 @@ Definition base' Gamma T : list (G (option exp)) :=
     it, choose another, and keep going until one succeeds or all
     possibilities are exhausted. Our base-case generator could then be
     like this: *)
-    
-Definition base Gamma T := 
+
+Definition base Gamma T :=
       (2, gen_typed_evar Gamma T) ::
-      match T with 
+      match T with
       | TNat  => [ (2, n <- arbitrary;; ret (Some (ENum n)))]
       | TBool => [ (1, ret (Some ETrue))
                  ; (1, ret (Some EFalse)) ]
@@ -595,11 +593,11 @@ Definition gen_has_type_2 Gamma T := backtrack (base Gamma T).
     sub-relation, [has_type_3], with just variables and addition: *)
 
 Module TypePlayground3.
-  
+
 Inductive has_type : context -> exp -> ty -> Prop :=
- | Ty_Var : forall x T Gamma, 
+ | Ty_Var : forall x T Gamma,
      bound_to Gamma x T -> has_type Gamma (EVar x) T
- | Ty_Plus : forall Gamma e1 e2, 
+ | Ty_Plus : forall Gamma e1 e2,
     has_type Gamma e1 TNat -> has_type Gamma e2 TNat ->
     has_type Gamma (EPlus e1 e2) TNat.
 
@@ -613,14 +611,14 @@ End TypePlayground3.
     input type [T] must be [TNat], otherwise it is not
     applicable. Once again, this leads to a match on [T]: *)
 
-Fixpoint gen_has_type_3 size Gamma T : G (option exp) := 
-  match size with 
+Fixpoint gen_has_type_3 size Gamma T : G (option exp) :=
+  match size with
   | O => gen_typed_evar Gamma T
-  | S size' => 
-    backtrack 
-      ([ (1, gen_typed_evar Gamma T) ] 
-      ++ match T with 
-         | TNat => 
+  | S size' =>
+    backtrack
+      ([ (1, gen_typed_evar Gamma T) ]
+      ++ match T with
+         | TNat =>
            [ (size, e1 <-- gen_has_type_3 size' Gamma TNat;;
                     e2 <-- gen_has_type_3 size' Gamma TNat;;
                     ret (Some (EPlus e1 e2))) ]
@@ -632,38 +630,38 @@ Fixpoint gen_has_type_3 size Gamma T : G (option exp) :=
     well-typed expressions. *)
 
 Fixpoint gen_exp_typed_sized
-            (size : nat) (Gamma : context) (T : ty) 
+            (size : nat) (Gamma : context) (T : ty)
        : G (option exp) :=
   let base := base Gamma T in
-  let recs size' := 
-    match T with 
+  let recs size' :=
+    match T with
     | TNat =>
-      [ (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
-            e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+      [ (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;;
+            e2 <-- gen_exp_typed_sized size' Gamma TNat ;;
             ret (Some (EPlus e1 e2)) )
-      ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
-            e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+      ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;;
+            e2 <-- gen_exp_typed_sized size' Gamma TNat ;;
             ret (Some (EMinus e1 e2)) )
-      ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
-            e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+      ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;;
+            e2 <-- gen_exp_typed_sized size' Gamma TNat ;;
             ret (Some (EMult e1 e2)))]
-    | TBool => 
-    [ (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
-             e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+    | TBool =>
+    [ (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;;
+             e2 <-- gen_exp_typed_sized size' Gamma TNat ;;
              ret (Some (EEq e1 e2)) )
-       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;; 
-             e2 <-- gen_exp_typed_sized size' Gamma TNat ;; 
+       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TNat ;;
+             e2 <-- gen_exp_typed_sized size' Gamma TNat ;;
              ret (Some (ELe e1 e2)) )
-       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TBool ;; 
+       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TBool ;;
              ret (Some (ENot e1)))
-       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TBool ;; 
-             e2 <-- gen_exp_typed_sized size' Gamma TBool ;; 
+       ; (size, e1 <-- gen_exp_typed_sized size' Gamma TBool ;;
+             e2 <-- gen_exp_typed_sized size' Gamma TBool ;;
              ret (Some (EAnd e1 e2))) ]
     end in
-  match size with 
-  | O => 
-    backtrack base 
-  | S size' => 
+  match size with
+  | O =>
+    backtrack base
+  | S size' =>
     backtrack (base ++ recs size')
   end.
 
@@ -671,18 +669,18 @@ Fixpoint gen_exp_typed_sized
     to verify that we are generating what we expect. For example, here
     we would expect [gen_exp_typed_sized] to always return expressions
     that are well typed.
-    
+
     We can use [forAll] to encode such a property. *)
 
 Definition gen_typed_has_type :=
   let num_vars := 4 in
-  let top_level_size := 3 in 
+  let top_level_size := 3 in
   forAll (gen_context num_vars) (fun Gamma =>
-  forAll arbitrary (fun T =>                                   
+  forAll arbitrary (fun T =>
   forAll (gen_exp_typed_sized top_level_size Gamma T) (fun me =>
-  match me with 
+  match me with
   | Some e => (has_type Gamma e T)?
-  | None => false 
+  | None => false
   end))).
 
 (* QuickChick gen_typed_has_type. *)
@@ -705,7 +703,7 @@ Derive Show for value.
 
 (** We can also quickly define a typing relation for values, a Dec instance
     for it, and a generator for values of a given type. *)
-  
+
 Inductive has_type_value : value -> ty -> Prop :=
   | TyVNat  : forall n, has_type_value (VNat  n) TNat
   | TyVBool : forall b, has_type_value (VBool b) TBool.
@@ -716,7 +714,7 @@ destruct v; destruct T; solve_sum.
 Defined.
 
 Definition gen_typed_value (T : ty) : G value :=
-  match T with 
+  match T with
   | TNat  => n <- arbitrary;; ret (VNat n)
   | TBool => b <- arbitrary;; ret (VBool b)
   end.
@@ -731,7 +729,7 @@ Definition state := Map value.
 (** We introduce an inductive relation that specifies when a state is
     well typed in a context (that is, when all of its variables are
     mapped to values of appropriate types).
-  
+
     We encode this in an element-by-element style inductive relation:
     empty states are only well typed with respect to an empty context,
     while non-empty states need to map their head identifier to a value of
@@ -740,12 +738,12 @@ Definition state := Map value.
 
 Inductive well_typed_state : context -> state -> Prop :=
 | TS_Empty : well_typed_state map_empty map_empty
-| TS_Elem  : forall x v T st Gamma, 
+| TS_Elem  : forall x v T st Gamma,
     has_type_value v T -> well_typed_state Gamma st ->
     well_typed_state ((x,T)::Gamma) ((x,v)::st).
 
 #[export] Instance dec_well_typed_state Gamma st : Dec (well_typed_state Gamma st).
-Proof. 
+Proof.
 constructor; unfold ssrbool.decidable.
 generalize dependent Gamma.
 induction st; intros; destruct Gamma; solve_sum.
@@ -755,8 +753,7 @@ subst; specialize (IHst Gamma); destruct IHst; solve_sum.
 destruct (dec_has_type_value v T); destruct dec; solve_sum.
 Defined.
 
-    
-Definition gen_well_typed_state (Gamma : context) : G state := 
+Definition gen_well_typed_state (Gamma : context) : G state :=
   sequenceGen (List.map (fun '(x, T) =>
                            v <- gen_typed_value T;;
                            ret (x, v)) Gamma).
@@ -773,40 +770,40 @@ Fixpoint eval (st : state) (e : exp) : option value :=
   match e with
   | EVar x => map_get st x
   | ENum n => Some (VNat n)
-  | EPlus e1 e2 => 
-    match eval st e1, eval st e2 with 
+  | EPlus e1 e2 =>
+    match eval st e1, eval st e2 with
     | Some (VNat n1), Some (VNat n2) => Some (VNat (n1 + n2))
     | _, _ => None
-    end 
-  | EMinus e1 e2 => 
-    match eval st e1, eval st e2 with 
+    end
+  | EMinus e1 e2 =>
+    match eval st e1, eval st e2 with
     | Some (VNat n1), Some (VNat n2) => Some (VNat (n1 - n2))
     | _, _ => None
     end
-  | EMult e1 e2 => 
-    match eval st e1, eval st e2 with 
+  | EMult e1 e2 =>
+    match eval st e1, eval st e2 with
     | Some (VNat n1), Some (VNat n2) => Some (VNat (n1 * n2))
     | _, _ => None
     end
   | ETrue       => Some (VBool true  )
   | EFalse      => Some (VBool false )
-  | EEq e1 e2 => 
-    match eval st e1, eval st e2 with 
+  | EEq e1 e2 =>
+    match eval st e1, eval st e2 with
     | Some (VNat n1), Some (VNat n2) => Some (VBool (n1 =? n2))
     | _, _ => None
     end
-  | ELe e1 e2 => 
-    match eval st e1, eval st e2 with 
+  | ELe e1 e2 =>
+    match eval st e1, eval st e2 with
     | Some (VNat n1), Some (VNat n2) => Some (VBool (n1 <? n2))
     | _, _ => None
     end
-  | ENot e => 
-    match eval st e with 
+  | ENot e =>
+    match eval st e with
     | Some (VBool b) => Some (VBool (negb b))
     | _ => None
     end
-  | EAnd e1 e2  => 
-    match eval st e1, eval st e2 with 
+  | EAnd e1 e2  =>
+    match eval st e1, eval st e2 with
 (* Let's include a silly bug here! *)
     | Some (VBool b), Some (VNat n2) => Some (VBool (negb b))
 (*  | Some (VBool b1), Some (VBool b2) => Some (VBool (andb b1 b2)) *)
@@ -823,32 +820,31 @@ Fixpoint eval (st : state) (e : exp) : option value :=
     [e] in [st] will never fail.*)
 
 Definition isNone {A : Type} (m : option A) :=
-  match m with 
+  match m with
   | None => true
   | Some _ => false
   end.
 
-Conjecture expression_soundness : forall Gamma st e T,  
+Conjecture expression_soundness : forall Gamma st e T,
     well_typed_state Gamma st ->  Gamma ||- e \IN T ->
     isNone (eval st e) = false.
 
 (** To test this property, we construct an appropriate checker: *)
 
-Definition expression_soundness_exec := 
-  let num_vars := 4 in 
+Definition expression_soundness_exec :=
+  let num_vars := 4 in
   let top_level_size := 3 in
   forAll (gen_context num_vars)  (fun Gamma =>
   forAll (gen_well_typed_state Gamma) (fun st =>
-  forAll arbitrary (fun T =>                                    
-  forAll (gen_exp_typed_sized 3 Gamma T) (fun me => 
-  match me with  
+  forAll arbitrary (fun T =>
+  forAll (gen_exp_typed_sized 3 Gamma T) (fun me =>
+  match me with
   | Some e => negb (isNone (eval st e))
   | _ => true
-  end)))).   
+  end)))).
 
 (* QuickChick expression_soundness_exec.
 
-    
 
      ===>
        QuickChecking expression_soundness_exec
@@ -868,23 +864,22 @@ Definition expression_soundness_exec :=
 
 Derive Shrink for exp.
 
-Definition expression_soundness_exec_firstshrink := 
-  let num_vars := 4 in 
+Definition expression_soundness_exec_firstshrink :=
+  let num_vars := 4 in
   let top_level_size := 3 in
   forAll (gen_context num_vars)  (fun Gamma =>
   forAll (gen_well_typed_state Gamma) (fun st =>
-  forAll arbitrary (fun T =>                                    
-  forAllShrink (gen_exp_typed_sized 3 Gamma T) shrink (fun me => 
-  match me with  
+  forAll arbitrary (fun T =>
+  forAllShrink (gen_exp_typed_sized 3 Gamma T) shrink (fun me =>
+  match me with
   | Some e => negb (isNone (eval st e))
   | _ => true
-  end)))).   
+  end)))).
 
 (* QuickChick expression_soundness_exec_firstshrink.
 
-    
-<< 
-     ===> 
+<<
+     ===>
        QuickChecking expression_soundness_exec_firsttry
        [(1,TBool), (2,TNat), (3,TBool), (4,TBool)]
        [(1,VBool false), (2,VNat 0), (3,VBool true), (4,VBool false)]
@@ -894,10 +889,10 @@ Definition expression_soundness_exec_firstshrink :=
 *)
 
 (** The expression shrank to something ill-typed! Since it causes the
-    checker to fail, QuickChick views this as a succesfull shrink, even 
-    though this could not actually be produced by our generator and 
-    doesn't satisfy our preconditions!  One solution would be to check 
-    the preconditions in the Checker, filtering out shrinks.  But that 
+    checker to fail, QuickChick views this as a succesfull shrink, even
+    though this could not actually be produced by our generator and
+    doesn't satisfy our preconditions!  One solution would be to check
+    the preconditions in the Checker, filtering out shrinks.  But that
     would be inefficient. *)
 
 (** We not only need to shrink expressions, we need to shrink them so
@@ -906,7 +901,7 @@ Definition expression_soundness_exec_firstshrink :=
     generators: look at a typing derivation and see what parts of it
     we can shrink to while maintaining their types so that the type of
     the entire thing is preserved.
-  
+
     As in the case of [gen_exp_typed], we are going to build up the
     full shrinker in steps. Let's begin with shrinking constants.
 
@@ -918,34 +913,34 @@ Definition expression_soundness_exec_firstshrink :=
       [ETrue]. *)
 
 Definition shrink_base (e : exp) : list exp :=
-  match e with 
+  match e with
   | ENum n => map ENum (shrink n)
   | ETrue => []
-  | EFalse => [ETrue] 
+  | EFalse => [ETrue]
   | _ => []
   end.
 
 (** The next case, [EVar], must take the type [T] to be preserved into
     account. To shrink an [EVar] we could try shrinking the inner
     identifier, but shrinking an identifier by shrinking its natural
-    number representation makes little sense. Better, we can try to 
+    number representation makes little sense. Better, we can try to
     shrink the [EVar] to a constant of the appropriate type. *)
 
 Definition shrink_evar (T : ty) (e : exp) : list exp :=
-  match e with 
-  | EVar x => 
-    match T with 
+  match e with
+  | EVar x =>
+    match T with
     | TNat => [ENum 0]
     | TBool => [ETrue ; EFalse]
     end
   | _ => []
   end.
 
-(** Finally, we need to be able to shrink the recursive cases. Consider 
-    [EPlus e1 e2]: 
-      - We could try (recursively) shrinking [e1] or [e2] preserving their 
+(** Finally, we need to be able to shrink the recursive cases. Consider
+    [EPlus e1 e2]:
+      - We could try (recursively) shrinking [e1] or [e2] preserving their
         [TNat] type.
-      - We could try to shrink directly to [e1] or [e2] since their type 
+      - We could try to shrink directly to [e1] or [e2] since their type
         is the same as [EPlus e1 e2]. *)
 
 (** On the other hand, consider [EEq e1 e2]:
@@ -955,55 +950,55 @@ Definition shrink_evar (T : ty) (e : exp) : list exp :=
       - For faster shrinking, we can also try to shrink such expressions
         to boolean constants directly. *)
 
-Fixpoint shrink_rec (T : ty) (e : exp) : list exp := 
-  match e with 
-  | EPlus e1 e2 => 
-    e1 :: e2 
+Fixpoint shrink_rec (T : ty) (e : exp) : list exp :=
+  match e with
+  | EPlus e1 e2 =>
+    e1 :: e2
        :: (List.map (fun e1' => EPlus e1' e2) (shrink_rec T e1))
        ++ (List.map (fun e2' => EPlus e1 e2') (shrink_rec T e2))
-  | EEq e1 e2 => 
-    ETrue :: EFalse 
+  | EEq e1 e2 =>
+    ETrue :: EFalse
        :: (List.map (fun e1' => EEq e1' e2) (shrink_rec TNat e1))
        ++ (List.map (fun e2' => EEq e1 e2') (shrink_rec TNat e2))
   | _ => []
   end.
 
 (** Putting it all together yields the following smart shrinker: *)
-   
+
 Fixpoint shrink_exp_typed (T : ty) (e : exp) : list exp :=
-  match e with 
-  | EVar _ => 
-    match T with 
+  match e with
+  | EVar _ =>
+    match T with
     | TNat => [ENum 0]
     | TBool => [ETrue ; EFalse]
     end
   | ENum _ => []
   | ETrue => []
   | EFalse => [ETrue]
-  | EPlus e1 e2 => 
-    e1 :: e2 
+  | EPlus e1 e2 =>
+    e1 :: e2
        :: (List.map (fun e1' => EPlus e1' e2) (shrink_exp_typed T e1))
        ++ (List.map (fun e2' => EPlus e1 e2') (shrink_exp_typed T e2))
-  | EMinus e1 e2 => 
+  | EMinus e1 e2 =>
     e1 :: e2 :: (EPlus e1 e2)
        :: (List.map (fun e1' => EMinus e1' e2) (shrink_exp_typed T e1))
        ++ (List.map (fun e2' => EMinus e1 e2') (shrink_exp_typed T e2))
-  | EMult e1 e2 => 
+  | EMult e1 e2 =>
     e1 :: e2 :: (EPlus e1 e2)
        :: (List.map (fun e1' => EMult e1' e2) (shrink_exp_typed T e1))
        ++ (List.map (fun e2' => EMult e1 e2') (shrink_exp_typed T e2))
-  | EEq e1 e2 => 
-    ETrue :: EFalse 
+  | EEq e1 e2 =>
+    ETrue :: EFalse
        :: (List.map (fun e1' => EEq e1' e2) (shrink_exp_typed TNat e1))
        ++ (List.map (fun e2' => EEq e1 e2') (shrink_exp_typed TNat e2))
-  | ELe e1 e2 => 
+  | ELe e1 e2 =>
     ETrue :: EFalse :: (EEq e1 e2)
        :: (List.map (fun e1' => ELe e1' e2) (shrink_exp_typed TNat e1))
        ++ (List.map (fun e2' => ELe e1 e2') (shrink_exp_typed TNat e2))
-  | ENot e => 
+  | ENot e =>
     ETrue :: EFalse :: e :: (List.map ENot (shrink_exp_typed T e))
-  | EAnd e1 e2 => 
-    ETrue :: EFalse :: e1 :: e2 
+  | EAnd e1 e2 =>
+    ETrue :: EFalse :: e1 :: e2
        :: (List.map (fun e1' => EAnd e1' e2) (shrink_exp_typed TBool e1))
        ++ (List.map (fun e2' => EAnd e1 e2') (shrink_exp_typed TBool e2))
   end.
@@ -1011,17 +1006,17 @@ Fixpoint shrink_exp_typed (T : ty) (e : exp) : list exp :=
 (** As we saw for generators, we can also perform sanity checks on our
     shrinkers.  Here, when the shrinker is applied to an expression of
     a given type, all of its results should have the same type. *)
-    
+
 Definition shrink_typed_has_type :=
   let num_vars := 4 in
-  let top_level_size := 3 in 
+  let top_level_size := 3 in
   forAll (gen_context num_vars) (fun Gamma =>
-  forAll arbitrary (fun T =>                                   
+  forAll arbitrary (fun T =>
   forAll (gen_exp_typed_sized top_level_size Gamma T) (fun me =>
-  match me with 
-  | Some e => 
+  match me with
+  | Some e =>
     List.forallb (fun e' => (has_type Gamma e' T)?) (shrink_exp_typed T e)
-  | _ => false 
+  | _ => false
   end))).
 
 (* QuickChick shrink_typed_has_type. *)
@@ -1033,9 +1028,9 @@ Definition shrink_typed_has_type :=
     the following function. *)
 
 Definition lift_shrink {A}
-              (shr : A -> list A) (m : option A) 
+              (shr : A -> list A) (m : option A)
            : list (option A) :=
-  match m with 
+  match m with
   | Some x => List.map Some (shr x)
   | _ => []
   end.
@@ -1043,23 +1038,22 @@ Definition lift_shrink {A}
 (** Armed with shrinking, we can pinpoint the bug in the [EAnd] branch
     of the evaluator. *)
 
-Definition expression_soundness_exec' := 
-  let num_vars := 4 in 
+Definition expression_soundness_exec' :=
+  let num_vars := 4 in
   let top_level_size := 3 in
   forAll (gen_context num_vars)  (fun Gamma =>
   forAll (gen_well_typed_state Gamma) (fun st =>
-  forAll arbitrary (fun T =>                                    
-  forAllShrink (gen_exp_typed_sized 3 Gamma T) 
-               (lift_shrink (shrink_exp_typed T)) 
-               (fun me =>  
-  match me with  
+  forAll arbitrary (fun T =>
+  forAllShrink (gen_exp_typed_sized 3 Gamma T)
+               (lift_shrink (shrink_exp_typed T))
+               (fun me =>
+  match me with
   | Some e => negb (isNone (eval st e))
   | _ => true
-  end)))).   
+  end)))).
 
 (* QuickChick expression_soundness_exec'.
 
-    
 
      ===>
         QuickChecking expression_soundness_exec'
@@ -1100,27 +1094,27 @@ Derive Show for com.
     notations!) *)
 
 (** We can now define what it means for a command to be well typed
-    for a given context. The interesting cases are [TAsgn] and [TIf]/[TWhile]. 
-    The first one, ensures that the type of the variable we are 
+    for a given context. The interesting cases are [TAsgn] and [TIf]/[TWhile].
+    The first one, ensures that the type of the variable we are
     assigning to is the same as that of the expression. The latter,
     requires that the conditional is indeed a boolean expression.
  *)
 
 Inductive well_typed_com : context -> com -> Prop :=
   | TSkip : forall Gamma, well_typed_com Gamma CSkip
-  | TAsgn  : forall Gamma x e T, 
-      bound_to Gamma x T -> 
+  | TAsgn  : forall Gamma x e T,
+      bound_to Gamma x T ->
       Gamma ||- e \IN T ->
       well_typed_com Gamma (CAsgn x e)
-  | TSeq  : forall Gamma c1 c2, 
+  | TSeq  : forall Gamma c1 c2,
       well_typed_com Gamma c1 -> well_typed_com Gamma c2 ->
       well_typed_com Gamma (CSeq c1 c2)
-  | TIf : forall Gamma b c1 c2, 
+  | TIf : forall Gamma b c1 c2,
       Gamma ||- b \IN TBool ->
       well_typed_com Gamma c1 -> well_typed_com Gamma c2 ->
       well_typed_com Gamma (CIf b c1 c2)
   | TWhile : forall Gamma b c,
-      Gamma ||- b \IN TBool -> well_typed_com Gamma c -> 
+      Gamma ||- b \IN TBool -> well_typed_com Gamma c ->
       well_typed_com Gamma (CWhile b c).
 
 (* ================================================================= *)
@@ -1130,15 +1124,15 @@ Inductive well_typed_com : context -> com -> Prop :=
     proof... *)
 
 Lemma bind_deterministic Gamma x (T1 T2 : ty) :
-  bound_to Gamma x T1 -> bound_to Gamma x T2 -> 
+  bound_to Gamma x T1 -> bound_to Gamma x T2 ->
   T1 = T2.
 Proof.
-  destruct T1; destruct T2; intros H1 H2; eauto; 
+  destruct T1; destruct T2; intros H1 H2; eauto;
     inversion H1; inversion H2; congruence.
 Qed.
 
-Lemma has_type_deterministic Gamma e (T1 T2 : ty) : 
-  has_type e Gamma T1 -> has_type e Gamma T2 -> 
+Lemma has_type_deterministic Gamma e (T1 T2 : ty) :
+  has_type e Gamma T1 -> has_type e Gamma T2 ->
   T1 = T2.
 Proof.
   destruct T1; destruct T2; intros H1 H2; eauto;
@@ -1147,8 +1141,8 @@ Proof.
     eapply bind_deterministic; eauto.
 Qed.
 
-Ltac solve_det := 
-  match goal with 
+Ltac solve_det :=
+  match goal with
   | [ H1 : bound_to _ _ ?T1 ,
       H2 : bound_to _ _ ?T2 |- _ ] =>
     assert (T1 = T2) by (eapply bind_deterministic; eauto)
@@ -1158,15 +1152,15 @@ Ltac solve_det :=
   end.
 
 (** Now, here is a brute-force decision procedure for the typing
-    relation (which amounts to a simple typechecker). *) 
+    relation (which amounts to a simple typechecker). *)
 
-#[export] Instance dec_well_typed_com (Gamma : context) (c : com) 
+#[export] Instance dec_well_typed_com (Gamma : context) (c : com)
   : Dec (well_typed_com Gamma c).
 Proof with eauto.
   constructor. unfold ssrbool.decidable.
   induction c; solve_sum.
   - destruct (dec_bound_to Gamma i TNat); destruct dec;
-    destruct (dec_has_type e Gamma TNat); destruct dec; 
+    destruct (dec_has_type e Gamma TNat); destruct dec;
     destruct (dec_bound_to Gamma i TBool); destruct dec;
     destruct (dec_has_type e Gamma TBool); destruct dec; solve_sum;
     try solve_det; try congruence;
@@ -1176,7 +1170,7 @@ Proof with eauto.
   - destruct IHc1; destruct IHc2; subst; eauto; solve_sum.
   - destruct IHc1; destruct IHc2; subst; eauto; solve_sum.
     destruct (dec_has_type e Gamma TBool); destruct dec; solve_sum.
-  - destruct IHc; 
+  - destruct IHc;
     destruct (dec_has_type e Gamma TBool); destruct dec; solve_sum.
 Qed.
 
@@ -1196,55 +1190,55 @@ Qed.
     we return [OutOfGas], signifying that we're not sure if evaluation
     would have succeeded, failed, or diverged if we'd gone on
     evaluating. *)
-  
-Inductive result := 
+
+Inductive result :=
 | Success : state -> result
-| Fail : result 
-| OutOfGas : result. 
+| Fail : result
+| OutOfGas : result.
 
 Fixpoint ceval (fuel : nat) (st : state) (c : com) : result :=
-  match fuel with 
+  match fuel with
   | O => OutOfGas
-  | S fuel' => 
+  | S fuel' =>
     match c with
     | SKIP =>
         Success st
     | x ::= e =>
-        match eval st e with 
+        match eval st e with
         | Some v => Success (map_set st x v)
-        | _ => Fail 
+        | _ => Fail
         end
     | c1 ;;; c2 =>
-        match ceval fuel' st c1 with 
-        | Success st' =>  ceval fuel' st' c2 
-        | _ => Fail 
+        match ceval fuel' st c1 with
+        | Success st' =>  ceval fuel' st' c2
+        | _ => Fail
         end
     | TEST b THEN c1 ELSE c2 FI =>
-      match eval st b with 
+      match eval st b with
       | Some (VBool b) =>
         ceval fuel' st (if b then c1 else c2)
       | _ => Fail
       end
     | WHILE b DO c END =>
-      match eval st b with 
+      match eval st b with
       | Some (VBool b') =>
-        if b' 
-          then ceval fuel' st (c ;;; WHILE b DO c END) 
+        if b'
+          then ceval fuel' st (c ;;; WHILE b DO c END)
           else Success st
       | _ => Fail
       end
     end
   end.
 
-Definition isFail r := 
-  match r with 
+Definition isFail r :=
+  match r with
   | Fail => true
   | _ => false
   end.
 
 (** _Type soundness_: well-typed commands never fail. *)
 
-Conjecture well_typed_state_never_stuck : 
+Conjecture well_typed_state_never_stuck :
   forall Gamma st, well_typed_state Gamma st ->
   forall c, well_typed_com Gamma c ->
   forall fuel, isFail (ceval fuel st c) = false.
@@ -1257,24 +1251,24 @@ Conjecture well_typed_state_never_stuck :
 
 (** **** Exercise: 4 stars, standard (ty_eq_polymorphic)
 
-    In the [has_type] relation we allowed equality checks between 
-    only arithmetic expressions. Introduce an additional typing 
+    In the [has_type] relation we allowed equality checks between
+    only arithmetic expressions. Introduce an additional typing
     rule that allows for equality checks between booleans.
 
-    | Ty_Eq : forall Gamma e1 e2, 
+    | Ty_Eq : forall Gamma e1 e2,
         Gamma ||- e1 \IN TBool -> Gamma ||- e2 \IN TBool ->
         Gamma ||- EEq e1 e2 \IN TBool
 
-   Make sure you also update the evaluation relation to 
+   Make sure you also update the evaluation relation to
    compare boolean values. Update the generators and shrinkers
    accordingly to find counterexamples to the buggy properties
-   above. 
+   above.
 
-   HINT: When updating the shrinker, you will need to 
-   come up with the type of the equated expressions. The 
+   HINT: When updating the shrinker, you will need to
+   come up with the type of the equated expressions. The
    [Dec] instance of [has_type] will come in handy.
 *)
-   
+
 
 (* ################################################################# *)
 (** * Automation (Revisited) *)
@@ -1293,28 +1287,28 @@ Conjecture well_typed_state_never_stuck :
     | TyVBool : forall b, has_type_value (VBool b) TBool.
 
   Definition gen_typed_value (T : ty) : G value :=
-    match T with 
+    match T with
     | TNat  => n <- arbitrary;; ret (VNat n)
     | TBool => b <- arbitrary;; ret (VBool b)
     end.
 
     QuickChick includes a derivation mechanism that can _automatically_
-    produce such generators -- i.e., generators for data structures 
+    produce such generators -- i.e., generators for data structures
     satisfying inductively defined properties! *)
 
 Derive ArbitrarySizedSuchThat for (fun v => has_type_value v T).
-(** ===> 
+(** ===>
   GenSizedSuchThathas_type_value is defined. *)
 
-(** Let's take a closer look at what is being generated (after 
+(** Let's take a closer look at what is being generated (after
     doing some renaming and reformatting). *)
 
 Print GenSizedSuchThathas_type_value.
-(** 
+(**
      ===>
        GenSizedSuchThathas_type_value = fun T : ty =>
-       {| arbitrarySizeST := 
-          let fix aux_arb (size0 : nat) (T : ty) {struct size0} 
+       {| arbitrarySizeST :=
+          let fix aux_arb (size0 : nat) (T : ty) {struct size0}
                 : G (option value) :=
             match size0 with
             | 0 => backtrack [(1, match T with
@@ -1341,12 +1335,12 @@ Print GenSizedSuchThathas_type_value.
             fun size0 : nat => aux_arb size0 T |}
 
        : forall T : ty,
-           GenSizedSuchThat value 
+           GenSizedSuchThat value
                (fun v => has_type_value v T)
 *)
 
 (** This is a rather more verbose version of the [gen_typed_value]
-    generator, but the end result is actually exactly the same 
+    generator, but the end result is actually exactly the same
     distribution! *)
 
 (** Moreover, QuickChick can also derive DecOpt instances automatically, as well as proofs of correctness! *)
@@ -1361,32 +1355,32 @@ Print DecOpthas_type_value.
 (* ================================================================= *)
 (** ** (More) Typeclasses for Generation *)
 
-(** QuickChick provides typeclasses for automating the generation 
+(** QuickChick provides typeclasses for automating the generation
     for data satisfying predicates. *)
 
 Module GenSTPlayground.
 
 (** A variant that takes a size,... *)
 
-Class GenSizedSuchThat (A : Type) (P : A -> Prop) := 
+Class GenSizedSuchThat (A : Type) (P : A -> Prop) :=
   { arbitrarySizeST : nat -> G (option A) }.
 
 (** ...an unsized variant,... *)
 
-Class GenSuchThat (A : Type) (P : A -> Prop) := 
+Class GenSuchThat (A : Type) (P : A -> Prop) :=
   { arbitraryST : G (option A) }.
 
 (** ...convenient notation,... *)
 
-(* 
+(*
 Notation "'genST' x" := (@arbitraryST _ x _) (at level 70).
  *)
 
 (** ...and a coercion between the two: *)
 
-#[export] Instance GenSuchThatOfBounded (A : Type) (P : A -> Prop) 
+#[export] Instance GenSuchThatOfBounded (A : Type) (P : A -> Prop)
          (H : GenSizedSuchThat A P)
-  : GenSuchThat A P := 
+  : GenSuchThat A P :=
   { arbitraryST := sized arbitrarySizeST }.
 
 End GenSTPlayground.
@@ -1394,15 +1388,14 @@ End GenSTPlayground.
 (* ================================================================= *)
 (** ** Using "SuchThat" Typeclasses *)
 
-(** QuickChick can now (ab)use the typeclass resolution mechanism to 
+(** QuickChick can now (ab)use the typeclass resolution mechanism to
     perform a bit of black magic: *)
 
-Conjecture conditional_prop_example : 
+Conjecture conditional_prop_example :
   forall (x y : nat), x = y -> x = y.
 
 (* QuickChick conditional_prop_example.
 
-    
   ==>
     QuickChecking conditional_prop_example
     +++ Passed 10000 tests (0 discards)
@@ -1417,4 +1410,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2023-12-24 13:03 *)
+(* 2024-04-23 03:55 *)

@@ -9,7 +9,7 @@
 #include <stddef.h>
 int triang (int n);
 
-This header file suggests that the [triang] module exports just one function, 
+This header file suggests that the [triang] module exports just one function,
 that computes the triangular number of its input, that is, 1+2+...+n.
 *)
 
@@ -40,7 +40,7 @@ int triang(int n) {
   push_increasing(st, n);
   s = pop_and_add(st, n);
   return s;
-}  
+}
 
 In the file [triang2.c], the functions [push_increasing] and [pop_and_add]
 are identical to the ones in [Verif_stack].  These are _internal_
@@ -65,7 +65,7 @@ Require Import VC.Spec_stack.
 (* ================================================================= *)
 (** ** Abstract Predicate Declaration (APD) *)
 
-(** This module does not use any abstract data types in its 
+(** This module does not use any abstract data types in its
   external interface.  The only type used in [int triang (int n)] is
   the [int] type.  So this module does not need any APDs at all.
 
@@ -98,26 +98,26 @@ Definition triang_spec : ident * funspec :=
  DECLARE _triang
  WITH gv: globals (*... more WITH variables... *)
 (* FILL IN HERE *)
- PRE [ 
+ PRE [
 (* FILL IN HERE *)
-       ] 
+       ]
     PROP (
 (* FILL IN HERE *)
-     ) 
-    PARAMS( 
+     )
+    PARAMS(
 (* FILL IN HERE *)
-     ) 
-    GLOBALS(gv) 
+     )
+    GLOBALS(gv)
     SEP (mem_mgr M gv)
- POST [ tint ] 
-    (* Suggestion: this postcondition does not need an EX, but you 
+ POST [ tint ]
+    (* Suggestion: this postcondition does not need an EX, but you
        may add one if you wish to. *)
-    PROP ( 
-(* FILL IN HERE *) 
+    PROP (
+(* FILL IN HERE *)
     )
     RETURN (
 (* FILL IN HERE *)
-    ) 
+    )
     SEP (mem_mgr M gv).
 
 (** If you don't get this quite right, you will notice it either when
@@ -134,7 +134,7 @@ Definition triang_spec : ident * funspec :=
 (* ----------------------------------------------------------------- *)
 (** *** Completing the Triang ASI *)
 
-(** Now the "Triang Abstract Specification Interface" is just a list of the 
+(** Now the "Triang Abstract Specification Interface" is just a list of the
    exported funspecs *)
 
 Definition TriangASI : funspecs := [  triang_spec ].
@@ -147,4 +147,4 @@ Check TriangASI.  (*   : MallocFreeAPD -> funspecs *)
 (* ================================================================= *)
 (** ** Next Chapter: [Spec_stdlib] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

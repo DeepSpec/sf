@@ -1,5 +1,5 @@
 (** * VSU_stack: VSU verification of the Stack module *)
- 
+
 (* ================================================================= *)
 (** ** stack2.c
 
@@ -52,7 +52,7 @@
 
     Now we can verify the implementations of the individual modules.
   That is, for each module, we produce a VSU, a Verified Software Unit.
-  
+
   Each of these verifications imports only ASIs (abstract specification
   interfaces), not other VSUs; that is, the verification of a module
   depends only on interfaces, not on the implementations (or
@@ -110,7 +110,7 @@ Variable M: MallocFreeAPD.
 
 Fixpoint listrep (il: list Z) (p: val) : mpred :=
  match il with
- | i::il' => EX y: val, 
+ | i::il' => EX y: val,
         malloc_token M Ews (Tstruct _cons noattr) p *
         data_at Ews (Tstruct _cons noattr) (Vint (Int.repr i),y) p *
 	listrep il' y
@@ -130,7 +130,7 @@ Local Hint Resolve listrep_valid_pointer : valid_pointer.
 
 Definition stack (il: list Z) (p: val) :=
  EX q: val,
-  malloc_token M Ews (Tstruct _stack noattr) p * 
+  malloc_token M Ews (Tstruct _stack noattr) p *
   data_at Ews (Tstruct _stack noattr) q p *
   listrep il q.
 
@@ -151,7 +151,7 @@ Local Hint Resolve stack_valid_pointer : valid_pointer.
   gluing together the [stack] predicate with the two lemmas
   about it. *)
 
-Definition STACK : StackAPD := 
+Definition STACK : StackAPD :=
     Build_StackAPD stack stack_local_prop stack_valid_pointer.
 
 (* ################################################################# *)
@@ -232,7 +232,7 @@ forward_call (malloc_spec_sub M t) gv.
 (* ################################################################# *)
 (** * Construction of the VSU *)
 
-(** Programs that do input/output need an "External Specification" 
+(** Programs that do input/output need an "External Specification"
   (or [Espec]) that characterizes the interaction.  All the VSUs of the
   program must use the same Espec.   Since this program doesn't do
   any I/O, it can use the standard trivial Espec, as follows: *)
@@ -267,9 +267,9 @@ Proof.
   + solve_SF_internal body_surely_malloc.
   + solve_SF_internal body_newstack.
   +
-(** How do you know which [semax_body] proof to supply for 
+(** How do you know which [semax_body] proof to supply for
    each subgoal?  It's easy -- the subgoal has the form,
-  [SF Gprog name fundef funspec], where in this case 
+  [SF Gprog name fundef funspec], where in this case
   name is [_surely_malloc] and fundef is [Internal f_surely_malloc],
   so it's pretty clear that [body_surely_malloc] is what we want to
  provide here. *)
@@ -282,4 +282,4 @@ End Stack_VSU.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_triang] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

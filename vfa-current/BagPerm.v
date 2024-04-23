@@ -8,7 +8,7 @@
     the order does not matter.  A _multiset_ is like a list, possibly
     with repeats, where the order does not matter.  Whereas the principal
     query on a set is whether a given element appears in it, the
-    principal query on a bag is _how many_ times a given element appears 
+    principal query on a bag is _how many_ times a given element appears
     in it. *)
 
 From Coq Require Import Strings.String. (* for manual grading *)
@@ -16,7 +16,7 @@ From Coq Require Import Setoid Morphisms.
 From VFA Require Import Perm.
 From VFA Require Import Sort.
 
-(** To keep this chapter more self-contained, 
+(** To keep this chapter more self-contained,
 we restate the critical definitions from [Lists].  *)
 Definition bag := list nat.
 
@@ -31,7 +31,7 @@ Fixpoint count (v:nat) (s:bag) : nat :=
     of copies of every possible element. *)
 
 Definition bag_eqv (b1 b2: bag) : Prop :=
-  forall n, count n b1 = count n b2. 
+  forall n, count n b1 = count n b2.
 
 (** **** Exercise: 2 stars, standard (bag_eqv_properties) *)
 
@@ -41,7 +41,7 @@ Lemma bag_eqv_refl : forall b, bag_eqv b b.
 Proof.
 (* FILL IN HERE *) Admitted.
 
-Lemma bag_eqv_sym: forall b1 b2, bag_eqv b1 b2 -> bag_eqv b2 b1. 
+Lemma bag_eqv_sym: forall b1 b2, bag_eqv b1 b2 -> bag_eqv b2 b1.
 Proof.
 (* FILL IN HERE *) Admitted.
 
@@ -127,18 +127,18 @@ Definition manual_grade_for_permutations_vs_multiset : option (nat*string) := No
     [Permutation]: *)
 Lemma perm_bag:
   forall al bl : list nat,
-   Permutation al bl -> bag_eqv al bl. 
+   Permutation al bl -> bag_eqv al bl.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** The other direction,
     [bag_eqv al bl -> Permutation al bl],
-    is surprisingly difficult.  
+    is surprisingly difficult.
     This proof approach is due to Zhong Sheng Hu.
     The first three lemmas are used to prove the fourth one. *)
 
 (** **** Exercise: 2 stars, advanced (bag_nil_inv) *)
-Lemma bag_nil_inv : forall b, bag_eqv [] b -> b = []. 
+Lemma bag_nil_inv : forall b, bag_eqv [] b -> b = [].
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -189,4 +189,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2023-12-24 12:57 *)
+(* 2024-04-23 03:52 *)

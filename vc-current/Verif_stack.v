@@ -86,7 +86,7 @@ Require Import VC.hints.  (* Import special hints for this tutorial. *)
 
   where in this case, [header=3].
 
-  In separation logic, we can describe this as 
+  In separation logic, we can describe this as
   - [malloc_token Ews p * data_at Ews (Tstruct _mystruct noattr) (zero,one,two) p]
   where [malloc_token Ews p] describes this picture:
 
@@ -99,7 +99,7 @@ Require Import VC.hints.  (* Import special hints for this tutorial. *)
   of "remembering" the size that [p] points to, so its representation
   of [malloc_token] is _not necessarily_ a word at offset -1.
   Therefore, clients of the malloc/free library treat [malloc_token]
-  as an abstract predicate.  Now, the function-specifications of malloc 
+  as an abstract predicate.  Now, the function-specifications of malloc
   and free are something like this: *)
 
 Definition malloc_spec_example  :=
@@ -128,7 +128,7 @@ Definition free_spec_example :=
  POST [ Tvoid ]
      PROP () RETURN () SEP (mem_mgr gv).
 
-(** If your source program says [malloc(sizeof(t))], your [forward_call] 
+(** If your source program says [malloc(sizeof(t))], your [forward_call]
     should supply (as a WITH-witness) the C type [t].
     Malloc may choose to return NULL, in which case the SEP part
     of the postcondition is [emp], or it may return a pointer,
@@ -149,7 +149,7 @@ Definition free_spec_example :=
 
 Fixpoint listrep (il: list Z) (p: val) : mpred :=
  match il with
- | i::il' => EX y: val, 
+ | i::il' => EX y: val,
         malloc_token Ews (Tstruct _cons noattr) p *
         data_at Ews (Tstruct _cons noattr) (Vint (Int.repr i),y) p *
 	listrep il' y
@@ -197,7 +197,7 @@ Lemma listrep_valid_pointer:
 
 Definition stack (il: list Z) (p: val) :=
  EX q: val,
-  malloc_token Ews (Tstruct _stack noattr) p * 
+  malloc_token Ews (Tstruct _stack noattr) p *
   data_at Ews (Tstruct _stack noattr) q p *
   listrep il q.
 
@@ -221,29 +221,29 @@ Lemma stack_valid_pointer:
 Definition newstack_spec : ident * funspec :=
  DECLARE _newstack
  WITH gv: globals
- PRE [ ] 
+ PRE [ ]
     PROP () PARAMS() GLOBALS(gv) SEP (mem_mgr gv)
- POST [ tptr (Tstruct _stack noattr) ] 
+ POST [ tptr (Tstruct _stack noattr) ]
     EX p: val, PROP ( ) RETURN (p) SEP (stack nil p; mem_mgr gv).
 
 Definition push_spec : ident * funspec :=
  DECLARE _push
  WITH p: val, i: Z, il: list Z, gv: globals
- PRE [ tptr (Tstruct _stack noattr), tint ] 
-    PROP (Int.min_signed <= i <= Int.max_signed) 
-    PARAMS (p; Vint (Int.repr i)) GLOBALS(gv) 
+ PRE [ tptr (Tstruct _stack noattr), tint ]
+    PROP (Int.min_signed <= i <= Int.max_signed)
+    PARAMS (p; Vint (Int.repr i)) GLOBALS(gv)
     SEP (stack il p; mem_mgr gv)
- POST [ tvoid ] 
+ POST [ tvoid ]
     PROP ( ) RETURN () SEP (stack (i::il) p; mem_mgr gv).
 
 Definition pop_spec : ident * funspec :=
  DECLARE _pop
  WITH p: val, i: Z, il: list Z, gv: globals
- PRE [ tptr (Tstruct _stack noattr) ] 
-    PROP () 
-    PARAMS (p) GLOBALS(gv) 
+ PRE [ tptr (Tstruct _stack noattr) ]
+    PROP ()
+    PARAMS (p) GLOBALS(gv)
     SEP (stack (i::il) p; mem_mgr gv)
- POST [ tint ] 
+ POST [ tint ]
     PROP ( ) RETURN (Vint (Int.repr i)) SEP (stack il p; mem_mgr gv).
 
 (** Putting all the funspecs together: *)
@@ -256,10 +256,10 @@ Definition Gprog : funspecs :=
 (* ================================================================= *)
 (** ** Proofs of the function bodies *)
 
-(** An _Abstract Data Type_ (ADT) is a type provided with a 
+(** An _Abstract Data Type_ (ADT) is a type provided with a
   _representation_ and a set of _operations_.  Clients of the ADT
   never see the representation, they only call upon the operations.
-  Implementations of the operations do need to manipulate the 
+  Implementations of the operations do need to manipulate the
   representation directly.
 
   In this case, [stack] is our ADT.  The operations are [newstack],
@@ -267,7 +267,7 @@ Definition Gprog : funspecs :=
   [stack il p], where [il] is the list of values that the client
   has pushed onto the stack, and [p] is the client's "handle",
   the address of the representation of the stack.  The client does
-  not know whether the abstract list [il] is represented in C 
+  not know whether the abstract list [il] is represented in C
   data structures by a singly linked list, a doubly linked list,
   an array, or some other data structure.  The client _never unfolds_
   the Definition [stack].
@@ -303,4 +303,4 @@ start_function.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

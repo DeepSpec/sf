@@ -43,7 +43,7 @@
 </div>
 
 <div class="doc">
-<a id="lab616"></a><h1 class="section">Representation of Program Variables</h1>
+<a id="lab581"></a><h1 class="section">Representation of Program Variables</h1>
 
 <div class="paragraph"> </div>
 
@@ -52,7 +52,7 @@
 </div>
 
 <div class="doc">
-<a id="lab617"></a><h2 class="section">Representation of Variables</h2>
+<a id="lab582"></a><h2 class="section">Representation of Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -87,7 +87,7 @@ The boolean function <span class="inlinecode"><span class="id" title="var">var_e
 </div>
 
 <div class="doc">
-<a id="lab618"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">case_var</span></span></h2>
+<a id="lab583"></a><h2 class="section">Tactic <span class="inlinecode"><span class="id" title="var">case_var</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -105,12 +105,12 @@ The boolean function <span class="inlinecode"><span class="id" title="var">var_e
 </div>
 
 <div class="doc">
-<a id="lab619"></a><h1 class="section">Representation of List of Variables</h1>
+<a id="lab584"></a><h1 class="section">Representation of List of Variables</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab620"></a><h2 class="section">Definition of Distinct Variables</h2>
+<a id="lab585"></a><h2 class="section">Definition of Distinct Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -126,44 +126,8 @@ The boolean function <span class="inlinecode"><span class="id" title="var">var_e
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="var_fresh" class="idref" href="#var_fresh"><span class="id" title="definition">var_fresh</span></a> (<a id="y:5" class="idref" href="#y:5"><span class="id" title="binder">y</span></a>:<a class="idref" href="LibSepVar.html#var"><span class="id" title="definition">var</span></a>) (<a id="xs:6" class="idref" href="#xs:6"><span class="id" title="binder">xs</span></a>:<a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#xs:6"><span class="id" title="variable">xs</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
-&nbsp;&nbsp;| <span class="id" title="var">x</span><span class="id" title="notation">::</span><span class="id" title="var">xs'</span> ⇒ <span class="id" title="keyword">if</span> <a class="idref" href="LibSepVar.html#var_eq"><span class="id" title="definition">var_eq</span></a> <span class="id" title="var">x</span> <a class="idref" href="LibSepVar.html#y:5"><span class="id" title="variable">y</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a> <span class="id" title="keyword">else</span> <a class="idref" href="LibSepVar.html#var_fresh:7"><span class="id" title="definition">var_fresh</span></a> <a class="idref" href="LibSepVar.html#y:5"><span class="id" title="variable">y</span></a> <span class="id" title="var">xs'</span><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
-</div>
-
-<div class="doc">
-<span class="inlinecode"><span class="id" title="var">var_distinct</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> asserts that <span class="inlinecode"><span class="id" title="var">xs</span></span> consists of a list of pairwise
-    distinct variables, i.e., a list of variables distinct from each other. 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Fixpoint</span> <a id="var_distinct" class="idref" href="#var_distinct"><span class="id" title="definition">var_distinct</span></a> (<a id="xs:9" class="idref" href="#xs:9"><span class="id" title="binder">xs</span></a>:<a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#xs:9"><span class="id" title="variable">xs</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#True"><span class="id" title="inductive">True</span></a><br/>
-&nbsp;&nbsp;| <span class="id" title="var">x</span><span class="id" title="notation">::</span><span class="id" title="var">xs'</span> ⇒ <a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> <span class="id" title="var">x</span> <span class="id" title="var">xs'</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepVar.html#var_distinct:10"><span class="id" title="definition">var_distinct</span></a> <span class="id" title="var">xs'</span><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
-</div>
-
-<div class="doc">
-<span class="inlinecode"><span class="id" title="var">var_distinct_exec</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> is a boolean function that decides whether a
-    list of variables contains only distinct variables, that is, whether
-    the proposition <span class="inlinecode"><span class="id" title="var">var_distinct</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> is satisfied. 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Fixpoint</span> <a id="var_distinct_exec" class="idref" href="#var_distinct_exec"><span class="id" title="definition">var_distinct_exec</span></a> (<a id="xs:12" class="idref" href="#xs:12"><span class="id" title="binder">xs</span></a>:<a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#xs:12"><span class="id" title="variable">xs</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
-&nbsp;&nbsp;| <span class="id" title="var">x</span><span class="id" title="notation">::</span><span class="id" title="var">xs'</span> ⇒ <a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> <span class="id" title="var">x</span> <span class="id" title="var">xs'</span> <span class="id" title="notation">&amp;&amp;</span> <a class="idref" href="LibSepVar.html#var_distinct_exec:13"><span class="id" title="definition">var_distinct_exec</span></a> <span class="id" title="var">xs'</span><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="var_distinct_exec_eq" class="idref" href="#var_distinct_exec_eq"><span class="id" title="lemma">var_distinct_exec_eq</span></a> : <span class="id" title="keyword">∀</span> <a id="xs:15" class="idref" href="#xs:15"><span class="id" title="binder">xs</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_distinct_exec"><span class="id" title="definition">var_distinct_exec</span></a> <a class="idref" href="LibSepVar.html#xs:15"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">isTrue</span> (<a class="idref" href="LibSepVar.html#var_distinct"><span class="id" title="definition">var_distinct</span></a> <a class="idref" href="LibSepVar.html#xs:15"><span class="id" title="variable">xs</span></a>).<br/>
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">xs</span> <span class="id" title="keyword">as</span> [|<span class="id" title="var">x</span> <span class="id" title="var">xs'</span>]; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">rew_isTrue</span>.<br/>
-&nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. } { <span class="id" title="tactic">rewrite</span>¬<span class="id" title="var">IHxs'</span>. }<br/>
-<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="var_fresh" class="idref" href="#var_fresh"><span class="id" title="definition">var_fresh</span></a> (<a id="y:5" class="idref" href="#y:5"><span class="id" title="binder">y</span></a>:<a class="idref" href="LibSepVar.html#var"><span class="id" title="definition">var</span></a>) (<a id="xs:6" class="idref" href="#xs:6"><span class="id" title="binder">xs</span></a>:<a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a>) : <span class="id" title="keyword">Prop</span> := <br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">¬</span></a> <span class="id" title="inductive">mem</span> <a class="idref" href="LibSepVar.html#y:5"><span class="id" title="variable">y</span></a> <a class="idref" href="LibSepVar.html#xs:6"><span class="id" title="variable">xs</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -172,57 +136,15 @@ The following lemma asserts that if <span class="inlinecode"><span class="id" ti
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="var_fresh_mem_inv" class="idref" href="#var_fresh_mem_inv"><span class="id" title="lemma">var_fresh_mem_inv</span></a> : <span class="id" title="keyword">∀</span> <a id="y:16" class="idref" href="#y:16"><span class="id" title="binder">y</span></a> <a id="x:17" class="idref" href="#x:17"><span class="id" title="binder">x</span></a> <a id="xs:18" class="idref" href="#xs:18"><span class="id" title="binder">xs</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> <a class="idref" href="LibSepVar.html#x:17"><span class="id" title="variable">x</span></a> <a class="idref" href="LibSepVar.html#xs:18"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<span class="id" title="inductive">mem</span> <a class="idref" href="LibSepVar.html#y:16"><span class="id" title="variable">y</span></a> <a class="idref" href="LibSepVar.html#xs:18"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#x:17"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="LibSepVar.html#y:16"><span class="id" title="variable">y</span></a>.<br/>
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">H</span> <span class="id" title="var">M</span> <span class="id" title="var">N</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">xs</span> <span class="id" title="keyword">as</span> [|<span class="id" title="var">x</span> <span class="id" title="var">xs'</span>].<br/>
-&nbsp;&nbsp;{ <span class="id" title="var">inverts</span> <span class="id" title="var">M</span>. }<br/>
-&nbsp;&nbsp;{ <span class="id" title="var">simpls</span>. <span class="id" title="var">case_var</span>. <span class="id" title="var">inverts</span>¬<span class="id" title="var">M</span>. }<br/>
-<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="var_fresh_mem_inv" class="idref" href="#var_fresh_mem_inv"><span class="id" title="lemma">var_fresh_mem_inv</span></a> : <span class="id" title="keyword">∀</span> <a id="y:7" class="idref" href="#y:7"><span class="id" title="binder">y</span></a> <a id="x:8" class="idref" href="#x:8"><span class="id" title="binder">x</span></a> <a id="xs:9" class="idref" href="#xs:9"><span class="id" title="binder">xs</span></a>,<br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> <a class="idref" href="LibSepVar.html#x:8"><span class="id" title="variable">x</span></a> <a class="idref" href="LibSepVar.html#xs:9"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="inductive">mem</span> <a class="idref" href="LibSepVar.html#y:7"><span class="id" title="variable">y</span></a> <a class="idref" href="LibSepVar.html#xs:9"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#x:8"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="LibSepVar.html#y:7"><span class="id" title="variable">y</span></a>.<br/>
+<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>. <span class="id" title="var">introv</span> <span class="id" title="var">H</span> <span class="id" title="var">M</span> <span class="id" title="var">N</span>. <span class="id" title="var">unfolds</span> <a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a>. <span class="id" title="tactic">subst</span>*. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab621"></a><h2 class="section">Definition of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
-
-<div class="paragraph"> </div>
-
- <span class="inlinecode"><span class="id" title="var">var_funs</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> asserts that <span class="inlinecode"><span class="id" title="var">xs</span></span> consists of <span class="inlinecode"><span class="id" title="var">n</span></span> distinct variables,
-    where <span class="inlinecode"><span class="id" title="var">n</span></span> is asserted to be a postive number. 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Definition</span> <a id="var_funs" class="idref" href="#var_funs"><span class="id" title="definition">var_funs</span></a> (<a id="xs:19" class="idref" href="#xs:19"><span class="id" title="binder">xs</span></a>:<a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a>) (<a id="n:20" class="idref" href="#n:20"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <span class="id" title="keyword">Prop</span> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_distinct"><span class="id" title="definition">var_distinct</span></a> <a class="idref" href="LibSepVar.html#xs:19"><span class="id" title="variable">xs</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <span class="id" title="definition">length</span> <a class="idref" href="LibSepVar.html#xs:19"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepVar.html#n:20"><span class="id" title="variable">n</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="LibSepVar.html#xs:19"><span class="id" title="variable">xs</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a>.<br/>
-</div>
-
-<div class="doc">
-<span class="inlinecode"><span class="id" title="var">var_funs</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> is a boolean function that decides whether the proposition
-    <span class="inlinecode"><span class="id" title="var">var_funs</span></span> <span class="inlinecode"><span class="id" title="var">xs</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> is satisfied 
-</div>
-<div class="code">
-
-<span class="id" title="keyword">Definition</span> <a id="var_funs_exec" class="idref" href="#var_funs_exec"><span class="id" title="definition">var_funs_exec</span></a> (<a id="xs:21" class="idref" href="#xs:21"><span class="id" title="binder">xs</span></a>:<a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a>) (<a id="n:22" class="idref" href="#n:22"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">LibNat.beq</span> <a class="idref" href="LibSepVar.html#n:22"><span class="id" title="variable">n</span></a> (<span class="id" title="definition">LibListExec.length</span> <a class="idref" href="LibSepVar.html#xs:21"><span class="id" title="variable">xs</span></a>)<br/>
-&nbsp;&nbsp;<span class="id" title="notation">&amp;&amp;</span> <span class="id" title="definition">LibListExec.is_not_nil</span> <a class="idref" href="LibSepVar.html#xs:21"><span class="id" title="variable">xs</span></a><br/>
-&nbsp;&nbsp;<span class="id" title="notation">&amp;&amp;</span> <a class="idref" href="LibSepVar.html#var_distinct_exec"><span class="id" title="definition">var_distinct_exec</span></a> <a class="idref" href="LibSepVar.html#xs:21"><span class="id" title="variable">xs</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="var_funs_exec_eq" class="idref" href="#var_funs_exec_eq"><span class="id" title="lemma">var_funs_exec_eq</span></a> : <span class="id" title="keyword">∀</span> (<a id="n:23" class="idref" href="#n:23"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <a id="xs:24" class="idref" href="#xs:24"><span class="id" title="binder">xs</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_funs_exec"><span class="id" title="definition">var_funs_exec</span></a> <a class="idref" href="LibSepVar.html#xs:24"><span class="id" title="variable">xs</span></a> <a class="idref" href="LibSepVar.html#n:23"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="definition">isTrue</span> (<a class="idref" href="LibSepVar.html#var_funs"><span class="id" title="definition">var_funs</span></a> <a class="idref" href="LibSepVar.html#xs:24"><span class="id" title="variable">xs</span></a> <a class="idref" href="LibSepVar.html#n:23"><span class="id" title="variable">n</span></a>).<br/>
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="LibSepVar.html#var_funs_exec"><span class="id" title="definition">var_funs_exec</span></a>, <a class="idref" href="LibSepVar.html#var_funs"><span class="id" title="definition">var_funs</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">LibNat.beq_eq</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">LibListExec.is_not_nil_eq</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="lemma">LibListExec.length_eq</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="LibSepVar.html#var_distinct_exec_eq"><span class="id" title="lemma">var_distinct_exec_eq</span></a>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">extens</span>. <span class="id" title="var">rew_istrue</span>. <span class="id" title="var">iff</span>*.<br/>
-<span class="id" title="keyword">Qed</span>.<br/>
-</div>
-
-<div class="doc">
-<a id="lab622"></a><h2 class="section">Generation of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
+<a id="lab586"></a><h2 class="section">Generation of <span class="inlinecode"><span class="id" title="var">n</span></span> Distinct Variables</h2>
 
 <div class="paragraph"> </div>
 
@@ -232,10 +154,10 @@ The following lemma asserts that if <span class="inlinecode"><span class="id" ti
 
 <span class="id" title="keyword">Definition</span> <a id="dummy_char" class="idref" href="#dummy_char"><span class="id" title="definition">dummy_char</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Strings.Ascii.html#ascii_of_nat"><span class="id" title="definition">Ascii.ascii_of_nat</span></a> 0%<span class="id" title="var">nat</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Fixpoint</span> <a id="nat_to_var" class="idref" href="#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> (<a id="n:25" class="idref" href="#n:25"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="LibSepVar.html#var"><span class="id" title="definition">var</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#n:25"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="nat_to_var" class="idref" href="#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> (<a id="n:10" class="idref" href="#n:10"><span class="id" title="binder">n</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="LibSepVar.html#var"><span class="id" title="definition">var</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#n:10"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#EmptyString"><span class="id" title="constructor">String.EmptyString</span></a><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#String"><span class="id" title="constructor">String.String</span></a> <a class="idref" href="LibSepVar.html#dummy_char"><span class="id" title="definition">dummy_char</span></a> (<a class="idref" href="LibSepVar.html#nat_to_var:26"><span class="id" title="definition">nat_to_var</span></a> <span class="id" title="var">n'</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n'</span> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#String"><span class="id" title="constructor">String.String</span></a> <a class="idref" href="LibSepVar.html#dummy_char"><span class="id" title="definition">dummy_char</span></a> (<a class="idref" href="LibSepVar.html#nat_to_var:11"><span class="id" title="definition">nat_to_var</span></a> <span class="id" title="var">n'</span>)<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="injective_nat_to_var" class="idref" href="#injective_nat_to_var"><span class="id" title="lemma">injective_nat_to_var</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="definition">injective</span> <a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a>.<br/>
@@ -252,10 +174,10 @@ The following lemma asserts that if <span class="inlinecode"><span class="id" ti
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Fixpoint</span> <a id="var_seq" class="idref" href="#var_seq"><span class="id" title="definition">var_seq</span></a> (<a id="start:28" class="idref" href="#start:28"><span class="id" title="binder">start</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="nb:29" class="idref" href="#nb:29"><span class="id" title="binder">nb</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#nb:29"><span class="id" title="variable">nb</span></a> <span class="id" title="keyword">with</span><br/>
+<span class="id" title="keyword">Fixpoint</span> <a id="var_seq" class="idref" href="#var_seq"><span class="id" title="definition">var_seq</span></a> (<a id="start:13" class="idref" href="#start:13"><span class="id" title="binder">start</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="nb:14" class="idref" href="#nb:14"><span class="id" title="binder">nb</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) : <a class="idref" href="LibSepVar.html#vars"><span class="id" title="definition">vars</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="LibSepVar.html#nb:14"><span class="id" title="variable">nb</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><br/>
-&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">nb'</span> ⇒ <span class="id" title="notation">(</span><a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> <a class="idref" href="LibSepVar.html#start:28"><span class="id" title="variable">start</span></a><span class="id" title="notation">)</span> <span class="id" title="notation">::</span> <a class="idref" href="LibSepVar.html#var_seq:30"><span class="id" title="definition">var_seq</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="LibSepVar.html#start:28"><span class="id" title="variable">start</span></a>) <span class="id" title="var">nb'</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">nb'</span> ⇒ <span class="id" title="notation">(</span><a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> <a class="idref" href="LibSepVar.html#start:13"><span class="id" title="variable">start</span></a><span class="id" title="notation">)</span> <span class="id" title="notation">::</span> <a class="idref" href="LibSepVar.html#var_seq:15"><span class="id" title="definition">var_seq</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="LibSepVar.html#start:13"><span class="id" title="variable">start</span></a>) <span class="id" title="var">nb'</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 </div>
 
@@ -268,55 +190,46 @@ The properties of <span class="inlinecode"><span class="id" title="var">var_seq<
 
 <span class="id" title="keyword">Section</span> <a id="Var_seq" class="idref" href="#Var_seq"><span class="id" title="section">Var_seq</span></a>.<br/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">start</span> <span class="id" title="var">nb</span> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="var_fresh_var_seq_lt" class="idref" href="#var_fresh_var_seq_lt"><span class="id" title="lemma">var_fresh_var_seq_lt</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:32" class="idref" href="#x:32"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <a id="start:33" class="idref" href="#start:33"><span class="id" title="binder">start</span></a> <a id="nb:34" class="idref" href="#nb:34"><span class="id" title="binder">nb</span></a>,<br/>
-&nbsp;&nbsp;(<a class="idref" href="LibSepVar.html#x:32"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="LibSepVar.html#start:33"><span class="id" title="variable">start</span></a>)%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> (<a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> <a class="idref" href="LibSepVar.html#x:32"><span class="id" title="variable">x</span></a>) (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:33"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:34"><span class="id" title="variable">nb</span></a>).<br/>
+<span class="id" title="keyword">Lemma</span> <a id="var_fresh_var_seq_lt" class="idref" href="#var_fresh_var_seq_lt"><span class="id" title="lemma">var_fresh_var_seq_lt</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:17" class="idref" href="#x:17"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <a id="start:18" class="idref" href="#start:18"><span class="id" title="binder">start</span></a> <a id="nb:19" class="idref" href="#nb:19"><span class="id" title="binder">nb</span></a>,<br/>
+&nbsp;&nbsp;(<a class="idref" href="LibSepVar.html#x:17"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="LibSepVar.html#start:18"><span class="id" title="variable">start</span></a>)%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> (<a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> <a class="idref" href="LibSepVar.html#x:17"><span class="id" title="variable">x</span></a>) (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:18"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:19"><span class="id" title="variable">nb</span></a>).<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">introv</span> <span class="id" title="var">N</span>; <span class="id" title="var">rew_listx</span>.<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. }<br/>
-&nbsp;&nbsp;{ <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_var</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">lets</span>: <a class="idref" href="LibSepVar.html#injective_nat_to_var"><span class="id" title="lemma">injective_nat_to_var</span></a> <span class="id" title="var">C</span>. <span class="id" title="var">math</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_var</span>. <span class="id" title="var">rew_logic</span>. <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">E</span>. <span class="id" title="var">lets</span>: <a class="idref" href="LibSepVar.html#injective_nat_to_var"><span class="id" title="lemma">injective_nat_to_var</span></a> <span class="id" title="var">E</span>. <span class="id" title="var">math</span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <span class="id" title="var">IHnb</span>. <span class="id" title="var">math</span>. } }<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="var_fresh_var_seq_ge" class="idref" href="#var_fresh_var_seq_ge"><span class="id" title="lemma">var_fresh_var_seq_ge</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:35" class="idref" href="#x:35"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <a id="start:36" class="idref" href="#start:36"><span class="id" title="binder">start</span></a> <a id="nb:37" class="idref" href="#nb:37"><span class="id" title="binder">nb</span></a>,<br/>
-&nbsp;&nbsp;(<a class="idref" href="LibSepVar.html#x:35"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#73030c22bc0b1fa771c65aa5414c65f<sub>9</sub>"><span class="id" title="notation">≥</span></a> <a class="idref" href="LibSepVar.html#start:36"><span class="id" title="variable">start</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a><a class="idref" href="LibSepVar.html#nb:37"><span class="id" title="variable">nb</span></a>)%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> (<a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> <a class="idref" href="LibSepVar.html#x:35"><span class="id" title="variable">x</span></a>) (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:36"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:37"><span class="id" title="variable">nb</span></a>).<br/>
+<span class="id" title="keyword">Lemma</span> <a id="var_fresh_var_seq_ge" class="idref" href="#var_fresh_var_seq_ge"><span class="id" title="lemma">var_fresh_var_seq_ge</span></a> : <span class="id" title="keyword">∀</span> (<a id="x:20" class="idref" href="#x:20"><span class="id" title="binder">x</span></a>:<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <a id="start:21" class="idref" href="#start:21"><span class="id" title="binder">start</span></a> <a id="nb:22" class="idref" href="#nb:22"><span class="id" title="binder">nb</span></a>,<br/>
+&nbsp;&nbsp;(<a class="idref" href="LibSepVar.html#x:20"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#73030c22bc0b1fa771c65aa5414c65f<sub>9</sub>"><span class="id" title="notation">≥</span></a> <a class="idref" href="LibSepVar.html#start:21"><span class="id" title="variable">start</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a><a class="idref" href="LibSepVar.html#nb:22"><span class="id" title="variable">nb</span></a>)%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a> (<a class="idref" href="LibSepVar.html#nat_to_var"><span class="id" title="definition">nat_to_var</span></a> <a class="idref" href="LibSepVar.html#x:20"><span class="id" title="variable">x</span></a>) (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:21"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:22"><span class="id" title="variable">nb</span></a>).<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="LibSepVar.html#var_fresh"><span class="id" title="definition">var_fresh</span></a>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">introv</span> <span class="id" title="var">N</span>; <span class="id" title="var">rew_listx</span>.<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. }<br/>
-&nbsp;&nbsp;{ <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_var</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">lets</span>: <a class="idref" href="LibSepVar.html#injective_nat_to_var"><span class="id" title="lemma">injective_nat_to_var</span></a> <span class="id" title="var">C</span>. <span class="id" title="var">math</span>. }<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_var</span>. <span class="id" title="var">rew_logic</span>. <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">E</span>. <span class="id" title="var">lets</span>: <a class="idref" href="LibSepVar.html#injective_nat_to_var"><span class="id" title="lemma">injective_nat_to_var</span></a> <span class="id" title="var">E</span>. <span class="id" title="var">math</span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <span class="id" title="var">IHnb</span>. <span class="id" title="var">math</span>. } }<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="var_distinct_var_seq" class="idref" href="#var_distinct_var_seq"><span class="id" title="lemma">var_distinct_var_seq</span></a> : <span class="id" title="keyword">∀</span> <a id="start:38" class="idref" href="#start:38"><span class="id" title="binder">start</span></a> <a id="nb:39" class="idref" href="#nb:39"><span class="id" title="binder">nb</span></a>,<br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_distinct"><span class="id" title="definition">var_distinct</span></a> (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:38"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:39"><span class="id" title="variable">nb</span></a>).<br/>
+<span class="id" title="keyword">Lemma</span> <a id="noduplicates_var_seq" class="idref" href="#noduplicates_var_seq"><span class="id" title="lemma">noduplicates_var_seq</span></a> : <span class="id" title="keyword">∀</span> <a id="start:23" class="idref" href="#start:23"><span class="id" title="binder">start</span></a> <a id="nb:24" class="idref" href="#nb:24"><span class="id" title="binder">nb</span></a>,<br/>
+&nbsp;&nbsp;<span class="id" title="inductive">LibList.noduplicates</span> (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:23"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:24"><span class="id" title="variable">nb</span></a>).<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">intros</span>.<br/>
-&nbsp;&nbsp;{ <span class="id" title="tactic">simple</span>¬. }<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">rew_listx</span>.<br/>
+&nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. }<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">split</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="LibSepVar.html#var_fresh_var_seq_lt"><span class="id" title="lemma">var_fresh_var_seq_lt</span></a>. <span class="id" title="var">math</span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. } }<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="length_var_seq" class="idref" href="#length_var_seq"><span class="id" title="lemma">length_var_seq</span></a> : <span class="id" title="keyword">∀</span> <a id="start:40" class="idref" href="#start:40"><span class="id" title="binder">start</span></a> <a id="nb:41" class="idref" href="#nb:41"><span class="id" title="binder">nb</span></a>,<br/>
-&nbsp;&nbsp;<span class="id" title="definition">length</span> (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:40"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:41"><span class="id" title="variable">nb</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepVar.html#nb:41"><span class="id" title="variable">nb</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="length_var_seq" class="idref" href="#length_var_seq"><span class="id" title="lemma">length_var_seq</span></a> : <span class="id" title="keyword">∀</span> <a id="start:25" class="idref" href="#start:25"><span class="id" title="binder">start</span></a> <a id="nb:26" class="idref" href="#nb:26"><span class="id" title="binder">nb</span></a>,<br/>
+&nbsp;&nbsp;<span class="id" title="definition">length</span> (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:25"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:26"><span class="id" title="variable">nb</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="LibSepVar.html#nb:26"><span class="id" title="variable">nb</span></a>.<br/>
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">gen</span> <span class="id" title="var">start</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">nb</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">intros</span>.<br/>
 &nbsp;&nbsp;{ <span class="id" title="tactic">auto</span>. } { <span class="id" title="var">rew_list</span>. <span class="id" title="tactic">rewrite</span>¬<span class="id" title="var">IHnb</span>. }<br/>
-<span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Lemma</span> <a id="var_funs_var_seq" class="idref" href="#var_funs_var_seq"><span class="id" title="lemma">var_funs_var_seq</span></a> : <span class="id" title="keyword">∀</span> <a id="start:42" class="idref" href="#start:42"><span class="id" title="binder">start</span></a> <a id="nb:43" class="idref" href="#nb:43"><span class="id" title="binder">nb</span></a>,<br/>
-&nbsp;&nbsp;(<a class="idref" href="LibSepVar.html#nb:43"><span class="id" title="variable">nb</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#::nat_scope:x_'&gt;'_x"><span class="id" title="notation">&gt;</span></a> 0%<span class="id" title="var">nat</span>)%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="LibSepVar.html#var_funs"><span class="id" title="definition">var_funs</span></a> (<a class="idref" href="LibSepVar.html#var_seq"><span class="id" title="definition">var_seq</span></a> <a class="idref" href="LibSepVar.html#start:42"><span class="id" title="variable">start</span></a> <a class="idref" href="LibSepVar.html#nb:43"><span class="id" title="variable">nb</span></a>) <a class="idref" href="LibSepVar.html#nb:43"><span class="id" title="variable">nb</span></a>.<br/>
-<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span>.<br/>
-&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">E</span>. <span class="id" title="var">splits</span>.<br/>
-&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="LibSepVar.html#var_distinct_var_seq"><span class="id" title="lemma">var_distinct_var_seq</span></a>. }<br/>
-&nbsp;&nbsp;{ <span class="id" title="var">applys</span> <a class="idref" href="LibSepVar.html#length_var_seq"><span class="id" title="lemma">length_var_seq</span></a>. }<br/>
-&nbsp;&nbsp;{ <span class="id" title="tactic">destruct</span> <span class="id" title="var">nb</span>. { <span class="id" title="var">false</span>. <span class="id" title="var">math</span>. } { <span class="id" title="tactic">simpl</span>. <span class="id" title="var">auto_false</span>. } }<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="LibSepVar.html#Var_seq"><span class="id" title="section">Var_seq</span></a>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab623"></a><h1 class="section">Notation for Program Variables</h1>
+<a id="lab587"></a><h1 class="section">Notation for Program Variables</h1>
 
 <div class="paragraph"> </div>
 
@@ -327,7 +240,7 @@ The properties of <span class="inlinecode"><span class="id" title="var">var_seq<
 </div>
 
 <div class="doc">
-<a id="lab624"></a><h2 class="section">Program Variables Expressed Using Definitions</h2>
+<a id="lab588"></a><h2 class="section">Program Variables Expressed Using Definitions</h2>
 
 <div class="paragraph"> </div>
 
@@ -461,7 +374,7 @@ Tactic to unfold these definitions. Useful to avoid the definitions
 </div>
 
 <div class="doc">
-<a id="lab625"></a><h2 class="section">Program Variables Expressed Using Notation, with a Quote Symbol</h2>
+<a id="lab589"></a><h2 class="section">Program Variables Expressed Using Notation, with a Quote Symbol</h2>
 
 <div class="paragraph"> </div>
 
@@ -582,12 +495,12 @@ Tactic to unfold these definitions. Useful to avoid the definitions
 </div>
 
 <div class="doc">
-<a id="lab626"></a><h1 class="section">Optional Material</h1>
+<a id="lab590"></a><h1 class="section">Optional Material</h1>
 
 </div>
 
 <div class="doc">
-<a id="lab627"></a><h2 class="section">Bonuse: the Tactic <span class="inlinecode"><span class="id" title="var">var_neq</span></span></h2>
+<a id="lab591"></a><h2 class="section">Bonuse: the Tactic <span class="inlinecode"><span class="id" title="var">var_neq</span></span></h2>
 
 <div class="paragraph"> </div>
 
@@ -607,7 +520,7 @@ Tactic to unfold these definitions. Useful to avoid the definitions
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ <span class="id" title="var">false</span> | <span class="id" title="tactic">apply</span> <span class="id" title="var">E</span> ] ] <span class="id" title="keyword">end</span>.<br/><hr class='doublespaceincode'/>
 #[<span class="id" title="var">global</span>]<br/>
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Extern</span> 1 (?<span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> ?<span class="id" title="var">y</span>) ⇒ <span class="id" title="var">var_neq</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-12-24&nbsp;13:00&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-04-23&nbsp;03:49&nbsp;*)</span><br/>
 </div>
 </div>
 

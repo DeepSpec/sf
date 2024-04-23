@@ -1244,7 +1244,6 @@ Module SigSandbox.
       because subset types are similar to something known in type
       theory as _sigma types_, aka _dependent sums_. *)
 
-  
   (** Subset types and existential quantification are quite similar.
       Recall how the latter is defined: *)
 
@@ -1495,4 +1494,4 @@ End TreeETableSubset.
 Definition manual_grade_for_ListsETable : option (nat*string) := None.
 (** [] *)
 
-(* 2023-12-24 12:57 *)
+(* 2024-04-23 03:52 *)

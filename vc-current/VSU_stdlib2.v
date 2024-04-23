@@ -20,11 +20,11 @@
 (* ################################################################# *)
 (** * The C program *)
 
-(** Here is our C program.  Notice the variables [pool, pool_index, freelist] 
+(** Here is our C program.  Notice the variables [pool, pool_index, freelist]
 that are global to the module, but meant to be private--not to be
 directly manipulated by clients of the module.  Furthermore, these
 variables have initial values ([pool_index=0, freelist=NULL],
-and [pool] zero-initialized implicitly) that 
+and [pool] zero-initialized implicitly) that
 represent a meaningful initial state.
 
 /* stdlib2.c */
@@ -71,7 +71,7 @@ As you can see, malloc can allocate blocks whose size ranges from
   The exit() function infinite-loops, so that it satisfies its postcondition
   of False in our Hoare logic of partial correctness.
 *)
- 
+
 (* ################################################################# *)
 (** * The normal boilerplate *)
 Require Import VST.floyd.proofauto.
@@ -87,8 +87,8 @@ Definition tcell := Tstruct _cell noattr.
 
 Fixpoint freelistrep (n: nat) (p: val) : mpred :=
  match n with
- | S n' => EX y: val, 
-        !! malloc_compatible (sizeof tcell) p && 
+ | S n' => EX y: val,
+        !! malloc_compatible (sizeof tcell) p &&
         data_at Ews tcell (y, (Vundef, (Vundef, Vundef))) p *
         freelistrep n' y
  | O => !! (p = nullval) && emp
@@ -96,7 +96,7 @@ Fixpoint freelistrep (n: nat) (p: val) : mpred :=
 
 Arguments freelistrep n p : simpl never.
 
-Lemma freelistrep_local_prop: forall n p, 
+Lemma freelistrep_local_prop: forall n p,
    freelistrep n p |--  !! (is_pointer_or_null p /\ (n=0<->p=nullval) /\ (n>0<->isptr p))%nat.
 (* FILL IN HERE *) Admitted.
 #[export] Hint Resolve freelistrep_local_prop : saturate_local.
@@ -117,11 +117,11 @@ Lemma freelistrep_valid_pointer:
   - Normally, there must be some way for [free(p)] to figure out
    the size of the block.  This can be done by having a header word,
    just before address p, that gives the size (though there are other
-   ways to do it).  Normally, this header word is part of what 
+   ways to do it).  Normally, this header word is part of what
    malloc_token represents.  But in this implementation, all blocks
    are the same size, so there's no need for such a header.
   - The memory-manager's free list contains blocks all of size
-   sizeof(tcell), which  is 16 bytes when [sizeof(size_t)=4] or 
+   sizeof(tcell), which  is 16 bytes when [sizeof(size_t)=4] or
    32 bytes when [sizeof(size_t)=8].  When [malloc(7)] splits a
    block into two pieces, the malloc_token represents the
    second piece, the portion of the block between offset 7 and the end.
@@ -129,11 +129,11 @@ Lemma freelistrep_valid_pointer:
   - In addition, the malloc_token has three propositional facts about
    address [p], that will assist the [free()] function in reconstituting
    the two parts of the split block. *)
- 
-Definition malloc_token_sz (sh: share) (n: Z) (p: val) : mpred := 
-  !! (field_compatible tcell [] p 
+
+Definition malloc_token_sz (sh: share) (n: Z) (p: val) : mpred :=
+  !! (field_compatible tcell [] p
       /\ malloc_compatible (sizeof tcell) p
-      /\ 0 <= n <= sizeof tcell) 
+      /\ 0 <= n <= sizeof tcell)
  &&  memory_block Ews (sizeof tcell - n) (offset_val n p).
 
 (** **** Exercise: 2 stars, standard (malloc_token_properties) *)
@@ -143,7 +143,7 @@ Lemma malloc_token_sz_valid_pointer:
               malloc_token_sz sh sz p |-- valid_pointer p.
 (* FILL IN HERE *) Admitted.
 
-Lemma  malloc_token_sz_local_facts : 
+Lemma  malloc_token_sz_local_facts :
    forall (sh : share) (sz : Z) (p : val),
      malloc_token_sz sh sz p |-- !! malloc_compatible sz p.
 (* FILL IN HERE *) Admitted.
@@ -160,7 +160,7 @@ Definition N_eq : N=_ := proj2_sig (opaque_constant _).
 
 Module Digression.
 (** Suppose someone changes the source program stdlib2.c,  putting a
-  different constant than 80000.  You would like your verification 
+  different constant than 80000.  You would like your verification
   script to automatically adjust.    We will revise the line,
   [Definition N : Z := ...]  to find the constant automagically.
 
@@ -180,14 +180,14 @@ Compute gvar_info (stdlib2.v_pool).
 Compute match gvar_info (stdlib2.v_pool) with Tarray _ n _ => n | _ => 0 end.
   (*  = 80000: Z *)
 
-(** The following definition of [N] won't work well, because N will 
+(** The following definition of [N] won't work well, because N will
   not be a constant, it'll be a match expression: *)
 Definition N' := match gvar_info (stdlib2.v_pool) with Tarray _ n _ => n | _ => 0 end.
 Print N'.  (* N' = match gvar_info v_pool with Tarray _ n _ => n | _ => 0 end *)
 
 (** So instead, use this Coq trick: *)
 
-Definition N'' := 
+Definition N'' :=
   ltac:(let x := constr:(match gvar_info (stdlib2.v_pool) with
                          | Tarray _ n _ => n
 			 | _ => 0 end)
@@ -195,10 +195,10 @@ Definition N'' :=
 Print N''. (* N'' = 80000 : Z *)
 
 (** Now, throw away N'' and we'll combine the two tricks together:
- - [opaque_constant] to define a constant that won't unfold except 
+ - [opaque_constant] to define a constant that won't unfold except
     by explicit rewriting; and
  - extract the value of the constant from the program itself. *)
-Definition N := proj1_sig (opaque_constant 
+Definition N := proj1_sig (opaque_constant
                             (ltac:(let x := constr:(match gvar_info (stdlib2.v_pool) with
                                           Tarray _ n _ => n | _ => 0 end)
                                     in let x := eval compute in x in exact x))).
@@ -227,7 +227,7 @@ Definition mem_mgr (gv: globals) : mpred :=
   data_at Ews (tptr tcell) p (gv _freelist) *
   freelistrep frees p.
 
-Definition M : MallocFreeAPD := 
+Definition M : MallocFreeAPD :=
     Build_MallocFreeAPD mem_mgr malloc_token_sz
            malloc_token_sz_valid_pointer malloc_token_sz_local_facts.
 
@@ -289,7 +289,7 @@ unfold MF_globals.
 
 Definition MallocFreeVSU: @VSU NullExtension.Espec
          MF_Externs MF_imported_specs ltac:(QPprog prog) MF_ASI MF_globals.
-  Proof. 
+  Proof.
  mkVSU prog MF_internal_specs.
     - solve_SF_internal body_malloc.
     - solve_SF_internal body_free.
@@ -300,4 +300,4 @@ Qed.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_main2] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

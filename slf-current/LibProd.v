@@ -117,7 +117,7 @@ Arguments snd {A} {B}.
 (** N-ary projections are defined as notations and not as
     definitions, which has appeared to be more flexible with
     respect to type inference.
-    TODO: investigate the possibility of using definitions. *)
+    --TODO: investigate the possibility of using definitions. *)
 
 Notation "'proj11' P" := P (at level 69, only parsing).
 
@@ -293,4 +293,4 @@ Tactic Notation "unfolds_unproj" :=
          unproj41, unproj42, unproj43, unproj44,
          unproj51 in *.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

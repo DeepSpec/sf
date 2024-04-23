@@ -6,7 +6,7 @@
 (* ================================================================= *)
 (** ** Imports *)
 
-(**  
+(**
   - We import the standard [floyd.proofauto] and [floyd.VSU].
   - This module calls upon functions from [stack2.c], so it needs to import [Spec_stack].
   - The module implements the [TriangASI], so it needs to import [Spec_triang], which defines that.
@@ -39,15 +39,15 @@ Variable STACK: StackAPD.
     Refer to [Stack_private] in [VSU_stack] for an example.
  *)
 
-Definition push_increasing_spec : ident * funspec 
+Definition push_increasing_spec : ident * funspec
  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
-Definition pop_and_add_spec  : ident * funspec 
+Definition pop_and_add_spec  : ident * funspec
  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
 Definition Triang_private : funspecs := [
   (* FILL IN HERE *)
-  ].   
+  ].
 
 (** [] *)
 
@@ -80,7 +80,7 @@ Lemma body_pop_and_add: semax_body Triang_Vprog Triang_Gprog f_pop_and_add pop_a
 
 (** **** Exercise: 3 stars, standard (body_triang)
 
-    Prove the correctness of the triang function. 
+    Prove the correctness of the triang function.
 
    When you get near the end, you may come upon the proof goal,
    [ stackrep STACK nil st |-- emp ]
@@ -141,4 +141,4 @@ End Triang_VSU.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stdlib] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

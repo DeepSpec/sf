@@ -63,37 +63,8 @@ Definition vars : Type := list var.
 
 (** [var_fresh y xs] asserts that [y] does not belong to the list [xs] *)
 
-Fixpoint var_fresh (y:var) (xs:vars) : bool :=
-  match xs with
-  | nil => true
-  | x::xs' => if var_eq x y then false else var_fresh y xs'
-  end.
-
-(** [var_distinct xs] asserts that [xs] consists of a list of pairwise
-    distinct variables, i.e., a list of variables distinct from each other. *)
-
-Fixpoint var_distinct (xs:vars) : Prop :=
-  match xs with
-  | nil => True
-  | x::xs' => var_fresh x xs' /\ var_distinct xs'
-  end.
-
-(** [var_distinct_exec xs] is a boolean function that decides whether a
-    list of variables contains only distinct variables, that is, whether
-    the proposition [var_distinct xs] is satisfied. *)
-
-Fixpoint var_distinct_exec (xs:vars) : bool :=
-  match xs with
-  | nil => true
-  | x::xs' => var_fresh x xs' && var_distinct_exec xs'
-  end.
-
-Lemma var_distinct_exec_eq : forall xs,
-  var_distinct_exec xs = isTrue (var_distinct xs).
-Proof using.
-  intros. induction xs as [|x xs']; simpl; rew_isTrue.
-  { auto. } { rewrite~ IHxs'. }
-Qed.
+Definition var_fresh (y:var) (xs:vars) : Prop :=
+  ~ mem y xs.
 
 (** The following lemma asserts that if [x] is a variable in the list [xs],
     and [y] is fresh from this list [xs], then [y] is not equal to [x]. *)
@@ -102,41 +73,7 @@ Lemma var_fresh_mem_inv : forall y x xs,
   var_fresh x xs ->
   mem y xs ->
   x <> y.
-Proof using.
-  introv H M N. subst. induction xs as [|x xs'].
-  { inverts M. }
-  { simpls. case_var. inverts~ M. }
-Qed.
-
-(* ================================================================= *)
-(** ** Definition of [n] Distinct Variables *)
-
-(** [var_funs xs n] asserts that [xs] consists of [n] distinct variables,
-    where [n] is asserted to be a postive number. *)
-
-Definition var_funs (xs:vars) (n:nat) : Prop :=
-     var_distinct xs
-  /\ length xs = n
-  /\ xs <> nil.
-
-(** [var_funs xs n] is a boolean function that decides whether the proposition
-    [var_funs xs n] is satisfied *)
-
-Definition var_funs_exec (xs:vars) (n:nat) : bool :=
-     LibNat.beq n (LibListExec.length xs)
-  && LibListExec.is_not_nil xs
-  && var_distinct_exec xs.
-
-Lemma var_funs_exec_eq : forall (n:nat) xs,
-  var_funs_exec xs n = isTrue (var_funs xs n).
-Proof using.
-  intros. unfold var_funs_exec, var_funs.
-  rewrite LibNat.beq_eq.
-  rewrite LibListExec.is_not_nil_eq.
-  rewrite LibListExec.length_eq.
-  rewrite var_distinct_exec_eq.
-  extens. rew_istrue. iff*.
-Qed.
+Proof using. introv H M N. unfolds var_fresh. subst*. Qed.
 
 (* ================================================================= *)
 (** ** Generation of [n] Distinct Variables *)
@@ -180,10 +117,10 @@ Lemma var_fresh_var_seq_lt : forall (x:nat) start nb,
   (x < start)%nat ->
   var_fresh (nat_to_var x) (var_seq start nb).
 Proof using.
-  intros. gen start. induction nb; intros.
+  intros. unfold var_fresh. gen start. induction nb; simpl; introv N; rew_listx.
   { auto. }
-  { simpl. case_var.
-    { lets: injective_nat_to_var C. math. }
+  { simpl. case_var. rew_logic. split.
+    { intros E. lets: injective_nat_to_var E. math. }
     { applys IHnb. math. } }
 Qed.
 
@@ -191,18 +128,18 @@ Lemma var_fresh_var_seq_ge : forall (x:nat) start nb,
   (x >= start+nb)%nat ->
   var_fresh (nat_to_var x) (var_seq start nb).
 Proof using.
-  intros. gen start. induction nb; intros.
+  intros. unfold var_fresh. gen start. induction nb; simpl; introv N; rew_listx.
   { auto. }
-  { simpl. case_var.
-    { lets: injective_nat_to_var C. math. }
+  { simpl. case_var. rew_logic. split.
+    { intros E. lets: injective_nat_to_var E. math. }
     { applys IHnb. math. } }
 Qed.
 
-Lemma var_distinct_var_seq : forall start nb,
-  var_distinct (var_seq start nb).
+Lemma noduplicates_var_seq : forall start nb,
+  LibList.noduplicates (var_seq start nb).
 Proof using.
-  intros. gen start. induction nb; intros.
-  { simple~. }
+  intros. gen start. induction nb; intros; simpl; rew_listx.
+  { auto. }
   { split.
     { applys var_fresh_var_seq_lt. math. }
     { auto. } }
@@ -213,16 +150,6 @@ Lemma length_var_seq : forall start nb,
 Proof using.
   intros. gen start. induction nb; simpl; intros.
   { auto. } { rew_list. rewrite~ IHnb. }
-Qed.
-
-Lemma var_funs_var_seq : forall start nb,
-  (nb > 0%nat)%nat ->
-  var_funs (var_seq start nb) nb.
-Proof using.
-  introv E. splits.
-  { applys var_distinct_var_seq. }
-  { applys length_var_seq. }
-  { destruct nb. { false. math. } { simpl. auto_false. } }
 Qed.
 
 End Var_seq.
@@ -510,4 +437,4 @@ Ltac var_neq :=
 #[global]
 Hint Extern 1 (?x <> ?y) => var_neq.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

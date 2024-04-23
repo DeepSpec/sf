@@ -5,7 +5,7 @@
 
 (** You've now seen how to verify programs that use many of C's data
   structures (arrays, pointers, structs, integers) and control
-  structures (functions, if-then-else, loops), and abstraction 
+  structures (functions, if-then-else, loops), and abstraction
   structures (data abstraction, module interfaces).  The capstone exercise
   (hash tables) demonstrated all of these at once, in addition to a
   key concept: layering the proof using a functional model,
@@ -16,7 +16,7 @@
 (* ################################################################# *)
 (** * Next: modular verification of modular programs *)
 
-(** VST's facility for verifying modular programs is called "Verified 
+(** VST's facility for verifying modular programs is called "Verified
    Software Units,"  designed and implemented by Lennart Beringer.
 
    A program module in C
@@ -29,7 +29,7 @@
 
   Although the C programming language has the notion of [static] functions
   and variables that are "global" only within a .c file, and not exported from
-  that .c file, we will not rely on this feature; 
+  that .c file, we will not rely on this feature;
   - in part because a single "module" may be implemented in more than one .c file, to which the [static] keyword does not generalize;
   - in part because we will use Verifiable C's  "VSU" facility to enforce this kind of locality.
 
@@ -61,7 +61,7 @@
 (** * A Stack/Triang program to verify *)
 
 (** As an exercise in VSU verification, we will use the [stack.c] program
-  that was introduced in [Verif_stack] and [Verif_triang].  
+  that was introduced in [Verif_stack] and [Verif_triang].
   But first we'll break it up into modules: *)
 (* ----------------------------------------------------------------- *)
 (** *** stdlib.h
@@ -111,4 +111,4 @@
 (* ================================================================= *)
 (** ** Next Chapter: [Spec_stack] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

@@ -7,11 +7,11 @@
 
 [Appel 2014] Program Logics for Certified Compilers,
  by Andrew W. Appel with Robert Dockins, Aquinas Hobor, Lennart Beringer,
- Josiah Dodds, Gordon Stewart, Sandrine Blazy, and Xavier Leroy. 
+ Josiah Dodds, Gordon Stewart, Sandrine Blazy, and Xavier Leroy.
  Cambridge University Press, 2014.
 
 [Appel 2015]  Verification of a Cryptographic Primitive: SHA-256,
- by Andrew W. Appel, ACM Transactions on Programming Languages and 
+ by Andrew W. Appel, ACM Transactions on Programming Languages and
  Systems 37(2) 7:1-7:31, April 2015.
  {https://www.cs.princeton.edu/~appel/papers/verif-sha-2.pdf}
 
@@ -26,9 +26,9 @@
  {https://www.cs.princeton.edu/~appel/papers/verified-hmac.pdf}
 
 [Beringer 2019] Abstraction and Subsumption in Modular Verification
- of C Programs, by Lennart Beringer and Andrew W. Appel. 
- In: Maurice H. ter Beek and Annabelle McIver: Formal Methods -- the next 
- 30 years.  Proceedings of the 23rd International Symposium on Formal 
+ of C Programs, by Lennart Beringer and Andrew W. Appel.
+ In: Maurice H. ter Beek and Annabelle McIver: Formal Methods -- the next
+ 30 years.  Proceedings of the 23rd International Symposium on Formal
  Methods (FM'19), pages 573-590, Springer, 2019.
  {https://www.cs.princeton.edu/~appel/papers/funspec_sub.pdf}
 
@@ -38,13 +38,13 @@
  {https://dl.acm.org/doi/pdf/10.1145/1863543.1863590}
 
 [Jacobs 2011] VeriFast: A Powerful, Sound, Predictable, Fast Verifier
- for C and Java, by Bart Jacobs, Jan Smans, Pieter Philippaerts, Frederic 
+ for C and Java, by Bart Jacobs, Jan Smans, Pieter Philippaerts, Frederic
  Vogels, Willem Penninckx, and Frank Piessens.
  In Proc. NASA Formal Methods (NFM) 2011.
  {https://people.cs.kuleuven.be/~bart.jacobs/nfm2011.pdf}
 
 [Koh 2020] From C To Interaction Trees: specifying, verifying and testing
- a networked server, by Nicolas Koh, Yao Li, Yishuai Li, Li-Yao Xia, Lennart 
+ a networked server, by Nicolas Koh, Yao Li, Yishuai Li, Li-Yao Xia, Lennart
  Beringer, Wolf Honore, William Mansky, Benjamin C Pierce, and Steve Zdancewic.
  CPP 2019 Proceedings of the 8th ACM SIGPLAN International Conference on
  Certified Programs and Proofs, Pages 234-248, ACM, 2019
@@ -54,18 +54,18 @@
  Ramana Kumar, Magnus O. Myreen, Michael Norrish, and Scott Owens,
  in POPL'14, ACM SIGPLAN Notices 49, no. 1 (2014): 179-191.
 
-[Leino 2010] Dafny: An automatic program verifier for functional 
- correctness, by K. Rustan M. Leino, International Conference on Logic 
+[Leino 2010] Dafny: An automatic program verifier for functional
+ correctness, by K. Rustan M. Leino, International Conference on Logic
  for Programming Artificial Intelligence and Reasoning, pp. 348-370, 2010.
 
-[Mansky 2017] A verified messaging system, 
+[Mansky 2017] A verified messaging system,
  by William Mansky, Andrew W. Appel, and Aleksey Nogin.
- OOPSLA'17: ACM Conference on Object-Oriented Programming Systems, 
- Languages, and Applications, October 2017. 
+ OOPSLA'17: ACM Conference on Object-Oriented Programming Systems,
+ Languages, and Applications, October 2017.
  PACM/PL volume 1, issue OOPSLA, paper 87, 2017.
 
 [Mansky 2020] Connecting Higher-Order Separation Logic to a First-Order
- Outside World, by William Mansky, Wolf Honoré, and Andrew W. Appel, 
+ Outside World, by William Mansky, Wolf Honoré, and Andrew W. Appel,
  ESOP 2020: European Symposium on Programming, April 2020.
  {https://www.cs.princeton.edu/~appel/papers/connecting-esop.pdf}
 
@@ -89,4 +89,4 @@
 
 *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

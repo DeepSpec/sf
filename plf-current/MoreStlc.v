@@ -710,15 +710,14 @@ Set Default Goal Selector "!".
     _pair_ of recursive functions (illustrating the fact that the type
     [T1] in the rule [T_Fix] need not be a function type):
 
-      evenodd =
-        fix
-          (\eo: (Nat->Bool * Nat->Bool),
-             let e = \n:Nat, if n=0 then true  else eo.snd (pred n) in
-             let o = \n:Nat, if n=0 then false else eo.fst (pred n) in
-             (e,o))
-
-      even = evenodd.fst
-      odd  = evenodd.snd
+    let evenodd =
+         fix
+           (\eo: ((Nat -> Nat) * (Nat -> Nat)),
+              (\n:Nat, if0 n then 1 else (eo.snd (pred n)),
+               \n:Nat, if0 n then 0 else (eo.fst (pred n)))) in
+    let even = evenodd.fst in
+    let odd  = evenodd.snd in
+    (even 3, even 4)}
 *)
 
 (* ================================================================= *)
@@ -998,6 +997,7 @@ Inductive tm : Type :=
        if0 x then ... else ...
 *)
 
+Definition w : string := "w".
 Definition x : string := "x".
 Definition y : string := "y".
 Definition z : string := "z".
@@ -1150,6 +1150,31 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   end
 
 where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
+
+(* Make sure the following tests are valid by reflexzivity: *)
+Example substeg1 :
+  <{ [z:=0] (let w = z in z) }> = <{ let w = 0 in 0 }>.
+Proof.
+(*
+  reflexivity.
+*)
+(* FILL IN HERE *) Admitted.
+
+Example substeg2 :
+  <{ [z:=0] (let w = z in w) }> = <{ let w = 0 in w }>.
+Proof.
+(*
+  reflexivity.
+*)
+(* FILL IN HERE *) Admitted.
+
+Example substeg3 :
+  <{ [z:=0] (let y = succ 0 in z) }> = <{ let y = succ 0 in 0 }>.
+Proof.
+(*
+  reflexivity.
+*)
+(* FILL IN HERE *) Admitted.
 
 (** [] *)
 
@@ -1441,7 +1466,6 @@ Hint Extern 2 (_ = _) => compute; reflexivity : core.
 
 Module Numtest.
 
-(* tm_test0 (pred (succ (pred (2 * 0))) then 5 else 6 *)
 Definition tm_test :=
   <{if0
     (pred
@@ -1464,7 +1488,7 @@ Proof.
 Example reduces :
   tm_test -->* 5.
 Proof.
-(* 
+(*
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1476,7 +1500,6 @@ End Numtest.
 
 Module ProdTest.
 
-(* ((5,6),7).fst.tm_snd *)
 Definition tm_test :=
   <{((5,6),7).fst.snd}>.
 
@@ -1487,7 +1510,7 @@ Proof. unfold tm_test. eauto. (* FILL IN HERE *) Admitted.
 Example reduces :
   tm_test -->* 6.
 Proof.
-(* 
+(*
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1499,7 +1522,6 @@ End ProdTest.
 
 Module LetTest.
 
-(* let x = pred 6 in succ x *)
 Definition tm_test :=
   <{let x = (pred 6) in
     (succ x)}>.
@@ -1512,12 +1534,33 @@ Proof. unfold tm_test. eauto.
 Example reduces :
   tm_test -->* 6.
 Proof.
-(* 
+(*
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
 
 End LetTest.
+
+Module LetTest1.
+
+Definition tm_test :=
+  <{let z = pred 6 in
+    (succ z)}>.
+
+Example typechecks :
+  empty |-- tm_test \in Nat.
+Proof. unfold tm_test. eauto.
+(* FILL IN HERE *) Admitted.
+
+Example reduces :
+  tm_test -->* 6.
+Proof.
+(*
+  unfold tm_test. normalize.
+*)
+(* FILL IN HERE *) Admitted.
+
+End LetTest1.
 
 (* ----------------------------------------------------------------- *)
 (** *** Sums *)
@@ -1536,7 +1579,7 @@ Proof. unfold tm_test. eauto. (* FILL IN HERE *) Admitted.
 Example reduces :
   tm_test -->* 5.
 Proof.
-(* 
+(*
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1567,7 +1610,7 @@ Proof. unfold tm_test. eauto 10. (* FILL IN HERE *) Admitted.
 Example reduces :
   tm_test -->* <{(5, 0)}>.
 Proof.
-(* 
+(*
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1597,7 +1640,7 @@ Proof. unfold tm_test. eauto. (* FILL IN HERE *) Admitted.
 Example reduces :
   tm_test -->* 25.
 Proof.
-(* 
+(*
   unfold tm_test. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1625,7 +1668,7 @@ Proof. unfold fact. auto 10. (* FILL IN HERE *) Admitted.
 Example reduces :
   <{fact 4}> -->* 24.
 Proof.
-(* 
+(*
   unfold fact. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1652,7 +1695,7 @@ Example reduces :
   <{map (\a:Nat, succ a) (1 :: 2 :: (nil Nat))}>
   -->* <{2 :: 3 :: (nil Nat)}>.
 Proof.
-(* 
+(*
   unfold map. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1677,7 +1720,7 @@ Proof. unfold equal. auto 10. (* FILL IN HERE *) Admitted.
 Example reduces :
   <{equal 4 4}> -->* 1.
 Proof.
-(* 
+(*
   unfold equal. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1686,7 +1729,7 @@ Proof.
 Example reduces2 :
   <{equal 4 5}> -->* 0.
 Proof.
-(* 
+(*
   unfold equal. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -1713,7 +1756,7 @@ Proof. unfold eotest. eauto 30. (* FILL IN HERE *) Admitted.
 Example reduces :
   eotest -->* <{(0, 1)}>.
 Proof.
-(* 
+(*
   unfold eotest. eauto 10. normalize.
 *)
 (* FILL IN HERE *) Admitted.
@@ -2058,4 +2101,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2023-12-24 12:54 *)
+(* 2024-04-23 03:47 *)

@@ -384,7 +384,7 @@ Proof using.
   { introv M1 M2. destruct (D x); false*. }
   { intros x. specializes E x. unfolds indom, map_indom.
     applys not_not_inv. intros N. rew_logic in N. false*. }
-Qed. 
+Qed.
 Lemma disjoint_of_not_indom_both : forall h1 h2,
   (forall x, indom h1 x -> indom h2 x -> False) ->
   disjoint h1 h2.
@@ -498,7 +498,7 @@ Proof using.
   rewrite indom_update_eq in Hy1. destruct Hy1.
   { subst. false*. }
   { applys* HD y. }
-Qed. 
+Qed.
 Lemma disjoint_remove_l : forall h1 h2 x,
   disjoint h1 h2 ->
   disjoint (remove h1 x) h2.
@@ -746,6 +746,12 @@ Lemma update_eq_union_single : forall h x v,
   update h x v = union (single x v) h.
 Proof using. auto. Qed.
 
+Lemma update_empty : forall x v,
+  update empty x v = single x v.
+Proof using.
+  intros. rewrite update_eq_union_single. rewrite* union_empty_r.
+Qed.
+
 Lemma update_single : forall x v w,
   update (single x v) x w = single x w.
 Proof using.
@@ -798,6 +804,14 @@ Qed.
 
 (* ================================================================= *)
 (** ** Removal *)
+
+Lemma remove_single : forall x v,
+  remove (single x v) x = empty.
+Proof using.
+  intros. applys fmap_extens. intros y.
+  unfold remove, map_remove, single, empty. simpl.
+  case_if*. case_if*.
+Qed.
 
 Lemma remove_disjoint_union_l : forall h1 h2 x,
   indom h1 x ->
@@ -1185,4 +1199,4 @@ Qed.
 
 End FmapFresh.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

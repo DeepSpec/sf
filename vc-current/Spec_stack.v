@@ -1,15 +1,15 @@
 (** * Spec_stack: VSU specification of the Stack module *)
 
 (** Recall the Stack module described in [Verif_stack].  Recall that
-   [stack.c] really contained two modules, "stack" and "triang".  We 
+   [stack.c] really contained two modules, "stack" and "triang".  We
    will break this program into four pieces, as follows:
 
- - [stdlib.c]  (and [stdlib.h]) characterizing the external library functions, malloc, free, exit. 
+ - [stdlib.c]  (and [stdlib.h]) characterizing the external library functions, malloc, free, exit.
  - [stack2.c]  (and [stack2.h]) with newstack, push, pop.
  - [triang2.c] (and [triang2.h]) with push_increasing, pop_and_add, and triang.
  - [main2.c] with a main function that calls triang.
 
-For the [stack] module we have the header file [stack2.h]: 
+For the [stack] module we have the header file [stack2.h]:
 
     /* stack2.h */
     #include <stddef.h>
@@ -39,7 +39,7 @@ Require Import VC.Spec_stdlib.
   fields, and is meant to use the API functions [newstack], [push], and [pop] to
   create and manipulate values of type <struct stack *>.  C programs can't
   exactly _enforce_ this, because the client could "cheat" by declaring
-  <struct stack {...fields...}> or by casting values of type <struct stack *> to 
+  <struct stack {...fields...}> or by casting values of type <struct stack *> to
   other types.  But in our VST verification, we _can_ enforce this data abstraction.
   We do so by making an _Abstract Predicate Declaration_  (APD) . *)
 
@@ -58,8 +58,8 @@ Record StackAPD := {
   the [local_facts] and the [valid_pointer] lemmas for this relation, just
   as we did in [Verif_stack]; but here we just present them as axioms,
   not as theorems.  All of this is bundled into a Record, the _abstract
-  predicate declaration_ (APD).  The client need never know how the 
-  data structure is really represented, that is, the details of the stackrep 
+  predicate declaration_ (APD).  The client need never know how the
+  data structure is really represented, that is, the details of the stackrep
   predicate. *)
 
 (** If we examine the type of [stackrep], ... *)
@@ -68,7 +68,7 @@ Check stackrep.  (* : StackAPD -> list Z -> val -> mpred
     we find that, given an _instance_    [S:StackAPD], then
    [stackrep S] will be a relation of type [list Z -> val -> mpred].
   At the moment, we don't yet have an instance; after all, this is an
-  abstract data type whose representation will be provided by the 
+  abstract data type whose representation will be provided by the
   implementation of a module, and in this file we are describing only
   the interface, not the implementation. *)
 
@@ -101,8 +101,8 @@ Variable STACK: StackAPD.
 
 (** Now the funspecs look just as they did in [Verif_stack], except that
   we write [mem_mgr M] instead of [mem_mgr], and we write [stackrep STACK]
-  instead of [stack].  By the way, in [Verif_stack] the identifier 
-  mem_mgr referred to [VST.floyd.library.mem_mgr], but here we are 
+  instead of [stack].  By the way, in [Verif_stack] the identifier
+  mem_mgr referred to [VST.floyd.library.mem_mgr], but here we are
   referring to [Spec_stdlib.mem_mgr] which is not the same.
   We'll explain that one in Chapter [Spec_stdlib]. *)
 
@@ -112,35 +112,35 @@ Check mem_mgr.  (* MallocFreeAPD -> globals -> mpred. *)
 Definition newstack_spec : ident * funspec :=
  DECLARE _newstack
  WITH gv: globals
- PRE [ ] 
+ PRE [ ]
     PROP () PARAMS() GLOBALS(gv) SEP (mem_mgr M gv)
- POST [ tptr (Tstruct _stack noattr) ] 
-    EX p: val, PROP ( ) RETURN (p) 
+ POST [ tptr (Tstruct _stack noattr) ]
+    EX p: val, PROP ( ) RETURN (p)
                SEP (stackrep STACK nil p; mem_mgr M gv).
 
 Definition push_spec : ident * funspec :=
  DECLARE _push
  WITH p: val, i: Z, il: list Z, gv: globals
- PRE [ tptr (Tstruct _stack noattr), tint ] 
-    PROP (Int.min_signed <= i <= Int.max_signed) 
-    PARAMS (p; Vint (Int.repr i)) GLOBALS(gv) 
+ PRE [ tptr (Tstruct _stack noattr), tint ]
+    PROP (Int.min_signed <= i <= Int.max_signed)
+    PARAMS (p; Vint (Int.repr i)) GLOBALS(gv)
     SEP (stackrep STACK il p; mem_mgr M gv)
- POST [ tvoid ] 
+ POST [ tvoid ]
     PROP ( ) RETURN ()
     SEP (stackrep STACK (i::il) p; mem_mgr M gv).
 
 Definition pop_spec : ident * funspec :=
  DECLARE _pop
  WITH p: val, i: Z, il: list Z, gv: globals
- PRE [ tptr (Tstruct _stack noattr) ] 
-    PROP () 
-    PARAMS (p) GLOBALS(gv) 
+ PRE [ tptr (Tstruct _stack noattr) ]
+    PROP ()
+    PARAMS (p) GLOBALS(gv)
     SEP (stackrep STACK (i::il) p; mem_mgr M gv)
- POST [ tint ] 
+ POST [ tint ]
     PROP ( ) RETURN (Vint (Int.repr i))
     SEP (stackrep STACK il p; mem_mgr M gv).
 
-(** Now the "Stack Abstract Specification Interface" is just a list of the 
+(** Now the "Stack Abstract Specification Interface" is just a list of the
    exported funspecs *)
 
 Definition StackASI : funspecs := [  newstack_spec; push_spec; pop_spec ].
@@ -153,4 +153,4 @@ Check StackASI.  (*   : MallocFreeAPD -> StackAPD -> funspecs *)
 (* ================================================================= *)
 (** ** Next Chapter: [Spec_triang] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

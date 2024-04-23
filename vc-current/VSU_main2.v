@@ -1,10 +1,10 @@
 (** * VSU_main2: linking with stdlib2 instead of with stdlib *)
 
-(**  In this chapter we link the stack/triang program with 
+(**  In this chapter we link the stack/triang program with
   stdlib2 (our internal implementation of malloc/free/exit) instead
  of with stdlib (which axiomatizes malloc/free/exit as external functions).
 
-  Both programs use the exact same main.c program: 
+  Both programs use the exact same main.c program:
 
 #include <stddef.h>
 #include "stdlib.h"
@@ -23,7 +23,7 @@ since the client program (main.c) should be oblivious of private data
 representations (etc.) of the stdlib module. The only difference is that
 in some places it says [stdlib2] instead of [stdlib].
 
-In addition, we illustrate a new concept, restrictExports, a more general 
+In addition, we illustrate a new concept, restrictExports, a more general
 mechanism than privatizeExports. *)
 
 (* ################################################################# *)
@@ -43,8 +43,8 @@ Require VC.VSU_stdlib2 VC.VSU_stack VC.VSU_triang.
 Definition M : Spec_stdlib.MallocFreeAPD := VSU_stdlib2.M.
 Definition STACK : Spec_stack.StackAPD := VSU_stack.STACK M.
 
-Time Definition stacktriangVSU1 := ltac:(linkVSUs 
-         (VSU_stack.StackVSU M) (VSU_triang.TriangVSU M STACK)). 
+Time Definition stacktriangVSU1 := ltac:(linkVSUs
+         (VSU_stack.StackVSU M) (VSU_triang.TriangVSU M STACK)).
    (* 1.98 seconds to 6  seconds  *)
 
 (* ================================================================= *)
@@ -75,13 +75,13 @@ Check prove_restrictExports. (*
   - if Exports' does not have any repeated identifiers, and
   - if for every (id,fspec') in Exports', there is an (id,fspec) in Exports
        such that funspec_sub (fspec,fspec'),
-  - then there is a new VSU whose exports is Exports'. 
+  - then there is a new VSU whose exports is Exports'.
 
   We will now use this to build [stacktriangVSU].  *)
 
 Eval simpl in VSU_Exports stacktriangVSU1.  (* newstack, push, pop, triang *)
 
-Lemma stacktriangVSU: 
+Lemma stacktriangVSU:
    restrictExports stacktriangVSU1
    (Spec_triang.TriangASI M).
 Proof.
@@ -102,7 +102,7 @@ Eval hnf in VSU_Exports stacktriangVSU.  (* newstack, push, pop, triang *)
 (* ================================================================= *)
 (** ** End of digression about restrictExports *)
 
-Time Definition coreVSU := 
+Time Definition coreVSU :=
    privatizeExports
    ltac:(linkVSUs stacktriangVSU VSU_stdlib2.MallocFreeVSU)
   [stdlib._malloc; stdlib._free; stdlib._exit] .
@@ -142,4 +142,4 @@ Proof. proveWholeProgSafe. Qed.
 
 Eval red in WholeProgSafeType WholeComp tt.
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

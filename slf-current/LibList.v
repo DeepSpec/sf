@@ -33,12 +33,12 @@ Arguments cons {A}.
 
 Declare Scope liblist_scope.
 Open Scope liblist_scope.
-Delimit Scope liblist_scope with list.
+Delimit Scope liblist_scope with mylist.
 Bind Scope liblist_scope with list.
 
 Infix "::" := cons (at level 60, right associativity) : liblist_scope.
 
-(* Notations are not loaded by default *)
+(* Bracket notations are not loaded by default *)
 Module LibListNotation.
 Notation "[ ]" := nil (format "[ ]") : liblist_scope.
 Notation "[ x ]" := (cons x nil) : liblist_scope.
@@ -511,7 +511,7 @@ Proof using.
     inverts He. forwards* (->&->): IHl1 H1. }
 Qed.
 
-(* TODO: state and prove consequences of
+(* --TODO: state and prove consequences of
     He : l2 = t1 ++ t2
     Hl : length l2 = length t2
 *)
@@ -534,7 +534,7 @@ Proof using.
   destruct E. split; apply* rev_inj. *)
 Qed.
 
-(* TODO: prove app_cancel_l using app_cancel_same_length_l *)
+(* --TODO: prove app_cancel_l using app_cancel_same_length_l *)
 Lemma app_cancel_l : forall l1 l2 l3,
   l1 ++ l2 = l1 ++ l3 ->
   l2 = l3.
@@ -542,7 +542,7 @@ Proof using.
   introv E. induction l1; rew_list in *. auto. inverts* E.
 Qed.
 
-(* TODO: prove app_cancel_r using app_cancel_same_length_r *)
+(* --TODO: prove app_cancel_r using app_cancel_same_length_r *)
 Lemma app_cancel_r : forall l1 l2 l3,
   l1 ++ l3 = l2 ++ l3 ->
   l1 = l2.
@@ -1597,7 +1597,7 @@ Hint Rewrite length_update update_nil update_zero update_succ : rew_listx.
 
 (* ---------------------------------------------------------------------- *)
 (* ================================================================= *)
-(** **   *)
+(** ** Map *)
 
 Definition map A B (f:A->B) (l:list A) : list B :=
   fold_right (fun x acc => (f x)::acc) (@nil B) l.
@@ -1873,7 +1873,7 @@ Hint Rewrite concat_nil concat_cons concat_app concat_last : rew_listx.
 (** [filter P l] produces a list [l'] that is the sublist of [l]
     made exactly of the elements of [l] that satisfy [P]. *)
 
-Definition filter A (P:A->Prop) l :=
+Definition filter A (P:A->Prop) (l:list A) : list A :=
   fold_right (fun x acc => If P x then x::acc else acc) (@nil A) l.
 
 Section Filter.
@@ -2008,7 +2008,7 @@ Hint Rewrite filter_nil filter_cons filter_app filter_last filter_rev
 (* ================================================================= *)
 (** ** Remove *)
 
-Definition remove A (a:A) (l:list A) :=
+Definition remove A (a:A) (l:list A) : list A :=
   filter (<> a) l.
 
 Section Remove.
@@ -2089,6 +2089,14 @@ Section Noduplicates.
 Variables (A : Type).
 Implicit Types l : list A.
 Hint Constructors noduplicates.
+
+Lemma noduplicates_nil_eq :
+  noduplicates (@nil A) = True.
+Proof using. extens. iff M; inverts* M. Qed.
+
+Lemma noduplicates_cons_eq : forall x l,
+  noduplicates (x::l) = (~ (LibList.mem x l) /\ noduplicates l).
+Proof using. extens. iff M; inverts* M. Qed.
 
 Lemma noduplicates_one : forall (x:A),
   noduplicates (x::nil).
@@ -2224,6 +2232,8 @@ Qed.
 
 End Noduplicates.
 
+#[global] Hint Rewrite noduplicates_nil_eq noduplicates_cons_eq : rew_listx.
+
 (* ---------------------------------------------------------------------- *)
 (* ================================================================= *)
 (* ** remove_duplicates *)
@@ -2231,7 +2241,7 @@ End Noduplicates.
 (** [remove_duplicates l] produces a list [l'] that is the sublist of [l]
     obtained by keeping only the first occurence of every item. *)
 
-Fixpoint remove_duplicates A (l:list A) :=
+Fixpoint remove_duplicates A (l:list A) : list A :=
   match l with
   | nil => nil
   | x::l' => x :: (remove x (remove_duplicates l'))
@@ -3415,7 +3425,7 @@ Lemma mem_Exists : forall P l x,
   Exists P l.
 Proof using. introv M H. rewrite* Exists_eq_exists_mem. Qed.
 
-Lemma mem_Exists_eq : forall P l x, (* TODO: rename *)
+Lemma mem_Exists_eq : forall P l x, (* --TODO: rename *)
   mem x l = Exists (= x) l.
 Proof using.
   intros. extens. rewrite* Exists_eq_exists_mem. iff M (y&?&?); subst*.
@@ -3599,7 +3609,7 @@ Proof using. intros. apply length_filter. Qed.
 
 (* Interactions with [Forall] *)
 
-(* TODO: should use a tactic for bruteforcing iff/false/math/eauto *)
+(* --TODO: should use a tactic for bruteforcing iff/false/math/eauto *)
 
 Lemma Forall_eq_count_eq_length : forall P l,
   Forall P l = (count P l = length l).
@@ -3971,4 +3981,4 @@ Tactic Notation "list2_ind_last" constr(E) :=
   match type of E with length ?l1 = length ?l2 =>
     list2_ind_last l1 l2; [ apply E | | ] end.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

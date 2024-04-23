@@ -875,7 +875,7 @@ Lemma card_disjoint_union_single : forall A (E:set A) x,
   (card (E \u \{x}) = card E + 1)%nat.
 Proof using.
   intros.
-  replace 1%nat with (card \{x}) by eauto using card_single.
+  replace 1%nat with (card \{x}) by eauto using @card_single, @card_single_inst.
   applys~ card_disjoint_union. applys finite_single.
   rewrite disjoint_single_r_eq. auto.
 Qed.
@@ -992,7 +992,8 @@ Proof using. (* --todo: cleanup proof *)
   (* Note that [f x] is the result of folding [f] over the singleton [\{x}]. *)
   erewrite <- (fold_single f x) by typeclass.
   (* Conclude. *)
-  eapply fold_union; eauto using remove_disjoint with finite.
+  epose (remove_disjoint).
+  eapply fold_union; eauto with finite.
 Qed.
 
 (* ---------------------------------------------------------------------- *)
@@ -1142,4 +1143,4 @@ Tactic Notation "rew_foreach" "*" "in" "*" :=
 *)
 
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

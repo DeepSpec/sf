@@ -946,6 +946,13 @@ Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
+(** (You'll need to add remove the period at the end of this
+    definition and add
+
+    where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
+
+    when you fill it in.) *)
+
 Inductive value : tm -> Prop :=
   (* FILL IN HERE *)
 .
@@ -1029,4 +1036,4 @@ Proof with eauto. (* FILL IN HERE *) Admitted.
 
 End STLCArith.
 
-(* 2023-12-24 12:54 *)
+(* 2024-04-23 03:47 *)

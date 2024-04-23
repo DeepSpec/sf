@@ -17,7 +17,6 @@ Module Type QuickChickSig.
 
 (** [Show] typeclass allows the test case to be printed as a string.
 
-    
     Class Show (A : Type) : Type :=
       {
         show : A -> string
@@ -63,7 +62,7 @@ Parameter run  : forall {A : Type}, G A -> nat -> RandomSeed -> A.
 (** The semantics of a generator is its set of possible outcomes. *)
 Parameter semGen : forall {A : Type} (g : G A), set A.
 Parameter semGenSize : forall {A : Type} (g : G A) (size : nat), set A.
-  
+
 
 (* ================================================================= *)
 (** ** Structural Combinators *)
@@ -118,7 +117,7 @@ Parameter backtrack :
   forall {A : Type}, list (nat * G (option A)) -> G (option A).
 
 (** Internally, the G monad hides a [size] parameter that can be accessed by
-    generators. The [sized] combinator provides such access. The [resize] 
+    generators. The [sized] combinator provides such access. The [resize]
     combinator sets it. *)
 Parameter sized : forall {A: Type}, (nat -> G A) -> G A.
 Parameter resize : forall {A: Type}, nat -> G A -> G A.
@@ -171,7 +170,7 @@ End QcDefaultNotation.
 
 (** The original version of QuickChick used [elements], [oneof] and [frequency]
     as the default-argument versions of the corresponding combinators.
-    These have since been deprecated in favor of a more consistent 
+    These have since been deprecated in favor of a more consistent
     naming scheme.
 *)
 
@@ -216,7 +215,6 @@ Parameter choose :
     randomly. More specifically, [GenSized] depends on a generator for any given
     natural number that indicate the size of output.
 
-    
     Class GenSized (A : Type) := { arbitrarySized : nat -> G A }.
     Class Gen (A : Type) := { arbitrary : G A }.
 *)
@@ -248,9 +246,8 @@ Parameter choose :
     for generators of type [A], it provides constrained variants for
     generators of type [A] such that [P : A -> Prop] holds of all
     generated values.  Since it is not guaranteed that any such [A]
-    exist, these generators are partial. 
+    exist, these generators are partial.
 
-    
      Class GenSizedSuchThat (A : Type) (P : A -> Prop) :=
        {
          arbitrarySizeST : nat -> G (option A)
@@ -262,21 +259,21 @@ Parameter choose :
        }.
 *)
 
-(** So, for example, if you have a typing relation 
-    [has_type : exp -> type -> Prop] for some language, you could, 
-    given some type [T] as input, write (or derive as we will see later on) 
-    an instance of [GenSizedSuchThat (fun e => has_type e T)], that produces 
-    an expression of with type [T]. 
-    
-    Calling [arbitraryST] through such an instance would require 
+(** So, for example, if you have a typing relation
+    [has_type : exp -> type -> Prop] for some language, you could,
+    given some type [T] as input, write (or derive as we will see later on)
+    an instance of [GenSizedSuchThat (fun e => has_type e T)], that produces
+    an expression of with type [T].
+
+    Calling [arbitraryST] through such an instance would require
     making an explicit application to [@arbitraryST] as follows:
 
     @arbitraryST _ (fun e => has_type e T) _
-]] 
-    where the first placeholder is the type of expressions [exp] 
+]]
+    where the first placeholder is the type of expressions [exp]
     and the second placeholder is the actual instance to be inferred.
 
-    To avoid this, QuickChick also provides convenient notation to call 
+    To avoid this, QuickChick also provides convenient notation to call
     by providing only the predicate [P] that constraints the generation.
     The typeclass constraint is inferred. *)
 
@@ -294,7 +291,6 @@ Notation "'genST' x" := (@arbitraryST _ x _) (at level 70).
     shrinking larger elements to smaller ones, allowing QuickChick to
     search for a minimal counter example when errors occur.
 
-    
     Class Shrink (A : Type) :=
       {
         shrink : A -> list A
@@ -315,14 +311,13 @@ Notation "'genST' x" := (@arbitraryST _ x _) (at level 70).
 
 (** The [Arbitrary] typeclass combines generation and shrinking.
 
-    
     Class Arbitrary (A : Type) `{Gen A} `{Shrink A}.
 *)
 
 (* ================================================================= *)
 (** ** The Generator Typeclass Hierarchy *)
 
-(** 
+(**
                             GenSized
                                |
                                |
@@ -348,7 +343,6 @@ Parameter Checker : Type.
 
 (** The [Checkable] class indicates we can check a type A.
 
-    
     Class Checkable (A : Type) : Type :=
       {
         checker : A -> Checker
@@ -370,7 +364,7 @@ Parameter forAll :
 
 (** A variant of [forAll] that provides evidence that the generated
     values are members of the semantics of the generator. (Such evidence
-    can be useful when constructing dependently typed data, such as 
+    can be useful when constructing dependently typed data, such as
     bounded integers.) *)
 Parameter forAllProof :
   forall {A prop : Type} `{Checkable prop} `{Show A}
@@ -409,7 +403,7 @@ Parameter forAllShrink :
 Parameter whenFail :
   forall {prop : Type} `{Checkable prop} (str : string), prop -> Checker.
 
-(** Record an expectation that a property should fail, i.e. 
+(** Record an expectation that a property should fail, i.e.
     the property will fail if all the tests succeed. *)
 Parameter expectFailure :
   forall {prop: Type} `{Checkable prop} (p: prop), Checker.
@@ -454,7 +448,6 @@ End QcNotation.
 
     Decidability typeclass using ssreflect's 'decidable'.
 
-    
      Class Dec (P : Prop) : Type := { dec : decidable P }.
 *)
 
@@ -475,7 +468,7 @@ Notation "P '?'" := (match (@dec P _) with
 (* ================================================================= *)
 (** ** The [Dec_Eq] Typeclass *)
 
-(** 
+(**
      Class Dec_Eq (A : Type) :=
        {
          dec_eq : forall (x y : A), decidable (x = y)
@@ -487,10 +480,10 @@ Notation "P '?'" := (match (@dec P _) with
 
 (** Since deciding equalities is a very common requirement in testing,
     QuickChick provides a tactic that can define instances of the form
-    [Dec (x = y)]. 
+    [Dec (x = y)].
 *)
-(** 
-     Ltac dec_eq. 
+(**
+     Ltac dec_eq.
 *)
 
 (** QuickChick also lifts common decidable instances to the [Dec] typeclass. *)
@@ -560,14 +553,12 @@ Notation "P '?'" := (match (@dec P _) with
 (** The [Sample] command samples a generator. The argument [g] needs
     to have type [G A] for some showable type [A].
 
-    
     Sample g.
 *)
 
 (** The main testing command, [QuickChick], runs a test. The argument
     [prop] must belong to a type that is an instance of [Checkable].
 
-    
      QuickChick prop.
 *)
 
@@ -597,7 +588,6 @@ Record Args :=
 
 (** Instead of record updates, you should overwrite extraction constants.
 
-    
    Extract Constant defNumTests    => "10000".
    Extract Constant defNumDiscards => "(2 * defNumTests)".
    Extract Constant defNumShrinks  => "1000".
@@ -611,7 +601,7 @@ Record Args :=
       - Batch processing, compilation and execution of tests
       - Mutation testing
       - Sectioning of tests and mutants
-    
+
     Comments that begin with an exclamation mark are special to the
     QuickChick command-line tool parser and signify a test, a section,
     or a mutant. *)
@@ -619,8 +609,8 @@ Record Args :=
 (* ================================================================= *)
 (** ** Test Annotations *)
 
-(** A test annotation is just a [QuickChick] command wrapped inside 
-    a comment with an exclamation mark. 
+(** A test annotation is just a [QuickChick] command wrapped inside
+    a comment with an exclamation mark.
 
     (*! QuickChick prop. *)
 
@@ -630,14 +620,14 @@ Record Args :=
 (* ================================================================= *)
 (** ** Mutant Annotations *)
 
-(** A mutant annotation consists of 4 components. First an anottation 
+(** A mutant annotation consists of 4 components. First an anottation
     that signifies the beginning of the mutant [(*! *)]. That is followed
-    by the actual code. Then, we can include an optional annotation 
-    (in a comment with double exclamation marks) that corresponds to 
+    by the actual code. Then, we can include an optional annotation
+    (in a comment with double exclamation marks) that corresponds to
     the mutant names. Finally, we can add a list of mutations inside
-    normal annotated comments. Each mutant should be able to be 
-    syntactically substituted in for the normal code. 
-   
+    normal annotated comments. Each mutant should be able to be
+    syntactically substituted in for the normal code.
+
 
     (*! *)
     Normal code
@@ -650,9 +640,9 @@ Record Args :=
 (* ================================================================= *)
 (** ** Section Annotations *)
 
-(** To organize larger developments better, we can group together 
-    different tests and mutants in sections. A section annotation is 
-    a single annotation that defines the beginning of the section 
+(** To organize larger developments better, we can group together
+    different tests and mutants in sections. A section annotation is
+    a single annotation that defines the beginning of the section
     (which lasts until the next section or the end of the file).
 
       (*! Section section-name *)
@@ -661,7 +651,7 @@ Record Args :=
 
       (*! Section section-name *)(*! extends other-section-name *)
 
-   This signifies that the section being defined also 
+   This signifies that the section being defined also
    contains all tests and mutants from [other-section-name].
 *)
 
@@ -689,4 +679,4 @@ Record Args :=
 
 End QuickChickSig.
 
-(* 2023-12-24 13:03 *)
+(* 2024-04-23 03:55 *)

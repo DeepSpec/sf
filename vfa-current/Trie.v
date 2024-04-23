@@ -328,7 +328,7 @@ Inductive Z : Set :=
 End Integers.  (* Hide away our experiments with [positive] *)
 
 (** These types, [positive] and [Z], are part of the Coq standard library.
-   We can access them here, because we imported [PArith] and [ZArith] 
+   We can access them here, because we imported [PArith] and [ZArith]
    at the top of the file. *)
 
 Print positive.  (* from the Coq standard library:
@@ -705,4 +705,4 @@ try (apply empty_relate).
   but [FMaps] uses different names for the functions [insert] and [lookup],
   and also provides several other operations on maps.  *)
 
-(* 2023-12-24 12:57 *)
+(* 2024-04-23 03:52 *)

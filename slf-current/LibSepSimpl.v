@@ -1,4 +1,4 @@
-(** * LibSepSimpl: Appendix - Simplification of Entailments *)
+(** * LibSepSimpl: Appendix - Simplification Tactic for Entailments *)
 
 Set Implicit Arguments.
 From SLF Require Export LibCore.
@@ -161,11 +161,6 @@ Parameter himpl_frame_lr : forall H1 H1' H2 H2',
   H2 ==> H2' ->
   (H1 \* H2) ==> (H1' \* H2').
 
-Parameter himpl_hstar_trans_l : forall H1 H2 H3 H4,
-  H1 ==> H2 ->
-  H2 \* H3 ==> H4 ->
-  H1 \* H3 ==> H4.
-
 (** Characterization of [hpure] *)
 
 Parameter himpl_hempty_hpure : forall P,
@@ -271,6 +266,14 @@ Lemma himpl_of_eq_sym : forall H1 H2,
   H1 = H2 ->
   H2 ==> H1.
 Proof. intros. subst. applys~ himpl_refl. Qed.
+
+Lemma himpl_hstar_trans_l : forall H1 H2 H3 H4,
+  H1 ==> H2 ->
+  H2 \* H3 ==> H4 ->
+  H1 \* H3 ==> H4.
+Proof using.
+  introv M1 M2. applys himpl_trans M2. applys* himpl_frame_lr M1.
+Qed.
 
 (* ================================================================= *)
 (** ** Properties of [qimpl] *)
@@ -1329,7 +1332,9 @@ Ltac xsimpl_hwand_hstars_l tt :=
       ])
   end.
 
-Ltac xsimpl_step_l tt :=
+Ltac xsimpl_step_l cancel_wands :=
+  (* next line is for backward compatibility for calls to [xsimpl_step_l tt]. *)
+  let cancel_wands := match cancel_wands with tt => constr:(true) | ?x => x end in
   match goal with |- Xsimpl ?HL ?HR =>
   match HL with
   | (?Hla, ?Hlw, (?H \* ?Hlt)) =>
@@ -1346,12 +1351,17 @@ Ltac xsimpl_step_l tt :=
       match H1 with
       | \[] => apply xsimpl_l_cancel_hwand_hempty
       | (_ \* _) => xsimpl_hwand_hstars_l tt
-      | _ => first [ xsimpl_pick_same H1; apply xsimpl_l_cancel_hwand
-                   | apply xsimpl_l_keep_wand ]
+      | _ =>
+        match cancel_wands with
+        | true => xsimpl_pick_same H1; apply xsimpl_l_cancel_hwand (* else continue *)
+        | _ => apply xsimpl_l_keep_wand
+        end
       end
   | (?Hla, ((?Q1 \--* ?Q2) \* ?Hlw), \[]) =>
-      first [ xsimpl_pick_applied Q1; eapply xsimpl_l_cancel_qwand
-            | apply xsimpl_l_keep_wand ]
+        match cancel_wands with
+        | true => xsimpl_pick_applied Q1; eapply xsimpl_l_cancel_qwand (* else continue *)
+        | _ => apply xsimpl_l_keep_wand
+        end
   end end.
 
 Ltac xsimpl_hgc_or_htop_cancel cancel_item cancel_lemma :=
@@ -1435,10 +1445,8 @@ Ltac xsimpl_step_lr tt :=
     | ?Hrg' => xsimpl_flip_acc_lr tt; apply xsimpl_lr_exit
   end end.
 
-  
-
-Ltac xsimpl_step tt :=
-  first [ xsimpl_step_l tt
+Ltac xsimpl_step cancel_wands :=
+  first [ xsimpl_step_l cancel_wands
         | xsimpl_step_r tt
         | xsimpl_step_lr tt ].
 
@@ -1454,10 +1462,16 @@ Tactic Notation "xpull" := xpull_core tt.
 Tactic Notation "xpull" "~" := xpull; auto_tilde.
 Tactic Notation "xpull" "*" := xpull; auto_star.
 
-Ltac xsimpl_core tt :=
+Ltac xsimpl_core_mode cancel_wands :=
   xsimpl_start tt;
-  repeat (xsimpl_step tt);
+  repeat (xsimpl_step cancel_wands);
   xsimpl_post tt.
+
+Ltac xsimpl_core tt := (* cancel wands *)
+  xsimpl_core_mode constr:(true).
+
+Ltac xsimpl_no_cancel_wand tt := (* don't cancel wands *)
+  xsimpl_core_mode constr:(false).
 
 Tactic Notation "xsimpl" := xsimpl_core tt.
 Tactic Notation "xsimpl" "~" := xsimpl; auto_tilde.
@@ -1472,6 +1486,12 @@ Tactic Notation "xsimpl" constr(X1) constr(X2) :=
   xsimpl (>> X1 X2).
 Tactic Notation "xsimpl" constr(X1) constr(X2) constr(X3) :=
   xsimpl (>> X1 X2 X3).
+  Tactic Notation "xsimpl" constr(X1) constr(X2) constr(X3) constr(X4):=
+  xsimpl (>> X1 X2 X3 X4).
+Tactic Notation "xsimpl" constr(X1) constr(X2) constr(X3) constr(X4) constr(X5) :=
+  xsimpl (>> X1 X2 X3 X4 X5).
+Tactic Notation "xsimpl" constr(X1) constr(X2) constr(X3) constr(X4) constr(X5) constr(X6) :=
+  xsimpl (>> X1 X2 X3 X4 X5 X6).
 
 Tactic Notation "xsimpl" "~" constr(L) :=
   xsimpl L; auto_tilde.
@@ -1479,6 +1499,12 @@ Tactic Notation "xsimpl" "~" constr(X1) constr(X2) :=
   xsimpl X1 X2; auto_tilde.
 Tactic Notation "xsimpl" "~" constr(X1) constr(X2) constr(X3) :=
   xsimpl X1 X2 X3; auto_tilde.
+Tactic Notation "xsimpl" "~" constr(X1) constr(X2) constr(X3) constr(X4):=
+  xsimpl X1 X2 X3 X4; auto_tilde.
+Tactic Notation "xsimpl" "~" constr(X1) constr(X2) constr(X3) constr(X4) constr(X5) :=
+  xsimpl X1 X2 X3 X4 X5; auto_tilde.
+Tactic Notation "xsimpl" "~" constr(X1) constr(X2) constr(X3) constr(X4) constr(X5) constr(X6) :=
+  xsimpl X1 X2 X3 X4 X5 X6; auto_tilde.
 
 Tactic Notation "xsimpl" "*" constr(L) :=
   xsimpl L; auto_star.
@@ -1486,6 +1512,12 @@ Tactic Notation "xsimpl" "*" constr(X1) constr(X2) :=
   xsimpl X1 X2; auto_star.
 Tactic Notation "xsimpl" "*" constr(X1) constr(X2) constr(X3) :=
   xsimpl X1 X2 X3; auto_star.
+Tactic Notation "xsimpl" "*" constr(X1) constr(X2) constr(X3) constr(X4):=
+  xsimpl X1 X2 X3 X4; auto_star.
+Tactic Notation "xsimpl" "*" constr(X1) constr(X2) constr(X3) constr(X4) constr(X5) :=
+  xsimpl X1 X2 X3 X4 X5; auto_star.
+Tactic Notation "xsimpl" "*" constr(X1) constr(X2) constr(X3) constr(X4) constr(X5) constr(X6) :=
+  xsimpl X1 X2 X3 X4 X5 X6; auto_star.
 
 (* ----------------------------------------------------------------- *)
 (** *** Tactic [xchange] *)
@@ -1994,4 +2026,4 @@ Qed.
 
 End XsimplSetup.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

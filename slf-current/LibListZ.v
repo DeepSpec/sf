@@ -956,7 +956,7 @@ Qed.
 Lemma take_pos_last : forall (IA:Inhab A) l i,
   index l (i-1) ->
   take i l = take (i-1) l & l[i-1].
-Proof using. 
+Proof using.
   introv Hi. gen i. induction l; intros; rew_index in Hi; rew_list in Hi.
   { math. }
   { rewrite take_cons_pos; try math.
@@ -1510,4 +1510,4 @@ Qed.
 
 *)
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

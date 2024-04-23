@@ -255,7 +255,7 @@
 (** ** System Requirements *)
 
 (** Coq runs on Windows, Linux, and macOS.  The files in this book
-    have been tested with Coq 8.17.
+    have been tested with Coq 8.17.1.
 
     You will need:
 
@@ -375,7 +375,7 @@
     readers.  Advanced exercises are for readers who want an extra
     challenge and a deeper cut at the material.
 
-    _Please do not post solutions to the exercises in a public place_. 
+    _Please do not post solutions to the exercises in a public place_.
     Software Foundations is widely used both for self-study and for
     university courses.  Having solutions easily available makes it
     much less useful for courses, which typically have graded homework
@@ -420,9 +420,9 @@
     title        =   "Logical Foundations",
     series       =   "Software Foundations",
     volume       =   "1",
-    year         =   "2023",
+    year         =   "2024",
     publisher    =   "Electronic textbook",
-    note         =   {Version 6.5, \URL{http://softwarefoundations.cis.upenn.edu}}
+    note         =   {Version 6.6, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
 *)
 
@@ -506,4 +506,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2023-12-24 12:53 *)
+(* 2024-04-23 03:45 *)

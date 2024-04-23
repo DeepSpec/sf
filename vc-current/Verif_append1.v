@@ -43,10 +43,10 @@ Definition t_list := Tstruct _list noattr.
 
 Fixpoint listrep (sigma: list val) (p: val) : mpred :=
  match sigma with
- | h::hs => 
-    EX y:val, 
+ | h::hs =>
+    EX y:val,
       data_at Tsh t_list (h,y) p  *  listrep hs y
- | nil => 
+ | nil =>
     !! (p = nullval) && emp
  end.
 
@@ -78,15 +78,15 @@ especially the loop in it, we may want a loop invariant which
 can be illustrated by the following diagram.
 (The following diagram is best demonstrated with a monospaced font. )
 
-        +---+---+            +---+---+   +---+---+   +---+---+   
-  x ==> |   |  ===> ... ===> |   | t ==> | b | u ==> |   |  ===> ... 
+        +---+---+            +---+---+   +---+---+   +---+---+
+  x ==> |   |  ===> ... ===> |   | t ==> | b | u ==> |   |  ===> ...
         +---+---+            +---+---+   +---+---+   +---+---+
 
       | <========= s1a =========> |       (b)       | <==== s1c ====> |
       | <============================= s1 ==========================> |
 
-        +---+---+   +---+---+   +---+---+   
-  y ==> |   |  ===> |   |   ==> |   |  ===> ... 
+        +---+---+   +---+---+   +---+---+
+  y ==> |   |  ===> |   |   ==> |   |  ===> ...
         +---+---+   +---+---+   +---+---+
 
       | <================ s2 =================> |
@@ -120,8 +120,8 @@ Proof.
  satisfy [lseg [a; b] x y].
 (The following diagram is best demonstrated with a monospaced font. )
 
-        +---+---+   +---+---+   
-  x ==> | a | y ==> | b | y ====+ 
+        +---+---+   +---+---+
+  x ==> | a | y ==> | b | y ====+
         +---+---+   +- -+---+   |
                       ^         |
                       |         |
@@ -130,7 +130,7 @@ Proof.
 We can prove this formally. *)
 
 Lemma lseg_maybe_loop: forall (a b x y: val),
-  data_at Tsh t_list (a, y) x * data_at Tsh t_list (b, y) y 
+  data_at Tsh t_list (a, y) x * data_at Tsh t_list (b, y) y
   |-- lseg [a; b] x y.
 Proof.
   intros.
@@ -149,15 +149,15 @@ will lead to a contradication. Here, the first two separating conjuncts build
 a loopy [lseg] and the third separating conjunct is a nonempty [listrep]. *)
 
 Lemma loopy_lseg_not_bad: forall (a b c x y: val),
-  data_at Tsh t_list (a, y) x * data_at Tsh t_list (b, y) y * listrep [c] y 
+  data_at Tsh t_list (a, y) x * data_at Tsh t_list (b, y) y * listrep [c] y
     |-- FF.
 Proof.
   intros.
   unfold listrep.
   Intros u.
   subst.
-Check (data_at_conflict Tsh t_list (c, nullval)). 
-  sep_apply (data_at_conflict Tsh t_list (c, nullval)). 
+Check (data_at_conflict Tsh t_list (c, nullval)).
+  sep_apply (data_at_conflict Tsh t_list (c, nullval)).
   + auto.
   + entailer!.
 Qed.
@@ -182,8 +182,8 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** Is it possible to define [lseg] in a different way so that loopy 
-   situations can be banned?  Yes.  We discuss this near the end of 
+(** Is it possible to define [lseg] in a different way so that loopy
+   situations can be banned?  Yes.  We discuss this near the end of
    the chapter. *)
 
 (* ================================================================= *)
@@ -294,21 +294,21 @@ forward_if. (* if (x == NULL) *)
                                  new t       new u
                                    |           |
                                    |           |
-                 +---+---+   +---+---+   +---+---+   +---+---+   
-  x ==> ... ===> |   | t ==> | b | u ==> | c | z ==> |   |  ===> ... 
+                 +---+---+   +---+---+   +---+---+   +---+---+
+  x ==> ... ===> |   | t ==> | b | u ==> | c | z ==> |   |  ===> ...
                  +---+---+   +---+---+   +---+---+   +---+---+
 
       | <===== s1a =====> |   (b)         (c)      | <==== s1d ====> |
       | <========== new s1a ========> |  (new b)   | <== new s1c ==> |
 
-        +---+---+   +---+---+   +---+---+   
-  y ==> |   |  ===> |   |   ==> |   |  ===> ... 
+        +---+---+   +---+---+   +---+---+
+  y ==> |   |  ===> |   |   ==> |   |  ===> ...
         +---+---+   +---+---+   +---+---+
       | <================ s2 =================> |
 
  Clearly, [s1a ++ b :: nil] should be the new value of [s1a];  [c] should be
  the new value of [b]; [s1d] should be the new value of [s1c]; [u] should be
- the new value of [t]; and [z] should be the new value of [u]. The next 
+ the new value of [t]; and [z] should be the new value of [u]. The next
  command instantiates the existentially quantified variables in our loop
  invariant accordingly. *)
 
@@ -316,14 +316,14 @@ forward_if. (* if (x == NULL) *)
 
   (** As usual, we try [entailer!] to solve this proof goal. This time,
  [entailer!] does not solve it directly. Instead, two simplified proof goals
- are left. Their proofs are left for the reader, using [app_assoc], 
+ are left. Their proofs are left for the reader, using [app_assoc],
  [singleton_lseg] and [lseg_lseg]. *)
     entailer!.
     * (* FILL IN HERE *) admit.
     * (* FILL IN HERE *) admit.
  + (* after the loop *)
    (** After exiting the loop, the loop condition must be false, i.e.
-    [u] is the null pointer. Thus [s1c = nil] and [s1 = s1a ++ [b]]. *)    
+    [u] is the null pointer. Thus [s1c = nil] and [s1 = s1a ++ [b]]. *)
   clear h r u H0; rename u0 into u.
   rewrite (listrep_null s1c) by auto.
   Intros.
@@ -396,7 +396,7 @@ Proof.
 Fixpoint nt_lseg (contents: list val) (x z: val) : mpred :=
   match contents with
   | nil => !! (x = z) && emp
-  | h::hs => EX y:val, !! (x <> z) 
+  | h::hs => EX y:val, !! (x <> z)
                    && data_at Tsh t_list (h, y) x * nt_lseg hs y z
   end.
 
@@ -405,23 +405,23 @@ Arguments nt_lseg contents x z : simpl never.
 (** Here, "nt" means no-touch. *)
 
 (** The difference between [nt_lseg] and [lseg] is the extra proposition
-  [x <> z] in the nonempty situation. This extra clause in [nt_lseg] 
+  [x <> z] in the nonempty situation. This extra clause in [nt_lseg]
   prevents loop structures.
 
   The proof theories of [nt_lseg] and [lseg] are a bit different as
   well. The following diagram shows that the counterpart of [lseg_lseg]
-  is not valid! 
+  is not valid!
 
-        +---+---+   +---+---+   +---+---+   +---+---+   
+        +---+---+   +---+---+   +---+---+   +---+---+
   x ==> | a | u ==> | b | y ==> | c | v ==> | d | u ===+
         +---+---+   +- -+---+   +---+---+   +---+---+  |
                       ^                                |
                       |                                |
                       +================================+
 
-  In this example, both [ [a; b] ] and [ [c; d] ] are stored in loop-free 
-  partial linked lists but it is not true for their concatenation. In 
-  general, if [(nt_lseg s1 x y)] and [(nt_lseg s2 y z)] describe two 
+  In this example, both [ [a; b] ] and [ [c; d] ] are stored in loop-free
+  partial linked lists but it is not true for their concatenation. In
+  general, if [(nt_lseg s1 x y)] and [(nt_lseg s2 y z)] describe two
   loop-free partial linked lists, the assertion
 
     (nt_lseg s1 x y * nt_lseg s2 y z)
@@ -429,12 +429,12 @@ Arguments nt_lseg contents x z : simpl never.
   cannot ensure that the structure is loop free. Specifically, the address
   [z] may be used in [(nt_lseg s1 x y)]. In other words,
 
-   nt_lseg s1 x y * nt_lseg s2 y z |-/- nt_lseg (s1 ++ s2) x z 
+   nt_lseg s1 x y * nt_lseg s2 y z |-/- nt_lseg (s1 ++ s2) x z
 *)
 
 (** For [nt_lseg], the following proof rules are useful. *)
 
-(** **** Exercise: 2 stars, standard, optional (nt_lseg) *) 
+(** **** Exercise: 2 stars, standard, optional (nt_lseg) *)
 Lemma singleton_nt_lseg: forall (contents: list val) (a x y: val),
   data_at Tsh t_list (a, y) x * listrep contents y |--
   nt_lseg [a] x y * listrep contents y.
@@ -442,7 +442,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (singleton_nt_lseg') *) 
+(** **** Exercise: 2 stars, standard, optional (singleton_nt_lseg') *)
 Lemma singleton_nt_lseg': forall (a b x y z: val),
   data_at Tsh t_list (a, y) x * data_at Tsh t_list (b, z) y |--
   nt_lseg [a] x y * data_at Tsh t_list (b, z) y.
@@ -450,7 +450,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (nt_lseg_nt_lseg) *) 
+(** **** Exercise: 2 stars, standard, optional (nt_lseg_nt_lseg) *)
 Lemma nt_lseg_nt_lseg: forall (s1 s2: list val) (a x y z u: val),
   nt_lseg s1 x y * nt_lseg s2 y z * data_at Tsh t_list (a, u) z |--
   nt_lseg (s1 ++ s2) x z * data_at Tsh t_list (a, u) z.
@@ -461,7 +461,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, optional (nt_lseg_list) *) 
+(** **** Exercise: 2 stars, standard, optional (nt_lseg_list) *)
 Lemma nt_lseg_list: forall (s1 s2: list val) (x y: val),
   nt_lseg s1 x y * listrep s2 y |-- listrep (s1 ++ s2) x.
 Proof.
@@ -471,7 +471,7 @@ Proof.
 (** Now, we will use [nt_lseg] instead of [lseg] in the loop invariant to
 prove [body_append]. *)
 
-(** **** Exercise: 3 stars, standard, optional (body_append_alter1) *) 
+(** **** Exercise: 3 stars, standard, optional (body_append_alter1) *)
 Lemma body_append_alter1: semax_body Vprog Gprog f_append append_spec.
 Proof.
 start_function.
@@ -485,10 +485,10 @@ forward_if. (* if (x == NULL) *)
  forward. (* t = x; *)
  forward. (* u = t -> tail; *)
  (** Now use [forward_while] to verify this while loop.  Remember,
-  [forward_while] will generate four proof goals: current precondition 
+  [forward_while] will generate four proof goals: current precondition
   implies loop invariant; loop test is safe to execute; loop body preserves
   invariant; and the correctness of after-loop commands. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

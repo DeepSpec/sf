@@ -69,7 +69,7 @@
 
 (** Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
    describes the Coq installation you will need.  This edition was
-   built with Coq 8.17.
+   built with Coq 8.17.1.
 
    You will need VST 2.11.1 installed.  You can do that either by installing
    it as part of the standard "Coq Platform" that is released with each
@@ -124,8 +124,9 @@
        - Four and five stars: more difficult exercises (half an hour
          and up).
 
-    _Please do not post solutions to the exercises in any public place_: 
+    _Please do not post solutions to the exercises in any public place_:
     Software Foundations is widely used both for self-study and for
+
     university courses.  Having solutions easily available makes it
     much less useful for courses, which typically have graded homework
     assignments.  The authors especially request that readers not post
@@ -144,7 +145,7 @@
     title        =   "Verifiable C",
     series       =   "Software Foundations",
     volume       =   "5",
-    year         =   "2023",
+    year         =   "2024",
     publisher    =   "Electronic textbook",
     note         =   {Version 1.2.2, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
@@ -170,7 +171,7 @@ Require Import Coq.Strings.String.
 Open Scope string.
 (* IMPORTANT: If you change the next line, make sure you make the same
    change in the Makefile! *)
-Definition release_needed := "2.11.1".
+Definition release_needed := "2.12".
 Require Import VST.veric.version.  (* If this line fails, it means
                                       you don't have a VST installed. *)
 Goal release = release_needed.
@@ -208,4 +209,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

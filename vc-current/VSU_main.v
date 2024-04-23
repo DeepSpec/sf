@@ -8,7 +8,7 @@
 
   That won't be very noticeable in this example (stdlib/stack/triang/main), because
   none of the modules has global variables.  But in general, each module has its own
-  "extern" or "static" global variables, initialized or default-zero-initialized.  They 
+  "extern" or "static" global variables, initialized or default-zero-initialized.  They
   constitute the initial footprint (in the separation-logic sense) of the program.
 
    We might expect that each module -- each .c file, or each VSU -- manages (some
@@ -27,7 +27,7 @@
    free-list (with one item removed from it) compared to the [mem_mgr M gv] in
    the precondition.
 
-   When verifying any program in VST, the precondition of main (written as [main_pre]) 
+   When verifying any program in VST, the precondition of main (written as [main_pre])
    contains all of these global variables.  The [start_function] tactic
    for VSUs has the job of abstracting these into into module-specific APDs,
    using the mkInitPred lemma that comes with each VSU, as you will see. *)
@@ -71,7 +71,7 @@ Definition triangVSU := VSU_triang.TriangVSU M STACK.
   - [Externs] :   functions entirely external to the whole C program, such as system calls
                and assembly-language functions that we won't prove in VST.  The
                function-specifications (funspecs) that we give for these functions are
-               _axioms_  (but see "Connecting Higher-Order Separation Logic to a 
+               _axioms_  (but see "Connecting Higher-Order Separation Logic to a
                First-Order Outside World" by Mansky et al. 2020 to see how these axioms
                can be proved as theorems in Coq).
   - [Imports]:  functions external to _this_ module, but which will be proved in other VSUs;
@@ -100,7 +100,7 @@ Definition stacktriangVSU1 := ltac:(linkVSUs stackVSU triangVSU).
 (** When we link VSUs, C=linkVSUs(A,B),  the Imports of C are the union of
    the Imports of A and B, _minus_ the defined functions (and externs) of A and B.
    So, for example, newstack,push,pop are imported by triangVSU,
-  but they are not in the Imports of stacktriangVSU because they are provided 
+  but they are not in the Imports of stacktriangVSU because they are provided
   by stackVSU.
 
   Similarly, the Exports of C are the union of the Exports of A and B. *)
@@ -115,7 +115,7 @@ Eval simpl in VSU_Exports stacktriangVSU1.  (* newstack, push, pop, triang *)
   should not export [newstack,push,pop] to the client; it should export only
   [triang].  The stack functions are there only to support the triang function.
 
-  To make a stack+triang  VSU that exports only triang, we start with 
+  To make a stack+triang  VSU that exports only triang, we start with
   stacktriangVSU1, and privatize the three functions that we want to hide
   from clients.  As follows: *)
 
@@ -142,7 +142,7 @@ Eval hnf in VSU_Exports VSU_stdlib.MallocFreeVSU.  (* malloc, free, exit *)
 (**  We link the stacktriangVSU with the MallocFreeVSU.   We can do the privateExports
     step at the same time, without needing a separate Definition. *)
 
-Time Definition coreVSU := 
+Time Definition coreVSU :=
    privatizeExports
    ltac:(linkVSUs stacktriangVSU VSU_stdlib.MallocFreeVSU)
   [stdlib._malloc; stdlib._free; stdlib._exit] .
@@ -163,7 +163,7 @@ Eval simpl in VSU_Exports coreVSU.  (* triang *)
 Time Definition whole_prog := ltac:(QPlink_progs (QPprog prog) (VSU_prog coreVSU)).
 
 (** The main point about whole_prog is that it contains the intializers for
-   every global variable _including_ main.  
+   every global variable _including_ main.
 
    The funspec for [main] should have precondition [main_pre p z gv], where
   - [p] is the program (e.g., all the .c files linked together),
@@ -241,14 +241,14 @@ fold M.  (* See "Exercise: Delete" below to see why this is needed *)
  to do so by [pose proof Core_VSU]. *)
 
 (** Now, as usual prove correctness of the function body.  Start with a
-  [forward_call(XX)] to the [triang] function.  The parameter XX will 
+  [forward_call(XX)] to the [triang] function.  The parameter XX will
  depend on what you have put in the WITH clause of the [triang_spec]
  in [Spec_triang]. *)
 (* FILL IN HERE *) Admitted.
 
 (** Exercise:  Once you've finished the proof of [body_main], go back and delete the
    [fold M] near the top of [body_main], and proceed to the point immediately
-  after the [forward_call].  You'll probably see an extra proof obligation here, 
+  after the [forward_call].  You'll probably see an extra proof obligation here,
   which is provable by (fold M; cancel).   That suggests why the [fold M] is
   useful at the top of the function. *)
 
@@ -256,7 +256,7 @@ fold M.  (* See "Exercise: Delete" below to see why this is needed *)
 (** * The Main Component, the Whole Component *)
 
 (** There are several different concepts (and types) here:
-  - [Clight.program]   is the Abstract Syntax Tree (AST) of a Clight program 
+  - [Clight.program]   is the Abstract Syntax Tree (AST) of a Clight program
                 as produced by clightgen;
   - [QP.program]  is an alternate version of that AST that's more
                 efficient to link computationally in Coq;
@@ -285,8 +285,8 @@ Qed.
     - coreVSU,   the VSU of the entire program except main.c;
     - whole_prog,   the whole program including main.c+core;
     - snd main_spec,  the funspec of the main function;
-    - emp,   the separation-logic characterization of all the global variables 
-                     of main.c (in this case, there are none).  
+    - emp,   the separation-logic characterization of all the global variables
+                     of main.c (in this case, there are none).
 *)
 
 (** Having made the Main component, we link it with the coreVSU to form the
@@ -302,10 +302,10 @@ Import SeparationLogicSoundness.VericMinimumSeparationLogic.CSHL_Defs.
 Require Import VST.veric.SequentialClight.
 
 (** VST's program logic is proved sound with respect to the operational semantics
-   of Clight.  That means, 
+   of Clight.  That means,
   - if you prove in VST that some program satisfies its specification, written
       as [@semax_prog Espec CompSpecs prog init V G]
-  - then (in the operational semantics of CompCert Clight) it will behave 
+  - then (in the operational semantics of CompCert Clight) it will behave
       according to that specification. *)
 
 About semax_prog.   (*
@@ -323,11 +323,11 @@ Check whole_program_sequential_safety_ext.
    -  [semax_prog prog initial_oracle V G]
    meaning "you proved the program correct",  and the main conclusion is
    -  [step_lemmas.dry_safeN ...]
-   meaning "the program runs safely, interacting correctly as specified 
+   meaning "the program runs safely, interacting correctly as specified
    with its external environment."
 
    What we want from the VSU system is a proof that the C program you get by
-   linking all these VSUs together (with the MainComponent) satisfies [semax_prog]. 
+   linking all these VSUs together (with the MainComponent) satisfies [semax_prog].
    And here is that theorem: *)
 
 Lemma WholeProgSafe: WholeProgSafeType WholeComp tt.
@@ -340,12 +340,12 @@ Eval red in (WholeProgSafeType WholeComp tt).
        | semax_prog (prog_of_component WholeComp) tt (QPvarspecs whole_prog) G} *)
 
 (** or in other words, there exists a complete set [G] of funspecs (for all the
-    functions in the program) such that the Clight program corresponding to 
-    the WholeComponent is proved correct.  Now we could apply 
+    functions in the program) such that the Clight program corresponding to
+    the WholeComponent is proved correct.  Now we could apply
     [whole_program_sequential_safety_ext] to get the corollary that the program
    runs correctly. *)
 
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stdlib2] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

@@ -8,7 +8,7 @@
  - Concurrent messaging system [Mansky 2017] (in Bib.v)
  - Generational copying garbage collector [Wang 2019] (in Bib.v)
  - Bins-based malloc/free system [Appel and Naumann 2020] (in Bib.v)
- - AES encryption, B+Trees, Tries of B+ trees (unpublished 
+ - AES encryption, B+Trees, Tries of B+ trees (unpublished
         master's or undergraduate theses). *)
 
 (* ================================================================= *)
@@ -28,7 +28,7 @@
     The first-draft version of VST's module system -- for verifying
   multimodule C programs with .c and .h files -- is described in
   [Beringer 2019] (in Bib.v).  The newer version, using Verified Software Units,
-  is demonstrated in progs/VSUpile distributed with VST.  
+  is demonstrated in progs/VSUpile distributed with VST.
   The description in [Beringer 2019] (in Bib.v) mostly matches
   the proofs in progs/VSUpile, but the proofs handle data abstraction
   using the methods described in the the VSU chapters of this volume. *)
@@ -37,7 +37,7 @@
 (** ** Input/output
 
      To prove I/O using our Verifiable C logic, we treat the state of the
-  outside world as a resource in the SEP clause, alongside (but separating from) 
+  outside world as a resource in the SEP clause, alongside (but separating from)
   in-memory conjuncts.  Proved examples are in [progs/io.c, progs/io_mem.c],
   and their proof files [progs/verif_io.v, progs/verif_io_mem.v].  Research
   papers describing these concepts include [Koh 2020] (in Bib.v) and
@@ -55,7 +55,7 @@
     There are many _static analyzers_ -- too numerous to list here -- that
   attempt to check _safety_ of your program:  will it crash?  Will it access
   an array out of bounds, or dereference an uninitialized pointer?  Static
-  analyzers can be useful in software engineering, but they have two major 
+  analyzers can be useful in software engineering, but they have two major
   limitations:
   - They don't verify _functional correctness_ -- that is, does your program
     produce the right answer, or interact with the right behavior?
@@ -77,7 +77,7 @@
     same thing: write functional programs, prove them correct, extract, compile.
   - You can write Haskell programs, compile with [ghc], and import into Coq
     for verification using hs-to-coq [Spector-Zabusky 2018] (in Bib.v).
-  - ACL2 is an older system, that uses a first-order logic.  That's less 
+  - ACL2 is an older system, that uses a first-order logic.  That's less
     expressive, you don't get polymorphism or quantification, but there
     have been many successful applications of ACL2 in industry. *)
 
@@ -115,7 +115,7 @@
   Unlike VST, where (as you have seen) the proof script is separate from
   the program, in both Frama-C and VeriFast you prove the program by inserting
   assertions and invariants into the program. the tools complete the
-  verification automatically -- or else, point out which assertions 
+  verification automatically -- or else, point out which assertions
   have failed, so you can adjust your assertions and invariants, and try again.
 
   Each of these three systems has an assertion language, in which you
@@ -124,7 +124,7 @@
     (PROP/LOCAL/SEP) embedded in Coq, so that the PROP, LOCAL, and SEP
     clauses can all make use of the full expressive power of the Calculus
     of Inductive Constructions (CiC).  You have seen a simple example of
-    the expressive power of this approach, where we can use ordinary Coq 
+    the expressive power of this approach, where we can use ordinary Coq
     proofs in [Hashfun], and directly connect them to separation-logic
     proofs in [Verif_hash].
   - Frama-C uses a weaker assertion language, expressed in C syntax.  That's
@@ -136,7 +136,7 @@
     it is separation logic, not just Hoare logic.  That means you can reason
     about data structures.  There's no artificial limitation to a C-like syntax
     in the assertion language.  Unfortunately, VeriFast's assertion language
-    is not connected to a general-purpose logic (and proof assistant); that 
+    is not connected to a general-purpose logic (and proof assistant); that
     means you can do refinement proofs (this C program implements that
     functional model),  but it's not so easy to reason about properties of
     your functional models. *)
@@ -146,7 +146,7 @@
 
 (** Formal reasoning about source programs is a good thing -- but once you've
   proved your source program correct, how do you know that is compiled
-  correctly?  That is, 
+  correctly?  That is,
   - the compiler must not have bugs, and
   - the compiler must agree with your verifier on every detail of the
     semantics of the source language.
@@ -163,6 +163,6 @@
   express a wide variety of programming paradigms, and Verifiable C is
   expressive enough to allow to verify them.  We wish you success in your
   future software verification efforts. *)
-  
-  
-(* 2023-12-24 12:58 *)
+
+
+(* 2024-04-23 03:53 *)

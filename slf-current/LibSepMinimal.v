@@ -1,10 +1,10 @@
 (** * LibSepMinimal: Appendix - Minimalistic Soundness Proof *)
 
 (** This file contains a stand-alone, minimalistic formalization of the
-    soundness of Separation Logic reasoning rules with respect to the big-step
-    semantics of an imperative lambda-calculus. This formalization accompanies
-    the ICFP'20 paper _Separation Logic for Sequential Programs_:
-    http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf . *)
+    soundness of Separation Logic reasoning rules with respect to an
+    omni-big-step semantics. For a development grounded with respect to a
+    small-step semantics, see the two approaches described in chapter
+    [Triples]. *)
 
 (* ################################################################# *)
 (** * Source Language *)
@@ -36,7 +36,8 @@ Inductive prim : Type :=
   | val_set : prim
   | val_free : prim
   | val_add : prim
-  | val_div : prim.
+  | val_div : prim
+  | val_rand : prim.
 
 (** The grammar of closed values (assumed to contain no free variables)
     includes values of ground types, primitive operations, and closures. *)
@@ -76,7 +77,7 @@ Coercion trm_app : trm >-> Funclass.
 Global Instance Inhab_val : Inhab val.
 Proof. apply (Inhab_of_val val_unit). Qed.
 
-(** A heap, a.k.a. state, consists of a finite map from location to values.
+(** A heap, a.k.a. heap, consists of a finite map from location to values.
     Finite maps are formalized in the file [LibSepFmap.v]. (We purposely do not
     use TLC's finite map library to avoid complications with typeclasses.) *)
 
@@ -109,43 +110,56 @@ Fixpoint subst (y:var) (w:val) (t:trm) : trm :=
   | trm_if t0 t1 t2 => trm_if (aux t0) (aux t1) (aux t2)
   end.
 
-(** The big-step evaluation judgement, written [eval s t s' v], asserts that
-    the evaluation of term [t] in state [s] terminates on a value [v] in a
-    state [s']. *)
+(* ================================================================= *)
+(** ** Definition of Omni-Big-Step Semantics *)
 
-Inductive eval : heap -> trm -> heap -> val -> Prop :=
-  | eval_val : forall s v,
-      eval s (trm_val v) s v
-  | eval_fix : forall s f x t1,
-      eval s (trm_fix f x t1) s (val_fix f x t1)
-  | eval_app : forall s1 s2 v1 v2 f x t1 v,
+Implicit Types Q : val->heap->Prop.
+
+Inductive eval : heap -> trm -> (val->heap->Prop) -> Prop :=
+  | eval_val : forall s v Q,
+      Q v s ->
+      eval s (trm_val v) Q
+  | eval_fix : forall s f x t1 Q,
+      Q (val_fix f x t1) s ->
+      eval s (trm_fix f x t1) Q
+  | eval_app_fix : forall s v1 v2 f x t1 Q,
       v1 = val_fix f x t1 ->
-      eval s1 (subst x v2 (subst f v1 t1)) s2 v ->
-      eval s1 (trm_app v1 v2) s2 v
-  | eval_let : forall s1 s2 s3 x t1 t2 v1 r,
-      eval s1 t1 s2 v1 ->
-      eval s2 (subst x v1 t2) s3 r ->
-      eval s1 (trm_let x t1 t2) s3 r
-  | eval_if : forall s1 s2 b v t1 t2,
-      eval s1 (if b then t1 else t2) s2 v ->
-      eval s1 (trm_if (val_bool b) t1 t2) s2 v
-  | eval_add : forall m n1 n2,
-      eval m (val_add (val_int n1) (val_int n2)) m (val_int (n1 + n2))
-  | eval_div : forall m n1 n2,
-       n2 <> 0 ->
-     eval m (val_div (val_int n1) (val_int n2)) m (val_int (Z.quot n1 n2))
-  | eval_ref : forall s v p,
-      ~ Fmap.indom s p ->
-      eval s (val_ref v) (Fmap.update s p v) (val_loc p)
-  | eval_get : forall s p,
+      eval s (subst x v2 (subst f v1 t1)) Q ->
+      eval s (trm_app v1 v2) Q
+  | eval_let : forall Q1 s x t1 t2 Q,
+      eval s t1 Q1 ->
+      (forall v1 s2, Q1 v1 s2 -> eval s2 (subst x v1 t2) Q) ->
+      eval s (trm_let x t1 t2) Q
+  | eval_if : forall s (b:bool) t1 t2 Q,
+      eval s (if b then t1 else t2) Q ->
+      eval s (trm_if (val_bool b) t1 t2) Q
+  | eval_add : forall s n1 n2 Q,
+      Q (val_int (n1 + n2)) s ->
+      eval s (val_add (val_int n1) (val_int n2)) Q
+  | eval_div : forall s n1 n2 Q,
+      n2 <> 0 ->
+      Q (val_int (Z.quot n1 n2)) s ->
+      eval s (val_div (val_int n1) (val_int n2)) Q
+  | eval_rand : forall s n Q,
+      n > 0 ->
+      (forall n1, 0 <= n1 < n -> Q n1 s) ->
+      eval s (val_rand (val_int n)) Q
+  | eval_ref : forall s v Q,
+      (forall p, ~ Fmap.indom s p ->
+          Q (val_loc p) (Fmap.update s p v)) ->
+      eval s (val_ref v) Q
+  | eval_get : forall s p Q,
       Fmap.indom s p ->
-      eval s (val_get (val_loc p)) s (Fmap.read s p)
-  | eval_set : forall s p v,
+      Q (Fmap.read s p) s ->
+      eval s (val_get (val_loc p)) Q
+  | eval_set : forall s p v Q,
       Fmap.indom s p ->
-      eval s (val_set (val_loc p) v) (Fmap.update s p v) val_unit
-  | eval_free : forall s p,
+      Q val_unit (Fmap.update s p v) ->
+      eval s (val_set (val_loc p) v) Q
+  | eval_free : forall s p Q,
       Fmap.indom s p ->
-      eval s (val_free (val_loc p)) (Fmap.remove s p) val_unit.
+      Q val_unit (Fmap.remove s p) ->
+      eval s (val_free (val_loc p)) Q.
 
 (* ================================================================= *)
 (** ** Automation for Heap Equality and Heap Disjointness *)
@@ -198,7 +212,6 @@ Definition hprop := heap -> Prop.
 
 Implicit Types P : Prop.
 Implicit Types H : hprop.
-Implicit Types Q : val->hprop.
 
 (** Core heap predicates, and their associated notations:
 
@@ -481,206 +494,6 @@ Tactic Notation "xchange" constr(M) :=
   forwards_nounfold_then M ltac:(fun K =>
     eapply xchange_lemma; [ eapply K | xsimpl | ]).
 
-(* ================================================================= *)
-(** ** Reformulation of the Evaluation Rules for Primitive Operations. *)
-
-Lemma eval_ref_sep : forall s1 s2 v p,
-  s2 = Fmap.single p v ->
-  Fmap.disjoint s2 s1 ->
-  eval s1 (val_ref v) (Fmap.union s2 s1) (val_loc p).
-Proof.
-  introv -> D. forwards Dv: Fmap.indom_single p v.
-  rewrite <- Fmap.update_eq_union_single. applys* eval_ref.
-  { intros N. applys* Fmap.disjoint_inv_not_indom_both D N. }
-Qed.
-
-Lemma eval_get_sep : forall s s2 p v,
-  s = Fmap.union (Fmap.single p v) s2 ->
-  eval s (val_get (val_loc p)) s v.
-Proof.
-  introv ->. forwards Dv: Fmap.indom_single p v. applys_eq eval_get.
-  { rewrite* Fmap.read_union_l. rewrite* Fmap.read_single. }
-  { applys* Fmap.indom_union_l. }
-Qed.
-
-Lemma eval_set_sep : forall s1 s2 s3 p v1 v2,
-  s1 = Fmap.union (Fmap.single p v1) s3 ->
-  s2 = Fmap.union (Fmap.single p v2) s3 ->
-  Fmap.disjoint (Fmap.single p v1) s3 ->
-  eval s1 (val_set (val_loc p) v2) s2 val_unit.
-Proof.
-  introv -> -> D. forwards Dv: Fmap.indom_single p v1. applys_eq eval_set.
-  { rewrite* Fmap.update_union_l. fequals. rewrite* Fmap.update_single. }
-  { applys* Fmap.indom_union_l. }
-Qed.
-
-Lemma eval_free_sep : forall s1 s2 v p,
-  s1 = Fmap.union (Fmap.single p v) s2 ->
-  Fmap.disjoint (Fmap.single p v) s2 ->
-  eval s1 (val_free p) s2 val_unit.
-Proof.
-  introv -> D. forwards Dv: Fmap.indom_single p v. applys_eq eval_free.
-  { rewrite* Fmap.remove_union_single_l. intros Dl.
-    applys Fmap.disjoint_inv_not_indom_both D Dl. applys Fmap.indom_single. }
-  { applys* Fmap.indom_union_l. }
-Qed.
-
-(* ################################################################# *)
-(** * Hoare Logic *)
-
-(* ================================================================= *)
-(** ** Definition of Total Correctness Hoare Triples *)
-
-Definition hoare (t:trm) (H:hprop) (Q:val->hprop) :=
-  forall h, H h -> exists h' v, eval h t h' v /\ Q v h'.
-
-(* ================================================================= *)
-(** ** Structural Rules for Hoare Triples *)
-
-Lemma hoare_conseq : forall t H' Q' H Q,
-  hoare t H' Q' ->
-  H ==> H' ->
-  Q' ===> Q ->
-  hoare t H Q.
-Proof.
-  introv M MH MQ HF. forwards (h'&v&R&K): M h. { applys* MH. }
-  exists h' v. splits*. { applys* MQ. }
-Qed.
-
-Lemma hoare_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall x, hoare t (J x) Q) ->
-  hoare t (hexists J) Q.
-Proof. introv M. intros h (x&Hh). applys M Hh. Qed.
-
-Lemma hoare_hpure : forall t (P:Prop) H Q,
-  (P -> hoare t H Q) ->
-  hoare t (\[P] \* H) Q.
-Proof.
-  introv M. intros h HF.
-  rewrite hstar_hpure_l in HF. destruct HF as [HP Hh]. applys* M.
-Qed.
-
-(* ================================================================= *)
-(** ** Reasoning Rules for Terms, for Hoare Triples *)
-
-Lemma hoare_val : forall v H Q,
-  H ==> Q v ->
-  hoare (trm_val v) H Q.
-Proof.
-  introv M. intros h K. exists h v. splits.
-  { applys eval_val. }
-  { applys* M. }
-Qed.
-
-Lemma hoare_fix : forall f x t1 H Q,
-  H ==> Q (val_fix f x t1) ->
-  hoare (trm_fix f x t1) H Q.
-Proof.
-  introv M. intros h K. exists h (val_fix f x t1). splits.
-  { applys* eval_fix. }
-  { applys* M. }
-Qed.
-
-Lemma hoare_app : forall v1 v2 f x t1 H Q,
-  v1 = val_fix f x t1 ->
-  hoare (subst x v2 (subst f v1 t1)) H Q ->
-  hoare (trm_app v1 v2) H Q.
-Proof.
-  introv E M. intros s K0. forwards (s'&v&R1&K1): (rm M) K0.
-  exists s' v. splits. { applys eval_app E R1. } { applys K1. }
-Qed.
-
-Lemma hoare_let : forall x t1 t2 H Q Q1,
-  hoare t1 H Q1 ->
-  (forall v1, hoare (subst x v1 t2) (Q1 v1) Q) ->
-  hoare (trm_let x t1 t2) H Q.
-Proof.
-  introv M1 M2 Hh. forwards* (h1'&v1&R1&K1): (rm M1).
-  forwards* (h2'&v2&R2&K2): (rm M2).
-  exists h2' v2. splits*. { applys* eval_let. }
-Qed.
-
-Lemma hoare_if : forall (b:bool) t1 t2 H Q,
-  hoare (if b then t1 else t2) H Q ->
-  hoare (trm_if b t1 t2) H Q.
-Proof.
-  introv M1. intros h Hh. forwards* (h1'&v1&R1&K1): (rm M1).
-  exists h1' v1. splits*. { applys* eval_if. }
-Qed.
-
-(* ================================================================= *)
-(** ** Specification of Primitive Operations, for Hoare Triples. *)
-
-Lemma hoare_add : forall H n1 n2,
-  hoare (val_add n1 n2)
-    H
-    (fun r => \[r = val_int (n1 + n2)] \* H).
-Proof.
-  intros. intros s K0. exists s (val_int (n1 + n2)). split.
-  { applys eval_add. }
-  { rewrite* hstar_hpure_l. }
-Qed.
-
-Lemma hoare_div : forall H n1 n2,
-  n2 <> 0 ->
-  hoare (val_div n1 n2)
-    H
-    (fun r => \[r = val_int (Z.quot n1 n2)] \* H).
-Proof.
-  introv N. intros s K0. exists s (val_int (Z.quot n1 n2)). split.
-  { applys eval_div N. }
-  { rewrite* hstar_hpure_l. }
-Qed.
-
-Lemma hoare_ref : forall H v,
-  hoare (val_ref v)
-    H
-    (fun r => (\exists p, \[r = val_loc p] \* p ~~> v) \* H).
-Proof.
-  intros. intros s1 K0. forwards* (p&D&N): (Fmap.single_fresh 0%nat s1 v).
-  exists (Fmap.union (Fmap.single p v) s1) (val_loc p). split.
-  { applys* eval_ref_sep D. }
-  { applys* hstar_intro.
-    { exists p. rewrite* hstar_hpure_l. split*. { hnfs*. } } }
-Qed.
-
-Lemma hoare_get : forall H v p,
-  hoare (val_get p)
-    ((p ~~> v) \* H)
-    (fun r => \[r = v] \* (p ~~> v) \* H).
-Proof.
-  intros. intros s K0. exists s v. split.
-  { destruct K0 as (s1&s2&->&P2&D&U). applys eval_get_sep U. }
-  { rewrite* hstar_hpure_l. }
-Qed.
-
-Lemma hoare_set : forall H w p v,
-  hoare (val_set (val_loc p) w)
-    ((p ~~> v) \* H)
-    (fun r => (p ~~> w) \* H).
-Proof.
-  intros. intros s1 (h1&h2&->&P2&D&U).
-  exists (Fmap.union (Fmap.single p w) h2) val_unit. split.
-  { applys eval_set_sep U D. auto. }
-  { applys* hstar_intro.
-    { hnfs*. }
-    { applys Fmap.disjoint_single_set D. } }
-Qed.
-
-Lemma hoare_free : forall H p v,
-  hoare (val_free (val_loc p))
-    ((p ~~> v) \* H)
-    (fun r => H).
-Proof.
-  intros. intros s1 (h1&h2&->&P2&D&U). exists h2 val_unit. split.
-  { applys eval_free_sep U D. }
-  { auto. }
-Qed.
-
-(** From now on, all operators have opaque definitions *)
-
-Global Opaque hempty hpure hstar hsingle hexists hforall.
-
 (* ################################################################# *)
 (** * Separation Logic *)
 
@@ -688,7 +501,45 @@ Global Opaque hempty hpure hstar hsingle hexists hforall.
 (** ** Definition of Separation Logic triples *)
 
 Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
-  forall (H':hprop), hoare t (H \* H') (Q \*+ H').
+  forall s, H s -> eval s t Q.
+
+(* ================================================================= *)
+(** ** Key Properties of Omni-Big-Step Semantics *)
+
+Lemma eval_conseq : forall s t Q1 Q2,
+  eval s t Q1 ->
+  Q1 ===> Q2 ->
+  eval s t Q2.
+Proof using.
+  introv M W.
+  asserts W': (forall v h, Q1 v h -> Q2 v h). { auto. } clear W.
+  induction M; try solve [ constructors* ].
+Qed.
+
+Lemma eval_frame : forall h1 h2 t Q,
+  eval h1 t Q ->
+  Fmap.disjoint h1 h2 ->
+  eval (Fmap.union h1 h2) t (Q \*+ (= h2)).
+Proof using.
+  introv M HD. gen h2. induction M; intros;
+    try solve [ hint hstar_intro; constructors* ].
+  { rename M into M1, H into M2, IHM into IH1, H0 into IH2.
+    specializes IH1 HD. applys eval_let IH1. introv HK.
+    lets (h1'&h2'&K1'&K2'&KD&KU): HK. subst. applys* IH2. }
+  { rename H into M. applys eval_ref. intros p Hp.
+    rewrite Fmap.indom_union_eq in Hp. rew_logic in Hp.
+    destruct Hp as [Hp1 Hp2].
+    rewrite* Fmap.update_union_not_r. applys hstar_intro.
+    { applys* M. } { auto. } { applys* Fmap.disjoint_update_not_r. } }
+  { applys eval_get. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.read_union_l. applys* hstar_intro. } }
+  { applys eval_set. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.update_union_l. applys hstar_intro.
+      { auto. } { auto. } { applys* Fmap.disjoint_update_l. } } }
+  { applys eval_free. { rewrite* Fmap.indom_union_eq. }
+    { rewrite* Fmap.remove_disjoint_union_l. applys hstar_intro.
+      { auto. } { auto. } { applys* Fmap.disjoint_remove_l. } } }
+Qed.
 
 (* ================================================================= *)
 (** ** Structural Rules *)
@@ -698,33 +549,28 @@ Lemma triple_conseq : forall t H' Q' H Q,
   H ==> H' ->
   Q' ===> Q ->
   triple t H Q.
-Proof.
-  introv M MH MQ. intros HF. applys hoare_conseq M.
-  { xchange MH. xsimpl. }
-  { intros x. xchange (MQ x). xsimpl. }
-Qed.
+Proof using. unfolds triple. introv M MH MQ HF. applys* eval_conseq. Qed.
 
 Lemma triple_frame : forall t H Q H',
   triple t H Q ->
   triple t (H \* H') (Q \*+ H').
 Proof.
-  introv M. intros HF. applys hoare_conseq (M (HF \* H')); xsimpl.
+  introv M. intros h HF. lets (h1&h2&M1&M2&MD&MU): (rm HF).
+  subst. specializes M M1. applys eval_conseq.
+  { applys eval_frame M MD. } { xsimpl. intros h' ->. applys M2. }
 Qed.
 
 Lemma triple_hexists : forall t (A:Type) (J:A->hprop) Q,
-  (forall x, triple t (J x) Q) ->
+  (forall (x:A), triple t (J x) Q) ->
   triple t (hexists J) Q.
-Proof.
-  introv M. intros HF. rewrite hstar_hexists.
-  applys hoare_hexists. intros. applys* M.
-Qed.
+Proof using. introv M. intros h (x&Hh). applys M Hh. Qed.
 
 Lemma triple_hpure : forall t (P:Prop) H Q,
   (P -> triple t H Q) ->
   triple t (\[P] \* H) Q.
-Proof.
-  introv M. intros HF. rewrite hstar_assoc.
-  applys hoare_hpure. intros. applys* M.
+Proof using.
+  introv M. intros h (h1&h2&M1&M2&D&U). destruct M1 as (M1&HP).
+  inverts HP. subst. rewrite Fmap.union_empty_l. applys~ M.
 Qed.
 
 (* ================================================================= *)
@@ -733,41 +579,29 @@ Qed.
 Lemma triple_val : forall v H Q,
   H ==> Q v ->
   triple (trm_val v) H Q.
-Proof.
-  introv M. intros HF. applys hoare_val. { xchange M. xsimpl. }
-Qed.
+Proof using. introv M Hs. applys* eval_val. Qed.
 
 Lemma triple_fix : forall f x t1 H Q,
   H ==> Q (val_fix f x t1) ->
   triple (trm_fix f x t1) H Q.
-Proof.
-  introv M. intros HF. applys hoare_fix. { xchange M. xsimpl. }
-Qed.
+Proof using. introv M Hs. applys* eval_fix. Qed.
+
+Lemma triple_if : forall (b:bool) t1 t2 H Q,
+  triple (if b then t1 else t2) H Q ->
+  triple (trm_if b t1 t2) H Q.
+Proof using. introv M Hs. applys* eval_if. Qed.
+
+Lemma triple_app_fix : forall v1 v2 f x t1 H Q,
+  v1 = val_fix f x t1 ->
+  triple (subst x v2 (subst f v1 t1)) H Q ->
+  triple (trm_app v1 v2) H Q.
+Proof using. introv E M Hs. applys* eval_app_fix. Qed.
 
 Lemma triple_let : forall x t1 t2 Q1 H Q,
   triple t1 H Q1 ->
   (forall v1, triple (subst x v1 t2) (Q1 v1) Q) ->
   triple (trm_let x t1 t2) H Q.
-Proof.
-  introv M1 M2. intros HF. applys hoare_let.
-  { applys M1. }
-  { intros v. applys hoare_conseq M2; xsimpl. }
-Qed.
-
-Lemma triple_if : forall (b:bool) t1 t2 H Q,
-  triple (if b then t1 else t2) H Q ->
-  triple (trm_if b t1 t2) H Q.
-Proof.
-  introv M1. intros HF. applys hoare_if. applys M1.
-Qed.
-
-Lemma triple_app : forall v1 v2 f x t1 H Q,
-  v1 = val_fix f x t1 ->
-  triple (subst x v2 (subst f v1 t1)) H Q ->
-  triple (trm_app v1 v2) H Q.
-Proof.
-  introv E M1. intros H'. applys hoare_app E. applys M1.
-Qed.
+Proof using. introv M1 M2 Hs. applys* eval_let. Qed.
 
 (* ================================================================= *)
 (** ** Specification of Primitive Operations *)
@@ -776,42 +610,68 @@ Lemma triple_add : forall n1 n2,
   triple (val_add n1 n2)
     \[]
     (fun r => \[r = val_int (n1 + n2)]).
-Proof. intros. intros H'. applys hoare_conseq hoare_add; xsimpl*. Qed.
+Proof using.
+  introv Hs. applys* eval_add. inverts Hs. exists*. hnfs*.
+Qed.
 
 Lemma triple_div : forall n1 n2,
   n2 <> 0 ->
   triple (val_div n1 n2)
     \[]
     (fun r => \[r = val_int (Z.quot n1 n2)]).
-Proof. intros. intros H'. applys* hoare_conseq hoare_div; xsimpl*. Qed.
+Proof using.
+  introv Hn2 Hs. applys* eval_div. inverts Hs. exists*. hnfs*.
+Qed.
+
+Lemma triple_rand : forall n,
+  n > 0 ->
+  triple (val_rand n)
+    \[]
+    (fun r => \[exists n1, r = val_int n1 /\ 0 <= n1 < n]).
+Proof using.
+  introv Hn2 Hs. applys* eval_rand. inverts Hs.
+  intros n1 Hn1. hnfs. exists*. hnfs*.
+Qed.
 
 Lemma triple_ref : forall v,
   triple (val_ref v)
     \[]
     (fun r => \exists p, \[r = val_loc p] \* p ~~> v).
-Proof. intros. intros HF. applys hoare_conseq hoare_ref; xsimpl*. Qed.
+Proof using.
+  intros. intros s1 K. applys eval_ref. intros p D.
+  inverts K. rewrite Fmap.update_empty. exists p.
+  rewrite hstar_hpure_l. split*. hnfs*.
+Qed.
 
 Lemma triple_get : forall v p,
-  triple (val_get (val_loc p))
+  triple (val_get p)
     (p ~~> v)
-    (fun x => \[x = v] \* (p ~~> v)).
-(* COQBUG in v8.10, therefore using an alternative proof.
-   Proof. intros. intros HF. applys hoare_conseq hoare_get; xsimpl*. Qed.
-*)
-Proof. intros. intros HF. applys hoare_conseq hoare_get. xsimpl*. xsimpl*. Qed.
+    (fun r => \[r = v] \* (p ~~> v)).
+Proof using.
+  intros. intros s K. inverts K. applys eval_get.
+  { applys* Fmap.indom_single. }
+  { rewrite hstar_hpure_l. split*. rewrite* Fmap.read_single. hnfs*. }
+Qed.
 
 Lemma triple_set : forall w p v,
-  triple (val_set (val_loc p) w)
-    (p ~~> v)
-    (fun _ => p ~~> w).
-Proof. intros. intros HF. applys hoare_conseq hoare_set; xsimpl*. Qed.
+  triple (val_set (val_loc p) v)
+    (p ~~> w)
+    (fun r => (p ~~> v)).
+Proof using.
+  intros. intros s1 K. inverts K. applys eval_set.
+  { applys* Fmap.indom_single. }
+  { rewrite Fmap.update_single. hnfs*. }
+Qed.
 
 Lemma triple_free : forall p v,
   triple (val_free (val_loc p))
     (p ~~> v)
-    (fun _ => \[]).
-Proof. intros. intros HF. applys hoare_conseq hoare_free; xsimpl*. Qed.
-
+    (fun r => \[]).
+Proof using.
+  intros. intros s1 K. inverts K. applys eval_free.
+  { applys* Fmap.indom_single. }
+  { rewrite* Fmap.remove_single. hnfs*. }
+Qed.
 
 (* ################################################################# *)
 (** * Bonus: Example Proof *)
@@ -847,7 +707,7 @@ Lemma triple_incr : forall (p:loc) (n:int),
 (** Verification of [incr], applying the reasoning rules by hand. *)
 
 Proof using.
-  intros. applys triple_app. { reflexivity. } simpl.
+  intros. applys triple_app_fix. { reflexivity. } simpl.
   applys triple_let. { apply triple_get. }
   intros n'. simpl. apply triple_hpure. intros ->.
   applys triple_let. { applys triple_conseq.
@@ -855,7 +715,7 @@ Proof using.
     { xsimpl. }
     { xsimpl. } }
   intros m'. simpl. apply triple_hpure. intros ->.
-  { applys triple_set. }
+  { apply triple_set. }
 Qed.
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

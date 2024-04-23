@@ -812,9 +812,7 @@ Tactic Notation "constructors" :=
 (** ** Assertions *)
 
 (** [asserts H: T] is another syntax for [assert (H : T)], which
-    also works with introduction patterns. For instance, one can write:
-    [asserts \[x P\] (exists n, n = 3)], or
-    [asserts \[H|H\] (n = 0 \/ n = 1). *)
+    also works with introduction patterns. *)
 
 Tactic Notation "asserts" simple_intropattern(I) ":" constr(T) :=
   let H := fresh "TEMP" in assert (H : T);
@@ -1460,7 +1458,7 @@ Tactic Notation "puts" ":" constr(E) :=
 (** ** Application of Tautologies *)
 
 (** [logic E], where [E] is a fact, is equivalent to
-    [assert H:E; [tauto | eapply H; clear H]. It is useful for instance
+    [assert H:E; [tauto | eapply H; clear H]]. It is useful for instance
     to prove a conjunction [A /\ B] by showing first [A] and then [A -> B],
     through the command [logic (foral A B, A -> (A -> B) -> A /\ B)] *)
 
@@ -1698,9 +1696,8 @@ Tactic Notation "false_invert" constr(H) :=
 
 Ltac false_invert_iter :=
   match goal with H:_ |- _ =>
-    solve [ inversion H; false
-          | clear H; false_invert_iter
-          | fail 2 ] end.
+    first [ solve [ inversion H; false ]
+          | clear H; false_invert_iter ] end.
 
 Tactic Notation "false_invert" :=
   intros; solve [ false_invert_iter | false ].
@@ -2921,6 +2918,51 @@ Tactic Notation "lets_inverts" constr(E) "as" simple_intropattern(I1)
  simple_intropattern(I2) simple_intropattern(I3) simple_intropattern(I4) :=
   lets_inverts_base E ltac:(fun H => inverts H as I1 I2 I3 I4).
 
+(* ---------------------------------------------------------------------- *)
+(* ================================================================= *)
+(** ** Inversion with Pattern Matching on Head of Hypothesis *)
+
+(** [invert_post] is invoked after [false_inverts] and [invert_if_head].
+    --LATER: could be also called after [invert]. *)
+
+Ltac invert_post tt :=
+  try discriminate.
+
+(** [inverts_post] is invoked after [false_inverts] and [inverts_if_head].
+    --LATER: could be also called after [inverts]. *)
+
+Ltac inverts_post tt :=
+  try discriminate.
+
+(** [false_inverts] is like [false_invert] but with substitutions. *)
+
+Ltac false_inverts_iter :=
+  match goal with H:_ |- _ =>
+    first [ solve [ inversion H; try subst; false; inverts_post tt ] (* could be inverts *)
+          | clear H; false_inverts_iter ] end.
+
+Tactic Notation "false_inverts" :=
+  intros; solve [ false_inverts_iter | false ].
+
+(** [invert_if_head E] calls [invert] on an assumption whose head symbol is [E].
+    It then calls [invert_post tt] to attempt discarding absurd goals *)
+
+Ltac invert_if_head E :=
+  match goal with H: ?T |- _ =>
+    match get_head T with E =>
+      invert H; invert_post tt
+    end
+  end.
+
+(** [inverts_if_head E] calls [inverts] an assumption whose head symbol is [E].
+    It then calls [inverts_post tt] to attempt discarding absurd goals *)
+
+Ltac inverts_if_head E :=
+  match goal with H: ?T |- _ =>
+    match get_head T with E =>
+      inverts H; inverts_post tt
+    end
+  end.
 
 (* ---------------------------------------------------------------------- *)
 (* ================================================================= *)
@@ -5206,7 +5248,7 @@ Tactic Notation "let_name_all" "as" ident(x) :=
 
     The real implementation is careful to not generalized [ltac_Mark],
     even though it is of type [Prop].
-    TODO: investigate whether it would be sufficient to put [ltac_Mark]
+    --TODO: investigate whether it would be sufficient to put [ltac_Mark]
     in [Type] to obtain the desired behavior. *)
 
 Ltac generalize_all_prop :=
@@ -5230,4 +5272,4 @@ Ltac autorewrite_in_star_patch cont :=
 
 (* End of experimental features *)
 
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

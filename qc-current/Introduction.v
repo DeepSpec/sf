@@ -44,12 +44,12 @@ Conjecture removeP : forall x l,  ~ (In x (remove x l)).
     running it on many randomly generated inputs, resulting in output
     like this:
 
-       0 
-       [0, 0] 
+       0
+       [0, 0]
        Failed! After 17 tests and 12 shrinks
 
-    This means that, if we run [remove] with [x] being [0] and [l] 
-    being the two-element list containing two zeros, then the property 
+    This means that, if we run [remove] with [x] being [0] and [l]
+    being the two-element list containing two zeros, then the property
     [removeP] fails. *)
 
 (** With this example in hand, we can see that the [then] branch
@@ -107,7 +107,7 @@ Fixpoint insert x l :=
     _typeclasses_, which QuickChick uses extensively both internally
     and in its programmatic interface to users.  This is the
     [Typeclasses] chapter.
-    
+
     In the [QC] chapter we'll cover the core concepts and
     features of QuickChick itself.
 
@@ -124,4 +124,4 @@ Fixpoint insert x l :=
     Finally, the [Postscript] chapter gives some suggestions for
     further reading. *)
 
-(* 2023-12-24 13:03 *)
+(* 2024-04-23 03:55 *)

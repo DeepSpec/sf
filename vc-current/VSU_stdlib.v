@@ -23,7 +23,7 @@ Axiom make_mem_mgr: forall gv, emp |-- mem_mgr M gv.
 (** Normally at this point, we would prove a [semax_body] lemma for each
   function that the module exports.  But here, we use [body_lemma_of_funspec]
   for external functions; and we write this as an axiom: *)
-   
+
 Axiom body_malloc:
  forall {Espec: OracleKind} {cs: compspecs} ,
    VST.floyd.library.body_lemma_of_funspec EF_malloc (snd (malloc_spec_sz M)).
@@ -103,7 +103,7 @@ Qed.
 
 (**  Each VSU may have private global variables that constitute its
   "local state".  This [VSU_initializer] lemma calculates how to
-  reason about their initial values.   But the module stdlib.c does 
+  reason about their initial values.   But the module stdlib.c does
   not have any global variables, so this [initialize] lemma is
   rather trivial here.  See [VSU_stdlib2.v], lemma [initialize],
   for a more interesting example. *)
@@ -118,7 +118,7 @@ Qed.
 
 Definition MallocFreeVSU: @VSU NullExtension.Espec
          MF_E MF_imported_specs ltac:(QPprog prog) MF_ASI MF_globals.
-  Proof. 
+  Proof.
     mkVSU prog MF_internal_specs.
     - solve_SF_external (@body_malloc NullExtension.Espec CompSpecs).
        apply (semax_func_cons_malloc_aux gv gx ret n).
@@ -130,4 +130,4 @@ Qed.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_main] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

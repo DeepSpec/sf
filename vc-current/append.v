@@ -482,8 +482,8 @@ Definition public_idents : list ident :=
  ___compcert_va_float64 :: ___compcert_va_int64 :: ___compcert_va_int32 ::
  nil).
 
-Definition prog : Clight.program := 
+Definition prog : Clight.program :=
   mkprogram composites global_definitions public_idents _main Logic.I.
 
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

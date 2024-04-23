@@ -42,18 +42,19 @@
 </div>
 
 <div class="doc">
-<a id="lab405"></a><h1 class="section">Adding Records</h1>
+<a id="lab399"></a><h1 class="section">Adding Records</h1>
 
 <div class="paragraph"> </div>
 
- We saw in chapter <a href="MoreStlc.html"><span class="inlineref">MoreStlc</span></a> how records can be treated as just
-    syntactic sugar for nested uses of products.  This is OK for
+ We saw in chapter <a href="MoreStlc.html"><span class="inlineref">MoreStlc</span></a> how records can be treated as
+    just syntactic sugar for nested uses of products.  This is OK for
     simple examples, but the encoding is informal (in reality, if we
-    actually treated records this way, it would be carried out in the
-    parser, which we are eliding here), and anyway it is not very
-    efficient.  So it is also interesting to see how records can be
-    treated as first-class citizens of the language.  This chapter
-    shows how.
+    actually treated records this way, the translation would be
+    carried out in the parser, which we are eliding here), and anyway
+    it is not very efficient, nor does it lead to nice error messages
+    for programs that the typechecker rejects.  So it is also
+    interesting to see how records can be treated as first-class
+    citizens of the language.  This chapter shows how.
 
 <div class="paragraph"> </div>
 
@@ -148,7 +149,7 @@
 </div>
 
 <div class="doc">
-<a id="lab406"></a><h1 class="section">Formalizing Records</h1>
+<a id="lab400"></a><h1 class="section">Formalizing Records</h1>
 
 </div>
 <div class="code">
@@ -157,7 +158,7 @@
 </div>
 
 <div class="doc">
-<a id="lab407"></a><h3 class="section">Syntax and Operational Semantics</h3>
+<a id="lab401"></a><h3 class="section">Syntax and Operational Semantics</h3>
 
 <div class="paragraph"> </div>
 
@@ -291,7 +292,7 @@ Some examples...
 </div>
 
 <div class="doc">
-<a id="lab408"></a><h3 class="section">Well-Formedness</h3>
+<a id="lab402"></a><h3 class="section">Well-Formedness</h3>
 
 <div class="paragraph"> </div>
 
@@ -376,7 +377,7 @@ Note that <span class="inlinecode"><span class="id" title="var">record_ty</span>
 </div>
 
 <div class="doc">
-<a id="lab409"></a><h3 class="section">Substitution</h3>
+<a id="lab403"></a><h3 class="section">Substitution</h3>
 
 <div class="paragraph"> </div>
 
@@ -405,7 +406,7 @@ Note that <span class="inlinecode"><span class="id" title="var">record_ty</span>
 </div>
 
 <div class="doc">
-<a id="lab410"></a><h3 class="section">Reduction</h3>
+<a id="lab404"></a><h3 class="section">Reduction</h3>
 
 <div class="paragraph"> </div>
 
@@ -476,7 +477,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab411"></a><h3 class="section">Typing</h3>
+<a id="lab405"></a><h3 class="section">Typing</h3>
 
 <div class="paragraph"> </div>
 
@@ -546,18 +547,21 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab412"></a><h2 class="section">Examples</h2>
+<a id="lab406"></a><h2 class="section">Examples</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab413"></a><h4 class="section">Exercise: 2 stars, standard (examples)</h4>
+<a id="lab407"></a><h4 class="section">Exercise: 2 stars, standard (examples)</h4>
  Finish the proofs below.  Feel free to use Coq's automation
     features in this proof.  However, if you are not confident about
     how the type system works, you may want to carry out the proofs
     first using the basic features (<span class="inlinecode"><span class="id" title="tactic">apply</span></span> instead of <span class="inlinecode"><span class="id" title="tactic">eapply</span></span>, in
-    particular) and then perhaps compress it using automation.  Before
-    starting to prove anything, make sure you understand what it is
-    saying. 
+    particular) and then perhaps compress it using automation.
+
+<div class="paragraph"> </div>
+
+    Before starting to prove <i>anything</i>, make sure you understand what
+    it is saying. :-) 
 </div>
 <div class="code">
 
@@ -585,7 +589,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 
 
 <div class="doc">
-<a id="lab414"></a><h2 class="section">Properties of Typing</h2>
+<a id="lab408"></a><h2 class="section">Properties of Typing</h2>
 
 <div class="paragraph"> </div>
 
@@ -595,7 +599,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab415"></a><h3 class="section">Well-Formedness</h3>
+<a id="lab409"></a><h3 class="section">Well-Formedness</h3>
 
 </div>
 <div class="code">
@@ -645,7 +649,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab416"></a><h3 class="section">Field Lookup</h3>
+<a id="lab410"></a><h3 class="section">Field Lookup</h3>
 
 <div class="paragraph"> </div>
 
@@ -723,7 +727,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab417"></a><h3 class="section">Progress</h3>
+<a id="lab411"></a><h3 class="section">Progress</h3>
 
 </div>
 <div class="code">
@@ -828,7 +832,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab418"></a><h2 class="section">Weakening</h2>
+<a id="lab412"></a><h2 class="section">Weakening</h2>
 
 <div class="paragraph"> </div>
 
@@ -856,7 +860,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 </div>
 
 <div class="doc">
-<a id="lab419"></a><h3 class="section">Preservation</h3>
+<a id="lab413"></a><h3 class="section">Preservation</h3>
 
 <div class="paragraph"> </div>
 
@@ -939,7 +943,7 @@ The <span class="inlinecode"><span class="id" title="var">step</span></span> fun
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Records.html#STLCExtendedRecords.T_RCons"><span class="id" title="constructor">T_RCons</span></a>... <span class="id" title="tactic">eapply</span> <a class="idref" href="Records.html#STLCExtendedRecords.step_preserves_record_tm"><span class="id" title="lemma">step_preserves_record_tm</span></a>...<br/>
 <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Records.html#STLCExtendedRecords"><span class="id" title="module">STLCExtendedRecords</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-12-24&nbsp;12:54&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-04-23&nbsp;03:47&nbsp;*)</span><br/>
 </div>
 </div>
 

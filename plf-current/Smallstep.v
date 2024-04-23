@@ -129,7 +129,6 @@ Module SimpleArith1.
 
 (** Now, here is the corresponding _small-step_ evaluation relation.
 
-    
                      -------------------------------        (ST_PlusConstConst)
                      P (C n1) (C n2) --> C (n1 + n2)
 
@@ -390,7 +389,7 @@ Inductive value : tm -> Prop :=
     definition of the [-->] relation to write [ST_Plus2] rule in a
     slightly more elegant way: *)
 
-(** 
+(**
                      -------------------------------        (ST_PlusConstConst)
                      P (C n1) (C n2) --> C (n1 + n2)
 
@@ -1910,4 +1909,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-12-24 12:54 *)
+(* 2024-04-23 03:47 *)

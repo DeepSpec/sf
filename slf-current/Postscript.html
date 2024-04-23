@@ -34,7 +34,7 @@
 
 
 <div class="doc">
-<a id="lab504"></a><h1 class="section">Beyond the Scope of This Course</h1>
+<a id="lab468"></a><h1 class="section">Beyond the Scope of This Course</h1>
 
 <div class="paragraph"> </div>
 
@@ -44,14 +44,13 @@
 
 <div class="paragraph"> </div>
 
-    There are numerous aspects of Separation Logic that were not covered
-    in this course, including:
+    There are numerous aspects of Separation Logic that were not covered in this
+    course, including:
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> Concurrent Separation Logic, for reasoning about concurrent behaviors,
-      or even, behaviors of weak memory models.
+<li> Concurrent Separation Logic, for reasoning about concurrent programs.
 
 </li>
 <li> Automated reasoning using Separation Logic, typically for a restricted
@@ -73,32 +72,15 @@
 </div>
 
 <div class="doc">
-<a id="lab505"></a><h1 class="section">Historical Notes</h1>
+<a id="lab469"></a><h1 class="section">Tools Leveraging Separation Logic</h1>
 
 <div class="paragraph"> </div>
 
- The most relevant historical notes were included near the end of each
-    chapter. Additional information may be found in the ICFP'20 paper
-    <i>Separation Logic for Sequential Programs</i>, by Arthur Charguéraud.
-    <a href='http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf'>http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf</a>
-<div class="paragraph"> </div>
-
- In addition, the reader may be interested in checking out Peter O'Hearn's
-    account of the early days of Separation Logic:
-    <a href='http://www0.cs.ucl.ac.uk/staff/p.ohearn/SeparationLogic/Separation_Logic/Early_Days.html'>http://www0.cs.ucl.ac.uk/staff/p.ohearn/SeparationLogic/Separation_Logic/Early_Days.html</a>
-</div>
-
-<div class="doc">
-<a id="lab506"></a><h1 class="section">Tools Leveraging Separation Logic</h1>
-
-<div class="paragraph"> </div>
-
- Ideas of Separation Logic have had significant influence on the field
-    of programming languages from various perspectives. For a broad survey
-    of Separation Logic, we refer to Peter O'Hearn's CACM paper <span class="inlinecode">2019</span>.
-    <a href='https://dl.acm.org/doi/10.1145/3211968'>https://dl.acm.org/doi/10.1145/3211968</a>
-    (Make sure to also download the "supplementary material" link at the bottom
-    of the page.)
+ Ideas of Separation Logic have had significant influence on the field of
+    programming languages from various perspectives. For a broad survey of
+    Separation Logic, we refer to Peter O'Hearn's CACM paper <span class="inlinecode">2019</span>.
+    <a href='https://dl.acm.org/doi/10.1145/3211968'>https://dl.acm.org/doi/10.1145/3211968</a>(Make sure to also download the
+    "supplementary material" link at the bottom of the page.)
 
 <div class="paragraph"> </div>
 
@@ -125,7 +107,7 @@
 
 </li>
 <li> The tool "VeriFast" targets C and Java programs.
-      <a href='https://people.cs.kuleuven.be/~bart.jacobs/verifast'>https://people.cs.kuleuven.be/~bart.jacobs/verifast</a> and
+      <a href='https://people.cs.kuleuven.be/~bart.jacobs/verifast'>https://people.cs.kuleuven.be/~bart.jacobs/verifast</a>and
       <a href='https://github.com/verifast/verifast'>https://github.com/verifast/verifast</a>
 
 <div class="paragraph"> </div>
@@ -161,11 +143,11 @@
 
 
 </li>
-<li> The tool "CFML", which targets the verification of OCaml programs.
-      The original version of CFML leverages a version of characteristic
-      formulae slightly more complicated than the one presented in this
-      volume. The new version, CFML 2.0, directly leverages all the ideas
-      from this course. It is still under active development.
+<li> The tool "CFML" targets the verification of OCaml programs. The original
+      version of CFML leverages a version of characteristic formulae slightly
+      more complicated than the one presented in this volume. The new version,
+      CFML 2.0, directly leverages all the ideas from this course, in particular
+      the weakest-precondition style <span class="inlinecode"><span class="id" title="var">wpgen</span></span> function.
 
 <div class="paragraph"> </div>
 
@@ -187,7 +169,7 @@
 </div>
 
 <div class="doc">
-<a id="lab507"></a><h1 class="section">Related Courses</h1>
+<a id="lab470"></a><h1 class="section">Related Courses</h1>
 
 <div class="paragraph"> </div>
 
@@ -214,18 +196,17 @@
 <li> The Iris tutorial, by Birkedal and Bizjak, presents the core ideas of
       Iris' concurrent Separation Logic.
       <a href='https://iris-project.org/tutorial-material.html'>https://iris-project.org/tutorial-material.html</a>
+
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
- Teaser: Arthur Charguéraud has for project to write a follow-up course on
-    practical program verification using CFML, focusing on the specification
-    and verification of classic data structures and algorithms. 
+
 </div>
 
 <div class="doc">
-<a id="lab508"></a><h1 class="section">Acknowledgments</h1>
+<a id="lab471"></a><h1 class="section">Acknowledgments</h1>
 
 <div class="paragraph"> </div>
 
@@ -265,19 +246,7 @@
       work aspects.
 
 </li>
-</ul>
-
-<div class="paragraph"> </div>
-
-   Thanks also to users who contributed feedback and helped fixing typos:
-<ul class="doclist">
-<li> Jonathan Leivent
-
-</li>
-<li> Ori Lahav
-
-</li>
-<li> Shachar Itzhaky.
+<li> The many readers who helped fixing typos.
 
 </li>
 </ul>
@@ -288,7 +257,7 @@
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-12-24&nbsp;13:00&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-04-23&nbsp;03:49&nbsp;*)</span><br/>
 </div>
 </div>
 

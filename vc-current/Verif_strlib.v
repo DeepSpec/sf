@@ -31,7 +31,7 @@
         else if(d1 < d2) return -1;
         else if(d1 > d2) return 1;
       }
-    }    
+    }
 *)
 
 (* ################################################################# *)
@@ -62,7 +62,7 @@ Print byte.  (* Notation byte := Byte.int
 
     CompCert's [Byte] module is an 8-bit instantiation of
    the n-bit integers, just as the [Int] module is a 32-bit
-   instantiation. 
+   instantiation.
 
    Here, we can ask what [Byte] knows about the theory of 8-bit
    modular integers: *)
@@ -82,13 +82,13 @@ Definition Hello := "Hello"%string.
 Definition Hello' := string_to_list_byte Hello.
 
 Eval simpl in string_to_list_byte Hello.
- (* = [Byte.repr 72; Byte.repr 101; Byte.repr 108; 
+ (* = [Byte.repr 72; Byte.repr 101; Byte.repr 108;
       Byte.repr 108; Byte.repr 111]   :   list byte *)
 
 Section StringDemo.
 
   Variable p : val.  (* Suppose we have an address in memory *)
-  
+
 (** To describe a single byte in memory, we can use [data_at]
    with the signed-character type: *)
 Print tschar.  (* = Tint I8 Signed noattr : type *)
@@ -144,7 +144,7 @@ Check (
  the contents of [Hello'] with a [Byte.zero] appended at the end.
 
  Sometimes we know that there is a null-terminated string inside an  array of
- length [n].  That is, there are [k] nonnull characters (where [k<n]), 
+ length [n].  That is, there are [k] nonnull characters (where [k<n]),
  followed by a null character, followed by [n-(k+1)] uninitialized (or
  don't-care) characters.  We represent this with the [cstringn] predicate. *)
 Print cstringn. (* =
@@ -163,7 +163,7 @@ End StringDemo.
 
 (** In separation logic proofs about C strings, we often find
   proof goals similar to the one exemplified by this lemma: *)
-Lemma demonstrate_cstring1: 
+Lemma demonstrate_cstring1:
  forall i contents
    (H:  ~ In Byte.zero contents)
    (H0: Znth i (contents ++ [Byte.zero]) <> Byte.zero)
@@ -171,19 +171,19 @@ Lemma demonstrate_cstring1:
    0 <= i + 1 < Zlength (contents ++ [Byte.zero]).
 Proof.
 intros.
-(** 
+(**
    A null-terminated string is an array of characters with three parts:
    - The contents of the string, none of which is the '\0' character;
    - The null termination character, equal to Byte.zero;
    - the remaining garbage in the array, after the null.
-   When processing a string, you should maintain three kinds of 
+   When processing a string, you should maintain three kinds of
    assumptions above the line:
   - Hypothesis [H] above the line says that none of the
   contents is the null character;
   - Hypothesis [H0] typically comes from a loop test, [s[i]!=0]
-  - [H1] typically comes from a loop invariant:  suppose a 
+  - [H1] typically comes from a loop invariant:  suppose a
   a loop iteration variable [_i] (with value [i])
-  is traversing the array.  We expect that loop to go up to but 
+  is traversing the array.  We expect that loop to go up to but
   no farther than the null character, that is, one past the contents.
 
   The [cstring] tactic processes all three of these hypotheses to conclude
@@ -200,7 +200,7 @@ Qed.
 (** Here is another demonstration.  When your loop on the string
    contents reaches the end, the loop test [s[i]!=0] is false, so
    therefore [s[i]=0]. *)
-Lemma demonstrate_cstring2: 
+Lemma demonstrate_cstring2:
  forall i contents
    (H: ~ In Byte.zero contents)
    (H0: Znth i (contents ++ [Byte.zero]) = Byte.zero)
@@ -234,13 +234,13 @@ Definition strlen_spec :=
 
     Vptrofs?  Ptrofs.repr?  What's that?
 
-  Programmers use [size_t] when writing C programs that are 
+  Programmers use [size_t] when writing C programs that are
   portable to 64-bit and 32-bit installations; this typedef stands for
   whatever size of unsigned (long) integer is the same size as a pointer.
   In Verifiable C, size_t is the corresponding C unsigned type: *)
 Print size_t.
-(*   = if Archi.ptr64 
-         then Tlong Unsigned noattr 
+(*   = if Archi.ptr64
+         then Tlong Unsigned noattr
          else Tint I32 Unsigned noattr
 
     Then, in the RETURN clause, instead of returning the value
@@ -253,8 +253,8 @@ Print Vptrofs.
           then Vlong (Ptrofs.to_int64 n)
           else Vint (Ptrofs.to_int n)
 
-    The unpronounceable "ptrofs" stands for "pointer offset".  
-    It's a CompCert thing.  Don't ask.  
+    The unpronounceable "ptrofs" stands for "pointer offset".
+    It's a CompCert thing.  Don't ask.
     The argument of Vptrofs is a [ptrofs], that is [Ptrofs.int].
     The module Ptrofs is isomorphic to Int64 in a 64-bit configuration,
     and isomorphic to Int in a 32-bit configuration.  Isomorphic,
@@ -340,7 +340,7 @@ forward. (* i=0; *)
  Providing  [continue: Inv2] is optional, as is [break: Inv3].
  In many cases the [forward_loop] tactic can figure out that the [continue:]
  invariant is not needed (if the loop doesn't contain a [continue] statement),
- or the [break:] postcondition is not needed (if there's no [break] 
+ or the [break:] postcondition is not needed (if there's no [break]
  statement, or if there are no commands after the loop).
 
   So let's try this loop with only a single loop invariant: *)
@@ -374,17 +374,17 @@ Compute Archi.ptr64. (* = false : bool *)
  CompCert [val], we have [Vptrofs]. And -- just as we can write C programs
  that are portable to 32-bit or 64-bit pointers using [size_t], we can write
  proofs scripts portable by using [Ptrofs].  *)
-Print Vptrofs. (* = 
+Print Vptrofs. (* =
  fun n : ptrofs =>
-   if Archi.ptr64 then Vlong (Ptrofs.to_int64 n) 
+   if Archi.ptr64 then Vlong (Ptrofs.to_int64 n)
                   else Vint (Ptrofs.to_int n)
-     : ptrofs -> val 
+     : ptrofs -> val
 
-    And therefore, [_i] is a C variable of type [size_t], 
+    And therefore, [_i] is a C variable of type [size_t],
   [i] is a Coq variable of type [Z], and and [Vptrofs (Ptrofs.repr i)]
   is a CompCert [val] that _represents_ [i] as a [val]. *)
 
-assert (Example: Archi.ptr64=false -> 
+assert (Example: Archi.ptr64=false ->
           forall n, Vptrofs (Ptrofs.repr n) = Vint (Int.repr n)). {
  intro Hx; try discriminate Hx. (* in case Archi.ptr64 = true *)
   (* In a 32-bit C system: *)
@@ -467,7 +467,7 @@ Lemma data_at_Vundef_example:
   data_at sh (tarray tschar n)
           (Zrepeat (Vbyte Byte.zero) (i+1)
              ++ Zrepeat Vundef (n-(i+1))) p
- |--           
+ |--
   data_at sh (tarray tschar n)
           (Zrepeat (Vbyte Byte.zero) i
              ++ Zrepeat Vundef (n-i)) p.
@@ -498,7 +498,7 @@ Lemma data_at_Vundef_example:
   data_at sh (tarray tschar n)
           (Zrepeat (Vbyte Byte.zero) (i+1)
              ++ Zrepeat Vundef (n-(i+1))) p
- |--           
+ |--
   data_at sh (tarray tschar n)
           (Zrepeat (Vbyte Byte.zero) i
              ++ Zrepeat Vundef (n-i) ) p.
@@ -509,7 +509,7 @@ replace (n-i) with (1 + (n-(i+1))) by lia.
 rewrite <- Zrepeat_app by lia.
 rewrite !app_ass.
 Check split2_data_at_Tarray_app.
-(*  forall (cs : compspecs) (mid n : Z) (sh : Share.t) 
+(*  forall (cs : compspecs) (mid n : Z) (sh : Share.t)
     (t : type) (v1 v2 : list (reptype t)) (p : val),
   Zlength v1 = mid ->
   Zlength v2 = n - mid ->
@@ -528,7 +528,7 @@ Qed.
 (** Why did that work?  Let's look at a simpler example. *)
 
 Lemma cancel_example:
- forall sh i j p q, 
+ forall sh i j p q,
    data_at sh tint (Vint i) p * data_at sh tint (Vint j) q
  |-- data_at sh tint (Vint i) p * data_at sh tint (Vundef) q.
 Proof.
@@ -538,7 +538,7 @@ intros.
 
     [cancel] breaks this into two subgoals: *)
 apply sepcon_derives.
-- 
+-
 (** In the first subgoal, we use the fact that |-- is reflexive *)
 apply derives_refl.
 -
@@ -548,7 +548,7 @@ apply derives_refl.
 apply stronger_default_val.
 Qed.
 
-(** The moral of the story is:  When proving 
+(** The moral of the story is:  When proving
 
    data_at sh t a p |-- data_at sh t b p
 
@@ -563,7 +563,7 @@ Lemma body_strcpy: semax_body Vprog Gprog f_strcpy strcpy_spec.
 Proof.
 start_function.
 (** Because this function subscripts the strings, it does _not_
-  treat the strings abstractly, we must unfold [cstring] and [cstringn]. *)  
+  treat the strings abstractly, we must unfold [cstring] and [cstringn]. *)
 unfold cstring,cstringn in *.
 forward.
 Intros.
@@ -609,7 +609,7 @@ Definition example_call_strcpy_spec :=
     RETURN (Vint (Int.repr (Z.of_N (Ascii.N_of_ascii "H"%char))))
     SEP (cstring Ews (Hello' ++ [Byte.zero]) (gv ___stringlit_1)).
 
-Lemma body_example_call_strcpy: semax_body Vprog Gprog 
+Lemma body_example_call_strcpy: semax_body Vprog Gprog
          f_example_call_strcpy example_call_strcpy_spec.
 Proof.
 start_function.
@@ -628,4 +628,4 @@ Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

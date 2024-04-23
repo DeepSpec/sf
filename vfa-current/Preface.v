@@ -69,7 +69,7 @@
 
 (** Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
     describes the Coq installation you will need.  This edition was
-    built with Coq 8.17.
+    built with Coq 8.17.1.
 
     In addition, two of the chapters ask you to compile and run an
     OCaml program; having OCaml installed on your computer is helpful,
@@ -101,7 +101,7 @@
     readers.  Advanced exercises are for readers who want an extra
     challenge (and, in return, a deeper contact with the material).
 
-    _Please do not post solutions to the exercises in any public place_: 
+    _Please do not post solutions to the exercises in any public place_:
     Software Foundations is widely used both for self-study and for
     university courses.  Having solutions easily available makes it
     much less useful for courses, which typically have graded homework
@@ -148,7 +148,7 @@
     title        =   "Verified Functional Algorithms",
     series       =   "Software Foundations",
     volume       =   "3",
-    year         =   "2023",
+    year         =   "2024",
     publisher    =   "Electronic textbook",
     note         =   {Version 1.5.4, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
@@ -162,4 +162,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2023-12-24 12:57 *)
+(* 2024-04-23 03:52 *)

@@ -425,12 +425,7 @@ where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
     a custom one like [stlc]). This restriction only applies to the
     [subst] definition -- that is, before the [where ...] part. From now
     on, using the substitution notation in the [stlc] custom grammar
-    doesn't need any curly braces.
-
-     BCP 23: I don't understand the last sentence -- there are no
-   curly braces.  And I wonder whether any readers are really
-   interested in the rest.  It's all a pile of hacks anyway. 
- *)
+    doesn't need any curly braces. *)
 
 (** For example... *)
 Check <{[x:=true] x}>.
@@ -522,7 +517,7 @@ Proof.
 
     is traditionally called _beta-reduction_. *)
 
-(** 
+(**
                                value v2
                      ---------------------------                     (ST_AppAbs)
                      (\x:T2,t1) v2 --> [x:=v2]t1
@@ -754,7 +749,7 @@ Definition context := partial_map ty.
 (* ================================================================= *)
 (** ** Typing Relation *)
 
-(** 
+(**
                             Gamma x = T1
                           ------------------                             (T_Var)
                           Gamma |-- x \in T1
@@ -856,7 +851,6 @@ Proof.
 
     Formally prove the following typing derivation holds:
 
-    
        empty |-- \x:Bool->B, \y:Bool->Bool, \z:Bool,
                    y (x z)
              \in T.
@@ -918,4 +912,4 @@ Proof.
 
 End STLC.
 
-(* 2023-12-24 12:54 *)
+(* 2024-04-23 03:47 *)

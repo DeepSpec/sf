@@ -269,9 +269,9 @@ End ExamplePrettyAssertions.
       stating that command [X := X + 1] will transform a state in
       which [X = 0] to a state in which [X = 1].
 
-    - [forall m, {{X = m}} X := X + 1 {{X = m + 1}}], is a
+    - [forall m, {{X = m}} X := X + 1 {{X = m + 1}}] is a
       _proposition_ stating that the Hoare triple [{{X = m}} X := X +
-      m {{X = m + 1}}] is valid for any choice of [m].  Note that [m]
+      1 {{X = m + 1}}] is valid for any choice of [m].  Note that [m]
       in the two assertions and the command in the middle is a
       reference to the _Coq_ variable [m], which is bound outside the
       Hoare triple. *)
@@ -673,7 +673,7 @@ Proof. (* FILL IN HERE *) Admitted.
       {{ True }} X := a {{ X = a }}
 
     Give a counterexample showing that this rule is incorrect and use
-    it to complete the proof belkow, showing that it is really a
+    it to complete the proof below, showing that it is really a
     counterexample.  (Hint: The rule universally quantifies over the
     arithmetic expression [a], and your counterexample needs to
     exhibit an [a] for which the rule doesn't work.) *)
@@ -2330,4 +2330,4 @@ End HoareAssertAssume.
 
 
 
-(* 2023-12-24 12:54 *)
+(* 2024-04-23 03:47 *)

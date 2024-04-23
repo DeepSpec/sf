@@ -1,6 +1,6 @@
 (** * Verif_reverse: Linked lists in Verifiable C *)
 
-(** This chapter demonstrates some more features of Verifiable C. 
+(** This chapter demonstrates some more features of Verifiable C.
   There are no exercises in this chapter. *)
 
 (* ================================================================= *)
@@ -31,7 +31,7 @@ by flipping through the slides of Reverse-Slides.pdf, distributed with
 this chapter.    Let's prove this program correct!
 *)
 
-(** SEE ALSO VC.pdf Chapter 46 (_Proof of the reverse program_) *)
+(** SEE ALSO VC.pdf Chapter 50 (_Proof of the reverse program_) *)
 
 (** As usual, we import the Verifiable C system [VST.floyd.proofauto],
     then the program to be verified, in this case [reverse].  Then we
@@ -374,7 +374,7 @@ Proof.
 start_function.
 
 (**  As usual, the current assertion (precondition) is derived from the PRE
-  clause of the function specification, [reverse_spec], and the current command 
+  clause of the function specification, [reverse_spec], and the current command
   [ w=0; ...more... ] is the function body of [f_reverse].
 
   The first statement (command) in the function-body is the assignment
@@ -412,7 +412,7 @@ Fail forward.
 (** To prove a while-loop, you must supply a loop invariant,
     such as
 
-     (EX s1 ... PROP(...)LOCAL(...)SEP(...). 
+     (EX s1 ... PROP(...)LOCAL(...)SEP(...).
 *)
 
 forward_while
@@ -422,7 +422,7 @@ forward_while
      LOCAL (temp _w w; temp _v v)
      SEP (listrep s1 w; listrep s2 v)).
 
-(** The forward_while tactic leaves four subgoals, 
+(** The forward_while tactic leaves four subgoals,
   which we mark with - (the Coq "bullet") *)
 - (* Prove that (current) precondition implies the loop invariant *)
 hint.
@@ -510,7 +510,7 @@ destruct s2 as [ | h r].
 
    Intros.
 
-   (** Now, above the line, we have [v=nullval] and [isptr v]; 
+   (** Now, above the line, we have [v=nullval] and [isptr v];
        this is a contradiction. *)
 
    subst. contradiction.
@@ -560,8 +560,8 @@ destruct s2 as [ | h r].
      Exists w. entailer!.
 
 - (* after the loop *)
-  (** As usual in any Hoare logic (including Separation Logic), the 
-    postcondition of a while-loop is {Inv /\ not Test}, where Inv is the 
+  (** As usual in any Hoare logic (including Separation Logic), the
+    postcondition of a while-loop is {Inv /\ not Test}, where Inv is the
     loop invariant and Test is the loop test.  Here, all the EXistentials
     and PROPs of the loop invariant have been moved above the line as
     [s1,s2,w,v,HRE,H].
@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

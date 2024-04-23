@@ -1519,7 +1519,19 @@ In this extended exercise, your job is to finish formalizing the
 </div>
 <div class="code">
 <span class="id" title="keyword">Fixpoint</span> <a id="STLCArith.subst" class="idref" href="#STLCArith.subst"><span class="id" title="definition">subst</span></a> (<a id="x:83" class="idref" href="#x:83"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) (<a id="s:84" class="idref" href="#s:84"><span class="id" title="binder">s</span></a> : <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a>) (<a id="t:85" class="idref" href="#t:85"><span class="id" title="binder">t</span></a> : <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a>) : <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
+</div>
+
+<div class="doc">
+(You'll need to add remove the period at the end of this
+    definition and add
+<pre>
+    where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
+</pre>
+    when you fill it in.) 
+</div>
+<div class="code">
+
 <span class="id" title="keyword">Inductive</span> <a id="STLCArith.value" class="idref" href="#STLCArith.value"><span class="id" title="inductive">value</span></a> : <a class="idref" href="StlcProp.html#STLCArith.tm"><span class="id" title="inductive">tm</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 .<br/><hr class='doublespaceincode'/>
@@ -1615,7 +1627,7 @@ In this extended exercise, your job is to finish formalizing the
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="StlcProp.html#STLCArith"><span class="id" title="module">STLCArith</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2023-12-24&nbsp;12:54&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-04-23&nbsp;03:47&nbsp;*)</span><br/>
 </div>
 </div>
 

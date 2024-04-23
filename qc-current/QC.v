@@ -30,10 +30,10 @@ Require Import String. Local Open Scope string.
     generators.  First, [returnGen] takes a constant value and yields
     a generator that always returns this value. *)
 
-Check returnGen. 
-(** 
+Check returnGen.
+(**
 
-     ===> returnGen : ?A -> G ?A 
+     ===> returnGen : ?A -> G ?A
 *)
 
 (** We can see how it behaves by using the [Sample] command, which
@@ -42,7 +42,7 @@ Check returnGen.
 
 (* Sample (returnGen 42).
 
-     ===> [42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42] 
+     ===> [42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42]
 *)
 
 (** Next, given a random generator for [A] and a _function_ [f] taking
@@ -53,8 +53,8 @@ Check returnGen.
 Check bindGen.
 (**
 
-     ===> bindGen : G ?A -> (?A -> G ?B) -> G ?B 
-*) 
+     ===> bindGen : G ?A -> (?A -> G ?B) -> G ?B
+*)
 
 (** Naturally, the implementation of [bindGen] must take care
     to pass different random seeds to the two sub-generators! *)
@@ -62,7 +62,7 @@ Check bindGen.
 (** With these two primitives in hand, we can make [G] an instance of
     the [Monad] typeclass. *)
 
-Section GMonadDef. 
+Section GMonadDef.
 
 Instance GMonad : `{Monad G} | 3 :=
   {
@@ -81,7 +81,7 @@ End GMonadDef.
 Check @choose.
 (**
 
-     ===> 
+     ===>
      @choose
      : forall G : Type -> Type,
        Producer G ->
@@ -96,16 +96,16 @@ Check @choose.
     generalizes generators and also encompasses enumerators --- you can safely ignore it for now.
 *)
 
-Print ChoosableFromInterval. 
+Print ChoosableFromInterval.
 (**
 
      ===>
-     Record ChoosableFromInterval (A : Type) : Type := 
+     Record ChoosableFromInterval (A : Type) : Type :=
        Build_ChoosableFromInterval
        { super : Ord A;
          randomR : A * A -> RandomSeed -> A * RandomSeed;
          ...
-       }. 
+       }.
 *)
 
 (* Sample (choose (0,10)).
@@ -118,7 +118,7 @@ Print ChoosableFromInterval.
     Print out the full definition of [ChoosableFromInterval].  Can you
     understand what it means?
 
-    [] *)    
+    [] *)
 
 (* ================================================================= *)
 (** ** Lists *)
@@ -132,32 +132,32 @@ Print ChoosableFromInterval.
 Check listOf.
 (**
 
-     ===> listOf : G ?A -> G (list ?A) 
+     ===> listOf : G ?A -> G (list ?A)
 *)
 
 (* Sample (listOf (choose (0,4))).
 
-     ===> 
-      [ [ 0, 3, 2, 0 ], 
-        [ 1, 3, 4, 1, 0, 3, 0, 2, 2, 3, 2, 2, 2, 0, 4, 2, 3, 0, 1 ], 
-        [ 3, 4, 3, 1, 2, 4, 4, 1, 0, 3, 4, 3, 2, 2, 4, 4, 1 ], 
-        [ 0 ], 
-        [ 4, 2, 3 ], 
-        [ 3, 3, 4, 0, 1, 4, 3, 2, 4, 1 ], 
-        [ 0, 4 ], 
-        [  ], 
-        [ 1, 0, 1, 3, 1 ], 
-        [ 0, 0 ], 
-        [ 1, 4 ], 
-        [ 4, 3, 2, 0, 2, 2, 4, 0 ], 
-        [ 1, 1, 0, 0, 1, 4 ], 
-        [ 2, 0, 2, 1, 3, 3 ], 
-        [ 4, 3, 3, 0, 1 ], 
-        [ 3, 3, 3 ], 
-        [ 3, 2, 4 ], 
-        [ 1, 2 ], 
-        [  ], 
-        [  ] ] 
+     ===>
+      [ [ 0, 3, 2, 0 ],
+        [ 1, 3, 4, 1, 0, 3, 0, 2, 2, 3, 2, 2, 2, 0, 4, 2, 3, 0, 1 ],
+        [ 3, 4, 3, 1, 2, 4, 4, 1, 0, 3, 4, 3, 2, 2, 4, 4, 1 ],
+        [ 0 ],
+        [ 4, 2, 3 ],
+        [ 3, 3, 4, 0, 1, 4, 3, 2, 4, 1 ],
+        [ 0, 4 ],
+        [  ],
+        [ 1, 0, 1, 3, 1 ],
+        [ 0, 0 ],
+        [ 1, 4 ],
+        [ 4, 3, 2, 0, 2, 2, 4, 0 ],
+        [ 1, 1, 0, 0, 1, 4 ],
+        [ 2, 0, 2, 1, 3, 3 ],
+        [ 4, 3, 3, 0, 1 ],
+        [ 3, 3, 3 ],
+        [ 3, 2, 4 ],
+        [ 1, 2 ],
+        [  ],
+        [  ] ]
 *)
 
 (** The second combinator, [vectorOf], receives an additional numeric
@@ -166,29 +166,29 @@ Check listOf.
 Check vectorOf.
 (**
 
-     ===> vectorOf : nat -> G ?A -> G (list ?A) 
+     ===> vectorOf : nat -> G ?A -> G (list ?A)
 *)
 
 (* Sample (vectorOf 3 (choose (0,4))).
 
-     ===> 
-      [ [0, 1, 4], 
-        [1, 1, 0], 
-        [3, 3, 3], 
-        [0, 2, 1], 
-        [1, 3, 2], 
-        [3, 3, 0], 
-        [3, 0, 4], 
-        [2, 3, 3], 
-        [3, 2, 4], 
-        [1, 2, 3], 
-        [2, 0, 4]  ] 
+     ===>
+      [ [0, 1, 4],
+        [1, 1, 0],
+        [3, 3, 3],
+        [0, 2, 1],
+        [1, 3, 2],
+        [3, 3, 0],
+        [3, 0, 4],
+        [2, 3, 3],
+        [3, 2, 4],
+        [1, 2, 3],
+        [2, 0, 4]  ]
 *)
 
 (** This raises a question.  It's clear how [vectorOf] decides how big
     to make its lists (we tell it!), but how does [listOf] do it?  The
     answer is hidden inside [G].
-  
+
     In addition to handling random-seed plumbing, the [G] monad also
     maintains a "current maximum size" (in the style of a "reader
     monad", if you like that terminology): a natural number that
@@ -241,7 +241,7 @@ Inductive color := Red | Green | Blue | Yellow.
 Check elems_.
 (**
 
-     ===> elems_ : ?A -> list ?A -> G ?A 
+     ===> elems_ : ?A -> list ?A -> G ?A
 *)
 
 Definition genColor' : G color :=
@@ -249,8 +249,8 @@ Definition genColor' : G color :=
 
 (* Sample genColor'.
 
-     ===> 
-   [Red, Green, Blue, Blue, Red, Yellow, Blue, Red, Blue, Blue, Red] 
+     ===>
+   [Red, Green, Blue, Blue, Red, Yellow, Blue, Red, Blue, Blue, Red]
 *)
 
 (** The first argument to [elems_] serves as a default result.  If
@@ -263,15 +263,15 @@ Definition genColor' : G color :=
 (** To make the common case smoother, QuickChick provides convenient
     notations that automatically extract the default element. *)
 
-(** 
+(**
 
-     " 'elems' [ x ] " 
+     " 'elems' [ x ] "
          := elems_ x (cons x nil)
-     " 'elems' [ x ; y ] " 
+     " 'elems' [ x ; y ] "
          := elems_ x (cons x (cons y nil))
-     " 'elems' [ x ; y ; .. ; z ] " 
+     " 'elems' [ x ; y ; .. ; z ] "
          := elems_ x (cons x (cons y (.. (cons z nil))))
-     " 'elems' ( x ;; l ) " 
+     " 'elems' ( x ;; l ) "
          := elems_ x (cons x l)
 *)
 
@@ -283,7 +283,7 @@ Definition genColor : G color :=
 
 (* Sample genColor.
 
-     ===> [Red, Green, Blue, Blue, Red, Yellow, Blue, Red, Blue, Blue, Red] 
+     ===> [Red, Green, Blue, Blue, Red, Yellow, Blue, Red, Blue, Blue, Red]
 *)
 
 (** For more complicated ADTs, QuickChick provides more combinators.
@@ -305,15 +305,15 @@ Arguments Node {A} _ _ _.
     declaration stems from the fact that Coq's typeclasses, unlike
     Haskell's, are not automatically recursive.  We could
     alternatively define [aux] with a separate top-level
-    [Fixpoint].) *) 
+    [Fixpoint].) *)
 
 #[export] Instance showTree {A} `{_ : Show A} : Show (Tree A) :=
   {| show := let fix aux t :=
        match t with
          | Leaf => "Leaf"
          | Node x l r =>
-             "Node (" ++ show x ++ ") (" 
-                      ++ aux l ++ ") (" 
+             "Node (" ++ show x ++ ") ("
+                      ++ aux l ++ ") ("
                       ++ aux r ++ ")"
        end
      in aux
@@ -324,7 +324,7 @@ Arguments Node {A} _ _ _.
 Check oneOf_.
 (**
 
-     ===> oneOf_ : G ?A -> list (G ?A) -> G ?A 
+     ===> oneOf_ : G ?A -> list (G ?A) -> G ?A
 *)
 
 (** This combinator takes a default generator and a list of
@@ -370,7 +370,7 @@ Fixpoint genTreeSized {A} (sz : nat) (g : G A) : G (Tree A) :=
   match sz with
     | O => ret Leaf
     | S sz' =>
-        oneOf [ 
+        oneOf [
           ret Leaf ;
           liftM3 Node g (genTreeSized sz' g) (genTreeSized sz' g)
         ]
@@ -378,7 +378,7 @@ Fixpoint genTreeSized {A} (sz : nat) (g : G A) : G (Tree A) :=
 
 (* Sample (genTreeSized 3 (choose(0,3))).
 
-     ===> 
+     ===>
        [ Leaf,
          Leaf,
          Node (3) (Node (0) (Leaf) (Leaf))
@@ -399,7 +399,7 @@ Fixpoint genTreeSized {A} (sz : nat) (g : G A) : G (Tree A) :=
          Leaf,
          Leaf,
          Leaf,
-         Leaf ] 
+         Leaf ]
 *)
 
 (** While this generator succeeds in avoiding nontermination, we can
@@ -415,7 +415,7 @@ Fixpoint genTreeSized {A} (sz : nat) (g : G A) : G (Tree A) :=
 Check freq_.
 (**
 
-     ===> freq_ : G ?A -> list (nat * G ?A) -> G ?A 
+     ===> freq_ : G ?A -> list (nat * G ?A) -> G ?A
 *)
 
 (** As with [oneOf], we usually use a convenient derived notation,
@@ -427,7 +427,7 @@ Check freq_.
 
 Fixpoint genTreeSized' {A} (sz : nat) (g : G A) : G (Tree A) :=
   match sz with
-    | O => ret Leaf 
+    | O => ret Leaf
     | S sz' =>
         freq [ (1,  ret Leaf) ;
                (sz, liftM3 Node g (genTreeSized' sz' g)
@@ -437,8 +437,8 @@ Fixpoint genTreeSized' {A} (sz : nat) (g : G A) : G (Tree A) :=
 
 (* Sample (genTreeSized' 3 (choose(0,3))).
 
-     ===> 
-         [ Node (3) (Node (1) (Node (3) (Leaf) (Leaf)) (Leaf)) 
+     ===>
+         [ Node (3) (Node (1) (Node (3) (Leaf) (Leaf)) (Leaf))
                     (Node (0) (Leaf) (Node (3) (Leaf) (Leaf))),
            Leaf,
            Node (2) (Node (1) (Leaf) (Leaf)) (Leaf),
@@ -449,25 +449,25 @@ Fixpoint genTreeSized' {A} (sz : nat) (g : G A) : G (Tree A) :=
                     (Node (2) (Leaf) (Leaf)),
            Node (1) (Node (3) (Node (2) (Leaf) (Leaf)) (Node (3) (Leaf) (Leaf)))
                     (Node (1) (Leaf) (Node (2) (Leaf) (Leaf))),
-           Node (0) (Node (0) (Node (0) (Leaf) (Leaf)) (Node (1) (Leaf) (Leaf))) 
+           Node (0) (Node (0) (Node (0) (Leaf) (Leaf)) (Node (1) (Leaf) (Leaf)))
                     (Node (2) (Node (3) (Leaf) (Leaf)) (Node (0) (Leaf) (Leaf))),
            Node (2) (Node (2) (Leaf) (Leaf)) (Node (1) (Node (2) (Leaf) (Leaf))
                                                        (Node (2) (Leaf) (Leaf))),
-           Node (2) (Node (3) (Node (2) (Leaf) (Leaf)) (Leaf)) 
+           Node (2) (Node (3) (Node (2) (Leaf) (Leaf)) (Leaf))
                     (Node (0) (Node (2) (Leaf) (Leaf)) (Leaf)),
            Leaf,
            Node (2) (Node (3) (Node (3) (Leaf) (Leaf)) (Leaf)) (Leaf),
            Leaf,
            Node (1) (Leaf) (Leaf),
            Leaf,
-           Node (1) (Node (2) (Leaf) (Node (3) (Leaf) (Leaf))) 
+           Node (1) (Node (2) (Leaf) (Node (3) (Leaf) (Leaf)))
                     (Node (0) (Leaf) (Node (1) (Leaf) (Leaf))),
            Leaf,
-           Node (3) (Node (0) (Node (0) (Leaf) (Leaf)) (Leaf)) 
+           Node (3) (Node (0) (Node (0) (Leaf) (Leaf)) (Leaf))
                     (Node (0) (Leaf) (Node (2) (Leaf) (Leaf))),
-           Node (2) (Node (2) (Node (0) (Leaf) (Leaf)) (Leaf)) 
+           Node (2) (Node (2) (Node (0) (Leaf) (Leaf)) (Leaf))
                     (Node (1) (Leaf) (Node (2) (Leaf) (Leaf))),
-           Leaf ] 
+           Leaf ]
 *)
 
 (** This looks better. *)
@@ -496,7 +496,7 @@ Fixpoint genTreeSized' {A} (sz : nat) (g : G A) : G (Tree A) :=
 (** To showcase how such generators can be used to find
     counterexamples, suppose we define a function for "mirroring" a
     tree -- swapping its left and right subtrees recursively. *)
-   
+
 Fixpoint mirror {A : Type} (t : Tree A) : Tree A :=
   match t with
     | Leaf => Leaf
@@ -589,15 +589,15 @@ End CheckerPlayground1.
 (* Sample (CheckerPlayground1.checker true).
 
      ===>
-      [Success, Success, Success, Success, Success, Success, Success, 
-       Success, Success, Success, Success] 
+      [Success, Success, Success, Success, Success, Success, Success,
+       Success, Success, Success, Success]
 *)
 
 (* Sample (CheckerPlayground1.checker false).
 
      ===>
-      [Failure, Failure, Failure, Failure, Failure, Failure, Failure, 
-       Failure, Failure, Failure, Failure] 
+      [Failure, Failure, Failure, Failure, Failure, Failure, Failure,
+       Failure, Failure, Failure, Failure]
 *)
 
 (** What we've done so far may look a a bit strange, since these
@@ -639,15 +639,15 @@ End CheckerPlayground2.
 (*  Sample (CheckerPlayground1.checker CheckerPlayground2.c1).
 
      ===>
-      [Failure, Failure, Failure, Failure, Failure, Failure, Failure, 
-       Failure, Failure, Failure, Failure] 
+      [Failure, Failure, Failure, Failure, Failure, Failure, Failure,
+       Failure, Failure, Failure, Failure]
 *)
 
 (* Sample (CheckerPlayground1.checker CheckerPlayground2.c2).
 
      ===>
-      [Success, Success, Success, Success, Success, Success, Success, 
-       Success, Success, Success, Success] 
+      [Success, Success, Success, Success, Success, Success, Success,
+       Success, Success, Success, Success]
 *)
 
 (** Again, the intuition is that, although we didn't present
@@ -677,11 +677,11 @@ End CheckerPlayground3.
 
 (** Let's try this out!
 
-    First, let's revisit our color example to execute a simple check. 
-    We can define a boolean test that returns [true] for [Red] and 
+    First, let's revisit our color example to execute a simple check.
+    We can define a boolean test that returns [true] for [Red] and
     [false] for other colors. *)
 
-Definition isRed c := 
+Definition isRed c :=
   match c with
     Red => true
   | _ => false
@@ -694,11 +694,11 @@ Definition isRed c :=
 (* Sample (CheckerPlayground3.forAll genColor isRed).
 
      ===>
-      [Success, Failure, Failure, Failure, Success, Failure, 
-       Failure, Success, Failure, Failure, Success] 
+      [Success, Failure, Failure, Failure, Success, Failure,
+       Failure, Success, Failure, Failure, Success]
 *)
 
-(** Looks like not all colors are [Red].  
+(** Looks like not all colors are [Red].
 
     Good to know. *)
 
@@ -712,8 +712,8 @@ Sample (CheckerPlayground3.forAll
 (**
 
      ===>
-      [Success, Success, Success, Success, Success, Success, Success, 
-       Success, Success, Success, Success] 
+      [Success, Success, Success, Success, Success, Success, Success,
+       Success, Success, Success, Success]
 *)
 
 (** Excellent: It looks like many tests are succeeding -- maybe the
@@ -732,8 +732,8 @@ Sample (CheckerPlayground3.forAll
 (**
 
      ===>
-      [Failure, Success, Failure, Success, Success, Success, Failure, 
-       Success, Failure, Failure, Success] 
+      [Failure, Success, Failure, Success, Success, Success, Failure,
+       Success, Failure, Failure, Success]
 *)
 
 (** Great -- looks like a good number of tests are failing now, as
@@ -815,19 +815,19 @@ Sample (CheckerPlayground4.forAll
 (**
 
      ===>
-      [Failure: (Node (2) (Node (3) (Node (2) (Leaf) (Leaf)) (Leaf)) 
-                          (Node (0) (Node (2) (Leaf) (Leaf)) (Leaf)), tt), 
-      Success, 
-      Failure: (Node (2) (Node (3) (Node (3) (Leaf) (Leaf)) (Leaf)) (Leaf), tt), 
-      Success, Success, Success, 
-      Failure: (Node (1) (Node (2) (Leaf) (Node (3) (Leaf) (Leaf))) 
-                         (Node (0) (Leaf) (Node (1) (Leaf) (Leaf))), tt), 
-      Success, 
-      Failure: (Node (3) (Node (0) (Node (0) (Leaf) (Leaf)) (Leaf)) 
-                         (Node (0) (Leaf) (Node (2) (Leaf) (Leaf))), tt), 
-      Failure: (Node (2) (Node (2) (Node (0) (Leaf) (Leaf)) (Leaf)) 
-                         (Node (1) (Leaf) (Node (2) (Leaf) (Leaf))), tt), 
-      Success] 
+      [Failure: (Node (2) (Node (3) (Node (2) (Leaf) (Leaf)) (Leaf))
+                          (Node (0) (Node (2) (Leaf) (Leaf)) (Leaf)), tt),
+      Success,
+      Failure: (Node (2) (Node (3) (Node (3) (Leaf) (Leaf)) (Leaf)) (Leaf), tt),
+      Success, Success, Success,
+      Failure: (Node (1) (Node (2) (Leaf) (Node (3) (Leaf) (Leaf)))
+                         (Node (0) (Leaf) (Node (1) (Leaf) (Leaf))), tt),
+      Success,
+      Failure: (Node (3) (Node (0) (Node (0) (Leaf) (Leaf)) (Leaf))
+                         (Node (0) (Leaf) (Node (2) (Leaf) (Leaf))), tt),
+      Failure: (Node (2) (Node (2) (Node (0) (Leaf) (Leaf)) (Leaf))
+                         (Node (1) (Leaf) (Node (2) (Leaf) (Leaf))), tt),
+      Success]
 *)
 
 (** The bug is found several times and actual counterexamples are
@@ -849,11 +849,11 @@ QuickChick
      ===>
      QuickChecking (forAll (genTreeSized' 3 (choose (0, 3))) faultyMirrorP)
 
-     Node (0) (Node (0) (Node (2) (Leaf) (Leaf)) 
+     Node (0) (Node (0) (Node (2) (Leaf) (Leaf))
                         (Node (1) (Leaf) (Leaf)))
               (Node (1) (Node (0) (Leaf) (Leaf)) (Leaf))
 
-     *** Failed after 1 tests and 0 shrinks. (0 discards) 
+     *** Failed after 1 tests and 0 shrinks. (0 discards)
 *)
 
 (** However, these counterexamples themselves still leave something to
@@ -906,29 +906,29 @@ QuickChick
 Print shrinkList.
 (**
 
-     ===> 
-       shrinkList = 
-         fun (A : Type) (H : Shrink A) => 
+     ===>
+       shrinkList =
+         fun (A : Type) (H : Shrink A) =>
             {| shrink := shrinkListAux shrink |}
-       : forall A : Type, Shrink A -> Shrink (list A) 
+       : forall A : Type, Shrink A -> Shrink (list A)
 
 *)
 
 Print shrinkListAux.
 (**
 
-     ===> 
-       shrinkListAux = 
+     ===>
+       shrinkListAux =
          fix shrinkListAux (A : Type) (shr : A -> list A) (l : list A) :
            list (list A) :=
            match l with
            | [] => []
            | x :: xs =>
-               ((xs :: map (fun xs' : list A => x :: xs') 
+               ((xs :: map (fun xs' : list A => x :: xs')
                            (shrinkListAux A shr xs)) ++
                 map (fun x' : A => x' :: xs) (shr x))
            end
-       : forall A : Type, (A -> list A) -> list A -> list (list A) 
+       : forall A : Type, (A -> list A) -> list A -> list (list A)
 *)
 
 (** An empty list cannot be shrunk, as there is no smaller list.  A
@@ -950,7 +950,7 @@ Print shrinkListAux.
     the subtrees. *)
 
 Open Scope list.
-Fixpoint shrinkTreeAux {A} 
+Fixpoint shrinkTreeAux {A}
               (s : A -> list A) (t : Tree A)
             : list (Tree A) :=
   match t with
@@ -961,7 +961,7 @@ Fixpoint shrinkTreeAux {A}
                     map (fun r' => Node x l r') (shrinkTreeAux s r)
   end.
 
-#[export] Instance shrinkTree {A} `{Shrink A} : Shrink (Tree A) := 
+#[export] Instance shrinkTree {A} `{Shrink A} : Shrink (Tree A) :=
   {| shrink x := shrinkTreeAux shrink x |}.
 
 (** With [shrinkTree] in hand, we can use the [forAllShrink] property
@@ -969,18 +969,18 @@ Fixpoint shrinkTreeAux {A}
     additional argument, to test properties like [faultyMirrorP]. *)
 
 (*
-  QuickChick 
-       (forAllShrink 
-          (genTreeSized' 5 (choose (0,5))) 
+  QuickChick
+       (forAllShrink
+          (genTreeSized' 5 (choose (0,5)))
           shrink
-          faultyMirrorP). 
+          faultyMirrorP).
 *)
 (**
 
-     ===> 
+     ===>
        Node (0) (Leaf) (Node (0) (Leaf) (Leaf))
 
-       *** Failed! After 1 tests and 8 shrinks 
+       *** Failed! After 1 tests and 8 shrinks
 *)
 
 (** We now get a quite simple counterexample (in fact, one of two
@@ -996,7 +996,7 @@ Fixpoint shrinkTreeAux {A}
 
 Inductive TernaryTree A :=
 | TLeaf : TernaryTree A
-| TNode : 
+| TNode :
     A -> TernaryTree A -> TernaryTree A -> TernaryTree A -> TernaryTree A.
 
 Arguments TLeaf {A}.
@@ -1071,7 +1071,7 @@ Fixpoint traverse_path {A} (p:path) (t: TernaryTree A) :=
     end
   end.
 
-(** And we can mirror a path by simply swapping left and 
+(** And we can mirror a path by simply swapping left and
     right throughout. *)
 
 Definition path_mirror := map (fun t => match t with
@@ -1091,7 +1091,7 @@ Proof. constructor; dec_eq. Defined.
     tree result. *)
 
 Definition tern_mirror_path_flip (t:TernaryTree nat) (p:path) :=
-  (  traverse_path p t 
+  (  traverse_path p t
    = tern_mirror (traverse_path (path_mirror p) (tern_mirror t))) ?.
 
 (** Before using this property to test [tern_mirror], we'll need to be
@@ -1152,7 +1152,7 @@ Definition genDirection : G direction :=
     [arbitrary] of type [G A]. *)
 
 Module DefineGen.
-  
+
 Class Gen (A : Type) :=
   {
     arbitrary : G A
@@ -1185,7 +1185,7 @@ End DefineArbitrary.
 (** We can use the top-level [QuickChick] command on quantified
     propositions with generatable and decidable conclusions, stating
     just the property and letting the typeclass machinery figure out
-    the rest.  
+    the rest.
 
     For example, suppose we want to test this: *)
 
@@ -1209,7 +1209,7 @@ Proof. dec_eq. Defined.
      ===>
        QuickChecking every_color_is_red
        Green
-       *** Failed after 1 tests and 1 shrinks. (0 discards) 
+       *** Failed after 1 tests and 1 shrinks. (0 discards)
 *)
 
 (* ################################################################# *)
@@ -1235,8 +1235,8 @@ Definition sized {A : Type} (f : nat -> G A) : G A :=
          match f n with
            MkG g => g n r
          end).
-  
-End DefineSized.  
+
+End DefineSized.
 (** To streamline assembling generators, it is convenient to introduce
     one more typeclass, [GenSized], whose instances are sized
     generators. *)
@@ -1261,7 +1261,7 @@ End DefineGenSized.
 (** Now we can make a [Gen] instance for trees by providing just an
     implementation of [arbitrarySized]. *)
 
-#[export] Instance genTree {A} `{Gen A} : GenSized (Tree A) := 
+#[export] Instance genTree {A} `{Gen A} : GenSized (Tree A) :=
   {| arbitrarySized n := genTreeSized' n arbitrary |}.
 
 (** Finally, with the [Arbitrary] instance for trees, we can supply
@@ -1292,15 +1292,15 @@ End DefineGenSized.
 Derive Arbitrary for Tree.
 (**
 
-     ===> GenSizedree is defined 
-     ===> ShrinkTree is defined 
+     ===> GenSizedree is defined
+     ===> ShrinkTree is defined
 *)
 Print GenSizedTree.
 Print ShrinkTree.
 
 Derive Show for Tree.
-(** 
-     ===> ShowTree is defined 
+(**
+     ===> ShowTree is defined
 *)
 Print ShowTree.
 
@@ -1315,15 +1315,15 @@ Print ShowTree.
     us an idea that something was wrong with the distribution of test
     cases, but it's often useful to collect more extensive statistics
     from larger sets of samples.
-    
+
     This is where [collect], another property combinator, comes in. *)
 
 Check @collect.
-(** 
+(**
 
-     ===> 
+     ===>
      @collect
-       : forall A prop : Type, Show A -> Checkable prop -> 
+       : forall A prop : Type, Show A -> Checkable prop ->
            A -> prop -> Checker
 *)
 
@@ -1351,7 +1351,7 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
 
 (* QuickChick (treeProp genTreeSized 5).
 
-     ===> 
+     ===>
        4947 : 0
        1258 : 1
        673 : 2
@@ -1376,7 +1376,7 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
        2 : 21
        1 : 23
 
-       +++ OK, passed 10000 tests 
+       +++ OK, passed 10000 tests
 *)
 
 (** We see that 62.5%% of the tests (4947 + 1258 / 10000) are either
@@ -1387,7 +1387,7 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
 
 (* QuickChick (treeProp genTreeSized' 5).
 
-     ===> 
+     ===>
        1624 : 0
        571 : 10
        564 : 12
@@ -1409,7 +1409,7 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
        179 : 20
        179 : 2
        138 : 21
-       132 : 3 
+       132 : 3
        87 : 22
        62 : 23
        19 : 24
@@ -1417,18 +1417,18 @@ Definition treeProp (g : nat -> G nat -> G (Tree nat)) n :=
        6 : 26
        2 : 27
 
-       +++ OK, passed 10000 tests 
+       +++ OK, passed 10000 tests
 *)
 
 (** This generates far fewer tiny examples, likely leading to more
-    efficient testing of interesting properties. However, there are 
+    efficient testing of interesting properties. However, there are
     still a lot of empty trees being generated.  Can we do something
-    about that? 
+    about that?
  *)
 
 (** **** Exercise: 2 stars, standard (genTreeSized'')
 
-    Write a generator [genTreeSized''] that generates fewer empty 
+    Write a generator [genTreeSized''] that generates fewer empty
     trees. Check your results using [collect].
 *)
 
@@ -1450,27 +1450,27 @@ Open Scope bool. Open Scope nat.
 
 (** Consider a function that inserts a natural number into a sorted list. *)
 
-Fixpoint sorted (l : list nat) := 
-  match l with 
-  | [] => true 
-  | x::xs => match xs with 
-             | [] => true 
-             | y :: ys => (x <=? y) && (sorted xs) 
-             end 
+Fixpoint sorted (l : list nat) :=
+  match l with
+  | [] => true
+  | x::xs => match xs with
+             | [] => true
+             | y :: ys => (x <=? y) && (sorted xs)
+             end
   end.
 
-Fixpoint insert (x : nat) (l : list nat) := 
-  match l with 
-  | [] => [x] 
-  | y::ys => if x <=? y then x :: l 
-             else y :: insert x ys 
+Fixpoint insert (x : nat) (l : list nat) :=
+  match l with
+  | [] => [x]
+  | y::ys => if x <=? y then x :: l
+             else y :: insert x ys
   end.
 
 (** We could test [insert] using a _conditional_ property, which uses _==>_ to encode implication:
  *)
 
 Check implication.
-(* 
+(*
 
      ===> implication : bool -> Checker -> Checker
 *)
@@ -1478,7 +1478,7 @@ Check implication.
 (**
    The _implication_ function takes a boolean (the precondition) and a
    Checker (the conclusion of the property); if the boolean is true,
-   it tests the Checker, otherwise, it rejects the current test. The _==>_ notation is in _Checker_scope_. 
+   it tests the Checker, otherwise, it rejects the current test. The _==>_ notation is in _Checker_scope_.
 
  *)
 
@@ -1488,14 +1488,14 @@ Definition insert_spec (x : nat) (l : list nat) :=
 
 Definition test_insert_spec :=
   forAll (choose (0,10)) (fun x =>
-  forAll (listOf (choose (0,10))) (fun l =>                            
+  forAll (listOf (choose (0,10))) (fun l =>
   insert_spec x l)).
 
 (* QuickChick test_insert_spec.
 
-     ===> 
-       QuickChecking test_insert_spec 
-       +++ Passed 10000 tests (17325 discards) 
+     ===>
+       QuickChecking test_insert_spec
+       +++ Passed 10000 tests (17325 discards)
 *)
 
 (** To test this property, QuickChick will try to generate random
@@ -1516,13 +1516,13 @@ Definition insert_spec' (x : nat) (l : list nat) :=
 
 Definition test_insert_spec' :=
   forAll (choose (0,10)) (fun x =>
-  forAll (listOf (choose (0,10))) (fun l =>                            
+  forAll (listOf (choose (0,10))) (fun l =>
   insert_spec' x l)).
 
 (* QuickChick test_insert_spec'.
 
-     ===> 
-   QuickChecking insert_spec' 
+     ===>
+   QuickChecking insert_spec'
    3652 : (Discarded) 7
    3582 : 0
    3568 : (Discarded) 6
@@ -1563,7 +1563,7 @@ Fixpoint genSortedList (low high : nat) (size : nat)
     else
       freq [ (1, ret []) ;
              (size, x <- choose (low, high);;
-                    xs <- genSortedList x high size';; 
+                    xs <- genSortedList x high size';;
                     ret (x :: xs)) ] end.
 
 (** We use a [size] parameter as usual to control the length of generated
@@ -1582,9 +1582,9 @@ Fixpoint genSortedList (low high : nat) (size : nat)
     new generator: *)
 
 Definition insert_spec_sorted (x : nat) :=
-  forAllShrink 
-    (genSortedList 0 10 10) 
-    shrink 
+  forAllShrink
+    (genSortedList 0 10 10)
+    shrink
     (fun l => insert_spec' x l).
 
 (** Now the distribution of lengths looks much better, and we don't
@@ -1606,7 +1606,7 @@ QuickChick insert_spec_sorted.
        885 : 8
        854 : 5
        847 : 1
-       +++ Passed 10000 tests (0 discards) 
+       +++ Passed 10000 tests (0 discards)
 *)
 (** Does this mean we are happy? *)
 
@@ -1632,8 +1632,8 @@ QuickChick insert_spec_sorted.
     The [isBST] predicate characterizes trees with elements between
     [low] and [high]. *)
 
-Fixpoint isBST (low high: nat) (t : Tree nat) := 
-  match t with 
+Fixpoint isBST (low high: nat) (t : Tree nat) :=
+  match t with
   | Leaf => true
   | Node x l r => (low <? x) && (x <? high)
                   && (isBST low x l) && (isBST x high r)
@@ -1642,44 +1642,43 @@ Fixpoint isBST (low high: nat) (t : Tree nat) :=
 (** Here is a (faulty?) insertion function for binary search trees. *)
 
 Fixpoint insertBST (x : nat) (t : Tree nat) :=
-  match t with 
+  match t with
   | Leaf => Node x Leaf Leaf
   | Node x' l r => if x <? x' then Node x' (insertBST x l) r
                    else Node x' l (insertBST x r)
   end.
 
-(** We would expect that if we insert an element that is within 
+(** We would expect that if we insert an element that is within
     the bounds [low] and [high] into a binary search tree, then
     the result is also a binary search tree. *)
 
 Definition insertBST_spec (low high : nat) (x : nat) (t : Tree nat) :=
-  (low <? x) ==> 
-  (x <? high) ==> 
-  (isBST low high t) ==> 
-  isBST low high (insertBST x t).                         
+  (low <? x) ==>
+  (x <? high) ==>
+  (isBST low high t) ==>
+  isBST low high (insertBST x t).
 
 (* QuickChick insertBST_spec.
 
-    
 
-    ===> 
+    ===>
       QuickChecking insertBST_spec
       0
       5
       4
       Node (4) (Leaf) (Leaf)
-      *** Failed after 85 tests and 1 shrinks. (1274 discards) 
+      *** Failed after 85 tests and 1 shrinks. (1274 discards)
 *)
 
 (** We can see that a bug exists when inserting an element into a
     [Node] with the same payload: if the element already exists in the
     binary search tree, we should not change it. *)
-  
+
 (** However we are wasting too much testing effort.  Indeed, if we fix the
     bug ... *)
 
 Fixpoint insertBST' (x : nat) (t : Tree nat) :=
-  match t with 
+  match t with
   | Leaf => Node x Leaf Leaf
   | Node x' l r => if x <? x' then Node x' (insertBST' x l) r
                    else if x' <? x then Node x' l (insertBST' x r)
@@ -1687,17 +1686,17 @@ Fixpoint insertBST' (x : nat) (t : Tree nat) :=
   end.
 
 Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
-  (low <? x) ==> (x <? high) ==> (isBST low high t) ==> 
-  isBST low high (insertBST' x t).                         
+  (low <? x) ==> (x <? high) ==> (isBST low high t) ==>
+  isBST low high (insertBST' x t).
 
 (** ... and try again... *)
 
 (* QuickChick insertBST_spec'.
 
-     ===> 
+     ===>
      QuickChecking insertBST_spec'
      *** Gave up! Passed only 1281 tests
-     Discarded: 20000 
+     Discarded: 20000
 *)
 (** ... we see that 90%% of tests are being discarded. *)
 
@@ -1710,4 +1709,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2023-12-24 13:03 *)
+(* 2024-04-23 03:55 *)

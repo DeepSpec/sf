@@ -178,7 +178,6 @@ Proof.
      following tactic applies [destruct] whenever the current goal is
      a [match] against a color or a tree. *)
 
-  
   match goal with
   | |- match ?c with Red => _ | Black => _  end <> _ => destruct c
   | |- match ?t with E => _ | T _ _ _ _ _ => _ end  <> _=> destruct t
@@ -362,7 +361,6 @@ Proof.
 
     The other goals look similar. *)
 
-  
 Abort.
 
 (** To make progress, we can set up some helper lemmas. *)
@@ -837,4 +835,4 @@ On the same machine that prints,
     - Red-black trees are about as fast on consecutive insertions as
       on random. *)
 
-(* 2023-12-24 12:57 *)
+(* 2024-04-23 03:52 *)

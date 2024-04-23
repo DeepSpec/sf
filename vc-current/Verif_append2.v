@@ -3,7 +3,7 @@
 (* ================================================================= *)
 (** ** Separating Implication *)
 
-(** Separating implication is another separation logic operator. It is 
+(** Separating implication is another separation logic operator. It is
  written as  [-*]  in  Verifiable C. Because of its shape, it is usually
  called "magic wand". The following [Locate] command and [Check] command
  show this notation definition and its typing information. *)
@@ -28,7 +28,7 @@ Check wand_sepcon_adjoint.
   (* : forall P Q R : mpred, P * Q |-- R   <->   P |-- Q -* R *)
 
 (** Because of this property, we also call [-*] a right adjoint of [*].
-  In propositional logic, 
+  In propositional logic,
   implication [->] is a right adjoint of conjunction [/\].
  *)
 
@@ -49,7 +49,7 @@ Check wand_derives.
 Check modus_ponens_wand.
   (*   : forall P Q : mpred, P * (P -* Q) |-- Q  *)
 
-(** Now, we learn to use the adjoint property to prove other 
+(** Now, we learn to use the adjoint property to prove other
   separation-logic rules about [-*]. We will start from an easy one. *)
 
 Lemma wand_trivial: forall P Q: mpred, P |-- Q -* (P * Q).
@@ -59,7 +59,7 @@ Proof.
   apply derives_refl.
 Qed.
 
-(** Then, we will reprove the modus ponens rule for [-*] and [*] from 
+(** Then, we will reprove the modus ponens rule for [-*] and [*] from
   the adjoint property. *)
 
 Lemma modus_ponens_wand_from_adjoint: forall P Q : mpred, P * (P -* Q) |-- Q.
@@ -76,7 +76,7 @@ Qed.
 
 (** **** Exercise: 2 stars, standard: (wand_derives) *)
 Lemma wand_derives_from_adjoint_and_modus_ponens:
-  forall P P' Q Q' : mpred, 
+  forall P P' Q Q' : mpred,
    P' |-- P  ->  Q |-- Q'  ->  P -* Q |-- P' -* Q'.
 Proof.
 (* FILL IN HERE *) Admitted.
@@ -130,7 +130,7 @@ Require Import VC.Verif_append1.
 Definition wlseg (contents: list val) (x y: val) : mpred :=
   ALL tail: list val, listrep tail y -* listrep (contents ++ tail) x.
 
-(** Here, "w" in "wlseg" represents "wand". 
+(** Here, "w" in "wlseg" represents "wand".
 
    This definition is very different from [lseg] and is beautifully
    simple, and it generalizes nicely to other data structures such as trees.
@@ -141,8 +141,8 @@ Definition wlseg (contents: list val) (x y: val) : mpred :=
    and how two wand expressions can merge ([wlseg_wlseg]).
 
    There are two logical operators in this definition, [-*] and the
-   universal quantifier. Previously, we have learned how to prove 
-   properties about [*] and [-*].  To prove properties about universal 
+   universal quantifier. Previously, we have learned how to prove
+   properties about [*] and [-*].  To prove properties about universal
    quantifiers, we will use [allp_left] and [allp_right]. *)
 
 Check allp_left.
@@ -174,15 +174,15 @@ Lemma wlseg_wlseg: forall (s1 s2: list val) (x y z: val),
 Proof.
  intros.
  unfold wlseg.
- (** First, extract the universally quantified variable [tail] on 
+ (** First, extract the universally quantified variable [tail] on
     the right side. *)
  apply allp_right; intro tail.
- (** Next, instantiate the first quantified [tail0] on the left 
+ (** Next, instantiate the first quantified [tail0] on the left
     with [tail]. *)
  rewrite -> wand_sepcon_adjoint.
  apply (allp_left _ tail).
  rewrite <- wand_sepcon_adjoint.
- (** Then, instantiate the other quantified [tail0] on the left 
+ (** Then, instantiate the other quantified [tail0] on the left
     with [s2 ++ tail]. *)
  rewrite sepcon_comm, -> wand_sepcon_adjoint.
  apply (allp_left _ (s2 ++ tail)).
@@ -193,7 +193,7 @@ Proof.
 Qed.
 
 (** This theorem [wlseg_wlseg] shares the same form with [lseg_lseg].
- In fact, properties about [lseg] and [wlseg] are very similar. 
+ In fact, properties about [lseg] and [wlseg] are very similar.
  The following exercises are to prove the counterparts of
  [singleton_lseg] and [lseg_list]. *)
 
@@ -214,7 +214,7 @@ Proof.
 (* ================================================================= *)
 (** ** Proof of the [append] function by [wlseg] *)
 
-(** Now, we are ready to reprove the correctness for the C program [append].  
+(** Now, we are ready to reprove the correctness for the C program [append].
     This time, we will use [wlseg] to write the loop invariant. *)
 
 (** **** Exercise: 3 stars, standard: (body_append_alter2) *)
@@ -358,7 +358,7 @@ struct list *append (struct list *x, struct list *y) {
   stored in memory. Specifically, when [curp] points the head
   pointer [x], the value of [curp] is the address of [x].  When [curp]
   points to some intermediate linked list node, the value of [curp] is
-  the predecessor node's [tail] field address. Using this implementation, 
+  the predecessor node's [tail] field address. Using this implementation,
   we do not need to test whether [x] is null in the beginning.
 
   The following separation logic predicate defines this data structure. *)
@@ -410,11 +410,11 @@ Proof.
 (** We have demonstrated two different approaches to define a
   separation logic predicate for list segments. In [Verif_append1]
   we define it using recursive definition over the list. In this chapter,
-  we use a quantifed magic wand expression.  It is natural to ask: what 
+  we use a quantifed magic wand expression.  It is natural to ask: what
   is the relation between [lseg] and [wlseg]? Are they equivalent to each
   other? They following theorems can offer a brief answer. *)
 
-(** First of all, recursive defined [lseg] is a logically stronger 
+(** First of all, recursive defined [lseg] is a logically stronger
   predicate than [wlseg]. *)
 Lemma lseg2wlseg: forall s x y, lseg s x y |-- wlseg s x y.
 Proof.
@@ -449,7 +449,7 @@ Proof.
   apply listrep2lseg.
 Qed.
 
-(** Combining these two lemmas above together, we know that 
+(** Combining these two lemmas above together, we know that
   [wlseg]-to-null equals [lseg]. *)
 Lemma wlseg_nullval: forall s x, wlseg s x nullval = lseg s x nullval.
 Proof.
@@ -467,12 +467,12 @@ Proof.
 Qed.
 
 (** However, [wlseg] does not derive [lseg] in general. As mentioned
-  above, to eliminate magic wand on the left side is hard. When 
+  above, to eliminate magic wand on the left side is hard. When
   [y <> nullval], we cannot instantiate the universally quantified variable
   [tail] inside [(wlseg s x y)] to get the form [emp -* _].  The
   following is a counterexample of the general entailment from [wlseg]
   to [lseg].  On one hand, it is obvious that
-  [data_at_ Tsh t_list y |-/- lseg [a] x y]. On the other hand, 
+  [data_at_ Tsh t_list y |-/- lseg [a] x y]. On the other hand,
   [data_at_ Tsh t_list y |-- wlseg [a] x y]. See the following theorem: *)
 
 Lemma wlseg_weird: forall a x y,
@@ -493,4 +493,4 @@ Proof.
     entailer!.
 Qed.
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

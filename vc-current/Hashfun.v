@@ -52,12 +52,12 @@
     /* create an empty table */
     struct hashtable *new_table (void) {
       int i;
-      struct hashtable *p = 
+      struct hashtable *p =
            (struct hashtable * )malloc(sizeof(struct hashtable));
       if (!p) exit(1);
       for (i=0; i<N; i++) p->buckets[i]=NULL;
       return p;
-    }  
+    }
 
     /* allocate and initialize a new linked-list cell */
     struct cell *new_cell (char *key, int count, struct cell *next) {
@@ -96,7 +96,7 @@
           return;
         }
       }
-    }  
+    }
 
     /* increment to the occurrence count of the string s the whole hash table */
     void incr (struct hashtable *table, char *s) {
@@ -110,7 +110,7 @@
 (** ** A functional model *)
 
 (** Before we prove the C program correct, we write a functional
- program that models its behavior as closely as possible.  
+ program that models its behavior as closely as possible.
  The functional program won't be (average) constant time per access,
  like the C program, because it takes linear time to get the nth
  element of a list, while the C program can subscript an array in
@@ -120,7 +120,7 @@
 
 Require Import VST.floyd.functional_base.
 
-#[export] Instance EqDec_string: EqDec (list byte) := list_eq_dec Byte.eq_dec. 
+#[export] Instance EqDec_string: EqDec (list byte) := list_eq_dec Byte.eq_dec.
 
 Fixpoint hashfun_aux (h: Z) (s: list byte) : Z :=
  match s with
@@ -134,7 +134,7 @@ Definition hashfun (s: list byte) := hashfun_aux 0 s.
 Definition hashtable_contents := list (list (list byte * Z)).
 
 Definition N := 109.
-Lemma N_eq : N = 109. 
+Lemma N_eq : N = 109.
 Proof. reflexivity. Qed.
 #[export] Hint Rewrite N_eq : rep_lia.
 Global Opaque N.
@@ -151,7 +151,7 @@ Fixpoint list_get (s: list byte) (al: list (list byte * Z)) : Z :=
 Fixpoint list_incr (s: list byte) (al: list (list byte * Z))
               :  list (list byte * Z) :=
   match al with
- | (k,i) :: al' => if eq_dec s k 
+ | (k,i) :: al' => if eq_dec s k
                       then (k, i +1)::al'
                       else (k,i)::list_incr s al'
  | nil => (s, 1)::nil
@@ -183,8 +183,8 @@ Proof.
 
 (** **** Exercise: 2 stars, standard (Zlength_hashtable_incr) *)
 Lemma Zlength_hashtable_incr:
- forall sigma cts, 
-      0 < Zlength cts -> 
+ forall sigma cts,
+      0 < Zlength cts ->
       Zlength (hashtable_incr sigma cts) = Zlength cts.
 Proof.
 (* FILL IN HERE *) Admitted.
@@ -250,13 +250,13 @@ End COUNT_TABLE.
    there's a type [table] of count-tables,
    and operators [empty], [get], [set] that satisfy the axioms
    [gempty], [gss], and [gso]. *)
-  
+
 (* ----------------------------------------------------------------- *)
 (** *** A "reference" implementation of COUNT_TABLE *)
 
 (** **** Exercise: 2 stars, standard (FunTable)
 
-     It's easy to make a slow implementation of [COUNT_TABLE], 
+     It's easy to make a slow implementation of [COUNT_TABLE],
   using functions. *)
 
 Module FunTable <: COUNT_TABLE.
@@ -285,7 +285,7 @@ End FunTable.
  the purely functional implementation takes linear time, not constant time,
  to select the the i'th bucket.  That is, [Znth i al] takes time proportional
  to [i]. But that is no problem, because we are not using [hashtable_get] and
- [hashtable_incr] as our real implementation; they are serving as the 
+ [hashtable_incr] as our real implementation; they are serving as the
  _functional model_ of the fast implementation in C.  *)
 
 Module IntHashTable <: COUNT_TABLE.
@@ -307,9 +307,9 @@ Proof.
 (* FILL IN HERE *) Admitted.
 
  Definition empty : table := exist _ _ empty_invariant.
- Definition get : key -> table -> Z := 
+ Definition get : key -> table -> Z :=
                   fun k tbl => hashtable_get k (proj1_sig tbl).
- Definition incr : key -> table -> table := 
+ Definition incr : key -> table -> table :=
        fun k tbl => exist _ _ (incr_invariant k _ (proj2_sig tbl)).
 
  Theorem gempty: forall k, get k empty = 0.
@@ -328,4 +328,4 @@ Proof.
 
 End IntHashTable.
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

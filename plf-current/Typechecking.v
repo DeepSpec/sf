@@ -32,8 +32,6 @@ Export STLC.
 
 (** First, we need a function to compare two types for equality... *)
 
-Locate "Bool".
-
 Fixpoint eqb_ty (T1 T2:ty) : bool :=
   match T1,T2 with
   | <{ Bool }> , <{ Bool }> =>
@@ -339,7 +337,7 @@ Fixpoint type_check (Gamma : context) (t : tm) : option ty :=
       end
 
   (* Complete the following cases. *)
-  
+
   (* sums *)
   (* FILL IN HERE *)
   (* lists (the [tm_lcase] is given for free) *)
@@ -687,4 +685,4 @@ Import StepFunction.
 End StlcImpl.
 (** [] *)
 
-(* 2023-12-24 12:54 *)
+(* 2024-04-23 03:47 *)

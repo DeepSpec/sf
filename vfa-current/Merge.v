@@ -25,11 +25,11 @@ From Coq Require Import Recdef.  (* needed for [Function] feature *)
 
     Mergesort on lists works essentially the same way: we split the
     original list into two halves, recursively sort each sublist,
-    and then merge the two sublists together again.  The only 
+    and then merge the two sublists together again.  The only
     difference, compared to the imperative algorithm, is that splitting
-    the list takes O(n) rather than O(1) time; however, that 
+    the list takes O(n) rather than O(1) time; however, that
     does not affect the asymptotic cost, since the merge step already
-    takes O(n) anyhow. 
+    takes O(n) anyhow.
 *)
 
 (* ================================================================= *)
@@ -42,7 +42,7 @@ From Coq Require Import Recdef.  (* needed for [Function] feature *)
     For example, if we know the length of the list, we could use that to split
     at the half-way point. But here is an attractive alternative, which simply
     alternates assigning the elements into left and right sublists:
-*)     
+*)
 
 Fixpoint split {X:Type} (l:list X) : (list X * list X) :=
   match l with
@@ -54,7 +54,7 @@ Fixpoint split {X:Type} (l:list X) : (list X * list X) :=
   end.
 
 (** Note: For generality, we made this function polymorphic, since the
-    type of the values in the list is irrelevant to the splitting process. 
+    type of the values in the list is irrelevant to the splitting process.
 
     While this function is straightforward to define, it can be a bit challenging
     to work with.  Let's try to prove the following lemma, which is obviously true:
@@ -65,23 +65,23 @@ Lemma split_len_first_try: forall {X} (l:list X) (l1 l2: list X),
     length l1 <= length l /\
     length l2 <= length l.
 Proof.
-  induction l; intros. 
-  - inv H. simpl. lia. 
+  induction l; intros.
+  - inv H. simpl. lia.
   - destruct l as [| x l'].
-    + inv H. 
+    + inv H.
       split; simpl; auto.
-    + inv H. destruct (split l') as [l1' l2'] eqn:E. inv H1. 
+    + inv H. destruct (split l') as [l1' l2'] eqn:E. inv H1.
       (* We're stuck! The IH talks about [split (x::l')] but we
          only know aobut [split (a::x::l')]. *)
 Abort.
 
 (** The problem here is that the standard induction principle for lists
-    requires us to show that the property being proved follows for      
+    requires us to show that the property being proved follows for
     any non-empty list if it holds for the tail of that list.
     What we want here is a "two-step" induction principle, that instead requires
     us to show that the property being proved follows for a list of
     length at least two, if it holds for the tail of the tail of that list.
-    Formally: 
+    Formally:
 *)
 
 Definition list_ind2_principle:=
@@ -91,12 +91,12 @@ Definition list_ind2_principle:=
       (forall (a b : A) (l : list A), P l -> P (a :: b :: l)) ->
       forall l : list A, P l.
 
-(** If we assume the correctness of this "non-standard" induction principle, 
-    our [split_len] proof is easy, using a form of the [induction] tactic 
-    that lets us specify the induction principle to use: 
+(** If we assume the correctness of this "non-standard" induction principle,
+    our [split_len] proof is easy, using a form of the [induction] tactic
+    that lets us specify the induction principle to use:
 *)
 
-Lemma split_len': list_ind2_principle -> 
+Lemma split_len': list_ind2_principle ->
     forall {X} (l:list X) (l1 l2: list X),
     split l = (l1,l2) ->
     length l1 <= length l /\
@@ -106,8 +106,8 @@ Proof.
   induction l using IP; intros.
   - inv H. lia.
   - inv H. simpl; lia.
-  - inv H. destruct (split l) as [l1' l2']. inv H1. 
-    simpl. 
+  - inv H. destruct (split l) as [l1' l2']. inv H1.
+    simpl.
     destruct (IHl l1' l2') as [P1 P2]; auto; lia.
 Qed.
 
@@ -125,7 +125,7 @@ Definition list_ind2 :
       (P : list A -> Prop)
       (H : P [])
       (H0 : forall a : A, P [a])
-      (H1 : forall (a b : A) (l : list A), P l -> P (a :: b :: l))  => 
+      (H1 : forall (a b : A) (l : list A), P l -> P (a :: b :: l))  =>
     fix IH (l : list A) :  P l :=
     match l with
     | [] => H
@@ -135,14 +135,14 @@ Definition list_ind2 :
 
 (** Here, the [fix] keyword defines a local recursive function [IH]
     of type [forall l:list A, P l], which is returned as the overall value of
-    [list_ind2]. As usual, this function must be obviously terminating 
-    to Coq (which it is because the recursive call is on a sublist [l'] 
+    [list_ind2]. As usual, this function must be obviously terminating
+    to Coq (which it is because the recursive call is on a sublist [l']
     of the original argument [l]) and the [match] must be exhaustive over
-    all possible lists (which it evidently is). 
+    all possible lists (which it evidently is).
 *)
 
-(** With our induction principle in hand, we can finally prove 
-    [split_len] free and clear: 
+(** With our induction principle in hand, we can finally prove
+    [split_len] free and clear:
 *)
 
 Lemma split_len: forall {X} (l:list X) (l1 l2: list X),
@@ -155,7 +155,7 @@ Qed.
 
 (** **** Exercise: 3 stars, standard (split_perm) *)
 
-(** Here's another fact about [split] that we will find useful later on.  
+(** Here's another fact about [split] that we will find useful later on.
 *)
 
 Lemma split_perm : forall {X:Type} (l l1 l2: list X),
@@ -218,17 +218,17 @@ Fixpoint merge l1 l2  {struct l1} :=
 
 (** Coq accepts the outer definition because it is structurally
     decreasing on [l1] (we specify that with the [{struct l1}] annotation,
-    although Coq would have guessed this even if we didn't write it), 
-    and it accepts the inner definition because it is structurally recursive 
-    on its (sole) argument. (Note that [let fix ... in ... end] is just a 
-    mechanism for  defining a local recursive function.)  
+    although Coq would have guessed this even if we didn't write it),
+    and it accepts the inner definition because it is structurally recursive
+    on its (sole) argument. (Note that [let fix ... in ... end] is just a
+    mechanism for  defining a local recursive function.)
 
-    This definition will turn out to work pretty well; the only irritation 
+    This definition will turn out to work pretty well; the only irritation
     is that simplification will show the definition of [merge_aux], as
-    illustrated by the following examples. 
+    illustrated by the following examples.
 
-    First, let's remind ourselves that Coq desugars a [match] over multiple 
-    arguments into a nested sequence of matches: 
+    First, let's remind ourselves that Coq desugars a [match] over multiple
+    arguments into a nested sequence of matches:
 *)
 
 Print merge.
@@ -252,7 +252,7 @@ Print merge.
     ]]
 *)
 
-(** Let's prove the following simple lemmas about [merge]: 
+(** Let's prove the following simple lemmas about [merge]:
 *)
 
 Lemma merge2 : forall (x1 x2:nat) r1 r2,
@@ -268,37 +268,37 @@ Proof.
       free variable [l1] has been substituted by [x1::r1],
       the match over [l1] has been simplified to its
       second arm (the non-empty case) and [x1] and [r1] have
-      been substituted for the pattern variables [a1] and [l1']. 
+      been substituted for the pattern variables [a1] and [l1'].
       The entire [fix] is applied to [r2], but Coq won't attempt
-      any further simplification until the structure of [r2] 
+      any further simplification until the structure of [r2]
       is known. *)
   bdestruct (x1 <=? x2).
   - auto.
   - (* Since [H] and [H0] are contradictory, this case follows by [lia].
-       But (ignoring that for the moment), note that we can get further 
+       But (ignoring that for the moment), note that we can get further
        simplification to occur if we give some structure to [l2]: *)
     simpl. (* does nothing *)
     destruct r2; simpl.  (* makes some progress *)
     + lia.
-    + lia. 
-Qed.  
+    + lia.
+Qed.
 
-Lemma merge_nil_l : forall l, merge [] l = l. 
+Lemma merge_nil_l : forall l, merge [] l = l.
 Proof.
   intros. simpl.
   (* Once again, we see a version of [merge_aux] specialized to
   the value [l1 = nil]. Now we see only the first arm (the
   empty case) of the [match] expression, which simply returns [l2];
-  in other words, here the [fix] is just the identity function. 
+  in other words, here the [fix] is just the identity function.
   And once again, the [fix] is applied to [l].  Irritatingly,
   Coq _still_ refuses to perform the application unless [l]
   is destructured first (even though the answer is always [l]). *)
   destruct l.
   - auto.
-  - auto. 
+  - auto.
 Qed.
 
-(** Morals: 
+(** Morals:
 
     (1) Even though the proof state involving local recursive
         functions can can be hard to read, persevere!
@@ -322,11 +322,11 @@ Qed.
     ]]
 
     Since this function has only one argument, Coq guesses that it is
-    intended to be structurally decreasing, but still 
+    intended to be structurally decreasing, but still
     rejects the definition, this time with the complaint:
 
     [[
-    Recursive call to mergesort has principal argument equal to 
+    Recursive call to mergesort has principal argument equal to
     "l1" instead of a subterm of "l".
     ]]
 
@@ -335,9 +335,9 @@ Qed.
     Coq is being stupid, since the fact that [split] returns smaller
     lists than it is passed is nontrivial.
 
-    In fact, it isn't true! Consider the behavior of [split] on 
+    In fact, it isn't true! Consider the behavior of [split] on
     empty or singleton lists...  This is case where Coq's totality
-    requirements can actually help us correct the definition of 
+    requirements can actually help us correct the definition of
     our code.  What we really want to write is something more like:
 
     [[
@@ -349,7 +349,7 @@ Qed.
     ]]
 
     Now this function really is terminating!  But Coq still won't let us
-    write it with a [Fixpoint].  Instead, we need to use a mechanism 
+    write it with a [Fixpoint].  Instead, we need to use a mechanism
     (there are several available) for defining functions that accommodates
     an explicit way to show that the function only calls itself on smaller
     arguments.   We will use the [Function] command:
@@ -363,41 +363,41 @@ Function mergesort (l: list nat) {measure length l} :  list nat :=
          merge (mergesort l1) (mergesort l2)
   end.
 
-(** [Function] is similar to [Fixpoint], but it lets us specify 
-    an explicit _measure_ on the function arguments. 
-    The annotation [{measure length l}] says that the function 
-    [length] applied to argument [l] serves as a decreasing measure.  
-    After processing this definition, Coq enters proof mode and demands 
-    proofs that each recursive call is indeed on a shorter list. 
-    Happily, we proved that fact already. 
+(** [Function] is similar to [Fixpoint], but it lets us specify
+    an explicit _measure_ on the function arguments.
+    The annotation [{measure length l}] says that the function
+    [length] applied to argument [l] serves as a decreasing measure.
+    After processing this definition, Coq enters proof mode and demands
+    proofs that each recursive call is indeed on a shorter list.
+    Happily, we proved that fact already.
 *)
 
 Proof.
   - (* recursive call on l1 *)
     intros.
-    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. simpl. 
+    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. simpl.
     destruct (split_len _ _ _ E).
     lia.
   - (* recursive call on l2 *)
     intros.
-    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. simpl. 
+    simpl in *. destruct (split l1) as [l1' l2'] eqn:E. inv teq1. simpl.
     destruct (split_len _ _ _ E).
     lia.
 Defined.
 
 (** Notice that the [Proof] must end with the keyword [Defined] rather
-    than [Qed]; if we don't do this, we won't be able to actually 
-    compute with [mergesort]. 
+    than [Qed]; if we don't do this, we won't be able to actually
+    compute with [mergesort].
 
     Defining [mergesort] with [Function] rather than [Fixpoint] causes
-    the automatic generation of some useful auxiliary definitions that we 
-    will need when working with it. 
+    the automatic generation of some useful auxiliary definitions that we
+    will need when working with it.
     First, we get a lemma [mergesort_equation], which performs a one-level
     unfolding of the function. *)
 
 Check mergesort_equation.
- 
-(** ==> 
+
+(** ==>
 
     [[
     mergesort_equation
@@ -417,12 +417,12 @@ Check mergesort_equation.
 
     Second, we get an induction principle [mergesort_ind]; performing
     induction using this principle can be much easier than trying to
-    use list induction over the argument [l].  
+    use list induction over the argument [l].
 *)
 
 Check mergesort_ind.
 
-(** ==>   
+(** ==>
     [[
     mergesort_ind
      : forall P : list nat -> list nat -> Prop,
@@ -447,19 +447,19 @@ Check mergesort_ind.
 
 (** As with insertion sort, our goal is to prove that mergesort produces
     a sorted list that is a permutation of the original list, i.e. to prove
-    
+
     [[
     is_a_sorting_algorithm mergesort
-    ]] 
-  
-    We will start by showing that [mergesort] produces a sorted list.  The key 
+    ]]
+
+    We will start by showing that [mergesort] produces a sorted list.  The key
     lemma is to show that [merge] of two sorted lists produces a sorted list.
     It is perhaps easiest to break out a sub-lemma first:
 *)
 
 (** **** Exercise: 2 stars, standard (sorted_merge1) *)
 Lemma sorted_merge1 : forall x x1 l1 x2 l2,
-    x <= x1 -> x <= x2 -> 
+    x <= x1 -> x <= x2 ->
     sorted (merge (x1::l1) (x2::l2)) ->
     sorted (x :: merge (x1::l1) (x2::l2)).
 Proof.
@@ -471,7 +471,7 @@ Lemma sorted_merge : forall l1, sorted l1 ->
                      forall l2, sorted l2 ->
                      sorted (merge l1 l2).
 Proof.
-  (* Hint: This is one unusual case where it is _much_ easier to do induction on 
+  (* Hint: This is one unusual case where it is _much_ easier to do induction on
      [l1] rather than on [sorted l1]. You will also need to do
      nested inductions on [l2]. *)
   (* FILL IN HERE *) Admitted.
@@ -479,7 +479,7 @@ Proof.
 
 (** **** Exercise: 2 stars, standard (mergesort_sorts) *)
 Lemma mergesort_sorts: forall l, sorted (mergesort l).
-Proof. 
+Proof.
   apply mergesort_ind; intros. (* Note that we use the special induction principle. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -489,18 +489,18 @@ Proof.
 
 (** Finally, we must show that [mergesort] returns a permutation of its input.
 
-    As usual, the key lemma is for [merge]. 
+    As usual, the key lemma is for [merge].
 
     Incidentally, you are welcome to import the alternative characterizations
-    of permutations as multisets given in [Multiset] or [BagPerm] 
-    and use that instead of [Permutation] if you think it will be easier. 
+    of permutations as multisets given in [Multiset] or [BagPerm]
+    and use that instead of [Permutation] if you think it will be easier.
     (I'm not sure!)
 *)
 
 (** **** Exercise: 3 stars, advanced (merge_perm) *)
 Lemma merge_perm: forall (l1 l2: list nat),
     Permutation (l1 ++ l2) (merge l1 l2).
-Proof. 
+Proof.
   (* Hint: A nested induction on [l2] is required. *)
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -523,4 +523,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2023-12-24 12:57 *)
+(* 2024-04-23 03:52 *)

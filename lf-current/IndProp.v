@@ -53,7 +53,7 @@ Definition f (n : nat) :=
     that it takes for such a sequence to reach [1]. *)
 
 Fail Fixpoint reaches_1_in (n : nat) :=
-  if n =? 1 then true
+  if n =? 1 then 0
   else 1 + reaches_1_in (f n).
 
 (** This definition is rejected by Coq's termination checker, since
@@ -1862,27 +1862,27 @@ Inductive nostutter {X:Type} : list X -> Prop :=
 
 Example test_nostutter_1: nostutter [3;1;4;1;5;6].
 (* FILL IN HERE *) Admitted.
-(* 
+(*
   Proof. repeat constructor; apply eqb_neq; auto.
   Qed.
 *)
 
 Example test_nostutter_2:  nostutter (@nil nat).
 (* FILL IN HERE *) Admitted.
-(* 
+(*
   Proof. repeat constructor; apply eqb_neq; auto.
   Qed.
 *)
 
 Example test_nostutter_3:  nostutter [5].
 (* FILL IN HERE *) Admitted.
-(* 
+(*
   Proof. repeat constructor; auto. Qed.
 *)
 
 Example test_nostutter_4:      not (nostutter [3;1;1;4]).
 (* FILL IN HERE *) Admitted.
-(* 
+(*
   Proof. intro.
   repeat match goal with
     h: nostutter _ |- _ => inversion h; clear h; subst
@@ -2433,4 +2433,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2023-12-24 12:53 *)
+(* 2024-04-23 03:45 *)

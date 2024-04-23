@@ -14,7 +14,7 @@ Require Import VC.stdlib.
 Require VST.floyd.library.  (* Only needed for the next line *)
 About VST.floyd.library.malloc_token.
 (*  library.malloc_token : compspecs -> share -> type -> val -> mpred
-    Arguments library.malloc_token {cs}    
+    Arguments library.malloc_token {cs}
 
     That is, [malloc_token] takes an implicit compspecs argument,
    and the interpretation of the [type] argument depends on the
@@ -25,7 +25,7 @@ About VST.floyd.library.malloc_token.
    can have its own struct and union types -- that is, its own compspecs.
    Our [malloc_token] with a compspecs parameter cannot assume that
    every module will have the same compspecs.  For modular programming,
-   we'll start with a more primitive form,  [malloc_token_sz], that just 
+   we'll start with a more primitive form,  [malloc_token_sz], that just
    depends on the _size_ of the object, of type [Z].  No compspecs required.
       Later in this file, we show how to recover the type-based
    [malloc_token] _within_ each module.
@@ -44,9 +44,9 @@ About VST.floyd.library.malloc_token.
 Record MallocFreeAPD := {
    mem_mgr: globals -> mpred;
    malloc_token_sz: share -> Z -> val -> mpred;
-   malloc_token_sz_valid_pointer: forall sh sz p, 
+   malloc_token_sz_valid_pointer: forall sh sz p,
       sz <= 0 -> malloc_token_sz sh sz p |-- valid_pointer p;
-   malloc_token_sz_local_facts:  forall sh sz p, 
+   malloc_token_sz_local_facts:  forall sh sz p,
       malloc_token_sz sh sz p |-- !! malloc_compatible sz p
 }.
 
@@ -61,7 +61,7 @@ Section MallocFreeASI.
 Variable M:MallocFreeAPD.
 
 (** Specification of [malloc] has the same issue with [compspecs] that we
-  discussed above for [malloc_token]:  That is, we need the ASI to be 
+  discussed above for [malloc_token]:  That is, we need the ASI to be
   independent of any particular module's struct/union declarations.
   So we will define [malloc_spec_sz] which is a size-based, not type-based,
   specification. *)
@@ -94,7 +94,7 @@ Definition free_spec_sz :=
        LOCAL ()
        SEP (mem_mgr M gv).
 
-(**  Of course the [exit] system call is not really part of the malloc/free 
+(**  Of course the [exit] system call is not really part of the malloc/free
    library, but this is a convenient place to put its specification. *)
 
 Definition exit_spec :=
@@ -120,11 +120,11 @@ End MallocFreeASI.
   So here we will define an alternate [malloc_token] and [malloc_spec]
   that uses compspecs and types. *)
 
-Definition malloc_token {cs: compspecs} (M:MallocFreeAPD) sh t v := 
-   !! field_compatible t [] v && 
+Definition malloc_token {cs: compspecs} (M:MallocFreeAPD) sh t v :=
+   !! field_compatible t [] v &&
    malloc_token_sz M sh (sizeof t) v.
 
-Lemma malloc_token_valid_pointer: forall {cs: compspecs} M sh t p, 
+Lemma malloc_token_valid_pointer: forall {cs: compspecs} M sh t p,
       sizeof t <= 0 -> malloc_token M sh t p |-- valid_pointer p.
 Proof. intros. unfold malloc_token.
  apply andp_left2. apply malloc_token_sz_valid_pointer; auto.
@@ -197,18 +197,18 @@ Definition free_spec (M:MallocFreeAPD)  {cs: compspecs} (t: type) :=
 (* ================================================================= *)
 (** ** How to use the type-based [malloc_spec] *)
 
-(** Both [malloc_spec_sz] and [malloc_spec] are specifications of the 
+(** Both [malloc_spec_sz] and [malloc_spec] are specifications of the
   same malloc function, so any given program (.c file) can be verified
   using either of the specs.  However, since the ASI provides
   [malloc_spec_sz], then in order to use [malloc_spec] in the verification
   of the client, one must do [forward_call] with the (optional)
   [funspec_sub] argument.
 
-   Here we prove that (for any compspecs), 
+   Here we prove that (for any compspecs),
     [malloc_spec_sz] implies [malloc_spec]. *)
 
 Lemma malloc_spec_sub:
- forall  (M:MallocFreeAPD) {cs: compspecs} (t: type), 
+ forall  (M:MallocFreeAPD) {cs: compspecs} (t: type),
    funspec_sub (snd (malloc_spec_sz M)) (snd (malloc_spec M t)).
 Proof.
   do_funspec_sub. rename w into gv. clear H.
@@ -225,7 +225,7 @@ Proof.
 Qed.
 
 Lemma free_spec_sub:
- forall (M:MallocFreeAPD) {cs: compspecs} (t: type), 
+ forall (M:MallocFreeAPD) {cs: compspecs} (t: type),
    funspec_sub (snd (free_spec_sz M)) (snd (free_spec M t)).
 Proof.
   do_funspec_sub. destruct w as [p gv]. clear H.
@@ -245,7 +245,7 @@ Qed.
    It works like this:  [t] (or, for example, [Tstruct _cons noattr]) is
    any type of the client's choosing, interpreted using the client's own
    compspecs.  [forward_call] looks up [malloc] in the imported
-   ASIs (that is, in the Gprog), and finds [malloc_spec_sz] as its 
+   ASIs (that is, in the Gprog), and finds [malloc_spec_sz] as its
    specification.   Then it uses the [funspec_sub] proof to adapt
    the spec into [malloc_spec M {cs} t], where the [cs] argument is
    instantiated using the _client's_  compspecs, as desired.
@@ -256,4 +256,4 @@ Qed.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stack] *)
 
-(* 2023-12-24 12:58 *)
+(* 2024-04-23 03:53 *)

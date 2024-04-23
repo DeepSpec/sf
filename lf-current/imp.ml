@@ -13,7 +13,9 @@ let rec app l m =
   | a :: l1 -> a :: (app l1 m)
 
 module Coq__1 = struct
- (** val add : int -> int -> int **)let rec add = ( + )
+ (** val add : int -> int -> int **)
+
+ let rec add = ( + )
 end
 include Coq__1
 

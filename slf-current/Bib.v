@@ -4,8 +4,8 @@
 (** * Resources cited in this volume *)
 
 (** An extended related work section on the history of Separation Logic
-    may be found in the paper [Charguéraud 2020], available from:
-    http://www.chargueraud.org/research/2020/seq_seplogic/seq_seplogic.pdf
+    may be found in the companion course notes, available from:
+    http://www.chargueraud.org/teach/verif/slf_notes.pdf
 
     The references most relevant to the contents of the course appear below. *)
 
@@ -40,9 +40,16 @@
   In Internation Conference on Function Programming (ICFP).
   https://dl.acm.org/doi/abs/10.1145/3408998
 
-[Charguéraud et al 2022]
+[Charguéraud 2023]
+  Arthur Charguéraud.
+  A Modern Eye on Separation Logic for Sequential Programs.
+  Habilitation Manuscript.
+  https://www.chargueraud.org/research/2023/hdr/chargueraud_hdr.pdf
+  https://inria.hal.science/tel-04076725/
+
+[Charguéraud et al 2023]
   Arthur Charguéraud, Adam Chlipala, Andres Erbsen, and Samuel Gruetter.
-  Omnisemantics: Smoother Handling of Nondeterminism (Draft).
+  Omnisemantics: Smoother Handling of Nondeterminism (TOPLAS).
   http://www.chargueraud.org/research/2022/omnisemantics/omnisemantics.pdf.
 
 [Chlipala et al 2009]
@@ -128,6 +135,12 @@
   Workshop on Computer Science Logic (CSL).
   https://doi.org/10.1007/3-540-44802-0_1
 
+[Ni, Shao 2006]
+  Zhaozhong Ni and Zhong Shao.
+  Certified Assembly Programming with Embedded Code Pointers.
+  Symposium on Principles of Programming Languages (POPL).
+  https://doi.org/10.1145/1111037.1111066
+
 [Reynolds 2002]
   John C. Reynolds.
   Separation Logic: A Logic for Shared Mutable Data Structures.
@@ -165,6 +178,4 @@
 
 *)
 
-(** $Date$ *)
-
-(* 2023-12-24 13:00 *)
+(* 2024-04-23 03:49 *)

@@ -404,9 +404,9 @@ One small limitation of this approach is that we don't have
 
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">m</span>,</span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1<span style='letter-spacing:-.4em;'>}</span>}</span>, is a
+<li> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">m</span>,</span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1</span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1<span style='letter-spacing:-.4em;'>}</span>}</span> is a
       <i>proposition</i> stating that the Hoare triple <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span><span style='letter-spacing:-.4em;'>}</span>}</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">:=</span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode">+</span>
-      <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1<span style='letter-spacing:-.4em;'>}</span>}</span> is valid for any choice of <span class="inlinecode"><span class="id" title="var">m</span></span>.  Note that <span class="inlinecode"><span class="id" title="var">m</span></span>
+      <span class="inlinecode">1</span> <span class="inlinecode"><span style='letter-spacing:-.4em;'>{</span>{<span class="id" title="var">X</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">m</span></span> <span class="inlinecode">+</span> <span class="inlinecode">1<span style='letter-spacing:-.4em;'>}</span>}</span> is valid for any choice of <span class="inlinecode"><span class="id" title="var">m</span></span>.  Note that <span class="inlinecode"><span class="id" title="var">m</span></span>
       in the two assertions and the command in the middle is a
       reference to the <i>Coq</i> variable <span class="inlinecode"><span class="id" title="var">m</span></span>, which is bound outside the
       Hoare triple. 
@@ -933,7 +933,7 @@ Of course, what we'd probably prefer is to prove this
   <td></td>
 </tr>
 </table></center>    Give a counterexample showing that this rule is incorrect and use
-    it to complete the proof belkow, showing that it is really a
+    it to complete the proof below, showing that it is really a
     counterexample.  (Hint: The rule universally quantifies over the
     arithmetic expression <span class="inlinecode"><span class="id" title="var">a</span></span>, and your counterexample needs to
     exhibit an <span class="inlinecode"><span class="id" title="var">a</span></span> for which the rule doesn't work.) 
@@ -3178,7 +3178,7 @@ Use your rules to prove the following triple.
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2023-12-24&nbsp;12:54&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-04-23&nbsp;03:47&nbsp;*)</span><br/>
 </div>
 </div>
 
