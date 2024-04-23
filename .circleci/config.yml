@@ -14,16 +14,6 @@ jobs:
             echo "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USER" --password-stdin
             fi
 
-            if fgrep -q '[docker 8.15]' \<<< $changes; then
-            echo "Building 8.15"
-            docker build -t deepspec/sfdev:8.15 - < Dockerfile.8.15
-            docker push deepspec/sfdev:8.15
-            fi
-            if fgrep -q '[docker 8.16]' \<<< $changes; then
-            echo "Building 8.16"
-            docker build -t deepspec/sfdev:8.16 - < Dockerfile.8.16
-            docker push deepspec/sfdev:8.16
-            fi
             if fgrep -q '[docker 8.17]' \<<< $changes; then
             echo "Building 8.17"
             docker build -t deepspec/sfdev:8.17 - < Dockerfile.8.17
@@ -119,15 +109,19 @@ workflows:
     jobs:
       - build-docker
       - build:
-          name: Coq 8.15
-          coq: '8.15'
+          name: Coq 8.17
+          coq: '8.17'
           vc: true
           requires:
             - build-docker
       - build:
-          name: Coq 8.16
-          coq: '8.16'
-          vc: true
+          name: Coq 8.18
+          coq: '8.18'
+          requires:
+            - build-docker
+      - build:
+          name: Coq 8.19
+          coq: '8.19'
           requires:
             - build-docker
 #      - build:
