@@ -1704,14 +1704,14 @@ Proof.
 
 (** **** Exercise: 5 stars, standard, optional (classical_axioms)
 
-    For those who like a challenge, here is an exercise taken from the
+    For those who like a challenge, here is an exercise adapted from the
     Coq'Art book by Bertot and Casteran (p. 123).  Each of the
-    following four statements, together with [excluded_middle], can be
+    following five statements, together with [excluded_middle], can be
     considered as characterizing classical logic.  We can't prove any
     of them in Coq, but we can consistently add any one of them as an
     axiom if we wish to work in classical logic.
 
-    Prove that all five propositions (these four plus [excluded_middle])
+    Prove that all six propositions (these five plus [excluded_middle])
     are equivalent.
 
     Hint: Rather than considering all pairs of statements pairwise,
@@ -1730,8 +1730,11 @@ Definition de_morgan_not_and_not := forall P Q:Prop,
 Definition implies_to_or := forall P Q:Prop,
   (P -> Q) -> (~P \/ Q).
 
+Definition consequentia_mirabilis := forall P:Prop,
+  (~P -> P) -> P.
+
 (* FILL IN HERE
 
     [] *)
 
-(* 2024-04-23 03:45 *)
+(* 2024-04-27 10:26 *)

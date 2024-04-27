@@ -516,4 +516,4 @@ idtac "---------- NatList.rev_injective ---------".
 Print Assumptions NatList.rev_injective.
 Abort.
 
-(* 2024-04-23 03:46 *)
+(* 2024-04-27 10:26 *)
