@@ -282,4 +282,4 @@ Proof using.
   rewrite IHn1. extens. rew_istrue. nat_math.
 Qed.
 
-(* 2024-04-27 10:30 *)
+(* 2024-07-10 18:43 *)

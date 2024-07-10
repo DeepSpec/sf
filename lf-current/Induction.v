@@ -3,7 +3,20 @@
 (* ################################################################# *)
 (** * Separate Compilation *)
 
-(** Before getting started on this chapter, we need to import
+(**  BCP 24: We should add something like this as a fall-back for
+    people that can't get the make- or CoqIDE-based solutions to
+    work (e.g., under windows)...
+
+      At the end of the first chapter you need to run:
+
+        coqc -Q . LF Basics.v
+
+      Doing an equivalent command is necessary at the end of every
+      chapter because each subsequent chapter imports the previous
+      one.
+
+
+    Before getting started on this chapter, we need to import
     all of our definitions from the previous chapter: *)
 
 From LF Require Export Basics.
@@ -761,4 +774,4 @@ Proof.
 
 (** [] *)
 
-(* 2024-04-27 10:26 *)
+(* 2024-07-10 18:39 *)
