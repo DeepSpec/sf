@@ -430,7 +430,7 @@ Check Zrepeat_app.  (* Hint: this lemma will be useful. *)
 Check upd_Znth_app1.     (* Hint: this lemma will be useful. *)
 Check app_Znth2.         (* Hint: this lemma will be useful. *)
 Check Znth_0_cons.       (* Hint: this lemma will be useful. *)
-(* Other useful lemmas will be map_app, app_ass *)
+(* Other useful lemmas will be map_app, app_assoc *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -452,7 +452,7 @@ intros.
 apply derives_refl'.
 f_equal.
 (** Useful lemmas here will be: upd_Znth_app2, sublist_split,
-repeat_app', app_Znth1, map_app, app_ass, sublist_len_1. *)
+repeat_app', app_Znth1, map_app, app_assoc, sublist_len_1. *)
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
@@ -485,7 +485,7 @@ f_equal.
 rewrite <- Zrepeat_app by lia.
 replace (n-i) with (1 + (n-(i+1))) by lia.
 rewrite <- Zrepeat_app by lia.
-rewrite !app_ass.
+rewrite !app_assoc.
 f_equal.
 f_equal.
 (** Oops!  The current proof goal is False!  The problem was
@@ -507,7 +507,7 @@ intros.
 rewrite <- Zrepeat_app by lia.
 replace (n-i) with (1 + (n-(i+1))) by lia.
 rewrite <- Zrepeat_app by lia.
-rewrite !app_ass.
+rewrite <- !app_assoc.
 Check split2_data_at_Tarray_app.
 (*  forall (cs : compspecs) (mid n : Z) (sh : Share.t)
     (t : type) (v1 v2 : list (reptype t)) (p : val),
@@ -603,11 +603,11 @@ Definition example_call_strcpy_spec :=
   PRE [  ]
     PROP ()
     PARAMS() GLOBALS (gv)
-    SEP (cstring Ews (Hello' ++ [Byte.zero]) (gv ___stringlit_1))
+    SEP (cstring Ews Hello' (gv ___stringlit_1))
   POST [ tint ]
     PROP ()
     RETURN (Vint (Int.repr (Z.of_N (Ascii.N_of_ascii "H"%char))))
-    SEP (cstring Ews (Hello' ++ [Byte.zero]) (gv ___stringlit_1)).
+    SEP (cstring Ews Hello' (gv ___stringlit_1)).
 
 Lemma body_example_call_strcpy: semax_body Vprog Gprog
          f_example_call_strcpy example_call_strcpy_spec.
@@ -628,4 +628,4 @@ Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-07-10 18:47 *)
+(* 2024-08-08 20:41 *)
