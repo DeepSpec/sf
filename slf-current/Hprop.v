@@ -406,7 +406,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 
 (** We next aim to prove the commutativity of the star operator, i.e., that
     [H1 \* H2] is equivalent to [H2 \* H1]. By symmetry, it suffices to prove
-    the entailement in one direction, e.g., [H1 \* H2 ==> H2 \* H1]. The
+    the entailment in one direction, e.g., [H1 \* H2 ==> H2 \* H1]. The
     symmetry argument for any binary operator on heap predicates is captured by
     the lemma [hprop_op_comm] shown below. *)
 
@@ -676,8 +676,8 @@ End Extensionality.
     the first mechanized formalizations of Separation Logic, in Coq by
     [Yu, Hamid, and Shao 2003] (in Bib.v), and in Isabelle/HOL by [Weber 2004] (in Bib.v).
     These two formalizations were carried out soon after the invention of
-    Separation Logic, by researcher who were used to mechanizing Hoare logic and
+    Separation Logic, by researchers who were used to mechanizing Hoare logic and
     had spotted the potential benefit of working with the separating
     conjunction. *)
 
-(* 2024-08-08 20:37 *)
+(* 2024-08-25 18:06 *)

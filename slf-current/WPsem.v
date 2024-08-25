@@ -181,7 +181,7 @@ Proof using.
   { xsimpl. intros h' ->. applys M2. }
 Qed.
 
-(** Looking at the entailement expressed by [wp_frame], the reader may wander
+(** Looking at the entaileent expressed by [wp_frame], the reader may wander
     whether the reverse entailment holds, that is, if [wp t (Q \*+ H)] entails
     [(wp t Q) \* H]. This reverse entailment does not hold in general. Consider
     the following counterexample term [t], defined as [let p = ref 1 in 0]. This
@@ -311,7 +311,7 @@ Proof using. introv M. xchange M. applys wp_ramified. Qed.
 
     Prove that [wp_conseq] is derivable from [wp_ramified]. Concretely, prove
     [wp_conseq] using only [wp_ramified] or [wp_ramified_trans], plus properties
-    of the entailement relation. *)
+    of the entailment relation. *)
 
 Lemma wp_conseq_of_wp_ramified : forall t Q1 Q2,
   Q1 ===> Q2 ->
@@ -323,7 +323,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** **** Exercise: 2 stars, standard, especially useful (wp_frame_of_wp_ramified)
 
     Prove that [wp_frame] is derivable from [wp_ramified]. Concretely, prove
-    [wp_frame] using only [wp_ramified] plus properties of entailement. *)
+    [wp_frame] using only [wp_ramified] plus properties of entailment. *)
 
 Lemma wp_frame_of_wp_ramified : forall t H Q,
   (wp t Q) \* H ==> wp t (Q \*+ H).
@@ -870,4 +870,4 @@ End TexanTriples.
     VST have advocated for this rule. The ramified frame rule was integrated in
     CFML 2.0 in 2018. *)
 
-(* 2024-08-08 20:37 *)
+(* 2024-08-25 18:06 *)

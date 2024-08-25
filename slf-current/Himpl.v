@@ -511,7 +511,7 @@ Proof using. intros. xsimpl. intros r. Abort.
 (** *** Example: Entailment Proofs using [xpull] and [xsimpl] *)
 
 (** The [xpull] tactic is a restricted version of [xsimpl]: it operates on the
-    left-hand side of the entailement, but leaves the right-hand side untouched.
+    left-hand side of the entailment, but leaves the right-hand side untouched.
     In other words, [xpull] performs only the first half of the work that
     [xsimpl] would do. *)
 
@@ -649,7 +649,8 @@ Parameter case_study_11 : forall p q,
   ==> \exists n, p ~~> n \* q ~~> n.
 
 Parameter case_study_12 : forall p n,
-  p ~~> n \* \[n > 0] \* \[n < 0] ==> p ~~> n \* p ~~> n.
+      p ~~> n \* \[n > 0] \* \[n < 0]
+  ==> p ~~> n \* p ~~> n.
 
 End EntailmentQuiz.
 
@@ -875,4 +876,4 @@ End EntailmentRulesProofs.
 (* ================================================================= *)
 (** ** Historical Notes *)
 
-(* 2024-08-08 20:37 *)
+(* 2024-08-25 18:06 *)

@@ -680,7 +680,7 @@ Parameter triple_hpure : forall t (P:Prop) H Q,
 (** The "extraction rule for existentials" asserts that a judgment of the form
     [triple t (\exists x, J x) Q] is derivable from
     [forall x, triple t (J x) Q]. Again, this rule is the counterpart of the
-    corresponding rule on entailements, [himpl_hexists_l]. *)
+    corresponding rule on entailments, [himpl_hexists_l]. *)
 
 Parameter triple_hexists : forall t (A:Type) (J:A->hprop) Q,
   (forall x, triple t (J x) Q) ->
@@ -1545,4 +1545,4 @@ End BakedInFrame.
     technique has been employed successfully in numerous formalizations of
     Separation Logic. *)
 
-(* 2024-08-08 20:37 *)
+(* 2024-08-25 18:06 *)

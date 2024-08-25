@@ -595,7 +595,7 @@ Definition triple (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
     account for the addition of [\GC] in the definition of [triples]. All the
     rules are proved using exactly the same proof scripts as before, with
     [xsimpl] possibly performing extra work for cancelling out occurrences of
-    [\GC] on both sides of an entailement. *)
+    [\GC] on both sides of an entailment. *)
 
 Lemma triple_conseq : forall t H' Q' H Q,
   triple t H' Q' ->
@@ -1234,4 +1234,4 @@ End FromPreToPostGC.
     approach to controlling linearity was introduced in the context of CFML, in
     work by [Guéneau, Jourdan, Charguéraud, and Pottier 2019] (in Bib.v). *)
 
-(* 2024-08-08 20:37 *)
+(* 2024-08-25 18:06 *)

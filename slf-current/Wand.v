@@ -77,7 +77,7 @@ Lemma hforall_inv : forall A (J:A->hprop) h,
   forall x, J x h.
 Proof using. introv M. applys* M. Qed.
 
-(** The introduction rule in an entailement for [\forall] appears below. To
+(** The introduction rule in an entailment for [\forall] appears below. To
     prove that a heap satisfies [\forall x, J x], we must show that, for any
     [x], this heap satisfies [J x]. *)
 
@@ -1273,4 +1273,4 @@ End QwandEquiv.
     [Hobor and Villard 2013] (in Bib.v). The rule has later been popularized by the
     Iris framework, in particular. *)
 
-(* 2024-08-08 20:37 *)
+(* 2024-08-25 18:06 *)
