@@ -680,4 +680,4 @@ End Extensionality.
     had spotted the potential benefit of working with the separating
     conjunction. *)
 
-(* 2024-08-25 18:06 *)
+(* 2024-08-30 14:21 *)

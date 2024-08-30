@@ -1793,4 +1793,4 @@ End FormalThoughtExercises.
 
 End STLCSub.
 
-(* 2024-08-25 18:04 *)
+(* 2024-08-30 14:18 *)

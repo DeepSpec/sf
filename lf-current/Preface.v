@@ -37,13 +37,13 @@
 (* ################################################################# *)
 (** * Overview *)
 
-(** Building reliable software is really hard -- really hard.  The
-    scale and complexity of modern systems, the number of people
-    involved, and the range of demands placed on them make it
-    challenging to build software that is even more-or-less correct,
-    much less 100%% correct.  At the same time, the increasing degree
-    to which information processing is woven into every aspect of
-    society greatly amplifies the cost of bugs and insecurities.
+(** Building reliable software is hard -- really hard.  The scale and
+    complexity of modern systems, the number of people involved, and
+    the range of demands placed on them make it challenging to build
+    software that is even more-or-less correct, much less 100%%
+    correct.  At the same time, the increasing degree to which
+    information processing is woven into every aspect of society
+    greatly amplifies the cost of bugs and insecurities.
 
     Computer scientists and software engineers have responded to these
     challenges by developing a host of techniques for improving
@@ -422,7 +422,7 @@
     volume       =   "1",
     year         =   "2024",
     publisher    =   "Electronic textbook",
-    note         =   {Version 6.6, \URL{http://softwarefoundations.cis.upenn.edu}}
+    note         =   {Version 6.7, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
 *)
 
@@ -506,4 +506,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-08-25 18:02 *)
+(* 2024-08-30 14:17 *)

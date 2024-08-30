@@ -3,20 +3,7 @@
 (* ################################################################# *)
 (** * Separate Compilation *)
 
-(**  BCP 24: We should add something like this as a fall-back for
-    people that can't get the make- or CoqIDE-based solutions to
-    work (e.g., under windows)...
-
-      At the end of the first chapter you need to run:
-
-        coqc -Q . LF Basics.v
-
-      Doing an equivalent command is necessary at the end of every
-      chapter because each subsequent chapter imports the previous
-      one.
-
-
-    Before getting started on this chapter, we need to import
+(** Before getting started on this chapter, we need to import
     all of our definitions from the previous chapter: *)
 
 From LF Require Export Basics.
@@ -46,10 +33,10 @@ From LF Require Export Basics.
      - In Proof General or CoqIDE, the compilation should happen
        automatically when you submit the [Require] line above to PG.
 
-     - For VSCode users, open the terminal pane at the bottom
-       and then use the command line instructions below.
-       (If you downloaded the project setup .tgz file, just doing `make`
-       should build all the code.)
+     - For VSCode users, open the terminal pane at the bottom and then
+       use the command line instructions below.  (If you downloaded
+       the project setup .tgz file, just doing `make` should build all
+       the code.)
 
      - If you want to compile from the command line, generate a
        [Makefile] using the [coq_makefile] utility, which comes
@@ -81,10 +68,26 @@ From LF Require Export Basics.
        compile them in the right order, so [make] should generally be
        preferred over explicit [coqc].
 
-    If you have trouble (e.g., if you get complaints about missing
-    identifiers later in the file), it may be because the "load path"
-    for Coq is not set up correctly.  The [Print LoadPath.] command
-    may be helpful in sorting out such issues.
+    - As a last (but not terrible) resort, you can simply compile each
+      file manually as you go.  For example, before starting work on
+      the present chapter, you would need to run the following
+      command:
+
+        coqc -Q . LF Basics.v
+
+      Then, once you've finished this chapter, you'd do
+
+        coqc -Q . LF Induction.v
+
+      to get ready to work on the next one.  If you ever remove the
+      .vo files, you'd need to give both commands again (in that
+      order).
+
+    If you have trouble running Coq in this file (e.g., if you get
+    complaints about missing identifiers later in the file), it may be
+    because the "load path" for Coq is not set up correctly.  The
+    [Print LoadPath.] command may be helpful in sorting out such
+    issues.
 
     In particular, if you see a message like
 
@@ -96,10 +99,10 @@ From LF Require Export Basics.
     in a terminal window are getting a different version of Coq than
     commands executed by Proof General or CoqIDE.
 
-    - Another common reason is that the library [Bar] was modified and
-      recompiled without also recompiling [Foo] which depends on it.
-      Recompile [Foo], or everything if too many files are
-      affected.  (Using the third solution above: [make clean; make].)
+    Another common reason is that the library [Bar] was modified and
+    recompiled without also recompiling [Foo] which depends on it.
+    Recompile [Foo], or everything if too many files are
+    affected.  (Using the third solution above: [make clean; make].)
 
     One more tip for CoqIDE users: If you see messages like [Error:
     Unable to locate library Basics], a likely reason is
@@ -774,4 +777,4 @@ Proof.
 
 (** [] *)
 
-(* 2024-08-25 18:02 *)
+(* 2024-08-30 14:17 *)

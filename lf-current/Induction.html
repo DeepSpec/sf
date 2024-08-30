@@ -38,27 +38,7 @@
 
 <div class="paragraph"> </div>
 
- <div style="background-color:lightgray; color:red; margin:10px; padding:10px; "> BCP 24: We should add something like this as a fall-back for
-    people that can't get the make- or CoqIDE-based solutions to
-    work (e.g., under windows)...
-
-<div class="paragraph"> </div>
-
-      At the end of the first chapter you need to run:
-
-<div class="paragraph"> </div>
-
-        coqc -Q . LF Basics.v
-
-<div class="paragraph"> </div>
-
-      Doing an equivalent command is necessary at the end of every
-      chapter because each subsequent chapter imports the previous
-      one.
-
-<div class="paragraph"> </div>
-
-</div>  Before getting started on this chapter, we need to import
+ Before getting started on this chapter, we need to import
     all of our definitions from the previous chapter: 
 </div>
 <div class="code">
@@ -102,10 +82,10 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
 
 
 </li>
-<li> For VSCode users, open the terminal pane at the bottom
-       and then use the command line instructions below.
-       (If you downloaded the project setup .tgz file, just doing `make`
-       should build all the code.)
+<li> For VSCode users, open the terminal pane at the bottom and then
+       use the command line instructions below.  (If you downloaded
+       the project setup .tgz file, just doing `make` should build all
+       the code.)
 
 <div class="paragraph"> </div>
 
@@ -139,15 +119,33 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
        compile them in the right order, so <span class="inlinecode"><span class="id" title="var">make</span></span> should generally be
        preferred over explicit <span class="inlinecode"><span class="id" title="var">coqc</span></span>.
 
+<div class="paragraph"> </div>
+
+
+</li>
+<li> As a last (but not terrible) resort, you can simply compile each
+      file manually as you go.  For example, before starting work on
+      the present chapter, you would need to run the following
+      command:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span>
+</span>      Then, once you've finished this chapter, you'd do
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Induction.v</span>
+</span>      to get ready to work on the next one.  If you ever remove the
+      .vo files, you'd need to give both commands again (in that
+      order).
+
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-    If you have trouble (e.g., if you get complaints about missing
-    identifiers later in the file), it may be because the "load path"
-    for Coq is not set up correctly.  The <span class="inlinecode"><span class="id" title="keyword">Print</span></span> <span class="inlinecode"><span class="id" title="var">LoadPath</span>.</span> command
-    may be helpful in sorting out such issues.
+    If you have trouble running Coq in this file (e.g., if you get
+    complaints about missing identifiers later in the file), it may be
+    because the "load path" for Coq is not set up correctly.  The
+    <span class="inlinecode"><span class="id" title="keyword">Print</span></span> <span class="inlinecode"><span class="id" title="var">LoadPath</span>.</span> command may be helpful in sorting out such
+    issues.
 
 <div class="paragraph"> </div>
 
@@ -162,14 +160,10 @@ For this <span class="inlinecode"><span class="id" title="keyword">Require</span
 
 <div class="paragraph"> </div>
 
-<ul class="doclist">
-<li> Another common reason is that the library <span class="inlinecode"><span class="id" title="var">Bar</span></span> was modified and
-      recompiled without also recompiling <span class="inlinecode"><span class="id" title="var">Foo</span></span> which depends on it.
-      Recompile <span class="inlinecode"><span class="id" title="var">Foo</span></span>, or everything if too many files are
-      affected.  (Using the third solution above: <span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">clean</span>;</span> <span class="inlinecode"><span class="id" title="var">make</span></span>.)
-
-</li>
-</ul>
+    Another common reason is that the library <span class="inlinecode"><span class="id" title="var">Bar</span></span> was modified and
+    recompiled without also recompiling <span class="inlinecode"><span class="id" title="var">Foo</span></span> which depends on it.
+    Recompile <span class="inlinecode"><span class="id" title="var">Foo</span></span>, or everything if too many files are
+    affected.  (Using the third solution above: <span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">clean</span>;</span> <span class="inlinecode"><span class="id" title="var">make</span></span>.)
 
 <div class="paragraph"> </div>
 
@@ -1075,7 +1069,7 @@ Finally, prove the main theorem. The inductive cases could be a
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-08-25&nbsp;18:02&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-08-30&nbsp;14:17&nbsp;*)</span><br/>
 </div>
 </div>
 

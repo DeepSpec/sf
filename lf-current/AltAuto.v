@@ -1180,6 +1180,13 @@ Lemma pumping : forall T (re : reg_exp T) s,
         forall m, s1 ++ napp m s2 ++ s3 =~ re.
 
 Proof.
+  intros T re s Hmatch.
+  induction Hmatch
+    as [ | x | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
+       | s1 re1 re2 Hmatch IH | re1 s2 re2 Hmatch IH
+       | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2 ];
+    simpl; try lia;
+    intros Hlen.
 (* FILL IN HERE *) Admitted.
 (* Do not modify the following line: *)
 Definition manual_grade_for_pumping_redux_strong : option (nat*string) := None.
@@ -1199,7 +1206,7 @@ Example trans_example1:  forall a b c d,
     a <= d.
 Proof.
   intros a b c d H1 H2.
-  apply le_trans with (b + b * c).
+  apply Nat.le_trans with (b + b * c).
     (* ^ We must supply the intermediate value *)
   - apply H1.
   - simpl in H2. rewrite mul_comm. apply H2.
@@ -1228,7 +1235,7 @@ Example trans_example1':  forall a b c d,
     a <= d.
 Proof.
   intros a b c d H1 H2.
-  eapply le_trans. (* 1 *)
+  eapply Nat.le_trans. (* 1 *)
   - apply H1. (* 2 *)
   - simpl in H2. rewrite mul_comm. apply H2.
 Qed.
@@ -1257,7 +1264,7 @@ Example trans_example2:  forall a b c d,
     a <= d.
 Proof.
   intros a b c d H1 H2.
-  info_eauto using le_trans.
+  info_eauto using Nat.le_trans.
 Qed.
 
 (** The [eauto] tactic works just like [auto], except that it
@@ -1825,4 +1832,4 @@ Definition manual_grade_for_nor_intuition : option (nat*string) := None.
 
     - Ltac functions and [match goal] *)
 
-(* 2024-08-25 18:03 *)
+(* 2024-08-30 14:17 *)
