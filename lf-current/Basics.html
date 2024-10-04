@@ -132,7 +132,7 @@ The new type is called <span class="inlinecode"><span class="id" title="var">day
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="next_weekday" class="idref" href="#next_weekday"><span class="id" title="definition">next_weekday</span></a> (<a id="d:3" class="idref" href="#d:3"><span class="id" title="binder">d</span></a>:<a class="idref" href="Basics.html#day"><span class="id" title="inductive">day</span></a>) : <a class="idref" href="Basics.html#day"><span class="id" title="inductive">day</span></a> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="next_working_day" class="idref" href="#next_working_day"><span class="id" title="definition">next_working_day</span></a> (<a id="d:3" class="idref" href="#d:3"><span class="id" title="binder">d</span></a>:<a class="idref" href="Basics.html#day"><span class="id" title="inductive">day</span></a>) : <a class="idref" href="Basics.html#day"><span class="id" title="inductive">day</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Basics.html#d:3"><span class="id" title="variable">d</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#monday"><span class="id" title="constructor">monday</span></a>    ⇒ <a class="idref" href="Basics.html#tuesday"><span class="id" title="constructor">tuesday</span></a><br/>
 &nbsp;&nbsp;| <a class="idref" href="Basics.html#tuesday"><span class="id" title="constructor">tuesday</span></a>   ⇒ <a class="idref" href="Basics.html#wednesday"><span class="id" title="constructor">wednesday</span></a><br/>
@@ -155,13 +155,13 @@ Note that the argument and return types of this function are
  Having defined a function, we can check that it works on
     some examples.  There are actually three different ways to do
     examples in Coq.  First, we can use the command <span class="inlinecode"><span class="id" title="keyword">Compute</span></span> to
-    evaluate a compound expression involving <span class="inlinecode"><span class="id" title="var">next_weekday</span></span>. 
+    evaluate a compound expression involving <span class="inlinecode"><span class="id" title="var">next_working_day</span></span>. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> <a class="idref" href="Basics.html#friday"><span class="id" title="constructor">friday</span></a>).<br/>
+<span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#next_working_day"><span class="id" title="definition">next_working_day</span></a> <a class="idref" href="Basics.html#friday"><span class="id" title="constructor">friday</span></a>).<br/>
 <span class="comment">(*&nbsp;==&gt;&nbsp;monday&nbsp;:&nbsp;day&nbsp;*)</span><br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> <a class="idref" href="Basics.html#saturday"><span class="id" title="constructor">saturday</span></a>)).<br/>
+<span class="id" title="keyword">Compute</span> (<a class="idref" href="Basics.html#next_working_day"><span class="id" title="definition">next_working_day</span></a> (<a class="idref" href="Basics.html#next_working_day"><span class="id" title="definition">next_working_day</span></a> <a class="idref" href="Basics.html#saturday"><span class="id" title="constructor">saturday</span></a>)).<br/>
 <span class="comment">(*&nbsp;==&gt;&nbsp;tuesday&nbsp;:&nbsp;day&nbsp;*)</span><br/>
 </div>
 
@@ -179,13 +179,13 @@ Note that the argument and return types of this function are
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Example</span> <a id="test_next_weekday" class="idref" href="#test_next_weekday"><span class="id" title="definition">test_next_weekday</span></a>:<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> (<a class="idref" href="Basics.html#next_weekday"><span class="id" title="definition">next_weekday</span></a> <a class="idref" href="Basics.html#saturday"><span class="id" title="constructor">saturday</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#tuesday"><span class="id" title="constructor">tuesday</span></a>.<br/>
+<span class="id" title="keyword">Example</span> <a id="test_next_working_day" class="idref" href="#test_next_working_day"><span class="id" title="definition">test_next_working_day</span></a>:<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Basics.html#next_working_day"><span class="id" title="definition">next_working_day</span></a> (<a class="idref" href="Basics.html#next_working_day"><span class="id" title="definition">next_working_day</span></a> <a class="idref" href="Basics.html#saturday"><span class="id" title="constructor">saturday</span></a>)<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#tuesday"><span class="id" title="constructor">tuesday</span></a>.<br/>
 </div>
 
 <div class="doc">
 This declaration does two things: it makes an assertion
-    (that the second weekday after <span class="inlinecode"><span class="id" title="var">saturday</span></span> is <span class="inlinecode"><span class="id" title="var">tuesday</span></span>), and it
+    (that the second working day after <span class="inlinecode"><span class="id" title="var">saturday</span></span> is <span class="inlinecode"><span class="id" title="var">tuesday</span></span>), and it
     gives the assertion a name that can be used to refer to it later.
     Having made the assertion, we can also ask Coq to verify it like
     this: 
@@ -2691,7 +2691,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-08-30&nbsp;14:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-04&nbsp;13:52&nbsp;*)</span><br/>
 </div>
 </div>
 

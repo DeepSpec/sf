@@ -328,4 +328,4 @@ Proof using. extens. intros a b l. induction l; simpl; rew_listx; fequals. Qed.
 #[global] Hint Rewrite fold_right_eq : rew_list_exec.
 
 
-(* 2024-08-30 14:21 *)
+(* 2024-10-04 13:56 *)

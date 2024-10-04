@@ -111,8 +111,8 @@
        - _Proof assistants_ are hybrid tools that automate the more
          routine aspects of building proofs while depending on human
          guidance for more difficult aspects.  Widely used proof
-         assistants include Isabelle, Agda, Twelf, ACL2, PVS, and Coq,
-         among many others.
+         assistants include Isabelle, Agda, Twelf, ACL2, PVS, F*,
+         and Coq, among many others.
 
     This course is based around Coq, a proof assistant that has been
     under development since 1983 and that in recent years has
@@ -143,14 +143,14 @@
       CompCert, a fully-verified optimizing compiler for C, and
       CertiKOS, a fully verified hypervisor, for proving the
       correctness of subtle algorithms involving floating point
-      numbers, and as the basis for CertiCrypt, an environment for
-      reasoning about the security of cryptographic algorithms.  It is
-      also being used to build verified implementations of the
+      numbers, and as the basis for CertiCrypt, FCF, and SSProve,
+      which are frameworks for proving cryptographic algorithms secure.
+      It is also being used to build verified implementations of the
       open-source RISC-V processor architecture.
 
     - As a _realistic environment for functional programming with
       dependent types_, it has inspired numerous innovations.  For
-      example, the Ynot system embeds "relational Hoare reasoning" (an
+      example, Hoare Type Theory embeds "Hoare reasoning" (an
       extension of the _Hoare Logic_ we will see later in this course)
       in Coq.
 
@@ -185,7 +185,8 @@
     programming idioms that can be used in almost any programming
     language and to a family of programming languages designed to
     emphasize these idioms, including Haskell, OCaml, Standard ML,
-    F##, Scala, Scheme, Racket, Common Lisp, Clojure, Erlang, and Coq.
+    F##, Scala, Scheme, Racket, Common Lisp, Clojure, Erlang, F*,
+    and Coq.
 
     Functional programming has been developed over many decades --
     indeed, its roots go back to Church's lambda-calculus, which was
@@ -259,7 +260,8 @@
 
     You will need:
 
-    - A current installation of Coq, available from the Coq home page.
+    - A current installation of Coq, available from the Coq home page
+      ({https://coq.inria.fr/download}).
       The "Coq Platform" usually offers the smoothest installation
       experience.
 
@@ -506,4 +508,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-08-30 14:17 *)
+(* 2024-10-04 13:52 *)

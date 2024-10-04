@@ -83,7 +83,7 @@ Inductive day : Type :=
     Having defined [day], we can write functions that operate on
     days. *)
 
-Definition next_weekday (d:day) : day :=
+Definition next_working_day (d:day) : day :=
   match d with
   | monday    => tuesday
   | tuesday   => wednesday
@@ -103,12 +103,12 @@ Definition next_weekday (d:day) : day :=
 (** Having defined a function, we can check that it works on
     some examples.  There are actually three different ways to do
     examples in Coq.  First, we can use the command [Compute] to
-    evaluate a compound expression involving [next_weekday]. *)
+    evaluate a compound expression involving [next_working_day]. *)
 
-Compute (next_weekday friday).
+Compute (next_working_day friday).
 (* ==> monday : day *)
 
-Compute (next_weekday (next_weekday saturday)).
+Compute (next_working_day (next_working_day saturday)).
 (* ==> tuesday : day *)
 
 (** (We show Coq's responses in comments; if you have a computer
@@ -121,11 +121,11 @@ Compute (next_weekday (next_weekday saturday)).
 (** Second, we can record what we _expect_ the result to be in the
     form of a Coq example: *)
 
-Example test_next_weekday:
-  (next_weekday (next_weekday saturday)) = tuesday.
+Example test_next_working_day:
+  (next_working_day (next_working_day saturday)) = tuesday.
 
 (** This declaration does two things: it makes an assertion
-    (that the second weekday after [saturday] is [tuesday]), and it
+    (that the second working day after [saturday] is [tuesday]), and it
     gives the assertion a name that can be used to refer to it later.
     Having made the assertion, we can also ask Coq to verify it like
     this: *)
@@ -2015,4 +2015,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2024-08-30 14:17 *)
+(* 2024-10-04 13:52 *)

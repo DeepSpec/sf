@@ -77,7 +77,7 @@ Check is_three : nat -> Prop.
     For instance, here's a (polymorphic) property defining the
     familiar notion of an _injective function_. *)
 
-Definition injective {A B} (f : A -> B) :=
+Definition injective {A B} (f : A -> B) : Prop :=
   forall x y : A, f x = f y -> x = y.
 
 Lemma succ_inj : injective S.
@@ -139,8 +139,8 @@ Proof.
   - (* 2 + 2 = 4 *) reflexivity.
 Qed.
 
-(** **** Exercise: 2 stars, standard (and_exercise) *)
-Example and_exercise :
+(** **** Exercise: 2 stars, standard (plus_is_O) *)
+Example plus_is_O :
   forall n m : nat, n + m = 0 -> n = 0 /\ m = 0.
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -188,19 +188,18 @@ Proof.
   reflexivity.
 Qed.
 
-(** For this specific theorem, both formulations are fine.  But it's
-    important to understand how to work with conjunctive hypotheses because
-    conjunctions often arise from intermediate steps in proofs, especially
-    in larger developments.
-
-    Here's a simple example: *)
+(** For this specific theorem, both formulations are fine.  But
+    it's important to understand how to work with conjunctive
+    hypotheses because conjunctions often arise from intermediate
+    steps in proofs, especially in larger developments.  Here's a
+    simple example: *)
 
 Lemma and_example3 :
   forall n m : nat, n + m = 0 -> n * m = 0.
 Proof.
   (* WORKED IN CLASS *)
   intros n m H.
-  apply and_exercise in H.
+  apply plus_is_O in H.
   destruct H as [Hn Hm].
   rewrite Hn. reflexivity.
 Qed.
@@ -226,9 +225,9 @@ Proof.
 (** [] *)
 
 (** Finally, we sometimes need to rearrange the order of conjunctions
-    and/or the grouping of multi-way conjunctions.  The following
-    commutativity and associativity theorems can be handy in such
-    cases. *)
+    and/or the grouping of multi-way conjunctions. We can see this
+    at work in the proofs of the following commutativity and
+    associativity theorems *)
 
 Theorem and_commut : forall P Q : Prop,
   P /\ Q -> Q /\ P.
@@ -238,7 +237,7 @@ Proof.
     - (* left *) apply HQ.
     - (* right *) apply HP.  Qed.
 
-(** **** Exercise: 2 stars, standard (and_assoc)
+(** **** Exercise: 1 star, standard (and_assoc)
 
     (In the following proof of associativity, notice how the _nested_
     [intros] pattern breaks the hypothesis [H : P /\ (Q /\ R)] down into
@@ -261,9 +260,9 @@ Check and : Prop -> Prop -> Prop.
 (** ** Disjunction *)
 
 (** Another important connective is the _disjunction_, or _logical or_,
-    of two propositions: [A \/ B] is true when either [A] or [B]
-    is.  This infix notation stands for [or A B], where [or : Prop ->
-    Prop -> Prop]. *)
+    of two propositions: [A \/ B] is true when either [A] or [B] is.
+    (This infix notation stands for [or A B], where
+    [or : Prop -> Prop -> Prop].) *)
 
 (** To use a disjunctive hypothesis in a proof, we proceed by case
     analysis -- which, as with other data types like [nat], can be done
@@ -282,6 +281,14 @@ Proof.
     rewrite Hm. rewrite <- mult_n_O.
     reflexivity.
 Qed.
+
+(** We can see in this example that, when we perform case analysis on a
+    disjunction [A \/ B], we must separately satisfy two proof
+    obligations, each showing that the conclusion holds under a different
+    assumption -- [A] in the first subgoal and [B] in the second.
+
+    The case analysis pattern [[Hn | Hm]] allows
+    us to name the hypotheses that are generated for the subgoals. *)
 
 (** Conversely, to show that a disjunction holds, it suffices to show that
     one of its sides holds. This can be done via the tactics [left] and
@@ -336,9 +343,9 @@ Proof.
     contradiction, then any other proposition can be derived.
 
     Following this intuition, we could define [~ P] ("not [P]") as
-    [forall Q, P -> Q].
+    [forall Q, P -> Q]. *)
 
-    Coq actually makes a slightly different but equivalent choice,
+(** Coq actually makes a slightly different (but equivalent) choice,
     defining [~ P] as [P -> False], where [False] is a specific
     un-provable proposition defined in the standard library. *)
 
@@ -422,8 +429,8 @@ Theorem contradiction_implies_anything : forall P Q : Prop,
   (P /\ ~P) -> Q.
 Proof.
   (* WORKED IN CLASS *)
-  intros P Q [HP HNA]. unfold not in HNA.
-  apply HNA in HP. destruct HP.  Qed.
+  intros P Q [HP HNP]. unfold not in HNP.
+  apply HNP in HP. destruct HP.  Qed.
 
 Theorem double_neg : forall P : Prop,
   P -> ~~P.
@@ -431,7 +438,7 @@ Proof.
   (* WORKED IN CLASS *)
   intros P H. unfold not. intros G. apply G. apply H.  Qed.
 
-(** **** Exercise: 2 stars, advanced (double_neg_inf)
+(** **** Exercise: 2 stars, advanced (double_neg_informal)
 
     Write an _informal_ proof of [double_neg]:
 
@@ -440,7 +447,7 @@ Proof.
 (* FILL IN HERE *)
 
 (* Do not modify the following line: *)
-Definition manual_grade_for_double_neg_inf : option (nat*string) := None.
+Definition manual_grade_for_double_neg_informal : option (nat*string) := None.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, especially useful (contrapositive) *)
@@ -457,7 +464,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 1 star, advanced (informal_not_PNP)
+(** **** Exercise: 1 star, advanced (not_PNP_informal)
 
     Write an informal proof (in English) of the proposition [forall P
     : Prop, ~(P /\ ~P)]. *)
@@ -465,7 +472,7 @@ Proof.
 (* FILL IN HERE *)
 
 (* Do not modify the following line: *)
-Definition manual_grade_for_informal_not_PNP : option (nat*string) := None.
+Definition manual_grade_for_not_PNP_informal : option (nat*string) := None.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (de_morgan_not_or)
@@ -473,8 +480,8 @@ Definition manual_grade_for_informal_not_PNP : option (nat*string) := None.
     _De Morgan's Laws_, named for Augustus De Morgan, describe how
     negation interacts with conjunction and disjunction.  The
     following law says that "the negation of a disjunction is the
-    conjunction of the negations." There is a corresponding law
-    [de_morgan_not_and_not] that we will return to at the end of this
+    conjunction of the negations." There is a dual law
+    [de_morgan_not_and_not] to which we will return at the end of this
     chapter. *)
 Theorem de_morgan_not_or : forall (P Q : Prop),
     ~ (P \/ Q) -> ~P /\ ~Q.
@@ -497,8 +504,7 @@ Proof.
 Theorem not_true_is_false : forall b : bool,
   b <> true -> b = false.
 Proof.
-  intros b H.
-  destruct b eqn:HE.
+  intros b H. destruct b eqn:HE.
   - (* b = true *)
     unfold not in H.
     apply ex_falso_quodlibet.
@@ -559,9 +565,9 @@ Definition disc_fn (n: nat) : Prop :=
 
 Theorem disc_example : forall n, ~ (O = S n).
 Proof.
-  intros n H1.
-  assert (H2 : disc_fn O). { simpl. apply I. }
-  rewrite H1 in H2. simpl in H2. apply H2.
+  intros n contra.
+  assert (H : disc_fn O). { simpl. apply I. }
+  rewrite contra in H. simpl in H. apply H.
 Qed.
 
 (** To generalize this to other constructors, we simply have to provide an
@@ -612,12 +618,14 @@ Qed.
 
 Lemma apply_iff_example1:
   forall P Q R : Prop, (P <-> Q) -> (Q -> R) -> (P -> R).
-  intros P Q R Hiff H HP. apply H.  apply Hiff. apply HP.
+Proof.
+  intros P Q R Hiff H HP. apply H. apply Hiff. apply HP.
 Qed.
 
 Lemma apply_iff_example2:
   forall P Q R : Prop, (P <-> Q) -> (P -> R) -> (Q -> R).
-  intros P Q R Hiff H HQ. apply H.  apply Hiff. apply HQ.
+Proof.
+  intros P Q R Hiff H HQ. apply H. apply Hiff. apply HQ.
 Qed.
 
 (** **** Exercise: 1 star, standard, optional (iff_properties)
@@ -1737,4 +1745,4 @@ Definition consequentia_mirabilis := forall P:Prop,
 
     [] *)
 
-(* 2024-08-30 14:17 *)
+(* 2024-10-04 13:52 *)

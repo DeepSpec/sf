@@ -47,135 +47,181 @@
 </div>
 
 <div class="doc">
-For this <span class="inlinecode"><span class="id" title="keyword">Require</span></span> <span class="inlinecode"><span class="id" title="keyword">Export</span></span> command to work, Coq needs to be
-    able to find a compiled version of <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>, called <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span>,
-    in a directory associated with the prefix <span class="inlinecode"><span class="id" title="var">LF</span></span>.  This file is
-    analogous to the <span class="inlinecode">.<span class="id" title="var">class</span></span> files compiled from <span class="inlinecode">.<span class="id" title="var">java</span></span> source files
-    and the <span class="inlinecode">.<span class="id" title="var">o</span></span> files compiled from <span class="inlinecode">.<span class="id" title="var">c</span></span> files.
+For this <span class="inlinecode"><span class="id" title="keyword">Require</span></span> command to work, Coq needs to be able to
+    find a compiled version of the previous chapter (<span class="inlinecode"><span class="id" title="var">Basics.v</span></span>).
+    This compiled version, called <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span>, is analogous to the
+    <span class="inlinecode">.<span class="id" title="var">class</span></span> files compiled from <span class="inlinecode">.<span class="id" title="var">java</span></span> source files and the <span class="inlinecode">.<span class="id" title="var">o</span></span>
+    files compiled from <span class="inlinecode">.<span class="id" title="var">c</span></span> files.
 
 <div class="paragraph"> </div>
 
-    First create a file named <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> containing the following
-    line (if you obtained the whole volume "Logical Foundations" as a
-    single archive, a <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> should already exist and you can
-    skip this step):
+    To compile <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> and obtain <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span>, first make sure that
+    the files <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>, <span class="inlinecode"><span class="id" title="var">Induction.v</span></span>, and <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> are in
+    the current directory.  
+
+<div class="paragraph"> </div>
+
+    The <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> file should contain just the following line: 
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span>
 </span>    This maps the current directory ("<span class="inlinecode">.</span>", which contains <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>,
     <span class="inlinecode"><span class="id" title="var">Induction.v</span></span>, etc.) to the prefix (or "logical directory")
-    "<span class="inlinecode"><span class="id" title="var">LF</span></span>".  Proof General and CoqIDE read <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span>
-    automatically, so they know to where to look for the file
+    "<span class="inlinecode"><span class="id" title="var">LF</span></span>". Proof General, CoqIDE, and VSCoq read <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span>
+    automatically, to find out to where to look for the file
     <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span> corresponding to the library <span class="inlinecode"><span class="id" title="var">LF.Basics</span></span>.
 
 <div class="paragraph"> </div>
 
-    Once <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> is thus created, there are various ways to
-    build <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span>:
+    Once the files are in place, there are various ways to build
+    <span class="inlinecode"><span class="id" title="var">Basics.vo</span></span> from an IDE, or you can build it from the command 
+    line.  From an IDE...
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> In Proof General or CoqIDE, the compilation should happen
-       automatically when you submit the <span class="inlinecode"><span class="id" title="keyword">Require</span></span> line above to PG.
+<li> In Proof General: The compilation can be made to happen
+       automatically when you submit the <span class="inlinecode"><span class="id" title="keyword">Require</span></span> line above to PG, by
+       setting the emacs variable <span class="inlinecode"><span class="id" title="var">coq</span>-<span class="id" title="var">compile</span>-<span class="id" title="keyword">before</span>-<span class="id" title="var">require</span></span> to <span class="inlinecode"><span class="id" title="var">t</span></span>.
+       This can also be found in the menu: "Coq" &gt; "Auto Compilation" &gt;
+       "Compile Before Require".
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> In CoqIDE: One thing you can do on all platforms is open
+       <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>; then, in the "Compile" menu, click on "Compile Buffer".
 
 <div class="paragraph"> </div>
 
 
 </li>
 <li> For VSCode users, open the terminal pane at the bottom and then
-       use the command line instructions below.  (If you downloaded
+       follow the command line instructions below.  (If you downloaded
        the project setup .tgz file, just doing `make` should build all
        the code.)
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> If you want to compile from the command line, generate a
-       <span class="inlinecode"><span class="id" title="var">Makefile</span></span> using the <span class="inlinecode"><span class="id" title="var">coq_makefile</span></span> utility, which comes
-       installed with Coq (if you obtained the whole volume as a
-       single archive, a <span class="inlinecode"><span class="id" title="var">Makefile</span></span> should already exist and you can
-       skip this step):
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coq_makefile</span> -<span class="id" title="var">f</span> <span class="id" title="var">_CoqProject</span> *.<span class="id" title="var">v</span> -<span class="id" title="var">o</span> <span class="id" title="var">Makefile</span>
-</span>       Note: You should rerun that command whenever you add or remove
-       Coq files to the directory.
-
-<div class="paragraph"> </div>
-
-       Now you can compile <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> by running <span class="inlinecode"><span class="id" title="var">make</span></span> with the
-       corresponding <span class="inlinecode">.<span class="id" title="var">vo</span></span> file as a target:
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">make</span> <span class="id" title="var">Basics.vo</span>
-</span>       All files in the directory can be compiled by giving no
-       arguments:
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">make</span>
-</span>       Under the hood, <span class="inlinecode"><span class="id" title="var">make</span></span> uses the Coq compiler, <span class="inlinecode"><span class="id" title="var">coqc</span></span>.  You can
-       also run <span class="inlinecode"><span class="id" title="var">coqc</span></span> directly:
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span>
-</span>       But <span class="inlinecode"><span class="id" title="var">make</span></span> also calculates dependencies between source files to
-       compile them in the right order, so <span class="inlinecode"><span class="id" title="var">make</span></span> should generally be
-       preferred over explicit <span class="inlinecode"><span class="id" title="var">coqc</span></span>.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> As a last (but not terrible) resort, you can simply compile each
-      file manually as you go.  For example, before starting work on
-      the present chapter, you would need to run the following
-      command:
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span>
-</span>      Then, once you've finished this chapter, you'd do
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Induction.v</span>
-</span>      to get ready to work on the next one.  If you ever remove the
-      .vo files, you'd need to give both commands again (in that
-      order).
 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-    If you have trouble running Coq in this file (e.g., if you get
-    complaints about missing identifiers later in the file), it may be
-    because the "load path" for Coq is not set up correctly.  The
-    <span class="inlinecode"><span class="id" title="keyword">Print</span></span> <span class="inlinecode"><span class="id" title="var">LoadPath</span>.</span> command may be helpful in sorting out such
-    issues.
+    To compile <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> from the command line...
 
 <div class="paragraph"> </div>
 
-    In particular, if you see a message like
+<ul class="doclist">
+<li> One way to do this is by manually running this command:
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Compiled</span> <span class="id" title="var">library</span> <span class="id" title="var">Foo</span> <span class="id" title="var">makes</span> <span class="id" title="var">inconsistent</span> <span class="id" title="var">assumptions</span> <span class="id" title="var">over</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">library</span> <span class="id" title="var">Bar</span>
-</span>    check whether you have multiple installations of Coq on your
-    machine.  It may be that commands (like <span class="inlinecode"><span class="id" title="var">coqc</span></span>) that you execute
-    in a terminal window are getting a different version of Coq than
-    commands executed by Proof General or CoqIDE.
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span>
+</span>       In general you need to compile all the dependencies of the
+       current file, in the right order, which why, for later
+       chapters, using the <span class="inlinecode"><span class="id" title="var">make</span></span> solution below may be preferable.
 
 <div class="paragraph"> </div>
 
-    Another common reason is that the library <span class="inlinecode"><span class="id" title="var">Bar</span></span> was modified and
-    recompiled without also recompiling <span class="inlinecode"><span class="id" title="var">Foo</span></span> which depends on it.
-    Recompile <span class="inlinecode"><span class="id" title="var">Foo</span></span>, or everything if too many files are
-    affected.  (Using the third solution above: <span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">clean</span>;</span> <span class="inlinecode"><span class="id" title="var">make</span></span>.)
+
+</li>
+<li> If you have <span class="inlinecode"><span class="id" title="var">make</span></span> installed on your machine you can use that
+       to automatically compile dependencies.  You can compile
+       <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> by running <span class="inlinecode"><span class="id" title="var">make</span></span> with the corresponding <span class="inlinecode">.<span class="id" title="var">vo</span></span> file
+       as a target:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">make</span> <span class="id" title="var">Basics.vo</span>
+</span>       Or you can compile all files in the directory by giving no
+       arguments to <span class="inlinecode"><span class="id" title="var">make</span></span>:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">make</span>
+</span>
+<div class="paragraph"> </div>
+
+
+</li>
+<li> As a last (but not terrible) resort, you can simply compile each
+       file manually as you go.  For example, before starting work on
+       the present chapter, you would need to run the following
+       command:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span>
+</span>       Then, once you've finished this chapter, you'd do
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Induction.v</span>
+</span>       to get ready to work on the next one.  If you ever remove the
+       .vo files, you'd need to give both commands again (in that
+       order).
+
+</li>
+</ul>
 
 <div class="paragraph"> </div>
 
-    One more tip for CoqIDE users: If you see messages like <span class="inlinecode"><span class="id" title="var">Error</span>:</span>
-    <span class="inlinecode"><span class="id" title="var">Unable</span></span> <span class="inlinecode"><span class="id" title="var">to</span></span> <span class="inlinecode"><span class="id" title="var">locate</span></span> <span class="inlinecode"><span class="id" title="var">library</span></span> <span class="inlinecode"><span class="id" title="var">Basics</span></span>, a likely reason is
-    inconsistencies between compiling things <i>within CoqIDE</i> vs <i>using
-    <span class="inlinecode"><span class="id" title="var">coqc</span></span> from the command line</i>.  This typically happens when there
-    are two incompatible versions of <span class="inlinecode"><span class="id" title="var">coqc</span></span> installed on your
-    system (one associated with CoqIDE, and one associated with <span class="inlinecode"><span class="id" title="var">coqc</span></span>
-    from the terminal).  The workaround for this situation is
-    compiling using CoqIDE only (i.e. choosing "make" from the menu),
-    and avoiding using <span class="inlinecode"><span class="id" title="var">coqc</span></span> directly at all. 
+    Troubleshooting:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> For many of the alternatives above you need to make sure that
+       the <span class="inlinecode"><span class="id" title="var">coqc</span></span> executable is in your <span class="inlinecode"><span class="id" title="var">PATH</span></span>.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> If you get complaints about missing identifiers, it may be
+       because the "load path" for Coq is not set up correctly.  The
+       <span class="inlinecode"><span class="id" title="keyword">Print</span></span> <span class="inlinecode"><span class="id" title="var">LoadPath</span>.</span> command may be helpful in sorting out such
+       issues.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> When trying to compile a later chapter, if you see a message like
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Compiled</span> <span class="id" title="var">library</span> <span class="id" title="keyword">Induction</span> <span class="id" title="var">makes</span> <span class="id" title="var">inconsistent</span> <span class="id" title="var">assumptions</span> <span class="id" title="var">over</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">library</span> <span class="id" title="var">Basics</span>
+</span>       a common reason is that the library <span class="inlinecode"><span class="id" title="var">Basics</span></span> was modified and
+       recompiled without also recompiling <span class="inlinecode"><span class="id" title="keyword">Induction</span></span> which depends
+       on it.  Recompile <span class="inlinecode"><span class="id" title="keyword">Induction</span></span>, or everything if too many files
+       are affected (for instance by running <span class="inlinecode"><span class="id" title="var">make</span></span> and if even this
+       doesn't work then <span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">clean</span>;</span> <span class="inlinecode"><span class="id" title="var">make</span></span>).
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> If you get complaints about missing identifiers later in this
+       file it may be because the "load path" for Coq is not set up
+       correctly.  The <span class="inlinecode"><span class="id" title="keyword">Print</span></span> <span class="inlinecode"><span class="id" title="var">LoadPath</span>.</span> command may be helpful in
+       sorting out such issues.
+
+<div class="paragraph"> </div>
+
+       In particular, if you see a message like
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Compiled</span> <span class="id" title="var">library</span> <span class="id" title="var">Foo</span> <span class="id" title="var">makes</span> <span class="id" title="var">inconsistent</span> <span class="id" title="var">assumptions</span> <span class="id" title="var">over</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">library</span> <span class="id" title="var">Bar</span>
+</span>       check whether you have multiple installations of Coq on your
+       machine.  It may be that commands (like <span class="inlinecode"><span class="id" title="var">coqc</span></span>) that you execute
+       in a terminal window are getting a different version of Coq than
+       commands executed by Proof General or CoqIDE.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> One more tip for CoqIDE users: If you see messages like <span class="inlinecode"><span class="id" title="var">Error</span>:</span>
+       <span class="inlinecode"><span class="id" title="var">Unable</span></span> <span class="inlinecode"><span class="id" title="var">to</span></span> <span class="inlinecode"><span class="id" title="var">locate</span></span> <span class="inlinecode"><span class="id" title="var">library</span></span> <span class="inlinecode"><span class="id" title="var">Basics</span></span>, a likely reason is
+       inconsistencies between compiling things <i>within CoqIDE</i> vs <i>using
+       <span class="inlinecode"><span class="id" title="var">coqc</span></span> from the command line</i>.  This typically happens when there
+       are two incompatible versions of <span class="inlinecode"><span class="id" title="var">coqc</span></span> installed on your
+       system (one associated with CoqIDE, and one associated with <span class="inlinecode"><span class="id" title="var">coqc</span></span>
+       from the terminal).  The workaround for this situation is
+       compiling using CoqIDE only (i.e. choosing "make" from the menu),
+       and avoiding using <span class="inlinecode"><span class="id" title="var">coqc</span></span> directly at all. 
+
+</li>
+</ul>
 </div>
 
 <div class="doc">
@@ -1069,7 +1115,7 @@ Finally, prove the main theorem. The inductive cases could be a
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-08-30&nbsp;14:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-04&nbsp;13:52&nbsp;*)</span><br/>
 </div>
 </div>
 
