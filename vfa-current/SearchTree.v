@@ -23,7 +23,7 @@
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From Coq Require Import String.  (* for an example, and manual grading *)
-From Coq Require Import Logic.FunctionalExtensionality.
+From Coq Require Import FunctionalExtensionality.
 From VFA Require Import Perm.
 From VFA Require Import Maps.
 From VFA Require Import Sort.
