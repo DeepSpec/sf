@@ -39,7 +39,7 @@ ul#menu li, div.button {
     display: inline-block;
     background-color: white;
     padding: 5px;
-    font-size: .70em;
+    font-size: .80em;
     text-transform: uppercase;
     width: 30%;
     text-align: center;
@@ -188,7 +188,7 @@ h4.section {
 
 #main .doc {
     margin: 0px auto;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 22px;
     /* max-width: 570px; */
     color: black;
@@ -254,7 +254,7 @@ h1 .inlinecode .id, h1.section span.inlinecode {
 
 .doc .code {
     display: inline;
-    font-size: 110%;
+    font-size: 120%;
     color: rgb(35%,35%,70%);
     font-family: monospace;
     padding-left: 0px;
@@ -360,7 +360,7 @@ div.hidden {
 
 .code {
     padding-left: 20px;
-    font-size: 14px;
+    font-size: 110%;
     font-family: monospace;
     line-height: 17px;
     margin-top: 9px;
@@ -394,7 +394,7 @@ div.hidden {
 hr.doublespaceincode {
     height: 1pt;
     visibility: hidden;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 /*
@@ -568,7 +568,7 @@ div#sec1.hide { display: none; }
 
 #toc ul {
     padding-top: 8px;
-    font-size: 14px;
+    font-size: 16px;
     padding-left: 0;
 }
 
@@ -997,7 +997,7 @@ body.sf_home #main_home {
     background-color: transparent;
 }
 
-/* A partial fix to a coqdoc bug...  
+/* A partial fix to a coqdoc bug...
    See https://github.com/DeepSpec/sfdev/issues/236 */
 .inlinecode { white-space: pre; }
 .inlinecode br { display: none; }

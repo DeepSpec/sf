@@ -1183,4 +1183,4 @@ Arguments forall_conj_inv_10 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] 
 Arguments forall_conj_inv_11 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] [A11] [P] [Q].
 
 
-(* 2024-10-04 13:56 *)
+(* 2024-10-24 21:44 *)
