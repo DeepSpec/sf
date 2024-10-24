@@ -74,11 +74,88 @@
 </div>
 
 <div class="doc">
-<a id="lab21"></a><h1 class="section">Data and Functions</h1>
+<a id="lab21"></a><h1 class="section">Homework Submission Guidelines</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab22"></a><h2 class="section">Enumerated Types</h2>
+ If you are using <i>Software Foundations</i> in a course, your
+    instructor may use automatic scripts to help grade your homework
+    assignments.  In order for these scripts to work correctly (and
+    ensure that you get full credit for your work!), please be
+    careful to follow these rules:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Do not change the names of exercises. Otherwise the grading
+        scripts will be unable to find your solution.
+
+</li>
+<li> Do not delete exercises.  If you skip an exercise (e.g.,
+        because it is marked "optional," or because you can't solve it),
+        it is OK to leave a partial proof in your <span class="inlinecode">.<span class="id" title="var">v</span></span> file; in
+        this case, please make sure it ends with the keyword <span class="inlinecode"><span class="id" title="var">Admitted</span></span>
+        (not, for example <span class="inlinecode"><span class="id" title="keyword">Abort</span></span>).
+
+</li>
+<li> It is fine to use additional definitions (of helper functions,
+        useful lemmas, etc.) in your solutions.  You can put these
+        before the theorem you are asked to prove.
+
+</li>
+<li> If you introduce a helper lemma that you end up being unable
+        to prove, hence end it with <span class="inlinecode"><span class="id" title="var">Admitted</span></span>, then make sure to also
+        end the main theorem in which you use it with <span class="inlinecode"><span class="id" title="var">Admitted</span></span>, not
+        <span class="inlinecode"><span class="id" title="keyword">Qed</span></span>.  This will help you get partial credit, in case you
+        use that main theorem to solve a later exercise.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    You will also notice that each chapter (like <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>) is
+    accompanied by a <i>test script</i> (<span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span>) that automatically
+    calculates points for the finished homework problems in the
+    chapter.  These scripts are mostly for the auto-grading
+    tools, but you may also want to use them to double-check
+    that your file is well formatted before handing it in.  In a
+    terminal window, either type "<span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">BasicsTest.vo</span></span>" or do the
+    following:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">BasicsTest.v</span>
+</span>    See the end of this chapter for more information about how to interpret
+    the output of test scripts.
+
+<div class="paragraph"> </div>
+
+    There is no need to hand in <span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span> itself (or <span class="inlinecode"><span class="id" title="var">Preface.v</span></span>).
+
+<div class="paragraph"> </div>
+
+    If your class is using the Canvas system to hand in assignments...
+<ul class="doclist">
+<li> If you submit multiple versions of the assignment, you may
+        notice that they are given different names.  This is fine: The
+        most recent submission is the one that will be graded.
+
+</li>
+<li> If you want to hand in multiple files at the same time (if more
+        than one chapter is assigned in the same week), you need to make a
+        single submission with all the files at once using the
+        "Add another file" button just above the comment box. 
+
+</li>
+</ul>
+</div>
+
+<div class="doc">
+<a id="lab22"></a><h1 class="section">Data and Functions</h1>
+
+<div class="paragraph"> </div>
+
+<a id="lab23"></a><h2 class="section">Enumerated Types</h2>
 
 <div class="paragraph"> </div>
 
@@ -101,7 +178,7 @@
 </div>
 
 <div class="doc">
-<a id="lab23"></a><h2 class="section">Days of the Week</h2>
+<a id="lab24"></a><h2 class="section">Days of the Week</h2>
 
 <div class="paragraph"> </div>
 
@@ -220,83 +297,6 @@ The details are not important just now, but essentially this
 
     Indeed, this is one of the main uses for which Coq was developed.
     We'll come back to this topic in later chapters. 
-</div>
-
-<div class="doc">
-<a id="lab24"></a><h2 class="section">Homework Submission Guidelines</h2>
-
-<div class="paragraph"> </div>
-
- If you are using <i>Software Foundations</i> in a course, your
-    instructor may use automatic scripts to help grade your homework
-    assignments.  In order for these scripts to work correctly (and
-    ensure that you get full credit for your work!), please be
-    careful to follow these rules:
-
-<div class="paragraph"> </div>
-
-<ul class="doclist">
-<li> Do not change the names of exercises. Otherwise the grading
-        scripts will be unable to find your solution.
-
-</li>
-<li> Do not delete exercises.  If you skip an exercise (e.g.,
-        because it is marked "optional," or because you can't solve it),
-        it is OK to leave a partial proof in your <span class="inlinecode">.<span class="id" title="var">v</span></span> file; in
-        this case, please make sure it ends with the keyword <span class="inlinecode"><span class="id" title="var">Admitted</span></span>
-        (not, for example <span class="inlinecode"><span class="id" title="keyword">Abort</span></span>).
-
-</li>
-<li> It is fine to use additional definitions (of helper functions,
-        useful lemmas, etc.) in your solutions.  You can put these
-        before the theorem you are asked to prove.
-
-</li>
-<li> If you introduce a helper lemma that you end up being unable
-        to prove, hence end it with <span class="inlinecode"><span class="id" title="var">Admitted</span></span>, then make sure to also
-        end the main theorem in which you use it with <span class="inlinecode"><span class="id" title="var">Admitted</span></span>, not
-        <span class="inlinecode"><span class="id" title="keyword">Qed</span></span>.  This will help you get partial credit, in case you
-        use that main theorem to solve a later exercise.
-
-</li>
-</ul>
-
-<div class="paragraph"> </div>
-
-    You will also notice that each chapter (like <span class="inlinecode"><span class="id" title="var">Basics.v</span></span>) is
-    accompanied by a <i>test script</i> (<span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span>) that automatically
-    calculates points for the finished homework problems in the
-    chapter.  These scripts are mostly for the auto-grading
-    tools, but you may also want to use them to double-check
-    that your file is well formatted before handing it in.  In a
-    terminal window, either type "<span class="inlinecode"><span class="id" title="var">make</span></span> <span class="inlinecode"><span class="id" title="var">BasicsTest.vo</span></span>" or do the
-    following:
-<br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">Basics.v</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqc</span> -<span class="id" title="var">Q</span> . <span class="id" title="var">LF</span> <span class="id" title="var">BasicsTest.v</span>
-</span>    See the end of this chapter for more information about how to interpret
-    the output of test scripts.
-
-<div class="paragraph"> </div>
-
-    There is no need to hand in <span class="inlinecode"><span class="id" title="var">BasicsTest.v</span></span> itself (or <span class="inlinecode"><span class="id" title="var">Preface.v</span></span>).
-
-<div class="paragraph"> </div>
-
-    If your class is using the Canvas system to hand in assignments...
-<ul class="doclist">
-<li> If you submit multiple versions of the assignment, you may
-        notice that they are given different names.  This is fine: The
-        most recent submission is the one that will be graded.
-
-</li>
-<li> If you want to hand in multiple files at the same time (if more
-        than one chapter is assigned in the same week), you need to make a
-        single submission with all the files at once using the
-        "Add another file" button just above the comment box. 
-</li>
-</ul>
-
 <div class="paragraph"> </div>
 
  The <span class="inlinecode"><span class="id" title="keyword">Require</span></span> <span class="inlinecode"><span class="id" title="keyword">Export</span></span> statement on the next line tells Coq to use
@@ -2587,7 +2587,7 @@ The following "unit tests" of your increment and binary-to-unary
 
 
 <div class="doc">
-<a id="lab60"></a><h1 class="section">Testing Your Solutions</h1>
+<a id="lab60"></a><h1 class="section">Optional: Testing Your Solutions</h1>
 
 <div class="paragraph"> </div>
 
@@ -2600,9 +2600,9 @@ The following "unit tests" of your increment and binary-to-unary
 
 <div class="paragraph"> </div>
 
-    (Important: This step is <i>optional</i>: if you've completed all the
+    Important: This step is <i>optional</i>: if you've completed all the
     non-optional exercises and Coq accepts your answers, this already
-    shows that you are in good shape.)
+    shows that you are in good shape.
 
 <div class="paragraph"> </div>
 
@@ -2691,7 +2691,7 @@ The following "unit tests" of your increment and binary-to-unary
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-10-24&nbsp;21:57&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-24&nbsp;23:38&nbsp;*)</span><br/>
 </div>
 </div>
 

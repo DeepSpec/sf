@@ -97,8 +97,8 @@
     software projects teams (e.g., extreme programming) to design
     philosophies for libraries (e.g., model-view-controller,
     publish-subscribe, etc.) and programming languages (e.g.,
-    object-oriented programming, aspect-oriented programming,
-    functional programming, ...) to mathematical techniques for
+    object-oriented programming, functional programming, ...)
+    to mathematical techniques for
     specifying and reasoning about properties of software and tools
     for helping validate these properties.  The <i>Software Foundations</i>
     series is focused on this last set of tools.
@@ -166,8 +166,8 @@
 <li> <i>Automated theorem provers</i> provide "push-button" operation:
          you give them a proposition and they return either <i>true</i> or
          <i>false</i> (or, sometimes, <i>don't know: ran out of time</i>).
-         Although their capabilities are still limited to specific
-         domains, they have matured tremendously in recent years and
+         Although their reasoning capabilities are still limited,
+         they have matured tremendously in recent decades and
          are used now in a multitude of settings.  Examples of such
          tools include SAT solvers, SMT solvers, and model checkers.
 
@@ -179,7 +179,7 @@
          routine aspects of building proofs while depending on human
          guidance for more difficult aspects.  Widely used proof
          assistants include Isabelle, Agda, Twelf, ACL2, PVS, F*,
-         and Coq, among many others.
+         HOL4, Lean, and Coq, among many others.
 
 </li>
 </ul>
@@ -235,9 +235,9 @@
 </li>
 <li> As a <i>realistic environment for functional programming with
       dependent types</i>, it has inspired numerous innovations.  For
-      example, Hoare Type Theory embeds "Hoare reasoning" (an
-      extension of the <i>Hoare Logic</i> we will see later in this course)
-      in Coq.
+      example, Hoare Type Theory embeds reasoning about
+      "pre-conditions" and "post-conditions" (an extension of the
+      <i>Hoare Logic</i> we will see later in this course) in Coq.
 
 <div class="paragraph"> </div>
 
@@ -262,7 +262,7 @@
 <div class="paragraph"> </div>
 
    By the way, in case you're wondering about the name, here's what
-   the official Coq web site at INRIA (the French national research
+   the official Coq web site at Inria (the French national research
    lab where Coq has mostly been developed) says about it: "Some
    French computer scientists have a tradition of naming their
    software as animal species: Caml, Elan, Foc or Phox are examples of
@@ -397,8 +397,8 @@
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> The VSCoq extension for Visual Studio Code offers a simple
-          interface via a familiar IDE.  This option is the
+<li> <i>VSCoq</i> is an extension for Visual Studio Code that offers a
+          simple interface via a familiar IDE.  This option is the
           recommended default.
 
 <div class="paragraph"> </div>
@@ -411,7 +411,7 @@
 
 
 </li>
-<li> Proof General is an Emacs-based IDE.  It tends to be
+<li> <i>Proof General</i> is an Emacs-based IDE.  It tends to be
           preferred by users who are already comfortable with Emacs.
           It requires a separate installation (google "Proof
           General").
@@ -425,7 +425,7 @@
 
 
 </li>
-<li> CoqIDE is a simpler stand-alone IDE.  It is distributed with
+<li> <i>CoqIDE</i> is a simpler stand-alone IDE.  It is distributed with
           Coq, so it should be available once you have Coq installed.
           It can also be compiled from scratch, but on some platforms
           this may involve installing additional packages for GUI
@@ -436,7 +436,8 @@
           Users who like CoqIDE should consider running it with the
           "asynchronous" and "error resilience" modes disabled: <br/>
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> \<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Foo.v</span> &amp; ]] *)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Foo.v</span> &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]] *)<br/>
 <br/>
 </div>
 
@@ -757,7 +758,7 @@
 </div>
 <div class="code">
 <br/>
-<span class="comment">(*&nbsp;2024-10-24&nbsp;21:57&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-24&nbsp;23:38&nbsp;*)</span><br/>
 </span></div>
 </div>
 

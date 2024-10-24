@@ -499,4 +499,4 @@ Definition compiles_correctly (e : exp) := (execute [] (compile e)) = [eval e]?.
     in [QuickChickInterface].
 *)
 
-(* 2024-10-24 22:08 *)
+(* 2024-10-24 23:48 *)

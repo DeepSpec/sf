@@ -1424,4 +1424,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2024-10-24 22:02 *)
+(* 2024-10-24 23:42 *)

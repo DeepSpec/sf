@@ -41,6 +41,57 @@
     can be used to prove properties of Gallina programs. *)
 
 (* ################################################################# *)
+(** * Homework Submission Guidelines *)
+
+(** If you are using _Software Foundations_ in a course, your
+    instructor may use automatic scripts to help grade your homework
+    assignments.  In order for these scripts to work correctly (and
+    ensure that you get full credit for your work!), please be
+    careful to follow these rules:
+
+      - Do not change the names of exercises. Otherwise the grading
+        scripts will be unable to find your solution.
+      - Do not delete exercises.  If you skip an exercise (e.g.,
+        because it is marked "optional," or because you can't solve it),
+        it is OK to leave a partial proof in your [.v] file; in
+        this case, please make sure it ends with the keyword [Admitted]
+        (not, for example [Abort]).
+      - It is fine to use additional definitions (of helper functions,
+        useful lemmas, etc.) in your solutions.  You can put these
+        before the theorem you are asked to prove.
+      - If you introduce a helper lemma that you end up being unable
+        to prove, hence end it with [Admitted], then make sure to also
+        end the main theorem in which you use it with [Admitted], not
+        [Qed].  This will help you get partial credit, in case you
+        use that main theorem to solve a later exercise.
+
+    You will also notice that each chapter (like [Basics.v]) is
+    accompanied by a _test script_ ([BasicsTest.v]) that automatically
+    calculates points for the finished homework problems in the
+    chapter.  These scripts are mostly for the auto-grading
+    tools, but you may also want to use them to double-check
+    that your file is well formatted before handing it in.  In a
+    terminal window, either type "[make BasicsTest.vo]" or do the
+    following:
+
+       coqc -Q . LF Basics.v
+       coqc -Q . LF BasicsTest.v
+
+    See the end of this chapter for more information about how to interpret
+    the output of test scripts.
+
+    There is no need to hand in [BasicsTest.v] itself (or [Preface.v]).
+
+    If your class is using the Canvas system to hand in assignments...
+      - If you submit multiple versions of the assignment, you may
+        notice that they are given different names.  This is fine: The
+        most recent submission is the one that will be graded.
+      - If you want to hand in multiple files at the same time (if more
+        than one chapter is assigned in the same week), you need to make a
+        single submission with all the files at once using the
+        "Add another file" button just above the comment box. *)
+
+(* ################################################################# *)
 (** * Data and Functions *)
 
 (* ================================================================= *)
@@ -151,57 +202,6 @@ Proof. simpl. reflexivity.  Qed.
 
     Indeed, this is one of the main uses for which Coq was developed.
     We'll come back to this topic in later chapters. *)
-
-(* ================================================================= *)
-(** ** Homework Submission Guidelines *)
-
-(** If you are using _Software Foundations_ in a course, your
-    instructor may use automatic scripts to help grade your homework
-    assignments.  In order for these scripts to work correctly (and
-    ensure that you get full credit for your work!), please be
-    careful to follow these rules:
-
-      - Do not change the names of exercises. Otherwise the grading
-        scripts will be unable to find your solution.
-      - Do not delete exercises.  If you skip an exercise (e.g.,
-        because it is marked "optional," or because you can't solve it),
-        it is OK to leave a partial proof in your [.v] file; in
-        this case, please make sure it ends with the keyword [Admitted]
-        (not, for example [Abort]).
-      - It is fine to use additional definitions (of helper functions,
-        useful lemmas, etc.) in your solutions.  You can put these
-        before the theorem you are asked to prove.
-      - If you introduce a helper lemma that you end up being unable
-        to prove, hence end it with [Admitted], then make sure to also
-        end the main theorem in which you use it with [Admitted], not
-        [Qed].  This will help you get partial credit, in case you
-        use that main theorem to solve a later exercise.
-
-    You will also notice that each chapter (like [Basics.v]) is
-    accompanied by a _test script_ ([BasicsTest.v]) that automatically
-    calculates points for the finished homework problems in the
-    chapter.  These scripts are mostly for the auto-grading
-    tools, but you may also want to use them to double-check
-    that your file is well formatted before handing it in.  In a
-    terminal window, either type "[make BasicsTest.vo]" or do the
-    following:
-
-       coqc -Q . LF Basics.v
-       coqc -Q . LF BasicsTest.v
-
-    See the end of this chapter for more information about how to interpret
-    the output of test scripts.
-
-    There is no need to hand in [BasicsTest.v] itself (or [Preface.v]).
-
-    If your class is using the Canvas system to hand in assignments...
-      - If you submit multiple versions of the assignment, you may
-        notice that they are given different names.  This is fine: The
-        most recent submission is the one that will be graded.
-      - If you want to hand in multiple files at the same time (if more
-        than one chapter is assigned in the same week), you need to make a
-        single submission with all the files at once using the
-        "Add another file" button just above the comment box. *)
 
 (** The [Require Export] statement on the next line tells Coq to use
     the [String] module from the standard library.  We'll use strings
@@ -1949,7 +1949,7 @@ Example test_bin_incr6 :
 (** [] *)
 
 (* ################################################################# *)
-(** * Testing Your Solutions *)
+(** * Optional: Testing Your Solutions *)
 
 (** Each SF chapter comes with a test file containing scripts that
     check whether you have solved the required exercises. If you're
@@ -1958,9 +1958,9 @@ Example test_bin_incr6 :
     use these test files, if you like, to make sure you haven't missed
     anything.
 
-    (Important: This step is _optional_: if you've completed all the
+    Important: This step is _optional_: if you've completed all the
     non-optional exercises and Coq accepts your answers, this already
-    shows that you are in good shape.)
+    shows that you are in good shape.
 
     The test file for this chapter is [BasicsTest.v]. To run it, make
     sure you have saved [Basics.v] to disk.  Then do this: [[ coqc -Q
@@ -2015,4 +2015,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2024-10-24 21:57 *)
+(* 2024-10-24 23:38 *)

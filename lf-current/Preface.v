@@ -51,8 +51,8 @@
     software projects teams (e.g., extreme programming) to design
     philosophies for libraries (e.g., model-view-controller,
     publish-subscribe, etc.) and programming languages (e.g.,
-    object-oriented programming, aspect-oriented programming,
-    functional programming, ...) to mathematical techniques for
+    object-oriented programming, functional programming, ...)
+    to mathematical techniques for
     specifying and reasoning about properties of software and tools
     for helping validate these properties.  The _Software Foundations_
     series is focused on this last set of tools.
@@ -103,8 +103,8 @@
        - _Automated theorem provers_ provide "push-button" operation:
          you give them a proposition and they return either _true_ or
          _false_ (or, sometimes, _don't know: ran out of time_).
-         Although their capabilities are still limited to specific
-         domains, they have matured tremendously in recent years and
+         Although their reasoning capabilities are still limited,
+         they have matured tremendously in recent decades and
          are used now in a multitude of settings.  Examples of such
          tools include SAT solvers, SMT solvers, and model checkers.
 
@@ -112,7 +112,7 @@
          routine aspects of building proofs while depending on human
          guidance for more difficult aspects.  Widely used proof
          assistants include Isabelle, Agda, Twelf, ACL2, PVS, F*,
-         and Coq, among many others.
+         HOL4, Lean, and Coq, among many others.
 
     This course is based around Coq, a proof assistant that has been
     under development since 1983 and that in recent years has
@@ -150,9 +150,9 @@
 
     - As a _realistic environment for functional programming with
       dependent types_, it has inspired numerous innovations.  For
-      example, Hoare Type Theory embeds "Hoare reasoning" (an
-      extension of the _Hoare Logic_ we will see later in this course)
-      in Coq.
+      example, Hoare Type Theory embeds reasoning about
+      "pre-conditions" and "post-conditions" (an extension of the
+      _Hoare Logic_ we will see later in this course) in Coq.
 
     - As a _proof assistant for higher-order logic_, it has been used
       to validate a number of important results in mathematics.  For
@@ -168,7 +168,7 @@
       groups.
 
    By the way, in case you're wondering about the name, here's what
-   the official Coq web site at INRIA (the French national research
+   the official Coq web site at Inria (the French national research
    lab where Coq has mostly been developed) says about it: "Some
    French computer scientists have a tradition of naming their
    software as animal species: Caml, Elan, Foc or Phox are examples of
@@ -270,15 +270,15 @@
 
     - An IDE for interacting with Coq.  There are several choices:
 
-        - The VSCoq extension for Visual Studio Code offers a simple
-          interface via a familiar IDE.  This option is the
+        - _VSCoq_ is an extension for Visual Studio Code that offers a
+          simple interface via a familiar IDE.  This option is the
           recommended default.
 
           VSCoq can be used as an ordinary IDE or it can be combined
           with Docker (see below) for a lightweight installation
           experience.
 
-        - Proof General is an Emacs-based IDE.  It tends to be
+        - _Proof General_ is an Emacs-based IDE.  It tends to be
           preferred by users who are already comfortable with Emacs.
           It requires a separate installation (google "Proof
           General").
@@ -286,7 +286,7 @@
           Adventurous users of Coq within Emacs may want to check out
           extensions such as [company-coq] and [control-lock].
 
-        - CoqIDE is a simpler stand-alone IDE.  It is distributed with
+        - _CoqIDE_ is a simpler stand-alone IDE.  It is distributed with
           Coq, so it should be available once you have Coq installed.
           It can also be compiled from scratch, but on some platforms
           this may involve installing additional packages for GUI
@@ -295,7 +295,8 @@
           Users who like CoqIDE should consider running it with the
           "asynchronous" and "error resilience" modes disabled: [[
           coqide -async-proofs off \
-          -async-proofs-command-error-resilience off Foo.v & ]] *)
+          -async-proofs-command-error-resilience off Foo.v &
+          ]] *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Using Coq with VSCode and Docker *)
@@ -508,4 +509,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-10-24 21:57 *)
+(* 2024-10-24 23:38 *)
