@@ -1954,7 +1954,10 @@ Proof.
 
 (** Note that weakest preconditions need not be unique.  For
     example, [Y <= 4] was a weakest precondition above, but so are the
-    logically equivalent assertions [Y < 5], [Y <= 2 * 2], etc.  *)
+    logically equivalent assertions [Y < 5], [Y <= 2 * 2], etc.
+    It is easy to show that any two weakest preconditions [P] and [P']
+    of a command [c] with respect to postcondition [Q] are logically
+    equivalent; that is, [P <<->> P']. *)
 
 Definition is_wp P c Q :=
   {{P}} c {{Q}} /\
@@ -2025,4 +2028,4 @@ Proof.
 End Himp2.
 (** [] *)
 
-(* 2024-10-24 21:40 *)
+(* 2024-10-24 21:59 *)

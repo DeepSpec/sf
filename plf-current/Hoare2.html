@@ -2396,7 +2396,10 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
 
  Note that weakest preconditions need not be unique.  For
     example, <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">4</span> was a weakest precondition above, but so are the
-    logically equivalent assertions <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">&lt;</span> <span class="inlinecode">5</span>, <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">2</span> <span class="inlinecode">×</span> <span class="inlinecode">2</span>, etc.  
+    logically equivalent assertions <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">&lt;</span> <span class="inlinecode">5</span>, <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">≤</span> <span class="inlinecode">2</span> <span class="inlinecode">×</span> <span class="inlinecode">2</span>, etc.
+    It is easy to show that any two weakest preconditions <span class="inlinecode"><span class="id" title="var">P</span></span> and <span class="inlinecode"><span class="id" title="var">P'</span></span>
+    of a command <span class="inlinecode"><span class="id" title="var">c</span></span> with respect to postcondition <span class="inlinecode"><span class="id" title="var">Q</span></span> are logically
+    equivalent; that is, <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="nowrap"><span style='font-size:85%;'><span style='letter-spacing:-.2em;'><<</span><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span><span style='letter-spacing:-.2em;'>></span>></span></span></span> <span class="inlinecode"><span class="id" title="var">P'</span></span>. 
 </div>
 <div class="code">
 
@@ -2488,7 +2491,7 @@ Prove that <span class="inlinecode"><span class="id" title="var">fib</span></spa
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-10-24&nbsp;21:40&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-10-24&nbsp;21:59&nbsp;*)</span><br/>
 </div>
 </div>
 
