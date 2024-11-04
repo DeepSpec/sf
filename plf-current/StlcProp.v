@@ -1036,4 +1036,4 @@ Proof with eauto. (* FILL IN HERE *) Admitted.
 
 End STLCArith.
 
-(* 2024-10-24 23:39 *)
+(* 2024-11-04 20:36 *)
