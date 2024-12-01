@@ -32,7 +32,7 @@
 
 Set Warnings "-undo-batch-mode".
 From Coq Require Import String.
-From Coq Require Import Logic.FunctionalExtensionality.
+From Coq Require Import FunctionalExtensionality.
 From Coq Require Import ZArith.
 From VFA Require Import Perm.
 From VFA Require Import Extract.
