@@ -304,6 +304,25 @@ Definition orb' (b1:bool) (b2:bool) : bool :=
     the [Inductive] definition (which just happens to be called [true]
     in this case) and false if it evaluates to the second. *)
 
+(** For example we can define the following datatype [bw], with
+    two constructors representing black ([b]) and white ([w]) and
+    define a function [invert] that inverts values of this type using
+    a conditional. *)
+
+Inductive bw : Type :=
+  | bw_black
+  | bw_white.
+
+Definition invert (x: bw) : bw :=
+  if x then bw_white
+  else bw_black.
+
+Compute (invert bw_black).
+(* ==> bw_white : bw *)
+
+Compute (invert bw_white).
+(* ==> bw_black : bw *)
+
 (** **** Exercise: 1 star, standard (nandb)
 
     The [Admitted] command can be used as a placeholder for an
@@ -1963,10 +1982,11 @@ Example test_bin_incr6 :
     shows that you are in good shape.
 
     The test file for this chapter is [BasicsTest.v]. To run it, make
-    sure you have saved [Basics.v] to disk.  Then do this: [[ coqc -Q
-    . LF Basics.v coqc -Q . LF BasicsTest.v ]] (Make sure you do this
-    in a directory that also contains a file named [_CoqProject]
-    containing the single line [-Q . LF].)
+    sure you have saved [Basics.v] to disk.  Then first run
+    [coqc -Q . LF Basics.v] and then run [coqc -Q . LF BasicsTest.v];
+    or, if you have make installed, you can run [make BasicsTest.vo].
+    (Make sure you do this in a directory that also contains a file
+    named [_CoqProject] containing the single line [-Q . LF].)
 
     If you accidentally deleted an exercise or changed its name, then
     [make BasicsTest.vo] will fail with an error that tells you the
@@ -2015,4 +2035,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2024-11-04 20:34 *)
+(* 2024-12-23 21:19 *)

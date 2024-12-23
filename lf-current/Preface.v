@@ -262,26 +262,32 @@
 
     - A current installation of Coq, available from the Coq home page
       ({https://coq.inria.fr/download}).
-      The "Coq Platform" usually offers the smoothest installation
-      experience.
+      The "Coq Platform" usually offers the easiest installation
+      experience, especially on Windows.
 
       If you use the VSCode + Docker option described below, you don't
       need to install Coq separately.
 
     - An IDE for interacting with Coq.  There are several choices:
 
-        - _VSCoq_ is an extension for Visual Studio Code that offers a
+        - _VsCoq_ is an extension for Visual Studio Code that offers a
           simple interface via a familiar IDE.  This option is the
-          recommended default.
+          recommended default. If you installed Coq via the Coq
+          platform binary then can only use "VsCoq Legacy", which is
+          the more stable version anyway. If you use opam, you can
+          also try "VsCoq 2", which is a bit more experimental but
+          much more featureful.
 
-          VSCoq can be used as an ordinary IDE or it can be combined
+          VsCoq can be used as an ordinary IDE or it can be combined
           with Docker (see below) for a lightweight installation
           experience.
 
         - _Proof General_ is an Emacs-based IDE.  It tends to be
           preferred by users who are already comfortable with Emacs.
-          It requires a separate installation (google "Proof
-          General").
+          It requires a separate installation (google "Proof General",
+          but generally all you need to do is [M-x package-list-packages],
+          then select the [proof-general] package from the list and
+          hit the [i] key for install, then hit the [x] key for execute).
 
           Adventurous users of Coq within Emacs may want to check out
           extensions such as [company-coq] and [control-lock].
@@ -509,4 +515,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-11-04 20:34 *)
+(* 2024-12-23 21:19 *)

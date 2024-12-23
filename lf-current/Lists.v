@@ -617,6 +617,45 @@ Proof.
      which is immediate from the induction hypothesis.  [] *)
 
 (* ----------------------------------------------------------------- *)
+(** *** Generalizing Statements *)
+
+(** In some situations, it can be necessary to generalize a
+    statement in order to prove it by induction.  Intuitively, the
+    reason is that a more general statement also yields a more general
+    (stronger) inductive hypothesis.  If you find yourself stuck in a
+    proof, it may help to step back and see whether you can prove a
+    stronger statement. *)
+
+Theorem repeat_double_firsttry : forall c n: nat,
+  repeat n c ++ repeat n c = repeat n (c + c).
+Proof.
+  intros c. induction c as [| c' IHc'].
+  - (* c = 0 *)
+    intros n. simpl. reflexivity.
+  - (* c = S c' *)
+    intros n. simpl.
+    (*  Now we seem to be stuck.  The IH cannot be used to
+        rewrite [repeat n (c' + S c')]: it only works
+        for [repeat n (c' + c')]. If the IH were more liberal here
+        (e.g., if it worked for an arbitrary second summand),
+        the proof would go through. *)
+Abort.
+
+(** To get a more general inductive hypothesis, we can generalize
+    the statement as follows: *)
+
+Theorem repeat_plus: forall c1 c2 n: nat,
+    repeat n c1 ++ repeat n c2 = repeat n (c1 + c2).
+Proof.
+  intros c1 c2 n.
+  induction c1 as [| c1' IHc1'].
+  - simpl. reflexivity.
+  - simpl.
+    rewrite <- IHc1'.
+    reflexivity.
+  Qed.
+
+(* ----------------------------------------------------------------- *)
 (** *** Reversing a List *)
 
 (** For a slightly more involved example of inductive proof over
@@ -657,7 +696,38 @@ Proof.
     (* ... but now we can't go any further. *)
 Abort.
 
-(** So let's take the equation relating [++] and [length] that
+(** A first attempt to make progress would be to prove exactly
+    the statement that we are missing at this point.  But this attempt
+    will fail because the inductive hypothesis is not general enough. *)
+Theorem app_rev_length_S_firsttry: forall l n,
+  length (rev l ++ [n]) = S (length (rev l)).
+Proof.
+  intros l. induction l as [| m l' IHl'].
+  - (* l = [] *)
+    intros n. simpl. reflexivity.
+  - (* l = m:: l' *)
+    intros n. simpl.
+    (* IHl' not applicable. *)
+Abort.
+
+(** We can slightly strengthen the lemma to work not only on
+    reversed lists but on general lists. *)
+Theorem app_length_S: forall l n,
+  length (l ++ [n]) = S (length l).
+Proof.
+  intros l n. induction l as [| m l' IHl'].
+  - (* l = [] *)
+    simpl. reflexivity.
+  - (* l = m:: l' *)
+    simpl.
+    rewrite IHl'.
+    reflexivity.
+Qed.
+(** This generalized lemma would be sufficient to conclude our
+    original proof.  Still, we can prove an even more general lemma
+    about the length of appended lists.  *)
+
+(** Let's take the equation relating [++] and [length] that
     would have enabled us to make progress at the point where we got
     stuck and state it as a separate lemma. *)
 
@@ -1137,4 +1207,4 @@ Proof.
 (** [] *)
 End PartialMap.
 
-(* 2024-11-04 20:34 *)
+(* 2024-12-23 21:19 *)
