@@ -124,4 +124,4 @@ Fixpoint insert x l :=
     Finally, the [Postscript] chapter gives some suggestions for
     further reading. *)
 
-(* 2024-12-24 15:24 *)
+(* 2024-12-24 21:19 *)

@@ -256,7 +256,7 @@
 (** ** System Requirements *)
 
 (** Coq runs on Windows, Linux, and macOS.  The files in this book
-    have been tested with Coq 8.17.1.
+    have been tested with Coq 8.19.2.
 
     You will need:
 
@@ -487,7 +487,7 @@
         Volume 6, "Separation Logic Foundations," the author of record
         is Arthur Chargueraud. For components outside of designated
         volumes (e.g., typesetting and grading tools and other
-        software infrastructure), the Author of Record is Benjamin
+        software infrastructure), the Author of Record is Benjamin C.
         Pierce.
 
     To get started, please send an email to Benjamin Pierce,
@@ -515,4 +515,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-12-24 15:14 *)
+(* 2024-12-24 21:09 *)

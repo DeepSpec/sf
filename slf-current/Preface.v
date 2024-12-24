@@ -238,7 +238,7 @@
 (** Install instructions for Coq and IDEs may be found on this page:
     [https://www.chargueraud.org/teach/verif/install/install.html]
 
-    The files you are reading have been tested with Coq version 8.17.1 but
+    The files you are reading have been tested with Coq version 8.19.2 but
     may also work with other versions. *)
 
 (* ================================================================= *)
@@ -294,4 +294,4 @@
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-12-24 15:18 *)
+(* 2024-12-24 21:13 *)

@@ -1545,4 +1545,4 @@ End BakedInFrame.
     technique has been employed successfully in numerous formalizations of
     Separation Logic. *)
 
-(* 2024-12-24 15:18 *)
+(* 2024-12-24 21:13 *)
