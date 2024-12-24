@@ -1616,4 +1616,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     history of higher-order Separation Logic for higher-order programs may be
     found in the companion course notes, linked in the [Preface]. *)
 
-(* 2024-12-23 21:23 *)
+(* 2024-12-24 15:18 *)

@@ -1224,4 +1224,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2024-12-23 21:19 *)
+(* 2024-12-24 15:14 *)
