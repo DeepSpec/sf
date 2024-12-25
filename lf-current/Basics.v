@@ -1885,7 +1885,6 @@ Theorem grade_lowered_once :
   forall (late_days : nat) (g : grade),
     (late_days <? 9 = false) ->
     (late_days <? 17 = true) ->
-    (grade_comparison (Grade F Minus) g = Lt) ->
     (apply_late_policy late_days g) = (lower_grade g).
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -2035,4 +2034,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2024-12-24 21:09 *)
+(* 2024-12-25 21:15 *)

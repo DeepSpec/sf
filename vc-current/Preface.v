@@ -71,7 +71,7 @@
    describes the Coq installation you will need.  This edition was
    built with Coq 8.19.2.
 
-   You will need VST 2.11.1 installed.  You can do that either by installing
+   You will need VST 2.12 installed.  You can do that either by installing
    it as part of the standard "Coq Platform" that is released with each
    new version of Coq, or using opam (the package is named coq-vst).
    At the end of this chapter is a test to make sure you have the right
@@ -81,7 +81,7 @@
      instructions at https://coq.inria.fr/opam-using.html
    and then continue with,
    - opam update   (_as necessary_)
-   - opam install coq-vst.2.11.1 (_this will take 30 minutes or more_)
+   - opam install coq-vst.2.12 (_this will take 30 minutes or more_)
 
    _You do not need to install CompCert clightgen_ to do the exercises
    in this volume.  But if you wish to modify and reparse the .c files,
@@ -169,8 +169,6 @@
 (*** Check that we have the right version of VST *)
 Require Import Coq.Strings.String.
 Open Scope string.
-(* IMPORTANT: If you change the next line, make sure you make the same
-   change in the Makefile! *)
 Definition release_needed := "2.12".
 Require Import VST.veric.version.  (* If this line fails, it means
                                       you don't have a VST installed. *)
@@ -209,4 +207,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2024-12-24 21:17 *)
+(* 2024-12-25 21:22 *)

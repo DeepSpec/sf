@@ -371,4 +371,4 @@ idtac "---------- Himp.havoc_post ---------".
 Print Assumptions Himp.havoc_post.
 Abort.
 
-(* 2024-12-24 21:11 *)
+(* 2024-12-25 21:16 *)

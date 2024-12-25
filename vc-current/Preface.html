@@ -142,7 +142,7 @@
 
 <div class="paragraph"> </div>
 
-   You will need VST 2.11.1 installed.  You can do that either by installing
+   You will need VST 2.12 installed.  You can do that either by installing
    it as part of the standard "Coq Platform" that is released with each
    new version of Coq, or using opam (the package is named coq-vst).
    At the end of this chapter is a test to make sure you have the right
@@ -157,7 +157,7 @@
 <li> opam update   (<i>as necessary</i>)
 
 </li>
-<li> opam install coq-vst.2.11.1 (<i>this will take 30 minutes or more</i>)
+<li> opam install coq-vst.2.12 (<i>this will take 30 minutes or more</i>)
 
 </li>
 </ul>
@@ -291,8 +291,6 @@
 <div class="code">
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Strings.String.html#"><span class="id" title="library">Coq.Strings.String</span></a>.<br/>
 <span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string</span>.<br/>
-<span class="comment">(*&nbsp;IMPORTANT:&nbsp;If&nbsp;you&nbsp;change&nbsp;the&nbsp;next&nbsp;line,&nbsp;make&nbsp;sure&nbsp;you&nbsp;make&nbsp;the&nbsp;same<br/>
-&nbsp;&nbsp;&nbsp;change&nbsp;in&nbsp;the&nbsp;Makefile!&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="release_needed" class="idref" href="#release_needed"><span class="id" title="definition">release_needed</span></a> := "2.12".<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">VST.veric.version</span>. <span class="comment">(*&nbsp;If&nbsp;this&nbsp;line&nbsp;fails,&nbsp;it&nbsp;means<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you&nbsp;don't&nbsp;have&nbsp;a&nbsp;VST&nbsp;installed.&nbsp;*)</span><br/>
@@ -328,7 +326,7 @@ see the README file in this directory."<br/>
 to install the properly configured clightgen outputs."<br/>
 "It is not necessary to have clightgen installed".<br/>
 <span class="id" title="keyword">Abort</span>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2024-12-24&nbsp;21:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-25&nbsp;21:22&nbsp;*)</span><br/>
 </div>
 </div>
 

@@ -358,8 +358,6 @@ check_type @LateDays.grade_lowered_once (
 (forall (late_days : nat) (g : LateDays.grade),
  (late_days <? 9) = false ->
  (late_days <? 17) = true ->
- LateDays.grade_comparison (LateDays.Grade LateDays.F LateDays.Minus) g =
- LateDays.Lt ->
  LateDays.apply_late_policy late_days g = LateDays.lower_grade g)).
 idtac "Assumptions:".
 Abort.
@@ -521,4 +519,4 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-24 21:09 *)
+(* 2024-12-25 21:15 *)

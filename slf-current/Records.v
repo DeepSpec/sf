@@ -770,4 +770,4 @@ Ltac xapp_nosubst_for_records tt ::=
 (** The above definition is the one used in [LibSepReference]. It was put to
     practice in the chapters [Basic] and [Repr]. *)
 
-(* 2024-12-24 21:13 *)
+(* 2024-12-25 21:19 *)

@@ -171,4 +171,4 @@ idtac "---------- mergesort_perm ---------".
 Print Assumptions mergesort_perm.
 Abort.
 
-(* 2024-12-24 21:15 *)
+(* 2024-12-25 21:21 *)

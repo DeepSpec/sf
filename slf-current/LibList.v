@@ -3981,4 +3981,4 @@ Tactic Notation "list2_ind_last" constr(E) :=
   match type of E with length ?l1 = length ?l2 =>
     list2_ind_last l1 l2; [ apply E | | ] end.
 
-(* 2024-12-24 21:13 *)
+(* 2024-12-25 21:19 *)
