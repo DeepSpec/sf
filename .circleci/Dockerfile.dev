@@ -6,6 +6,3 @@ RUN opam install -j `nproc` \
          coq-simple-io \
          menhir.20220210 \
          coq-quickchick
-
-# BCP 2023: This is probably not needed at all -- delete
-# && opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev \
