@@ -466,6 +466,16 @@ Admitted.
 Fixpoint optimize_0plus_b (b : bexp) : bexp
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 
+Example optimize_0plus_b_test1:
+  optimize_0plus_b (BNot (BGt (APlus (ANum 0) (ANum 4)) (ANum 8))) =
+                   (BNot (BGt (ANum 4) (ANum 8))).
+Proof. (* FILL IN HERE *) Admitted.
+
+Example optimize_0plus_b_test2:
+  optimize_0plus_b (BAnd (BLe (APlus (ANum 0) (ANum 4)) (ANum 5)) BTrue) =
+                   (BAnd (BLe (ANum 4) (ANum 5)) BTrue).
+Proof. (* FILL IN HERE *) Admitted.
+
 Theorem optimize_0plus_b_sound : forall b,
   beval (optimize_0plus_b b) = beval b.
 Proof.
@@ -2077,4 +2087,4 @@ End BreakImp.
 
     [] *)
 
-(* 2024-12-26 02:03 *)
+(* 2024-12-26 15:04 *)

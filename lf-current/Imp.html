@@ -75,7 +75,7 @@
 </div>
 
 <div class="doc">
-<a id="lab364"></a><h1 class="section">Arithmetic and Boolean Expressions</h1>
+<a id="lab375"></a><h1 class="section">Arithmetic and Boolean Expressions</h1>
 
 <div class="paragraph"> </div>
 
@@ -86,7 +86,7 @@
 </div>
 
 <div class="doc">
-<a id="lab365"></a><h2 class="section">Syntax</h2>
+<a id="lab376"></a><h2 class="section">Syntax</h2>
 
 </div>
 <div class="code">
@@ -198,7 +198,7 @@ In this chapter, we'll mostly elide the translation from the
 </div>
 
 <div class="doc">
-<a id="lab366"></a><h2 class="section">Evaluation</h2>
+<a id="lab377"></a><h2 class="section">Evaluation</h2>
 
 <div class="paragraph"> </div>
 
@@ -240,7 +240,7 @@ Similarly, evaluating a boolean expression yields a boolean.
 </div>
 
 <div class="doc">
-<a id="lab367"></a><h2 class="section">Optimization</h2>
+<a id="lab378"></a><h2 class="section">Optimization</h2>
 
 <div class="paragraph"> </div>
 
@@ -315,7 +315,7 @@ But if we want to be certain the optimization is correct --
 </div>
 
 <div class="doc">
-<a id="lab368"></a><h1 class="section">Coq Automation</h1>
+<a id="lab379"></a><h1 class="section">Coq Automation</h1>
 
 <div class="paragraph"> </div>
 
@@ -338,7 +338,7 @@ But if we want to be certain the optimization is correct --
 </div>
 
 <div class="doc">
-<a id="lab369"></a><h2 class="section">Tacticals</h2>
+<a id="lab380"></a><h2 class="section">Tacticals</h2>
 
 <div class="paragraph"> </div>
 
@@ -347,7 +347,7 @@ But if we want to be certain the optimization is correct --
 </div>
 
 <div class="doc">
-<a id="lab370"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">try</span></span> Tactical</h3>
+<a id="lab381"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">try</span></span> Tactical</h3>
 
 <div class="paragraph"> </div>
 
@@ -376,7 +376,7 @@ There is not much reason to use <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab371"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (Simple Form)</h3>
+<a id="lab382"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (Simple Form)</h3>
 
 <div class="paragraph"> </div>
 
@@ -527,7 +527,7 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
 </div>
 
 <div class="doc">
-<a id="lab372"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (General Form)</h3>
+<a id="lab383"></a><h3 class="section">The <span class="inlinecode">;</span> Tactical (General Form)</h3>
 
 <div class="paragraph"> </div>
 
@@ -550,7 +550,7 @@ Coq experts often use this "<span class="inlinecode">...;</span> <span class="in
 </div>
 
 <div class="doc">
-<a id="lab373"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> Tactical</h3>
+<a id="lab384"></a><h3 class="section">The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> Tactical</h3>
 
 <div class="paragraph"> </div>
 
@@ -623,7 +623,7 @@ Wait -- did we just write an infinite loop in Coq?!?!
     that we have constructed a bad proof. 
 <div class="paragraph"> </div>
 
-<a id="lab374"></a><h4 class="section">Exercise: 3 stars, standard (optimize_0plus_b_sound)</h4>
+<a id="lab385"></a><h4 class="section">Exercise: 3 stars, standard (optimize_0plus_b_sound)</h4>
  Since the <span class="inlinecode"><span class="id" title="var">optimize_0plus</span></span> transformation doesn't change the value
     of <span class="inlinecode"><span class="id" title="var">aexp</span></span>s, we should be able to apply it to all the <span class="inlinecode"><span class="id" title="var">aexp</span></span>s that
     appear in a <span class="inlinecode"><span class="id" title="var">bexp</span></span> without changing the <span class="inlinecode"><span class="id" title="var">bexp</span></span>'s value.  Write a
@@ -635,6 +635,14 @@ Wait -- did we just write an infinite loop in Coq?!?!
 
 <span class="id" title="keyword">Fixpoint</span> <a id="AExp.optimize_0plus_b" class="idref" href="#AExp.optimize_0plus_b"><span class="id" title="definition">optimize_0plus_b</span></a> (<a id="b:41" class="idref" href="#b:41"><span class="id" title="binder">b</span></a> : <a class="idref" href="Imp.html#AExp.bexp"><span class="id" title="inductive">bexp</span></a>) : <a class="idref" href="Imp.html#AExp.bexp"><span class="id" title="inductive">bexp</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="AExp.optimize_0plus_b_test1" class="idref" href="#AExp.optimize_0plus_b_test1"><span class="id" title="definition">optimize_0plus_b_test1</span></a>:<br/>
+&nbsp;&nbsp;<a class="idref" href="Imp.html#AExp.optimize_0plus_b"><span class="id" title="axiom">optimize_0plus_b</span></a> (<a class="idref" href="Imp.html#AExp.BNot"><span class="id" title="constructor">BNot</span></a> (<a class="idref" href="Imp.html#AExp.BGt"><span class="id" title="constructor">BGt</span></a> (<a class="idref" href="Imp.html#AExp.APlus"><span class="id" title="constructor">APlus</span></a> (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 0) (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 4)) (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 8))) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Imp.html#AExp.BNot"><span class="id" title="constructor">BNot</span></a> (<a class="idref" href="Imp.html#AExp.BGt"><span class="id" title="constructor">BGt</span></a> (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 4) (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 8))<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="AExp.optimize_0plus_b_test2" class="idref" href="#AExp.optimize_0plus_b_test2"><span class="id" title="definition">optimize_0plus_b_test2</span></a>:<br/>
+&nbsp;&nbsp;<a class="idref" href="Imp.html#AExp.optimize_0plus_b"><span class="id" title="axiom">optimize_0plus_b</span></a> (<a class="idref" href="Imp.html#AExp.BAnd"><span class="id" title="constructor">BAnd</span></a> (<a class="idref" href="Imp.html#AExp.BLe"><span class="id" title="constructor">BLe</span></a> (<a class="idref" href="Imp.html#AExp.APlus"><span class="id" title="constructor">APlus</span></a> (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 0) (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 4)) (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 5)) <a class="idref" href="Imp.html#AExp.BTrue"><span class="id" title="constructor">BTrue</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">(</span></a><a class="idref" href="Imp.html#AExp.BAnd"><span class="id" title="constructor">BAnd</span></a> (<a class="idref" href="Imp.html#AExp.BLe"><span class="id" title="constructor">BLe</span></a> (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 4) (<a class="idref" href="Imp.html#AExp.ANum"><span class="id" title="constructor">ANum</span></a> 5)) <a class="idref" href="Imp.html#AExp.BTrue"><span class="id" title="constructor">BTrue</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="AExp.optimize_0plus_b_sound" class="idref" href="#AExp.optimize_0plus_b_sound"><span class="id" title="lemma">optimize_0plus_b_sound</span></a> : <span class="id" title="keyword">∀</span> <a id="b:43" class="idref" href="#b:43"><span class="id" title="binder">b</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Imp.html#AExp.beval"><span class="id" title="definition">beval</span></a> (<a class="idref" href="Imp.html#AExp.optimize_0plus_b"><span class="id" title="axiom">optimize_0plus_b</span></a> <a class="idref" href="Imp.html#b:43"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Imp.html#AExp.beval"><span class="id" title="definition">beval</span></a> <a class="idref" href="Imp.html#b:43"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -645,7 +653,7 @@ Wait -- did we just write an infinite loop in Coq?!?!
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab375"></a><h4 class="section">Exercise: 4 stars, standard, optional (optimize)</h4>
+<a id="lab386"></a><h4 class="section">Exercise: 4 stars, standard, optional (optimize)</h4>
  <i>Design exercise</i>: The optimization implemented by our
     <span class="inlinecode"><span class="id" title="var">optimize_0plus</span></span> function is only one of many possible
     optimizations on arithmetic and boolean expressions.  Write a more
@@ -662,7 +670,7 @@ Wait -- did we just write an infinite loop in Coq?!?!
 
 
 <div class="doc">
-<a id="lab376"></a><h2 class="section">Defining New Tactics</h2>
+<a id="lab387"></a><h2 class="section">Defining New Tactics</h2>
 
 <div class="paragraph"> </div>
 
@@ -725,7 +733,7 @@ This defines a new tactic called <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab377"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">lia</span></span> Tactic</h2>
+<a id="lab388"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">lia</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -790,7 +798,7 @@ This defines a new tactic called <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab378"></a><h2 class="section">A Few More Handy Tactics</h2>
+<a id="lab389"></a><h2 class="section">A Few More Handy Tactics</h2>
 
 <div class="paragraph"> </div>
 
@@ -859,7 +867,7 @@ This defines a new tactic called <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab379"></a><h1 class="section">Evaluation as a Relation</h1>
+<a id="lab390"></a><h1 class="section">Evaluation as a Relation</h1>
 
 <div class="paragraph"> </div>
 
@@ -965,7 +973,7 @@ As we saw in our case study of regular expressions in
 </div>
 
 <div class="doc">
-<a id="lab380"></a><h2 class="section">Inference Rule Notation</h2>
+<a id="lab391"></a><h2 class="section">Inference Rule Notation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1098,7 +1106,7 @@ As we saw in our case study of regular expressions in
 </table></center>
 <div class="paragraph"> </div>
 
-<a id="lab381"></a><h4 class="section">Exercise: 1 star, standard, optional (beval_rules)</h4>
+<a id="lab392"></a><h4 class="section">Exercise: 1 star, standard, optional (beval_rules)</h4>
  Here, again, is the Coq definition of the <span class="inlinecode"><span class="id" title="var">beval</span></span> function:
 <br/>
 <span class="inlinecode">&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">beval</span> (<span class="id" title="var">e</span> : <span class="id" title="var">bexp</span>) : <span class="id" title="var">bool</span> :=<br/>
@@ -1124,7 +1132,7 @@ As we saw in our case study of regular expressions in
 
 
 <div class="doc">
-<a id="lab382"></a><h2 class="section">Equivalence of the Definitions</h2>
+<a id="lab393"></a><h2 class="section">Equivalence of the Definitions</h2>
 
 <div class="paragraph"> </div>
 
@@ -1193,7 +1201,7 @@ Again, we can make the proof quite a bit shorter using some
 </div>
 
 <div class="doc">
-<a id="lab383"></a><h4 class="section">Exercise: 3 stars, standard (bevalR)</h4>
+<a id="lab394"></a><h4 class="section">Exercise: 3 stars, standard (bevalR)</h4>
  Write a relation <span class="inlinecode"><span class="id" title="var">bevalR</span></span> in the same style as
     <span class="inlinecode"><span class="id" title="var">aevalR</span></span>, and prove that it is equivalent to <span class="inlinecode"><span class="id" title="var">beval</span></span>. 
 </div>
@@ -1216,7 +1224,7 @@ Again, we can make the proof quite a bit shorter using some
 </div>
 
 <div class="doc">
-<a id="lab384"></a><h2 class="section">Computational vs. Relational Definitions</h2>
+<a id="lab395"></a><h2 class="section">Computational vs. Relational Definitions</h2>
 
 <div class="paragraph"> </div>
 
@@ -1382,7 +1390,7 @@ At this point you maybe wondering: Which of these styles
 </div>
 
 <div class="doc">
-<a id="lab385"></a><h1 class="section">Expressions With Variables</h1>
+<a id="lab396"></a><h1 class="section">Expressions With Variables</h1>
 
 <div class="paragraph"> </div>
 
@@ -1397,7 +1405,7 @@ At this point you maybe wondering: Which of these styles
 </div>
 
 <div class="doc">
-<a id="lab386"></a><h2 class="section">States</h2>
+<a id="lab397"></a><h2 class="section">States</h2>
 
 <div class="paragraph"> </div>
 
@@ -1423,7 +1431,7 @@ At this point you maybe wondering: Which of these styles
 </div>
 
 <div class="doc">
-<a id="lab387"></a><h2 class="section">Syntax</h2>
+<a id="lab398"></a><h2 class="section">Syntax</h2>
 
 <div class="paragraph"> </div>
 
@@ -1476,7 +1484,7 @@ Defining a few variable names as notational shorthands will make
 </div>
 
 <div class="doc">
-<a id="lab388"></a><h2 class="section">Notations</h2>
+<a id="lab399"></a><h2 class="section">Notations</h2>
 
 <div class="paragraph"> </div>
 
@@ -1553,7 +1561,7 @@ We can now write <span class="inlinecode">3</span> <span class="inlinecode">+</s
 </div>
 
 <div class="doc">
-<a id="lab389"></a><h2 class="section">Evaluation</h2>
+<a id="lab400"></a><h2 class="section">Evaluation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1629,7 +1637,7 @@ Also, we can add a notation for a "singleton state" with just one
 </div>
 
 <div class="doc">
-<a id="lab390"></a><h1 class="section">Commands</h1>
+<a id="lab401"></a><h1 class="section">Commands</h1>
 
 <div class="paragraph"> </div>
 
@@ -1638,7 +1646,7 @@ Also, we can add a notation for a "singleton state" with just one
 </div>
 
 <div class="doc">
-<a id="lab391"></a><h2 class="section">Syntax</h2>
+<a id="lab402"></a><h2 class="section">Syntax</h2>
 
 <div class="paragraph"> </div>
 
@@ -1710,7 +1718,7 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab392"></a><h2 class="section">Desugaring Notations</h2>
+<a id="lab403"></a><h2 class="section">Desugaring Notations</h2>
 
 <div class="paragraph"> </div>
 
@@ -1773,11 +1781,11 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab393"></a><h2 class="section"><span class="inlinecode"><span class="id" title="keyword">Locate</span></span> Again</h2>
+<a id="lab404"></a><h2 class="section"><span class="inlinecode"><span class="id" title="keyword">Locate</span></span> Again</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab394"></a><h3 class="section">Finding identifiers</h3>
+<a id="lab405"></a><h3 class="section">Finding identifiers</h3>
 
 <div class="paragraph"> </div>
 
@@ -1799,7 +1807,7 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab395"></a><h3 class="section">Finding notations</h3>
+<a id="lab406"></a><h3 class="section">Finding notations</h3>
 
 <div class="paragraph"> </div>
 
@@ -1831,11 +1839,11 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab396"></a><h2 class="section">More Examples</h2>
+<a id="lab407"></a><h2 class="section">More Examples</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab397"></a><h3 class="section">Assignment:</h3>
+<a id="lab408"></a><h3 class="section">Assignment:</h3>
 
 </div>
 <div class="code">
@@ -1847,7 +1855,7 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab398"></a><h3 class="section">Loops</h3>
+<a id="lab409"></a><h3 class="section">Loops</h3>
 
 </div>
 <div class="code">
@@ -1866,7 +1874,7 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab399"></a><h3 class="section">An infinite loop:</h3>
+<a id="lab410"></a><h3 class="section">An infinite loop:</h3>
 
 </div>
 <div class="code">
@@ -1878,7 +1886,7 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab400"></a><h1 class="section">Evaluating Commands</h1>
+<a id="lab411"></a><h1 class="section">Evaluating Commands</h1>
 
 <div class="paragraph"> </div>
 
@@ -1888,7 +1896,7 @@ For example, here is the factorial function again, written as a
 </div>
 
 <div class="doc">
-<a id="lab401"></a><h2 class="section">Evaluation as a Function (Failed Attempt)</h2>
+<a id="lab412"></a><h2 class="section">Evaluation as a Function (Failed Attempt)</h2>
 
 <div class="paragraph"> </div>
 
@@ -1957,7 +1965,7 @@ In a more conventional functional programming language like OCaml or
 </div>
 
 <div class="doc">
-<a id="lab402"></a><h2 class="section">Evaluation as a Relation</h2>
+<a id="lab413"></a><h2 class="section">Evaluation as a Relation</h2>
 
 <div class="paragraph"> </div>
 
@@ -1980,7 +1988,7 @@ In a more conventional functional programming language like OCaml or
     pronounced "<span class="inlinecode"><span class="id" title="var">c</span></span> takes state <span class="inlinecode"><span class="id" title="var">st</span></span> to <span class="inlinecode"><span class="id" title="var">st'</span></span>". 
 <div class="paragraph"> </div>
 
-<a id="lab403"></a><h3 class="section">Operational Semantics</h3>
+<a id="lab414"></a><h3 class="section">Operational Semantics</h3>
 
 <div class="paragraph"> </div>
 
@@ -2164,7 +2172,7 @@ The cost of defining evaluation as a relation instead of a
 </div>
 
 <div class="doc">
-<a id="lab404"></a><h4 class="section">Exercise: 2 stars, standard (ceval_example2)</h4>
+<a id="lab415"></a><h4 class="section">Exercise: 2 stars, standard (ceval_example2)</h4>
 
 </div>
 <div class="code">
@@ -2186,7 +2194,7 @@ The cost of defining evaluation as a relation instead of a
 </div>
 
 <div class="doc">
-<a id="lab405"></a><h4 class="section">Exercise: 3 stars, standard, optional (pup_to_n)</h4>
+<a id="lab416"></a><h4 class="section">Exercise: 3 stars, standard, optional (pup_to_n)</h4>
  Write an Imp program that sums the numbers from <span class="inlinecode">1</span> to <span class="inlinecode"><span class="id" title="var">X</span></span>
     (inclusive: <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode">+</span> <span class="inlinecode">...</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">X</span></span>) in the variable <span class="inlinecode"><span class="id" title="var">Y</span></span>.  Your program
     should update the state as shown in theorem <span class="inlinecode"><span class="id" title="var">pup_to_2_ceval</span></span>,
@@ -2208,7 +2216,7 @@ The cost of defining evaluation as a relation instead of a
 
 
 <div class="doc">
-<a id="lab406"></a><h2 class="section">Determinism of Evaluation</h2>
+<a id="lab417"></a><h2 class="section">Determinism of Evaluation</h2>
 
 <div class="paragraph"> </div>
 
@@ -2263,7 +2271,7 @@ The cost of defining evaluation as a relation instead of a
 </div>
 
 <div class="doc">
-<a id="lab407"></a><h1 class="section">Reasoning About Imp Programs</h1>
+<a id="lab418"></a><h1 class="section">Reasoning About Imp Programs</h1>
 
 <div class="paragraph"> </div>
 
@@ -2296,7 +2304,7 @@ Inverting <span class="inlinecode"><span class="id" title="var">Heval</span></sp
 </div>
 
 <div class="doc">
-<a id="lab408"></a><h4 class="section">Exercise: 3 stars, standard, optional (XtimesYinZ_spec)</h4>
+<a id="lab419"></a><h4 class="section">Exercise: 3 stars, standard, optional (XtimesYinZ_spec)</h4>
  State and prove a specification of <span class="inlinecode"><span class="id" title="var">XtimesYinZ</span></span>. 
 </div>
 <div class="code">
@@ -2310,7 +2318,7 @@ Inverting <span class="inlinecode"><span class="id" title="var">Heval</span></sp
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab409"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (loop_never_stops)</h4>
+<a id="lab420"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (loop_never_stops)</h4>
 
 </div>
 <div class="code">
@@ -2337,7 +2345,7 @@ Proceed by induction on the assumed derivation showing that
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab410"></a><h4 class="section">Exercise: 3 stars, standard (no_whiles_eqv)</h4>
+<a id="lab421"></a><h4 class="section">Exercise: 3 stars, standard (no_whiles_eqv)</h4>
  Consider the following function: 
 </div>
 <div class="code">
@@ -2378,7 +2386,7 @@ This predicate yields <span class="inlinecode"><span class="id" title="var">true
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab411"></a><h4 class="section">Exercise: 4 stars, standard (no_whiles_terminating)</h4>
+<a id="lab422"></a><h4 class="section">Exercise: 4 stars, standard (no_whiles_terminating)</h4>
  Imp programs that don't involve while loops always terminate.
     State and prove a theorem <span class="inlinecode"><span class="id" title="var">no_whiles_terminating</span></span> that says this.  Use either <span class="inlinecode"><span class="id" title="var">no_whiles</span></span> or <span class="inlinecode"><span class="id" title="var">no_whilesR</span></span>, as you prefer. 
 </div>
@@ -2392,11 +2400,11 @@ This predicate yields <span class="inlinecode"><span class="id" title="var">true
 
 
 <div class="doc">
-<a id="lab412"></a><h1 class="section">Additional Exercises</h1>
+<a id="lab423"></a><h1 class="section">Additional Exercises</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab413"></a><h4 class="section">Exercise: 3 stars, standard (stack_compiler)</h4>
+<a id="lab424"></a><h4 class="section">Exercise: 3 stars, standard (stack_compiler)</h4>
  Old HP Calculators, programming languages like Forth and Postscript,
     and abstract machines like the Java Virtual Machine all evaluate
     arithmetic expressions using a <i>stack</i>. For instance, the expression
@@ -2521,7 +2529,7 @@ After you've defined <span class="inlinecode"><span class="id" title="var">s_com
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab414"></a><h4 class="section">Exercise: 3 stars, standard (execute_app)</h4>
+<a id="lab425"></a><h4 class="section">Exercise: 3 stars, standard (execute_app)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2542,7 +2550,7 @@ After you've defined <span class="inlinecode"><span class="id" title="var">s_com
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab415"></a><h4 class="section">Exercise: 3 stars, standard (stack_compiler_correct)</h4>
+<a id="lab426"></a><h4 class="section">Exercise: 3 stars, standard (stack_compiler_correct)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2574,7 +2582,7 @@ The main theorem should be a very easy corollary of that lemma.
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab416"></a><h4 class="section">Exercise: 3 stars, standard, optional (short_circuit)</h4>
+<a id="lab427"></a><h4 class="section">Exercise: 3 stars, standard, optional (short_circuit)</h4>
  Most modern programming languages use a "short-circuit" evaluation
     rule for boolean <span class="inlinecode"><span class="id" title="var">and</span></span>: to evaluate <span class="inlinecode"><span class="id" title="var">BAnd</span></span> <span class="inlinecode"><span class="id" title="var">b<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">b<sub>2</sub></span></span>, first evaluate
     <span class="inlinecode"><span class="id" title="var">b<sub>1</sub></span></span>.  If it evaluates to <span class="inlinecode"><span class="id" title="var">false</span></span>, then the entire <span class="inlinecode"><span class="id" title="var">BAnd</span></span>
@@ -2604,7 +2612,7 @@ The main theorem should be a very easy corollary of that lemma.
 </div>
 
 <div class="doc">
-<a id="lab417"></a><h4 class="section">Exercise: 4 stars, advanced (break_imp)</h4>
+<a id="lab428"></a><h4 class="section">Exercise: 4 stars, advanced (break_imp)</h4>
  Imperative languages like C and Java often include a <span class="inlinecode"><span class="id" title="var">break</span></span> or
     similar statement for interrupting the execution of loops. In this
     exercise we consider how to add <span class="inlinecode"><span class="id" title="var">break</span></span> to Imp.  First, we need to
@@ -2803,7 +2811,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab418"></a><h4 class="section">Exercise: 3 stars, advanced, optional (while_break_true)</h4>
+<a id="lab429"></a><h4 class="section">Exercise: 3 stars, advanced, optional (while_break_true)</h4>
 
 </div>
 <div class="code">
@@ -2819,7 +2827,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab419"></a><h4 class="section">Exercise: 4 stars, advanced, optional (ceval_deterministic)</h4>
+<a id="lab430"></a><h4 class="section">Exercise: 4 stars, advanced, optional (ceval_deterministic)</h4>
 
 </div>
 <div class="code">
@@ -2837,7 +2845,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 </div>
 
 <div class="doc">
-<a id="lab420"></a><h4 class="section">Exercise: 4 stars, standard, optional (add_for_loop)</h4>
+<a id="lab431"></a><h4 class="section">Exercise: 4 stars, standard, optional (add_for_loop)</h4>
  Add C-style <span class="inlinecode"><span class="id" title="keyword">for</span></span> loops to the language of commands, update the
     <span class="inlinecode"><span class="id" title="var">ceval</span></span> definition to define the semantics of <span class="inlinecode"><span class="id" title="keyword">for</span></span> loops, and add
     cases for <span class="inlinecode"><span class="id" title="keyword">for</span></span> loops as needed so that all the proofs in this
@@ -2861,7 +2869,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-26&nbsp;02:02&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-26&nbsp;15:02&nbsp;*)</span><br/>
 </div>
 </div>
 

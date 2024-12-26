@@ -490,7 +490,7 @@ Set Default Goal Selector "!".
    body will not have a type in the context when it is looked up by the
    [T_Var] rule.) *)
 
-(* Changing the [let] rule to handle "recursive definitions"
+(** Changing the [let] rule to handle "recursive definitions"
    like this is possible, but it requires some extra effort -- e.g.,
    passing around an extra "environment" of recursive function
    definitions in the definition of the [step] relation.  We're going
@@ -2101,4 +2101,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2024-12-26 02:04 *)
+(* 2024-12-26 15:04 *)

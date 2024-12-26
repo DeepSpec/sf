@@ -60,7 +60,7 @@ idtac "-------------------  mult_is_O  --------------------".
 idtac " ".
 
 idtac "#> mult_is_O".
-idtac "Possible points: 1".
+idtac "Possible points: 2".
 check_type @mult_is_O ((forall n m : nat, n * m = 0 -> n = 0 \/ m = 0)).
 idtac "Assumptions:".
 Abort.
@@ -93,7 +93,7 @@ idtac "-------------------  contrapositive  --------------------".
 idtac " ".
 
 idtac "#> contrapositive".
-idtac "Possible points: 2".
+idtac "Possible points: 1".
 check_type @contrapositive ((forall P Q : Prop, (P -> Q) -> ~ Q -> ~ P)).
 idtac "Assumptions:".
 Abort.
@@ -179,7 +179,7 @@ idtac "-------------------  In_map_iff  --------------------".
 idtac " ".
 
 idtac "#> In_map_iff".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @In_map_iff (
 (forall (A B : Type) (f : A -> B) (l : list A) (y : B),
  @In B y (@map A B f l) <-> (exists x : A, f x = y /\ @In A x l))).
@@ -337,8 +337,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 44".
-idtac "Max points - advanced: 50".
+idtac "Max points - standard: 43".
+idtac "Max points - advanced: 49".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -414,4 +414,4 @@ idtac "---------- not_exists_dist ---------".
 Print Assumptions not_exists_dist.
 Abort.
 
-(* 2024-12-26 02:02 *)
+(* 2024-12-26 15:02 *)

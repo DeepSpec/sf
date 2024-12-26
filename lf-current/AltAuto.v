@@ -66,7 +66,7 @@ Proof.
   induction M
     as [| x'
         | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
-        | s1 re1 re2 Hmatch IH | re1 s2 re2 Hmatch IH
+        | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
         | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2].
   - (* MEmpty *) simpl. apply MEmpty.
   - (* MChar *) simpl. apply MChar.
@@ -212,7 +212,7 @@ Proof.
   induction M
     as [| x'
         | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
-        | s1 re1 re2 Hmatch IH | re1 s2 re2 Hmatch IH
+        | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
         | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2];
     (* Do the [simpl] for every case here: *)
     simpl.
@@ -298,7 +298,7 @@ Proof.
   induction M
     as [| x'
         | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
-        | s1 re1 re2 Hmatch IH | re1 s2 re2 Hmatch IH
+        | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
         | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2];
     (* Do the [simpl] for every case here: *)
     simpl.
@@ -390,7 +390,7 @@ Proof.
   induction M
     as [| x'
         | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
-        | s1 re1 re2 Hmatch IH | re1 s2 re2 Hmatch IH
+        | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
         | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2].
   - (* MEmpty *) simpl. apply MEmpty.
   - (* MChar *) simpl. apply MChar.
@@ -1183,7 +1183,7 @@ Proof.
   intros T re s Hmatch.
   induction Hmatch
     as [ | x | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
-       | s1 re1 re2 Hmatch IH | re1 s2 re2 Hmatch IH
+       | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
        | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2 ];
     simpl; try lia;
     intros Hlen.
@@ -1832,4 +1832,4 @@ Definition manual_grade_for_nor_intuition : option (nat*string) := None.
 
     - Ltac functions and [match goal] *)
 
-(* 2024-12-26 02:02 *)
+(* 2024-12-26 15:02 *)

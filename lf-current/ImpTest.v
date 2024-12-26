@@ -35,8 +35,35 @@ Goal True.
 idtac "-------------------  optimize_0plus_b_sound  --------------------".
 idtac " ".
 
+idtac "#> AExp.optimize_0plus_b_test1".
+idtac "Possible points: 0.5".
+check_type @AExp.optimize_0plus_b_test1 (
+(AExp.optimize_0plus_b
+   (AExp.BNot
+      (AExp.BGt (AExp.APlus (AExp.ANum 0) (AExp.ANum 4)) (AExp.ANum 8))) =
+ AExp.BNot (AExp.BGt (AExp.ANum 4) (AExp.ANum 8)))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions AExp.optimize_0plus_b_test1.
+Goal True.
+idtac " ".
+
+idtac "#> AExp.optimize_0plus_b_test2".
+idtac "Possible points: 0.5".
+check_type @AExp.optimize_0plus_b_test2 (
+(AExp.optimize_0plus_b
+   (AExp.BAnd
+      (AExp.BLe (AExp.APlus (AExp.ANum 0) (AExp.ANum 4)) (AExp.ANum 5))
+      AExp.BTrue) =
+ AExp.BAnd (AExp.BLe (AExp.ANum 4) (AExp.ANum 5)) AExp.BTrue)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions AExp.optimize_0plus_b_test2.
+Goal True.
+idtac " ".
+
 idtac "#> AExp.optimize_0plus_b_sound".
-idtac "Possible points: 3".
+idtac "Possible points: 2".
 check_type @AExp.optimize_0plus_b_sound (
 (forall b : AExp.bexp, AExp.beval (AExp.optimize_0plus_b b) = AExp.beval b)).
 idtac "Assumptions:".
@@ -276,6 +303,10 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
+idtac "---------- AExp.optimize_0plus_b_test1 ---------".
+Print Assumptions AExp.optimize_0plus_b_test1.
+idtac "---------- AExp.optimize_0plus_b_test2 ---------".
+Print Assumptions AExp.optimize_0plus_b_test2.
 idtac "---------- AExp.optimize_0plus_b_sound ---------".
 Print Assumptions AExp.optimize_0plus_b_sound.
 idtac "---------- AExp.bevalR_iff_beval ---------".
@@ -314,4 +345,4 @@ idtac "---------- BreakImp.seq_stops_on_break ---------".
 Print Assumptions BreakImp.seq_stops_on_break.
 Abort.
 
-(* 2024-12-26 02:03 *)
+(* 2024-12-26 15:03 *)

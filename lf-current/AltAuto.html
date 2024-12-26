@@ -140,7 +140,7 @@ We would like to show the equivalence of re's with their
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">M</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">as</span> [| <span class="id" title="var">x'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">re</span> | <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re</span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span>].<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;MEmpty&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="IndProp.html#MEmpty"><span class="id" title="constructor">MEmpty</span></a>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;MChar&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="IndProp.html#MChar"><span class="id" title="constructor">MChar</span></a>.<br/>
@@ -180,7 +180,7 @@ The amount of repetition in that proof is annoying.  And if
 </div>
 
 <div class="doc">
-<a id="lab445"></a><h1 class="section">Tacticals</h1>
+<a id="lab456"></a><h1 class="section">Tacticals</h1>
 
 <div class="paragraph"> </div>
 
@@ -189,7 +189,7 @@ The amount of repetition in that proof is annoying.  And if
 </div>
 
 <div class="doc">
-<a id="lab446"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">try</span></span> Tactical</h2>
+<a id="lab457"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">try</span></span> Tactical</h2>
 
 <div class="paragraph"> </div>
 
@@ -218,7 +218,7 @@ There is no real reason to use <span class="inlinecode"><span class="id" title="
 </div>
 
 <div class="doc">
-<a id="lab447"></a><h2 class="section">The Sequence Tactical <span class="inlinecode">;</span> (Simple Form)</h2>
+<a id="lab458"></a><h2 class="section">The Sequence Tactical <span class="inlinecode">;</span> (Simple Form)</h2>
 
 <div class="paragraph"> </div>
 
@@ -272,7 +272,7 @@ Or even more tersely, <span class="inlinecode"><span class="id" title="tactic">d
 </div>
 
 <div class="doc">
-<a id="lab448"></a><h4 class="section">Exercise: 3 stars, standard (try_sequence)</h4>
+<a id="lab459"></a><h4 class="section">Exercise: 3 stars, standard (try_sequence)</h4>
 
 <div class="paragraph"> </div>
 
@@ -319,7 +319,7 @@ Or even more tersely, <span class="inlinecode"><span class="id" title="tactic">d
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">M</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">as</span> [| <span class="id" title="var">x'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">re</span> | <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re</span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span>];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Do&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="tactic">simpl</span></span>&nbsp;for&nbsp;every&nbsp;case&nbsp;here:&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
@@ -344,7 +344,7 @@ Or even more tersely, <span class="inlinecode"><span class="id" title="tactic">d
 </div>
 
 <div class="doc">
-<a id="lab449"></a><h2 class="section">The Sequence Tactical <span class="inlinecode">;</span> (Local Form)</h2>
+<a id="lab460"></a><h2 class="section">The Sequence Tactical <span class="inlinecode">;</span> (Local Form)</h2>
 
 <div class="paragraph"> </div>
 
@@ -405,7 +405,7 @@ The identity tactic <span class="inlinecode"><span class="id" title="tactic">idt
 </div>
 
 <div class="doc">
-<a id="lab450"></a><h4 class="section">Exercise: 1 star, standard (notry_sequence)</h4>
+<a id="lab461"></a><h4 class="section">Exercise: 1 star, standard (notry_sequence)</h4>
 
 <div class="paragraph"> </div>
 
@@ -436,7 +436,7 @@ The identity tactic <span class="inlinecode"><span class="id" title="tactic">idt
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">M</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">as</span> [| <span class="id" title="var">x'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">re</span> | <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re</span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span>];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Do&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="tactic">simpl</span></span>&nbsp;for&nbsp;every&nbsp;case&nbsp;here:&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
@@ -454,7 +454,7 @@ The identity tactic <span class="inlinecode"><span class="id" title="tactic">idt
 </div>
 
 <div class="doc">
-<a id="lab451"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> Tactical</h2>
+<a id="lab462"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">repeat</span></span> Tactical</h2>
 
 <div class="paragraph"> </div>
 
@@ -497,7 +497,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
     we have constructed an incorrect proof. 
 <div class="paragraph"> </div>
 
-<a id="lab452"></a><h4 class="section">Exercise: 1 star, standard (ev100)</h4>
+<a id="lab463"></a><h4 class="section">Exercise: 1 star, standard (ev100)</h4>
  Prove that 100 is even. Your proof script should be quite short. 
 </div>
 <div class="code">
@@ -509,8 +509,8 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 
 
 <div class="doc">
-<a id="lab453"></a><h2 class="section">An Optimization Exercise</h2>
-<a id="lab454"></a><h4 class="section">Exercise: 4 stars, standard (re_opt)</h4>
+<a id="lab464"></a><h2 class="section">An Optimization Exercise</h2>
+<a id="lab465"></a><h4 class="section">Exercise: 4 stars, standard (re_opt)</h4>
 
 <div class="paragraph"> </div>
 
@@ -546,7 +546,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">M</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">as</span> [| <span class="id" title="var">x'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">re</span> | <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re</span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span>].<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;MEmpty&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="IndProp.html#MEmpty"><span class="id" title="constructor">MEmpty</span></a>.<br/>
 &nbsp;&nbsp;- <span class="comment">(*&nbsp;MChar&nbsp;*)</span> <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="IndProp.html#MChar"><span class="id" title="constructor">MChar</span></a>.<br/>
@@ -752,7 +752,7 @@ The tactic <span class="inlinecode"><span class="id" title="tactic">repeat</span
 
 
 <div class="doc">
-<a id="lab455"></a><h1 class="section">Tactics that Make Mentioning Names Unnecessary</h1>
+<a id="lab466"></a><h1 class="section">Tactics that Make Mentioning Names Unnecessary</h1>
 
 <div class="paragraph"> </div>
 
@@ -779,7 +779,7 @@ We took the trouble to invent a name for <span class="inlinecode"><span class="i
 </div>
 
 <div class="doc">
-<a id="lab456"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">assumption</span></span> tactic</h2>
+<a id="lab467"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">assumption</span></span> tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -812,7 +812,7 @@ Some might argue to the contrary that hypothesis names
 </div>
 
 <div class="doc">
-<a id="lab457"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">contradiction</span></span> tactic</h2>
+<a id="lab468"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="var">contradiction</span></span> tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -840,7 +840,7 @@ Some might argue to the contrary that hypothesis names
 </div>
 
 <div class="doc">
-<a id="lab458"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">subst</span></span> tactic</h2>
+<a id="lab469"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">subst</span></span> tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -888,7 +888,7 @@ Actually there are two forms of this tactic.
 </div>
 
 <div class="doc">
-<a id="lab459"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> tactic</h2>
+<a id="lab470"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -918,7 +918,7 @@ Warning: if more than one constructor can apply,
 </div>
 
 <div class="doc">
-<a id="lab460"></a><h1 class="section">Automatic Solvers</h1>
+<a id="lab471"></a><h1 class="section">Automatic Solvers</h1>
 
 <div class="paragraph"> </div>
 
@@ -938,7 +938,7 @@ Warning: if more than one constructor can apply,
 </div>
 
 <div class="doc">
-<a id="lab461"></a><h2 class="section">Linear Integer Arithmetic: The <span class="inlinecode"><span class="id" title="var">lia</span></span> Tactic</h2>
+<a id="lab472"></a><h2 class="section">Linear Integer Arithmetic: The <span class="inlinecode"><span class="id" title="var">lia</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1041,7 +1041,7 @@ There are other tactics that can solve arithmetic goals.  The
 </div>
 
 <div class="doc">
-<a id="lab462"></a><h2 class="section">Equalities: The <span class="inlinecode"><span class="id" title="tactic">congruence</span></span> Tactic</h2>
+<a id="lab473"></a><h2 class="section">Equalities: The <span class="inlinecode"><span class="id" title="tactic">congruence</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1135,7 +1135,7 @@ The <span class="inlinecode"><span class="id" title="tactic">congruence</span></
 </div>
 
 <div class="doc">
-<a id="lab463"></a><h2 class="section">Propositions: The <span class="inlinecode"><span class="id" title="tactic">intuition</span></span> Tactic</h2>
+<a id="lab474"></a><h2 class="section">Propositions: The <span class="inlinecode"><span class="id" title="tactic">intuition</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1189,11 +1189,11 @@ In the previous example, neither <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab464"></a><h2 class="section">Exercises with Automatic Solvers</h2>
+<a id="lab475"></a><h2 class="section">Exercises with Automatic Solvers</h2>
 
 <div class="paragraph"> </div>
 
-<a id="lab465"></a><h4 class="section">Exercise: 2 stars, standard (automatic_solvers)</h4>
+<a id="lab476"></a><h4 class="section">Exercise: 2 stars, standard (automatic_solvers)</h4>
  The exercises below are gleaned from previous chapters, where they
     were proved with (relatively) long proof scripts. Each should now
     be provable with just a single invocation of an automatic
@@ -1219,7 +1219,7 @@ In the previous example, neither <span class="inlinecode"><span class="id" title
 
 
 <div class="doc">
-<a id="lab466"></a><h1 class="section">Search Tactics</h1>
+<a id="lab477"></a><h1 class="section">Search Tactics</h1>
 
 <div class="paragraph"> </div>
 
@@ -1237,7 +1237,7 @@ In the previous example, neither <span class="inlinecode"><span class="id" title
 </div>
 
 <div class="doc">
-<a id="lab467"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> Tactic</h2>
+<a id="lab478"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">auto</span></span> Tactic</h2>
 
 <div class="paragraph"> </div>
 
@@ -1447,7 +1447,7 @@ The "global" database that <span class="inlinecode"><span class="id" title="tact
 </div>
 
 <div class="doc">
-<a id="lab468"></a><h4 class="section">Exercise: 3 stars, standard (re_opt_match_auto)</h4>
+<a id="lab479"></a><h4 class="section">Exercise: 3 stars, standard (re_opt_match_auto)</h4>
 
 <div class="paragraph"> </div>
 
@@ -1479,7 +1479,7 @@ The "global" database that <span class="inlinecode"><span class="id" title="tact
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab469"></a><h4 class="section">Exercise: 3 stars, advanced, optional (pumping_redux)</h4>
+<a id="lab480"></a><h4 class="section">Exercise: 3 stars, advanced, optional (pumping_redux)</h4>
  Use <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="var">lia</span></span>, and any other useful tactics from this chapter
     to shorten your proof (or the "official" solution proof) of the
     weak Pumping Lemma exercise from <a href="IndProp.html"><span class="inlineref">IndProp</span></a>. 
@@ -1504,7 +1504,7 @@ The "global" database that <span class="inlinecode"><span class="id" title="tact
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab470"></a><h4 class="section">Exercise: 3 stars, advanced, optional (pumping_redux_strong)</h4>
+<a id="lab481"></a><h4 class="section">Exercise: 3 stars, advanced, optional (pumping_redux_strong)</h4>
  Use <span class="inlinecode"><span class="id" title="tactic">auto</span></span>, <span class="inlinecode"><span class="id" title="var">lia</span></span>, and any other useful tactics from this chapter
     to shorten your proof (or the "official" solution proof) of the
     stronger Pumping Lemma exercise from <a href="IndProp.html"><span class="inlineref">IndProp</span></a>. 
@@ -1523,7 +1523,7 @@ The "global" database that <span class="inlinecode"><span class="id" title="tact
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">T</span> <span class="id" title="var">re</span> <span class="id" title="var">s</span> <span class="id" title="var">Hmatch</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Hmatch</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">as</span> [ | <span class="id" title="var">x</span> | <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span> | <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re<sub>1</sub></span> <span class="id" title="var">re<sub>2</sub></span> <span class="id" title="var">Hmatch</span> <span class="id" title="var">IH</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">re</span> | <span class="id" title="var">s<sub>1</sub></span> <span class="id" title="var">s<sub>2</sub></span> <span class="id" title="var">re</span> <span class="id" title="var">Hmatch1</span> <span class="id" title="var">IH<sub>1</sub></span> <span class="id" title="var">Hmatch2</span> <span class="id" title="var">IH<sub>2</sub></span> ];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">lia</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Hlen</span>.<br/>
@@ -1535,7 +1535,7 @@ The "global" database that <span class="inlinecode"><span class="id" title="tact
 
 
 <div class="doc">
-<a id="lab471"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> variant</h2>
+<a id="lab482"></a><h2 class="section">The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> variant</h2>
 
 <div class="paragraph"> </div>
 
@@ -1641,7 +1641,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
 </div>
 
 <div class="doc">
-<a id="lab472"></a><h1 class="section">Ltac: The Tactic Language</h1>
+<a id="lab483"></a><h1 class="section">Ltac: The Tactic Language</h1>
 
 <div class="paragraph"> </div>
 
@@ -1666,7 +1666,7 @@ The <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
     proof script we have to write ourselves. 
 <div class="paragraph"> </div>
 
-<a id="lab473"></a><h2 class="section">Ltac Functions</h2>
+<a id="lab484"></a><h2 class="section">Ltac Functions</h2>
 
 <div class="paragraph"> </div>
 
@@ -1764,7 +1764,7 @@ We can factor out the common structure:
 </div>
 
 <div class="doc">
-<a id="lab474"></a><h4 class="section">Exercise: 1 star, standard (andb3_exchange)</h4>
+<a id="lab485"></a><h4 class="section">Exercise: 1 star, standard (andb3_exchange)</h4>
  Re-prove the following theorem from <a href="Basics.html"><span class="inlineref">Basics</span></a>, using only
     <span class="inlinecode"><span class="id" title="tactic">intros</span></span> and <span class="inlinecode"><span class="id" title="var">destructpf</span></span>. You should have a one-shot proof. 
 </div>
@@ -1779,7 +1779,7 @@ We can factor out the common structure:
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab475"></a><h4 class="section">Exercise: 2 stars, standard (andb_true_elim2)</h4>
+<a id="lab486"></a><h4 class="section">Exercise: 2 stars, standard (andb_true_elim2)</h4>
  The following theorem from <a href="Basics.html"><span class="inlineref">Basics</span></a> can't be proved with
     <span class="inlinecode"><span class="id" title="var">destructpf</span></span>. 
 </div>
@@ -1835,7 +1835,7 @@ Double-check that <span class="inlinecode"><span class="id" title="tactic">intro
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab476"></a><h2 class="section">Ltac Pattern Matching</h2>
+<a id="lab487"></a><h2 class="section">Ltac Pattern Matching</h2>
 
 <div class="paragraph"> </div>
 
@@ -2215,7 +2215,7 @@ That works great! Here are two other proofs that follow the same
 </div>
 
 <div class="doc">
-<a id="lab477"></a><h2 class="section">Using <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="keyword">goal</span></span> to Prove Tautologies</h2>
+<a id="lab488"></a><h2 class="section">Using <span class="inlinecode"><span class="id" title="keyword">match</span></span> <span class="inlinecode"><span class="id" title="keyword">goal</span></span> to Prove Tautologies</h2>
 
 <div class="paragraph"> </div>
 
@@ -2333,7 +2333,7 @@ Some other usual theorems about <span class="inlinecode"><span class="id" title=
 </div>
 
 <div class="doc">
-<a id="lab478"></a><h4 class="section">Exercise: 4 stars, advanced (nor_intuition)</h4>
+<a id="lab489"></a><h4 class="section">Exercise: 4 stars, advanced (nor_intuition)</h4>
 
 <div class="paragraph"> </div>
 
@@ -2377,7 +2377,7 @@ Each of the three theorems below, and many others involving these
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab479"></a><h1 class="section">Review</h1>
+<a id="lab490"></a><h1 class="section">Review</h1>
 
 <div class="paragraph"> </div>
 
@@ -2417,7 +2417,7 @@ Each of the three theorems below, and many others involving these
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-26&nbsp;02:02&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-26&nbsp;15:02&nbsp;*)</span><br/>
 </div>
 </div>
 

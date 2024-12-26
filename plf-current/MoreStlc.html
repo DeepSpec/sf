@@ -901,18 +901,16 @@
    <span class="inlinecode"><span class="id" title="keyword">let</span></span> itself, which means that the recursive occurrence of <span class="inlinecode"><span class="id" title="var">fact</span></span> in the
    body will not have a type in the context when it is looked up by the
    <span class="inlinecode"><span class="id" title="var">T_Var</span></span> rule.) 
-</div>
-<div class="code">
+<div class="paragraph"> </div>
 
-<span class="comment">(*&nbsp;Changing&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="keyword">let</span></span>&nbsp;rule&nbsp;to&nbsp;handle&nbsp;"recursive&nbsp;definitions"<br/>
-&nbsp;&nbsp;&nbsp;like&nbsp;this&nbsp;is&nbsp;possible,&nbsp;but&nbsp;it&nbsp;requires&nbsp;some&nbsp;extra&nbsp;effort&nbsp;--&nbsp;e.g.,<br/>
-&nbsp;&nbsp;&nbsp;passing&nbsp;around&nbsp;an&nbsp;extra&nbsp;"environment"&nbsp;of&nbsp;recursive&nbsp;function<br/>
-&nbsp;&nbsp;&nbsp;definitions&nbsp;in&nbsp;the&nbsp;definition&nbsp;of&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="var">step</span></span>&nbsp;relation.&nbsp;&nbsp;We're&nbsp;going<br/>
-&nbsp;&nbsp;&nbsp;to&nbsp;take&nbsp;a&nbsp;simpler&nbsp;path&nbsp;here.&nbsp;*)</span><br/>
-</div>
+ Changing the <span class="inlinecode"><span class="id" title="keyword">let</span></span> rule to handle "recursive definitions"
+   like this is possible, but it requires some extra effort -- e.g.,
+   passing around an extra "environment" of recursive function
+   definitions in the definition of the <span class="inlinecode"><span class="id" title="var">step</span></span> relation.  We're going
+   to take a simpler path here. 
+<div class="paragraph"> </div>
 
-<div class="doc">
-Here is another way of presenting recursive functions that is
+ Here is another way of presenting recursive functions that is
     a bit more verbose but equally powerful and much more straightforward
     to formalize: instead of writing recursive definitions, we will define
     a <i>fixed-point operator</i> called <span class="inlinecode"><span class="id" title="keyword">fix</span></span> that performs the "unfolding"
@@ -2749,7 +2747,7 @@ Next, a bit of Coq hackery to automate searching for typing
 <div class="code">
 
 <span class="id" title="keyword">End</span> <a class="idref" href="MoreStlc.html#STLCExtended"><span class="id" title="module">STLCExtended</span></a>.<br/><hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2024-12-26&nbsp;02:04&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-26&nbsp;15:04&nbsp;*)</span><br/>
 </div>
 </div>
 

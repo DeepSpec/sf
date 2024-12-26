@@ -53,7 +53,7 @@ Inductive ev : nat -> Prop :=
     between the world of logic and the world of computation:
 
                  propositions  ~  types
-                 proofs        ~  data values
+                 proofs        ~  programs
 
     See [Wadler 2015] (in Bib.v) for a brief history and up-to-date
     exposition. *)
@@ -203,9 +203,9 @@ Proof.
   apply H.
 Qed.
 
-(** What is the proof object corresponding to [ev_plus4]?
+(** What is the proof object corresponding to [ev_plus4]? *)
 
-    We're looking for an expression whose _type_ is [forall n, ev n ->
+(** We're looking for an expression whose _type_ is [forall n, ev n ->
     ev (4 + n)] -- that is, a _function_ that takes two arguments (one
     number and a piece of evidence) and returns a piece of evidence!
 
@@ -223,10 +223,7 @@ Definition ev_plus4'' (n : nat) (H : ev n)
                     : ev (4 + n) :=
   ev_SS (S (S n)) (ev_SS n H).
 
-Check ev_plus4''
-  : forall n : nat,
-    ev n ->
-    ev (4 + n).
+Check ev_plus4'' : forall n : nat, ev n -> ev (4 + n).
 
 (** When we view the proposition being proved by [ev_plus4] as a
     function type, one interesting point becomes apparent: The second
@@ -315,7 +312,7 @@ Compute add1 2.
 (** * Logical Connectives as Inductive Types *)
 
 (** Inductive definitions are powerful enough to express most of the
-    connectives we have seen so far.  Indeed, only universal
+    logical connectives we have seen so far.  Indeed, only universal
     quantification (with implication as a special case) is built into
     Coq; all the others are defined inductively.
 
@@ -382,6 +379,11 @@ End And.
     manipulated by tactics as we've been doing.  We can also use it to
     build proofs directly, using pattern-matching.  For instance: *)
 
+Definition proj1'' P Q (HPQ : P /\ Q) : P :=
+  match HPQ with
+  | conj HP HQ => HP
+  end.
+
 Definition and_comm'_aux P Q (H : P /\ Q) : Q /\ P :=
   match H with
   | conj HP HQ => conj HQ HP
@@ -428,6 +430,7 @@ Definition inj_l : forall (P Q : Prop), P -> P \/ Q :=
 Theorem inj_l' : forall (P Q : Prop), P -> P \/ Q.
 Proof.
   intros P Q HP. left. apply HP.
+  Show Proof.
 Qed.
 
 Definition or_elim : forall (P Q R : Prop), (P \/ Q) -> (P -> R) -> (Q -> R) -> R :=
@@ -483,7 +486,7 @@ End Ex.
     The notation in the standard library is a slight extension of
     the above, enabling syntactic forms such as [exists x y, P x y]. *)
 
-(** The more familiar form [exists x, P x] desugars to an expression
+(** The more familiar form [exists x, ev x] desugars to an expression
     involving [ex]: *)
 
 Check ex (fun n => ev n) : Prop.
@@ -498,6 +501,26 @@ Definition some_nat_is_even : exists n, ev n :=
     Construct a proof object for the following proposition. *)
 
 Definition ex_ev_Sn : ex (fun n => ev (S n))
+  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+(** [] *)
+
+(** To destruct existentials in a proof term we simply use match: *)
+Definition dist_exists_or_term (X:Type) (P Q : X -> Prop) :
+  (exists x, P x \/ Q x) -> (exists x, P x) \/ (exists x, Q x) :=
+  fun H => match H with
+           | ex_intro _ x Hx =>
+               match Hx with
+               | or_introl HPx => or_introl (ex_intro _ x HPx)
+               | or_intror HQx => or_intror (ex_intro _ x HQx)
+               end
+           end.
+
+(** **** Exercise: 2 stars, standard (ex_match)
+
+    Construct a proof object for the following proposition: *)
+Definition ex_match : forall (A : Type) (P Q : A -> Prop),
+  (forall x, P x -> Q x) ->
+  (exists x, P x) -> (exists x, Q x)
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
 (** [] *)
 
@@ -532,7 +555,7 @@ Inductive False : Prop := .
 
 Fail
   Definition contra : False :=
-  0 = 1.
+  42.
 
 (** But it is possible to destruct [False] by pattern matching. There can
     be no patterns that match it, since it has no constructors.  So
@@ -617,17 +640,17 @@ Definition four' : 2 + 2 == 1 + 3 :=
 Definition singleton : forall (X:Type) (x:X), []++[x] == x::[]  :=
   fun (X:Type) (x:X) => eq_refl [x].
 
-(** By pattern-matching against [n1 == n2], we obtain a term [n]
-    that is known to be convertible to both [n1] and [n2]. The term
-    [eq_refl (S n)] establishes [(S n) == (S n)]. The first [n] can be
-    converted to [n1], and the second to [n2], which yields [(S n1) ==
-    (S n2)]. Coq handles all that conversion for us. *)
-
+(** We can also pattern-match on an equality proof: *)
 Definition eq_add : forall (n1 n2 : nat), n1 == n2 -> (S n1) == (S n2) :=
   fun n1 n2 Heq =>
     match Heq with
     | eq_refl n => eq_refl (S n)
     end.
+
+(** By pattern-matching against [n1 == n2], we obtain a term [n]
+    that replaces [n1] and [n2] in the type we have to produce, so
+    instead of [(S n1) == (S n2)], we now have to produce something
+    of type [(S n) == (S n)], which we establish by [eq_refl (S n)]. *)
 
 (** A tactic-based proof runs into some difficulties if we try to use
     our usual repertoire of tactics, such as [rewrite] and
@@ -639,21 +662,20 @@ Definition eq_add : forall (n1 n2 : nat), n1 == n2 -> (S n1) == (S n2) :=
 Theorem eq_add' : forall (n1 n2 : nat), n1 == n2 -> (S n1) == (S n2).
 Proof.
   intros n1 n2 Heq.
-  Fail rewrite Heq.
-  destruct Heq.
-  Fail reflexivity.
+  Fail rewrite Heq. (* doesn't work for _our_ == relation *)
+  destruct Heq as [n]. (* n1 and n2 replaced by n in the goal! *)
+  Fail reflexivity. (* doesn't work for _our_ == relation *)
   apply eq_refl.
 Qed.
 
 (** **** Exercise: 2 stars, standard (eq_cons)
 
-    Construct the proof object for this theorem. Use pattern matching
-    against the equality hypotheses. *)
+    Construct the proof object for the following theorem. Use pattern
+    matching on the equality hypotheses. *)
 
 Definition eq_cons : forall (X : Type) (h1 h2 : X) (t1 t2 : list X),
     h1 == h2 -> t1 == t2 -> h1 :: t1 == h2 :: t2
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
-
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (equality__leibniz_equality)
@@ -921,4 +943,4 @@ Theorem pe_implies_pi :
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-12-26 02:02 *)
+(* 2024-12-26 15:02 *)
