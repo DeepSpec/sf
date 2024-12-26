@@ -4968,4 +4968,4 @@ End LibTacticsCompatibility.
 Open Scope nat_scope.
 
 
-(* 2024-12-25 21:16 *)
+(* 2024-12-26 02:04 *)

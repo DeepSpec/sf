@@ -413,6 +413,8 @@
 <a href="Imp.html#AExp.add_comm__lia">AExp.add_comm__lia</a> [definition, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aeval">AExp.aeval</a> [definition, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aevalR">AExp.aevalR</a> [inductive, in <a href="Imp.html">Imp</a>]<br/>
+<a href="Imp.html#AExp.aevalR_iff_aeval'">AExp.aevalR_iff_aeval'</a> [lemma, in <a href="Imp.html">Imp</a>]<br/>
+<a href="Imp.html#AExp.aevalR_iff_aeval">AExp.aevalR_iff_aeval</a> [lemma, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#e388c99d648cf6fa1ed798726c0d097c">_ ==&gt; _ (type_scope)</a> [notation, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aevalR_first_try.HypothesisNames.E_AMult">AExp.aevalR_first_try.HypothesisNames.E_AMult</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aevalR_first_try.HypothesisNames.E_AMinus">AExp.aevalR_first_try.HypothesisNames.E_AMinus</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
@@ -426,8 +428,6 @@
 <a href="Imp.html#AExp.aevalR_first_try.E_ANum">AExp.aevalR_first_try.E_ANum</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aevalR_first_try.aevalR">AExp.aevalR_first_try.aevalR</a> [inductive, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aevalR_first_try">AExp.aevalR_first_try</a> [module, in <a href="Imp.html">Imp</a>]<br/>
-<a href="Imp.html#AExp.aeval_iff_aevalR'">AExp.aeval_iff_aevalR'</a> [lemma, in <a href="Imp.html">Imp</a>]<br/>
-<a href="Imp.html#AExp.aeval_iff_aevalR">AExp.aeval_iff_aevalR</a> [lemma, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.aexp">AExp.aexp</a> [inductive, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.AMinus">AExp.AMinus</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.AMult">AExp.AMult</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
@@ -437,7 +437,7 @@
 <a href="Imp.html#AExp.BEq">AExp.BEq</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.beval">AExp.beval</a> [definition, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.bevalR">AExp.bevalR</a> [inductive, in <a href="Imp.html">Imp</a>]<br/>
-<a href="Imp.html#AExp.beval_iff_bevalR">AExp.beval_iff_bevalR</a> [lemma, in <a href="Imp.html">Imp</a>]<br/>
+<a href="Imp.html#AExp.bevalR_iff_beval">AExp.bevalR_iff_beval</a> [lemma, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.bexp">AExp.bexp</a> [inductive, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.BFalse">AExp.BFalse</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.BGt">AExp.BGt</a> [constructor, in <a href="Imp.html">Imp</a>]<br/>
@@ -7037,9 +7037,9 @@
 <a href="AltAuto.html#add_assoc_from_induction">add_assoc_from_induction</a> [in <a href="AltAuto.html">AltAuto</a>]<br/>
 <a href="AltAuto.html#add_assoc'">add_assoc'</a> [in <a href="AltAuto.html">AltAuto</a>]<br/>
 <a href="AltAuto.html#add_assoc">add_assoc</a> [in <a href="AltAuto.html">AltAuto</a>]<br/>
-<a href="Imp.html#AExp.aeval_iff_aevalR'">AExp.aeval_iff_aevalR'</a> [in <a href="Imp.html">Imp</a>]<br/>
-<a href="Imp.html#AExp.aeval_iff_aevalR">AExp.aeval_iff_aevalR</a> [in <a href="Imp.html">Imp</a>]<br/>
-<a href="Imp.html#AExp.beval_iff_bevalR">AExp.beval_iff_bevalR</a> [in <a href="Imp.html">Imp</a>]<br/>
+<a href="Imp.html#AExp.aevalR_iff_aeval'">AExp.aevalR_iff_aeval'</a> [in <a href="Imp.html">Imp</a>]<br/>
+<a href="Imp.html#AExp.aevalR_iff_aeval">AExp.aevalR_iff_aeval</a> [in <a href="Imp.html">Imp</a>]<br/>
+<a href="Imp.html#AExp.bevalR_iff_beval">AExp.bevalR_iff_beval</a> [in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.foo">AExp.foo</a> [in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.foo'">AExp.foo'</a> [in <a href="Imp.html">Imp</a>]<br/>
 <a href="Imp.html#AExp.invert_example1">AExp.invert_example1</a> [in <a href="Imp.html">Imp</a>]<br/>

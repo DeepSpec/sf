@@ -243,4 +243,4 @@ idtac "---------- bag_perm ---------".
 Print Assumptions bag_perm.
 Abort.
 
-(* 2024-12-25 21:21 *)
+(* 2024-12-26 02:08 *)

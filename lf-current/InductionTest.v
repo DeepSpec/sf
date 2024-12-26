@@ -258,4 +258,4 @@ idtac "---------- bin_nat_bin ---------".
 Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2024-12-25 21:15 *)
+(* 2024-12-26 02:02 *)

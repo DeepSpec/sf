@@ -790,7 +790,7 @@ Definition manual_grade_for_beval_rules : option (nat*string) := None.
 (** It is straightforward to prove that the relational and functional
     definitions of evaluation agree: *)
 
-Theorem aeval_iff_aevalR : forall a n,
+Theorem aevalR_iff_aeval : forall a n,
   (a ==> n) <-> aeval a = n.
 Proof.
   split.
@@ -828,7 +828,7 @@ Qed.
 (** Again, we can make the proof quite a bit shorter using some
     tacticals. *)
 
-Theorem aeval_iff_aevalR' : forall a n,
+Theorem aevalR_iff_aeval' : forall a n,
   (a ==> n) <-> aeval a = n.
 Proof.
   (* WORKED IN CLASS *)
@@ -852,7 +852,7 @@ Inductive bevalR: bexp -> bool -> Prop :=
 where "e '==>b' b" := (bevalR e b) : type_scope
 .
 
-Lemma beval_iff_bevalR : forall b bv,
+Lemma bevalR_iff_beval : forall b bv,
   b ==>b bv <-> beval b = bv.
 Proof.
   (* FILL IN HERE *) Admitted.
@@ -2077,4 +2077,4 @@ End BreakImp.
 
     [] *)
 
-(* 2024-12-25 21:15 *)
+(* 2024-12-26 02:02 *)
