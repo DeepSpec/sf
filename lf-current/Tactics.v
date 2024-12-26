@@ -606,8 +606,8 @@ Proof.
 (** Notice that both the goal and the induction hypothesis are
     different this time: the goal asks us to prove something more
     general (i.e., we must prove the statement for _every_ [m]), but
-    the IH is correspondingly more flexible, allowing us to choose any
-    [m] we like when we apply the IH. *)
+    the induction hypothesis [IH'] is correspondingly more flexible,
+    allowing us to choose any [m] we like when we apply it. *)
 
     intros m eq.
 
@@ -1242,4 +1242,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2024-12-26 15:02 *)
+(* 2024-12-26 16:47 *)

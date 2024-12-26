@@ -391,9 +391,8 @@ Proof.
 
 (** Inequality is a very common form of negated statement, so there is a
     special notation for it:
-
-      Notation "x <> y" := (~(x = y)).
 *)
+Notation "x <> y" := (~(x = y)) : type_scope.
 
 (** For example: *)
 
@@ -1797,4 +1796,4 @@ Definition consequentia_mirabilis := forall P:Prop,
 
     [] *)
 
-(* 2024-12-26 15:02 *)
+(* 2024-12-26 16:47 *)
