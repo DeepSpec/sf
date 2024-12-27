@@ -344,14 +344,9 @@ Module TreeETable_first_attempt (VT : ValType) <: ETable_first_attempt.
       get k t = v ->
       In (k, v) (elements t).
   Proof.
-    intros k v t Hbound Hlookup. unfold get in Hlookup.
-    (** [pose proof t as H] is equivalent to [assert (H : ...the type
-        of t...). { apply t. }] but saves some keystrokes. *)
-    pose proof (SearchTree.elements_complete) as Hcomplete.
-    unfold elements_complete_spec in Hcomplete.
-    apply Hcomplete with default.
-    - (** Stuck! We don't know that [t] satisfies the BST invariant. *)
-  Admitted.
+    intros k v t Hbound Hlookup.
+    eapply SearchTree.elements_complete; eauto.
+  Qed.
 
   Theorem elements_correct : forall (k : key) (v : V) (t : table),
       In (k, v) (elements t) ->
@@ -361,7 +356,7 @@ Module TreeETable_first_attempt (VT : ValType) <: ETable_first_attempt.
     pose proof (SearchTree.elements_correct) as Hcorrect.
     unfold elements_correct_spec in Hcorrect.
     apply Hcorrect.
-    - (** Again stuck because of the BST invariant. *)
+    - (** Stuck! We don't know that [t] satisfies the BST invariant. *)
   Admitted.
 
 End TreeETable_first_attempt.
@@ -1494,4 +1489,4 @@ End TreeETableSubset.
 Definition manual_grade_for_ListsETable : option (nat*string) := None.
 (** [] *)
 
-(* 2024-12-26 16:53 *)
+(* 2024-12-26 23:51 *)

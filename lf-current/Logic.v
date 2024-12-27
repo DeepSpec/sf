@@ -981,9 +981,9 @@ Check @rev : forall X, list X -> list X.
 Check add_comm        : forall n m : nat, n + m = m + n.
 Check plus_id_example : forall n m : nat, n = m -> n + n = m + m.
 
-(** Coq checks the type of the _statements_ of the [add_comm] and
+(** Coq checks the _statements_ of the [add_comm] and
     [plus_id_example] theorems in the same way that it checks the
-    _type_ of any term (e.g., plus). And if we leave off the colon and
+    _type_ of any term (e.g., plus). If we leave off the colon and
     type, Coq will print these types for us.
 
     Why? *)
@@ -1501,7 +1501,7 @@ Example function_equality_ex1 :
 Proof. reflexivity. Qed.
 
 (** This works when Coq can simplify the functions to the same expression,
-    but this doesn't always work. **)
+    but this doesn't always happen. **)
 
 (** These two functions are equal just by simplification, but in general
     functions can be equal for more interesting reasons.
@@ -1796,4 +1796,4 @@ Definition consequentia_mirabilis := forall P:Prop,
 
     [] *)
 
-(* 2024-12-26 16:47 *)
+(* 2024-12-26 23:45 *)

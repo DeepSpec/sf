@@ -1074,7 +1074,7 @@ Definition lt (n m : nat) := le (S n) m.
 
 Notation "n < m" := (lt n m).
 
-(** The [>=] is defined in terms of [<=]. *)
+(** The [>=] operation is defined in terms of [<=]. *)
 
 Definition ge (m n : nat) : Prop := le n m.
 Notation "m >= n" := (ge m n).
@@ -1188,7 +1188,6 @@ Proof.
 Theorem leb_correct : forall n m,
   n <= m ->
   n <=? m = true.
-  (** Hint: *)
 Proof.
   (* FILL IN HERE *) Admitted.
 
@@ -1337,10 +1336,11 @@ Proof.
 (* ################################################################# *)
 (** * Case Study: Regular Expressions *)
 
-(** Many of the examples above were simple and the [ev] property
-    even a bit artificial. To give a better sense of the power of
-    inductively defined propositions, we now show how to use them to
-    model a classic concept in computer science: _regular expressions_. *)
+(** Many of the examples above were simple and -- in the case of
+    the [ev] property -- even a bit artificial. To give a better sense
+    of the power of inductively defined propositions, we now show how
+    to use them to model a classic concept in computer science:
+    _regular expressions_. *)
 
 (** Regular expressions are a natural language for describing sets of
     strings.  Their syntax is defined as follows: *)
@@ -2730,4 +2730,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-12-26 16:47 *)
+(* 2024-12-26 23:45 *)

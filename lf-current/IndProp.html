@@ -1610,7 +1610,7 @@ The "strictly less than" relation <span class="inlinecode"><span class="id" titl
 </div>
 
 <div class="doc">
-The <span class="inlinecode">≥</span> is defined in terms of <span class="inlinecode">≤</span>. 
+The <span class="inlinecode">≥</span> operation is defined in terms of <span class="inlinecode">≤</span>. 
 </div>
 <div class="code">
 
@@ -1754,12 +1754,6 @@ Hint: May be easiest to prove by induction on <span class="inlinecode"><span cla
 <span class="id" title="keyword">Theorem</span> <a id="leb_correct" class="idref" href="#leb_correct"><span class="id" title="lemma">leb_correct</span></a> : <span class="id" title="keyword">∀</span> <a id="n:180" class="idref" href="#n:180"><span class="id" title="binder">n</span></a> <a id="m:181" class="idref" href="#m:181"><span class="id" title="binder">m</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="IndProp.html#n:180"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a<sub>3</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="IndProp.html#m:181"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="IndProp.html#n:180"><span class="id" title="variable">n</span></a> <a class="idref" href="Basics.html#0f31f5c1c6b6a21a3a187247222bc9e<sub>4</sub>"><span class="id" title="notation">&lt;=?</span></a> <a class="idref" href="IndProp.html#m:181"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
-</div>
-
-<div class="doc">
-Hint: 
-</div>
-<div class="code">
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 </div>
@@ -1975,10 +1969,11 @@ Hint: The next two can easily be proved without using <span class="inlinecode"><
 
 <div class="paragraph"> </div>
 
- Many of the examples above were simple and the <span class="inlinecode"><span class="id" title="var">ev</span></span> property
-    even a bit artificial. To give a better sense of the power of
-    inductively defined propositions, we now show how to use them to
-    model a classic concept in computer science: <i>regular expressions</i>. 
+ Many of the examples above were simple and -- in the case of
+    the <span class="inlinecode"><span class="id" title="var">ev</span></span> property -- even a bit artificial. To give a better sense
+    of the power of inductively defined propositions, we now show how
+    to use them to model a classic concept in computer science:
+    <i>regular expressions</i>. 
 <div class="paragraph"> </div>
 
  Regular expressions are a natural language for describing sets of
@@ -3931,7 +3926,7 @@ A function <span class="inlinecode"><span class="id" title="var">m</span></span>
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-26&nbsp;16:47&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2024-12-26&nbsp;23:45&nbsp;*)</span><br/>
 </div>
 </div>
 
