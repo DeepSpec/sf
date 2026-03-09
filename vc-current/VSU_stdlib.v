@@ -35,7 +35,7 @@ Axiom body_free:
 Axiom body_exit:
  forall {Espec: OracleKind},
   VST.floyd.library.body_lemma_of_funspec
-    (EF_external "exit" (mksignature (AST.Tint :: nil) AST.Tvoid cc_default))
+    (EF_external "exit" (mksignature (Xint :: nil) Xvoid cc_default))
     (snd (exit_spec)).
 
 (* ================================================================= *)
@@ -47,7 +47,8 @@ Axiom body_exit:
   for [malloc], [free], [exit].  Because nobody will call [placeholder()], we
  can give it a trivial funspec whose precondition is [False]. *)
 
-Definition placeholder_spec :=
+Notation placeholder_spec :=
+  (* This is Notation instead of Definition to work around VST bug #814 *)
     (_placeholder, vacuous_funspec (Internal f_placeholder)).
 
 (* ================================================================= *)
@@ -119,7 +120,7 @@ Qed.
 Definition MallocFreeVSU: @VSU NullExtension.Espec
          MF_E MF_imported_specs ltac:(QPprog prog) MF_ASI MF_globals.
   Proof.
-    mkVSU prog MF_internal_specs.
+  mkVSU prog MF_internal_specs.
     - solve_SF_external (@body_malloc NullExtension.Espec CompSpecs).
        apply (semax_func_cons_malloc_aux gv gx ret n).
     - solve_SF_external (@body_free NullExtension.Espec CompSpecs).
@@ -130,4 +131,4 @@ Qed.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_main] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

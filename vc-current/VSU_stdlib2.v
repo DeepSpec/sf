@@ -185,7 +185,7 @@ Compute match gvar_info (stdlib2.v_pool) with Tarray _ n _ => n | _ => 0 end.
 Definition N' := match gvar_info (stdlib2.v_pool) with Tarray _ n _ => n | _ => 0 end.
 Print N'.  (* N' = match gvar_info v_pool with Tarray _ n _ => n | _ => 0 end *)
 
-(** So instead, use this Coq trick: *)
+(** So instead, use this Rocq trick: *)
 
 Definition N'' :=
   ltac:(let x := constr:(match gvar_info (stdlib2.v_pool) with
@@ -300,4 +300,4 @@ Qed.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_main2] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

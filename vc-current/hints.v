@@ -5,7 +5,7 @@ Ltac verif_stack_free_hint1 :=
 match goal with
 |- semax ?D (PROPx _ (LOCALx ?Q (SEPx ?R)))
             (Ssequence
-                 (Scall _ (Evar ?free (Tfunction (Tcons (tptr tvoid) Tnil) tvoid cc_default))
+                 (Scall _ (Evar ?free (Tfunction [tptr tvoid] tvoid cc_default))
                  (Etempvar ?i _ :: _)) _) _ =>
   match Q with context [temp i ?q] =>
    match R with context [data_at _ ?t _ q] =>
@@ -28,7 +28,7 @@ Ltac verif_stack_malloc_hint1_aux D R c :=
   match c with
   | Ssequence ?c1 _ => verif_stack_malloc_hint1_aux D R c1
   | Scall _ (Evar ?malloc
-                 (Tfunction (Tcons tuint Tnil) (tptr tvoid) cc_default))
+                 (Tfunction [tuint] (tptr tvoid) cc_default))
                 (cons (Esizeof ?t _) nil) =>
       match R with context [mem_mgr ?gv] =>
           idtac "try  'forward_call (" t "," gv ")'"
@@ -51,4 +51,4 @@ Ltac vc_special_hint :=
 
 Ltac hint_special ::=  try vc_special_hint.
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

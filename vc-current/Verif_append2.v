@@ -435,7 +435,7 @@ Proof.
   unfold listrep at 1.
   rewrite prop_true_andp by auto.
   entailer!.
-  rewrite <- app_nil_end.
+  rewrite app_nil_r.
 
   (** The proof goal now has the form: a wand expression derives some
   wand-free assertion.  Usually, this is a tough task because there is
@@ -493,4 +493,4 @@ Proof.
     entailer!.
 Qed.
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

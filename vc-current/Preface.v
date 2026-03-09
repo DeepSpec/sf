@@ -5,8 +5,8 @@
 
 (** Here's a good way to build formally verified correct software:
     - Write your program in an expressive language with a good proof
-      theory (the Gallina language embedded in Coq's logic).
-    - Prove it correct in Coq.
+      theory (the Gallina language embedded in Rocq's logic).
+    - Prove it correct in Rocq.
     - Extract it to ML and compile it with an optimizing ML compiler.
 
     Unfortunately, for some applications you cannot afford to use a
@@ -18,7 +18,7 @@
     low-level imperative systems programming language such as C.
 
     But you still want your OS, or crypto, or GC, to be correct!  So
-    you should use machine-checked program verification in Coq.  For
+    you should use machine-checked program verification in Rocq.  For
     that purpose, you can use _Verifiable C_, a program logic and
     proof system for C.
 
@@ -43,13 +43,13 @@
     series, which presents the mathematical underpinnings of reliable
     software.  The principal novelty of _Software Foundations_ is that
     it is one hundred percent formalized and machine-checked: the
-    entire text is literally a script for Coq.  It is intended to be
-    read alongside an interactive session with Coq.  All the details
-    in the text are fully formalized in Coq, and the exercises are
-    designed to be worked using Coq.
+    entire text is literally a script for Rocq.  It is intended to be
+    read alongside an interactive session with Rocq.  All the details
+    in the text are fully formalized in Rocq, and the exercises are
+    designed to be worked using Rocq.
 
     Before studying this volume, you should be a competent user of
-    Coq:
+    Rocq:
     - Study _Software Foundations Volume 1_ (Logical Foundations), and
       do the exercises!
     - Study the Hoare and Hoare2 chapters of _Software Foundations
@@ -67,21 +67,24 @@
 (* ================================================================= *)
 (** ** System Requirements *)
 
-(** Coq runs on Windows, Linux, and OS X.  The Preface of Volume 1
-   describes the Coq installation you will need.  This edition was
-   built with Coq 8.19.2.
+(** Rocq runs on Windows, Linux, and OS X.  The Preface of Volume 1
+   describes the Rocq installation you will need.  This edition was
+   built with Rocq 9.0.0.
 
-   You will need VST 2.12 installed.  You can do that either by installing
+   You will need VST 2.16 installed.  You can do that either by installing
    it as part of the standard "Coq Platform" that is released with each
    new version of Coq, or using opam (the package is named coq-vst).
    At the end of this chapter is a test to make sure you have the right
    version of VST installed.
 
-   _IF YOU USE OPAM_, you can install Coq and CoqIDE using the
-     instructions at https://coq.inria.fr/opam-using.html
+   Note: As of January 2026, there is not yet a Coq Platform release for Rocq 9.
+   Install using opam as directed here.
+
+   _IF YOU USE OPAM_, you can install Rocq and RocqIDE using the
+     instructions at https://rocq-prover.org/opam-using.html
    and then continue with,
    - opam update   (_as necessary_)
-   - opam install coq-vst.2.12 (_this will take 30 minutes or more_)
+   - opam install coq-vst.2.16 (_this will take 30 minutes or more_)
 
    _You do not need to install CompCert clightgen_ to do the exercises
    in this volume.  But if you wish to modify and reparse the .c files,
@@ -90,10 +93,10 @@
    or by opam (the package is named coq-compcert). *)
 
 (* ================================================================= *)
-(** ** Downloading the Coq Files *)
+(** ** Downloading the Rocq Files *)
 
 (** A tar file containing the full sources for the "release version"
-    of this book (as a collection of Coq scripts and HTML files) is
+    of this book (as a collection of Rocq scripts and HTML files) is
     available at {https://softwarefoundations.cis.upenn.edu}.
 
     (If you are using the book as part of a class, your professor may
@@ -145,9 +148,9 @@
     title        =   "Verifiable C",
     series       =   "Software Foundations",
     volume       =   "5",
-    year         =   "2024",
+    year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 1.2.2, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 2.0, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -167,9 +170,9 @@
     1521523, _The Science of Deep Specification_. *)
 
 (*** Check that we have the right version of VST *)
-Require Import Coq.Strings.String.
+Require Import Stdlib.Strings.String.
 Open Scope string.
-Definition release_needed := "2.12".
+Definition release_needed := "2.16".
 Require Import VST.veric.version.  (* If this line fails, it means
                                       you don't have a VST installed. *)
 Goal release = release_needed.
@@ -180,7 +183,7 @@ fail "The wrong version of VST is installed.
 You have VST version"
 rel "but this version of 'Software Foundations Volume 5: Verifiable C'"
 "demands version" need ". If possible, install VST version" need
-"using the Coq Platform or using opam.  Or, if not from Coq Platform or opam,"
+"using the Coq Platform or using opam.  Or, if not From Stdlib Platform or opam,"
 "for instructions about building VST from source and accessing that version,
 see the README file in this directory."
 "Or, instead of installing VST" need ","
@@ -188,7 +191,7 @@ see the README file in this directory."
 "then edit the Definition release_needed in Preface.v".
 Abort.
 
-Require Import ZArith.
+From Stdlib Require Import ZArith.
 Local Open Scope Z_scope.
 
 Require VC.stack.  (* If this line fails, do 'make stack.vo' *)
@@ -207,4 +210,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

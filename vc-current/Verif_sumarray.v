@@ -8,7 +8,7 @@
   - a _program logic_ called Verifiable C, based on separation logic.
   - a _proof automation system_ called VST-Floyd that assists you in applying
     the program logic to your program.
-  - a soundness proof in Coq, guaranteeing that whatever properties you
+  - a soundness proof in Rocq, guaranteeing that whatever properties you
     prove about your program will actually hold in any execution of the
     C source-language operational semantics. And this proof _composes_
     with the correctness proof of the CompCert verified optimizing C compiler,
@@ -27,7 +27,7 @@
 (** The first two chapters (this one and [Verif_reverse]) are a
  feature-by-feature introduction to Verifiable C, demonstrated on two
  example C programs:  adding up an array and reversing a linked list.
- These chapters are best understood if you step through them in Coq, where
+ These chapters are best understood if you step through them in Rocq, where
  you can see the proof goals at each stage; they are less useful to read in
  HTML.  These two chapters closely follow the first 48 mini-chapters of the
  _Verifiable C Reference Manual_, [VC.pdf], that is distributed with VST --
@@ -90,7 +90,7 @@
   You would have installed [clightgen] as part of the CompCert tools, by
   mentioning the -clightgen option when you run ./configure when building CompCert.
 
-  The output of [clightgen] would be a file [sumarray.v] that contains the Coq
+  The output of [clightgen] would be a file [sumarray.v] that contains the Rocq
   inductive data structure describing the syntax trees of the source
   program.  You can open [sumarray.v] in the current directory
   and inspect it. *)
@@ -106,7 +106,7 @@
 
     For larger programs, one would typically break this down into three
     or more files:
-    - Functional model (often in the form of a Coq function)
+    - Functional model (often in the form of a Rocq function)
     - API specification
     - Function-body correctness proofs, one per file. *)
 
@@ -189,7 +189,7 @@ DECLARE _sumarray
  as a syntax tree).
 
   A function is specified by its _precondition_ and its
-  _postcondition_.  The [WITH] clause quantifies over Coq values that
+  _postcondition_.  The [WITH] clause quantifies over Rocq values that
   may appear in both the precondition and the postcondition. The
   precondition has access to the function parameters
   (in this case [a] and [size]) and the postcondition has access
@@ -198,7 +198,7 @@ DECLARE _sumarray
   Function preconditions, postconditions, and loop invariants are
   _assertions_ about the state of variables and memory at a particular
   program point.  In an assertion [PROP(P) LOCAL(Q) SEP(R)], the
-  propositions in the sequence [P] are all of Coq type [Prop].  They
+  propositions in the sequence [P] are all of Rocq type [Prop].  They
   describe things that are true independent of program state.  In the
   precondition above, the statement [0 <= size <= Int.max_signed] is
   true _just within the scope of the quantification of the variable_
@@ -351,7 +351,7 @@ Lemma body_sumarray: semax_body Vprog Gprog f_sumarray sumarray_spec.
 Proof.
 
 (** If you are reading this as a static document, you should consider
- switching to your favorite Coq development environment, in which you
+ switching to your favorite Rocq development environment, in which you
  can step through the rest of this chapter, tactic by tactic, and examine
  the proof state at each point. *)
 
@@ -423,7 +423,7 @@ Check (temp _i (Vint (Int.repr 0))).  (* : localdef,  the type of LOCAL assertio
      When doing forward symbolic execution (forward Floyd/Hoare proof)
   through a large function, you don't usually want to see the entire
   function-body in your proof subgoal.  Therefore the system abbreviates
-  some things for you, using the magic of Coq's implicit arguments. *)
+  some things for you, using the magic of Rocq's implicit arguments. *)
 
 Check @abbreviate.
 (*   : forall A : Type, A -> A *)
@@ -520,7 +520,7 @@ Set Nested Proofs Allowed.
 Goal forall (f: Z->Z) (x: Z), f(x)=0 -> exists i:Z, f(x)=i.
   intros.
 
-(** To prove such a goal, one uses Coq's "exists" tactic to
+(** To prove such a goal, one uses Rocq's "exists" tactic to
  demonstrate a value for [i]: *)
   exists 0.
   auto.
@@ -777,4 +777,4 @@ Qed.
 
 (** Recommended: read VC.pdf Chapters 23-49 (up to _Pointer comparisons_) *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

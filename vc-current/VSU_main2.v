@@ -18,7 +18,7 @@ int main(void) {
 and the only difference would be in the Makefile, the Unix [ld] or [cc] command
 would link the programs together with stdlib2.o instead of stdlib.o.
 
-The Coq code in this chapter is practically the same as in [VSU_main],
+The Rocq code in this chapter is practically the same as in [VSU_main],
 since the client program (main.c) should be oblivious of private data
 representations (etc.) of the stdlib module. The only difference is that
 in some places it says [stdlib2] instead of [stdlib].
@@ -122,7 +122,7 @@ Definition main_spec :=
 Definition Vprog: varspecs := QPvarspecs whole_prog.
 
 Definition Main_imports: funspecs := Spec_triang.TriangASI M.
-Definition Main_Gprog : funspecs := main_spec :: Main_imports.
+Definition Main_Gprog : funspecs := Main_imports ++ [main_spec].
 
 Lemma body_main: semax_body Vprog Main_Gprog f_main main_spec.
 (** Identical to the proof of [body_main] in [VSU_main]. *)
@@ -142,4 +142,4 @@ Proof. proveWholeProgSafe. Qed.
 
 Eval red in WholeProgSafeType WholeComp tt.
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

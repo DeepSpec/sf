@@ -831,8 +831,8 @@ table.vc tbody tr td.tab { background-color: rgb(159, 125, 140); }
 table.slf {  background-color: rgba(219, 178, 127, 0.5); }
 table.slf tbody tr td.tab { background-color: rgb(219, 178, 127); }
 
-/* Suggested background color for next volume */
-/*     #c07d62    */
+table.secf {  background-color: rgba(192, 125, 98, 0.5); }
+table.secf tbody tr td.tab { background-color: #c07d62; }
 
 .ui-draggable, .ui-droppable {
     background-position: top;

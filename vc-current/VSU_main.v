@@ -73,14 +73,14 @@ Definition triangVSU := VSU_triang.TriangVSU M STACK.
                function-specifications (funspecs) that we give for these functions are
                _axioms_  (but see "Connecting Higher-Order Separation Logic to a
                First-Order Outside World" by Mansky et al. 2020 to see how these axioms
-               can be proved as theorems in Coq).
+               can be proved as theorems in Rocq).
   - [Imports]:  functions external to _this_ module, but which will be proved in other VSUs;
                the [Imports] list says what funspecs we assume about them.
   - [Exports]:  functions exported from this module, with funspecs guaranteed by proofs.
   - [G]:   funspecs of _internal_ functions of the module.  Since these functions are
         not exported, not used in other modules, we don't need to "publish" these
         funspecs; they existed only in support of [semax_body] proofs of the exported
-         functions.  Therefore, the [G] list is private to the VSU, and hidden by Coq's
+         functions.  Therefore, the [G] list is private to the VSU, and hidden by Rocq's
          opacity mechanisms.
 
    Let's examine the Externs, Imports, and Exports of StackVSU and TriangVSU: *)
@@ -213,7 +213,7 @@ Definition Vprog: varspecs := QPvarspecs whole_prog.
    module plus the Imports of this module. *)
 
 Definition Main_imports: funspecs := Spec_triang.TriangASI M.
-Definition Main_Gprog : funspecs := main_spec :: Main_imports.
+Definition Main_Gprog : funspecs := Main_imports ++ [main_spec].
 
 (* ################################################################# *)
 (** * Proof of body_main *)
@@ -259,10 +259,10 @@ fold M.  (* See "Exercise: Delete" below to see why this is needed *)
   - [Clight.program]   is the Abstract Syntax Tree (AST) of a Clight program
                 as produced by clightgen;
   - [QP.program]  is an alternate version of that AST that's more
-                efficient to link computationally in Coq;
+                efficient to link computationally in Rocq;
   - [Component] is a set of correctness proofs (and other property proofs) about
                 a QP.program;
-  - [VSU] is a [Component] with its internal funspecs hidden by Coq's abstraction
+  - [VSU] is a [Component] with its internal funspecs hidden by Rocq's abstraction
        mechanism (sigT), and with the component's varspecs in a standard form.
 
   Unlike ordinary modules, we don't turn main.c (or the module containing main())
@@ -348,4 +348,4 @@ Eval red in (WholeProgSafeType WholeComp tt).
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stdlib2] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

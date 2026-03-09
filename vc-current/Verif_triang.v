@@ -56,7 +56,7 @@ Qed.
 
 (** This just shows that if the negative numbers did not exist, it would be
   necessary to construct them!  In reasoning about programs, as in many other
-  kinds of mathematics, we should use the integers.  In Coq the type is called [Z]. *)
+  kinds of mathematics, we should use the integers.  In Rocq the type is called [Z]. *)
 Lemma Z_sub_add_ok:
   forall a b : Z, a-b+b=a.
 Proof. intros. lia. Qed.
@@ -66,7 +66,7 @@ Print Z.
 (* Inductive Z : Set := Z0 : Z | Zpos : positive -> Z | Zneg : positive -> Z
 
     but we generally prefer to reason _abstractly_ about Z, using the lemmas
- in the Coq library (that the Coq developers proved from the inductive
+ in the Rocq library (that the Rocq developers proved from the inductive
  definition).  The induction principle on Z, that's automatically derived
  from this Inductive definition, is not the one we usually want to use! *)
 
@@ -110,11 +110,11 @@ Proof.
     show that if [n>0] then  [Z.to_nat (n-1) < Z.to_nat n].  *)
 lia.
 Defined.  (* Terminate your [Function] declarations with [Defined] instead
- of [Qed], so that Coq will be able to use your function in computations. *)
+ of [Qed], so that Rocq will be able to use your function in computations. *)
 
 (** **** Exercise: 2 stars, standard (Zinduction)
 
-    Coq's standard induction principle for Z is not the one we usually
+    Rocq's standard induction principle for Z is not the one we usually
    want, so let us define a more natural induction scheme: *)
 Lemma Zinduction: forall  (P: Z -> Prop),
   P 0 ->
@@ -151,9 +151,9 @@ Proof.
    what happens! *)
 (*  unfold decreasing. *)
 
-(** Instead of unfolding [decreasing] we use the equation that Coq automagically
+(** Instead of unfolding [decreasing] we use the equation that Rocq automagically
    defines for the Function.  Try the command [Search decreasing.] to see all
-   the reasoning principles that Coq  defined for the new [Function].  We will
+   the reasoning principles that Rocq  defined for the new [Function].  We will
    use this one: *)
 Check decreasing_equation.
 
@@ -161,7 +161,7 @@ Check decreasing_equation.
 
 (** during the proof of this lemma, you may
 find the [ring_simplify] tactic useful.  Read
-about it in the Coq reference manual.  Basically,
+about it in the Rocq reference manual.  Basically,
 it takes formulas with multiplication and addition,
 and simplifies them.  But you can do this without
 [ring_simplify], using just ordinary rewriting
@@ -482,4 +482,4 @@ sep_apply (create_mem_mgr gv).
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

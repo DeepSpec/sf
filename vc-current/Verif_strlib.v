@@ -43,12 +43,12 @@ Require Import VC.strlib.
 #[export] Instance CompSpecs : compspecs. make_compspecs prog. Defined.
 Definition Vprog : varspecs. mk_varspecs prog. Defined.
 Require Import VC.hints.  (* Import special hints for this tutorial. *)
-Require Import Coq.Strings.Ascii.
+Require Import Stdlib.Strings.Ascii.
 
 (* ################################################################# *)
 (** * Representation of null-terminated strings. *)
 
-(** Coq represents a string as a list-like Inductive of Ascii
+(** Rocq represents a string as a list-like Inductive of Ascii
     characters: *)
 Locate string.  (* Coq.Strings.String.string *)
 Print string.
@@ -57,7 +57,7 @@ Print string.
 
 (** The C programming language represents a _character_ as
    a byte, that is, an 8-bit signed or unsigned integer.
-   In Coq represent the 8-bit integers using the [byte] type. *)
+   In Rocq represent the 8-bit integers using the [byte] type. *)
 Print byte.  (* Notation byte := Byte.int
 
     CompCert's [Byte] module is an 8-bit instantiation of
@@ -69,7 +69,7 @@ Print byte.  (* Notation byte := Byte.int
 
 Search byte. (* Too long a list of theorems to reproduce here! *)
 
-(** We can convert a Coq string to a list of bytes: *)
+(** We can convert a Rocq string to a list of bytes: *)
 
 Fixpoint string_to_list_byte (s: string) : list byte :=
   match s with
@@ -381,7 +381,7 @@ Print Vptrofs. (* =
      : ptrofs -> val
 
     And therefore, [_i] is a C variable of type [size_t],
-  [i] is a Coq variable of type [Z], and and [Vptrofs (Ptrofs.repr i)]
+  [i] is a Rocq variable of type [Z], and and [Vptrofs (Ptrofs.repr i)]
   is a CompCert [val] that _represents_ [i] as a [val]. *)
 
 assert (Example: Archi.ptr64=false ->
@@ -628,4 +628,4 @@ Lemma body_strcmp: semax_body Vprog Gprog f_strcmp strcmp_spec.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

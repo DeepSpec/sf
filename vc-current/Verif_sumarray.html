@@ -39,7 +39,7 @@
 
 <div class="paragraph"> </div>
 
- The Verified Software Toolchain is a toolset for proving the functional 
+ The Verified Software Toolchain is a toolset for proving the functional
   correctness of C programs, with
 <ul class="doclist">
 <li> a <i>program logic</i> called Verifiable C, based on separation logic.
@@ -49,11 +49,11 @@
     the program logic to your program.
 
 </li>
-<li> a soundness proof in Coq, guaranteeing that whatever properties you
+<li> a soundness proof in Rocq, guaranteeing that whatever properties you
     prove about your program will actually hold in any execution of the
     C source-language operational semantics. And this proof <i>composes</i>
     with the correctness proof of the CompCert verified optimizing C compiler,
-    so you can also get a guarantee about the behavior of the assembly 
+    so you can also get a guarantee about the behavior of the assembly
     language program.
 
 </li>
@@ -72,14 +72,14 @@
 
 <div class="paragraph"> </div>
 
- The first two chapters (this one and <a href="Verif_reverse.html"><span class="inlineref">Verif_reverse</span></a>) are a 
+ The first two chapters (this one and <a href="Verif_reverse.html"><span class="inlineref">Verif_reverse</span></a>) are a
  feature-by-feature introduction to Verifiable C, demonstrated on two
  example C programs:  adding up an array and reversing a linked list.
- These chapters are best understood if you step through them in Coq, where
+ These chapters are best understood if you step through them in Rocq, where
  you can see the proof goals at each stage; they are less useful to read in
  HTML.  These two chapters closely follow the first 48 mini-chapters of the
  <i>Verifiable C Reference Manual</i>, <span class="inlinecode"><span class="id" title="var">VC.pdf</span></span>, that is distributed with VST --
- and you can find a copy distributed with this volume of <i>Software 
+ and you can find a copy distributed with this volume of <i>Software
  Foundations</i>.   The first two chapters have no exercises.
 
 <div class="paragraph"> </div>
@@ -92,7 +92,7 @@
 
 <div class="paragraph"> </div>
 
- The remaining 7 chapters are <i>mainly</i> exercises.  The best way to learn 
+ The remaining 7 chapters are <i>mainly</i> exercises.  The best way to learn
  is by doing it yourself -- so each chapter presents a little C program,
  and guides you through verifying it yourself.  The "capstone exercise"
  is the verification of a hash table with external chaining.
@@ -150,7 +150,7 @@
 
 <div class="paragraph"> </div>
 
-  The output of <span class="inlinecode"><span class="id" title="var">clightgen</span></span> would be a file <span class="inlinecode"><span class="id" title="var">sumarray.v</span></span> that contains the Coq
+  The output of <span class="inlinecode"><span class="id" title="var">clightgen</span></span> would be a file <span class="inlinecode"><span class="id" title="var">sumarray.v</span></span> that contains the Rocq
   inductive data structure describing the syntax trees of the source
   program.  You can open <span class="inlinecode"><span class="id" title="var">sumarray.v</span></span> in the current directory
   and inspect it. 
@@ -172,7 +172,7 @@
     For larger programs, one would typically break this down into three
     or more files:
 <ul class="doclist">
-<li> Functional model (often in the form of a Coq function)
+<li> Functional model (often in the form of a Rocq function)
 
 </li>
 <li> API specification
@@ -226,7 +226,7 @@ The first line imports Verifiable C and its <i>Floyd</i> proof-automation
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="sum_Z" class="idref" href="#sum_Z"><span class="id" title="definition">sum_Z</span></a> : <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#fold_right"><span class="id" title="definition">fold_right</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#Z.add"><span class="id" title="definition">Z.add</span></a> 0.<br/>
+<span class="id" title="keyword">Definition</span> <a id="sum_Z" class="idref" href="#sum_Z"><span class="id" title="definition">sum_Z</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#fold_right"><span class="id" title="definition">fold_right</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#Z.add"><span class="id" title="definition">Z.add</span></a> 0.<br/>
 </div>
 
 <div class="doc">
@@ -236,7 +236,7 @@ Then we prove properties of the functional model: in this case,
 <div class="code">
 
 <span class="id" title="keyword">Lemma</span> <a id="sum_Z_app" class="idref" href="#sum_Z_app"><span class="id" title="lemma">sum_Z_app</span></a>:<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="a:1" class="idref" href="#a:1"><span class="id" title="binder">a</span></a> <a id="b:2" class="idref" href="#b:2"><span class="id" title="binder">b</span></a>, <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> (<a class="idref" href="Verif_sumarray.html#a:1"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a><a class="idref" href="Verif_sumarray.html#b:2"><span class="id" title="variable">b</span></a>) <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a>  <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#a:1"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#b:2"><span class="id" title="variable">b</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="a:1" class="idref" href="#a:1"><span class="id" title="binder">a</span></a> <a id="b:2" class="idref" href="#b:2"><span class="id" title="binder">b</span></a>, <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> (<a class="idref" href="Verif_sumarray.html#a:1"><span class="id" title="variable">a</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a><a class="idref" href="Verif_sumarray.html#b:2"><span class="id" title="variable">b</span></a>) <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a>  <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#a:1"><span class="id" title="variable">a</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a> <a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#b:2"><span class="id" title="variable">b</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">a</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">lia</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
@@ -264,17 +264,17 @@ The data types used in a functional model can be any kind of mathematics
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="sumarray_spec" class="idref" href="#sumarray_spec"><span class="id" title="definition">sumarray_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="sumarray_spec" class="idref" href="#sumarray_spec"><span class="id" title="definition">sumarray_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
 <span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_sumarray</span><br/>
-&nbsp;<span class="id" title="notation">WITH</span> <a id="a:8" class="idref" href="#a:8"><span class="id" title="binder">a</span></a><span class="id" title="notation">:</span> <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <a id="sh:9" class="idref" href="#sh:9"><span class="id" title="binder">sh</span></a> <span class="id" title="notation">:</span> <span class="id" title="definition">share</span><span class="id" title="notation">,</span> <a id="contents:10" class="idref" href="#contents:10"><span class="id" title="binder">contents</span></a> <span class="id" title="notation">:</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span> <a id="size:11" class="idref" href="#size:11"><span class="id" title="binder">size</span></a><span class="id" title="notation">:</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><br/>
+&nbsp;<span class="id" title="notation">WITH</span> <a id="a:3" class="idref" href="#a:3"><span class="id" title="binder"><span id="a:8" class="id">a</span></span></a><span class="id" title="notation">:</span> <span class="id" title="inductive">val</span><span class="id" title="notation">,</span> <a id="sh:4" class="idref" href="#sh:4"><span class="id" title="binder"><span id="sh:9" class="id">sh</span></span></a> <span class="id" title="notation">:</span> <span class="id" title="definition">share</span><span class="id" title="notation">,</span> <a id="contents:5" class="idref" href="#contents:5"><span class="id" title="binder"><span id="contents:10" class="id">contents</span></span></a> <span class="id" title="notation">:</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span> <a id="size:6" class="idref" href="#size:6"><span class="id" title="binder"><span id="size:11" class="id">size</span></span></a><span class="id" title="notation">:</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><br/>
 &nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tptr</span> <span class="id" title="definition">tuint</span><span class="id" title="notation">,</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">PROP</span>  <span class="id" title="notation">(</span><span class="id" title="definition">readable_share</span> <a class="idref" href="Verif_sumarray.html#sh:4"><span class="id" title="variable">sh</span></a><span class="id" title="notation">;</span> 0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_sumarray.html#size:6"><span class="id" title="variable">size</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">Int.max_signed</span><span class="id" title="notation">;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#Forall"><span class="id" title="inductive">Forall</span></a> (<span class="id" title="keyword">fun</span> <a id="x:7" class="idref" href="#x:7"><span class="id" title="binder">x</span></a> ⇒ 0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_sumarray.html#x:7"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">Int.max_unsigned</span>) <a class="idref" href="Verif_sumarray.html#contents:5"><span class="id" title="variable">contents</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">PROP</span>  <span class="id" title="notation">(</span><span class="id" title="definition">readable_share</span> <a class="idref" href="Verif_sumarray.html#sh:4"><span class="id" title="variable">sh</span></a><span class="id" title="notation">;</span> 0 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_sumarray.html#size:6"><span class="id" title="variable">size</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">Int.max_signed</span><span class="id" title="notation">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#Forall"><span class="id" title="inductive">Forall</span></a> (<span class="id" title="keyword">fun</span> <a id="x:7" class="idref" href="#x:7"><span class="id" title="binder">x</span></a> ⇒ 0 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_sumarray.html#x:7"><span class="id" title="variable">x</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="definition">Int.max_unsigned</span>) <a class="idref" href="Verif_sumarray.html#contents:5"><span class="id" title="variable">contents</span></a><span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;<span class="id" title="notation">PARAMS</span> <span class="id" title="notation">(</span><a class="idref" href="Verif_sumarray.html#a:3"><span class="id" title="variable">a</span></a><span class="id" title="notation">;</span> <span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_sumarray.html#size:6"><span class="id" title="variable">size</span></a>)<span class="id" title="notation">)</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">SEP</span>   <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <a class="idref" href="Verif_sumarray.html#sh:4"><span class="id" title="variable">sh</span></a> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tuint</span> <a class="idref" href="Verif_sumarray.html#size:6"><span class="id" title="variable">size</span></a>) (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="constructor">Vint</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_sumarray.html#contents:5"><span class="id" title="variable">contents</span></a>)) <a class="idref" href="Verif_sumarray.html#a:3"><span class="id" title="variable">a</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">SEP</span>   <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <a class="idref" href="Verif_sumarray.html#sh:4"><span class="id" title="variable">sh</span></a> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tuint</span> <a class="idref" href="Verif_sumarray.html#size:6"><span class="id" title="variable">size</span></a>) (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="constructor">Vint</span> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_sumarray.html#contents:5"><span class="id" title="variable">contents</span></a>)) <a class="idref" href="Verif_sumarray.html#a:3"><span class="id" title="variable">a</span></a><span class="id" title="notation">)</span><br/>
 &nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tuint</span> <span class="id" title="notation">]</span><br/>
 &nbsp;&nbsp;<span class="id" title="notation">PROP</span> <span class="id" title="notation">()</span> <span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> (<a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> <a class="idref" href="Verif_sumarray.html#contents:10"><span class="id" title="variable">contents</span></a>))<span class="id" title="notation">)</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <a class="idref" href="Verif_sumarray.html#sh:9"><span class="id" title="variable">sh</span></a> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tuint</span> <a class="idref" href="Verif_sumarray.html#size:11"><span class="id" title="variable">size</span></a>) (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="constructor">Vint</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_sumarray.html#contents:10"><span class="id" title="variable">contents</span></a>)) <a class="idref" href="Verif_sumarray.html#a:8"><span class="id" title="variable">a</span></a><span class="id" title="notation">)</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <a class="idref" href="Verif_sumarray.html#sh:9"><span class="id" title="variable">sh</span></a> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tuint</span> <a class="idref" href="Verif_sumarray.html#size:11"><span class="id" title="variable">size</span></a>) (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="constructor">Vint</span> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_sumarray.html#contents:10"><span class="id" title="variable">contents</span></a>)) <a class="idref" href="Verif_sumarray.html#a:8"><span class="id" title="variable">a</span></a><span class="id" title="notation">)</span>.<br/>
 </div>
 
 <div class="doc">
@@ -283,14 +283,14 @@ This <span class="inlinecode"><span class="id" title="var">DECLARE</span></span>
  a function-specification.  The identifier <span class="inlinecode"><span class="id" title="var">_sumarray</span></span> comes directly
  from the C program, as parsed by <span class="inlinecode"><span class="id" title="var">clightgen</span></span>.  If you are curious,
  you can look in <span class="inlinecode"><span class="id" title="var">sumarray.v</span></span>  (the output of <span class="inlinecode"><span class="id" title="var">clightgen</span></span>) for
- <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> <span class="inlinecode"><span class="id" title="var">_sumarray</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">...</span>.  Later in <span class="inlinecode"><span class="id" title="var">sumarray.v</span></span>, you can see 
+ <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> <span class="inlinecode"><span class="id" title="var">_sumarray</span></span> <span class="inlinecode">:=</span> <span class="inlinecode">...</span>.  Later in <span class="inlinecode"><span class="id" title="var">sumarray.v</span></span>, you can see
  <span class="inlinecode"><span class="id" title="keyword">Definition</span></span> <span class="inlinecode"><span class="id" title="var">f_sumarray</span></span> that is the C-language function body (represented
  as a syntax tree).
 
 <div class="paragraph"> </div>
 
   A function is specified by its <i>precondition</i> and its
-  <i>postcondition</i>.  The <span class="inlinecode"><span class="id" title="var">WITH</span></span> clause quantifies over Coq values that
+  <i>postcondition</i>.  The <span class="inlinecode"><span class="id" title="var">WITH</span></span> clause quantifies over Rocq values that
   may appear in both the precondition and the postcondition. The
   precondition has access to the function parameters
   (in this case <span class="inlinecode"><span class="id" title="var">a</span></span> and <span class="inlinecode"><span class="id" title="var">size</span></span>) and the postcondition has access
@@ -301,7 +301,7 @@ This <span class="inlinecode"><span class="id" title="var">DECLARE</span></span>
   Function preconditions, postconditions, and loop invariants are
   <i>assertions</i> about the state of variables and memory at a particular
   program point.  In an assertion <span class="inlinecode"><span class="id" title="var">PROP</span>(<span class="id" title="var">P</span>)</span> <span class="inlinecode"><span class="id" title="var">LOCAL</span>(<span class="id" title="var">Q</span>)</span> <span class="inlinecode"><span class="id" title="var">SEP</span>(<span class="id" title="var">R</span>)</span>, the
-  propositions in the sequence <span class="inlinecode"><span class="id" title="var">P</span></span> are all of Coq type <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.  They
+  propositions in the sequence <span class="inlinecode"><span class="id" title="var">P</span></span> are all of Rocq type <span class="inlinecode"><span class="id" title="keyword">Prop</span></span>.  They
   describe things that are true independent of program state.  In the
   precondition above, the statement <span class="inlinecode">0</span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">size</span></span> <span class="inlinecode">≤</span> <span class="inlinecode"><span class="id" title="var">Int.max_signed</span></span> is
   true <i>just within the scope of the quantification of the variable</i>
@@ -335,7 +335,7 @@ This <span class="inlinecode"><span class="id" title="var">DECLARE</span></span>
   type is defined by CompCert as, 
 </div>
 <div class="code">
-<span class="id" title="keyword">Print</span> <span class="id" title="inductive">val</span>.<br/>
+<span class="id" title="keyword">Print</span> <span class="id" title="var">val</span>.<br/>
 <span class="comment">(*<br/>
 &nbsp;Inductive&nbsp;val:&nbsp;Type&nbsp;:=<br/>
 &nbsp;|&nbsp;Vundef:&nbsp;val<br/>
@@ -397,11 +397,11 @@ In an assertion <span class="inlinecode"><span class="id" title="var">PROP</span
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a id="main_spec" class="idref" href="#main_spec"><span class="id" title="definition">main_spec</span></a> :=<br/>
 &nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_main</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:13" class="idref" href="#gv:13"><span class="id" title="binder">gv</span></a> <span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
-&nbsp;&nbsp;<span class="id" title="notation">PRE</span>  <span class="id" title="notation">[]</span> <span class="id" title="definition">main_pre</span> <span class="id" title="definition">prog</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="Verif_sumarray.html#gv:12"><span class="id" title="variable">gv</span></a><br/>
-&nbsp;&nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span>  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span><span class="id" title="notation">()</span> <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> (1<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>2<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>3<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>4))<span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:12" class="idref" href="#gv:12"><span class="id" title="binder"><span id="gv:13" class="id">gv</span></span></a> <span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
+&nbsp;&nbsp;<span class="id" title="notation">PRE</span>  <span class="id" title="notation">[]</span> <span class="id" title="definition">main_pre</span> <span class="id" title="definition">prog</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="Verif_sumarray.html#gv:12"><span class="id" title="variable">gv</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span><span class="id" title="notation">()</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> (1<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>2<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>3<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>4))<span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span><span class="id" title="notation">(</span><span class="id" title="method">TT</span><span class="id" title="notation">)</span>.<br/>
 </div>
 
@@ -466,7 +466,7 @@ The first step is easy:
 <div class="code">
 
 <span class="comment">(*&nbsp;Packaging&nbsp;the&nbsp;API&nbsp;specs&nbsp;all&nbsp;together.&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="Gprog" class="idref" href="#Gprog"><span class="id" title="definition">Gprog</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="Verif_sumarray.html#sumarray_spec"><span class="id" title="definition">sumarray_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_sumarray.html#main_spec"><span class="id" title="definition">main_spec</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Gprog" class="idref" href="#Gprog"><span class="id" title="definition">Gprog</span></a> := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="Verif_sumarray.html#sumarray_spec"><span class="id" title="definition">sumarray_spec</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="Verif_sumarray.html#main_spec"><span class="id" title="definition">main_spec</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -481,9 +481,9 @@ What's in <span class="inlinecode"><span class="id" title="var">Gprog</span></sp
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Print</span> <a class="idref" href="Verif_sumarray.html#Vprog"><span class="id" title="definition">Vprog</span></a>.<br/>
+<span class="id" title="keyword">Print</span> <span class="id" title="var">Vprog</span>.<br/>
 <span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;<span class="inlinecode">(<span class="id" title="var">_four</span>,</span> <span class="inlinecode"><span class="id" title="var">tarray</span></span> <span class="inlinecode"><span class="id" title="var">tuint</span></span> <span class="inlinecode">4)</span>&nbsp;&nbsp;:&nbsp;varspecs&nbsp;*)</span><br/>
-<span class="id" title="keyword">Print</span> <span class="id" title="definition">varspecs</span>.<br/>
+<span class="id" title="keyword">Print</span> <span class="id" title="var">varspecs</span>.<br/>
 <span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;list&nbsp;(ident&nbsp;*&nbsp;type)&nbsp;*)</span><br/>
 </div>
 
@@ -522,7 +522,7 @@ Here, <span class="inlinecode"><span class="id" title="var">f_sumarray</span></s
 
 <div class="doc">
 If you are reading this as a static document, you should consider
- switching to your favorite Coq development environment, in which you 
+ switching to your favorite Rocq development environment, in which you
  can step through the rest of this chapter, tactic by tactic, and examine
  the proof state at each point. 
 <div class="paragraph"> </div>
@@ -583,9 +583,9 @@ Some of the assumptions you now see above the line are,
 
 <div class="paragraph"> </div>
 
-  We do Hoare logic proof by forward symbolic execution.  At the beginning 
+  We do Hoare logic proof by forward symbolic execution.  At the beginning
   of this function body, our proof goal is a Hoare triple about the statement
-  <span class="inlinecode">(<span class="id" title="var">i</span>=0;</span> <span class="inlinecode">...<span class="id" title="var">more</span></span> <span class="inlinecode"><span class="id" title="var">commands</span>...)</span>. In a forward Hoare logic proof of 
+  <span class="inlinecode">(<span class="id" title="var">i</span>=0;</span> <span class="inlinecode">...<span class="id" title="var">more</span></span> <span class="inlinecode"><span class="id" title="var">commands</span>...)</span>. In a forward Hoare logic proof of
   <span class="inlinecode">{<span class="id" title="var">P</span>}(<span class="id" title="var">i</span>=0;...<span class="id" title="var">more</span>...){<span class="id" title="var">R</span>}</span> we might first apply the sequence rule,
 <pre>
     {P}(i=0;){Q}  {Q}(...more...){R}
@@ -624,7 +624,7 @@ Look at the precondition of the current proof goal, that is, the
   When doing forward symbolic execution (forward Floyd/Hoare proof)
   through a large function, you don't usually want to see the entire
   function-body in your proof subgoal.  Therefore the system abbreviates
-  some things for you, using the magic of Coq's implicit arguments. 
+  some things for you, using the magic of Rocq's implicit arguments. 
 </div>
 <div class="code">
 
@@ -717,13 +717,13 @@ The <span class="inlinecode"><span class="id" title="var">forward</span></span> 
 </div>
 <div class="code">
 <span class="id" title="var">forward_while</span><br/>
-&nbsp;(<span class="id" title="notation">EX</span> <a id="i:15" class="idref" href="#i:15"><span class="id" title="binder">i</span></a>: <a class="idref" href="http://coq.inria.fr/library//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span><br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span>  <span class="id" title="notation">(</span>0 <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_sumarray.html#i:14"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="var">size</span><span class="id" title="notation">)</span><br/>
+&nbsp;(<span class="id" title="notation">EX</span> <a id="i:14" class="idref" href="#i:14"><span class="id" title="binder"><span id="i:15" class="id">i</span></span></a>: <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a><span class="id" title="notation">,</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span>  <span class="id" title="notation">(</span>0 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <a class="idref" href="Verif_sumarray.html#i:14"><span class="id" title="variable">i</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#6f909ea2391c6073ff1047e870dd64e<sub>2</sub>"><span class="id" title="notation">≤</span></a> <span class="id" title="var">size</span><span class="id" title="notation">)</span><br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="notation">LOCAL</span> <span class="id" title="notation">(</span><span class="id" title="constructor">temp</span> <span class="id" title="definition">_a</span> <span class="id" title="var">a</span><span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="constructor">temp</span> <span class="id" title="definition">_i</span> (<span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> <a class="idref" href="Verif_sumarray.html#i:14"><span class="id" title="variable">i</span></a>))<span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="constructor">temp</span> <span class="id" title="definition">_n</span> (<span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> <span class="id" title="var">size</span>))<span class="id" title="notation">;</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="constructor">temp</span> <span class="id" title="definition">_s</span> (<span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> (<a class="idref" href="Verif_sumarray.html#sum_Z"><span class="id" title="definition">sum_Z</span></a> (<span class="id" title="definition">sublist</span> 0 <a class="idref" href="Verif_sumarray.html#i:14"><span class="id" title="variable">i</span></a> <span class="id" title="var">contents</span>))))<span class="id" title="notation">)</span><br/>
-&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span>   <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <span class="id" title="var">sh</span> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tuint</span> <span class="id" title="var">size</span>) (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="constructor">Vint</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Int.repr</span> <span class="id" title="var">contents</span>)) <span class="id" title="var">a</span><span class="id" title="notation">)</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span>   <span class="id" title="notation">(</span><span class="id" title="definition">data_at</span> <span class="id" title="var">sh</span> (<span class="id" title="definition">tarray</span> <span class="id" title="definition">tuint</span> <span class="id" title="var">size</span>) (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="constructor">Vint</span> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Lists.ListDef.html#map"><span class="id" title="definition">map</span></a> <span class="id" title="definition">Int.repr</span> <span class="id" title="var">contents</span>)) <span class="id" title="var">a</span><span class="id" title="notation">)</span>).<br/>
 </div>
 
 <div class="doc">
@@ -756,7 +756,7 @@ The first subgoal is to prove
 
 <div class="paragraph"> </div>
 
-  This proof goal is an <i>entailment</i>,  <span class="inlinecode"><span class="id" title="var">ENTAIL</span></span> <span class="inlinecode"><span class="id" title="var">Delta</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="nowrap">&vert;--</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>,  meaning 
+  This proof goal is an <i>entailment</i>,  <span class="inlinecode"><span class="id" title="var">ENTAIL</span></span> <span class="inlinecode"><span class="id" title="var">Delta</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="nowrap">&vert;--</span></span> <span class="inlinecode"><span class="id" title="var">Q</span></span>,  meaning
   "in context <span class="inlinecode"><span class="id" title="var">Delta</span></span>, any state that satisfies <span class="inlinecode"><span class="id" title="var">P</span></span> will also satisfy <span class="inlinecode"><span class="id" title="var">Q</span></span>."
 
 <div class="paragraph"> </div>
@@ -764,7 +764,7 @@ The first subgoal is to prove
   In this case, the right-hand-side of this entailment is existentially
   quantified; it says: there exists a value <span class="inlinecode"><span class="id" title="var">i</span></span> such that (among other things)
   <span class="inlinecode"><span class="id" title="var">temp</span></span> <span class="inlinecode"><span class="id" title="var">_i</span></span> <span class="inlinecode">(<span class="id" title="var">Vint</span></span> <span class="inlinecode">(<span class="id" title="var">Int.repr</span></span> <span class="inlinecode"><span class="id" title="var">i</span>))</span>, that is, the C variable <span class="inlinecode"><span class="id" title="var">_i</span></span> contains the
-  value <span class="inlinecode"><span class="id" title="var">i</span></span>.  But the left-hand-side of the entailment says 
+  value <span class="inlinecode"><span class="id" title="var">i</span></span>.  But the left-hand-side of the entailment says
   <span class="inlinecode"><span class="id" title="var">temp</span></span> <span class="inlinecode"><span class="id" title="var">_i</span></span> <span class="inlinecode">(<span class="id" title="var">Vint</span></span> <span class="inlinecode">(<span class="id" title="var">Int.repr</span></span> <span class="inlinecode">0))</span>, that is, the C variable <span class="inlinecode"><span class="id" title="var">_i</span></span> contains 0.
 
 <div class="paragraph"> </div>
@@ -774,12 +774,12 @@ The first subgoal is to prove
 <div class="code">
 
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Nested</span> <span class="id" title="var">Proofs</span> <span class="id" title="var">Allowed</span>.<br/>
-<span class="id" title="keyword">Goal</span> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">∀</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="f:16" class="idref" href="#f:16"><span class="id" title="binder">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">→</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="x:17" class="idref" href="#x:17"><span class="id" title="binder">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">),</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)=0</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">→</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">∃</span></a> <a id="i:18" class="idref" href="#i:18"><span class="id" title="binder">i</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">,</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)=</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">i</span></a>.<br/>
+<span class="id" title="keyword">Goal</span> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">∀</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="binder, definition"><span id="f:16" class="id">f</span></span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">→</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="binder, definition"><span id="x:17" class="id">x</span></span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">),</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)=0</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">→</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">∃</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="binder, definition"><span id="i:18" class="id">i</span></span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">:</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">Z</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">,</span></a> <a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">f</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">(</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">x</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">)=</span></a><a id="Unnamed_thm" class="idref" href="#Unnamed_thm"><span class="id" title="definition">i</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
 </div>
 
 <div class="doc">
-To prove such a goal, one uses Coq's "exists" tactic to
+To prove such a goal, one uses Rocq's "exists" tactic to
  demonstrate a value for <span class="inlinecode"><span class="id" title="var">i</span></span>: 
 </div>
 <div class="code">
@@ -912,7 +912,7 @@ The third subgoal of <span class="inlinecode"><span class="id" title="var">forwa
 </div>
 <div class="code">
 
-<span class="id" title="var">assert_PROP</span> (<a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <span class="id" title="var">contents</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">size</span>). {<br/>
+<span class="id" title="var">assert_PROP</span> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.Zcomplements.html#Zlength"><span class="id" title="definition">Zlength</span></a> <span class="id" title="var">contents</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">size</span>). {<br/>
 <br/>
 </div>
 
@@ -983,7 +983,7 @@ SEE ALSO: VC.pdf Chapter 18 (<i>At the end of the loop body</i>)
    postcondition of the loop body) entails the loop invariant. 
 </div>
 <div class="code">
-&nbsp;<span class="id" title="var">Exists</span> (<span class="id" title="var">i</span><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1).<br/>
+&nbsp;<span class="id" title="var">Exists</span> (<span class="id" title="var">i</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1).<br/>
 &nbsp;<span class="id" title="var">entailer</span>!.<br/>
 &nbsp;<span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">f_equal</span>.<br/>
 </div>
@@ -1005,13 +1005,13 @@ Here the proof goal is,
  
 </div>
 <div class="code">
-&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="lemma">sublist_split</span> 0 <span class="id" title="var">i</span> (<span class="id" title="var">i</span><a class="idref" href="http://coq.inria.fr/library//Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1)) <span class="id" title="tactic">by</span> <span class="id" title="var">lia</span>.<br/>
+&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="lemma">sublist_split</span> 0 <span class="id" title="var">i</span> (<span class="id" title="var">i</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a"><span class="id" title="notation">+</span></a>1)) <span class="id" title="tactic">by</span> <span class="id" title="var">lia</span>.<br/>
 &nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="Verif_sumarray.html#sum_Z_app"><span class="id" title="lemma">sum_Z_app</span></a>. <span class="id" title="tactic">rewrite</span> (<span class="id" title="lemma">sublist_one</span> <span class="id" title="var">i</span>) <span class="id" title="tactic">by</span> <span class="id" title="var">lia</span>.<br/>
 &nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="var">lia</span>.<br/>
 </div>
 
 <div class="doc">
-After the loop, our precondition is the conjunction of the loop 
+After the loop, our precondition is the conjunction of the loop
     invariant and the negation of the loop test.  
 <div class="paragraph"> </div>
 
@@ -1056,7 +1056,7 @@ Here we prove that the postcondition of the function body
 </div>
 <div class="code">
 <span class="comment">(*&nbsp;Contents&nbsp;of&nbsp;the&nbsp;extern&nbsp;global&nbsp;initialized&nbsp;array&nbsp;"_four"&nbsp;*)</span><br/>
-<span class="id" title="keyword">Definition</span> <a id="four_contents" class="idref" href="#four_contents"><span class="id" title="definition">four_contents</span></a> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a>1<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 2<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 3<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 4<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="four_contents" class="idref" href="#four_contents"><span class="id" title="definition">four_contents</span></a> := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a>1<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 2<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 3<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> 4<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="body_main" class="idref" href="#body_main"><span class="id" title="lemma">body_main</span></a>:  <span class="id" title="definition">semax_body</span> <a class="idref" href="Verif_sumarray.html#Vprog"><span class="id" title="definition">Vprog</span></a> <a class="idref" href="Verif_sumarray.html#Gprog"><span class="id" title="definition">Gprog</span></a> <span class="id" title="definition">f_main</span> <a class="idref" href="Verif_sumarray.html#main_spec"><span class="id" title="definition">main_spec</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">start_function</span>.<br/>
@@ -1103,7 +1103,7 @@ C programs may have extern global variables, either with
 </div>
 <div class="code">
 <span class="id" title="var">forward_call</span> <span class="comment">(*&nbsp;&nbsp;s&nbsp;=&nbsp;sumarray(four,4);&nbsp;*)</span><br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">gv</span> <span class="id" title="definition">_four</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="definition">Ews</span><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="Verif_sumarray.html#four_contents"><span class="id" title="definition">four_contents</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> 4<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">gv</span> <span class="id" title="definition">_four</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="definition">Ews</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="Verif_sumarray.html#four_contents"><span class="id" title="definition">four_contents</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> 4<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -1141,7 +1141,7 @@ Now we are after the function-call, and we can go forward through
 </div>
 <div class="code">
 
-#[<span class="id" title="var">export</span>] <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">NullExtension.Espec</span>.<br/>
+#[<span class="id" title="var">export</span>] <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="definition">NullExtension.Espec</span>.<br/>
 </div>
 
 <div class="doc">
@@ -1158,7 +1158,7 @@ This is a <i>typeclass instance</i>.  If you're not familiar with typeclasses,
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="prog_correct" class="idref" href="#prog_correct"><span class="id" title="lemma">prog_correct</span></a>: <span class="id" title="definition">semax_prog</span> <span class="id" title="definition">prog</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="Verif_sumarray.html#Vprog"><span class="id" title="definition">Vprog</span></a> <a class="idref" href="Verif_sumarray.html#Gprog"><span class="id" title="definition">Gprog</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="prog_correct" class="idref" href="#prog_correct"><span class="id" title="lemma">prog_correct</span></a>: <span class="id" title="definition">semax_prog</span> <span class="id" title="definition">prog</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="Verif_sumarray.html#Vprog"><span class="id" title="definition">Vprog</span></a> <a class="idref" href="Verif_sumarray.html#Gprog"><span class="id" title="definition">Gprog</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="id" title="var">prove_semax_prog</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="var">semax_func_cons</span> <a class="idref" href="Verif_sumarray.html#body_sumarray"><span class="id" title="lemma">body_sumarray</span></a>.<br/>
@@ -1175,12 +1175,12 @@ This is a <i>typeclass instance</i>.  If you're not familiar with typeclasses,
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:34&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:38&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

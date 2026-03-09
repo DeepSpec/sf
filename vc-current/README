@@ -2,7 +2,7 @@
                            SOFTWARE FOUNDATIONS
 #########################################################################
 
-This directory contains both Coq scripts (.v files) and more readable
+This directory contains both Rocq scripts (.v files) and more readable
 HTML files for Verifiable C, by Andrew W. Appel et al.,
 volume [VC] of the Software Foundations series.
 
@@ -13,7 +13,7 @@ volume [VC] of the Software Foundations series.
   - index.html
     The book's cover page and navigation starting point
 
-  - deps.html 
+  - deps.html
     Overview of the ordering of chapters
 
   - LICENSE
