@@ -11,10 +11,10 @@
 (** * A Broken Evaluator *)
 
 From Coq Require Import Lia.
-From Coq Require Import Arith.Arith.
-From Coq Require Import Arith.PeanoNat.
+From Coq Require Import Arith.
+From Coq Require Import PeanoNat.
 Import Nat.
-From Coq Require Import Arith.EqNat.
+From Coq Require Import EqNat.
 From LF Require Import Imp Maps.
 
 (** Here was our first try at an evaluation function for commands,

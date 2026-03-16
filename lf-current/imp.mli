@@ -37,6 +37,13 @@ type n =
 
 module Pos :
  sig
+  val iter_op : ('a1 -> 'a1 -> 'a1) -> positive -> 'a1 -> 'a1
+
+  val to_nat : positive -> int
+ end
+
+module Coq_Pos :
+ sig
   val succ : positive -> positive
 
   val add : positive -> positive -> positive
@@ -44,10 +51,6 @@ module Pos :
   val add_carry : positive -> positive -> positive
 
   val mul : positive -> positive -> positive
-
-  val iter_op : ('a1 -> 'a1 -> 'a1) -> positive -> 'a1 -> 'a1
-
-  val to_nat : positive -> int
  end
 
 module N :
@@ -59,9 +62,9 @@ module N :
   val to_nat : n -> int
  end
 
-val rev : 'a1 list -> 'a1 list
-
 val map : ('a1 -> 'a2) -> 'a1 list -> 'a2 list
+
+val rev : 'a1 list -> 'a1 list
 
 val fold_left : ('a1 -> 'a2 -> 'a1) -> 'a2 list -> 'a1 -> 'a1
 

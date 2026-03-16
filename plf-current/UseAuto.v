@@ -26,7 +26,7 @@
     from the library [LibTactics.v], which is presented in the chapter
     [UseTactics]. *)
 
-From Coq Require Import Arith.Arith.
+From Coq Require Import Arith.
 
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
@@ -34,7 +34,7 @@ From PLF Require Import LibTactics.
 From PLF Require Stlc.
 From PLF Require Imp.
 
-From Coq Require Import Lists.List.
+From Coq Require Import List.
 
 
 (* ################################################################# *)

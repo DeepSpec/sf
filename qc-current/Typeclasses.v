@@ -1,8 +1,8 @@
 (** * Typeclasses: A Tutorial on Typeclasses in Coq *)
 
-From Coq Require Import Bool.Bool.
+From Coq Require Import Bool.
 From Coq Require Import Strings.String.
-From Coq Require Import Arith.Arith.
+From Coq Require Import Arith.
 From Coq Require Import Lia.
 Require Import List. Import ListNotations.
 Local Open Scope string.
