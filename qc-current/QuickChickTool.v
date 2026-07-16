@@ -126,7 +126,7 @@ Inductive exp : Type :=
 (** Since [exp] is a simple datatype, QuickChick can derive a generator, a
     shrinker, and a printer automatically. *)
 
-Derive (Arbitrary, Show) for exp.
+QCDerive (Arbitrary, Show) for exp.
 
 (** The [eval] function evaluates an expression to a number. *)
 Fixpoint eval (e : exp) : nat :=
