@@ -749,7 +749,6 @@ Lemma substitution_preserves_typing : forall Gamma x U t v T,
    empty |-- v \in U   ->
    Gamma |-- [x:=v]t \in T.
 Proof.
-Proof.
   intros Gamma x U t v T Ht Hv.
   remember (x |-> U; Gamma) as Gamma'.
   generalize dependent Gamma.
