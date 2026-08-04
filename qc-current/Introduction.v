@@ -4,7 +4,7 @@ Set Warnings "-extraction-opaque-accessed,-extraction".
 Set Warnings "-notation-overridden,-parsing".
 
 From QuickChick Require Import QuickChick.
-Require Import List ZArith. Import ListNotations.
+From Stdlib Require Import List ZArith. Import ListNotations.
 
 (* ################################################################# *)
 (** * A First Taste of Testing *)
@@ -103,7 +103,7 @@ Fixpoint insert x l :=
     - _shrinkers_, which are used to minimize counterexamples. *)
 
 (** We will delve into each of these in detail later on, but first we
-    need to make a digression to explain Coq's support for
+    need to make a digression to explain Rocq's support for
     _typeclasses_, which QuickChick uses extensively both internally
     and in its programmatic interface to users.  This is the
     [Typeclasses] chapter.
@@ -124,4 +124,4 @@ Fixpoint insert x l :=
     Finally, the [Postscript] chapter gives some suggestions for
     further reading. *)
 
-(* 2024-12-27 01:36 *)
+(* 2026-01-07 13:37 *)

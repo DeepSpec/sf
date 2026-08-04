@@ -27,7 +27,7 @@
           - proof objects *)
 
 (**
-     - _Coq_, an industrial-strength proof assistant
+     - _Rocq_, an industrial-strength proof assistant
           - functional core language
           - core tactics
           - automation
@@ -53,7 +53,7 @@
          that you may find useful.  Take a look at the table of contents and the chapter dependency diagram to find
          them.
 
-       - For questions about Coq, the [#coq] area of Stack
+       - For questions about Rocq, the [#coq] area of Stack
          Overflow ({https://stackoverflow.com/questions/tagged/coq})
          is an excellent community resource.
 
@@ -65,7 +65,7 @@
             - ...and many other excellent books on Haskell, OCaml,
               Scheme, Racket, Scala, F sharp, etc., etc.
 
-       - And some further resources for Coq:
+       - And some further resources for Rocq:
            - Certified Programming with Dependent Types, by Adam
              Chlipala [Chlipala 2013] (in Bib.v).
            - Interactive Theorem Proving and Program Development:
@@ -76,10 +76,10 @@
          verification to critical software, see the Postscript chapter
          of _Programming Language Foundations_.
 
-       - For applications of Coq in building verified systems, the
+       - For applications of Rocq in building verified systems, the
          lectures and course materials for the 2017 DeepSpec Summer
          School are a great resource.
          {https://deepspec.org/event/dsss17/index.html}
 *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

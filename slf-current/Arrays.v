@@ -639,7 +639,7 @@ Definition vals_int (L:list int) : list val :=
 
 (** To ease the reasoning about [vals_int], we add the rewriting rules, stated
     below, to the tactics [rew_list] and [rew_listx]. These tactics perform
-    normalization by means of Coq's [autorewrite] tactic. In an ideal world, we
+    normalization by means of Rocq's [autorewrite] tactic. In an ideal world, we
     would use a single tactic [rew_list] to handle all rewriting rules related
     to lists. Unfortunately, [autorewrite] is undesirably slow when handling a
     large the data base of rewriting rules. The TLC library therefore relies on
@@ -767,7 +767,7 @@ Module Realization.
 Definition hheader (n:int) (p:loc) : hprop :=
   p ~~> (val_int n).
 
-(** Because Coq's [fold] operation rarely applys as the user expects, we state a
+(** Because Rocq's [fold] operation rarely applys as the user expects, we state a
     lemma that reformulates the definition of [hheader] as an equality.
     Performing a [rewrite] using this lemma corresponds either to an [unfold] or
     to a [fold] operation, depending on the direction. More generally,
@@ -1177,7 +1177,7 @@ Global Transparent hheader.
 #[local] Hint Extern 1 (_ >= _) => math : triple.
 
 (** Moreover, we customize the behavior of the "*" suffix that appears in next
-    to Coq tactics, for this symbol to trigger not a call to [eauto] but instead
+    to Rocq tactics, for this symbol to trigger not a call to [eauto] but instead
     a call to [eauto with maths]. *)
 
 Local Ltac auto_star ::= eauto with maths.
@@ -1548,4 +1548,4 @@ Qed.
 
 End Pivot.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

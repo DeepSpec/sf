@@ -167,9 +167,9 @@ Although the <i>implementation</i> of this module uses the StackAPD,
    maxium integer, so that the triangular number does not overflow. 
 </div>
 <div class="code">
-<span class="id" title="keyword">Definition</span> <a id="triang_spec" class="idref" href="#triang_spec"><span class="id" title="definition">triang_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="triang_spec" class="idref" href="#triang_spec"><span class="id" title="definition">triang_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> :=<br/>
 &nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_triang</span><br/>
-&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:3" class="idref" href="#gv:3"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span> <span class="comment">(*...&nbsp;more&nbsp;WITH&nbsp;variables...&nbsp;*)</span><br/>
+&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:3" class="idref" href="#gv:3"><span class="id" title="binder"><span id="gv:4" class="id">gv</span></span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span> <span class="comment">(*...&nbsp;more&nbsp;WITH&nbsp;variables...&nbsp;*)</span><br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 &nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
@@ -180,8 +180,8 @@ Although the <i>implementation</i> of this module uses the StackAPD,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PARAMS</span><span class="id" title="notation">(</span> <br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">)</span> <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">GLOBALS</span><span class="id" title="notation">(</span><a class="idref" href="Spec_triang.html#gv:2"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span> <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="Spec_triang.html#TriangASI.M"><span class="id" title="variable">M</span></a> <a class="idref" href="Spec_triang.html#gv:2"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">GLOBALS</span><span class="id" title="notation">(</span><a class="idref" href="Spec_triang.html#gv:3"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="Spec_triang.html#TriangASI.M"><span class="id" title="variable">M</span></a> <a class="idref" href="Spec_triang.html#gv:3"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span><br/>
 &nbsp;<span class="id" title="notation">POST</span> <span class="id" title="notation">[</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Suggestion:&nbsp;this&nbsp;postcondition&nbsp;does&nbsp;not&nbsp;need&nbsp;an&nbsp;EX,&nbsp;but&nbsp;you&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;may&nbsp;add&nbsp;one&nbsp;if&nbsp;you&nbsp;wish&nbsp;to.&nbsp;*)</span><br/>
@@ -191,7 +191,7 @@ Although the <i>implementation</i> of this module uses the StackAPD,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">)</span> <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="Spec_triang.html#TriangASI.M"><span class="id" title="variable">M</span></a> <a class="idref" href="Spec_triang.html#gv:3"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">SEP</span> <span class="id" title="notation">(</span><a class="idref" href="Spec_stdlib.html#mem_mgr"><span class="id" title="projection">mem_mgr</span></a> <a class="idref" href="Spec_triang.html#TriangASI.M"><span class="id" title="variable">M</span></a> <a class="idref" href="Spec_triang.html#gv:4"><span class="id" title="variable">gv</span></a><span class="id" title="notation">)</span>.<br/>
 </div>
 
 <div class="doc">
@@ -218,7 +218,7 @@ If you don't get this quite right, you will notice it either when
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="TriangASI" class="idref" href="#TriangASI"><span class="id" title="definition">TriangASI</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a>  <a class="idref" href="Spec_triang.html#triang_spec"><span class="id" title="definition">triang_spec</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="TriangASI" class="idref" href="#TriangASI"><span class="id" title="definition">TriangASI</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a>  <a class="idref" href="Spec_triang.html#triang_spec"><span class="id" title="definition">triang_spec</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">End</span> <a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="section">TriangASI</span></a>.<br/>
 </div>
 
@@ -235,12 +235,12 @@ And remember that StackASI is parameterized by the Variables of the Section:
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:34&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-01-06&nbsp;14:19&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

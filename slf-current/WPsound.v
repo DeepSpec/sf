@@ -139,7 +139,7 @@ Lemma wpgen_let_sound : forall F1 F2of x t1 t2,
   (forall v, formula_sound (subst x v t2) (F2of v)) ->
   formula_sound (trm_let x t1 t2) (wpgen_let F1 F2of).
 Proof using.
-  introv S1 S2. intros Q. unfolds wpgen_let. applys himpl_trans wp_let.
+  introv S1 S2. intros Q. unfolds wpgen_let. applys himpl_trans_r wp_let.
   applys himpl_trans S1. applys wp_conseq. intros v. applys S2.
 Qed.
 
@@ -149,7 +149,7 @@ Lemma wpgen_if_sound : forall F1 F2 t0 t1 t2,
   formula_sound (trm_if t0 t1 t2) (wpgen_if t0 F1 F2).
 Proof using.
   introv S1 S2. intros Q. unfold wpgen_if. xpull. intros b ->.
-  applys himpl_trans wp_if. case_if. { applys S1. } { applys S2. }
+  applys himpl_trans_r wp_if. case_if. { applys S1. } { applys S2. }
 Qed.
 
 Lemma wpgen_app_sound : forall t,
@@ -410,7 +410,7 @@ Implicit Types E : ctx.
 *)
 
 (** The first lemma is straightforward by induction. The TLC tactic [fequals] is
-    an enhanced variant of Coq's tactic [f_equal]. *)
+    an enhanced variant of Rocq's tactic [f_equal]. *)
 
 Lemma isubst_nil : forall t,
   isubst nil t = t.
@@ -588,4 +588,4 @@ Qed.
 
 End IsubstProp.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

@@ -13,7 +13,7 @@
       strengthening is required; and
     - more details on how to reason by case analysis. *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
+Set Warnings "-notation-overridden".
 From LF Require Export Poly.
 
 (* ################################################################# *)
@@ -54,7 +54,7 @@ Proof.
     begin with a [forall] that introduces some _universally quantified
     variables_.
 
-    When Coq matches the current goal against the conclusion of [H],
+    When Rocq matches the current goal against the conclusion of [H],
     it will try to find appropriate values for these variables.  For
     example, when we do [apply eq2] in the following proof, the
     universal variable [q] in [eq2] gets instantiated with [n], and
@@ -95,7 +95,7 @@ Proof.
 
   Fail apply H.
 
-  (** but we can use the [symmetry] tactic, which switches the left
+  (** ...but we can use the [symmetry] tactic, which switches the left
       and right sides of an equality in the goal. *)
 
   symmetry. apply H.  Qed.
@@ -137,16 +137,16 @@ Example trans_eq_example : forall (a b c d e f : nat),
      [a;b] = [e;f].
 Proof.
   intros a b c d e f eq1 eq2.
-  rewrite -> eq1. rewrite -> eq2. reflexivity.  Qed.
+  rewrite -> eq1. apply eq2. Qed.
 
 (** Since this is a common pattern, we might like to pull it out as a
     lemma that records, once and for all, the fact that equality is
     transitive. *)
 
-Theorem trans_eq : forall (X:Type) (n m o : X),
-  n = m -> m = o -> n = o.
+Theorem trans_eq : forall (X:Type) (x y z : X),
+  x = y -> y = z -> x = z.
 Proof.
-  intros X n m o eq1 eq2. rewrite -> eq1. rewrite -> eq2.
+  intros X x y z eq1 eq2. rewrite -> eq1. rewrite -> eq2.
   reflexivity.  Qed.
 
 (** Now, we should be able to use [trans_eq] to prove the above
@@ -160,22 +160,22 @@ Example trans_eq_example' : forall (a b c d e f : nat),
 Proof.
   intros a b c d e f eq1 eq2.
 
-(** If we simply tell Coq [apply trans_eq] at this point, it can
+(** If we simply tell Rocq [apply trans_eq] at this point, it can
     tell (by matching the goal against the conclusion of the lemma)
-    that it should instantiate [X] with [[nat]], [n] with [[a,b]], and
-    [o] with [[e,f]].  However, the matching process doesn't determine
-    an instantiation for [m]: we have to supply one explicitly by
-    adding "[with (m:=[c,d])]" to the invocation of [apply]. *)
+    that it should instantiate [X] with [[nat]], [x] with [[a,b]], and
+    [z] with [[e,f]].  However, the matching process doesn't determine
+    an instantiation for [y]: we have to supply one explicitly by
+    adding "[with (y:=[c,d])]" to the invocation of [apply]. *)
 
-  apply trans_eq with (m:=[c;d]).
+  apply trans_eq with (y:=[c;d]).
   apply eq1. apply eq2.   Qed.
 
-(** Actually, the name [m] in the [with] clause is not required,
-    since Coq is often smart enough to figure out which variable we
+(** Actually, the name [y] in the [with] clause is not required,
+    since Rocq is often smart enough to figure out which variable we
     are instantiating. We could instead simply write [apply trans_eq
     with [c;d]]. *)
 
-(** Coq also has a built-in tactic [transitivity] that
+(** Rocq also has a built-in tactic [transitivity] that
     accomplishes the same purpose as applying [trans_eq]. The tactic
     requires us to state the instantiation we want, just like [apply
     with] does. *)
@@ -239,11 +239,15 @@ Proof.
   rewrite H2. rewrite H1. simpl. reflexivity.
 Qed.
 
-(** This technique can be generalized to any constructor by
-    writing the equivalent of [pred] -- i.e., writing a function that
+(** Rocq's [assert] tactic, used above, adds the given hypothesis
+    to the context, but it first requires you to prove the hypothesis
+    as a new goal.
+
+    This technique for injectivity can be generalized to any constructor
+    by writing the equivalent of [pred] -- i.e., writing a function that
     "undoes" one application of the constructor.
 
-    As a more convenient alternative, Coq provides a tactic called
+    As a convenient alternative, Rocq provides a tactic called
     [injection] that allows us to exploit the injectivity of any
     constructor.  Here is an alternate proof of the above theorem
     using [injection]: *)
@@ -254,7 +258,7 @@ Theorem S_injective' : forall (n m : nat),
 Proof.
   intros n m H.
 
-(** By writing [injection H as Hmn] at this point, we are asking Coq
+(** By writing [injection H as Hmn] at this point, we are asking Rocq
     to generate all equations that it can infer from [H] using the
     injectivity of constructors (in the present example, the equation
     [n = m]). Each such equation is added as a hypothesis (called
@@ -319,9 +323,8 @@ Proof.
     that these proofs are _not_ showing that the conclusion of the
     statement holds.  Rather, they are showing that, _if_ the
     nonsensical situation described by the premise did somehow hold,
-    _then_ the nonsensical conclusion would also follow, because we'd
-    be living in an inconsistent universe where every statement is
-    true.
+    _then_ the nonsensical conclusion would too -- because we'd be
+    living in an inconsistent universe where every statement is true.
 
     We'll explore the principle of explosion in more detail in the
     next chapter. *)
@@ -350,25 +353,24 @@ Proof.
   - (* n = 0 *)
     intros H. reflexivity.
 
-(** However, the second one doesn't look so simple: assuming [0
-    =? (S n') = true], we must show [S n' = 0]!  The way forward is to
-    observe that the assumption itself is nonsensical: *)
+(** However, the second one doesn't look so simple: assuming
+    [0 =? (S n') = true], we must show [S n' = 0]!  The way forward
+    is to observe that the assumption itself is nonsensical: *)
 
   - (* n = S n' *)
     simpl.
 
-(** If we use [discriminate] on this hypothesis, Coq confirms
+(** If we use [discriminate] on this hypothesis, Rocq confirms
     that the subgoal we are working on is impossible and removes it
     from further consideration. *)
 
     intros H. discriminate H.
 Qed.
 
-(** The injectivity of constructors allows us to reason that
-    [forall (n m : nat), S n = S m -> n = m].  The converse of this
+(** The injectivity of constructors allows us to reason that [forall
+    (n m : nat), S n = S m -> n = m].  The converse of this
     implication is an instance of a more general fact about both
-    constructors and functions, which we will find convenient
-    below: *)
+    constructors and functions, which we will find useful below: *)
 
 Theorem f_equal : forall (A B : Type) (f: A -> B) (x y: A),
   x = y -> f x = f y.
@@ -383,8 +385,7 @@ Proof. intros n m H. apply f_equal. apply H. Qed.
     ... an = g b1 ... bn], the tactic [f_equal] will produce subgoals
     of the form [f = g], [a1 = b1], ..., [an = bn]. At the same time,
     any of these subgoals that are simple enough (e.g., immediately
-    provable by [reflexivity]) will be automatically discharged by
-    [f_equal]. *)
+    provable by [reflexivity]) will be automatically discharged. *)
 
 Theorem eq_implies_succ_equal' : forall (n m : nat),
   n = m -> S n = S m.
@@ -439,22 +440,21 @@ Proof.
     goal, until premises or previously proven theorems are reached.
 
     The informal proofs seen in math or computer science classes tend
-    to use forward reasoning.  By contrast, idiomatic use of Coq
+    to use forward reasoning.  By contrast, idiomatic use of Rocq
     generally favors backward reasoning, though in some situations the
     forward style can be easier to think about. *)
 
 (* ################################################################# *)
 (** * Specializing Hypotheses *)
 
-(** Another handy tactic for fiddling with hypotheses is [specialize].
+(** Another handy tactic for manipulating hypotheses is [specialize].
     It is essentially just a combination of [assert] and [apply], but
     it often provides a pleasingly smooth way to nail down overly
     general assumptions.  It works like this:
 
     If [H] is a quantified hypothesis in the current context -- i.e.,
     [H : forall (x:T), P] -- then [specialize H with (x := e)] will
-    change [H] so that it looks like [[x:=e]P], that is, [P] with [x]
-    replaced by [e].
+    change [H] so that it looks like [P] with [x] replaced by [e].
 
     For example: *)
 
@@ -464,10 +464,19 @@ Theorem specialize_example: forall n,
 Proof.
   intros n H.
   specialize H with (m := 1).
-  simpl in H.
-  rewrite add_comm in H.
-  simpl in H.
+  rewrite mult_1_l in H.
   apply H. Qed.
+
+(** **** Exercise: 3 stars, standard (nth_error_always_none) *)
+
+(** Use [specialize] to prove the the following lemma, following the
+    model of [specialize_example] above. Do not use [induction]. *)
+Lemma nth_error_always_none: forall (l : list nat),
+  (forall i, nth_error l i = None) ->
+  l = [].
+Proof.
+  (* FILL IN HERE *) Admitted.
+(** [] *)
 
 (** Using [specialize] before [apply] gives us yet another way to
     control where [apply] does its work. *)
@@ -477,11 +486,11 @@ Example trans_eq_example''' : forall (a b c d e f : nat),
      [a;b] = [e;f].
 Proof.
   intros a b c d e f eq1 eq2.
-  specialize trans_eq with (m:=[c;d]) as H.
+  specialize trans_eq with (y:=[c;d]) as H.
   apply H.
   apply eq1.
   apply eq2. Qed.
-(** Note:
+(** Things to note:
     - We can [specialize] facts in the global context, not just
       local hypotheses.
     - The [as...] clause at the end tells [specialize] how to name
@@ -491,7 +500,7 @@ Proof.
 (** * Varying the Induction Hypothesis *)
 
 (** Sometimes it is important to control the exact form of the
-    induction hypothesis when carrying out inductive proofs in Coq.
+    induction hypothesis when carrying out inductive proofs in Rocq.
     In particular, we may need to be careful about which of the
     assumptions we move (using [intros]) from the goal to the context
     before invoking the [induction] tactic.
@@ -507,7 +516,7 @@ Proof.
 
        intros n. induction n.
 
-    then all is well.  But if we begin it with introducing both
+    then all will be well.  But if we begin it with introducing _both_
     variables
 
        intros n m. induction n.
@@ -536,12 +545,12 @@ Abort.
 
 (** The problem is that, at the point where we invoke the
     induction hypothesis, we have already introduced [m] into the
-    context -- intuitively, we have told Coq, "Let's consider some
+    context -- intuitively, we have told Rocq, "Let's consider some
     particular [n] and [m]..." and we now have to prove that, if
     [double n = double m] for _these particular_ [n] and [m], then
     [n = m].
 
-    The next tactic, [induction n] says to Coq: We are going to show
+    The next tactic, [induction n] says to Rocq: We are going to show
     the goal by induction on [n].  That is, we are going to prove, for
     _all_ [n], that the proposition
 
@@ -588,7 +597,7 @@ Abort.
     prove a statement involving _every_ [n] but just a _particular_
     [m]. *)
 
-(** A successful proof of [double_injective] leaves [m] universally
+(** A successful proof of [double_injective] keeps [m] universally
     quantified in the goal statement at the point where the
     [induction] tactic is invoked on [n]: *)
 
@@ -600,7 +609,6 @@ Proof.
   - (* n = O *) simpl. intros m eq. destruct m as [| m'] eqn:E.
     + (* m = O *) reflexivity.
     + (* m = S m' *) discriminate eq.
-
   - (* n = S n' *)
 
 (** Notice that both the goal and the induction hypothesis are
@@ -613,7 +621,7 @@ Proof.
 
 (** Now we've chosen a particular [m] and introduced the assumption
     that [double n = double m].  Since we are doing a case analysis on
-    [n], we also need a case analysis on [m] to keep the two "in sync." *)
+    [n], we also need a case analysis on [m] to keep the two in sync. *)
 
     destruct m as [| m'] eqn:E.
     + (* m = O *)
@@ -638,7 +646,7 @@ Proof.
     careful, when using induction, that you are not trying to prove
     something too specific: When proving a property quantified over
     variables [n] and [m] by induction on [n], it is sometimes crucial
-    to leave [m] generic. *)
+    to leave [m] "generic." *)
 
 (** The following exercise, which further strengthens the link between
     [=?] and [=], follows the same pattern. *)
@@ -649,7 +657,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, advanced (eqb_true_informal)
+(** **** Exercise: 2 stars, advanced, optional (eqb_true_informal)
 
     Give a careful informal proof of [eqb_true], stating the induction
     hypothesis explicitly and being as explicit as possible about
@@ -694,7 +702,7 @@ Abort.
 
 (** The problem is that, to do induction on [m], we must first
     introduce [n].  (If we simply say [induction m] without
-    introducing anything first, Coq will automatically introduce [n]
+    introducing anything first, Rocq will automatically introduce [n]
     for us!)  *)
 
 (** What can we do about this?  One possibility is to rewrite the
@@ -767,6 +775,49 @@ Proof.
         allows us to conclude that [n' = m'], and it follows immediately
         that [S n' = S m'].  Since [S n' = n] and [S m' = m], this is just
         what we wanted to show. [] *)
+
+(* ################################################################# *)
+(** * Rewriting with conditional statements *)
+
+(** Suppose that we want to show that [plus] is the inverse of
+    [minus].  Since we are working with natural numbers, we need an
+    assumption to prevent [minus] from truncating its result. With
+    this assumption, the induction hypothesis becomes [forall m, n'
+    <=? m = true -> (m - n') + n' = m].  The beginning of the proof
+    uses techniques we have already seen -- in particular, notice how
+    we induct on [n] before introducing [m], so that the induction
+    hypothesis becomes sufficiently general. *)
+
+Lemma sub_add_leb : forall n m, n <=? m = true -> (m - n) + n = m.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - (* n = 0 *)
+    intros m H. rewrite add_0_r. destruct m as [| m'].
+    + (* m = 0 *)
+      reflexivity.
+    + (* m = S m' *)
+      reflexivity.
+  - (* n = S n' *)
+    intros m H. destruct m as [| m'].
+    + (* m = 0 *)
+      discriminate.
+    + (* m = S m' *)
+      simpl in H. simpl. rewrite <- plus_n_Sm.
+
+(** At this point, we need to show [S ((m' - n') + n') = S m'] from
+    the assumption [(n' <= m') = true].  We could use the [assert]
+    tactic to prove [(m' - n') + n' = m'] from the induction
+    hypothesis. However, we can also just use [rewrite] directly: if
+    we rewrite with a conditional statement of the form [P -> a = b],
+    then Rocq tries to rewrite with [a = b], and then asks us to prove
+    [P] in a new subgoal.  If the statement has more than one
+    assumption, then we get one subgoal for each assumption. *)
+
+      rewrite IHn'.
+      * reflexivity.
+      * apply H.
+Qed.
 
 (** **** Exercise: 3 stars, standard, especially useful (gen_dep_practice)
 
@@ -888,7 +939,7 @@ Qed.
     [match] hidden inside [bar] is what was preventing us from making
     progress. *)
 
-(** A more straightforward way forward is to explicitly tell Coq to
+(** A more straightforward way forward is to explicitly tell Rocq to
     unfold [bar]. *)
 
 Fact silly_fact_2' : forall m, bar m + 1 = bar (m + 1) + 1.
@@ -971,12 +1022,11 @@ Proof.
     we've chosen to include it most of the time, for the sake of
     documentation, it can often be omitted without harm.
 
-    However, when [destruct]ing compound expressions, the information
-    recorded by the [eqn:] can actually be critical: if we leave it
-    out, then [destruct] can erase information we need to complete a
-    proof.
-
-    For example, suppose we define a function [sillyfun1] like
+    One example where it _cannot_ be omitted is when we are
+    [destruct]ing compound expressions; here, the information recorded
+    by the [eqn:] can actually be critical, and, if we leave it out,
+    then [destruct] can erase information we need to complete a proof. *)
+    (** For example, suppose we define a function [sillyfun1] like
     this: *)
 
 Definition sillyfun1 (n : nat) : bool :=
@@ -984,7 +1034,7 @@ Definition sillyfun1 (n : nat) : bool :=
   else if n =? 5 then true
   else false.
 
-(** Now suppose that we want to convince Coq that [sillyfun1 n]
+(** Now suppose that we want to convince Rocq that [sillyfun1 n]
     yields [true] only when [n] is odd.  If we start the proof like
     this (with no [eqn:] on the [destruct])... *)
 
@@ -1045,11 +1095,11 @@ Proof.
 (* ################################################################# *)
 (** * Review *)
 
-(** We've now seen many of Coq's most fundamental tactics.  We'll
-    introduce a few more in the coming chapters, and later on we'll
-    see some more powerful _automation_ tactics that make Coq help us
-    with low-level details.  But basically we've got what we need to
-    get work done.
+(** We've now talked about many of Rocq's most fundamental tactics.
+    We'll introduce a few more in the coming chapters, and later on
+    we'll see some more powerful _automation_ tactics that make Rocq
+    help us with low-level details.  But basically we've got what we
+    need to get work done.
 
     Here are the ones we've seen:
 
@@ -1065,6 +1115,9 @@ Proof.
 
       - [apply... with...]: explicitly specify values for variables
         that cannot be determined by pattern matching
+
+      - [specialize (H ...)]: refine a hypothesis by fixing some of
+        its variables
 
       - [simpl]: simplify computations in the goal
 
@@ -1103,6 +1156,9 @@ Proof.
 
       - [discriminate]: reason by disjointness of constructors on
         equalities between values of inductively defined types
+
+      - [replace x with y]: replaces [x] with [y] everywhere for the
+        current goal, creating a subgoal that [x = y].
 
       - [assert (H: e)] (or [assert (e) as H]): introduce a "local
         lemma" [e] and call it [H]
@@ -1242,4 +1298,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:17 *)

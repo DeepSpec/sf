@@ -730,7 +730,7 @@ Proof using. intros. applys himpl_trans wp_ref_1. xsimpl. Qed.
 Lemma wp_ref_3 : forall Q v,
   (\forall p, (p ~~> v) \-* Q (val_loc p)) ==> wp (val_ref v) Q.
 Proof using.
-  intros. applys himpl_trans wp_ref_2. xsimpl. intros ? p ->.
+  intros. applys himpl_trans_r wp_ref_2. xsimpl. intros ? p ->.
   xchange (hforall_specialize p).
 Qed.
 
@@ -764,7 +764,7 @@ Proof using.
   { intros Q. xchange M. applys wp_ramified_trans.
     xsimpl. intros r x ->.
     xchange (hforall_specialize x). }
-  { applys himpl_trans M. xsimpl~. }
+  { applys himpl_trans_r M. xsimpl~. }
 Qed.
 
 (* ----------------------------------------------------------------- *)
@@ -870,4 +870,4 @@ End TexanTriples.
     VST have advocated for this rule. The ramified frame rule was integrated in
     CFML 2.0 in 2018. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-06 11:57 *)

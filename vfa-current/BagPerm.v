@@ -11,8 +11,8 @@
     principal query on a bag is _how many_ times a given element appears
     in it. *)
 
-From Coq Require Import Strings.String. (* for manual grading *)
-From Coq Require Import Setoid Morphisms.
+From Stdlib Require Import Strings.String. (* for manual grading *)
+From Stdlib Require Import Setoid Morphisms.
 From VFA Require Import Perm.
 From VFA Require Import Sort.
 
@@ -189,4 +189,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

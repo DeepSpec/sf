@@ -61,12 +61,12 @@
     - Interactive proofs: the user provides not just the code and its
       specifications, but also a detailed proof script justifying the
       correctness of the code. These proofs may be developed interactively
-      using a proof assistant such as Coq.
+      using a proof assistant such as Rocq.
 
     The present course focuses on the third approach, that is, the integration
     of Separation Logic in an interactive proof assistant. This approach has
     been successfully put to practice throughout the world, using various proof
-    assistants (Coq, Isabelle/HOL, HOL), targeting different languages
+    assistants (Rocq, Isabelle/HOL, HOL), targeting different languages
     (Assembly, C, SML, OCaml, Rust...) and for verifying various kind of
     programs, ranging from low-level operating system kernels to high-level data
     structures and algorithms. *)
@@ -235,10 +235,10 @@
 (* ================================================================= *)
 (** ** System Requirements *)
 
-(** Install instructions for Coq and IDEs may be found on this page:
+(** Install instructions for Rocq and IDEs may be found on this page:
     [https://www.chargueraud.org/teach/verif/install/install.html]
 
-    The files you are reading have been tested with Coq version 8.19.2 but
+    The files you are reading have been tested with Rocq version 9.0.0 but
     may also work with other versions. *)
 
 (* ================================================================= *)
@@ -280,9 +280,9 @@
     title        =   "Separation Logic Foundations",
     series       =   "Software Foundations",
     volume       =   "6",
-    year         =   "2024",
+    year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 2.2, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 3.0, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -294,4 +294,4 @@
     Foundation under the NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

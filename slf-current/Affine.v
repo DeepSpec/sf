@@ -1076,7 +1076,7 @@ Lemma xgc_lemma: forall H1 H2 H F Q,
 Proof using.
   introv WH K M. xchange WH. xchange M.
   applys himpl_trans mkstruct_frame.
-  applys himpl_trans mkstruct_hgc.
+  applys himpl_trans_r mkstruct_hgc.
   applys mkstruct_conseq. xsimpl.
 Qed.
 
@@ -1234,4 +1234,4 @@ End FromPreToPostGC.
     approach to controlling linearity was introduced in the context of CFML, in
     work by [Guéneau, Jourdan, Charguéraud, and Pottier 2019] (in Bib.v). *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-06 11:57 *)

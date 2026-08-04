@@ -13,7 +13,7 @@
     deal with these. *)
 
 (** The STLC lives in the lower-left front corner of the famous
-    _lambda cube_  (also called the _Barendregt Cube_), which
+    _lambda cube_ (also called the _Barendregt Cube_), which
     visualizes three sets of features that can be added to its
     simple core:
 
@@ -41,10 +41,10 @@
 
     The top right corner on the back, which combines all three features,
     is called the _Calculus of Constructions_.  First studied by
-    Coquand and Huet, it forms the foundation of Coq's logic. *)
+    Coquand and Huet, it forms the foundation of Rocq's logic. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Strings.String.
+From Stdlib Require Import Strings.String.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
 Set Default Goal Selector "!".
@@ -57,7 +57,7 @@ Set Default Goal Selector "!".
     doesn't matter much -- the definition of the language as well as
     its theoretical properties work out the same no matter what we
     choose -- so for the sake of brevity let's take just [Bool] for
-    the moment.  At the end of the chapter we'll see how to add more
+    the moment.  In the next chapter we'll see how to add more
     base types, and in later chapters we'll enrich the pure STLC with
     other useful constructs like pairs, records, subtyping, and
     mutable state.
@@ -74,10 +74,10 @@ Set Default Goal Selector "!".
 
        t ::= x                         (variable)
            | \x:T,t                    (abstraction)
-           | t t                       (application)
+           | t1 t2                     (application)
            | true                      (constant true)
            | false                     (constant false)
-           | if t then t else t        (conditional)
+           | if t1 then t2 else t3     (conditional)
 *)
 (** The [\] symbol in a function abstraction [\x:T,t] is usually
     written as a Greek letter "lambda" (hence the name of the
@@ -89,8 +89,8 @@ Set Default Goal Selector "!".
 (** If you've seen lambda-calculus notation elsewhere, you might
     be wondering why abstraction is written here as [\x:T,t] instead
     of the usual "[\x:T.t]". The reason is that some user interfaces
-    for interacting with Coq use periods to separate a file into
-    "sentences" to be passed separately to the Coq top level. *)
+    for interacting with Rocq use periods to separate a file into
+    "sentences" to be passed separately to the Rocq top level. *)
 
 (** Some examples:
 
@@ -115,18 +115,21 @@ Set Default Goal Selector "!".
       - [\x:Bool, \y:Bool, x]
 
         A two-argument function that takes two booleans and returns
-        the first one.  (As in Coq, a two-argument function in the
-        lambda-calculus is really a one-argument function whose body
-        is also a one-argument function.)
+        the first one. *)
 
-      - [(\x:Bool, \y:Bool, x) false true]
+(** (As in Rocq, a two-argument function in the
+    lambda-calculus is really a one-argument function whose body
+    is also a one-argument function.) *)
+
+(**   - [(\x:Bool, \y:Bool, x) false true]
 
         A two-argument function that takes two booleans and returns
-        the first one, applied to the booleans [false] and [true].
+        the first one, applied to the booleans [false] and [true]. *)
 
-        As in Coq, application associates to the left -- i.e., this
-        expression is parsed as [((\x:Bool, \y:Bool, x) false) true].
+(** (As in Rocq, application associates to the left -- i.e., this
+    expression is parsed as [((\x:Bool, \y:Bool, x) false) true].) *)
 
+(**
       - [\f:Bool->Bool, f (f true)]
 
         A higher-order function that takes a _function_ [f] (from
@@ -200,30 +203,53 @@ Inductive tm : Type :=
 (** We need some notation magic to set up the concrete syntax, as
     we did in the [Imp] chapter... *)
 
-Declare Custom Entry stlc.
-Notation "<{ e }>" := e (e custom stlc at level 99).
-Notation "( x )" := x (in custom stlc, x at level 99).
-Notation "x" := x (in custom stlc at level 0, x constr at level 0).
-Notation "S -> T" := (Ty_Arrow S T) (in custom stlc at level 50, right associativity).
-Notation "x y" := (tm_app x y) (in custom stlc at level 1, left associativity).
-Notation "\ x : t , y" :=
-  (tm_abs x t y) (in custom stlc at level 90, x at level 99,
-                     t custom stlc at level 99,
-                     y custom stlc at level 99,
-                     left associativity).
-Coercion tm_var : string >-> tm.
+Declare Scope stlc_scope.
+Delimit Scope stlc_scope with stlc.
+Open Scope stlc_scope.
 
-Notation "'Bool'" := Ty_Bool (in custom stlc at level 0).
+Declare Custom Entry stlc_ty.
+Declare Custom Entry stlc_tm.
+
+Notation "x" := x (in custom stlc_ty at level 0, x global) : stlc_scope.
+
+Notation "<{{ x }}>" := x (x custom stlc_ty).
+
+Notation "( t )" := t (in custom stlc_ty at level 0, t custom stlc_ty) : stlc_scope.
+Notation "S -> T" := (Ty_Arrow S T) (in custom stlc_ty at level 99, right associativity) : stlc_scope.
+
+Notation "$( t )" := t (in custom stlc_ty at level 0, t constr) : stlc_scope.
+
+Notation "'Bool'" := Ty_Bool (in custom stlc_ty at level 0) : stlc_scope.
 Notation "'if' x 'then' y 'else' z" :=
-  (tm_if x y z) (in custom stlc at level 89,
-                    x custom stlc at level 99,
-                    y custom stlc at level 99,
-                    z custom stlc at level 99,
+  (tm_if x y z) (in custom stlc_tm at level 200,
+                    x custom stlc_tm,
+                    y custom stlc_tm,
+                    z custom stlc_tm at level 200,
                     left associativity).
 Notation "'true'"  := true (at level 1).
-Notation "'true'"  := tm_true (in custom stlc at level 0).
+Notation "'true'"  := tm_true (in custom stlc_tm at level 0).
 Notation "'false'"  := false (at level 1).
-Notation "'false'"  := tm_false (in custom stlc at level 0).
+Notation "'false'"  := tm_false (in custom stlc_tm at level 0).
+
+(** We'll write types inside of [<{{ ... }}>] brackets: *)
+
+Check <{{ Bool }}>.
+Check <{{ Bool -> Bool }}>.
+Check <{{ (Bool -> Bool) -> Bool }}>.
+
+Notation "$( x )" := x (in custom stlc_tm at level 0, x constr, only parsing) : stlc_scope.
+Notation "x" := x (in custom stlc_tm at level 0, x constr at level 0) : stlc_scope.
+Notation "<{ e }>" := e (e custom stlc_tm at level 200) : stlc_scope.
+Notation "( x )" := x (in custom stlc_tm at level 0, x custom stlc_tm) : stlc_scope.
+
+Notation "x y" := (tm_app x y) (in custom stlc_tm at level 10, left associativity) : stlc_scope.
+Notation "\ x : t , y" :=
+  (tm_abs x t y) (in custom stlc_tm at level 200, x global,
+                     t custom stlc_ty,
+                     y custom stlc_tm at level 200,
+                     left associativity).
+Coercion tm_var : string >-> tm.
+Arguments tm_var _%_string.
 
 Definition x : string := "x".
 Definition y : string := "y".
@@ -232,26 +258,35 @@ Hint Unfold x : core.
 Hint Unfold y : core.
 Hint Unfold z : core.
 
-(** Note that an abstraction [\x:T,t] (formally, [tm_abs x T t]) is
-    always annotated with the type [T] of its parameter, in contrast
-    to Coq (and other functional languages like ML, Haskell, etc.),
-    which use type inference to fill in missing annotations.  We're
-    not considering type inference at all here. *)
+(** The upshot of these notation definitions is that we can
+    write STLC terms in these brackets: [<{ .. }>] (similar to how we
+    wrote Imp commands) and STLC types in these brackets: [<{{ .. }}>].
+
+    As before, we can use [$(..)] to "escape" to arbitrary Rocq notation.
+ *)
+
+(** And terms inside of [<{ .. }>] brackets: *)
 
 (** Examples... *)
 
 Notation idB :=
-  <{\x:Bool, x}>.
+  <{ \x:Bool, x }>.
 
 Notation idBB :=
-  <{\x:Bool->Bool, x}>.
+  <{ \x:Bool->Bool, x }>.
 
 Notation idBBBB :=
-  <{\x:((Bool->Bool)->(Bool->Bool)), x}>.
+  <{ \x: (Bool->Bool)->(Bool->Bool), x}>.
 
-Notation k := <{\x:Bool, \y:Bool, x}>.
+Notation k := <{ \x:Bool, \y:Bool, x }>.
 
-Notation notB := <{\x:Bool, if x then false else true}>.
+Notation notB := <{ \x:Bool, if x then false else true }>.
+
+(** Note that an abstraction [\x:T,t] (formally, [tm_abs x T t]) is
+    always annotated with the type [T] of its parameter, in contrast
+    to Rocq (and other functional languages like ML, Haskell, etc.),
+    which use type inference to fill in missing annotations.  We're
+    not considering type inference at all here. *)
 
 (** (We write these as [Notation]s rather than [Definition]s to make
     things easier for [auto].) *)
@@ -298,10 +333,10 @@ Notation notB := <{\x:Bool, if x then false else true}>.
 
          fun x:bool => 7
 
-    But Gallina is rather unusual in this respect.  Most real-world
-    functional programming languages make the second choice --
-    reduction of a function's body only begins when the function is
-    actually applied to an argument.
+    But Gallina is rather unusual in this respect.  Most functional
+    programming languages make the second choice -- reduction of a
+    function's body only begins when the function is actually applied
+    to an argument.
 
     We also make the second choice here. *)
 
@@ -328,7 +363,7 @@ Hint Constructors value : core.
 (** Having made the choice not to reduce under abstractions, we don't
     need to worry about whether variables are values, since we'll
     always be reducing programs "from the outside in," and that means
-    the [step] relation will always be working with closed terms.  *)
+    the [step] relation will always be working with closed terms. *)
 
 (* ================================================================= *)
 (** ** Substitution *)
@@ -356,7 +391,7 @@ Hint Constructors value : core.
 
 (** Here are some examples:
 
-      - [[x:=true] (if x then x else false)]
+      - [[x:=true] (if x then true else false)]
            yields [if true then true else false]
 
       - [[x:=true] x] yields [true]
@@ -397,7 +432,8 @@ Hint Constructors value : core.
 
 (** ... and formally: *)
 
-Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
+Reserved Notation "'[' x ':=' s ']' t" (in custom stlc_tm at level 5, x global, s custom stlc_tm,
+      t custom stlc_tm at next level, right associativity).
 
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   match t with
@@ -406,36 +442,24 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   | <{\y:T, t1}> =>
       if String.eqb x y then t else <{\y:T, [x:=s] t1}>
   | <{t1 t2}> =>
-      <{([x:=s] t1) ([x:=s] t2)}>
+      <{[x:=s] t1 [x:=s] t2}>
   | <{true}> =>
       <{true}>
   | <{false}> =>
       <{false}>
   | <{if t1 then t2 else t3}> =>
-      <{if ([x:=s] t1) then ([x:=s] t2) else ([x:=s] t3)}>
+      <{if [x:=s] t1 then [x:=s] t2 else [x:=s] t3}>
   end
 
-where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
-
-(** Note on notations: You might be wondering why we need parentheses
-    around the substitution notation in the above definition, and why
-    we need to redefine the substitution notation in the [stlc]
-    custom grammar. The reason is that reserved notations in
-    definitions have to be defined in the general Coq grammar (and not
-    a custom one like [stlc]). This restriction only applies to the
-    [subst] definition -- that is, before the [where ...] part. From now
-    on, using the substitution notation in the [stlc] custom grammar
-    doesn't need any curly braces. *)
-
-(** For example... *)
-Check <{[x:=true] x}>.
+where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc_tm).
 
 (** _Technical note_: Substitution also becomes trickier to define if
     we consider the case where [s], the term being substituted for a
     variable in some other term, may itself contain free variables. *)
 
-(** For example, using the definition of substitution above to
-    substitute the _open_ term
+(** Here is an example of how things would become trickier if one were
+    to substitute _open_ terms. Using the simple definition of
+    substitution above to substitute the open term
 
       s = \x:Bool, r
 
@@ -461,12 +485,14 @@ Check <{[x:=true] x}>.
 
       \w:Bool, \x:Bool, r
 
-    which does not behave the same as the original substitution into t:
+    which does not behave the same as the substituting in the original t:
 
       [z:=s]t = \r:Bool, \x:Bool, r
 
-    That is, renaming a bound variable in [t] changes how [t] behaves
-    under substitution. *)
+    That is, renaming a bound variable in [t] would change how [t]
+    behaves under our simple substitution. So substitution gets more
+    complicated in that setting, but fortunately we don't have that
+    problem in our STLC variant. *)
 
 (** See, for example, [Aydemir 2008] (in Bib.v) for further discussion
     of this issue. *)
@@ -476,10 +502,9 @@ Check <{[x:=true] x}>.
     that include binders for all of the variables they mention), we
     can sidestep this extra complexity, but it must be dealt with when
     formalizing richer languages. *)
-
 (** **** Exercise: 3 stars, standard (substi_correct)
 
-    The definition that we gave above uses Coq's [Fixpoint] facility
+    The definition that we gave above uses Rocq's [Fixpoint] facility
     to define substitution as a _function_.  Suppose, instead, we
     wanted to define substitution as an inductive _relation_ [substi].
     We've begun the definition by providing the [Inductive] header and
@@ -518,9 +543,9 @@ Proof.
     is traditionally called _beta-reduction_. *)
 
 (**
-                               value v2
-                     ---------------------------                     (ST_AppAbs)
-                     (\x:T2,t1) v2 --> [x:=v2]t1
+                              value v
+                       -----------------------                      (ST_AppAbs)
+                       (\x:T,t) v --> [x:=v]t
 
                               t1 --> t1'
                            ----------------                           (ST_App1)
@@ -544,14 +569,21 @@ Proof.
       (if t1 then t2 else t3) --> (if t1' then t2 else t3)
 *)
 
+(** This is _call by value_ reduction: to reduce an
+    application [(t1 t2)], we
+      - first reduce [t1] to a value: a function [\x:T,t]
+      - then reduce the argument [t2] to a value [v]
+      - then reduce the application itself by substituting [v] for
+        the bound variable [x] in the body [t]. *)
+
 (** Formally: *)
 
 Reserved Notation "t '-->' t'" (at level 40).
 
 Inductive step : tm -> tm -> Prop :=
-  | ST_AppAbs : forall x T2 t1 v2,
-         value v2 ->
-         <{(\x:T2, t1) v2}> --> <{[x:=v2]t1}>
+  | ST_AppAbs : forall x T t v,
+         value v ->
+         <{(\x:T, t) v}> --> <{ [x:=v]t }>
   | ST_App1 : forall t1 t1' t2,
          t1 --> t1' ->
          <{t1 t2}> --> <{t1' t2}>
@@ -704,7 +736,13 @@ Proof.
 (* ################################################################# *)
 (** * Typing *)
 
-(** Next we consider the typing relation of the STLC. *)
+(** Next we consider the typing relation of the STLC, which is
+    meant to prevent reduction from getting stuck. *)
+
+(** For instance, the following two STLC terms are both stuck
+    [if \x:Bool,x then true else false] (where we branch on a function
+    as a boolean) and [true false] (where we apply a boolean as a
+    function). *)
 
 (* ================================================================= *)
 (** ** Contexts *)
@@ -740,10 +778,6 @@ Proof.
     specifications of the typing relation.
 *)
 
-(** Following the usual notation for partial maps, we write [(X |->
-    T, Gamma)] for "update the partial function [Gamma] so that it
-    maps [x] to [T]." *)
-
 Definition context := partial_map ty.
 
 (* ================================================================= *)
@@ -769,38 +803,52 @@ Definition context := partial_map ty.
                          ------------------------                       (T_False)
                          Gamma |-- false \in Bool
 
-    Gamma |-- t1 \in Bool    Gamma |-- t2 \in T1    Gamma |-- t3 \in T1
-    -------------------------------------------------------------------    (T_If)
-                  Gamma |-- if t1 then t2 else t3 \in T1
+    Gamma |-- t1 \in Bool    Gamma |-- t2 \in T    Gamma |-- t3 \in T
+    -----------------------------------------------------------------    (T_If)
+                  Gamma |-- if t1 then t2 else t3 \in T
 
     We can read the three-place relation [Gamma |-- t \in T] as:
     "under the assumptions in Gamma, the term [t] has the type [T]." *)
 
-Reserved Notation "Gamma '|--' t '\in' T"
-            (at level 101,
-             t custom stlc, T custom stlc at level 0).
+(** In the formal development, we write this judgment in
+    [<{ .. }>] brackets, as introduced by the following notational
+    conventions. *)
+
+
+
+Notation "x '|->' v ';' m " := (update m x v)
+  (in custom stlc_tm at level 0, x constr at level 0, v  custom stlc_ty, right associativity) : stlc_scope.
+
+Notation "x '|->' v " := (update empty x v)
+  (in custom stlc_tm at level 0, x constr at level 0, v custom stlc_ty) : stlc_scope.
+
+Notation "'empty'" := empty (in custom stlc_tm) : stlc_scope.
+
+Reserved Notation "<{ Gamma '|--' t '\in' T }>"
+            (at level 0, Gamma custom stlc_tm at level 200, t custom stlc_tm, T custom stlc_ty).
+
 Inductive has_type : context -> tm -> ty -> Prop :=
   | T_Var : forall Gamma x T1,
       Gamma x = Some T1 ->
-      Gamma |-- x \in T1
+      <{ Gamma |-- x \in T1 }>
   | T_Abs : forall Gamma x T1 T2 t1,
-      x |-> T2 ; Gamma |-- t1 \in T1 ->
-      Gamma |-- \x:T2, t1 \in (T2 -> T1)
+      <{ x |-> T2 ; Gamma |-- t1 \in T1 }> ->
+      <{ Gamma |-- \x:T2, t1 \in T2 -> T1 }>
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma |-- t1 \in (T2 -> T1) ->
-      Gamma |-- t2 \in T2 ->
-      Gamma |-- t1 t2 \in T1
+      <{ Gamma |-- t1 \in T2 -> T1 }> ->
+      <{ Gamma |-- t2 \in T2 }> ->
+      <{ Gamma |-- t1 t2 \in T1 }>
   | T_True : forall Gamma,
-       Gamma |-- true \in Bool
+      <{ Gamma |-- true \in Bool }>
   | T_False : forall Gamma,
-       Gamma |-- false \in Bool
+      <{ Gamma |-- false \in Bool }>
   | T_If : forall t1 t2 t3 T1 Gamma,
-       Gamma |-- t1 \in Bool ->
-       Gamma |-- t2 \in T1 ->
-       Gamma |-- t3 \in T1 ->
-       Gamma |-- if t1 then t2 else t3 \in T1
+       <{ Gamma |-- t1 \in Bool }> ->
+       <{ Gamma |-- t2 \in T1 }> ->
+       <{ Gamma |-- t3 \in T1 }> ->
+       <{ Gamma |-- if t1 then t2 else t3 \in T1 }>
 
-where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
+where "<{ Gamma '|--' t '\in' T }>" := (has_type Gamma t T) : stlc_scope.
 
 Hint Constructors has_type : core.
 
@@ -808,28 +856,30 @@ Hint Constructors has_type : core.
 (** ** Examples *)
 
 Example typing_example_1 :
-  empty |-- \x:Bool, x \in (Bool -> Bool).
+  <{ empty |-- \x:Bool, x \in Bool -> Bool }>.
 Proof. eauto. Qed.
 
 (** Note that, since we added the [has_type] constructors to the hints
-    database, [auto] can actually solve this one immediately. *)
+    database, [eauto] can solve this one immediately. *)
 
+(** For what it's worth, in this case [auto] works too, since our term
+    contains no application nodes: *)
 Example typing_example_1' :
-  empty |-- \x:Bool, x \in (Bool -> Bool).
+  <{ empty |-- \x:Bool, x \in Bool -> Bool }>.
 Proof. auto.  Qed.
 
 (** More examples:
 
-       empty |-- \x:A, \y:A->A, y (y x)
-             \in A -> (A->A) -> A.
+       empty |-- \x:Bool, \y:Bool->Bool, y (y x)
+             \in Bool -> (Bool->Bool) -> Bool.
 *)
 
 Example typing_example_2 :
-  empty |--
+  <{ empty |--
     \x:Bool,
        \y:Bool->Bool,
           (y (y x)) \in
-    (Bool -> (Bool -> Bool) -> Bool).
+    Bool -> (Bool -> Bool) -> Bool }>.
 Proof. eauto 20. Qed.
 
 (** **** Exercise: 2 stars, standard, optional (typing_example_2_full)
@@ -838,11 +888,11 @@ Proof. eauto 20. Qed.
     [eapply] (or [...]). *)
 
 Example typing_example_2_full :
-  empty |--
+ <{ empty |--
     \x:Bool,
        \y:Bool->Bool,
           (y (y x)) \in
-    (Bool -> (Bool -> Bool) -> Bool).
+    Bool -> (Bool -> Bool) -> Bool }>.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -851,25 +901,26 @@ Proof.
 
     Formally prove the following typing derivation holds:
 
-       empty |-- \x:Bool->B, \y:Bool->Bool, \z:Bool,
+    exists T,
+       empty |-- \x:Bool->Bool, \y:Bool->Bool, \z:Bool,
                    y (x z)
              \in T.
 *)
 
 Example typing_example_3 :
   exists T,
-    empty |--
+   <{ empty |--
       \x:Bool->Bool,
          \y:Bool->Bool,
             \z:Bool,
                (y (x z)) \in
-      T.
+      T }>.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** We can also show that some terms are _not_ typable.  For example,
-    let's check that there is no typing derivation assigning a type
+    we can check that there is no typing derivation assigning a type
     to the term [\x:Bool, \y:Bool, x y] -- i.e.,
 
     ~ exists T,
@@ -878,11 +929,11 @@ Proof.
 
 Example typing_nonexample_1 :
   ~ exists T,
-      empty |--
+    <{  empty |--
         \x:Bool,
             \y:Bool,
                (x y) \in
-        T.
+        T }>.
 Proof.
   intros Hc. destruct Hc as [T Hc].
   (* The [clear] tactic is useful here for tidying away bits of
@@ -904,12 +955,12 @@ Qed.
 
 Example typing_nonexample_3 :
   ~ (exists S T,
-        empty |--
-          \x:S, x x \in T).
+      <{ empty |--
+          \x:S, x x \in T }>).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
 End STLC.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:33 *)

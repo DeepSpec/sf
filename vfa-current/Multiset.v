@@ -24,8 +24,8 @@
     In this chapter we'll explore using multisets to specify
     sortedness. *)
 
-From Coq Require Import Strings.String.  (* for manual grading *)
-From Coq Require Import FunctionalExtensionality.
+From Stdlib Require Import Strings.String.  (* for manual grading *)
+From Stdlib Require Import FunctionalExtensionality.
 From VFA Require Import Perm.
 From VFA Require Import Sort.
 
@@ -320,4 +320,4 @@ Proof.
 (** That means we can verify sorting algorithms using either
     permutations or multisets, whichever we find more convenient. *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

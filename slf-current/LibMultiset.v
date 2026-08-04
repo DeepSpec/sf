@@ -6,7 +6,7 @@
     couple admits. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Multisets                                                               *
 **************************************************************************)
 
@@ -754,4 +754,4 @@ Tactic Notation "multiset_empty" :=
 Tactic Notation "multiset_empty" constr(E) :=
   let H := fresh "M" in lets H:E; multiset_empty in H.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

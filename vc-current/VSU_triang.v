@@ -97,7 +97,7 @@ Lemma body_pop_and_add: semax_body Triang_Vprog Triang_Gprog f_pop_and_add pop_a
   - Adjust the postcondition of [triang] to [...SEP(mem_mgr M gv; TT)],
      which means that [triang] is permitted to have a "space leak".
      That is, [triang] may allocate things that it does not free.
-  - Adjust the StackAPD with one more field in its Coq record:
+  - Adjust the StackAPD with one more field in its Rocq record:
      [stackrep_nil: forall st, stackrep STACK [] st |-- emp].
      This specifies that, whatever is the low-level representation
      of a stack, the empty stack will always use no memory.
@@ -141,4 +141,4 @@ End Triang_VSU.
 (* ================================================================= *)
 (** ** Next Chapter: [VSU_stdlib] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

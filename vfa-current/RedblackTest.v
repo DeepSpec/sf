@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Redblack.
 
 Parameter MISSING: Type.
@@ -38,10 +38,10 @@ idtac " ".
 idtac "#> balanceP".
 idtac "Possible points: 2".
 check_type @balanceP (
-(forall (V : Type) (P : key -> V -> Prop) (c : color) 
-   (l r : tree V) (k : key) (v : V),
- @ForallT V P l ->
- @ForallT V P r -> P k v -> @ForallT V P (@balance V c l k v r))).
+(forall (V : Type) (P : forall (_ : key) (_ : V), Prop)
+   (c : color) (l r : tree V) (k : key) (v : V) (_ : @ForallT V P l)
+   (_ : @ForallT V P r) (_ : P k v),
+ @ForallT V P (@balance V c l k v r))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions balanceP.
@@ -54,8 +54,10 @@ idtac " ".
 idtac "#> insP".
 idtac "Possible points: 2".
 check_type @insP (
-(forall (V : Type) (P : key -> V -> Prop) (t : tree V) (k : key) (v : V),
- @ForallT V P t -> P k v -> @ForallT V P (@ins V k v t))).
+(forall (V : Type) (P : forall (_ : key) (_ : V), Prop)
+   (t : tree V) (k : key) (v : V) (_ : @ForallT V P t)
+   (_ : P k v),
+ @ForallT V P (@ins V k v t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions insP.
@@ -68,8 +70,8 @@ idtac " ".
 idtac "#> ins_BST".
 idtac "Possible points: 3".
 check_type @ins_BST (
-(forall (V : Type) (t : tree V) (k : key) (v : V),
- @BST V t -> @BST V (@ins V k v t))).
+(forall (V : Type) (t : tree V) (k : key) (v : V) (_ : @BST V t),
+ @BST V (@ins V k v t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ins_BST.
@@ -82,8 +84,8 @@ idtac " ".
 idtac "#> insert_BST".
 idtac "Possible points: 2".
 check_type @insert_BST (
-(forall (V : Type) (t : tree V) (v : V) (k : key),
- @BST V t -> @BST V (@insert V k v t))).
+(forall (V : Type) (t : tree V) (v : V) (k : key) (_ : @BST V t),
+ @BST V (@insert V k v t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions insert_BST.
@@ -96,22 +98,23 @@ idtac " ".
 idtac "#> balance_lookup".
 idtac "Possible points: 6".
 check_type @balance_lookup (
-(forall (V : Type) (d : V) (c : color) (k k' : key) (v : V) (l r : tree V),
- @BST V l ->
- @BST V r ->
- @ForallT V
-   (fun (k'0 : Extract.int) (_ : V) =>
-    BinInt.Z.lt (Extract.Abs k'0) (Extract.Abs k)) l ->
- @ForallT V
-   (fun (k'0 : Extract.int) (_ : V) =>
-    BinInt.Z.gt (Extract.Abs k'0) (Extract.Abs k)) r ->
- @lookup V d k' (@balance V c l k v r) =
- (if BinInt.Z.ltb (Extract.Abs k') (Extract.Abs k)
-  then @lookup V d k' l
-  else
-   if BinInt.Z.gtb (Extract.Abs k') (Extract.Abs k)
-   then @lookup V d k' r
-   else v))).
+(forall (V : Type) (d : V) (c : color) (k k' : key)
+   (v : V) (l r : tree V) (_ : @BST V l) (_ : @BST V r)
+   (_ : @ForallT V
+          (fun (k'0 : Extract.int) (_ : V) =>
+           BinInt.Z.lt (Extract.Abs k'0) (Extract.Abs k))
+          l)
+   (_ : @ForallT V
+          (fun (k'0 : Extract.int) (_ : V) =>
+           BinInt.Z.gt (Extract.Abs k'0) (Extract.Abs k))
+          r),
+ @eq V (@lookup V d k' (@balance V c l k v r))
+   (if BinInt.Z.ltb (Extract.Abs k') (Extract.Abs k)
+    then @lookup V d k' l
+    else
+     if BinInt.Z.gtb (Extract.Abs k') (Extract.Abs k)
+     then @lookup V d k' r
+     else v))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions balance_lookup.
@@ -124,8 +127,8 @@ idtac " ".
 idtac "#> lookup_ins_eq".
 idtac "Possible points: 3".
 check_type @lookup_ins_eq (
-(forall (V : Type) (d : V) (t : tree V) (k : key) (v : V),
- @BST V t -> @lookup V d k (@ins V k v t) = v)).
+(forall (V : Type) (d : V) (t : tree V) (k : key) (v : V) (_ : @BST V t),
+ @eq V (@lookup V d k (@ins V k v t)) v)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_ins_eq.
@@ -138,8 +141,9 @@ idtac " ".
 idtac "#> lookup_ins_neq".
 idtac "Possible points: 3".
 check_type @lookup_ins_neq (
-(forall (V : Type) (d : V) (t : tree V) (k k' : key) (v : V),
- @BST V t -> k <> k' -> @lookup V d k' (@ins V k v t) = @lookup V d k' t)).
+(forall (V : Type) (d : V) (t : tree V) (k k' : key)
+   (v : V) (_ : @BST V t) (_ : not (@eq key k k')),
+ @eq V (@lookup V d k' (@ins V k v t)) (@lookup V d k' t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_ins_neq.
@@ -152,8 +156,8 @@ idtac " ".
 idtac "#> lookup_insert_eq".
 idtac "Possible points: 1".
 check_type @lookup_insert_eq (
-(forall (V : Type) (d : V) (t : tree V) (k : key) (v : V),
- @BST V t -> @lookup V d k (@insert V k v t) = v)).
+(forall (V : Type) (d : V) (t : tree V) (k : key) (v : V) (_ : @BST V t),
+ @eq V (@lookup V d k (@insert V k v t)) v)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_insert_eq.
@@ -163,8 +167,9 @@ idtac " ".
 idtac "#> lookup_insert_neq".
 idtac "Possible points: 1".
 check_type @lookup_insert_neq (
-(forall (V : Type) (d : V) (t : tree V) (k k' : key) (v : V),
- @BST V t -> k <> k' -> @lookup V d k' (@insert V k v t) = @lookup V d k' t)).
+(forall (V : Type) (d : V) (t : tree V) (k k' : key)
+   (v : V) (_ : @BST V t) (_ : not (@eq key k k')),
+ @eq V (@lookup V d k' (@insert V k v t)) (@lookup V d k' t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_insert_neq.
@@ -177,7 +182,8 @@ idtac " ".
 idtac "#> RB_blacken_parent".
 idtac "Possible points: 1".
 check_type @RB_blacken_parent (
-(forall (V : Type) (t : tree V) (n : nat), @RB V t Red n -> @RB V t Black n)).
+(forall (V : Type) (t : tree V) (n : nat) (_ : @RB V t Red n),
+ @RB V t Black n)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions RB_blacken_parent.
@@ -191,8 +197,8 @@ idtac "#> ins_RB".
 idtac "Possible points: 6".
 check_type @ins_RB (
 (forall (V : Type) (k : key) (v : V) (t : tree V) (n : nat),
- (@RB V t Black n -> @NearlyRB V (@ins V k v t) n) /\
- (@RB V t Red n -> @RB V (@ins V k v t) Black n))).
+ and (forall _ : @RB V t Black n, @NearlyRB V (@ins V k v t) n)
+   (forall _ : @RB V t Red n, @RB V (@ins V k v t) Black n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ins_RB.
@@ -205,8 +211,8 @@ idtac " ".
 idtac "#> RB_blacken_root".
 idtac "Possible points: 1".
 check_type @RB_blacken_root (
-(forall (V : Type) (t : tree V) (n : nat),
- @RB V t Black n -> exists n' : nat, @RB V (@make_black V t) Red n')).
+(forall (V : Type) (t : tree V) (n : nat) (_ : @RB V t Black n),
+ @ex nat (fun n' : nat => @RB V (@make_black V t) Red n'))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions RB_blacken_root.
@@ -219,8 +225,9 @@ idtac " ".
 idtac "#> insert_RB".
 idtac "Possible points: 1".
 check_type @insert_RB (
-(forall (V : Type) (t : tree V) (k : key) (v : V) (n : nat),
- @RB V t Red n -> exists n' : nat, @RB V (@insert V k v t) Red n')).
+(forall (V : Type) (t : tree V) (k : key) (v : V)
+   (n : nat) (_ : @RB V t Red n),
+ @ex nat (fun n' : nat => @RB V (@insert V k v t) Red n'))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions insert_RB.
@@ -304,4 +311,6 @@ idtac "---------- redblack_bound ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

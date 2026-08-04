@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Binom.
 
 Parameter MISSING: Type.
@@ -50,9 +50,9 @@ idtac " ".
 idtac "#> BinomQueue.smash_valid".
 idtac "Possible points: 2".
 check_type @BinomQueue.smash_valid (
-(forall (n : nat) (t u : BinomQueue.tree),
- BinomQueue.pow2heap n t ->
- BinomQueue.pow2heap n u -> BinomQueue.pow2heap (S n) (BinomQueue.smash t u))).
+(forall (n : nat) (t u : BinomQueue.tree) (_ : BinomQueue.pow2heap n t)
+   (_ : BinomQueue.pow2heap n u),
+ BinomQueue.pow2heap (S n) (BinomQueue.smash t u))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.smash_valid.
@@ -65,10 +65,9 @@ idtac " ".
 idtac "#> BinomQueue.carry_valid".
 idtac "Possible points: 3".
 check_type @BinomQueue.carry_valid (
-(forall (n : nat) (q : list BinomQueue.tree),
- BinomQueue.priq' n q ->
- forall t : BinomQueue.tree,
- t = BinomQueue.Leaf \/ BinomQueue.pow2heap n t ->
+(forall (n : nat) (q : list BinomQueue.tree) (_ : BinomQueue.priq' n q)
+   (t : BinomQueue.tree)
+   (_ : or (@eq BinomQueue.tree t BinomQueue.Leaf) (BinomQueue.pow2heap n t)),
  BinomQueue.priq' n (BinomQueue.carry q t))).
 idtac "Assumptions:".
 Abort.
@@ -90,9 +89,10 @@ idtac " ".
 idtac "#> BinomQueue.tree_elems_ext".
 idtac "Possible points: 2".
 check_type @BinomQueue.tree_elems_ext (
-(forall (t : BinomQueue.tree) (e1 e2 : list BinomQueue.key),
- @Permutation.Permutation BinomQueue.key e1 e2 ->
- BinomQueue.tree_elems t e1 -> BinomQueue.tree_elems t e2)).
+(forall (t : BinomQueue.tree) (e1 e2 : list BinomQueue.key)
+   (_ : @Permutation.Permutation BinomQueue.key e1 e2)
+   (_ : BinomQueue.tree_elems t e1),
+ BinomQueue.tree_elems t e2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.tree_elems_ext.
@@ -105,9 +105,9 @@ idtac " ".
 idtac "#> BinomQueue.tree_perm".
 idtac "Possible points: 2".
 check_type @BinomQueue.tree_perm (
-(forall (t : BinomQueue.tree) (e1 e2 : list BinomQueue.key),
- BinomQueue.tree_elems t e1 ->
- BinomQueue.tree_elems t e2 -> @Permutation.Permutation BinomQueue.key e1 e2)).
+(forall (t : BinomQueue.tree) (e1 e2 : list BinomQueue.key)
+   (_ : BinomQueue.tree_elems t e1) (_ : BinomQueue.tree_elems t e2),
+ @Permutation.Permutation BinomQueue.key e1 e2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.tree_perm.
@@ -120,9 +120,10 @@ idtac " ".
 idtac "#> BinomQueue.priqueue_elems_ext".
 idtac "Possible points: 2".
 check_type @BinomQueue.priqueue_elems_ext (
-(forall (q : list BinomQueue.tree) (e1 e2 : list BinomQueue.key),
- @Permutation.Permutation BinomQueue.key e1 e2 ->
- BinomQueue.priqueue_elems q e1 -> BinomQueue.priqueue_elems q e2)).
+(forall (q : list BinomQueue.tree) (e1 e2 : list BinomQueue.key)
+   (_ : @Permutation.Permutation BinomQueue.key e1 e2)
+   (_ : BinomQueue.priqueue_elems q e1),
+ BinomQueue.priqueue_elems q e2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.priqueue_elems_ext.
@@ -135,10 +136,10 @@ idtac " ".
 idtac "#> BinomQueue.abs_perm".
 idtac "Possible points: 2".
 check_type @BinomQueue.abs_perm (
-(forall (p : BinomQueue.priqueue) (al bl : list BinomQueue.key),
- BinomQueue.priq p ->
- BinomQueue.Abs p al ->
- BinomQueue.Abs p bl -> @Permutation.Permutation BinomQueue.key al bl)).
+(forall (p : BinomQueue.priqueue) (al bl : list BinomQueue.key)
+   (_ : BinomQueue.priq p) (_ : BinomQueue.Abs p al)
+   (_ : BinomQueue.Abs p bl),
+ @Permutation.Permutation BinomQueue.key al bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.abs_perm.
@@ -151,8 +152,9 @@ idtac " ".
 idtac "#> BinomQueue.can_relate".
 idtac "Possible points: 2".
 check_type @BinomQueue.can_relate (
-(forall p : BinomQueue.priqueue,
- BinomQueue.priq p -> exists al : list BinomQueue.key, BinomQueue.Abs p al)).
+(forall (p : BinomQueue.priqueue) (_ : BinomQueue.priq p),
+ @ex (list BinomQueue.key)
+   (fun al : list BinomQueue.key => BinomQueue.Abs p al))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.can_relate.
@@ -178,12 +180,10 @@ idtac " ".
 idtac "#> BinomQueue.smash_elems".
 idtac "Possible points: 3".
 check_type @BinomQueue.smash_elems (
-(forall (n : nat) (t u : BinomQueue.tree) (bt bu : list BinomQueue.key),
- BinomQueue.pow2heap n t ->
- BinomQueue.pow2heap n u ->
- BinomQueue.tree_elems t bt ->
- BinomQueue.tree_elems u bu ->
- BinomQueue.tree_elems (BinomQueue.smash t u) (bt ++ bu))).
+(forall (n : nat) (t u : BinomQueue.tree) (bt bu : list BinomQueue.key)
+   (_ : BinomQueue.pow2heap n t) (_ : BinomQueue.pow2heap n u)
+   (_ : BinomQueue.tree_elems t bt) (_ : BinomQueue.tree_elems u bu),
+ BinomQueue.tree_elems (BinomQueue.smash t u) (@app BinomQueue.key bt bu))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions BinomQueue.smash_elems.
@@ -252,4 +252,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

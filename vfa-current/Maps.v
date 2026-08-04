@@ -6,8 +6,8 @@
     indicate success or failure. We'll use maps in upcoming chapters
     to verify other data structures. *)
 
-From Coq Require Import Bool.Bool.
-From Coq Require Import Logic.FunctionalExtensionality.
+From Stdlib Require Import Bool.
+From Stdlib Require Import FunctionalExtensionality.
 From VFA Require Import Perm.
 
 (* ################################################################# *)
@@ -217,4 +217,4 @@ Proof.
   apply t_update_permute.
 Qed.
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

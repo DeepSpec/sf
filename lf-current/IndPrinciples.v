@@ -1,12 +1,12 @@
 (** * IndPrinciples: Induction Principles *)
 
-(** Every time we declare a new [Inductive] datatype, Coq
+(** Every time we declare a new [Inductive] datatype, Rocq
     automatically generates an _induction principle_ for this type.
     This induction principle is a theorem like any other: If [t] is
     defined inductively, the corresponding induction principle is
     called [t_ind]. *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
+Set Warnings "-notation-overridden".
 From LF Require Export ProofObjects.
 
 (* ################################################################# *)
@@ -74,7 +74,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** Coq generates induction principles for every datatype
+(** Rocq generates induction principles for every datatype
     defined with [Inductive], including those that aren't recursive.
     Although of course we don't need the proof technique of induction
     to prove properties of non-recursive datatypes, the idea of an
@@ -82,7 +82,7 @@ Proof.
     prove that a property holds for all values of the type. *)
 
 (** These generated principles follow a similar pattern. If we
-    define a type [t] with constructors [c1] ... [cn], Coq generates a
+    define a type [t] with constructors [c1] ... [cn], Rocq generates a
     theorem with this shape:
 
     t_ind : forall P : t -> Prop,
@@ -110,9 +110,9 @@ Check time_ind :
 
 (** **** Exercise: 1 star, standard, optional (rgb)
 
-    Write out the induction principle that Coq will generate for the
+    Write out the induction principle that Rocq will generate for the
     following datatype.  Write down your answer on paper or type it
-    into a comment, and then compare it with what Coq prints. *)
+    into a comment, and then compare it with what Rocq prints. *)
 
 Inductive rgb : Type :=
   | red
@@ -181,7 +181,7 @@ Inductive booltree : Type :=
   | bt_branch (b : bool) (t1 t2 : booltree).
 
 (* What is the induction principle for [booltree]? Of course you could
-   ask Coq, but try not to do that. Instead, write it down yourself on
+   ask Rocq, but try not to do that. Instead, write it down yourself on
    paper. Then look at the definition of [booltree_ind_type], below.
    It has three missing pieces, which are provided by the definitions
    in between here and there. Fill in those definitions based on what
@@ -226,7 +226,7 @@ Proof. (* FILL IN HERE *) Admitted.
     forall t : Toy, P t
 
     Give an [Inductive] definition of [Toy], such that the induction
-    principle Coq generates is that given above: *)
+    principle Rocq generates is that given above: *)
 
 Inductive Toy : Type :=
   (* FILL IN HERE *)
@@ -280,8 +280,8 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** **** Exercise: 1 star, standard, optional (tree)
 
-    Write out the induction principle that Coq will generate for
-   the following datatype.  Compare your answer with what Coq
+    Write out the induction principle that Rocq will generate for
+   the following datatype.  Compare your answer with what Rocq
    prints. *)
 
 Inductive tree (X:Type) : Type :=
@@ -328,8 +328,8 @@ Inductive foo' (X:Type) : Type :=
   | C1 (l : list X) (f : foo' X)
   | C2.
 
-(** What induction principle will Coq generate for [foo']?  (Fill
-   in the blanks, then check your answer with Coq.)
+(** What induction principle will Rocq generate for [foo']?  (Fill
+   in the blanks, then check your answer with Rocq.)
 
      foo'_ind :
         forall (X : Type) (P : foo' X -> Prop),
@@ -414,12 +414,12 @@ Proof.
           - show that, if [P n'] holds, then so does [P (S n')]
           - conclude that [P n] holds for all n.
     So, when we begin a proof with [intros n] and then [induction n],
-    we are first telling Coq to consider a _particular_ [n] (by
+    we are first telling Rocq to consider a _particular_ [n] (by
     introducing it into the context) and then telling it to prove
     something about _all_ numbers (by using induction).
 *)
 
-(**  What Coq actually does in this situation, internally, is it
+(**  What Rocq actually does in this situation, internally, is it
     "re-generalizes" the variable we perform induction on.  For
     example, in our original proof that [plus] is associative... *)
 
@@ -483,7 +483,7 @@ Proof.
 (* ################################################################# *)
 (** * Induction Principles for Propositions *)
 
-(** Inductive definitions of propositions also cause Coq to generate
+(** Inductive definitions of propositions also cause Rocq to generate
     induction priniciples.  For example, recall our proposition [ev]
     from [IndProp]: *)
 
@@ -536,7 +536,7 @@ Proof.
 Qed.
 
 (** The precise form of an [Inductive] definition can affect the
-    induction principle Coq generates. *)
+    induction principle Rocq generates. *)
 
 Inductive le1 : nat -> nat -> Prop :=
   | le1_n : forall n, le1 n n
@@ -573,7 +573,7 @@ Check le2_ind :
 (* ################################################################# *)
 (** * Another Form of Induction Principles on Propositions (Optional) *)
 
-(** The induction principle that Coq generated for [ev] was parameterized
+(** The induction principle that Rocq generated for [ev] was parameterized
     on a natural number [n].  It could have additionally been parameterized
     on the evidence that [n] was even, which would have led to this
     induction principle:
@@ -623,7 +623,7 @@ Check le2_ind :
        forall n : nat,
          even n -> P n
 
-    That is why Coq actually generates the induction principle
+    That is why Rocq actually generates the induction principle
     [ev_ind] that we saw before. *)
 
 (* ################################################################# *)
@@ -782,10 +782,10 @@ Check le2_ind :
 
 (** Although tactic-based proofs are normally much easier to
     work with, the ability to write a proof term directly is sometimes
-    very handy, particularly when we want Coq to do something slightly
+    very handy, particularly when we want Rocq to do something slightly
     non-standard.  *)
 
-(** Recall again the induction principle on naturals that Coq generates for
+(** Recall again the induction principle on naturals that Rocq generates for
     us automatically from the Inductive declaration for [nat]. *)
 
 Check nat_ind :
@@ -795,7 +795,7 @@ Check nat_ind :
     forall n : nat, P n.
 
 (** There's nothing magic about this induction lemma: it's just
-   another Coq lemma that requires a proof.  Coq generates the proof
+   another Rocq lemma that requires a proof.  Rocq generates the proof
    automatically too...  *)
 
 Print nat_ind.
@@ -830,7 +830,7 @@ Definition nat_ind_tidy := build_proof.
     [n], recursing all the way down to 0, and building up a proof
     as it returns. *)
 
-(** The actual [nat_ind] that Coq generates uses a recursive
+(** The actual [nat_ind] that Rocq generates uses a recursive
     function [F] defined with [fix] instead of [Fixpoint]. *)
 
 (** We can adapt this approach to proving [nat_ind] to help prove
@@ -963,4 +963,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

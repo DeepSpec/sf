@@ -21,22 +21,22 @@
 (** * The Coq Standard Library *)
 
 (** In this volume, we're going to import the definitions and theorems
-    we need directly from Coq's standard library, rather than from
+    we need directly from Rocq's standard library, rather than from
     chapters in Volume 1.  You should not notice much difference,
     though, because we've been careful to name our own definitions and
     theorems the same as their counterparts in the standard
     library. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Strings.String.  (* for manual grading *)
-From Coq Require Export Bool.Bool.
-From Coq Require Export Arith.Arith.
-From Coq Require Export Arith.PeanoNat.
-From Coq Require Export Arith.EqNat.
-From Coq Require Export Lia.
-From Coq Require Export Lists.List.
+From Stdlib Require Import Strings.String.  (* for manual grading *)
+From Stdlib Require Export Bool.
+From Stdlib Require Export Arith.Arith.
+From Stdlib Require Export PeanoNat.
+From Stdlib Require Export Arith.EqNat.
+From Stdlib Require Export Lia.
+From Stdlib Require Export List.
 Export ListNotations.
-From Coq Require Export Permutation.
+From Stdlib Require Export Permutation.
 
 (* ################################################################# *)
 (** * The Less-Than Order on the Natural Numbers *)
@@ -627,4 +627,4 @@ Proof.
     [maybe_swap_correct] will be applied (at a larger scale) in
     the next few chapters. *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

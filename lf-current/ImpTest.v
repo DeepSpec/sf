@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import Imp.
 
 Parameter MISSING: Type.
@@ -38,10 +38,11 @@ idtac " ".
 idtac "#> AExp.optimize_0plus_b_test1".
 idtac "Possible points: 0.5".
 check_type @AExp.optimize_0plus_b_test1 (
-(AExp.optimize_0plus_b
-   (AExp.BNot
-      (AExp.BGt (AExp.APlus (AExp.ANum 0) (AExp.ANum 4)) (AExp.ANum 8))) =
- AExp.BNot (AExp.BGt (AExp.ANum 4) (AExp.ANum 8)))).
+(@eq AExp.bexp
+   (AExp.optimize_0plus_b
+      (AExp.BNot
+         (AExp.BGt (AExp.APlus (AExp.ANum 0) (AExp.ANum 4)) (AExp.ANum 8))))
+   (AExp.BNot (AExp.BGt (AExp.ANum 4) (AExp.ANum 8))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions AExp.optimize_0plus_b_test1.
@@ -51,11 +52,12 @@ idtac " ".
 idtac "#> AExp.optimize_0plus_b_test2".
 idtac "Possible points: 0.5".
 check_type @AExp.optimize_0plus_b_test2 (
-(AExp.optimize_0plus_b
-   (AExp.BAnd
-      (AExp.BLe (AExp.APlus (AExp.ANum 0) (AExp.ANum 4)) (AExp.ANum 5))
-      AExp.BTrue) =
- AExp.BAnd (AExp.BLe (AExp.ANum 4) (AExp.ANum 5)) AExp.BTrue)).
+(@eq AExp.bexp
+   (AExp.optimize_0plus_b
+      (AExp.BAnd
+         (AExp.BLe (AExp.APlus (AExp.ANum 0) (AExp.ANum 4)) (AExp.ANum 5))
+         AExp.BTrue))
+   (AExp.BAnd (AExp.BLe (AExp.ANum 4) (AExp.ANum 5)) AExp.BTrue))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions AExp.optimize_0plus_b_test2.
@@ -65,7 +67,8 @@ idtac " ".
 idtac "#> AExp.optimize_0plus_b_sound".
 idtac "Possible points: 2".
 check_type @AExp.optimize_0plus_b_sound (
-(forall b : AExp.bexp, AExp.beval (AExp.optimize_0plus_b b) = AExp.beval b)).
+(forall b : AExp.bexp,
+ @eq bool (AExp.beval (AExp.optimize_0plus_b b)) (AExp.beval b))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions AExp.optimize_0plus_b_sound.
@@ -78,7 +81,8 @@ idtac " ".
 idtac "#> AExp.bevalR_iff_beval".
 idtac "Possible points: 3".
 check_type @AExp.bevalR_iff_beval (
-(forall (b : AExp.bexp) (bv : bool), AExp.bevalR b bv <-> AExp.beval b = bv)).
+(forall (b : AExp.bexp) (bv : bool),
+ iff (AExp.bevalR b bv) (@eq bool (AExp.beval b) bv))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions AExp.bevalR_iff_beval.
@@ -91,8 +95,10 @@ idtac " ".
 idtac "#> ceval_example2".
 idtac "Possible points: 2".
 check_type @ceval_example2 (
-(empty_st =[ X := (ANum 0); Y := (ANum 1); Z := (ANum 2)
- ]=> @Maps.t_update nat (@Maps.t_update nat (X !-> 0) Y 1) Z 2)).
+(ceval (CSeq (CAsgn X (ANum 0)) (CSeq (CAsgn Y (ANum 1)) (CAsgn Z (ANum 2))))
+   empty_st
+   (@Maps.t_update nat
+      (@Maps.t_update nat (@Maps.t_update nat empty_st X 0) Y 1) Z 2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ceval_example2.
@@ -104,7 +110,7 @@ idtac " ".
 
 idtac "#> loop_never_stops".
 idtac "Possible points: 3".
-check_type @loop_never_stops ((forall st st' : state, ~ st =[ loop ]=> st')).
+check_type @loop_never_stops ((forall st st' : state, not (ceval loop st st'))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions loop_never_stops.
@@ -116,7 +122,8 @@ idtac " ".
 
 idtac "#> no_whiles_eqv".
 idtac "Possible points: 3".
-check_type @no_whiles_eqv ((forall c : com, no_whiles c = true <-> no_whilesR c)).
+check_type @no_whiles_eqv (
+(forall c : com, iff (@eq bool (no_whiles c) true) (no_whilesR c))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions no_whiles_eqv.
@@ -137,9 +144,12 @@ idtac " ".
 idtac "#> s_execute1".
 idtac "Possible points: 1".
 check_type @s_execute1 (
-(s_execute empty_st (@nil nat)
-   (SPush 5 :: SPush 3 :: SPush 1 :: SMinus :: @nil sinstr) =
- (2 :: 5 :: @nil nat)%list)).
+(@eq (list nat)
+   (s_execute empty_st (@nil nat)
+      (@cons sinstr (SPush 5)
+         (@cons sinstr (SPush 3)
+            (@cons sinstr (SPush 1) (@cons sinstr SMinus (@nil sinstr))))))
+   (@cons nat 2 (@cons nat 5 (@nil nat))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions s_execute1.
@@ -149,9 +159,13 @@ idtac " ".
 idtac "#> s_execute2".
 idtac "Possible points: 0.5".
 check_type @s_execute2 (
-(s_execute (X !-> 3) (3 :: 4 :: @nil nat)
-   (SPush 4 :: SLoad X :: SMult :: SPlus :: @nil sinstr) =
- (15 :: 4 :: @nil nat)%list)).
+(@eq (list nat)
+   (s_execute (@Maps.t_update nat empty_st X 3)
+      (@cons nat 3 (@cons nat 4 (@nil nat)))
+      (@cons sinstr (SPush 4)
+         (@cons sinstr (SLoad X)
+            (@cons sinstr SMult (@cons sinstr SPlus (@nil sinstr))))))
+   (@cons nat 15 (@cons nat 4 (@nil nat))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions s_execute2.
@@ -161,8 +175,11 @@ idtac " ".
 idtac "#> s_compile1".
 idtac "Possible points: 1.5".
 check_type @s_compile1 (
-(s_compile <{ (AId X) - (ANum 2) * (AId Y) }> =
- (SLoad X :: SPush 2 :: SLoad Y :: SMult :: SMinus :: @nil sinstr)%list)).
+(@eq (list sinstr) (s_compile (AMinus (AId X) (AMult (ANum 2) (AId Y))))
+   (@cons sinstr (SLoad X)
+      (@cons sinstr (SPush 2)
+         (@cons sinstr (SLoad Y)
+            (@cons sinstr SMult (@cons sinstr SMinus (@nil sinstr)))))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions s_compile1.
@@ -176,7 +193,8 @@ idtac "#> execute_app".
 idtac "Possible points: 3".
 check_type @execute_app (
 (forall (st : state) (p1 p2 : list sinstr) (stack : list nat),
- s_execute st stack (p1 ++ p2) = s_execute st (s_execute st stack p1) p2)).
+ @eq (list nat) (s_execute st stack (@app sinstr p1 p2))
+   (s_execute st (s_execute st stack p1) p2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions execute_app.
@@ -190,7 +208,8 @@ idtac "#> s_compile_correct_aux".
 idtac "Possible points: 2.5".
 check_type @s_compile_correct_aux (
 (forall (st : state) (e : aexp) (stack : list nat),
- s_execute st stack (s_compile e) = (aeval st e :: stack)%list)).
+ @eq (list nat) (s_execute st stack (s_compile e))
+   (@cons nat (aeval st e) stack))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions s_compile_correct_aux.
@@ -201,85 +220,18 @@ idtac "#> s_compile_correct".
 idtac "Possible points: 0.5".
 check_type @s_compile_correct (
 (forall (st : state) (e : aexp),
- s_execute st (@nil nat) (s_compile e) = (aeval st e :: @nil nat)%list)).
+ @eq (list nat) (s_execute st (@nil nat) (s_compile e))
+   (@cons nat (aeval st e) (@nil nat)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions s_compile_correct.
 Goal True.
 idtac " ".
 
-idtac "-------------------  break_imp  --------------------".
-idtac " ".
-
-idtac "#> BreakImp.break_ignore".
-idtac "Advanced".
-idtac "Possible points: 1.5".
-check_type @BreakImp.break_ignore (
-(forall (c : BreakImp.com) (st st' : state) (s : BreakImp.result),
- BreakImp.ceval (BreakImp.CSeq BreakImp.CBreak c) st s st' -> st = st')).
-idtac "Assumptions:".
-Abort.
-Print Assumptions BreakImp.break_ignore.
-Goal True.
-idtac " ".
-
-idtac "#> BreakImp.while_continue".
-idtac "Advanced".
-idtac "Possible points: 1.5".
-check_type @BreakImp.while_continue (
-(forall (b : bexp) (c : BreakImp.com) (st st' : state) (s : BreakImp.result),
- BreakImp.ceval (BreakImp.CWhile b c) st s st' -> s = BreakImp.SContinue)).
-idtac "Assumptions:".
-Abort.
-Print Assumptions BreakImp.while_continue.
-Goal True.
-idtac " ".
-
-idtac "#> BreakImp.while_stops_on_break".
-idtac "Advanced".
-idtac "Possible points: 1".
-check_type @BreakImp.while_stops_on_break (
-(forall (b : bexp) (c : BreakImp.com) (st st' : state),
- beval st b = true ->
- BreakImp.ceval c st BreakImp.SBreak st' ->
- BreakImp.ceval (BreakImp.CWhile b c) st BreakImp.SContinue st')).
-idtac "Assumptions:".
-Abort.
-Print Assumptions BreakImp.while_stops_on_break.
-Goal True.
-idtac " ".
-
-idtac "#> BreakImp.seq_continue".
-idtac "Advanced".
-idtac "Possible points: 1".
-check_type @BreakImp.seq_continue (
-(forall (c1 c2 : BreakImp.com) (st st' st'' : state),
- BreakImp.ceval c1 st BreakImp.SContinue st' ->
- BreakImp.ceval c2 st' BreakImp.SContinue st'' ->
- BreakImp.ceval (BreakImp.CSeq c1 c2) st BreakImp.SContinue st'')).
-idtac "Assumptions:".
-Abort.
-Print Assumptions BreakImp.seq_continue.
-Goal True.
-idtac " ".
-
-idtac "#> BreakImp.seq_stops_on_break".
-idtac "Advanced".
-idtac "Possible points: 1".
-check_type @BreakImp.seq_stops_on_break (
-(forall (c1 c2 : BreakImp.com) (st st' : state),
- BreakImp.ceval c1 st BreakImp.SBreak st' ->
- BreakImp.ceval (BreakImp.CSeq c1 c2) st BreakImp.SBreak st')).
-idtac "Assumptions:".
-Abort.
-Print Assumptions BreakImp.seq_stops_on_break.
-Goal True.
-idtac " ".
-
 idtac " ".
 
 idtac "Max points - standard: 29".
-idtac "Max points - advanced: 35".
+idtac "Max points - advanced: 29".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -333,16 +285,8 @@ idtac "---------- s_compile_correct ---------".
 Print Assumptions s_compile_correct.
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- BreakImp.break_ignore ---------".
-Print Assumptions BreakImp.break_ignore.
-idtac "---------- BreakImp.while_continue ---------".
-Print Assumptions BreakImp.while_continue.
-idtac "---------- BreakImp.while_stops_on_break ---------".
-Print Assumptions BreakImp.while_stops_on_break.
-idtac "---------- BreakImp.seq_continue ---------".
-Print Assumptions BreakImp.seq_continue.
-idtac "---------- BreakImp.seq_stops_on_break ---------".
-Print Assumptions BreakImp.seq_stops_on_break.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

@@ -44,7 +44,7 @@
       https://github.com/verifast/verifast
 
     - The tool "Verifiable C" tool, from the VST project, targets the
-      verification of C code, using interactive Coq proofs based on Separation
+      verification of C code, using interactive Rocq proofs based on Separation
       Logic.
       https://vst.cs.princeton.edu/
       See also volume 5 of Software Foundations.
@@ -96,7 +96,7 @@
 
 (** The lead author of this volume, Arthur Charguéraud, wishes to thank:
 
-    - Benjamin Pierce, for demonstrating the benefits of Coq-based teaching,
+    - Benjamin Pierce, for demonstrating the benefits of Rocq-based teaching,
       for coordinating the Software Foundations series, and for encouraging
       me to write this volume.
     - The Software Foundations (SF) community, for helping to polish the course
@@ -117,4 +117,4 @@
 
 *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

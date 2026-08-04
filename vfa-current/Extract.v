@@ -14,6 +14,8 @@
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
 Require Extraction.
+#[global]
+Set Extraction Output Directory ".".
 
 (* ################################################################# *)
 (** * Extraction *)
@@ -37,7 +39,7 @@ Fixpoint sort (l : list nat) : list nat :=
 
 Extraction sort.
 
-(** You can see the translation of [sort] from Coq to OCaml in
+(** You can see the translation of [sort] from Rocq to OCaml in
     your IDE.  Examine it there, and notice the similarities and
     differences.  To get the whole program, we need [Recursive
     Extraction]: *)
@@ -66,7 +68,7 @@ Recursive Extraction sort.
 (** We could instead use Coq's [Z], which is a binary representation
     of integers. But that is logarithmic-time, not constant. *)
 
-Require Import ZArith.
+From Stdlib Require Import ZArith.
 Open Scope Z_scope.
 
 Fixpoint insZ (i : Z) (l : list Z) :=
@@ -388,4 +390,4 @@ Insert and lookup 20000 consecutive integers in 0.387535 seconds.
     balanced search trees to achieve logarithmic.  [Redblack]
     will do that. *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

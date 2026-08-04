@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Equality                                                                  *
 **************************************************************************)
 
@@ -874,7 +874,7 @@ Proof using. introv E. dependent rewrite E. simple~. constructor. Qed.
 (* ################################################################# *)
 (** * John Major's equality *)
 
-Require Import Coq.Logic.JMeq.
+From Stdlib Require Import JMeq.
 
 (** The module above defines John Major's equality:
 
@@ -922,4 +922,4 @@ Proof using.
   apply~ eq_dep_of_JMeq.
 Qed.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

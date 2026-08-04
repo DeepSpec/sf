@@ -42,7 +42,7 @@
 <g id="a_node4"><a xlink:href="Basics.html" xlink:title="Go to chapter" target="_top">
 <polygon fill="lightblue" stroke="black" points="361,-900 209,-900 209,-858 361,-858 361,-900"/>
 <text text-anchor="start" x="270.64" y="-883.2" font-family="Times,serif" font-size="11.00">Basics</text>
-<text text-anchor="start" x="226.63" y="-867.8" font-family="Times,serif" font-size="9.00">Functional Programming in Coq</text>
+<text text-anchor="start" x="226.63" y="-867.8" font-family="Times,serif" font-size="9.00">Functional Programming in Rocq</text>
 </a>
 </g>
 </g>
@@ -171,7 +171,7 @@
 <g id="a_node10"><a xlink:href="Logic.html" xlink:title="Go to chapter" target="_top">
 <polygon fill="lightblue" stroke="black" points="326.5,-510 243.5,-510 243.5,-468 326.5,-468 326.5,-510"/>
 <text text-anchor="start" x="272.67" y="-493.2" font-family="Times,serif" font-size="11.00">Logic</text>
-<text text-anchor="start" x="261.75" y="-477.8" font-family="Times,serif" font-size="9.00">Logic in Coq</text>
+<text text-anchor="start" x="261.75" y="-477.8" font-family="Times,serif" font-size="9.00">Logic in Rocq</text>
 </a>
 </g>
 </g>
@@ -307,7 +307,7 @@
 <g id="a_node15"><a xlink:href="ImpParser.html" xlink:title="Go to chapter" target="_top">
 <polygon fill="lightblue" stroke="black" points="132,-198 0,-198 0,-156 132,-156 132,-198"/>
 <text text-anchor="start" x="43.4" y="-181.2" font-family="Times,serif" font-size="11.00">ImpParser</text>
-<text text-anchor="start" x="17.75" y="-165.8" font-family="Times,serif" font-size="9.00">Lexing and Parsing in Coq</text>
+<text text-anchor="start" x="17.75" y="-165.8" font-family="Times,serif" font-size="9.00">Lexing and Parsing in Rocq</text>
 </a>
 </g>
 </g>
@@ -361,7 +361,7 @@
 <g id="a_node20"><a xlink:href="Extraction.html" xlink:title="Go to chapter" target="_top">
 <polygon fill="lightblue" stroke="black" points="128.5,-120 3.5,-120 3.5,-78 128.5,-78 128.5,-120"/>
 <text text-anchor="start" x="43.59" y="-103.2" font-family="Times,serif" font-size="11.00">Extraction</text>
-<text text-anchor="start" x="21.55" y="-87.8" font-family="Times,serif" font-size="9.00">Extracting ML from Coq</text>
+<text text-anchor="start" x="21.55" y="-87.8" font-family="Times,serif" font-size="9.00">Extracting ML From Stdlib</text>
 </a>
 </g>
 </g>

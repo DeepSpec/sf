@@ -1,0 +1,144 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.Bib}{Library }{SECF.Bib}
+
+\begin{coqdoccode}
+\end{coqdoccode}
+\section{Bib: Bibliography}
+
+
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\section{Resources cited in this volume}
+
+
+
+
+
+\coqdocvar{Algehed} \coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}} \coqdocvar{Bernardy} 2019 Simple noninterference from
+  parametricity. Maximilian Algehed, Jean-Philippe Bernardy. Proc. ACM
+  Program. Lang. 3(ICFP): 89:1-89:22. 2019. \{https://doi.org/10.1145/3341693\}
+
+
+\coqdocvar{Algehed} \coqdocvar{et} \coqdocvar{al} 2021 Dynamic IFC Theorems for Free! Maximilian Algehed,
+  Jean-Philippe Bernardy, Catalin Hritcu. CSF 2021. 1-14.
+  \{https://arxiv.org/abs/2005.04722\}
+
+
+\coqdocvar{Almeida} \coqdocvar{et} \coqdocvar{al} 2020 The Last Mile: High-Assurance and High-Speed
+  Cryptographic Implementations. José Bacelar Almeida, Manuel Barbosa, Gilles
+  Barthe, Benjamin Grégoire, Adrien Koutsos, Vincent Laporte, Tiago Oliveira,
+  Pierre-Yves Strub. IEEE Symposium on Security and Privacy. 2020.
+  \{https://doi.org/10.1109/SP40000.2020.00028\}
+
+
+\coqdocvar{Arranz}-\coqdocvar{Olmos} \coqdocvar{et} \coqdocvar{al} 2025 Preservation of Speculative Constant-Time by
+  Compilation. Santiago Arranz-Olmos, Gilles Barthe, Lionel Blatter, Benjamin
+  Grégoire, Vincent Laporte. Proc. ACM Program. Lang. 9(POPL):
+  1293-1325. 2025. \{https://doi.org/10.1145/3704880\}
+
+
+\coqdocvar{Barthe} \coqdocvar{et} \coqdocvar{al} 2019 System-Level Non-interference of Constant-Time
+  Cryptography. Part I: Model. Gilles Barthe, Gustavo Betarte, Juan Diego Campo,
+  Carlos Luna. J. Autom. Reason. 63(1): 1-51. 2019.
+  \{https://doi.org/10.1007/s10817-017-9441-5\}
+
+
+\coqdocvar{Barthe} \coqdocvar{et} \coqdocvar{al} 2020 Formal verification of a constant-time preserving C
+  compiler. Gilles Barthe, Sandrine Blazy, Benjamin Grégoire, Rémi Hutin,
+  Vincent Laporte, David Pichardie, Alix Trieu. Proc. ACM
+  Program. Lang. 4(POPL): 7:1-7:30. 2020. \{https://doi.org/10.1145/3371075\}
+
+
+\coqdocvar{Barthe} \coqdocvar{et} \coqdocvar{al} 2021 Structured Leakage and Applications to Cryptographic
+  Constant-Time and Cost. Gilles Barthe, Benjamin Grégoire, Vincent Laporte,
+  Swarn Priya. ACM SIGSAC Conference on Computer and Communications Security
+  (CCS). 2021. \{https://doi.org/10.1145/3460120.3484761\}
+
+
+\coqdocvar{Baumann} \coqdocvar{et} \coqdocvar{al} 2025 FSLH: Flexible Mechanized Speculative Load
+  Hardening. Jonathan Baumann, Roberto Blanco, Léon Ducruet, Sebastian Harwig,
+  and Cătălin Hrițcu. IEEE Computer Security Foundations Symposium
+  (CSF). 2025. \{http://arxiv.org/abs/2502.03203\}
+
+
+\coqdocvar{Devriese} \coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}} \coqdocvar{Piessens} 2010 Noninterference through Secure
+  Multi-execution. Dominique Devriese, Frank Piessens. IEEE Symposium on
+  Security and Privacy. 2010.  \{https://doi.org/10.1109/SP.2010.15\}
+
+
+\coqdocvar{Lau} \coqdocvar{et} \coqdocvar{al} 2024 Specification and Verification of Strong Timing Isolation
+  of Hardware Enclaves. Stella Lau, Thomas Bourgeat, Clément Pit-Claudel, Adam
+  Chlipala. ACM SIGSAC Conference on Computer and Communications Security
+  (CCS). 2024. \{https://doi.org/10.1145/3658644.3690203\}
+
+
+\coqdocvar{Molnar} \coqdocvar{et} \coqdocvar{al} 2005 The Program Counter Security Model: Automatic Detection
+  and Removal of Control-Flow Side Channel Attacks. David Molnar, Matt
+  Piotrowski, David Schultz, and David Wagner. ICISC 2005.
+  \{https://eprint.iacr.org/2005/368\}
+
+
+\coqdocvar{Ngo} \coqdocvar{et} \coqdocvar{al} 2018 Impossibility of Precise and Sound Termination-Sensitive
+  Security Enforcements. Minh Ngo, Frank Piessens, Tamara Rezk. IEEE Symposium
+  on Security and Privacy. 2018. \{https://doi.org/10.1109/SP.2018.00048\}
+
+
+\coqdocvar{Sabelfeld} \coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}} \coqdocvar{Myers} 2003 Language-based information-flow security.  Andrei
+  Sabelfeld and Andrew C. Myers. IEEE Journal on Selected Areas in
+  Communications 21 (1), 5-19. 2003.
+  \{https://www.cs.cornell.edu/andru/papers/jsac/sm-jsac03.pdf\}
+
+
+\coqdocvar{Shivakumar} \coqdocvar{et} \coqdocvar{al} 2023 Spectre Declassified: Reading from the Right Place
+  at the Wrong Time. B. A. Shivakumar, J. Barnes, G. Barthe, S. Cauligi,
+  C. Chuengsatiansup, D. Genkin, S. O’Connell, P. Schwabe, R. Q. Sim, and
+  Y. Yarom.  IEEE Symposium on Security and Privacy. 2023.
+  \{http://dx.doi.org/10.1109/SP46215.2023.10179355\}
+
+
+\coqdocvar{Volpano} \coqdocvar{et} \coqdocvar{al} 1996 A Sound Type System for Secure Flow Analysis. Dennis
+  M. Volpano, Cynthia E. Irvine, Geoffrey Smith. J. Comput. Secur. 4(2/3):
+  167-188. 1996. \{https://people.mpi-sws.org/\~{}dg/teaching/lis2014/modules/ifc-1-volpano96.pdf\}
+
+
+\coqdocvar{Volpano} \coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}} \coqdocvar{Smith} 1997 Eliminating Covert Flows with Minimum
+  Typings. Dennis M. Volpano, Geoffrey Smith. Computer Security Foundations
+  Workshop
+  (CSFW). 1997. \{https://ifc-challenge.appspot.com/static/pdfs/csfw97.pdf\}
+
+
+\coqdocvar{Zhang} \coqdocvar{et} \coqdocvar{al} 2023 Ultimate SLH: Taking Speculative Load Hardening to the
+  Next Level. Zhiyuan Zhang, Gilles Barthe, Chitchanok Chuengsatiansup, Peter
+  Schwabe, Yuval Yarom. USENIX Security Symposium. 2023.
+  \{https://www.usenix.org/conference/usenixsecurity23/presentation/zhang-zhiyuan-slh\}
+
+
+
+
+ $Date$ 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

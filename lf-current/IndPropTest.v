@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import IndProp.
 
 Parameter MISSING: Type.
@@ -49,7 +49,9 @@ idtac " ".
 
 idtac "#> Perm3_ex1".
 idtac "Possible points: 0.5".
-check_type @Perm3_ex1 ((@Perm3 nat [1; 2; 3] [2; 3; 1])).
+check_type @Perm3_ex1 (
+(@Perm3 nat (@cons nat 1 (@cons nat 2 (@cons nat 3 (@nil nat))))
+   (@cons nat 2 (@cons nat 3 (@cons nat 1 (@nil nat)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Perm3_ex1.
@@ -58,7 +60,10 @@ idtac " ".
 
 idtac "#> Perm3_refl".
 idtac "Possible points: 0.5".
-check_type @Perm3_refl ((forall (X : Type) (a b c : X), @Perm3 X [a; b; c] [a; b; c])).
+check_type @Perm3_refl (
+(forall (X : Type) (a b c : X),
+ @Perm3 X (@cons X a (@cons X b (@cons X c (@nil X))))
+   (@cons X a (@cons X b (@cons X c (@nil X)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Perm3_refl.
@@ -71,7 +76,9 @@ idtac " ".
 idtac "#> le_inversion".
 idtac "Possible points: 1".
 check_type @le_inversion (
-(forall n m : nat, n <= m -> n = m \/ (exists m' : nat, m = S m' /\ n <= m'))).
+(forall (n m : nat) (_ : le n m),
+ or (@eq nat n m)
+   (@ex nat (fun m' : nat => and (@eq nat m (S m')) (le n m'))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions le_inversion.
@@ -83,7 +90,7 @@ idtac " ".
 
 idtac "#> SSSSev__even".
 idtac "Possible points: 1".
-check_type @SSSSev__even ((forall n : nat, ev (S (S (S (S n)))) -> ev n)).
+check_type @SSSSev__even ((forall (n : nat) (_ : ev (S (S (S (S n))))), ev n)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions SSSSev__even.
@@ -95,7 +102,7 @@ idtac " ".
 
 idtac "#> ev5_nonsense".
 idtac "Possible points: 1".
-check_type @ev5_nonsense ((ev 5 -> 2 + 2 = 9)).
+check_type @ev5_nonsense ((forall _ : ev 5, @eq nat (Nat.add 2 2) 9)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ev5_nonsense.
@@ -107,7 +114,7 @@ idtac " ".
 
 idtac "#> ev_sum".
 idtac "Possible points: 2".
-check_type @ev_sum ((forall n m : nat, ev n -> ev m -> ev (n + m))).
+check_type @ev_sum ((forall (n m : nat) (_ : ev n) (_ : ev m), ev (Nat.add n m))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ev_sum.
@@ -120,7 +127,7 @@ idtac " ".
 idtac "#> ev_ev__ev".
 idtac "Advanced".
 idtac "Possible points: 3".
-check_type @ev_ev__ev ((forall n m : nat, ev (n + m) -> ev n -> ev m)).
+check_type @ev_ev__ev ((forall (n m : nat) (_ : ev (Nat.add n m)) (_ : ev n), ev m)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ev_ev__ev.
@@ -133,8 +140,9 @@ idtac " ".
 idtac "#> Perm3_In".
 idtac "Possible points: 2".
 check_type @Perm3_In (
-(forall (X : Type) (x : X) (l1 l2 : list X),
- @Perm3 X l1 l2 -> @In X x l1 -> @In X x l2)).
+(forall (X : Type) (x : X) (l1 l2 : list X) (_ : @Perm3 X l1 l2)
+   (_ : @In X x l1),
+ @In X x l2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Perm3_In.
@@ -146,7 +154,7 @@ idtac " ".
 
 idtac "#> le_trans".
 idtac "Possible points: 0.5".
-check_type @le_trans ((forall m n o : nat, m <= n -> n <= o -> m <= o)).
+check_type @le_trans ((forall (m n o : nat) (_ : le m n) (_ : le n o), le m o)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions le_trans.
@@ -155,7 +163,7 @@ idtac " ".
 
 idtac "#> O_le_n".
 idtac "Possible points: 0.5".
-check_type @O_le_n ((forall n : nat, 0 <= n)).
+check_type @O_le_n ((forall n : nat, le 0 n)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions O_le_n.
@@ -164,7 +172,7 @@ idtac " ".
 
 idtac "#> n_le_m__Sn_le_Sm".
 idtac "Possible points: 0.5".
-check_type @n_le_m__Sn_le_Sm ((forall n m : nat, n <= m -> S n <= S m)).
+check_type @n_le_m__Sn_le_Sm ((forall (n m : nat) (_ : le n m), le (S n) (S m))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions n_le_m__Sn_le_Sm.
@@ -173,7 +181,7 @@ idtac " ".
 
 idtac "#> Sn_le_Sm__n_le_m".
 idtac "Possible points: 1".
-check_type @Sn_le_Sm__n_le_m ((forall n m : nat, S n <= S m -> n <= m)).
+check_type @Sn_le_Sm__n_le_m ((forall (n m : nat) (_ : le (S n) (S m)), le n m)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Sn_le_Sm__n_le_m.
@@ -182,7 +190,7 @@ idtac " ".
 
 idtac "#> le_plus_l".
 idtac "Possible points: 0.5".
-check_type @le_plus_l ((forall a b : nat, a <= a + b)).
+check_type @le_plus_l ((forall a b : nat, le a (Nat.add a b))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions le_plus_l.
@@ -194,7 +202,8 @@ idtac " ".
 
 idtac "#> plus_le".
 idtac "Possible points: 1".
-check_type @plus_le ((forall n1 n2 m : nat, n1 + n2 <= m -> n1 <= m /\ n2 <= m)).
+check_type @plus_le (
+(forall (n1 n2 m : nat) (_ : le (Nat.add n1 n2) m), and (le n1 m) (le n2 m))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_le.
@@ -203,7 +212,9 @@ idtac " ".
 
 idtac "#> plus_le_cases".
 idtac "Possible points: 1".
-check_type @plus_le_cases ((forall n m p q : nat, n + m <= p + q -> n <= p \/ m <= q)).
+check_type @plus_le_cases (
+(forall (n m p q : nat) (_ : le (Nat.add n m) (Nat.add p q)),
+ or (le n p) (le m q))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_le_cases.
@@ -215,7 +226,8 @@ idtac " ".
 
 idtac "#> plus_le_compat_l".
 idtac "Possible points: 0.5".
-check_type @plus_le_compat_l ((forall n m p : nat, n <= m -> p + n <= p + m)).
+check_type @plus_le_compat_l (
+(forall (n m p : nat) (_ : le n m), le (Nat.add p n) (Nat.add p m))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_le_compat_l.
@@ -224,7 +236,8 @@ idtac " ".
 
 idtac "#> plus_le_compat_r".
 idtac "Possible points: 0.5".
-check_type @plus_le_compat_r ((forall n m p : nat, n <= m -> n + p <= m + p)).
+check_type @plus_le_compat_r (
+(forall (n m p : nat) (_ : le n m), le (Nat.add n p) (Nat.add m p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_le_compat_r.
@@ -233,7 +246,7 @@ idtac " ".
 
 idtac "#> le_plus_trans".
 idtac "Possible points: 1".
-check_type @le_plus_trans ((forall n m p : nat, n <= m -> n <= m + p)).
+check_type @le_plus_trans ((forall (n m p : nat) (_ : le n m), le n (Nat.add m p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions le_plus_trans.
@@ -265,7 +278,7 @@ idtac "#> subseq_app".
 idtac "Advanced".
 idtac "Possible points: 2".
 check_type @subseq_app (
-(forall l1 l2 l3 : list nat, subseq l1 l2 -> subseq l1 (l2 ++ l3))).
+(forall (l1 l2 l3 : list nat) (_ : subseq l1 l2), subseq l1 (@app nat l2 l3))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions subseq_app.
@@ -276,7 +289,8 @@ idtac "#> subseq_trans".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @subseq_trans (
-(forall l1 l2 l3 : list nat, subseq l1 l2 -> subseq l2 l3 -> subseq l1 l3)).
+(forall (l1 l2 l3 : list nat) (_ : subseq l1 l2) (_ : subseq l2 l3),
+ subseq l1 l3)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions subseq_trans.
@@ -288,7 +302,8 @@ idtac " ".
 
 idtac "#> EmptySet_is_empty".
 idtac "Possible points: 0.5".
-check_type @EmptySet_is_empty ((forall (T : Type) (s : list T), ~ (s =~ @EmptySet T))).
+check_type @EmptySet_is_empty (
+(forall (T : Type) (s : list T), not (@exp_match T s (@EmptySet T)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions EmptySet_is_empty.
@@ -298,8 +313,9 @@ idtac " ".
 idtac "#> MUnion'".
 idtac "Possible points: 0.5".
 check_type @MUnion' (
-(forall (T : Type) (s : list T) (re1 re2 : reg_exp T),
- s =~ re1 \/ s =~ re2 -> s =~ @Union T re1 re2)).
+(forall (T : Type) (s : list T) (re1 re2 : reg_exp T)
+   (_ : or (@exp_match T s re1) (@exp_match T s re2)),
+ @exp_match T s (@Union T re1 re2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions MUnion'.
@@ -309,9 +325,9 @@ idtac " ".
 idtac "#> MStar'".
 idtac "Possible points: 2".
 check_type @MStar' (
-(forall (T : Type) (ss : list (list T)) (re : reg_exp T),
- (forall s : list T, @In (list T) s ss -> s =~ re) ->
- @fold (list T) (list T) (@app T) ss [ ] =~ @Star T re)).
+(forall (T : Type) (ss : list (list T)) (re : reg_exp T)
+   (_ : forall (s : list T) (_ : @In (list T) s ss), @exp_match T s re),
+ @exp_match T (@fold (list T) (list T) (@app T) ss (@nil T)) (@Star T re))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions MStar'.
@@ -323,7 +339,7 @@ idtac " ".
 
 idtac "#> re_not_empty".
 idtac "Possible points: 3".
-check_type @re_not_empty ((forall T : Type, reg_exp T -> bool)).
+check_type @re_not_empty ((forall (T : Type) (_ : reg_exp T), bool)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions re_not_empty.
@@ -334,29 +350,126 @@ idtac "#> re_not_empty_correct".
 idtac "Possible points: 3".
 check_type @re_not_empty_correct (
 (forall (T : Type) (re : reg_exp T),
- (exists s : list T, s =~ re) <-> @re_not_empty T re = true)).
+ iff (@ex (list T) (fun s : list T => @exp_match T s re))
+   (@eq bool (@re_not_empty T re) true))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions re_not_empty_correct.
 Goal True.
 idtac " ".
 
-idtac "-------------------  weak_pumping  --------------------".
+idtac "-------------------  weak_pumping_char  --------------------".
 idtac " ".
 
-idtac "#> Pumping.weak_pumping".
-idtac "Advanced".
-idtac "Possible points: 10".
-check_type @Pumping.weak_pumping (
-(forall (T : Type) (re : reg_exp T) (s : list T),
- s =~ re ->
- @Pumping.pumping_constant T re <= @length T s ->
- exists s1 s2 s3 : list T,
-   s = s1 ++ s2 ++ s3 /\
-   s2 <> [ ] /\ (forall m : nat, s1 ++ @Pumping.napp T m s2 ++ s3 =~ re))).
+idtac "#> Pumping.weak_pumping_char".
+idtac "Possible points: 2".
+check_type @Pumping.weak_pumping_char (
+(forall (T : Type) (x : T)
+   (_ : le (@Pumping.pumping_constant T (@Char T x))
+          (@length T (@cons T x (@nil T)))),
+ @ex (list T)
+   (fun s1 : list T =>
+    @ex (list T)
+      (fun s2 : list T =>
+       @ex (list T)
+         (fun s3 : list T =>
+          and (@eq (list T) (@cons T x (@nil T)) (@app T s1 (@app T s2 s3)))
+            (and (not (@eq (list T) s2 (@nil T)))
+               (forall m : nat,
+                @exp_match T (@app T s1 (@app T (@Pumping.napp T m s2) s3))
+                  (@Char T x)))))))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions Pumping.weak_pumping.
+Print Assumptions Pumping.weak_pumping_char.
+Goal True.
+idtac " ".
+
+idtac "-------------------  weak_pumping_app  --------------------".
+idtac " ".
+
+idtac "#> Pumping.weak_pumping_app".
+idtac "Possible points: 3".
+check_type @Pumping.weak_pumping_app (
+(forall (T : Type) (s1 s2 : list T) (re1 re2 : reg_exp T)
+   (_ : @exp_match T s1 re1) (_ : @exp_match T s2 re2)
+   (_ : forall _ : le (@Pumping.pumping_constant T re1) (@length T s1),
+        @ex (list T)
+          (fun s3 : list T =>
+           @ex (list T)
+             (fun s4 : list T =>
+              @ex (list T)
+                (fun s5 : list T =>
+                 and (@eq (list T) s1 (@app T s3 (@app T s4 s5)))
+                   (and (not (@eq (list T) s4 (@nil T)))
+                      (forall m : nat,
+                       @exp_match T
+                         (@app T s3 (@app T (@Pumping.napp T m s4) s5)) re1))))))
+   (_ : forall _ : le (@Pumping.pumping_constant T re2) (@length T s2),
+        @ex (list T)
+          (fun s3 : list T =>
+           @ex (list T)
+             (fun s4 : list T =>
+              @ex (list T)
+                (fun s5 : list T =>
+                 and (@eq (list T) s2 (@app T s3 (@app T s4 s5)))
+                   (and (not (@eq (list T) s4 (@nil T)))
+                      (forall m : nat,
+                       @exp_match T
+                         (@app T s3 (@app T (@Pumping.napp T m s4) s5)) re2))))))
+   (_ : le (@Pumping.pumping_constant T (@App T re1 re2))
+          (@length T (@app T s1 s2))),
+ @ex (list T)
+   (fun s0 : list T =>
+    @ex (list T)
+      (fun s3 : list T =>
+       @ex (list T)
+         (fun s4 : list T =>
+          and (@eq (list T) (@app T s1 s2) (@app T s0 (@app T s3 s4)))
+            (and (not (@eq (list T) s3 (@nil T)))
+               (forall m : nat,
+                @exp_match T (@app T s0 (@app T (@Pumping.napp T m s3) s4))
+                  (@App T re1 re2)))))))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions Pumping.weak_pumping_app.
+Goal True.
+idtac " ".
+
+idtac "-------------------  weak_pumping_union_l  --------------------".
+idtac " ".
+
+idtac "#> Pumping.weak_pumping_union_l".
+idtac "Possible points: 3".
+check_type @Pumping.weak_pumping_union_l (
+(forall (T : Type) (s1 : list T) (re1 re2 : reg_exp T)
+   (_ : @exp_match T s1 re1)
+   (_ : forall _ : le (@Pumping.pumping_constant T re1) (@length T s1),
+        @ex (list T)
+          (fun s2 : list T =>
+           @ex (list T)
+             (fun s3 : list T =>
+              @ex (list T)
+                (fun s4 : list T =>
+                 and (@eq (list T) s1 (@app T s2 (@app T s3 s4)))
+                   (and (not (@eq (list T) s3 (@nil T)))
+                      (forall m : nat,
+                       @exp_match T
+                         (@app T s2 (@app T (@Pumping.napp T m s3) s4)) re1))))))
+   (_ : le (@Pumping.pumping_constant T (@Union T re1 re2)) (@length T s1)),
+ @ex (list T)
+   (fun s0 : list T =>
+    @ex (list T)
+      (fun s2 : list T =>
+       @ex (list T)
+         (fun s3 : list T =>
+          and (@eq (list T) s1 (@app T s0 (@app T s2 s3)))
+            (and (not (@eq (list T) s2 (@nil T)))
+               (forall m : nat,
+                @exp_match T (@app T s0 (@app T (@Pumping.napp T m s2) s3))
+                  (@Union T re1 re2)))))))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions Pumping.weak_pumping_union_l.
 Goal True.
 idtac " ".
 
@@ -365,7 +478,8 @@ idtac " ".
 
 idtac "#> reflect_iff".
 idtac "Possible points: 2".
-check_type @reflect_iff ((forall (P : Prop) (b : bool), reflect P b -> P <-> b = true)).
+check_type @reflect_iff (
+(forall (P : Prop) (b : bool) (_ : reflect P b), iff P (@eq bool b true))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions reflect_iff.
@@ -378,7 +492,8 @@ idtac " ".
 idtac "#> eqbP_practice".
 idtac "Possible points: 3".
 check_type @eqbP_practice (
-(forall (n : nat) (l : list nat), count n l = 0 -> ~ @In nat n l)).
+(forall (n : nat) (l : list nat) (_ : @eq nat (count n l) 0),
+ not (@In nat n l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions eqbP_practice.
@@ -400,10 +515,11 @@ idtac "#> merge_filter".
 idtac "Advanced".
 idtac "Possible points: 6".
 check_type @merge_filter (
-(forall (X : Set) (test : X -> bool) (l l1 l2 : list X),
- @merge X l1 l2 l ->
- @All X (fun n : X => test n = true) l1 ->
- @All X (fun n : X => test n = false) l2 -> @filter X test l = l1)).
+(forall (X : Set) (test : forall _ : X, bool) (l l1 l2 : list X)
+   (_ : @merge X l1 l2 l)
+   (_ : @All X (fun n : X => @eq bool (test n) true) l1)
+   (_ : @All X (fun n : X => @eq bool (test n) false) l2),
+ @eq (list X) (@filter X test l) l1)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions merge_filter.
@@ -412,8 +528,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 36".
-idtac "Max points - advanced: 61".
+idtac "Max points - standard: 44".
+idtac "Max points - advanced: 59".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -485,6 +601,12 @@ idtac "---------- re_not_empty ---------".
 Print Assumptions re_not_empty.
 idtac "---------- re_not_empty_correct ---------".
 Print Assumptions re_not_empty_correct.
+idtac "---------- Pumping.weak_pumping_char ---------".
+Print Assumptions Pumping.weak_pumping_char.
+idtac "---------- Pumping.weak_pumping_app ---------".
+Print Assumptions Pumping.weak_pumping_app.
+idtac "---------- Pumping.weak_pumping_union_l ---------".
+Print Assumptions Pumping.weak_pumping_union_l.
 idtac "---------- reflect_iff ---------".
 Print Assumptions reflect_iff.
 idtac "---------- eqbP_practice ---------".
@@ -501,10 +623,10 @@ idtac "---------- subseq_app ---------".
 Print Assumptions subseq_app.
 idtac "---------- subseq_trans ---------".
 Print Assumptions subseq_trans.
-idtac "---------- Pumping.weak_pumping ---------".
-Print Assumptions Pumping.weak_pumping.
 idtac "---------- merge_filter ---------".
 Print Assumptions merge_filter.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Trie.
 
 Parameter MISSING: Type.
@@ -39,7 +39,8 @@ idtac "#> Integers.succ_correct".
 idtac "Possible points: 2".
 check_type @Integers.succ_correct (
 (forall p : Integers.positive,
- Integers.positive2nat (Integers.succ p) = S (Integers.positive2nat p))).
+ @eq nat (Integers.positive2nat (Integers.succ p))
+   (S (Integers.positive2nat p)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Integers.succ_correct.
@@ -53,8 +54,9 @@ idtac "#> Integers.addc_correct".
 idtac "Possible points: 3".
 check_type @Integers.addc_correct (
 (forall (c : bool) (p q : Integers.positive),
- Integers.positive2nat (Integers.addc c p q) =
- (if c then 1 else 0) + Integers.positive2nat p + Integers.positive2nat q)).
+ @eq nat (Integers.positive2nat (Integers.addc c p q))
+   (Nat.add (Nat.add (if c then 1 else 0) (Integers.positive2nat p))
+      (Integers.positive2nat q)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Integers.addc_correct.
@@ -69,9 +71,9 @@ idtac "Possible points: 10".
 check_type @Integers.compare_correct (
 (forall x y : Integers.positive,
  match Integers.compare x y with
- | Integers.Eq => Integers.positive2nat x = Integers.positive2nat y
- | Integers.Lt => Integers.positive2nat x < Integers.positive2nat y
- | Integers.Gt => Integers.positive2nat x > Integers.positive2nat y
+ | Integers.Eq => @eq nat (Integers.positive2nat x) (Integers.positive2nat y)
+ | Integers.Lt => lt (Integers.positive2nat x) (Integers.positive2nat y)
+ | Integers.Gt => gt (Integers.positive2nat x) (Integers.positive2nat y)
  end)).
 idtac "Assumptions:".
 Abort.
@@ -93,7 +95,8 @@ idtac " ".
 idtac "#> look_leaf".
 idtac "Possible points: 1".
 check_type @look_leaf (
-(forall (A : Type) (a : A) (j : BinNums.positive), @look A a j (@Leaf A) = a)).
+(forall (A : Type) (a : A) (j : BinNums.positive),
+ @eq A (@look A a j (@Leaf A)) a)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions look_leaf.
@@ -107,7 +110,7 @@ idtac "#> look_ins_same".
 idtac "Possible points: 2".
 check_type @look_ins_same (
 (forall (A : Type) (a : A) (k : BinNums.positive) (v : A) (t : trie A),
- @look A a k (@ins A a k v t) = v)).
+ @eq A (@look A a k (@ins A a k v t)) v)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions look_ins_same.
@@ -121,7 +124,7 @@ idtac "#> look_ins_same".
 idtac "Possible points: 3".
 check_type @look_ins_same (
 (forall (A : Type) (a : A) (k : BinNums.positive) (v : A) (t : trie A),
- @look A a k (@ins A a k v t) = v)).
+ @eq A (@look A a k (@ins A a k v t)) v)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions look_ins_same.
@@ -134,7 +137,8 @@ idtac " ".
 idtac "#> pos2nat_injective".
 idtac "Possible points: 1".
 check_type @pos2nat_injective (
-(forall p q : BinNums.positive, pos2nat p = pos2nat q -> p = q)).
+(forall (p q : BinNums.positive) (_ : @eq nat (pos2nat p) (pos2nat q)),
+ @eq BinNums.positive p q)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions pos2nat_injective.
@@ -143,7 +147,9 @@ idtac " ".
 
 idtac "#> nat2pos_injective".
 idtac "Possible points: 1".
-check_type @nat2pos_injective ((forall i j : nat, nat2pos i = nat2pos j -> i = j)).
+check_type @nat2pos_injective (
+(forall (i j : nat) (_ : @eq BinNums.positive (nat2pos i) (nat2pos j)),
+ @eq nat i j)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions nat2pos_injective.
@@ -155,7 +161,7 @@ idtac " ".
 
 idtac "#> is_trie".
 idtac "Possible points: 2".
-check_type @is_trie ((forall A : Type, trie_table A -> Prop)).
+check_type @is_trie ((forall (A : Type) (_ : trie_table A), Prop)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions is_trie.
@@ -183,8 +189,8 @@ idtac "#> lookup_relate".
 idtac "Possible points: 2".
 check_type @lookup_relate (
 (forall (A : Type) (i : BinNums.positive) (t : trie_table A)
-   (m : Maps.total_map A),
- @is_trie A t -> @Abs A t m -> @lookup A i t = m (pos2nat i))).
+   (m : Maps.total_map A) (_ : @is_trie A t) (_ : @Abs A t m),
+ @eq A (@lookup A i t) (m (pos2nat i)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_relate.
@@ -197,10 +203,9 @@ idtac " ".
 idtac "#> insert_relate".
 idtac "Possible points: 3".
 check_type @insert_relate (
-(forall (A : Type) (k : BinNums.positive) (v : A) 
-   (t : trie_table A) (cts : Maps.total_map A),
- @is_trie A t ->
- @Abs A t cts ->
+(forall (A : Type) (k : BinNums.positive) (v : A)
+   (t : trie_table A) (cts : Maps.total_map A) (_ : @is_trie A t)
+   (_ : @Abs A t cts),
  @Abs A (@insert A k v t) (@Maps.t_update A cts (pos2nat k) v))).
 idtac "Assumptions:".
 Abort.
@@ -274,4 +279,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

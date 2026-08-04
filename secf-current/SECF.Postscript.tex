@@ -1,0 +1,218 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.Postscript}{Library }{SECF.Postscript}
+
+\begin{coqdoccode}
+\end{coqdoccode}
+\section{Postscript}
+
+
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\section{Looking Back}
+
+
+
+ Here is a quick summary of the topics we covered in this volume: 
+
+\subsection{Noninterference}
+
+
+
+\begin{itemize}
+\item  definitions for pure functions, state transformers,
+  and imperative programs
+
+\item  termination-insensitive noninterference (TINI)
+
+\item  termination-sensitive noninterference (TSNI) 
+\end{itemize}
+
+
+\subsection{Secure multi-execution}
+
+
+
+\begin{itemize}
+\item  sound and transparent dynamic enforcement of TINI 
+\end{itemize}
+
+
+\subsection{Information-flow control type systems}
+
+
+
+\begin{itemize}
+\item  type-checkers enforcing TINI and TSNI
+
+\item  for imperative programs with state and outputs 
+\end{itemize}
+
+
+\subsection{Side channels}
+
+
+
+\begin{itemize}
+\item  control flow security and type system enforcing it
+
+\item  cryptographic constant-time security and type system enforcing it 
+\end{itemize}
+
+
+\subsection{Speculative execution attacks}
+
+
+
+\begin{itemize}
+\item  speculative constant-time security definition
+
+\item  speculative load hardening (SLH) transformation achieving it 
+
+\end{itemize}
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\section{Looking Around}
+
+
+
+ The topics above have found practical applications in system security. Below
+    we highlight a few recent research projects involving machine-checked proofs: 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Proving Noninterference by Parametricity}
+
+
+
+ While in \coqdoclibrary{StaticIFC} we showed how to build specialized type systems
+    for noninterference, research has shown that in functional programming
+    languages with strong type-abstraction mechanisms, information-flow control
+    can be implemented as a library. Recent research has shown that in this
+    setting simple and elegant noninterference proofs can be built by relying on
+    the theory of parametricity, both for libraries doing static enforcement
+    \coqdocvar{Algehed} \coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}} \coqdocvar{Bernardy} 2019 (in Bib.v) and for ones doing dynamic enforcement
+    \coqdocvar{Algehed} \coqdocvar{et} \coqdocvar{al} 2021 (in Bib.v). These noninterference proofs have been
+    machine-checked in Agda. 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Formal verification of a constant-time preserving C compiler}
+
+
+
+ This work \coqdocvar{Barthe} \coqdocvar{et} \coqdocvar{al} 2020 (in Bib.v) shows that a mildly modified version of
+    the CompCert verified C compiler preserves cryptographic constant-time
+    security. In particular the authors prove in Rocq that the compiler does
+    not introduce secret dependencies into control flow or memory access. Their
+    Rocq formalization is aimed at maximizing reuse of the CompCert correctness
+    proof, through the use of novel proof techniques for constant-time
+    preservation. 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Jasmin programming language and compiler}
+
+
+
+ Jasmin is a low-level domain-specific language for implementing
+    high-assurance and high-speed cryptography. Jasmin programs can be verified
+    for correctness, cryptographic security, and side-channel resistance by
+    translation to the EasyCrypt proof assistant \coqdocvar{Almeida} \coqdocvar{et} \coqdocvar{al} 2020 (in Bib.v).
+    The Jasmin compiler was formally verified in Rocq to be correct
+    \coqdocvar{Almeida} \coqdocvar{et} \coqdocvar{al} 2020 (in Bib.v) and to preserve constant-time security
+    \coqdocvar{Barthe} \coqdocvar{et} \coqdocvar{al} 2021 (in Bib.v). In more recent work a core compiler inspired by
+    Jasmin was proved in Rocq to also preserve speculative constant-time
+    \coqdocvar{Arranz}-\coqdocvar{Olmos} \coqdocvar{et} \coqdocvar{al} 2025 (in Bib.v). 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Flexible Mechanized Speculative Load Hardening}
+
+
+
+ The \coqdoclibrary{SpecCT} chapter and the two projects above are
+    aimed at achieving security for cryptographic code. Yet Spectre attacks
+    are also a serious threat for non-cryptographic code, since without any
+    defenses attackers can construct ``universal read gadgets'' that leak a
+    sensitive program's entire memory. SLH is, however, not strong enough for
+    protecting code that does not respect the constant-time discipline, leading
+    to the introduction of Ultimate SLH \coqdocvar{Zhang} \coqdocvar{et} \coqdocvar{al} 2023 (in Bib.v), which provides
+    protection for arbitrary programs, but has too large overhead for general
+    use, since it conservatively assumes that all data is secret. More recent
+    work introduces Flexible SLH \coqdocvar{Baumann} \coqdocvar{et} \coqdocvar{al} 2025 (in Bib.v), which achieves the
+    best of both worlds by generalizing both the selective SLH variant from
+    \coqdoclibrary{SpecCT} and Ultimate SLH. Baumann et al prove in Rocq that Flexible
+    SLH and Ultimate SLH satisfy a relative security property: any
+    transformed program running with speculation must not leak more than what
+    the source program leaks sequentially. Their Rocq formalization originated
+    as an extension of the simple development from the \coqdoclibrary{SpecCT} chapter. 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Strong Timing Isolation of Hardware Enclaves}
+
+
+
+ This work \coqdocvar{Lau} \coqdocvar{et} \coqdocvar{al} 2024 (in Bib.v) introduced a RISC-V processor design that is
+    formally verified in Rocq to achieve strong timing isolation for enclaves,
+    which is formalized in terms of ``air-gaped machines''. 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\section{Looking Forward}
+
+
+
+ For readers interesting in research, here are the main conferences
+    publishing papers on formal foundations on security:
+
+\begin{itemize}
+\item  Computer Security Foundations (CSF)
+
+\item  Principles of Programming Languages (POPL)
+
+\item  International Conference on Functional Programming (ICFP)
+
+\item  Certified Programs and Proofs (CPP)
+
+\item  Interactive Theorem Proving (ITP)
+
+\item  Computer and Communications Security (CCS)
+
+\begin{itemize}
+\item  Formal Methods and Programming Languages track
+
+\end{itemize}
+
+\item  IEEE Security and Privacy (SP)
+
+\item  Principles of Secure Compilation Workshop (PriSC) 
+
+\end{itemize}
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

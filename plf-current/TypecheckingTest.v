@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import Typechecking.
 
 Parameter MISSING: Type.
@@ -47,8 +47,10 @@ idtac "#> TypecheckerExtensions.type_checking_sound".
 idtac "Possible points: 2".
 check_type @TypecheckerExtensions.type_checking_sound (
 (forall (Gamma : MoreStlc.STLCExtended.context)
-   (t : MoreStlc.STLCExtended.tm) (T : MoreStlc.STLCExtended.ty),
- TypecheckerExtensions.type_check Gamma t = return T ->
+   (t : MoreStlc.STLCExtended.tm) (T : MoreStlc.STLCExtended.ty)
+   (_ : @eq (option MoreStlc.STLCExtended.ty)
+          (TypecheckerExtensions.type_check Gamma t)
+          (@Some MoreStlc.STLCExtended.ty T)),
  MoreStlc.STLCExtended.has_type Gamma t T)).
 idtac "Assumptions:".
 Abort.
@@ -63,9 +65,11 @@ idtac "#> TypecheckerExtensions.type_checking_complete".
 idtac "Possible points: 2".
 check_type @TypecheckerExtensions.type_checking_complete (
 (forall (Gamma : MoreStlc.STLCExtended.context)
-   (t : MoreStlc.STLCExtended.tm) (T : MoreStlc.STLCExtended.ty),
- MoreStlc.STLCExtended.has_type Gamma t T ->
- TypecheckerExtensions.type_check Gamma t = return T)).
+   (t : MoreStlc.STLCExtended.tm) (T : MoreStlc.STLCExtended.ty)
+   (_ : MoreStlc.STLCExtended.has_type Gamma t T),
+ @eq (option MoreStlc.STLCExtended.ty)
+   (TypecheckerExtensions.type_check Gamma t)
+   (@Some MoreStlc.STLCExtended.ty T))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TypecheckerExtensions.type_checking_complete.
@@ -106,4 +110,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

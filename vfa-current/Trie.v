@@ -67,9 +67,9 @@
 (* ################################################################# *)
 (** * A Simple Program That's Waaaaay Too Slow. *)
 
-From Coq Require Import Strings.String.  (* for manual grading *)
-From Coq Require Import ZArith.
-From Coq Require Import PArith.
+From Stdlib Require Import Strings.String.  (* for manual grading *)
+From Stdlib Require Import ZArith.
+From Stdlib Require Import PArith.
 From VFA Require Import Perm.
 From VFA Require Import Maps.
 Import FunctionalExtensionality.
@@ -705,4 +705,4 @@ try (apply empty_relate).
   but [FMaps] uses different names for the functions [insert] and [lookup],
   and also provides several other operations on maps.  *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

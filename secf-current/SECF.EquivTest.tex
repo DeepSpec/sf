@@ -1,0 +1,549 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.EquivTest}{Library }{SECF.EquivTest}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Set} \coqdocvar{Warnings} "-notation-overridden,-parsing".\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{Stdlib} \coqdockw{Require} \coqdockw{Export} \coqdoclibrary{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Equiv}{\coqdoclibrary{Equiv}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdef{SECF.EquivTest.MISSING}{MISSING}{\coqdocaxiom{MISSING}}: \coqdockw{Type}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdef{SECF.EquivTest.Check}{Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{check\_type} \coqdocvar{A} \coqdocvar{B} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdockw{type} \coqdockw{of} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdockw{context}[\coqref{SECF.EquivTest.MISSING}{\coqdocaxiom{MISSING}}] \ensuremath{\Rightarrow} \coqdoctac{idtac} "Missing:" \coqdocvar{A}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} ?\coqdocvar{T} \ensuremath{\Rightarrow} \coqdoctac{first} [\coqdocvar{unify} \coqdocvar{T} \coqdocvar{B}; \coqdoctac{idtac} "Type: ok" \ensuremath{|} \coqdoctac{idtac} "Type: wrong - should be (" \coqdocvar{B} ")"]\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print\_manual\_grade} \coqdocvar{A} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{Some}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{Some}} (\coqdocvar{\_} ?\coqdocvar{S} ?\coqdocvar{C}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score:"  \coqdocvar{S};\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{C} \coqdockw{with}\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} ""\%\coqdocvar{string} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment:" \coqdocvar{C}\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{None}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{None}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score: Ungraded";\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqref{SECF.EquivTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Equiv}{\coqdoclibrary{Equiv}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqref{SECF.EquivTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  skip\_right  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> skip\_right".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.skip right}{\coqdocaxiom{skip\_right}} ((\coqdockw{\ensuremath{\forall}} \coqdef{SECF.EquivTest.c:3}{c}{\coqdocbinder{c}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}, \coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} (\coqref{SECF.Imp.CSeq}{\coqdocconstructor{CSeq}} \coqref{SECF.EquivTest.c:3}{\coqdocvariable{c}} \coqref{SECF.Imp.CSkip}{\coqdocconstructor{CSkip}}) \coqref{SECF.EquivTest.c:3}{\coqdocvariable{c}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.skip right}{\coqdocaxiom{skip\_right}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  if\_false  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> if\_false".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.if false}{\coqdocaxiom{if\_false}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.b:5}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}}) (\coqdef{SECF.EquivTest.c1:6}{c1}{\coqdocbinder{c1}} \coqdef{SECF.EquivTest.c2:7}{c2}{\coqdocbinder{c2}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}) (\coqdocvar{\_} : \coqref{SECF.Equiv.bequiv}{\coqdocdefinition{bequiv}} \coqref{SECF.EquivTest.b:5}{\coqdocvariable{b}} \coqref{SECF.Imp.BFalse}{\coqdocconstructor{BFalse}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} (\coqref{SECF.Imp.CIf}{\coqdocconstructor{CIf}} \coqref{SECF.EquivTest.b:5}{\coqdocvariable{b}} \coqref{SECF.EquivTest.c1:6}{\coqdocvariable{c1}} \coqref{SECF.EquivTest.c2:7}{\coqdocvariable{c2}}) \coqref{SECF.EquivTest.c2:7}{\coqdocvariable{c2}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.if false}{\coqdocaxiom{if\_false}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  swap\_if\_branches  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> swap\_if\_branches".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.swap if branches}{\coqdocaxiom{swap\_if\_branches}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.b:11}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}}) (\coqdef{SECF.EquivTest.c1:12}{c1}{\coqdocbinder{c1}} \coqdef{SECF.EquivTest.c2:13}{c2}{\coqdocbinder{c2}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}), \coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} (\coqref{SECF.Imp.CIf}{\coqdocconstructor{CIf}} \coqref{SECF.EquivTest.b:11}{\coqdocvariable{b}} \coqref{SECF.EquivTest.c1:12}{\coqdocvariable{c1}} \coqref{SECF.EquivTest.c2:13}{\coqdocvariable{c2}}) (\coqref{SECF.Imp.CIf}{\coqdocconstructor{CIf}} (\coqref{SECF.Imp.BNot}{\coqdocconstructor{BNot}} \coqref{SECF.EquivTest.b:11}{\coqdocvariable{b}}) \coqref{SECF.EquivTest.c2:13}{\coqdocvariable{c2}} \coqref{SECF.EquivTest.c1:12}{\coqdocvariable{c1}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.swap if branches}{\coqdocaxiom{swap\_if\_branches}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  while\_true  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> while\_true".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.while true}{\coqdocaxiom{while\_true}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.b:17}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}}) (\coqdef{SECF.EquivTest.c:18}{c}{\coqdocbinder{c}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}) (\coqdocvar{\_} : \coqref{SECF.Equiv.bequiv}{\coqdocdefinition{bequiv}} \coqref{SECF.EquivTest.b:17}{\coqdocvariable{b}} \coqref{SECF.Imp.BTrue}{\coqdocconstructor{BTrue}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} (\coqref{SECF.Imp.CWhile}{\coqdocconstructor{CWhile}} \coqref{SECF.EquivTest.b:17}{\coqdocvariable{b}} \coqref{SECF.EquivTest.c:18}{\coqdocvariable{c}}) (\coqref{SECF.Imp.CWhile}{\coqdocconstructor{CWhile}} \coqref{SECF.Imp.BTrue}{\coqdocconstructor{BTrue}} \coqref{SECF.Imp.CSkip}{\coqdocconstructor{CSkip}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.while true}{\coqdocaxiom{while\_true}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  assign\_aequiv  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> assign\_aequiv".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.assign aequiv}{\coqdocaxiom{assign\_aequiv}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.X:21}{X}{\coqdocbinder{X}} : \coqdocinductive{String.string}) (\coqdef{SECF.EquivTest.a:22}{a}{\coqdocbinder{a}} : \coqref{SECF.Imp.aexp}{\coqdocinductive{aexp}}) (\coqdocvar{\_} : \coqref{SECF.Equiv.aequiv}{\coqdocdefinition{aequiv}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.EquivTest.X:21}{\coqdocvariable{X}}) \coqref{SECF.EquivTest.a:22}{\coqdocvariable{a}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} \coqref{SECF.Imp.CSkip}{\coqdocconstructor{CSkip}} (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.EquivTest.X:21}{\coqdocvariable{X}} \coqref{SECF.EquivTest.a:22}{\coqdocvariable{a}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.assign aequiv}{\coqdocaxiom{assign\_aequiv}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  CIf\_congruence  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> CIf\_congruence".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.CIf congruence}{\coqdocaxiom{CIf\_congruence}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.b:25}{b}{\coqdocbinder{b}} \coqdef{SECF.EquivTest.b':26}{b'}{\coqdocbinder{b'}} : \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}}) (\coqdef{SECF.EquivTest.c1:27}{c1}{\coqdocbinder{c1}} \coqdef{SECF.EquivTest.c1':28}{c1'}{\coqdocbinder{c1'}} \coqdef{SECF.EquivTest.c2:29}{c2}{\coqdocbinder{c2}} \coqdef{SECF.EquivTest.c2':30}{c2'}{\coqdocbinder{c2'}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}) (\coqdocvar{\_} : \coqref{SECF.Equiv.bequiv}{\coqdocdefinition{bequiv}} \coqref{SECF.EquivTest.b:25}{\coqdocvariable{b}} \coqref{SECF.EquivTest.b':26}{\coqdocvariable{b'}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} \coqref{SECF.EquivTest.c1:27}{\coqdocvariable{c1}} \coqref{SECF.EquivTest.c1':28}{\coqdocvariable{c1'}}) (\coqdocvar{\_} : \coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} \coqref{SECF.EquivTest.c2:29}{\coqdocvariable{c2}} \coqref{SECF.EquivTest.c2':30}{\coqdocvariable{c2'}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} (\coqref{SECF.Imp.CIf}{\coqdocconstructor{CIf}} \coqref{SECF.EquivTest.b:25}{\coqdocvariable{b}} \coqref{SECF.EquivTest.c1:27}{\coqdocvariable{c1}} \coqref{SECF.EquivTest.c2:29}{\coqdocvariable{c2}}) (\coqref{SECF.Imp.CIf}{\coqdocconstructor{CIf}} \coqref{SECF.EquivTest.b':26}{\coqdocvariable{b'}} \coqref{SECF.EquivTest.c1':28}{\coqdocvariable{c1'}} \coqref{SECF.EquivTest.c2':30}{\coqdocvariable{c2'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.CIf congruence}{\coqdocaxiom{CIf\_congruence}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  not\_congr  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Manually graded: not\_congr".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{print\_manual\_grade} \coqref{SECF.Equiv.manual grade for not congr}{\coqdocdefinition{manual\_grade\_for\_not\_congr}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  fold\_constants\_com\_sound  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> fold\_constants\_com\_sound".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.fold constants com sound}{\coqdocaxiom{fold\_constants\_com\_sound}} ((\coqref{SECF.Equiv.ctrans sound}{\coqdocdefinition{ctrans\_sound}} \coqref{SECF.Equiv.fold constants com}{\coqdocdefinition{fold\_constants\_com}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.fold constants com sound}{\coqdocaxiom{fold\_constants\_com\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  inequiv\_exercise  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> inequiv\_exercise".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.inequiv exercise}{\coqdocaxiom{inequiv\_exercise}} ((\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Equiv.cequiv}{\coqdocdefinition{cequiv}} (\coqref{SECF.Imp.CWhile}{\coqdocconstructor{CWhile}} \coqref{SECF.Imp.BTrue}{\coqdocconstructor{BTrue}} \coqref{SECF.Imp.CSkip}{\coqdocconstructor{CSkip}}) \coqref{SECF.Imp.CSkip}{\coqdocconstructor{CSkip}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.inequiv exercise}{\coqdocaxiom{inequiv\_exercise}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  himp\_ceval  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Manually graded: Himp.Check\_rule\_for\_HAVOC".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{print\_manual\_grade} \coqref{SECF.Equiv.Himp.manual grade for Check rule for HAVOC}{\coqdocdefinition{Himp.manual\_grade\_for\_Check\_rule\_for\_HAVOC}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  havoc\_swap  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.pXY\_cequiv\_pYX".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.Himp.pXY cequiv pYX}{\coqdocaxiom{Himp.pXY\_cequiv\_pYX}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{or}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{or}} (\coqref{SECF.Equiv.Himp.cequiv}{\coqdocdefinition{Himp.cequiv}} \coqref{SECF.Equiv.Himp.pXY}{\coqdocdefinition{Himp.pXY}} \coqref{SECF.Equiv.Himp.pYX}{\coqdocdefinition{Himp.pYX}}) (\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Equiv.Himp.cequiv}{\coqdocdefinition{Himp.cequiv}} \coqref{SECF.Equiv.Himp.pXY}{\coqdocdefinition{Himp.pXY}} \coqref{SECF.Equiv.Himp.pYX}{\coqdocdefinition{Himp.pYX}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.pXY cequiv pYX}{\coqdocaxiom{Himp.pXY\_cequiv\_pYX}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  p1\_p2\_term  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.p1\_may\_diverge".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.Himp.p1 may diverge}{\coqdocaxiom{Himp.p1\_may\_diverge}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.st:37}{st}{\coqdocbinder{st}} : \coqdockw{\ensuremath{\forall}} \coqdocvar{\_} : \coqdocinductive{String.string}, \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqdef{SECF.EquivTest.st':38}{st'}{\coqdocbinder{st'}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} (\coqref{SECF.EquivTest.st:37}{\coqdocvariable{st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) 0)),\coqdoceol
+\coqdocindent{0.50em}
+\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Equiv.Himp.ceval}{\coqdocinductive{Himp.ceval}} \coqref{SECF.Equiv.Himp.p1}{\coqdocdefinition{Himp.p1}} \coqref{SECF.EquivTest.st:37}{\coqdocvariable{st}} \coqref{SECF.EquivTest.st':38}{\coqdocvariable{st'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p1 may diverge}{\coqdocaxiom{Himp.p1\_may\_diverge}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.p2\_may\_diverge".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.Himp.p2 may diverge}{\coqdocaxiom{Himp.p2\_may\_diverge}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.EquivTest.st:41}{st}{\coqdocbinder{st}} : \coqdockw{\ensuremath{\forall}} \coqdocvar{\_} : \coqdocinductive{String.string}, \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqdef{SECF.EquivTest.st':42}{st'}{\coqdocbinder{st'}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} (\coqref{SECF.EquivTest.st:41}{\coqdocvariable{st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) 0)),\coqdoceol
+\coqdocindent{0.50em}
+\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Equiv.Himp.ceval}{\coqdocinductive{Himp.ceval}} \coqref{SECF.Equiv.Himp.p2}{\coqdocdefinition{Himp.p2}} \coqref{SECF.EquivTest.st:41}{\coqdocvariable{st}} \coqref{SECF.EquivTest.st':42}{\coqdocvariable{st'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p2 may diverge}{\coqdocaxiom{Himp.p2\_may\_diverge}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  p1\_p2\_equiv  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.p1\_p2\_equiv".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 6".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.Himp.p1 p2 equiv}{\coqdocaxiom{Himp.p1\_p2\_equiv}} ((\coqref{SECF.Equiv.Himp.cequiv}{\coqdocdefinition{Himp.cequiv}} \coqref{SECF.Equiv.Himp.p1}{\coqdocdefinition{Himp.p1}} \coqref{SECF.Equiv.Himp.p2}{\coqdocdefinition{Himp.p2}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p1 p2 equiv}{\coqdocaxiom{Himp.p1\_p2\_equiv}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  p3\_p4\_inequiv  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.p3\_p4\_inequiv".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 6".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Equiv.Himp.p3 p4 inequiv}{\coqdocaxiom{Himp.p3\_p4\_inequiv}} ((\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Equiv.Himp.cequiv}{\coqdocdefinition{Himp.cequiv}} \coqref{SECF.Equiv.Himp.p3}{\coqdocdefinition{Himp.p3}} \coqref{SECF.Equiv.Himp.p4}{\coqdocdefinition{Himp.p4}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p3 p4 inequiv}{\coqdocaxiom{Himp.p3\_p4\_inequiv}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.EquivTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - standard: 25".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - advanced: 46".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Allowed Axioms:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "functional\_extensionality".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "FunctionalExtensionality.functional\_extensionality\_dep".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Summary **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Below is a summary of the automatically graded exercises that are incomplete.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "The output for each exercise can be any of the following:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'Closed under the global context', if it is complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'MANUAL', if it is manually graded".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - A list of pending axioms, containing unproven assumptions. In this case".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "    the exercise is considered complete, if the axioms are all allowed.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Standard **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- skip\_right ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.skip right}{\coqdocaxiom{skip\_right}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- if\_false ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.if false}{\coqdocaxiom{if\_false}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- swap\_if\_branches ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.swap if branches}{\coqdocaxiom{swap\_if\_branches}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- while\_true ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.while true}{\coqdocaxiom{while\_true}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- assign\_aequiv ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.assign aequiv}{\coqdocaxiom{assign\_aequiv}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- CIf\_congruence ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.CIf congruence}{\coqdocaxiom{CIf\_congruence}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- fold\_constants\_com\_sound ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.fold constants com sound}{\coqdocaxiom{fold\_constants\_com\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- inequiv\_exercise ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.inequiv exercise}{\coqdocaxiom{inequiv\_exercise}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Check\_rule\_for\_HAVOC ---------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "MANUAL".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.pXY\_cequiv\_pYX ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.pXY cequiv pYX}{\coqdocaxiom{Himp.pXY\_cequiv\_pYX}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Advanced **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- not\_congr ---------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "MANUAL".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.p1\_may\_diverge ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p1 may diverge}{\coqdocaxiom{Himp.p1\_may\_diverge}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.p2\_may\_diverge ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p2 may diverge}{\coqdocaxiom{Himp.p2\_may\_diverge}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.p1\_p2\_equiv ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p1 p2 equiv}{\coqdocaxiom{Himp.p1\_p2\_equiv}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.p3\_p4\_inequiv ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Equiv.Himp.p3 p4 inequiv}{\coqdocaxiom{Himp.p3\_p4\_inequiv}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

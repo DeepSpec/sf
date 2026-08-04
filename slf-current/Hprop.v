@@ -184,8 +184,8 @@ Parameter hstar_assoc_statement : forall H1 H2 H3,
     [forall (h:heap), H1 h <-> H2 h].
 
     This reasoning principle, a specific form of extensionality property, is not
-    available by default in Coq. But we can safely assume it if we extend the
-    logic of Coq with a standard axiom called "predicate extensionality". *)
+    available by default in Rocq. But we can safely assume it if we extend the
+    logic of Rocq with a standard axiom called "predicate extensionality". *)
 
 Axiom predicate_extensionality : forall (A:Type) (P Q:A->Prop),
   (forall x, P x <-> Q x) ->
@@ -265,7 +265,7 @@ Notation "Q \*+ H" := (fun x => hstar (Q x) H) (at level 40).
     equal, it suffices to show that the heap predicates [Q1 v] and [Q2 v] are
     equal for any value [v].
 
-    Again, the extensionality property that we need is not built into Coq. We
+    Again, the extensionality property that we need is not built into Rocq. We
     need another axiom called "functional extensionality". *)
 
 Axiom functional_extensionality : forall A B (f g:A->B),
@@ -367,7 +367,7 @@ Module HpropProofs.
 (** Let us prove that [(\exists x, J x) \* H] is equivalent to
     [\exists x, (J x \* H)].
 
-    Note that, somewhat confusingly, Coq displays none of the parentheses. You
+    Note that, somewhat confusingly, Rocq displays none of the parentheses. You
     may want to use [Set Printing Parentheses] to more easily follow through the
     proof. *)
 
@@ -618,7 +618,7 @@ Definition hpure' (P:Prop) : hprop :=
 
 (** The notation for [\exists] is directly adapted from that of [exists], which
     supports the quantification an arbitrary number of variables, and is defined
-    in [Coq.Init.Logic] as follows.
+    in [Rocq.Init.Logic] as follows.
 
     Notation "'exists' x1 .. xn , p" := (ex (fun x1 => .. (ex (fun xn => p)) ..))
       (at level 200, x1 binder, right associativity,
@@ -671,13 +671,13 @@ End Extensionality.
 (** ** Historical Notes *)
 
 (** In this chapter, we have defined the Separation Logic operators, in
-    particular the "separating conjunction" operator, as a Coq predicate. This
+    particular the "separating conjunction" operator, as a Rocq predicate. This
     formalization style is called "shallow embedding". It has been employed in
-    the first mechanized formalizations of Separation Logic, in Coq by
+    the first mechanized formalizations of Separation Logic, in Rocq by
     [Yu, Hamid, and Shao 2003] (in Bib.v), and in Isabelle/HOL by [Weber 2004] (in Bib.v).
     These two formalizations were carried out soon after the invention of
     Separation Logic, by researchers who were used to mechanizing Hoare logic and
     had spotted the potential benefit of working with the separating
     conjunction. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

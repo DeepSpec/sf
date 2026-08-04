@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Proof of the axioms of choice                                           *
 **************************************************************************)
 
@@ -215,4 +215,4 @@ Proof using. intros. apply~ guarded_rel_choice. Qed.
 
 
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

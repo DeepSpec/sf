@@ -1,0 +1,432 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.NoninterferenceTest}{Library }{SECF.NoninterferenceTest}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Set} \coqdocvar{Warnings} "-notation-overridden,-parsing".\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{Stdlib} \coqdockw{Require} \coqdockw{Export} \coqdoclibrary{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Noninterference}{\coqdoclibrary{Noninterference}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdef{SECF.NoninterferenceTest.MISSING}{MISSING}{\coqdocaxiom{MISSING}}: \coqdockw{Type}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdef{SECF.NoninterferenceTest.Check}{Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{check\_type} \coqdocvar{A} \coqdocvar{B} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdockw{type} \coqdockw{of} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdockw{context}[\coqref{SECF.NoninterferenceTest.MISSING}{\coqdocaxiom{MISSING}}] \ensuremath{\Rightarrow} \coqdoctac{idtac} "Missing:" \coqdocvar{A}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} ?\coqdocvar{T} \ensuremath{\Rightarrow} \coqdoctac{first} [\coqdocvar{unify} \coqdocvar{T} \coqdocvar{B}; \coqdoctac{idtac} "Type: ok" \ensuremath{|} \coqdoctac{idtac} "Type: wrong - should be (" \coqdocvar{B} ")"]\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print\_manual\_grade} \coqdocvar{A} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{Some}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{Some}} (\coqdocvar{\_} ?\coqdocvar{S} ?\coqdocvar{C}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score:"  \coqdocvar{S};\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{C} \coqdockw{with}\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} ""\%\coqdocvar{string} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment:" \coqdocvar{C}\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{None}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{None}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score: Ungraded";\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqref{SECF.NoninterferenceTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Noninterference}{\coqdoclibrary{Noninterference}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqref{SECF.NoninterferenceTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  prove\_or\_disprove\_obvious\_f1  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> prove\_or\_disprove\_obvious\_f1".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.prove or disprove obvious f1}{\coqdocaxiom{prove\_or\_disprove\_obvious\_f1}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{or}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{or}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.obvious f1}{\coqdocdefinition{obvious\_f1}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.obvious f1}{\coqdocdefinition{obvious\_f1}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove obvious f1}{\coqdocaxiom{prove\_or\_disprove\_obvious\_f1}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  prove\_or\_disprove\_obvious\_f2  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> prove\_or\_disprove\_obvious\_f2".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.prove or disprove obvious f2}{\coqdocaxiom{prove\_or\_disprove\_obvious\_f2}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{or}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{or}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.obvious f2}{\coqdocdefinition{obvious\_f2}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.obvious f2}{\coqdocdefinition{obvious\_f2}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove obvious f2}{\coqdocaxiom{prove\_or\_disprove\_obvious\_f2}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  prove\_or\_disprove\_less\_obvious\_f4  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> prove\_or\_disprove\_less\_obvious\_f4".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.prove or disprove less obvious f4}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f4}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{or}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{or}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.less obvious f4}{\coqdocdefinition{less\_obvious\_f4}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.less obvious f4}{\coqdocdefinition{less\_obvious\_f4}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove less obvious f4}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f4}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  prove\_or\_disprove\_less\_obvious\_f5  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> prove\_or\_disprove\_less\_obvious\_f5".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.prove or disprove less obvious f5}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f5}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{or}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{or}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.less obvious f5}{\coqdocdefinition{less\_obvious\_f5}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.less obvious f5}{\coqdocdefinition{less\_obvious\_f5}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove less obvious f5}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f5}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  prove\_or\_disprove\_less\_obvious\_f6  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> prove\_or\_disprove\_less\_obvious\_f6".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.prove or disprove less obvious f6}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f6}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{or}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{or}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.less obvious f6}{\coqdocdefinition{less\_obvious\_f6}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqref{SECF.Noninterference.noninterferent}{\coqdocdefinition{noninterferent}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Noninterference.less obvious f6}{\coqdocdefinition{less\_obvious\_f6}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove less obvious f6}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f6}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  sme\_another\_insecure\_f2  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> sme\_another\_insecure\_f2".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.sme another insecure f2}{\coqdocaxiom{sme\_another\_insecure\_f2}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} \coqdef{SECF.NoninterferenceTest.pi:3}{pi}{\coqdocbinder{pi}} \coqdef{SECF.NoninterferenceTest.si:4}{si}{\coqdocbinder{si}} : \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}},\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{prod}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{prod}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (@\coqref{SECF.Noninterference.sme}{\coqdocdefinition{sme}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 0 \coqref{SECF.Noninterference.another insecure f2}{\coqdocdefinition{another\_insecure\_f2}} \coqref{SECF.NoninterferenceTest.pi:3}{\coqdocvariable{pi}} \coqref{SECF.NoninterferenceTest.si:4}{\coqdocvariable{si}})\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{pair}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{pair}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.NoninterferenceTest.pi:3}{\coqdocvariable{pi}} (\coqdocdefinition{PeanoNat.Nat.add} \coqref{SECF.NoninterferenceTest.pi:3}{\coqdocvariable{pi}} \coqref{SECF.NoninterferenceTest.si:4}{\coqdocvariable{si}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.sme another insecure f2}{\coqdocaxiom{sme\_another\_insecure\_f2}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  sme\_another\_insecure\_f3  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> sme\_another\_insecure\_f3".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.sme another insecure f3}{\coqdocaxiom{sme\_another\_insecure\_f3}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} \coqdef{SECF.NoninterferenceTest.pi:7}{pi}{\coqdocbinder{pi}} \coqdef{SECF.NoninterferenceTest.si:8}{si}{\coqdocbinder{si}} : \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}},\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{prod}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{prod}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (@\coqref{SECF.Noninterference.sme}{\coqdocdefinition{sme}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 0 \coqref{SECF.Noninterference.another insecure f3}{\coqdocdefinition{another\_insecure\_f3}} \coqref{SECF.NoninterferenceTest.pi:7}{\coqdocvariable{pi}} \coqref{SECF.NoninterferenceTest.si:8}{\coqdocvariable{si}})\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{pair}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{pair}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.NoninterferenceTest.pi:7}{\coqdocvariable{pi}} (\coqdocdefinition{PeanoNat.Nat.add} \coqref{SECF.NoninterferenceTest.pi:7}{\coqdocvariable{pi}} \coqref{SECF.NoninterferenceTest.si:8}{\coqdocvariable{si}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.sme another insecure f3}{\coqdocaxiom{sme\_another\_insecure\_f3}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  noninterferent\_secure\_ex1  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> noninterferent\_secure\_ex1".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.noninterferent secure ex1}{\coqdocaxiom{noninterferent\_secure\_ex1}} ((\coqref{SECF.Noninterference.noninterferent no while}{\coqdocdefinition{noninterferent\_no\_while}} \coqref{SECF.Noninterference.xpub}{\coqdocdefinition{xpub}} \coqref{SECF.Noninterference.secure ex1}{\coqdocdefinition{secure\_ex1}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.noninterferent secure ex1}{\coqdocaxiom{noninterferent\_secure\_ex1}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  interferent\_insecure\_com\_explicit  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> interferent\_insecure\_com\_explicit".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.interferent insecure com explicit}{\coqdocaxiom{interferent\_insecure\_com\_explicit}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Noninterference.noninterferent no while}{\coqdocdefinition{noninterferent\_no\_while}} \coqref{SECF.Noninterference.xpub}{\coqdocdefinition{xpub}} \coqref{SECF.Noninterference.insecure com explicit}{\coqdocdefinition{insecure\_com\_explicit}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.interferent insecure com explicit}{\coqdocaxiom{interferent\_insecure\_com\_explicit}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  interferent\_insecure\_com\_implicit  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> interferent\_insecure\_com\_implicit".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Noninterference.interferent insecure com implicit}{\coqdocaxiom{interferent\_insecure\_com\_implicit}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Noninterference.noninterferent no while}{\coqdocdefinition{noninterferent\_no\_while}} \coqref{SECF.Noninterference.xpub}{\coqdocdefinition{xpub}} \coqref{SECF.Noninterference.insecure com implicit}{\coqdocdefinition{insecure\_com\_implicit}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.interferent insecure com implicit}{\coqdocaxiom{interferent\_insecure\_com\_implicit}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.NoninterferenceTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - standard: 18".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - advanced: 18".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Allowed Axioms:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "functional\_extensionality".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "FunctionalExtensionality.functional\_extensionality\_dep".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Summary **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Below is a summary of the automatically graded exercises that are incomplete.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "The output for each exercise can be any of the following:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'Closed under the global context', if it is complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'MANUAL', if it is manually graded".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - A list of pending axioms, containing unproven assumptions. In this case".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "    the exercise is considered complete, if the axioms are all allowed.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Standard **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- prove\_or\_disprove\_obvious\_f1 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove obvious f1}{\coqdocaxiom{prove\_or\_disprove\_obvious\_f1}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- prove\_or\_disprove\_obvious\_f2 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove obvious f2}{\coqdocaxiom{prove\_or\_disprove\_obvious\_f2}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- prove\_or\_disprove\_less\_obvious\_f4 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove less obvious f4}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f4}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- prove\_or\_disprove\_less\_obvious\_f5 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove less obvious f5}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f5}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- prove\_or\_disprove\_less\_obvious\_f6 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.prove or disprove less obvious f6}{\coqdocaxiom{prove\_or\_disprove\_less\_obvious\_f6}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- sme\_another\_insecure\_f2 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.sme another insecure f2}{\coqdocaxiom{sme\_another\_insecure\_f2}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- sme\_another\_insecure\_f3 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.sme another insecure f3}{\coqdocaxiom{sme\_another\_insecure\_f3}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- noninterferent\_secure\_ex1 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.noninterferent secure ex1}{\coqdocaxiom{noninterferent\_secure\_ex1}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- interferent\_insecure\_com\_explicit ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.interferent insecure com explicit}{\coqdocaxiom{interferent\_insecure\_com\_explicit}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- interferent\_insecure\_com\_implicit ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Noninterference.interferent insecure com implicit}{\coqdocaxiom{interferent\_insecure\_com\_implicit}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Advanced **********".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import Induction.
 
 Parameter MISSING: Type.
@@ -37,7 +37,7 @@ idtac " ".
 
 idtac "#> mul_0_r".
 idtac "Possible points: 0.5".
-check_type @mul_0_r ((forall n : nat, n * 0 = 0)).
+check_type @mul_0_r ((forall n : nat, @eq nat (Nat.mul n 0) 0)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions mul_0_r.
@@ -46,7 +46,7 @@ idtac " ".
 
 idtac "#> plus_n_Sm".
 idtac "Possible points: 0.5".
-check_type @plus_n_Sm ((forall n m : nat, S (n + m) = n + S m)).
+check_type @plus_n_Sm ((forall n m : nat, @eq nat (S (Nat.add n m)) (Nat.add n (S m)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_n_Sm.
@@ -55,7 +55,7 @@ idtac " ".
 
 idtac "#> add_comm".
 idtac "Possible points: 0.5".
-check_type @add_comm ((forall n m : nat, n + m = m + n)).
+check_type @add_comm ((forall n m : nat, @eq nat (Nat.add n m) (Nat.add m n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions add_comm.
@@ -64,7 +64,9 @@ idtac " ".
 
 idtac "#> add_assoc".
 idtac "Possible points: 0.5".
-check_type @add_assoc ((forall n m p : nat, n + (m + p) = n + m + p)).
+check_type @add_assoc (
+(forall n m p : nat,
+ @eq nat (Nat.add n (Nat.add m p)) (Nat.add (Nat.add n m) p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions add_assoc.
@@ -76,7 +78,7 @@ idtac " ".
 
 idtac "#> double_plus".
 idtac "Possible points: 2".
-check_type @double_plus ((forall n : nat, double n = n + n)).
+check_type @double_plus ((forall n : nat, @eq nat (double n) (Nat.add n n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions double_plus.
@@ -88,20 +90,11 @@ idtac " ".
 
 idtac "#> eqb_refl".
 idtac "Possible points: 2".
-check_type @eqb_refl ((forall n : nat, (n =? n) = true)).
+check_type @eqb_refl ((forall n : nat, @eq bool (eqb n n) true)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions eqb_refl.
 Goal True.
-idtac " ".
-
-idtac "-------------------  add_comm_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: add_comm_informal".
-idtac "Advanced".
-idtac "Possible points: 2".
-print_manual_grade manual_grade_for_add_comm_informal.
 idtac " ".
 
 idtac "-------------------  mul_comm  --------------------".
@@ -109,7 +102,9 @@ idtac " ".
 
 idtac "#> add_shuffle3".
 idtac "Possible points: 1".
-check_type @add_shuffle3 ((forall n m p : nat, n + (m + p) = m + (n + p))).
+check_type @add_shuffle3 (
+(forall n m p : nat,
+ @eq nat (Nat.add n (Nat.add m p)) (Nat.add m (Nat.add n p)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions add_shuffle3.
@@ -118,7 +113,7 @@ idtac " ".
 
 idtac "#> mul_comm".
 idtac "Possible points: 2".
-check_type @mul_comm ((forall m n : nat, m * n = n * m)).
+check_type @mul_comm ((forall m n : nat, @eq nat (Nat.mul m n) (Nat.mul n m))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions mul_comm.
@@ -131,7 +126,7 @@ idtac " ".
 idtac "#> bin_to_nat_pres_incr".
 idtac "Possible points: 3".
 check_type @bin_to_nat_pres_incr (
-(forall b : bin, bin_to_nat (incr b) = 1 + bin_to_nat b)).
+(forall b : bin, @eq nat (bin_to_nat (incr b)) (Nat.add 1 (bin_to_nat b)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bin_to_nat_pres_incr.
@@ -143,7 +138,7 @@ idtac " ".
 
 idtac "#> nat_bin_nat".
 idtac "Possible points: 3".
-check_type @nat_bin_nat ((forall n : nat, bin_to_nat (nat_to_bin n) = n)).
+check_type @nat_bin_nat ((forall n : nat, @eq nat (bin_to_nat (nat_to_bin n)) n)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions nat_bin_nat.
@@ -156,7 +151,7 @@ idtac " ".
 idtac "#> double_incr".
 idtac "Advanced".
 idtac "Possible points: 0.5".
-check_type @double_incr ((forall n : nat, double (S n) = S (S (double n)))).
+check_type @double_incr ((forall n : nat, @eq nat (double (S n)) (S (S (double n))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions double_incr.
@@ -166,7 +161,7 @@ idtac " ".
 idtac "#> double_bin_zero".
 idtac "Advanced".
 idtac "Possible points: 0.5".
-check_type @double_bin_zero ((double_bin Z = Z)).
+check_type @double_bin_zero ((@eq bin (double_bin Z) Z)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions double_bin_zero.
@@ -177,7 +172,7 @@ idtac "#> double_incr_bin".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @double_incr_bin (
-(forall b : bin, double_bin (incr b) = incr (incr (double_bin b)))).
+(forall b : bin, @eq bin (double_bin (incr b)) (incr (incr (double_bin b))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions double_incr_bin.
@@ -190,7 +185,8 @@ idtac " ".
 idtac "#> bin_nat_bin".
 idtac "Advanced".
 idtac "Possible points: 6".
-check_type @bin_nat_bin ((forall b : bin, nat_to_bin (bin_to_nat b) = normalize b)).
+check_type @bin_nat_bin (
+(forall b : bin, @eq bin (nat_to_bin (bin_to_nat b)) (normalize b))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bin_nat_bin.
@@ -200,7 +196,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 15".
-idtac "Max points - advanced: 25".
+idtac "Max points - advanced: 23".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -246,8 +242,6 @@ idtac "---------- nat_bin_nat ---------".
 Print Assumptions nat_bin_nat.
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- add_comm_informal ---------".
-idtac "MANUAL".
 idtac "---------- double_incr ---------".
 Print Assumptions double_incr.
 idtac "---------- double_bin_zero ---------".
@@ -258,4 +252,6 @@ idtac "---------- bin_nat_bin ---------".
 Print Assumptions bin_nat_bin.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

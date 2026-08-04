@@ -1,0 +1,61 @@
+name: Recheck Software Foundations Book Versions
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Magic Nix Cache
+        uses: MagicNixCache/magic-nix-cache-action@v1
+
+      - name: Run Update Script
+        run: |
+          nix develop --command python3 update_volumes.py
+
+      - name: Commit and Push Volume Updates
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add updated versions.json, index.html, flake.lock, etc.
+          git add versions.json index.html common/ flake.nix flake.lock
+          git add *-current/
+          
+          # Commit and push if there are changes
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update Software Foundations volumes [skip ci]"
+            git push
+          else
+            echo "No volume changes detected."
+          fi
+
+      - name: Build PDFs
+        run: |
+          nix develop --command make all || true
+
+      - name: Create or Update GitHub Release with PDFs
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-pdfs
+          name: "Software Foundations PDFs"
+          body: "Automated PDF builds for Software Foundations books."
+          files: |
+            doc/pdf/*.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

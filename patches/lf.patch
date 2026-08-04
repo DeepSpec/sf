@@ -1,0 +1,10 @@
+--- a/Induction.v
++++ b/Induction.v
+@@ -56,1 +56,1 @@
+-         rocq makefile -f _CoqProject *.v -o Makefile
++         rocq makefile -f [_CoqProject] *.v -o Makefile
+--- a/Tactics.v
++++ b/Tactics.v
+@@ -1025,1 +1025,1 @@
+-    One example where it _cannot _ be omitted is when we are
++    One example where it _cannot_ be omitted is when we are

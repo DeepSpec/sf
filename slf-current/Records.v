@@ -174,7 +174,7 @@ Notation "p '~~~>' kvs" := (hrecord kvs p)
 (** The following lemma may be used to convert a concrete [hrecord] predicate
     into a [hheader] and a conjunction of [hfield] predicates. In the statement
     below, [LibListExec.length] is a variant of [LibList.length] that computes
-    in Coq using [simpl] or [reflexivity]. *)
+    in Rocq using [simpl] or [reflexivity]. *)
 
 Lemma hrecord_elim : forall p kvs,
   hrecord kvs p ==> hheader (LibListExec.length kvs) p \* hfields kvs p.
@@ -339,7 +339,7 @@ Parameter triple_set_field_hrecord : forall kvs kvs' k p v,
     for arity 2. For example, the notation [`{ head := x; tail := q }] stands
     for the term [(val_new_hrecord_2 head tail) x q].
 
-    Here, [val_new_hrecord_2] is a Coq function that expects two names as
+    Here, [val_new_hrecord_2] is a Rocq function that expects two names as
     arguments and produces a value. For example, the expression
     [val_new_hrecord_2 head tail] is a value that may be applied to two
     arguments in the program syntax. *)
@@ -409,7 +409,7 @@ Ltac is_additional_arith_type T ::=
 
 (** The get operation on a field, written [p`.k], is encoded as
     [val_get (p+1+k)]. In the definition shown below, the braces around
-    [nat_to_Z k] are used to embed the Coq natural number [k] into the code, in
+    [nat_to_Z k] are used to embed the Rocq natural number [k] into the code, in
     the form of an integer represented in the grammar of terms using the
     implicit coercion [val_int]. *)
 
@@ -570,7 +570,7 @@ Qed.
     per field to store the provided values into the corresponding memory cells.
 
     The present section focuses on the first part, namely the allocation without
-    initialization. The Coq value [val_alloc_hrecord ks] depends on a list of
+    initialization. The Rocq value [val_alloc_hrecord ks] depends on a list of
     field names. This value corresponds to a function that, when applied to a
     unit argument, allocates a record with [length ks] fields. The operation
     [(val_alloc_hrecord ks) ()] is only specified when [ks] corresponds to a
@@ -579,7 +579,7 @@ Qed.
     The implementation of this operation allocates a block of size [n+1] at a
     fresh location [p], then sets the header cell to the value [n], then returns
     the address [p]. In the statement below, the expression
-    [{LibListExec.length ks}] in braces computes in Coq the expression
+    [{LibListExec.length ks}] in braces computes in Rocq the expression
     [length ks], and inserts the result in the code as a constant integer --
     that is, as a value of the form [val_int (LibListExec.length ks)]. *)
 
@@ -622,7 +622,7 @@ Qed.
     offsets starting from zero.
 
     Recall that [LibListExec.length] is a variant of [LibList.length] that
-    computes in Coq (using [simpl] or [reflexivity]). Likewise [LibListExec.map]
+    computes in Rocq (using [simpl] or [reflexivity]). Likewise [LibListExec.map]
     is a computable version of [LibList.map]. *)
 
 Lemma triple_alloc_hrecord : forall ks,
@@ -666,10 +666,10 @@ Qed.
 
 (** We now show the implementation of record initialization in the particular
     case of records with exactly 2 fields. Recall that [val_new_hrecord_2 k1 k2]
-    denotes a Coq value of type [val], which may be applied in the grammar of
+    denotes a Rocq value of type [val], which may be applied in the grammar of
     terms to two arguments, [x1] and [x2]. The definition below shows an
     implementation for [val_new_hrecord_2]. In this definition, the expression
-    in braces [val_alloc_hrecord (k1::k2::nil)] refers to a Coq term, embedded
+    in braces [val_alloc_hrecord (k1::k2::nil)] refers to a Rocq term, embedded
     in the syntax of program terms. *)
 
 Definition val_new_hrecord_2 (k1:field) (k2:field) : val :=
@@ -770,4 +770,4 @@ Ltac xapp_nosubst_for_records tt ::=
 (** The above definition is the one used in [LibSepReference]. It was put to
     practice in the chapters [Basic] and [Repr]. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

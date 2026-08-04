@@ -1,7 +1,7 @@
 (** * QuickChickInterface: QuickChick Reference Manual *)
 
 From QuickChick Require Import QuickChick.
-Require Import ZArith Strings.Ascii Strings.String.
+From Stdlib Require Import ZArith Strings.Ascii Strings.String.
 
 From ExtLib.Structures Require Import Functor Applicative.
 
@@ -143,8 +143,6 @@ Module QcDefaultNotation.
     (elems_ x (cons x (cons y nil))) : qc_scope.
   Notation " 'elems' [ x ; y ; .. ; z ] " :=
     (elems_ x (cons x (cons y .. (cons z nil) ..))) : qc_scope.
-  Notation " 'elems' ( x ;; l ) " :=
-    (elems_ x (cons x l)) (at level 1, no associativity) : qc_scope.
 
   (** [oneOf] is a shorthand for [oneOf_] without a default argument. *)
   Notation " 'oneOf' [ x ] " :=
@@ -153,8 +151,6 @@ Module QcDefaultNotation.
     (oneOf_ x (cons x (cons y nil))) : qc_scope.
   Notation " 'oneOf' [ x ; y ; .. ; z ] " :=
     (oneOf_ x (cons x (cons y .. (cons z nil) ..))) : qc_scope.
-  Notation " 'oneOf' ( x ;; l ) " :=
-    (oneOf_ x (cons x l))  (at level 1, no associativity) : qc_scope.
 
   (** [freq] is a shorthand for [freq_] without a default argument. *)
   Notation " 'freq' [ x ] " :=
@@ -163,8 +159,6 @@ Module QcDefaultNotation.
     (freq_ x (cons (n, x) (cons y nil))) : qc_scope.
   Notation " 'freq' [ ( n , x ) ; y ; .. ; z ] " :=
     (freq_ x (cons (n, x) (cons y .. (cons z nil) ..))) : qc_scope.
-  Notation " 'freq' ( ( n , x ) ;; l ) " :=
-    (freq_ x (cons (n, x) l)) (at level 1, no associativity) : qc_scope.
 
 End QcDefaultNotation.
 
@@ -182,31 +176,19 @@ End QcDefaultNotation.
     choose from an interval without writing down all the possible
     values.
 
-    Such intervals can be defined on ordered data types, instances of
-    [OrdType], whose ordering [leq] satisfies reflexive, transitive,
-    and antisymmetric predicates. *)
-
-Existing Class OrdType.
-
-#[export] Declare Instance OrdBool : OrdType bool.
-#[export] Declare Instance OrdNat  : OrdType nat.
-#[export] Declare Instance OrdZ    : OrdType Z.
-
-(** We also expect the random function to be able to pick every element in any
-    given interval. *)
-
-Existing Class ChoosableFromInterval.
+    We also expect the random function to be able to pick every element in any
+    given interval. This is encoded in the [ChoosableFromInterval] typeclass. *)
 
 (** QuickChick has provided some instances for ordered data types that are
-    choosable from intervals, including [bool], [nat], and [Z]. *)
-#[export] Declare Instance ChooseBool : ChoosableFromInterval bool.
-#[export] Declare Instance ChooseNat : ChoosableFromInterval nat.
-#[export] Declare Instance ChooseZ : ChoosableFromInterval Z.
+    choosable from intervals, including [nat] and [Z], using
+the ordering available in the standard library. *)
+#[export] Declare Instance ChooseNat : ChoosableFromInterval nat Nat.le.
+#[export] Declare Instance ChooseZ : ChoosableFromInterval Z Z.le.
 
 (** [choose l r] generates a value between [l] and [r], inclusive the two
     extremes. It causes a runtime error if [r < l]. *)
 Parameter choose :
-  forall {A : Type} `{ChoosableFromInterval A}, (A * A) -> G A.
+  forall {A : Type} {le} `{ChoosableFromInterval A le}, (A * A) -> G A.
 
 (* ================================================================= *)
 (** ** The [Gen] and [GenSized] Typeclasses *)
@@ -679,4 +661,4 @@ Record Args :=
 
 End QuickChickSig.
 
-(* 2024-12-27 01:36 *)
+(* 2026-01-07 13:37 *)

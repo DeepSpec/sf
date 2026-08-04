@@ -18,7 +18,7 @@ Implicit Types p q : loc.
 (* ================================================================= *)
 (** ** Parsing of Programs *)
 
-(** The programs we consider are written within Coq, using a "custom grammar"
+(** The programs we consider are written within Rocq, using a "custom grammar"
     that allows writing code that reads almost like OCaml code. For example,
     consider the function [incr], which increments the contents of a mutable
     cell that stores an integer. In OCaml syntax, this function could be defined
@@ -33,10 +33,10 @@ OCaml:
       p := m
 *)
 
-(** In Coq, the corresponding program is described as shown below. The function
+(** In Rocq, the corresponding program is described as shown below. The function
     defined, named [incr], admits the type [val]. This type is defined by the
     framework. Observe that all variable names are prefixed with a quote symbol.
-    This presentation avoids conflict between program variables and Coq
+    This presentation avoids conflict between program variables and Rocq
     constants. *)
 
 Definition incr : val :=
@@ -165,11 +165,11 @@ Qed.
 #[global] Hint Resolve triple_incr : triple.
 
 (** To minimize the amount of syntactic noise in specifications, we leverage an
-    advanced feature of Coq's coercion mechanism. Concretely, instead of writing
+    advanced feature of Rocq's coercion mechanism. Concretely, instead of writing
     the specification in the form [triple <{ incr p }> ...], we write it in the
     form [triple (incr p) ...], that is, with just parentheses. Thanks to the
     coercion mecanism, explained in more detail in chapter [Rules], when
-    Coq sees a "program value" [incr] being applied to an argument [p], it
+    Rocq sees a "program value" [incr] being applied to an argument [p], it
     automatically interprets this as a "program function call" of [incr] to [p].
     Thus, the specification of the increment function can be written as follows.
     *)
@@ -247,8 +247,8 @@ Lemma triple_example_let : forall (n:int),
     prove this equality, we invoke the tactic [math] provided by the TLC
     library. Recall from the preface that this course leverages TLC for enhanced
     definitions and tactics. (Technically, [math] is a wrapper around the
-    standard Coq tactic [lia]; this wrapper is needed because TLC uses different
-    definitions for arithmetic inequalities than Coq's standard library.) *)
+    standard Rocq tactic [lia]; this wrapper is needed because TLC uses different
+    definitions for arithmetic inequalities than Rocq's standard library.) *)
 
 Proof.
   xwp. xapp. xapp. xapp. xsimpl. math.
@@ -291,10 +291,10 @@ Definition inplace_double : val :=
 (** [] *)
 
 (** From here on, we use the command [Proof using] for introducing a proof
-    instead of writing just [Proof]. Writing [Proof using.] tells Coq that the
+    instead of writing just [Proof]. Writing [Proof using.] tells Rocq that the
     proof of the lemma does not depend on section variables others than the ones
     involved for typechecking the statement of the lemma. The [Proof using.]
-    enables Coq to compile proofs in parallel when the [-vos] flag is passed.
+    enables Rocq to compile proofs in parallel when the [-vos] flag is passed.
     For more details, see the "Need for Proof using" section from:
     https://coq.inria.fr/refman/practical-tools/coq-commands.html *)
 
@@ -615,7 +615,7 @@ Qed.
     [triple_ref_greater_abstract], should be derived from [triple_ref_greater],
     following the proof pattern employed in [triple_incr_first_derived].
 
-    Hint: Remember that the notation [\[P]] injects a Coq proposition into the
+    Hint: Remember that the notation [\[P]] injects a Rocq proposition into the
     language of Separation Logic predicates. *)
 
 (* FILL IN HERE *)
@@ -829,7 +829,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** ** Axiomatization of the Mathematical Factorial Function *)
 
 (** Our next example consists of a program that evaluates the factorial
-    function. To specify this function, we consider a Coq axiomatization of the
+    function. To specify this function, we consider a Rocq axiomatization of the
     mathematical factorial function, named [facto]. We wrap the axiomatization
     inside a module, so that we can later refer to it from other files. *)
 
@@ -1060,7 +1060,7 @@ Proof using.
 (** First, we introduce all variables and hypotheses. *)
   intros p n m Hm.
 (** Next, we generalize variables and hypotheses that are not constant during
-    the recursion, using the TLC tactic [gen], which is similar to Coq's tactics
+    the recursion, using the TLC tactic [gen], which is similar to Rocq's tactics
     [revert] and [dependent generalize]. *)
   gen n Hm.
 (** Then, we set up the induction. *)
@@ -1319,7 +1319,7 @@ Proof using. (* FILL IN HERE *) Admitted.
     - [xif] to reason about a conditional,
     - [xsimpl] to simplify or prove entailments ([H ==> H'] and [Q ===> Q']).
 
-    In addition to x-tactics, the proof scripts exploit standard Coq tactics, as
+    In addition to x-tactics, the proof scripts exploit standard Rocq tactics, as
     well as tactics from the TLC library, which provides a bunch of useful,
     general purpose tactics. In this chapter, we used a few TLC tactics:
 
@@ -1424,4 +1424,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

@@ -238,7 +238,7 @@ Fixpoint subst (y:var) (w:val) (t:trm) : trm :=
 (** *** Implicit Types and Coercions *)
 
 (** To improve the readability of the evaluation rules below, we take advantage
-    of Coq's _implicit types_ and _coercions_.
+    of Rocq's _implicit types_ and _coercions_.
 
     First off, we give several Implicit Types declarations. For example, the
     first command indicates that variables whose name begins with the letter 'b'
@@ -274,7 +274,7 @@ Coercion trm_val : val >-> trm.
 Coercion trm_app : trm >-> Funclass.
 
 (** The "Funclass" coercion for [trm_app] can be iterated. The expression
-    [t1 t2 t3] is parsed by Coq as [(t1 t2) t3]. The first application [t1 t2]
+    [t1 t2 t3] is parsed by Rocq as [(t1 t2) t3]. The first application [t1 t2]
     is interpreted as [trm_app t1 t2]. This expression, which itself has type
     [trm], is applied to [t3]. Hence, [t1 t2 t3] is interpreted as
     [trm_app (trm_app t1 t2) t3]. *)
@@ -383,7 +383,7 @@ Inductive big : heap -> trm -> heap -> val -> Prop :=
 
       The term [trm_if (val_bool true) t1 t2] behaves like [t1], whereas the
       term [trm_if (val_bool false) t1 t2] behaves like [t2]. This behavior is
-      described by a single rule, leveraging Coq's "if" constructor to factor
+      described by a single rule, leveraging Rocq's "if" constructor to factor
       out the two cases. *)
 
   | big_if : forall s1 s2 b v t1 t2,
@@ -1437,10 +1437,12 @@ Module BakedInFrame.
     allocation operation, which may pick any fresh location. For such languages,
     it is possible to define Separation Logic triples in terms of the standard
     big-step semantics, using a technique known as the "baked-in frame rule".
+    Let [beval] denote the standard big-step judgment: [beval s t s' v] asserts
+    that the evaluation of [t] in a state [s] produces the value [v] in a state
+    [s'].
+*)
 
-    Recall the big-step judgment. *)
-
-Parameter eval : heap -> trm -> heap -> val -> Prop.
+Parameter beval : heap -> trm -> heap -> val -> Prop.
 
 (** First, we define a (total correctness) Hoare triple, written [hoare t H Q].
     This judgment asserts that, starting from a state [s] satisfying the
@@ -1449,7 +1451,7 @@ Parameter eval : heap -> trm -> heap -> val -> Prop.
 
 Definition hoare (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
   forall (s:heap), H s ->
-  exists (s':heap) (v:val), eval s t s' v /\ Q v s'.
+  exists (s':heap) (v:val), beval s t s' v /\ Q v s'.
 
 (** **** Exercise: 2 stars, standard, especially useful (hoare_conseq)
 
@@ -1498,9 +1500,7 @@ Proof using. (* FILL IN HERE *) Admitted.
     the precondition [H] and [h2] describes the rest of the state, then the
     evaluation of [t] produces a value [v] in a final state made that can be
     decomposed between a part [h1'] and [h2] unchanged, in such a way that [v]
-    and [h1'] together satisfy the postcondition [Q].
-
-    Formally: *)
+    and [h1'] together satisfy the postcondition [Q]. Formally: *)
 
 Definition btriple_lowlevel (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
   forall h1 h2,
@@ -1508,7 +1508,7 @@ Definition btriple_lowlevel (t:trm) (H:hprop) (Q:val->hprop) : Prop :=
   H h1 ->
   exists h1' v,
        Fmap.disjoint h1' h2
-    /\ eval (h1 \u h2) t (h1' \u h2) v
+    /\ beval (h1 \u h2) t (h1' \u h2) v
     /\ Q v h1'.
 
 (** Let us establish the equivalence between this alternative definition of
@@ -1530,6 +1530,41 @@ Qed.
 (** The low-level definition of triple leveraging the baked-in frame rule may be
     convenient for formalizing certain extensions of Separation Logic. *)
 
+(** Finally, let us investigate how to derive a reasoning rule for triples
+    defined using the baked-in frame rule, with respect to a standard big-step
+    semantics. Consider [beval_let], the big-step evaluation rule for a
+    let-binding. *)
+
+Parameter beval_let : forall s1 s2 s3 v1 v2 x t1 t2,
+  beval s1 t1 s2 v1 ->
+  beval s2 (subst x v1 t2) s3 v2 ->
+  beval s1 (trm_let x t1 t2) s3 v2.
+
+(** **** Exercise: 3 stars, standard, especially useful (hoare_let)
+
+    Prove the reasoning rule for let-bindings w.r.t. Hoare triples. *)
+
+Lemma hoare_let : forall x t1 t2 H Q Q1,
+  hoare t1 H Q1 ->
+  (forall v, hoare (subst x v t2) (Q1 v) Q) ->
+  hoare (trm_let x t1 t2) H Q.
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
+(** **** Exercise: 3 stars, standard, especially useful (btriple_let)
+
+    Prove the reasoning rule for let-bindings w.r.t. Separation Logic triples
+    defined using the baked-in frame rule. *)
+
+Lemma btriple_let : forall x t1 t2 Q1 H Q,
+  btriple t1 H Q1 ->
+  (forall v1, btriple (subst x v1 t2) (Q1 v1) Q) ->
+  btriple (trm_let x t1 t2) H Q.
+Proof using. (* FILL IN HERE *) Admitted.
+
+(** [] *)
+
 End BakedInFrame.
 
 (* ================================================================= *)
@@ -1545,4 +1580,4 @@ End BakedInFrame.
     technique has been employed successfully in numerous formalizations of
     Separation Logic. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

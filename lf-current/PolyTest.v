@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import Poly.
 
 Parameter MISSING: Type.
@@ -37,7 +37,8 @@ idtac " ".
 
 idtac "#> app_nil_r".
 idtac "Possible points: 0.5".
-check_type @app_nil_r ((forall (X : Type) (l : list X), l ++ [ ] = l)).
+check_type @app_nil_r (
+(forall (X : Type) (l : list X), @eq (list X) (@app X l (@nil X)) l)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions app_nil_r.
@@ -46,7 +47,9 @@ idtac " ".
 
 idtac "#> app_assoc".
 idtac "Possible points: 1".
-check_type @app_assoc ((forall (A : Type) (l m n : list A), l ++ m ++ n = (l ++ m) ++ n)).
+check_type @app_assoc (
+(forall (A : Type) (l m n : list A),
+ @eq (list A) (@app A l (@app A m n)) (@app A (@app A l m) n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions app_assoc.
@@ -57,7 +60,7 @@ idtac "#> app_length".
 idtac "Possible points: 0.5".
 check_type @app_length (
 (forall (X : Type) (l1 l2 : list X),
- @length X (l1 ++ l2) = @length X l1 + @length X l2)).
+ @eq nat (@length X (@app X l1 l2)) (Nat.add (@length X l1) (@length X l2)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions app_length.
@@ -71,7 +74,7 @@ idtac "#> rev_app_distr".
 idtac "Possible points: 1".
 check_type @rev_app_distr (
 (forall (X : Type) (l1 l2 : list X),
- @rev X (l1 ++ l2) = @rev X l2 ++ @rev X l1)).
+ @eq (list X) (@rev X (@app X l1 l2)) (@app X (@rev X l2) (@rev X l1)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions rev_app_distr.
@@ -80,7 +83,8 @@ idtac " ".
 
 idtac "#> rev_involutive".
 idtac "Possible points: 1".
-check_type @rev_involutive ((forall (X : Type) (l : list X), @rev X (@rev X l) = l)).
+check_type @rev_involutive (
+(forall (X : Type) (l : list X), @eq (list X) (@rev X (@rev X l)) l)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions rev_involutive.
@@ -92,7 +96,7 @@ idtac " ".
 
 idtac "#> split".
 idtac "Possible points: 1".
-check_type @split ((forall X Y : Type, list (X * Y) -> list X * list Y)).
+check_type @split ((forall (X Y : Type) (_ : list (prod X Y)), prod (list X) (list Y))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions split.
@@ -102,7 +106,13 @@ idtac " ".
 idtac "#> test_split".
 idtac "Possible points: 1".
 check_type @test_split (
-(@split nat bool [(1, false); (2, false)] = ([1; 2], [false; false]))).
+(@eq (prod (list nat) (list bool))
+   (@split nat bool
+      (@cons (prod nat bool) (@pair nat bool 1 false)
+         (@cons (prod nat bool) (@pair nat bool 2 false)
+            (@nil (prod nat bool)))))
+   (@pair (list nat) (list bool) (@cons nat 1 (@cons nat 2 (@nil nat)))
+      (@cons bool false (@cons bool false (@nil bool)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_split.
@@ -115,7 +125,15 @@ idtac " ".
 idtac "#> test_filter_even_gt7_1".
 idtac "Possible points: 1".
 check_type @test_filter_even_gt7_1 (
-(filter_even_gt7 [1; 2; 6; 9; 10; 3; 12; 8] = [10; 12; 8])).
+(@eq (list nat)
+   (filter_even_gt7
+      (@cons nat 1
+         (@cons nat 2
+            (@cons nat 6
+               (@cons nat 9
+                  (@cons nat 10
+                     (@cons nat 3 (@cons nat 12 (@cons nat 8 (@nil nat))))))))))
+   (@cons nat 10 (@cons nat 12 (@cons nat 8 (@nil nat)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_filter_even_gt7_1.
@@ -124,7 +142,12 @@ idtac " ".
 
 idtac "#> test_filter_even_gt7_2".
 idtac "Possible points: 1".
-check_type @test_filter_even_gt7_2 ((filter_even_gt7 [5; 2; 6; 19; 129] = [ ])).
+check_type @test_filter_even_gt7_2 (
+(@eq (list nat)
+   (filter_even_gt7
+      (@cons nat 5
+         (@cons nat 2 (@cons nat 6 (@cons nat 19 (@cons nat 129 (@nil nat)))))))
+   (@nil nat))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_filter_even_gt7_2.
@@ -136,7 +159,9 @@ idtac " ".
 
 idtac "#> partition".
 idtac "Possible points: 1".
-check_type @partition ((forall X : Type, (X -> bool) -> list X -> list X * list X)).
+check_type @partition (
+(forall (X : Type) (_ : forall _ : X, bool) (_ : list X),
+ prod (list X) (list X))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions partition.
@@ -145,7 +170,14 @@ idtac " ".
 
 idtac "#> test_partition1".
 idtac "Possible points: 1".
-check_type @test_partition1 ((@partition nat odd [1; 2; 3; 4; 5] = ([1; 3; 5], [2; 4]))).
+check_type @test_partition1 (
+(@eq (prod (list nat) (list nat))
+   (@partition nat odd
+      (@cons nat 1
+         (@cons nat 2 (@cons nat 3 (@cons nat 4 (@cons nat 5 (@nil nat)))))))
+   (@pair (list nat) (list nat)
+      (@cons nat 1 (@cons nat 3 (@cons nat 5 (@nil nat))))
+      (@cons nat 2 (@cons nat 4 (@nil nat)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_partition1.
@@ -155,7 +187,11 @@ idtac " ".
 idtac "#> test_partition2".
 idtac "Possible points: 1".
 check_type @test_partition2 (
-(@partition nat (fun _ : nat => false) [5; 9; 0] = ([ ], [5; 9; 0]))).
+(@eq (prod (list nat) (list nat))
+   (@partition nat (fun _ : nat => false)
+      (@cons nat 5 (@cons nat 9 (@cons nat 0 (@nil nat)))))
+   (@pair (list nat) (list nat) (@nil nat)
+      (@cons nat 5 (@cons nat 9 (@cons nat 0 (@nil nat))))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_partition2.
@@ -168,8 +204,8 @@ idtac " ".
 idtac "#> map_rev".
 idtac "Possible points: 3".
 check_type @map_rev (
-(forall (X Y : Type) (f : X -> Y) (l : list X),
- @map X Y f (@rev X l) = @rev Y (@map X Y f l))).
+(forall (X Y : Type) (f : forall _ : X, Y) (l : list X),
+ @eq (list Y) (@map X Y f (@rev X l)) (@rev Y (@map X Y f l)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions map_rev.
@@ -181,7 +217,8 @@ idtac " ".
 
 idtac "#> flat_map".
 idtac "Possible points: 1".
-check_type @flat_map ((forall X Y : Type, (X -> list Y) -> list X -> list Y)).
+check_type @flat_map (
+(forall (X Y : Type) (_ : forall _ : X, list Y) (_ : list X), list Y)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions flat_map.
@@ -191,8 +228,17 @@ idtac " ".
 idtac "#> test_flat_map1".
 idtac "Possible points: 1".
 check_type @test_flat_map1 (
-(@flat_map nat nat (fun n : nat => [n; n; n]) [1; 5; 4] =
- [1; 1; 1; 5; 5; 5; 4; 4; 4])).
+(@eq (list nat)
+   (@flat_map nat nat
+      (fun n : nat => @cons nat n (@cons nat n (@cons nat n (@nil nat))))
+      (@cons nat 1 (@cons nat 5 (@cons nat 4 (@nil nat)))))
+   (@cons nat 1
+      (@cons nat 1
+         (@cons nat 1
+            (@cons nat 5
+               (@cons nat 5
+                  (@cons nat 5
+                     (@cons nat 4 (@cons nat 4 (@cons nat 4 (@nil nat)))))))))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions test_flat_map1.
@@ -205,7 +251,8 @@ idtac " ".
 idtac "#> Exercises.fold_length_correct".
 idtac "Possible points: 2".
 check_type @Exercises.fold_length_correct (
-(forall (X : Type) (l : list X), @Exercises.fold_length X l = @length X l)).
+(forall (X : Type) (l : list X),
+ @eq nat (@Exercises.fold_length X l) (@length X l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.fold_length_correct.
@@ -227,8 +274,9 @@ idtac "#> Exercises.uncurry_curry".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.uncurry_curry (
-(forall (X Y Z : Type) (f : X -> Y -> Z) (x : X) (y : Y),
- @Exercises.prod_curry X Y Z (@Exercises.prod_uncurry X Y Z f) x y = f x y)).
+(forall (X Y Z : Type) (f : forall (_ : X) (_ : Y), Z) (x : X) (y : Y),
+ @eq Z (@Exercises.prod_curry X Y Z (@Exercises.prod_uncurry X Y Z f) x y)
+   (f x y))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.uncurry_curry.
@@ -239,21 +287,13 @@ idtac "#> Exercises.curry_uncurry".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.curry_uncurry (
-(forall (X Y Z : Type) (f : X * Y -> Z) (p : X * Y),
- @Exercises.prod_uncurry X Y Z (@Exercises.prod_curry X Y Z f) p = f p)).
+(forall (X Y Z : Type) (f : forall _ : prod X Y, Z) (p : prod X Y),
+ @eq Z (@Exercises.prod_uncurry X Y Z (@Exercises.prod_curry X Y Z f) p)
+   (f p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.curry_uncurry.
 Goal True.
-idtac " ".
-
-idtac "-------------------  nth_error_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: Exercises.informal_proof".
-idtac "Advanced".
-idtac "Possible points: 2".
-print_manual_grade Exercises.manual_grade_for_informal_proof.
 idtac " ".
 
 idtac "-------------------  church_scc  --------------------".
@@ -263,7 +303,8 @@ idtac "#> Exercises.Church.scc_2".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.scc_2 (
-(Exercises.Church.scc Exercises.Church.one = Exercises.Church.two)).
+(@eq Exercises.Church.cnat (Exercises.Church.scc Exercises.Church.one)
+   Exercises.Church.two)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.scc_2.
@@ -274,7 +315,8 @@ idtac "#> Exercises.Church.scc_3".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.scc_3 (
-(Exercises.Church.scc Exercises.Church.two = Exercises.Church.three)).
+(@eq Exercises.Church.cnat (Exercises.Church.scc Exercises.Church.two)
+   Exercises.Church.three)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.scc_3.
@@ -288,8 +330,9 @@ idtac "#> Exercises.Church.plus_1".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.plus_1 (
-(Exercises.Church.plus Exercises.Church.zero Exercises.Church.one =
- Exercises.Church.one)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.plus Exercises.Church.zero Exercises.Church.one)
+   Exercises.Church.one)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.plus_1.
@@ -300,8 +343,9 @@ idtac "#> Exercises.Church.plus_2".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.plus_2 (
-(Exercises.Church.plus Exercises.Church.two Exercises.Church.three =
- Exercises.Church.plus Exercises.Church.three Exercises.Church.two)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.plus Exercises.Church.two Exercises.Church.three)
+   (Exercises.Church.plus Exercises.Church.three Exercises.Church.two))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.plus_2.
@@ -312,11 +356,12 @@ idtac "#> Exercises.Church.plus_3".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.plus_3 (
-(Exercises.Church.plus
-   (Exercises.Church.plus Exercises.Church.two Exercises.Church.two)
-   Exercises.Church.three =
- Exercises.Church.plus Exercises.Church.one
-   (Exercises.Church.plus Exercises.Church.three Exercises.Church.three))).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.plus
+      (Exercises.Church.plus Exercises.Church.two Exercises.Church.two)
+      Exercises.Church.three)
+   (Exercises.Church.plus Exercises.Church.one
+      (Exercises.Church.plus Exercises.Church.three Exercises.Church.three)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.plus_3.
@@ -330,8 +375,9 @@ idtac "#> Exercises.Church.mult_1".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.mult_1 (
-(Exercises.Church.mult Exercises.Church.one Exercises.Church.one =
- Exercises.Church.one)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.mult Exercises.Church.one Exercises.Church.one)
+   Exercises.Church.one)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.mult_1.
@@ -342,9 +388,10 @@ idtac "#> Exercises.Church.mult_2".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.mult_2 (
-(Exercises.Church.mult Exercises.Church.zero
-   (Exercises.Church.plus Exercises.Church.three Exercises.Church.three) =
- Exercises.Church.zero)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.mult Exercises.Church.zero
+      (Exercises.Church.plus Exercises.Church.three Exercises.Church.three))
+   Exercises.Church.zero)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.mult_2.
@@ -355,8 +402,9 @@ idtac "#> Exercises.Church.mult_3".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.mult_3 (
-(Exercises.Church.mult Exercises.Church.two Exercises.Church.three =
- Exercises.Church.plus Exercises.Church.three Exercises.Church.three)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.mult Exercises.Church.two Exercises.Church.three)
+   (Exercises.Church.plus Exercises.Church.three Exercises.Church.three))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.mult_3.
@@ -370,8 +418,9 @@ idtac "#> Exercises.Church.exp_1".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.exp_1 (
-(Exercises.Church.exp Exercises.Church.two Exercises.Church.two =
- Exercises.Church.plus Exercises.Church.two Exercises.Church.two)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.exp Exercises.Church.two Exercises.Church.two)
+   (Exercises.Church.plus Exercises.Church.two Exercises.Church.two))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.exp_1.
@@ -382,8 +431,9 @@ idtac "#> Exercises.Church.exp_2".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.exp_2 (
-(Exercises.Church.exp Exercises.Church.three Exercises.Church.zero =
- Exercises.Church.one)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.exp Exercises.Church.three Exercises.Church.zero)
+   Exercises.Church.one)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.exp_2.
@@ -394,11 +444,12 @@ idtac "#> Exercises.Church.exp_3".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @Exercises.Church.exp_3 (
-(Exercises.Church.exp Exercises.Church.three Exercises.Church.two =
- Exercises.Church.plus
-   (Exercises.Church.mult Exercises.Church.two
-      (Exercises.Church.mult Exercises.Church.two Exercises.Church.two))
-   Exercises.Church.one)).
+(@eq Exercises.Church.cnat
+   (Exercises.Church.exp Exercises.Church.three Exercises.Church.two)
+   (Exercises.Church.plus
+      (Exercises.Church.mult Exercises.Church.two
+         (Exercises.Church.mult Exercises.Church.two Exercises.Church.two))
+      Exercises.Church.one))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Exercises.Church.exp_3.
@@ -408,7 +459,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 21".
-idtac "Max points - advanced: 36".
+idtac "Max points - advanced: 34".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -472,8 +523,6 @@ idtac "---------- Exercises.uncurry_curry ---------".
 Print Assumptions Exercises.uncurry_curry.
 idtac "---------- Exercises.curry_uncurry ---------".
 Print Assumptions Exercises.curry_uncurry.
-idtac "---------- informal_proof ---------".
-idtac "MANUAL".
 idtac "---------- Exercises.Church.scc_2 ---------".
 Print Assumptions Exercises.Church.scc_2.
 idtac "---------- Exercises.Church.scc_3 ---------".
@@ -498,4 +547,6 @@ idtac "---------- Exercises.Church.exp_3 ---------".
 Print Assumptions Exercises.Church.exp_3.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

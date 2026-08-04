@@ -1,10 +1,10 @@
-(** * Typeclasses: A Tutorial on Typeclasses in Coq *)
+(** * Typeclasses: A Tutorial on Typeclasses in Rocq *)
 
-From Coq Require Import Bool.Bool.
-From Coq Require Import Strings.String.
-From Coq Require Import Arith.Arith.
-From Coq Require Import Lia.
-Require Import List. Import ListNotations.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Strings.String.
+From Stdlib Require Import Arith.
+From Stdlib Require Import Lia.
+From Stdlib Require Import List. Import ListNotations.
 Local Open Scope string.
 
 (** In real-world programming, it is often necessary to convert
@@ -52,19 +52,19 @@ Local Open Scope string.
     with an empty mind!)
 
     Many other modern language designs have followed Haskell's lead,
-    and Coq is no exception.  However, because Coq's type system is so
-    much richer than that of Haskell, and because typeclasses in Coq
+    and Rocq is no exception.  However, because Rocq's type system is so
+    much richer than that of Haskell, and because typeclasses in Rocq
     are used to automatically construct not only programs but also
-    proofs, Coq's presentation of typeclasses is quite a bit less
+    proofs, Rocq's presentation of typeclasses is quite a bit less
     "transparent": to use typeclasses effectively, one must have a
-    fairly detailed understanding of how they are implemented.  Coq
+    fairly detailed understanding of how they are implemented.  Rocq
     typeclasses are a power tool: they can make complex developments
     much more elegant and easy to manage when used properly, and they
     can cause a great deal of trouble when things go wrong!
 
-    This tutorial introduces the core features of Coq's typeclasses,
+    This tutorial introduces the core features of Rocq's typeclasses,
     explains how they are implemented, surveys some useful typeclasses
-    that can be found in Coq's standard library and other contributed
+    that can be found in Rocq's standard library and other contributed
     libraries, and collects some advice about the pragmatics of using
     typeclasses. *)
 
@@ -94,7 +94,7 @@ Class Show A : Type :=
     show := fun b:bool => if b then "true" else "false"
   }.
 
-(** Here, the [export] pragma instructs Coq to export this instance
+(** Here, the [export] pragma instructs Rocq to export this instance
     whenever this module is loaded. Other options are [local] (which
     never exports the instance), and [global] (which always does). *)
 
@@ -235,7 +235,7 @@ Notation "x =? y" := (eqb x y) (at level 70).
   }.
 
 (** One possible confusion should be addressed here: Why should we
-    need to define a typeclass for boolean equality when Coq's
+    need to define a typeclass for boolean equality when Rocq's
     _propositional_ equality ([x = y]) is completely generic?  The
     answer is that, while it makes sense to _claim_ that two values
     [x] and [y] are equal no matter what their type is, it is not
@@ -371,7 +371,7 @@ Definition max {A: Type} `{Eq A} `{Ord A} (x y : A) : A :=
 
 (** **** Exercise: 1 star, standard (missingConstraintAgain)
 
-    What does Coq say if the [Ord] class constraint is left out of the
+    What does Rocq say if the [Ord] class constraint is left out of the
     definition of [max]?  What about the [Eq] class constraint?
 
     [] *)
@@ -395,11 +395,11 @@ Definition max {A: Type} `{Eq A} `{Ord A} (x y : A) : A :=
 (* ################################################################# *)
 (** * How It Works *)
 
-(** Typeclasses in Coq are a powerful tool, but the expressiveness of
-    the Coq logic makes it hard to implement sanity checks like
+(** Typeclasses in Rocq are a powerful tool, but the expressiveness of
+    the Rocq logic makes it hard to implement sanity checks like
     Haskell's "overlapping instances" detector.
 
-    As a result, using Coq's typeclasses effectively -- and figuring
+    As a result, using Rocq's typeclasses effectively -- and figuring
     out what is wrong when things don't work -- requires a clear
     understanding of the underlying mechanisms. *)
 
@@ -409,7 +409,7 @@ Definition max {A: Type} `{Eq A} `{Ord A} (x y : A) : A :=
 (** The first thing to understand is exactly what the "backtick"
     notation means in declarations of classes, instances, and
     functions using typeclasses.  This is actually a quite generic
-    mechanism, called _implicit generalization_, that was added to Coq
+    mechanism, called _implicit generalization_, that was added to Rocq
     to support typeclasses but that can also be used to good effect
     elsewhere.
 
@@ -422,7 +422,7 @@ Definition max {A: Type} `{Eq A} `{Ord A} (x y : A) : A :=
 
 Generalizable Variables A.
 
-(** By default, Coq only implicitly generalizes variables declared in
+(** By default, Rocq only implicitly generalizes variables declared in
     this way, to avoid puzzling behavior in case of typos.  There is
     also a [Generalize Variables All] command, but it's probably not a
     good idea to use it! *)
@@ -433,7 +433,7 @@ Generalizable Variables A.
 Definition showOne1 `{Show A} (a : A) : string :=
   "The value is " ++ show a.
 
-(** Coq will notice that the occurrence of [A] inside the [`{...}] is
+(** Rocq will notice that the occurrence of [A] inside the [`{...}] is
     unbound and automatically insert the binding that we wrote
     explicitly before. *)
 
@@ -451,7 +451,7 @@ Print showOne1.
     if they had been written with [{...}], rather than [(...)].  The
     "implicit" part means that the type argument [A] and the [Show]
     witness [H] are usually expected to be left implicit: whenever we
-    write [showOne1], Coq will automatically insert two unification
+    write [showOne1], Rocq will automatically insert two unification
     variables as the first two arguments.  This automatic insertion
     can be disabled by writing [@], so a bare occurrence of [showOne1]
     means the same as [@showOne1 _ _].  The "maximally inserted" part
@@ -484,7 +484,7 @@ Definition showOne3 `{H : Show A} (a : A) : string :=
 Definition showOne4 `{Show} a : string :=
   "The value is " ++ show a.
 
-(** If we ask Coq to print the arguments that are normally implicit,
+(** If we ask Rocq to print the arguments that are normally implicit,
     we see that all these definitions are exactly the same
     internally. *)
 
@@ -505,7 +505,7 @@ Unset Printing Implicit.
 (** The examples we've seen so far illustrate how implicit
     generalization works, but you may not be convinced yet that it is
     actually saving enough keystrokes to be worth the trouble of
-    adding such a fancy mechanism to Coq.  Where things become more
+    adding such a fancy mechanism to Rocq.  Where things become more
     convincing is when classes are organized into hierarchies.  For
     example, here is an alternate definition of the [max] function: *)
 
@@ -513,7 +513,7 @@ Definition max1 `{Ord A} (x y : A) :=
   if le x y then y else x.
 
 (** If we print out [max1] in full detail, we can see that the
-    implicit generalization around [`{Ord A}] led Coq to fill in not
+    implicit generalization around [`{Ord A}] led Rocq to fill in not
     only a binding for [A] but also a binding for [H], which it can
     see must be of type [Eq A] because it appears as the second
     argument to [Ord].  (And why is [Ord] applied here to two
@@ -575,7 +575,7 @@ Print implicit_fun.
 Compute (@implicit_fun 2 3).
 
 (** Writing [`(...)], with parentheses instead of curly braces, causes
-    Coq to perform the same implicit generalization step, but does
+    Rocq to perform the same implicit generalization step, but does
     _not_ mark the inserted binders themselves as implicit. *)
 
 Definition implicit_fun1 := `(x + y).
@@ -585,7 +585,7 @@ Compute (implicit_fun1 2 3).
 (* ================================================================= *)
 (** ** Records are Products *)
 
-(** Although records are not part of its core, Coq does provide some
+(** Although records are not part of its core, Rocq does provide some
     simple syntactic sugar for defining and using records. *)
 
 (** Record types must be declared before they are used.  For example:*)
@@ -670,7 +670,7 @@ Print Show.
 *)
 Unset Printing All.
 (** (If you run the [Print] command yourself, you'll see that [Show]
-    actually displays as a [Variant]; this is Coq's terminology for a
+    actually displays as a [Variant]; this is Rocq's terminology for a
     single-field record.) *)
 
 (** Analogously, [Instance] declarations become record values: *)
@@ -729,7 +729,7 @@ Unset Printing Implicit.
     typed is automatically expanded to [@show _ _ 42].  The first [_]
     should obviously be replaced by [nat].  But what about the second?
 
-    By ordinary type inference, Coq knows that, to make the whole
+    By ordinary type inference, Rocq knows that, to make the whole
     expression well typed, the second argument to [@show] must be a
     value of type [Show nat].  It attempts to find or construct such a
     value using a variant of the [eauto] proof search procedure that
@@ -797,7 +797,7 @@ Unset Typeclasses Debug.
 (* ################################################################# *)
 (** * Typeclasses and Proofs *)
 
-(** Since programs and proofs in Coq are fundamentally made from the
+(** Since programs and proofs in Rocq are fundamentally made from the
     same stuff, the mechanisms of typeclasses extend smoothly to
     situations where classes contain not only data and functions but
     also proofs.
@@ -830,7 +830,7 @@ Class EqDec (A : Type) {H : Eq A} :=
   }.
 
 (** If we do not happen to have an appropriate proof already in the
-    environment, we can simply omit it. Coq will enter
+    environment, we can simply omit it. Rocq will enter
     proof mode and ask the user to use tactics to construct
     inhabitants for the fields. *)
 
@@ -856,7 +856,7 @@ Proof.
   subst. reflexivity. Qed.
 
 (** There is much more to say about how typeclasses can be used (and
-    how they should not be used) to support large-scale proofs in Coq.
+    how they should not be used) to support large-scale proofs in Rocq.
     See the suggested readings below. *)
 
 (* ================================================================= *)
@@ -864,9 +864,9 @@ Proof.
 
 (** Naturally, it is also possible to have typeclass instances as
     members of other typeclasses: these are called _substructures_.
-    Here is an example adapted from the Coq Reference Manual. *)
+    Here is an example adapted from the Rocq Reference Manual. *)
 
-From Coq Require Import Relations.Relation_Definitions.
+From Stdlib Require Import Relations.Relation_Definitions.
 
 Class Reflexive (A : Type) (R : relation A) :=
   {
@@ -888,8 +888,8 @@ Proof.
   assumption. assumption. assumption. Defined.
 
 Class PreOrder (A : Type) (R : relation A) :=
-  { PreOrder_Reflexive :> Reflexive A R ;
-    PreOrder_Transitive :> Transitive A R }.
+  { PreOrder_Reflexive :: Reflexive A R ;
+    PreOrder_Transitive :: Transitive A R }.
 
 (** The syntax [:>] indicates that each [PreOrder] can be seen as a
     [Reflexive] and [Transitive] relation, so that, any time a
@@ -1031,9 +1031,9 @@ Definition silly_fun2 (x y z : nat) :=
     in Haskell.  Readers who have never seen monads before may want to
     refer to one of these to fully understand the examples here. *)
 
-(** In Coq, monads are also heavily used, but the fact that
-    typeclasses are a relatively recent addition to Coq, together with
-    the fact that Coq's [Notation] extension mechanism allows users to
+(** In Rocq, monads are also heavily used, but the fact that
+    typeclasses are a relatively recent addition to Rocq, together with
+    the fact that Rocq's [Notation] extension mechanism allows users to
     define their own variants of [do] notation for specific situations
     where a monadic style is useful, have led to a proliferation of
     definitions of monads: most older projects simply define their own
@@ -1063,7 +1063,7 @@ Open Scope monad_scope.
 
     (If you [Print] the actual definition, you'll see something more
     complicated, involving [Polymorphic Record bla bla]...  The
-    [Polymorphic] part refers to Coq's "universe polymorphism," which
+    [Polymorphic] part refers to Rocq's "universe polymorphism," which
     does not concern us here.) *)
 
 (** For example, we can define a monad instance for [option] like
@@ -1163,12 +1163,12 @@ Definition sum3opt' (n1 n2 : option nat) :=
 
 (** The [/examples] directory in the [ext-lib] Github
     repository ({https://github.com/coq-community/coq-ext-lib/blob/master/}) includes
-    some further examples of using monads in Coq. *)
+    some further examples of using monads in Rocq. *)
 
 (* ================================================================= *)
 (** ** Others *)
 
-(** Two popular typeclasses from the Coq standard library are
+(** Two popular typeclasses from the Rocq standard library are
     [Equivalence] (and the associated classes [Reflexive],
     [Transitive], etc.) and [Proper].  They are described in the
     second half of _A Gentle Introduction to Type Classes and
@@ -1212,7 +1212,7 @@ Fail Check (foo true).
 
 (** Here's what happened:
       - When we defined [foo], the type of [x] was not specified, so
-        Coq filled in a unification variable (an "evar") [?A].
+        Rocq filled in a unification variable (an "evar") [?A].
       - When typechecking the expression [eqb x], the typeclass
         instance mechanism was asked to search for a type-correct
         instance of [Eq], i.e., an expression of type [Eq ?A].
@@ -1235,8 +1235,8 @@ Fail Check (foo true).
 (* ================================================================= *)
 (** ** Manipulating the Hint Database *)
 
-(** One of the ways in which Coq's typeclasses differ most from
-    Haskell's is the lack, in Coq, of an automatic check for
+(** One of the ways in which Rocq's typeclasses differ most from
+    Haskell's is the lack, in Rocq, of an automatic check for
     "overlapping instances."
 
     That is, it is completely legal to define a given type to be an
@@ -1267,7 +1267,7 @@ Compute (show (Baz 42)).
 
 (** When this happens, it is unpredictable which instance will be
     found first by the instance search process; here it just happened
-    to be the second. The reason Coq doesn't do the overlapping
+    to be the second. The reason Rocq doesn't do the overlapping
     instances check is because its type system is much more complex
     than Haskell's -- so much so that it is very challenging in
     general to decide whether two given instances overlap.
@@ -1562,7 +1562,7 @@ Definition e4 : list nat := mymap false.
 (** ** John Wiegley *)
 
 (** One thing that always gets me is that overlapping instances are
-    easy to write with no warning from Coq (unlike Haskell, which
+    easy to write with no warning from Rocq (unlike Haskell, which
     ensures that resolution always pick a single instance). This
     requires me to often use:
 
@@ -1579,7 +1579,7 @@ Definition e4 : list nat := mymap false.
     Another scenario that often bites me is when I define an instance
     for a type class, and then intend to write a function using the
     type class and forget to provide it as an argument. In Haskell
-    this would be an error, but in Coq it just resolves to whatever
+    this would be an error, but in Rocq it just resolves to whatever
     the last globally defined instance was.
 
     For example, say I write a function that uses a functor, but forget
@@ -1590,7 +1590,7 @@ Definition e4 : list nat := mymap false.
      fmap f.
 
     In Haskell this gives an error stating that no Functor is
-    available. In Coq, it type checks using the highest priority
+    available. In Rocq, it type checks using the highest priority
     [C --> D] functor instance in scope. I typically discover that
     this has happened when I try to use [foo] and find the Functor to
     be too specific, or by turning on Printing All and looking at the
@@ -1645,7 +1645,7 @@ Definition e4 : list nat := mymap false.
 
     Only those classes which might be multiply-inherited need to be
     lifted like this. It forces me to use Sections to avoid
-    repetition, but allows Coq to see that base classes sharing is
+    repetition, but allows Rocq to see that base classes sharing is
     plainly evident.
 
     The main gotcha here for the newcomer is that it is not obvious at
@@ -1678,7 +1678,7 @@ Definition e4 : list nat := mymap false.
     libraries, and very much enjoy the facility they provide. I have a
     category-theory library that is nearly all type classes, and I ran
     into every one of the problems described above, before learning
-    how to "work with Coq" to make things happy. *)
+    how to "work with Rocq" to make things happy. *)
 
 (* ================================================================= *)
 (** ** Michael Soegtrop *)
@@ -1704,7 +1704,7 @@ Definition e4 : list nat := mymap false.
 (** Typeclasses are merely about inferring some implicit arguments
     using proof search. The underlying modularity mechanism, which is
     the ability to define "existential types" using induction, was
-    _always_ there in Coq: typeclasses merely cuts down on verbosity
+    _always_ there in Rocq: typeclasses merely cuts down on verbosity
     because more arguments can now be implicit because they can be
     automatically inferred.  Relying on proof search often brings
     predictability concerns. So, guidance on taming proof search would
@@ -1734,7 +1734,7 @@ Definition e4 : list nat := mymap false.
     operation) in the interface I, even if parts of D don't actually
     need that operation: I've run into situations where it is
     impossible to cook up an operation that 90 percent of L doesn't use
-    anyway.  When using the unbundled approach, one can use Coq's
+    anyway.  When using the unbundled approach, one can use Rocq's
     Section mechanism to ensure that definitions/proofs only depend on
     items of the interface they actually use, and not on a big
     bundle. *)
@@ -1754,7 +1754,7 @@ Definition e4 : list nat := mymap false.
         {https://link.springer.com/chapter/10.1007%%2F978-3-540-71067-7_23}
 
     Sources for this tutorial:
-     - Coq Reference Manual:
+     - Rocq Reference Manual:
        {https://coq.inria.fr/refman/}
      - Casteran and Sozeau's "Gentle Introduction":
        {https://www.labri.fr/perso/casteran/CoqArt/TypeClassesTut/typeclassestut.pdf}
@@ -1767,4 +1767,4 @@ Definition e4 : list nat := mymap false.
        {http://learnyouahaskell.com/making-our-own-types-and-typeclasses}
 *)
 
-(* 2024-12-27 01:36 *)
+(* 2026-01-07 13:37 *)

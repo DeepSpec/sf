@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import IndPrinciples.
 
 Parameter MISSING: Type.
@@ -37,7 +37,7 @@ idtac " ".
 
 idtac "#> plus_one_r'".
 idtac "Possible points: 2".
-check_type @plus_one_r' ((forall n : nat, n + 1 = S n)).
+check_type @plus_one_r' ((forall n : nat, @eq nat (Nat.add n 1) (S n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_one_r'.
@@ -62,10 +62,14 @@ idtac " ".
 idtac "#> Toy_correct".
 idtac "Possible points: 2".
 check_type @Toy_correct (
-(exists (f : bool -> Toy) (g : nat -> Toy -> Toy),
-   forall P : Toy -> Prop,
-   (forall b : bool, P (f b)) ->
-   (forall (n : nat) (t : Toy), P t -> P (g n t)) -> forall t : Toy, P t)).
+(@ex (forall _ : bool, Toy)
+   (fun f : forall _ : bool, Toy =>
+    @ex (forall (_ : nat) (_ : Toy), Toy)
+      (fun g : forall (_ : nat) (_ : Toy), Toy =>
+       forall (P : forall _ : Toy, Prop) (_ : forall b : bool, P (f b))
+         (_ : forall (n : nat) (t : Toy) (_ : P t), P (g n t))
+         (t : Toy),
+       P t)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Toy_correct.
@@ -109,4 +113,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

@@ -1,4 +1,4 @@
-(** * Basics: Functional Programming in Coq *)
+(** * Basics: Functional Programming in Rocq *)
 
 (* REMINDER:
 
@@ -12,9 +12,9 @@
 (* ################################################################# *)
 (** * Introduction *)
 
-(** The functional style of programming is founded on simple, everyday
-    mathematical intuitions: If a procedure or method has no side
-    effects, then (ignoring efficiency) all we need to understand
+(** The _functional style_ of programming is founded on simple,
+    everyday mathematical intuitions: If a procedure or method has no
+    side effects, then (ignoring efficiency) all we need to understand
     about it is how it maps inputs to outputs -- that is, we can think
     of it as just a concrete method for computing a mathematical
     function.  This is one sense of the word "functional" in
@@ -32,13 +32,13 @@
     Other common features of functional languages include _algebraic
     data types_ and _pattern matching_, which make it easy to
     construct and manipulate rich data structures, and _polymorphic
-    type systems_ supporting abstraction and code reuse.  Coq offers
+    type systems_ supporting abstraction and code reuse.  Rocq offers
     all of these features.
 
-    The first half of this chapter introduces the most essential
-    elements of Coq's native functional programming language,
-    _Gallina_.  The second half introduces some basic _tactics_ that
-    can be used to prove properties of Gallina programs. *)
+    The first half of this chapter introduces some key elements of
+    Rocq's native functional programming language, _Gallina_.  The
+    second half introduces some basic _tactics_ that can be used to
+    prove properties of Gallina programs. *)
 
 (* ################################################################# *)
 (** * Homework Submission Guidelines *)
@@ -55,27 +55,26 @@
         because it is marked "optional," or because you can't solve it),
         it is OK to leave a partial proof in your [.v] file; in
         this case, please make sure it ends with the keyword [Admitted]
-        (not, for example [Abort]).
+        (not, for example, [Abort]).
       - It is fine to use additional definitions (of helper functions,
         useful lemmas, etc.) in your solutions.  You can put these
         before the theorem you are asked to prove.
       - If you introduce a helper lemma that you end up being unable
         to prove, hence end it with [Admitted], then make sure to also
         end the main theorem in which you use it with [Admitted], not
-        [Qed].  This will help you get partial credit, in case you
+        [Qed].  This will make sure you get partial credit if you
         use that main theorem to solve a later exercise.
 
-    You will also notice that each chapter (like [Basics.v]) is
-    accompanied by a _test script_ ([BasicsTest.v]) that automatically
-    calculates points for the finished homework problems in the
-    chapter.  These scripts are mostly for the auto-grading
-    tools, but you may also want to use them to double-check
-    that your file is well formatted before handing it in.  In a
-    terminal window, either type "[make BasicsTest.vo]" or do the
-    following:
+    You will also notice that each chapter (e.g., [Basics.v]) is
+    accompanied by a _test script_ (e.g., [BasicsTest.v]) that
+    automatically calculates points for the finished homework problems
+    in the chapter.  These scripts are mostly for the auto-grading
+    tools, but you may also want to use them to double-check that your
+    file is well formatted before handing it in.  In a terminal
+    window, either type "[make BasicsTest.vo]" or do the following:
 
-       coqc -Q . LF Basics.v
-       coqc -Q . LF BasicsTest.v
+       rocq compile -Q . LF Basics.v
+       rocq compile -Q . LF BasicsTest.v
 
     See the end of this chapter for more information about how to interpret
     the output of test scripts.
@@ -86,10 +85,11 @@
       - If you submit multiple versions of the assignment, you may
         notice that they are given different names.  This is fine: The
         most recent submission is the one that will be graded.
-      - If you want to hand in multiple files at the same time (if more
-        than one chapter is assigned in the same week), you need to make a
-        single submission with all the files at once using the
-        "Add another file" button just above the comment box. *)
+      - If you are handing in multiple files at the same time (i.e.,
+        if more than one chapter is assigned in the same week), you
+        should make a _single_ submission with all the files at once
+        by using the "Add another file" button just above the comment
+        box. *)
 
 (* ################################################################# *)
 (** * Data and Functions *)
@@ -97,27 +97,26 @@
 (* ================================================================= *)
 (** ** Enumerated Types *)
 
-(** One notable thing about Coq is that its set of built-in
-    features is _extremely_ small.  For example, instead of providing
-    the usual palette of atomic data types (booleans, integers,
-    strings, etc.), Coq offers a powerful mechanism for defining new
-    data types from scratch, with all these familiar types as
-    instances.
+(** One notable thing about Rocq is that its set of built-in
+    features is _extremely_ small.  For example, instead of the usual
+    palette of atomic data types (booleans, integers, strings, etc.),
+    Rocq offers a powerful mechanism for defining new data types from
+    scratch, with all these familiar types as instances.
 
-    Naturally, the Coq distribution comes with an extensive standard
-    library providing definitions of booleans, numbers, and many
-    common data structures like lists and hash tables.  But there is
-    nothing magic or primitive about these library definitions.  To
+    Naturally, the Rocq distribution also comes with an extensive
+    standard library providing definitions of booleans, numbers, and
+    many common data structures like lists and hash tables.  But there
+    is nothing magic or primitive about these library definitions.  To
     illustrate this, in this course we will explicitly recapitulate
-    (almost) all the definitions we need, rather than getting them
+    almost all the definitions we need, rather than getting them
     from the standard library. *)
 
 (* ================================================================= *)
 (** ** Days of the Week *)
 
-(** To see how this definition mechanism works, let's start with
-    a very simple example.  The following declaration tells Coq that
-    we are defining a set of data values -- a _type_. *)
+(** To see how the datatype definition mechanism works, let's
+    start with a very simple example.  The following declaration tells
+    Rocq that we are defining a set of data values -- a _type_. *)
 
 Inductive day : Type :=
   | monday
@@ -146,14 +145,15 @@ Definition next_working_day (d:day) : day :=
   end.
 
 (** Note that the argument and return types of this function are
-    explicitly declared here.  Like most functional programming
-    languages, Coq can often figure out these types for itself when
-    they are not given explicitly -- i.e., it can do _type inference_
-    -- but we'll generally include them to make reading easier. *)
+    explicitly declared on the first line.  Like most functional
+    programming languages, Rocq can often figure out these types for
+    itself when they are not given explicitly -- i.e., it can do _type
+    inference_ -- but we'll generally include them to make reading
+    easier. *)
 
 (** Having defined a function, we can check that it works on
     some examples.  There are actually three different ways to do
-    examples in Coq.  First, we can use the command [Compute] to
+    examples in Rocq.  First, we can use the command [Compute] to
     evaluate a compound expression involving [next_working_day]. *)
 
 Compute (next_working_day friday).
@@ -162,15 +162,15 @@ Compute (next_working_day friday).
 Compute (next_working_day (next_working_day saturday)).
 (* ==> tuesday : day *)
 
-(** (We show Coq's responses in comments; if you have a computer
-    handy, this would be an excellent moment to fire up the Coq
+(** (We show Rocq's responses in comments; if you have a computer
+    handy, this would be an excellent moment to fire up the Rocq
     interpreter under your favorite IDE (see the [Preface] for
     installation instructions) and try it for yourself.  Load this
-    file, [Basics.v], from the book's Coq sources, find the above
-    example, submit it to Coq, and observe the result.) *)
+    file, [Basics.v], from the book's Rocq sources, find the above
+    example, submit it to Rocq, and observe the result.) *)
 
 (** Second, we can record what we _expect_ the result to be in the
-    form of a Coq example: *)
+    form of a Rocq "example": *)
 
 Example test_next_working_day:
   (next_working_day (next_working_day saturday)) = tuesday.
@@ -178,7 +178,7 @@ Example test_next_working_day:
 (** This declaration does two things: it makes an assertion
     (that the second working day after [saturday] is [tuesday]), and it
     gives the assertion a name that can be used to refer to it later.
-    Having made the assertion, we can also ask Coq to verify it like
+    Having made the assertion, we can also ask Rocq to _verify_ it, like
     this: *)
 
 Proof. simpl. reflexivity.  Qed.
@@ -188,7 +188,7 @@ Proof. simpl. reflexivity.  Qed.
     proved by observing that both sides of the equality evaluate to
     the same thing." *)
 
-(** Third, we can ask Coq to _extract_, from our [Definition], a
+(** Third, we can ask Rocq to _extract_, from our [Definition], a
     program in a more conventional programming language (OCaml,
     Scheme, or Haskell) with a high-performance compiler.  This
     facility is very useful, since it gives us a path from
@@ -196,18 +196,18 @@ Proof. simpl. reflexivity.  Qed.
     code.
 
     (Of course, we are trusting the correctness of the
-    OCaml/Haskell/Scheme compiler, and of Coq's extraction facility
+    OCaml/Haskell/Scheme compiler, and of Rocq's extraction facility
     itself, but this is still a big step forward from the way most
     software is developed today!)
 
-    Indeed, this is one of the main uses for which Coq was developed.
+    Indeed, this is one of the main uses for which Rocq was developed.
     We'll come back to this topic in later chapters. *)
 
-(** The [Require Export] statement on the next line tells Coq to use
+(** The [Require Export] statement on the next line tells Rocq to use
     the [String] module from the standard library.  We'll use strings
     for various things in later chapters, but we need to [Require] it here so
     that the grading scripts can use it for internal purposes. *)
-From Coq Require Export String.
+From Stdlib Require Export String.
 
 (* ================================================================= *)
 (** ** Booleans *)
@@ -242,13 +242,13 @@ Definition orb (b1:bool) (b2:bool) : bool :=
   end.
 
 (** (Although we are rolling our own booleans here for the sake
-    of building up everything from scratch, Coq does, of course,
+    of building up everything from scratch, Rocq does, of course,
     provide a default implementation of the booleans, together with a
-    multitude of useful functions and lemmas.  Whereever possible,
+    multitude of useful functions and lemmas.  Wherever possible,
     we've named our own definitions and theorems to match the ones in
     the standard library.) *)
 
-(** The last two of these illustrate Coq's syntax for
+(** The last two of these illustrate Rocq's syntax for
     multi-argument function definitions.  The corresponding
     multi-argument _application_ syntax is illustrated by the
     following "unit tests," which constitute a complete specification
@@ -263,9 +263,10 @@ Proof. simpl. reflexivity.  Qed.
 Example test_orb4:  (orb true  true)  = true.
 Proof. simpl. reflexivity.  Qed.
 
-(** We can also introduce some familiar infix syntax for the
-    boolean operations we have just defined. The [Notation] command
-    defines a new symbolic notation for an existing definition. *)
+(** We can also introduce more familiar and readable infix
+    syntax for the boolean operations we have just defined. The
+    [Notation] command defines a new symbolic notation for an existing
+    definition. *)
 
 Notation "x && y" := (andb x y).
 Notation "x || y" := (orb x y).
@@ -274,13 +275,14 @@ Example test_orb5:  false || false || true = true.
 Proof. simpl. reflexivity. Qed.
 
 (** _A note on notation_: In [.v] files, we use square brackets
-    to delimit fragments of Coq code within comments; this convention,
-    also used by the [coqdoc] documentation tool, keeps them visually
-    separate from the surrounding text.  In the HTML version of the
-    files, these pieces of text appear in a different font. *)
+    to delimit fragments of Rocq code within comments; this
+    convention, also used by the [rocq doc] documentation tool, keeps
+    them visually separate from the surrounding text.  In the HTML
+    version of the files, these pieces of text appear in a different
+    font (and without the brackets). *)
 
-(** These examples are also an opportunity to introduce one more small
-    feature of Coq's programming language: conditional expressions... *)
+(** These examples are also an opportunity to introduce one more
+    feature of Rocq's programming language: conditional expressions... *)
 
 Definition negb' (b:bool) : bool :=
   if b then false
@@ -294,15 +296,15 @@ Definition orb' (b1:bool) (b2:bool) : bool :=
   if b1 then true
   else b2.
 
-(** Coq's conditionals are exactly like those found in any other
+(** Rocq's conditionals are exactly like those found in any other
     language, with one small generalization:
 
-    Since the [bool] type is not built in, Coq actually supports
+    Since the [bool] type is not built in, Rocq actually supports
     conditional expressions over _any_ inductively defined type with
     exactly two clauses in its definition.  The guard is considered
     true if it evaluates to the "constructor" of the first clause of
-    the [Inductive] definition (which just happens to be called [true]
-    in this case) and false if it evaluates to the second. *)
+    the [Inductive] definition (which happens to be called [true] in
+    this case) and false if it evaluates to the second. *)
 
 (** For example we can define the following datatype [bw], with
     two constructors representing black ([b]) and white ([w]) and
@@ -330,18 +332,18 @@ Compute (invert bw_white).
     that we're leaving for you -- i.e., your job is to replace
     [Admitted]s with real proofs.
 
-    Remove "[Admitted.]" and complete the definition of the following
-    function; then make sure that the [Example] assertions below can
-    each be verified by Coq.  (I.e., fill in each proof, following the
-    model of the [orb] tests above, and make sure Coq accepts it.) The
-    function should return [true] if either or both of its inputs are
-    [false].
+    Remove "[Admitted.]" below and complete the definition of the
+    following function; then make sure that the [Example] assertions
+    below can each be verified by Rocq.  (I.e., fill in each proof,
+    following the model of the [orb] tests above, and make sure Rocq
+    accepts it.) The function should return [true] if either or both
+    of its inputs are [false].
 
     Hint: if [simpl] will not simplify the goal in your proof, it's
     probably because you defined [nandb] without using a [match]
-    expression. Try a different definition of [nandb], or just
-    skip over [simpl] and go directly to [reflexivity]. We'll
-    explain this phenomenon later in the chapter. *)
+    expression. Try a different definition of [nandb], or just skip
+    over [simpl] and go directly to [reflexivity]. We'll explain
+    what's happening later in the chapter. *)
 
 Definition nandb (b1:bool) (b2:bool) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -378,16 +380,16 @@ Example test_andb34:                 (andb3 true true false) = false.
 (* ================================================================= *)
 (** ** Types *)
 
-(** Every expression in Coq has a type describing what sort of
-    thing it computes. The [Check] command asks Coq to print the type
+(** Every expression in Rocq has a type describing what sort of
+    thing it computes. The [Check] command asks Rocq to print the type
     of an expression. *)
 
 Check true.
 (* ===> true : bool *)
 
 (** If the thing after [Check] is followed by a colon and a type
-    declaration, Coq will verify that the type of the expression
-    matches the given type and halt with an error if not. *)
+    declaration, Rocq will verify that the type of the expression
+    matches the given type and signal an error if not. *)
 
 Check true
   : bool.
@@ -411,10 +413,11 @@ Check negb
 (* ================================================================= *)
 (** ** New Types from Old *)
 
-(** The types we have defined so far are examples of "enumerated
-    types": their definitions explicitly enumerate a finite set of
-    elements, called _constructors_.  Here is a more interesting type
-    definition, where one of the constructors takes an argument: *)
+(** The types we have defined so far are examples of simple
+    "enumerated types": their definitions explicitly enumerate a
+    finite set of elements, called _constructors_.  Here is a more
+    interesting type definition, [color], where one of the
+    constructors takes an argument: *)
 
 Inductive rgb : Type :=
   | red
@@ -430,7 +433,7 @@ Inductive color : Type :=
 
     An [Inductive] definition does two things:
 
-    - It defines a set of new _constructors_. E.g., [red],
+    - It introduces a set of new _constructors_. E.g., [red],
       [primary], [true], [false], [monday], etc. are constructors.
 
     - It groups them into a new named type, like [bool], [rgb], or
@@ -496,7 +499,7 @@ Definition isred (c : color) : bool :=
 (* ================================================================= *)
 (** ** Modules *)
 
-(** Coq provides a _module system_ to aid in organizing large
+(** Rocq provides a _module system_ to aid in organizing large
     developments.  We won't need most of its features, but one is
     useful here: If we enclose a collection of declarations between
     [Module X] and [End X] markers, then, in the remainder of the file
@@ -539,16 +542,16 @@ Check (bits B1 B0 B1 B0)
 (** The [bits] constructor acts as a wrapper for its contents.
     Unwrapping can be done by pattern-matching, as in the [all_zero]
     function below, which tests a nybble to see if all its bits are
-    [B0].
-
-    We use underscore (_) as a _wildcard pattern_ to avoid inventing
-    variable names that will not be used. *)
+    [B0]. *)
 
 Definition all_zero (nb : nybble) : bool :=
   match nb with
   | (bits B0 B0 B0 B0) => true
   | (bits _ _ _ _) => false
   end.
+
+(** (The underscore (_) here is a _wildcard pattern_, which avoids
+    inventing variable names that will not be used.) *)
 
 Compute (all_zero (bits B1 B0 B1 B0)).
 (* ===> false : bool *)
@@ -574,15 +577,14 @@ Module NatPlayground.
     slightly richer form of type declaration to represent them.
 
     There are many representations of numbers to choose from. You are
-    almost certainly most familiar with decimal notation (base 10),
-    using the digits 0 through 9, for example, to form the number 123.
-    You may very likely also have encountered hexadecimal
-    notation (base 16), in which the same number is represented as 7B,
-    or octal (base 8), where it is 173, or binary (base 2), where it
-    is 1111011. Using an enumerated type to represent digits, we could
-    use any of these as our representation natural numbers. Indeed,
-    there are circumstances where each of these choices would be
-    useful.
+    certainly familiar with decimal notation (base 10), using the
+    digits 0 through 9, for example, to form the number 123. You may
+    very likely also have encountered hexadecimal notation (base 16),
+    in which the same number is represented as 7B, or octal (base 8),
+    where it is 173, or binary (base 2), where it is 1111011. Using an
+    enumerated type to represent digits, we could use any of these as
+    our representation natural numbers. Indeed, there are
+    circumstances where each of these choices would be useful.
 
     The binary representation is valuable in computer hardware because
     the digits can be represented with just two distinct voltage
@@ -591,13 +593,14 @@ Module NatPlayground.
 
     In fact, there is a representation of numbers that is even simpler
     than binary, namely unary (base 1), in which only a single digit
-    is used (as our forebears might have done to count days by making
-    scratches on the walls of their caves). To represent unary numbers
-    with a Coq datatype, we use two constructors. The capital-letter
-    [O] constructor represents zero. The [S] constructor can be
-    applied to the representation of the natural number n, yieldimng
-    the representation of n+1, where [S] stands for "successor" (or
-    "scratch").  Here is the complete datatype definition: *)
+    is used -- as our forebears might have done to count days by
+    making scratches on the walls of their caves. To represent unary
+    numbers with a Rocq datatype, we use two constructors. The
+    capital-letter [O] constructor represents zero. The [S]
+    constructor can be applied to the representation of the natural
+    number [n], yielding the representation of [n+1], where [S] stands for
+    "successor" (or "scratch").  Here is the complete datatype
+    definition: *)
 
 Inductive nat : Type :=
   | O
@@ -623,7 +626,7 @@ Inductive nat : Type :=
       ones belonging to the set [nat]. *)
 
 (** These conditions are the precise force of the [Inductive]
-    declaration that we gave to Coq.  They imply that the constructor
+    declaration that we gave to Rocq.  They imply that the constructor
     expression [O], the constructor expression [S O], the constructor
     expression [S (S O)], the constructor expression [S (S (S O))],
     and so on all belong to the set [nat], while other constructor
@@ -666,10 +669,10 @@ Definition pred (n : nat) : nat :=
 End NatPlayground.
 
 (** Because natural numbers are such a pervasive kind of data,
-    Coq does provide a tiny bit of built-in magic for parsing and
+    Rocq does provide a tiny bit of built-in magic for parsing and
     printing them: ordinary decimal numerals can be used as an
     alternative to the "unary" notation defined by the constructors
-    [S] and [O].  Coq prints numbers in decimal form by default: *)
+    [S] and [O].  Rocq prints numbers in decimal form by default: *)
 
 Check (S (S (S (S O)))).
 (* ===> 4 : nat *)
@@ -752,7 +755,7 @@ Fixpoint plus (n : nat) (m : nat) : nat :=
 Compute (plus 3 2).
 (* ===> 5 : nat *)
 
-(** The steps of simplification that Coq performs here can be
+(** The steps of simplification that Rocq performs here can be
     visualized as follows: *)
 
 (*      [plus 3 2]
@@ -768,7 +771,7 @@ Compute (plus 3 2).
    i.e. [5]  *)
 
 (** As a notational convenience, if two or more arguments have
-    the same type, they can be written together.  In the following
+    the same type, they can be grouped together.  In the following
     definition, [(n m : nat)] means just the same as if we had written
     [(n : nat) (m : nat)]. *)
 
@@ -806,10 +809,10 @@ Fixpoint exp (base power : nat) : nat :=
        factorial(0)  =  1
        factorial(n)  =  n * factorial(n-1)     (if n>0)
 
-    Translate this into Coq.
+    Translate this into Rocq.
 
-    Make sure you put a [:=] between the header we've provided and
-    your definition.  If you see an error like "The reference
+    Hint: Make sure you put a [:=] between the header we've provided
+    and your definition.  If you see an error like "The reference
     factorial was not found in the current environment," it means
     you've forgotten the [:=]. *)
 
@@ -839,22 +842,22 @@ Notation "x * y" := (mult x y)
 Check ((0 + 1) + 1) : nat.
 
 (** (The [level], [associativity], and [nat_scope] annotations
-    control how these notations are treated by Coq's parser.  The
+    control how these notations are treated by Rocq's parser.  The
     details are not important for present purposes, but interested
-    readers can refer to the "More on Notation" section at the end of
+    readers can check out the "More on Notation" section at the end of
     this chapter.)
 
     Note that these declarations do not change the definitions we've
-    already made: they are simply instructions to Coq's parser to
+    already made: they are simply instructions to Rocq's parser to
     accept [x + y] in place of [plus x y] and, conversely, to its
     pretty-printer to display [plus x y] as [x + y]. *)
 
-(** When we say that Coq comes with almost nothing built-in, we really
+(** When we say that Rocq comes with almost nothing built-in, we really
     mean it: even testing equality is a user-defined operation!
-    Here is a function [eqb], which tests natural numbers for
+    Here is a function [eqb] that tests natural numbers for
     [eq]uality, yielding a [b]oolean.  Note the use of nested
-    [match]es (we could also have used a simultaneous match, as
-    in [minus].) *)
+    [match]es -- we could also have used a simultaneous match, as
+    in [minus]. *)
 
 Fixpoint eqb (n m : nat) : bool :=
   match n with
@@ -906,11 +909,13 @@ Proof. simpl. reflexivity.  Qed.
 
 (** **** Exercise: 1 star, standard (ltb)
 
-    The [ltb] function tests natural numbers for [l]ess-[t]han,
-    yielding a [b]oolean.  Instead of making up a new [Fixpoint] for
+    Fill in the definition of an [ltb] function that tests natural
+    numbers for [l]ess-[t]han, yielding a [b]oolean.
+
+    Hint: Instead of making up a new [Fixpoint] for
     this one, define it in terms of a previously defined
-    function.  (It can be done with just one previously defined
-    function, but you can use two if you want.) *)
+    function.  It can be done with just one previously defined
+    function, but you can use two if you want. *)
 
 Definition ltb (n m : nat) : bool
   (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
@@ -937,9 +942,12 @@ Example test_ltb3:             (ltb 4 2) = false.
     were always the same: use [simpl] to simplify both sides of the
     equation, then use [reflexivity] to check that both sides contain
     identical values.
+ *)
+Example plus_1_1 : 1 + 1 = 2.
+Proof. simpl. reflexivity. Qed.
 
-    The same sort of "proof by simplification" can be used to
-    establish more interesting properties as well.  For example, the
+(**   The same sort of "proof by simplification" can also be used to
+    establish more interesting properties.  For example, the
     fact that [0] is a "neutral element" for [+] on the left can be
     proved just by observing that [0 + n] reduces to [n] no matter
     what [n] is -- a fact that can be read off directly from the
@@ -957,7 +965,7 @@ Proof.
     transformed into the standard upside-down-A symbol.)
 
     This is a good place to mention that [reflexivity] is a bit more
-    powerful than we have acknowledged. In the examples we have seen,
+    powerful than we have suggested. In the examples we have seen,
     the calls to [simpl] were actually not required because
     [reflexivity] will do some simplification automatically when
     checking that two sides are equal; [simpl] was just added so that
@@ -968,7 +976,7 @@ Theorem plus_O_n' : forall n : nat, 0 + n = n.
 Proof.
   intros n. reflexivity. Qed.
 
-(** Moreover, it will be useful to know that [reflexivity] does
+(** Moreover, it is useful to know that [reflexivity] does
     somewhat _more_ simplification than [simpl] does -- for example,
     it tries "unfolding" defined terms, replacing them with their
     right-hand sides.  The reason for this difference is that, if
@@ -984,9 +992,9 @@ Proof.
     just a few differences.
 
     First, we've used the keyword [Theorem] instead of [Example].
-    This difference is mostly a matter of style; the keywords
+    This difference is just a matter of style; the keywords
     [Example] and [Theorem] (and a few others, including [Lemma],
-    [Fact], and [Remark]) mean pretty much the same thing to Coq.
+    [Fact], and [Remark]) mean pretty much the same thing to Rocq.
 
     Second, we've added the quantifier [forall n:nat], so that our
     theorem talks about _all_ natural numbers [n].  Informally, to
@@ -1024,7 +1032,7 @@ Proof.
 
 (** It is worth stepping through these proofs to observe how the
     context and the goal change.  You may want to add calls to [simpl]
-    before [reflexivity] to see the simplifications that Coq performs
+    before [reflexivity] to see the simplifications that Rocq performs
     on the terms before checking that they are equal. *)
 
 (* ################################################################# *)
@@ -1050,7 +1058,7 @@ Theorem plus_id_example : forall n m:nat,
     simplification to prove this theorem.  Instead, we prove it by
     observing that, if we are assuming [n = m], then we can replace
     [n] with [m] in the goal statement and obtain an equality with the
-    same expression on both sides.  The tactic that tells Coq to
+    same expression on both sides.  The tactic that tells Rocq to
     perform this replacement is called [rewrite]. *)
 
 Proof.
@@ -1065,13 +1073,13 @@ Proof.
 (** The first line of the proof moves the universally quantified
     variables [n] and [m] into the context.  The second moves the
     hypothesis [n = m] into the context and gives it the name [H].
-    The third tells Coq to rewrite the current goal ([n + n = m + m])
+    The third tells Rocq to rewrite the current goal ([n + n = m + m])
     by replacing the left side of the equality hypothesis [H] with the
     right side.
 
     (The arrow symbol in the [rewrite] has nothing to do with
-    implication: it tells Coq to apply the rewrite from left to right.
-    In fact, we can omit the arrow, and Coq will default to rewriting
+    implication: it tells Rocq to apply the rewrite from left to right.
+    Indeed, we can omit the arrow, and Rocq will default to rewriting
     left to right.  To rewrite from right to left, use [rewrite <-].
     Try making this change in the above proof and see what changes.) *)
 (** **** Exercise: 1 star, standard (plus_id_exercise)
@@ -1086,7 +1094,7 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** The [Admitted] command tells Coq that we want to skip trying
+(** The [Admitted] command tells Rocq that we want to skip trying
     to prove this theorem and just accept it as a given.  This is
     often useful for developing longer proofs: we can state subsidiary
     lemmas that we believe will be useful for making some larger
@@ -1096,8 +1104,8 @@ Proof.
     skipped.
 
     Be careful, though: every time you say [Admitted] you are leaving
-    a door open for total nonsense to enter Coq's nice, rigorous,
-    formally checked world! *)
+    a door open for total nonsense to enter Rocq's safe, formally
+    checked world! *)
 
 (** The [Check] command can also be used to examine the statements of
     previously declared lemmas and theorems.  The two examples below
@@ -1114,7 +1122,7 @@ Check mult_n_Sm.
 (** We can use the [rewrite] tactic with a previously proved theorem
     instead of a hypothesis from the context. If the statement of the
     previously proved theorem involves quantified variables, as in the
-    example below, Coq will try to fill in appropriate values for them
+    example below, Rocq will try to fill in appropriate values for them
     by matching the body of the previous theorem statement against the
     current goal. *)
 
@@ -1128,7 +1136,7 @@ Proof.
 
 (** **** Exercise: 1 star, standard (mult_n_1)
 
-    Use [mult_n_Sm] and [mult_n_0] to prove the following
+    Use [mult_n_Sm] and [mult_n_O] to prove the following
     theorem.  (Recall that [1] is [S O].) *)
 
 Theorem mult_n_1 : forall p : nat,
@@ -1155,13 +1163,13 @@ Proof.
   simpl.  (* does nothing! *)
 Abort.
 
-(** The reason for this is that the definitions of both [eqb]
-    and [+] begin by performing a [match] on their first argument.
+(** The reason for getting stuck is that the definitions of both
+    [eqb] and [+] begin by performing a [match] on their first argument.
     Here, the first argument to [+] is the unknown number [n] and the
     argument to [eqb] is the compound expression [n + 1]; neither can
     be simplified.
 
-    To make progress, we need to consider the possible forms of [n]
+    To make progress, we need to consider the possible forms of [n],
     separately.  If [n] is [O], then we can calculate the final result
     of [(n + 1) =? 0] and check that it is, indeed, [false].  And if
     [n = S n'] for some [n'], then -- although we don't know exactly
@@ -1169,8 +1177,8 @@ Abort.
     it will begin with one [S]; and this is enough to calculate that,
     again, [(n + 1) =? 0] will yield [false].
 
-    The tactic that tells Coq to consider, separately, the cases where
-    [n = O] and where [n = S n'] is called [destruct]. *)
+    The tactic that tells Rocq to consider separate cases where
+    [n = O] and [n = S n'] is called [destruct]. *)
 
 Theorem plus_1_neq_0 : forall n : nat,
   (n + 1) =? 0 = false.
@@ -1180,20 +1188,20 @@ Proof.
   - reflexivity.   Qed.
 
 (** The [destruct] generates _two_ subgoals, which we must then
-    prove, separately, in order to get Coq to accept the theorem.
+    prove, separately, in order to get Rocq to accept the theorem.
 
     The annotation "[as [| n']]" is called an _intro pattern_.  It
-    tells Coq what variable names to introduce in each subgoal.  In
+    tells Rocq what variable names to introduce in each subgoal.  In
     general, what goes between the square brackets is a _list of
     lists_ of names, separated by [|].  In this case, the first
     component is empty, since the [O] constructor doesn't take any
     arguments.  The second component gives a single name, [n'], since
     [S] is a unary constructor.
 
-    In each subgoal, Coq remembers the assumption about [n] that is
+    In each subgoal, Rocq remembers the assumption about [n] that is
     relevant for this subgoal -- either [n = 0] or [n = S n'] for some
     n'.  The [eqn:E] annotation tells [destruct] to give the name [E]
-    to this equation.  (Leaving off the [eqn:E] annotation causes Coq
+    to this equation.  (Leaving off the [eqn:E] annotation causes Rocq
     to elide these assumptions in the subgoals.  This slightly
     streamlines proofs where the assumptions are not explicitly used,
     but it is better practice to keep them for the sake of
@@ -1211,18 +1219,18 @@ Proof.
     [eqb], and then simplifying the [match].
 
     Marking cases with bullets is optional: if bullets are not
-    present, Coq simply expects you to prove each subgoal in sequence,
-    one at a time. But it is a good idea to use bullets.  For one
-    thing, they make the structure of a proof apparent, improving
-    readability. Moreover, bullets instruct Coq to ensure that a
-    subgoal is complete before trying to verify the next one,
-    preventing proofs for different subgoals from getting mixed
-    up. These issues become especially important in larger
-    developments, where fragile proofs can lead to long debugging
-    sessions!
+    present, Rocq simply expects you to prove each subgoal in
+    sequence, one at a time. But it is a good idea to use bullets, and
+    you should make a habit of doing it! For one thing, bullets make
+    the structure of a proof apparent, improving readability.
+    Moreover, bullets instruct Rocq to ensure that a subgoal is
+    complete before trying to verify the next one, preventing proofs
+    for different subgoals from getting mixed up. These issues become
+    especially important in larger developments, where fragile proofs
+    can lead to long debugging sessions!
 
     There are no hard and fast rules for how proofs should be
-    formatted in Coq -- e.g., where lines should be broken and how
+    formatted in Rocq -- e.g., where lines should be broken and how
     sections of the proof should be indented to indicate their nested
     structure.  However, if the places where multiple subgoals are
     generated are marked with explicit bullets at the beginning of
@@ -1230,12 +1238,12 @@ Proof.
     choices are made about other aspects of layout.
 
     This is also a good place to mention one other piece of somewhat
-    obvious advice about line lengths.  Beginning Coq users sometimes
+    obvious advice about line lengths. Beginning Rocq users sometimes
     tend to the extremes, either writing each tactic on its own line
-    or writing entire proofs on a single line.  Good style lies
-    somewhere in the middle.  One reasonable guideline is to limit
-    yourself to 80- (or, if you have a wide screen or good eyes,
-    120-) character lines.
+    or writing entire proofs on a single line. Good style lies
+    somewhere in the middle. One reasonable guideline is to limit
+    yourself to 80 (or, if you have a wide screen or good eyes,
+    120) character lines.
 
     The [destruct] tactic can be used with any inductively defined
     datatype.  For example, we use it next to prove that boolean
@@ -1252,9 +1260,9 @@ Proof.
 (** Note that the [destruct] here has no [as] clause because
     none of the subcases of the [destruct] need to bind any variables,
     so there is no need to specify any names.  In fact, we can omit
-    the [as] clause from _any_ [destruct] and Coq will fill in
+    the [as] clause from _any_ [destruct] and Rocq will fill in
     variable names automatically.  This is generally considered bad
-    style, since Coq often makes confusing choices of names when left
+    style, since Rocq often makes confusing choices of names when left
     to its own devices.
 
     It is sometimes useful to invoke [destruct] inside a subgoal,
@@ -1279,7 +1287,7 @@ Qed.
 
 (** Besides [-] and [+], we can use [*] (asterisk) or any repetition
     of a bullet symbol (e.g. [--] or [***]) as a bullet.  We can also
-    enclose sub-proofs in curly braces: *)
+    enclose sub-proofs in curly braces instead of using bullets: *)
 
 Theorem andb_commutative' : forall b c, andb b c = andb c b.
 Proof.
@@ -1295,9 +1303,10 @@ Qed.
 (** Since curly braces mark both the beginning and the end of a proof,
     they can be used for multiple subgoal levels, as this example
     shows. Furthermore, curly braces allow us to reuse the same bullet
-    shapes at multiple levels in a proof. The choice of braces,
-    bullets, or a combination of the two is purely a matter of
-    taste. *)
+    shapes at multiple levels in a proof.
+
+    The choice of braces, bullets, or a combination of the two is purely
+    a matter of taste. *)
 
 Theorem andb3_exchange :
   forall b c d, andb (andb b c) d = andb (andb b d) c.
@@ -1324,12 +1333,17 @@ Qed.
     Prove the following claim, marking cases (and subcases) with
     bullets when you use [destruct].
 
-    Hint: You will eventually need to destruct both booleans, as in
-    the theorems above. But its best to delay introducing the
-    hypothesis until after you have an opportunity to simplify it.
+    Hint 1: Thus far, we've only ever used [simpl] to simplify the goal.
+    It is also possible to use it to simplify hypotheses:
+    use [simpl in H], where [H] is a hypothesis, to simplify it.
+    You may find this useful in this exercise.
 
-    Hint 2: When you reach a contradiction in the hypotheses, focus on
-    how to [rewrite] with that contradiction. *)
+    Hint 2: You will eventually need to destruct both booleans, as in
+    the theorems above. It is better to simplify the hypothesis
+    before attempting to destruct the second boolean.
+
+    Hint 3: If you reach a contradiction in the hypotheses, focus on
+    how to [rewrite] using that contradiction. *)
 
 Theorem andb_true_elim2 : forall b c : bool,
   andb b c = true -> c = true.
@@ -1337,13 +1351,13 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** Before closing the chapter, let's mention one final
+(** Before closing the chapter, we should mention one final
     convenience.  As you may have noticed, many proofs perform case
     analysis on a variable right after introducing it:
 
        intros x y. destruct y as [|y] eqn:E.
 
-    This pattern is so common that Coq provides a shorthand for it: we
+    This pattern is so common that Rocq provides a shorthand for it: we
     can perform case analysis on a variable when introducing it by
     using an intro pattern instead of a variable name. For instance,
     here is a shorter proof of the [plus_1_neq_0] theorem
@@ -1395,24 +1409,24 @@ Notation "x * y" := (mult x y)
                        (at level 40, left associativity)
                        : nat_scope.
 
-(** For each notation symbol in Coq, we can specify its _precedence
+(** For each notation symbol in Rocq, we can specify its _precedence
     level_ and its _associativity_.  The precedence level [n] is
-    specified by writing [at level n]; this helps Coq parse compound
+    specified by writing [at level n]; this helps Rocq parse compound
     expressions.  The associativity setting helps to disambiguate
     expressions containing multiple occurrences of the same
     symbol. For example, the parameters specified above for [+] and
     [*] say that the expression [1+2*3*4] is shorthand for
-    [(1+((2*3)*4))]. Coq uses precedence levels from 0 to 100, and
+    [(1+((2*3)*4))]. Rocq uses precedence levels from 0 to 100, and
     _left_, _right_, or _no_ associativity.  We will see more examples
     of this later, e.g., in the [Lists] chapter.
 
     Each notation symbol is also associated with a _notation scope_.
-    Coq tries to guess what scope is meant from context, so when it
+    Rocq tries to guess what scope is meant from context, so when it
     sees [S (O*O)] it guesses [nat_scope], but when it sees the pair
     type type [bool*bool] (which we'll see in a later chapter) it
     guesses [type_scope].  Occasionally, it is necessary to help it
     out by writing, for example, [(x*y)%nat], and sometimes in what
-    Coq prints it will use [%nat] to indicate what scope a notation is
+    Rocq prints it will use [%nat] to indicate what scope a notation is
     in.
 
     Notation scopes also apply to numeral notations ([3], [4], [5],
@@ -1421,7 +1435,7 @@ Notation "x * y" := (mult x y)
     [0%Z], which means the integer zero (which comes from a different
     part of the standard library).
 
-    Pro tip: Coq's notation mechanism is not especially powerful.
+    Pro tip: Rocq's notation mechanism is not especially powerful.
     Don't expect too much from it. *)
 
 (* ================================================================= *)
@@ -1435,17 +1449,17 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
   | S n' => S (plus' n' m)
   end.
 
-(** When Coq checks this definition, it notes that [plus'] is
+(** When Rocq checks this definition, it notes that [plus'] is
     "decreasing on 1st argument."  What this means is that we are
     performing a _structural recursion_ over the argument [n] -- i.e.,
     that we make recursive calls only on strictly smaller values of
     [n].  This implies that all calls to [plus'] will eventually
-    terminate.  Coq demands that some argument of _every_ [Fixpoint]
+    terminate.  Rocq demands that some argument of _every_ [Fixpoint]
     definition be "decreasing."
 
-    This requirement is a fundamental feature of Coq's design: In
+    This requirement is a fundamental feature of Rocq's design: In
     particular, it guarantees that every function that can be defined
-    in Coq will terminate on all inputs.  However, because Coq's
+    in Rocq will terminate on all inputs.  However, because Rocq's
     "decreasing analysis" is not very sophisticated, it is sometimes
     necessary to write functions in slightly unnatural ways. *)
 
@@ -1453,12 +1467,12 @@ Fixpoint plus' (n : nat) (m : nat) : nat :=
 
     To get a concrete sense of this, find a way to write a sensible
     [Fixpoint] definition (of a simple function on numbers, say) that
-    _does_ terminate on all inputs, but that Coq will reject because
+    _does_ terminate on all inputs, but that Rocq will reject because
     of this restriction.
 
     (If you choose to turn in this optional exercise as part of a
     homework assignment, make sure you comment out your solution so
-    that it doesn't cause Coq to reject the whole file!) *)
+    that it doesn't cause Rocq to reject the whole file!) *)
 
 (* FILL IN HERE
 
@@ -1487,7 +1501,7 @@ Proof.
 (** **** Exercise: 1 star, standard (negation_fn_applied_twice)
 
     Now state and prove a theorem [negation_fn_applied_twice] similar
-    to the previous one but where the second hypothesis says that the
+    to the previous one but where the hypothesis says that the
     function [f] has the property that [f x = negb x]. *)
 
 (* FILL IN HERE *)
@@ -1522,7 +1536,7 @@ Proof.
     many homework assignments late.
 
     In the next series of problems, we model this situation using the
-    features of Coq that we have seen so far and prove some simple
+    features of Rocq that we have seen so far and prove some simple
     facts about this grading policy.  *)
 
 Module LateDays.
@@ -1539,8 +1553,8 @@ Inductive modifier : Type :=
 
 (** A full [grade], then, is just a [letter] and a [modifier].
 
-    We might write, informally, "A-" for the Coq value [Grade A Minus],
-    and similarly "C" for the Coq value [Grade C Natural]. *)
+    We might write, informally, "A-" for the Rocq value [Grade A Minus],
+    and similarly "C" for the Rocq value [Grade C Natural]. *)
 Inductive grade : Type :=
   Grade (l:letter) (m:modifier).
 
@@ -1552,7 +1566,7 @@ Inductive grade : Type :=
     comparing two values, as shown below.  This datatype has three
     constructors that can be used to indicate whether two values are
     "equal", "less than", or "greater than" one another. (This
-    definition also appears in the Coq standard libary.)  *)
+    definition also appears in the Rocq standard libary.)  *)
 
 Inductive comparison : Type :=
   | Eq         (* "equal" *)
@@ -1781,7 +1795,7 @@ Example lower_grade_thrice :
 Proof.
 (* FILL IN HERE *) Admitted.
 
-(** Coq makes no distinction between an [Example] and a [Theorem]. We
+(** Rocq makes no distinction between an [Example] and a [Theorem]. We
     state the following as a [Theorem] only as a hint that we will use
     it in proofs below. *)
 Theorem lower_grade_F_Minus : lower_grade (Grade F Minus) = (Grade F Minus).
@@ -1807,11 +1821,10 @@ Proof.
     good idea.  Judicious use of [destruct] along with rewriting is a
     better strategy.
 
-    Hint: If you defined your [grade_comparison] function as
-    suggested, you will need to rewrite using [letter_comparison_Eq]
-    in two cases.  The remaining case is the only one in which you
-    need to destruct a [letter].  The case for [F] will probably
-    benefit from [lower_grade_F_Minus].  *)
+    Hint: If you defined your [grade_comparison] function as suggested,
+    you will only need to destruct a [letter] in one case.
+    The case for [F] will probably benefit from [lower_grade_F_Minus].
+  *)
 Theorem lower_grade_lowers :
   forall (g : grade),
     grade_comparison (Grade F Minus) g = Lt ->
@@ -1964,6 +1977,9 @@ Example test_bin_incr6 :
         bin_to_nat (incr (incr (B1 Z))) = 2 + bin_to_nat (B1 Z).
 (* FILL IN HERE *) Admitted.
 
+Example test_bin_incr7 : bin_to_nat (B0 (B0 (B0 (B1 Z)))) = 8.
+(* FILL IN HERE *) Admitted.
+
 (** [] *)
 
 (* ################################################################# *)
@@ -1977,12 +1993,12 @@ Example test_bin_incr6 :
     anything.
 
     Important: This step is _optional_: if you've completed all the
-    non-optional exercises and Coq accepts your answers, this already
+    non-optional exercises and Rocq accepts your answers, this already
     shows that you are in good shape.
 
     The test file for this chapter is [BasicsTest.v]. To run it, make
     sure you have saved [Basics.v] to disk.  Then first run
-    [coqc -Q . LF Basics.v] and then run [coqc -Q . LF BasicsTest.v];
+    [rocq compile -Q . LF Basics.v] and then run [rocq compile -Q . LF BasicsTest.v];
     or, if you have make installed, you can run [make BasicsTest.vo].
     (Make sure you do this in a directory that also contains a file
     named [_CoqProject] containing the single line [-Q . LF].)
@@ -1992,8 +2008,7 @@ Example test_bin_incr6 :
     name of the missing exercise.  Otherwise, you will get a lot of
     useful output:
 
-    - First will be all the output produced by [Basics.v] itself.  At
-      the end of that you will see [COQC BasicsTest.v].
+    - First will be all the output produced by [Basics.v] itself.
 
     - Second, for each required exercise, there is a report that tells
       you its point value (the number of stars or some fraction
@@ -2020,7 +2035,7 @@ Example test_bin_incr6 :
 
     - Fourth, you will see a list of "Allowed Axioms".  These are
       unproven theorems that your solution is permitted to depend
-      upon, aside from the fundamental axioms of Coq's logic.  You'll
+      upon, aside from the fundamental axioms of Rocq's logic.  You'll
       probably see something about [functional_extensionality] for
       this chapter; we'll cover what that means in a later chapter.
 
@@ -2034,4 +2049,4 @@ Example test_bin_incr6 :
     output.  But since they have to be graded by a human, the test
     script won't be able to tell you much about them.  *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:17 *)

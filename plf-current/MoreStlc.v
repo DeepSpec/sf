@@ -1,11 +1,10 @@
 (** * MoreStlc: More on the Simply Typed Lambda-Calculus *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
+Set Warnings "-notation-overridden,-parsing".
 From PLF Require Import Maps.
 From PLF Require Import Types.
 From PLF Require Import Smallstep.
 From PLF Require Import Stlc.
-Set Default Goal Selector "!".
 
 (* ################################################################# *)
 (** * Simple Extensions to STLC *)
@@ -21,7 +20,7 @@ Set Default Goal Selector "!".
 (* ================================================================= *)
 (** ** Numbers *)
 
-(** As we saw in exercise [stlc_arith] at the end of the [StlcProp]
+(** As we saw in the [STLCArith] exercises at the end of the [StlcProp]
     chapter, adding types, constants, and primitive operations for
     natural numbers is easy -- basically just a matter of combining
     the [Types] and [Stlc] chapters.  Adding more realistic
@@ -35,7 +34,7 @@ Set Default Goal Selector "!".
 (** When writing a complex expression, it is useful to be able
     to give names to some of its subexpressions to avoid repetition
     and increase readability.  Most languages provide one or more ways
-    of doing this.  In OCaml (and Coq), for example, we can write [let
+    of doing this.  In OCaml (and Rocq), for example, we can write [let
     x=t1 in t2] to mean "reduce the expression [t1] to a value and
     bind the name [x] to this value while reducing [t2]."
 
@@ -56,7 +55,7 @@ Set Default Goal Selector "!".
 
        t ::=                Terms
            | ...               (other terms same as before)
-           | let x=t in t      let-binding
+           | let x=t1 in t2    let-binding
 *)
 
 (**
@@ -79,7 +78,7 @@ Set Default Goal Selector "!".
 (* ================================================================= *)
 (** ** Pairs *)
 
-(** Our functional programming examples in Coq have made
+(** Our functional programming examples in Rocq have made
     frequent use of _pairs_ of values.  The type of such a pair is
     called a _product type_.
 
@@ -87,7 +86,7 @@ Set Default Goal Selector "!".
     discussing.  However, let's look briefly at the various parts of
     the definition to emphasize the common pattern. *)
 
-(** In Coq, the primitive way of extracting the components of a pair
+(** In Rocq, the primitive way of extracting the components of a pair
     is _pattern matching_.  An alternative is to take [fst] and
     [snd] -- the first- and second-projection operators -- as
     primitives.  Just for fun, let's do our pairs this way.  For
@@ -110,17 +109,17 @@ Set Default Goal Selector "!".
 
        t ::=                Terms
            | ...
-           | (t,t)             pair
-           | t.fst             first projection
-           | t.snd             second projection
+           | (t1,t2)           pair
+           | t0.fst            first projection
+           | t0.snd            second projection
 
        v ::=                Values
            | ...
-           | (v,v)             pair value
+           | (v1,v2)           pair value
 
        T ::=                Types
            | ...
-           | T * T             product type
+           | T1 * T2           product type
 *)
 
 (** For reduction, we need several new rules specifying how pairs and
@@ -134,16 +133,16 @@ Set Default Goal Selector "!".
                          --------------------                        (ST_Pair2)
                          (v1,t2) --> (v1,t2')
 
-                               t1 --> t1'
+                               t0 --> t0'
                            ------------------                        (ST_Fst1)
-                           t1.fst --> t1'.fst
+                           t0.fst --> t0'.fst
 
                           ------------------                       (ST_FstPair)
                           (v1,v2).fst --> v1
 
-                               t1 --> t1'
+                               t0 --> t0'
                            ------------------                        (ST_Snd1)
-                           t1.snd --> t1'.snd
+                           t0.snd --> t0'.snd
 
                           ------------------                       (ST_SndPair)
                           (v1,v2).snd --> v2
@@ -232,6 +231,8 @@ Set Default Goal Selector "!".
     have a type for the (trivial) result of an expression that is
     evaluated only for its effect. *)
 
+(** No! For instance (\x:Unit,x) unit is also a _term_ of type unit. *)
+
 (* ================================================================= *)
 (** ** Sums *)
 
@@ -265,7 +266,7 @@ Set Default Goal Selector "!".
     elements of [T1] tagged with the token [inl], plus the elements of
     [T2] tagged with [inr]. *)
 
-(** As we've seen in Coq programming, one important use of sums is
+(** As we've seen in Rocq programming, one important use of sums is
     signaling errors:
 
       div \in Nat -> Nat -> (Nat + Unit)
@@ -277,11 +278,11 @@ Set Default Goal Selector "!".
             inl ...
 *)
 (** The type [Nat + Unit] above is in fact isomorphic to [option
-    nat] in Coq -- i.e., it's easy to write functions that translate
+    nat] in Rocq -- i.e., it's easy to write functions that translate
     back and forth. *)
 
 (** To _use_ elements of sum types, we introduce a [case]
-    construct (a very simplified form of Coq's [match]) to destruct
+    construct (a very simplified form of Rocq's [match]) to destruct
     them. For example, the following procedure converts a [Nat+Bool]
     into a [Nat]:
 
@@ -299,20 +300,20 @@ Set Default Goal Selector "!".
 
        t ::=                Terms
            | ...               (other terms same as before)
-           | inl T t           tagging (left)
-           | inr T t           tagging (right)
-           | case t of         case
-               inl x => t
-             | inr x => t
+           | inl T2 t1         tagging (left)
+           | inr T1 t2         tagging (right)
+           | case t0 of        case analysis
+               inl x1 => t1
+             | inr x2 => t2
 
        v ::=                Values
            | ...
-           | inl T v           tagged value (left)
-           | inr T v           tagged value (right)
+           | inl T2 v1         tagged value (left)
+           | inr T1 v2         tagged value (right)
 
        T ::=                Types
            | ...
-           | T + T             sum type
+           | T1 + T2           sum type
 *)
 
 (** Reduction:
@@ -385,7 +386,7 @@ Set Default Goal Selector "!".
     constructor is [List].  For every type [T], the type [List T]
     describes finite-length lists whose elements are drawn from [T].
 
-    In principle, we could encode lists using pairs, sums and
+    In principle, we could encode lists using pairs, sums, unit, and
     _recursive_ types. But giving semantics to recursive types is
     non-trivial. Instead, we'll just discuss the special case of lists
     directly.
@@ -393,7 +394,7 @@ Set Default Goal Selector "!".
     Below we give the syntax, semantics, and typing rules for lists.
     Except for the fact that explicit type annotations are mandatory
     on [nil] and cannot appear on [cons], these lists are essentially
-    identical to those we built in Coq.  We use [case], rather than
+    identical to those we built in Rocq.  We use [case], rather than
     [head] and [tail] operators, to destruct lists, to avoid dealing
     with questions like "what is the [head] of the empty list?" *)
 
@@ -413,16 +414,16 @@ Set Default Goal Selector "!".
 
        t ::=                Terms
            | ...
-           | nil T
-           | cons t t
-           | case t of
-               nil     => t
-               | x::x' => t
+           | nil T             empty list
+           | t1 :: t2          cons
+           | case t1 of        case analysis
+               nil      => t2
+               | xh::xt => t3
 
        v ::=                Values
            | ...
            | nil T             nil value
-           | cons v v          cons value
+           | v1 :: v2          cons value
 
        T ::=                Types
            | ...
@@ -433,11 +434,11 @@ Set Default Goal Selector "!".
 
                                 t1 --> t1'
                        --------------------------                    (ST_Cons1)
-                       cons t1 t2 --> cons t1' t2
+                         t1 :: t2 --> t1' :: t2
 
                                 t2 --> t2'
                        --------------------------                    (ST_Cons2)
-                       cons v1 t2 --> cons v1 t2'
+                         v1 :: t2 --> v1 :: t2'
 
                               t1 --> t1'
                 -------------------------------------------         (ST_Lcase1)
@@ -448,9 +449,9 @@ Set Default Goal Selector "!".
                (case nil T1 of nil => t2 | xh::xt => t3)
                                 --> t2
 
-            ------------------------------------------------     (ST_LcaseCons)
-            (case (cons vh vt) of nil => t2 | xh::xt => t3)
-                          --> [xh:=vh,xt:=vt]t3
+              -------------------------------------------         (ST_LcaseCons)
+              (case (vh::vt) of nil => t2 | xh::xt => t3)
+                          --> [xh:=vh][xt:=vt]t3
 *)
 
 (** Typing:
@@ -460,25 +461,25 @@ Set Default Goal Selector "!".
 
             Gamma |-- t1 \in T1      Gamma |-- t2 \in List T1
             -------------------------------------------------           (T_Cons)
-                    Gamma |-- cons t1 t2 \in List T1
+                    Gamma |-- t1 :: t2 \in List T1
 
                         Gamma |-- t1 \in List T1
                         Gamma |-- t2 \in T2
-                (h|->T1; t|->List T1; Gamma) |-- t3 \in T2
+                (xh|->T1; xt|->List T1; Gamma) |-- t3 \in T2
           ----------------------------------------------------         (T_Lcase)
-          Gamma |-- (case t1 of nil => t2 | h::t => t3) \in T2
+          Gamma |-- (case t1 of nil => t2 | xh::xt => t3) \in T2
 *)
 
 (* ================================================================= *)
 (** ** General Recursion *)
 
 (** Another facility found in most programming languages (including
-    Coq) is the ability to define recursive functions.  For example,
+    Rocq) is the ability to define recursive functions.  For example,
     we would like to be able to define and use the factorial function
     like this:
 
       let fact = \x:Nat,
-             if x=0 then 1 else x * (fact (pred x))) in
+                   if x=0 then 1 else x * (fact (pred x))) in
       fact 3.
 
    Note that the right-hand side of this binder mentions [fact], the
@@ -535,7 +536,8 @@ Set Default Goal Selector "!".
         [let]-binding for [fact].
 *)
 
-(** The intuition here is that the higher-order function [f]
+(** For the mathematically inclined,
+    the intuition here is that the higher-order function [f]
     passed to [fix] is a _generator_ for the [fact] function: if [f]
     is applied to a function that "approximates" the desired behavior
     of [fact] up to some number [n] (that is, a function that returns
@@ -556,7 +558,7 @@ Set Default Goal Selector "!".
 
        t ::=                Terms
            | ...
-           | fix t             fixed-point operator
+           | fix t1            fixed-point operator
 
    Reduction:
 
@@ -595,7 +597,7 @@ Set Default Goal Selector "!".
 
     3 * (fix F (pred 3))
 
-[-->] [ST_FixAbs + ST_Mult2]
+[-->] [ST_FixAbs + ST_Mult2 + ST_App1]
 
     3 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 3))
 
@@ -611,7 +613,7 @@ Set Default Goal Selector "!".
 
     3 * (2 * (fix F (pred 2)))
 
-[-->] [ST_FixAbs + 2 x ST_Mult2]
+[-->] [ST_FixAbs + 2 x ST_Mult2 + ST_App1]
 
     3 * (2 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 2)))
 
@@ -627,7 +629,7 @@ Set Default Goal Selector "!".
 
     3 * (2 * (1 * (fix F (pred 1))))
 
-[-->] [ST_FixAbs + 3 x ST_Mult2]
+[-->] [ST_FixAbs + 3 x ST_Mult2 + ST_App1]
 
     3 * (2 * (1 * ((\x. if x=0 then 1 else x * (fix F (pred x))) (pred 1))))
 
@@ -734,7 +736,7 @@ Set Default Goal Selector "!".
        t ::=                          Terms
            | ...
            | {i1=t1, ..., in=tn}         record
-           | t.i                         projection
+           | t0.i                        projection
 
        v ::=                          Values
            | ...
@@ -834,35 +836,48 @@ Set Default Goal Selector "!".
     tuple, [{5,6}] is a 2-tuple (morally the same as a pair),
     [{5,6,7}] is a triple, etc.
 
-      {} ----> unit {t1, t2, ..., tn} ----> (t1, trest) where {t2,
-      ..., tn} ----> trest
+      {}                 ---->  unit
+      {t1, t2, ..., tn}  ---->  (t1, trest)
+                                where {t2, ..., tn} ----> trest
 
     Similarly, we can encode tuple types using nested product types:
 
-      {} ----> Unit {T1, T2, ..., Tn} ----> T1 * TRest where {T2, ...,
-      Tn} ----> TRest
+      {}                 ---->  Unit
+      {T1, T2, ..., Tn}  ---->  T1 * TRest
+                                where {T2, ..., Tn} ----> TRest
 
     The operation of projecting a field from a tuple can be encoded
     using a sequence of second projections followed by a first
     projection:
 
-      t.0 ----> t.fst t.(n+1) ----> (t.snd).n
+      t.0        ---->  t.fst
+      t.(n+1)    ---->  (t.snd).n
 
     Next, suppose that there is some total ordering on record labels,
     so that we can associate each label with a unique natural number.
     This number is called the _position_ of the label.  For example,
     we might assign positions like this:
 
-      LABEL POSITION a 0 b 1 c 2 ...  ...  bar 1395 ...  ...  foo 4460
-      ...  ...
+      LABEL   POSITION
+      a       0
+      b       1
+      c       2
+      ...     ...
+      bar     1395
+      ...     ...
+      foo     4460
+      ...     ...
 
     We use these positions to encode record values as tuples (i.e., as
     nested pairs) by sorting the fields according to their positions.
     For example:
 
-      {a=5,b=6} ----> {5,6} {a=5,c=7} ----> {5,unit,7} {c=7,a=5} ---->
-      {5,unit,7} {c=5,b=3} ----> {unit,3,5} {f=8,c=5,a=7} ---->
-      {7,unit,5,unit,unit,8} {f=8,c=5} ----> {unit,unit,5,unit,unit,8}
+      {a=5,b=6}       ---->   {5,6}
+      {a=5,c=7}       ---->   {5,unit,7}
+      {c=7,a=5}       ---->   {5,unit,7}
+      {c=5,b=3}       ---->   {unit,3,5}
+      {f=8,c=5,a=7}   ---->   {7,unit,5,unit,unit,8}
+      {f=8,c=5}       ---->   {unit,unit,5,unit,unit,8}
 
     Note that each field appears in the position associated with its
     label, that the size of the tuple is determined by the label with
@@ -871,8 +886,9 @@ Set Default Goal Selector "!".
 
     We do exactly the same thing with record types:
 
-      {a:Nat,b:Nat} ----> {Nat,Nat} {c:Nat,a:Nat} ----> {Nat,Unit,Nat}
-      {f:Nat,c:Nat} ----> {Unit,Unit,Nat,Unit,Unit,Nat}
+      {a:Nat,b:Nat}       ---->   {Nat,Nat}
+      {c:Nat,a:Nat}       ---->   {Nat,Unit,Nat}
+      {f:Nat,c:Nat}       ---->   {Unit,Unit,Nat,Unit,Unit,Nat}
 
     Finally, record projection is encoded as a tuple projection from
     the appropriate position:
@@ -929,14 +945,14 @@ Module STLCExtended.
     You need to complete the implementations for:
      - pairs
      - let (which involves binding)
-     - [fix]
+     - fix
 
-    A good strategy is to work on the extensions one at a time, in
-    separate passes, rather than trying to work through the file from
-    start to finish in a single pass.  For each definition or proof,
-    begin by reading carefully through the parts that are provided for
-    you, referring to the text in the [Stlc] chapter for
-    high-level intuitions and the embedded comments for detailed
+    A good strategy is to work on the extensions one at a time (first
+    pairs, then let, then fix), in separate passes, rather than trying
+    to do all three at once in a single pass.  For each definition or
+    proof, begin by reading carefully through the parts that are
+    provided for you, referring to the text in the [Stlc] chapter
+    for high-level intuitions and the embedded comments for detailed
     mechanics. *)
 
 (* ----------------------------------------------------------------- *)
@@ -996,7 +1012,6 @@ Inductive tm : Type :=
 
        if0 x then ... else ...
 *)
-
 Definition w : string := "w".
 Definition x : string := "x".
 Definition y : string := "y".
@@ -1006,91 +1021,103 @@ Hint Unfold x : core.
 Hint Unfold y : core.
 Hint Unfold z : core.
 
-Declare Custom Entry stlc_ty.
+Delimit Scope stlc_scope with stlc.
+Open Scope stlc_scope.
 
-Notation "<{ e }>" := e (e custom stlc at level 99).
-Notation "<{{ e }}>" := e (e custom stlc_ty at level 99).
-Notation "( x )" := x (in custom stlc, x at level 99).
-Notation "( x )" := x (in custom stlc_ty, x at level 99).
-Notation "x" := x (in custom stlc at level 0, x constr at level 0).
-Notation "x" := x (in custom stlc_ty at level 0, x constr at level 0).
-Notation "S -> T" := (Ty_Arrow S T) (in custom stlc_ty at level 50, right associativity).
-Notation "x y" := (tm_app x y) (in custom stlc at level 1, left associativity).
+Notation "x" := x (in custom stlc_ty at level 0, x global) : stlc_scope.
+
+Notation "<{{ x }}>" := x (x custom stlc_ty).
+
+Notation "( t )" := t (in custom stlc_ty at level 0, t custom stlc_ty) : stlc_scope.
+Notation "S -> T" := (Ty_Arrow S T) (in custom stlc_ty at level 99, right associativity) : stlc_scope.
+
+Notation "$( t )" := t (in custom stlc_ty at level 0, t constr) : stlc_scope.
+
+Notation "x" := x (in custom stlc_tm at level 0, x global) : stlc_scope.
+Notation "'_'" := _ (in custom stlc_tm at level 0) : stlc_scope.
+Notation "'$' x" := x (in custom stlc_tm at level 0, x constr at level 0) : stlc_scope.
+Notation "'$(' x ')'" := x (in custom stlc_tm at level 0, x constr, only parsing) : stlc_scope.
+Notation "<{ e }>" := e (e custom stlc_tm at level 200) : stlc_scope.
+Notation "( x )" := x (in custom stlc_tm at level 0, x custom stlc_tm) : stlc_scope.
+
+Notation "x y" := (tm_app x y) (in custom stlc_tm at level 10, left associativity) : stlc_scope.
 Notation "\ x : t , y" :=
-  (tm_abs x t y) (in custom stlc at level 90, x at level 99,
-                     t custom stlc_ty at level 99,
-                     y custom stlc at level 99,
+  (tm_abs x t y) (in custom stlc_tm at level 200, x global,
+                     t custom stlc_ty,
+                     y custom stlc_tm at level 200,
                      left associativity).
 Coercion tm_var : string >-> tm.
-
-Notation "{ x }" := x (in custom stlc at level 1, x constr).
+Arguments tm_var _%_string.
 
 Notation "'Nat'" := Ty_Nat (in custom stlc_ty at level 0).
-Notation "'succ' x" := (tm_succ x) (in custom stlc at level 0,
-                                     x custom stlc at level 0).
-Notation "'pred' x" := (tm_pred x) (in custom stlc at level 0,
-                                     x custom stlc at level 0).
-Notation "x * y" := (tm_mult x y) (in custom stlc at level 1,
-                                      left associativity).
+Notation "'succ' x" := (tm_succ x) (in custom stlc_tm at level 10,
+                                     x custom stlc_tm at level 0) : stlc_scope.
+Notation "'pred' x" := (tm_pred x) (in custom stlc_tm at level 10,
+                                     x custom stlc_tm at level 0) : stlc_scope.
+Notation "x * y" := (tm_mult x y) (in custom stlc_tm at level 95,
+                                      right associativity) : stlc_scope.
 Notation "'if0' x 'then' y 'else' z" :=
-  (tm_if0 x y z) (in custom stlc at level 89,
-                    x custom stlc at level 99,
-                    y custom stlc at level 99,
-                    z custom stlc at level 99,
-                    left associativity).
+  (tm_if0 x y z) (in custom stlc_tm at level 0,
+                    x custom stlc_tm at level 0,
+                    y custom stlc_tm at level 0,
+                    z custom stlc_tm at level 0) : stlc_scope.
+
 Coercion tm_const : nat >-> tm.
 
 Notation "S + T" :=
   (Ty_Sum S T) (in custom stlc_ty at level 3, left associativity).
-Notation "'inl' T t" := (tm_inl T t) (in custom stlc at level 0,
-                                         T custom stlc_ty at level 0,
-                                         t custom stlc at level 0).
-Notation "'inr' T t" := (tm_inr T t) (in custom stlc at level 0,
-                                         T custom stlc_ty at level 0,
-                                         t custom stlc at level 0).
+Notation "'inl' T t" := (tm_inl T t) (in custom stlc_tm at level 10,
+                                         T custom stlc_ty,
+                                         t custom stlc_tm at level 0).
+Notation "'inr' T t" := (tm_inr T t) (in custom stlc_tm at level 10,
+                                         T custom stlc_ty,
+                                         t custom stlc_tm at level 0).
 Notation "'case' t0 'of' '|' 'inl' x1 '=>' t1 '|' 'inr' x2 '=>' t2" :=
-  (tm_case t0 x1 t1 x2 t2) (in custom stlc at level 89,
-                               t0 custom stlc at level 99,
-                               x1 custom stlc at level 99,
-                               t1 custom stlc at level 99,
-                               x2 custom stlc at level 99,
-                               t2 custom stlc at level 99,
+  (tm_case t0 x1 t1 x2 t2) (in custom stlc_tm at level 200,
+                               t0 custom stlc_tm at level 200,
+                               x1 global,
+                               t1 custom stlc_tm at level 200,
+                               x2 global,
+                               t2 custom stlc_tm at level 200,
                                left associativity).
 
 Notation "X * Y" :=
-  (Ty_Prod X Y) (in custom stlc_ty at level 2, X custom stlc_ty, Y custom stlc_ty at level 0).
-Notation "( x ',' y )" := (tm_pair x y) (in custom stlc at level 0,
-                                                x custom stlc at level 99,
-                                                y custom stlc at level 99).
-Notation "t '.fst'" := (tm_fst t) (in custom stlc at level 1).
-Notation "t '.snd'" := (tm_snd t) (in custom stlc at level 1).
+  (Ty_Prod X Y) (in custom stlc_ty at level 2, X custom stlc_ty, Y custom stlc_ty at level 0) : stlc_scope.
+
+Notation "( x ',' y )" := (tm_pair x y) (in custom stlc_tm at level 0,
+                                                x custom stlc_tm,
+                                                y custom stlc_tm) : stlc_scope.
+Notation "t '.fst'" := (tm_fst t) (in custom stlc_tm at level 1) : stlc_scope.
+Notation "t '.snd'" := (tm_snd t) (in custom stlc_tm at level 1) : stlc_scope.
 
 Notation "'List' T" :=
-  (Ty_List T) (in custom stlc_ty at level 4).
-Notation "'nil' T" := (tm_nil T) (in custom stlc at level 0, T custom stlc_ty at level 0).
-Notation "h '::' t" := (tm_cons h t) (in custom stlc at level 2, right associativity).
+  (Ty_List T) (in custom stlc_ty at level 4) : stlc_scope.
+Notation "'List' T" := (Ty_List T) (at level 0) : stlc_scope.
+Notation "'nil' T" := (tm_nil T) (in custom stlc_tm at level 0, T custom stlc_ty) : stlc_scope.
+Notation "h '::' t" := (tm_cons h t) (in custom stlc_tm at level 2, right associativity) : stlc_scope.
 Notation "'case' t1 'of' '|' 'nil' '=>' t2 '|' x '::' y '=>' t3" :=
-  (tm_lcase t1 t2 x y t3) (in custom stlc at level 89,
-                              t1 custom stlc at level 99,
-                              t2 custom stlc at level 99,
-                              x constr at level 1,
-                              y constr at level 1,
-                              t3 custom stlc at level 99,
-                              left associativity).
+  (tm_lcase t1 t2 x y t3) (in custom stlc_tm at level 200,
+                              t1 custom stlc_tm at level 200,
+                              t2 custom stlc_tm at level 0,
+                              x global,
+                              y global,
+                              t3 custom stlc_tm at level 0,
+                              left associativity) : stlc_scope.
 
 Notation "'Unit'" :=
-  (Ty_Unit) (in custom stlc_ty at level 0).
-Notation "'unit'" := tm_unit (in custom stlc at level 0).
+  (Ty_Unit) (in custom stlc_ty at level 0) : stlc_scope.
+Notation "'unit'" := tm_unit (in custom stlc_tm at level 0) : stlc_scope.
 
 Notation "'let' x '=' t1 'in' t2" :=
-  (tm_let x t1 t2) (in custom stlc at level 0).
+  (tm_let x t1 t2) (in custom stlc_tm at level 200) : stlc_scope.
 
-Notation "'fix' t" := (tm_fix t) (in custom stlc at level 0).
+Notation "'fix' t" := (tm_fix t) (in custom stlc_tm at level 200) : stlc_scope.
 
 (* ----------------------------------------------------------------- *)
 (** *** Substitution *)
 
-Reserved Notation "'[' x ':=' s ']' t" (in custom stlc at level 20, x constr).
+Reserved Notation "'[' x ':=' s ']' t" (in custom stlc_tm at level 5, x global, s custom stlc_tm,
+      t custom stlc_tm at next level, right associativity).
 
 (** **** Exercise: 3 stars, standard (STLCExtended.subst) *)
 Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
@@ -1106,9 +1133,9 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   | tm_const _ =>
       t
   | <{succ t1}> =>
-      <{succ [x := s] t1}>
+      <{succ ([x := s] t1)}>
   | <{pred t1}> =>
-      <{pred [x := s] t1}>
+      <{pred ([x := s] t1)}>
   | <{t1 * t2}> =>
       <{ ([x := s] t1) * ([x := s] t2)}>
   | <{if0 t1 then t2 else t3}> =>
@@ -1120,10 +1147,10 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
       <{inr T1 ( [x:=s] t2) }>
   | <{case t0 of | inl y1 => t1 | inr y2 => t2}> =>
       <{case ([x:=s] t0) of
-         | inl y1 => { if String.eqb x y1 then t1 else <{ [x:=s] t1 }> }
-         | inr y2 => {if String.eqb x y2 then t2 else <{ [x:=s] t2 }> } }>
+         | inl y1 => $(if String.eqb x y1 then t1 else <{ [x:=s] t1 }> )
+         | inr y2 => $(if String.eqb x y2 then t2 else <{ [x:=s] t2 }> ) }>
   (* lists *)
-  | <{nil _}> =>
+  | <{nil T}> =>
       t
   | <{t1 :: t2}> =>
       <{ ([x:=s] t1) :: [x:=s] t2 }>
@@ -1131,10 +1158,10 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
       <{case ( [x:=s] t1 ) of
         | nil => [x:=s] t2
         | y1 :: y2 =>
-        {if String.eqb x y1 then
+        $(if String.eqb x y1 then
            t3
          else if String.eqb x y2 then t3
-              else <{ [x:=s] t3 }> } }>
+              else <{ [x:=s] t3 }>) }>
   (* unit *)
   | <{unit}> => <{unit}>
 
@@ -1149,11 +1176,11 @@ Fixpoint subst (x : string) (s : tm) (t : tm) : tm :=
   | _ => t  (* ... and delete this line when you finish the exercise *)
   end
 
-where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc).
+where "'[' x ':=' s ']' t" := (subst x s t) (in custom stlc_tm) : stlc_scope.
 
-(* Make sure the following tests are valid by reflexzivity: *)
+(* Make sure the following tests are valid by reflexivity: *)
 Example substeg1 :
-  <{ [z:=0] (let w = z in z) }> = <{ let w = 0 in 0 }>.
+  <{ [z:=$0] (let w = z in z) }> = <{ let w = $0 in $0 }>.
 Proof.
 (*
   reflexivity.
@@ -1161,7 +1188,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 
 Example substeg2 :
-  <{ [z:=0] (let w = z in w) }> = <{ let w = 0 in w }>.
+  <{ [z:=$0] (let w = z in w) }> = <{ let w = $0 in w }>.
 Proof.
 (*
   reflexivity.
@@ -1169,7 +1196,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 
 Example substeg3 :
-  <{ [z:=0] (let y = succ 0 in z) }> = <{ let y = succ 0 in 0 }>.
+  <{ [z:=$0] (let y = succ $0 in z) }> = <{ let y = succ $0 in $0 }>.
 Proof.
 (*
   reflexivity.
@@ -1233,14 +1260,14 @@ Inductive step : tm -> tm -> Prop :=
          t1 --> t1' ->
          <{succ t1}> --> <{succ t1'}>
   | ST_SuccNat : forall n : nat,
-         <{succ n}> --> <{ {S n} }>
+         <{succ n}> --> <{ $(S n) }>
   | ST_Pred : forall t1 t1',
          t1 --> t1' ->
          <{pred t1}> --> <{pred t1'}>
   | ST_PredNat : forall n:nat,
-         <{pred n}> --> <{ {n - 1} }>
+         <{pred n}> --> <{ $(n - 1) }>
   | ST_Mulconsts : forall n1 n2 : nat,
-         <{n1 * n2}> --> <{ {n1 * n2} }>
+         <{n1 * n2}> --> <{ $(n1 * n2) }>
   | ST_Mult1 : forall t1 t1' t2,
          t1 --> t1' ->
          <{t1 * t2}> --> <{t1' * t2}>
@@ -1252,9 +1279,9 @@ Inductive step : tm -> tm -> Prop :=
          t1 --> t1' ->
          <{if0 t1 then t2 else t3}> --> <{if0 t1' then t2 else t3}>
   | ST_If0_Zero : forall t2 t3,
-         <{if0 0 then t2 else t3}> --> t2
+         <{if0 $0 then t2 else t3}> --> t2
   | ST_If0_Nonzero : forall n t2 t3,
-         <{if0 {S n} then t2 else t3}> --> t3
+         <{if0 $(S n) then t2 else t3}> --> t3
   (* sums *)
   | ST_Inl : forall t1 t1' T2,
         t1 --> t1' ->
@@ -1318,66 +1345,75 @@ Definition context := partial_map ty.
 (** Next we define the typing rules.  These are nearly direct
     transcriptions of the inference rules shown above. *)
 
-Reserved Notation "Gamma '|--' t '\in' T" (at level 40, t custom stlc, T custom stlc_ty at level 0).
+Notation "x '|->' v ';' m " := (update m x v)
+  (in custom stlc_tm at level 0, x global, v custom stlc_ty, right associativity) : stlc_scope.
+
+Notation "x '|->' v " := (update empty x v)
+  (in custom stlc_tm at level 0, x global, v custom stlc_ty) : stlc_scope.
+
+Notation "'empty'" := empty (in custom stlc_tm) : stlc_scope.
+
+Reserved Notation "<{ Gamma '|--' t '\in' T }>"
+            (at level 0, Gamma custom stlc_tm at level 200, t custom stlc_tm, T custom stlc_ty).
 
 (** **** Exercise: 3 stars, standard (STLCExtended.has_type) *)
 Inductive has_type : context -> tm -> ty -> Prop :=
   (* pure STLC *)
   | T_Var : forall Gamma x T1,
       Gamma x = Some T1 ->
-      Gamma |-- x \in T1
+      <{ Gamma |-- x \in T1 }>
   | T_Abs : forall Gamma x T1 T2 t1,
-    (x |-> T2 ; Gamma) |-- t1 \in T1 ->
-      Gamma |-- \x:T2, t1 \in (T2 -> T1)
+    <{ x |-> T2 ; Gamma |-- t1 \in T1 }> ->
+    <{ Gamma |-- \x:T2, t1 \in T2 -> T1 }>
   | T_App : forall T1 T2 Gamma t1 t2,
-      Gamma |-- t1 \in (T2 -> T1) ->
-      Gamma |-- t2 \in T2 ->
-      Gamma |-- t1 t2 \in T1
+      <{ Gamma |-- t1 \in T2 -> T1 }> ->
+      <{ Gamma |-- t2 \in T2 }> ->
+      <{ Gamma |-- t1 t2 \in T1 }>
   (* numbers *)
   | T_Nat : forall Gamma (n : nat),
-      Gamma |-- n \in Nat
+      <{ Gamma |-- n \in Nat }>
   | T_Succ : forall Gamma t,
-      Gamma |-- t \in Nat ->
-      Gamma |-- succ t \in Nat
+      <{ Gamma |-- t \in Nat }> ->
+      <{ Gamma |-- succ t \in Nat }>
   | T_Pred : forall Gamma t,
-      Gamma |-- t \in Nat ->
-      Gamma |-- pred t \in Nat
+      <{ Gamma |-- t \in Nat }> ->
+      <{ Gamma |-- pred t \in Nat }>
   | T_Mult : forall Gamma t1 t2,
-      Gamma |-- t1 \in Nat ->
-      Gamma |-- t2 \in Nat ->
-      Gamma |-- t1 * t2 \in Nat
+      <{ Gamma |-- t1 \in Nat }> ->
+      <{ Gamma |-- t2 \in Nat }> ->
+      <{ Gamma |-- t1 * t2 \in Nat }>
   | T_If0 : forall Gamma t1 t2 t3 T0,
-      Gamma |-- t1 \in Nat ->
-      Gamma |-- t2 \in T0 ->
-      Gamma |-- t3 \in T0 ->
-      Gamma |-- if0 t1 then t2 else t3 \in T0
+      <{ Gamma |-- t1 \in Nat }> ->
+      <{ Gamma |-- t2 \in T0 }> ->
+      <{ Gamma |-- t3 \in T0 }> ->
+      <{ Gamma |-- if0 t1 then t2 else t3 \in T0 }>
   (* sums *)
   | T_Inl : forall Gamma t1 T1 T2,
-      Gamma |-- t1 \in T1 ->
-      Gamma |-- (inl T2 t1) \in (T1 + T2)
+      <{ Gamma |-- t1 \in T1 }> ->
+      <{ Gamma |-- (inl T2 t1) \in T1 + T2 }>
   | T_Inr : forall Gamma t2 T1 T2,
-      Gamma |-- t2 \in T2 ->
-      Gamma |-- (inr T1 t2) \in (T1 + T2)
+      <{ Gamma |-- t2 \in T2 }> ->
+      <{ Gamma |-- (inr T1 t2) \in T1 + T2 }>
   | T_Case : forall Gamma t0 x1 T1 t1 x2 T2 t2 T3,
-      Gamma |-- t0 \in (T1 + T2) ->
-      (x1 |-> T1 ; Gamma) |-- t1 \in T3 ->
-      (x2 |-> T2 ; Gamma) |-- t2 \in T3 ->
-      Gamma |-- (case t0 of | inl x1 => t1 | inr x2 => t2) \in T3
+      <{ Gamma |-- t0 \in T1 + T2 }> ->
+      <{ x1 |-> T1 ; Gamma |-- t1 \in T3 }> ->
+      <{ x2 |-> T2 ; Gamma |-- t2 \in T3 }> ->
+      <{ Gamma |-- case t0 of | inl x1 => t1 | inr x2 => t2 \in T3 }>
   (* lists *)
   | T_Nil : forall Gamma T1,
-      Gamma |-- (nil T1) \in (List T1)
+      <{ Gamma |-- nil T1 \in List T1 }>
   | T_Cons : forall Gamma t1 t2 T1,
-      Gamma |-- t1 \in T1 ->
-      Gamma |-- t2 \in (List T1) ->
-      Gamma |-- (t1 :: t2) \in (List T1)
+      <{ Gamma |-- t1 \in T1 }> ->
+      <{ Gamma |-- t2 \in List T1 }> ->
+      <{ Gamma |-- t1 :: t2 \in List T1 }>
   | T_Lcase : forall Gamma t1 T1 t2 x1 x2 t3 T2,
-      Gamma |-- t1 \in (List T1) ->
-      Gamma |-- t2 \in T2 ->
-      (x1 |-> T1 ; x2 |-> <{{List T1}}> ; Gamma) |-- t3 \in T2 ->
-      Gamma |-- (case t1 of | nil => t2 | x1 :: x2 => t3) \in T2
+      <{ Gamma |-- t1 \in List T1 }> ->
+      <{ Gamma |-- t2 \in T2 }> ->
+      <{ x1 |-> T1 ; x2 |-> List T1 ; Gamma |-- t3 \in T2 }> ->
+      <{ Gamma |-- case t1 of | nil => t2 | x1 :: x2 => t3 \in T2 }>
   (* unit *)
   | T_Unit : forall Gamma,
-      Gamma |-- unit \in Unit
+      <{ Gamma |-- unit \in Unit }>
 
   (* Add rules for the following extensions. *)
 
@@ -1388,7 +1424,7 @@ Inductive has_type : context -> tm -> ty -> Prop :=
   (* fix *)
   (* FILL IN HERE *)
 
-where "Gamma '|--' t '\in' T" := (has_type Gamma t T).
+where "<{ Gamma '|--' t '\in' T }>" := (has_type Gamma t T).
 
 (** [] *)
 
@@ -1440,7 +1476,7 @@ Notation even := "even".
 Notation odd := "odd".
 Notation eo := "eo".
 
-(** Next, a bit of Coq hackery to automate searching for typing
+(** Next, a bit of Rocq hackery to automate searching for typing
     derivations.  You don't need to understand this bit in detail --
     just have a look over it so that you'll know what to look for if
     you ever find yourself needing to make custom extensions to
@@ -1471,12 +1507,12 @@ Definition tm_test :=
     (pred
       (succ
         (pred
-          (2 * 0))))
-    then 5
-    else 6}>.
+          ($2 * $0))))
+    then $5
+    else $6}>.
 
 Example typechecks :
-  empty |-- tm_test \in Nat.
+  <{ empty |-- tm_test \in Nat }>.
 Proof.
   unfold tm_test.
   (* This typing derivation is quite deep, so we need
@@ -1501,10 +1537,10 @@ End Numtest.
 Module ProdTest.
 
 Definition tm_test :=
-  <{((5,6),7).fst.snd}>.
+  <{(($5,$6),$7).fst.snd}>.
 
 Example typechecks :
-  empty |-- tm_test \in Nat.
+  <{ empty |-- tm_test \in Nat }>.
 Proof. unfold tm_test. eauto. (* FILL IN HERE *) Admitted.
 
 Example reduces :
@@ -1523,11 +1559,11 @@ End ProdTest.
 Module LetTest.
 
 Definition tm_test :=
-  <{let x = (pred 6) in
+  <{let x = (pred $6) in
     (succ x)}>.
 
 Example typechecks :
-  empty |-- tm_test \in Nat.
+  <{ empty |-- tm_test \in Nat }>.
 Proof. unfold tm_test. eauto.
 (* FILL IN HERE *) Admitted.
 
@@ -1544,11 +1580,11 @@ End LetTest.
 Module LetTest1.
 
 Definition tm_test :=
-  <{let z = pred 6 in
-    (succ z)}>.
+  <{ let z = pred $6 in
+     (succ z) }>.
 
 Example typechecks :
-  empty |-- tm_test \in Nat.
+  <{ empty |-- tm_test \in Nat }>.
 Proof. unfold tm_test. eauto.
 (* FILL IN HERE *) Admitted.
 
@@ -1568,12 +1604,12 @@ End LetTest1.
 Module Sumtest1.
 
 Definition tm_test :=
-  <{case (inl Nat 5) of
-    | inl x => x
-    | inr y => y}>.
+  <{ case (inl Nat $5) of
+     | inl x => x
+     | inr y => y }>.
 
 Example typechecks :
-  empty |-- tm_test \in Nat.
+  <{ empty |-- tm_test \in Nat }>.
 Proof. unfold tm_test. eauto. (* FILL IN HERE *) Admitted.
 
 Example reduces :
@@ -1596,19 +1632,19 @@ Module Sumtest2.
    (processSum (inl Nat 5), processSum (inr Nat 5))    *)
 
 Definition tm_test :=
-  <{let processSum =
-    (\x:Nat + Nat,
-      case x of
-       | inl n => n
-       | inr n => (if0 n then 1 else 0)) in
-    (processSum (inl Nat 5), processSum (inr Nat 5))}>.
+  <{ let processSum =
+     (\x:Nat + Nat,
+       case x of
+        | inl n => n
+        | inr n => (if0 n then $1 else $0)) in
+     (processSum (inl Nat $5), processSum (inr Nat $5)) }>.
 
 Example typechecks :
-  empty |-- tm_test \in (Nat * Nat).
+  <{ empty |-- tm_test \in Nat * Nat }>.
 Proof. unfold tm_test. eauto 10. (* FILL IN HERE *) Admitted.
 
 Example reduces :
-  tm_test -->* <{(5, 0)}>.
+  tm_test -->* <{ ($5, $0) }>.
 Proof.
 (*
   unfold tm_test. normalize.
@@ -1628,13 +1664,13 @@ Module ListTest.
    | x::y => x*x *)
 
 Definition tm_test :=
-  <{let l = (5 :: 6 :: (nil Nat)) in
-    case l of
-    | nil => 0
-    | x :: y => (x * x)}>.
+  <{ let l = ($5 :: $6 :: (nil Nat)) in
+     case l of
+     | nil => $0
+     | x :: y => (x * x) }>.
 
 Example typechecks :
-  empty |-- tm_test \in Nat.
+  <{ empty |-- tm_test \in Nat }>.
 Proof. unfold tm_test. eauto. (* FILL IN HERE *) Admitted.
 
 Example reduces :
@@ -1653,20 +1689,20 @@ End ListTest.
 Module FixTest1.
 
 Definition fact :=
-  <{fix
+  <{ fix
       (\f:Nat->Nat,
         \a:Nat,
-         if0 a then 1 else (a * (f (pred a))))}>.
+         if0 a then $1 else (a * (f (pred a)))) }>.
 
 (** (Warning: you may be able to typecheck [fact] but still have some
     rules wrong!) *)
 
 Example typechecks :
-  empty |-- fact \in (Nat -> Nat).
+  <{ empty |-- fact \in Nat -> Nat }>.
 Proof. unfold fact. auto 10. (* FILL IN HERE *) Admitted.
 
 Example reduces :
-  <{fact 4}> -->* 24.
+  <{ fact $4 }> -->* 24.
 Proof.
 (*
   unfold fact. normalize.
@@ -1684,16 +1720,16 @@ Definition map :=
             \l:List Nat,
                case l of
                | nil => nil Nat
-               | x::l => ((g x)::(f l)))}>.
+               | x::l => ((g x)::(f l))) }>.
 
 Example typechecks :
-  empty |-- map \in
-    ((Nat -> Nat) -> ((List Nat) -> (List Nat))).
+  <{ empty |-- map \in
+     (Nat -> Nat) -> (List Nat) -> (List Nat) }>.
 Proof. unfold map. auto 10. (* FILL IN HERE *) Admitted.
 
 Example reduces :
-  <{map (\a:Nat, succ a) (1 :: 2 :: (nil Nat))}>
-  -->* <{2 :: 3 :: (nil Nat)}>.
+  <{ map (\a:Nat, succ a) ($1 :: $2 :: (nil Nat)) }>
+  -->* <{ $2 :: $3 :: (nil Nat) }>.
 Proof.
 (*
   unfold map. normalize.
@@ -1705,20 +1741,20 @@ End FixTest2.
 Module FixTest3.
 
 Definition equal :=
-  <{fix
+  <{ fix
         (\eq:Nat->Nat->Nat,
            \m:Nat, \n:Nat,
-             if0 m then (if0 n then 1 else 0)
+             if0 m then (if0 n then $1 else $0)
              else (if0 n
-                   then 0
-                   else (eq (pred m) (pred n))))}>.
+                   then $0
+                   else (eq (pred m) (pred n)))) }>.
 
 Example typechecks :
-  empty |-- equal \in (Nat -> Nat -> Nat).
+ <{ empty |-- equal \in Nat -> Nat -> Nat }>.
 Proof. unfold equal. auto 10. (* FILL IN HERE *) Admitted.
 
 Example reduces :
-  <{equal 4 4}> -->* 1.
+  <{ equal $4 $4 }> -->* 1.
 Proof.
 (*
   unfold equal. normalize.
@@ -1727,7 +1763,7 @@ Proof.
 (* GRADE_THEOREM 0.25: reduces *)
 
 Example reduces2 :
-  <{equal 4 5}> -->* 0.
+  <{ equal $4 $5 }> -->* 0.
 Proof.
 (*
   unfold equal. normalize.
@@ -1740,21 +1776,21 @@ End FixTest3.
 Module FixTest4.
 
 Definition eotest :=
-<{let evenodd =
-         fix
-           (\eo: ((Nat -> Nat) * (Nat -> Nat)),
-              (\n:Nat, if0 n then 1 else (eo.snd (pred n)),
-               \n:Nat, if0 n then 0 else (eo.fst (pred n)))) in
-    let even = evenodd.fst in
-    let odd  = evenodd.snd in
-    (even 3, even 4)}>.
+  <{ let evenodd =
+           fix
+           (\eo: (Nat -> Nat) * (Nat -> Nat),
+              (\n:Nat, if0 n then $1 else (eo.snd (pred n)),
+               \n:Nat, if0 n then $0 else (eo.fst (pred n)))) in
+     let even = evenodd.fst in
+     let odd  = evenodd.snd in
+     (even $3, even $4) }>.
 
 Example typechecks :
-  empty |-- eotest \in (Nat * Nat).
+  <{ empty |-- eotest \in Nat * Nat }>.
 Proof. unfold eotest. eauto 30. (* FILL IN HERE *) Admitted.
 
 Example reduces :
-  eotest -->* <{(0, 1)}>.
+  eotest -->* <{ ($0, $1) }>.
 Proof.
 (*
   unfold eotest. eauto 10. normalize.
@@ -1785,7 +1821,7 @@ End Examples.
 
     Proof: By induction on the given typing derivation. *)
 Theorem progress : forall t T,
-     empty |-- t \in T ->
+     <{ empty |-- t \in T }> ->
      value t \/ exists t', t --> t'.
 Proof with eauto.
   intros t T Ht.
@@ -1834,7 +1870,7 @@ Proof with eauto.
     destruct IHHt...
     + (* t1 is a value *)
       destruct H; try solve_by_invert.
-      exists <{ {S n} }>...
+      exists <{ $(S n) }>...
     + (* t1 steps *)
       destruct H as [t' Hstp].
       exists <{succ t'}>...
@@ -1843,7 +1879,7 @@ Proof with eauto.
     destruct IHHt...
     + (* t1 is a value *)
       destruct H; try solve_by_invert.
-      exists <{ {n - 1} }>...
+      exists <{ $(n - 1) }>...
     + (* t1 steps *)
       destruct H as [t' Hstp].
       exists <{pred t'}>...
@@ -1855,7 +1891,7 @@ Proof with eauto.
       * (* t2 is a value *)
         destruct H; try solve_by_invert.
         destruct H0; try solve_by_invert.
-        exists <{ {n * n0} }>...
+        exists <{ $(n * n0) }>...
       * (* t2 steps *)
         destruct H0 as [t2' Hstp].
         exists <{t1 * t2'}>...
@@ -1945,8 +1981,8 @@ Proof with eauto.
 
 Lemma weakening : forall Gamma Gamma' t T,
      includedin Gamma Gamma' ->
-     Gamma  |-- t \in T  ->
-     Gamma' |-- t \in T.
+     <{ Gamma  |-- t \in T }> ->
+     <{ Gamma' |-- t \in T }>.
 Proof.
   intros Gamma Gamma' t T H Ht.
   generalize dependent Gamma'.
@@ -1954,8 +1990,8 @@ Proof.
 Qed.
 
 Lemma weakening_empty : forall Gamma t T,
-     empty |-- t \in T  ->
-     Gamma |-- t \in T.
+     <{ empty |-- t \in T }> ->
+     <{ Gamma |-- t \in T }>.
 Proof.
   intros Gamma t T.
   eapply weakening.
@@ -1970,9 +2006,9 @@ Qed.
     Complete the proof of [substitution_preserves_typing]. *)
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
-  (x |-> U ; Gamma) |-- t \in T ->
-  empty |-- v \in U   ->
-  Gamma |-- [x:=v]t \in T.
+  <{ x |-> U ; Gamma |-- t \in T }> ->
+  <{ empty |-- v \in U }>  ->
+  <{ Gamma |-- [x:=v]t \in T }>.
 Proof with eauto.
   intros Gamma x U t v T Ht Hv.
   generalize dependent Gamma. generalize dependent T.
@@ -2057,9 +2093,9 @@ Proof with eauto.
     Complete the proof of [preservation]. *)
 
 Theorem preservation : forall t t' T,
-     empty |-- t \in T  ->
+     <{ empty |-- t \in T }> ->
      t --> t'  ->
-     empty |-- t' \in T.
+     <{ empty |-- t' \in T }>.
 Proof with eauto.
   intros t t' T HT. generalize dependent t'.
   remember empty as Gamma.
@@ -2101,4 +2137,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:33 *)

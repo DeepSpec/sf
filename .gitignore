@@ -33,3 +33,23 @@ nlia.cache
 nra.cache
 Makefile.coq*
 *.report
+*.pdf
+doc/pdf/
+pdfs/
+src/
+
+# LaTeX and coqdoc build artifacts
+*.aux
+*.log
+*.out
+*.toc
+coqdoc.sty
+*.tex
+
+# Generated OCaml extraction files in LF
+lf-current/*.ml
+lf-current/*.mli
+
+# Patch reject and backup files
+*.rej
+*.orig

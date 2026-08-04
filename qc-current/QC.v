@@ -1,15 +1,17 @@
 (** * QC: Core QuickChick *)
 
-Require Import Arith Bool List ZArith. Import ListNotations.
-From QuickChick Require Import QuickChick. Import QcNotation.
-
 (* Suppress some annoying warnings: *)
 Set Warnings "-extraction-opaque-accessed,-extraction".
+Set Warnings "-deprecated-dirpath-Coq".
+Set Warnings "-notation-incompatible-prefix".
+
+From Stdlib Require Import Arith Bool List ZArith. Import ListNotations.
+From QuickChick Require Import QuickChick. Import QcNotation.
 
 Require Export ExtLib.Structures.Monads.
 Export MonadNotation. Open Scope monad_scope.
 
-Require Import String. Local Open Scope string.
+From Stdlib Require Import String. Local Open Scope string.
 
 (* ################################################################# *)
 (** * Generators *)
@@ -256,8 +258,8 @@ Definition genColor' : G color :=
 (** The first argument to [elems_] serves as a default result.  If
     its list argument is not empty, [elems_] returns a generator
     that always picks an element of that list; otherwise the generator
-    always returns the default object.  This makes Coq's totality
-    checker happy, but makes [elem_] a little awkward to use, since
+    always returns the default object.  This makes Rocq's totality
+    checker happy, but makes [elems_] a little awkward to use, since
     typically its second argument will be a non-empty constant list. *)
 
 (** To make the common case smoother, QuickChick provides convenient
@@ -271,8 +273,6 @@ Definition genColor' : G color :=
          := elems_ x (cons x (cons y nil))
      " 'elems' [ x ; y ; .. ; z ] "
          := elems_ x (cons x (cons y (.. (cons z nil))))
-     " 'elems' ( x ;; l ) "
-         := elems_ x (cons x l)
 *)
 
 (** Armed with [elems], we can write a [color] generator the way we'd
@@ -302,7 +302,7 @@ Arguments Node {A} _ _ _.
 
 (** Before getting to generators for trees, we again give a
     straightforward [Show] instance.  (The need for a local [let fix]
-    declaration stems from the fact that Coq's typeclasses, unlike
+    declaration stems from the fact that Rocq's typeclasses, unlike
     Haskell's, are not automatically recursive.  We could
     alternatively define [aux] with a separate top-level
     [Fixpoint].) *)
@@ -334,7 +334,7 @@ Check oneOf_.
     introduces a more convenient notation [oneOf] to hide this default
     element. *)
 
-(** Next, Coq's termination checker will save us from shooting
+(** Next, Rocq's termination checker will save us from shooting
     ourselves in the foot!
 
     The "obvious" first attempt at a generator is the following
@@ -349,7 +349,7 @@ Check oneOf_.
                 liftM3 Node g (genTree g) (genTree g) ].
 *)
 
-(** Of course, this fixpoint will not pass Coq's termination
+(** Of course, this fixpoint will not pass Rocq's termination
     checker. Attempting to justify this fixpoint informally, one might
     first say that at some point the random generation will pick a
     [Leaf] so it will eventually terminate.  But the termination
@@ -360,7 +360,7 @@ Check oneOf_.
     the _expected_ size of the generated trees is actually
     infinite! *)
 
-(** The solution is to use the standard "fuel" idiom that Coq users
+(** The solution is to use the standard "fuel" idiom that Rocq users
     are familiar with.  We add a natural number [sz] as a parameter.  We
     decrease this size in each recursive call, and when it reaches
     [O], we always generate [Leaf].  Thus, the initial [sz] parameter
@@ -629,7 +629,7 @@ End CheckerPlayground2.
 
 (** The somewhat astononishing thing about the [Checkable] instance
     for decidable [Prop]s is that, even though these are
-    _conjectures_ (we haven't proved them, so the "evidence" that Coq
+    _conjectures_ (we haven't proved them, so the "evidence" that Rocq
     has for them internally is just an uninstantiated "evar"), we can
     still build checkers from them and sample from these
     checkers! (Why?  Technically, it is because the [Checkable]
@@ -651,7 +651,7 @@ End CheckerPlayground2.
 *)
 
 (** Again, the intuition is that, although we didn't present
-    proofs (and could not have, in the first case!), Coq already
+    proofs (and could not have, in the first case!), Rocq already
     "knows" either a proof or a disproof of each of these conjectures
     because they are decidable. *)
 
@@ -1237,6 +1237,7 @@ Definition sized {A : Type} (f : nat -> G A) : G A :=
          end).
 
 End DefineSized.
+
 (** To streamline assembling generators, it is convenient to introduce
     one more typeclass, [GenSized], whose instances are sized
     generators. *)
@@ -1660,7 +1661,6 @@ Definition insertBST_spec (low high : nat) (x : nat) (t : Tree nat) :=
 
 (* QuickChick insertBST_spec.
 
-
     ===>
       QuickChecking insertBST_spec
       0
@@ -1709,4 +1709,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2024-12-27 01:36 *)
+(* 2026-01-07 13:37 *)

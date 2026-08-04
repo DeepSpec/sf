@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Multiset.
 
 Parameter MISSING: Type.
@@ -38,7 +38,8 @@ idtac " ".
 idtac "#> union_assoc".
 idtac "Possible points: 1".
 check_type @union_assoc (
-(forall a b c : multiset, union a (union b c) = union (union a b) c)).
+(forall a b c : multiset,
+ @eq multiset (union a (union b c)) (union (union a b) c))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions union_assoc.
@@ -50,7 +51,7 @@ idtac " ".
 
 idtac "#> union_comm".
 idtac "Possible points: 1".
-check_type @union_comm ((forall a b : multiset, union a b = union b a)).
+check_type @union_comm ((forall a b : multiset, @eq multiset (union a b) (union b a))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions union_comm.
@@ -63,7 +64,8 @@ idtac " ".
 idtac "#> union_swap".
 idtac "Possible points: 2".
 check_type @union_swap (
-(forall a b c : multiset, union a (union b c) = union b (union a c))).
+(forall a b c : multiset,
+ @eq multiset (union a (union b c)) (union b (union a c)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions union_swap.
@@ -77,7 +79,7 @@ idtac "#> insert_contents".
 idtac "Possible points: 3".
 check_type @insert_contents (
 (forall (x : nat) (l : list nat),
- contents (Sort.insert x l) = contents (x :: l))).
+ @eq multiset (contents (Sort.insert x l)) (contents (@cons nat x l)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions insert_contents.
@@ -89,7 +91,8 @@ idtac " ".
 
 idtac "#> sort_contents".
 idtac "Possible points: 2".
-check_type @sort_contents ((forall l : list value, contents l = contents (Sort.sort l))).
+check_type @sort_contents (
+(forall l : list value, @eq multiset (contents l) (contents (Sort.sort l)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sort_contents.
@@ -122,8 +125,8 @@ idtac " ".
 idtac "#> perm_contents".
 idtac "Possible points: 3".
 check_type @perm_contents (
-(forall al bl : list nat,
- @Permutation.Permutation nat al bl -> contents al = contents bl)).
+(forall (al bl : list nat) (_ : @Permutation.Permutation nat al bl),
+ @eq multiset (contents al) (contents bl))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions perm_contents.
@@ -137,8 +140,8 @@ idtac "#> contents_nil_inv".
 idtac "Advanced".
 idtac "Possible points: 2".
 check_type @contents_nil_inv (
-(forall l : list value,
- (forall x : value, 0 = contents l x) -> l = @nil value)).
+(forall (l : list value) (_ : forall x : value, @eq nat 0 (contents l x)),
+ @eq (list value) l (@nil value))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions contents_nil_inv.
@@ -152,10 +155,14 @@ idtac "#> contents_cons_inv".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @contents_cons_inv (
-(forall (l : list value) (x : value) (n : nat),
- S n = contents l x ->
- exists l1 l2 : list value,
-   l = (l1 ++ x :: l2)%list /\ contents (l1 ++ l2) x = n)).
+(forall (l : list value) (x : value) (n : nat)
+   (_ : @eq nat (S n) (contents l x)),
+ @ex (list value)
+   (fun l1 : list value =>
+    @ex (list value)
+      (fun l2 : list value =>
+       and (@eq (list value) l (@app value l1 (@cons value x l2)))
+         (@eq nat (contents (@app value l1 l2) x) n))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions contents_cons_inv.
@@ -169,8 +176,9 @@ idtac "#> contents_insert_other".
 idtac "Advanced".
 idtac "Possible points: 2".
 check_type @contents_insert_other (
-(forall (l1 l2 : list value) (x y : value),
- y <> x -> contents (l1 ++ x :: l2) y = contents (l1 ++ l2) y)).
+(forall (l1 l2 : list value) (x y : value) (_ : not (@eq value y x)),
+ @eq nat (contents (@app value l1 (@cons value x l2)) y)
+   (contents (@app value l1 l2) y))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions contents_insert_other.
@@ -184,8 +192,8 @@ idtac "#> contents_perm".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @contents_perm (
-(forall al bl : list value,
- contents al = contents bl -> @Permutation.Permutation value al bl)).
+(forall (al bl : list value) (_ : @eq multiset (contents al) (contents bl)),
+ @Permutation.Permutation value al bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions contents_perm.
@@ -199,7 +207,8 @@ idtac "#> same_contents_iff_perm".
 idtac "Possible points: 1".
 check_type @same_contents_iff_perm (
 (forall al bl : list value,
- contents al = contents bl <-> @Permutation.Permutation value al bl)).
+ iff (@eq multiset (contents al) (contents bl))
+   (@Permutation.Permutation value al bl))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions same_contents_iff_perm.
@@ -212,8 +221,8 @@ idtac " ".
 idtac "#> sort_specifications_equivalent".
 idtac "Possible points: 2".
 check_type @sort_specifications_equivalent (
-(forall sort : list nat -> list nat,
- Sort.is_a_sorting_algorithm sort <-> is_a_sorting_algorithm' sort)).
+(forall sort : forall _ : list nat, list nat,
+ iff (Sort.is_a_sorting_algorithm sort) (is_a_sorting_algorithm' sort))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sort_specifications_equivalent.
@@ -288,4 +297,6 @@ idtac "---------- contents_perm ---------".
 Print Assumptions contents_perm.
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

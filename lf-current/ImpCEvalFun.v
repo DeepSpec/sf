@@ -10,12 +10,14 @@
 (* ################################################################# *)
 (** * A Broken Evaluator *)
 
-From Coq Require Import Lia.
-From Coq Require Import Arith.Arith.
-From Coq Require Import Arith.PeanoNat.
+Set Warnings "-notation-overridden,-notation-incompatible-prefix".
+From Stdlib Require Import Lia.
+From Stdlib Require Import Arith.
+From Stdlib Require Import PeanoNat.
 Import Nat.
-From Coq Require Import Arith.EqNat.
+From Stdlib Require Import EqNat.
 From LF Require Import Imp Maps.
+Local Open Scope com_scope.
 
 (** Here was our first try at an evaluation function for commands,
     omitting [while]. *)
@@ -46,24 +48,24 @@ Fixpoint ceval_step1 (st : state) (c : com) : state :=
           ceval_step1 st <{ c1; while b1 do c1 end }>
         else st
 
-    Coq doesn't accept such a definition ([Error: Cannot guess
+    Rocq doesn't accept such a definition ([Error: Cannot guess
     decreasing argument of fix]) because the function we want to
     define is not guaranteed to terminate. Indeed, the changed
     [ceval_step1] function applied to the [loop] program from [Imp.v]
-    would never terminate. Since Coq is not just a functional
+    would never terminate. Since Rocq is not just a functional
     programming language, but also a consistent logic, any potentially
     non-terminating function needs to be rejected. Here is an
-    invalid(!) Coq program showing what would go wrong if Coq allowed
+    invalid(!) Rocq program showing what would go wrong if Rocq allowed
     non-terminating recursive functions:
 
      Fixpoint loop_false (n : nat) : False := loop_false n.
 
     That is, propositions like [False] would become
     provable (e.g., [loop_false 0] would be a proof of [False]), which
-    would be a disaster for Coq's logical consistency.
+    would be a disaster for Rocq's logical consistency.
 
     Thus, because it doesn't terminate on all inputs, the full version
-    of [ceval_step1] cannot be written in Coq -- at least not without
+    of [ceval_step1] cannot be written in Rocq -- at least not without
     one additional trick... *)
 
 (* ################################################################# *)
@@ -393,4 +395,4 @@ Proof.
   rewrite E1 in E2. inversion E2. reflexivity.
   lia. lia.  Qed.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

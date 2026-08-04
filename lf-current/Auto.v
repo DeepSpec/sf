@@ -1,30 +1,32 @@
 (** * Auto: More Automation *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Lia.
+Set Warnings "-notation-overridden,-notation-incompatible-prefix".
+From Stdlib Require Import Lia.
+From Stdlib Require Import Strings.String.
 From LF Require Import Maps.
 From LF Require Import Imp.
 
-(** Up to now, we've used the more manual part of Coq's tactic
-    facilities.  In this chapter, we'll learn more about some of Coq's
-    powerful automation features: proof search via the [auto] tactic,
-    automated forward reasoning via the [Ltac] hypothesis matching
-    machinery, and deferred instantiation of existential variables
-    using [eapply] and [eauto].  Using these features together with
-    Ltac's scripting facilities will enable us to make our proofs
-    startlingly short!  Used properly, they can also make proofs more
-    maintainable and robust to changes in underlying definitions.  A
-    deeper treatment of [auto] and [eauto] can be found in the
-    [UseAuto] chapter in _Programming Language Foundations_.
+(** Up to now, we've used the manual part of Rocq's tactic
+    facilities.  In this chapter, we'll learn more about some of
+    Rocq's powerful automation features: proof search via the [auto]
+    tactic, automated forward reasoning via the [Ltac] hypothesis
+    matching machinery, and deferred instantiation of existential
+    variables using [eapply] and [eauto].  Using these features
+    together with Ltac's scripting facilities will enable us to make
+    some of our proofs startlingly short!  Used properly, they can
+    also make proofs more maintainable and robust to changes in
+    underlying definitions.  A deeper treatment of [auto] and [eauto]
+    can be found in the [UseAuto] chapter in _Programming Language
+    Foundations_.
 
-    There's another major category of automation we haven't discussed
-    much yet, namely built-in decision procedures for specific kinds
-    of problems: [lia] is one example, but there are others.  This
-    topic will be deferred for a while longer.
+    (There's one other major category of automation we haven't
+    discussed much yet, namely built-in decision procedures for
+    specific kinds of problems: [lia] is one example, but there are
+    others.  This topic will be deferred for a while longer.)
 
-    Our motivating example will be this proof, repeated with just a
-    few small changes from the [Imp] chapter.  We will simplify
-    this proof in several stages. *)
+    Our motivating example will be the following proof, repeated with
+    just a few small changes from the [Imp] chapter.  We will
+    simplify this proof in several stages. *)
 
 Theorem ceval_deterministic: forall c st st1 st2,
   st =[ c ]=> st1  ->
@@ -84,13 +86,11 @@ Proof.
 Qed.
 
 (** The [auto] tactic solves goals that are solvable by any combination of
-     - [intros]
-    and
-     - [apply] (of hypotheses from the local context, by default). *)
+    [intros] and [apply]. *)
 
-(** Using [auto] is always "safe" in the sense that it will never fail
-    and will never change the proof state: either it completely solves
-    the current goal, or it does nothing. *)
+(** Using [auto] is always "safe" in the sense that it will
+    never fail and will never change the proof state: either it
+    completely solves the current goal, or it does nothing. *)
 
 (** Here is a larger example showing [auto]'s power: *)
 
@@ -106,7 +106,7 @@ Example auto_example_2 : forall P Q R S T U : Prop,
 Proof. auto. Qed.
 
 (** Proof search could, in principle, take an arbitrarily long time,
-    so there are limits to how deep [auto] will search by default. *)
+    so there is a limit to how deep [auto] will search by default. *)
 
 (** If [auto] is not solving our goal as expected we can use [debug auto]
     to see a trace. *)
@@ -170,9 +170,9 @@ Qed.
 Lemma le_antisym : forall n m: nat, (n <= m /\ m <= n) -> n = m.
 Proof. lia. Qed.
 
-Example auto_example_6 : forall n m p : nat,
-  (n <= p -> (n <= m /\ m <= n)) ->
-  n <= p ->
+Example auto_example_6 : forall n m p q : nat,
+  (p = q -> (n <= m /\ m <= n)) ->
+  p = q ->
   n = m.
 Proof.
   auto using le_antisym.
@@ -190,14 +190,14 @@ Qed.
 
       Hint Constructors c : core.
 
-    to tell Coq to do a [Hint Resolve] for _all_ of the constructors
+    to tell Rocq to do a [Hint Resolve] for _all_ of the constructors
     from the inductive definition of [c].
 
     It is also sometimes necessary to add
 
       Hint Unfold d : core.
 
-    where [d] is a defined symbol, so that [auto] knows to expand uses
+    where [d] is a defined symbol, so that [auto] knows to unfold uses
     of [d], thus enabling further possibilities for applying lemmas that
     it knows about. *)
 
@@ -206,13 +206,13 @@ Qed.
     style to create your own hint databases instead of polluting
     [core].
 
-    See the Coq reference manual for details. *)
+    See the Rocq reference manual for details. *)
 
 Hint Resolve le_antisym : core.
 
-Example auto_example_6' : forall n m p : nat,
-  (n<= p -> (n <= m /\ m <= n)) ->
-  n <= p ->
+Example auto_example_6' : forall n m p q : nat,
+  (p = q -> (n <= m /\ m <= n)) ->
+  p = q ->
   n = m.
 Proof.
   auto. (* picks up hint from database *)
@@ -234,13 +234,13 @@ Proof.
   auto. (* try also: info_auto. *)
 Qed.
 
-(** (Note that the [Hint Unfold is_fortytwo] command above the
-    example is needed because, unlike the [apply] tactic, the "apply"
-    steps that are performed by [auto] do not do any automatic
-    unfolding. *)
+(** Note that the [Hint Unfold is_fortytwo] command above the
+    example is needed because, unlike the normal [apply] tactic, the
+    [simple apply] steps that are performed by [auto] do not do any
+    automatic unfolding. *)
 
-(** Let's take a first pass over [ceval_deterministic] to simplify the
-    proof script. *)
+(** Let's take a first pass over [ceval_deterministic], using [auto]
+    to simplify the proof script. *)
 
 Theorem ceval_deterministic': forall c st st1 st2,
   st =[ c ]=> st1  ->
@@ -250,21 +250,21 @@ Proof.
   intros c st st1 st2 E1 E2.
   generalize dependent st2;
     induction E1; intros st2 E2; inversion E2; subst;
-    auto.   (* <---- here's one good place for auto *)
+    auto.             (* <---- here's one good place for auto *)
   - (* E_Seq *)
     rewrite (IHE1_1 st'0 H1) in *.
-    auto.   (* <---- here's another *)
-  - (* E_IfTrue -- contradiction! *)
+    auto.             (* <---- here's another *)
+  - (* E_IfTrue *)
     rewrite H in H5. discriminate.
-  - (* E_IfFalse -- contradiction! *)
+  - (* E_IfFalse *)
     rewrite H in H5. discriminate.
-  - (* E_WhileFalse -- contradiction! *)
+  - (* E_WhileFalse *)
     rewrite H in H2. discriminate.
-  - (* E_WhileTrue, with b false -- contradiction! *)
+  - (* E_WhileTrue, with b false *)
     rewrite H in H4. discriminate.
   - (* E_WhileTrue, with b true *)
     rewrite (IHE1_1 st'0 H3) in *.
-    auto.   (* <---- and another *)
+    auto.             (* <---- and another *)
 Qed.
 
 (** When we are using a particular tactic many times in a proof, we
@@ -282,16 +282,16 @@ Proof with auto.
   intros c st st1 st2 E1 E2;
   generalize dependent st2;
   induction E1;
-           intros st2 E2; inversion E2; subst...
+       intros st2 E2; inversion E2; subst...
   - (* E_Seq *)
     rewrite (IHE1_1 st'0 H1) in *...
-  - (* E_IfTrue -- contradiction! *)
+  - (* E_IfTrue *)
     rewrite H in H5. discriminate.
-  - (* E_IfFalse -- contradiction! *)
+  - (* E_IfFalse *)
     rewrite H in H5. discriminate.
-  - (* E_WhileFalse -- contradiction! *)
+  - (* E_WhileFalse *)
     rewrite H in H2. discriminate.
-  - (* E_WhileTrue, with b false -- contradiction! *)
+  - (* E_WhileTrue, with b false *)
     rewrite H in H4. discriminate.
   - (* E_WhileTrue, with b true *)
     rewrite (IHE1_1 st'0 H3) in *...
@@ -301,7 +301,7 @@ Qed.
 (** * Searching For Hypotheses *)
 
 (** The proof has become simpler, but there is still an annoying
-    amount of repetition. Let's start by tackling the contradiction
+    degree of repetition. Let's start by tackling the contradiction
     cases. Each of them occurs in a situation where we have both
 
       H1: beval st b = false
@@ -315,10 +315,9 @@ Qed.
     and [H2] and do a [rewrite] following by a [discriminate].  We'd
     like to automate this process.
 
-    (In fact, Coq has a built-in tactic [congruence] that will do the
-    job in this case.  But we'll ignore the existence of this tactic
-    for now, in order to demonstrate how to build forward search
-    tactics by hand.)
+    (In fact, Rocq has a built-in tactic [congruence] that will do the
+    job in this case.  We'll ignore this tactic for now, in order to
+    demonstrate how to build forward-search tactics by hand.)
 
     As a first step, we can abstract out the piece of script in
     question by writing a little function in Ltac. *)
@@ -337,26 +336,26 @@ Proof.
     rewrite (IHE1_1 st'0 H1) in *.
     auto.
   - (* E_IfTrue *)
-      rwd H H5.
+    rwd H H5.                 (* <----- *)
   - (* E_IfFalse *)
-      rwd H H5.
+    rwd H H5.                 (* <----- *)
   - (* E_WhileFalse *)
-      rwd H H2.
+    rwd H H2.                 (* <----- *)
   - (* E_WhileTrue - b false *)
-    rwd H H4.
+    rwd H H4.                 (* <----- *)
   - (* EWhileTrue - b true *)
     rewrite (IHE1_1 st'0 H3) in *.
     auto. Qed.
 
-(** That was a bit better, but we really want Coq to discover the
+(** That's a bit better, but we really want Rocq to discover the
     relevant hypotheses for us.  We can do this by using the [match
     goal] facility of Ltac. *)
 
 Ltac find_rwd :=
   match goal with
-    H1: ?E = true,
-    H2: ?E = false
-    |- _ => rwd H1 H2
+    H1: ?E = true, H2: ?E = false |- _
+       =>
+    rwd H1 H2
   end.
 
 (** This [match goal] looks for two distinct hypotheses that
@@ -375,7 +374,9 @@ Theorem ceval_deterministic''': forall c st st1 st2,
 Proof.
   intros c st st1 st2 E1 E2.
   generalize dependent st2;
-  induction E1; intros st2 E2; inversion E2; subst; try find_rwd; auto.
+  induction E1; intros st2 E2; inversion E2; subst;
+       try find_rwd;                                  (* <------ *)
+       auto.
   - (* E_Seq *)
     rewrite (IHE1_1 st'0 H1) in *.
     auto.
@@ -392,7 +393,8 @@ Ltac find_eqn :=
   match goal with
     H1: forall x, ?P x -> ?L = ?R,
     H2: ?P ?X
-    |- _ => rewrite (H1 X H2) in *
+    |- _
+    => rewrite (H1 X H2) in *
   end.
 
 (** The pattern [forall x, ?P x -> ?L = ?R] matches any hypothesis of
@@ -415,13 +417,15 @@ Theorem ceval_deterministic'''': forall c st st1 st2,
 Proof.
   intros c st st1 st2 E1 E2.
   generalize dependent st2;
-  induction E1; intros st2 E2; inversion E2; subst; try find_rwd;
-    try find_eqn; auto.
+  induction E1; intros st2 E2; inversion E2; subst;
+    try find_rwd;
+    try find_eqn;    (* <------- *)
+    auto.
 Qed.
 
-(** The big payoff in this approach is that our proof script should be
-    more robust in the face of modest changes to our language.  To
-    test this, let's try adding a [REPEAT] command to the language. *)
+(** The big payoff in this approach is that the new proof script is
+    more robust in the face of changes to our language.  To test this,
+    let's try adding a [REPEAT] command to the language. *)
 
 Module Repeat.
 
@@ -540,7 +544,7 @@ Qed.
 End Repeat.
 
 (** These examples just give a flavor of what "hyper-automation"
-    can achieve in Coq.  The details of [match goal] are a bit
+    can achieve in Rocq.  The details of [match goal] are a bit
     tricky (and debugging scripts using it is, frankly, not very
     pleasant).  But it is well worth adding at least simple uses to
     your proofs, both to avoid tedium and to "future proof" them. *)
@@ -548,10 +552,10 @@ End Repeat.
 (* ################################################################# *)
 (** * The [eapply] and [eauto] tactics *)
 
-(** To close the chapter, we'll introduce one more convenient feature
-    of Coq: its ability to delay instantiation of quantifiers.  To
-    motivate this feature, recall this example from the [Imp]
-    chapter: *)
+(** To close the chapter, let's look at one more convenience
+    feature of Rocq: its ability to delay instantiation of
+    quantifiers.  To motivate this feature, recall this example from
+    the [Imp] chapter: *)
 
 Example ceval_example1:
   empty_st =[
@@ -570,7 +574,7 @@ Qed.
 
 
 (** In the first step of the proof, we had to explicitly provide a
-    longish expression to help Coq instantiate a "hidden" argument to
+    longish expression to help Rocq instantiate a "hidden" argument to
     the [E_Seq] constructor.  This was needed because the definition
     of [E_Seq]...
 
@@ -581,15 +585,15 @@ Qed.
 
    is quantified over a variable, [st'], that does not appear in its
    conclusion, so unifying its conclusion with the goal state doesn't
-   help Coq find a suitable value for this variable.  If we leave
+   help Rocq find a suitable value for this variable.  If we leave
    out the [with], this step fails ("Error: Unable to find an
    instance for the variable [st']").
 
-   What's silly about this error is that the appropriate value for [st']
-   will actually become obvious in the very next step, where we apply
-   [E_Asgn].  If Coq could just wait until we get to this step, there
-   would be no need to give the value explicitly.  This is exactly what
-   the [eapply] tactic gives us: *)
+   What's silly about this error is that the appropriate value for
+   [st'] will actually become obvious in the very next step, where we
+   apply [E_Asgn].  If Rocq could just wait until we get to this step,
+   there would be no need for us to give the value explicitly.  This
+   is exactly what the [eapply] tactic allows: *)
 
 Example ceval'_example1:
   empty_st =[
@@ -600,17 +604,17 @@ Example ceval'_example1:
     end
   ]=> (Z !-> 4 ; X !-> 2).
 Proof.
-  eapply E_Seq. (* 1 *)
-  - apply E_Asgn. (* 2 *)
-    reflexivity. (* 3 *)
+  (* 1 *) eapply E_Seq.
+  - (* 2 *) apply E_Asgn.
+    (* 3 *) reflexivity.
   - (* 4 *) apply E_IfFalse. reflexivity. apply E_Asgn. reflexivity.
 Qed.
 
 (** The [eapply H] tactic behaves just like [apply H] except
     that, after it finishes unifying the goal state with the
-    conclusion of [H], it does not bother to check whether all the
-    variables that were introduced in the process have been given
-    concrete values during unification.
+    conclusion of [H], it skips checking whether all the variables
+    that were introduced in the process have been given concrete
+    values during unification.
 
     If you step through the proof above, you'll see that the goal
     state at position [1] mentions the _existential variable_ [?st']
@@ -618,10 +622,10 @@ Qed.
     to position [2]) replaces [?st'] with a concrete value.  This new
     value contains a new existential variable [?n], which is
     instantiated in its turn by the following [reflexivity] step,
-    position [3].  When we start working on the second
-    subgoal (position [4]), we observe that the occurrence of [?st']
-    in this subgoal has been replaced by the value that it was given
-    during the first subgoal. *)
+    position [3].  When we start working on the second subgoal
+    (position [4]), we observe that the occurrence of [?st'] in this
+    subgoal has been replaced by the value that it was given during
+    the first subgoal. *)
 
 (** Several of the tactics that we've seen so far, including [exists],
     [constructor], and [auto], have similar variants. The [eauto]
@@ -653,7 +657,7 @@ Proof. info_eauto. Qed.
 (** Pro tip: One might think that, since [eapply] and [eauto]
     are more powerful than [apply] and [auto], we should just use them
     all the time.  Unfortunately, they are also significantly slower
-    -- especially [eauto].  Coq experts tend to use [apply] and [auto]
+    -- especially [eauto].  Rocq experts tend to use [apply] and [auto]
     most of the time, only switching to the [e] variants when the
     ordinary variants don't do the job. *)
 
@@ -661,8 +665,8 @@ Proof. info_eauto. Qed.
 (** * Constraints on Existential Variables *)
 
 (** In order for [Qed] to succeed, all existential variables need to
-    be determined by the end of the proof. Otherwise Coq
-    will (rightly) refuse to accept the proof. Remember that the Coq
+    be determined by the end of the proof. Otherwise Rocq
+    will (rightly) refuse to accept the proof. Remember that the Rocq
     tactics build proof objects, and proof objects containing
     existential variables are not complete. *)
 
@@ -671,8 +675,8 @@ Lemma silly1 : forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
   (forall x y : nat, P x y -> Q x) ->
   Q 42.
 Proof.
-  intros P Q HP HQ. eapply HQ. apply HP.
-(** Coq gives a warning after [apply HP]: "All the remaining goals
+  intros P Q HP HQ. eapply HQ. apply HP. Unshelve. exact 0.
+(** Rocq gives a warning after [apply HP]: "All the remaining goals
     are on the shelf," means that we've finished all our top-level
     proof obligations but along the way we've put some aside to be
     done later, and we have not finished those.  Trying to close the
@@ -683,7 +687,7 @@ Abort.
     instantiated with terms containing ordinary variables that did not
     exist at the time the existential variable was created.  (The
     reason for this technical restriction is that allowing such
-    instantiation would lead to inconsistency of Coq's logic.) *)
+    instantiation would lead to inconsistency of Rocq's logic.) *)
 
 Lemma silly2 :
   forall (P : nat -> nat -> Prop) (Q : nat -> Prop),
@@ -716,7 +720,7 @@ Qed.
     in the goal with the variable [y].
 
     Note that the [assumption] tactic doesn't work in this case, since
-    it cannot handle existential variables.  However, Coq also
+    it cannot handle existential variables.  However, Rocq also
     provides an [eassumption] tactic that solves the goal if one of
     the premises matches the goal up to instantiations of existential
     variables. We can use it instead of [apply HP'] if we like. *)
@@ -740,4 +744,4 @@ Proof.
   intros P Q HP HQ. destruct HP as [y HP']. eauto.
 Qed.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

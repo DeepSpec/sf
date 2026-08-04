@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Well-founded relations                                                  *
 **************************************************************************)
 
@@ -15,7 +15,7 @@ From SLF Require Import LibTactics LibLogic
 (* ################################################################# *)
 (** * Compatibility *)
 
-(** Coq's stdlib Prelude defines:
+(** Rocq's stdlib Prelude defines:
 
  Inductive Acc A (R:A->A->Prop) (x:A) : Prop :=
    | Acc_intro : (forall (y:A), R y x -> Acc y) -> Acc x.
@@ -596,4 +596,4 @@ Proof using.
   induction 1; eauto using Acc_inv.
 Qed.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

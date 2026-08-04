@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import Hoare2.
 
 Parameter MISSING: Type.
@@ -74,6 +74,7 @@ idtac "-------------------  minimum_correct  --------------------".
 idtac " ".
 
 idtac "#> minimum_correct".
+idtac "Advanced".
 idtac "Possible points: 3".
 check_type @minimum_correct ((forall a b : nat, outer_triple_valid (minimum_dec a b))).
 idtac "Assumptions:".
@@ -96,7 +97,7 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 10".
+idtac "Max points - standard: 7".
 idtac "Max points - advanced: 16".
 idtac "".
 idtac "Allowed Axioms:".
@@ -122,14 +123,16 @@ idtac "---------- if_minus_plus_correct ---------".
 Print Assumptions if_minus_plus_correct.
 idtac "---------- slow_assignment ---------".
 Print Assumptions slow_assignment.
-idtac "---------- minimum_correct ---------".
-Print Assumptions minimum_correct.
 idtac "---------- two_loops ---------".
 Print Assumptions two_loops.
 idtac "".
 idtac "********** Advanced **********".
 idtac "---------- factorial_correct ---------".
 Print Assumptions factorial_correct.
+idtac "---------- minimum_correct ---------".
+Print Assumptions minimum_correct.
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

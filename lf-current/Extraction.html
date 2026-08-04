@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="common/css/sf.css" rel="stylesheet" type="text/css" />
-<title>Extraction: Extracting OCaml from Coq</title>
+<title>Extraction: Extracting OCaml from Rocq</title>
 <link href="common/jquery-ui/jquery-ui.css" rel="stylesheet">
 <script src="common/jquery-ui/external/jquery/jquery.js"></script>
 <script src="common/jquery-ui/jquery-ui.js"></script>
@@ -29,19 +29,19 @@
 
 <div id="main">
 
-<h1 class="libtitle">Extraction<span class="subtitle">Extracting OCaml from Coq</span></h1>
+<h1 class="libtitle">Extraction<span class="subtitle">Extracting OCaml from Rocq</span></h1>
 
 
 <div class="doc">
 
 <div class="paragraph"> </div>
 
-<a id="lab447"></a><h1 class="section">Basic Extraction</h1>
+<a id="lab455"></a><h1 class="section">Basic Extraction</h1>
 
 <div class="paragraph"> </div>
 
  In its simplest form, extracting an efficient program from one
-    written in Coq is completely straightforward.
+    written in Rocq is completely straightforward.
 
 <div class="paragraph"> </div>
 
@@ -51,24 +51,26 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Require</span> <a class="idref" href="http://coq.inria.fr/library//Coq.extraction.Extraction.html#"><span class="id" title="library">Coq.extraction.Extraction</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.extraction.Extraction.html#"><span class="id" title="library">Extraction</span></a>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Output</span> <span class="id" title="var">Directory</span> ".".<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Language</span> <span class="id" title="var">OCaml</span>.<br/>
 </div>
 
 <div class="doc">
-Now we load up the Coq environment with some definitions, either
+Now we load up the Rocq environment with some definitions, either
     directly or by importing them from other modules. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.Arith.html#"><span class="id" title="library">Arith.Arith</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Arith.EqNat.html#"><span class="id" title="library">Arith.EqNat</span></a>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden,-notation-incompatible-prefix".<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Arith.Arith.html#"><span class="id" title="library">Arith</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Init.Nat.html#"><span class="id" title="library">Init.Nat</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Arith.EqNat.html#"><span class="id" title="library">EqNat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">LF</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="ImpCEvalFun.html#"><span class="id" title="library">ImpCEvalFun</span></a>.<br/>
 </div>
 
 <div class="doc">
-Finally, we tell Coq the name of a definition to extract and the
+Finally, we tell Rocq the name of a definition to extract and the
     name of a file to put the extracted code into. 
 </div>
 <div class="code">
@@ -77,21 +79,21 @@ Finally, we tell Coq the name of a definition to extract and the
 </div>
 
 <div class="doc">
-When Coq processes this command, it generates a file <span class="inlinecode"><span class="id" title="var">imp1.ml</span></span>
+When Rocq processes this command, it generates a file <span class="inlinecode"><span class="id" title="var">imp1.ml</span></span>
     containing an extracted version of <span class="inlinecode"><span class="id" title="var">ceval_step</span></span>, together with
     everything that it recursively depends on.  Compile the present
     <span class="inlinecode">.<span class="id" title="var">v</span></span> file and have a look at <span class="inlinecode"><span class="id" title="var">imp1.ml</span></span> now. 
 </div>
 
 <div class="doc">
-<a id="lab448"></a><h1 class="section">Controlling Extraction of Specific Types</h1>
+<a id="lab456"></a><h1 class="section">Controlling Extraction of Specific Types</h1>
 
 <div class="paragraph"> </div>
 
- We can tell Coq to extract certain <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definitions to
+ We can tell Rocq to extract certain <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span> definitions to
     specific OCaml types.  For each one, we must say
 <ul class="doclist">
-<li> how the Coq type itself should be represented in OCaml, and
+<li> how the Rocq type itself should be represented in OCaml, and
 
 </li>
 <li> how each constructor should be translated. 
@@ -101,7 +103,7 @@ When Coq processes this command, it generates a file <span class="inlinecode"><s
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ⇒ "bool" [ "true" "false" ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ⇒ "bool" [ "true" "false" ].<br/>
 </div>
 
 <div class="doc">
@@ -111,7 +113,7 @@ Also, for non-enumeration types (where the constructors take
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ "int"<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ "int"<br/>
 &nbsp;&nbsp;[ "0" "(fun x <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> x + 1)" ]<br/>
 &nbsp;&nbsp;"(fun zero succ n <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span>
       if n=0 then zero () else succ (n-1))".<br/>
@@ -148,7 +150,7 @@ Have a look at the file <span class="inlinecode"><span class="id" title="var">im
 </div>
 
 <div class="doc">
-<a id="lab449"></a><h1 class="section">A Complete Example</h1>
+<a id="lab457"></a><h1 class="section">A Complete Example</h1>
 
 <div class="paragraph"> </div>
 
@@ -164,14 +166,14 @@ Have a look at the file <span class="inlinecode"><span class="id" title="var">im
 <div class="paragraph"> </div>
 
     Also, to make it easier to type in examples, let's extract a
-    parser from the <span class="inlinecode"><span class="id" title="var">ImpParser</span></span> Coq module.  To do this, we first need
-    to set up the right correspondence between Coq strings and lists
+    parser from the <span class="inlinecode"><span class="id" title="var">ImpParser</span></span> Rocq module.  To do this, we first need
+    to set up the right correspondence between Rocq strings and lists
     of OCaml characters. 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.extraction.ExtrOcamlBasic.html#"><span class="id" title="library">ExtrOcamlBasic</span></a>.<br/>
-<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/library//Coq.extraction.ExtrOcamlString.html#"><span class="id" title="library">ExtrOcamlString</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.extraction.ExtrOcamlBasic.html#"><span class="id" title="library">ExtrOcamlBasic</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.extraction.ExtrOcamlString.html#"><span class="id" title="library">ExtrOcamlString</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -179,7 +181,7 @@ We also need one more variant of booleans.
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Specif.html#sumbool"><span class="id" title="inductive">sumbool</span></a> ⇒ "bool" ["true" "false"].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Specif.html#sumbool"><span class="id" title="inductive">sumbool</span></a> ⇒ "bool" ["true" "false"].<br/>
 </div>
 
 <div class="doc">
@@ -210,7 +212,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 </div>
 
 <div class="doc">
-<a id="lab450"></a><h1 class="section">Discussion</h1>
+<a id="lab458"></a><h1 class="section">Discussion</h1>
 
 <div class="paragraph"> </div>
 
@@ -222,7 +224,7 @@ Now let's run our generated Imp evaluator.  First, have a look at
 </div>
 
 <div class="doc">
-<a id="lab451"></a><h1 class="section">Going Further</h1>
+<a id="lab459"></a><h1 class="section">Going Further</h1>
 
 <div class="paragraph"> </div>
 
@@ -232,12 +234,12 @@ Now let's run our generated Imp evaluator.  First, have a look at
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:26&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:18&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

@@ -46,7 +46,7 @@
    VSU verification of a module (for example, "Stack") usually comprises these separate files:
    - [Model_stack.v],  the functional model, just in the sense that [hash.v] is the
        functional model for our hash table.  But the functional model for stacks
-       is so simple -- just Coq lists -- that we will merge that into Spec_stack.v.
+       is so simple -- just Rocq lists -- that we will merge that into Spec_stack.v.
    - [Spec_stack.v], the API specification of the stack module.  This is the one that
        clients import; it contains (for example) funspecs and the names of
        abstract data types (ADTs).  The important thing is that it contains
@@ -111,4 +111,4 @@
 (* ================================================================= *)
 (** ** Next Chapter: [Spec_stack] *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

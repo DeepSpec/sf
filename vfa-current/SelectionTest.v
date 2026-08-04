@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Selection.
 
 Parameter MISSING: Type.
@@ -38,8 +38,9 @@ idtac " ".
 idtac "#> select_perm".
 idtac "Possible points: 2".
 check_type @select_perm (
-(forall (x : nat) (l : list nat) (y : nat) (r : list nat),
- select x l = (y, r) -> @Permutation.Permutation nat (x :: l) (y :: r))).
+(forall (x : nat) (l : list nat) (y : nat) (r : list nat)
+   (_ : @eq (prod nat (list nat)) (select x l) (@pair nat (list nat) y r)),
+ @Permutation.Permutation nat (@cons nat x l) (@cons nat y r))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions select_perm.
@@ -52,8 +53,9 @@ idtac " ".
 idtac "#> select_rest_length".
 idtac "Possible points: 1".
 check_type @select_rest_length (
-(forall (x : nat) (l : list nat) (y : nat) (r : list nat),
- select x l = (y, r) -> @length nat l = @length nat r)).
+(forall (x : nat) (l : list nat) (y : nat) (r : list nat)
+   (_ : @eq (prod nat (list nat)) (select x l) (@pair nat (list nat) y r)),
+ @eq nat (@length nat l) (@length nat r))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions select_rest_length.
@@ -66,8 +68,8 @@ idtac " ".
 idtac "#> selsort_perm".
 idtac "Possible points: 3".
 check_type @selsort_perm (
-(forall (n : nat) (l : list nat),
- @length nat l = n -> @Permutation.Permutation nat l (selsort l n))).
+(forall (n : nat) (l : list nat) (_ : @eq nat (@length nat l) n),
+ @Permutation.Permutation nat l (selsort l n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions selsort_perm.
@@ -93,7 +95,9 @@ idtac " ".
 idtac "#> select_fst_leq".
 idtac "Possible points: 2".
 check_type @select_fst_leq (
-(forall (al bl : list nat) (x y : nat), select x al = (y, bl) -> y <= x)).
+(forall (al bl : list nat) (x y : nat)
+   (_ : @eq (prod nat (list nat)) (select x al) (@pair nat (list nat) y bl)),
+ le y x)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions select_fst_leq.
@@ -106,7 +110,8 @@ idtac " ".
 idtac "#> le_all__le_one".
 idtac "Possible points: 1".
 check_type @le_all__le_one (
-(forall (lst : list nat) (y n : nat), y <=* lst -> @In nat n lst -> y <= n)).
+(forall (lst : list nat) (y n : nat) (_ : le_all y lst) (_ : @In nat n lst),
+ le y n)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions le_all__le_one.
@@ -119,7 +124,9 @@ idtac " ".
 idtac "#> select_smallest".
 idtac "Possible points: 2".
 check_type @select_smallest (
-(forall (al bl : list nat) (x y : nat), select x al = (y, bl) -> y <=* bl)).
+(forall (al bl : list nat) (x y : nat)
+   (_ : @eq (prod nat (list nat)) (select x al) (@pair nat (list nat) y bl)),
+ le_all y bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions select_smallest.
@@ -132,8 +139,9 @@ idtac " ".
 idtac "#> select_in".
 idtac "Possible points: 2".
 check_type @select_in (
-(forall (al bl : list nat) (x y : nat),
- select x al = (y, bl) -> @In nat y (x :: al))).
+(forall (al bl : list nat) (x y : nat)
+   (_ : @eq (prod nat (list nat)) (select x al) (@pair nat (list nat) y bl)),
+ @In nat y (@cons nat x al))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions select_in.
@@ -146,9 +154,9 @@ idtac " ".
 idtac "#> cons_of_small_maintains_sort".
 idtac "Possible points: 3".
 check_type @cons_of_small_maintains_sort (
-(forall (bl : list nat) (y n : nat),
- n = @length nat bl ->
- y <=* bl -> sorted (selsort bl n) -> sorted (y :: selsort bl n))).
+(forall (bl : list nat) (y n : nat) (_ : @eq nat n (@length nat bl))
+   (_ : le_all y bl) (_ : sorted (selsort bl n)),
+ sorted (@cons nat y (selsort bl n)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions cons_of_small_maintains_sort.
@@ -161,8 +169,8 @@ idtac " ".
 idtac "#> selsort_sorted".
 idtac "Possible points: 2".
 check_type @selsort_sorted (
-(forall (n : nat) (al : list nat),
- @length nat al = n -> sorted (selsort al n))).
+(forall (n : nat) (al : list nat) (_ : @eq nat (@length nat al) n),
+ sorted (selsort al n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions selsort_sorted.
@@ -199,8 +207,8 @@ idtac " ".
 idtac "#> selsort'_perm".
 idtac "Possible points: 1".
 check_type @selsort'_perm (
-(forall (n : nat) (l : list nat),
- @length nat l = n -> @Permutation.Permutation nat l (selsort' l))).
+(forall (n : nat) (l : list nat) (_ : @eq nat (@length nat l) n),
+ @Permutation.Permutation nat l (selsort' l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions selsort'_perm.
@@ -213,8 +221,9 @@ idtac " ".
 idtac "#> cons_of_small_maintains_sort'".
 idtac "Possible points: 1".
 check_type @cons_of_small_maintains_sort' (
-(forall (bl : list nat) (y : nat),
- y <=* bl -> sorted (selsort' bl) -> sorted (y :: selsort' bl))).
+(forall (bl : list nat) (y : nat) (_ : le_all y bl)
+   (_ : sorted (selsort' bl)),
+ sorted (@cons nat y (selsort' bl)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions cons_of_small_maintains_sort'.
@@ -227,7 +236,8 @@ idtac " ".
 idtac "#> selsort'_sorted".
 idtac "Possible points: 1".
 check_type @selsort'_sorted (
-(forall (n : nat) (al : list nat), @length nat al = n -> sorted (selsort' al))).
+(forall (n : nat) (al : list nat) (_ : @eq nat (@length nat al) n),
+ sorted (selsort' al))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions selsort'_sorted.
@@ -318,4 +328,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)
