@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import Equiv.
 
 Parameter MISSING: Type.
@@ -37,7 +37,7 @@ idtac " ".
 
 idtac "#> skip_right".
 idtac "Possible points: 2".
-check_type @skip_right ((forall c : com, cequiv <{ c; skip }> c)).
+check_type @skip_right ((forall c : com, cequiv (CSeq c CSkip) c)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions skip_right.
@@ -50,8 +50,8 @@ idtac " ".
 idtac "#> if_false".
 idtac "Possible points: 2".
 check_type @if_false (
-(forall (b : bexp) (c1 c2 : com),
- bequiv b <{ false }> -> cequiv <{ if b then c1 else c2 end }> c2)).
+(forall (b : bexp) (c1 c2 : com) (_ : bequiv b BFalse),
+ cequiv (CIf b c1 c2) c2)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions if_false.
@@ -64,8 +64,7 @@ idtac " ".
 idtac "#> swap_if_branches".
 idtac "Possible points: 3".
 check_type @swap_if_branches (
-(forall (b : bexp) (c1 c2 : com),
- cequiv <{ if b then c1 else c2 end }> <{ if ~ b then c2 else c1 end }>)).
+(forall (b : bexp) (c1 c2 : com), cequiv (CIf b c1 c2) (CIf (BNot b) c2 c1))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions swap_if_branches.
@@ -78,9 +77,8 @@ idtac " ".
 idtac "#> while_true".
 idtac "Possible points: 2".
 check_type @while_true (
-(forall (b : bexp) (c : com),
- bequiv b <{ true }> ->
- cequiv <{ while b do c end }> <{ while true do skip end }>)).
+(forall (b : bexp) (c : com) (_ : bequiv b BTrue),
+ cequiv (CWhile b c) (CWhile BTrue CSkip))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions while_true.
@@ -93,20 +91,12 @@ idtac " ".
 idtac "#> assign_aequiv".
 idtac "Possible points: 2".
 check_type @assign_aequiv (
-(forall (X : String.string) (a : aexp),
- aequiv (AId X) a -> cequiv <{ skip }> <{ X := a }>)).
+(forall (X : String.string) (a : aexp) (_ : aequiv (AId X) a),
+ cequiv CSkip (CAsgn X a))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions assign_aequiv.
 Goal True.
-idtac " ".
-
-idtac "-------------------  equiv_classes  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: equiv_classes".
-idtac "Possible points: 2".
-print_manual_grade manual_grade_for_equiv_classes.
 idtac " ".
 
 idtac "-------------------  CIf_congruence  --------------------".
@@ -115,11 +105,9 @@ idtac " ".
 idtac "#> CIf_congruence".
 idtac "Possible points: 3".
 check_type @CIf_congruence (
-(forall (b b' : bexp) (c1 c1' c2 c2' : com),
- bequiv b b' ->
- cequiv c1 c1' ->
- cequiv c2 c2' ->
- cequiv <{ if b then c1 else c2 end }> <{ if b' then c1' else c2' end }>)).
+(forall (b b' : bexp) (c1 c1' c2 c2' : com) (_ : bequiv b b')
+   (_ : cequiv c1 c1') (_ : cequiv c2 c2'),
+ cequiv (CIf b c1 c2) (CIf b' c1' c2'))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions CIf_congruence.
@@ -152,7 +140,7 @@ idtac " ".
 
 idtac "#> inequiv_exercise".
 idtac "Possible points: 3".
-check_type @inequiv_exercise ((~ cequiv <{ while true do skip end }> <{ skip }>)).
+check_type @inequiv_exercise ((not (cequiv (CWhile BTrue CSkip) CSkip))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions inequiv_exercise.
@@ -173,7 +161,7 @@ idtac " ".
 idtac "#> Himp.pXY_cequiv_pYX".
 idtac "Possible points: 3".
 check_type @Himp.pXY_cequiv_pYX (
-(Himp.cequiv Himp.pXY Himp.pYX \/ ~ Himp.cequiv Himp.pXY Himp.pYX)).
+(or (Himp.cequiv Himp.pXY Himp.pYX) (not (Himp.cequiv Himp.pXY Himp.pYX)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Himp.pXY_cequiv_pYX.
@@ -187,8 +175,9 @@ idtac "#> Himp.p1_may_diverge".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @Himp.p1_may_diverge (
-(forall (st : String.string -> nat) (st' : state),
- st X <> 0 -> ~ Himp.ceval Himp.p1 st st')).
+(forall (st : forall _ : String.string, nat) (st' : state)
+   (_ : not (@eq nat (st X) 0)),
+ not (Himp.ceval Himp.p1 st st'))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Himp.p1_may_diverge.
@@ -199,8 +188,9 @@ idtac "#> Himp.p2_may_diverge".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @Himp.p2_may_diverge (
-(forall (st : String.string -> nat) (st' : state),
- st X <> 0 -> ~ Himp.ceval Himp.p2 st st')).
+(forall (st : forall _ : String.string, nat) (st' : state)
+   (_ : not (@eq nat (st X) 0)),
+ not (Himp.ceval Himp.p2 st st'))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Himp.p2_may_diverge.
@@ -226,7 +216,7 @@ idtac " ".
 idtac "#> Himp.p3_p4_inequiv".
 idtac "Advanced".
 idtac "Possible points: 6".
-check_type @Himp.p3_p4_inequiv ((~ Himp.cequiv Himp.p3 Himp.p4)).
+check_type @Himp.p3_p4_inequiv ((not (Himp.cequiv Himp.p3 Himp.p4))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Himp.p3_p4_inequiv.
@@ -235,8 +225,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 27".
-idtac "Max points - advanced: 48".
+idtac "Max points - standard: 25".
+idtac "Max points - advanced: 46".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -267,8 +257,6 @@ idtac "---------- while_true ---------".
 Print Assumptions while_true.
 idtac "---------- assign_aequiv ---------".
 Print Assumptions assign_aequiv.
-idtac "---------- equiv_classes ---------".
-idtac "MANUAL".
 idtac "---------- CIf_congruence ---------".
 Print Assumptions CIf_congruence.
 idtac "---------- fold_constants_com_sound ---------".
@@ -293,4 +281,6 @@ idtac "---------- Himp.p3_p4_inequiv ---------".
 Print Assumptions Himp.p3_p4_inequiv.
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

@@ -5,7 +5,7 @@
     constructors were presented as _theorems_ about the evaluation
     behavior of programs, and proofs of program correctness (validity
     of Hoare triples) were constructed by combining these theorems
-    directly in Coq.
+    directly in Rocq.
 
     Another way of presenting Hoare logic is to define a completely
     separate proof system -- a set of axioms and inference rules that
@@ -18,7 +18,7 @@
     the [ProofObjects] chapter in _Logical
     Foundations_ (_Software Foundations_, volume 1). *)
 
-Set Warnings "-deprecated-hint-without-locality,-deprecated-hint-without-locality".
+Set Warnings "-deprecated-hint-without-locality,-deprecated-hint-without-locality,-parsing".
 From PLF Require Import Maps.
 From PLF Require Import Hoare.
 
@@ -176,7 +176,7 @@ Inductive derivable : Assertion -> com -> Assertion -> Type :=
   | H_Skip : forall P,
       derivable P <{skip}> P
   | H_Asgn : forall Q V a,
-      derivable (Q [V |-> a]) <{V := a}> Q
+      derivable ({{Q [V |-> a]}}) <{V := a}> Q
   | H_Seq : forall P c Q d R,
       derivable Q d R -> derivable P c Q -> derivable P <{c;d}> R
   | H_If : forall P Q b c1 c2,
@@ -218,7 +218,7 @@ Proof. eauto using H_Consequence. Qed.
 
 Example sample_proof :
   derivable
-    ((fun st:state => st X = 3) [X |-> X + 2] [X |-> X + 1])
+    ({{ $(fun st:state => st X = 3)  [X |-> X + 2] [X |-> X + 1] }})
     <{ X := X + 1; X := X + 2}>
     (fun st:state => st X = 3).
 Proof.
@@ -313,7 +313,7 @@ Hint Unfold wp : core.
     about [wp] are the same. *)
 
 Theorem wp_is_precondition : forall c Q,
-  {{wp c Q}} c {{Q}}.
+  {{$(wp c Q)}} c {{Q}}.
 Proof. auto. Qed.
 
 Theorem wp_is_weakest : forall c Q P',
@@ -345,7 +345,7 @@ Proof.
     Q] is a loop invariant of [while b do c end]. *)
 
 Lemma wp_invariant : forall b c Q,
-    valid (wp <{while b do c end}> Q /\ b) c (wp <{while b do c end}> Q).
+    valid ({{$(wp <{while b do c end}> Q) /\ b}}) c (wp <{while b do c end}> Q).
 Proof.
   (* FILL IN HERE *) Admitted.
 
@@ -389,7 +389,7 @@ Proof.
 
     Similarly, the triple [{{True}} skip {{P}}] is valid if and only
     if [forall s, P s] is valid, where [P] is an arbitrary assertion
-    of Coq's logic. But this logic is far too powerful to be
+    of Rocq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:33 *)

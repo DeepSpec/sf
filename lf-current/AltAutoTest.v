@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import AltAuto.
 
 Parameter MISSING: Type.
@@ -38,7 +38,9 @@ idtac " ".
 idtac "#> andb_eq_orb".
 idtac "Possible points: 1".
 check_type @andb_eq_orb (
-(forall b c : Basics.bool, Basics.andb b c = Basics.orb b c -> b = c)).
+(forall (b c : Basics.bool)
+   (_ : @eq Basics.bool (Basics.andb b c) (Basics.orb b c)),
+ @eq Basics.bool b c)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions andb_eq_orb.
@@ -47,7 +49,9 @@ idtac " ".
 
 idtac "#> add_assoc".
 idtac "Possible points: 1".
-check_type @add_assoc ((forall n m p : nat, n + (m + p) = n + m + p)).
+check_type @add_assoc (
+(forall n m p : nat,
+ @eq nat (Nat.add n (Nat.add m p)) (Nat.add (Nat.add n m) p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions add_assoc.
@@ -58,8 +62,8 @@ idtac "#> nonzeros_app".
 idtac "Possible points: 1".
 check_type @nonzeros_app (
 (forall lst1 lst2 : Poly.list nat,
- nonzeros (@Poly.app nat lst1 lst2) =
- @Poly.app nat (nonzeros lst1) (nonzeros lst2))).
+ @eq (Poly.list nat) (nonzeros (@Poly.app nat lst1 lst2))
+   (@Poly.app nat (nonzeros lst1) (nonzeros lst2)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions nonzeros_app.
@@ -71,7 +75,9 @@ idtac " ".
 
 idtac "#> add_assoc'".
 idtac "Possible points: 1".
-check_type @add_assoc' ((forall n m p : nat, n + (m + p) = n + m + p)).
+check_type @add_assoc' (
+(forall n m p : nat,
+ @eq nat (Nat.add n (Nat.add m p)) (Nat.add (Nat.add n m) p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions add_assoc'.
@@ -104,7 +110,8 @@ idtac " ".
 idtac "#> plus_id_exercise_from_basics".
 idtac "Possible points: 0.5".
 check_type @plus_id_exercise_from_basics (
-(forall n m o : nat, n = m -> m = o -> n + m = m + o)).
+(forall (n m o : nat) (_ : @eq nat n m) (_ : @eq nat m o),
+ @eq nat (Nat.add n m) (Nat.add m o))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_id_exercise_from_basics.
@@ -113,7 +120,9 @@ idtac " ".
 
 idtac "#> add_assoc_from_induction".
 idtac "Possible points: 0.5".
-check_type @add_assoc_from_induction ((forall n m p : nat, n + (m + p) = n + m + p)).
+check_type @add_assoc_from_induction (
+(forall n m p : nat,
+ @eq nat (Nat.add n (Nat.add m p)) (Nat.add (Nat.add n m) p))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions add_assoc_from_induction.
@@ -122,7 +131,8 @@ idtac " ".
 
 idtac "#> S_injective_from_tactics".
 idtac "Possible points: 0.5".
-check_type @S_injective_from_tactics ((forall n m : nat, S n = S m -> n = m)).
+check_type @S_injective_from_tactics (
+(forall (n m : nat) (_ : @eq nat (S n) (S m)), @eq nat n m)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions S_injective_from_tactics.
@@ -132,7 +142,7 @@ idtac " ".
 idtac "#> or_distributes_over_and_from_logic".
 idtac "Possible points: 0.5".
 check_type @or_distributes_over_and_from_logic (
-(forall P Q R : Prop, P \/ Q /\ R <-> (P \/ Q) /\ (P \/ R))).
+(forall P Q R : Prop, iff (or P (and Q R)) (and (or P Q) (or P R)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions or_distributes_over_and_from_logic.
@@ -154,7 +164,8 @@ idtac "#> andb3_exchange".
 idtac "Possible points: 1".
 check_type @andb3_exchange (
 (forall b c d : Basics.bool,
- Basics.andb (Basics.andb b c) d = Basics.andb (Basics.andb b d) c)).
+ @eq Basics.bool (Basics.andb (Basics.andb b c) d)
+   (Basics.andb (Basics.andb b d) c))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions andb3_exchange.
@@ -167,7 +178,9 @@ idtac " ".
 idtac "#> andb_true_elim2'".
 idtac "Possible points: 1.5".
 check_type @andb_true_elim2' (
-(forall b c : Basics.bool, Basics.andb b c = Basics.true -> c = Basics.true)).
+(forall (b c : Basics.bool)
+   (_ : @eq Basics.bool (Basics.andb b c) Basics.true),
+ @eq Basics.bool c Basics.true)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions andb_true_elim2'.
@@ -178,7 +191,8 @@ idtac "#> andb3_exchange'".
 idtac "Possible points: 0.5".
 check_type @andb3_exchange' (
 (forall b c d : Basics.bool,
- Basics.andb (Basics.andb b c) d = Basics.andb (Basics.andb b d) c)).
+ @eq Basics.bool (Basics.andb (Basics.andb b c) d)
+   (Basics.andb (Basics.andb b d) c))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions andb3_exchange'.
@@ -255,4 +269,6 @@ idtac "---------- nor_intuition ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2024-12-27 01:27 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

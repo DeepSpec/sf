@@ -2,11 +2,13 @@
 
 Set Warnings "-notation-overridden,-parsing".
 Set Warnings "-extraction-opaque-accessed,-extraction".
+Set Warnings "-deprecated-dirpath-Coq".
+Set Warnings "-notation-incompatible-prefix".
 
 From QuickChick Require Import QuickChick Tactics.
 Import QcDefaultNotation. Open Scope qc_scope.
 
-Require Import Arith List. Import ListNotations.
+From Stdlib Require Import Arith List. Import ListNotations.
 
 Set Bullet Behavior "Strict Subproofs".
 
@@ -68,7 +70,6 @@ Set Bullet Behavior "Strict Subproofs".
     +++ Passed 10000 tests (0 discards)
     Checking Stack.compiles_correctly...
     +++ Passed 10000 tests (0 discards)
->>
 
     As we will see later in this chapter, the [QuickChick] command-line tool
     gathers [QuickChick] tests from the sources and runs them together in one
@@ -186,7 +187,7 @@ Definition optimize_correct_prop (e : exp) := eval (optimize e) = eval e?.
     OCaml, execute the test (up to 10000 tests by default for
     successes), and report the outcome.  While this process is often
     adequate for small developments, it quickly becomes intractable
-    for large Coq files, multi-file developments, or large numbers of
+    for large Rocq files, multi-file developments, or large numbers of
     properties that need to be tested.
 
     One main feature of the command line tool is to gather all
@@ -302,7 +303,6 @@ Definition optimize_correct_prop (e : exp) := eval (optimize e) = eval e?.
     the mutant, which begins with two exclamation marks to help the parser.
 
        (*!! Plus-copy-paste-error *)
-]]
 
     Finally, we include mutations of the original code, each in a QuickChick
     single-exclamation-mark annotation. The code of the mutation is meant to be
@@ -499,4 +499,4 @@ Definition compiles_correctly (e : exp) := (execute [] (compile e)) = [eval e]?.
     in [QuickChickInterface].
 *)
 
-(* 2024-12-27 01:36 *)
+(* 2026-01-07 13:37 *)

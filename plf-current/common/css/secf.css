@@ -1,0 +1,10 @@
+/*   Styles for SF: V42: Security Foundations     */
+
+/*   Background   */
+body { background-image: url('../media/image/security_foundations_bg.jpg'); }
+
+#header { background-color: rgba(192, 125, 98, 0.53); }
+
+/*   This volume's color   */
+.section, ul#menu li.section_name, div.button, td.logical_tab, .ui-state-active  { background-color: #c07d62; }
+

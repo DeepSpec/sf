@@ -3,13 +3,13 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Strings                                                                 *
 **************************************************************************)
 
 Set Implicit Arguments.
 From SLF Require Import LibTactics LibReflect.
-Require Export Coq.Strings.String.
+From Stdlib Require Export String.
 
 (* ********************************************************************** *)
 (* ################################################################# *)
@@ -19,4 +19,4 @@ Require Export Coq.Strings.String.
 Instance Inhab_string : Inhab string.
 Proof using. apply (Inhab_of_val EmptyString). Qed.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

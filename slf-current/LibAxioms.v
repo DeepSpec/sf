@@ -3,13 +3,13 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Axioms                                                                  *
 **************************************************************************)
 
 Set Implicit Arguments.
 
-(** This file is used to extend Coq with standard axioms from classical,
+(** This file is used to extend Rocq with standard axioms from classical,
     non-constructive higher-order logic. (Such axioms are provided by
     default in other theorem provers like Isabelle/HOL or HOL4.) *)
 
@@ -52,4 +52,4 @@ Axiom indefinite_description : forall (A : Type) (P : A->Prop),
   ex P ->
   sig P.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

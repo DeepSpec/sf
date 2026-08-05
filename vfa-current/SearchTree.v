@@ -7,7 +7,7 @@
     bindings, both in the worst and expected case. *)
 
 (** If the type of keys can be totally ordered -- that is, it supports
-    a well-behaved [<=] comparison -- then maps can be implemented with
+    a well-behaved [<] comparison -- then maps can be implemented with
     _binary search trees_ (BSTs).  Insert and lookup operations on
     BSTs take time proportional to the height of the tree.  If the
     tree is balanced, the operations therefore take logarithmic time. *)
@@ -22,8 +22,8 @@
       Cormen, Leiserson, and Rivest, MIT Press 2009. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import String.  (* for an example, and manual grading *)
-From Coq Require Import Logic.FunctionalExtensionality.
+From Stdlib Require Import String.  (* for an example, and manual grading *)
+From Stdlib Require Import FunctionalExtensionality.
 From VFA Require Import Perm.
 From VFA Require Import Maps.
 From VFA Require Import Sort.
@@ -66,34 +66,34 @@ Definition empty_tree {V : Type} : tree V :=
 
 (** [bound k t] is whether [k] is bound in [t]. *)
 
-Fixpoint bound {V : Type} (x : key) (t : tree V) :=
+Fixpoint bound {V : Type} (k : key) (t : tree V) :=
   match t with
   | E => false
-  | T l y v r => if x <? y then bound x l
-                else if x >? y then bound x r
+  | T l x v r => if k <? x then bound k l
+                else if k >? x then bound k r
                      else true
   end.
 
 (** [lookup d k t] is the value bound to [k] in [t], or is default
     value [d] if [k] is not bound in [t]. *)
 
-Fixpoint lookup {V : Type} (d : V) (x : key) (t : tree V) : V :=
+Fixpoint lookup {V : Type} (d : V) (k : key) (t : tree V) : V :=
   match t with
   | E => d
-  | T l y v r => if x <? y then lookup d x l
-                else if x >? y then lookup d x r
+  | T l x v r => if k <? x then lookup d k l
+                else if k >? x then lookup d k r
                      else v
   end.
 
 (** [insert k v t] is the map containing all the bindings of [t] along
     with a binding of [k] to [v]. *)
 
-Fixpoint insert {V : Type} (x : key) (v : V) (t : tree V) : tree V :=
+Fixpoint insert {V : Type} (k : key) (v : V) (t : tree V) : tree V :=
   match t with
-  | E => T E x v E
-  | T l y v' r => if x <? y then T (insert x v l) y v' r
-                 else if x >? y then T l y v' (insert x v r)
-                      else T l x v r
+  | E => T E k v E
+  | T l x v' r => if k <? x then T (insert k v l) x v' r
+                 else if k >? x then T l x v' (insert k v r)
+                      else T l k v r
   end.
 
 (** Note that [insert] is a _functional_ aka _persistent_
@@ -946,7 +946,7 @@ Proof.
       tree and map are in correspondence.
 
     This approach is sometimes called _model-based specification_: we
-    show that our implementation of a data type corresponds to a more
+    show that our implementation of a data type corresponds to a
     more abstract _model_ type that we already understand. To reason
     about programs that use the implementation, it suffices to reason
     about the behavior of the abstract type, which may be
@@ -1082,14 +1082,13 @@ Proof.
 Lemma insert_relate : forall (V : Type) (t : tree V) (k : key) (v : V),
   BST t -> Abs (insert k v t) = update (Abs t) k v.
 Proof.
-  (* TODO: find a direct proof that doesn't rely on [kvs_insert_elements] *)
-    unfold Abs.
+  unfold Abs.
   intros.
   rewrite kvs_insert_elements; auto.
   remember (elements t) as l.
   clear -l. (* clear everything not about [l] *)
   (* Hint: proceed by induction on [l]. *)
-    (* FILL IN HERE *) Admitted.
+  (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** The previous three lemmas are in essence saying that the following
@@ -1323,4 +1322,4 @@ Proof.
 	   efficiently inside Coq.  We'll explore [extraction] in
 	   [Extract]. *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

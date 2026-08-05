@@ -42,23 +42,22 @@
     various aspects of <i>Software Foundations</i>, the mathematical
     underpinnings of reliable software.  Topics in the series include
     basic concepts of logic, computer-assisted theorem proving, the
-    Coq proof assistant, functional programming, operational
-    semantics, logics and techniques for reasoning about programs,
-    static type systems, property-based random testing, and
-    verification of practical C code.  The exposition is intended for
-    a broad range of readers, from advanced undergraduates to PhD
-    students and researchers.  No specific background in logic or
-    programming languages is assumed, though a degree of mathematical
-    maturity will be helpful.
+    Rocq prover, functional programming, operational semantics, logics
+    and techniques for reasoning about programs, static type systems,
+    property-based random testing, and verification of practical C
+    code.  The exposition is intended for a broad range of readers,
+    from advanced undergraduates to PhD students and researchers.  No
+    specific background in logic or programming languages is assumed,
+    though a degree of mathematical maturity will be helpful.
 
 <div class="paragraph"> </div>
 
     The principal novelty of the series is that it is one hundred
     percent formalized and machine-checked: each text is literally a
-    script for Coq.  The books are intended to be read alongside (or
-    inside) an interactive session with Coq.  All the details in the
-    text are fully formalized in Coq, and most of the exercises are
-    designed to be worked using Coq.
+    script for Rocq.  The books are intended to be read alongside (or
+    inside) an interactive session with Rocq.  All the details in the
+    text are fully formalized in Rocq, and most of the exercises are
+    designed to be worked using Rocq.
 
 <div class="paragraph"> </div>
 
@@ -73,7 +72,7 @@
 
     This book, <i>Logical Foundations</i>, lays groundwork for the others,
     introducing the reader to the basic ideas of functional
-    programming, constructive logic, and the Coq proof assistant. 
+    programming, constructive logic, and the Rocq prover. 
 </div>
 
 <div class="doc">
@@ -109,17 +108,17 @@
 
 <div class="paragraph"> </div>
 
-    (1) basic tools from <i>logic</i> for making and justifying precise
+    (A) basic tools from <i>logic</i> for making and justifying precise
         claims about programs;
 
 <div class="paragraph"> </div>
 
-    (2) the use of <i>proof assistants</i> to construct rigorous logical
-        arguments;
+    (B) the use of <i>proof assistants</i> (or <i>provers</i>) to construct
+        rigorous logical arguments;
 
 <div class="paragraph"> </div>
 
-    (3) <i>functional programming</i>, both as a method of programming that
+    (C) <i>functional programming</i>, both as a method of programming that
         simplifies reasoning about programs and as a bridge between
         programming and logic. 
 <div class="paragraph"> </div>
@@ -179,29 +178,29 @@
          routine aspects of building proofs while depending on human
          guidance for more difficult aspects.  Widely used proof
          assistants include Isabelle, Agda, Twelf, ACL2, PVS, F*,
-         HOL4, Lean, and Coq, among many others.
+         HOL4, Lean, and Rocq, among many others.
 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-    This course is based around Coq, a proof assistant that has been
-    under development since 1983 and that in recent years has
-    attracted a large community of users in both research and
-    industry.  Coq provides a rich environment for interactive
-    development of machine-checked formal reasoning.  The kernel of
-    the Coq system is a simple proof-checker, which guarantees that
-    only correct deduction steps are ever performed.  On top of this
-    kernel, the Coq environment provides high-level facilities for
-    proof development, including a large library of common definitions
-    and lemmas, powerful tactics for constructing complex proofs
-    semi-automatically, and a special-purpose programming language for
-    defining new proof-automation tactics for specific situations.
+    This course is based around Rocq, a proof assistant that has been
+    under development since 1983 and has attracted a large community
+    of users in both research and industry.  Rocq provides a rich
+    environment for interactive development of machine-checked formal
+    reasoning.  The kernel of the Rocq system is a simple
+    proof-checker, which guarantees that only correct deduction steps
+    are ever performed.  On top of this kernel, the Rocq environment
+    provides high-level facilities for proof development, including a
+    large library of common definitions and lemmas, powerful tactics
+    for constructing complex proofs semi-automatically, and a
+    special-purpose programming language for defining new
+    proof-automation tactics for specific situations.
 
 <div class="paragraph"> </div>
 
-    Coq has been a critical enabler for a huge variety of work across
+    Rocq has been a critical enabler for a huge variety of work across
     computer science and mathematics:
 
 <div class="paragraph"> </div>
@@ -220,7 +219,7 @@
 
 </li>
 <li> As an <i>environment for developing formally certified software
-      and hardware</i>, Coq has been used, for example, to build
+      and hardware</i>, Rocq has been used, for example, to build
       CompCert, a fully-verified optimizing compiler for C, and
       CertiKOS, a fully verified hypervisor, for proving the
       correctness of subtle algorithms involving floating point
@@ -237,7 +236,7 @@
       dependent types</i>, it has inspired numerous innovations.  For
       example, Hoare Type Theory embeds reasoning about
       "pre-conditions" and "post-conditions" (an extension of the
-      <i>Hoare Logic</i> we will see later in this course) in Coq.
+      <i>Hoare Logic</i> we will see later in this course) in Rocq.
 
 <div class="paragraph"> </div>
 
@@ -249,28 +248,15 @@
       proofs made it possible to develop the first formally verified
       proof of the 4-color theorem.  This proof had previously been
       controversial among mathematicians because it required checking
-      a large number of configurations using a program. In the Coq
+      a large number of configurations using a program. In the Rocq
       formalization, everything is checked, including the correctness
       of the computational part.  More recently, an even more massive
-      effort led to a Coq formalization of the Feit-Thompson Theorem,
+      effort led to a Rocq formalization of the Feit-Thompson Theorem,
       the first major step in the classification of finite simple
-      groups.
-
+      groups.  
 </li>
 </ul>
 
-<div class="paragraph"> </div>
-
-   By the way, in case you're wondering about the name, here's what
-   the official Coq web site at Inria (the French national research
-   lab where Coq has mostly been developed) says about it: "Some
-   French computer scientists have a tradition of naming their
-   software as animal species: Caml, Elan, Foc or Phox are examples of
-   this tacit convention. In French, 'coq' means rooster, and it
-   sounds like the initials of the Calculus of Constructions (CoC) on
-   which it is based."  The rooster is also the national symbol of
-   France, and C-o-q are the first three letters of the name of
-   Thierry Coquand, one of Coq's early developers. 
 <div class="paragraph"> </div>
 
 <a id="lab5"></a><h2 class="section">Functional Programming</h2>
@@ -282,7 +268,7 @@
     language and to a family of programming languages designed to
     emphasize these idioms, including Haskell, OCaml, Standard ML,
     F#, Scala, Scheme, Racket, Common Lisp, Clojure, Erlang, F*,
-    and Coq.
+    and Rocq.
 
 <div class="paragraph"> </div>
 
@@ -339,16 +325,39 @@
 
     For purposes of this course, functional programming has yet
     another significant attraction: it serves as a bridge between
-    logic and computer science.  Indeed, Coq itself can be viewed as a
+    logic and computer science.  Indeed, Rocq itself can be viewed as a
     combination of a small but extremely expressive functional
     programming language plus a set of tools for stating and proving
     logical assertions.  Moreover, when we come to look more closely,
-    we find that these two sides of Coq are actually aspects of the
+    we find that these two sides of Rocq are actually aspects of the
     very same underlying machinery -- i.e., <i>proofs are programs</i>.  
+<div class="paragraph"> </div>
+
+<a id="lab6"></a><h2 class="section">Rocq vs. Coq</h2>
+
+<div class="paragraph"> </div>
+
+ Until 2025, the Rocq prover was known as Coq. According to the
+    official webpage, "The name 'Coq' referenced the Calculus of
+    Constructions (CoC), the foundational system it is based on, as
+    well as one of its creators, Thierry Coquand. Additionally, it
+    paid homage to the French national symbol, the rooster.  The new
+    name, 'the Rocq Prover', honors Inria Rocquencourt, the original
+    site where the prover was developed. It also alludes to the
+    mythological bird Roc (or Rokh), symbolizing strength and not so
+    disconnected to a rooster. Furthermore, the name conveys a sense
+    of solidity, and its unintended connection to music adds a
+    pleasant resonance."
+
+<div class="paragraph"> </div>
+
+    The current release of Software Foundations is still in a
+    transitional state, and you will see references to both Coq and
+    Rocq. 
 </div>
 
 <div class="doc">
-<a id="lab6"></a><h2 class="section">Further Reading</h2>
+<a id="lab7"></a><h2 class="section">Further Reading</h2>
 
 <div class="paragraph"> </div>
 
@@ -360,113 +369,31 @@
 </div>
 
 <div class="doc">
-<a id="lab7"></a><h1 class="section">Practicalities</h1>
+<a id="lab8"></a><h1 class="section">Practicalities</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab8"></a><h2 class="section">System Requirements</h2>
+<a id="lab9"></a><h2 class="section">System Requirements</h2>
 
 <div class="paragraph"> </div>
 
- Coq runs on Windows, Linux, and macOS.  The files in this book
-    have been tested with Coq 8.19.2.
-
+ Rocq runs on Windows, Linux, and macOS.  The files in this book
+    have been tested with Rocq 9.0.0. 
 <div class="paragraph"> </div>
 
-    You will need:
-
-<div class="paragraph"> </div>
-
-<ul class="doclist">
-<li> A current installation of Coq, available from the Coq home page
-      (<a href="https://coq.inria.fr/download"><span class="inlineref" <a href='https://coq.inria.fr/download</span></a>).'>https://coq.inria.fr/download</span></a>).</a>
-      The "Coq Platform" usually offers the easiest installation
-      experience, especially on Windows.
-
-<div class="paragraph"> </div>
-
-      If you use the VSCode + Docker option described below, you don't
-      need to install Coq separately.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> An IDE for interacting with Coq.  There are several choices:
-
-<div class="paragraph"> </div>
-
-<ul class="doclist">
-<li> <i>VsCoq</i> is an extension for Visual Studio Code that offers a
-          simple interface via a familiar IDE.  This option is the
-          recommended default. If you installed Coq via the Coq
-          platform binary then can only use "VsCoq Legacy", which is
-          the more stable version anyway. If you use opam, you can
-          also try "VsCoq 2", which is a bit more experimental but
-          much more featureful.
-
-<div class="paragraph"> </div>
-
-          VsCoq can be used as an ordinary IDE or it can be combined
-          with Docker (see below) for a lightweight installation
-          experience.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> <i>Proof General</i> is an Emacs-based IDE.  It tends to be
-          preferred by users who are already comfortable with Emacs.
-          It requires a separate installation (google "Proof General",
-          but generally all you need to do is <span class="inlinecode"><span class="id" title="var">M</span>-<span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">package</span>-<span class="id" title="var">list</span>-<span class="id" title="var">packages</span></span>,
-          then select the <span class="inlinecode"><span class="id" title="var">proof</span>-<span class="id" title="var">general</span></span> package from the list and
-          hit the <span class="inlinecode"><span class="id" title="var">i</span></span> key for install, then hit the <span class="inlinecode"><span class="id" title="var">x</span></span> key for execute).
-
-<div class="paragraph"> </div>
-
-          Adventurous users of Coq within Emacs may want to check out
-          extensions such as <span class="inlinecode"><span class="id" title="var">company</span>-<span class="id" title="var">coq</span></span> and <span class="inlinecode"><span class="id" title="var">control</span>-<span class="id" title="var">lock</span></span>.
-
-<div class="paragraph"> </div>
-
-
-</li>
-<li> <i>CoqIDE</i> is a simpler stand-alone IDE.  It is distributed with
-          Coq, so it should be available once you have Coq installed.
-          It can also be compiled from scratch, but on some platforms
-          this may involve installing additional packages for GUI
-          libraries and such.
-
-<div class="paragraph"> </div>
-
-          Users who like CoqIDE should consider running it with the
-          "asynchronous" and "error resilience" modes disabled: <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> \<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Foo.v</span> &amp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]] *)<br/>
-<br/>
-</div>
-
-<div class="doc">
-
-</li>
-</ul>
-
-</li>
-</ul>
-<a id="lab9"></a><h3 class="section">Using Coq with VSCode and Docker</h3>
+<a id="lab10"></a><h3 class="section">Recommended Installation Method: VSCode + Docker</h3>
 
 <div class="paragraph"> </div>
 
  The Visual Studio Code IDE can cooperate with the Docker
-    virtualization platform to compile Coq scripts without the need
-    for any separate Coq installation.  To get things set up, follow
-    these steps:
+    virtualization platform to compile Rocq scripts without the need
+    for any separate Rocq installation.  This method is recommended for
+    most Software Foundations readers.
 
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> Install Docker from <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">www.docker.com</span>/<span class="id" title="var">get</span>-<span class="id" title="var">started</span>/</span> or
+<li> Install Docker from <a href="https://www.docker.com/get-started/"><span class="inlineref" <a href='https://www.docker.com/get-started/</span></a>'>https://www.docker.com/get-started/</span></a></a>or
       make sure your existing installation is up to date.
 
 <div class="paragraph"> </div>
@@ -479,16 +406,20 @@
 
 
 </li>
-<li> Install VSCode from <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">code.visualstudio.com</span></span> and start it
+<li> Install VSCode from <a href="https://code.visualstudio.com"><span class="inlineref" <a href='https://code.visualstudio.com</span></a>'>https://code.visualstudio.com</span></a></a>and start it
       running.
 
 <div class="paragraph"> </div>
 
 
 </li>
-<li> Install VSCode's Remote Containers Extention from <span class="inlinecode"></span>
-        <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">marketplace.visualstudio.com</span>/<span class="id" title="var">items</span>?<span class="id" title="var">itemName</span>=<span class="id" title="var">ms</span>-<span class="id" title="var">vscode</span>-<span class="id" title="var">remote.remote</span>-<span class="id" title="var">containers</span></span>
-        <span class="inlinecode"></span>
+<li> Install VSCode's Dev Containers Extension from
+      <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers"><span class="inlineref" <a href='https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers</span></a>'>https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers</span></a></a>
+
+<div class="paragraph"> </div>
+
+      (Note that this extension only works with the official version
+      of VSCode, not with some VSCode forks like VsCodium.)
 
 <div class="paragraph"> </div>
 
@@ -513,6 +444,10 @@
 
 <div class="paragraph"> </div>
 
+      This step may take some time.
+
+<div class="paragraph"> </div>
+
 
 </li>
 <li> Check that VSCoq is working by double-clicking the file
@@ -525,17 +460,137 @@
 
 <div class="paragraph"> </div>
 
+<ul class="doclist">
+<li> If VSCoq does not work and you receive an error indicating that
+        <span class="inlinecode"><span class="id" title="var">vscoqtop</span></span> was not found, open a new terminal in the container
+        (you can do this by opening the command palette and running the
+        command “Terminal: Create New Terminal”) and run the command
+        <span class="inlinecode"><span class="id" title="var">which</span></span> <span class="inlinecode"><span class="id" title="var">vscoqtop</span></span>. This should print the path to the VSCoq
+        installation inside the container. Copy this path
+        and paste it into the “VSCoq: Path” textbox in the
+        VSCoq extension settings (accessible via the gear icon on
+        the VSCoq extension page in VSCode), then reload your window.
+
+<div class="paragraph"> </div>
+
+
+</li>
+</ul>
 
 </li>
 <li> To see what other key bindings are available, press F<sub>1</sub> and then
       type <span class="inlinecode"><span class="id" title="var">Coq</span>:</span>, or visit the VSCoq web pages:
-      <span class="inlinecode"><span class="id" title="var">https</span>://<span class="id" title="var">github.com</span>/<span class="id" title="var">coq</span>-<span class="id" title="var">community</span>/<span class="id" title="var">vscoq</span>/<span class="id" title="var">tree</span>/<span class="id" title="var">vscoq1</span></span>.  
+      <a href="https://github.com/rocq-prover/vsrocq"><span class="inlineref" <a href='https://github.com/rocq-prover/vsrocq</span></a>.'>https://github.com/rocq-prover/vsrocq</span></a>.</a> 
 </li>
 </ul>
 
 <div class="paragraph"> </div>
 
-<a id="lab10"></a><h2 class="section">Exercises</h2>
+<a id="lab11"></a><h2 class="section">Alternative Installation Methods</h2>
+
+<div class="paragraph"> </div>
+
+ If you prefer, there are several other ways to use Rocq. You will need:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> A current installation of Rocq, available from the Rocq home
+      page (<a href="https://rocq-prover.org/install"><span class="inlineref" <a href='https://rocq-prover.org/install</span></a>).'>https://rocq-prover.org/install</span></a>).</a> The "Rocq Platform"
+      offers the easiest installation experience for most people,
+      especially on Windows.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> An IDE for interacting with Rocq.  There are several choices:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <i>VsCoq</i> is an extension for Visual Studio Code that offers a
+          simple interface via a familiar IDE.  This option is the
+          recommended default.
+
+<div class="paragraph"> </div>
+
+          VsCoq can be used as an ordinary IDE or it can be combined
+          with Docker (see below) for a lightweight installation
+          experience.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <i>Proof General</i> is an Emacs-based IDE.  It tends to be
+          preferred by users who are already comfortable with Emacs.
+          It requires a separate installation (google "Proof General",
+          but generally all you need to do is <span class="inlinecode"><span class="id" title="var">M</span>-<span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">package</span>-<span class="id" title="var">list</span>-<span class="id" title="var">packages</span></span>,
+          then select the <span class="inlinecode"><span class="id" title="var">proof</span>-<span class="id" title="var">general</span></span> package from the list and
+          hit the <span class="inlinecode"><span class="id" title="var">i</span></span> key for install, then hit the <span class="inlinecode"><span class="id" title="var">x</span></span> key for execute).
+
+<div class="paragraph"> </div>
+
+          There are only a few commands you need to know to use ProofGeneral
+          effectively. They are:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">n</span></span>: send the next command to Rocq.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">u</span></span>: undo (retract) the most recently executed command.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">RET</span></span>: submit everything up to the current cursor location to
+            Rocq for processing.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-.</span>: move the cursor to the end of the last command which has
+            been processed by Rocq.
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode">.</span>: toggle "electric terminator mode". When this mode is
+            turned on, simply typing a period will send the current command to
+            Rocq (normally you have to type a period and then type <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">c</span></span> <span class="inlinecode"><span class="id" title="var">C</span>-<span class="id" title="var">n</span></span>).
+
+<div class="paragraph"> </div>
+
+
+</li>
+</ul>
+          Adventurous users of Rocq within Emacs may want to check out
+          extensions such as <span class="inlinecode"><span class="id" title="var">company</span>-<span class="id" title="var">coq</span></span> and <span class="inlinecode"><span class="id" title="var">control</span>-<span class="id" title="var">lock</span></span>.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <i>RocqIDE</i> is a simpler stand-alone IDE.  It is distributed with
+          the Rocq Platform, so it should be available once you have Rocq
+          installed.  It can also be compiled from scratch, but on some
+          platforms this may involve installing additional packages for GUI
+          libraries and such.
+
+<div class="paragraph"> </div>
+
+          Users who like RocqIDE should consider running it with the
+          "asynchronous" and "error resilience" modes disabled:
+<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">coqide</span> -<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span> <span class="id" title="var">off</span> \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<span class="id" title="var">async</span>-<span class="id" title="var">proofs</span>-<span class="id" title="var">command</span>-<span class="id" title="var">error</span>-<span class="id" title="var">resilience</span> <span class="id" title="var">off</span> <span class="id" title="var">Foo.v</span> &amp;
+</span>
+</li>
+</ul>
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+<a id="lab12"></a><h2 class="section">Exercises</h2>
 
 <div class="paragraph"> </div>
 
@@ -604,12 +659,12 @@
     search engines. 
 <div class="paragraph"> </div>
 
-<a id="lab11"></a><h2 class="section">Downloading the Coq Files</h2>
+<a id="lab13"></a><h2 class="section">Downloading the Rocq Files</h2>
 
 <div class="paragraph"> </div>
 
  A tar file containing the full sources for the "release version"
-    of this book (as a collection of Coq scripts and HTML files) is
+    of this book (as a collection of Rocq scripts and HTML files) is
     available at <a href="https://softwarefoundations.cis.upenn.edu"><span class="inlineref" <a href='https://softwarefoundations.cis.upenn.edu</span></a>.'>https://softwarefoundations.cis.upenn.edu</span></a>.</a>
 
 <div class="paragraph"> </div>
@@ -620,7 +675,7 @@
     you get any local updates during the semester. 
 <div class="paragraph"> </div>
 
-<a id="lab12"></a><h2 class="section">Chapter Dependencies</h2>
+<a id="lab14"></a><h2 class="section">Chapter Dependencies</h2>
 
 <div class="paragraph"> </div>
 
@@ -629,7 +684,7 @@
 </div>
 
 <div class="doc">
-<a id="lab13"></a><h2 class="section">Recommended Citation Format</h2>
+<a id="lab15"></a><h2 class="section">Recommended Citation Format</h2>
 
 <div class="paragraph"> </div>
 
@@ -649,19 +704,19 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">title</span>        =   "Logical Foundations",<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">series</span>       =   "Software Foundations",<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">volume</span>       =   "1",<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">year</span>         =   "2024",<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">year</span>         =   "2026",<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">publisher</span>    =   "Electronic textbook",<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">note</span>         =   {<span class="id" title="var">Version</span> 6.7, \<span class="id" title="var">URL</span>{<span class="id" title="var">http</span>://<span class="id" title="var">softwarefoundations.cis.upenn.edu</span><span style='letter-spacing:-.4em;'>}</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">note</span>         =   {<span class="id" title="var">Version</span> 7.0, \<span class="id" title="var">URL</span>{<span class="id" title="var">http</span>://<span class="id" title="var">softwarefoundations.cis.upenn.edu</span><span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}
 </span>
 </div>
 
 <div class="doc">
-<a id="lab14"></a><h1 class="section">Resources</h1>
+<a id="lab16"></a><h1 class="section">Resources</h1>
 
 <div class="paragraph"> </div>
 
-<a id="lab15"></a><h2 class="section">Sample Exams</h2>
+<a id="lab17"></a><h2 class="section">Sample Exams</h2>
 
 <div class="paragraph"> </div>
 
@@ -673,7 +728,7 @@
     the problems are still relevant to the current text. 
 <div class="paragraph"> </div>
 
-<a id="lab16"></a><h2 class="section">Lecture Videos</h2>
+<a id="lab18"></a><h2 class="section">Lecture Videos</h2>
 
 <div class="paragraph"> </div>
 
@@ -686,7 +741,7 @@
 </div>
 
 <div class="doc">
-<a id="lab17"></a><h1 class="section">Note for Instructors and Contributors</h1>
+<a id="lab19"></a><h1 class="section">Note for Instructors and Contributors</h1>
 
 <div class="paragraph"> </div>
 
@@ -715,7 +770,7 @@
         and 2, known until 2016 as "Software Foundations" and from
         2016 as (respectively) "Logical Foundations" and "Programming
         Foundations," and for Volume 4, "QuickChick: Property-Based
-        Testing in Coq," the Author of Record is Benjamin C. Pierce.
+        Testing in Rocq," the Author of Record is Benjamin C. Pierce.
         For Volume 3, "Verified Functional Algorithms," and volume 5,
         "Verifiable C," the Author of Record is Andrew W. Appel. For
         Volume 6, "Separation Logic Foundations," the author of record
@@ -731,7 +786,7 @@
 
     To get started, please send an email to Benjamin Pierce,
     describing yourself and how you plan to use the materials and
-    including (1) the above copyright transfer text and (2) your
+    including (A) the above copyright transfer text and (B) your
     github username.
 
 <div class="paragraph"> </div>
@@ -742,7 +797,7 @@
 </div>
 
 <div class="doc">
-<a id="lab18"></a><h1 class="section">Translations</h1>
+<a id="lab20"></a><h1 class="section">Translations</h1>
 
 <div class="paragraph"> </div>
 
@@ -753,7 +808,7 @@
 </div>
 
 <div class="doc">
-<a id="lab19"></a><h1 class="section">Thanks</h1>
+<a id="lab21"></a><h1 class="section">Thanks</h1>
 
 <div class="paragraph"> </div>
 
@@ -763,13 +818,13 @@
     Specification</i>. 
 </div>
 <div class="code">
-<br/>
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:26&nbsp;*)</span><br/>
-</span></div>
+
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:17&nbsp;*)</span><br/>
+</div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

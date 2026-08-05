@@ -1,18 +1,18 @@
-(** * UseTactics: Tactic Library for Coq: A Gentle Introduction *)
+(** * UseTactics: Tactic Library for Rocq: A Gentle Introduction *)
 
 (* Chapter written and maintained by Arthur Chargueraud *)
 
-(** Coq comes with a set of builtin tactics, such as [reflexivity],
+(** Rocq comes with a set of builtin tactics, such as [reflexivity],
     [intros], [inversion] and so on. While it is possible to conduct
     proofs using only those tactics, you can significantly increase
     your productivity by working with a set of more powerful tactics.
     This chapter describes a number of such useful tactics, which, for
-    various reasons, are not yet available by default in Coq.  These
+    various reasons, are not yet available by default in Rocq.  These
     tactics are defined in the [LibTactics.v] file. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 
-From Coq Require Import Arith.Arith.
+From Stdlib Require Import Arith.
 
 From PLF Require Maps.
 From PLF Require Stlc.
@@ -35,7 +35,7 @@ Import LibTactics.
           "SSReflect" package.
         - "SSReflect" entirely rethinks the presentation of tactics,
           whereas "LibTactics" mostly stick to the traditional
-          presentation of Coq tactics, simply providing a number of
+          presentation of Rocq tactics, simply providing a number of
           additional tactics.  For this reason, "LibTactics" is
           probably easier to get started with than "SSReflect". *)
 
@@ -130,7 +130,7 @@ Import Maps.
 Import Imp.
 Import Equiv.
 
-(** The [inversion] tactic of Coq is not very satisfying for
+(** The [inversion] tactic of Rocq is not very satisfying for
     three reasons. First, it produces a bunch of equalities
     which one typically wants to substitute away, using [subst].
     Second, it introduces meaningless names for hypotheses.
@@ -243,11 +243,11 @@ Import Maps.
 
 Example typing_nonexample_1 :
   ~ exists T,
-      empty |--
+     <{ empty |--
         \x:Bool,
             \y:Bool,
                (x y) \in
-        T.
+        T }>.
 Proof.
   dup 3.
 
@@ -286,7 +286,7 @@ End InvertsExamples1.
 (* ################################################################# *)
 (** * Tactics for N-ary Connectives *)
 
-(** Because Coq encodes conjunctions and disjunctions using binary
+(** Because Rocq encodes conjunctions and disjunctions using binary
     constructors [/\] and [\/], working with a conjunction or a
     disjunction of [N] facts can sometimes be quite cumbursome.
     For this reason, "LibTactics" provides tactics offering direct
@@ -316,6 +316,9 @@ Proof.
   intros. splits.
 Abort.
 
+(** Note that [splits] is less agressive than [repeat split],
+    which might unfold predicates unexpectedly. *)
+
 (* ================================================================= *)
 (** ** The Tactic [branch] *)
 
@@ -339,14 +342,13 @@ End NaryExamples.
 (* ################################################################# *)
 (** * Tactics for Working with Equality *)
 
-(** One of the major weaknesses of Coq compared with other interactive
+(** One of the major weaknesses of Rocq compared with other interactive
     proof assistants is its relatively poor support for reasoning
     with equalities. The tactics described next aims at simplifying
     pieces of proof scripts manipulating equalities. *)
 
 (** This section presents the following tactics:
     - [asserts_rewrite] for introducing an equality to rewrite with,
-    - [substs] for improving the [subst] tactic,
     - [fequals] for improving the [f_equal] tactic,
     - [applys_eq] for proving [P x y] using an hypothesis [P x z],
       automatically producing an equality [y = z] as subgoal. *)
@@ -356,8 +358,9 @@ Module EqualityExamples.
 (* ================================================================= *)
 (** ** The Tactic [asserts_rewrite] *)
 
-(** The tactic [asserts_rewrite (E1 = E2)] replaces [E1] with [E2] in
-    the goal, and produces the goal [E1 = E2]. *)
+(** The tactic [asserts_rewrite] is an enhanced version of [replace].
+    A call to [asserts_rewrite (E1 = E2)] first produces the
+    goal [E1 = E2], then replaces [E1] with [E2] in the goal. *)
 
 Theorem mult_0_plus : forall n m : nat,
   (0 + n) * m = n * m.
@@ -375,11 +378,8 @@ Proof.
     reflexivity. (* subgoal [n*m = n*m] *)
 Qed.
 
-(** Remark: the syntax [asserts_rewrite (E1 = E2) in H] allows
-     rewriting in the hypothesis [H] rather than in the goal. *)
-
-(** More generally, the tactic [asserts_rewrite] can be provided
-    a lemma as argument. For example, one can write
+(** Unlike [replace], the tactic [asserts_rewrite] can be provided
+    a lemma statement as argument. For example, one can write
     [asserts_rewrite (forall a b, a*(S b) = a*b+a)].
     This formulation is useful when [a] and [b] are big terms,
     since there is no need to repeat their statements. *)
@@ -392,24 +392,10 @@ Proof.
     (* second subgoal: [(u + v) * (w * x + y) + (u + v) = z] *)
 Abort.
 
-(** The tactic [cuts_rewrite] is similar to [asserts_write] except that
-    it the two subgoals produced are swapped. *)
-
-(* ================================================================= *)
-(** ** The Tactic [substs] *)
-
-(** The tactic [substs] is similar to [subst] except that it
-    does not fail when the goal contains "circular equalities",
-    such as [x = f x]. *)
-
-Lemma demo_substs : forall x y (f:nat->nat),
-  x = f x ->
-  y = x ->
-  y = f x.
-Proof.
-  intros. substs. (* the tactic [subst] would fail here *)
-  assumption.
-Qed.
+(** The syntax [asserts_rewrite (E1 = E2) in H] allows rewriting in an
+    hypothesis [H] rather than in the goal. The tactic [cuts_rewrite]
+    is similar to [asserts_write] except that it the two subgoals
+    produced are swapped. *)
 
 (* ================================================================= *)
 (** ** The Tactic [fequals] *)
@@ -572,9 +558,9 @@ Module GenExample.
   Import Maps.
 
 Lemma substitution_preserves_typing : forall Gamma x U t v T,
-  x |-> U ; Gamma |-- t \in T ->
-  empty |-- v \in U   ->
-  Gamma |-- [x:=v]t \in T.
+  <{ x |-> U ; Gamma |-- t \in T }> ->
+  <{ empty |-- v \in U }>  ->
+  <{ Gamma |-- [x:=v]t \in T }>.
 Proof.
   dup.
 
@@ -717,7 +703,7 @@ End SortExamples.
     to spend time figuring out how many underscore symbols you need to
     write. *)
 
-(** In this section, we'll use a useful feature of Coq for decomposing
+(** In this section, we'll use a useful feature of Rocq for decomposing
     conjunctions and existentials. In short, a tactic like [intros] or
     [destruct] can be provided with a pattern [(H1 & H2 & H3 & H4 & H5)],
     which is a shorthand for [ [H1 [H2 [H3 [H4 H5] ] ] ] ]. For example,
@@ -756,7 +742,7 @@ Import Sub.STLCSub.
 Import String.
 
 Axiom typing_inversion_var : forall Gamma (x:string) T,
-  Gamma |-- x \in T ->
+  <{ Gamma |-- x \in T }> ->
   exists S,
     Gamma x = Some S /\ S <: T.
 
@@ -766,7 +752,7 @@ Axiom typing_inversion_var : forall Gamma (x:string) T,
     [lets K: typing_inversion_var H], as shown next. *)
 
 Lemma demo_lets_1 : forall (G:context) (x:string) (T:ty),
-  G |-- x \in T ->
+  <{ G |-- x \in T }> ->
   True.
 Proof.
   intros G x T H. dup.
@@ -900,8 +886,8 @@ End ExamplesLets.
 
     - [splits] and [branch], to deal with n-ary constructs.
 
-    - [asserts_rewrite], [cuts_rewrite], [substs] and [fequals] help
-      working with equalities.
+    - [asserts_rewrite], [cuts_rewrite], and [fequals] help working
+      with equalities.
 
     - [lets], [forwards], [specializes] and [applys] provide means
       of very conveniently instantiating lemmas.
@@ -912,7 +898,7 @@ End ExamplesLets.
     - [admits], [admit_rewrite] and [admit_goal] give the flexibility to
       choose which subgoals to try and discharge first.
 
-    Making use of these tactics can boost one's productivity in Coq proofs.
+    Making use of these tactics can boost one's productivity in Rocq proofs.
 
     If you are interested in using [LibTactics.v] in your own developments,
     make sure you get the lastest version from:
@@ -920,4 +906,4 @@ End ExamplesLets.
 
 *)
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)

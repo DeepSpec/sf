@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import SearchTree.
 
 Parameter MISSING: Type.
@@ -50,9 +50,10 @@ idtac " ".
 idtac "#> ForallT_insert".
 idtac "Possible points: 1.5".
 check_type @ForallT_insert (
-(forall (V : Type) (P : key -> V -> Prop) (t : tree V),
- @ForallT V P t ->
- forall (k : key) (v : V), P k v -> @ForallT V P (@insert V k v t))).
+(forall (V : Type) (P : forall (_ : key) (_ : V), Prop)
+   (t : tree V) (_ : @ForallT V P t) (k : key) (v : V)
+   (_ : P k v),
+ @ForallT V P (@insert V k v t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ForallT_insert.
@@ -62,8 +63,8 @@ idtac " ".
 idtac "#> insert_BST".
 idtac "Possible points: 1.5".
 check_type @insert_BST (
-(forall (V : Type) (k : key) (v : V) (t : tree V),
- @BST V t -> @BST V (@insert V k v t))).
+(forall (V : Type) (k : key) (v : V) (t : tree V) (_ : @BST V t),
+ @BST V (@insert V k v t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions insert_BST.
@@ -88,9 +89,9 @@ idtac " ".
 idtac "#> elements_preserves_forall".
 idtac "Possible points: 2".
 check_type @elements_preserves_forall (
-(forall (V : Type) (P : key -> V -> Prop) (t : tree V),
- @ForallT V P t ->
- @List.Forall (key * V) (@uncurry key V Prop P) (@elements V t))).
+(forall (V : Type) (P : forall (_ : key) (_ : V), Prop)
+   (t : tree V) (_ : @ForallT V P t),
+ @ListDef.Forall (prod key V) (@uncurry key V Prop P) (@elements V t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions elements_preserves_forall.
@@ -103,9 +104,11 @@ idtac " ".
 idtac "#> elements_preserves_relation".
 idtac "Possible points: 2".
 check_type @elements_preserves_relation (
-(forall (V : Type) (k k' : key) (v : V) (t : tree V) (R : key -> key -> Prop),
- @ForallT V (fun (y : key) (_ : V) => R y k') t ->
- @List.In (key * V) (k, v) (@elements V t) -> R k k')).
+(forall (V : Type) (k k' : key) (v : V) (t : tree V)
+   (R : forall (_ : key) (_ : key), Prop)
+   (_ : @ForallT V (fun (y : key) (_ : V) => R y k') t)
+   (_ : @List.In (prod key V) (@pair key V k v) (@elements V t)),
+ R k k')).
 idtac "Assumptions:".
 Abort.
 Print Assumptions elements_preserves_relation.
@@ -131,9 +134,9 @@ idtac "#> elements_complete_inverse".
 idtac "Advanced".
 idtac "Possible points: 2".
 check_type @elements_complete_inverse (
-(forall (V : Type) (k : key) (v : V) (t : tree V),
- @BST V t ->
- @bound V k t = false -> ~ @List.In (key * V) (k, v) (@elements V t))).
+(forall (V : Type) (k : key) (v : V) (t : tree V)
+   (_ : @BST V t) (_ : @eq bool (@bound V k t) false),
+ not (@List.In (prod key V) (@pair key V k v) (@elements V t)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions elements_complete_inverse.
@@ -147,8 +150,8 @@ idtac "#> bound_value".
 idtac "Advanced".
 idtac "Possible points: 2".
 check_type @bound_value (
-(forall (V : Type) (k : key) (t : tree V),
- @bound V k t = true -> exists v : V, forall d : V, @lookup V d k t = v)).
+(forall (V : Type) (k : key) (t : tree V) (_ : @eq bool (@bound V k t) true),
+ @ex V (fun v : V => forall d : V, @eq V (@lookup V d k t) v))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bound_value.
@@ -159,9 +162,10 @@ idtac "#> elements_correct_inverse".
 idtac "Advanced".
 idtac "Possible points: 4".
 check_type @elements_correct_inverse (
-(forall (V : Type) (k : key) (t : tree V),
- (forall v : V, ~ @List.In (key * V) (k, v) (@elements V t)) ->
- @bound V k t = false)).
+(forall (V : Type) (k : key) (t : tree V)
+   (_ : forall v : V,
+        not (@List.In (prod key V) (@pair key V k v) (@elements V t))),
+ @eq bool (@bound V k t) false)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions elements_correct_inverse.
@@ -175,11 +179,10 @@ idtac "#> sorted_app".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @sorted_app (
-(forall (l1 l2 : list nat) (x : nat),
- Sort.sorted l1 ->
- Sort.sorted l2 ->
- @List.Forall nat (fun n : nat => n < x) l1 ->
- @List.Forall nat (fun n : nat => n > x) l2 -> Sort.sorted (l1 ++ x :: l2))).
+(forall (l1 l2 : list nat) (x : nat) (_ : Sort.sorted l1)
+   (_ : Sort.sorted l2) (_ : @ListDef.Forall nat (fun n : nat => lt n x) l1)
+   (_ : @ListDef.Forall nat (fun n : nat => gt n x) l2),
+ Sort.sorted (@app nat l1 (@cons nat x l2)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sorted_app.
@@ -193,8 +196,8 @@ idtac "#> sorted_elements".
 idtac "Advanced".
 idtac "Possible points: 6".
 check_type @sorted_elements (
-(forall (V : Type) (t : tree V),
- @BST V t -> Sort.sorted (@list_keys V (@elements V t)))).
+(forall (V : Type) (t : tree V) (_ : @BST V t),
+ Sort.sorted (@list_keys V (@elements V t)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sorted_elements.
@@ -207,8 +210,9 @@ idtac " ".
 idtac "#> fast_elements_tr_helper".
 idtac "Possible points: 2".
 check_type @fast_elements_tr_helper (
-(forall (V : Type) (t : tree V) (lst : list (key * V)),
- @fast_elements_tr V t lst = (@elements V t ++ lst)%list)).
+(forall (V : Type) (t : tree V) (lst : list (prod key V)),
+ @eq (list (prod key V)) (@fast_elements_tr V t lst)
+   (@app (prod key V) (@elements V t) lst))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions fast_elements_tr_helper.
@@ -218,7 +222,8 @@ idtac " ".
 idtac "#> fast_elements_eq_elements".
 idtac "Possible points: 1".
 check_type @fast_elements_eq_elements (
-(forall (V : Type) (t : tree V), @fast_elements V t = @elements V t)).
+(forall (V : Type) (t : tree V),
+ @eq (list (prod key V)) (@fast_elements V t) (@elements V t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions fast_elements_eq_elements.
@@ -293,4 +298,6 @@ idtac "---------- sorted_elements ---------".
 Print Assumptions sorted_elements.
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

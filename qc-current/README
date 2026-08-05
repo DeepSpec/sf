@@ -2,7 +2,7 @@
                            SOFTWARE FOUNDATIONS
 #########################################################################
 
-This directory contains both Coq scripts (.v files) and more readable
+This directory contains both Rocq scripts (.v files) and more readable
 HTML files for Volume 4 of the Software Foundations electronic
 textbook series.
 

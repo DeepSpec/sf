@@ -39,7 +39,7 @@
  Congratulations: We've made it to the end! 
 <div class="paragraph"> </div>
 
-<a id="lab525"></a><h1 class="section">Looking Back</h1>
+<a id="lab527"></a><h1 class="section">Looking Back</h1>
 
 <div class="paragraph"> </div>
 
@@ -102,7 +102,7 @@
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> <i>Coq</i>, an industrial-strength proof assistant
+<li> <i>Rocq</i>, an industrial-strength proof assistant
 <ul class="doclist">
 <li> functional core language
 
@@ -189,7 +189,7 @@
 </div>
 
 <div class="doc">
-<a id="lab526"></a><h1 class="section">Looking Around</h1>
+<a id="lab528"></a><h1 class="section">Looking Around</h1>
 
 <div class="paragraph"> </div>
 
@@ -201,11 +201,11 @@
     today... 
 <div class="paragraph"> </div>
 
-<a id="lab527"></a><h3 class="section">CompCert</h3>
+<a id="lab529"></a><h3 class="section">CompCert</h3>
  <i>CompCert</i> is a fully verified optimizing compiler for almost all
     of the ISO C<sub>90</sub> / ANSI C language, generating code for x<sub>86</sub>, ARM,
     and PowerPC processors.  The whole of CompCert is is written in
-    Gallina and extracted to an efficient OCaml program using Coq's
+    Gallina and extracted to an efficient OCaml program using Rocq's
     extraction facilities.
 
 <div class="paragraph"> </div>
@@ -247,7 +247,7 @@
     <a href="http://compcert.inria.fr"><span class="inlineref" <a href='http://compcert.inria.fr</span></a>'>http://compcert.inria.fr</span></a></a>
 <div class="paragraph"> </div>
 
-<a id="lab528"></a><h3 class="section">seL4</h3>
+<a id="lab530"></a><h3 class="section">seL4</h3>
  <i>seL4</i> is a fully verified microkernel, considered to be the
     world's first OS kernel with an end-to-end proof of implementation
     correctness and security enforcement.  It is implemented in C and
@@ -271,9 +271,9 @@
     <a href="https://sel4.systems"><span class="inlineref" <a href='https://sel4.systems</span></a>.'>https://sel4.systems</span></a>.</a>
 <div class="paragraph"> </div>
 
-<a id="lab529"></a><h3 class="section">CertiKOS</h3>
+<a id="lab531"></a><h3 class="section">CertiKOS</h3>
  <i>CertiKOS</i> is a clean-slate, fully verified hypervisor, written in
-    CompCert C and verified in Coq.
+    CompCert C and verified in Rocq.
 
 <div class="paragraph"> </div>
 
@@ -281,12 +281,12 @@
     programming infrastructure for constructing large-scale certified
     system software. By combining recent advances in programming
     languages, operating systems, and formal methods, we hope to
-    attack the following research questions: (1) what OS kernel
+    attack the following research questions: (A) what OS kernel
     structure can offer the best support for extensibility, security,
-    and resilience? (2) which semantic models and program logics can
-    best capture these abstractions? (3) what are the right
+    and resilience? (B) which semantic models and program logics can
+    best capture these abstractions? (C) what are the right
     programming languages and environments for developing such
-    certified kernels? and (4) how to build automation facilities to
+    certified kernels? and (D) how to build automation facilities to
     make certified software development really scale?"
 
 <div class="paragraph"> </div>
@@ -294,7 +294,7 @@
     <a href="http://flint.cs.yale.edu/certikos/"><span class="inlineref" <a href='http://flint.cs.yale.edu/certikos/</span></a>'>http://flint.cs.yale.edu/certikos/</span></a></a>
 <div class="paragraph"> </div>
 
-<a id="lab530"></a><h3 class="section">Ironclad</h3>
+<a id="lab532"></a><h3 class="section">Ironclad</h3>
  <i>Ironclad Apps</i> is a collection of fully verified web
     applications, including a "notary" for securely signing
     statements, a password hasher, a multi-user trusted counter, and a
@@ -324,7 +324,7 @@
     <a href="https://github.com/Microsoft/Ironclad/tree/master/ironclad-apps"><span class="inlineref" <a href='https://github.com/Microsoft/Ironclad/tree/master/ironclad-apps</span></a>'>https://github.com/Microsoft/Ironclad/tree/master/ironclad-apps</span></a></a>
 <div class="paragraph"> </div>
 
-<a id="lab531"></a><h3 class="section">Verdi</h3>
+<a id="lab533"></a><h3 class="section">Verdi</h3>
  <i>Verdi</i> is a framework for implementing and formally verifying
     distributed systems.
 
@@ -336,7 +336,7 @@
     techniques. Developers can verify an application in an idealized
     fault model, and then apply a VST to obtain an application that is
     guaranteed to have analogous properties in a more adversarial
-    environment.  Verdi is developed using the Coq proof assistant,
+    environment.  Verdi is developed using the Rocq proof assistant,
     and systems are extracted to OCaml for execution. Verdi systems,
     including a fault-tolerant key-value store, achieve comparable
     performance to unverified counterparts."
@@ -346,7 +346,7 @@
     <a href="http://verdi.uwplse.org"><span class="inlineref" <a href='http://verdi.uwplse.org</span></a>'>http://verdi.uwplse.org</span></a></a>
 <div class="paragraph"> </div>
 
-<a id="lab532"></a><h3 class="section">DeepSpec</h3>
+<a id="lab534"></a><h3 class="section">DeepSpec</h3>
  <i>The Science of Deep Specification</i> is an NSF "Expedition"
     project (running from 2016 to 2020) that focuses on the
     specification and verification of full functional correctness of
@@ -370,7 +370,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab533"></a><h3 class="section">REMS</h3>
+<a id="lab535"></a><h3 class="section">REMS</h3>
  <i>REMS</i> is a european project on Rigorous Engineering of Mainstream
     Systems.  It has produced detailed formal specifications of a wide
     range of critical real-world interfaces, protocols, and APIs,
@@ -401,7 +401,7 @@
     <a href="https://www.cl.cam.ac.uk/~pes20/rems/"><span class="inlineref" <a href='https://www.cl.cam.ac.uk/~pes20/rems/</span></a>'>https://www.cl.cam.ac.uk/~pes20/rems/</span></a></a>
 <div class="paragraph"> </div>
 
-<a id="lab534"></a><h3 class="section">Others</h3>
+<a id="lab536"></a><h3 class="section">Others</h3>
 
 <div class="paragraph"> </div>
 
@@ -426,7 +426,7 @@
 
 </li>
 <li> Ur/Web, a programming language for verified web applications
-        embedded in Coq
+        embedded in Rocq
 
 </li>
 <li> the Princeton Verified Software Toolchain
@@ -437,7 +437,7 @@
 </div>
 
 <div class="doc">
-<a id="lab535"></a><h1 class="section">Looking Forward</h1>
+<a id="lab537"></a><h1 class="section">Looking Forward</h1>
 
 <div class="paragraph"> </div>
 
@@ -497,7 +497,7 @@
 
 </li>
 <li> Iron Lambda  <a href='http://iron.ouroborus.net/)'>http://iron.ouroborus.net/)</a>is a collection
-          of Coq formalisations for functional languages of
+          of Rocq formalisations for functional languages of
           increasing complexity. It fills part of the gap between
           the end of the Software Foundations course and what
           appears in current research papers.  The collection has
@@ -550,12 +550,12 @@
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:28&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:34&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

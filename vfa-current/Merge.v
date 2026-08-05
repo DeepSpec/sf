@@ -2,7 +2,7 @@
 
 From VFA Require Import Perm.
 From VFA Require Import Sort.
-From Coq Require Import Recdef.  (* needed for [Function] feature *)
+From Stdlib Require Import Recdef.  (* needed for [Function] feature *)
 
 (** Mergesort is a well-known sorting algorithm, normally presented
     as an imperative algorithm on arrays, that has worst-case
@@ -523,4 +523,4 @@ Qed.
 
 (** $Date$ *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

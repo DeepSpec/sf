@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Packing the Core Modules                                                *
 **************************************************************************)
 
@@ -16,4 +16,4 @@ Open Scope Z_scope.
 Open Scope Int_scope.
 Open Scope comp_scope.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

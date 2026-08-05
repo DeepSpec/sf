@@ -2,7 +2,11 @@
 
 Set Warnings "-notation-overridden,-parsing".
 Set Warnings "-extraction-opaque-accessed,-extraction".
-Require Import Bool Arith EqNat List. Import ListNotations.
+Set Warnings "-deprecated-dirpath-Coq".
+Set Warnings "-notation-incompatible-prefix".
+Set Warnings "-non-recursive".
+
+From Stdlib Require Import Bool Arith EqNat List. Import ListNotations.
 
 From QuickChick Require Import QuickChick Tactics.
 Import QcNotation QcDefaultNotation. Open Scope qc_scope.
@@ -106,8 +110,9 @@ Fixpoint get_fresh_ids n l :=
     Write a [Gen] instance for [id] using the [elems_]
     combinator and [get_fresh_ids].  *)
 
-(* FILL IN HERE *)
-(** [] *)
+(* FILL IN HERE
+
+    [] *)
 
 (** There remains the question of how to [shrink] [id]s.
     We will answer that question when [id]s are used later
@@ -168,7 +173,7 @@ Proof. dec_eq. Defined.
     representation in the _Software Foundations_ version of Imp is not
     well suited for testing: we need to be able to access the domain
     of the map, fold over it, and test for equality; these are all
-    awkward to define for Coq functions. Therefore, we introduce a
+    awkward to define for Rocq functions. Therefore, we introduce a
     simple list-based map representation that uses [id]s as the keys.
 
     The operations we need are:
@@ -753,6 +758,16 @@ subst; specialize (IHst Gamma); destruct IHst; solve_sum.
 destruct (dec_has_type_value v T); destruct dec; solve_sum.
 Defined.
 
+(** To write a generator for well-typed states given a context
+    [Gamma], we use the QuickChick combinator
+    [sequenceGen : list (G A) -> G (list A)], which takes a list of
+    generators and produces a generator for lists.
+
+    We just need to iterate ([map]) through the context, producing an
+    arbitrary value of the appropriate type for each pair [(x,T)]. The
+    [sequenceGen] combinator will then chain all those generators in
+    sequence, producing a generator for well-typed states *)
+
 Definition gen_well_typed_state (Gamma : context) : G state :=
   sequenceGen (List.map (fun '(x, T) =>
                            v <- gen_typed_value T;;
@@ -845,7 +860,6 @@ Definition expression_soundness_exec :=
 
 (* QuickChick expression_soundness_exec.
 
-
      ===>
        QuickChecking expression_soundness_exec
        [(1,TNat), (2,TNat), (3,TBool), (4,TNat)]
@@ -878,7 +892,6 @@ Definition expression_soundness_exec_firstshrink :=
 
 (* QuickChick expression_soundness_exec_firstshrink.
 
-<<
      ===>
        QuickChecking expression_soundness_exec_firsttry
        [(1,TBool), (2,TNat), (3,TBool), (4,TBool)]
@@ -1053,7 +1066,6 @@ Definition expression_soundness_exec' :=
   end)))).
 
 (* QuickChick expression_soundness_exec'.
-
 
      ===>
         QuickChecking expression_soundness_exec'
@@ -1269,7 +1281,6 @@ Conjecture well_typed_state_never_stuck :
    [Dec] instance of [has_type] will come in handy.
 *)
 
-
 (* ################################################################# *)
 (** * Automation (Revisited) *)
 
@@ -1410,4 +1421,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2024-12-27 01:36 *)
+(* 2026-01-07 13:37 *)

@@ -1,0 +1,564 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.SpecCTTest}{Library }{SECF.SpecCTTest}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Set} \coqdocvar{Warnings} "-notation-overridden,-parsing".\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{Stdlib} \coqdockw{Require} \coqdockw{Export} \coqdoclibrary{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.SpecCT}{\coqdoclibrary{SpecCT}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdef{SECF.SpecCTTest.MISSING}{MISSING}{\coqdocaxiom{MISSING}}: \coqdockw{Type}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdef{SECF.SpecCTTest.Check}{Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{check\_type} \coqdocvar{A} \coqdocvar{B} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdockw{type} \coqdockw{of} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdockw{context}[\coqref{SECF.SpecCTTest.MISSING}{\coqdocaxiom{MISSING}}] \ensuremath{\Rightarrow} \coqdoctac{idtac} "Missing:" \coqdocvar{A}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} ?\coqdocvar{T} \ensuremath{\Rightarrow} \coqdoctac{first} [\coqdocvar{unify} \coqdocvar{T} \coqdocvar{B}; \coqdoctac{idtac} "Type: ok" \ensuremath{|} \coqdoctac{idtac} "Type: wrong - should be (" \coqdocvar{B} ")"]\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print\_manual\_grade} \coqdocvar{A} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{Some}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{Some}} (\coqdocvar{\_} ?\coqdocvar{S} ?\coqdocvar{C}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score:"  \coqdocvar{S};\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{C} \coqdockw{with}\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} ""\%\coqdocvar{string} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment:" \coqdocvar{C}\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{None}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{None}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score: Ungraded";\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqref{SECF.SpecCTTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.SpecCT}{\coqdoclibrary{SpecCT}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqref{SECF.SpecCTTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_insecure\_prog'\_is\_not\_cct\_secure  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> cct\_insecure\_prog'\_is\_not\_cct\_secure".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.cct insecure prog' is not cct secure}{\coqdocaxiom{cct\_insecure\_prog'\_is\_not\_cct\_secure}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.SpecCT.cct secure}{\coqdocdefinition{cct\_secure}} \coqref{SECF.SpecCT.XYZpub}{\coqdocdefinition{XYZpub}} \coqref{SECF.SpecCT.APpub}{\coqdocdefinition{APpub}} \coqref{SECF.SpecCT.cct insecure prog'}{\coqdocdefinition{cct\_insecure\_prog'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct insecure prog' is not cct secure}{\coqdocaxiom{cct\_insecure\_prog'\_is\_not\_cct\_secure}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  label\_of\_exp  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> label\_of\_exp".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.label of exp}{\coqdocaxiom{label\_of\_exp}} ((\coqdockw{\ensuremath{\forall}} (\coqdocvar{\_} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdocvar{\_} : \coqref{SECF.SpecCT.exp}{\coqdocinductive{exp}}), \coqref{SECF.SpecCT.label}{\coqdocdefinition{label}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.label of exp}{\coqdocaxiom{label\_of\_exp}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  label\_of\_exp\_sound  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> label\_of\_exp\_sound".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.label of exp sound}{\coqdocaxiom{label\_of\_exp\_sound}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:3}{P}{\coqdocbinder{P}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.e:4}{e}{\coqdocbinder{e}} : \coqref{SECF.SpecCT.exp}{\coqdocinductive{exp}}), \coqref{SECF.SpecCT.exp has label}{\coqdocinductive{exp\_has\_label}} \coqref{SECF.SpecCTTest.P:3}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.e:4}{\coqdocvariable{e}} (\coqref{SECF.SpecCT.label of exp}{\coqdocaxiom{label\_of\_exp}} \coqref{SECF.SpecCTTest.P:3}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.e:4}{\coqdocvariable{e}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.label of exp sound}{\coqdocaxiom{label\_of\_exp\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  label\_of\_exp\_unique  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> label\_of\_exp\_unique".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.label of exp unique}{\coqdocaxiom{label\_of\_exp\_unique}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:7}{P}{\coqdocbinder{P}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.e:8}{e}{\coqdocbinder{e}} : \coqref{SECF.SpecCT.exp}{\coqdocinductive{exp}}) (\coqdef{SECF.SpecCTTest.l:9}{l}{\coqdocbinder{l}} : \coqref{SECF.SpecCT.label}{\coqdocdefinition{label}}) (\coqdocvar{\_} : \coqref{SECF.SpecCT.exp has label}{\coqdocinductive{exp\_has\_label}} \coqref{SECF.SpecCTTest.P:7}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.e:8}{\coqdocvariable{e}} \coqref{SECF.SpecCTTest.l:9}{\coqdocvariable{l}}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqref{SECF.SpecCT.label}{\coqdocdefinition{label}} \coqref{SECF.SpecCTTest.l:9}{\coqdocvariable{l}} (\coqref{SECF.SpecCT.label of exp}{\coqdocaxiom{label\_of\_exp}} \coqref{SECF.SpecCTTest.P:7}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.e:8}{\coqdocvariable{e}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.label of exp unique}{\coqdocaxiom{label\_of\_exp\_unique}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_typechecker  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> cct\_typechecker".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.cct typechecker}{\coqdocaxiom{cct\_typechecker}} ((\coqdockw{\ensuremath{\forall}} (\coqdocvar{\_} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdocvar{\_} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdocvar{\_} : \coqref{SECF.SpecCT.com}{\coqdocinductive{com}}), \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct typechecker}{\coqdocaxiom{cct\_typechecker}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_typechecker\_sound  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> cct\_typechecker\_sound".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.cct typechecker sound}{\coqdocaxiom{cct\_typechecker\_sound}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:13}{P}{\coqdocbinder{P}} \coqdef{SECF.SpecCTTest.PA:14}{PA}{\coqdocbinder{PA}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.c:15}{c}{\coqdocbinder{c}} : \coqref{SECF.SpecCT.com}{\coqdocinductive{com}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : @\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} (\coqref{SECF.SpecCT.cct typechecker}{\coqdocaxiom{cct\_typechecker}} \coqref{SECF.SpecCTTest.P:13}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:14}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:15}{\coqdocvariable{c}}) \coqref{SECF.SpecCT.:::'true'}{\coqdocnotation{true}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.SpecCT.cct well typed}{\coqdocinductive{cct\_well\_typed}} \coqref{SECF.SpecCTTest.P:13}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:14}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:15}{\coqdocvariable{c}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct typechecker sound}{\coqdocaxiom{cct\_typechecker\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_typechecker\_complete  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> cct\_typechecker\_complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.cct typechecker complete}{\coqdocaxiom{cct\_typechecker\_complete}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:19}{P}{\coqdocbinder{P}} \coqdef{SECF.SpecCTTest.PA:20}{PA}{\coqdocbinder{PA}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.c:21}{c}{\coqdocbinder{c}} : \coqref{SECF.SpecCT.com}{\coqdocinductive{com}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : @\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} (\coqref{SECF.SpecCT.cct typechecker}{\coqdocaxiom{cct\_typechecker}} \coqref{SECF.SpecCTTest.P:19}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:20}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:21}{\coqdocvariable{c}}) \coqref{SECF.SpecCT.:::'false'}{\coqdocnotation{false}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.SpecCT.cct well typed}{\coqdocinductive{cct\_well\_typed}} \coqref{SECF.SpecCTTest.P:19}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:20}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:21}{\coqdocvariable{c}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct typechecker complete}{\coqdocaxiom{cct\_typechecker\_complete}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_insecure\_prog\_ill\_typed  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> cct\_insecure\_prog\_ill\_typed".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.cct insecure prog ill typed}{\coqdocaxiom{cct\_insecure\_prog\_ill\_typed}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.SpecCT.cct well typed}{\coqdocinductive{cct\_well\_typed}} \coqref{SECF.SpecCT.XYZpub}{\coqdocdefinition{XYZpub}} \coqref{SECF.SpecCT.APpub}{\coqdocdefinition{APpub}} \coqref{SECF.SpecCT.cct insecure prog}{\coqdocdefinition{cct\_insecure\_prog}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct insecure prog ill typed}{\coqdocaxiom{cct\_insecure\_prog\_ill\_typed}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_insecure\_prog'\_ill\_typed  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> cct\_insecure\_prog'\_ill\_typed".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.cct insecure prog' ill typed}{\coqdocaxiom{cct\_insecure\_prog'\_ill\_typed}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.SpecCT.cct well typed}{\coqdocinductive{cct\_well\_typed}} \coqref{SECF.SpecCT.XYZpub}{\coqdocdefinition{XYZpub}} \coqref{SECF.SpecCT.APpub}{\coqdocdefinition{APpub}} \coqref{SECF.SpecCT.cct insecure prog'}{\coqdocdefinition{cct\_insecure\_prog'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct insecure prog' ill typed}{\coqdocaxiom{cct\_insecure\_prog'\_ill\_typed}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_well\_typed\_div  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Manually graded: Div.cct\_well\_typed\_div".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{print\_manual\_grade} \coqref{SECF.SpecCT.Div.manual grade for cct well typed div}{\coqdocdefinition{Div.manual\_grade\_for\_cct\_well\_typed\_div}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_well\_typed\_div\_noninterferent  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Div.cct\_well\_typed\_div\_noninterferent".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.Div.cct well typed div noninterferent}{\coqdocaxiom{Div.cct\_well\_typed\_div\_noninterferent}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:25}{P}{\coqdocbinder{P}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.PA:26}{PA}{\coqdocbinder{PA}} : \coqref{SECF.SpecCT.pub arrs}{\coqdocdefinition{pub\_arrs}}) (\coqdef{SECF.SpecCTTest.c:27}{c}{\coqdocbinder{c}} : \coqref{SECF.SpecCT.Div.com}{\coqdocinductive{Div.com}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdef{SECF.SpecCTTest.st1:28}{st1}{\coqdocbinder{st1}} \coqdef{SECF.SpecCTTest.st2:29}{st2}{\coqdocbinder{st2}} : \coqref{SECF.Maps.total map}{\coqdocdefinition{Maps.total\_map}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqdef{SECF.SpecCTTest.m1:30}{m1}{\coqdocbinder{m1}} \coqdef{SECF.SpecCTTest.m2:31}{m2}{\coqdocbinder{m2}} : \coqref{SECF.Maps.total map}{\coqdocdefinition{Maps.total\_map}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdef{SECF.SpecCTTest.st1':32}{st1'}{\coqdocbinder{st1'}} \coqdef{SECF.SpecCTTest.st2':33}{st2'}{\coqdocbinder{st2'}} : \coqref{SECF.SpecCT.state}{\coqdocdefinition{state}}) (\coqdef{SECF.SpecCTTest.m1':34}{m1'}{\coqdocbinder{m1'}} \coqdef{SECF.SpecCTTest.m2':35}{m2'}{\coqdocbinder{m2'}} : \coqref{SECF.SpecCT.mem}{\coqdocdefinition{mem}}) (\coqdef{SECF.SpecCTTest.os1:36}{os1}{\coqdocbinder{os1}} \coqdef{SECF.SpecCTTest.os2:37}{os2}{\coqdocbinder{os2}} : \coqref{SECF.SpecCT.Div.obs}{\coqdocdefinition{Div.obs}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.Div.cct well typed}{\coqdocinductive{Div.cct\_well\_typed}} \coqref{SECF.SpecCTTest.P:25}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:26}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:27}{\coqdocvariable{c}}) (\coqdocvar{\_} : @\coqref{SECF.SpecCT.pub equiv}{\coqdocdefinition{pub\_equiv}} \coqref{SECF.SpecCTTest.P:25}{\coqdocvariable{P}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.SpecCTTest.st1:28}{\coqdocvariable{st1}} \coqref{SECF.SpecCTTest.st2:29}{\coqdocvariable{st2}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : @\coqref{SECF.SpecCT.pub equiv}{\coqdocdefinition{pub\_equiv}} \coqref{SECF.SpecCTTest.PA:26}{\coqdocvariable{PA}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) \coqref{SECF.SpecCTTest.m1:30}{\coqdocvariable{m1}} \coqref{SECF.SpecCTTest.m2:31}{\coqdocvariable{m2}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.Div.cteval}{\coqdocinductive{Div.cteval}} \coqref{SECF.SpecCTTest.c:27}{\coqdocvariable{c}} \coqref{SECF.SpecCTTest.st1:28}{\coqdocvariable{st1}} \coqref{SECF.SpecCTTest.m1:30}{\coqdocvariable{m1}} \coqref{SECF.SpecCTTest.st1':32}{\coqdocvariable{st1'}} \coqref{SECF.SpecCTTest.m1':34}{\coqdocvariable{m1'}} \coqref{SECF.SpecCTTest.os1:36}{\coqdocvariable{os1}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.Div.cteval}{\coqdocinductive{Div.cteval}} \coqref{SECF.SpecCTTest.c:27}{\coqdocvariable{c}} \coqref{SECF.SpecCTTest.st2:29}{\coqdocvariable{st2}} \coqref{SECF.SpecCTTest.m2:31}{\coqdocvariable{m2}} \coqref{SECF.SpecCTTest.st2':33}{\coqdocvariable{st2'}} \coqref{SECF.SpecCTTest.m2':35}{\coqdocvariable{m2'}} \coqref{SECF.SpecCTTest.os2:37}{\coqdocvariable{os2}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}} (@\coqref{SECF.SpecCT.pub equiv}{\coqdocdefinition{pub\_equiv}} \coqref{SECF.SpecCTTest.P:25}{\coqdocvariable{P}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.SpecCTTest.st1':32}{\coqdocvariable{st1'}} \coqref{SECF.SpecCTTest.st2':33}{\coqdocvariable{st2'}}) (@\coqref{SECF.SpecCT.pub equiv}{\coqdocdefinition{pub\_equiv}} \coqref{SECF.SpecCTTest.PA:26}{\coqdocvariable{PA}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) \coqref{SECF.SpecCTTest.m1':34}{\coqdocvariable{m1'}} \coqref{SECF.SpecCTTest.m2':35}{\coqdocvariable{m2'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.Div.cct well typed div noninterferent}{\coqdocaxiom{Div.cct\_well\_typed\_div\_noninterferent}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  cct\_well\_typed\_div\_secure  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Div.cct\_well\_typed\_div\_secure".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.Div.cct well typed div secure}{\coqdocaxiom{Div.cct\_well\_typed\_div\_secure}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:51}{P}{\coqdocbinder{P}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.PA:52}{PA}{\coqdocbinder{PA}} : \coqref{SECF.SpecCT.pub arrs}{\coqdocdefinition{pub\_arrs}}) (\coqdef{SECF.SpecCTTest.c:53}{c}{\coqdocbinder{c}} : \coqref{SECF.SpecCT.Div.com}{\coqdocinductive{Div.com}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.Div.cct well typed}{\coqdocinductive{Div.cct\_well\_typed}} \coqref{SECF.SpecCTTest.P:51}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:52}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:53}{\coqdocvariable{c}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.SpecCT.Div.cct secure}{\coqdocdefinition{Div.cct\_secure}} \coqref{SECF.SpecCTTest.P:51}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:52}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:53}{\coqdocvariable{c}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.Div.cct well typed div secure}{\coqdocaxiom{Div.cct\_well\_typed\_div\_secure}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  speculation\_bit\_monotonic  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> speculation\_bit\_monotonic".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.speculation bit monotonic}{\coqdocaxiom{speculation\_bit\_monotonic}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.c:57}{c}{\coqdocbinder{c}} : \coqref{SECF.SpecCT.com}{\coqdocinductive{com}}) (\coqdef{SECF.SpecCTTest.s:58}{s}{\coqdocbinder{s}} : \coqref{SECF.SpecCT.state}{\coqdocdefinition{state}}) (\coqdef{SECF.SpecCTTest.a:59}{a}{\coqdocbinder{a}} : \coqref{SECF.SpecCT.mem}{\coqdocdefinition{mem}}) (\coqdef{SECF.SpecCTTest.b:60}{b}{\coqdocbinder{b}} : \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdef{SECF.SpecCTTest.ds:61}{ds}{\coqdocbinder{ds}} : \coqref{SECF.SpecCT.dirs}{\coqdocdefinition{dirs}}) (\coqdef{SECF.SpecCTTest.s':62}{s'}{\coqdocbinder{s'}} : \coqref{SECF.SpecCT.state}{\coqdocdefinition{state}}) (\coqdef{SECF.SpecCTTest.a':63}{a'}{\coqdocbinder{a'}} : \coqref{SECF.SpecCT.mem}{\coqdocdefinition{mem}}) (\coqdef{SECF.SpecCTTest.b':64}{b'}{\coqdocbinder{b'}} : \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdef{SECF.SpecCTTest.os:65}{os}{\coqdocbinder{os}} : \coqref{SECF.SpecCT.obs}{\coqdocdefinition{obs}}) (\coqdocvar{\_} : \coqref{SECF.SpecCT.spec eval}{\coqdocinductive{spec\_eval}} \coqref{SECF.SpecCTTest.c:57}{\coqdocvariable{c}} \coqref{SECF.SpecCTTest.s:58}{\coqdocvariable{s}} \coqref{SECF.SpecCTTest.a:59}{\coqdocvariable{a}} \coqref{SECF.SpecCTTest.b:60}{\coqdocvariable{b}} \coqref{SECF.SpecCTTest.ds:61}{\coqdocvariable{ds}} \coqref{SECF.SpecCTTest.s':62}{\coqdocvariable{s'}} \coqref{SECF.SpecCTTest.a':63}{\coqdocvariable{a'}} \coqref{SECF.SpecCTTest.b':64}{\coqdocvariable{b'}} \coqref{SECF.SpecCTTest.os:65}{\coqdocvariable{os}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : @\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} \coqref{SECF.SpecCTTest.b:60}{\coqdocvariable{b}} \coqref{SECF.SpecCT.:::'true'}{\coqdocnotation{true}}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} \coqref{SECF.SpecCTTest.b':64}{\coqdocvariable{b'}} \coqref{SECF.SpecCT.:::'true'}{\coqdocnotation{true}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.speculation bit monotonic}{\coqdocaxiom{speculation\_bit\_monotonic}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  ct\_well\_typed\_seq\_spec\_eval\_ct\_secure  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> ct\_well\_typed\_seq\_spec\_eval\_ct\_secure".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.SpecCT.ct well typed seq spec eval ct secure}{\coqdocaxiom{ct\_well\_typed\_seq\_spec\_eval\_ct\_secure}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.SpecCTTest.P:75}{P}{\coqdocbinder{P}} : \coqref{SECF.SpecCT.pub vars}{\coqdocdefinition{pub\_vars}}) (\coqdef{SECF.SpecCTTest.PA:76}{PA}{\coqdocbinder{PA}} : \coqref{SECF.SpecCT.pub arrs}{\coqdocdefinition{pub\_arrs}}) (\coqdef{SECF.SpecCTTest.c:77}{c}{\coqdocbinder{c}} : \coqref{SECF.SpecCT.com}{\coqdocinductive{com}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdef{SECF.SpecCTTest.st1:78}{st1}{\coqdocbinder{st1}} \coqdef{SECF.SpecCTTest.st2:79}{st2}{\coqdocbinder{st2}} : \coqref{SECF.Maps.total map}{\coqdocdefinition{Maps.total\_map}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqdef{SECF.SpecCTTest.m1:80}{m1}{\coqdocbinder{m1}} \coqdef{SECF.SpecCTTest.m2:81}{m2}{\coqdocbinder{m2}} : \coqref{SECF.Maps.total map}{\coqdocdefinition{Maps.total\_map}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdef{SECF.SpecCTTest.st1':82}{st1'}{\coqdocbinder{st1'}} \coqdef{SECF.SpecCTTest.st2':83}{st2'}{\coqdocbinder{st2'}} : \coqref{SECF.SpecCT.state}{\coqdocdefinition{state}}) (\coqdef{SECF.SpecCTTest.m1':84}{m1'}{\coqdocbinder{m1'}} \coqdef{SECF.SpecCTTest.m2':85}{m2'}{\coqdocbinder{m2'}} : \coqref{SECF.SpecCT.mem}{\coqdocdefinition{mem}}) (\coqdef{SECF.SpecCTTest.os1:86}{os1}{\coqdocbinder{os1}} \coqdef{SECF.SpecCTTest.os2:87}{os2}{\coqdocbinder{os2}} : \coqref{SECF.SpecCT.obs}{\coqdocdefinition{obs}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.cct well typed}{\coqdocinductive{cct\_well\_typed}} \coqref{SECF.SpecCTTest.P:75}{\coqdocvariable{P}} \coqref{SECF.SpecCTTest.PA:76}{\coqdocvariable{PA}} \coqref{SECF.SpecCTTest.c:77}{\coqdocvariable{c}}) (\coqdocvar{\_} : @\coqref{SECF.SpecCT.pub equiv}{\coqdocdefinition{pub\_equiv}} \coqref{SECF.SpecCTTest.P:75}{\coqdocvariable{P}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.SpecCTTest.st1:78}{\coqdocvariable{st1}} \coqref{SECF.SpecCTTest.st2:79}{\coqdocvariable{st2}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : @\coqref{SECF.SpecCT.pub equiv}{\coqdocdefinition{pub\_equiv}} \coqref{SECF.SpecCTTest.PA:76}{\coqdocvariable{PA}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) \coqref{SECF.SpecCTTest.m1:80}{\coqdocvariable{m1}} \coqref{SECF.SpecCTTest.m2:81}{\coqdocvariable{m2}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.seq spec eval}{\coqdocdefinition{seq\_spec\_eval}} \coqref{SECF.SpecCTTest.c:77}{\coqdocvariable{c}} \coqref{SECF.SpecCTTest.st1:78}{\coqdocvariable{st1}} \coqref{SECF.SpecCTTest.m1:80}{\coqdocvariable{m1}} \coqref{SECF.SpecCTTest.st1':82}{\coqdocvariable{st1'}} \coqref{SECF.SpecCTTest.m1':84}{\coqdocvariable{m1'}} \coqref{SECF.SpecCTTest.os1:86}{\coqdocvariable{os1}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.SpecCT.seq spec eval}{\coqdocdefinition{seq\_spec\_eval}} \coqref{SECF.SpecCTTest.c:77}{\coqdocvariable{c}} \coqref{SECF.SpecCTTest.st2:79}{\coqdocvariable{st2}} \coqref{SECF.SpecCTTest.m2:81}{\coqdocvariable{m2}} \coqref{SECF.SpecCTTest.st2':83}{\coqdocvariable{st2'}} \coqref{SECF.SpecCTTest.m2':85}{\coqdocvariable{m2'}} \coqref{SECF.SpecCTTest.os2:87}{\coqdocvariable{os2}}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqref{SECF.SpecCT.obs}{\coqdocdefinition{obs}} \coqref{SECF.SpecCTTest.os1:86}{\coqdocvariable{os1}} \coqref{SECF.SpecCTTest.os2:87}{\coqdocvariable{os2}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.ct well typed seq spec eval ct secure}{\coqdocaxiom{ct\_well\_typed\_seq\_spec\_eval\_ct\_secure}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.SpecCTTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - standard: 20".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - advanced: 20".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Allowed Axioms:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "functional\_extensionality".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "FunctionalExtensionality.functional\_extensionality\_dep".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Summary **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Below is a summary of the automatically graded exercises that are incomplete.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "The output for each exercise can be any of the following:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'Closed under the global context', if it is complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'MANUAL', if it is manually graded".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - A list of pending axioms, containing unproven assumptions. In this case".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "    the exercise is considered complete, if the axioms are all allowed.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Standard **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_insecure\_prog'\_is\_not\_cct\_secure ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct insecure prog' is not cct secure}{\coqdocaxiom{cct\_insecure\_prog'\_is\_not\_cct\_secure}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- label\_of\_exp ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.label of exp}{\coqdocaxiom{label\_of\_exp}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- label\_of\_exp\_sound ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.label of exp sound}{\coqdocaxiom{label\_of\_exp\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- label\_of\_exp\_unique ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.label of exp unique}{\coqdocaxiom{label\_of\_exp\_unique}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_typechecker ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct typechecker}{\coqdocaxiom{cct\_typechecker}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_typechecker\_sound ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct typechecker sound}{\coqdocaxiom{cct\_typechecker\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_typechecker\_complete ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct typechecker complete}{\coqdocaxiom{cct\_typechecker\_complete}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_insecure\_prog\_ill\_typed ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct insecure prog ill typed}{\coqdocaxiom{cct\_insecure\_prog\_ill\_typed}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_insecure\_prog'\_ill\_typed ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.cct insecure prog' ill typed}{\coqdocaxiom{cct\_insecure\_prog'\_ill\_typed}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- cct\_well\_typed\_div ---------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "MANUAL".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Div.cct\_well\_typed\_div\_noninterferent ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.Div.cct well typed div noninterferent}{\coqdocaxiom{Div.cct\_well\_typed\_div\_noninterferent}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Div.cct\_well\_typed\_div\_secure ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.Div.cct well typed div secure}{\coqdocaxiom{Div.cct\_well\_typed\_div\_secure}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- speculation\_bit\_monotonic ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.speculation bit monotonic}{\coqdocaxiom{speculation\_bit\_monotonic}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- ct\_well\_typed\_seq\_spec\_eval\_ct\_secure ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.SpecCT.ct well typed seq spec eval ct secure}{\coqdocaxiom{ct\_well\_typed\_seq\_spec\_eval\_ct\_secure}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Advanced **********".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

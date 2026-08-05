@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import Maps.
 
 Parameter MISSING: Type.
@@ -38,7 +38,8 @@ idtac " ".
 idtac "#> t_update_same".
 idtac "Possible points: 2".
 check_type @t_update_same (
-(forall (A : Type) (m : total_map A) (x : string), (x !-> m x; m) = m)).
+(forall (A : Type) (m : total_map A) (x : string),
+ @eq (forall _ : string, A) (@t_update A m x (m x)) m)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions t_update_same.
@@ -51,8 +52,10 @@ idtac " ".
 idtac "#> t_update_permute".
 idtac "Possible points: 3".
 check_type @t_update_permute (
-(forall (A : Type) (m : total_map A) (v1 v2 : A) (x1 x2 : string),
- x2 <> x1 -> (x1 !-> v1; x2 !-> v2; m) = (x2 !-> v2; x1 !-> v1; m))).
+(forall (A : Type) (m : total_map A) (v1 v2 : A) (x1 x2 : string)
+   (_ : not (@eq string x2 x1)),
+ @eq (forall _ : string, A) (@t_update A (@t_update A m x2 v2) x1 v1)
+   (@t_update A (@t_update A m x1 v1) x2 v2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions t_update_permute.
@@ -94,4 +97,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

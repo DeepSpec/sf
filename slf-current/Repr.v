@@ -22,7 +22,7 @@ Implicit Types x : val.
     A representation predicate is a heap predicate that describes a mutable data
     structure. For example, the heap predicate [MList L p] describes a mutable
     linked list whose head cell is at location [p] and whose elements are
-    described by the Coq list [L]. In this chapter, we will see how to define
+    described by the Rocq list [L]. In this chapter, we will see how to define
     [MList] and how to use this predicate for specifying and verifying functions
     that operate on mutable linked lists. We will also study representation
     predicates for mutable trees, as well as for counter functions, which
@@ -100,7 +100,7 @@ Fixpoint MList (L:list val) (p:loc) : hprop :=
 (** ** Alternative Characterizations of [MList] *)
 
 (** Carrying out proofs directly with [MList] can be slightly cumbersome, mainly
-    due to Coq's limited support for re-folding definitions. We find it more
+    due to Rocq's limited support for re-folding definitions. We find it more
     practical to explicitly state equalities that paraphrase the definition of
     [MList]. There is one equality for the [nil] case and one for the [cons]
     case. *)
@@ -126,7 +126,7 @@ Proof using. auto. Qed.
       describes the tail of the list. *)
 
 (** The corresponding lemma, shown below, is stated using the
-    [If P then X else Y] construction, which generalizes Coq's construction
+    [If P then X else Y] construction, which generalizes Rocq's construction
     [if b then X else Y] to discriminate over a proposition [P] as opposed to a
     boolean value [b]. The [If] construct leverages classical logic; it is
     provided by the TLC library. The tactic [case_if] is convenient for
@@ -145,7 +145,7 @@ Proof using. (* FILL IN HERE *) Admitted.
     true, but we do not need it so we do not bother proving it here. In the rest
     of the course, we will never unfold the definition [MList], but only work
     with [MList_nil], [MList_cons], and [MList_if]. We therefore make the
-    definition of [MList] opaque to prevent Coq from performing undesired
+    definition of [MList] opaque to prevent Rocq from performing undesired
     simplifications. *)
 
 Global Opaque MList.
@@ -398,7 +398,7 @@ Proof using.
     xchange <- MList_cons. xsimpl. auto. }
 Qed.
 
-(** A Coq expert would typically write the same proof script in a more compact
+(** A Rocq expert would typically write the same proof script in a more compact
     fashion, as follows. Recall that the token [->] can be provided instead of a
     fresh name to indicate on-the-fly substitution, and that the star token
     after a tactic indicates a call to [eauto]. *)
@@ -801,8 +801,8 @@ End SizedStack.
 
 (** In this section, we generalize the ideas presented for linked lists to
     binary trees that store integer values in their nodes. Just as mutable lists
-    are specified with respect to Coq's purely functional lists, mutable binary
-    trees are specified with respect to Coq trees.
+    are specified with respect to Rocq's purely functional lists, mutable binary
+    trees are specified with respect to Rocq trees.
 
     Consider the following inductive definition of the type [tree]. A leaf is
     represented by the constructor [Leaf], and a node takes the form
@@ -1035,7 +1035,7 @@ Definition mtreesum : val :=
        treeacc 'c 'p;
        get_and_free 'c }>.
 
-(** The specification of [mtreesum] is expressed in terms of the Coq function
+(** The specification of [mtreesum] is expressed in terms of the Rocq function
     [treesum], which computes the sum of the node items stored in a logical
     tree. This operation is defined by recursion over the tree. *)
 
@@ -1125,7 +1125,7 @@ Lemma triple_create_counter :
     [CounterSpec], which itself involves a triple. In other words, a triple
     appears nested inside another triple. In technical terms, we are leveraging
     the "impredicativity of triples", which holds as a consequence of the
-    "impredicativity of predicates" in the logic of Coq. *)
+    "impredicativity of predicates" in the logic of Rocq. *)
 
 (** The proof involves the use of a new tactic, called [xfun], for reasoning
     about local function definitions. Here, [xfun] gives us the hypothesis [Hf]
@@ -1606,14 +1606,14 @@ Proof using. (* FILL IN HERE *) Admitted.
     Zhaozhong Ni and Zhong Shao presented the framework XCAP, which was the
     first to support reasoning on embedded code pointers [Ni, Shao 2006] (in Bib.v).
     Their proof, carried on a 23-line assembly program, consists of 1500+ lines
-    of Coq. Subsequently, Charguéraud presented a concise proof for a high-level
+    of Rocq. Subsequently, Charguéraud presented a concise proof for a high-level
     implementation of the [cps_append] function, essentially equivalent to the
     formalization presented above [Charguéraud 2011] (in Bib.v).
 
     The specification of higher-order iterators requires higher-order Separation
-    Logic. Being embedded in the higher-order logic of Coq, the Separation Logic
+    Logic. Being embedded in the higher-order logic of Rocq, the Separation Logic
     that we work with is inherently higher-order. Further information on the
     history of higher-order Separation Logic for higher-order programs may be
     found in the companion course notes, linked in the [Preface]. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

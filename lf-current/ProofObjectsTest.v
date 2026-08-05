@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import ProofObjects.
 
 Parameter MISSING: Type.
@@ -58,7 +58,8 @@ idtac " ".
 
 idtac "#> Props.conj_fact".
 idtac "Possible points: 2".
-check_type @Props.conj_fact ((forall P Q R : Prop, P /\ Q -> Q /\ R -> P /\ R)).
+check_type @Props.conj_fact (
+(forall (P Q R : Prop) (_ : and P Q) (_ : and Q R), and P R)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Props.conj_fact.
@@ -70,7 +71,7 @@ idtac " ".
 
 idtac "#> Props.or_commut'".
 idtac "Possible points: 2".
-check_type @Props.or_commut' ((forall P Q : Prop, P \/ Q -> Q \/ P)).
+check_type @Props.or_commut' ((forall (P Q : Prop) (_ : or P Q), or Q P)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Props.or_commut'.
@@ -82,7 +83,7 @@ idtac " ".
 
 idtac "#> Props.ex_ev_Sn".
 idtac "Possible points: 2".
-check_type @Props.ex_ev_Sn ((exists n : nat, ev (S n))).
+check_type @Props.ex_ev_Sn ((@ex nat (fun n : nat => ev (S n)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Props.ex_ev_Sn.
@@ -95,8 +96,9 @@ idtac " ".
 idtac "#> Props.ex_match".
 idtac "Possible points: 2".
 check_type @Props.ex_match (
-(forall (A : Type) (P Q : A -> Prop),
- (forall x : A, P x -> Q x) -> (exists x : A, P x) -> exists x : A, Q x)).
+(forall (A : Type) (P Q : forall _ : A, Prop)
+   (_ : forall (x : A) (_ : P x), Q x) (_ : @ex A (fun x : A => P x)),
+ @ex A (fun x : A => Q x))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Props.ex_match.
@@ -108,7 +110,7 @@ idtac " ".
 
 idtac "#> Props.p_implies_true".
 idtac "Possible points: 1".
-check_type @Props.p_implies_true ((forall P : Type, P -> Props.True)).
+check_type @Props.p_implies_true ((forall (P : Type) (_ : P), Props.True)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Props.p_implies_true.
@@ -120,7 +122,7 @@ idtac " ".
 
 idtac "#> Props.ex_falso_quodlibet'".
 idtac "Possible points: 1".
-check_type @Props.ex_falso_quodlibet' ((forall P : Type, Props.False -> P)).
+check_type @Props.ex_falso_quodlibet' ((forall (P : Type) (_ : Props.False), P)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Props.ex_falso_quodlibet'.
@@ -133,10 +135,10 @@ idtac " ".
 idtac "#> EqualityPlayground.eq_cons".
 idtac "Possible points: 2".
 check_type @EqualityPlayground.eq_cons (
-(forall (X : Type) (h1 h2 : X) (t1 t2 : list X),
- @EqualityPlayground.eq X h1 h2 ->
- @EqualityPlayground.eq (list X) t1 t2 ->
- @EqualityPlayground.eq (list X) (h1 :: t1) (h2 :: t2))).
+(forall (X : Type) (h1 h2 : X) (t1 t2 : list X)
+   (_ : @EqualityPlayground.eq X h1 h2)
+   (_ : @EqualityPlayground.eq (list X) t1 t2),
+ @EqualityPlayground.eq (list X) (@cons X h1 t1) (@cons X h2 t2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions EqualityPlayground.eq_cons.
@@ -149,8 +151,9 @@ idtac " ".
 idtac "#> EqualityPlayground.equality__leibniz_equality".
 idtac "Possible points: 2".
 check_type @EqualityPlayground.equality__leibniz_equality (
-(forall (X : Type) (x y : X),
- @EqualityPlayground.eq X x y -> forall P : X -> Prop, P x -> P y)).
+(forall (X : Type) (x y : X) (_ : @EqualityPlayground.eq X x y)
+   (P : forall _ : X, Prop) (_ : P x),
+ P y)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions EqualityPlayground.equality__leibniz_equality.
@@ -163,8 +166,9 @@ idtac " ".
 idtac "#> EqualityPlayground.equality__leibniz_equality_term".
 idtac "Possible points: 2".
 check_type @EqualityPlayground.equality__leibniz_equality_term (
-(forall (X : Type) (x y : X),
- @EqualityPlayground.eq X x y -> forall P : X -> Prop, P x -> P y)).
+(forall (X : Type) (x y : X) (_ : @EqualityPlayground.eq X x y)
+   (P : forall _ : X, Prop) (_ : P x),
+ P y)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions EqualityPlayground.equality__leibniz_equality_term.
@@ -176,7 +180,7 @@ idtac " ".
 
 idtac "#> and_assoc".
 idtac "Possible points: 2".
-check_type @and_assoc ((forall P Q R : Prop, P /\ Q /\ R -> (P /\ Q) /\ R)).
+check_type @and_assoc ((forall (P Q R : Prop) (_ : and P (and Q R)), and (and P Q) R)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions and_assoc.
@@ -189,7 +193,7 @@ idtac " ".
 idtac "#> or_distributes_over_and".
 idtac "Possible points: 3".
 check_type @or_distributes_over_and (
-(forall P Q R : Prop, P \/ Q /\ R <-> (P \/ Q) /\ (P \/ R))).
+(forall P Q R : Prop, iff (or P (and Q R)) (and (or P Q) (or P R)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions or_distributes_over_and.
@@ -201,7 +205,7 @@ idtac " ".
 
 idtac "#> double_neg".
 idtac "Possible points: 1".
-check_type @double_neg ((forall P : Prop, P -> ~ ~ P)).
+check_type @double_neg ((forall (P : Prop) (_ : P), not (not P))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions double_neg.
@@ -210,7 +214,7 @@ idtac " ".
 
 idtac "#> contradiction_implies_anything".
 idtac "Possible points: 1".
-check_type @contradiction_implies_anything ((forall P Q : Prop, P /\ ~ P -> Q)).
+check_type @contradiction_implies_anything ((forall (P Q : Prop) (_ : and P (not P)), Q)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions contradiction_implies_anything.
@@ -219,7 +223,8 @@ idtac " ".
 
 idtac "#> de_morgan_not_or".
 idtac "Possible points: 1".
-check_type @de_morgan_not_or ((forall P Q : Prop, ~ (P \/ Q) -> ~ P /\ ~ Q)).
+check_type @de_morgan_not_or (
+(forall (P Q : Prop) (_ : not (or P Q)), and (not P) (not Q))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions de_morgan_not_or.
@@ -231,7 +236,8 @@ idtac " ".
 
 idtac "#> curry".
 idtac "Possible points: 1".
-check_type @curry ((forall P Q R : Prop, (P /\ Q -> R) -> P -> Q -> R)).
+check_type @curry (
+(forall (P Q R : Prop) (_ : forall _ : and P Q, R) (_ : P) (_ : Q), R)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions curry.
@@ -240,7 +246,8 @@ idtac " ".
 
 idtac "#> uncurry".
 idtac "Possible points: 1".
-check_type @uncurry ((forall P Q R : Prop, (P -> Q -> R) -> P /\ Q -> R)).
+check_type @uncurry (
+(forall (P Q R : Prop) (_ : forall (_ : P) (_ : Q), R) (_ : and P Q), R)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions uncurry.
@@ -254,7 +261,8 @@ idtac "#> pe_implies_or_eq".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @pe_implies_or_eq (
-(propositional_extensionality -> forall P Q : Prop, (P \/ Q) = (Q \/ P))).
+(forall (_ : propositional_extensionality) (P Q : Prop),
+ @eq Prop (or P Q) (or Q P))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions pe_implies_or_eq.
@@ -268,7 +276,8 @@ idtac "#> pe_implies_true_eq".
 idtac "Advanced".
 idtac "Possible points: 1".
 check_type @pe_implies_true_eq (
-(propositional_extensionality -> forall P : Prop, P -> True = P)).
+(forall (_ : propositional_extensionality) (P : Prop) (_ : P),
+ @eq Prop True P)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions pe_implies_true_eq.
@@ -281,7 +290,7 @@ idtac " ".
 idtac "#> pe_implies_pi".
 idtac "Advanced".
 idtac "Possible points: 3".
-check_type @pe_implies_pi ((propositional_extensionality -> proof_irrelevance)).
+check_type @pe_implies_pi ((forall _ : propositional_extensionality, proof_irrelevance)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions pe_implies_pi.
@@ -361,4 +370,6 @@ idtac "---------- pe_implies_pi ---------".
 Print Assumptions pe_implies_pi.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

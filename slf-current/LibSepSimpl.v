@@ -161,7 +161,12 @@ Parameter himpl_frame_lr : forall H1 H1' H2 H2',
   H2 ==> H2' ->
   (H1 \* H2) ==> (H1' \* H2').
 
-(** Characterization of [hpure] *)
+Parameter himpl_hstar_trans_l : forall H1 H2 H3 H4,
+  H1 ==> H2 ->
+  H2 \* H3 ==> H4 ->
+  H1 \* H3 ==> H4.
+
+(** Characterization of hpure *)
 
 Parameter himpl_hempty_hpure : forall P,
   P ->
@@ -1339,13 +1344,13 @@ Ltac xsimpl_step_l cancel_wands :=
   match HL with
   | (?Hla, ?Hlw, (?H \* ?Hlt)) =>
     match H with
-    | \[] => apply xsimpl_l_hempty
-    | \[?P] => apply xsimpl_l_hpure; intro
+    | \[] => eapply xsimpl_l_hempty
+    | \[?P] => eapply xsimpl_l_hpure; intro
     | ?H1 \* ?H2 => rewrite (@hstar_assoc H1 H2)
-    | hexists ?J => apply xsimpl_l_hexists; intro
-    | ?H1 \-* ?H2 => apply xsimpl_l_acc_wand
-    | ?Q1 \--* ?Q2 => apply xsimpl_l_acc_wand
-    | _ => apply xsimpl_l_acc_other
+    | hexists ?J => eapply xsimpl_l_hexists; intro
+    | ?H1 \-* ?H2 => eapply xsimpl_l_acc_wand
+    | ?Q1 \--* ?Q2 => eapply xsimpl_l_acc_wand
+    | _ => eapply xsimpl_l_acc_other
     end
   | (?Hla, ((?H1 \-* ?H2) \* ?Hlw), \[]) =>
       match H1 with
@@ -1353,14 +1358,14 @@ Ltac xsimpl_step_l cancel_wands :=
       | (_ \* _) => xsimpl_hwand_hstars_l tt
       | _ =>
         match cancel_wands with
-        | true => xsimpl_pick_same H1; apply xsimpl_l_cancel_hwand (* else continue *)
-        | _ => apply xsimpl_l_keep_wand
+        | true => xsimpl_pick_same H1; eapply xsimpl_l_cancel_hwand (* else continue *)
+        | _ => eapply xsimpl_l_keep_wand
         end
       end
   | (?Hla, ((?Q1 \--* ?Q2) \* ?Hlw), \[]) =>
         match cancel_wands with
         | true => xsimpl_pick_applied Q1; eapply xsimpl_l_cancel_qwand (* else continue *)
-        | _ => apply xsimpl_l_keep_wand
+        | _ => eapply xsimpl_l_keep_wand
         end
   end end.
 
@@ -1399,22 +1404,22 @@ Ltac xsimpl_step_r tt :=
       | \[?P] => fail 1 (* don't cancel out cause [P] might contain a contradiction *)
       | _ =>
         match H'eqH with
-        | H => apply xsimpl_r_hwand_same
+        | H => eapply xsimpl_r_hwand_same
      (* | protect H => we purposely refuse to unify if proetcted*)
         end
       end
   | hexists ?J => xsimpl_r_hexists_apply tt
   | \GC => xsimpl_hgc_or_htop_step tt
   | \Top => xsimpl_hgc_or_htop_step tt
-  | protect ?H' => apply xsimpl_r_keep
-  | protect ?Q' _ => apply xsimpl_r_keep
+  | protect ?H' => eapply xsimpl_r_keep
+  | protect ?Q' _ => eapply xsimpl_r_keep
   | ?H' => is_not_evar H;  xsimpl_cancel_same H (* else continue *)
-  | ?p ~> _ => xsimpl_pick_repr H; apply xsimpl_lr_cancel_eq_repr;
+  | ?p ~> _ => xsimpl_pick_repr H; eapply xsimpl_lr_cancel_eq_repr;
                [ xsimpl_lr_cancel_eq_repr_post tt | ]  (* else continue *)
-  | ?x ~> Id ?X => has_no_evar x; apply xsimpl_r_id
+  | ?x ~> Id ?X => has_no_evar x; eapply xsimpl_r_id
     | ?x ~> ?T_evar ?X_evar => has_no_evar x; is_evar T_evar; is_evar X_evar;
-                           apply xsimpl_r_id_unify
-  | _ => apply xsimpl_r_keep
+                           eapply xsimpl_r_id_unify
+  | _ => eapply xsimpl_r_keep
   end end.
 
 Ltac xsimpl_step_lr tt :=
@@ -1424,25 +1429,25 @@ Ltac xsimpl_step_lr tt :=
        match Hra with
        | ?H1 \* \[] =>
          match H1 with
-         | ?Hra_evar => is_evar Hra_evar; rew_heap; apply himpl_lr_refl (* else continue *)
+         | ?Hra_evar => is_evar Hra_evar; rew_heap; eapply himpl_lr_refl (* else continue *)
          | ?Q1 \--* ?Q2 => is_evar Q2; eapply himpl_lr_qwand_unify
          | \[False] \-* ?H2 => apply xsimpl_lr_hwand_hfalse
          | ?H1 \-* ?H2 => xsimpl_flip_acc_l tt; apply xsimpl_lr_hwand
          | ?Q1 \--* ?Q2 =>
              xsimpl_flip_acc_l tt;
              match H1 with
-             | @qwand unit ?Q1' ?Q2' => apply xsimpl_lr_qwand_unit
-             | _ => apply xsimpl_lr_qwand; intro
+             | @qwand unit ?Q1' ?Q2' => eapply xsimpl_lr_qwand_unit
+             | _ => eapply xsimpl_lr_qwand; intro
              end
          | hforall _ => xsimpl_flip_acc_l tt; apply xsimpl_lr_hforall; intro
                                  end
-       | \[] => apply himpl_lr_refl
-       | _ => xsimpl_flip_acc_lr tt; apply xsimpl_lr_exit_nogc
+       | \[] => eapply himpl_lr_refl
+       | _ => xsimpl_flip_acc_lr tt; eapply xsimpl_lr_exit_nogc
        end
-    | (\Top \* _) => apply himpl_lr_htop
-    | (\GC \* _) => apply himpl_lr_hgc;
+    | (\Top \* _) => eapply himpl_lr_htop
+    | (\GC \* _) => eapply himpl_lr_hgc;
                     [ try remove_empty_heaps_haffine tt; xaffine | ]
-    | ?Hrg' => xsimpl_flip_acc_lr tt; apply xsimpl_lr_exit
+    | ?Hrg' => xsimpl_flip_acc_lr tt; eapply xsimpl_lr_exit
   end end.
 
 Ltac xsimpl_step cancel_wands :=
@@ -2026,4 +2031,4 @@ Qed.
 
 End XsimplSetup.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-06 11:57 *)

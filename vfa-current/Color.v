@@ -56,11 +56,11 @@
    keys to [unit], where [None] means absent and [Some tt] means present; but their
    implementation is a bit more efficient. *)
 
-Require Import List.
-Require Import Setoid.  (* Generalized rewriting *)
-Require Import FSets.   (* Efficient functional sets *)
-Require Import FMaps.   (* Efficient functional maps *)
-Require Import PArith.  (* Positives *)
+From Stdlib Require Import List.
+From Stdlib Require Import Setoid.  (* Generalized rewriting *)
+From Stdlib Require Import FSets.   (* Efficient functional sets *)
+From Stdlib Require Import FMaps.   (* Efficient functional maps *)
+From Stdlib Require Import PArith.  (* Positives *)
 From VFA Require Import Perm.   (* to use <? notation and [bdestruct] tactic *)
 
 (** The nodes in our graph will be named by positive numbers.
@@ -296,7 +296,7 @@ Proof.
 intros.
 apply eqlistA_Eeq_eq.
 apply SortE_equivlistE_eqlistE.
-* (* To prove this one, [SearchAbout S.elements] *)
+* (* To prove this one, [Search S.elements] *)
 (* FILL IN HERE *) admit.
 * (* Use [filter_sortE] to prove this one *)
 (* FILL IN HERE *) admit.
@@ -363,7 +363,7 @@ Check M.cardinal_1.
 Check M.elements_1.
 Check M.elements_2.
 Check M.elements_3.
-Check map_length.
+Check length_map.
 Check eqlistA_length.
 Check SortE_equivlistE_eqlistE.
 Check InA_map_fst_key.
@@ -515,7 +515,7 @@ Lemma select_terminates:
 
 (* ================================================================= *)
 (** ** The Rest of the Algorithm *)
-Require Import Recdef.  (* Must import this to use the [Function] feature *)
+From Stdlib Require Import Recdef.  (* Must import this to use the [Function] feature *)
 
 Function select (K: nat) (g: graph) {measure M.cardinal g}: list node :=
   match S.choose (subset_nodes (low_deg K) g) with
@@ -599,4 +599,4 @@ Compute (M.elements (color palette G)). (* = [(4, 1); (2, 3); (6, 2); (1, 2); (5
   nodes [6] and [1] with [2], and node [5] with color [1]. *)
 
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

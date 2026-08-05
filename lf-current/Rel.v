@@ -1,16 +1,16 @@
 (** * Rel: Properties of Relations *)
 
 (** This short (and optional) chapter develops some basic definitions
-    and a few theorems about binary relations in Coq.  The key
+    and a few theorems about binary relations in Rocq.  The key
     definitions are repeated where they are actually used (in the
     [Smallstep] chapter of _Programming Language Foundations_),
     so readers who are already comfortable with these ideas can safely
     skim or skip this chapter.  However, relations are also a good
-    source of exercises for developing facility with Coq's basic
+    source of exercises for developing facility with Rocq's basic
     reasoning facilities, so it may be useful to look at this material
     just after the [IndProp] chapter. *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
+Set Warnings "-notation-overridden".
 From LF Require Export IndProp.
 
 (* ################################################################# *)
@@ -22,10 +22,10 @@ From LF Require Export IndProp.
 
 Definition relation (X: Type) := X -> X -> Prop.
 
-(** Somewhat confusingly, the Coq standard library hijacks the generic
+(** Somewhat confusingly, the Rocq standard library hijacks the generic
     term "relation" for this specific instance of the idea. To
     maintain consistency with the library, we will do the same.  So,
-    henceforth, the Coq identifier [relation] will always refer to a
+    henceforth, the Rocq identifier [relation] will always refer to a
     binary relation _on_ some set (between the set and itself),
     whereas in ordinary mathematical English the word "relation" can
     refer either to this specific concept or the more general concept
@@ -44,7 +44,7 @@ Check le : nat -> nat -> Prop.
 Check le : relation nat.
 (** (Why did we write it this way instead of starting with [Inductive
     le : relation nat...]?  Because we wanted to put the first [nat]
-    to the left of the [:], which makes Coq generate a somewhat nicer
+    to the left of the [:], which makes Rocq generate a somewhat nicer
     induction principle for reasoning about [<=].) *)
 
 (* ################################################################# *)
@@ -241,7 +241,7 @@ Proof.
 
 (** Reflexivity and transitivity are the main concepts we'll need for
     later chapters, but, for a bit of additional practice working with
-    relations in Coq, let's look at a few other common ones... *)
+    relations in Rocq, let's look at a few other common ones... *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Symmetric and Antisymmetric Relations *)
@@ -294,7 +294,7 @@ Definition equivalence {X:Type} (R: relation X) :=
 (** *** Partial Orders and Preorders *)
 
 (** A relation is a _partial order_ when it's reflexive,
-    _anti_-symmetric, and transitive.  In the Coq standard library
+    _anti_-symmetric, and transitive.  In the Rocq standard library
     it's called just "order" for short. *)
 
 Definition order {X:Type} (R: relation X) :=
@@ -321,7 +321,7 @@ Proof.
 (** The _reflexive, transitive closure_ of a relation [R] is the
     smallest relation that contains [R] and that is both reflexive and
     transitive.  Formally, it is defined like this in the Relations
-    module of the Coq standard library: *)
+    module of the Rocq standard library: *)
 
 Inductive clos_refl_trans {A: Type} (R: relation A) : relation A :=
   | rt_step x y (H : R x y) : clos_refl_trans R x y
@@ -409,4 +409,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

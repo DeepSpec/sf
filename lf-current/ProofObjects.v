@@ -1,35 +1,35 @@
 (** * ProofObjects: The Curry-Howard Correspondence *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
+Set Warnings "-notation-overridden,-notation-incompatible-prefix".
 From LF Require Export IndProp.
 
 (** "Algorithms are the computational content of proofs."
     (Robert Harper) *)
 
-(** We have seen that Coq has mechanisms both for _programming_,
+(** We have seen that Rocq has mechanisms both for _programming_,
     using inductive data types like [nat] or [list] and functions over
     these types, and for _proving_ properties of these programs, using
     inductive propositions (like [ev]), implication, universal
     quantification, and the like.  So far, we have mostly treated
     these mechanisms as if they were quite separate, and for many
     purposes this is a good way to think.  But we have also seen hints
-    that Coq's programming and proving facilities are closely related.
+    that Rocq's programming and proving facilities are closely related.
     For example, the keyword [Inductive] is used to declare both data
     types and propositions, and [->] is used both to describe the type
     of functions on data and logical implication.  This is not just a
-    syntactic accident!  In fact, programs and proofs in Coq are
-    almost the same thing.  In this chapter we will study how this
-    works.
+    syntactic accident!  In fact, programs and proofs in Rocq are
+    almost the same thing.  In this chapter we will study this connection
+    in more detail.
 
-    We have already seen the fundamental idea: provability in Coq is
-    represented by concrete _evidence_.  When we construct the proof
-    of a basic proposition, we are actually building a tree of
-    evidence, which can be thought of as a data structure.
+    We have already seen the fundamental idea: provability in Rocq is
+    always witnessed by _evidence_.  When we construct the proof of a
+    basic proposition, we are actually building a tree of evidence,
+    which can be thought of as a concrete data structure.
 
     If the proposition is an implication like [A -> B], then its proof
-    will be an evidence _transformer_: a recipe for converting
-    evidence for A into evidence for B.  So at a fundamental level,
-    proofs are simply programs that manipulate evidence. *)
+    is an evidence _transformer_: a recipe for converting evidence for
+    A into evidence for B.  So at a fundamental level, proofs are
+    simply programs that manipulate evidence. *)
 
 (** Question: If evidence is data, what are propositions themselves?
 
@@ -41,11 +41,10 @@ Inductive ev : nat -> Prop :=
   | ev_0                       : ev 0
   | ev_SS (n : nat) (H : ev n) : ev (S (S n)).
 
-(** Suppose we introduce an alternative pronunciation of "[:]".
-    Instead of "has type," we can say "is a proof of."  For example,
-    the second line in the definition of [ev] declares that [ev_0 : ev
-    0].  Instead of "[ev_0] has type [ev 0]," we can say that "[ev_0]
-    is a proof of [ev 0]." *)
+(** We can pronounce the ":" here as either "has type" or "is a proof
+    of."  For example, the second line in the definition of [ev]
+    declares that [ev_0 : ev 0].  Instead of "[ev_0] has type [ev 0],"
+    we can say that "[ev_0] is a proof of [ev 0]." *)
 
 (** This pun between types and propositions -- between [:] as "has type"
     and [:] as "is a proof of" or "is evidence for" -- is called the
@@ -55,8 +54,7 @@ Inductive ev : nat -> Prop :=
                  propositions  ~  types
                  proofs        ~  programs
 
-    See [Wadler 2015] (in Bib.v) for a brief history and up-to-date
-    exposition. *)
+    See [Wadler 2015] (in Bib.v) for a brief history and modern exposition. *)
 
 (** Many useful insights follow from this connection.  To begin with,
     it gives us a natural interpretation of the type of the [ev_SS]
@@ -64,40 +62,40 @@ Inductive ev : nat -> Prop :=
 
 Check ev_SS
   : forall n,
-    ev n ->
-    ev (S (S n)).
+      ev n ->
+      ev (S (S n)).
 
 (** This can be read "[ev_SS] is a constructor that takes two
     arguments -- a number [n] and evidence for the proposition [ev
     n] -- and yields evidence for the proposition [ev (S (S n))]." *)
 
-(** Now let's look again at a previous proof involving [ev]. *)
+(** Now let's look again at an earlier proof involving [ev]. *)
 
 Theorem ev_4 : ev 4.
 Proof.
   apply ev_SS. apply ev_SS. apply ev_0. Qed.
 
-(** As with ordinary data values and functions, we can use the [Print]
-    command to see the _proof object_ that results from this proof
-    script. *)
+(** Just as with ordinary data values and functions, we can use the
+    [Print] command to see the _proof object_ that results from this
+    proof script. *)
 
 Print ev_4.
 (* ===> ev_4 = ev_SS 2 (ev_SS 0 ev_0)
       : ev 4  *)
 
 (** Indeed, we can also write down this proof object directly,
-    without the need for a separate proof script: *)
+    with no need for a proof script at all: *)
 
 Check (ev_SS 2 (ev_SS 0 ev_0))
   : ev 4.
 
-(** The expression [ev_SS 2 (ev_SS 0 ev_0)] can be thought of as
-    instantiating the parameterized constructor [ev_SS] with the
-    specific arguments [2] and [0] plus the corresponding proof
-    objects for its premises [ev 2] and [ev 0].  Alternatively, we can
-    think of [ev_SS] as a primitive "evidence constructor" that, when
-    applied to a particular number, wants to be further applied to
-    evidence that this number is even; its type,
+(** The expression [ev_SS 2 (ev_SS 0 ev_0)] instantiates the
+    parameterized constructor [ev_SS] with the specific arguments [2]
+    and [0] plus the corresponding proof objects for its premises [ev
+    2] and [ev 0].  Alternatively, we can think of [ev_SS] as a
+    primitive "evidence constructor" that, when applied to a
+    particular number, wants to be further applied to evidence that
+    this number is even; its type,
 
       forall n, ev n -> ev (S (S n)),
 
@@ -120,7 +118,7 @@ Qed.
 (** * Proof Scripts *)
 
 (** The _proof objects_ we've been discussing lie at the core of how
-    Coq operates.  When Coq is following a proof script, what is
+    Rocq operates.  When Rocq is following a proof script, what is
     happening internally is that it is gradually constructing a proof
     object -- a term whose type is the proposition being proved.  The
     tactics between [Proof] and [Qed] tell it how to build up a term
@@ -139,7 +137,7 @@ Proof.
   Show Proof.
 Qed.
 
-(** At any given moment, Coq has constructed a term with a
+(** At any given moment, Rocq has constructed a term with a
     "hole" (indicated by [?Goal] here, and so on), and it knows what
     type of evidence is needed to fill this hole.
 
@@ -148,7 +146,7 @@ Qed.
     evidence we've built is stored in the global context under the name
     given in the [Theorem] command. *)
 
-(** Tactic proofs are convenient, but they are not essential in Coq:
+(** Tactic proofs are convenient, but they are not essential in Rocq:
     in principle, we can always just construct the required evidence
     by hand. Then we can use [Definition] (rather than [Theorem]) to
     introduce a global name for this evidence. *)
@@ -183,12 +181,12 @@ Definition ev_8' : ev 8
 (* ################################################################# *)
 (** * Quantifiers, Implications, Functions *)
 
-(** In Coq's computational universe (where data structures and
+(** In Rocq's computational universe (where data structures and
     programs live), there are two sorts of values that have arrows in
     their types: _constructors_ introduced by [Inductive]ly defined
     data types, and _functions_.
 
-    Similarly, in Coq's logical universe (where we carry out proofs),
+    Similarly, in Rocq's logical universe (where we carry out proofs),
     there are two ways of giving evidence for an implication:
     constructors introduced by [Inductive]ly defined propositions,
     and... functions! *)
@@ -216,7 +214,7 @@ Definition ev_plus4' : forall n, ev n -> ev (4 + n) :=
     ev_SS (S (S n)) (ev_SS n H).
 
 (** Recall that [fun n => blah] means "the function that, given [n],
-    yields [blah]," and that Coq treats [4 + n] and [S (S (S (S n)))]
+    yields [blah]," and that Rocq treats [4 + n] and [S (S (S (S n)))]
     as synonyms. Another equivalent way to write this definition is: *)
 
 Definition ev_plus4'' (n : nat) (H : ev n)
@@ -273,30 +271,32 @@ Definition ev_plus2'' : Prop :=
 (** * Programming with Tactics *)
 
 (** If we can build proofs by giving explicit terms rather than
-    executing tactic scripts, you may be wondering whether we can
-    build _programs_ using tactics rather than by writing down
-    explicit terms.
+    executing tactic scripts, you may wonder whether we can build
+    _programs_ using tactics rather than by writing down explicit
+    terms.
 
     Naturally, the answer is yes! *)
 
-Definition add1 : nat -> nat.
-intro n.
+Definition add2 : nat -> nat.
+intros n.
+Show Proof.
+apply S.
 Show Proof.
 apply S.
 Show Proof.
 apply n. Defined.
 
-Print add1.
+Print add2.
 (* ==>
-    add1 = fun n : nat => S n
-         : nat -> nat
+    add2 = fun n : nat => S (S n)
+          : nat -> nat
 *)
 
-Compute add1 2.
-(* ==> 3 : nat *)
+Compute add2 2.
+(* ==> 4 : nat *)
 
 (** Notice that we terminated the [Definition] with a [.] rather than
-    with [:=] followed by a term.  This tells Coq to enter _proof
+    with [:=] followed by a term.  This tells Rocq to enter _proof
     scripting mode_ to build an object of type [nat -> nat].  Also, we
     terminate the proof with [Defined] rather than [Qed]; this makes
     the definition _transparent_ so that it can be used in computation
@@ -306,7 +306,7 @@ Compute add1 2.
     This feature is mainly useful for writing functions with dependent
     types, which we won't explore much further in this book.  But it
     does illustrate the uniformity and orthogonality of the basic
-    ideas in Coq. *)
+    ideas in Rocq. *)
 
 (* ################################################################# *)
 (** * Logical Connectives as Inductive Types *)
@@ -314,7 +314,7 @@ Compute add1 2.
 (** Inductive definitions are powerful enough to express most of the
     logical connectives we have seen so far.  Indeed, only universal
     quantification (with implication as a special case) is built into
-    Coq; all the others are defined inductively.
+    Rocq; all the others are defined inductively.
 
     Let's see how. *)
 
@@ -404,7 +404,7 @@ Definition conj_fact : forall P Q R, P /\ Q -> Q /\ R -> P /\ R
 (** ** Disjunction *)
 
 (** The inductive definition of disjunction uses two constructors, one
-    for each side of the disjunct: *)
+    for each side of the disjunction: *)
 
 Module Or.
 
@@ -584,7 +584,7 @@ End Props.
 (* ################################################################# *)
 (** * Equality *)
 
-(** Even Coq's equality relation is not built in.  We can define
+(** Even Rocq's equality relation is not built in.  We can define
     it ourselves: *)
 
 Module EqualityPlayground.
@@ -611,7 +611,7 @@ Notation "x == y" := (eq x y)
     2].  Can we also use it to construct evidence that [1 + 1 = 2]?
     Yes, we can.  Indeed, it is the very same piece of evidence!
 
-    The reason is that Coq treats as "the same" any two terms that are
+    The reason is that Rocq treats as "the same" any two terms that are
     _convertible_ according to a simple set of computation rules.
 
     These rules, which are similar to those used by [Compute], include
@@ -654,8 +654,8 @@ Definition eq_add : forall (n1 n2 : nat), n1 == n2 -> (S n1) == (S n2) :=
 
 (** A tactic-based proof runs into some difficulties if we try to use
     our usual repertoire of tactics, such as [rewrite] and
-    [reflexivity]. Those work with *setoid* relations that Coq knows
-    about, such as [=], but not our [==]. We could prove to Coq that
+    [reflexivity]. Those work with *setoid* relations that Rocq knows
+    about, such as [=], but not our [==]. We could prove to Rocq that
     [==] is a setoid, but a simpler way is to use [destruct] and
     [apply] instead. *)
 
@@ -770,19 +770,19 @@ End EqualityPlayground.
     context. *)
 
 (* ################################################################# *)
-(** * Coq's Trusted Computing Base *)
+(** * Rocq's Trusted Computing Base *)
 
 (** One question that arises with any automated proof assistant
     is "why should we trust it?" -- i.e., what if there is a bug in
     the implementation that renders all its reasoning suspect?
 
     While it is impossible to allay such concerns completely, the fact
-    that Coq is based on the Curry-Howard correspondence gives it a
+    that Rocq is based on the Curry-Howard correspondence gives it a
     strong foundation. Because propositions are just types and proofs
     are just terms, checking that an alleged proof of a proposition is
     valid just amounts to _type-checking_ the term.  Type checkers are
     relatively small and straightforward programs, so the "trusted
-    computing base" for Coq -- the part of the code that we have to
+    computing base" for Rocq -- the part of the code that we have to
     believe is operating correctly -- is small too.
 
     What must a typechecker do?  Its primary job is to make sure that
@@ -793,7 +793,7 @@ End EqualityPlayground.
 
 (** There are a few additional wrinkles:
 
-    First, since Coq types can themselves be expressions, the checker
+    First, since Rocq types can themselves be expressions, the checker
     must normalize these (by using the computation rules) before
     comparing them.
 
@@ -809,7 +809,7 @@ Fail Definition or_bogus : forall P Q, P \/ Q -> P :=
     end.
 
 (** All the types here match correctly, but the [match] only
-    considers one of the possible constructors for [or].  Coq's
+    considers one of the possible constructors for [or].  Rocq's
     exhaustiveness check will reject this definition.
 
     Third, the checker must make sure that each recursive function
@@ -825,16 +825,16 @@ Fail Definition falso : False := infinite_loop 0.
 
 (** Recursive function [infinite_loop] purports to return a
     value of any type [X] that you would like.  (The [struct]
-    annotation on the function tells Coq that it recurses on argument
-    [n], not [X].)  Were Coq to allow [infinite_loop], then [falso]
-    would be definable, thus giving evidence for [False].  So Coq rejects
+    annotation on the function tells Rocq that it recurses on argument
+    [n], not [X].)  Were Rocq to allow [infinite_loop], then [falso]
+    would be definable, thus giving evidence for [False].  So Rocq rejects
     [infinite_loop]. *)
 
-(** Note that the soundness of Coq depends only on the
+(** Note that the soundness of Rocq depends only on the
     correctness of this typechecking engine, not on the tactic
-    machinery.  If there is a bug in a tactic implementation (and this
-    certainly does happen!), that tactic might construct an invalid
-    proof term.  But when you type [Qed], Coq checks the term for
+    machinery.  If there is a bug in a tactic implementation (which
+    does happen occasionally), that tactic might construct an invalid
+    proof term.  But when you type [Qed], Rocq checks the term for
     validity from scratch.  Only theorems whose proofs pass the
     type-checker can be used in further proof developments.  *)
 
@@ -885,7 +885,7 @@ Definition uncurry : forall P Q R : Prop,
 (** * Proof Irrelevance (Advanced) *)
 
 (** In [Logic] we saw that functional extensionality could be
-    added to Coq. A similar notion about propositions can also
+    added to Rocq. A similar notion about propositions can also
     be defined (and added as an axiom, if desired): *)
 
 Definition propositional_extensionality : Prop :=
@@ -922,7 +922,7 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** **** Exercise: 3 stars, advanced (pe_implies_pi)
 
-    Acknowledgment: this theorem and its proof technique are inspired
+    (Acknowledgment: this theorem and its proof technique are inspired
     by Gert Smolka's manuscript Modeling and Proving in Computational
     Type Theory Using the Coq Proof Assistant, 2021. *)
 
@@ -943,4 +943,4 @@ Theorem pe_implies_pi :
 Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

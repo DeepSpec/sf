@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import Tactics.
 
 Parameter MISSING: Type.
@@ -37,7 +37,9 @@ idtac " ".
 
 idtac "#> rev_exercise1".
 idtac "Possible points: 2".
-check_type @rev_exercise1 ((forall l l' : list nat, l = @rev nat l' -> l' = @rev nat l)).
+check_type @rev_exercise1 (
+(forall (l l' : list nat) (_ : @eq (list nat) l (@rev nat l')),
+ @eq (list nat) l' (@rev nat l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions rev_exercise1.
@@ -50,8 +52,10 @@ idtac " ".
 idtac "#> injection_ex3".
 idtac "Possible points: 3".
 check_type @injection_ex3 (
-(forall (X : Type) (x y z : X) (l j : list X),
- x :: y :: l = z :: j -> j = z :: l -> x = y)).
+(forall (X : Type) (x y z : X) (l j : list X)
+   (_ : @eq (list X) (@cons X x (@cons X y l)) (@cons X z j))
+   (_ : @eq (list X) j (@cons X z l)),
+ @eq X x y)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions injection_ex3.
@@ -64,11 +68,27 @@ idtac " ".
 idtac "#> discriminate_ex3".
 idtac "Possible points: 1".
 check_type @discriminate_ex3 (
-(forall (X : Type) (x y z : X) (l : list X),
- list X -> x :: y :: l = [ ] -> x = z)).
+(forall (X : Type) (x y z : X) (l _ : list X)
+   (_ : @eq (list X) (@cons X x (@cons X y l)) (@nil X)),
+ @eq X x z)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions discriminate_ex3.
+Goal True.
+idtac " ".
+
+idtac "-------------------  nth_error_always_none  --------------------".
+idtac " ".
+
+idtac "#> nth_error_always_none".
+idtac "Possible points: 3".
+check_type @nth_error_always_none (
+(forall (l : list nat)
+   (_ : forall i : nat, @eq (option nat) (@nth_error nat l i) (@None nat)),
+ @eq (list nat) l (@nil nat))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions nth_error_always_none.
 Goal True.
 idtac " ".
 
@@ -77,20 +97,11 @@ idtac " ".
 
 idtac "#> eqb_true".
 idtac "Possible points: 2".
-check_type @eqb_true ((forall n m : nat, (n =? m) = true -> n = m)).
+check_type @eqb_true ((forall (n m : nat) (_ : @eq bool (eqb n m) true), @eq nat n m)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions eqb_true.
 Goal True.
-idtac " ".
-
-idtac "-------------------  eqb_true_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: informal_proof".
-idtac "Advanced".
-idtac "Possible points: 2".
-print_manual_grade manual_grade_for_informal_proof.
 idtac " ".
 
 idtac "-------------------  plus_n_n_injective  --------------------".
@@ -98,7 +109,8 @@ idtac " ".
 
 idtac "#> plus_n_n_injective".
 idtac "Possible points: 3".
-check_type @plus_n_n_injective ((forall n m : nat, n + n = m + m -> n = m)).
+check_type @plus_n_n_injective (
+(forall (n m : nat) (_ : @eq nat (Nat.add n n) (Nat.add m m)), @eq nat n m)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_n_n_injective.
@@ -111,8 +123,8 @@ idtac " ".
 idtac "#> nth_error_after_last".
 idtac "Possible points: 3".
 check_type @nth_error_after_last (
-(forall (n : nat) (X : Type) (l : list X),
- @length X l = n -> @nth_error X l n = @None X)).
+(forall (n : nat) (X : Type) (l : list X) (_ : @eq nat (@length X l) n),
+ @eq (option X) (@nth_error X l n) (@None X))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions nth_error_after_last.
@@ -125,8 +137,11 @@ idtac " ".
 idtac "#> combine_split".
 idtac "Possible points: 3".
 check_type @combine_split (
-(forall (X Y : Type) (l : list (X * Y)) (l1 : list X) (l2 : list Y),
- @split X Y l = (l1, l2) -> @combine X Y l1 l2 = l)).
+(forall (X Y : Type) (l : list (prod X Y)) (l1 : list X)
+   (l2 : list Y)
+   (_ : @eq (prod (list X) (list Y)) (@split X Y l)
+          (@pair (list X) (list Y) l1 l2)),
+ @eq (list (prod X Y)) (@combine X Y l1 l2) l)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions combine_split.
@@ -139,7 +154,7 @@ idtac " ".
 idtac "#> bool_fn_applied_thrice".
 idtac "Possible points: 2".
 check_type @bool_fn_applied_thrice (
-(forall (f : bool -> bool) (b : bool), f (f (f b)) = f b)).
+(forall (f : forall _ : bool, bool) (b : bool), @eq bool (f (f (f b))) (f b))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bool_fn_applied_thrice.
@@ -151,7 +166,7 @@ idtac " ".
 
 idtac "#> eqb_sym".
 idtac "Possible points: 3".
-check_type @eqb_sym ((forall n m : nat, (n =? m) = (m =? n))).
+check_type @eqb_sym ((forall n m : nat, @eq bool (eqb n m) (eqb m n))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions eqb_sym.
@@ -174,8 +189,9 @@ idtac "#> filter_exercise".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @filter_exercise (
-(forall (X : Type) (test : X -> bool) (x : X) (l lf : list X),
- @filter X test l = x :: lf -> test x = true)).
+(forall (X : Type) (test : forall _ : X, bool) (x : X)
+   (l lf : list X) (_ : @eq (list X) (@filter X test l) (@cons X x lf)),
+ @eq bool (test x) true)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions filter_exercise.
@@ -189,8 +205,8 @@ idtac "#> existsb_existsb'".
 idtac "Advanced".
 idtac "Possible points: 6".
 check_type @existsb_existsb' (
-(forall (X : Type) (test : X -> bool) (l : list X),
- @existsb X test l = @existsb' X test l)).
+(forall (X : Type) (test : forall _ : X, bool) (l : list X),
+ @eq bool (@existsb X test l) (@existsb' X test l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions existsb_existsb'.
@@ -199,8 +215,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 22".
-idtac "Max points - advanced: 36".
+idtac "Max points - standard: 25".
+idtac "Max points - advanced: 37".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -230,6 +246,8 @@ idtac "---------- injection_ex3 ---------".
 Print Assumptions injection_ex3.
 idtac "---------- discriminate_ex3 ---------".
 Print Assumptions discriminate_ex3.
+idtac "---------- nth_error_always_none ---------".
+Print Assumptions nth_error_always_none.
 idtac "---------- eqb_true ---------".
 Print Assumptions eqb_true.
 idtac "---------- plus_n_n_injective ---------".
@@ -244,8 +262,6 @@ idtac "---------- eqb_sym ---------".
 Print Assumptions eqb_sym.
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- informal_proof ---------".
-idtac "MANUAL".
 idtac "---------- split_combine ---------".
 idtac "MANUAL".
 idtac "---------- filter_exercise ---------".
@@ -254,4 +270,6 @@ idtac "---------- existsb_existsb' ---------".
 Print Assumptions existsb_existsb'.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

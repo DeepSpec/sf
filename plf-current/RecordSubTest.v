@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import RecordSub.
 
 Parameter MISSING: Type.
@@ -54,7 +54,15 @@ check_type @RecordSub.Examples.subtyping_example_2 (
 (RecordSub.subtype
    (RecordSub.Ty_Arrow RecordSub.Ty_Top RecordSub.Examples.TRcd_kj)
    (RecordSub.Ty_Arrow
-      (RecordSub.Ty_Arrow RecordSub.Examples.C RecordSub.Examples.C)
+      (RecordSub.Ty_Arrow
+         (RecordSub.Ty_Base
+            (String.String
+               (Ascii.Ascii true true false false false false true false)
+               String.EmptyString))
+         (RecordSub.Ty_Base
+            (String.String
+               (Ascii.Ascii true true false false false false true false)
+               String.EmptyString)))
       RecordSub.Examples.TRcd_j))).
 idtac "Assumptions:".
 Abort.
@@ -70,11 +78,26 @@ idtac "Possible points: 1".
 check_type @RecordSub.Examples.subtyping_example_3 (
 (RecordSub.subtype
    (RecordSub.Ty_Arrow RecordSub.Ty_RNil
-      (RecordSub.Ty_RCons RecordSub.Examples.j RecordSub.Examples.A
+      (RecordSub.Ty_RCons
+         (String.String
+            (Ascii.Ascii false true false true false true true false)
+            String.EmptyString)
+         (RecordSub.Ty_Base
+            (String.String
+               (Ascii.Ascii true false false false false false true false)
+               String.EmptyString))
          RecordSub.Ty_RNil))
    (RecordSub.Ty_Arrow
-      (RecordSub.Ty_RCons RecordSub.Examples.k RecordSub.Examples.B
-         RecordSub.Ty_RNil) RecordSub.Ty_RNil))).
+      (RecordSub.Ty_RCons
+         (String.String
+            (Ascii.Ascii true true false true false true true false)
+            String.EmptyString)
+         (RecordSub.Ty_Base
+            (String.String
+               (Ascii.Ascii false true false false false false true false)
+               String.EmptyString))
+         RecordSub.Ty_RNil)
+      RecordSub.Ty_RNil))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions RecordSub.Examples.subtyping_example_3.
@@ -88,13 +111,54 @@ idtac "#> RecordSub.Examples.subtyping_example_4".
 idtac "Possible points: 2".
 check_type @RecordSub.Examples.subtyping_example_4 (
 (RecordSub.subtype
-   (RecordSub.Ty_RCons RecordSub.Examples.x RecordSub.Examples.A
-      (RecordSub.Ty_RCons RecordSub.Examples.y RecordSub.Examples.B
-         (RecordSub.Ty_RCons RecordSub.Examples.z RecordSub.Examples.C
+   (RecordSub.Ty_RCons
+      (String.String
+         (Ascii.Ascii false false false true true true true false)
+         String.EmptyString)
+      (RecordSub.Ty_Base
+         (String.String
+            (Ascii.Ascii true false false false false false true false)
+            String.EmptyString))
+      (RecordSub.Ty_RCons
+         (String.String
+            (Ascii.Ascii true false false true true true true false)
+            String.EmptyString)
+         (RecordSub.Ty_Base
+            (String.String
+               (Ascii.Ascii false true false false false false true false)
+               String.EmptyString))
+         (RecordSub.Ty_RCons
+            (String.String
+               (Ascii.Ascii false true false true true true true false)
+               String.EmptyString)
+            (RecordSub.Ty_Base
+               (String.String
+                  (Ascii.Ascii true true false false false false true false)
+                  String.EmptyString))
             RecordSub.Ty_RNil)))
-   (RecordSub.Ty_RCons RecordSub.Examples.z RecordSub.Examples.C
-      (RecordSub.Ty_RCons RecordSub.Examples.y RecordSub.Examples.B
-         (RecordSub.Ty_RCons RecordSub.Examples.x RecordSub.Examples.A
+   (RecordSub.Ty_RCons
+      (String.String (Ascii.Ascii false true false true true true true false)
+         String.EmptyString)
+      (RecordSub.Ty_Base
+         (String.String
+            (Ascii.Ascii true true false false false false true false)
+            String.EmptyString))
+      (RecordSub.Ty_RCons
+         (String.String
+            (Ascii.Ascii true false false true true true true false)
+            String.EmptyString)
+         (RecordSub.Ty_Base
+            (String.String
+               (Ascii.Ascii false true false false false false true false)
+               String.EmptyString))
+         (RecordSub.Ty_RCons
+            (String.String
+               (Ascii.Ascii false false false true true true true false)
+               String.EmptyString)
+            (RecordSub.Ty_Base
+               (String.String
+                  (Ascii.Ascii true false false false false false true false)
+                  String.EmptyString))
             RecordSub.Ty_RNil))))).
 idtac "Assumptions:".
 Abort.
@@ -132,10 +196,29 @@ idtac "Possible points: 2".
 check_type @RecordSub.Examples2.typing_example_1 (
 (RecordSub.has_type (@Maps.empty RecordSub.ty)
    (RecordSub.tm_app
-      (RecordSub.tm_abs RecordSub.Examples.x RecordSub.Examples.TRcd_j
-         (RecordSub.tm_rproj (RecordSub.tm_var RecordSub.Examples.x)
-            RecordSub.Examples.j)) RecordSub.Examples2.trcd_kj)
-   (RecordSub.Ty_Arrow RecordSub.Examples.B RecordSub.Examples.B))).
+      (RecordSub.tm_abs
+         (String.String
+            (Ascii.Ascii false false false true true true true false)
+            String.EmptyString)
+         RecordSub.Examples.TRcd_j
+         (RecordSub.tm_rproj
+            (RecordSub.tm_var
+               (String.String
+                  (Ascii.Ascii false false false true true true true false)
+                  String.EmptyString))
+            (String.String
+               (Ascii.Ascii false true false true false true true false)
+               String.EmptyString)))
+      RecordSub.Examples2.trcd_kj)
+   (RecordSub.Ty_Arrow
+      (RecordSub.Ty_Base
+         (String.String
+            (Ascii.Ascii false true false false false false true false)
+            String.EmptyString))
+      (RecordSub.Ty_Base
+         (String.String
+            (Ascii.Ascii false true false false false false true false)
+            String.EmptyString))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions RecordSub.Examples2.typing_example_1.
@@ -148,11 +231,17 @@ idtac " ".
 idtac "#> RecordSub.canonical_forms_of_arrow_types".
 idtac "Possible points: 3".
 check_type @RecordSub.canonical_forms_of_arrow_types (
-(forall (Gamma : RecordSub.context) (s : RecordSub.tm) (T1 T2 : RecordSub.ty),
- RecordSub.has_type Gamma s (RecordSub.Ty_Arrow T1 T2) ->
- RecordSub.value s ->
- exists (x : String.string) (S1 : RecordSub.ty) (s2 : RecordSub.tm),
-   s = RecordSub.tm_abs x S1 s2)).
+(forall (Gamma : RecordSub.context) (s : RecordSub.tm)
+   (T1 T2 : RecordSub.ty)
+   (_ : RecordSub.has_type Gamma s (RecordSub.Ty_Arrow T1 T2))
+   (_ : RecordSub.value s),
+ @ex String.string
+   (fun x : String.string =>
+    @ex RecordSub.ty
+      (fun S1 : RecordSub.ty =>
+       @ex RecordSub.tm
+         (fun s2 : RecordSub.tm =>
+          @eq RecordSub.tm s (RecordSub.tm_abs x S1 s2)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions RecordSub.canonical_forms_of_arrow_types.
@@ -203,4 +292,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

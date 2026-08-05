@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import Types.
 
 Parameter MISSING: Type.
@@ -37,7 +37,7 @@ idtac " ".
 
 idtac "#> TM.some_term_is_stuck".
 idtac "Possible points: 2".
-check_type @TM.some_term_is_stuck ((exists t : TM.tm, TM.stuck t)).
+check_type @TM.some_term_is_stuck ((@ex TM.tm (fun t : TM.tm => TM.stuck t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TM.some_term_is_stuck.
@@ -49,7 +49,8 @@ idtac " ".
 
 idtac "#> TM.value_is_nf".
 idtac "Possible points: 3".
-check_type @TM.value_is_nf ((forall t : TM.tm, TM.value t -> TM.step_normal_form t)).
+check_type @TM.value_is_nf (
+(forall (t : TM.tm) (_ : TM.value t), @Smallstep.normal_form TM.tm TM.step t)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TM.value_is_nf.
@@ -62,21 +63,12 @@ idtac " ".
 idtac "#> TM.progress".
 idtac "Possible points: 3".
 check_type @TM.progress (
-(forall (t : TM.tm) (T : TM.ty),
- TM.has_type t T -> TM.value t \/ (exists t' : TM.tm, TM.step t t'))).
+(forall (t : TM.tm) (T : TM.ty) (_ : TM.has_type t T),
+ or (TM.value t) (@ex TM.tm (fun t' : TM.tm => TM.step t t')))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TM.progress.
 Goal True.
-idtac " ".
-
-idtac "-------------------  finish_progress_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: TM.finish_progress_informal".
-idtac "Advanced".
-idtac "Possible points: 3".
-print_manual_grade TM.manual_grade_for_finish_progress_informal.
 idtac " ".
 
 idtac "-------------------  finish_preservation  --------------------".
@@ -85,21 +77,12 @@ idtac " ".
 idtac "#> TM.preservation".
 idtac "Possible points: 2".
 check_type @TM.preservation (
-(forall (t t' : TM.tm) (T : TM.ty),
- TM.has_type t T -> TM.step t t' -> TM.has_type t' T)).
+(forall (t t' : TM.tm) (T : TM.ty) (_ : TM.has_type t T) (_ : TM.step t t'),
+ TM.has_type t' T)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TM.preservation.
 Goal True.
-idtac " ".
-
-idtac "-------------------  finish_preservation_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: TM.finish_preservation_informal".
-idtac "Advanced".
-idtac "Possible points: 3".
-print_manual_grade TM.manual_grade_for_finish_preservation_informal.
 idtac " ".
 
 idtac "-------------------  preservation_alternate_proof  --------------------".
@@ -108,8 +91,8 @@ idtac " ".
 idtac "#> TM.preservation'".
 idtac "Possible points: 3".
 check_type @TM.preservation' (
-(forall (t t' : TM.tm) (T : TM.ty),
- TM.has_type t T -> TM.step t t' -> TM.has_type t' T)).
+(forall (t t' : TM.tm) (T : TM.ty) (_ : TM.has_type t T) (_ : TM.step t t'),
+ TM.has_type t' T)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TM.preservation'.
@@ -122,11 +105,14 @@ idtac " ".
 idtac "#> TM.subject_expansion".
 idtac "Possible points: 3".
 check_type @TM.subject_expansion (
-((forall (t t' : TM.tm) (T : TM.ty),
-  TM.step t t' /\ TM.has_type t' T -> TM.has_type t T) \/
- ~
- (forall (t t' : TM.tm) (T : TM.ty),
-  TM.step t t' /\ TM.has_type t' T -> TM.has_type t T))).
+(or
+   (forall (t t' : TM.tm) (T : TM.ty)
+      (_ : and (TM.step t t') (TM.has_type t' T)),
+    TM.has_type t T)
+   (not
+      (forall (t t' : TM.tm) (T : TM.ty)
+         (_ : and (TM.step t t') (TM.has_type t' T)),
+       TM.has_type t T)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TM.subject_expansion.
@@ -169,7 +155,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 21".
-idtac "Max points - advanced: 33".
+idtac "Max points - advanced: 27".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -210,12 +196,10 @@ idtac "---------- remove_pred0 ---------".
 idtac "MANUAL".
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- finish_progress_informal ---------".
-idtac "MANUAL".
-idtac "---------- finish_preservation_informal ---------".
-idtac "MANUAL".
 idtac "---------- prog_pres_bigstep ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

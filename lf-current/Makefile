@@ -10,7 +10,7 @@ clean::
 	$(RM) $(wildcard Makefile.coq Makefile.coq.conf) imp.ml imp.mli imp1.ml imp1.mli imp2.ml imp2.mli
 
 Makefile.coq:
-	coq_makefile $(COQMFFLAGS) -o Makefile.coq $(ALLVFILES)
+	rocq makefile $(COQMFFLAGS) -o Makefile.coq $(ALLVFILES)
 
 -include Makefile.coq
 

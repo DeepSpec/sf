@@ -1,0 +1,796 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.HoareTest}{Library }{SECF.HoareTest}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Set} \coqdocvar{Warnings} "-notation-overridden,-parsing".\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{Stdlib} \coqdockw{Require} \coqdockw{Export} \coqdoclibrary{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Hoare}{\coqdoclibrary{Hoare}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdef{SECF.HoareTest.MISSING}{MISSING}{\coqdocaxiom{MISSING}}: \coqdockw{Type}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdef{SECF.HoareTest.Check}{Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{check\_type} \coqdocvar{A} \coqdocvar{B} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdockw{type} \coqdockw{of} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdockw{context}[\coqref{SECF.HoareTest.MISSING}{\coqdocaxiom{MISSING}}] \ensuremath{\Rightarrow} \coqdoctac{idtac} "Missing:" \coqdocvar{A}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} ?\coqdocvar{T} \ensuremath{\Rightarrow} \coqdoctac{first} [\coqdocvar{unify} \coqdocvar{T} \coqdocvar{B}; \coqdoctac{idtac} "Type: ok" \ensuremath{|} \coqdoctac{idtac} "Type: wrong - should be (" \coqdocvar{B} ")"]\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print\_manual\_grade} \coqdocvar{A} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{Some}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{Some}} (\coqdocvar{\_} ?\coqdocvar{S} ?\coqdocvar{C}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score:"  \coqdocvar{S};\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{C} \coqdockw{with}\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} ""\%\coqdocvar{string} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment:" \coqdocvar{C}\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{None}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{None}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score: Ungraded";\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqref{SECF.HoareTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Hoare}{\coqdoclibrary{Hoare}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqref{SECF.HoareTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_post\_true  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> hoare\_post\_true".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.hoare post true}{\coqdocaxiom{hoare\_post\_true}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.HoareTest.P:3}{P}{\coqdocbinder{P}} \coqdef{SECF.HoareTest.Q:4}{Q}{\coqdocbinder{Q}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) (\coqdef{SECF.HoareTest.c:5}{c}{\coqdocbinder{c}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}) (\coqdocvar{\_} : \coqdockw{\ensuremath{\forall}} \coqdef{SECF.HoareTest.st:6}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}}, \coqref{SECF.HoareTest.Q:4}{\coqdocvariable{Q}} \coqref{SECF.HoareTest.st:6}{\coqdocvariable{st}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}} \coqref{SECF.HoareTest.P:3}{\coqdocvariable{P}} \coqref{SECF.HoareTest.c:5}{\coqdocvariable{c}} \coqref{SECF.HoareTest.Q:4}{\coqdocvariable{Q}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.hoare post true}{\coqdocaxiom{hoare\_post\_true}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_asgn\_wrong  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> hoare\_asgn\_wrong".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.hoare asgn wrong}{\coqdocaxiom{hoare\_asgn\_wrong}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{ex}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{ex}} \coqref{SECF.Imp.aexp}{\coqdocinductive{aexp}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.a:11}{a}{\coqdocbinder{a}} : \coqref{SECF.Imp.aexp}{\coqdocinductive{aexp}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}}\coqdoceol
+\coqdocindent{3.00em}
+(\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}} (\coqdockw{fun} \coqdocvar{\_} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow} \coqref{SECF.Hoare.:::'True'}{\coqdocnotation{True}})\coqdoceol
+\coqdocindent{4.50em}
+(\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} \coqref{SECF.HoareTest.a:11}{\coqdocvariable{a}})\coqdoceol
+\coqdocindent{4.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:12}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{5.00em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:12}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{6.00em}
+((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} \coqref{SECF.HoareTest.a:11}{\coqdocvariable{a}} : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:12}{\coqdocvariable{st}})))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.hoare asgn wrong}{\coqdocaxiom{hoare\_asgn\_wrong}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_asgn\_examples\_2  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> assertion\_sub\_ex1'".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.assertion sub ex1'}{\coqdocaxiom{assertion\_sub\_ex1'}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:15}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:15}{\coqdocvariable{st}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 5 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:15}{\coqdocvariable{st}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.AMult}{\coqdocconstructor{AMult}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 2) (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}})))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:16}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:16}{\coqdocvariable{st}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 10 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:16}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.assertion sub ex1'}{\coqdocaxiom{assertion\_sub\_ex1'}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> assertion\_sub\_ex2'".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.assertion sub ex2'}{\coqdocaxiom{assertion\_sub\_ex2'}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:19}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}}\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:21}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 0 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:21}{\coqdocvariable{st0}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 3 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:21}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) \coqref{SECF.HoareTest.st:19}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:20}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 3 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:20}{\coqdocvariable{st0}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 5 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:20}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) \coqref{SECF.HoareTest.st:19}{\coqdocvariable{st}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 3))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:22}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}}\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:24}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 0 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:24}{\coqdocvariable{st0}}) ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:24}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) \coqref{SECF.HoareTest.st:22}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:23}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:23}{\coqdocvariable{st0}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 5 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:23}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) \coqref{SECF.HoareTest.st:22}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.assertion sub ex2'}{\coqdocaxiom{assertion\_sub\_ex2'}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_asgn\_example4  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> hoare\_asgn\_example4".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.hoare asgn example4}{\coqdocaxiom{hoare\_asgn\_example4}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}} (\coqdockw{fun} \coqdocvar{\_} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow} \coqref{SECF.Hoare.:::'True'}{\coqdocnotation{True}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.CSeq}{\coqdocconstructor{CSeq}} (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 1)) (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 2)))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:31}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}}\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:33}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:33}{\coqdocvariable{st0}})\coqdoceol
+\coqdocindent{5.50em}
+((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 1 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:33}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) \coqref{SECF.HoareTest.st:31}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:32}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:32}{\coqdocvariable{st0}})\coqdoceol
+\coqdocindent{5.50em}
+((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} 2 : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:32}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) \coqref{SECF.HoareTest.st:31}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.hoare asgn example4}{\coqdocaxiom{hoare\_asgn\_example4}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  swap\_exercise  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> swap\_exercise".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.swap exercise}{\coqdocaxiom{swap\_exercise}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:37}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:37}{\coqdocvariable{st}}) ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:37}{\coqdocvariable{st}}))\coqdoceol
+\coqdocindent{1.50em}
+\coqref{SECF.Hoare.swap program}{\coqdocaxiom{swap\_program}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:38}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+\coqexternalref{le}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Peano}{\coqdocinductive{le}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:38}{\coqdocvariable{st}}) ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:38}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.swap exercise}{\coqdocaxiom{swap\_exercise}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  invalid\_triple  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> invalid\_triple".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 6".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.invalid triple}{\coqdocaxiom{invalid\_triple}} (\coqdoceol
+\coqdocnoindent
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.HoareTest.a:41}{a}{\coqdocbinder{a}} : \coqref{SECF.Imp.aexp}{\coqdocinductive{aexp}}) (\coqdef{SECF.HoareTest.n:42}{n}{\coqdocbinder{n}} : \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}),\coqdoceol
+\coqdocindent{2.00em}
+\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}}\coqdoceol
+\coqdocindent{3.00em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:43}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{3.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} \coqref{SECF.HoareTest.a:41}{\coqdocvariable{a}} : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:43}{\coqdocvariable{st}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} \coqref{SECF.HoareTest.n:42}{\coqdocvariable{n}} : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:43}{\coqdocvariable{st}}))\coqdoceol
+\coqdocindent{3.00em}
+(\coqref{SECF.Imp.CSeq}{\coqdocconstructor{CSeq}} (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 3)) (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}} \coqref{SECF.HoareTest.a:41}{\coqdocvariable{a}}))\coqdoceol
+\coqdocindent{3.00em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:44}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{3.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:44}{\coqdocvariable{st}}) ((\coqref{SECF.Hoare.Aexp of nat}{\coqdocdefinition{Aexp\_of\_nat}} \coqref{SECF.HoareTest.n:42}{\coqdocvariable{n}} : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:44}{\coqdocvariable{st}}))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.invalid triple}{\coqdocaxiom{invalid\_triple}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  if\_minus\_plus  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> if\_minus\_plus".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.if minus plus}{\coqdocaxiom{if\_minus\_plus}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.valid hoare triple}{\coqdocdefinition{valid\_hoare\_triple}} (\coqdockw{fun} \coqdocvar{\_} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow} \coqref{SECF.Hoare.:::'True'}{\coqdocnotation{True}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.CIf}{\coqdocconstructor{CIf}} (\coqref{SECF.Imp.BLe}{\coqdocconstructor{BLe}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}})) (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}} (\coqref{SECF.Imp.AMinus}{\coqdocconstructor{AMinus}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}})))\coqdoceol
+\coqdocindent{3.00em}
+(\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}} (\coqref{SECF.Imp.APlus}{\coqdocconstructor{APlus}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}}))))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:49}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:49}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:50}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+\coqdocdefinition{PeanoNat.Nat.add} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:50}{\coqdocvariable{st0}})\coqdoceol
+\coqdocindent{5.50em}
+((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:50}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:49}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.if minus plus}{\coqdocaxiom{if\_minus\_plus}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  if1\_ceval  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> If1.if1true\_test".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.If1.if1true test}{\coqdocaxiom{If1.if1true\_test}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.If1.ceval}{\coqdocinductive{If1.ceval}} (\coqref{SECF.Hoare.If1.CIf1}{\coqdocconstructor{If1.CIf1}} (\coqref{SECF.Imp.BEq}{\coqdocconstructor{BEq}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 0)) (\coqref{SECF.Hoare.If1.CAsgn}{\coqdocconstructor{If1.CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 1))) \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}}\coqdoceol
+\coqdocindent{1.50em}
+(@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} 1))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.If1.if1true test}{\coqdocaxiom{If1.if1true\_test}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> If1.if1false\_test".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.If1.if1false test}{\coqdocaxiom{If1.if1false\_test}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.If1.ceval}{\coqdocinductive{If1.ceval}} (\coqref{SECF.Hoare.If1.CIf1}{\coqdocconstructor{If1.CIf1}} (\coqref{SECF.Imp.BEq}{\coqdocconstructor{BEq}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 0)) (\coqref{SECF.Hoare.If1.CAsgn}{\coqdocconstructor{If1.CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 1)))\coqdoceol
+\coqdocindent{1.50em}
+(@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} 2) (@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} 2))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.If1.if1false test}{\coqdocaxiom{If1.if1false\_test}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_if1  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Manually graded: If1.hoare\_if1".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{print\_manual\_grade} \coqref{SECF.Hoare.If1.manual grade for hoare if1}{\coqdocdefinition{If1.manual\_grade\_for\_hoare\_if1}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_if1\_good  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> If1.hoare\_if1\_good".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.If1.hoare if1 good}{\coqdocaxiom{If1.hoare\_if1\_good}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.If1.valid hoare triple}{\coqdocdefinition{If1.valid\_hoare\_triple}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:53}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}\coqdoceol
+\coqdocindent{3.00em}
+(((\coqdockw{fun} \coqdef{SECF.HoareTest.st0:54}{st0}{\coqdocbinder{st0}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.50em}
+\coqdocdefinition{PeanoNat.Nat.add} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:54}{\coqdocvariable{st0}})\coqdoceol
+\coqdocindent{5.50em}
+((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st0:54}{\coqdocvariable{st0}}))\coqdoceol
+\coqdocindent{4.00em}
+:\coqdoceol
+\coqdocindent{4.00em}
+\coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:53}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{3.00em}
+((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:53}{\coqdocvariable{st}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Hoare.If1.CIf1}{\coqdocconstructor{If1.CIf1}} (\coqref{SECF.Imp.BNeq}{\coqdocconstructor{BNeq}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}) (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 0)) (\coqref{SECF.Hoare.If1.CAsgn}{\coqdocconstructor{If1.CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.APlus}{\coqdocconstructor{APlus}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}))))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:55}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} ((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:55}{\coqdocvariable{st}})\coqdoceol
+\coqdocindent{3.00em}
+((\coqref{SECF.Hoare.Aexp of aexp}{\coqdocdefinition{Aexp\_of\_aexp}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}}) : \coqref{SECF.Hoare.Aexp}{\coqdocdefinition{Aexp}}) \coqref{SECF.HoareTest.st:55}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.If1.hoare if1 good}{\coqdocaxiom{If1.hoare\_if1\_good}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  hoare\_havoc  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.hoare\_havoc".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.Himp.hoare havoc}{\coqdocaxiom{Himp.hoare\_havoc}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.HoareTest.Q:59}{Q}{\coqdocbinder{Q}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) (\coqdef{SECF.HoareTest.X:60}{X}{\coqdocbinder{X}} : \coqdocinductive{String.string}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Hoare.Himp.valid hoare triple}{\coqdocdefinition{Himp.valid\_hoare\_triple}} (\coqref{SECF.Hoare.Himp.havoc pre}{\coqdocaxiom{Himp.havoc\_pre}} \coqref{SECF.HoareTest.X:60}{\coqdocvariable{X}} \coqref{SECF.HoareTest.Q:59}{\coqdocvariable{Q}}) (\coqref{SECF.Hoare.Himp.CHavoc}{\coqdocconstructor{Himp.CHavoc}} \coqref{SECF.HoareTest.X:60}{\coqdocvariable{X}}) \coqref{SECF.HoareTest.Q:59}{\coqdocvariable{Q}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.Himp.hoare havoc}{\coqdocaxiom{Himp.hoare\_havoc}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  havoc\_post  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Himp.havoc\_post".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Advanced".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.Himp.havoc post}{\coqdocaxiom{Himp.havoc\_post}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.HoareTest.P:63}{P}{\coqdocbinder{P}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) (\coqdef{SECF.HoareTest.X:64}{X}{\coqdocbinder{X}} : \coqdocinductive{String.string}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Hoare.Himp.valid hoare triple}{\coqdocdefinition{Himp.valid\_hoare\_triple}} \coqref{SECF.HoareTest.P:63}{\coqdocvariable{P}} (\coqref{SECF.Hoare.Himp.CHavoc}{\coqdocconstructor{Himp.CHavoc}} \coqref{SECF.HoareTest.X:64}{\coqdocvariable{X}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.st:65}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow} @\coqexternalref{ex}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{ex}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} (\coqdockw{fun} \coqdef{SECF.HoareTest.n:66}{n}{\coqdocbinder{n}} : \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \ensuremath{\Rightarrow} \coqref{SECF.Hoare.assertion sub}{\coqdocdefinition{assertion\_sub}} \coqref{SECF.HoareTest.X:64}{\coqdocvariable{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} \coqref{SECF.HoareTest.n:66}{\coqdocvariable{n}}) \coqref{SECF.HoareTest.P:63}{\coqdocvariable{P}} \coqref{SECF.HoareTest.st:65}{\coqdocvariable{st}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.Himp.havoc post}{\coqdocaxiom{Himp.havoc\_post}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  assert\_vs\_assume  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> HoareAssertAssume.assert\_assume\_differ".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.HoareAssertAssume.assert assume differ}{\coqdocaxiom{HoareAssertAssume.assert\_assume\_differ}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{ex}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{ex}} \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.P:71}{P}{\coqdocbinder{P}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.00em}
+@\coqexternalref{ex}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{ex}} \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}}\coqdoceol
+\coqdocindent{3.00em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.b:72}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{3.50em}
+@\coqexternalref{ex}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{ex}} \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}\coqdoceol
+\coqdocindent{4.50em}
+(\coqdockw{fun} \coqdef{SECF.HoareTest.Q:73}{Q}{\coqdocbinder{Q}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{5.00em}
+\coqexternalref{and}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{and}}\coqdoceol
+\coqdocindent{6.00em}
+(\coqref{SECF.Hoare.HoareAssertAssume.valid hoare triple}{\coqdocdefinition{HoareAssertAssume.valid\_hoare\_triple}} \coqref{SECF.HoareTest.P:71}{\coqdocvariable{P}}\coqdoceol
+\coqdocindent{7.50em}
+(\coqref{SECF.Hoare.HoareAssertAssume.CAssume}{\coqdocconstructor{HoareAssertAssume.CAssume}} \coqref{SECF.HoareTest.b:72}{\coqdocvariable{b}}) \coqref{SECF.HoareTest.Q:73}{\coqdocvariable{Q}})\coqdoceol
+\coqdocindent{6.00em}
+(\coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}}\coqdoceol
+\coqdocindent{7.50em}
+(\coqref{SECF.Hoare.HoareAssertAssume.valid hoare triple}{\coqdocdefinition{HoareAssertAssume.valid\_hoare\_triple}} \coqref{SECF.HoareTest.P:71}{\coqdocvariable{P}}\coqdoceol
+\coqdocindent{9.00em}
+(\coqref{SECF.Hoare.HoareAssertAssume.CAssert}{\coqdocconstructor{HoareAssertAssume.CAssert}} \coqref{SECF.HoareTest.b:72}{\coqdocvariable{b}}) \coqref{SECF.HoareTest.Q:73}{\coqdocvariable{Q}}))))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.HoareAssertAssume.assert assume differ}{\coqdocaxiom{HoareAssertAssume.assert\_assume\_differ}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> HoareAssertAssume.assert\_implies\_assume".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.HoareAssertAssume.assert implies assume}{\coqdocaxiom{HoareAssertAssume.assert\_implies\_assume}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.HoareTest.P:77}{P}{\coqdocbinder{P}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}}) (\coqdef{SECF.HoareTest.b:78}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.bexp}{\coqdocinductive{bexp}}) (\coqdef{SECF.HoareTest.Q:79}{Q}{\coqdocbinder{Q}} : \coqref{SECF.Hoare.Assertion}{\coqdocdefinition{Assertion}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqref{SECF.Hoare.HoareAssertAssume.valid hoare triple}{\coqdocdefinition{HoareAssertAssume.valid\_hoare\_triple}} \coqref{SECF.HoareTest.P:77}{\coqdocvariable{P}} (\coqref{SECF.Hoare.HoareAssertAssume.CAssert}{\coqdocconstructor{HoareAssertAssume.CAssert}} \coqref{SECF.HoareTest.b:78}{\coqdocvariable{b}})\coqdoceol
+\coqdocindent{5.00em}
+\coqref{SECF.HoareTest.Q:79}{\coqdocvariable{Q}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqref{SECF.Hoare.HoareAssertAssume.valid hoare triple}{\coqdocdefinition{HoareAssertAssume.valid\_hoare\_triple}} \coqref{SECF.HoareTest.P:77}{\coqdocvariable{P}} (\coqref{SECF.Hoare.HoareAssertAssume.CAssume}{\coqdocconstructor{HoareAssertAssume.CAssume}} \coqref{SECF.HoareTest.b:78}{\coqdocvariable{b}}) \coqref{SECF.HoareTest.Q:79}{\coqdocvariable{Q}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.HoareAssertAssume.assert implies assume}{\coqdocaxiom{HoareAssertAssume.assert\_implies\_assume}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> HoareAssertAssume.assert\_assume\_example".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 4".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Hoare.HoareAssertAssume.assert assume example}{\coqdocaxiom{HoareAssertAssume.assert\_assume\_example}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Hoare.HoareAssertAssume.valid hoare triple}{\coqdocdefinition{HoareAssertAssume.valid\_hoare\_triple}} (\coqdockw{fun} \coqdocvar{\_} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow} \coqref{SECF.Hoare.:::'True'}{\coqdocnotation{True}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Hoare.HoareAssertAssume.CSeq}{\coqdocconstructor{HoareAssertAssume.CSeq}} (\coqref{SECF.Hoare.HoareAssertAssume.CAssume}{\coqdocconstructor{HoareAssertAssume.CAssume}} (\coqref{SECF.Imp.BEq}{\coqdocconstructor{BEq}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 1)))\coqdoceol
+\coqdocindent{3.00em}
+(\coqref{SECF.Hoare.HoareAssertAssume.CSeq}{\coqdocconstructor{HoareAssertAssume.CSeq}}\coqdoceol
+\coqdocindent{4.50em}
+(\coqref{SECF.Hoare.HoareAssertAssume.CAsgn}{\coqdocconstructor{HoareAssertAssume.CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.APlus}{\coqdocconstructor{APlus}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 1)))\coqdoceol
+\coqdocindent{4.50em}
+(\coqref{SECF.Hoare.HoareAssertAssume.CAssert}{\coqdocconstructor{HoareAssertAssume.CAssert}} (\coqref{SECF.Imp.BEq}{\coqdocconstructor{BEq}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 2)))))\coqdoceol
+\coqdocindent{1.50em}
+(\coqdockw{fun} \coqdocvar{\_} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}} \ensuremath{\Rightarrow} \coqref{SECF.Hoare.:::'True'}{\coqdocnotation{True}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.HoareAssertAssume.assert assume example}{\coqdocaxiom{HoareAssertAssume.assert\_assume\_example}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.HoareTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - standard: 24".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - advanced: 36".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Allowed Axioms:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "functional\_extensionality".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "FunctionalExtensionality.functional\_extensionality\_dep".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Summary **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Below is a summary of the automatically graded exercises that are incomplete.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "The output for each exercise can be any of the following:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'Closed under the global context', if it is complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'MANUAL', if it is manually graded".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - A list of pending axioms, containing unproven assumptions. In this case".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "    the exercise is considered complete, if the axioms are all allowed.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Standard **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- hoare\_post\_true ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.hoare post true}{\coqdocaxiom{hoare\_post\_true}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- hoare\_asgn\_wrong ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.hoare asgn wrong}{\coqdocaxiom{hoare\_asgn\_wrong}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- assertion\_sub\_ex1' ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.assertion sub ex1'}{\coqdocaxiom{assertion\_sub\_ex1'}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- assertion\_sub\_ex2' ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.assertion sub ex2'}{\coqdocaxiom{assertion\_sub\_ex2'}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- hoare\_asgn\_example4 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.hoare asgn example4}{\coqdocaxiom{hoare\_asgn\_example4}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- swap\_exercise ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.swap exercise}{\coqdocaxiom{swap\_exercise}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- if\_minus\_plus ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.if minus plus}{\coqdocaxiom{if\_minus\_plus}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- If1.if1true\_test ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.If1.if1true test}{\coqdocaxiom{If1.if1true\_test}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- If1.if1false\_test ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.If1.if1false test}{\coqdocaxiom{If1.if1false\_test}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- hoare\_if1 ---------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "MANUAL".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- If1.hoare\_if1\_good ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.If1.hoare if1 good}{\coqdocaxiom{If1.hoare\_if1\_good}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- HoareAssertAssume.assert\_assume\_differ ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.HoareAssertAssume.assert assume differ}{\coqdocaxiom{HoareAssertAssume.assert\_assume\_differ}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- HoareAssertAssume.assert\_implies\_assume ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.HoareAssertAssume.assert implies assume}{\coqdocaxiom{HoareAssertAssume.assert\_implies\_assume}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- HoareAssertAssume.assert\_assume\_example ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.HoareAssertAssume.assert assume example}{\coqdocaxiom{HoareAssertAssume.assert\_assume\_example}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Advanced **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- invalid\_triple ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.invalid triple}{\coqdocaxiom{invalid\_triple}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.hoare\_havoc ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.Himp.hoare havoc}{\coqdocaxiom{Himp.hoare\_havoc}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- Himp.havoc\_post ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Hoare.Himp.havoc post}{\coqdocaxiom{Himp.havoc\_post}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

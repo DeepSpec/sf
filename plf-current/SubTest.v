@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import Sub.
 
 Parameter MISSING: Type.
@@ -126,11 +126,14 @@ idtac " ".
 idtac "#> STLCSub.sub_inversion_arrow".
 idtac "Possible points: 3".
 check_type @STLCSub.sub_inversion_arrow (
-(forall U V1 V2 : STLCSub.ty,
- STLCSub.subtype U (STLCSub.Ty_Arrow V1 V2) ->
- exists U1 U2 : STLCSub.ty,
-   U = STLCSub.Ty_Arrow U1 U2 /\
-   STLCSub.subtype V1 U1 /\ STLCSub.subtype U2 V2)).
+(forall (U V1 V2 : STLCSub.ty)
+   (_ : STLCSub.subtype U (STLCSub.Ty_Arrow V1 V2)),
+ @ex STLCSub.ty
+   (fun U1 : STLCSub.ty =>
+    @ex STLCSub.ty
+      (fun U2 : STLCSub.ty =>
+       and (@eq STLCSub.ty U (STLCSub.Ty_Arrow U1 U2))
+         (and (STLCSub.subtype V1 U1) (STLCSub.subtype U2 V2)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions STLCSub.sub_inversion_arrow.
@@ -230,4 +233,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

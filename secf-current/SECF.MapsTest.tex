@@ -1,0 +1,200 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.MapsTest}{Library }{SECF.MapsTest}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Set} \coqdocvar{Warnings} "-notation-overridden,-parsing".\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{Stdlib} \coqdockw{Require} \coqdockw{Export} \coqdoclibrary{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Maps}{\coqdoclibrary{Maps}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdef{SECF.MapsTest.MISSING}{MISSING}{\coqdocaxiom{MISSING}}: \coqdockw{Type}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdef{SECF.MapsTest.Check}{Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{check\_type} \coqdocvar{A} \coqdocvar{B} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdockw{type} \coqdockw{of} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdockw{context}[\coqref{SECF.MapsTest.MISSING}{\coqdocaxiom{MISSING}}] \ensuremath{\Rightarrow} \coqdoctac{idtac} "Missing:" \coqdocvar{A}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} ?\coqdocvar{T} \ensuremath{\Rightarrow} \coqdoctac{first} [\coqdocvar{unify} \coqdocvar{T} \coqdocvar{B}; \coqdoctac{idtac} "Type: ok" \ensuremath{|} \coqdoctac{idtac} "Type: wrong - should be (" \coqdocvar{B} ")"]\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print\_manual\_grade} \coqdocvar{A} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{Some}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{Some}} (\coqdocvar{\_} ?\coqdocvar{S} ?\coqdocvar{C}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score:"  \coqdocvar{S};\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{C} \coqdockw{with}\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} ""\%\coqdocvar{string} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment:" \coqdocvar{C}\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{None}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{None}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score: Ungraded";\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqref{SECF.MapsTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Maps}{\coqdoclibrary{Maps}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqref{SECF.MapsTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.MapsTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  t\_update\_same  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> t\_update\_same".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Maps.t update same}{\coqdocaxiom{t\_update\_same}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.MapsTest.A:3}{A}{\coqdocbinder{A}} : \coqdockw{Type}) (\coqdef{SECF.MapsTest.m:4}{m}{\coqdocbinder{m}} : \coqref{SECF.Maps.total map}{\coqdocdefinition{total\_map}} \coqref{SECF.MapsTest.A:3}{\coqdocvariable{A}}) (\coqdef{SECF.MapsTest.x:5}{x}{\coqdocbinder{x}} : \coqdocinductive{string}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqdockw{\ensuremath{\forall}} \coqdocvar{\_} : \coqdocinductive{string}, \coqref{SECF.MapsTest.A:3}{\coqdocvariable{A}}) (@\coqref{SECF.Maps.t update}{\coqdocdefinition{t\_update}} \coqref{SECF.MapsTest.A:3}{\coqdocvariable{A}} \coqref{SECF.MapsTest.m:4}{\coqdocvariable{m}} \coqref{SECF.MapsTest.x:5}{\coqdocvariable{x}} (\coqref{SECF.MapsTest.m:4}{\coqdocvariable{m}} \coqref{SECF.MapsTest.x:5}{\coqdocvariable{x}})) \coqref{SECF.MapsTest.m:4}{\coqdocvariable{m}})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Maps.t update same}{\coqdocaxiom{t\_update\_same}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.MapsTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  t\_update\_permute  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> t\_update\_permute".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Maps.t update permute}{\coqdocaxiom{t\_update\_permute}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.MapsTest.A:9}{A}{\coqdocbinder{A}} : \coqdockw{Type}) (\coqdef{SECF.MapsTest.m:10}{m}{\coqdocbinder{m}} : \coqref{SECF.Maps.total map}{\coqdocdefinition{total\_map}} \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}}) (\coqdef{SECF.MapsTest.v1:11}{v1}{\coqdocbinder{v1}} \coqdef{SECF.MapsTest.v2:12}{v2}{\coqdocbinder{v2}} : \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}}) (\coqdef{SECF.MapsTest.x1:13}{x1}{\coqdocbinder{x1}} \coqdef{SECF.MapsTest.x2:14}{x2}{\coqdocbinder{x2}} : \coqdocinductive{string})\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{\_} : \coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqdocinductive{string} \coqref{SECF.MapsTest.x2:14}{\coqdocvariable{x2}} \coqref{SECF.MapsTest.x1:13}{\coqdocvariable{x1}})),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqdockw{\ensuremath{\forall}} \coqdocvar{\_} : \coqdocinductive{string}, \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}}) (@\coqref{SECF.Maps.t update}{\coqdocdefinition{t\_update}} \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}} (@\coqref{SECF.Maps.t update}{\coqdocdefinition{t\_update}} \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}} \coqref{SECF.MapsTest.m:10}{\coqdocvariable{m}} \coqref{SECF.MapsTest.x2:14}{\coqdocvariable{x2}} \coqref{SECF.MapsTest.v2:12}{\coqdocvariable{v2}}) \coqref{SECF.MapsTest.x1:13}{\coqdocvariable{x1}} \coqref{SECF.MapsTest.v1:11}{\coqdocvariable{v1}})\coqdoceol
+\coqdocindent{1.50em}
+(@\coqref{SECF.Maps.t update}{\coqdocdefinition{t\_update}} \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}} (@\coqref{SECF.Maps.t update}{\coqdocdefinition{t\_update}} \coqref{SECF.MapsTest.A:9}{\coqdocvariable{A}} \coqref{SECF.MapsTest.m:10}{\coqdocvariable{m}} \coqref{SECF.MapsTest.x1:13}{\coqdocvariable{x1}} \coqref{SECF.MapsTest.v1:11}{\coqdocvariable{v1}}) \coqref{SECF.MapsTest.x2:14}{\coqdocvariable{x2}} \coqref{SECF.MapsTest.v2:12}{\coqdocvariable{v2}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Maps.t update permute}{\coqdocaxiom{t\_update\_permute}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.MapsTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - standard: 5".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - advanced: 5".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Allowed Axioms:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "functional\_extensionality".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "FunctionalExtensionality.functional\_extensionality\_dep".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Summary **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Below is a summary of the automatically graded exercises that are incomplete.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "The output for each exercise can be any of the following:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'Closed under the global context', if it is complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'MANUAL', if it is manually graded".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - A list of pending axioms, containing unproven assumptions. In this case".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "    the exercise is considered complete, if the axioms are all allowed.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Standard **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- t\_update\_same ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Maps.t update same}{\coqdocaxiom{t\_update\_same}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- t\_update\_permute ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Maps.t update permute}{\coqdocaxiom{t\_update\_permute}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Advanced **********".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

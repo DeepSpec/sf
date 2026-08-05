@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Perm.
 
 Parameter MISSING: Type.
@@ -47,7 +47,8 @@ idtac "#> permut_example".
 idtac "Possible points: 3".
 check_type @permut_example (
 (forall a b : list nat,
- @Permutation nat (5 :: 6 :: a ++ b) ((5 :: b) ++ 6 :: a ++ []))).
+ @Permutation nat (@cons nat 5 (@cons nat 6 (@app nat a b)))
+   (@app nat (@cons nat 5 b) (@cons nat 6 (@app nat a (@nil nat)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions permut_example.
@@ -59,7 +60,10 @@ idtac " ".
 
 idtac "#> not_a_permutation".
 idtac "Possible points: 2".
-check_type @not_a_permutation ((~ @Permutation nat [1; 1] [1; 2])).
+check_type @not_a_permutation (
+(not
+   (@Permutation nat (@cons nat 1 (@cons nat 1 (@nil nat)))
+      (@cons nat 1 (@cons nat 2 (@nil nat)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions not_a_permutation.
@@ -72,8 +76,9 @@ idtac " ".
 idtac "#> Forall_perm".
 idtac "Possible points: 3".
 check_type @Forall_perm (
-(forall (A : Type) (f : A -> Prop) (al bl : list A),
- @Permutation A al bl -> @Forall A f al -> @Forall A f bl)).
+(forall (A : Type) (f : forall _ : A, Prop) (al bl : list A)
+   (_ : @Permutation A al bl) (_ : @Forall A f al),
+ @Forall A f bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions Forall_perm.
@@ -128,4 +133,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

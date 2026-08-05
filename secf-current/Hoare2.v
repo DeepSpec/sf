@@ -17,7 +17,7 @@ Definition FILL_IN_HERE := <{True}>.
 (* ################################################################# *)
 (** * Decorated Programs *)
 
-(** The beauty of Hoare Logic is that it is _syntax directed: the
+(** The beauty of Hoare Logic is that it is _syntax directed_: the
     structure of proofs exactly follows the structure of programs.
 
     We can record the essential ideas of a Hoare-logic proof --

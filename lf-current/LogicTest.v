@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From LF Require Import Logic.
 
 Parameter MISSING: Type.
@@ -37,7 +37,9 @@ idtac " ".
 
 idtac "#> plus_is_O".
 idtac "Possible points: 2".
-check_type @plus_is_O ((forall n m : nat, n + m = 0 -> n = 0 /\ m = 0)).
+check_type @plus_is_O (
+(forall (n m : nat) (_ : @eq nat (Nat.add n m) 0),
+ and (@eq nat n 0) (@eq nat m 0))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions plus_is_O.
@@ -49,7 +51,7 @@ idtac " ".
 
 idtac "#> and_assoc".
 idtac "Possible points: 1".
-check_type @and_assoc ((forall P Q R : Prop, P /\ Q /\ R -> (P /\ Q) /\ R)).
+check_type @and_assoc ((forall (P Q R : Prop) (_ : and P (and Q R)), and (and P Q) R)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions and_assoc.
@@ -61,7 +63,9 @@ idtac " ".
 
 idtac "#> mult_is_O".
 idtac "Possible points: 2".
-check_type @mult_is_O ((forall n m : nat, n * m = 0 -> n = 0 \/ m = 0)).
+check_type @mult_is_O (
+(forall (n m : nat) (_ : @eq nat (Nat.mul n m) 0),
+ or (@eq nat n 0) (@eq nat m 0))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions mult_is_O.
@@ -73,20 +77,11 @@ idtac " ".
 
 idtac "#> or_commut".
 idtac "Possible points: 1".
-check_type @or_commut ((forall P Q : Prop, P \/ Q -> Q \/ P)).
+check_type @or_commut ((forall (P Q : Prop) (_ : or P Q), or Q P)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions or_commut.
 Goal True.
-idtac " ".
-
-idtac "-------------------  double_neg_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: double_neg_informal".
-idtac "Advanced".
-idtac "Possible points: 2".
-print_manual_grade manual_grade_for_double_neg_informal.
 idtac " ".
 
 idtac "-------------------  contrapositive  --------------------".
@@ -94,7 +89,8 @@ idtac " ".
 
 idtac "#> contrapositive".
 idtac "Possible points: 1".
-check_type @contrapositive ((forall P Q : Prop, (P -> Q) -> ~ Q -> ~ P)).
+check_type @contrapositive (
+(forall (P Q : Prop) (_ : forall _ : P, Q) (_ : not Q), not P)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions contrapositive.
@@ -106,7 +102,7 @@ idtac " ".
 
 idtac "#> not_both_true_and_false".
 idtac "Possible points: 1".
-check_type @not_both_true_and_false ((forall P : Prop, ~ (P /\ ~ P))).
+check_type @not_both_true_and_false ((forall P : Prop, not (and P (not P)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions not_both_true_and_false.
@@ -127,7 +123,8 @@ idtac " ".
 
 idtac "#> de_morgan_not_or".
 idtac "Possible points: 2".
-check_type @de_morgan_not_or ((forall P Q : Prop, ~ (P \/ Q) -> ~ P /\ ~ Q)).
+check_type @de_morgan_not_or (
+(forall (P Q : Prop) (_ : not (or P Q)), and (not P) (not Q))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions de_morgan_not_or.
@@ -140,7 +137,7 @@ idtac " ".
 idtac "#> or_distributes_over_and".
 idtac "Possible points: 3".
 check_type @or_distributes_over_and (
-(forall P Q R : Prop, P \/ Q /\ R <-> (P \/ Q) /\ (P \/ R))).
+(forall P Q R : Prop, iff (or P (and Q R)) (and (or P Q) (or P R)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions or_distributes_over_and.
@@ -153,8 +150,8 @@ idtac " ".
 idtac "#> dist_not_exists".
 idtac "Possible points: 1".
 check_type @dist_not_exists (
-(forall (X : Type) (P : X -> Prop),
- (forall x : X, P x) -> ~ (exists x : X, ~ P x))).
+(forall (X : Type) (P : forall _ : X, Prop) (_ : forall x : X, P x),
+ not (@ex X (fun x : X => not (P x))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions dist_not_exists.
@@ -167,8 +164,9 @@ idtac " ".
 idtac "#> dist_exists_or".
 idtac "Possible points: 2".
 check_type @dist_exists_or (
-(forall (X : Type) (P Q : X -> Prop),
- (exists x : X, P x \/ Q x) <-> (exists x : X, P x) \/ (exists x : X, Q x))).
+(forall (X : Type) (P Q : forall _ : X, Prop),
+ iff (@ex X (fun x : X => or (P x) (Q x)))
+   (or (@ex X (fun x : X => P x)) (@ex X (fun x : X => Q x))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions dist_exists_or.
@@ -181,8 +179,9 @@ idtac " ".
 idtac "#> In_map_iff".
 idtac "Possible points: 2".
 check_type @In_map_iff (
-(forall (A B : Type) (f : A -> B) (l : list A) (y : B),
- @In B y (@map A B f l) <-> (exists x : A, f x = y /\ @In A x l))).
+(forall (A B : Type) (f : forall _ : A, B) (l : list A) (y : B),
+ iff (@In B y (@map A B f l))
+   (@ex A (fun x : A => and (@eq B (f x) y) (@In A x l))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions In_map_iff.
@@ -196,7 +195,7 @@ idtac "#> In_app_iff".
 idtac "Possible points: 2".
 check_type @In_app_iff (
 (forall (A : Type) (l l' : list A) (a : A),
- @In A a (l ++ l') <-> @In A a l \/ @In A a l')).
+ iff (@In A a (@app A l l')) (or (@In A a l) (@In A a l')))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions In_app_iff.
@@ -209,8 +208,8 @@ idtac " ".
 idtac "#> All_In".
 idtac "Possible points: 3".
 check_type @All_In (
-(forall (T : Type) (P : T -> Prop) (l : list T),
- (forall x : T, @In T x l -> P x) <-> @All T P l)).
+(forall (T : Type) (P : forall _ : T, Prop) (l : list T),
+ iff (forall (x : T) (_ : @In T x l), P x) (@All T P l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions All_In.
@@ -224,7 +223,8 @@ idtac "#> even_double_conv".
 idtac "Possible points: 3".
 check_type @even_double_conv (
 (forall n : nat,
- exists k : nat, n = (if even n then double k else S (double k)))).
+ @ex nat
+   (fun k : nat => @eq nat n (if even n then double k else S (double k))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions even_double_conv.
@@ -237,7 +237,8 @@ idtac " ".
 idtac "#> andb_true_iff".
 idtac "Possible points: 1".
 check_type @andb_true_iff (
-(forall b1 b2 : bool, b1 && b2 = true <-> b1 = true /\ b2 = true)).
+(forall b1 b2 : bool,
+ iff (@eq bool (andb b1 b2) true) (and (@eq bool b1 true) (@eq bool b2 true)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions andb_true_iff.
@@ -247,7 +248,8 @@ idtac " ".
 idtac "#> orb_true_iff".
 idtac "Possible points: 1".
 check_type @orb_true_iff (
-(forall b1 b2 : bool, b1 || b2 = true <-> b1 = true \/ b2 = true)).
+(forall b1 b2 : bool,
+ iff (@eq bool (orb b1 b2) true) (or (@eq bool b1 true) (@eq bool b2 true)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions orb_true_iff.
@@ -259,7 +261,8 @@ idtac " ".
 
 idtac "#> eqb_neq".
 idtac "Possible points: 1".
-check_type @eqb_neq ((forall x y : nat, (x =? y) = false <-> x <> y)).
+check_type @eqb_neq (
+(forall x y : nat, iff (@eq bool (eqb x y) false) (not (@eq nat x y)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions eqb_neq.
@@ -272,9 +275,10 @@ idtac " ".
 idtac "#> eqb_list_true_iff".
 idtac "Possible points: 3".
 check_type @eqb_list_true_iff (
-(forall (A : Type) (eqb : A -> A -> bool),
- (forall a1 a2 : A, eqb a1 a2 = true <-> a1 = a2) ->
- forall l1 l2 : list A, @eqb_list A eqb l1 l2 = true <-> l1 = l2)).
+(forall (A : Type) (eqb : forall (_ : A) (_ : A), bool)
+   (_ : forall a1 a2 : A, iff (@eq bool (eqb a1 a2) true) (@eq A a1 a2))
+   (l1 l2 : list A),
+ iff (@eq bool (@eqb_list A eqb l1 l2) true) (@eq (list A) l1 l2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions eqb_list_true_iff.
@@ -287,8 +291,9 @@ idtac " ".
 idtac "#> forallb_true_iff".
 idtac "Possible points: 2".
 check_type @forallb_true_iff (
-(forall (X : Type) (test : X -> bool) (l : list X),
- @forallb X test l = true <-> @All X (fun x : X => test x = true) l)).
+(forall (X : Type) (test : forall _ : X, bool) (l : list X),
+ iff (@eq bool (@forallb X test l) true)
+   (@All X (fun x : X => @eq bool (test x) true) l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions forallb_true_iff.
@@ -300,7 +305,8 @@ idtac " ".
 
 idtac "#> tr_rev_correct".
 idtac "Possible points: 6".
-check_type @tr_rev_correct ((forall X : Type, @tr_rev X = @rev X)).
+check_type @tr_rev_correct (
+(forall X : Type, @eq (forall _ : list X, list X) (@tr_rev X) (@rev X))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions tr_rev_correct.
@@ -312,7 +318,7 @@ idtac " ".
 
 idtac "#> excluded_middle_irrefutable".
 idtac "Possible points: 3".
-check_type @excluded_middle_irrefutable ((forall P : Prop, ~ ~ (P \/ ~ P))).
+check_type @excluded_middle_irrefutable ((forall P : Prop, not (not (or P (not P))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions excluded_middle_irrefutable.
@@ -326,9 +332,9 @@ idtac "#> not_exists_dist".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @not_exists_dist (
-(excluded_middle ->
- forall (X : Type) (P : X -> Prop),
- ~ (exists x : X, ~ P x) -> forall x : X, P x)).
+(forall (_ : excluded_middle) (X : Type) (P : forall _ : X, Prop)
+   (_ : not (@ex X (fun x : X => not (P x)))) (x : X),
+ P x)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions not_exists_dist.
@@ -338,7 +344,7 @@ idtac " ".
 idtac " ".
 
 idtac "Max points - standard: 43".
-idtac "Max points - advanced: 49".
+idtac "Max points - advanced: 47".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -406,12 +412,12 @@ idtac "---------- excluded_middle_irrefutable ---------".
 Print Assumptions excluded_middle_irrefutable.
 idtac "".
 idtac "********** Advanced **********".
-idtac "---------- double_neg_informal ---------".
-idtac "MANUAL".
 idtac "---------- not_PNP_informal ---------".
 idtac "MANUAL".
 idtac "---------- not_exists_dist ---------".
 Print Assumptions not_exists_dist.
 Abort.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)
+
+(* 2026-01-07 13:18 *)

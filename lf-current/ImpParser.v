@@ -1,11 +1,11 @@
-(** * ImpParser: Lexing and Parsing in Coq *)
+(** * ImpParser: Lexing and Parsing in Rocq *)
 
 (** The development of the Imp language in [Imp.v] completely ignores
     issues of concrete syntax -- how an ascii string that a programmer
     might write gets translated into abstract syntax trees defined by
     the datatypes [aexp], [bexp], and [com].  In this chapter, we
     illustrate how the rest of the story can be filled in by building
-    a simple lexical analyzer and parser using Coq's functional
+    a simple lexical analyzer and parser using Rocq's functional
     programming facilities. *)
 
 (** It is not important to understand all the details here (and
@@ -17,14 +17,15 @@
     make out -- but most readers will probably want to just skim down
     to the Examples section at the very end to get the punchline. *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Strings.String.
-From Coq Require Import Strings.Ascii.
-From Coq Require Import Arith.Arith.
-From Coq Require Import Init.Nat.
-From Coq Require Import Arith.EqNat.
-From Coq Require Import Lists.List. Import ListNotations.
+Set Warnings "-notation-overridden,-notation-incompatible-prefix".
+From Stdlib Require Import Strings.String.
+From Stdlib Require Import Strings.Ascii.
+From Stdlib Require Import Arith.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import EqNat.
+From Stdlib Require Import List. Import ListNotations.
 From LF Require Import Maps Imp.
+Local Open Scope com_scope.
 
 (* ################################################################# *)
 (** * Internals *)
@@ -462,4 +463,4 @@ Example eg2 : parse "
       "x" := "z" }>.
 Proof. cbv. reflexivity. Qed.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

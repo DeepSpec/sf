@@ -184,7 +184,7 @@ Proof using. (* FILL IN HERE *) Admitted.
     establish this entailment, we must prove that [H] entails [H'] under the
     assumption that [P] is true. The "extraction rule for pure facts in the left
     of an entailment" captures the property that the pure fact [\[P]] can be
-    extracted into the Coq context. It is stated as follows. *)
+    extracted into the Rocq context. It is stated as follows. *)
 
 (** **** Exercise: 2 stars, standard, especially useful (himpl_hstar_hpure_l).
 
@@ -220,7 +220,7 @@ Proof using. (* FILL IN HERE *) Admitted.
     then [h] satisfies [H'].
 
     The "extraction rule for existentials in the left of an entailment" captures
-    the property that existentials can be extracted into the Coq context. It is
+    the property that existentials can be extracted into the Rocq context. It is
     stated as follows. (Observe how the existential quantifier on the left of
     the entailment becomes a universal quantifier outside of the arrow.) *)
 
@@ -302,15 +302,15 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** ** The [xsimpl] Tactic *)
 
 (** Simplifying entailments by hand is extremely tedious. Fortunately, it can be
-    automated using a specialized Coq tactic. This tactic, called [xsimpl],
+    automated using a specialized Rocq tactic. This tactic, called [xsimpl],
     applies to an entailment and implements a 3-step process:
 
     - extract pure facts and existential quantifiers from the LHS;
-    - instantial existential quantifiers from the RHS, using either Coq
+    - instantial existential quantifiers from the RHS, using either Rocq
       unification variables or user-provided hints (details are explained
       further on);
     - cancel out predicates that occur on both the LHS and RHS; certain
-      Coq unification variables may be instantiated during that process.
+      Rocq unification variables may be instantiated during that process.
 
     These steps are detailed and illustrated in the subsections that follow. *)
 
@@ -327,11 +327,11 @@ Import LibSepReference.
 (** *** [xsimpl] Extracts Pure Facts and Quantifiers in LHS *)
 
 (** The first feature of [xsimpl] is its ability to extract the pure facts and
-    existential quantifiers from the left-hand side out into the Coq context.
+    existential quantifiers from the left-hand side out into the Rocq context.
 
     In the example below, the pure fact [n > 0] appears in the LHS. After
     calling [xsimpl], this pure fact is turned into a hypothesis, which may be
-    introduced with a name into the Coq context. *)
+    introduced with a name into the Rocq context. *)
 
 Lemma xsimpl_demo_lhs_hpure : forall H1 H2 H3 H4 (n:int),
   H1 \* H2 \* \[n > 0] \* H3 ==> H4.
@@ -420,7 +420,7 @@ Abort.
 
 (** When it encounters an existential quantifier in the RHS, the [xsimpl] tactic
     introduces a unification variable denoted by a question mark, that is, an
-    "evar", in Coq terminology. Here, [xsimpl] turns [\exists n, .. p ~~> n ..]
+    "evar", in Rocq terminology. Here, [xsimpl] turns [\exists n, .. p ~~> n ..]
     into [.. p ~~> ?Goal ..], where [?Goal] is the evar. *)
 
 Lemma xsimpl_demo_rhs_hexists : forall H1 H2 H3 H4 (p:loc),
@@ -542,7 +542,7 @@ Proof using.
 
     Invoking [xsimpl] here leaves the goal [forall x, x = ?Goal + 1]. This
     statement is technically provable, because [?Goal] can be instantiated with
-    [x - 1]. Yet, discharging such a proof obligation, which features a Coq
+    [x - 1]. Yet, discharging such a proof obligation, which features a Rocq
     meta-variable [?Goal] that depends on a bound variable [x] is rather awkward
     and impractical.
 
@@ -596,7 +596,7 @@ Abort.
 (* ================================================================= *)
 (** ** Identifying True and False Entailments *)
 
-(** Quiz: For each entailment below, indicate (without a Coq proof) whether it
+(** Quiz: For each entailment below, indicate (without a Rocq proof) whether it
     is true or false. Solutions appear further on. *)
 
 Module EntailmentQuiz.
@@ -876,4 +876,4 @@ End EntailmentRulesProofs.
 (* ================================================================= *)
 (** ** Historical Notes *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

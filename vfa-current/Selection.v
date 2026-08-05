@@ -27,7 +27,7 @@
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
 From VFA Require Import Perm.
 Hint Constructors Permutation : core.
-From Coq Require Export Lists.List.  (* for exercises involving [List.length] *)
+From Stdlib Require Export List.  (* for exercises involving [List.length] *)
 
 (* ################################################################# *)
 (** * The Selection-Sort Program  *)
@@ -320,7 +320,7 @@ Proof.
     _measure_ that is decreasing at each recursive call. To activate
     such annotations, we need to load a library. *)
 
-Require Import Recdef.  (* needed for [measure] feature *)
+From Stdlib Require Import Recdef.  (* needed for [measure] feature *)
 
 (** Now we can add a [measure] annotation on the definition of
     [selsort] to tell Coq that each recursive call decreases the
@@ -459,4 +459,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

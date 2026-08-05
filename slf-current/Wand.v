@@ -100,7 +100,7 @@ Proof using. intros. intros h K. apply* K. Qed.
 Lemma himpl_hforall_l : forall A (v:A) (J:A->hprop) H,
   J v ==> H ->
   (\forall x, J x) ==> H.
-Proof using. introv M. applys himpl_trans M. applys hforall_specialize. Qed.
+Proof using. introv M. applys himpl_trans_r M. applys hforall_specialize. Qed.
 
 (** Universal quantifers that appear in the precondition of a triple may be
     specialized like universal quantifiers appearing on the left-hand side of an
@@ -128,7 +128,7 @@ Module Hor.
     [hprop].
 
     The disjunction operator does not appear to be critically useful in
-    practice, because it can be encoded using Coq's conditional construct, or
+    practice, because it can be encoded using Rocq's conditional construct, or
     using pattern matching. Nevertheless, there are situations where it proves
     handy.
 
@@ -872,7 +872,7 @@ Parameter triple_conseq_frame : forall H2 H1 Q1 t H Q,
     can be computed as the subtraction of [H] minus [H1]. The resulting value
     may then exploited in the last premise for constructing [Q1 \*+ H2]. This
     transfer of information via [H2] from one subgoal to another can be obtained
-    by introducing an "evar" (Coq unification variable) for [H2]. However this
+    by introducing an "evar" (Rocq unification variable) for [H2]. However this
     approach does not work well in cases where [H] contains existential
     quantifiers. This is because such existential quantifiers are typically
     first extracted out of the entailment [H ==> H1 \* H2] by the tactic
@@ -991,7 +991,7 @@ Proof using.
     (* Here again, [xsimpl]'s strategy pulls out the existentially quantified
        variables from the LHS. But it works here because the remainder of the
        reasoning takes place in the same subgoal, in the scope of the extended
-       Coq context. *)
+       Rocq context. *)
     intros l' v'.
      (* The proof obligation is of the form [(l' ~~> v) ==> (Q1 \--* Q2)],
         which is equivalent to [Q1 \*+ (l' ~~> v) ===> Q2] according to
@@ -1273,4 +1273,4 @@ End QwandEquiv.
     [Hobor and Villard 2013] (in Bib.v). The rule has later been popularized by the
     Iris framework, in particular. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

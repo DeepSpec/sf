@@ -7,21 +7,20 @@
     various aspects of _Software Foundations_, the mathematical
     underpinnings of reliable software.  Topics in the series include
     basic concepts of logic, computer-assisted theorem proving, the
-    Coq proof assistant, functional programming, operational
-    semantics, logics and techniques for reasoning about programs,
-    static type systems, property-based random testing, and
-    verification of practical C code.  The exposition is intended for
-    a broad range of readers, from advanced undergraduates to PhD
-    students and researchers.  No specific background in logic or
-    programming languages is assumed, though a degree of mathematical
-    maturity will be helpful.
+    Rocq prover, functional programming, operational semantics, logics
+    and techniques for reasoning about programs, static type systems,
+    property-based random testing, and verification of practical C
+    code.  The exposition is intended for a broad range of readers,
+    from advanced undergraduates to PhD students and researchers.  No
+    specific background in logic or programming languages is assumed,
+    though a degree of mathematical maturity will be helpful.
 
     The principal novelty of the series is that it is one hundred
     percent formalized and machine-checked: each text is literally a
-    script for Coq.  The books are intended to be read alongside (or
-    inside) an interactive session with Coq.  All the details in the
-    text are fully formalized in Coq, and most of the exercises are
-    designed to be worked using Coq.
+    script for Rocq.  The books are intended to be read alongside (or
+    inside) an interactive session with Rocq.  All the details in the
+    text are fully formalized in Rocq, and most of the exercises are
+    designed to be worked using Rocq.
 
     The files in each book are organized into a sequence of core
     chapters, covering about one semester's worth of material and
@@ -32,7 +31,7 @@
 
     This book, _Logical Foundations_, lays groundwork for the others,
     introducing the reader to the basic ideas of functional
-    programming, constructive logic, and the Coq proof assistant. *)
+    programming, constructive logic, and the Rocq prover. *)
 
 (* ################################################################# *)
 (** * Overview *)
@@ -59,13 +58,13 @@
 
     This volume weaves together three conceptual threads:
 
-    (1) basic tools from _logic_ for making and justifying precise
+    (A) basic tools from _logic_ for making and justifying precise
         claims about programs;
 
-    (2) the use of _proof assistants_ to construct rigorous logical
-        arguments;
+    (B) the use of _proof assistants_ (or _provers_) to construct
+        rigorous logical arguments;
 
-    (3) _functional programming_, both as a method of programming that
+    (C) _functional programming_, both as a method of programming that
         simplifies reasoning about programs and as a bridge between
         programming and logic. *)
 
@@ -112,22 +111,22 @@
          routine aspects of building proofs while depending on human
          guidance for more difficult aspects.  Widely used proof
          assistants include Isabelle, Agda, Twelf, ACL2, PVS, F*,
-         HOL4, Lean, and Coq, among many others.
+         HOL4, Lean, and Rocq, among many others.
 
-    This course is based around Coq, a proof assistant that has been
-    under development since 1983 and that in recent years has
-    attracted a large community of users in both research and
-    industry.  Coq provides a rich environment for interactive
-    development of machine-checked formal reasoning.  The kernel of
-    the Coq system is a simple proof-checker, which guarantees that
-    only correct deduction steps are ever performed.  On top of this
-    kernel, the Coq environment provides high-level facilities for
-    proof development, including a large library of common definitions
-    and lemmas, powerful tactics for constructing complex proofs
-    semi-automatically, and a special-purpose programming language for
-    defining new proof-automation tactics for specific situations.
+    This course is based around Rocq, a proof assistant that has been
+    under development since 1983 and has attracted a large community
+    of users in both research and industry.  Rocq provides a rich
+    environment for interactive development of machine-checked formal
+    reasoning.  The kernel of the Rocq system is a simple
+    proof-checker, which guarantees that only correct deduction steps
+    are ever performed.  On top of this kernel, the Rocq environment
+    provides high-level facilities for proof development, including a
+    large library of common definitions and lemmas, powerful tactics
+    for constructing complex proofs semi-automatically, and a
+    special-purpose programming language for defining new
+    proof-automation tactics for specific situations.
 
-    Coq has been a critical enabler for a huge variety of work across
+    Rocq has been a critical enabler for a huge variety of work across
     computer science and mathematics:
 
     - As a _platform for modeling programming languages_, it has
@@ -139,7 +138,7 @@
       sets and programming languages such as C.
 
     - As an _environment for developing formally certified software
-      and hardware_, Coq has been used, for example, to build
+      and hardware_, Rocq has been used, for example, to build
       CompCert, a fully-verified optimizing compiler for C, and
       CertiKOS, a fully verified hypervisor, for proving the
       correctness of subtle algorithms involving floating point
@@ -152,7 +151,7 @@
       dependent types_, it has inspired numerous innovations.  For
       example, Hoare Type Theory embeds reasoning about
       "pre-conditions" and "post-conditions" (an extension of the
-      _Hoare Logic_ we will see later in this course) in Coq.
+      _Hoare Logic_ we will see later in this course) in Rocq.
 
     - As a _proof assistant for higher-order logic_, it has been used
       to validate a number of important results in mathematics.  For
@@ -160,23 +159,12 @@
       proofs made it possible to develop the first formally verified
       proof of the 4-color theorem.  This proof had previously been
       controversial among mathematicians because it required checking
-      a large number of configurations using a program. In the Coq
+      a large number of configurations using a program. In the Rocq
       formalization, everything is checked, including the correctness
       of the computational part.  More recently, an even more massive
-      effort led to a Coq formalization of the Feit-Thompson Theorem,
+      effort led to a Rocq formalization of the Feit-Thompson Theorem,
       the first major step in the classification of finite simple
-      groups.
-
-   By the way, in case you're wondering about the name, here's what
-   the official Coq web site at Inria (the French national research
-   lab where Coq has mostly been developed) says about it: "Some
-   French computer scientists have a tradition of naming their
-   software as animal species: Caml, Elan, Foc or Phox are examples of
-   this tacit convention. In French, 'coq' means rooster, and it
-   sounds like the initials of the Calculus of Constructions (CoC) on
-   which it is based."  The rooster is also the national symbol of
-   France, and C-o-q are the first three letters of the name of
-   Thierry Coquand, one of Coq's early developers. *)
+      groups.  *)
 
 (* ================================================================= *)
 (** ** Functional Programming *)
@@ -186,7 +174,7 @@
     language and to a family of programming languages designed to
     emphasize these idioms, including Haskell, OCaml, Standard ML,
     F##, Scala, Scheme, Racket, Common Lisp, Clojure, Erlang, F*,
-    and Coq.
+    and Rocq.
 
     Functional programming has been developed over many decades --
     indeed, its roots go back to Church's lambda-calculus, which was
@@ -233,12 +221,31 @@
 
     For purposes of this course, functional programming has yet
     another significant attraction: it serves as a bridge between
-    logic and computer science.  Indeed, Coq itself can be viewed as a
+    logic and computer science.  Indeed, Rocq itself can be viewed as a
     combination of a small but extremely expressive functional
     programming language plus a set of tools for stating and proving
     logical assertions.  Moreover, when we come to look more closely,
-    we find that these two sides of Coq are actually aspects of the
+    we find that these two sides of Rocq are actually aspects of the
     very same underlying machinery -- i.e., _proofs are programs_.  *)
+
+(* ================================================================= *)
+(** ** Rocq vs. Coq *)
+
+(** Until 2025, the Rocq prover was known as Coq. According to the
+    official webpage, "The name 'Coq' referenced the Calculus of
+    Constructions (CoC), the foundational system it is based on, as
+    well as one of its creators, Thierry Coquand. Additionally, it
+    paid homage to the French national symbol, the rooster.  The new
+    name, 'the Rocq Prover', honors Inria Rocquencourt, the original
+    site where the prover was developed. It also alludes to the
+    mythological bird Roc (or Rokh), symbolizing strength and not so
+    disconnected to a rooster. Furthermore, the name conveys a sense
+    of solidity, and its unintended connection to music adds a
+    pleasant resonance."
+
+    The current release of Software Foundations is still in a
+    transitional state, and you will see references to both Coq and
+    Rocq. *)
 
 (* ================================================================= *)
 (** ** Further Reading *)
@@ -255,74 +262,30 @@
 (* ================================================================= *)
 (** ** System Requirements *)
 
-(** Coq runs on Windows, Linux, and macOS.  The files in this book
-    have been tested with Coq 8.19.2.
-
-    You will need:
-
-    - A current installation of Coq, available from the Coq home page
-      ({https://coq.inria.fr/download}).
-      The "Coq Platform" usually offers the easiest installation
-      experience, especially on Windows.
-
-      If you use the VSCode + Docker option described below, you don't
-      need to install Coq separately.
-
-    - An IDE for interacting with Coq.  There are several choices:
-
-        - _VsCoq_ is an extension for Visual Studio Code that offers a
-          simple interface via a familiar IDE.  This option is the
-          recommended default. If you installed Coq via the Coq
-          platform binary then can only use "VsCoq Legacy", which is
-          the more stable version anyway. If you use opam, you can
-          also try "VsCoq 2", which is a bit more experimental but
-          much more featureful.
-
-          VsCoq can be used as an ordinary IDE or it can be combined
-          with Docker (see below) for a lightweight installation
-          experience.
-
-        - _Proof General_ is an Emacs-based IDE.  It tends to be
-          preferred by users who are already comfortable with Emacs.
-          It requires a separate installation (google "Proof General",
-          but generally all you need to do is [M-x package-list-packages],
-          then select the [proof-general] package from the list and
-          hit the [i] key for install, then hit the [x] key for execute).
-
-          Adventurous users of Coq within Emacs may want to check out
-          extensions such as [company-coq] and [control-lock].
-
-        - _CoqIDE_ is a simpler stand-alone IDE.  It is distributed with
-          Coq, so it should be available once you have Coq installed.
-          It can also be compiled from scratch, but on some platforms
-          this may involve installing additional packages for GUI
-          libraries and such.
-
-          Users who like CoqIDE should consider running it with the
-          "asynchronous" and "error resilience" modes disabled: [[
-          coqide -async-proofs off \
-          -async-proofs-command-error-resilience off Foo.v &
-          ]] *)
+(** Rocq runs on Windows, Linux, and macOS.  The files in this book
+    have been tested with Rocq 9.0.0. *)
 
 (* ----------------------------------------------------------------- *)
-(** *** Using Coq with VSCode and Docker *)
+(** *** Recommended Installation Method: VSCode + Docker *)
 
 (** The Visual Studio Code IDE can cooperate with the Docker
-    virtualization platform to compile Coq scripts without the need
-    for any separate Coq installation.  To get things set up, follow
-    these steps:
+    virtualization platform to compile Rocq scripts without the need
+    for any separate Rocq installation.  This method is recommended for
+    most Software Foundations readers.
 
-    - Install Docker from [https://www.docker.com/get-started/] or
+    - Install Docker from {https://www.docker.com/get-started/} or
       make sure your existing installation is up to date.
 
     - Make sure Docker is running.
 
-    - Install VSCode from [https://code.visualstudio.com] and start it
+    - Install VSCode from {https://code.visualstudio.com} and start it
       running.
 
-    - Install VSCode's Remote Containers Extention from [
-        https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
-        ]
+    - Install VSCode's Dev Containers Extension from
+      {https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers}
+
+      (Note that this extension only works with the official version
+      of VSCode, not with some VSCode forks like VsCodium.)
 
     - Set up a directory for this SF volume by downloading the
       provided [.tgz] file.  Besides the [.v] file for each chapter,
@@ -337,6 +300,8 @@
       open the command palette by pressing F1 and run the command “Dev
       Containers: Reopen in Container”.)
 
+      This step may take some time.
+
     - Check that VSCoq is working by double-clicking the file
       [Basics.v] from the list on the left (you should see a blinking
       cursor in the window that opens; if not you can click in that
@@ -345,9 +310,75 @@
       cursor move through the file and the region above the cursor get
       highlighted.
 
+      - If VSCoq does not work and you receive an error indicating that
+        [vscoqtop] was not found, open a new terminal in the container
+        (you can do this by opening the command palette and running the
+        command “Terminal: Create New Terminal”) and run the command
+        [which vscoqtop]. This should print the path to the VSCoq
+        installation inside the container. Copy this path
+        and paste it into the “VSCoq: Path” textbox in the
+        VSCoq extension settings (accessible via the gear icon on
+        the VSCoq extension page in VSCode), then reload your window.
+
     - To see what other key bindings are available, press F1 and then
       type [Coq:], or visit the VSCoq web pages:
-      [https://github.com/coq-community/vscoq/tree/vscoq1].  *)
+      {https://github.com/rocq-prover/vsrocq}.  *)
+
+(* ================================================================= *)
+(** ** Alternative Installation Methods *)
+
+(** If you prefer, there are several other ways to use Rocq. You will need:
+
+    - A current installation of Rocq, available from the Rocq home
+      page ({https://rocq-prover.org/install}).  The "Rocq Platform"
+      offers the easiest installation experience for most people,
+      especially on Windows.
+
+    - An IDE for interacting with Rocq.  There are several choices:
+
+        - _VsCoq_ is an extension for Visual Studio Code that offers a
+          simple interface via a familiar IDE.  This option is the
+          recommended default.
+
+          VsCoq can be used as an ordinary IDE or it can be combined
+          with Docker (see below) for a lightweight installation
+          experience.
+
+        - _Proof General_ is an Emacs-based IDE.  It tends to be
+          preferred by users who are already comfortable with Emacs.
+          It requires a separate installation (google "Proof General",
+          but generally all you need to do is [M-x package-list-packages],
+          then select the [proof-general] package from the list and
+          hit the [i] key for install, then hit the [x] key for execute).
+
+          There are only a few commands you need to know to use ProofGeneral
+          effectively. They are:
+
+          - [C-c C-n]: send the next command to Rocq.
+          - [C-c C-u]: undo (retract) the most recently executed command.
+          - [C-c C-RET]: submit everything up to the current cursor location to
+            Rocq for processing.
+          - [C-c C-.]: move the cursor to the end of the last command which has
+            been processed by Rocq.
+          - [C-c .]: toggle "electric terminator mode". When this mode is
+            turned on, simply typing a period will send the current command to
+            Rocq (normally you have to type a period and then type [C-c C-n]).
+
+          Adventurous users of Rocq within Emacs may want to check out
+          extensions such as [company-coq] and [control-lock].
+
+        - _RocqIDE_ is a simpler stand-alone IDE.  It is distributed with
+          the Rocq Platform, so it should be available once you have Rocq
+          installed.  It can also be compiled from scratch, but on some
+          platforms this may involve installing additional packages for GUI
+          libraries and such.
+
+          Users who like RocqIDE should consider running it with the
+          "asynchronous" and "error resilience" modes disabled:
+
+          coqide -async-proofs off \
+                 -async-proofs-command-error-resilience off Foo.v &
+*)
 
 (* ================================================================= *)
 (** ** Exercises *)
@@ -393,10 +424,10 @@
     search engines. *)
 
 (* ================================================================= *)
-(** ** Downloading the Coq Files *)
+(** ** Downloading the Rocq Files *)
 
 (** A tar file containing the full sources for the "release version"
-    of this book (as a collection of Coq scripts and HTML files) is
+    of this book (as a collection of Rocq scripts and HTML files) is
     available at {https://softwarefoundations.cis.upenn.edu}.
 
     If you are using the book as part of a class, your professor may
@@ -429,9 +460,9 @@
     title        =   "Logical Foundations",
     series       =   "Software Foundations",
     volume       =   "1",
-    year         =   "2024",
+    year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 6.7, \URL{http://softwarefoundations.cis.upenn.edu}}
+    note         =   {Version 7.0, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
 *)
 
@@ -481,7 +512,7 @@
         and 2, known until 2016 as "Software Foundations" and from
         2016 as (respectively) "Logical Foundations" and "Programming
         Foundations," and for Volume 4, "QuickChick: Property-Based
-        Testing in Coq," the Author of Record is Benjamin C. Pierce.
+        Testing in Rocq," the Author of Record is Benjamin C. Pierce.
         For Volume 3, "Verified Functional Algorithms," and volume 5,
         "Verifiable C," the Author of Record is Andrew W. Appel. For
         Volume 6, "Separation Logic Foundations," the author of record
@@ -492,7 +523,7 @@
 
     To get started, please send an email to Benjamin Pierce,
     describing yourself and how you plan to use the materials and
-    including (1) the above copyright transfer text and (2) your
+    including (A) the above copyright transfer text and (B) your
     github username.
 
     We'll set you up with access to the git repository and developers'
@@ -515,4 +546,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:17 *)

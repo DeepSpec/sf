@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Merge.
 
 Parameter MISSING: Type.
@@ -38,8 +38,10 @@ idtac " ".
 idtac "#> split_perm".
 idtac "Possible points: 3".
 check_type @split_perm (
-(forall (X : Type) (l l1 l2 : list X),
- @split X l = (l1, l2) -> @Permutation.Permutation X l (l1 ++ l2))).
+(forall (X : Type) (l l1 l2 : list X)
+   (_ : @eq (prod (list X) (list X)) (@split X l)
+          (@pair (list X) (list X) l1 l2)),
+ @Permutation.Permutation X l (@app X l1 l2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions split_perm.
@@ -52,11 +54,10 @@ idtac " ".
 idtac "#> sorted_merge1".
 idtac "Possible points: 2".
 check_type @sorted_merge1 (
-(forall (x x1 : nat) (l1 : list nat) (x2 : nat) (l2 : list nat),
- x <= x1 ->
- x <= x2 ->
- Sort.sorted (merge (x1 :: l1) (x2 :: l2)) ->
- Sort.sorted (x :: merge (x1 :: l1) (x2 :: l2)))).
+(forall (x x1 : nat) (l1 : list nat) (x2 : nat) (l2 : list nat)
+   (_ : le x x1) (_ : le x x2)
+   (_ : Sort.sorted (merge (@cons nat x1 l1) (@cons nat x2 l2))),
+ Sort.sorted (@cons nat x (merge (@cons nat x1 l1) (@cons nat x2 l2))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sorted_merge1.
@@ -69,9 +70,9 @@ idtac " ".
 idtac "#> sorted_merge".
 idtac "Possible points: 6".
 check_type @sorted_merge (
-(forall l1 : list nat,
- Sort.sorted l1 ->
- forall l2 : list nat, Sort.sorted l2 -> Sort.sorted (merge l1 l2))).
+(forall (l1 : list nat) (_ : Sort.sorted l1) (l2 : list nat)
+   (_ : Sort.sorted l2),
+ Sort.sorted (merge l1 l2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sorted_merge.
@@ -98,7 +99,7 @@ idtac "Advanced".
 idtac "Possible points: 3".
 check_type @merge_perm (
 (forall l1 l2 : list nat,
- @Permutation.Permutation nat (l1 ++ l2) (merge l1 l2))).
+ @Permutation.Permutation nat (@app nat l1 l2) (merge l1 l2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions merge_perm.
@@ -171,4 +172,6 @@ idtac "---------- mergesort_perm ---------".
 Print Assumptions mergesort_perm.
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

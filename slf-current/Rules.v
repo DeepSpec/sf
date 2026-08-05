@@ -48,7 +48,7 @@ Implicit Types Q : val->hprop.
       ------------------------------------
               {H} (t1;t2) {Q}
 
-    The Coq statement corresponding to the above rule is: *)
+    The Rocq statement corresponding to the above rule is: *)
 
 Lemma triple_seq : forall t1 t2 H Q H1,
   triple t1 H (fun _ => H1) ->
@@ -76,7 +76,7 @@ Proof using. (* FILL IN HERE *) Admitted.
             {H} (let x = t1 in t2) {Q}
 
    However, this presentation confuses the [x] that denotes a program variable
-   in [let x = t1 in t2], and the [x] that denotes a universally quantified Coq
+   in [let x = t1 in t2], and the [x] that denotes a universally quantified Rocq
    value. The correct statement involves a substitution from the variable [x] to
    a value quantified as [forall (v:val)].
 
@@ -84,7 +84,7 @@ Proof using. (* FILL IN HERE *) Admitted.
       -----------------------------------------------------
                 {H} (let x = t1 in t2) {Q}
 
-   The corresponding Coq statement is thus. *)
+   The corresponding Rocq statement is thus. *)
 
 Lemma triple_let : forall x t1 t2 Q1 H Q,
   triple t1 H Q1 ->
@@ -97,13 +97,13 @@ Proof using. introv M1 M2 Hs. applys* eval_let. Qed.
     [forall v1, triple (subst "a" v1 rest_of_the_program) (post1 v1) post2],
     where "a" denotes the name of the program variable that was bound by the
     let-binding in the original source code. At this point, the user would
-    typically type [intros a], to introduce the Coq variable [v1] under the same
+    typically type [intros a], to introduce the Rocq variable [v1] under the same
     name that it had in the source code. This operations produces:
     [triple (subst "a" a rest_of_the_program) (post1 a) post2]. At that point,
     the user may call [simpl] to effectively replace all occurences of the
-    program variable ["a"] with the Coq variable [a] of type [val]. Doing so
+    program variable ["a"] with the Rocq variable [a] of type [val]. Doing so
     produces: [triple rest_of_the_program_updated (post1 a) post2], where
-    [rest_of_the_program_updated] refers to the Coq variable [a]. This process
+    [rest_of_the_program_updated] refers to the Rocq variable [a]. This process
     will be illustrated in the proof of [triple_incr] further on. *)
 
 (* ----------------------------------------------------------------- *)
@@ -115,7 +115,7 @@ Proof using. introv M1 M2 Hs. applys* eval_let. Qed.
       --------------------------------------------------
                {H} (if b then t1 in t2) {Q}
 
-  The corresponding Coq statement is: *)
+  The corresponding Rocq statement is: *)
 
 Lemma triple_if_case : forall b t1 t2 H Q,
   (b = true -> triple t1 H Q) ->
@@ -132,7 +132,7 @@ Proof using. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 (** The two premises of the rule for if-statements may be factorized into a
-    single one using Coq's conditional construct, as in [eval_if]. *)
+    single one using Rocq's conditional construct, as in [eval_if]. *)
 
 Lemma triple_if : forall (b:bool) t1 t2 H Q,
   triple (if b then t1 else t2) H Q ->
@@ -157,7 +157,7 @@ Proof using. introv M Hs. applys* eval_if. Qed.
       ---------
       {H} v {Q}
 
-    The Coq statement of the rule for values is thus as follows. *)
+    The Rocq statement of the rule for values is thus as follows. *)
 
 Lemma triple_val : forall v H Q,
   H ==> Q v ->
@@ -264,9 +264,9 @@ Proof using. introv M Hs. applys* eval_fix. Qed.
 
    - If [v1] was a program variable (that is, a [trm_var]) in the original
      source code, then this program variable should have been substituted by
-     a Coq value or variable of type [val] by the time we reach this function
+     a Rocq value or variable of type [val] by the time we reach this function
      call. Otherwise, the variable would correspond to a dangling free variable.
-   - If [v1] is a Coq variable of type [val] but with no assumption of the form
+   - If [v1] is a Rocq variable of type [val] but with no assumption of the form
      [v1 = val_fun x t1], it is probably the case that we already have
      established a specification lemma for the function [v1] earlier in the
      reasoning. It this case, the rule above generally cannot be applied.
@@ -276,7 +276,7 @@ Proof using. introv M Hs. applys* eval_fix. Qed.
 
    Let's come back to the case where we are interested in establishing a triple
    for a concrete function, whose code is known. The reasoning rule stated above
-   translates in Coq as shown below. *)
+   translates in Rocq as shown below. *)
 
 Lemma triple_app_fun : forall x v1 v2 t1 H Q,
   v1 = val_fun x t1 ->
@@ -610,7 +610,7 @@ Lemma triple_incr : forall (p:loc) (n:int),
     - the [xsimpl] tactic for simplifying entailments.
 
     Executing the proof script step by step leads to the display of intermediate
-    proof obligations that involve Coq existential variables, a.k.a. "evars",
+    proof obligations that involve Rocq existential variables, a.k.a. "evars",
     whose name is prefixed by a question mark, e.g., "?x". These placeholders
     are typically introduced by [applys] (which calls [eapply]), and are
     typically instantiated when solving subgoals. *)
@@ -620,7 +620,7 @@ Proof using.
   intros. applys triple_app_fun.
 (** Provide the argument name and body for [incr]. *)
   { reflexivity. }
-(** Compute the substitution from program variable ["p"] to Coq variable [p] *)
+(** Compute the substitution from program variable ["p"] to Rocq variable [p] *)
   simpl.
 (** Reason about [let n = ..]. Observe that this introduces an evar [?Q1], which
     denotes the postcondition of [!p]. *)
@@ -1004,7 +1004,7 @@ End ExamplePrograms2.
 
     Numerous mechanized presentations of Separation Logic, targeting various
     languages (assembly, C, core-Java, ML, etc.) and using various tools
-    (Isabelle/HOL, Coq, PVS, HOL4, HOL). For a detailed list, see the last
+    (Isabelle/HOL, Coq/Rocq, PVS, HOL4, HOL). For a detailed list, see the last
     chapter of the companion notes, linked from the [Preface]. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Extract.
 
 Parameter MISSING: Type.
@@ -39,7 +39,7 @@ idtac "#> sort_int_correct".
 idtac "Possible points: 3".
 check_type @sort_int_correct (
 (forall al : list int,
- @Permutation.Permutation int al (sort_int al) /\ sorted (sort_int al))).
+ and (@Permutation.Permutation int al (sort_int al)) (sorted (sort_int al)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions sort_int_correct.
@@ -53,7 +53,7 @@ idtac "#> lookup_insert_eq".
 idtac "Possible points: 1".
 check_type @lookup_insert_eq (
 (forall (V : Type) (default : V) (t : tree V) (k : key) (v : V),
- @lookup V default k (@insert V k v t) = v)).
+ @eq V (@lookup V default k (@insert V k v t)) v)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_insert_eq.
@@ -66,8 +66,9 @@ idtac " ".
 idtac "#> lookup_insert_neq".
 idtac "Possible points: 2".
 check_type @lookup_insert_neq (
-(forall (V : Type) (default : V) (t : tree V) (k k' : key) (v : V),
- k <> k' -> @lookup V default k' (@insert V k v t) = @lookup V default k' t)).
+(forall (V : Type) (default : V) (t : tree V) (k k' : key)
+   (v : V) (_ : not (@eq key k k')),
+ @eq V (@lookup V default k' (@insert V k v t)) (@lookup V default k' t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions lookup_insert_neq.
@@ -120,4 +121,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

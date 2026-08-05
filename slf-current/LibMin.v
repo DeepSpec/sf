@@ -6,7 +6,7 @@
       e.g. mmin and mmax. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Minimum/Maximum w.r.t. an order relation                                *
 **************************************************************************)
 
@@ -258,4 +258,4 @@ Definition MMax `{Inhab A} `{Le A} := mmax le.
 
 
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import BagPerm.
 
 Parameter MISSING: Type.
@@ -46,7 +46,7 @@ idtac " ".
 
 idtac "#> bag_eqv_sym".
 idtac "Possible points: 0.5".
-check_type @bag_eqv_sym ((forall b1 b2 : bag, bag_eqv b1 b2 -> bag_eqv b2 b1)).
+check_type @bag_eqv_sym ((forall (b1 b2 : bag) (_ : bag_eqv b1 b2), bag_eqv b2 b1)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bag_eqv_sym.
@@ -56,7 +56,8 @@ idtac " ".
 idtac "#> bag_eqv_trans".
 idtac "Possible points: 0.5".
 check_type @bag_eqv_trans (
-(forall b1 b2 b3 : bag, bag_eqv b1 b2 -> bag_eqv b2 b3 -> bag_eqv b1 b3)).
+(forall (b1 b2 b3 : bag) (_ : bag_eqv b1 b2) (_ : bag_eqv b2 b3),
+ bag_eqv b1 b3)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bag_eqv_trans.
@@ -66,8 +67,8 @@ idtac " ".
 idtac "#> bag_eqv_cons".
 idtac "Possible points: 0.5".
 check_type @bag_eqv_cons (
-(forall (x : nat) (b1 b2 : bag),
- bag_eqv b1 b2 -> bag_eqv (x :: b1)%list (x :: b2)%list)).
+(forall (x : nat) (b1 b2 : bag) (_ : bag_eqv b1 b2),
+ bag_eqv (@cons nat x b1) (@cons nat x b2))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bag_eqv_cons.
@@ -80,7 +81,7 @@ idtac " ".
 idtac "#> insert_bag".
 idtac "Possible points: 3".
 check_type @insert_bag (
-(forall (x : nat) (l : list nat), bag_eqv (x :: l)%list (Sort.insert x l))).
+(forall (x : nat) (l : list nat), bag_eqv (@cons nat x l) (Sort.insert x l))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions insert_bag.
@@ -113,7 +114,8 @@ idtac " ".
 idtac "#> perm_bag".
 idtac "Possible points: 3".
 check_type @perm_bag (
-(forall al bl : list nat, @Permutation.Permutation nat al bl -> bag_eqv al bl)).
+(forall (al bl : list nat) (_ : @Permutation.Permutation nat al bl),
+ bag_eqv al bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions perm_bag.
@@ -126,7 +128,8 @@ idtac " ".
 idtac "#> bag_nil_inv".
 idtac "Advanced".
 idtac "Possible points: 2".
-check_type @bag_nil_inv ((forall b : bag, bag_eqv (@nil nat) b -> b = @nil nat)).
+check_type @bag_nil_inv (
+(forall (b : bag) (_ : bag_eqv (@nil nat) b), @eq bag b (@nil nat))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bag_nil_inv.
@@ -140,10 +143,13 @@ idtac "#> bag_cons_inv".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @bag_cons_inv (
-(forall (l : bag) (x n : nat),
- S n = count x l ->
- exists l1 l2 : list nat,
-   l = (l1 ++ x :: l2)%list /\ count x (l1 ++ l2)%list = n)).
+(forall (l : bag) (x n : nat) (_ : @eq nat (S n) (count x l)),
+ @ex (list nat)
+   (fun l1 : list nat =>
+    @ex (list nat)
+      (fun l2 : list nat =>
+       and (@eq bag l (@app nat l1 (@cons nat x l2)))
+         (@eq nat (count x (@app nat l1 l2)) n))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bag_cons_inv.
@@ -157,8 +163,8 @@ idtac "#> count_insert_other".
 idtac "Advanced".
 idtac "Possible points: 2".
 check_type @count_insert_other (
-(forall (l1 l2 : list nat) (x y : nat),
- y <> x -> count y (l1 ++ x :: l2)%list = count y (l1 ++ l2)%list)).
+(forall (l1 l2 : list nat) (x y : nat) (_ : not (@eq nat y x)),
+ @eq nat (count y (@app nat l1 (@cons nat x l2))) (count y (@app nat l1 l2)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions count_insert_other.
@@ -172,7 +178,7 @@ idtac "#> bag_perm".
 idtac "Advanced".
 idtac "Possible points: 3".
 check_type @bag_perm (
-(forall al bl : bag, bag_eqv al bl -> @Permutation.Permutation nat al bl)).
+(forall (al bl : bag) (_ : bag_eqv al bl), @Permutation.Permutation nat al bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions bag_perm.
@@ -243,4 +249,6 @@ idtac "---------- bag_perm ---------".
 Print Assumptions bag_perm.
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

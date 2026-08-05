@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Executable operations for lists                                         *
 **************************************************************************)
 
@@ -319,7 +319,7 @@ Qed.
 (* ** [fold_right] *)
 
 (** [LibList.fold_right] computes well. Here, we prove that it matches
-    Coq's standard library [fold_right]. *)
+    Rocq's standard library [fold_right]. *)
 
 Lemma fold_right_eq : forall A B,
   @List.fold_right B A = @LibList.fold_right A B.
@@ -328,4 +328,4 @@ Proof using. extens. intros a b l. induction l; simpl; rew_listx; fequals. Qed.
 #[global] Hint Rewrite fold_right_eq : rew_list_exec.
 
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

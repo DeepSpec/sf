@@ -1,9 +1,9 @@
 (** * AltAuto: A Streamlined Treatment of Automation *)
 
 (** So far, we've been doing all our proofs using just a small
-    handful of Coq's tactics and completely ignoring its powerful
+    handful of Rocq's tactics and completely ignoring its powerful
     facilities for constructing parts of proofs automatically. Getting
-    used to them will take some work -- Coq's automation is a power
+    used to them will take some work -- Rocq's automation is a power
     tool -- but it will allow us to scale up our efforts to more
     complex definitions and more interesting properties without
     becoming overwhelmed by boring, repetitive, low-level details.
@@ -32,8 +32,8 @@
     A deeper treatment of [auto] can be found in the [UseAuto]
     chapter in _Programming Language Foundations_.  *)
 
-Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality,-deprecated-syntactic-definition,-deprecated]".
-From Coq Require Import Arith List.
+Set Warnings "-notation-overridden,-notation-incompatible-prefix".
+From Stdlib Require Import Arith List.
 From LF Require Import IndProp.
 
 (** As a simple illustration of the benefits of automation,
@@ -339,11 +339,11 @@ Qed.
 (** The tactic [repeat T] also does not have any upper bound on the
     number of times it applies [T].  If [T] is a tactic that always
     succeeds, then repeat [T] will loop forever (e.g., [repeat simpl]
-    loops, since [simpl] always succeeds). Evaluation in Coq's term
+    loops, since [simpl] always succeeds). Evaluation in Rocq's term
     language, Gallina, is guaranteed to terminate, but tactic
-    evaluation is not. This does not affect Coq's logical consistency,
+    evaluation is not. This does not affect Rocq's logical consistency,
     however, since the job of [repeat] and other tactics is to guide
-    Coq in constructing proofs. If the construction process diverges,
+    Rocq in constructing proofs. If the construction process diverges,
     it simply means that we have failed to construct a proof, not that
     we have constructed an incorrect proof. *)
 
@@ -608,7 +608,7 @@ Qed.
     to remember that name. If we later change the name in one place,
     we have to change it everywhere. Likewise, if we were to add new
     arguments to the theorem, we would have to adjust the [intros]
-    list. That makes it challenging to maintain large proofs. So, Coq
+    list. That makes it challenging to maintain large proofs. So, Rocq
     provides several tactics that make it possible to write proof
     scripts that do not hardcode names. *)
 
@@ -631,7 +631,7 @@ Qed.
     paraphrased simply as "the conclusion follows from the
     assumptions."
 
-    Anyway, unlike informal (good) mathematical proofs, Coq proof
+    Anyway, unlike informal (good) mathematical proofs, Rocq proof
     scripts are generally not that illuminating to readers. Worries
     about rich, self-documenting names for hypotheses might be
     misplaced. *)
@@ -721,7 +721,7 @@ Qed.
 (* ################################################################# *)
 (** * Automatic Solvers *)
 
-(** Coq has several special-purpose tactics that can solve
+(** Rocq has several special-purpose tactics that can solve
     certain kinds of goals in a completely automated way. These
     tactics are based on sophisticated algorithms developed for
     verification in specific mathematical or logical domains.
@@ -764,7 +764,7 @@ Qed.
 
     Also, [lia] will do [intros] as necessary. *)
 
-From Coq Require Import Lia.
+From Stdlib Require Import Lia.
 
 Theorem lia_succeed1 : forall (n : nat),
   n > 0 -> n * 2 > n.
@@ -792,7 +792,7 @@ Abort.
     the algebraic structures of _rings_ and _fields_, from which the
     tactics get their names. These tactics do not do [intros]. *)
 
-Require Import Ring.
+From Stdlib Require Import Ring.
 
 Theorem mult_comm : forall (n m : nat),
     n * m = m * n.
@@ -870,7 +870,7 @@ Qed.
     quantifiers -- or at least, if quantifiers do not have to be
     instantiated to carry out the proof. The [intuition] tactic
     implements a decision procedure for propositional tautologies in
-    Coq's constructive (that is, intuitionistic) logic. Even if a goal
+    Rocq's constructive (that is, intuitionistic) logic. Even if a goal
     is not a propositional tautology, [intuition] will still attempt
     to reduce it to simpler subgoals. *)
 
@@ -948,7 +948,7 @@ Proof. (* FILL IN HERE *) Admitted.
     lemmas we've proved, or that are provided by libraries that we
     load.
 
-    Another kind of automation that Coq provides does just that: the
+    Another kind of automation that Rocq provides does just that: the
     [auto] tactic and its variants search for proofs that can be
     assembled out of hypotheses and lemmas. *)
 
@@ -1063,7 +1063,7 @@ Qed.
     constructor of an inductively defined proposition (i.e., anything
     whose type is an implication). We tell [auto] to use that database
     by writing [auto with db]. Technically creation of the database
-    is optional; Coq will create it automatically the first time
+    is optional; Rocq will create it automatically the first time
     we use [Hint]. *)
 
 Create HintDb le_db.
@@ -1081,7 +1081,7 @@ Qed.
 
       Hint Constructors c : db.
 
-    to tell Coq to do a [Hint Resolve] for _all_ of the constructors
+    to tell Rocq to do a [Hint Resolve] for _all_ of the constructors
     from the inductive definition of [c].
 
     It is also sometimes necessary to add
@@ -1107,7 +1107,7 @@ Example auto_example_7' : forall x,
 Proof. info_auto with le_db. Qed.
 
 (** The "global" database that [auto] always uses is named [core].
-    You can add your own hints to it, but the Coq manual discourages
+    You can add your own hints to it, but the Rocq manual discourages
     that, preferring instead to have specialized databases for
     specific developments. Many of the important libraries have their
     own hint databases that you can tag in: [arith], [bool], [datatypes]
@@ -1180,14 +1180,7 @@ Lemma pumping : forall T (re : reg_exp T) s,
         forall m, s1 ++ napp m s2 ++ s3 =~ re.
 
 Proof.
-  intros T re s Hmatch.
-  induction Hmatch
-    as [ | x | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
-       | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
-       | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2 ];
-    simpl; try lia;
-    intros Hlen.
-(* FILL IN HERE *) Admitted.
+  (* FILL IN HERE *) Admitted.
 (* Do not modify the following line: *)
 Definition manual_grade_for_pumping_redux_strong : option (nat*string) := None.
 (** [] *)
@@ -1213,7 +1206,7 @@ Proof.
 Qed.
 
 (** In the first step of the proof, we had to explicitly provide a
-    longish expression to help Coq instantiate a "hidden" argument to
+    longish expression to help Rocq instantiate a "hidden" argument to
     the [le_trans] constructor. This was needed because the definition
     of [le_trans]...
 
@@ -1221,7 +1214,7 @@ Qed.
 
     is quantified over a variable, [n], that does not appear in its
     conclusion, so unifying its conclusion with the goal state doesn't
-    help Coq find a suitable value for this variable.  If we leave
+    help Rocq find a suitable value for this variable.  If we leave
     out the [with], this step fails ("Error: Unable to find an
     instance for the variable [n]").
 
@@ -1273,7 +1266,7 @@ Qed.
     Pro tip: One might think that, since [eapply] and [eauto] are more
     powerful than [apply] and [auto], it would be a good idea to use
     them all the time.  Unfortunately, they are also significantly
-    slower -- especially [eauto].  Coq experts tend to use [apply] and
+    slower -- especially [eauto].  Rocq experts tend to use [apply] and
     [auto] most of the time, only switching to the [e] variants when
     the ordinary variants don't do the job. *)
 
@@ -1281,12 +1274,12 @@ Qed.
 (** * Ltac: The Tactic Language *)
 
 (** Most of the tactics we have been using are implemented in
-    OCaml, where they are able to use an API to access Coq's internal
+    OCaml, where they are able to use an API to access Rocq's internal
     structures at a low level. But this is seldom worth the trouble
-    for ordinary Coq users.
+    for ordinary Rocq users.
 
-    Coq has a high-level language called Ltac for programming new
-    tactics in Coq itself, without having to escape to OCaml.
+    Rocq has a high-level language called Ltac for programming new
+    tactics in Rocq itself, without having to escape to OCaml.
     Actually we've been using Ltac all along -- anytime we are in
     proof mode, we've been writing Ltac programs. At their most basic,
     those programs are just invocations of built-in tactics.  The
@@ -1451,7 +1444,7 @@ Proof.
   end.
 Qed.
 
-(** The syntax is similar to a [match] in Gallina (Coq's term
+(** The syntax is similar to a [match] in Gallina (Rocq's term
     language), but has some new features:
 
     - The word [goal] here is a keyword, rather than an expression
@@ -1707,7 +1700,7 @@ Qed.
 (** ** Using [match goal] to Prove Tautologies *)
 
 (** The Ltac source code of [intuition] can be found in the GitHub
-    repo for Coq in [theories/Init/Tauto.v]. At heart, it is a big
+    repo for Rocq in [theories/Init/Tauto.v]. At heart, it is a big
     loop that runs [match goal] to find propositions it can [apply]
     and [destruct].
 
@@ -1832,4 +1825,4 @@ Definition manual_grade_for_nor_intuition : option (nat*string) := None.
 
     - Ltac functions and [match goal] *)
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:18 *)

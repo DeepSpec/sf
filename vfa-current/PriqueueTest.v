@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import Priqueue.
 
 Parameter MISSING: Type.
@@ -40,7 +40,7 @@ idtac "Possible points: 1".
 check_type @List_Priqueue.select_perm (
 (forall (i : nat) (l : list nat),
  let (j, r) := List_Priqueue.select i l in
- @Permutation.Permutation nat (i :: l) (j :: r))).
+ @Permutation.Permutation nat (@cons nat i l) (@cons nat j r))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions List_Priqueue.select_perm.
@@ -50,9 +50,11 @@ idtac " ".
 idtac "#> List_Priqueue.select_biggest_aux".
 idtac "Possible points: 1".
 check_type @List_Priqueue.select_biggest_aux (
-(forall (i : nat) (al : list nat) (j : nat) (bl : list nat),
- @List.Forall nat (fun x : nat => j >= x) bl ->
- List_Priqueue.select i al = (j, bl) -> j >= i)).
+(forall (i : nat) (al : list nat) (j : nat) (bl : list nat)
+   (_ : @ListDef.Forall nat (fun x : nat => ge j x) bl)
+   (_ : @eq (prod nat (list nat)) (List_Priqueue.select i al)
+          (@pair nat (list nat) j bl)),
+ ge j i)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions List_Priqueue.select_biggest_aux.
@@ -62,9 +64,10 @@ idtac " ".
 idtac "#> List_Priqueue.select_biggest".
 idtac "Possible points: 1".
 check_type @List_Priqueue.select_biggest (
-(forall (i : nat) (al : list nat) (j : nat) (bl : list nat),
- List_Priqueue.select i al = (j, bl) ->
- @List.Forall nat (fun x : nat => j >= x) bl)).
+(forall (i : nat) (al : list nat) (j : nat) (bl : list nat)
+   (_ : @eq (prod nat (list nat)) (List_Priqueue.select i al)
+          (@pair nat (list nat) j bl)),
+ @ListDef.Forall nat (fun x : nat => ge j x) bl)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions List_Priqueue.select_biggest.
@@ -77,10 +80,10 @@ idtac " ".
 idtac "#> List_Priqueue.delete_max_None_relate".
 idtac "Possible points: 0.5".
 check_type @List_Priqueue.delete_max_None_relate (
-(forall p : List_Priqueue.priqueue,
- List_Priqueue.priq p ->
- List_Priqueue.Abs p (@nil List_Priqueue.key) <->
- List_Priqueue.delete_max p = @None (nat * list nat))).
+(forall (p : List_Priqueue.priqueue) (_ : List_Priqueue.priq p),
+ iff (List_Priqueue.Abs p (@nil List_Priqueue.key))
+   (@eq (option (prod nat (list nat))) (List_Priqueue.delete_max p)
+      (@None (prod nat (list nat)))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions List_Priqueue.delete_max_None_relate.
@@ -91,13 +94,14 @@ idtac "#> List_Priqueue.delete_max_Some_relate".
 idtac "Possible points: 1".
 check_type @List_Priqueue.delete_max_Some_relate (
 (forall (p q : List_Priqueue.priqueue) (k : nat)
-   (pl ql : list List_Priqueue.key),
- List_Priqueue.priq p ->
- List_Priqueue.Abs p pl ->
- List_Priqueue.delete_max p = @Some (nat * List_Priqueue.priqueue) (k, q) ->
- List_Priqueue.Abs q ql ->
- @Permutation.Permutation List_Priqueue.key pl (k :: ql) /\
- @List.Forall nat (ge k) ql)).
+   (pl ql : list List_Priqueue.key) (_ : List_Priqueue.priq p)
+   (_ : List_Priqueue.Abs p pl)
+   (_ : @eq (option (prod nat (list nat))) (List_Priqueue.delete_max p)
+          (@Some (prod nat List_Priqueue.priqueue)
+             (@pair nat List_Priqueue.priqueue k q)))
+   (_ : List_Priqueue.Abs q ql),
+ and (@Permutation.Permutation List_Priqueue.key pl (@cons nat k ql))
+   (@ListDef.Forall nat (ge k) ql))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions List_Priqueue.delete_max_Some_relate.
@@ -108,13 +112,14 @@ idtac "#> List_Priqueue.delete_max_Some_relate".
 idtac "Possible points: 0.5".
 check_type @List_Priqueue.delete_max_Some_relate (
 (forall (p q : List_Priqueue.priqueue) (k : nat)
-   (pl ql : list List_Priqueue.key),
- List_Priqueue.priq p ->
- List_Priqueue.Abs p pl ->
- List_Priqueue.delete_max p = @Some (nat * List_Priqueue.priqueue) (k, q) ->
- List_Priqueue.Abs q ql ->
- @Permutation.Permutation List_Priqueue.key pl (k :: ql) /\
- @List.Forall nat (ge k) ql)).
+   (pl ql : list List_Priqueue.key) (_ : List_Priqueue.priq p)
+   (_ : List_Priqueue.Abs p pl)
+   (_ : @eq (option (prod nat (list nat))) (List_Priqueue.delete_max p)
+          (@Some (prod nat List_Priqueue.priqueue)
+             (@pair nat List_Priqueue.priqueue k q)))
+   (_ : List_Priqueue.Abs q ql),
+ and (@Permutation.Permutation List_Priqueue.key pl (@cons nat k ql))
+   (@ListDef.Forall nat (ge k) ql))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions List_Priqueue.delete_max_Some_relate.
@@ -173,4 +178,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)

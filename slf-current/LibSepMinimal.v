@@ -486,8 +486,8 @@ Lemma xchange_lemma : forall H1 H1',
   H1' \* H2 ==> H' ->
   H ==> H'.
 Proof.
-  introv M1 M2 M3. applys himpl_trans M2. applys himpl_trans M3.
-  applys himpl_frame_l. applys M1.
+  introv M1 M2 M3. applys himpl_trans M2. applys himpl_trans.
+  { applys himpl_frame_l. applys M1. } { applys M3. }
 Qed.
 
 Tactic Notation "xchange" constr(M) :=
@@ -718,4 +718,4 @@ Proof using.
   { apply triple_set. }
 Qed.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-06 11:57 *)

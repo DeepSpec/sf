@@ -38,11 +38,11 @@ Implicit Types Q : val->hprop.
     Another key difference between [wp] and [wpgen] is that the formulae
     produced by [wpgen] no longer refer to program syntax. In particular, all
     program variables involved in a term [t] in a statement of the form [wp t Q]
-    are replaced with Coq variables when computing [wpgen t Q]. The benefit of
+    are replaced with Rocq variables when computing [wpgen t Q]. The benefit of
     eliminating program variables is that formulae produced by [wpgen] can be
     manipulated without the need to simplify substitutions of the form
-    [subst x v t2]. Instead, the beta reduction mechanism of Coq will
-    automatically perform substitutions for Coq variables.
+    [subst x v t2]. Instead, the beta reduction mechanism of Rocq will
+    automatically perform substitutions for Rocq variables.
 
     The reader might have encountered the term "weakest precondition generator"
     in the past. Such generators take as input a program annotated with all
@@ -58,7 +58,7 @@ Implicit Types Q : val->hprop.
     x-tactics presented in the first two chapters of the course were built on
     top of [wpgen]. The matter of the present chapter is to show:
 
-    - how to define [wpgen t Q] as a recursive function in Coq,
+    - how to define [wpgen t Q] as a recursive function in Rocq,
     - how to integrate support for the frame rule in this definition,
     - how to carry out practical proofs using [wpgen].
 
@@ -121,7 +121,7 @@ Implicit Types Q : val->hprop.
 
 (** In a first step, we modify the definition in order to make it structurally
     recursive. Indeed, in the above the recursive call [wpgen (subst x v t2)] is
-    not made on a strict subterm of [trm_let x t1 t2], so Coq will reject this
+    not made on a strict subterm of [trm_let x t1 t2], so Rocq will reject this
     definition as it stands.
 
     To fix the issue, we change the definition to the form [wpgen E t Q], where
@@ -200,7 +200,7 @@ Implicit Types Q : val->hprop.
     notation that enables a nice display of the output of [wpgen]. For example,
     the notation [Let' v := F1 in F2] stands for [wpgen_let F1 (fun v => F2)].
     Thanks to this notation, the result of computing [wpgen] on a source term
-    [Let x := t1 in t2], which is an Coq expression of type [trm], is a Coq
+    [Let x := t1 in t2], which is an Rocq expression of type [trm], is a Rocq
     expression of type [formula] displayed as [Let' x := F1 in F2].
 
     Thanks to these auxiliary definitions and pieces of notation, the formula
@@ -240,7 +240,7 @@ Implicit Types Q : val->hprop.
     defined.
 
     The "more details" section recapitulates each of the four steps presented in
-    the above summary, but explaining in detail all the Coq definitions
+    the above summary, but explaining in detail all the Rocq definitions
     involved. *)
 
 (* ################################################################# *)
@@ -485,7 +485,7 @@ Proof using. intros. rewrite <- wp_equiv. applys wp_var. Qed.
 (** *** Definition of [wpgen] for Conditionals *)
 
 (** Finally, consider an if-statement. Recall the [wp]-style reasoning rule
-    stated using a Coq conditional. *)
+    stated using a Rocq conditional. *)
 
 Parameter wp_if : forall (b:bool) t1 t2 Q,
   (if b then (wp t1 Q) else (wp t2 Q)) ==> wp (trm_if (val_bool b) t1 t2) Q.
@@ -540,7 +540,7 @@ Parameter wp_if : forall (b:bool) t1 t2 Q,
       end.
 
     As pointed out earlier, this definition is not structurally recursive and is
-    thus not accepted by Coq, due to the recursive call
+    thus not accepted by Rocq, due to the recursive call
     [wpgen (subst x v t2) Q]. Our next step is to fix this issue. *)
 
 (* ================================================================= *)
@@ -726,7 +726,7 @@ Fixpoint isubst (E:ctx) (t:trm) : trm :=
 
 Module WpgenExec1.
 
-(** At last, we arrive at a definition of [wpgen] that type-checks in Coq and
+(** At last, we arrive at a definition of [wpgen] that type-checks in Rocq and
     that can be used to effectively compute weakest preconditions in Separation
     Logic. *)
 
@@ -1374,7 +1374,7 @@ Tactic Notation "xapp_nosubst" constr(E) :=
   xseq_xlet_if_needed; xstruct_if_needed;
   applys xapp_lemma E; [ xsimpl | xpull ].
 
-(** [xwp] applys [xwp_lemma], then requests Coq to evaluate the [wpgen]
+(** [xwp] applys [xwp_lemma], then requests Rocq to evaluate the [wpgen]
     function. (For technical reasons, in the definition shown below we need to
     explicitly request the unfolding of [wpgen_var].) *)
 
@@ -1569,7 +1569,7 @@ Proof using.
 Abort.
 
 (** We therefore introduce a variant of the [xlet] tactic, called [xletval],
-    that processes let-bindings by introducing an equality in the Coq context.
+    that processes let-bindings by introducing an equality in the Rocq context.
     For example, for our local function [f], a fresh hypothesis named [f] of
     type [val] is introduced, and an hypothesis of type asserting that [f] is
     equal to [fun {"u"} => {incr p}] is provided to characterize the value [f].
@@ -1809,7 +1809,7 @@ End ExampleLocalFunWpgen.
     be counterproductive when verifying nontrivial programs. Let us explain why.
 
     In a nontrivial proof, calls to x-tactics do not appear in sequence: they
-    are interleaved with conventional Coq tactics for discharging side
+    are interleaved with conventional Rocq tactics for discharging side
     conditions. Typically, when reasoning about a function whose specification
     contains preconditions, [xapp] generates one subgoal for each precondition.
     Now, suppose that we have a sequence made of 3 such function calls. The
@@ -2388,13 +2388,13 @@ End WPgenRec.
 
     In general, a characteristic formula provides not just a sound but also a
     complete description of the semantics of a program. In Charguéraud's PhD
-    thesis, completeness is established on paper, and a mechanized proof in Coq
+    thesis, completeness is established on paper, and a mechanized proof in Rocq
     is provided only for the simple IMP language. Even if a result of the form
-    [wp t Q ==> wpgen t Q] were proved in Coq, such a completeness result would
+    [wp t Q ==> wpgen t Q] were proved in Rocq, such a completeness result would
     be relatively unsatisfying. Indeed, this entailment asserts that if a
     program admits a behavior, then the program logic can be used to establish
     that this program admits that behavior. Yet, this statement does not capture
     the existence of a _pretty_ Separation Logic proof featuring local reasoning
     --that is, allowing for maximal usage of the frame rule. *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

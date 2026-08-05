@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Properties of logical connectives and functions                         *
 **************************************************************************)
 
@@ -123,7 +123,7 @@ Definition prop_inv := classic.
 (** ** Strong excluded middle *)
 
 (** From classical logic and indefinite description, we can prove
-    the strong (or informative) excluded middle, which allows Coq
+    the strong (or informative) excluded middle, which allows Rocq
     definitions to make a case analysis on the truth value of any
     proposition. *)
 
@@ -1183,4 +1183,4 @@ Arguments forall_conj_inv_10 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] 
 Arguments forall_conj_inv_11 [A1] [A2] [A3] [A4] [A5] [A6] [A7] [A8] [A9] [A10] [A11] [P] [Q].
 
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

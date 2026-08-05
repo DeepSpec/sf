@@ -7,7 +7,7 @@
 *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Functions                                                               *
 **************************************************************************)
 
@@ -260,4 +260,4 @@ Proof using. introv I. induction n; introv Hx; autos*. Qed.
 (* --TODO: rename applyn to iter *)
 (* --TODO: migrate iteration of functionals from LibFix to here *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

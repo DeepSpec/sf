@@ -8,7 +8,7 @@ Module NatList.
 
 (** In an [Inductive] type definition, each constructor can take
     any number of arguments -- none (as with [true] and [O]), one (as
-    with [S]), or more than one (as with [nybble], and the following): *)
+    with [S]), or more than one (as with [nybble] and the following): *)
 
 Inductive natprod : Type :=
   | pair (n1 n2 : nat).
@@ -37,7 +37,7 @@ Compute (fst (pair 3 5)).
 
 (** Since pairs will be used heavily in what follows, it will be
     convenient to write them with the standard mathematical notation
-    [(x,y)] instead of [pair x y].  We can tell Coq to allow this with
+    [(x,y)] instead of [pair x y].  We can tell Rocq to allow this with
     a [Notation] declaration. *)
 
 Notation "( x , y )" := (pair x y).
@@ -76,7 +76,7 @@ Definition swap_pair (p : natprod) : natprod :=
          | S n', S m' => minus n' m'
          end.
 
-    The distinction is minor, but it is worth knowing that they
+    The distinction is minor, but it is worth understanding that they
     are not the same. For instance, the following definitions are
     ill-formed:
 
@@ -168,7 +168,7 @@ Notation "[ x ; .. ; y ]" := (cons x .. (cons y nil) ..).
 
 (** It is not necessary to understand the details of these
     declarations, but here is roughly what's going on in case you are
-    interested.  The "[right associativity]" annotation tells Coq how to
+    interested.  The "[right associativity]" annotation tells Rocq how to
     parenthesize expressions involving multiple uses of [::] so that,
     for example, the next three declarations mean exactly the same
     thing: *)
@@ -177,7 +177,7 @@ Definition mylist1 := 1 :: (2 :: (3 :: nil)).
 Definition mylist2 := 1 :: 2 :: 3 :: nil.
 Definition mylist3 := [1;2;3].
 
-(** The "[at level 60]" part tells Coq how to parenthesize
+(** The "[at level 60]" part tells Rocq how to parenthesize
     expressions that involve both [::] and some other infix operator.
     For example, since we defined [+] as infix notation for the [plus]
     function at level 50,
@@ -191,26 +191,25 @@ Definition mylist3 := [1;2;3].
     (Expressions like "[1 + 2 :: [3]]" can be a little confusing when
     you read them in a [.v] file.  The inner brackets, around 3,
     indicate a list, but the outer brackets, which are invisible in
-    the HTML rendering, are there to instruct the "coqdoc" tool that
-    the bracketed part should be displayed as Coq code rather than
+    the HTML rendering, are there to instruct the "rocq doc" tool that
+    the bracketed part should be displayed as Rocq code rather than
     running text.)
 
     The second and third [Notation] declarations above introduce the
     standard square-bracket notation for lists; the right-hand side of
-    the third one illustrates Coq's syntax for declaring n-ary
+    the third one illustrates Rocq's syntax for declaring n-ary
     notations and translating them to nested sequences of binary
     constructors.
 
     Again, don't worry if some of these parsing details are puzzling:
     all the notations you'll need in this course will be defined for
-    you.
-*)
+    you. *)
 
 (* ----------------------------------------------------------------- *)
 (** *** Repeat *)
 
 (** Next let's look at several functions for constructing and
-    manipulating lists.  First, the [repeat] function, which takes a
+    manipulating lists.  First is the [repeat] function, which takes a
     number [n] and a [count] and returns a list of length [count] in
     which every element is [n]. *)
 
@@ -258,7 +257,7 @@ Proof. reflexivity. Qed.
 (* ----------------------------------------------------------------- *)
 (** *** Head and Tail *)
 
-(** Here are two smaller examples of programming with lists.
+(** Here are two more handy functions for working with lists.
     The [hd] function returns the first element (the "head") of the
     list, while [tl] returns everything but the first element (the
     "tail").  Since the empty list has no first element, we pass
@@ -336,7 +335,7 @@ Example test_countoddmembers3:
     below for more specific examples.
 
     Hint: there are natural ways of writing [alternate] that fail to
-    satisfy Coq's requirement that all [Fixpoint] definitions be
+    satisfy Rocq's requirement that all [Fixpoint] definitions be
     _structurally recursive_, as mentioned in [Basics]. If you
     encounter this difficulty, consider pattern matching against both
     lists at the same time with the "multiple pattern" syntax we've
@@ -470,10 +469,10 @@ Example test_included2:              included [1;2;2] [2;1;4;1] = false.
  (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 2 stars, standard, especially useful (add_inc_count)
+(** **** Exercise: 2 stars, standard, optional (add_inc_count)
 
     Adding a value to a bag should increase the value's count by one.
-    State this as a theorem and prove it in Coq. *)
+    State this as a theorem and prove it in Rocq. *)
 (*
 Theorem add_inc_count : ...
 Proof.
@@ -490,20 +489,18 @@ Definition manual_grade_for_add_inc_count : option (nat*string) := None.
 
 (** As with numbers, simple facts about list-processing
     functions can sometimes be proved entirely by simplification.  For
-    example, the simplification performed by [reflexivity] is enough
-    for this theorem... *)
+    example, just [reflexivity] is enough for this theorem... *)
 
 Theorem nil_app : forall l : natlist,
   [] ++ l = l.
 Proof. reflexivity. Qed.
 
-(** ...because the [[]] is substituted into the
-    "scrutinee" (the expression whose value is being "scrutinized" by
-    the match) in the definition of [app], allowing the match itself
-    to be simplified. *)
+(** ...because the [[]] is substituted into the "scrutinee" (the
+    expression whose value is being "scrutinized" by the match) in the
+    definition of [app], allowing the match itself to be simplified. *)
 
 (** Also, as with numbers, it is sometimes helpful to perform case
-    analysis on the possible shapes (empty or non-empty) of an unknown
+    analysis on the possible shapes -- empty or non-empty -- of an unknown
     list. *)
 
 Theorem tl_length_pred : forall l:natlist,
@@ -526,7 +523,7 @@ Proof.
 
 (** (Micro-Sermon: As we get deeper into this material, simply
     _reading_ proof scripts will not help you very much.  Rather, it
-    is important to step through the details of each one using Coq and
+    is important to step through the details of each one using Rocq and
     think about what each step achieves.  Otherwise it is more or less
     guaranteed that the exercises will make no sense when you get to
     them.  'Nuff said.) *)
@@ -579,14 +576,14 @@ Proof.
     to the induction hypothesis corresponding to the smaller list
     [l1'] in the [cons] case.
 
-    Once again, this Coq proof is not especially illuminating as a
+    Once again, this Rocq proof is not especially illuminating as a
     static document -- it is easy to see what's going on if you are
-    reading the proof in an interactive Coq session and you can see
+    reading the proof in an interactive Rocq session and you can see
     the current goal and context at each point, but this state is not
-    visible in the written-down parts of the Coq proof.  So a
-    natural-language proof -- one written for human readers -- should
-    include more explicit signposts; in particular, it will help the
-    reader stay oriented if we remind them exactly what the induction
+    visible in the written-down parts of the Rocq proof.  So a
+    natural-language proof -- one written for human readers -- would
+    include more explicit signposts; in particular, it helps the
+    reader stay oriented to remind them exactly what the induction
     hypothesis is in the second case. *)
 
 (** For comparison, here is an informal proof of the same theorem. *)
@@ -619,7 +616,7 @@ Proof.
 (* ----------------------------------------------------------------- *)
 (** *** Generalizing Statements *)
 
-(** In some situations, it can be necessary to generalize a
+(** In some situations, it is necessary to generalize a
     statement in order to prove it by induction.  Intuitively, the
     reason is that a more general statement also yields a more general
     (stronger) inductive hypothesis.  If you find yourself stuck in a
@@ -710,8 +707,9 @@ Proof.
     (* IHl' not applicable. *)
 Abort.
 
-(** We can slightly strengthen the lemma to work not only on
-    reversed lists but on general lists. *)
+(** It turns out that the above lemma is more specific than it
+    needs to be. We can strengthen the lemma to work not only on reversed
+    lists but on general lists. *)
 Theorem app_length_S: forall l n,
   length (l ++ [n]) = S (length l).
 Proof.
@@ -723,29 +721,6 @@ Proof.
     rewrite IHl'.
     reflexivity.
 Qed.
-(** This generalized lemma would be sufficient to conclude our
-    original proof.  Still, we can prove an even more general lemma
-    about the length of appended lists.  *)
-
-(** Let's take the equation relating [++] and [length] that
-    would have enabled us to make progress at the point where we got
-    stuck and state it as a separate lemma. *)
-
-Theorem app_length : forall l1 l2 : natlist,
-  length (l1 ++ l2) = (length l1) + (length l2).
-Proof.
-  (* WORKED IN CLASS *)
-  intros l1 l2. induction l1 as [| n l1' IHl1'].
-  - (* l1 = nil *)
-    reflexivity.
-  - (* l1 = cons *)
-    simpl. rewrite -> IHl1'. reflexivity.  Qed.
-
-(** Note that, to make the lemma as general as possible, we
-    quantify over _all_ [natlist]s, not just those that result from an
-    application of [rev].  This seems natural, because the truth of
-    the goal clearly doesn't depend on the list having been reversed.
-    Moreover, it is easier to prove the more general property. *)
 
 (** Now we can complete the original proof. *)
 
@@ -756,10 +731,24 @@ Proof.
   - (* l = nil *)
     reflexivity.
   - (* l = cons *)
-    simpl. rewrite -> app_length.
-    simpl. rewrite -> IHl'. rewrite add_comm.
+    simpl.
+    rewrite -> app_length_S.
+    rewrite -> IHl'.
     reflexivity.
 Qed.
+
+(** Note that the [app_length_S] lemma we proved above is pretty
+    narrow, requiring that the second list contains only a single element.
+    We can prove a more general version for any two lists. *)
+Theorem app_length : forall l1 l2 : natlist,
+  length (l1 ++ l2) = (length l1) + (length l2).
+Proof.
+  (* WORKED IN CLASS *)
+  intros l1 l2. induction l1 as [| n l1' IHl1'].
+  - (* l1 = nil *)
+    reflexivity.
+  - (* l1 = cons *)
+    simpl. rewrite -> IHl1'. reflexivity.  Qed.
 
 (** For comparison, here are informal proofs of these two theorems:
 
@@ -846,10 +835,10 @@ Qed.
     to remember what theorems have been proven, much less what they
     are called.
 
-    Coq's [Search] command is quite helpful with this.
+    Rocq's [Search] command is quite helpful with this.
 
     Let's say you've forgotten the name of a theorem about [rev].  The
-    command [Search rev] will cause Coq to display a list of all
+    command [Search rev] will cause Rocq to display a list of all
     theorems involving [rev]. *)
 
 Search rev.
@@ -876,7 +865,11 @@ Search (?x + ?y = ?y + ?x).
     identifier that is expected to be in scope currently.) *)
 
 (** Keep [Search] in mind as you do the following exercises and
-    throughout the rest of the book; it can save you a lot of time! *)
+    throughout the rest of the book; it can save you a lot of time!
+
+    Your IDE likely has its own functionality to help with searching.
+    For example, in VSRocq, you can open a tab for performing searches
+    with [Command-Control-K]. *)
 
 (* ================================================================= *)
 (** ** List Exercises, Part 1 *)
@@ -984,10 +977,12 @@ Proof.
 
     Write down an interesting theorem [bag_count_sum] about bags
     involving the functions [count] and [sum], and prove it using
-    Coq.  (You may find that the difficulty of the proof depends on
-    how you defined [count]!  Hint: If you defined [count] using
-    [=?] you may find it useful to know that [destruct] works on
-    arbitrary expressions, not just simple identifiers.)
+    Rocq.  (You may find that the difficulty of the proof depends on
+    how you defined [count]!
+
+    Hint: If you defined [count] using [=?] you may find it useful
+    to know that [destruct] works on arbitrary expressions, not just
+    simple identifiers.)
 *)
 (* FILL IN HERE
 
@@ -1039,17 +1034,17 @@ Fixpoint nth_bad (l:natlist) (n:nat) : nat :=
   end.
 
 (** This solution is not so good: If [nth_bad] returns [42], we
-    can't tell whether that value actually appears on the input
-    without further processing. A better alternative is to change the
+    don't know whether that value actually appears in the input
+    or whether we gave bad arguments. A better alternative is to change the
     return type of [nth_bad] to include an error value as a possible
-    outcome. We call this type [natoption]. *)
+    outcome. We call this new type [natoption]. *)
 
 Inductive natoption : Type :=
   | Some (n : nat)
   | None.
 
 (* Note that we've capitalized the constructor names [None] and
-   [Some], following their definition in Coq's standard library.  In
+   [Some], following their definition in Rocq's standard library.  In
    general, constructor (and variable) names can begin with either
    capital or lowercase letters. *)
 
@@ -1057,8 +1052,10 @@ Inductive natoption : Type :=
     return [None] when the list is too short and [Some a] when the
     list has enough members and [a] appears at position [n]. We call
     this new function [nth_error] to indicate that it may result in an
-    error. As we see here, constructors of inductive definitions can
-    be capitalized. *)
+    error.
+
+    (As we see here, constructors of inductive definitions are allowed
+    to be be capitalized.) *)
 
 Fixpoint nth_error (l:natlist) (n:nat) : natoption :=
   match l with
@@ -1124,7 +1121,7 @@ End NatList.
 (** * Partial Maps *)
 
 (** As a final illustration of how data structures can be defined in
-    Coq, here is a simple _partial map_ data type, analogous to the
+    Rocq, here is a simple _partial map_ data type, analogous to the
     map or dictionary data structures found in most programming
     languages. *)
 
@@ -1207,4 +1204,4 @@ Proof.
 (** [] *)
 End PartialMap.
 
-(* 2024-12-27 01:26 *)
+(* 2026-01-07 13:17 *)

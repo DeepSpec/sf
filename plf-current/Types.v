@@ -5,13 +5,13 @@
     their results.  We'll begin with a typed version of the simplest
     imaginable language, to introduce the basic ideas of types and
     typing rules and the fundamental theorems about type systems:
-    _type preservation_ and _progress_.  In chapter [Stlc] we'll move
+    _type preservation_ and _progress_. In chapter [Stlc] we'll move
     on to the _simply typed lambda-calculus_, which lives at the core
     of every modern functional programming language (including
-    Coq!). *)
+    Rocq!). *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Arith.Arith.
+From Stdlib Require Import Arith.
 From PLF Require Import Maps.
 From PLF Require Import Smallstep.
 Set Default Goal Selector "!".
@@ -124,11 +124,11 @@ Hint Unfold value : core.
                           iszero 0 --> true
 
                          numeric value v
-                      -------------------------                  (ST_IszeroSucc)
+                      -------------------------                  (ST_IsZeroSucc)
                       iszero (succ v) --> false
 
                             t1 --> t1'
-                       ------------------------                      (ST_Iszero)
+                       ------------------------                      (ST_IsZero)
                        iszero t1 --> iszero t1'
 *)
 
@@ -155,18 +155,21 @@ Inductive step : tm -> tm -> Prop :=
   | ST_Pred : forall t1 t1',
       t1 --> t1' ->
       <{ pred t1 }> --> <{ pred t1' }>
-  | ST_Iszero0 :
+  | ST_IsZero0 :
       <{ iszero 0 }> --> <{ true }>
-  | ST_IszeroSucc : forall v,
+  | ST_IsZeroSucc : forall v,
        nvalue v ->
       <{ iszero (succ v) }> --> <{ false }>
-  | ST_Iszero : forall t1 t1',
+  | ST_IsZero : forall t1 t1',
       t1 --> t1' ->
       <{ iszero t1 }> --> <{ iszero t1' }>
 
 where "t '-->' t'" := (step t t').
 
 Hint Constructors step : core.
+
+(** The [nvalue] conditions in [ST_PredSucc] and [ST_IszeroSucc] are
+    needed for determinism (will be proved in an optional exercise below). *)
 
 (** Notice that the [step] relation doesn't care about whether the
     expression being stepped makes global sense -- it just checks that
@@ -279,40 +282,46 @@ Inductive ty : Type :=
                           |-- pred t1 \in Nat
 
                             |-- t1 \in Nat
-                          ----------------------               (T_Iszero)
+                          ----------------------               (T_IsZero)
                           |-- iszero t1 \in Bool
 *)
 
-Reserved Notation "'|--' t '\in' T" (at level 40).
+Declare Custom Entry ty.
+Notation "'Nat'" := Nat (in custom ty).
+Notation "'Bool'" := Bool (in custom ty).
+Notation "x" := x (in custom ty, x global).
+
+Reserved Notation "<{ '|--' t '\in' T }>"
+            (at level 0, t custom tm, T custom ty).
 
 Inductive has_type : tm -> ty -> Prop :=
   | T_True :
-       |-- <{ true }> \in Bool
+       <{ |-- true \in Bool }>
   | T_False :
-       |-- <{ false }> \in Bool
+       <{ |-- false \in Bool }>
   | T_If : forall t1 t2 t3 T,
-       |-- t1 \in Bool ->
-       |-- t2 \in T ->
-       |-- t3 \in T ->
-       |-- <{ if t1 then t2 else t3 }> \in T
+       <{ |-- t1 \in Bool }> ->
+       <{ |-- t2 \in T }> ->
+       <{ |-- t3 \in T }> ->
+       <{ |-- if t1 then t2 else t3 \in T }>
   | T_0 :
-       |-- <{ 0 }> \in Nat
+       <{ |-- 0 \in Nat }>
   | T_Succ : forall t1,
-       |-- t1 \in Nat ->
-       |-- <{ succ t1 }> \in Nat
+       <{ |-- t1 \in Nat }> ->
+       <{ |-- succ t1 \in Nat }>
   | T_Pred : forall t1,
-       |-- t1 \in Nat ->
-       |-- <{ pred t1 }> \in Nat
+       <{ |-- t1 \in Nat }> ->
+       <{ |-- pred t1 \in Nat }>
   | T_Iszero : forall t1,
-       |-- t1 \in Nat ->
-       |-- <{ iszero t1 }> \in Bool
+       <{ |-- t1 \in Nat }> ->
+       <{ |-- iszero t1 \in Bool }>
 
-where "'|--' t '\in' T" := (has_type t T).
+where "<{ '|--' t '\in' T }>" := (has_type t T).
 
 Hint Constructors has_type : core.
 
 Example has_type_1 :
-  |-- <{ if false then 0 else (succ 0) }> \in Nat.
+  <{ |-- if false then 0 else (succ 0) \in Nat }>.
 Proof.
   apply T_If.
   - apply T_False.
@@ -329,15 +338,20 @@ Qed.
     what happens when the term is reduced -- in particular, it does
     not calculate the type of its normal form. *)
 
-Example has_type_not :
-  ~ ( |-- <{ if false then 0 else true}> \in Bool ).
+Example not_has_type :
+  ~ <{ |-- if false then 0 else true \in Bool }>.
+Proof.
+  intros Contra. solve_by_inverts 2.  Qed.
+
+Example not_has_type' :
+  ~ <{ |-- if iszero (succ 0) then succ false else true \in Bool }>.
 Proof.
   intros Contra. solve_by_inverts 2.  Qed.
 
 (** **** Exercise: 1 star, standard, optional (succ_hastype_nat__hastype_nat) *)
 Example succ_hastype_nat__hastype_nat : forall t,
-  |-- <{succ t}> \in Nat ->
-  |-- t \in Nat.
+  <{ |--  succ t \in Nat }> ->
+  <{ |-- t \in Nat }>.
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -350,7 +364,7 @@ Proof.
     relation. *)
 
 Lemma bool_canonical : forall t,
-  |-- t \in Bool -> value t -> bvalue t.
+  <{ |-- t \in Bool }> -> value t -> bvalue t.
 Proof.
   intros t HT [Hb | Hn].
   - assumption.
@@ -360,7 +374,7 @@ Proof.
 Qed.
 
 Lemma nat_canonical : forall t,
-  |-- t \in Nat -> value t -> nvalue t.
+  <{ |-- t \in Nat }> -> value t -> nvalue t.
 Proof.
   intros t HT [Hb | Hn].
   - inversion Hb; subst; inversion HT.
@@ -378,7 +392,7 @@ Qed.
 
 (** **** Exercise: 3 stars, standard (finish_progress) *)
 Theorem progress : forall t T,
-  |-- t \in T ->
+  <{ |-- t \in T }> ->
   value t \/ exists t', t --> t'.
 
 (** Complete the formal proof of the [progress] property.  (Make sure
@@ -399,11 +413,11 @@ Proof.
       * exists t3. auto.
     + (* t1 can take a step *)
       destruct H as [t1' H1].
-      exists (<{ if t1' then t2 else t3 }>). auto.
+      exists <{ if t1' then t2 else t3 }>. auto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (finish_progress_informal)
+(** **** Exercise: 3 stars, advanced, optional (finish_progress_informal)
 
     Complete the corresponding informal proof: *)
 
@@ -447,23 +461,22 @@ Definition manual_grade_for_finish_progress_informal : option (nat*string) := No
 
 (** **** Exercise: 2 stars, standard (finish_preservation) *)
 Theorem preservation : forall t t' T,
-  |-- t \in T ->
+  <{ |-- t \in T }> ->
   t --> t' ->
-  |-- t' \in T.
+  <{ |-- t' \in T }>.
 
-(** Complete the formal proof of the [preservation] property.  (Again,
-    make sure you understand the informal proof fragment in the
-    following exercise first.) *)
+(** Complete the formal proof of the [preservation] property.
+    (Again, make sure you understand the informal proof fragment in
+    the following exercise first.) *)
 
 Proof.
   intros t t' T HT HE.
   generalize dependent t'.
   induction HT;
-         (* every case needs to introduce a couple of things *)
-         intros t' HE;
-         (* and we can deal with several impossible
-            cases all at once *)
-         try solve_by_invert.
+    (* every case needs to introduce a couple of things... *)
+       intros t' HE;
+    (* and we can deal with several impossible cases at once... *)
+       try solve_by_invert.
     - (* T_If *) inversion HE; subst; clear HE.
       + (* ST_IFTrue *) assumption.
       + (* ST_IfFalse *) assumption.
@@ -472,7 +485,7 @@ Proof.
     (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, advanced (finish_preservation_informal)
+(** **** Exercise: 3 stars, advanced, optional (finish_preservation_informal)
 
     Complete the following informal proof: *)
 
@@ -516,9 +529,9 @@ Definition manual_grade_for_finish_preservation_informal : option (nat*string) :
     not exactly the same. *)
 
 Theorem preservation' : forall t t' T,
-  |-- t \in T ->
+  <{ |-- t \in T }> ->
   t --> t' ->
-  |-- t' \in T.
+  <{ |-- t' \in T }>.
 Proof with eauto.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -539,7 +552,7 @@ Definition multistep := (multi step).
 Notation "t1 '-->*' t2" := (multistep t1 t2) (at level 40).
 
 Corollary soundness : forall t t' T,
-  |-- t \in T ->
+  <{ |-- t \in T }> ->
   t -->* t' ->
   ~(stuck t').
 Proof.
@@ -565,9 +578,9 @@ Qed.
 *)
 
 Theorem subject_expansion:
-  (forall t t' T, t --> t' /\ |-- t' \in T -> |-- t \in T)
+  (forall t t' T, t --> t' /\ <{ |-- t' \in T }> -> <{ |-- t \in T }>)
   \/
-  ~ (forall t t' T, t --> t' /\ |-- t' \in T -> |-- t \in T).
+  ~ (forall t t' T, t --> t' /\ <{ |-- t' \in T }> -> <{ |-- t \in T }>).
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
@@ -577,8 +590,8 @@ Proof.
     Suppose that we add this new rule to the typing relation:
 
       | T_SuccBool : forall t,
-           |-- t \in Bool ->
-           |-- <{ succ t }> \in Bool
+           <{ |-- t \in Bool }> ->
+           <{ |--  succ t \in Bool }>
 
    Which of the following properties remain true in the presence of
    this rule?  For each one, write either "remains true" or
@@ -655,7 +668,7 @@ Definition manual_grade_for_variation2 : option (nat*string) := None.
     Suppose instead that we add this rule:
 
       | T_Funny5 :
-            |-- <{ pred 0 }> \in Bool
+            |--  pred 0 }> \in Bool
 
    Which of the above properties become false in the presence of
    this rule?  For each one that does, give a counter-example.
@@ -705,4 +718,4 @@ Definition manual_grade_for_prog_pres_bigstep : option (nat*string) := None.
 (** [] *)
 End TM.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:33 *)

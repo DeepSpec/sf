@@ -124,7 +124,7 @@ with trm : Type :=
 Definition heap : Type := fmap loc val.
 
 (* ================================================================= *)
-(** ** Coq Tweaks *)
+(** ** Rocq Tweaks *)
 
 (** [h1 \u h2] is a notation for union of two heaps. *)
 
@@ -793,7 +793,7 @@ Lemma himpl_hstar_trans_l : forall H1 H2 H3 H4,
   H2 \* H3 ==> H4 ->
   H1 \* H3 ==> H4.
 Proof using.
-  introv M1 M2. applys himpl_trans M2. applys himpl_frame_l M1.
+  introv M1 M2. applys himpl_trans_r M2. applys himpl_frame_l M1.
 Qed.
 
 Lemma himpl_hstar_trans_r : forall H1 H2 H3 H4,
@@ -801,7 +801,7 @@ Lemma himpl_hstar_trans_r : forall H1 H2 H3 H4,
   H3 \* H2 ==> H4 ->
   H3 \* H1 ==> H4.
 Proof using.
-  introv M1 M2. applys himpl_trans M2. applys himpl_frame_r M1.
+  introv M1 M2. applys himpl_trans_r M2. applys himpl_frame_r M1.
 Qed.
 
 (* ----------------------------------------------------------------- *)
@@ -992,7 +992,7 @@ Lemma hwand_hpure_l : forall P H,
   (\[P] \-* H) = H.
 Proof using.
   introv HP. applys himpl_antisym.
-  { lets K: hwand_cancel \[P] H. applys himpl_trans K.
+  { lets K: hwand_cancel \[P] H. applys himpl_trans_r K.
     applys* himpl_hstar_hpure_r. }
   { rewrite hwand_equiv. applys* himpl_hstar_hpure_l. }
 Qed.
@@ -2058,7 +2058,7 @@ Proof using. unfold wp. intros. intros h K. applys* eval_if. Qed.
 
 Lemma wp_if_case : forall b t1 t2 Q,
   (if b then wp t1 Q else wp t2 Q) ==> wp (trm_if b t1 t2) Q.
-Proof using. intros. applys himpl_trans wp_if. case_if~. Qed.
+Proof using. intros. applys himpl_trans_r wp_if. case_if~. Qed.
 
 (* ################################################################# *)
 (** * WP Generator *)
@@ -2506,7 +2506,7 @@ Lemma wpgen_seq_sound : forall F1 F2 t1 t2,
   formula_sound t2 F2 ->
   formula_sound (trm_seq t1 t2) (wpgen_seq F1 F2).
 Proof using.
-  introv S1 S2. intros Q. unfolds wpgen_seq. applys himpl_trans wp_seq.
+  introv S1 S2. intros Q. unfolds wpgen_seq. applys himpl_trans_r wp_seq.
   applys himpl_trans S1. applys wp_conseq. intros v. applys S2.
 Qed.
 
@@ -2515,7 +2515,7 @@ Lemma wpgen_let_sound : forall F1 F2of x t1 t2,
   (forall v, formula_sound (subst x v t2) (F2of v)) ->
   formula_sound (trm_let x t1 t2) (wpgen_let F1 F2of).
 Proof using.
-  introv S1 S2. intros Q. unfolds wpgen_let. applys himpl_trans wp_let.
+  introv S1 S2. intros Q. unfolds wpgen_let. applys himpl_trans_r wp_let.
   applys himpl_trans S1. applys wp_conseq. intros v. applys S2.
 Qed.
 
@@ -2525,7 +2525,7 @@ Lemma wpgen_if_sound : forall F1 F2 t0 t1 t2,
   formula_sound (trm_if t0 t1 t2) (wpgen_if t0 F1 F2).
 Proof using.
   introv S1 S2. intros Q. unfold wpgen_if. xpull. intros b ->.
-  applys himpl_trans wp_if. case_if. { applys S1. } { applys S2. }
+  applys himpl_trans_r wp_if. case_if. { applys S1. } { applys S2. }
 Qed.
 
 Lemma wpgen_app_sound : forall t,
@@ -2754,7 +2754,7 @@ Lemma xapp_simpl_lemma : forall F H Q,
 Proof using. introv M. xchange M. unfold protect. xsimpl. Qed.
 
 Tactic Notation "xapp_simpl" :=
-  first [ applys xapp_simpl_lemma (* handles specification coming from [xfun] *)
+  first [ eapply xapp_simpl_lemma (* handles specification coming from [xfun] *)
         | xsimpl_no_cancel_wand tt; unfold protect; xapp_try_clear_unit_result ].
 
 Tactic Notation "xapp_pre" :=
@@ -2843,6 +2843,8 @@ Tactic Notation "xvars" :=
 
 (** [xwp_simpl] is a specialized version of [simpl] to be used for
     getting the function [wp] to compute properly. *)
+
+From Stdlib Require Bool.
 
 Ltac xwp_simpl :=
   xvars;
@@ -2955,7 +2957,7 @@ Notation "'Val' v" :=
 Notation "'Let' x ':=' F1 'in' F2" :=
   ((wpgen_let F1 (fun x => F2)))
   (in custom wp at level 69,
-   x name, (* NOTE: For compilation with Coq 8.12, replace "name" with "ident",
+   x name, (* NOTE: For compilation with Rocq 8.12, replace "name" with "ident",
                here and in the next 3 occurrences in the rest of the section. *)
    F1 custom wp at level 99,
    F2 custom wp at level 99,
@@ -4260,8 +4262,7 @@ Proof using.
       (p ~~> m)
       (fun _ => p ~~> (m+1))); intros f Hf.
   { intros. applys Hf. clear Hf. xapp. xsimpl. }
-  xapp.
-  xapp.
+  xapp. xapp.
   replace (n+1+1) with (n+2); [|math]. xsimpl.
 Qed.
 
@@ -4288,4 +4289,4 @@ Proof using. xwp. xif; auto_false. intros _. xval. xsimpl. Qed.
 
 End DemoPrograms.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

@@ -3,13 +3,13 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Lists                                                                   *
 * See also LibListExec.v and LibListSub.v                                 *
 ***************************************************************************)
 
 Set Implicit Arguments.
-Require Import Coq.Classes.Morphisms. (* for [Proper] instances *)
+Require Import Stdlib.Classes.Morphisms. (* for [Proper] instances *)
 From SLF Require Import LibTactics LibLogic LibReflect LibOperation
  LibProd LibOption LibNat LibInt LibWf LibMonoid LibRelation.
 Generalizable Variables A B.
@@ -3981,4 +3981,4 @@ Tactic Notation "list2_ind_last" constr(E) :=
   match type of E with length ?l1 = length ?l2 =>
     list2_ind_last l1 l2; [ apply E | | ] end.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

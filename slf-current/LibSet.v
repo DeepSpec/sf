@@ -3,13 +3,13 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Sets                                                                    *
 **************************************************************************)
 
 Set Implicit Arguments.
 Generalizable Variables A B.
-Require Import Coq.Classes.Morphisms. (* for [Proper] instances *)
+Require Import Stdlib.Classes.Morphisms. (* for [Proper] instances *)
 From SLF Require Import LibTactics LibLogic LibReflect LibList
   LibOperation LibMonoid LibInt LibNat
   LibEpsilon LibRelation LibMin.
@@ -1143,4 +1143,4 @@ Tactic Notation "rew_foreach" "*" "in" "*" :=
 *)
 
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

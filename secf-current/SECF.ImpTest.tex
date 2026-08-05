@@ -1,0 +1,561 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+
+%Warning: tipa declares many non-standard macros used by utf8x to
+%interpret utf8 characters but extra packages might have to be added
+%such as "textgreek" for Greek letters not already in tipa
+%or "stmaryrd" for mathematical symbols.
+%Utf8 codes missing a LaTeX interpretation can be defined by using
+%\DeclareUnicodeCharacter{code}{interpretation}.
+%Use coqdoc's option -p to add new packages or declarations.
+\usepackage{tipa}
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% /nix/store/5nhkcrnn3hzlx1rsgy6zxlg2lrla4f5y-coq-with-packages-9.1.1/bin-orig/coqdoc -latex -toc -interpolate -utf8 -Q . SECF Maps.v Imp.v Equiv.v Hoare.v Hoare2.v Preface.v Noninterference.v StaticIFC.v SpecCT.v Postscript.v Bib.v MapsTest.v ImpTest.v EquivTest.v HoareTest.v Hoare2Test.v PrefaceTest.v NoninterferenceTest.v StaticIFCTest.v SpecCTTest.v PostscriptTest.v BibTest.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{SECF.ImpTest}{Library }{SECF.ImpTest}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Set} \coqdocvar{Warnings} "-notation-overridden,-parsing".\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{Stdlib} \coqdockw{Require} \coqdockw{Export} \coqdoclibrary{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Imp}{\coqdoclibrary{Imp}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdef{SECF.ImpTest.MISSING}{MISSING}{\coqdocaxiom{MISSING}}: \coqdockw{Type}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdef{SECF.ImpTest.Check}{Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{check\_type} \coqdocvar{A} \coqdocvar{B} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdockw{type} \coqdockw{of} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdockw{context}[\coqref{SECF.ImpTest.MISSING}{\coqdocaxiom{MISSING}}] \ensuremath{\Rightarrow} \coqdoctac{idtac} "Missing:" \coqdocvar{A}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} ?\coqdocvar{T} \ensuremath{\Rightarrow} \coqdoctac{first} [\coqdocvar{unify} \coqdocvar{T} \coqdocvar{B}; \coqdoctac{idtac} "Type: ok" \ensuremath{|} \coqdoctac{idtac} "Type: wrong - should be (" \coqdocvar{B} ")"]\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print\_manual\_grade} \coqdocvar{A} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{A} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{Some}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{Some}} (\coqdocvar{\_} ?\coqdocvar{S} ?\coqdocvar{C}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score:"  \coqdocvar{S};\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{match} \coqdoctac{eval} \coqdoctac{compute} \coqdoctac{in} \coqdocvar{C} \coqdockw{with}\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} ""\%\coqdocvar{string} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{5.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{idtac} "Comment:" \coqdocvar{C}\coqdoceol
+\coqdocindent{4.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqexternalref{None}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{None}} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Score: Ungraded";\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{idtac} "Comment: None"\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqref{SECF.ImpTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{From} \coqdocvar{SECF} \coqdockw{Require} \coqdockw{Import} \coqref{SECF.Imp}{\coqdoclibrary{Imp}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqref{SECF.ImpTest.Check}{\coqdocmodule{Check}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  optimize\_0plus\_b\_sound  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> AExp.optimize\_0plus\_b\_test1".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 0.5".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.AExp.optimize 0plus b test1}{\coqdocaxiom{AExp.optimize\_0plus\_b\_test1}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqref{SECF.Imp.AExp.bexp}{\coqdocinductive{AExp.bexp}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.AExp.optimize 0plus b}{\coqdocaxiom{AExp.optimize\_0plus\_b}}\coqdoceol
+\coqdocindent{3.00em}
+(\coqref{SECF.Imp.AExp.BNot}{\coqdocconstructor{AExp.BNot}}\coqdoceol
+\coqdocindent{4.50em}
+(\coqref{SECF.Imp.AExp.BGt}{\coqdocconstructor{AExp.BGt}} (\coqref{SECF.Imp.AExp.APlus}{\coqdocconstructor{AExp.APlus}} (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 0) (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 4)) (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 8))))\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.AExp.BNot}{\coqdocconstructor{AExp.BNot}} (\coqref{SECF.Imp.AExp.BGt}{\coqdocconstructor{AExp.BGt}} (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 4) (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 8))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.optimize 0plus b test1}{\coqdocaxiom{AExp.optimize\_0plus\_b\_test1}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> AExp.optimize\_0plus\_b\_test2".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 0.5".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.AExp.optimize 0plus b test2}{\coqdocaxiom{AExp.optimize\_0plus\_b\_test2}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqref{SECF.Imp.AExp.bexp}{\coqdocinductive{AExp.bexp}}\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.AExp.optimize 0plus b}{\coqdocaxiom{AExp.optimize\_0plus\_b}}\coqdoceol
+\coqdocindent{3.00em}
+(\coqref{SECF.Imp.AExp.BAnd}{\coqdocconstructor{AExp.BAnd}}\coqdoceol
+\coqdocindent{4.50em}
+(\coqref{SECF.Imp.AExp.BLe}{\coqdocconstructor{AExp.BLe}} (\coqref{SECF.Imp.AExp.APlus}{\coqdocconstructor{AExp.APlus}} (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 0) (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 4)) (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 5))\coqdoceol
+\coqdocindent{4.50em}
+\coqref{SECF.Imp.AExp.BTrue}{\coqdocconstructor{AExp.BTrue}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.AExp.BAnd}{\coqdocconstructor{AExp.BAnd}} (\coqref{SECF.Imp.AExp.BLe}{\coqdocconstructor{AExp.BLe}} (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 4) (\coqref{SECF.Imp.AExp.ANum}{\coqdocconstructor{AExp.ANum}} 5)) \coqref{SECF.Imp.AExp.BTrue}{\coqdocconstructor{AExp.BTrue}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.optimize 0plus b test2}{\coqdocaxiom{AExp.optimize\_0plus\_b\_test2}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> AExp.optimize\_0plus\_b\_sound".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.AExp.optimize 0plus b sound}{\coqdocaxiom{AExp.optimize\_0plus\_b\_sound}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} \coqdef{SECF.ImpTest.b:3}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.AExp.bexp}{\coqdocinductive{AExp.bexp}},\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} (\coqref{SECF.Imp.AExp.beval}{\coqdocdefinition{AExp.beval}} (\coqref{SECF.Imp.AExp.optimize 0plus b}{\coqdocaxiom{AExp.optimize\_0plus\_b}} \coqref{SECF.ImpTest.b:3}{\coqdocvariable{b}})) (\coqref{SECF.Imp.AExp.beval}{\coqdocdefinition{AExp.beval}} \coqref{SECF.ImpTest.b:3}{\coqdocvariable{b}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.optimize 0plus b sound}{\coqdocaxiom{AExp.optimize\_0plus\_b\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  bevalR  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> AExp.bevalR\_iff\_beval".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.AExp.bevalR iff beval}{\coqdocaxiom{AExp.bevalR\_iff\_beval}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.ImpTest.b:5}{b}{\coqdocbinder{b}} : \coqref{SECF.Imp.AExp.bexp}{\coqdocinductive{AExp.bexp}}) (\coqdef{SECF.ImpTest.bv:6}{bv}{\coqdocbinder{bv}} : \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}}),\coqdoceol
+\coqdocindent{0.50em}
+\coqexternalref{iff}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{iff}} (\coqref{SECF.Imp.AExp.bevalR}{\coqdocinductive{AExp.bevalR}} \coqref{SECF.ImpTest.b:5}{\coqdocvariable{b}} \coqref{SECF.ImpTest.bv:6}{\coqdocvariable{bv}}) (@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} (\coqref{SECF.Imp.AExp.beval}{\coqdocdefinition{AExp.beval}} \coqref{SECF.ImpTest.b:5}{\coqdocvariable{b}}) \coqref{SECF.ImpTest.bv:6}{\coqdocvariable{bv}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.bevalR iff beval}{\coqdocaxiom{AExp.bevalR\_iff\_beval}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  ceval\_example2  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> ceval\_example2".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.ceval example2}{\coqdocaxiom{ceval\_example2}} (\coqdoceol
+\coqdocnoindent
+(\coqref{SECF.Imp.ceval}{\coqdocinductive{ceval}} (\coqref{SECF.Imp.CSeq}{\coqdocconstructor{CSeq}} (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 0)) (\coqref{SECF.Imp.CSeq}{\coqdocconstructor{CSeq}} (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 1)) (\coqref{SECF.Imp.CAsgn}{\coqdocconstructor{CAsgn}} \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 2))))\coqdoceol
+\coqdocindent{1.50em}
+\coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}}\coqdoceol
+\coqdocindent{1.50em}
+(@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}\coqdoceol
+\coqdocindent{3.00em}
+(@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} (@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} 0) \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}} 1) \coqref{SECF.Imp.Z}{\coqdocdefinition{Z}} 2))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.ceval example2}{\coqdocaxiom{ceval\_example2}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  loop\_never\_stops  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> loop\_never\_stops".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.loop never stops}{\coqdocaxiom{loop\_never\_stops}} ((\coqdockw{\ensuremath{\forall}} \coqdef{SECF.ImpTest.st:9}{st}{\coqdocbinder{st}} \coqdef{SECF.ImpTest.st':10}{st'}{\coqdocbinder{st'}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}}, \coqexternalref{not}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{not}} (\coqref{SECF.Imp.ceval}{\coqdocinductive{ceval}} \coqref{SECF.Imp.loop}{\coqdocdefinition{loop}} \coqref{SECF.ImpTest.st:9}{\coqdocvariable{st}} \coqref{SECF.ImpTest.st':10}{\coqdocvariable{st'}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.loop never stops}{\coqdocaxiom{loop\_never\_stops}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  no\_whiles\_eqv  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> no\_whiles\_eqv".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.no whiles eqv}{\coqdocaxiom{no\_whiles\_eqv}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} \coqdef{SECF.ImpTest.c:13}{c}{\coqdocbinder{c}} : \coqref{SECF.Imp.com}{\coqdocinductive{com}}, \coqexternalref{iff}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocdefinition{iff}} (@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} \coqexternalref{bool}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{bool}} (\coqref{SECF.Imp.no whiles}{\coqdocdefinition{no\_whiles}} \coqref{SECF.ImpTest.c:13}{\coqdocvariable{c}}) \coqref{SECF.Imp.:::'true'}{\coqdocnotation{true}}) (\coqref{SECF.Imp.no whilesR}{\coqdocinductive{no\_whilesR}} \coqref{SECF.ImpTest.c:13}{\coqdocvariable{c}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.no whiles eqv}{\coqdocaxiom{no\_whiles\_eqv}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  no\_whiles\_terminating  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> Manually graded: no\_whiles\_terminating".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 6".\coqdoceol
+\coqdocnoindent
+\coqdocvar{print\_manual\_grade} \coqref{SECF.Imp.manual grade for no whiles terminating}{\coqdocdefinition{manual\_grade\_for\_no\_whiles\_terminating}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  stack\_compiler  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> s\_execute1".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.s execute1}{\coqdocaxiom{s\_execute1}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}} (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}})\coqdoceol
+\coqdocindent{3.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SPush}{\coqdocconstructor{SPush}} 5)\coqdoceol
+\coqdocindent{4.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SPush}{\coqdocconstructor{SPush}} 3)\coqdoceol
+\coqdocindent{6.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SPush}{\coqdocconstructor{SPush}} 1) (@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} \coqref{SECF.Imp.SMinus}{\coqdocconstructor{SMinus}} (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}}))))))\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 2 (@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 5 (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s execute1}{\coqdocaxiom{s\_execute1}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> s\_execute2".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 0.5".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.s execute2}{\coqdocaxiom{s\_execute2}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}})\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} (@\coqref{SECF.Maps.t update}{\coqdocdefinition{Maps.t\_update}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} \coqref{SECF.Imp.empty st}{\coqdocdefinition{empty\_st}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}} 3)\coqdoceol
+\coqdocindent{3.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 3 (@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 4 (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}})))\coqdoceol
+\coqdocindent{3.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SPush}{\coqdocconstructor{SPush}} 4)\coqdoceol
+\coqdocindent{4.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SLoad}{\coqdocconstructor{SLoad}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}})\coqdoceol
+\coqdocindent{6.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} \coqref{SECF.Imp.SMult}{\coqdocconstructor{SMult}} (@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} \coqref{SECF.Imp.SPlus}{\coqdocconstructor{SPlus}} (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}}))))))\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 15 (@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} 4 (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s execute2}{\coqdocaxiom{s\_execute2}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> s\_compile1".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 1.5".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.s compile1}{\coqdocaxiom{s\_compile1}} (\coqdoceol
+\coqdocnoindent
+(@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}}) (\coqref{SECF.Imp.s compile}{\coqdocaxiom{s\_compile}} (\coqref{SECF.Imp.AMinus}{\coqdocconstructor{AMinus}} (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}}) (\coqref{SECF.Imp.AMult}{\coqdocconstructor{AMult}} (\coqref{SECF.Imp.ANum}{\coqdocconstructor{ANum}} 2) (\coqref{SECF.Imp.AId}{\coqdocconstructor{AId}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}}))))\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SLoad}{\coqdocconstructor{SLoad}} \coqref{SECF.Imp.X}{\coqdocdefinition{X}})\coqdoceol
+\coqdocindent{3.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SPush}{\coqdocconstructor{SPush}} 2)\coqdoceol
+\coqdocindent{4.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} (\coqref{SECF.Imp.SLoad}{\coqdocconstructor{SLoad}} \coqref{SECF.Imp.Y}{\coqdocdefinition{Y}})\coqdoceol
+\coqdocindent{6.00em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} \coqref{SECF.Imp.SMult}{\coqdocconstructor{SMult}} (@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} \coqref{SECF.Imp.SMinus}{\coqdocconstructor{SMinus}} (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}})))))))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s compile1}{\coqdocaxiom{s\_compile1}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  execute\_app  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> execute\_app".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 3".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.execute app}{\coqdocaxiom{execute\_app}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.ImpTest.st:15}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}}) (\coqdef{SECF.ImpTest.p1:16}{p1}{\coqdocbinder{p1}} \coqdef{SECF.ImpTest.p2:17}{p2}{\coqdocbinder{p2}} : \coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}}) (\coqdef{SECF.ImpTest.stack:18}{stack}{\coqdocbinder{stack}} : \coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} \coqref{SECF.ImpTest.st:15}{\coqdocvariable{st}} \coqref{SECF.ImpTest.stack:18}{\coqdocvariable{stack}} (@\coqexternalref{app}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocdefinition{app}} \coqref{SECF.Imp.sinstr}{\coqdocinductive{sinstr}} \coqref{SECF.ImpTest.p1:16}{\coqdocvariable{p1}} \coqref{SECF.ImpTest.p2:17}{\coqdocvariable{p2}}))\coqdoceol
+\coqdocindent{1.50em}
+(\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} \coqref{SECF.ImpTest.st:15}{\coqdocvariable{st}} (\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} \coqref{SECF.ImpTest.st:15}{\coqdocvariable{st}} \coqref{SECF.ImpTest.stack:18}{\coqdocvariable{stack}} \coqref{SECF.ImpTest.p1:16}{\coqdocvariable{p1}}) \coqref{SECF.ImpTest.p2:17}{\coqdocvariable{p2}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.execute app}{\coqdocaxiom{execute\_app}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "-------------------  stack\_compiler\_correct  --------------------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> s\_compile\_correct\_aux".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 2.5".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.s compile correct aux}{\coqdocaxiom{s\_compile\_correct\_aux}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.ImpTest.st:23}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}}) (\coqdef{SECF.ImpTest.e:24}{e}{\coqdocbinder{e}} : \coqref{SECF.Imp.aexp}{\coqdocinductive{aexp}}) (\coqdef{SECF.ImpTest.stack:25}{stack}{\coqdocbinder{stack}} : \coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} \coqref{SECF.ImpTest.st:23}{\coqdocvariable{st}} \coqref{SECF.ImpTest.stack:25}{\coqdocvariable{stack}} (\coqref{SECF.Imp.s compile}{\coqdocaxiom{s\_compile}} \coqref{SECF.ImpTest.e:24}{\coqdocvariable{e}}))\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} (\coqref{SECF.Imp.aeval}{\coqdocdefinition{aeval}} \coqref{SECF.ImpTest.st:23}{\coqdocvariable{st}} \coqref{SECF.ImpTest.e:24}{\coqdocvariable{e}}) \coqref{SECF.ImpTest.stack:25}{\coqdocvariable{stack}}))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s compile correct aux}{\coqdocaxiom{s\_compile\_correct\_aux}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "\#> s\_compile\_correct".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Possible points: 0.5".\coqdoceol
+\coqdocnoindent
+\coqdocvar{check\_type} @\coqref{SECF.Imp.s compile correct}{\coqdocaxiom{s\_compile\_correct}} (\coqdoceol
+\coqdocnoindent
+(\coqdockw{\ensuremath{\forall}} (\coqdef{SECF.ImpTest.st:29}{st}{\coqdocbinder{st}} : \coqref{SECF.Imp.state}{\coqdocdefinition{state}}) (\coqdef{SECF.ImpTest.e:30}{e}{\coqdocbinder{e}} : \coqref{SECF.Imp.aexp}{\coqdocinductive{aexp}}),\coqdoceol
+\coqdocindent{0.50em}
+@\coqexternalref{eq}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Logic}{\coqdocinductive{eq}} (\coqexternalref{list}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{list}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqref{SECF.Imp.s execute}{\coqdocaxiom{s\_execute}} \coqref{SECF.ImpTest.st:29}{\coqdocvariable{st}} (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}}) (\coqref{SECF.Imp.s compile}{\coqdocaxiom{s\_compile}} \coqref{SECF.ImpTest.e:30}{\coqdocvariable{e}}))\coqdoceol
+\coqdocindent{1.50em}
+(@\coqexternalref{cons}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{cons}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}} (\coqref{SECF.Imp.aeval}{\coqdocdefinition{aeval}} \coqref{SECF.ImpTest.st:29}{\coqdocvariable{st}} \coqref{SECF.ImpTest.e:30}{\coqdocvariable{e}}) (@\coqexternalref{nil}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocconstructor{nil}} \coqexternalref{nat}{http://rocq-prover.org/doc/V9.1.1/stdlib//Corelib.Init.Datatypes}{\coqdocinductive{nat}})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Assumptions:".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s compile correct}{\coqdocaxiom{s\_compile\_correct}}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} \coqdef{SECF.ImpTest.Unnamed thm}{True}{\coqdocdefinition{True}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} " ".\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - standard: 29".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Max points - advanced: 29".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Allowed Axioms:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "functional\_extensionality".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "FunctionalExtensionality.functional\_extensionality\_dep".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Summary **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "Below is a summary of the automatically graded exercises that are incomplete.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "The output for each exercise can be any of the following:".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'Closed under the global context', if it is complete".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - 'MANUAL', if it is manually graded".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "  - A list of pending axioms, containing unproven assumptions. In this case".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "    the exercise is considered complete, if the axioms are all allowed.".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Standard **********".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- AExp.optimize\_0plus\_b\_test1 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.optimize 0plus b test1}{\coqdocaxiom{AExp.optimize\_0plus\_b\_test1}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- AExp.optimize\_0plus\_b\_test2 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.optimize 0plus b test2}{\coqdocaxiom{AExp.optimize\_0plus\_b\_test2}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- AExp.optimize\_0plus\_b\_sound ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.optimize 0plus b sound}{\coqdocaxiom{AExp.optimize\_0plus\_b\_sound}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- AExp.bevalR\_iff\_beval ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.AExp.bevalR iff beval}{\coqdocaxiom{AExp.bevalR\_iff\_beval}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- ceval\_example2 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.ceval example2}{\coqdocaxiom{ceval\_example2}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- loop\_never\_stops ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.loop never stops}{\coqdocaxiom{loop\_never\_stops}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- no\_whiles\_eqv ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.no whiles eqv}{\coqdocaxiom{no\_whiles\_eqv}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- no\_whiles\_terminating ---------".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "MANUAL".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- s\_execute1 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s execute1}{\coqdocaxiom{s\_execute1}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- s\_execute2 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s execute2}{\coqdocaxiom{s\_execute2}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- s\_compile1 ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s compile1}{\coqdocaxiom{s\_compile1}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- execute\_app ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.execute app}{\coqdocaxiom{execute\_app}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- s\_compile\_correct\_aux ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s compile correct aux}{\coqdocaxiom{s\_compile\_correct\_aux}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "---------- s\_compile\_correct ---------".\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdockw{Assumptions} \coqref{SECF.Imp.s compile correct}{\coqdocaxiom{s\_compile\_correct}}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "".\coqdoceol
+\coqdocnoindent
+\coqdoctac{idtac} "********** Advanced **********".\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

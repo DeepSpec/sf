@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Lists accessed with integers (not nat), using LibContainer typeclasses  *
 **************************************************************************)
 
@@ -1510,4 +1510,4 @@ Qed.
 
 *)
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

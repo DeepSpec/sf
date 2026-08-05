@@ -27,7 +27,7 @@
       2020. Available from
       {http://caml.inria.fr/pub/docs/manual-ocaml/}.  *)
 
-From Coq Require Import String.  (* for manual grading *)
+From Stdlib Require Import String.  (* for manual grading *)
 From VFA Require Import Perm.
 From VFA Require Import Maps.
 From VFA Require Import SearchTree.
@@ -1489,4 +1489,4 @@ End TreeETableSubset.
 Definition manual_grade_for_ListsETable : option (nat*string) := None.
 (** [] *)
 
-(* 2024-12-27 01:32 *)
+(* 2026-01-06 11:59 *)

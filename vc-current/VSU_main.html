@@ -47,7 +47,7 @@
 
   That won't be very noticeable in this example (stdlib/stack/triang/main), because
   none of the modules has global variables.  But in general, each module has its own
-  "extern" or "static" global variables, initialized or default-zero-initialized.  They 
+  "extern" or "static" global variables, initialized or default-zero-initialized.  They
   constitute the initial footprint (in the separation-logic sense) of the program.
 
 <div class="paragraph"> </div>
@@ -72,7 +72,7 @@
 
 <div class="paragraph"> </div>
 
-   When verifying any program in VST, the precondition of main (written as <span class="inlinecode"><span class="id" title="var">main_pre</span></span>) 
+   When verifying any program in VST, the precondition of main (written as <span class="inlinecode"><span class="id" title="var">main_pre</span></span>)
    contains all of these global variables.  The <span class="inlinecode"><span class="id" title="var">start_function</span></span> tactic
    for VSUs has the job of abstracting these into into module-specific APDs,
    using the mkInitPred lemma that comes with each VSU, as you will see. 
@@ -142,9 +142,9 @@ Each VSU has
 <li> <span class="inlinecode"><span class="id" title="var">Externs</span></span> :   functions entirely external to the whole C program, such as system calls
                and assembly-language functions that we won't prove in VST.  The
                function-specifications (funspecs) that we give for these functions are
-               <i>axioms</i>  (but see "Connecting Higher-Order Separation Logic to a 
+               <i>axioms</i>  (but see "Connecting Higher-Order Separation Logic to a
                First-Order Outside World" by Mansky et al. 2020 to see how these axioms
-               can be proved as theorems in Coq).
+               can be proved as theorems in Rocq).
 
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">Imports</span></span>:  functions external to <i>this</i> module, but which will be proved in other VSUs;
@@ -157,7 +157,7 @@ Each VSU has
 <li> <span class="inlinecode"><span class="id" title="var">G</span></span>:   funspecs of <i>internal</i> functions of the module.  Since these functions are
         not exported, not used in other modules, we don't need to "publish" these
         funspecs; they existed only in support of <span class="inlinecode"><span class="id" title="var">semax_body</span></span> proofs of the exported
-         functions.  Therefore, the <span class="inlinecode"><span class="id" title="var">G</span></span> list is private to the VSU, and hidden by Coq's
+         functions.  Therefore, the <span class="inlinecode"><span class="id" title="var">G</span></span> list is private to the VSU, and hidden by Rocq's
          opacity mechanisms.
 
 <div class="paragraph"> </div>
@@ -189,7 +189,7 @@ We link together <span class="inlinecode"><span class="id" title="var">stackVSU<
 When we link VSUs, C=linkVSUs(A,B),  the Imports of C are the union of
    the Imports of A and B, <i>minus</i> the defined functions (and externs) of A and B.
    So, for example, newstack,push,pop are imported by triangVSU,
-  but they are not in the Imports of stacktriangVSU because they are provided 
+  but they are not in the Imports of stacktriangVSU because they are provided
   by stackVSU.
 
 <div class="paragraph"> </div>
@@ -212,7 +212,7 @@ If we view stack+triang as a module, then what is the client view?
 
 <div class="paragraph"> </div>
 
-  To make a stack+triang  VSU that exports only triang, we start with 
+  To make a stack+triang  VSU that exports only triang, we start with
   stacktriangVSU1, and privatize the three functions that we want to hide
   from clients.  As follows: 
 </div>
@@ -220,7 +220,7 @@ If we view stack+triang as a module, then what is the client view?
 
 <span class="id" title="keyword">Definition</span> <a id="stacktriangVSU" class="idref" href="#stacktriangVSU"><span class="id" title="definition">stacktriangVSU</span></a> :=<br/>
 &nbsp;<span class="id" title="lemma">privatizeExports</span> <a class="idref" href="VSU_main.html#stacktriangVSU1"><span class="id" title="definition">stacktriangVSU1</span></a><br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">stack2._newstack</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stack2._push</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stack2._pop</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">stack2._newstack</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stack2._push</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stack2._pop</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -254,10 +254,10 @@ What we learn here (which we could have known already by reading VSU_stdlib.v)
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Time</span> <span class="id" title="keyword">Definition</span> <a id="coreVSU" class="idref" href="#coreVSU"><span class="id" title="definition">coreVSU</span></a> := <br/>
+<span class="id" title="keyword">Time</span> <span class="id" title="keyword">Definition</span> <a id="coreVSU" class="idref" href="#coreVSU"><span class="id" title="definition">coreVSU</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="lemma">privatizeExports</span><br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="var">linkVSUs</span> <a class="idref" href="VSU_main.html#stacktriangVSU"><span class="id" title="definition">stacktriangVSU</span></a> <a class="idref" href="VSU_stdlib.html#MallocFreeVSU"><span class="id" title="definition">VSU_stdlib.MallocFreeVSU</span></a>)<br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">stdlib._malloc</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stdlib._free</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stdlib._exit</span><a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> .<br/><hr class='doublespaceincode'/>
+&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><span class="id" title="definition">stdlib._malloc</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stdlib._free</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <span class="id" title="definition">stdlib._exit</span><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> .<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="definition">VSU_Externs</span> <a class="idref" href="VSU_main.html#coreVSU"><span class="id" title="definition">coreVSU</span></a>. <span class="comment">(*&nbsp;malloc,&nbsp;free,&nbsp;exit&nbsp;*)</span><br/>
 <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="definition">VSU_Imports</span> <a class="idref" href="VSU_main.html#coreVSU"><span class="id" title="definition">coreVSU</span></a>. <span class="comment">(*&nbsp;nil&nbsp;*)</span><br/>
 <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="definition">VSU_Exports</span> <a class="idref" href="VSU_main.html#coreVSU"><span class="id" title="definition">coreVSU</span></a>. <span class="comment">(*&nbsp;triang&nbsp;*)</span><br/>
@@ -282,7 +282,7 @@ We call this the "core" VSU for a specific reason:  It's everything except main(
 
 <div class="doc">
 The main point about whole_prog is that it contains the intializers for
-   every global variable <i>including</i> main.  
+   every global variable <i>including</i> main.
 
 <div class="paragraph"> </div>
 
@@ -320,8 +320,8 @@ The main point about whole_prog is that it contains the intializers for
 
 <span class="id" title="keyword">Definition</span> <a id="main_spec" class="idref" href="#main_spec"><span class="id" title="definition">main_spec</span></a> :=<br/>
 &nbsp;<span class="id" title="notation">DECLARE</span> <span class="id" title="definition">_main</span><br/>
-&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:2" class="idref" href="#gv:2"><span class="id" title="binder">gv</span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
-&nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <span class="id" title="notation">]</span> <span class="id" title="definition">main_pre</span> <a class="idref" href="VSU_main.html#whole_prog"><span class="id" title="definition">whole_prog</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="VSU_main.html#gv:1"><span class="id" title="variable">gv</span></a><br/>
+&nbsp;<span class="id" title="notation">WITH</span> <a id="gv:1" class="idref" href="#gv:1"><span class="id" title="binder"><span id="gv:2" class="id">gv</span></span></a><span class="id" title="notation">:</span> <span class="id" title="definition">globals</span><br/>
+&nbsp;<span class="id" title="notation">PRE</span> <span class="id" title="notation">[</span> <span class="id" title="notation">]</span> <span class="id" title="definition">main_pre</span> <a class="idref" href="VSU_main.html#whole_prog"><span class="id" title="definition">whole_prog</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a> <a class="idref" href="VSU_main.html#gv:1"><span class="id" title="variable">gv</span></a><br/>
 &nbsp;<span class="id" title="notation">POST</span><span class="id" title="notation">[</span> <span class="id" title="definition">tint</span> <span class="id" title="notation">]</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">PROP</span><span class="id" title="notation">()</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="notation">RETURN</span> <span class="id" title="notation">(</span><span class="id" title="constructor">Vint</span> (<span class="id" title="definition">Int.repr</span> 55)<span class="id" title="notation">)</span><br/>
@@ -367,7 +367,7 @@ The Gprog for main is, as usual, the funspecs of all the functions in this
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="Main_imports" class="idref" href="#Main_imports"><span class="id" title="definition">Main_imports</span></a>: <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">Spec_triang.TriangASI</span></a> <a class="idref" href="VSU_main.html#M"><span class="id" title="definition">M</span></a>.<br/>
-<span class="id" title="keyword">Definition</span> <a id="Main_Gprog" class="idref" href="#Main_Gprog"><span class="id" title="definition">Main_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_main.html#main_spec"><span class="id" title="definition">main_spec</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="VSU_main.html#Main_imports"><span class="id" title="definition">Main_imports</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Main_Gprog" class="idref" href="#Main_Gprog"><span class="id" title="definition">Main_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_main.html#Main_imports"><span class="id" title="definition">Main_imports</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><a class="idref" href="VSU_main.html#main_spec"><span class="id" title="definition">main_spec</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -405,7 +405,7 @@ Now the SEP clause of the precondition is, <span class="inlinecode"></span> <spa
 <div class="paragraph"> </div>
 
  Now, as usual prove correctness of the function body.  Start with a
-  <span class="inlinecode"><span class="id" title="var">forward_call</span>(<span class="id" title="var">XX</span>)</span> to the <span class="inlinecode"><span class="id" title="var">triang</span></span> function.  The parameter XX will 
+  <span class="inlinecode"><span class="id" title="var">forward_call</span>(<span class="id" title="var">XX</span>)</span> to the <span class="inlinecode"><span class="id" title="var">triang</span></span> function.  The parameter XX will
  depend on what you have put in the WITH clause of the <span class="inlinecode"><span class="id" title="var">triang_spec</span></span>
  in <a href="Spec_triang.html"><span class="inlineref">Spec_triang</span></a>. 
 </div>
@@ -416,7 +416,7 @@ Now the SEP clause of the precondition is, <span class="inlinecode"></span> <spa
 <div class="doc">
 Exercise:  Once you've finished the proof of <span class="inlinecode"><span class="id" title="var">body_main</span></span>, go back and delete the
    <span class="inlinecode"><span class="id" title="tactic">fold</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> near the top of <span class="inlinecode"><span class="id" title="var">body_main</span></span>, and proceed to the point immediately
-  after the <span class="inlinecode"><span class="id" title="var">forward_call</span></span>.  You'll probably see an extra proof obligation here, 
+  after the <span class="inlinecode"><span class="id" title="var">forward_call</span></span>.  You'll probably see an extra proof obligation here,
   which is provable by (fold M; cancel).   That suggests why the <span class="inlinecode"><span class="id" title="tactic">fold</span></span> <span class="inlinecode"><span class="id" title="var">M</span></span> is
   useful at the top of the function. 
 <div class="paragraph"> </div>
@@ -427,19 +427,19 @@ Exercise:  Once you've finished the proof of <span class="inlinecode"><span clas
 
  There are several different concepts (and types) here:
 <ul class="doclist">
-<li> <span class="inlinecode"><span class="id" title="var">Clight.program</span></span>   is the Abstract Syntax Tree (AST) of a Clight program 
+<li> <span class="inlinecode"><span class="id" title="var">Clight.program</span></span>   is the Abstract Syntax Tree (AST) of a Clight program
                 as produced by clightgen;
 
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">QP.program</span></span>  is an alternate version of that AST that's more
-                efficient to link computationally in Coq;
+                efficient to link computationally in Rocq;
 
 </li>
 <li> <span class="inlinecode"><span class="id" title="var">Component</span></span> is a set of correctness proofs (and other property proofs) about
                 a QP.program;
 
 </li>
-<li> <span class="inlinecode"><span class="id" title="var">VSU</span></span> is a <span class="inlinecode"><span class="id" title="var">Component</span></span> with its internal funspecs hidden by Coq's abstraction
+<li> <span class="inlinecode"><span class="id" title="var">VSU</span></span> is a <span class="inlinecode"><span class="id" title="var">Component</span></span> with its internal funspecs hidden by Rocq's abstraction
        mechanism (sigT), and with the component's varspecs in a standard form.
 
 </li>
@@ -454,7 +454,7 @@ Exercise:  Once you've finished the proof of <span class="inlinecode"><span clas
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="MainComp" class="idref" href="#MainComp"><span class="id" title="definition">MainComp</span></a>:  <span class="id" title="definition">MainCompType</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) <a class="idref" href="VSU_main.html#coreVSU"><span class="id" title="definition">coreVSU</span></a> <a class="idref" href="VSU_main.html#whole_prog"><span class="id" title="definition">whole_prog</span></a> (<a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="VSU_main.html#main_spec"><span class="id" title="definition">main_spec</span></a>) <span class="id" title="method">emp</span>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="MainComp" class="idref" href="#MainComp"><span class="id" title="definition">MainComp</span></a>:  <span class="id" title="definition">MainCompType</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) <a class="idref" href="VSU_main.html#coreVSU"><span class="id" title="definition">coreVSU</span></a> <a class="idref" href="VSU_main.html#whole_prog"><span class="id" title="definition">whole_prog</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <a class="idref" href="VSU_main.html#main_spec"><span class="id" title="definition">main_spec</span></a>) <span class="id" title="method">emp</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 <span class="id" title="var">mkComponent</span> <span class="id" title="definition">prog</span>.<br/>
 </div>
@@ -487,8 +487,8 @@ The arguments of MainCompType (above) are,
 <li> snd main_spec,  the funspec of the main function;
 
 </li>
-<li> emp,   the separation-logic characterization of all the global variables 
-                     of main.c (in this case, there are none).  
+<li> emp,   the separation-logic characterization of all the global variables
+                     of main.c (in this case, there are none).
 
 </li>
 </ul>
@@ -516,13 +516,13 @@ The arguments of MainCompType (above) are,
 
 <div class="doc">
 VST's program logic is proved sound with respect to the operational semantics
-   of Clight.  That means, 
+   of Clight.  That means,
 <ul class="doclist">
 <li> if you prove in VST that some program satisfies its specification, written
       as <span class="inlinecode">@<span class="id" title="var">semax_prog</span></span> <span class="inlinecode"><span class="id" title="var">Espec</span></span> <span class="inlinecode"><span class="id" title="var">CompSpecs</span></span> <span class="inlinecode"><span class="id" title="var">prog</span></span> <span class="inlinecode"><span class="id" title="var">init</span></span> <span class="inlinecode"><span class="id" title="var">V</span></span> <span class="inlinecode"><span class="id" title="var">G</span></span>
 
 </li>
-<li> then (in the operational semantics of CompCert Clight) it will behave 
+<li> then (in the operational semantics of CompCert Clight) it will behave
       according to that specification. 
 
 </li>
@@ -560,18 +560,18 @@ That's a complicated theorem-statement, but the main premise is
 
 </li>
 </ul>
-   meaning "the program runs safely, interacting correctly as specified 
+   meaning "the program runs safely, interacting correctly as specified
    with its external environment."
 
 <div class="paragraph"> </div>
 
    What we want from the VSU system is a proof that the C program you get by
-   linking all these VSUs together (with the MainComponent) satisfies <span class="inlinecode"><span class="id" title="var">semax_prog</span></span>. 
+   linking all these VSUs together (with the MainComponent) satisfies <span class="inlinecode"><span class="id" title="var">semax_prog</span></span>.
    And here is that theorem: 
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Lemma</span> <a id="WholeProgSafe" class="idref" href="#WholeProgSafe"><span class="id" title="lemma">WholeProgSafe</span></a>: <span class="id" title="definition">WholeProgSafeType</span> <a class="idref" href="VSU_main.html#WholeComp"><span class="id" title="lemma">WholeComp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
+<span class="id" title="keyword">Lemma</span> <a id="WholeProgSafe" class="idref" href="#WholeProgSafe"><span class="id" title="lemma">WholeProgSafe</span></a>: <span class="id" title="definition">WholeProgSafeType</span> <a class="idref" href="VSU_main.html#WholeComp"><span class="id" title="lemma">WholeComp</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="var">proveWholeProgSafe</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
@@ -580,15 +580,15 @@ And you can see what was just proved by unfolding WholeProgSafeType:
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">red</span> <span class="id" title="keyword">in</span> (<span class="id" title="definition">WholeProgSafeType</span> <a class="idref" href="VSU_main.html#WholeComp"><span class="id" title="lemma">WholeComp</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">red</span> <span class="id" title="keyword">in</span> (<span class="id" title="definition">WholeProgSafeType</span> <a class="idref" href="VSU_main.html#WholeComp"><span class="id" title="lemma">WholeComp</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>).<br/>
 <span class="comment">(*&nbsp;&nbsp;&nbsp;{G&nbsp;:&nbsp;funspecs<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;semax_prog&nbsp;(prog_of_component&nbsp;WholeComp)&nbsp;tt&nbsp;(QPvarspecs&nbsp;whole_prog)&nbsp;G}&nbsp;*)</span><br/>
 </div>
 
 <div class="doc">
 or in other words, there exists a complete set <span class="inlinecode"><span class="id" title="var">G</span></span> of funspecs (for all the
-    functions in the program) such that the Clight program corresponding to 
-    the WholeComponent is proved correct.  Now we could apply 
+    functions in the program) such that the Clight program corresponding to
+    the WholeComponent is proved correct.  Now we could apply
     <span class="inlinecode"><span class="id" title="var">whole_program_sequential_safety_ext</span></span> to get the corollary that the program
    runs correctly. 
 <div class="paragraph"> </div>
@@ -598,12 +598,12 @@ or in other words, there exists a complete set <span class="inlinecode"><span cl
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:34&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:38&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

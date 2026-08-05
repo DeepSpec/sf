@@ -1,0 +1,6 @@
+--- a/Hoare2.v
++++ b/Hoare2.v
+@@ -20,2 +20,2 @@
+-(** The beauty of Hoare Logic is that it is _syntax directed: the
++(** The beauty of Hoare Logic is that it is _syntax directed_: the
+     structure of proofs exactly follows the structure of programs.

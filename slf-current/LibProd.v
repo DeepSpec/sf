@@ -3,7 +3,7 @@
    DO NOT EDIT. *)
 
 (**************************************************************************
-* TLC: A library for Coq                                                  *
+* TLC: A library for Rocq                                                  *
 * Product of Data Structures                                              *
 **************************************************************************)
 
@@ -293,4 +293,4 @@ Tactic Notation "unfolds_unproj" :=
          unproj41, unproj42, unproj43, unproj44,
          unproj51 in *.
 
-(* 2024-12-27 01:30 *)
+(* 2026-01-07 13:36 *)

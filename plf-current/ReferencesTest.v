@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From PLF Require Import References.
 
 Parameter MISSING: Type.
@@ -54,15 +54,20 @@ idtac " ".
 idtac "#> STLCRef.cyclic_store".
 idtac "Possible points: 3".
 check_type @STLCRef.cyclic_store (
-(exists t : STLCRef.tm,
-   STLCRef.multistep (t, @nil STLCRef.tm)
-     (STLCRef.tm_unit,
-      (STLCRef.tm_abs STLCRef.x STLCRef.Ty_Nat
-         (STLCRef.tm_app (STLCRef.tm_deref (STLCRef.tm_loc 1))
-            (STLCRef.tm_var STLCRef.x))
-       :: STLCRef.tm_abs STLCRef.x STLCRef.Ty_Nat
-            (STLCRef.tm_app (STLCRef.tm_deref (STLCRef.tm_loc 0))
-               (STLCRef.tm_var STLCRef.x)) :: @nil STLCRef.tm)%list))).
+(@ex STLCRef.tm
+   (fun t : STLCRef.tm =>
+    STLCRef.multistep
+      (@pair STLCRef.tm (list STLCRef.tm) t (@nil STLCRef.tm))
+      (@pair STLCRef.tm (list STLCRef.tm) STLCRef.tm_unit
+         (@cons STLCRef.tm
+            (STLCRef.tm_abs STLCRef.x STLCRef.Ty_Nat
+               (STLCRef.tm_app (STLCRef.tm_deref (STLCRef.tm_loc 1))
+                  (STLCRef.tm_var STLCRef.x)))
+            (@cons STLCRef.tm
+               (STLCRef.tm_abs STLCRef.x STLCRef.Ty_Nat
+                  (STLCRef.tm_app (STLCRef.tm_deref (STLCRef.tm_loc 0))
+                     (STLCRef.tm_var STLCRef.x)))
+               (@nil STLCRef.tm))))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions STLCRef.cyclic_store.
@@ -75,21 +80,19 @@ idtac " ".
 idtac "#> STLCRef.store_not_unique".
 idtac "Possible points: 3".
 check_type @STLCRef.store_not_unique (
-(exists (st : STLCRef.store) (ST1 ST2 : STLCRef.store_ty),
-   STLCRef.store_well_typed ST1 st /\
-   STLCRef.store_well_typed ST2 st /\ ST1 <> ST2)).
+(@ex STLCRef.store
+   (fun st : STLCRef.store =>
+    @ex STLCRef.store_ty
+      (fun ST1 : STLCRef.store_ty =>
+       @ex STLCRef.store_ty
+         (fun ST2 : STLCRef.store_ty =>
+          and (STLCRef.store_well_typed ST1 st)
+            (and (STLCRef.store_well_typed ST2 st)
+               (not (@eq STLCRef.store_ty ST1 ST2)))))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions STLCRef.store_not_unique.
 Goal True.
-idtac " ".
-
-idtac "-------------------  preservation_informal  --------------------".
-idtac " ".
-
-idtac "#> Manually graded: STLCRef.preservation_informal".
-idtac "Possible points: 3".
-print_manual_grade STLCRef.manual_grade_for_preservation_informal.
 idtac " ".
 
 idtac "-------------------  factorial_ref  --------------------".
@@ -118,8 +121,8 @@ idtac " ".
 
 idtac " ".
 
-idtac "Max points - standard: 19".
-idtac "Max points - advanced: 19".
+idtac "Max points - standard: 16".
+idtac "Max points - advanced: 16".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -148,8 +151,6 @@ idtac "---------- STLCRef.cyclic_store ---------".
 Print Assumptions STLCRef.cyclic_store.
 idtac "---------- STLCRef.store_not_unique ---------".
 Print Assumptions STLCRef.store_not_unique.
-idtac "---------- preservation_informal ---------".
-idtac "MANUAL".
 idtac "---------- STLCRef.RefsAndNontermination.factorial ---------".
 Print Assumptions STLCRef.RefsAndNontermination.factorial.
 idtac "---------- STLCRef.RefsAndNontermination.factorial_type ---------".
@@ -158,4 +159,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2024-12-27 01:28 *)
+(* 2026-01-07 13:34 *)
+
+(* 2026-01-07 13:34 *)

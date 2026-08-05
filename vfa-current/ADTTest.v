@@ -1,5 +1,5 @@
 Set Warnings "-notation-overridden,-parsing".
-From Coq Require Export String.
+From Stdlib Require Export String.
 From VFA Require Import ADT.
 
 Parameter MISSING: Type.
@@ -39,9 +39,10 @@ idtac "#> StringListsTableExamples.StringListsTable.get_empty_default".
 idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.StringListsTable.get_empty_default (
 (forall k : StringListsTableExamples.StringListsTable.key,
- StringListsTableExamples.StringListsTable.get k
-   StringListsTableExamples.StringListsTable.empty =
- StringListsTableExamples.StringListsTable.default)).
+ @eq StringListsTableExamples.StringListsTable.V
+   (StringListsTableExamples.StringListsTable.get k
+      StringListsTableExamples.StringListsTable.empty)
+   StringListsTableExamples.StringListsTable.default)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.StringListsTable.get_empty_default.
@@ -54,8 +55,10 @@ check_type @StringListsTableExamples.StringListsTable.get_set_same (
 (forall (k : StringListsTableExamples.StringListsTable.key)
    (v : StringListsTableExamples.StringListsTable.V)
    (t : StringListsTableExamples.StringListsTable.table),
- StringListsTableExamples.StringListsTable.get k
-   (StringListsTableExamples.StringListsTable.set k v t) = v)).
+ @eq StringListsTableExamples.StringListsTable.V
+   (StringListsTableExamples.StringListsTable.get k
+      (StringListsTableExamples.StringListsTable.set k v t))
+   v)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.StringListsTable.get_set_same.
@@ -67,11 +70,12 @@ idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.StringListsTable.get_set_other (
 (forall (k k' : StringListsTableExamples.StringListsTable.key)
    (v : StringListsTableExamples.StringListsTable.V)
-   (t : StringListsTableExamples.StringListsTable.table),
- k <> k' ->
- StringListsTableExamples.StringListsTable.get k'
-   (StringListsTableExamples.StringListsTable.set k v t) =
- StringListsTableExamples.StringListsTable.get k' t)).
+   (t : StringListsTableExamples.StringListsTable.table)
+   (_ : not (@eq StringListsTableExamples.StringListsTable.key k k')),
+ @eq StringListsTableExamples.StringListsTable.V
+   (StringListsTableExamples.StringListsTable.get k'
+      (StringListsTableExamples.StringListsTable.set k v t))
+   (StringListsTableExamples.StringListsTable.get k' t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.StringListsTable.get_set_other.
@@ -81,8 +85,10 @@ idtac " ".
 idtac "#> StringListsTableExamples.ex1".
 idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.ex1 (
-(StringListsTableExamples.StringListsTable.get 0
-   StringListsTableExamples.StringListsTable.empty = String.EmptyString)).
+(@eq StringListsTableExamples.StringListsTable.V
+   (StringListsTableExamples.StringListsTable.get 0
+      StringListsTableExamples.StringListsTable.empty)
+   String.EmptyString)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.ex1.
@@ -92,13 +98,15 @@ idtac " ".
 idtac "#> StringListsTableExamples.ex2".
 idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.ex2 (
-(StringListsTableExamples.StringListsTable.get 0
-   (StringListsTableExamples.StringListsTable.set 0
-      (String.String
-         (Ascii.Ascii true false false false false false true false)
-         String.EmptyString) StringListsTableExamples.StringListsTable.empty) =
- String.String (Ascii.Ascii true false false false false false true false)
-   String.EmptyString)).
+(@eq StringListsTableExamples.StringListsTable.V
+   (StringListsTableExamples.StringListsTable.get 0
+      (StringListsTableExamples.StringListsTable.set 0
+         (String.String
+            (Ascii.Ascii true false false false false false true false)
+            String.EmptyString)
+         StringListsTableExamples.StringListsTable.empty))
+   (String.String (Ascii.Ascii true false false false false false true false)
+      String.EmptyString))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.ex2.
@@ -108,12 +116,14 @@ idtac " ".
 idtac "#> StringListsTableExamples.ex3".
 idtac "Possible points: 0.5".
 check_type @StringListsTableExamples.ex3 (
-(StringListsTableExamples.StringListsTable.get 1
-   (StringListsTableExamples.StringListsTable.set 0
-      (String.String
-         (Ascii.Ascii true false false false false false true false)
-         String.EmptyString) StringListsTableExamples.StringListsTable.empty) =
- String.EmptyString)).
+(@eq StringListsTableExamples.StringListsTable.V
+   (StringListsTableExamples.StringListsTable.get 1
+      (StringListsTableExamples.StringListsTable.set 0
+         (String.String
+            (Ascii.Ascii true false false false false false true false)
+            String.EmptyString)
+         StringListsTableExamples.StringListsTable.empty))
+   String.EmptyString)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListsTableExamples.ex3.
@@ -137,8 +147,7 @@ idtac "#> StringListETableAbs.set_ok".
 idtac "Possible points: 0.5".
 check_type @StringListETableAbs.set_ok (
 (forall (k : StringListETableAbs.key) (v : StringListETableAbs.V)
-   (t : StringListETableAbs.table),
- StringListETableAbs.rep_ok t ->
+   (t : StringListETableAbs.table) (_ : StringListETableAbs.rep_ok t),
  StringListETableAbs.rep_ok (StringListETableAbs.set k v t))).
 idtac "Assumptions:".
 Abort.
@@ -149,8 +158,9 @@ idtac " ".
 idtac "#> StringListETableAbs.empty_relate".
 idtac "Possible points: 0.5".
 check_type @StringListETableAbs.empty_relate (
-(StringListETableAbs.Abs StringListETableAbs.empty =
- @empty_map StringListETableAbs.V)).
+(@eq (Maps.partial_map StringListETableAbs.V)
+   (StringListETableAbs.Abs StringListETableAbs.empty)
+   (@empty_map StringListETableAbs.V))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListETableAbs.empty_relate.
@@ -160,10 +170,11 @@ idtac " ".
 idtac "#> StringListETableAbs.bound_relate".
 idtac "Possible points: 0.5".
 check_type @StringListETableAbs.bound_relate (
-(forall (t : StringListETableAbs.table) (k : StringListETableAbs.key),
- StringListETableAbs.rep_ok t ->
- @SearchTree.map_bound StringListETableAbs.V k (StringListETableAbs.Abs t) =
- StringListETableAbs.bound k t)).
+(forall (t : StringListETableAbs.table) (k : StringListETableAbs.key)
+   (_ : StringListETableAbs.rep_ok t),
+ @eq bool
+   (@SearchTree.map_bound StringListETableAbs.V k (StringListETableAbs.Abs t))
+   (StringListETableAbs.bound k t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListETableAbs.bound_relate.
@@ -173,10 +184,12 @@ idtac " ".
 idtac "#> StringListETableAbs.lookup_relate".
 idtac "Possible points: 1.5".
 check_type @StringListETableAbs.lookup_relate (
-(forall (t : StringListETableAbs.table) (k : StringListETableAbs.key),
- StringListETableAbs.rep_ok t ->
- @map_find StringVal.V StringListETableAbs.default k
-   (StringListETableAbs.Abs t) = StringListETableAbs.get k t)).
+(forall (t : StringListETableAbs.table) (k : StringListETableAbs.key)
+   (_ : StringListETableAbs.rep_ok t),
+ @eq StringVal.V
+   (@map_find StringVal.V StringListETableAbs.default k
+      (StringListETableAbs.Abs t))
+   (StringListETableAbs.get k t))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListETableAbs.lookup_relate.
@@ -187,10 +200,10 @@ idtac "#> StringListETableAbs.insert_relate".
 idtac "Possible points: 1.5".
 check_type @StringListETableAbs.insert_relate (
 (forall (t : StringListETableAbs.table) (k : StringListETableAbs.key)
-   (v : StringListETableAbs.V),
- StringListETableAbs.rep_ok t ->
- @map_update StringListETableAbs.V k v (StringListETableAbs.Abs t) =
- StringListETableAbs.Abs (StringListETableAbs.set k v t))).
+   (v : StringListETableAbs.V) (_ : StringListETableAbs.rep_ok t),
+ @eq (Maps.partial_map StringListETableAbs.V)
+   (@map_update StringListETableAbs.V k v (StringListETableAbs.Abs t))
+   (StringListETableAbs.Abs (StringListETableAbs.set k v t)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListETableAbs.insert_relate.
@@ -200,11 +213,10 @@ idtac " ".
 idtac "#> StringListETableAbs.elements_relate".
 idtac "Possible points: 1".
 check_type @StringListETableAbs.elements_relate (
-(forall t : StringListETableAbs.table,
- StringListETableAbs.rep_ok t ->
- StringListETableAbs.Abs t =
- @SearchTree.map_of_list StringListETableAbs.V
-   (StringListETableAbs.elements t))).
+(forall (t : StringListETableAbs.table) (_ : StringListETableAbs.rep_ok t),
+ @eq (Maps.partial_map StringListETableAbs.V) (StringListETableAbs.Abs t)
+   (@SearchTree.map_of_list StringListETableAbs.V
+      (StringListETableAbs.elements t)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions StringListETableAbs.elements_relate.
@@ -216,7 +228,8 @@ idtac " ".
 
 idtac "#> ListQueue.is_empty_empty".
 idtac "Possible points: 0.5".
-check_type @ListQueue.is_empty_empty ((ListQueue.is_empty ListQueue.empty = true)).
+check_type @ListQueue.is_empty_empty (
+(@eq bool (ListQueue.is_empty ListQueue.empty) true)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ListQueue.is_empty_empty.
@@ -227,7 +240,7 @@ idtac "#> ListQueue.is_empty_nonempty".
 idtac "Possible points: 0.5".
 check_type @ListQueue.is_empty_nonempty (
 (forall (q : ListQueue.queue) (v : ListQueue.V),
- ListQueue.is_empty (ListQueue.enq q v) = false)).
+ @eq bool (ListQueue.is_empty (ListQueue.enq q v)) false)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ListQueue.is_empty_nonempty.
@@ -237,7 +250,7 @@ idtac " ".
 idtac "#> ListQueue.peek_empty".
 idtac "Possible points: 0.5".
 check_type @ListQueue.peek_empty (
-(forall d : ListQueue.V, ListQueue.peek d ListQueue.empty = d)).
+(forall d : ListQueue.V, @eq ListQueue.V (ListQueue.peek d ListQueue.empty) d)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ListQueue.peek_empty.
@@ -248,7 +261,7 @@ idtac "#> ListQueue.peek_nonempty".
 idtac "Possible points: 0.5".
 check_type @ListQueue.peek_nonempty (
 (forall (d : ListQueue.V) (q : ListQueue.queue) (v : ListQueue.V),
- ListQueue.peek d (ListQueue.enq q v) = ListQueue.peek v q)).
+ @eq ListQueue.V (ListQueue.peek d (ListQueue.enq q v)) (ListQueue.peek v q))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ListQueue.peek_nonempty.
@@ -257,7 +270,8 @@ idtac " ".
 
 idtac "#> ListQueue.deq_empty".
 idtac "Possible points: 0.5".
-check_type @ListQueue.deq_empty ((ListQueue.deq ListQueue.empty = ListQueue.empty)).
+check_type @ListQueue.deq_empty (
+(@eq ListQueue.queue (ListQueue.deq ListQueue.empty) ListQueue.empty)).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ListQueue.deq_empty.
@@ -268,8 +282,8 @@ idtac "#> ListQueue.deq_nonempty".
 idtac "Possible points: 0.5".
 check_type @ListQueue.deq_nonempty (
 (forall (q : ListQueue.queue) (v : ListQueue.V),
- ListQueue.deq (ListQueue.enq q v) =
- (if ListQueue.is_empty q then q else ListQueue.enq (ListQueue.deq q) v))).
+ @eq ListQueue.queue (ListQueue.deq (ListQueue.enq q v))
+   (if ListQueue.is_empty q then q else ListQueue.enq (ListQueue.deq q) v))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions ListQueue.deq_nonempty.
@@ -282,7 +296,8 @@ idtac " ".
 idtac "#> TwoListQueueAbs.empty_relate".
 idtac "Possible points: 0.5".
 check_type @TwoListQueueAbs.empty_relate (
-(TwoListQueueAbs.Abs TwoListQueueAbs.empty = @nil TwoListQueueAbs.V)).
+(@eq (list TwoListQueueAbs.V) (TwoListQueueAbs.Abs TwoListQueueAbs.empty)
+   (@nil TwoListQueueAbs.V))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TwoListQueueAbs.empty_relate.
@@ -293,8 +308,9 @@ idtac "#> TwoListQueueAbs.enq_relate".
 idtac "Possible points: 0.5".
 check_type @TwoListQueueAbs.enq_relate (
 (forall (q : TwoListQueueAbs.queue) (v : TwoListQueueAbs.V),
- TwoListQueueAbs.Abs (TwoListQueueAbs.enq q v) =
- (TwoListQueueAbs.Abs q ++ v :: @nil TwoListQueueAbs.V)%list)).
+ @eq (list TwoListQueueAbs.V) (TwoListQueueAbs.Abs (TwoListQueueAbs.enq q v))
+   (@app TwoListQueueAbs.V (TwoListQueueAbs.Abs q)
+      (@cons TwoListQueueAbs.V v (@nil TwoListQueueAbs.V))))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TwoListQueueAbs.enq_relate.
@@ -305,8 +321,8 @@ idtac "#> TwoListQueueAbs.peek_relate".
 idtac "Possible points: 1".
 check_type @TwoListQueueAbs.peek_relate (
 (forall (d : TwoListQueueAbs.V) (q : TwoListQueueAbs.queue),
- TwoListQueueAbs.peek d q =
- @List.hd TwoListQueueAbs.V d (TwoListQueueAbs.Abs q))).
+ @eq TwoListQueueAbs.V (TwoListQueueAbs.peek d q)
+   (@List.hd TwoListQueueAbs.V d (TwoListQueueAbs.Abs q)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TwoListQueueAbs.peek_relate.
@@ -317,8 +333,8 @@ idtac "#> TwoListQueueAbs.deq_relate".
 idtac "Possible points: 1".
 check_type @TwoListQueueAbs.deq_relate (
 (forall q : TwoListQueueAbs.queue,
- TwoListQueueAbs.Abs (TwoListQueueAbs.deq q) =
- @List.tl TwoListQueueAbs.V (TwoListQueueAbs.Abs q))).
+ @eq (list TwoListQueueAbs.V) (TwoListQueueAbs.Abs (TwoListQueueAbs.deq q))
+   (@List.tl TwoListQueueAbs.V (TwoListQueueAbs.Abs q)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions TwoListQueueAbs.deq_relate.
@@ -344,7 +360,8 @@ idtac "#> vector_cons_correct".
 idtac "Possible points: 2".
 check_type @vector_cons_correct (
 (forall (X : Type) (x : X) (v : vector X),
- @list_of_vector X (@vector_cons X x v) = (x :: @list_of_vector X v)%list)).
+ @eq (list X) (@list_of_vector X (@vector_cons X x v))
+   (@cons X x (@list_of_vector X v)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions vector_cons_correct.
@@ -358,8 +375,8 @@ idtac "#> vector_app_correct".
 idtac "Possible points: 2".
 check_type @vector_app_correct (
 (forall (X : Type) (v1 v2 : vector X),
- @list_of_vector X (@vector_app X v1 v2) =
- (@list_of_vector X v1 ++ @list_of_vector X v2)%list)).
+ @eq (list X) (@list_of_vector X (@vector_app X v1 v2))
+   (@app X (@list_of_vector X v1) (@list_of_vector X v2)))).
 idtac "Assumptions:".
 Abort.
 Print Assumptions vector_app_correct.
@@ -469,4 +486,6 @@ idtac "---------- ListsETable ---------".
 idtac "MANUAL".
 Abort.
 
-(* 2024-12-27 01:33 *)
+(* 2026-01-06 11:58 *)
+
+(* 2026-01-06 11:59 *)
