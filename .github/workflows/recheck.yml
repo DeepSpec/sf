@@ -22,7 +22,7 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: Magic Nix Cache
-        uses: MagicNixCache/magic-nix-cache-action@v1
+        uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Run Update Script
         run: |
