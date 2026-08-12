@@ -76,8 +76,8 @@ Fixpoint listrep (sigma: list val) (p: val) : mpred :=
 
   But if [sigma] is [nil], then [p] is the null pointer, and the
   memory footprint is empty ([emp]).  The fact [p=nullval] is a pure
-  proposition (Coq [Prop]); we inject this into the assertion language
-  (Coq [mpred]) using the [!!] operator.
+  proposition (Rocq [Prop]); we inject this into the assertion language
+  (Rocq [mpred]) using the [!!] operator.
 
   Because [!!P] (for a proposition [P]) does not specify any footprint
   (whether empty or otherwise), we do not use the separating conjunction
@@ -342,7 +342,7 @@ Definition reverse_spec : ident * funspec :=
   - The PREcondition says,
      - There is one function-parameter, whose C type is
          "pointer to struct list"
-     - PARAMS:  The parameter contains the Coq value [p];
+     - PARAMS:  The parameter contains the Rocq value [p];
      - SEP: in memory at address [p] there is a linked list
           representing [sigma].
   - The POSTcondition says,
@@ -423,7 +423,7 @@ forward_while
      SEP (listrep s1 w; listrep s2 v)).
 
 (** The forward_while tactic leaves four subgoals,
-  which we mark with - (the Coq "bullet") *)
+  which we mark with - (the Rocq "bullet") *)
 - (* Prove that (current) precondition implies the loop invariant *)
 hint.
 
@@ -582,7 +582,7 @@ Exists w; entailer!.
 rewrite (proj1 H1) by auto.
 unfold listrep at 2; fold listrep.
 entailer!.
-rewrite <- app_nil_end, rev_involutive.
+rewrite app_nil_r, rev_involutive.
 auto.
 Qed.
 
@@ -743,4 +743,4 @@ Abort.
   Separation logic is essential for reasoning about updates to these structures.
   Verifiable C's SEP clause ensures separation between all its conjuncts. *)
 
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

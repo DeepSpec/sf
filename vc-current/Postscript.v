@@ -70,12 +70,12 @@
     A good way to write proved-correct software is to program in a pure
   functional program logic, and use higher-order logic to prove correctness.
   For example:
-  - Write pure functional programs in Coq, prove them correct in Coq, then
-    extract them from Coq to OCaml or Haskell.  See Volume 3 of Software
+  - Write pure functional programs in Rocq, prove them correct in Rocq, then
+    extract them From Stdlib to OCaml or Haskell.  See Volume 3 of Software
     Foundations:  Verified Functional Algorithms.
   - In HOL systems (Higher-order Logic) such as Isabelle/HOL, you can do the
     same thing: write functional programs, prove them correct, extract, compile.
-  - You can write Haskell programs, compile with [ghc], and import into Coq
+  - You can write Haskell programs, compile with [ghc], and import into Rocq
     for verification using hs-to-coq [Spector-Zabusky 2018] (in Bib.v).
   - ACL2 is an older system, that uses a first-order logic.  That's less
     expressive, you don't get polymorphism or quantification, but there
@@ -98,7 +98,7 @@
 
   ML with mutable references and arrays is also a high-level imperative
   language.  CFML is a system for reasoning about imperative ML
-  programs using separation logic in Coq [Chargueraud 2010] (in Bib.v),
+  programs using separation logic in Rocq [Chargueraud 2010] (in Bib.v),
   soon to be described in another volume of _Software Foundations_.
   CakeML is a system for proving (and correctly compiling) ML
   programs in HOL [Kumar 2014] (in Bib.v). *)
@@ -121,15 +121,15 @@
   Each of these three systems has an assertion language, in which you
   express your function specifications, assertions, and invariants.
   - In VST, as you have seen, that language is a separation language
-    (PROP/LOCAL/SEP) embedded in Coq, so that the PROP, LOCAL, and SEP
+    (PROP/LOCAL/SEP) embedded in Rocq, so that the PROP, LOCAL, and SEP
     clauses can all make use of the full expressive power of the Calculus
     of Inductive Constructions (CiC).  You have seen a simple example of
-    the expressive power of this approach, where we can use ordinary Coq
+    the expressive power of this approach, where we can use ordinary Rocq
     proofs in [Hashfun], and directly connect them to separation-logic
     proofs in [Verif_hash].
   - Frama-C uses a weaker assertion language, expressed in C syntax.  That's
     a much weaker logic to reason in, and it doesn't directly connect to
-    a general-purpose logic (and proof assistant) like Coq.  Also, since
+    a general-purpose logic (and proof assistant) like Rocq.  Also, since
     Frama-C is not a separation logic, it can be difficult to reason about
     data structures.
   - VeriFast uses a capable Dafny-like logic -- even more capable, since
@@ -164,5 +164,4 @@
   expressive enough to allow to verify them.  We wish you success in your
   future software verification efforts. *)
 
-
-(* 2024-12-27 01:34 *)
+(* 2026-01-07 13:38 *)

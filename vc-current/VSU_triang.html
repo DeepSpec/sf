@@ -100,21 +100,21 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="push_increasing_spec" class="idref" href="#push_increasing_spec"><span class="id" title="definition">push_increasing_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> <br/>
+<span class="id" title="keyword">Definition</span> <a id="push_increasing_spec" class="idref" href="#push_increasing_spec"><span class="id" title="definition">push_increasing_spec</span></a> : <span class="id" title="definition">ident</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span><br/>
 &nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="pop_and_add_spec" class="idref" href="#pop_and_add_spec"><span class="id" title="definition">pop_and_add_spec</span></a>  : <span class="id" title="definition">ident</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span> <br/>
+<span class="id" title="keyword">Definition</span> <a id="pop_and_add_spec" class="idref" href="#pop_and_add_spec"><span class="id" title="definition">pop_and_add_spec</span></a>  : <span class="id" title="definition">ident</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <span class="id" title="inductive">funspec</span><br/>
 &nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
-<span class="id" title="keyword">Definition</span> <a id="Triang_private" class="idref" href="#Triang_private"><span class="id" title="definition">Triang_private</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[</span></a><br/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_private" class="idref" href="#Triang_private"><span class="id" title="definition">Triang_private</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
-&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">]</span></a>.<br/>
+&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">]</span></a>.<br/>
 <font size=-2>&#9744;</font>
 </div>
 
 <div class="code">
 
 <span class="id" title="keyword">Definition</span> <a id="Triang_imports" class="idref" href="#Triang_imports"><span class="id" title="definition">Triang_imports</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="Spec_stack.html#StackASI"><span class="id" title="definition">StackASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.STACK"><span class="id" title="variable">STACK</span></a>.<br/>
-<span class="id" title="keyword">Definition</span> <a id="Triang_internals" class="idref" href="#Triang_internals"><span class="id" title="definition">Triang_internals</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_triang.html#Triang_private"><span class="id" title="definition">Triang_private</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">TriangASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a><a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">)</span></a>.<br/>
-<span class="id" title="keyword">Definition</span> <a id="Triang_Gprog" class="idref" href="#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_triang.html#Triang_imports"><span class="id" title="definition">Triang_imports</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="VSU_triang.html#Triang_internals"><span class="id" title="definition">Triang_internals</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_internals" class="idref" href="#Triang_internals"><span class="id" title="definition">Triang_internals</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_triang.html#Triang_private"><span class="id" title="definition">Triang_private</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">TriangASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Triang_Gprog" class="idref" href="#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a> : <span class="id" title="definition">funspecs</span> := <a class="idref" href="VSU_triang.html#Triang_imports"><span class="id" title="definition">Triang_imports</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c<sub>6</sub>"><span class="id" title="notation">++</span></a> <a class="idref" href="VSU_triang.html#Triang_internals"><span class="id" title="definition">Triang_internals</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="Triang_Vprog" class="idref" href="#Triang_Vprog"><span class="id" title="definition">Triang_Vprog</span></a> : <span class="id" title="definition">varspecs</span>. <span class="id" title="var">mk_varspecs</span> <span class="id" title="definition">prog</span>. <span class="id" title="keyword">Defined</span>.<br/>
 </div>
 
@@ -157,7 +157,7 @@
 <div class="paragraph"> </div>
 
 <a id="lab198"></a><h4 class="section">Exercise: 3 stars, standard (body_triang)</h4>
- Prove the correctness of the triang function. 
+ Prove the correctness of the triang function.
 
 <div class="paragraph"> </div>
 
@@ -185,7 +185,7 @@
      That is, <span class="inlinecode"><span class="id" title="var">triang</span></span> may allocate things that it does not free.
 
 </li>
-<li> Adjust the StackAPD with one more field in its Coq record:
+<li> Adjust the StackAPD with one more field in its Rocq record:
      <span class="inlinecode"><span class="id" title="var">stackrep_nil</span>:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">st</span>,</span> <span class="inlinecode"><span class="id" title="var">stackrep</span></span> <span class="inlinecode"><span class="id" title="var">STACK</span></span> <span class="inlinecode">[]</span> <span class="inlinecode"><span class="id" title="var">st</span></span> <span class="inlinecode"><span class="nowrap">&vert;--</span></span> <span class="inlinecode"><span class="id" title="var">emp</span></span>.
      This specifies that, whatever is the low-level representation
      of a stack, the empty stack will always use no memory.
@@ -216,7 +216,7 @@
 </div>
 <div class="code">
 
-<span class="id" title="keyword">Axiom</span> <a id="stackrep_nil" class="idref" href="#stackrep_nil"><span class="id" title="axiom">stackrep_nil</span></a>: <span class="id" title="keyword">∀</span> <a id="st:3" class="idref" href="#st:3"><span class="id" title="binder">st</span></a>, <a class="idref" href="Spec_stack.html#stackrep"><span class="id" title="projection">stackrep</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.STACK"><span class="id" title="variable">STACK</span></a> <a class="idref" href="http://coq.inria.fr/library//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="VSU_triang.html#st:3"><span class="id" title="variable">st</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="method">emp</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Axiom</span> <a id="Triang_VSU.stackrep_nil" class="idref" href="#Triang_VSU.stackrep_nil"><span class="id" title="variable">stackrep_nil</span></a>: <span class="id" title="keyword">∀</span> <a id="st:5" class="idref" href="#st:5"><span class="id" title="binder">st</span></a>, <a class="idref" href="Spec_stack.html#stackrep"><span class="id" title="projection">stackrep</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.STACK"><span class="id" title="variable">STACK</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="VSU_triang.html#st:5"><span class="id" title="variable">st</span></a> <span class="id" title="notation"><span class="nowrap">&vert;--</span></span> <span class="id" title="method">emp</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Lemma</span> <a id="body_triang" class="idref" href="#body_triang"><span class="id" title="lemma">body_triang</span></a>: <span class="id" title="definition">semax_body</span> <a class="idref" href="VSU_triang.html#Triang_Vprog"><span class="id" title="definition">Triang_Vprog</span></a> <a class="idref" href="VSU_triang.html#Triang_Gprog"><span class="id" title="definition">Triang_Gprog</span></a> <span class="id" title="definition">f_triang</span> (<a class="idref" href="Spec_triang.html#triang_spec"><span class="id" title="definition">triang_spec</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a>).<br/>
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
 <font size=-2>&#9744;</font>
@@ -224,7 +224,7 @@
 
 <div class="code">
 
-<span class="id" title="keyword">Definition</span> <a id="TriangVSU" class="idref" href="#TriangVSU"><span class="id" title="definition">TriangVSU</span></a>: @<span class="id" title="definition">VSU</span> <span class="id" title="definition">NullExtension.Espec</span> <a class="idref" href="http://coq.inria.fr/library//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="VSU_triang.html#Triang_imports"><span class="id" title="definition">Triang_imports</span></a><br/>
+<span class="id" title="keyword">Definition</span> <a id="TriangVSU" class="idref" href="#TriangVSU"><span class="id" title="definition">TriangVSU</span></a>: @<span class="id" title="definition">VSU</span> <span class="id" title="definition">NullExtension.Espec</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a> <a class="idref" href="VSU_triang.html#Triang_imports"><span class="id" title="definition">Triang_imports</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="var">QPprog</span> <span class="id" title="definition">prog</span>) (<a class="idref" href="Spec_triang.html#TriangASI"><span class="id" title="definition">TriangASI</span></a> <a class="idref" href="VSU_triang.html#Triang_VSU.M"><span class="id" title="variable">M</span></a>) <span class="id" title="method">emp</span>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 </div>
@@ -248,12 +248,12 @@ with the right definition of <span class="inlinecode"><span class="id" title="va
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:34&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:38&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>

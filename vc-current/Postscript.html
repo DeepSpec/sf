@@ -56,7 +56,7 @@
 <li> Bins-based malloc/free system <a href="Bib.html#Appel-and Naumann 2020"><span class="inlineref">[Appel and Naumann 2020]</span></a>
 
 </li>
-<li> AES encryption, B+Trees, Tries of B+ trees (unpublished 
+<li> AES encryption, B+Trees, Tries of B+ trees (unpublished
         master's or undergraduate theses). 
 </li>
 </ul>
@@ -74,7 +74,7 @@
  The first-draft version of VST's module system -- for verifying
   multimodule C programs with .c and .h files -- is described in
   <a href="Bib.html#Beringer-2019"><span class="inlineref">[Beringer 2019]</span></a>.  The newer version, using Verified Software Units,
-  is demonstrated in progs/VSUpile distributed with VST.  
+  is demonstrated in progs/VSUpile distributed with VST.
   The description in <a href="Bib.html#Beringer-2019"><span class="inlineref">[Beringer 2019]</span></a> mostly matches
   the proofs in progs/VSUpile, but the proofs handle data abstraction
   using the methods described in the the VSU chapters of this volume. 
@@ -82,7 +82,7 @@
 
 <a id="lab231"></a><h2 class="section">Input/output</h2>
   To prove I/O using our Verifiable C logic, we treat the state of the
-  outside world as a resource in the SEP clause, alongside (but separating from) 
+  outside world as a resource in the SEP clause, alongside (but separating from)
   in-memory conjuncts.  Proved examples are in <span class="inlinecode"><span class="id" title="var">progs</span>/<span class="id" title="var">io.c</span>,</span> <span class="inlinecode"><span class="id" title="var">progs</span>/<span class="id" title="var">io_mem.c</span></span>,
   and their proof files <span class="inlinecode"><span class="id" title="var">progs</span>/<span class="id" title="var">verif_io.v</span>,</span> <span class="inlinecode"><span class="id" title="var">progs</span>/<span class="id" title="var">verif_io_mem.v</span></span>.  Research
   papers describing these concepts include <a href="Bib.html#Koh-2020"><span class="inlineref">[Koh 2020]</span></a> and
@@ -101,7 +101,7 @@
  There are many <i>static analyzers</i> -- too numerous to list here -- that
   attempt to check <i>safety</i> of your program:  will it crash?  Will it access
   an array out of bounds, or dereference an uninitialized pointer?  Static
-  analyzers can be useful in software engineering, but they have two major 
+  analyzers can be useful in software engineering, but they have two major
   limitations:
 <ul class="doclist">
 <li> They don't verify <i>functional correctness</i> -- that is, does your program
@@ -122,8 +122,8 @@
   functional program logic, and use higher-order logic to prove correctness.
   For example:
 <ul class="doclist">
-<li> Write pure functional programs in Coq, prove them correct in Coq, then
-    extract them from Coq to OCaml or Haskell.  See Volume 3 of Software
+<li> Write pure functional programs in Rocq, prove them correct in Rocq, then
+    extract them From Stdlib to OCaml or Haskell.  See Volume 3 of Software
     Foundations:  Verified Functional Algorithms.
 
 </li>
@@ -131,11 +131,11 @@
     same thing: write functional programs, prove them correct, extract, compile.
 
 </li>
-<li> You can write Haskell programs, compile with <span class="inlinecode"><span class="id" title="var">ghc</span></span>, and import into Coq
+<li> You can write Haskell programs, compile with <span class="inlinecode"><span class="id" title="var">ghc</span></span>, and import into Rocq
     for verification using hs-to-coq <a href="Bib.html#Spector-Zabusky-2018"><span class="inlineref">[Spector-Zabusky 2018]</span></a>.
 
 </li>
-<li> ACL2 is an older system, that uses a first-order logic.  That's less 
+<li> ACL2 is an older system, that uses a first-order logic.  That's less
     expressive, you don't get polymorphism or quantification, but there
     have been many successful applications of ACL2 in industry. 
 </li>
@@ -165,7 +165,7 @@
 
   ML with mutable references and arrays is also a high-level imperative
   language.  CFML is a system for reasoning about imperative ML
-  programs using separation logic in Coq <a href="Bib.html#Chargueraud-2010"><span class="inlineref">[Chargueraud 2010]</span></a>,
+  programs using separation logic in Rocq <a href="Bib.html#Chargueraud-2010"><span class="inlineref">[Chargueraud 2010]</span></a>,
   soon to be described in another volume of <i>Software Foundations</i>.
   CakeML is a system for proving (and correctly compiling) ML
   programs in HOL <a href="Bib.html#Kumar-2014"><span class="inlineref">[Kumar 2014]</span></a>. 
@@ -194,7 +194,7 @@
   Unlike VST, where (as you have seen) the proof script is separate from
   the program, in both Frama-C and VeriFast you prove the program by inserting
   assertions and invariants into the program. the tools complete the
-  verification automatically -- or else, point out which assertions 
+  verification automatically -- or else, point out which assertions
   have failed, so you can adjust your assertions and invariants, and try again.
 
 <div class="paragraph"> </div>
@@ -203,17 +203,17 @@
   express your function specifications, assertions, and invariants.
 <ul class="doclist">
 <li> In VST, as you have seen, that language is a separation language
-    (PROP/LOCAL/SEP) embedded in Coq, so that the PROP, LOCAL, and SEP
+    (PROP/LOCAL/SEP) embedded in Rocq, so that the PROP, LOCAL, and SEP
     clauses can all make use of the full expressive power of the Calculus
     of Inductive Constructions (CiC).  You have seen a simple example of
-    the expressive power of this approach, where we can use ordinary Coq 
+    the expressive power of this approach, where we can use ordinary Rocq
     proofs in <a href="Hashfun.html"><span class="inlineref">Hashfun</span></a>, and directly connect them to separation-logic
     proofs in <a href="Verif_hash.html"><span class="inlineref">Verif_hash</span></a>.
 
 </li>
 <li> Frama-C uses a weaker assertion language, expressed in C syntax.  That's
     a much weaker logic to reason in, and it doesn't directly connect to
-    a general-purpose logic (and proof assistant) like Coq.  Also, since
+    a general-purpose logic (and proof assistant) like Rocq.  Also, since
     Frama-C is not a separation logic, it can be difficult to reason about
     data structures.
 
@@ -222,7 +222,7 @@
     it is separation logic, not just Hoare logic.  That means you can reason
     about data structures.  There's no artificial limitation to a C-like syntax
     in the assertion language.  Unfortunately, VeriFast's assertion language
-    is not connected to a general-purpose logic (and proof assistant); that 
+    is not connected to a general-purpose logic (and proof assistant); that
     means you can do refinement proofs (this C program implements that
     functional model),  but it's not so easy to reason about properties of
     your functional models. 
@@ -237,7 +237,7 @@
 
  Formal reasoning about source programs is a good thing -- but once you've
   proved your source program correct, how do you know that is compiled
-  correctly?  That is, 
+  correctly?  That is,
 <ul class="doclist">
 <li> the compiler must not have bugs, and
 
@@ -264,13 +264,13 @@
   future software verification efforts. 
 </div>
 <div class="code">
-<hr class='doublespaceincode'/>
-<span class="comment">(*&nbsp;2024-12-27&nbsp;01:34&nbsp;*)</span><br/>
+
+<span class="comment">(*&nbsp;2026-01-07&nbsp;13:38&nbsp;*)</span><br/>
 </div>
 </div>
 
 <div id="footer">
-<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+<hr/><a href="coqindex.html">Index</a><hr/>This page has been generated by <a href="http://rocq-prover.org/">coqdoc</a>
 </div>
 
 </div>
