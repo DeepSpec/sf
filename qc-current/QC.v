@@ -1289,7 +1289,7 @@ End DefineGenSized.
     [QuickChick] provides some automation for deriving such instances
     for simple datatypes automatically! *)
 
-Derive Arbitrary for Tree.
+QCDerive Arbitrary for Tree.
 (**
 
      ===> GenSizedree is defined
@@ -1298,7 +1298,7 @@ Derive Arbitrary for Tree.
 Print GenSizedTree.
 Print ShrinkTree.
 
-Derive Show for Tree.
+QCDerive Show for Tree.
 (**
      ===> ShowTree is defined
 *)
