@@ -45,7 +45,7 @@
 </div>
 
 <div class="doc">
-<a id="lab447"></a><h1 class="section">A Broken Evaluator</h1>
+<a id="lab480"></a><h1 class="section">A Broken Evaluator</h1>
 
 </div>
 <div class="code">
@@ -118,7 +118,7 @@ As we remarked in chapter <a href="Imp.html"><span class="inlineref">Imp</span><
 </div>
 
 <div class="doc">
-<a id="lab448"></a><h1 class="section">A Step-Indexed Evaluator</h1>
+<a id="lab481"></a><h1 class="section">A Step-Indexed Evaluator</h1>
 
 <div class="paragraph"> </div>
 
@@ -265,7 +265,7 @@ We can improve the readability of this version by introducing a
 </div>
 
 <div class="doc">
-<a id="lab449"></a><h4 class="section">Exercise: 1 star, standard, optional (pup_to_n)</h4>
+<a id="lab482"></a><h4 class="section">Exercise: 1 star, standard, optional (pup_to_n)</h4>
  Write an Imp program that sums the numbers from <span class="inlinecode">1</span> to
    <span class="inlinecode"><span class="id" title="var">X</span></span> (inclusive -- i.e., <span class="inlinecode">1</span> <span class="inlinecode">+</span> <span class="inlinecode">2</span> <span class="inlinecode">+</span> <span class="inlinecode">...</span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">X</span></span>) in the variable <span class="inlinecode"><span class="id" title="var">Y</span></span>.  Make
    sure your solution satisfies the test that follows. 
@@ -287,7 +287,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab450"></a><h4 class="section">Exercise: 2 stars, standard, optional (peven)</h4>
+<a id="lab483"></a><h4 class="section">Exercise: 2 stars, standard, optional (peven)</h4>
  Write an <span class="inlinecode"><span class="id" title="var">Imp</span></span> program that sets <span class="inlinecode"><span class="id" title="var">Z</span></span> to <span class="inlinecode">0</span> if <span class="inlinecode"><span class="id" title="var">X</span></span> is even and
     sets <span class="inlinecode"><span class="id" title="var">Z</span></span> to <span class="inlinecode">1</span> otherwise.  Use <span class="inlinecode"><span class="id" title="var">test_ceval</span></span> to test your
     program. 
@@ -300,7 +300,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 
 
 <div class="doc">
-<a id="lab451"></a><h1 class="section">Relational vs. Step-Indexed Evaluation</h1>
+<a id="lab484"></a><h1 class="section">Relational vs. Step-Indexed Evaluation</h1>
 
 <div class="paragraph"> </div>
 
@@ -364,7 +364,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 </div>
 
 <div class="doc">
-<a id="lab452"></a><h4 class="section">Exercise: 4 stars, advanced (ceval_step__ceval_inf)</h4>
+<a id="lab485"></a><h4 class="section">Exercise: 4 stars, advanced (ceval_step__ceval_inf)</h4>
  Write an informal proof of <span class="inlinecode"><span class="id" title="var">ceval_step__ceval</span></span>, following the
     usual template.  (The template for case analysis on an inductively
     defined value should look the same as for induction, except that
@@ -405,7 +405,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="ImpCEvalFun.html#ceval_step"><span class="id" title="definition">ceval_step</span></a> <span class="id" title="var">st</span> <span class="id" title="var">c<sub>1</sub></span> <span class="id" title="var">i<sub>1</sub>'</span>) <span class="id" title="var">eqn</span>:<span class="id" title="var">Heqst1'o</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;st<sub>1</sub>'o&nbsp;=&nbsp;Some&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">IHi1'</span> <span class="id" title="var">i<sub>2</sub>'</span>) <span class="id" title="keyword">in</span> <span class="id" title="var">Heqst1'o</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">Heqst1'o</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">Hceval</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">Heqst1'o</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">IHi1'</span> <span class="id" title="var">i<sub>2</sub>'</span>) <span class="id" title="keyword">in</span> <span class="id" title="var">Hceval</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;st<sub>1</sub>'o&nbsp;=&nbsp;None&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">discriminate</span> <span class="id" title="var">Hceval</span>.<br/><hr class='doublespaceincode'/>
@@ -419,14 +419,14 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="ImpCEvalFun.html#ceval_step"><span class="id" title="definition">ceval_step</span></a> <span class="id" title="var">st</span> <span class="id" title="var">c</span> <span class="id" title="var">i<sub>1</sub>'</span>) <span class="id" title="var">eqn</span>: <span class="id" title="var">Heqst1'o</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;st<sub>1</sub>'o&nbsp;=&nbsp;Some&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">IHi1'</span> <span class="id" title="var">i<sub>2</sub>'</span>) <span class="id" title="keyword">in</span> <span class="id" title="var">Heqst1'o</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">Heqst1'o</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">Hceval</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> → <span class="id" title="var">Heqst1'o</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">IHi1'</span> <span class="id" title="var">i<sub>2</sub>'</span>) <span class="id" title="keyword">in</span> <span class="id" title="var">Hceval</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="comment">(*&nbsp;i<sub>1</sub>'o&nbsp;=&nbsp;None&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="keyword">in</span> <span class="id" title="var">Hceval</span>. <span class="id" title="tactic">discriminate</span> <span class="id" title="var">Hceval</span>. <span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">discriminate</span> <span class="id" title="var">Hceval</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
 
 <div class="doc">
-<a id="lab453"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (ceval__ceval_step)</h4>
+<a id="lab486"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (ceval__ceval_step)</h4>
  Finish the following proof.  You'll need <span class="inlinecode"><span class="id" title="var">ceval_step_more</span></span> in a
     few places, as well as some basic facts about <span class="inlinecode">≤</span> and <span class="inlinecode"><span class="id" title="var">plus</span></span>. 
 </div>
@@ -454,7 +454,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 </div>
 
 <div class="doc">
-<a id="lab454"></a><h1 class="section">Determinism of Evaluation Again</h1>
+<a id="lab487"></a><h1 class="section">Determinism of Evaluation Again</h1>
 
 <div class="paragraph"> </div>
 
@@ -483,7 +483,7 @@ Proof.&nbsp;reflexivity.&nbsp;Qed.<br/>
 </div>
 
 <br/>
-<span class="comment">(*&nbsp;2026-01-07&nbsp;13:18&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-08-16&nbsp;15:43&nbsp;*)</span><br/>
 </div>
 </div>
 

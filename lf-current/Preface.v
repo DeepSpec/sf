@@ -292,7 +292,7 @@
       this directory will contain a [.devcontainer] subdirectory with
       instructions for VSCode about where to find an appropriate
       Docker image and a [_CoqProject] file, whose presence triggers
-      the VSCoq extension.
+      the VSRocq extension.
 
     - In VSCode, use [File > Open Folder] to open the new directory.
       VSCode should ask you whether you want to run the project in the
@@ -302,7 +302,7 @@
 
       This step may take some time.
 
-    - Check that VSCoq is working by double-clicking the file
+    - Check that VSRocq is working by double-clicking the file
       [Basics.v] from the list on the left (you should see a blinking
       cursor in the window that opens; if not you can click in that
       window to select it), and pressing [alt+downarrow] (on MacOS,
@@ -310,18 +310,18 @@
       cursor move through the file and the region above the cursor get
       highlighted.
 
-      - If VSCoq does not work and you receive an error indicating that
-        [vscoqtop] was not found, open a new terminal in the container
+      - If VSRocq does not work and you receive an error indicating that
+        [vsrocqtop] was not found, open a new terminal in the container
         (you can do this by opening the command palette and running the
         command “Terminal: Create New Terminal”) and run the command
-        [which vscoqtop]. This should print the path to the VSCoq
+        [which vsrocqtop]. This should print the path to the VSRocq
         installation inside the container. Copy this path
-        and paste it into the “VSCoq: Path” textbox in the
-        VSCoq extension settings (accessible via the gear icon on
-        the VSCoq extension page in VSCode), then reload your window.
+        and paste it into the “VSRocq: Path” textbox in the
+        VSRocq extension settings (accessible via the gear icon on
+        the VSRocq extension page in VSCode), then reload your window.
 
     - To see what other key bindings are available, press F1 and then
-      type [Coq:], or visit the VSCoq web pages:
+      type [Coq:], or visit the VSRocq web pages:
       {https://github.com/rocq-prover/vsrocq}.  *)
 
 (* ================================================================= *)
@@ -462,7 +462,7 @@
     volume       =   "1",
     year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 7.0, \URL{http://softwarefoundations.cis.upenn.edu}}
+    note         =   {Version 7.1, \URL{http://softwarefoundations.cis.upenn.edu}}
     }
 *)
 
@@ -516,8 +516,9 @@
         For Volume 3, "Verified Functional Algorithms," and volume 5,
         "Verifiable C," the Author of Record is Andrew W. Appel. For
         Volume 6, "Separation Logic Foundations," the author of record
-        is Arthur Chargueraud. For components outside of designated
-        volumes (e.g., typesetting and grading tools and other
+        is Arthur Chargueraud. For Volume 7, "Security Foundations," the
+        author of record is Catalin Hritcu. For components outside of
+        designated volumes (e.g., typesetting and grading tools and other
         software infrastructure), the Author of Record is Benjamin C.
         Pierce.
 
@@ -536,7 +537,7 @@
 (** Thanks to the efforts of a team of volunteer translators,
     _Software Foundations_ can be enjoyed in Japanese at
     {http://proofcafe.org/sf}.  A Chinese translation is also underway;
-    you can preview it at {https://coq-zh.github.io/SF-zh/}. *)
+     you can preview it at {https://rocq-zh.github.io/SF-zh/}. *)
 
 (* ################################################################# *)
 (** * Thanks *)
@@ -546,4 +547,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2026-01-07 13:17 *)
+(* 2026-08-16 15:43 *)

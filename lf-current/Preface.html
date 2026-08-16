@@ -430,7 +430,7 @@
       this directory will contain a <span class="inlinecode">.<span class="id" title="var">devcontainer</span></span> subdirectory with
       instructions for VSCode about where to find an appropriate
       Docker image and a <span class="inlinecode"><span class="id" title="var">_CoqProject</span></span> file, whose presence triggers
-      the VSCoq extension.
+      the VSRocq extension.
 
 <div class="paragraph"> </div>
 
@@ -450,7 +450,7 @@
 
 
 </li>
-<li> Check that VSCoq is working by double-clicking the file
+<li> Check that VSRocq is working by double-clicking the file
       <span class="inlinecode"><span class="id" title="var">Basics.v</span></span> from the list on the left (you should see a blinking
       cursor in the window that opens; if not you can click in that
       window to select it), and pressing <span class="inlinecode"><span class="id" title="var">alt</span>+<span class="id" title="var">downarrow</span></span> (on MacOS,
@@ -461,15 +461,15 @@
 <div class="paragraph"> </div>
 
 <ul class="doclist">
-<li> If VSCoq does not work and you receive an error indicating that
-        <span class="inlinecode"><span class="id" title="var">vscoqtop</span></span> was not found, open a new terminal in the container
+<li> If VSRocq does not work and you receive an error indicating that
+        <span class="inlinecode"><span class="id" title="var">vsrocqtop</span></span> was not found, open a new terminal in the container
         (you can do this by opening the command palette and running the
         command “Terminal: Create New Terminal”) and run the command
-        <span class="inlinecode"><span class="id" title="var">which</span></span> <span class="inlinecode"><span class="id" title="var">vscoqtop</span></span>. This should print the path to the VSCoq
+        <span class="inlinecode"><span class="id" title="var">which</span></span> <span class="inlinecode"><span class="id" title="var">vsrocqtop</span></span>. This should print the path to the VSRocq
         installation inside the container. Copy this path
-        and paste it into the “VSCoq: Path” textbox in the
-        VSCoq extension settings (accessible via the gear icon on
-        the VSCoq extension page in VSCode), then reload your window.
+        and paste it into the “VSRocq: Path” textbox in the
+        VSRocq extension settings (accessible via the gear icon on
+        the VSRocq extension page in VSCode), then reload your window.
 
 <div class="paragraph"> </div>
 
@@ -479,7 +479,7 @@
 
 </li>
 <li> To see what other key bindings are available, press F<sub>1</sub> and then
-      type <span class="inlinecode"><span class="id" title="var">Coq</span>:</span>, or visit the VSCoq web pages:
+      type <span class="inlinecode"><span class="id" title="var">Coq</span>:</span>, or visit the VSRocq web pages:
       <a href="https://github.com/rocq-prover/vsrocq"><span class="inlineref" <a href='https://github.com/rocq-prover/vsrocq</span></a>.'>https://github.com/rocq-prover/vsrocq</span></a>.</a> 
 </li>
 </ul>
@@ -706,7 +706,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">volume</span>       =   "1",<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">year</span>         =   "2026",<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">publisher</span>    =   "Electronic textbook",<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">note</span>         =   {<span class="id" title="var">Version</span> 7.0, \<span class="id" title="var">URL</span>{<span class="id" title="var">http</span>://<span class="id" title="var">softwarefoundations.cis.upenn.edu</span><span style='letter-spacing:-.4em;'>}</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">note</span>         =   {<span class="id" title="var">Version</span> 7.1, \<span class="id" title="var">URL</span>{<span class="id" title="var">http</span>://<span class="id" title="var">softwarefoundations.cis.upenn.edu</span><span style='letter-spacing:-.4em;'>}</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}
 </span>
 </div>
@@ -774,8 +774,9 @@
         For Volume 3, "Verified Functional Algorithms," and volume 5,
         "Verifiable C," the Author of Record is Andrew W. Appel. For
         Volume 6, "Separation Logic Foundations," the author of record
-        is Arthur Chargueraud. For components outside of designated
-        volumes (e.g., typesetting and grading tools and other
+        is Arthur Chargueraud. For Volume 7, "Security Foundations," the
+        author of record is Catalin Hritcu. For components outside of
+        designated volumes (e.g., typesetting and grading tools and other
         software infrastructure), the Author of Record is Benjamin C.
         Pierce.
 
@@ -804,7 +805,7 @@
  Thanks to the efforts of a team of volunteer translators,
     <i>Software Foundations</i> can be enjoyed in Japanese at
     <a href="http://proofcafe.org/sf"><span class="inlineref" <a href='http://proofcafe.org/sf</span></a>.'>http://proofcafe.org/sf</span></a>.</a> A Chinese translation is also underway;
-    you can preview it at <a href="https://coq-zh.github.io/SF-zh/"><span class="inlineref" <a href='https://coq-zh.github.io/SF-zh/</span></a>.'>https://coq-zh.github.io/SF-zh/</span></a>.</a>
+     you can preview it at <a href="https://rocq-zh.github.io/SF-zh/"><span class="inlineref" <a href='https://rocq-zh.github.io/SF-zh/</span></a>.'>https://rocq-zh.github.io/SF-zh/</span></a>.</a>
 </div>
 
 <div class="doc">
@@ -819,7 +820,7 @@
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2026-01-07&nbsp;13:17&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-08-16&nbsp;15:43&nbsp;*)</span><br/>
 </div>
 </div>
 

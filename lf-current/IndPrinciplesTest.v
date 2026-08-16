@@ -12,7 +12,7 @@ Ltac check_type A B :=
     | ?T => first [unify T B; idtac "Type: ok" | idtac "Type: wrong - should be (" B ")"]
     end.
 
-Ltac print_manual_grade A :=
+Tactic Notation "print_manual_grade" constr(A) :=
     match eval compute in A with
     | Some (_ ?S ?C) =>
         idtac "Score:"  S;
@@ -76,10 +76,24 @@ Print Assumptions Toy_correct.
 Goal True.
 idtac " ".
 
+idtac "-------------------  t_tree  --------------------".
 idtac " ".
 
-idtac "Max points - standard: 6".
-idtac "Max points - advanced: 6".
+idtac "#> reflect_involution".
+idtac "Possible points: 6".
+check_type @reflect_involution (
+(forall (X : Type) (t : t_tree X),
+ @eq (t_tree X) (@reflect X (@reflect X t)) t)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions reflect_involution.
+Goal True.
+idtac " ".
+
+idtac " ".
+
+idtac "Max points - standard: 12".
+idtac "Max points - advanced: 12".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -109,10 +123,12 @@ idtac "---------- booltree_ind_type_correct ---------".
 Print Assumptions booltree_ind_type_correct.
 idtac "---------- Toy_correct ---------".
 Print Assumptions Toy_correct.
+idtac "---------- reflect_involution ---------".
+Print Assumptions reflect_involution.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2026-01-07 13:18 *)
+(* 2026-08-16 15:43 *)
 
-(* 2026-01-07 13:18 *)
+(* 2026-08-16 15:43 *)

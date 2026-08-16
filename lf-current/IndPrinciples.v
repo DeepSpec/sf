@@ -778,7 +778,7 @@ Check le2_ind :
              But then, by [le_S], [n <= S o'].  [] *)
 
 (* ################################################################# *)
-(** * Explicit Proof Objects for Induction (Optional) *)
+(** * Explicit Proof Objects for Induction *)
 
 (** Although tactic-based proofs are normally much easier to
     work with, the ability to write a proof term directly is sometimes
@@ -832,6 +832,19 @@ Definition nat_ind_tidy := build_proof.
 
 (** The actual [nat_ind] that Rocq generates uses a recursive
     function [F] defined with [fix] instead of [Fixpoint]. *)
+
+(** We can use our own hand-coded induction principle in place
+    of the automatically-generated induction principle with the
+    [induction ... using ...] variant of the usual [induction]
+    tactic. *)
+
+Theorem mul_0_r''' : forall n:nat,
+  n * 0 = 0.
+Proof.
+  induction n as [ | n' IHn'] using nat_ind_tidy.
+  - reflexivity.
+  - simpl. rewrite -> IHn'. reflexivity.
+Qed.
 
 (** We can adapt this approach to proving [nat_ind] to help prove
     _non-standard_ induction principles too.  As a motivating example,
@@ -896,7 +909,7 @@ Qed.
 
 
 
-(** **** Exercise: 4 stars, standard, optional (t_tree)
+(** **** Exercise: 4 stars, standard (t_tree)
 
     What if we wanted to define binary trees as follows, using a
     constructor that bundles the children and value at a node into a
@@ -963,4 +976,5 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2026-01-07 13:18 *)
+
+(* 2026-08-16 15:43 *)

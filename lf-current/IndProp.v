@@ -112,25 +112,25 @@ Fail Fixpoint Collatz_holds_for (n : nat) : Prop :=
     proving that 12 reaches 1 (where we left out the evenness/oddness
     premises):
 
-                    ———————————————————— (Chf_one)
+                    -------------------- (Chf_one)
                     Collatz_holds_for 1
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 2
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 4
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 8
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 16
-                    ———————————————————— (Chf_odd)
+                    -------------------- (Chf_odd)
                     Collatz_holds_for 5
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 10
-                    ———————————————————— (Chf_odd)
+                    -------------------- (Chf_odd)
                     Collatz_holds_for 3
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 6
-                    ———————————————————— (Chf_even)
+                    -------------------- (Chf_even)
                     Collatz_holds_for 12
 *)
 
@@ -229,10 +229,9 @@ End LePlayground.
 (* ================================================================= *)
 (** ** Example: Transitive Closure *)
 
-(** Another example: The _reflexive and transitive closure_ of a
-    relation [R] is the smallest relation that contains [R] and that
-    is reflexive and transitive. This can be defined by the following
-    three rules (where we added a reflexivity rule to [clos_trans]):
+(** Another example: The _transitive closure_ of a relation [R] is the smallest
+    relation that contains [R] and that is transitive. This can be defined by
+    the following two rules:
 
                      R x y
                 ---------------- (t_step)
@@ -275,11 +274,11 @@ Definition ancestor_of : Person -> Person -> Prop :=
 
 (** Here is a derivation showing that Sage is an ancestor of Moss:
 
- ———————————————————(po_SC)     ———————————————————(po_CM)
+ -------------------(po_SC)     -------------------(po_CM)
  parent_of Sage Cleo            parent_of Cleo Moss
-—————————————————————(t_step)  —————————————————————(t_step)
+---------------------(t_step)  ---------------------(t_step)
 ancestor_of Sage Cleo          ancestor_of Cleo Moss
-————————————————————————————————————————————————————(t_trans)
+----------------------------------------------------(t_trans)
                 ancestor_of Sage Moss
 *)
 
@@ -350,11 +349,11 @@ Conjecture collatz' : forall n, n <> 0 -> cms n 1.
     linear ones of the directly-defined [Collatz_holds_for] relation:
 
 csf 16 = 8         csf 8 = 4         csf 4 = 2         csf 2 = 1
-————————(rt_step)  ———————(rt_step)  ———————(rt_step)  ———————(rt_step)
+--------(rt_step)  -------(rt_step)  -------(rt_step)  -------(rt_step)
 cms 16 8           cms 8 4           cms 4 2           cms 2 1
-—————————————————————————(rt_trans)  ————————————————————————(rt_trans)
+-------------------------(rt_trans)  ------------------------(rt_trans)
         cms 16 4                              cms 4 1
-        —————————————————————————————————————————————(rt_trans)
+        ---------------------------------------------(rt_trans)
                            cms 16 1
 *)
 
@@ -389,11 +388,11 @@ cms 16 8           cms 8 4           cms 4 2           cms 2 1
 
     For instance we can derive [Perm3 [1;2;3] [3;2;1]] as follows:
 
-    ————————(perm_swap12)  —————————————————————(perm_swap23)
+    --------(perm_swap12)  ---------------------(perm_swap23)
     Perm3 [1;2;3] [2;1;3]  Perm3 [2;1;3] [2;3;1]
-    ——————————————————————————————(perm_trans)  ————————————(perm_swap12)
+    ------------------------------(perm_trans)  ------------(perm_swap12)
         Perm3 [1;2;3] [2;3;1]                   Perm [2;3;1] [3;2;1]
-        —————————————————————————————————————————————————————(perm_trans)
+        -----------------------------------------------------(perm_trans)
                           Perm3 [1;2;3] [3;2;1]
 *)
 
@@ -459,11 +458,11 @@ Inductive Perm3 {X : Type} : list X -> list X -> Prop :=
 (** To illustrate how this new definition of evenness works, let's
     imagine using it to show that [4] is even:
 
-                           ———— (ev_0)
+                           ---- (ev_0)
                            ev 0
-                       ———————————— (ev_SS)
+                       ------------ (ev_SS)
                        ev (S (S 0))
-                   ———————————————————— (ev_SS)
+                   -------------------- (ev_SS)
                    ev (S (S (S (S 0))))
 *)
 
@@ -1229,12 +1228,12 @@ Proof.
 (** [] *)
 
 (** **** Exercise: 4 stars, standard, optional (leb_le) *)
-Theorem leb_complete : forall n m,
+Theorem leb_sound : forall n m,
   n <=? m = true -> n <= m.
 Proof.
   (* FILL IN HERE *) Admitted.
 
-Theorem leb_correct : forall n m,
+Theorem leb_complete : forall n m,
   n <= m ->
   n <=? m = true.
 Proof.
@@ -2140,7 +2139,7 @@ Proof.
                 \/ (length s1 <> 0 /\ length s1 < pumping_constant re)
                 \/ pumping_constant re <= length s1).
   {
-    induction s1 as [| h s1' IHs1].
+    destruct s1 as [| h s1'].
     - (* FILL IN HERE *) admit.
     - (* FILL IN HERE *) admit.
   }
@@ -2959,4 +2958,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2026-01-07 13:17 *)
+(* 2026-08-16 15:43 *)

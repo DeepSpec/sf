@@ -26,10 +26,14 @@
   of the 1991 ACM/IEEE conference on Supercomputing. ACM, 1991.
   {https://dl.acm.org/citation.cfm?id=125848}
 
+[Sørensen and Urzyczyn 2006] M.H. Sørensen and P. Urzyczyn. Lectures on the
+  Curry-Howard Isomorphism. Studies in Logic and the Foundations of Mathematics,
+  vol. 149, ed. Abramsky et al. Elsevier, 2006.
+
 [Wadler 2015] Philip Wadler. "Propositions as types."
   Communications of the ACM 58, no. 12 (2015): 75-84.
   {https://dl.acm.org/citation.cfm?id=2699407}
 
 *)
 
-(* 2026-01-06 11:47 *)
+(* 2026-08-16 15:43 *)

@@ -53,7 +53,7 @@ From LF Require Export Basics.
        a single archive, a [Makefile] should already exist and you can
        skip this step.)
 
-         rocq makefile -f [_CoqProject] *.v -o Makefile
+         rocq makefile -f _CoqProject *.v -o Makefile
 
        You should rerun that command whenever you add or remove
        Rocq files in this directory.
@@ -761,4 +761,4 @@ Proof.
 
 (** [] *)
 
-(* 2026-01-07 13:17 *)
+(* 2026-08-16 15:43 *)

@@ -330,7 +330,7 @@ induction i1 as [|i1']; intros i2 st st' c Hle Hceval.
       destruct (ceval_step st c1 i1') eqn:Heqst1'o.
       * (* st1'o = Some *)
         apply (IHi1' i2') in Heqst1'o; try assumption.
-        rewrite Heqst1'o. simpl. simpl in Hceval.
+        rewrite Heqst1'o.
         apply (IHi1' i2') in Hceval; try assumption.
       * (* st1'o = None *)
         discriminate Hceval.
@@ -346,10 +346,10 @@ induction i1 as [|i1']; intros i2 st st' c Hle Hceval.
       destruct (ceval_step st c i1') eqn: Heqst1'o.
       * (* st1'o = Some *)
         apply (IHi1' i2') in Heqst1'o; try assumption.
-        rewrite -> Heqst1'o. simpl. simpl in Hceval.
+        rewrite -> Heqst1'o.
         apply (IHi1' i2') in Hceval; try assumption.
       * (* i1'o = None *)
-        simpl in Hceval. discriminate Hceval.  Qed.
+        discriminate Hceval.  Qed.
 
 (** **** Exercise: 3 stars, standard, especially useful (ceval__ceval_step)
 
@@ -395,4 +395,4 @@ Proof.
   rewrite E1 in E2. inversion E2. reflexivity.
   lia. lia.  Qed.
 
-(* 2026-01-07 13:18 *)
+(* 2026-08-16 15:43 *)
