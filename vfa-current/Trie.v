@@ -169,10 +169,8 @@ Eval compute in print_in_binary ten.  (*  = [1; 0; 1; 0] *)
 (** Another way to see the "binary representation" is to make up
      postfix notation for [xI] and [xO], as follows *)
 
-Notation "p ~ 1" := (xI p)
- (at level 7, left associativity, format "p '~' '1'").
-Notation "p ~ 0" := (xO p)
- (at level 7, left associativity, format "p '~' '0'").
+Notation "p ~ 1" := (xI p).
+Notation "p ~ 0" := (xO p).
 
 Print ten. (* = xH~0~1~0 : positive *)
 
