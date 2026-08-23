@@ -1209,15 +1209,18 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 <span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">fold</span> <span class="id" title="var">plus</span> [1;2;3;4] 0
 </span>    yields
 <br/>
-<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 + (2 + (3 + (4 + 0))).<br/>
-]] *)<br/>
-<br/>
+<span class="inlinecode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 + (2 + (3 + (4 + 0))).
+</span>
+</div>
+<div class="code">
+
 <span class="id" title="keyword">Example</span> <a id="fold_example1" class="idref" href="#fold_example1"><span class="id" title="definition">fold_example1</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="Basics.html#andb"><span class="id" title="definition">andb</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a><a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#false"><span class="id" title="constructor">false</span></a>.<br/>
 <div class="togglescript" id="proofcontrol21" onclick="toggleDisplay('proof21');toggleDisplay('proofcontrol21')"><span class="show"></span></div>
 <div class="proofscript" id="proof21" onclick="toggleDisplay('proof21');toggleDisplay('proofcontrol21')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
+
 <br/>
 <span class="id" title="keyword">Example</span> <a id="fold_example2" class="idref" href="#fold_example2"><span class="id" title="definition">fold_example2</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#mult"><span class="id" title="abbreviation">mult</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> 1 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 24.<br/>
@@ -1225,6 +1228,7 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 <div class="proofscript" id="proof22" onclick="toggleDisplay('proof22');toggleDisplay('proofcontrol22')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
+
 <br/>
 <span class="id" title="keyword">Example</span> <a id="fold_example3" class="idref" href="#fold_example3"><span class="id" title="definition">fold_example3</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="Poly.html#app"><span class="id" title="definition">app</span></a>  <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];</span></a><a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];[</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]]</span></a> <a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
@@ -1232,11 +1236,11 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
 <div class="proofscript" id="proof23" onclick="toggleDisplay('proof23');toggleDisplay('proofcontrol23')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
+
 <br/>
 <span class="id" title="keyword">Example</span> <a id="foldexample4" class="idref" href="#foldexample4"><span class="id" title="definition">foldexample4</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> (<span class="id" title="keyword">fun</span> <a id="l:163" class="idref" href="#l:163"><span class="id" title="binder">l</span></a> <a id="n:164" class="idref" href="#n:164"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="Poly.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Poly.html#l:163"><span class="id" title="variable">l</span></a> <a class="idref" href="Basics.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="Poly.html#n:164"><span class="id" title="variable">n</span></a>) <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[[</span></a>1<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];</span></a><a class="idref" href="Poly.html#2c60282cbb04e070c60ae01e76f3865a"><span class="id" title="notation">[]</span></a><a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">];[</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]]</span></a> 0 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 5.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
-<br/>
 </div>
 
 <div class="doc">
@@ -1248,7 +1252,7 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
     and <span class="inlinecode"><span class="id" title="var">Y</span></span> to be different. Can you think of any others? 
 </div>
 <div class="code">
-<br/>
+
 <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
 <font size=-2>&#9744;</font>
 </div>
@@ -1267,24 +1271,22 @@ Intuitively, the behavior of the <span class="inlinecode"><span class="id" title
     yields <span class="inlinecode"><span class="id" title="var">x</span></span> whenever it is called, ignoring its <span class="inlinecode"><span class="id" title="var">nat</span></span> argument. 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Definition</span> <a id="constfun" class="idref" href="#constfun"><span class="id" title="definition">constfun</span></a> {<a id="X:165" class="idref" href="#X:165"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="x:166" class="idref" href="#x:166"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:165"><span class="id" title="variable">X</span></a>) : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:165"><span class="id" title="variable">X</span></a> :=<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="k:167" class="idref" href="#k:167"><span class="id" title="binder">k</span></a>:<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) ⇒ <a class="idref" href="Poly.html#x:166"><span class="id" title="variable">x</span></a>.<br/>
-<br/>
-<span class="id" title="keyword">Definition</span> <a id="ftrue" class="idref" href="#ftrue"><span class="id" title="definition">ftrue</span></a> := <a class="idref" href="Poly.html#constfun"><span class="id" title="definition">constfun</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
-<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="k:167" class="idref" href="#k:167"><span class="id" title="binder">k</span></a>:<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) ⇒ <a class="idref" href="Poly.html#x:166"><span class="id" title="variable">x</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Definition</span> <a id="ftrue" class="idref" href="#ftrue"><span class="id" title="definition">ftrue</span></a> := <a class="idref" href="Poly.html#constfun"><span class="id" title="definition">constfun</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="constfun_example1" class="idref" href="#constfun_example1"><span class="id" title="definition">constfun_example1</span></a> : <a class="idref" href="Poly.html#ftrue"><span class="id" title="definition">ftrue</span></a> 0 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Basics.html#true"><span class="id" title="constructor">true</span></a>.<br/>
 <div class="togglescript" id="proofcontrol24" onclick="toggleDisplay('proof24');toggleDisplay('proofcontrol24')"><span class="show"></span></div>
 <div class="proofscript" id="proof24" onclick="toggleDisplay('proof24');toggleDisplay('proofcontrol24')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
+
 <br/>
 <span class="id" title="keyword">Example</span> <a id="constfun_example2" class="idref" href="#constfun_example2"><span class="id" title="definition">constfun_example2</span></a> : (<a class="idref" href="Poly.html#constfun"><span class="id" title="definition">constfun</span></a> 5) 99 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 5.<br/>
 <div class="togglescript" id="proofcontrol25" onclick="toggleDisplay('proof25');toggleDisplay('proofcontrol25')"><span class="show"></span></div>
 <div class="proofscript" id="proof25" onclick="toggleDisplay('proof25');toggleDisplay('proofcontrol25')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
-<br/>
 </div>
 
 <div class="doc">
@@ -1293,12 +1295,10 @@ In fact, the multiple-argument functions we have already
     recall the type of <span class="inlinecode"><span class="id" title="var">plus</span></span>. 
 </div>
 <div class="code">
-<br/>
-<span class="id" title="keyword">Check</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
-<br/>
+
+<span class="id" title="keyword">Check</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Definition</span> <a id="plus3" class="idref" href="#plus3"><span class="id" title="definition">plus3</span></a> := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> 3.<br/>
-<span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#plus3"><span class="id" title="definition">plus3</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
-<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#plus3"><span class="id" title="definition">plus3</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="test_plus3" class="idref" href="#test_plus3"><span class="id" title="definition">test_plus3</span></a> :    <a class="idref" href="Poly.html#plus3"><span class="id" title="definition">plus3</span></a> 4 <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 7.<br/>
 <div class="togglescript" id="proofcontrol26" onclick="toggleDisplay('proof26');toggleDisplay('proofcontrol26')"><span class="show"></span></div>
 <div class="proofscript" id="proof26" onclick="toggleDisplay('proof26');toggleDisplay('proofcontrol26')">
@@ -1314,7 +1314,6 @@ In fact, the multiple-argument functions we have already
 <div class="proofscript" id="proof28" onclick="toggleDisplay('proof28');toggleDisplay('proofcontrol28')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
-<br/>
 </div>
 
 <div class="doc">
@@ -1322,10 +1321,8 @@ Similarly, we can write:
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a id="fold_plus" class="idref" href="#fold_plus"><span class="id" title="definition">fold_plus</span></a> :=<br/>
-&nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a>.<br/>
-<br/>
+&nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="Poly.html#fold_plus"><span class="id" title="definition">fold_plus</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>.<br/>
-<br/>
 </div>
 
 <div class="doc">
@@ -1358,9 +1355,8 @@ What's happening here is called *partial application*. In
 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Module</span> <a id="Exercises" class="idref" href="#Exercises"><span class="id" title="module">Exercises</span></a>.<br/>
-<br/>
 </div>
 
 <div class="doc">
@@ -1369,16 +1365,14 @@ What's happening here is called *partial application*. In
     <span class="inlinecode"><span class="id" title="tactic">fold</span></span>.  For example, here is an alternative definition of <span class="inlinecode"><span class="id" title="var">length</span></span>: 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Definition</span> <a id="Exercises.fold_length" class="idref" href="#Exercises.fold_length"><span class="id" title="definition">fold_length</span></a> {<a id="X:168" class="idref" href="#X:168"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} (<a id="l:169" class="idref" href="#l:169"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:168"><span class="id" title="variable">X</span></a>) : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
-&nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <a id="n:170" class="idref" href="#n:170"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Poly.html#n:170"><span class="id" title="variable">n</span></a>) <a class="idref" href="Poly.html#l:169"><span class="id" title="variable">l</span></a> 0.<br/>
-<br/>
+&nbsp;&nbsp;<a class="idref" href="Poly.html#fold"><span class="id" title="definition">fold</span></a> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <a id="n:170" class="idref" href="#n:170"><span class="id" title="binder">n</span></a> ⇒ <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="Poly.html#n:170"><span class="id" title="variable">n</span></a>) <a class="idref" href="Poly.html#l:169"><span class="id" title="variable">l</span></a> 0.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Example</span> <a id="Exercises.test_fold_length1" class="idref" href="#Exercises.test_fold_length1"><span class="id" title="definition">test_fold_length1</span></a> : <a class="idref" href="Poly.html#Exercises.fold_length"><span class="id" title="definition">fold_length</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>4<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>7<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>0<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 3.<br/>
 <div class="togglescript" id="proofcontrol29" onclick="toggleDisplay('proof29');toggleDisplay('proofcontrol29')"><span class="show"></span></div>
 <div class="proofscript" id="proof29" onclick="toggleDisplay('proof29');toggleDisplay('proofcontrol29')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
-<br/>
 </div>
 
 <div class="doc">
@@ -1393,7 +1387,7 @@ Prove the correctness of <span class="inlinecode"><span class="id" title="var">f
     This tactic will be discussed further in the following chapter. 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Theorem</span> <a id="Exercises.fold_length_correct" class="idref" href="#Exercises.fold_length_correct"><span class="id" title="lemma">fold_length_correct</span></a> : <span class="id" title="keyword">∀</span> <a id="X:171" class="idref" href="#X:171"><span class="id" title="binder">X</span></a> (<a id="l:172" class="idref" href="#l:172"><span class="id" title="binder">l</span></a> : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:171"><span class="id" title="variable">X</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#Exercises.fold_length"><span class="id" title="definition">fold_length</span></a> <a class="idref" href="Poly.html#l:172"><span class="id" title="variable">l</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#length"><span class="id" title="definition">length</span></a> <a class="idref" href="Poly.html#l:172"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1409,10 +1403,9 @@ Prove the correctness of <span class="inlinecode"><span class="id" title="var">f
     below. 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Definition</span> <a id="Exercises.fold_map" class="idref" href="#Exercises.fold_map"><span class="id" title="definition">fold_map</span></a> {<a id="X:173" class="idref" href="#X:173"><span class="id" title="binder">X</span></a> <a id="Y:174" class="idref" href="#Y:174"><span class="id" title="binder">Y</span></a>: <span class="id" title="keyword">Type</span>} (<a id="f:175" class="idref" href="#f:175"><span class="id" title="binder">f</span></a>: <a class="idref" href="Poly.html#X:173"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:174"><span class="id" title="variable">Y</span></a>) (<a id="l:176" class="idref" href="#l:176"><span class="id" title="binder">l</span></a>: <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#X:173"><span class="id" title="variable">X</span></a>) : <a class="idref" href="Poly.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Poly.html#Y:174"><span class="id" title="variable">Y</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
-<br/>
 </div>
 
 <div class="doc">
@@ -1421,9 +1414,8 @@ Write down a theorem <span class="inlinecode"><span class="id" title="var">fold_
     <span class="inlinecode"><span class="id" title="tactic">unfold</span></span>ing before <span class="inlinecode"><span class="id" title="tactic">simpl</span></span>ifying may help.) 
 </div>
 <div class="code">
-<br/>
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
-<br/>
+
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.manual_grade_for_fold_map" class="idref" href="#Exercises.manual_grade_for_fold_map"><span class="id" title="definition">manual_grade_for_fold_map</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
 <font size=-2>&#9744;</font>
@@ -1463,10 +1455,9 @@ Write down a theorem <span class="inlinecode"><span class="id" title="var">fold_
  We can define currying as follows: 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Definition</span> <a id="Exercises.prod_curry" class="idref" href="#Exercises.prod_curry"><span class="id" title="definition">prod_curry</span></a> {<a id="X:177" class="idref" href="#X:177"><span class="id" title="binder">X</span></a> <a id="Y:178" class="idref" href="#Y:178"><span class="id" title="binder">Y</span></a> <a id="Z:179" class="idref" href="#Z:179"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;(<a id="f:180" class="idref" href="#f:180"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:177"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:178"><span class="id" title="variable">Y</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Z:179"><span class="id" title="variable">Z</span></a>) (<a id="x:181" class="idref" href="#x:181"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:177"><span class="id" title="variable">X</span></a>) (<a id="y:182" class="idref" href="#y:182"><span class="id" title="binder">y</span></a> : <a class="idref" href="Poly.html#Y:178"><span class="id" title="variable">Y</span></a>) : <a class="idref" href="Poly.html#Z:179"><span class="id" title="variable">Z</span></a> := <a class="idref" href="Poly.html#f:180"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#x:181"><span class="id" title="variable">x</span></a><a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">,</span></a> <a class="idref" href="Poly.html#y:182"><span class="id" title="variable">y</span></a><a class="idref" href="Poly.html#62264328926d76449e4f268ee9289ca<sub>9</sub>"><span class="id" title="notation">)</span></a>.<br/>
-<br/>
 </div>
 
 <div class="doc">
@@ -1474,11 +1465,10 @@ As an exercise, define its inverse, <span class="inlinecode"><span class="id" ti
     the theorems below to show that the two are really inverses. 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Definition</span> <a id="Exercises.prod_uncurry" class="idref" href="#Exercises.prod_uncurry"><span class="id" title="definition">prod_uncurry</span></a> {<a id="X:183" class="idref" href="#X:183"><span class="id" title="binder">X</span></a> <a id="Y:184" class="idref" href="#Y:184"><span class="id" title="binder">Y</span></a> <a id="Z:185" class="idref" href="#Z:185"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>}<br/>
 &nbsp;&nbsp;(<a id="f:186" class="idref" href="#f:186"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:183"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:184"><span class="id" title="variable">Y</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Z:185"><span class="id" title="variable">Z</span></a>) (<a id="p:187" class="idref" href="#p:187"><span class="id" title="binder">p</span></a> : <a class="idref" href="Poly.html#X:183"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:184"><span class="id" title="variable">Y</span></a>) : <a class="idref" href="Poly.html#Z:185"><span class="id" title="variable">Z</span></a><br/>
 &nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/>
-<br/>
 </div>
 
 <div class="doc">
@@ -1486,13 +1476,12 @@ As a (trivial) example of the usefulness of currying, we can use it
     to shorten one of the examples that we saw above: 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Example</span> <a id="Exercises.test_map1'" class="idref" href="#Exercises.test_map1'"><span class="id" title="definition">test_map1'</span></a>: <a class="idref" href="Poly.html#map"><span class="id" title="definition">map</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Peano.html#plus"><span class="id" title="abbreviation">plus</span></a> 3) <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>0<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>2<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">[</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>3<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">;</span></a>5<a class="idref" href="Poly.html#fa57d319973f6d58544a8887d0d48ea<sub>6</sub>"><span class="id" title="notation">]</span></a>.<br/>
 <div class="togglescript" id="proofcontrol30" onclick="toggleDisplay('proof30');toggleDisplay('proofcontrol30')"><span class="show"></span></div>
 <div class="proofscript" id="proof30" onclick="toggleDisplay('proof30');toggleDisplay('proofcontrol30')">
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 </div>
-<br/>
 </div>
 
 <div class="doc">
@@ -1500,17 +1489,15 @@ Thought exercise: before running the following commands, can you
     calculate the types of <span class="inlinecode"><span class="id" title="var">prod_curry</span></span> and <span class="inlinecode"><span class="id" title="var">prod_uncurry</span></span>? 
 </div>
 <div class="code">
-<br/>
+
 <span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#Exercises.prod_curry"><span class="id" title="definition">prod_curry</span></a>.<br/>
-<span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#Exercises.prod_uncurry"><span class="id" title="axiom">prod_uncurry</span></a>.<br/>
-<br/>
+<span class="id" title="keyword">Check</span> @<a class="idref" href="Poly.html#Exercises.prod_uncurry"><span class="id" title="axiom">prod_uncurry</span></a>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="Exercises.uncurry_curry" class="idref" href="#Exercises.uncurry_curry"><span class="id" title="lemma">uncurry_curry</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:188" class="idref" href="#X:188"><span class="id" title="binder">X</span></a> <a id="Y:189" class="idref" href="#Y:189"><span class="id" title="binder">Y</span></a> <a id="Z:190" class="idref" href="#Z:190"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="f:191" class="idref" href="#f:191"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:188"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Y:189"><span class="id" title="variable">Y</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Z:190"><span class="id" title="variable">Z</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="x:192" class="idref" href="#x:192"><span class="id" title="binder">x</span></a> <a id="y:193" class="idref" href="#y:193"><span class="id" title="binder">y</span></a>,<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#Exercises.prod_curry"><span class="id" title="definition">prod_curry</span></a> (<a class="idref" href="Poly.html#Exercises.prod_uncurry"><span class="id" title="axiom">prod_uncurry</span></a> <a class="idref" href="Poly.html#f:191"><span class="id" title="variable">f</span></a>) <a class="idref" href="Poly.html#x:192"><span class="id" title="variable">x</span></a> <a class="idref" href="Poly.html#y:193"><span class="id" title="variable">y</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#f:191"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#x:192"><span class="id" title="variable">x</span></a> <a class="idref" href="Poly.html#y:193"><span class="id" title="variable">y</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
-<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
 <span class="id" title="keyword">Theorem</span> <a id="Exercises.curry_uncurry" class="idref" href="#Exercises.curry_uncurry"><span class="id" title="lemma">curry_uncurry</span></a> : <span class="id" title="keyword">∀</span> (<a id="X:194" class="idref" href="#X:194"><span class="id" title="binder">X</span></a> <a id="Y:195" class="idref" href="#Y:195"><span class="id" title="binder">Y</span></a> <a id="Z:196" class="idref" href="#Z:196"><span class="id" title="binder">Z</span></a> : <span class="id" title="keyword">Type</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="f:197" class="idref" href="#f:197"><span class="id" title="binder">f</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#X:194"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:195"><span class="id" title="variable">Y</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#Z:196"><span class="id" title="variable">Z</span></a>) (<a id="p:198" class="idref" href="#p:198"><span class="id" title="binder">p</span></a> : <a class="idref" href="Poly.html#X:194"><span class="id" title="variable">X</span></a> <a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a> <a class="idref" href="Poly.html#Y:195"><span class="id" title="variable">Y</span></a>),<br/>
 &nbsp;&nbsp;<a class="idref" href="Poly.html#Exercises.prod_uncurry"><span class="id" title="axiom">prod_uncurry</span></a> (<a class="idref" href="Poly.html#Exercises.prod_curry"><span class="id" title="definition">prod_curry</span></a> <a class="idref" href="Poly.html#f:197"><span class="id" title="variable">f</span></a>) <a class="idref" href="Poly.html#p:198"><span class="id" title="variable">p</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#f:197"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#p:198"><span class="id" title="variable">p</span></a>.<br/>
@@ -1537,290 +1524,251 @@ Thought exercise: before running the following commands, can you
 
 </div>
 <div class="code">
-<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/>
-<br/>
+<span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span><br/><hr class='doublespaceincode'/>
 <span class="comment">(*&nbsp;Do&nbsp;not&nbsp;modify&nbsp;the&nbsp;following&nbsp;line:&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="Exercises.manual_grade_for_informal_proof" class="idref" href="#Exercises.manual_grade_for_informal_proof"><span class="id" title="definition">manual_grade_for_informal_proof</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><a class="idref" href="Poly.html#11c698c8685bb8ab1cf725545c085ac<sub>4</sub>"><span class="id" title="notation">×</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Strings.String.html#string"><span class="id" title="inductive">string</span></a>) := <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a>.<br/>
-</span><span class="comment">(**&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab152"></a><h2 class="section">Church Numerals (Advanced)</h2>
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;**&nbsp;Church&nbsp;Numerals&nbsp;(Advanced)&nbsp;*)</span><br/>
+ The following exercises explore an alternative way of defining
+    natural numbers using the <i>Church numerals</i>, which are named after
+    their inventor, the mathematician Alonzo Church.  We can represent
+    a natural number <span class="inlinecode"><span class="id" title="var">n</span></span> as a function that takes a function <span class="inlinecode"><span class="id" title="var">f</span></span> as a
+    parameter and returns <span class="inlinecode"><span class="id" title="var">f</span></span> iterated <span class="inlinecode"><span class="id" title="var">n</span></span> times. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Module</span> <a id="Exercises.Church" class="idref" href="#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.cnat" class="idref" href="#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> := <span class="id" title="keyword">∀</span> <a id="X:199" class="idref" href="#X:199"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>, <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="Poly.html#X:199"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:199"><span class="id" title="variable">X</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:199"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:199"><span class="id" title="variable">X</span></a>.<br/>
+</div>
+
+<div class="doc">
+Let's see how to write some numbers with this notation. Iterating
+    a function once should be the same as just applying it.  Thus: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.one" class="idref" href="#Exercises.Church.one"><span class="id" title="definition">one</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:200" class="idref" href="#X:200"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:201" class="idref" href="#f:201"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:200"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:200"><span class="id" title="variable">X</span></a>) (<a id="x:202" class="idref" href="#x:202"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:200"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#f:201"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#x:202"><span class="id" title="variable">x</span></a>.<br/>
+</div>
+
+<div class="doc">
+Similarly, <span class="inlinecode"><span class="id" title="var">two</span></span> should apply <span class="inlinecode"><span class="id" title="var">f</span></span> twice to its argument: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.two" class="idref" href="#Exercises.Church.two"><span class="id" title="definition">two</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:203" class="idref" href="#X:203"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:204" class="idref" href="#f:204"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:203"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:203"><span class="id" title="variable">X</span></a>) (<a id="x:205" class="idref" href="#x:205"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:203"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#f:204"><span class="id" title="variable">f</span></a> (<a class="idref" href="Poly.html#f:204"><span class="id" title="variable">f</span></a> <a class="idref" href="Poly.html#x:205"><span class="id" title="variable">x</span></a>).<br/>
+</div>
+
+<div class="doc">
+Defining <span class="inlinecode"><span class="id" title="var">zero</span></span> is somewhat trickier: how can we "apply a function
+    zero times"?  The answer is actually simple: just return the
+    argument untouched. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.zero" class="idref" href="#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:206" class="idref" href="#X:206"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="f:207" class="idref" href="#f:207"><span class="id" title="binder">f</span></a> : <a class="idref" href="Poly.html#X:206"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:206"><span class="id" title="variable">X</span></a>) (<a id="x:208" class="idref" href="#x:208"><span class="id" title="binder">x</span></a> : <a class="idref" href="Poly.html#X:206"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#x:208"><span class="id" title="variable">x</span></a>.<br/>
+</div>
+
+<div class="doc">
+More generally, a number <span class="inlinecode"><span class="id" title="var">n</span></span> can be written as <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">(<span class="id" title="var">f</span></span>
+    <span class="inlinecode">...</span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> <span class="inlinecode">...)</span>, with <span class="inlinecode"><span class="id" title="var">n</span></span> occurrences of <span class="inlinecode"><span class="id" title="var">f</span></span>.  Let's informally
+    notate that as <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>, with the convention that <span class="inlinecode"><span class="id" title="var">f</span>^0</span> <span class="inlinecode"><span class="id" title="var">x</span></span>
+    is just <span class="inlinecode"><span class="id" title="var">x</span></span>. Note how the <span class="inlinecode"><span class="id" title="var">doit3times</span></span> function we've defined
+    previously is actually just the Church representation of <span class="inlinecode">3</span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.three" class="idref" href="#Exercises.Church.three"><span class="id" title="definition">three</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> := @<a class="idref" href="Poly.html#doit3times"><span class="id" title="definition">doit3times</span></a>.<br/>
+</div>
+
+<div class="doc">
+So <span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> represents "do it <span class="inlinecode"><span class="id" title="var">n</span></span> times", where <span class="inlinecode"><span class="id" title="var">n</span></span> is a Church
+    numerals and "it" means applying <span class="inlinecode"><span class="id" title="var">f</span></span> starting with <span class="inlinecode"><span class="id" title="var">x</span></span>.
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;The&nbsp;following&nbsp;exercises&nbsp;explore&nbsp;an&nbsp;alternative&nbsp;way&nbsp;of&nbsp;defining<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;natural&nbsp;numbers&nbsp;using&nbsp;the&nbsp;_Church&nbsp;numerals_,&nbsp;which&nbsp;are&nbsp;named&nbsp;after<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;their&nbsp;inventor,&nbsp;the&nbsp;mathematician&nbsp;Alonzo&nbsp;Church.&nbsp;&nbsp;We&nbsp;can&nbsp;represent<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;natural&nbsp;number&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;as&nbsp;a&nbsp;function&nbsp;that&nbsp;takes&nbsp;a&nbsp;function&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>&nbsp;as&nbsp;a<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;and&nbsp;returns&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>&nbsp;iterated&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;times.&nbsp;*)</span><br/>
+    Another way to think about the Church representation is that
+    function <span class="inlinecode"><span class="id" title="var">f</span></span> represents the successor operation on <span class="inlinecode"><span class="id" title="var">X</span></span>, and value
+    <span class="inlinecode"><span class="id" title="var">x</span></span> represents the zero element of <span class="inlinecode"><span class="id" title="var">X</span></span>.  We could even rewrite
+    with those names to make it clearer: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.zero'" class="idref" href="#Exercises.Church.zero'"><span class="id" title="definition">zero'</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:209" class="idref" href="#X:209"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="succ:210" class="idref" href="#succ:210"><span class="id" title="binder">succ</span></a> : <a class="idref" href="Poly.html#X:209"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:209"><span class="id" title="variable">X</span></a>) (<a id="zero:211" class="idref" href="#zero:211"><span class="id" title="binder">zero</span></a> : <a class="idref" href="Poly.html#X:209"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#zero:211"><span class="id" title="variable">zero</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.one'" class="idref" href="#Exercises.Church.one'"><span class="id" title="definition">one'</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:212" class="idref" href="#X:212"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="succ:213" class="idref" href="#succ:213"><span class="id" title="binder">succ</span></a> : <a class="idref" href="Poly.html#X:212"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:212"><span class="id" title="variable">X</span></a>) (<a id="zero:214" class="idref" href="#zero:214"><span class="id" title="binder">zero</span></a> : <a class="idref" href="Poly.html#X:212"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#succ:213"><span class="id" title="variable">succ</span></a> <a class="idref" href="Poly.html#zero:214"><span class="id" title="variable">zero</span></a>.<br/>
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.two'" class="idref" href="#Exercises.Church.two'"><span class="id" title="definition">two'</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<a id="X:215" class="idref" href="#X:215"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>) (<a id="succ:216" class="idref" href="#succ:216"><span class="id" title="binder">succ</span></a> : <a class="idref" href="Poly.html#X:215"><span class="id" title="variable">X</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="Poly.html#X:215"><span class="id" title="variable">X</span></a>) (<a id="zero:217" class="idref" href="#zero:217"><span class="id" title="binder">zero</span></a> : <a class="idref" href="Poly.html#X:215"><span class="id" title="variable">X</span></a>) ⇒ <a class="idref" href="Poly.html#succ:216"><span class="id" title="variable">succ</span></a> (<a class="idref" href="Poly.html#succ:216"><span class="id" title="variable">succ</span></a> <a class="idref" href="Poly.html#zero:217"><span class="id" title="variable">zero</span></a>).<br/>
+</div>
+
+<div class="doc">
+If we passed in <span class="inlinecode"><span class="id" title="var">S</span></span> as <span class="inlinecode"><span class="id" title="var">succ</span></span> and <span class="inlinecode"><span class="id" title="var">O</span></span> as <span class="inlinecode"><span class="id" title="var">zero</span></span>, we'd even get the Peano
+    naturals as a result: 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.zero_church_peano" class="idref" href="#Exercises.Church.zero_church_peano"><span class="id" title="definition">zero_church_peano</span></a> : <a class="idref" href="Poly.html#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 0.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.one_church_peano" class="idref" href="#Exercises.Church.one_church_peano"><span class="id" title="definition">one_church_peano</span></a> : <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 1.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.two_church_peano" class="idref" href="#Exercises.Church.two_church_peano"><span class="id" title="definition">two_church_peano</span></a> : <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> 2.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+</div>
+
+<div class="doc">
+One very interesting implication of the Church numerals is that we
+    don't strictly need the natural numbers to be built-in to a
+    functional programming language, or even to be definable with an
+    inductive data type. It's possible to represent them purely (if
+    not efficiently) with functions.
 
 <div class="paragraph"> </div>
 
-Module Church.
-Definition cnat := forall X : Type, (X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X.
+    Of course, it's not enough just to "represent" numerals; we need
+    to be able to do arithmetic with the representation. Show that we
+    can by completing the definitions of the following functions. Make
+    sure that the corresponding unit tests pass by proving them with
+    <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>. 
+<div class="paragraph"> </div>
+
+<a id="lab153"></a><h4 class="section">Exercise: 2 stars, advanced (church_scc)</h4>
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;Let's&nbsp;see&nbsp;how&nbsp;to&nbsp;write&nbsp;some&nbsp;numbers&nbsp;with&nbsp;this&nbsp;notation.&nbsp;Iterating<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;function&nbsp;once&nbsp;should&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;just&nbsp;applying&nbsp;it.&nbsp;&nbsp;Thus:&nbsp;*)</span><br/>
+ Define a function that computes the successor of a Church numeral.
+    Given a Church numeral <span class="inlinecode"><span class="id" title="var">n</span></span>, its successor <span class="inlinecode"><span class="id" title="var">scc</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span> should iterate
+    its function argument once more than <span class="inlinecode"><span class="id" title="var">n</span></span>. That is, given <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>
+    <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> as input, <span class="inlinecode"><span class="id" title="var">scc</span></span> should produce <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^(<span class="id" title="var">n</span>+1)</span> <span class="inlinecode"><span class="id" title="var">x</span></span> as
+    output. In other words, do it <span class="inlinecode"><span class="id" title="var">n</span></span> times, then do it once more. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.scc" class="idref" href="#Exercises.Church.scc"><span class="id" title="definition">scc</span></a> (<a id="n:218" class="idref" href="#n:218"><span class="id" title="binder">n</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a>) : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.scc_1" class="idref" href="#Exercises.Church.scc_1"><span class="id" title="definition">scc_1</span></a> : <a class="idref" href="Poly.html#Exercises.Church.scc"><span class="id" title="axiom">scc</span></a> <a class="idref" href="Poly.html#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.scc_2" class="idref" href="#Exercises.Church.scc_2"><span class="id" title="definition">scc_2</span></a> : <a class="idref" href="Poly.html#Exercises.Church.scc"><span class="id" title="axiom">scc</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.scc_3" class="idref" href="#Exercises.Church.scc_3"><span class="id" title="definition">scc_3</span></a> : <a class="idref" href="Poly.html#Exercises.Church.scc"><span class="id" title="axiom">scc</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab154"></a><h4 class="section">Exercise: 3 stars, advanced (church_plus)</h4>
 
 <div class="paragraph"> </div>
 
-Definition one : cnat :=
-  fun (X : Type) (f : X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) (x : X) =&gt; f x.
+ Define a function that computes the addition of two Church
+    numerals.  Given <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> and <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">m</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> as
+    input, <span class="inlinecode"><span class="id" title="var">plus</span></span> should produce <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode"><span class="id" title="var">x</span></span> as output.
+    In other words, do it <span class="inlinecode"><span class="id" title="var">n</span></span> times, then do it <span class="inlinecode"><span class="id" title="var">m</span></span> more times.
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;Similarly,&nbsp;<span class="inlinecode"><span class="id" title="var">two</span></span>&nbsp;should&nbsp;apply&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>&nbsp;twice&nbsp;to&nbsp;its&nbsp;argument:&nbsp;*)</span><br/>
+    Hint: the "zero" argument to a Church numeral need not be just
+    <span class="inlinecode"><span class="id" title="var">x</span></span>. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.plus" class="idref" href="#Exercises.Church.plus"><span class="id" title="definition">plus</span></a> (<a id="n:219" class="idref" href="#n:219"><span class="id" title="binder">n</span></a> <a id="m:220" class="idref" href="#m:220"><span class="id" title="binder">m</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a>) : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.plus_1" class="idref" href="#Exercises.Church.plus_1"><span class="id" title="definition">plus_1</span></a> : <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.plus_2" class="idref" href="#Exercises.Church.plus_2"><span class="id" title="definition">plus_2</span></a> : <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.plus_3" class="idref" href="#Exercises.Church.plus_3"><span class="id" title="definition">plus_3</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> (<a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a>) <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a> (<a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab155"></a><h4 class="section">Exercise: 3 stars, advanced (church_mult)</h4>
 
 <div class="paragraph"> </div>
 
-Definition two : cnat :=
-  fun (X : Type) (f : X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) (x : X) =&gt; f (f x).
+ Define a function that computes the multiplication of two Church
+    numerals.
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;Defining&nbsp;<span class="inlinecode"><span class="id" title="var">zero</span></span>&nbsp;is&nbsp;somewhat&nbsp;trickier:&nbsp;how&nbsp;can&nbsp;we&nbsp;"apply&nbsp;a&nbsp;function<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;zero&nbsp;times"?&nbsp;&nbsp;The&nbsp;answer&nbsp;is&nbsp;actually&nbsp;simple:&nbsp;just&nbsp;return&nbsp;the<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;untouched.&nbsp;*)</span><br/>
+    Hint: the "successor" argument to a Church numeral need not be
+    just <span class="inlinecode"><span class="id" title="var">f</span></span>.
 
 <div class="paragraph"> </div>
 
-Definition zero : cnat :=
-  fun (X : Type) (f : X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) (x : X) =&gt; x.
+    Warning: Rocq will not let you pass <span class="inlinecode"><span class="id" title="var">cnat</span></span> itself as the type <span class="inlinecode"><span class="id" title="var">X</span></span>
+    argument to a Church numeral; you will get a "Universe
+    inconsistency" error. That is Rocq's way of preventing a paradox in
+    which a type contains itself. So leave the type argument
+    unchanged. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.mult" class="idref" href="#Exercises.Church.mult"><span class="id" title="definition">mult</span></a> (<a id="n:221" class="idref" href="#n:221"><span class="id" title="binder">n</span></a> <a id="m:222" class="idref" href="#m:222"><span class="id" title="binder">m</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a>) : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.mult_1" class="idref" href="#Exercises.Church.mult_1"><span class="id" title="definition">mult_1</span></a> : <a class="idref" href="Poly.html#Exercises.Church.mult"><span class="id" title="axiom">mult</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.mult_2" class="idref" href="#Exercises.Church.mult_2"><span class="id" title="definition">mult_2</span></a> : <a class="idref" href="Poly.html#Exercises.Church.mult"><span class="id" title="axiom">mult</span></a> <a class="idref" href="Poly.html#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> (<a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a>) <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.zero"><span class="id" title="definition">zero</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.mult_3" class="idref" href="#Exercises.Church.mult_3"><span class="id" title="definition">mult_3</span></a> : <a class="idref" href="Poly.html#Exercises.Church.mult"><span class="id" title="axiom">mult</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="doc"> 
+<div class="paragraph"> </div>
+
+<a id="lab156"></a><h4 class="section">Exercise: 3 stars, advanced (church_exp)</h4>
 
 <div class="paragraph"> </div>
 
-<span class="comment">(**&nbsp;More&nbsp;generally,&nbsp;a&nbsp;number&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;can&nbsp;be&nbsp;written&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">(<span class="id" title="var">f</span></span>
-    <span class="inlinecode">...</span> <span class="inlinecode">(<span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> <span class="inlinecode">...)</span>,&nbsp;with&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;occurrences&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>.&nbsp;&nbsp;Let's&nbsp;informally<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;notate&nbsp;that&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>,&nbsp;with&nbsp;the&nbsp;convention&nbsp;that&nbsp;<span class="inlinecode"><span class="id" title="var">f</span>^0</span> <span class="inlinecode"><span class="id" title="var">x</span></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;just&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span>.&nbsp;Note&nbsp;how&nbsp;the&nbsp;<span class="inlinecode"><span class="id" title="var">doit3times</span></span>&nbsp;function&nbsp;we've&nbsp;defined<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;previously&nbsp;is&nbsp;actually&nbsp;just&nbsp;the&nbsp;Church&nbsp;representation&nbsp;of&nbsp;<span class="inlinecode">3</span>.&nbsp;*)</span><br/>
+ Exponentiation: 
+<div class="paragraph"> </div>
+
+ Define a function that computes the exponentiation of two Church
+    numerals.
 
 <div class="paragraph"> </div>
 
-Definition three : cnat := @doit3times.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;So&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;represents&nbsp;"do&nbsp;it&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;times",&nbsp;where&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;is&nbsp;a&nbsp;Church<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;numerals&nbsp;and&nbsp;"it"&nbsp;means&nbsp;applying&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>&nbsp;starting&nbsp;with&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span>.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Another&nbsp;way&nbsp;to&nbsp;think&nbsp;about&nbsp;the&nbsp;Church&nbsp;representation&nbsp;is&nbsp;that<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>&nbsp;represents&nbsp;the&nbsp;successor&nbsp;operation&nbsp;on&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span>,&nbsp;and&nbsp;value<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;represents&nbsp;the&nbsp;zero&nbsp;element&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span>.&nbsp;&nbsp;We&nbsp;could&nbsp;even&nbsp;rewrite<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;those&nbsp;names&nbsp;to&nbsp;make&nbsp;it&nbsp;clearer:&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-Definition zero' : cnat :=
-  fun (X : Type) (succ : X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) (zero : X) =&gt; zero.
-Definition one' : cnat :=
-  fun (X : Type) (succ : X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) (zero : X) =&gt; succ zero.
-Definition two' : cnat :=
-  fun (X : Type) (succ : X <span class="nowrap"><span style='font-size:85%;'><span style='vertical-align:5%;'><span style='letter-spacing:-.2em;'>-</span></span>&gt;</span></span> X) (zero : X) =&gt; succ (succ zero).
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;If&nbsp;we&nbsp;passed&nbsp;in&nbsp;<span class="inlinecode"><span class="id" title="var">S</span></span>&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">succ</span></span>&nbsp;and&nbsp;<span class="inlinecode"><span class="id" title="var">O</span></span>&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">zero</span></span>,&nbsp;we'd&nbsp;even&nbsp;get&nbsp;the&nbsp;Peano<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;naturals&nbsp;as&nbsp;a&nbsp;result:&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-Example zero_church_peano : zero nat S O = 0.
-Proof. reflexivity. Qed.
-
-<div class="paragraph"> </div>
-
-Example one_church_peano : one nat S O = 1.
-Proof. reflexivity. Qed.
-
-<div class="paragraph"> </div>
-
-Example two_church_peano : two nat S O = 2.
-Proof. reflexivity. Qed.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;One&nbsp;very&nbsp;interesting&nbsp;implication&nbsp;of&nbsp;the&nbsp;Church&nbsp;numerals&nbsp;is&nbsp;that&nbsp;we<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;don't&nbsp;strictly&nbsp;need&nbsp;the&nbsp;natural&nbsp;numbers&nbsp;to&nbsp;be&nbsp;built-in&nbsp;to&nbsp;a<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;functional&nbsp;programming&nbsp;language,&nbsp;or&nbsp;even&nbsp;to&nbsp;be&nbsp;definable&nbsp;with&nbsp;an<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;inductive&nbsp;data&nbsp;type.&nbsp;It's&nbsp;possible&nbsp;to&nbsp;represent&nbsp;them&nbsp;purely&nbsp;(if<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;efficiently)&nbsp;with&nbsp;functions.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Of&nbsp;course,&nbsp;it's&nbsp;not&nbsp;enough&nbsp;just&nbsp;to&nbsp;"represent"&nbsp;numerals;&nbsp;we&nbsp;need<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;do&nbsp;arithmetic&nbsp;with&nbsp;the&nbsp;representation.&nbsp;Show&nbsp;that&nbsp;we<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;by&nbsp;completing&nbsp;the&nbsp;definitions&nbsp;of&nbsp;the&nbsp;following&nbsp;functions.&nbsp;Make<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;sure&nbsp;that&nbsp;the&nbsp;corresponding&nbsp;unit&nbsp;tests&nbsp;pass&nbsp;by&nbsp;proving&nbsp;them&nbsp;with<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;****&nbsp;Exercise:&nbsp;2&nbsp;stars,&nbsp;advanced&nbsp;(church_scc)&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;Define&nbsp;a&nbsp;function&nbsp;that&nbsp;computes&nbsp;the&nbsp;successor&nbsp;of&nbsp;a&nbsp;Church&nbsp;numeral.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Given&nbsp;a&nbsp;Church&nbsp;numeral&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>,&nbsp;its&nbsp;successor&nbsp;<span class="inlinecode"><span class="id" title="var">scc</span></span> <span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;should&nbsp;iterate<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;its&nbsp;function&nbsp;argument&nbsp;once&nbsp;more&nbsp;than&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>.&nbsp;That&nbsp;is,&nbsp;given&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>
-    <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;as&nbsp;input,&nbsp;<span class="inlinecode"><span class="id" title="var">scc</span></span>&nbsp;should&nbsp;produce&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^(<span class="id" title="var">n</span>+1)</span> <span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;as<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;output.&nbsp;In&nbsp;other&nbsp;words,&nbsp;do&nbsp;it&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;times,&nbsp;then&nbsp;do&nbsp;it&nbsp;once&nbsp;more.&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-Definition scc (n : cnat) : cnat
-  <span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. Admitted.
-
-<div class="paragraph"> </div>
-
-Example scc_1 : scc zero = one.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example scc_2 : scc one = two.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example scc_3 : scc two = three.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;****&nbsp;Exercise:&nbsp;3&nbsp;stars,&nbsp;advanced&nbsp;(church_plus)&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;Define&nbsp;a&nbsp;function&nbsp;that&nbsp;computes&nbsp;the&nbsp;addition&nbsp;of&nbsp;two&nbsp;Church<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;numerals.&nbsp;&nbsp;Given&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">n</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;and&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^<span class="id" title="var">m</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;as<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;input,&nbsp;<span class="inlinecode"><span class="id" title="var">plus</span></span>&nbsp;should&nbsp;produce&nbsp;<span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><span class="id" title="var">X</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><span class="id" title="var">f</span>^(<span class="id" title="var">n</span></span> <span class="inlinecode">+</span> <span class="inlinecode"><span class="id" title="var">m</span>)</span> <span class="inlinecode"><span class="id" title="var">x</span></span>&nbsp;as&nbsp;output.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;other&nbsp;words,&nbsp;do&nbsp;it&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span>&nbsp;times,&nbsp;then&nbsp;do&nbsp;it&nbsp;<span class="inlinecode"><span class="id" title="var">m</span></span>&nbsp;more&nbsp;times.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Hint:&nbsp;the&nbsp;"zero"&nbsp;argument&nbsp;to&nbsp;a&nbsp;Church&nbsp;numeral&nbsp;need&nbsp;not&nbsp;be&nbsp;just<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span>.&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-Definition plus (n m : cnat) : cnat
-  <span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. Admitted.
-
-<div class="paragraph"> </div>
-
-Example plus_1 : plus zero one = one.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example plus_2 : plus two three = plus three two.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example plus_3 :
-  plus (plus two two) three = plus one (plus three three).
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;****&nbsp;Exercise:&nbsp;3&nbsp;stars,&nbsp;advanced&nbsp;(church_mult)&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;Define&nbsp;a&nbsp;function&nbsp;that&nbsp;computes&nbsp;the&nbsp;multiplication&nbsp;of&nbsp;two&nbsp;Church<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;numerals.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Hint:&nbsp;the&nbsp;"successor"&nbsp;argument&nbsp;to&nbsp;a&nbsp;Church&nbsp;numeral&nbsp;need&nbsp;not&nbsp;be<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;just&nbsp;<span class="inlinecode"><span class="id" title="var">f</span></span>.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Warning:&nbsp;Rocq&nbsp;will&nbsp;not&nbsp;let&nbsp;you&nbsp;pass&nbsp;<span class="inlinecode"><span class="id" title="var">cnat</span></span>&nbsp;itself&nbsp;as&nbsp;the&nbsp;type&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;to&nbsp;a&nbsp;Church&nbsp;numeral;&nbsp;you&nbsp;will&nbsp;get&nbsp;a&nbsp;"Universe<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;inconsistency"&nbsp;error.&nbsp;That&nbsp;is&nbsp;Rocq's&nbsp;way&nbsp;of&nbsp;preventing&nbsp;a&nbsp;paradox&nbsp;in<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;a&nbsp;type&nbsp;contains&nbsp;itself.&nbsp;So&nbsp;leave&nbsp;the&nbsp;type&nbsp;argument<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;unchanged.&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-Definition mult (n m : cnat) : cnat
-  <span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. Admitted.
-
-<div class="paragraph"> </div>
-
-Example mult_1 : mult one one = one.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example mult_2 : mult zero (plus three three) = zero.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example mult_3 : mult two three = plus three three.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;****&nbsp;Exercise:&nbsp;3&nbsp;stars,&nbsp;advanced&nbsp;(church_exp)&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;Exponentiation:&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;Define&nbsp;a&nbsp;function&nbsp;that&nbsp;computes&nbsp;the&nbsp;exponentiation&nbsp;of&nbsp;two&nbsp;Church<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;numerals.<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Hint:&nbsp;the&nbsp;type&nbsp;argument&nbsp;to&nbsp;a&nbsp;Church&nbsp;numeral&nbsp;need&nbsp;not&nbsp;just&nbsp;be&nbsp;<span class="inlinecode"><span class="id" title="var">X</span></span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;But&nbsp;again,&nbsp;you&nbsp;cannot&nbsp;pass&nbsp;<span class="inlinecode"><span class="id" title="var">cnat</span></span>&nbsp;itself&nbsp;as&nbsp;the&nbsp;type&nbsp;argument.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;Finding&nbsp;the&nbsp;right&nbsp;type&nbsp;can&nbsp;be&nbsp;tricky.&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-Definition exp (n m : cnat) : cnat
-  <span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. Admitted.
-
-<div class="paragraph"> </div>
-
-Example exp_1 : exp two two = plus two two.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example exp_2 : exp three zero = one.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-Example exp_3 : exp three two = plus (mult two (mult two two)) one.
-Proof. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> Admitted.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(**&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
-
-<div class="paragraph"> </div>
-
-End Church.
-End Exercises.
-
-<div class="paragraph"> </div>
-
-<span class="comment">(*&nbsp;2026-08-16&nbsp;15:43&nbsp;*)</span><br/>
+    Hint: the type argument to a Church numeral need not just be <span class="inlinecode"><span class="id" title="var">X</span></span>.
+    But again, you cannot pass <span class="inlinecode"><span class="id" title="var">cnat</span></span> itself as the type argument.
+    Finding the right type can be tricky. 
+</div>
+<div class="code">
+
+<span class="id" title="keyword">Definition</span> <a id="Exercises.Church.exp" class="idref" href="#Exercises.Church.exp"><span class="id" title="definition">exp</span></a> (<a id="n:223" class="idref" href="#n:223"><span class="id" title="binder">n</span></a> <a id="m:224" class="idref" href="#m:224"><span class="id" title="binder">m</span></a> : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a>) : <a class="idref" href="Poly.html#Exercises.Church.cnat"><span class="id" title="definition">cnat</span></a><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;REPLACE&nbsp;THIS&nbsp;LINE&nbsp;WITH&nbsp;":=&nbsp;_your_definition_&nbsp;."&nbsp;*)</span>. <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.exp_1" class="idref" href="#Exercises.Church.exp_1"><span class="id" title="definition">exp_1</span></a> : <a class="idref" href="Poly.html#Exercises.Church.exp"><span class="id" title="axiom">exp</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.exp_2" class="idref" href="#Exercises.Church.exp_2"><span class="id" title="definition">exp_2</span></a> : <a class="idref" href="Poly.html#Exercises.Church.exp"><span class="id" title="axiom">exp</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="Poly.html#Exercises.Church.zero"><span class="id" title="definition">zero</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/><hr class='doublespaceincode'/>
+<span class="id" title="keyword">Example</span> <a id="Exercises.Church.exp_3" class="idref" href="#Exercises.Church.exp_3"><span class="id" title="definition">exp_3</span></a> : <a class="idref" href="Poly.html#Exercises.Church.exp"><span class="id" title="axiom">exp</span></a> <a class="idref" href="Poly.html#Exercises.Church.three"><span class="id" title="definition">three</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Poly.html#Exercises.Church.plus"><span class="id" title="axiom">plus</span></a> (<a class="idref" href="Poly.html#Exercises.Church.mult"><span class="id" title="axiom">mult</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> (<a class="idref" href="Poly.html#Exercises.Church.mult"><span class="id" title="axiom">mult</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a> <a class="idref" href="Poly.html#Exercises.Church.two"><span class="id" title="definition">two</span></a>)) <a class="idref" href="Poly.html#Exercises.Church.one"><span class="id" title="definition">one</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="comment">(*&nbsp;FILL&nbsp;IN&nbsp;HERE&nbsp;*)</span> <span class="id" title="var">Admitted</span>.<br/>
+<font size=-2>&#9744;</font>
+</div>
+
+<div class="code">
+
+<span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises.Church"><span class="id" title="module">Church</span></a>.<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="Poly.html#Exercises"><span class="id" title="module">Exercises</span></a>.<br/><hr class='doublespaceincode'/>
+<span class="comment">(*&nbsp;2026-08-23&nbsp;16:07&nbsp;*)</span><br/>
 </div>
 </div>
 

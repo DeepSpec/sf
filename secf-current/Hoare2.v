@@ -17,7 +17,7 @@ Definition FILL_IN_HERE := <{True}>.
 (* ################################################################# *)
 (** * Decorated Programs *)
 
-(** The beauty of Hoare Logic is that it is _syntax directed_: the
+(** The beauty of Hoare Logic is that it is _syntax directed: the
     structure of proofs exactly follows the structure of programs.
 
     We can record the essential ideas of a Hoare-logic proof --
@@ -348,11 +348,8 @@ Proof.
         exact I.
   - (* Loop invariant and negated guard imply post *)
     intros st [Inv GuardFalse].
-    unfold bassertion in GuardFalse. simpl in GuardFalse.
-    rewrite not_true_iff_false in GuardFalse.
-    rewrite negb_false_iff in GuardFalse.
-    apply eqb_eq in GuardFalse.
-    apply GuardFalse.
+    simpl in *.
+    destruct (eqb_spec (st X) 0); lia.
 Qed.
 
 (** In [Hoare] we introduced a series of tactics named
@@ -381,26 +378,15 @@ Ltac verify_assertion :=
   simpl in *;
   repeat match goal with [H : _ /\ _ |- _] =>
                          destruct H end;
-  repeat rewrite not_true_iff_false in *;
-  repeat rewrite not_false_iff_true in *;
-  repeat rewrite negb_true_iff in *;
-  repeat rewrite negb_false_iff in *;
-  repeat rewrite eqb_eq in *;
-  repeat rewrite eqb_neq in *;
-  repeat rewrite leb_iff in *;
-  repeat rewrite leb_iff_conv in *;
-  try subst;
-  simpl in *;
-  repeat
-    match goal with
-      [st : state |- _] =>
-        match goal with
-        | [H : st _ = _ |- _] =>
-            rewrite -> H in *; clear H
-        | [H : _ = st _ |- _] =>
-            rewrite <- H in *; clear H
-        end
+  repeat match goal with
+  | |- context [ ?X =? ?Y] => destruct (eqb_spec X Y)
+  | |- context [ ?X <? ?Y] => destruct (ltb_spec0 X Y)
+  | |- context [ ?X <=? ?Y] => destruct (leb_spec0 X Y)
+  | H: context [ ?X =? ?Y] |- _ => destruct (eqb_spec X Y)
+  | H: context [ ?X <? ?Y] |- _ => destruct (ltb_spec0 X Y)
+  | H: context [ ?X <=? ?Y] |- _ => destruct (leb_spec0 X Y)
     end;
+  subst;
   try eauto;
   try lia.
 
@@ -2032,4 +2018,4 @@ Proof.
 End Himp2.
 (** [] *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:10 *)

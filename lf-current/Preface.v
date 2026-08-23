@@ -9,10 +9,10 @@
     basic concepts of logic, computer-assisted theorem proving, the
     Rocq prover, functional programming, operational semantics, logics
     and techniques for reasoning about programs, static type systems,
-    property-based random testing, and verification of practical C
-    code.  The exposition is intended for a broad range of readers,
-    from advanced undergraduates to PhD students and researchers.  No
-    specific background in logic or programming languages is assumed,
+    property-based random testing, verification of practical C
+    code, and security. The exposition is intended for a broad range of
+    readers, from advanced undergraduates to PhD students and researchers.
+    No specific background in logic or programming languages is assumed,
     though a degree of mathematical maturity will be helpful.
 
     The principal novelty of the series is that it is one hundred
@@ -336,11 +336,11 @@
 
     - An IDE for interacting with Rocq.  There are several choices:
 
-        - _VsCoq_ is an extension for Visual Studio Code that offers a
+        - _VsRocq_ is an extension for Visual Studio Code that offers a
           simple interface via a familiar IDE.  This option is the
           recommended default.
 
-          VsCoq can be used as an ordinary IDE or it can be combined
+          VsRocq can be used as an ordinary IDE or it can be combined
           with Docker (see below) for a lightweight installation
           experience.
 
@@ -547,4 +547,4 @@
     NSF Expeditions grant 1521523, _The Science of Deep
     Specification_. *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:07 *)

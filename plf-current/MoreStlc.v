@@ -2137,4 +2137,4 @@ Proof with eauto.
 
 End STLCExtended.
 
-(* 2026-01-07 13:33 *)
+(* 2026-08-15 20:01 *)

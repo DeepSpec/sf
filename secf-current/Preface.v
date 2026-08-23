@@ -19,8 +19,8 @@
     happening during execution, or side-channel observations
     (e.g., the branches and memory addresses accessed by the program,
     as assumed by cryptographic constant-time programming discipline).
-    We also investigate attackers that can influence the program by causing
-    speculative execution to take the wrong branch in a conditional. *)
+    We also investigate Spectre attackers that can influence the program by
+    causing speculative execution to take the wrong branch in a conditional. *)
 
 (** (2) We investigate various static and dynamic information-flow control
     _enforcement mechanisms_ aimed at achieving specific noninterference
@@ -74,7 +74,7 @@
     volume       =   "7",
     year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 1.0,
+    note         =   {Version 1.2,
                       \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
@@ -94,4 +94,4 @@
     all people who have contributed to this volume (the people we remembered are
     listed on the cover page of this volume).  *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:10 *)

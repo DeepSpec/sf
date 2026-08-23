@@ -1,10 +1,12 @@
 (** * Auto: More Automation *)
 
 Set Warnings "-notation-overridden,-notation-incompatible-prefix".
+From Stdlib Require Import Arith List.
 From Stdlib Require Import Lia.
 From Stdlib Require Import Strings.String.
 From LF Require Import Maps.
 From LF Require Import Imp.
+Set Default Goal Selector "!".
 
 (** Up to now, we've used the manual part of Rocq's tactic
     facilities.  In this chapter, we'll learn more about some of
@@ -19,14 +21,14 @@ From LF Require Import Imp.
     can be found in the [UseAuto] chapter in _Programming Language
     Foundations_.
 
-    (There's one other major category of automation we haven't
-    discussed much yet, namely built-in decision procedures for
-    specific kinds of problems: [lia] is one example, but there are
-    others.  This topic will be deferred for a while longer.)
+    There's one other major category of automation we haven't discussed much
+    yet, namely built-in decision procedures for specific kinds of problems:
+    [lia] is one example, and at the end of the chapter we will introduce one
+    more called [congruence].
 
-    Our motivating example will be the following proof, repeated with
-    just a few small changes from the [Imp] chapter.  We will
-    simplify this proof in several stages. *)
+    We start with the [auto] tactic, though, and our motivating example will be
+    the following proof, repeated with just a few small changes from the
+    [Imp] chapter.  We will simplify this proof in several stages. *)
 
 Theorem ceval_deterministic: forall c st st1 st2,
   st =[ c ]=> st1  ->
@@ -66,18 +68,18 @@ Proof.
 (* ################################################################# *)
 (** * The [auto] Tactic *)
 
-(** Thus far, our proof scripts mostly apply relevant hypotheses or
-    lemmas by name, and only one at a time. *)
+(** Thus far, our proof scripts mostly work backward by applying
+    relevant hypotheses or lemmas to the goal by name, one at a time. *)
 
 Example auto_example_1 : forall (P Q R: Prop),
   (P -> Q) -> (Q -> R) -> P -> R.
 Proof.
-  intros P Q R H1 H2 H3.
-  apply H2. apply H1. assumption.
+  intros P Q R HPQ HQR HP.
+  apply HQR. apply HPQ. assumption.
 Qed.
 
 (** The [auto] tactic tries to free us from this drudgery by _searching_
-    for a sequence of applications that will prove the goal: *)
+    for a sequence of applications to the goal that will finally prove it: *)
 
 Example auto_example_1' : forall (P Q R: Prop),
   (P -> Q) -> (Q -> R) -> P -> R.
@@ -105,11 +107,37 @@ Example auto_example_2 : forall P Q R S T U : Prop,
   U.
 Proof. auto. Qed.
 
-(** Proof search could, in principle, take an arbitrarily long time,
-    so there is a limit to how deep [auto] will search by default. *)
+(** Intuitively, we can understand the [auto] tactic as recursively performing
+    the following backward search steps:
 
-(** If [auto] is not solving our goal as expected we can use [debug auto]
-    to see a trace. *)
+    - If [assumption] closes the goal, we are done.
+
+    - If the goal is an implication ([->]) or an universal quantifier
+      ([forall]), call the [intro] tactic (the unary version of [intros])
+      and continue with the new goal.
+
+    - Otherwise, apply a hypothesis whose conclusion unifies with the goal, and
+      recurse on the new subgoals. If some subgoal cannot be closed, backtrack
+      and try any other hypothesis unifying with the goal.
+
+  If no candidate path leads to a complete proof, [auto] does nothing, leaving
+  the goal unchanged. *)
+
+(** If [auto] does not solve our goal as expected we can use [debug
+    auto] to see a trace. In fact, [debug auto] prints the whole
+    search trace even when [auto] _succeeds_, so we can also use it to
+    watch [auto] backtrack: *)
+
+Example auto_algorithm : forall (P Q R: Prop),
+  (Q -> R) -> (* HQR : requires [Q] -- dead end *)
+  ((P -> P) -> R) -> (* HPPR : requires [P -> P] -- proved by [intro]
+                                                    and [assumption] *)
+  R.
+Proof. intros P Q R HQR HPPR. debug auto. Qed.
+
+(** Proof search could, in principle, take an arbitrarily long time,
+    so there is a limit to how deep [auto] will search (by default 5). *)
+
 Example auto_example_3 : forall (P Q R S T U: Prop),
   (P -> Q) ->
   (Q -> R) ->
@@ -119,14 +147,25 @@ Example auto_example_3 : forall (P Q R S T U: Prop),
   P ->
   U.
 Proof.
-  (* When it cannot solve the goal, [auto] does nothing *)
+  intros P Q R S T U HPQ HQR HRS HST HTU HP.
+  (* [auto] does nothing for this goal, even if it seems solvable *)
   auto.
 
-  (* Let's see where [auto] gets stuck using [debug auto] *)
+  (* Let's see what [auto] does with the default search depth
+     of 5 by adding the [debug] keyword: *)
   debug auto.
 
-  (* Optional argument to [auto] says how deep to search
-     (default is 5) *)
+  (* What it did is this: *)
+  (* apply HTU. *)
+  (* apply HST. *)
+  (* apply HRS. *)
+  (* apply HQR. *)
+  (* apply HPQ. *)
+  (* But then it couldn't prove [P]
+     even though it had [P] as a hypothesis *)
+
+  (* With an optional argument to [auto] we can change the maximum
+     search depth; in this case a depth of 6 does the trick: *)
   auto 6.
 Qed.
 
@@ -142,27 +181,30 @@ Example auto_example_4 : forall P Q R : Prop,
   P \/ (Q /\ R).
 Proof. auto. Qed.
 
-(** If we want to see which facts [auto] is using, we can use
-    [info_auto] instead. *)
+(** If we want to see which facts [auto] is using, we can use [info_auto]
+    instead. As opposed to [debug auto] which also prints failed paths,
+    [info_auto] only displays the successful proof path. *)
+
+Example auto_example_4' : forall P Q R : Prop,
+  Q ->
+  (Q -> R) ->
+  P \/ (Q /\ R).
+Proof.
+  info_auto.
+Qed.
+
+(** [auto] used the following facts from the default hint database: *)
+Check or_intror : forall A B : Prop, B -> A \/ B.
+Check conj : forall A B : Prop, A -> B -> A /\ B.
 
 Example auto_example_5: 2 = 2.
 Proof.
   info_auto.
 Qed.
 
-Example auto_example_5' : forall (P Q R S T U W: Prop),
-  (U -> T) ->
-  (W -> U) ->
-  (R -> S) ->
-  (S -> T) ->
-  (P -> R) ->
-  (U -> T) ->
-  P ->
-  T.
-Proof.
-  intros.
-  info_auto.
-Qed.
+(** [auto] subsumes reflexivity because [eq_refl] is
+    a fact in the default hint database: *)
+Check @eq_refl : forall A (x:A), x = x.
 
 (** We can extend the hint database just for the purposes of one
     application of [auto] by writing "[auto using ...]". *)
@@ -248,9 +290,10 @@ Theorem ceval_deterministic': forall c st st1 st2,
   st1 = st2.
 Proof.
   intros c st st1 st2 E1 E2.
-  generalize dependent st2;
-    induction E1; intros st2 E2; inversion E2; subst;
-    auto.             (* <---- here's one good place for auto *)
+  generalize dependent st2.
+  induction E1; intros st2 E2;
+    inversion E2; subst; (* <- ends with ; *)
+    auto.             (* <---- here's one good place to try auto *)
   - (* E_Seq *)
     rewrite (IHE1_1 st'0 H1) in *.
     auto.             (* <---- here's another *)
@@ -279,10 +322,10 @@ Theorem ceval_deterministic'_alt: forall c st st1 st2,
   st =[ c ]=> st2 ->
   st1 = st2.
 Proof with auto.
-  intros c st st1 st2 E1 E2;
-  generalize dependent st2;
-  induction E1;
-       intros st2 E2; inversion E2; subst...
+  intros c st st1 st2 E1 E2.
+  generalize dependent st2.
+  induction E1; intros st2 E2;
+    inversion E2; subst...
   - (* E_Seq *)
     rewrite (IHE1_1 st'0 H1) in *...
   - (* E_IfTrue *)
@@ -296,6 +339,297 @@ Proof with auto.
   - (* E_WhileTrue, with b true *)
     rewrite (IHE1_1 st'0 H3) in *...
 Qed.
+
+(* ================================================================= *)
+(** ** Exercises  *)
+
+From LF Require IndProp.
+
+Module Exercises.
+
+Import IndProp. Import Pumping.
+
+(** **** Exercise: 1 star, standard (pumping_constant_ge_1_redux)
+
+    Use [auto], [lia], and [;] to reprove this lemma in a "single" line.
+    The "official" proof in [IndProp] takes about a dozen lines. *)
+
+Lemma pumping_constant_ge_1 :
+  forall T (re : reg_exp T),
+    pumping_constant re >= 1.
+(* FILL IN HERE *) Admitted.
+(* Do not modify the following line: *)
+Definition manual_grade_for_pumping_constant_ge_1_redux : option (nat*string) := None.
+(** [] *)
+
+(* ----------------------------------------------------------------- *)
+(** *** Regular Expression Optimization Exercise  *)
+
+(** **** Exercise: 3 stars, standard (re_opt_match_auto) *)
+
+(** As a simple illustration of the benefits of automation,
+    let's consider another problem on regular expressions, which we
+    formalized in [IndProp].  A given set of strings can be
+    denoted by many different regular expressions.  For example, [App
+    EmptyString re] matches exactly the same strings as [re].  We can
+    write a function that "optimizes" any regular expression into a
+    potentially simpler one by applying this fact throughout the r.e.
+    (Note that, for simplicity, the function does not optimize
+    expressions that arise as the result of other optimizations.) *)
+
+Fixpoint re_opt {T:Type} (re: reg_exp T) : reg_exp T :=
+  match re with
+  | App _ EmptySet => EmptySet
+  | App EmptyStr re2 => re_opt re2
+  | App re1 EmptyStr => re_opt re1
+  | App re1 re2 => App (re_opt re1) (re_opt re2)
+  | Union EmptySet re2 => re_opt re2
+  | Union re1 EmptySet => re_opt re1
+  | Union re1 re2 => Union (re_opt re1) (re_opt re2)
+  | Star EmptySet => EmptyStr
+  | Star EmptyStr => EmptyStr
+  | Star re => Star (re_opt re)
+  | EmptySet => EmptySet
+  | EmptyStr => EmptyStr
+  | Char x => Char x
+  end.
+
+(** We would like to show the equivalence of re's with their
+    "optimized" form.  Here is an incredibly tedious manual
+    proof of (one direction of) its correctness: *)
+
+Lemma re_opt_match : forall T (re: reg_exp T) s,
+  s =~ re -> s =~ re_opt re.
+Proof.
+  intros T re s M.
+  induction M
+    as [| x'
+       | s1 re1 s2 re2 Hmatch1 IH1 Hmatch2 IH2
+       | s1 re1 re2 Hmatch IH | s2 re1 re2 Hmatch IH
+       | re | s1 s2 re Hmatch1 IH1 Hmatch2 IH2].
+  - (* MEmpty *) simpl. apply MEmpty.
+  - (* MChar *) simpl. apply MChar.
+  - (* MApp *) simpl.
+    destruct re1.
+    + inversion IH1.
+    + inversion IH1. simpl. destruct re2.
+      * apply IH2.
+      * apply IH2.
+      * apply IH2.
+      * apply IH2.
+      * apply IH2.
+      * apply IH2.
+    + destruct re2.
+      * inversion IH2.
+      * inversion IH2. rewrite app_nil_r. apply IH1.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+    + destruct re2.
+      * inversion IH2.
+      * inversion IH2. rewrite app_nil_r.  apply IH1.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+    + destruct re2.
+      * inversion IH2.
+      * inversion IH2. rewrite app_nil_r. apply IH1.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+    + destruct re2.
+      * inversion IH2.
+      * inversion IH2. rewrite app_nil_r. apply IH1.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+      * apply MApp.
+        -- apply IH1.
+        -- apply IH2.
+  - (* MUnionL *) simpl.
+    destruct re1.
+    + inversion IH.
+    + destruct re2.
+      * apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+    + destruct re2.
+      * apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+    + destruct re2.
+      * apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+    + destruct re2.
+      * apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+    + destruct re2.
+      * apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+      * apply MUnionL. apply IH.
+  - (* MUnionR *) simpl.
+    destruct re1.
+    + apply IH.
+    + destruct re2.
+      * inversion IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+    + destruct re2.
+      * inversion IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+    + destruct re2.
+      * inversion IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+    + destruct re2.
+      * inversion IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+    + destruct re2.
+      * inversion IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+      * apply MUnionR. apply IH.
+ - (* MStar0 *) simpl.
+    destruct re.
+    + apply MEmpty.
+    + apply MEmpty.
+    + apply MStar0.
+    + apply MStar0.
+    + apply MStar0.
+    + simpl.
+      destruct re.
+      * apply MStar0.
+      * apply MStar0.
+      * apply MStar0.
+      * apply MStar0.
+      * apply MStar0.
+      * apply MStar0.
+ - (* MStarApp *) simpl.
+   destruct re.
+   + inversion IH1.
+   + inversion IH1. inversion IH2. apply MEmpty.
+   + apply star_app.
+     * apply MStar1. apply IH1.
+     * apply IH2.
+   + apply star_app.
+     * apply MStar1.  apply IH1.
+     * apply IH2.
+   + apply star_app.
+     * apply MStar1.  apply IH1.
+     * apply IH2.
+   + apply star_app.
+     * apply MStar1.  apply IH1.
+     * apply IH2.
+Qed.
+
+(** Use [auto] to shorten the proof. The proof above is about 200
+    lines. Reduce it to 50 or fewer lines of similar
+    density. Eliminate all uses of [apply], thus removing the need to
+    name specific constructors and lemmas about regular expressions.
+
+    Hint: You can use a bottom-up approach. First copy-paste the
+    entire proof below. Then automate the innermost bullets first,
+    proceeding outwards. Frequently double-check that the entire proof
+    still compiles. If it doesn't, undo the most recent changes you
+    made until you get back to a compiling proof. *)
+
+Lemma re_opt_match'' : forall T (re: reg_exp T) s,
+  s =~ re -> s =~ re_opt re.
+Proof.
+(* FILL IN HERE *) Admitted.
+(* Do not modify the following line: *)
+Definition manual_grade_for_re_opt_match'' : option (nat*string) := None.
+(** [] *)
+
+(* ----------------------------------------------------------------- *)
+(** *** Optional Pumping Exercise  *)
+
+(** **** Exercise: 3 stars, advanced, optional (pumping_redux_strong)
+
+    Use [auto], [lia], [repeat], [;], [try], etc. to shorten the official proof
+    of the stronger Pumping Lemma optional exercise from [IndProp]. *)
+
+Lemma pumping : forall T (re : reg_exp T) s,
+    s =~ re ->
+    pumping_constant re <= length s ->
+    exists s1 s2 s3,
+      s = s1 ++ s2 ++ s3 /\
+        s2 <> [] /\
+        length s1 + length s2 <= pumping_constant re /\
+        forall m, s1 ++ napp m s2 ++ s3 =~ re.
+Proof.
+  (* FILL IN HERE *) Admitted.
+(* Do not modify the following line: *)
+Definition manual_grade_for_pumping_redux_strong : option (nat*string) := None.
+(** [] *)
+
+End Exercises.
 
 (* ################################################################# *)
 (** * Searching For Hypotheses *)
@@ -567,9 +901,11 @@ Example ceval_example1:
   ]=> (Z !-> 4 ; X !-> 2).
 Proof.
   (* We supply the intermediate state [st']... *)
-  apply E_Seq with (X !-> 2).
+  apply E_Seq with (st' := X !-> 2).
   - apply E_Asgn. reflexivity.
-  - apply E_IfFalse. reflexivity. apply E_Asgn. reflexivity.
+  - apply E_IfFalse.
+    + reflexivity.
+    + apply E_Asgn. reflexivity.
 Qed.
 
 
@@ -604,10 +940,13 @@ Example ceval'_example1:
     end
   ]=> (Z !-> 4 ; X !-> 2).
 Proof.
-  (* 1 *) eapply E_Seq.
-  - (* 2 *) apply E_Asgn.
-    (* 3 *) reflexivity.
-  - (* 4 *) apply E_IfFalse. reflexivity. apply E_Asgn. reflexivity.
+  (* 1 *) eapply E_Seq. (* introduces [?st'] existential variable *)
+  - (* 2 *) apply E_Asgn. (* instantiates [?st'] with [X !-> ?n];
+                       using a fresh existential variable [?n] *)
+    (* 3 *) simpl. reflexivity. (* instantiates [?n] with [2] *)
+  - (* 4 *) apply E_IfFalse.
+    + reflexivity.
+    + apply E_Asgn. reflexivity.
 Qed.
 
 (** The [eapply H] tactic behaves just like [apply H] except
@@ -628,17 +967,60 @@ Qed.
     the first subgoal. *)
 
 (** Several of the tactics that we've seen so far, including [exists],
-    [constructor], and [auto], have similar variants. The [eauto]
-    tactic works like [auto], except that it uses [eapply] instead of
-    [apply].  Tactic [info_eauto] shows us which tactics [eauto] uses
-    in its proof search.
+    [constructor], and [auto], have variants similar to [eapply]. *)
 
-    Below is an example of [eauto].  Before using it, we need to give
-    some hints to [auto] about using the constructors of [ceval]
-    and the definitions of [state] and [total_map] as part of its
-    proof search. *)
+(** For instance, in addition to [exists] Rocq also provides an
+    [eexists] tactic. To prove a goal of the form [exists x, P x], the
+    [exists t] tactic requires us to supply a concrete term [t],
+    changing the goal to [P t]. The [eexists] tactic instead
+    introduces a fresh existential variable [?x] in its place, leaving
+    us with the goal [P ?x]. The value of [?x] has to be determined by
+    unification in some later proof step. *)
+
+Example eexists_example : exists s',
+  (Y !-> 1 ; X !-> 2) =[
+    if (X <= Y)
+      then Z := Y - X
+      else Y := X + Z
+    end
+  ]=> s'.
+Proof.
+  eexists. eapply E_IfFalse.
+  - reflexivity.
+  - eapply E_Asgn. reflexivity.
+Qed.
+
+(** Similarly, [econstructor] is to [constructor] what [eapply] is to
+    [apply].  In the proof of [ceval'_example1], we could have written
+    [econstructor] in place of [eapply E_Seq]: Rocq would pick the
+    matching constructor ([E_Seq]) and leave the intermediate state as
+    an existential variable, to be determined by a later step. Here is
+    that proof again, using [econstructor]. *)
+
+Example econstructor_example :
+  empty_st =[
+    X := 2;
+    if (X <= 1)
+      then Y := 3
+      else Z := 4
+    end
+  ]=> (Z !-> 4 ; X !-> 2).
+Proof.
+  econstructor.
+  - apply E_Asgn. reflexivity.
+  - apply E_IfFalse.
+    + reflexivity.
+    + apply E_Asgn. reflexivity.
+Qed.
+
+(** The [eauto] tactic works like [auto], except that it uses [eapply]
+    instead of [apply]. Before using it in an example, we give some
+    hints to [eauto] about using the constructors of [ceval] and the
+    definitions of [state] and [total_map] as part of its proof search. *)
 
 Hint Constructors ceval : core.
+(* HIDE CH: I think better would be to choose another example that
+   doesn't need `Hint Transparent` *)
 Hint Transparent state total_map : core.
 
 Example eauto_example : exists s',
@@ -650,9 +1032,7 @@ Example eauto_example : exists s',
   ]=> s'.
 Proof. info_eauto. Qed.
 
-(** The [eauto] tactic works just like [auto], except that it uses
-    [eapply] instead of [apply]; [info_eauto] shows us which facts
-    [eauto] uses. *)
+(** [info_eauto] shows us which facts [eauto] uses. *)
 
 (** Pro tip: One might think that, since [eapply] and [eauto]
     are more powerful than [apply] and [auto], we should just use them
@@ -744,4 +1124,120 @@ Proof.
   intros P Q HP HQ. destruct HP as [y HP']. eauto.
 Qed.
 
-(* 2026-08-16 15:43 *)
+(* ################################################################# *)
+(** * Solver for Equalities: The [congruence] Tactic *)
+
+(** Rocq has several special-purpose tactics that can solve certain
+    kinds of goals automatically, based on algorithms for specific
+    mathematical or logical domains. One of these tactics, [lia],
+    were already introduced in [Imp], and here we will
+    learn one more: [congruence].  *)
+
+(** The [lia] tactic makes use of facts about addition and
+    multiplication to prove equalities. A more basic way of treating
+    such formulas is to regard every function appearing in them as
+    a black box: nothing is known about the function's behavior.
+    Based on the properties of equality itself, it is still possible
+    to prove some formulas. For example, [y = f x -> g y = g (f x)],
+    even if we know nothing about [f] or [g]: *)
+
+Theorem eq_example1 :
+  forall (A B C : Type) (f : A -> B) (g : B -> C) (x : A) (y : B),
+    y = f x -> g y = g (f x).
+Proof.
+  intros. rewrite H. reflexivity.
+Qed.
+
+(** The essential properties of equality are that it is:
+
+    - reflexive
+
+    - symmetric
+
+    - transitive
+
+    - a _congruence_: it respects function and predicate
+      application. *)
+
+(** It is that congruence property that we're using when we
+    [rewrite] in the proof above: if [a = b] then [f a = f b].  (The
+    [ProofObjects] chapter explores this idea further under the
+    name "Leibniz equality".) *)
+
+(** The [congruence] tactic is a decision procedure for equality with
+    uninterpreted functions and other symbols.  *)
+
+Theorem eq_example1' :
+  forall (A B C : Type) (f : A -> B) (g : B -> C) (x : A) (y : B),
+    y = f x -> g y = g (f x).
+Proof.
+  congruence.
+Qed.
+
+(** The [congruence] tactic is able to work with constructors,
+    even taking advantage of their injectivity and distinctness. *)
+
+Theorem eq_example2 : forall (n m o p : nat),
+    (n, o) = (m, p) ->
+    n = m.
+Proof.
+  congruence.
+Qed.
+
+Theorem eq_example3 : forall (X : Type) (h : X) (t : list X),
+    nil <> h :: t.
+Proof.
+  congruence.
+Qed.
+
+(** This gives us another way to simplify our determinism proof,
+    which gets quite short even without using custom tactics: *)
+
+Theorem ceval_deterministic_congruence: forall c st st1 st2,
+  st =[ c ]=> st1  ->
+  st =[ c ]=> st2 ->
+  st1 = st2.
+Proof.
+  intros c st st1 st2 E1 E2.
+  generalize dependent st2.
+  induction E1; intros st2 E2;
+    inversion E2; subst;
+    auto;
+    try congruence. (* <---- this solves 4 cases, previously proved
+                             by rewrite and discriminate *)
+  - (* E_Seq *)
+    rewrite (IHE1_1 st'0 H1) in *.
+    auto.
+  - (* E_WhileTrue, with b true *)
+    rewrite (IHE1_1 st'0 H3) in *.
+    auto.
+Qed.
+
+(** **** Exercise: 2 stars, standard (automatic_solvers)
+
+    The exercises below could be proved with (relatively) long manual
+    proof scripts, but each can be solved with just a single
+    invocation of an automatic solver we learned about ([congruence]
+    or [lia]). *)
+
+Theorem cons_equal : forall {X} (n m: X) (l: list X),
+    n = m -> n :: l = m :: l.
+Proof. (* FILL IN HERE *) Admitted.
+
+Theorem plus_le_cancel_r : forall n m p : nat,
+    n + p <= m + p -> n <= m.
+Proof. (* FILL IN HERE *) Admitted.
+
+Theorem no_half : forall n,
+    2 * n <> 1.
+Proof. (* FILL IN HERE *) Admitted.
+
+Theorem pair_equal : forall {X} (a b c d: X) (e: X * X),
+    (a, (b, c)) = (d, e) ->
+    e = (d, c) ->
+    b = d.
+Proof. (* FILL IN HERE *) Admitted.
+(** [] *)
+
+
+(* 2026-08-23 16:08 *)

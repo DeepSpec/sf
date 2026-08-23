@@ -36,14 +36,14 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab105"></a><h1 class="section">Looking Back</h1>
+<a id="lab131"></a><h1 class="section">Looking Back</h1>
 
 <div class="paragraph"> </div>
 
  Here is a quick summary of the topics we covered in this volume: 
 <div class="paragraph"> </div>
 
-<a id="lab106"></a><h2 class="section">Noninterference</h2>
+<a id="lab132"></a><h2 class="section">Noninterference</h2>
 
 <ul class="doclist">
 <li> definitions for pure functions, state transformers,
@@ -59,7 +59,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab107"></a><h2 class="section">Secure multi-execution</h2>
+<a id="lab133"></a><h2 class="section">Secure multi-execution</h2>
 
 <ul class="doclist">
 <li> sound and transparent dynamic enforcement of TINI 
@@ -68,7 +68,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab108"></a><h2 class="section">Information-flow control type systems</h2>
+<a id="lab134"></a><h2 class="section">Information-flow control type systems</h2>
 
 <ul class="doclist">
 <li> type-checkers enforcing TINI and TSNI
@@ -80,7 +80,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab109"></a><h2 class="section">Side channels</h2>
+<a id="lab135"></a><h2 class="section">Side channels</h2>
 
 <ul class="doclist">
 <li> control flow security and type system enforcing it
@@ -92,7 +92,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab110"></a><h2 class="section">Speculative execution attacks</h2>
+<a id="lab136"></a><h2 class="section">Speculative execution attacks</h2>
 
 <ul class="doclist">
 <li> speculative constant-time security definition
@@ -104,7 +104,7 @@
 
 <div class="paragraph"> </div>
 
-<a id="lab111"></a><h1 class="section">Looking Around</h1>
+<a id="lab137"></a><h1 class="section">Looking Around</h1>
 
 <div class="paragraph"> </div>
 
@@ -112,7 +112,7 @@
     we highlight a few recent research projects involving machine-checked proofs: 
 <div class="paragraph"> </div>
 
-<a id="lab112"></a><h2 class="section">Proving Noninterference by Parametricity</h2>
+<a id="lab138"></a><h2 class="section">Proving Noninterference by Parametricity</h2>
 
 <div class="paragraph"> </div>
 
@@ -127,7 +127,7 @@
     machine-checked in Agda. 
 <div class="paragraph"> </div>
 
-<a id="lab113"></a><h2 class="section">Formal verification of a constant-time preserving C compiler</h2>
+<a id="lab139"></a><h2 class="section">Formal verification of a constant-time preserving C compiler</h2>
 
 <div class="paragraph"> </div>
 
@@ -140,22 +140,26 @@
     preservation. 
 <div class="paragraph"> </div>
 
-<a id="lab114"></a><h2 class="section">Jasmin programming language and compiler</h2>
+<a id="lab140"></a><h2 class="section">Jasmin programming language and compiler</h2>
 
 <div class="paragraph"> </div>
 
  Jasmin is a low-level domain-specific language for implementing
-    high-assurance and high-speed cryptography. Jasmin programs can be verified
-    for correctness, cryptographic security, and side-channel resistance by
-    translation to the EasyCrypt proof assistant <a href="Bib.html#Almeida-et al 2020"><span class="inlineref">[Almeida et al 2020]</span></a>.
+    high-assurance and high-speed cryptography <a href="Bib.html#Jasmin"><span class="inlineref">[Jasmin]</span></a>. Jasmin programs
+    can be verified for correctness, cryptographic security, and side-channel
+    resistance by translation to the EasyCrypt proof assistant
+    <a href="Bib.html#Almeida-et al 2020"><span class="inlineref">[Almeida et al 2020]</span></a>. The Jasmin type checker enforces cryptographic
+    constant-time <a href="Bib.html#Shivakumar-et al 2022"><span class="inlineref">[Shivakumar et al 2022]</span></a> and also speculative
+    constant-time for manually SLH-hardened code <a href="Bib.html#Shivakumar-et al 2023b"><span class="inlineref">[Shivakumar et al 2023b]</span></a>.
     The Jasmin compiler was formally verified in Rocq to be correct
-    <a href="Bib.html#Almeida-et al 2020"><span class="inlineref">[Almeida et al 2020]</span></a> and to preserve constant-time security
-    <a href="Bib.html#Barthe-et al 2021"><span class="inlineref">[Barthe et al 2021]</span></a>. In more recent work a core compiler inspired by
-    Jasmin was proved in Rocq to also preserve speculative constant-time
-    <a href="Bib.html#Arranz-Olmos-et al 2025"><span class="inlineref">[Arranz-Olmos et al 2025]</span></a>. 
+    <a href="Bib.html#Almeida-et al 2020"><span class="inlineref">[Almeida et al 2020]</span></a> <a href="Bib.html#Arranz-Olmos-et al 2025b"><span class="inlineref">[Arranz-Olmos et al 2025b]</span></a>, to preserve
+    constant-time security <a href="Bib.html#Barthe-et al 2021"><span class="inlineref">[Barthe et al 2021]</span></a>, and in more recent work
+    to also preserve cryptographic security <a href="Bib.html#Arranz-Olmos-et al 2025b"><span class="inlineref">[Arranz-Olmos et al 2025b]</span></a>.
+    In recent work also a core compiler inspired by Jasmin was proved in Rocq to
+    preserve speculative constant-time <a href="Bib.html#Arranz-Olmos-et al 2025"><span class="inlineref">[Arranz-Olmos et al 2025]</span></a>. 
 <div class="paragraph"> </div>
 
-<a id="lab115"></a><h2 class="section">Flexible Mechanized Speculative Load Hardening</h2>
+<a id="lab141"></a><h2 class="section">Mechanized Speculative Load Hardening</h2>
 
 <div class="paragraph"> </div>
 
@@ -166,7 +170,7 @@
     sensitive program's entire memory. SLH is, however, not strong enough for
     protecting code that does not respect the constant-time discipline, leading
     to the introduction of Ultimate SLH <a href="Bib.html#Zhang-et al 2023"><span class="inlineref">[Zhang et al 2023]</span></a>, which provides
-    protection for arbitrary programs, but has too large overhead for general
+    protection for arbitrary programs, but has too large an overhead for general
     use, since it conservatively assumes that all data is secret. More recent
     work introduces Flexible SLH <a href="Bib.html#Baumann-et al 2025"><span class="inlineref">[Baumann et al 2025]</span></a>, which achieves the
     best of both worlds by generalizing both the selective SLH variant from
@@ -174,24 +178,27 @@
     SLH and Ultimate SLH satisfy a relative security property: any
     transformed program running with speculation must not leak more than what
     the source program leaks sequentially. Their Rocq formalization originated
-    as an extension of the simple development from the <a href="SpecCT.html"><span class="inlineref">SpecCT</span></a> chapter. 
+    as an extension of the simple development from the <a href="SpecCT.html"><span class="inlineref">SpecCT</span></a> chapter.
+    Another recent extension combines Ultimate SLH with protection against
+    speculative control-flow hijacking attacks (Spectre BTB and RSB) into a
+    formally secure defense called Triosecuris <a href="Bib.html#Baumann-et al 2026"><span class="inlineref">[Baumann et al 2026]</span></a>. 
 <div class="paragraph"> </div>
 
-<a id="lab116"></a><h2 class="section">Strong Timing Isolation of Hardware Enclaves</h2>
+<a id="lab142"></a><h2 class="section">Strong Timing Isolation of Hardware Enclaves</h2>
 
 <div class="paragraph"> </div>
 
  This work <a href="Bib.html#Lau-et al 2024"><span class="inlineref">[Lau et al 2024]</span></a> introduced a RISC-V processor design that is
     formally verified in Rocq to achieve strong timing isolation for enclaves,
-    which is formalized in terms of "air-gaped machines". 
+    which is formalized in terms of "air-gapped machines". 
 <div class="paragraph"> </div>
 
-<a id="lab117"></a><h1 class="section">Looking Forward</h1>
+<a id="lab143"></a><h1 class="section">Looking Forward</h1>
 
 <div class="paragraph"> </div>
 
- For readers interesting in research, here are the main conferences
-    publishing papers on formal foundations on security:
+ For readers interested in research, here are the main conferences
+    publishing papers on formal foundations of security:
 <ul class="doclist">
 <li> Computer Security Foundations (CSF)
 
@@ -219,14 +226,30 @@
 <li> IEEE Security and Privacy (SP)
 
 </li>
-<li> Principles of Secure Compilation Workshop (PriSC) 
+</ul>
+
+<div class="paragraph"> </div>
+
+There are also a few workshops in this space:
+<ul class="doclist">
+<li> Principles of Secure Compilation (PriSC)
+
+</li>
+<li> Programming Languages and Analysis for Security (PLAS)
+
+</li>
+<li> Foundations of Computer Security (FCS)
+
+<div class="paragraph"> </div>
+
+ 
 
 </li>
 </ul>
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2026-01-07&nbsp;13:37&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-08-23&nbsp;16:10&nbsp;*)</span><br/>
 </div>
 </div>
 

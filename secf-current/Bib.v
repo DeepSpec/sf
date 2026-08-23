@@ -24,6 +24,19 @@
   Grégoire, Vincent Laporte. Proc. ACM Program. Lang. 9(POPL):
   1293-1325. 2025. {https://doi.org/10.1145/3704880}
 
+[Arranz-Olmos et al 2025b] The Jasmin Compiler Preserves Cryptographic
+  Security. Santiago Arranz-Olmos, Gilles Barthe, Lionel Blatter, Benjamin
+  Grégoire, Vincent Laporte, Paolo Torrini. arXiv:2511.11292. 2025.
+  {https://arxiv.org/abs/2511.11292}
+
+[Barthe et al 2004] Secure Information Flow by Self-Composition. Gilles
+  Barthe, Pedro R. D'Argenio, Tamara Rezk. IEEE Computer Security Foundations
+  Workshop (CSFW). 2004. {https://doi.org/10.1109/CSFW.2004.17}
+
+[Barthe et al 2011] Relational Verification Using Product Programs. Gilles
+  Barthe, Juan Manuel Crespo, César Kunz. International Symposium on Formal
+  Methods (FM). LNCS 6664. 2011. {https://doi.org/10.1007/978-3-642-21437-0_17}
+
 [Barthe et al 2019] System-Level Non-interference of Constant-Time
   Cryptography. Part I: Model. Gilles Barthe, Gustavo Betarte, Juan Diego Campo,
   Carlos Luna. J. Autom. Reason. 63(1): 1-51. 2019.
@@ -44,9 +57,32 @@
   and Cătălin Hrițcu. IEEE Computer Security Foundations Symposium
   (CSF). 2025. {http://arxiv.org/abs/2502.03203}
 
+[Baumann et al 2026] Triosecuris: Formally Verified Protection Against
+  Speculative Control-Flow Hijacking. Jonathan Baumann, Yonghyun Kim, Yan Farba,
+  Cătălin Hrițcu, and Julay Leatherman-Brooks. IEEE Computer Security
+  Foundations Symposium (CSF). 2026. {https://arxiv.org/abs/2601.22978}
+
+[Carruth 2018] Speculative Load Hardening: A Spectre Variant ##1
+  Mitigation Technique. Chandler Carruth. LLVM Reference. 2018.
+  {https://llvm.org/docs/SpeculativeLoadHardening.html}
+
 [Devriese and Piessens 2010] Noninterference through Secure
   Multi-execution. Dominique Devriese, Frank Piessens. IEEE Symposium on
   Security and Privacy. 2010.  {https://doi.org/10.1109/SP.2010.15}
+
+[Fournet et al 2009] A Security-Preserving Compiler for Distributed
+  Programs. Cédric Fournet, Gurvan Le Guernic, Tamara Rezk. ACM SIGSAC
+  Conference on Computer and Communications Security (CCS). 2009.
+  {https://doi.org/10.1145/1653662.1653715}
+
+[Jasmin] Documentation for the Jasmin language for high-assurance and
+  high-speed cryptography. {https://jasmin-lang.readthedocs.io/}
+
+[Kocher et al 2019] Spectre Attacks: Exploiting Speculative Execution.
+  Paul Kocher, Jann Horn, Anders Fogh, Daniel Genkin, Daniel Gruss, Werner Haas,
+  Mike Hamburg, Moritz Lipp, Stefan Mangard, Thomas Prescher, Michael Schwarz,
+  Yuval Yarom. IEEE Symposium on Security and Privacy. 2019.
+  {https://doi.org/10.1109/SP.2019.00002}
 
 [Lau et al 2024] Specification and Verification of Strong Timing Isolation
   of Hardware Enclaves. Stella Lau, Thomas Bourgeat, Clément Pit-Claudel, Adam
@@ -67,11 +103,21 @@
   Communications 21 (1), 5-19. 2003.
   {https://www.cs.cornell.edu/andru/papers/jsac/sm-jsac03.pdf}
 
-[Shivakumar et al 2023] Spectre Declassified: Reading from the Right Place
+[Shivakumar et al 2022] Enforcing Fine-grained Constant-time
+  Policies. Basavesh Ammanaghatta Shivakumar, Gilles Barthe, Benjamin Grégoire,
+  Vincent Laporte, Swarn Priya. ACM SIGSAC Conference on Computer and
+  Communications Security (CCS). 2022. {https://doi.org/10.1145/3548606.3560689}
+
+[Shivakumar et al 2023a] Spectre Declassified: Reading from the Right Place
   at the Wrong Time. B. A. Shivakumar, J. Barnes, G. Barthe, S. Cauligi,
   C. Chuengsatiansup, D. Genkin, S. O’Connell, P. Schwabe, R. Q. Sim, and
   Y. Yarom.  IEEE Symposium on Security and Privacy. 2023.
   {http://dx.doi.org/10.1109/SP46215.2023.10179355}
+
+[Shivakumar et al 2023b] Typing High-Speed Cryptography against Spectre v1.
+  B. A. Shivakumar, G. Barthe, B. Grégoire, V. Laporte, T. Oliveira,
+  S. Priya, P. Schwabe, L. Tabary-Maujean. IEEE Symposium on Security and
+  Privacy. 2023. {https://doi.org/10.1109/SP46215.2023.10179418}
 
 [Volpano et al 1996] A Sound Type System for Secure Flow Analysis. Dennis
   M. Volpano, Cynthia E. Irvine, Geoffrey Smith. J. Comput. Secur. 4(2/3):
@@ -82,6 +128,10 @@
   Workshop
   (CSFW). 1997. {https://ifc-challenge.appspot.com/static/pdfs/csfw97.pdf}
 
+[Zdancewic et al 2002] Secure Program Partitioning. Steve Zdancewic,
+  Lantian Zheng, Nathaniel Nystrom, Andrew C. Myers. ACM Transactions on
+  Computer Systems 20(3): 283-328. 2002. {https://doi.org/10.1145/566340.566343}
+
 [Zhang et al 2023] Ultimate SLH: Taking Speculative Load Hardening to the
   Next Level. Zhiyuan Zhang, Gilles Barthe, Chitchanok Chuengsatiansup, Peter
   Schwabe, Yuval Yarom. USENIX Security Symposium. 2023.
@@ -91,4 +141,4 @@
 
 (** $Date$ *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:10 *)

@@ -993,7 +993,7 @@ End ExamplePrograms2.
     emerged a few years later.
 
     [Yu, Hamid, and Shao 2003] (in Bib.v) present the CAP framework for the
-    verification in Coq of assembly-level code. This framework exploits
+    verification in Rocq of assembly-level code. This framework exploits
     separation logic style specifications, with predicate for lists and list
     segments involving the separating conjunction operator.
 
@@ -1007,4 +1007,4 @@ End ExamplePrograms2.
     (Isabelle/HOL, Coq/Rocq, PVS, HOL4, HOL). For a detailed list, see the last
     chapter of the companion notes, linked from the [Preface]. *)
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

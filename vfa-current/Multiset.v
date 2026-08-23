@@ -320,4 +320,4 @@ Proof.
 (** That means we can verify sorting algorithms using either
     permutations or multisets, whichever we find more convenient. *)
 
-(* 2026-01-06 11:59 *)
+(* 2026-08-16 16:01 *)

@@ -4,7 +4,7 @@ Set Warnings "-notation-overridden".
 Require Nat.
 From LF Require Export Tactics.
 
-(** We have now seen many examples of factual claims (i.e.,
+(** We have now seen many examples of mathematical statements (i.e.,
     _propositions_) and ways of presenting evidence of their truth
     (_proofs_).  In particular, we have worked extensively with
     equality propositions ([e1 = e2]), implications ([P -> Q]), and
@@ -198,7 +198,6 @@ Qed.
 Lemma and_example3 :
   forall n m : nat, n + m = 0 -> n * m = 0.
 Proof.
-  (* WORKED IN CLASS *)
   intros n m H.
   apply plus_is_O in H.
   destruct H as [Hn Hm].
@@ -536,6 +535,15 @@ Proof.
   - (* b = false *) reflexivity.
 Qed.
 
+(** **** Exercise: 2 stars, standard, optional (S_pred_not_zero)
+
+    We can also prove that for non-negative natural numbers
+    the successor function is the inverse of predecessor. *)
+Lemma S_pred_not_zero : forall n, n<>0 -> S (pred n) = n.
+Proof.
+   (* FILL IN HERE *) Admitted.
+(** [] *)
+
 (* ================================================================= *)
 (** ** Truth *)
 
@@ -610,7 +618,7 @@ Print "<->".
      iff = fun A B : Prop => (A -> B) /\ (B -> A)
          : Prop -> Prop -> Prop
 
-     Argumments iff (A B)%type_scope  *)
+     Arguments iff (A B)%type_scope  *)
 
 Theorem iff_sym : forall P Q : Prop,
   (P <-> Q) -> (Q <-> P).
@@ -637,13 +645,13 @@ Qed.
 Lemma apply_iff_example1:
   forall P Q R : Prop, (P <-> Q) -> (Q -> R) -> (P -> R).
 Proof.
-  intros P Q R Hiff H HP. apply H. apply Hiff. apply HP.
+  intros P Q R Hiff H HP. apply H. apply Hiff (* P -> Q *). apply HP.
 Qed.
 
 Lemma apply_iff_example2:
   forall P Q R : Prop, (P <-> Q) -> (P -> R) -> (Q -> R).
 Proof.
-  intros P Q R Hiff H HQ. apply H. apply Hiff. apply HQ.
+  intros P Q R Hiff H HQ. apply H. apply Hiff (* Q -> P *). apply HQ.
 Qed.
 
 (** **** Exercise: 1 star, standard, optional (iff_properties)
@@ -803,6 +811,37 @@ Proof.
 (** [] *)
 
 (* ################################################################# *)
+(** * Recap -- Logical connectives in Rocq *)
+
+(** Here is a summary of the logical connectives in Rocq: *)
+
+(** **** Basic connectives:
+       - [and : Prop -> Prop -> Prop] (conjunction):
+         - introduced with the [split] tactic
+         - eliminated with [destruct H as [H1 H2]]
+       - [or : Prop -> Prop -> Prop] (disjunction):
+         - introduced with [left] and [right] tactics
+         - eliminated with [destruct H as [H1 | H2]]
+       - [False : Prop]
+         - eliminated with [destruct H as []]
+       - [True : Prop]
+         - introduced with [apply I], but not as useful
+       - [ex : forall A:Type, (A -> Prop) -> Prop] (existential)
+         - introduced with [exists w]
+         - eliminated with [destruct H as [x H]]
+*)
+(** **** Derived connectives:
+       - [not : Prop -> Prop] (negation):
+         - [not P] defined as [P -> False]
+       - [iff : Prop -> Prop -> Prop] (logical equivalence):
+         - [iff P Q] defined as [(P -> Q) /\ (Q -> P)]
+
+    **** Fundamental connectives we've been using since the beginning:
+       - equality ([e1 = e2])
+       - implication ([P -> Q])
+       - universal quantification ([forall x, P]) *)
+
+(* ################################################################# *)
 (** * Programming with Propositions *)
 
 (** The logical connectives that we have seen provide a rich
@@ -836,14 +875,13 @@ Proof.
 Qed.
 
 Example In_example_2 :
-  forall n, In n [2; 4] ->
-  exists n', n = 2 * n'.
+  forall n, In n [2; 4] -> Even n.
 Proof.
   (* WORKED IN CLASS *)
-  simpl.
-  intros n [H | [H | []]].
-  - exists 1. rewrite <- H. reflexivity.
-  - exists 2. rewrite <- H. reflexivity.
+  intros n H. unfold Even. simpl in H.
+  destruct H as [H | [H | []]].
+  - rewrite <- H. exists 1. reflexivity.
+  - rewrite <- H. exists 2. reflexivity.
 Qed.
 (** (Notice the use of the empty pattern to discharge the last case
     _en passant_.) *)
@@ -855,12 +893,12 @@ Theorem In_map :
          In x l ->
          In (f x) (map f l).
 Proof.
-  intros A B f l x.
+  intros A B f l x H.
   induction l as [|x' l' IHl'].
   - (* l = nil, contradiction *)
-    simpl. intros [].
+    simpl. simpl in H. destruct H as [].
   - (* l = x' :: l' *)
-    simpl. intros [H | H].
+    simpl. simpl in H. destruct H as [H | H].
     + rewrite H. left. reflexivity.
     + right. apply IHl'. apply H.
 Qed.
@@ -1084,7 +1122,7 @@ Qed.
 
 (** Intuitively, we should be able to use this theorem to prove the special
     case where [x] is [42]. However, simply invoking the tactic [apply
-    in_not_nil] will fail because it cannot infer the value of [x]. *)
+    in_not_nil] on the goal will fail because it cannot infer the value of [x]. *)
 
 Lemma in_not_nil_42 :
   forall l : list nat, In 42 l -> l <> [].
@@ -1095,21 +1133,21 @@ Abort.
 
 (** There are several ways to work around this: *)
 
-(** We can use [apply ... with ...]: *)
+(** We can use [apply ... in ...] to do a forward proof instead: *)
 Lemma in_not_nil_42_take2 :
   forall l : list nat, In 42 l -> l <> [].
 Proof.
   intros l H.
-  apply in_not_nil with (x := 42).
+  apply in_not_nil in H.
   apply H.
 Qed.
 
-(** Or we can use [apply ... in ...]: *)
+(** Or we can stick with a backward proof and use [apply ... with ...]: *)
 Lemma in_not_nil_42_take3 :
   forall l : list nat, In 42 l -> l <> [].
 Proof.
   intros l H.
-  apply in_not_nil in H.
+  apply in_not_nil with (x := 42).
   apply H.
 Qed.
 
@@ -1200,10 +1238,11 @@ Qed.
     propositional equality is required for this. *)
 
 
-(** Since [Prop] includes _both_ decidable and undecidable properties, we
-    have two options when we want to formalize a property that happens to
-    be decidable: we can express it either as a boolean computation or as a
-    function into [Prop]. *)
+
+(** Since [Prop] includes _both_ decidable and undecidable properties,
+    when we want to formalize a property that happens to be decidable
+    we have two options: we can express it as a boolean computation
+    _or_ as a function into [Prop]. *)
 
 Example even_42_bool : even 42 = true.
 Proof. reflexivity. Qed.
@@ -1270,7 +1309,7 @@ Qed.
 
     In general, _both_ can be useful. *)
 
-(** For example, booleans are more useful for defining functions.
+(** For example, booleans are more useful for defining computations.
     There is no effective way to _test_ whether or not a [Prop] is
     true, so we cannot use [Prop]s in conditional expressions. The
     following definition is rejected: *)
@@ -1508,13 +1547,10 @@ Example function_equality_ex1 :
   (fun x => 3 + x) = (fun x => (pred 4) + x).
 Proof. reflexivity. Qed.
 
-(** This works when Rocq can simplify the functions to the same expression,
-    but this doesn't always happen. **)
-
 (** These two functions are equal just by simplification, but in general
-    functions can be equal for more interesting reasons.
+    functions can be equal for more interesting reasons. *)
 
-    In common mathematical practice, two functions [f] and [g] are
+(** In common mathematical practice, two functions [f] and [g] are
     considered equal if they produce the same output on every input:
 
     (forall x, f x = g x) -> f = g
@@ -1802,4 +1838,4 @@ Definition consequentia_mirabilis := forall P:Prop,
 
     [] *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:07 *)

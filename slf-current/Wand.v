@@ -1273,4 +1273,4 @@ End QwandEquiv.
     [Hobor and Villard 2013] (in Bib.v). The rule has later been popularized by the
     Iris framework, in particular. *)
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

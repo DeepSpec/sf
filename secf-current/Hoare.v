@@ -224,7 +224,7 @@ Notation "( x )" := x (in custom assn at level 0, x at level 99) : assertion_sco
  *)
 
 Notation "$ f" := f (in custom assn at level 0, f constr at level 0) : assertion_scope.
-Notation "x" := (x%assertion) (in custom assn at level 0, x constr at level 0) : assertion_scope.
+Notation "x" := x (in custom assn at level 0, x constr at level 0) : assertion_scope.
 
 Declare Scope hoare_spec_scope.
 Open Scope hoare_spec_scope.
@@ -591,8 +591,7 @@ Qed.
     updated state, defined as follows: *)
 
 Definition assertion_sub X (a:aexp) (P:Assertion) : Assertion :=
-  fun (st : state) =>
-    (P%_assertion) (X !-> ((a:Aexp) st); st).
+  fun (st : state) => P (X !-> (aeval st a); st).
 
 Notation "P [ X |-> a ]" := (assertion_sub X a P)
                               (in custom assn at level 10, left associativity,
@@ -2398,4 +2397,4 @@ End HoareAssertAssume.
 
 
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:10 *)

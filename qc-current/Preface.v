@@ -7,10 +7,18 @@
 (** * Setup *)
 
 (** For working with this material, you will need to install
-    QuickChick. For this version, we are going to be using a
-    QuickChick-2.0, which can be installed by simply running:
+    QuickChick. This version of the book requires QuickChick 2.2 or
+    later, which can be installed by simply running:
 
     [ opam install coq-quickchick ]
+
+    If you already have an earlier version, upgrade it with
+
+    [ opam upgrade coq-quickchick ]
+
+    (QuickChick 2.2 renamed the command for automatic instance
+    derivation from [Derive] to [QCDerive], so the examples here will
+    not compile against older versions.)
 
     The [QuickChickInterface] chapter serves as a reference
     manual for QuickChick.  The rest of the book explains its features
@@ -32,7 +40,7 @@
     volume       =   "4",
     year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 2.0, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 2.1, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -45,4 +53,4 @@
     Specification_.  Work on this volume was also supported by NSF
     grant 1421243, _Random Testing for Language Design_. *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:01 *)

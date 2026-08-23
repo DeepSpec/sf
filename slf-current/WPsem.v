@@ -870,4 +870,4 @@ End TexanTriples.
     VST have advocated for this rule. The ramified frame rule was integrated in
     CFML 2.0 in 2018. *)
 
-(* 2026-01-06 11:57 *)
+(* 2026-08-16 15:58 *)

@@ -150,7 +150,7 @@
     volume       =   "5",
     year         =   "2026",
     publisher    =   "Electronic textbook",
-    note         =   {Version 2.0, \URL{http://softwarefoundations.cis.upenn.edu} },
+    note         =   {Version 2.1, \URL{http://softwarefoundations.cis.upenn.edu} },
     }
 *)
 
@@ -210,4 +210,4 @@ to install the properly configured clightgen outputs."
 "It is not necessary to have clightgen installed".
 Abort.
 
-(* 2026-01-07 13:38 *)
+(* 2026-08-16 16:25 *)

@@ -802,51 +802,36 @@ Proof.
 Lemma ev_Even_firsttry : forall n,
   ev n -> Even n.
 Proof.
-  (* WORKED IN CLASS *) unfold Even.
+  (* WORKED IN CLASS *) unfold Even. intros n E.
 
-(** We could try to proceed by case analysis or induction on [n].  But
-    since [ev] is mentioned in a premise, this strategy seems
+(** We start by instantiating the existential with [div2 n]: *)
+
+  exists (div2 n).
+
+(** We are left to prove that [n = double (div2 n)] knowing [E : ev n].
+
+    We could try to proceed by case analysis or induction on [n].  But
+    since [ev] is mentioned in [E], this strategy seems
     unpromising, because (as we've noted before) the induction
     hypothesis will talk about [n-1] (which is _not_ even!).  Thus, it
-    seems better to first try [inversion] on the evidence for [ev].
+    seems better to first try [inversion] on the evidence [E].
     Indeed, the first case can be solved trivially. *)
 
-  intros n E. inversion E as [EQ' | n' E' EQ'].
-  - (* E = ev_0 *) exists 0. reflexivity.
-  - (* E = ev_SS n' E'
+  inversion E as [EQ' | n' E' EQ'].
+  - (* E = ev_0 *) reflexivity.
 
-    Unfortunately, the second case is harder.  We need to show [exists
-    n0, S (S n') = double n0], but the only available assumption is
-    [E'], which states that [ev n'] holds.  Since this isn't directly
-    useful, it seems that we are stuck and that performing case
-    analysis on [E] was a waste of time.
+  - (* E = ev_SS n' E' *)
+    simpl. f_equal. f_equal.
 
-    If we look more closely at our second goal, however, we can see
-    that something interesting happened: By performing case analysis
-    on [E], we were able to reduce the original result to a similar
-    one that involves a _different_ piece of evidence for [ev]: namely
-    [E'].  More formally, we could finish our proof if we could show
-    that
+(** Unfortunately, the second case is harder.  We need to show
+    that [n' = double (div2 n')], but this is another instance
+    of the fact about [double] and [div2] we were trying to prove
+    before, just for [n'] instead of [n].
 
-        exists k', n' = double k',
+    We do have evidence [E' : ev n'], but what we are missing
+    is an induction hypothesis corresponding to this evidence.
 
-    which is the same as the original statement, but with [n'] instead
-    of [n].  Indeed, it is not difficult to convince Rocq that this
-    intermediate result would suffice. *)
-    assert (H: (exists k', n' = double k')
-               -> (exists n0, S (S n') = double n0)).
-        { intros [k' EQ'']. exists (S k'). simpl.
-          rewrite <- EQ''. reflexivity. }
-    apply H.
-
-    (** Unfortunately, now we are stuck. To see this clearly, let's
-        move [E'] back into the goal from the hypotheses. *)
-
-    generalize dependent E'.
-
-    (** Now it is obvious that we are trying to prove another instance
-        of the same theorem we set out to prove -- only here we are
-        talking about [n'] instead of [n]. *)
+    So we are stuck! *)
 Abort.
 
 (* ================================================================= *)
@@ -878,13 +863,12 @@ Abort.
 Lemma ev_Even : forall n,
   ev n -> Even n.
 Proof.
-  unfold Even. intros n E.
+  unfold Even. intros n E. exists (div2 n).
   induction E as [|n' E' IH].
   - (* E = ev_0 *)
-    exists 0. reflexivity.
-  - (* E = ev_SS n' E',  with IH : Even n' *)
-    destruct IH as [k Hk]. rewrite Hk.
-    exists (S k). simpl. reflexivity.
+    reflexivity.
+  - (* E = ev_SS n' E',  with IH : n' = double (div2 n') *)
+    simpl. f_equal. f_equal. apply IH.
 Qed.
 
 (** Here, we can see that Rocq produced an [IH] that corresponds
@@ -1672,9 +1656,9 @@ Definition EmptyStr' {T:Type} := @Star T (EmptySet).
     expressions will often require induction on evidence. *)
 
 (** For example, suppose we want to prove the following intuitive
-    fact: If a string [s] is matched by a regular expression [re],
-    then all elements of [s] must occur as character literals
-    somewhere in [re].
+    fact that is true in our simple setting: If a string [s] is matched
+    by a regular expression [re], then all elements of [s] must occur
+    as character literals somewhere in [re].
 
     To state this as a theorem, we first define a function [re_chars]
     that lists all characters that occur in a regular expression: *)
@@ -1737,7 +1721,8 @@ Proof.
     why we need induction on evidence for [exp_match], rather than
     induction on the regular expression [re]: The latter would only
     provide an induction hypothesis for strings that match [re], which
-    would not allow us to reason about the case [In x s2]. *)
+    would not allow us to reason about the case [In x s2], where [s2]
+    only matches [Star re] not [re]. *)
 
     rewrite In_app_iff in Hin.
     destruct Hin as [Hin | Hin].
@@ -2219,17 +2204,16 @@ Proof.
   - (* l = m :: l' *)
     simpl. destruct (n =? m) eqn:H.
     + (* n =? m = true *)
-      intros _. rewrite eqb_eq in H. rewrite H.
-      left. reflexivity.
+      intros _. rewrite eqb_eq in H.
+      rewrite H. left. reflexivity.
     + (* n =? m = false *)
       intros H'. right. apply IHl'. apply H'.
 Qed.
 
-(** In the first branch after [destruct], we explicitly apply the [eqb_eq]
-    lemma to the equation generated by destructing [n =? m], to convert the
-    assumption [n =? m
-    = true] into the assumption [n = m]; then we had to
-    [rewrite] using this assumption to complete the case. *)
+(** In the first branch after [destruct], we explicitly apply the
+    [eqb_eq] lemma to the equation generated by destructing [n =? m],
+    to convert the assumption [n =? m = true] into the assumption [n = m];
+    only then could we [rewrite] using this assumption to complete the case. *)
 
 (** We can streamline this sort of reasoning by defining an inductive
     proposition that yields a better case-analysis principle for [n =?
@@ -2261,7 +2245,7 @@ Inductive reflect (P : Prop) : bool -> Prop :=
     Similarly, the only way to show [reflect P false] is by tagging
     evidence for [~ P] with the [ReflectF] constructor. *)
 
-(** To put this observation to work, we first prove that the
+(** To put these observations to work, we first prove that the
     statements [P <-> b = true] and [reflect P b] are indeed
     equivalent.  First, the left-to-right implication: *)
 
@@ -2281,8 +2265,8 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** We can think of [reflect] as a variant of the usual "if and only
-    if" connective; the advantage of [reflect] is that, by destructing
+(** So we can think of [reflect] as a variant of the usual "if and only
+    if" connective. The advantage of [reflect] is that, by destructing
     a hypothesis or lemma of the form [reflect P b], we can perform
     case analysis on [b] while _at the same time_ generating
     appropriate hypothesis in the two branches ([P] in the first
@@ -2293,7 +2277,7 @@ Proof.
 
     We begin by recasting the [eqb_eq] lemma in terms of [reflect]: *)
 
-Lemma eqbP : forall n m, reflect (n = m) (n =? m).
+Lemma eqb_spec : forall n m, reflect (n = m) (n =? m).
 Proof.
   intros n m. apply iff_reflect. rewrite eqb_eq. reflexivity.
 Qed.
@@ -2316,16 +2300,16 @@ Proof.
   - (* l = [] *)
     simpl. intros H. apply H. reflexivity.
   - (* l = m :: l' *)
-    simpl. destruct (eqbP n m) as [EQnm | NEQnm].
+    simpl. destruct (eqb_spec n m) as [EQnm | NEQnm].
     + (* n = m *)
       intros _. rewrite EQnm. left. reflexivity.
     + (* n <> m *)
       intros H'. right. apply IHl'. apply H'.
 Qed.
 
-(** **** Exercise: 3 stars, standard, especially useful (eqbP_practice)
+(** **** Exercise: 3 stars, standard, especially useful (eqb_spec_practice)
 
-    Use [eqbP] as above to prove the following: *)
+    Use [eqb_spec] as above to prove the following: *)
 
 Fixpoint count n l :=
   match l with
@@ -2333,7 +2317,7 @@ Fixpoint count n l :=
   | m :: l' => (if n =? m then 1 else 0) + count n l'
   end.
 
-Theorem eqbP_practice : forall n l,
+Theorem eqb_spec_practice : forall n l,
   count n l = 0 -> ~(In n l).
 Proof.
   intros n l Hcount. induction l as [| m l' IHl'].
@@ -2958,4 +2942,4 @@ Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:07 *)

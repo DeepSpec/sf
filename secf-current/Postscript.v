@@ -60,17 +60,21 @@
 (** ** Jasmin programming language and compiler *)
 
 (** Jasmin is a low-level domain-specific language for implementing
-    high-assurance and high-speed cryptography. Jasmin programs can be verified
-    for correctness, cryptographic security, and side-channel resistance by
-    translation to the EasyCrypt proof assistant [Almeida et al 2020] (in Bib.v).
+    high-assurance and high-speed cryptography [Jasmin] (in Bib.v). Jasmin programs
+    can be verified for correctness, cryptographic security, and side-channel
+    resistance by translation to the EasyCrypt proof assistant
+    [Almeida et al 2020] (in Bib.v). The Jasmin type checker enforces cryptographic
+    constant-time [Shivakumar et al 2022] (in Bib.v) and also speculative
+    constant-time for manually SLH-hardened code [Shivakumar et al 2023b] (in Bib.v).
     The Jasmin compiler was formally verified in Rocq to be correct
-    [Almeida et al 2020] (in Bib.v) and to preserve constant-time security
-    [Barthe et al 2021] (in Bib.v). In more recent work a core compiler inspired by
-    Jasmin was proved in Rocq to also preserve speculative constant-time
-    [Arranz-Olmos et al 2025] (in Bib.v). *)
+    [Almeida et al 2020] (in Bib.v) [Arranz-Olmos et al 2025b] (in Bib.v), to preserve
+    constant-time security [Barthe et al 2021] (in Bib.v), and in more recent work
+    to also preserve cryptographic security [Arranz-Olmos et al 2025b] (in Bib.v).
+    In recent work also a core compiler inspired by Jasmin was proved in Rocq to
+    preserve speculative constant-time [Arranz-Olmos et al 2025] (in Bib.v). *)
 
 (* ================================================================= *)
-(** ** Flexible Mechanized Speculative Load Hardening *)
+(** ** Mechanized Speculative Load Hardening *)
 
 (** The [SpecCT] chapter and the two projects above are
     aimed at achieving security for cryptographic code. Yet Spectre attacks
@@ -79,7 +83,7 @@
     sensitive program's entire memory. SLH is, however, not strong enough for
     protecting code that does not respect the constant-time discipline, leading
     to the introduction of Ultimate SLH [Zhang et al 2023] (in Bib.v), which provides
-    protection for arbitrary programs, but has too large overhead for general
+    protection for arbitrary programs, but has too large an overhead for general
     use, since it conservatively assumes that all data is secret. More recent
     work introduces Flexible SLH [Baumann et al 2025] (in Bib.v), which achieves the
     best of both worlds by generalizing both the selective SLH variant from
@@ -87,20 +91,23 @@
     SLH and Ultimate SLH satisfy a relative security property: any
     transformed program running with speculation must not leak more than what
     the source program leaks sequentially. Their Rocq formalization originated
-    as an extension of the simple development from the [SpecCT] chapter. *)
+    as an extension of the simple development from the [SpecCT] chapter.
+    Another recent extension combines Ultimate SLH with protection against
+    speculative control-flow hijacking attacks (Spectre BTB and RSB) into a
+    formally secure defense called Triosecuris [Baumann et al 2026] (in Bib.v). *)
 
 (* ================================================================= *)
 (** ** Strong Timing Isolation of Hardware Enclaves *)
 
 (** This work [Lau et al 2024] (in Bib.v) introduced a RISC-V processor design that is
     formally verified in Rocq to achieve strong timing isolation for enclaves,
-    which is formalized in terms of "air-gaped machines". *)
+    which is formalized in terms of "air-gapped machines". *)
 
 (* ################################################################# *)
 (** * Looking Forward *)
 
-(** For readers interesting in research, here are the main conferences
-    publishing papers on formal foundations on security:
+(** For readers interested in research, here are the main conferences
+    publishing papers on formal foundations of security:
 - Computer Security Foundations (CSF)
 - Principles of Programming Languages (POPL)
 - International Conference on Functional Programming (ICFP)
@@ -109,6 +116,12 @@
 - Computer and Communications Security (CCS)
   - Formal Methods and Programming Languages track
 - IEEE Security and Privacy (SP)
-- Principles of Secure Compilation Workshop (PriSC) *)
 
-(* 2026-01-07 13:37 *)
+There are also a few workshops in this space:
+- Principles of Secure Compilation (PriSC)
+- Programming Languages and Analysis for Security (PLAS)
+- Foundations of Computer Security (FCS)
+
+ *)
+
+(* 2026-08-23 16:10 *)

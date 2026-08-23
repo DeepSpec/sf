@@ -27,11 +27,14 @@ Set Bullet Behavior "Strict Subproofs".
     deals with a command-line tool. The code that it discusses, a
     simple compiler from a high-level expression language to a
     low-level stack machine, can be found in the directory
-    [stack-compiler], broken up into two files: [Exp.v] containing the
-    high-level expression languages and [Stack.v] containing the low-level
-    stack machine and the compiler. The chapter's
-    text will tell you what to type on the command line or where to
-    look in the subdirectory as needed.
+    [stack-compiler] of the QuickChick repository (available here:
+    {https://github.com/QuickChick/QuickChick/tree/master/examples/stack-compiler}),
+    broken up into two files: [Exp.v] containing the high-level
+    expression languages and [Stack.v] containing the low-level
+    stack machine and the compiler. The chapter's text assumes
+    you have copied that directory as a subdirectory of [qc],
+    and will tell you what to type on the command line or where to
+    look in that subdirectory as needed.
 
     To get started, let's try the tool out and see it's output! Go to
     the [stack-compiler] subdirectory and run the following command:
@@ -127,7 +130,7 @@ Inductive exp : Type :=
 (** Since [exp] is a simple datatype, QuickChick can derive a generator, a
     shrinker, and a printer automatically. *)
 
-Derive (Arbitrary, Show) for exp.
+QCDerive (Arbitrary, Show) for exp.
 
 (** The [eval] function evaluates an expression to a number. *)
 Fixpoint eval (e : exp) : nat :=
@@ -499,4 +502,4 @@ Definition compiles_correctly (e : exp) := (execute [] (compile e)) = [eval e]?.
     in [QuickChickInterface].
 *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:02 *)

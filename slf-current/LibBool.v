@@ -241,7 +241,7 @@ Proof using. auto. Qed.
 Lemma neg_true : ! true = false.
 Proof using. auto. Qed.
 
-(* --LATER: fix coq display of goals below *)
+(* --LATER: fix display of goals below *)
 
 Lemma neg_and : automorphism neg and or.
 (* forall x y, ! (x && y) = (! x) || (! y) *)
@@ -387,4 +387,4 @@ Tactic Notation "rew_bool" "~" "in" "*" :=
 Tactic Notation "rew_bool" "*" "in" "*" :=
   rew_bool in *; auto_star.
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

@@ -742,7 +742,7 @@ Global Instance incl_union_l_of_incl_in_eq_and_in_union_eq :
   Incl_union_l.
 Proof using.
   constructor. introv I. rewrite incl_in_eq. rewrite incl_in_eq in I.
-  (* coqbug on "rewrite incl_in_eq in *" *)
+  (* rocq bug on "rewrite incl_in_eq in *" *)
   introv N. rewrite* in_union_eq.
 Qed.
 
@@ -970,4 +970,4 @@ Qed.
 
 End DerivedProperties.
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

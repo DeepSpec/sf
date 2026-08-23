@@ -563,7 +563,7 @@ Proof.
   (* WORKED IN CLASS *)
   unfold maybe_swap.
   destruct al as [ | a [ | b al]].
-  - simpl. apply perm_nil.
+  - apply perm_nil.
   - apply Permutation_refl.
   - bdestruct (a >? b).
     + apply perm_swap.
@@ -627,4 +627,4 @@ Proof.
     [maybe_swap_correct] will be applied (at a larger scale) in
     the next few chapters. *)
 
-(* 2026-01-06 11:59 *)
+(* 2026-08-16 16:01 *)

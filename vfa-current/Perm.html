@@ -818,7 +818,7 @@ That example illustrates a general method for proving permutations
 &nbsp;&nbsp;<span class="comment">(*&nbsp;WORKED&nbsp;IN&nbsp;CLASS&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Perm.html#maybe_swap"><span class="id" title="definition">maybe_swap</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">al</span> <span class="id" title="keyword">as</span> [ | <span class="id" title="var">a</span> [ | <span class="id" title="var">b</span> <span class="id" title="var">al</span>]].<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Sorting.Permutation.html#perm_nil"><span class="id" title="constructor">perm_nil</span></a>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Sorting.Permutation.html#perm_nil"><span class="id" title="constructor">perm_nil</span></a>.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Sorting.Permutation.html#Permutation_refl"><span class="id" title="lemma">Permutation_refl</span></a>.<br/>
 &nbsp;&nbsp;- <span class="id" title="var">bdestruct</span> (<span class="id" title="var">a</span> <a class="idref" href="Perm.html#5ea9023a94e85f78711b2bf8cc72c8f<sub>4</sub>"><span class="id" title="notation">&gt;?</span></a> <span class="id" title="var">b</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib//Stdlib.Sorting.Permutation.html#perm_swap"><span class="id" title="constructor">perm_swap</span></a>.<br/>
@@ -903,7 +903,7 @@ And, we can prove that <span class="inlinecode"><span class="id" title="var">may
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2026-01-06&nbsp;11:59&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-08-16&nbsp;16:01&nbsp;*)</span><br/>
 </div>
 </div>
 

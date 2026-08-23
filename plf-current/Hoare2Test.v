@@ -12,7 +12,7 @@ Ltac check_type A B :=
     | ?T => first [unify T B; idtac "Type: ok" | idtac "Type: wrong - should be (" B ")"]
     end.
 
-Ltac print_manual_grade A :=
+Tactic Notation "print_manual_grade" constr(A) :=
     match eval compute in A with
     | Some (_ ?S ?C) =>
         idtac "Score:"  S;
@@ -133,6 +133,6 @@ idtac "---------- minimum_correct ---------".
 Print Assumptions minimum_correct.
 Abort.
 
-(* 2026-01-07 13:34 *)
+(* 2026-08-23 16:09 *)
 
-(* 2026-01-07 13:34 *)
+(* 2026-08-23 16:09 *)

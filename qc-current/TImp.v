@@ -141,7 +141,7 @@ Inductive ty := TBool | TNat.
     QuickChick provides a top-level vernacular command to derive such
     instances. *)
 
-Derive (Arbitrary, Show) for ty.
+QCDerive (Arbitrary, Show) for ty.
 (* ==>
     GenSizedty is defined
     Shrinkty is defined
@@ -357,7 +357,7 @@ Inductive exp : Type :=
 
 (** To print expressions we derive a [Show] Instance. *)
 
-Derive Show for exp.
+QCDerive Show for exp.
 
 (* ================================================================= *)
 (** ** Typed Expressions *)
@@ -704,7 +704,7 @@ Definition gen_typed_has_type :=
 
 Inductive value := VNat : nat -> value | VBool : bool -> value.
 
-Derive Show for value.
+QCDerive Show for value.
 
 (** We can also quickly define a typing relation for values, a Dec instance
     for it, and a generator for values of a given type. *)
@@ -876,7 +876,7 @@ Definition expression_soundness_exec :=
 (** Let's see what happens if we use the default shrinker for
     expressions carelessly. *)
 
-Derive Shrink for exp.
+QCDerive Shrink for exp.
 
 Definition expression_soundness_exec_firstshrink :=
   let num_vars := 4 in
@@ -1100,7 +1100,7 @@ Notation "'WHILE' b 'DO' c 'END'" :=
 Notation "'TEST' c1 'THEN' c2 'ELSE' c3 'FI'" :=
   (CIf c1 c2 c3) (at level 80, right associativity).
 
-Derive Show for com.
+QCDerive Show for com.
 
 (** (Of course, the derived [Show] instance is not going to use these
     notations!) *)
@@ -1307,7 +1307,7 @@ Conjecture well_typed_state_never_stuck :
     produce such generators -- i.e., generators for data structures
     satisfying inductively defined properties! *)
 
-Derive ArbitrarySizedSuchThat for (fun v => has_type_value v T).
+QCDerive ArbitrarySizedSuchThat for (fun v => has_type_value v T).
 (** ===>
   GenSizedSuchThathas_type_value is defined. *)
 
@@ -1356,7 +1356,7 @@ Print GenSizedSuchThathas_type_value.
 
 (** Moreover, QuickChick can also derive DecOpt instances automatically, as well as proofs of correctness! *)
 
-Derive DecOpt for (has_type_value v T).
+QCDerive DecOpt for (has_type_value v T).
 
 Print DecOpthas_type_value.
 
@@ -1421,4 +1421,4 @@ Conjecture conditional_prop_example :
 (** The first version of this material was developed in collaboration
     with Nicolas Koh. *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:01 *)

@@ -1209,10 +1209,6 @@ Inductive com : Type :=
     declarations to make reading and writing Imp programs more
     convenient. *)
 
-(* SOON: (NOTATION NDS'25)
-   I considered changing maps to also span multiple lines, but I
-   have not attempted this yet, as this would have required changes
-   in earlier chapters. *)
 Notation "'skip'"  := CSkip
   (in custom com at level 0) : com_scope.
 Notation "x := y"  := (CAsgn x y)
@@ -1603,8 +1599,8 @@ Proof.
     also raises a question: Is the second definition of evaluation
     really a partial _function_?  Or is it possible that, beginning from
     the same state [st], we could evaluate some command [c] in
-    different ways to reach two different output states [st'] and
-    [st'']?
+    different ways to reach two different output states [st1] and
+    [st2]?
 
     In fact, this cannot happen: [ceval] _is_ a partial function: *)
 
@@ -2089,4 +2085,4 @@ End BreakImp.
 
     [] *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-16 15:40 *)

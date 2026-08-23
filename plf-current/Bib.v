@@ -5,6 +5,11 @@
 
 (**
 
+[Ahmed 2015] Amal Ahmed (transcribed by Lars Skorstengaard), An
+  Introduction to Logical Relations, Oregon Programming Languages Summer
+  School lectures, July 2015,
+  {https://www.cs.uoregon.edu/research/summerschool/summer16/notes/AhmedLR.pdf}
+
 [Aydemir 2008] Brian Aydemir, Arthur Charguéraud, Benjamin
   C. Pierce, Randy Pollack, and Stephanie Weirich. Engineering Formal
   Metatheory. In ACM SIGPLAN-SIGACT Symposium on Principles of
@@ -39,4 +44,4 @@
 
 (** $Date$ *)
 
-(* 2026-01-06 11:50 *)
+(* 2026-08-23 16:09 *)

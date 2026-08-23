@@ -841,7 +841,7 @@ Fixpoint fold {X Y: Type} (f : X -> Y -> Y) (l : list X) (b : Y)
     yields
 
        1 + (2 + (3 + (4 + 0))).
-]] *)
+*)
 
 Example fold_example1 :
   fold andb [true;true;false;true] true = false.
@@ -1243,4 +1243,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:07 *)

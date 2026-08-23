@@ -12,7 +12,7 @@ Ltac check_type A B :=
     | ?T => first [unify T B; idtac "Type: ok" | idtac "Type: wrong - should be (" B ")"]
     end.
 
-Ltac print_manual_grade A :=
+Tactic Notation "print_manual_grade" constr(A) :=
     match eval compute in A with
     | Some (_ ?S ?C) =>
         idtac "Score:"  S;
@@ -278,6 +278,6 @@ idtac "---------- Himp.p3_p4_inequiv ---------".
 Print Assumptions Himp.p3_p4_inequiv.
 Abort.
 
-(* 2026-01-07 13:38 *)
+(* 2026-08-16 15:40 *)
 
-(* 2026-01-07 13:38 *)
+(* 2026-08-16 15:41 *)

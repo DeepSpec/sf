@@ -618,7 +618,7 @@ Definition hpure' (P:Prop) : hprop :=
 
 (** The notation for [\exists] is directly adapted from that of [exists], which
     supports the quantification an arbitrary number of variables, and is defined
-    in [Rocq.Init.Logic] as follows.
+    in [Corelib.Init.Logic] as follows.
 
     Notation "'exists' x1 .. xn , p" := (ex (fun x1 => .. (ex (fun xn => p)) ..))
       (at level 200, x1 binder, right associativity,
@@ -680,4 +680,4 @@ End Extensionality.
     had spotted the potential benefit of working with the separating
     conjunction. *)
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

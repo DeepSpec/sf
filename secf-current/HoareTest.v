@@ -12,7 +12,7 @@ Ltac check_type A B :=
     | ?T => first [unify T B; idtac "Type: ok" | idtac "Type: wrong - should be (" B ")"]
     end.
 
-Ltac print_manual_grade A :=
+Tactic Notation "print_manual_grade" constr(A) :=
     match eval compute in A with
     | Some (_ ?S ?C) =>
         idtac "Score:"  S;
@@ -402,6 +402,6 @@ idtac "---------- Himp.havoc_post ---------".
 Print Assumptions Himp.havoc_post.
 Abort.
 
-(* 2026-01-07 13:38 *)
+(* 2026-08-23 16:10 *)
 
-(* 2026-01-07 13:38 *)
+(* 2026-08-23 16:10 *)

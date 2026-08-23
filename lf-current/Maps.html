@@ -57,7 +57,7 @@
 </div>
 
 <div class="doc">
-<a id="lab301"></a><h1 class="section">The  Standard Library</h1>
+<a id="lab311"></a><h1 class="section">The  Standard Library</h1>
 
 <div class="paragraph"> </div>
 
@@ -118,7 +118,7 @@ We'll see some more uses of <span class="inlinecode"><span class="id" title="key
 </div>
 
 <div class="doc">
-<a id="lab302"></a><h1 class="section">Identifiers</h1>
+<a id="lab312"></a><h1 class="section">Identifiers</h1>
 
 <div class="paragraph"> </div>
 
@@ -151,7 +151,7 @@ We will often use a few basic properties of string equality...
 </div>
 
 <div class="doc">
-<a id="lab303"></a><h1 class="section">Total Maps</h1>
+<a id="lab313"></a><h1 class="section">Total Maps</h1>
 
 <div class="paragraph"> </div>
 
@@ -279,7 +279,7 @@ When we use maps in later chapters, we'll need several fundamental
     which was discussed in the <a href="Logic.html"><span class="inlineref">Logic</span></a> chapter.) 
 <div class="paragraph"> </div>
 
-<a id="lab304"></a><h4 class="section">Exercise: 1 star, standard, optional (t_apply_empty)</h4>
+<a id="lab314"></a><h4 class="section">Exercise: 1 star, standard, optional (t_apply_empty)</h4>
  First, the empty map returns its default element for all keys: 
 </div>
 <div class="code">
@@ -294,7 +294,7 @@ When we use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab305"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_eq)</h4>
+<a id="lab315"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_eq)</h4>
  Next, if we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at a key <span class="inlinecode"><span class="id" title="var">x</span></span> with a new value <span class="inlinecode"><span class="id" title="var">v</span></span>
     and then look up <span class="inlinecode"><span class="id" title="var">x</span></span> in the map resulting from the <span class="inlinecode"><span class="id" title="var">update</span></span>, we
     get back <span class="inlinecode"><span class="id" title="var">v</span></span>: 
@@ -311,7 +311,7 @@ When we use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab306"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_neq)</h4>
+<a id="lab316"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_neq)</h4>
  On the other hand, if we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at a key <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> and then
     look up a <i>different</i> key <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span></span> in the resulting map, we get the
     same result that <span class="inlinecode"><span class="id" title="var">m</span></span> would have given: 
@@ -329,7 +329,7 @@ When we use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab307"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_shadow)</h4>
+<a id="lab317"></a><h4 class="section">Exercise: 2 stars, standard, optional (t_update_shadow)</h4>
  If we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at a key <span class="inlinecode"><span class="id" title="var">x</span></span> with a value <span class="inlinecode"><span class="id" title="var">v<sub>1</sub></span></span> and then
     update again with the same key <span class="inlinecode"><span class="id" title="var">x</span></span> and another value <span class="inlinecode"><span class="id" title="var">v<sub>2</sub></span></span>, the
     resulting map behaves the same (gives the same result when applied
@@ -351,7 +351,7 @@ When we use maps in later chapters, we'll need several fundamental
   
 <div class="paragraph"> </div>
 
-<a id="lab308"></a><h4 class="section">Exercise: 2 stars, standard (t_update_same)</h4>
+<a id="lab318"></a><h4 class="section">Exercise: 2 stars, standard (t_update_same)</h4>
  Given <span class="inlinecode"><span class="id" title="var">string</span></span>s <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> and <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span></span>, we can use the tactic
     <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode">(<span class="id" title="var">eqb_spec</span></span> <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span>)</span> to simultaneously perform case
     analysis on the result of <span class="inlinecode"><span class="id" title="var">String.eqb</span></span> <span class="inlinecode"><span class="id" title="var">x<sub>1</sub></span></span> <span class="inlinecode"><span class="id" title="var">x<sub>2</sub></span></span> and generate
@@ -373,7 +373,7 @@ When we use maps in later chapters, we'll need several fundamental
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab309"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (t_update_permute)</h4>
+<a id="lab319"></a><h4 class="section">Exercise: 3 stars, standard, especially useful (t_update_permute)</h4>
  Similarly, use <span class="inlinecode"><span class="id" title="var">String.eqb_spec</span></span> to prove one final property of
     the <span class="inlinecode"><span class="id" title="var">update</span></span> function: If we update a map <span class="inlinecode"><span class="id" title="var">m</span></span> at two distinct
     keys, it doesn't matter in which order we do the updates. 
@@ -393,7 +393,7 @@ When we use maps in later chapters, we'll need several fundamental
 
 
 <div class="doc">
-<a id="lab310"></a><h1 class="section">Partial maps</h1>
+<a id="lab320"></a><h1 class="section">Partial maps</h1>
 
 <div class="paragraph"> </div>
 

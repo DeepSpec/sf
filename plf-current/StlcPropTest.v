@@ -12,7 +12,7 @@ Ltac check_type A B :=
     | ?T => first [unify T B; idtac "Type: ok" | idtac "Type: wrong - should be (" B ")"]
     end.
 
-Ltac print_manual_grade A :=
+Tactic Notation "print_manual_grade" constr(A) :=
     match eval compute in A with
     | Some (_ ?S ?C) =>
         idtac "Score:"  S;
@@ -248,6 +248,6 @@ idtac "---------- STLCProp.substitution_preserves_typing_from_typing_ind -------
 Print Assumptions STLCProp.substitution_preserves_typing_from_typing_ind.
 Abort.
 
-(* 2026-01-07 13:34 *)
+(* 2026-08-15 20:00 *)
 
-(* 2026-01-07 13:34 *)
+(* 2026-08-15 20:01 *)

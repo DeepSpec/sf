@@ -296,7 +296,7 @@ Definition inplace_double : val :=
     involved for typechecking the statement of the lemma. The [Proof using.]
     enables Rocq to compile proofs in parallel when the [-vos] flag is passed.
     For more details, see the "Need for Proof using" section from:
-    https://coq.inria.fr/refman/practical-tools/coq-commands.html *)
+    https://rocq-prover.org/doc/V9.1.0/refman/practical-tools/coq-commands.html *)
 
 (* ################################################################# *)
 (** * Separation Logic Operators *)
@@ -1424,4 +1424,4 @@ Proof using. (* FILL IN HERE *) Admitted.
     predicates are directly inspired from those introduced in the Ynot project
     [Chlipala et al 2009] (in Bib.v). See chapter [Bib] for references. *)
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

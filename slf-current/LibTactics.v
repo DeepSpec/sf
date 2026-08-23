@@ -718,7 +718,7 @@ Tactic Notation "rapply" constr(t) :=
   | refine (@t _ _ _ _ _ _ _ _ _ _ _ _ _ _ _)
   ].
 
-(** No-typeclass refine apply, TEMPORARY for Coq < 8.11. *)
+(** No-typeclass refine apply. LATER: check if still needed. *)
 
 Ltac nrapply H :=
   first
@@ -5270,4 +5270,4 @@ Ltac autorewrite_in_star_patch cont :=
 
 (* End of experimental features *)
 
-(* 2026-01-07 13:36 *)
+(* 2026-08-16 15:58 *)

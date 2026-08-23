@@ -32,10 +32,73 @@ Import Check.
 
 Goal True.
 
+idtac "-------------------  pumping_constant_ge_1_redux  --------------------".
 idtac " ".
 
-idtac "Max points - standard: 0".
-idtac "Max points - advanced: 0".
+idtac "#> Manually graded: Exercises.pumping_constant_ge_1_redux".
+idtac "Possible points: 1".
+print_manual_grade Exercises.manual_grade_for_pumping_constant_ge_1_redux.
+idtac " ".
+
+idtac "-------------------  re_opt_match_auto  --------------------".
+idtac " ".
+
+idtac "#> Manually graded: Exercises.re_opt_match''".
+idtac "Possible points: 3".
+print_manual_grade Exercises.manual_grade_for_re_opt_match''.
+idtac " ".
+
+idtac "-------------------  automatic_solvers  --------------------".
+idtac " ".
+
+idtac "#> cons_equal".
+idtac "Possible points: 0.5".
+check_type @cons_equal (
+(forall (X : Type) (n m : X) (l : list X) (_ : @eq X n m),
+ @eq (list X) (@cons X n l) (@cons X m l))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions cons_equal.
+Goal True.
+idtac " ".
+
+idtac "#> plus_le_cancel_r".
+idtac "Possible points: 0.5".
+check_type @plus_le_cancel_r (
+(forall (n m p : nat) (_ : le (Nat.add n p) (Nat.add m p)), le n m)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions plus_le_cancel_r.
+Goal True.
+idtac " ".
+
+idtac "#> no_half".
+idtac "Possible points: 0.5".
+check_type @no_half ((forall n : nat, not (@eq nat (Nat.mul 2 n) 1))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions no_half.
+Goal True.
+idtac " ".
+
+idtac "#> pair_equal".
+idtac "Possible points: 0.5".
+check_type @pair_equal (
+(forall (X : Type) (a b c d : X) (e : prod X X)
+   (_ : @eq (prod X (prod X X)) (@pair X (prod X X) a (@pair X X b c))
+          (@pair X (prod X X) d e))
+   (_ : @eq (prod X X) e (@pair X X d c)),
+ @eq X b d)).
+idtac "Assumptions:".
+Abort.
+Print Assumptions pair_equal.
+Goal True.
+idtac " ".
+
+idtac " ".
+
+idtac "Max points - standard: 6".
+idtac "Max points - advanced: 6".
 idtac "".
 idtac "Allowed Axioms:".
 idtac "functional_extensionality".
@@ -59,10 +122,22 @@ idtac "  - A list of pending axioms, containing unproven assumptions. In this ca
 idtac "    the exercise is considered complete, if the axioms are all allowed.".
 idtac "".
 idtac "********** Standard **********".
+idtac "---------- pumping_constant_ge_1_redux ---------".
+idtac "MANUAL".
+idtac "---------- re_opt_match'' ---------".
+idtac "MANUAL".
+idtac "---------- cons_equal ---------".
+Print Assumptions cons_equal.
+idtac "---------- plus_le_cancel_r ---------".
+Print Assumptions plus_le_cancel_r.
+idtac "---------- no_half ---------".
+Print Assumptions no_half.
+idtac "---------- pair_equal ---------".
+Print Assumptions pair_equal.
 idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:08 *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:08 *)

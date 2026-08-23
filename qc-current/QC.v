@@ -1290,7 +1290,7 @@ End DefineGenSized.
     [QuickChick] provides some automation for deriving such instances
     for simple datatypes automatically! *)
 
-Derive Arbitrary for Tree.
+QCDerive Arbitrary for Tree.
 (**
 
      ===> GenSizedree is defined
@@ -1299,7 +1299,7 @@ Derive Arbitrary for Tree.
 Print GenSizedTree.
 Print ShrinkTree.
 
-Derive Show for Tree.
+QCDerive Show for Tree.
 (**
      ===> ShowTree is defined
 *)
@@ -1709,4 +1709,4 @@ Definition insertBST_spec' (low high : nat) (x : nat) (t : Tree nat) :=
 
     [] *)
 
-(* 2026-01-07 13:37 *)
+(* 2026-08-23 16:01 *)

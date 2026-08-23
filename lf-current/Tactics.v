@@ -1022,7 +1022,7 @@ Proof.
     we've chosen to include it most of the time, for the sake of
     documentation, it can often be omitted without harm.
 
-    One example where it _cannot _ be omitted is when we are
+    One example where it _cannot_ be omitted is when we are
     [destruct]ing compound expressions; here, the information recorded
     by the [eqn:] can actually be critical, and, if we leave it out,
     then [destruct] can erase information we need to complete a proof. *)
@@ -1298,4 +1298,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:07 *)

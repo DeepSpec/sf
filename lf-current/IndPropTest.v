@@ -486,17 +486,17 @@ Print Assumptions reflect_iff.
 Goal True.
 idtac " ".
 
-idtac "-------------------  eqbP_practice  --------------------".
+idtac "-------------------  eqb_spec_practice  --------------------".
 idtac " ".
 
-idtac "#> eqbP_practice".
+idtac "#> eqb_spec_practice".
 idtac "Possible points: 3".
-check_type @eqbP_practice (
+check_type @eqb_spec_practice (
 (forall (n : nat) (l : list nat) (_ : @eq nat (count n l) 0),
  not (@In nat n l))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions eqbP_practice.
+Print Assumptions eqb_spec_practice.
 Goal True.
 idtac " ".
 
@@ -609,8 +609,8 @@ idtac "---------- Pumping.weak_pumping_union_l ---------".
 Print Assumptions Pumping.weak_pumping_union_l.
 idtac "---------- reflect_iff ---------".
 Print Assumptions reflect_iff.
-idtac "---------- eqbP_practice ---------".
-Print Assumptions eqbP_practice.
+idtac "---------- eqb_spec_practice ---------".
+Print Assumptions eqb_spec_practice.
 idtac "---------- nostutter ---------".
 idtac "MANUAL".
 idtac "".
@@ -627,6 +627,6 @@ idtac "---------- merge_filter ---------".
 Print Assumptions merge_filter.
 Abort.
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:08 *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-23 16:08 *)

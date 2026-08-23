@@ -12,7 +12,7 @@ Ltac check_type A B :=
     | ?T => first [unify T B; idtac "Type: ok" | idtac "Type: wrong - should be (" B ")"]
     end.
 
-Ltac print_manual_grade A :=
+Tactic Notation "print_manual_grade" constr(A) :=
     match eval compute in A with
     | Some (_ ?S ?C) =>
         idtac "Score:"  S;
@@ -297,6 +297,6 @@ idtac "---------- contents_perm ---------".
 Print Assumptions contents_perm.
 Abort.
 
-(* 2026-01-06 11:58 *)
+(* 2026-08-16 16:01 *)
 
-(* 2026-01-06 11:59 *)
+(* 2026-08-16 16:01 *)
