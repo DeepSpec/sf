@@ -252,6 +252,6 @@ idtac "---------- compiler_is_correct ---------".
 Print Assumptions compiler_is_correct.
 Abort.
 
-(* 2026-08-15 20:00 *)
+(* 2026-08-24 10:05 *)
 
-(* 2026-08-15 20:01 *)
+(* 2026-08-24 10:06 *)

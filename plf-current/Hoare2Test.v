@@ -133,6 +133,6 @@ idtac "---------- minimum_correct ---------".
 Print Assumptions minimum_correct.
 Abort.
 
-(* 2026-08-23 16:09 *)
+(* 2026-08-24 10:05 *)
 
-(* 2026-08-23 16:09 *)
+(* 2026-08-24 10:06 *)

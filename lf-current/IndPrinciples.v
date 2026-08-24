@@ -180,7 +180,7 @@ Inductive booltree : Type :=
   | bt_leaf (b : bool)
   | bt_branch (b : bool) (t1 t2 : booltree).
 
-(* What is the induction principle for [booltree]? Of course you could
+(** What is the induction principle for [booltree]? Of course you could
    ask Rocq, but try not to do that. Instead, write it down yourself on
    paper. Then look at the definition of [booltree_ind_type], below.
    It has three missing pieces, which are provided by the definitions
@@ -977,4 +977,4 @@ Proof. (* FILL IN HERE *) Admitted.
 (** [] *)
 
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-24 10:03 *)

@@ -85,7 +85,8 @@ Compute insert 7 [1; 3; 4; 8; 12; 14; 18].
     idea formally in Coq.  One is with an inductively-defined
     relation that says: *)
 
-(** - The empty list is sorted.
+(**
+    - The empty list is sorted.
 
     - Any single-element list is sorted.
 
@@ -122,8 +123,8 @@ Check nth_error : forall A : Type, list A -> nat -> option A.
     - [nth] takes an additional argument of type [A] --a _default_
       value-- to be returned if the index is out of range, whereas
 
-    - [nth_error] returns [Some v] if the index is in range and [None]
-      --an error-- otherwise.
+    - [nth_error] returns [Some v] if the index is in range and
+      [None] --an error-- otherwise.
 
     If we use [nth], we must ensure that indices are in range: *)
 
@@ -304,4 +305,4 @@ Qed.
     difficulty of the correctness proofs_. *)
 
 
-(* 2026-08-16 16:01 *)
+(* 2026-08-24 10:11 *)

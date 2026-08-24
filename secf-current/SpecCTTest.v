@@ -211,6 +211,6 @@ idtac "---------- cct_fixed_load_spec ---------".
 Print Assumptions cct_fixed_load_spec.
 Abort.
 
-(* 2026-08-23 16:11 *)
+(* 2026-08-24 10:13 *)
 
-(* 2026-08-23 16:11 *)
+(* 2026-08-24 10:13 *)

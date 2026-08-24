@@ -321,6 +321,25 @@ To add binary numbers, we work from low-order to high-order,
 </div>
 
 <div class="doc">
+In the rest of this chapter, you may use <span class="inlinecode"><span class="id" title="var">lia</span></span> instead of proving results
+    about arithmetic "by hand".
+
+<div class="paragraph"> </div>
+
+    Note that conceptually, however, that is a bit of a shortcut: the
+    arithmetic reasoning that <span class="inlinecode"><span class="id" title="var">lia</span></span> performs rests on the correctness
+    of the standard-library number representations such as <span class="inlinecode"><span class="id" title="var">Z</span></span> and
+    <span class="inlinecode"><span class="id" title="var">positive</span></span>, and their associated operations such as <span class="inlinecode"><span class="id" title="var">add</span></span>.
+    Therefore, in the Rocq standard library, lemmas like those below
+    are proved first, and only afterward is <span class="inlinecode"><span class="id" title="var">lia</span></span> be built on top of
+    them.
+
+<div class="paragraph"> </div>
+
+    Nonetheless <span class="inlinecode"><span class="id" title="var">lia</span></span> is allowed here so that you can focus on the algorithms
+    and their correctness, rather than on routine arithmetic manipulation. 
+<div class="paragraph"> </div>
+
 <a id="lab222"></a><h4 class="section">Exercise: 2 stars, standard (succ_correct)</h4>
 
 </div>
@@ -336,13 +355,7 @@ To add binary numbers, we work from low-order to high-order,
 <div class="paragraph"> </div>
 
 <a id="lab223"></a><h4 class="section">Exercise: 3 stars, standard (addc_correct)</h4>
- You may use <span class="inlinecode"><span class="id" title="var">lia</span></span> in this proof if you want, along with induction
-    of course.  But really, using <span class="inlinecode"><span class="id" title="var">lia</span></span> is an anachronism in a sense:
-    Coq's <span class="inlinecode"><span class="id" title="var">lia</span></span> uses theorems about <span class="inlinecode"><span class="id" title="var">Z</span></span> that are proved from theorems about
-    Coq's standard-library <span class="inlinecode"><span class="id" title="var">positive</span></span> that, in turn, rely on a theorem much
-    like this one.  So the authors of the Coq standard library had to
-    do the associative-commutative rearrangement proofs "by hand."
-    But really, here you can use <span class="inlinecode"><span class="id" title="var">lia</span></span> without penalty. 
+
 </div>
 <div class="code">
 
@@ -717,8 +730,8 @@ This program takes <span class="inlinecode"><span class="id" title="var">O</span
 <div class="doc"> 
 <div class="paragraph"> </div>
 
-<a id="lab235"></a><h4 class="section">Exercise: 3 stars, standard (look_ins_same)</h4>
- Induction on j? Induction on t?   Do you feel lucky? 
+<a id="lab235"></a><h4 class="section">Exercise: 3 stars, standard (look_ins_other)</h4>
+ This also requires induction. 
 </div>
 <div class="code">
 
@@ -916,7 +929,7 @@ Abstraction relation.  This is what we mean by, "what you get is
 </div>
 <div class="code">
 
-<span class="comment">(*&nbsp;2026-08-16&nbsp;16:01&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-08-24&nbsp;10:11&nbsp;*)</span><br/>
 </div>
 </div>
 

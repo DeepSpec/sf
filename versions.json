@@ -1,9 +1,9 @@
 {
-  "lf": "Version 7.1 (2026-08-23 16:08, Coq 9.0.0 or later)",
-  "plf": "Version 7.1 (2026-08-23 16:09, Coq 9.0.0 or later)",
-  "vfa": "Version 2.1 (2026-08-16 16:21, Coq 9.0.0 or later)",
-  "qc": "Version 2.1 (2026-08-23 16:02, Coq 9.0.0 or later)",
-  "vc": "Version 2.1 (2026-08-16 16:26, Rocq 9.0.0)",
-  "slf": "Version 3.1 (2026-08-16 16:20, Coq 9.0.0 or later)",
-  "secf": "Version 1.2 (2026-08-23 16:11, Rocq 9.0.0 or later)"
+  "lf": "Version 7.1 (2026-08-24 10:03, Coq 9.0.0 or later)",
+  "plf": "Version 7.1 (2026-08-24 10:07, Coq 9.0.0 or later)",
+  "vfa": "Version 2.1 (2026-08-24 10:11, Coq 9.0.0 or later)",
+  "qc": "Version 2.1 (2026-08-24 10:31, Coq 9.0.0 or later)",
+  "vc": "Version 2.1 (2026-08-24 10:34, Rocq 9.0.0)",
+  "slf": "Version 3.1 (2026-08-24 10:10, Coq 9.0.0 or later)",
+  "secf": "Version 1.2 (2026-08-24 10:14, Rocq 9.0.0 or later)"
 }

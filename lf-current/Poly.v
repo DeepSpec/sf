@@ -924,7 +924,7 @@ Check fold_plus : list nat -> nat -> nat.
 
     1. Takes an argument [f] of type [X -> Y -> Y]
     2. Returns a function of type [list X -> Y -> Y] that "remembers"
-       [f]]
+       [f]
 
     When we write [fold plus], we're giving [fold] its first argument,
     [plus], and getting back a specialized function that can sum up
@@ -1243,4 +1243,4 @@ Proof. (* FILL IN HERE *) Admitted.
 End Church.
 End Exercises.
 
-(* 2026-08-23 16:07 *)
+(* 2026-08-24 10:03 *)

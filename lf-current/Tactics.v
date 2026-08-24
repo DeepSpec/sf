@@ -806,7 +806,7 @@ Proof.
       simpl in H. simpl. rewrite <- plus_n_Sm.
 
 (** At this point, we need to show [S ((m' - n') + n') = S m'] from
-    the assumption [(n' <= m') = true].  We could use the [assert]
+    the assumption [(n' <=? m') = true].  We could use the [assert]
     tactic to prove [(m' - n') + n' = m'] from the induction
     hypothesis. However, we can also just use [rewrite] directly: if
     we rewrite with a conditional statement of the form [P -> a = b],
@@ -1298,4 +1298,4 @@ Proof. (* FILL IN HERE *) Admitted.
 
 (** [] *)
 
-(* 2026-08-23 16:07 *)
+(* 2026-08-24 10:03 *)

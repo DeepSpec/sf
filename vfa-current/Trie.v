@@ -221,6 +221,20 @@ Fixpoint addc (carry: bool) (x y: positive) {struct x} : positive :=
 
 Definition add (x y: positive) : positive := addc false x y.
 
+(** In the rest of this chapter, you may use [lia] instead of proving results
+    about arithmetic "by hand".
+
+    Note that conceptually, however, that is a bit of a shortcut: the
+    arithmetic reasoning that [lia] performs rests on the correctness
+    of the standard-library number representations such as [Z] and
+    [positive], and their associated operations such as [add].
+    Therefore, in the Rocq standard library, lemmas like those below
+    are proved first, and only afterward is [lia] be built on top of
+    them.
+
+    Nonetheless [lia] is allowed here so that you can focus on the algorithms
+    and their correctness, rather than on routine arithmetic manipulation. *)
+
 (** **** Exercise: 2 stars, standard (succ_correct) *)
 Lemma succ_correct: forall p,
    positive2nat (succ p) = S (positive2nat p).
@@ -228,15 +242,7 @@ Proof.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (addc_correct)
-
-    You may use [lia] in this proof if you want, along with induction
-    of course.  But really, using [lia] is an anachronism in a sense:
-    Coq's [lia] uses theorems about [Z] that are proved from theorems about
-    Coq's standard-library [positive] that, in turn, rely on a theorem much
-    like this one.  So the authors of the Coq standard library had to
-    do the associative-commutative rearrangement proofs "by hand."
-    But really, here you can use [lia] without penalty. *)
+(** **** Exercise: 3 stars, standard (addc_correct) *)
 
 Lemma addc_correct: forall (c: bool) (p q: positive),
    positive2nat (addc c p q) =
@@ -552,9 +558,9 @@ Lemma look_ins_same: forall {A} a k (v:A) t, look a k (ins a k v t) = v.
 (* FILL IN HERE *) Admitted.
 (** [] *)
 
-(** **** Exercise: 3 stars, standard (look_ins_same)
+(** **** Exercise: 3 stars, standard (look_ins_other)
 
-    Induction on j? Induction on t?   Do you feel lucky? *)
+    This also requires induction. *)
 
 Lemma look_ins_other: forall {A} a j k (v:A) t,
    j <> k -> look a j (ins a k v t) = look a j t.
@@ -703,4 +709,4 @@ try (apply empty_relate).
   but [FMaps] uses different names for the functions [insert] and [lookup],
   and also provides several other operations on maps.  *)
 
-(* 2026-08-16 16:01 *)
+(* 2026-08-24 10:11 *)

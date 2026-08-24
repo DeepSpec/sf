@@ -392,4 +392,4 @@ Proof.
     of Rocq's logic. But this logic is far too powerful to be
     decidable. *)
 
-(* 2026-08-15 20:01 *)
+(* 2026-08-24 09:57 *)

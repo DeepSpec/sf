@@ -463,4 +463,4 @@ Example eg2 : parse "
       "x" := "z" }>.
 Proof. cbv. reflexivity. Qed.
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-24 09:55 *)

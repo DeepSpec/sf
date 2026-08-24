@@ -449,6 +449,6 @@ idtac "---------- Propositional.curry_howard_converse ---------".
 Print Assumptions Propositional.curry_howard_converse.
 Abort.
 
-(* 2026-08-23 16:08 *)
+(* 2026-08-24 09:55 *)
 
-(* 2026-08-23 16:08 *)
+(* 2026-08-24 09:55 *)

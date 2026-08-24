@@ -1115,7 +1115,7 @@ As we saw in our case study of regular expressions in
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BEq</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>   ⇒ (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>1</sub></span>) =? (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BNeq</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>  ⇒ <span class="id" title="var">negb</span> ((<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>1</sub></span>) =? (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>2</sub></span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BLe</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>   ⇒ (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>1</sub></span>) &lt;=? (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>2</sub></span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BGt</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>   ⇒ ~((<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>1</sub></span>) &lt;=? (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>2</sub></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BGt</span> <span class="id" title="var">a<sub>1</sub></span> <span class="id" title="var">a<sub>2</sub></span>   ⇒ <span class="id" title="var">negb</span> ((<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>1</sub></span>) &lt;=? (<span class="id" title="var">aeval</span> <span class="id" title="var">a<sub>2</sub></span>))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BNot</span> <span class="id" title="var">b</span>      ⇒ <span class="id" title="var">negb</span> (<span class="id" title="var">beval</span> <span class="id" title="var">b</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">BAnd</span> <span class="id" title="var">b<sub>1</sub></span> <span class="id" title="var">b<sub>2</sub></span>  ⇒ <span class="id" title="var">andb</span> (<span class="id" title="var">beval</span> <span class="id" title="var">b<sub>1</sub></span>) (<span class="id" title="var">beval</span> <span class="id" title="var">b<sub>2</sub></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.
@@ -2861,7 +2861,7 @@ Now prove the following properties of your definition of <span class="inlinecode
 
 <div class="code">
 
-<span class="comment">(*&nbsp;2026-08-16&nbsp;15:43&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;2026-08-24&nbsp;10:03&nbsp;*)</span><br/>
 </div>
 </div>
 

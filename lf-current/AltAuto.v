@@ -1895,4 +1895,4 @@ Definition manual_grade_for_nor_intuition : option (nat*string) := None.
 
     - Ltac functions and [match goal] *)
 
-(* 2026-08-23 16:08 *)
+(* 2026-08-24 09:55 *)

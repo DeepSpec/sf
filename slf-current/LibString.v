@@ -19,4 +19,4 @@ From Stdlib Require Export String.
 Instance Inhab_string : Inhab string.
 Proof using. apply (Inhab_of_val EmptyString). Qed.
 
-(* 2026-08-16 15:58 *)
+(* 2026-08-24 10:09 *)

@@ -117,17 +117,18 @@ Print Assumptions look_ins_same.
 Goal True.
 idtac " ".
 
-idtac "-------------------  look_ins_same  --------------------".
+idtac "-------------------  look_ins_other  --------------------".
 idtac " ".
 
-idtac "#> look_ins_same".
+idtac "#> look_ins_other".
 idtac "Possible points: 3".
-check_type @look_ins_same (
-(forall (A : Type) (a : A) (k : BinNums.positive) (v : A) (t : trie A),
- @eq A (@look A a k (@ins A a k v t)) v)).
+check_type @look_ins_other (
+(forall (A : Type) (a : A) (j k : BinNums.positive)
+   (v : A) (t : trie A) (_ : not (@eq BinNums.positive j k)),
+ @eq A (@look A a j (@ins A a k v t)) (@look A a j t))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions look_ins_same.
+Print Assumptions look_ins_other.
 Goal True.
 idtac " ".
 
@@ -159,12 +160,25 @@ idtac " ".
 idtac "-------------------  is_trie  --------------------".
 idtac " ".
 
-idtac "#> is_trie".
-idtac "Possible points: 2".
-check_type @is_trie ((forall (A : Type) (_ : trie_table A), Prop)).
+idtac "#> empty_is_trie".
+idtac "Possible points: 1".
+check_type @empty_is_trie (
+(forall (A : Type) (default : A), @is_trie A (@empty A default))).
 idtac "Assumptions:".
 Abort.
-Print Assumptions is_trie.
+Print Assumptions empty_is_trie.
+Goal True.
+idtac " ".
+
+idtac "#> insert_is_trie".
+idtac "Possible points: 1".
+check_type @insert_is_trie (
+(forall (A : Type) (i : BinNums.positive) (x : A)
+   (t : trie_table A) (_ : @is_trie A t),
+ @is_trie A (@insert A i x t))).
+idtac "Assumptions:".
+Abort.
+Print Assumptions insert_is_trie.
 Goal True.
 idtac " ".
 
@@ -261,14 +275,16 @@ idtac "---------- look_leaf ---------".
 Print Assumptions look_leaf.
 idtac "---------- look_ins_same ---------".
 Print Assumptions look_ins_same.
-idtac "---------- look_ins_same ---------".
-Print Assumptions look_ins_same.
+idtac "---------- look_ins_other ---------".
+Print Assumptions look_ins_other.
 idtac "---------- pos2nat_injective ---------".
 Print Assumptions pos2nat_injective.
 idtac "---------- nat2pos_injective ---------".
 Print Assumptions nat2pos_injective.
-idtac "---------- is_trie ---------".
-Print Assumptions is_trie.
+idtac "---------- empty_is_trie ---------".
+Print Assumptions empty_is_trie.
+idtac "---------- insert_is_trie ---------".
+Print Assumptions insert_is_trie.
 idtac "---------- empty_relate ---------".
 Print Assumptions empty_relate.
 idtac "---------- lookup_relate ---------".
@@ -279,6 +295,6 @@ idtac "".
 idtac "********** Advanced **********".
 Abort.
 
-(* 2026-08-16 16:01 *)
+(* 2026-08-24 10:11 *)
 
-(* 2026-08-16 16:01 *)
+(* 2026-08-24 10:11 *)

@@ -780,7 +780,7 @@ Inductive aevalR : aexp -> nat -> Prop :=
     | BEq a1 a2   => (aeval a1) =? (aeval a2)
     | BNeq a1 a2  => negb ((aeval a1) =? (aeval a2))
     | BLe a1 a2   => (aeval a1) <=? (aeval a2)
-    | BGt a1 a2   => ~((aeval a1) <=? (aeval a2))
+    | BGt a1 a2   => negb ((aeval a1) <=? (aeval a2))
     | BNot b      => negb (beval b)
     | BAnd b1 b2  => andb (beval b1) (beval b2)
     end.
@@ -2085,4 +2085,4 @@ End BreakImp.
 
     [] *)
 
-(* 2026-08-16 15:43 *)
+(* 2026-08-24 10:03 *)

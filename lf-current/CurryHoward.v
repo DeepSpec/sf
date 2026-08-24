@@ -1317,4 +1317,4 @@ End Propositional.
 
     See [Sørensen and Urzyczyn 2006] (in Bib.v) for a deeper exploration. *)
 
-(* 2026-08-23 16:08 *)
+(* 2026-08-24 09:55 *)
