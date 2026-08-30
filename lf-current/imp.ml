@@ -12,12 +12,9 @@ let rec app l m =
   | [] -> m
   | a :: l1 -> a :: (app l1 m)
 
-module Coq__1 = struct
- (** val add : int -> int -> int **)
+(** val add : int -> int -> int **)
 
- let rec add = ( + )
-end
-include Coq__1
+let rec add = ( + )
 
 (** val mul : int -> int -> int **)
 
@@ -134,6 +131,22 @@ type n =
 
 module Pos =
  struct
+  (** val iter_op : ('a1 -> 'a1 -> 'a1) -> positive -> 'a1 -> 'a1 **)
+
+  let rec iter_op op p a =
+    match p with
+    | XI p0 -> op a (iter_op op p0 (op a a))
+    | XO p0 -> iter_op op p0 (op a a)
+    | XH -> a
+
+  (** val to_nat : positive -> int **)
+
+  let to_nat x =
+    iter_op add x ((fun x -> x + 1) 0)
+ end
+
+module Coq_Pos =
+ struct
   (** val succ : positive -> positive **)
 
   let rec succ = function
@@ -187,19 +200,6 @@ module Pos =
     | XI p -> add y (XO (mul p y))
     | XO p -> XO (mul p y)
     | XH -> y
-
-  (** val iter_op : ('a1 -> 'a1 -> 'a1) -> positive -> 'a1 -> 'a1 **)
-
-  let rec iter_op op p a =
-    match p with
-    | XI p0 -> op a (iter_op op p0 (op a a))
-    | XO p0 -> iter_op op p0 (op a a)
-    | XH -> a
-
-  (** val to_nat : positive -> int **)
-
-  let to_nat x =
-    iter_op Coq__1.add x ((fun x -> x + 1) 0)
  end
 
 module N =
@@ -211,7 +211,7 @@ module N =
     | N0 -> m
     | Npos p -> (match m with
                  | N0 -> n0
-                 | Npos q -> Npos (Pos.add p q))
+                 | Npos q -> Npos (Coq_Pos.add p q))
 
   (** val mul : n -> n -> n **)
 
@@ -220,7 +220,7 @@ module N =
     | N0 -> N0
     | Npos p -> (match m with
                  | N0 -> N0
-                 | Npos q -> Npos (Pos.mul p q))
+                 | Npos q -> Npos (Coq_Pos.mul p q))
 
   (** val to_nat : n -> int **)
 
@@ -229,17 +229,17 @@ module N =
   | Npos p -> Pos.to_nat p
  end
 
-(** val rev : 'a1 list -> 'a1 list **)
-
-let rec rev = function
-| [] -> []
-| x :: l' -> app (rev l') (x :: [])
-
 (** val map : ('a1 -> 'a2) -> 'a1 list -> 'a2 list **)
 
 let rec map f = function
 | [] -> []
 | a :: t -> (f a) :: (map f t)
+
+(** val rev : 'a1 list -> 'a1 list **)
+
+let rec rev = function
+| [] -> []
+| x :: l' -> app (rev l') (x :: [])
 
 (** val fold_left : ('a1 -> 'a2 -> 'a1) -> 'a2 list -> 'a1 -> 'a1 **)
 

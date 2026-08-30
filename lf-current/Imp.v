@@ -22,12 +22,12 @@
     reasoning about imperative programs. *)
 
 Set Warnings "-notation-overridden,-parsing,-deprecated-hint-without-locality".
-From Coq Require Import Bool.Bool.
+From Coq Require Import Bool.
 From Coq Require Import Init.Nat.
-From Coq Require Import Arith.Arith.
-From Coq Require Import Arith.EqNat. Import Nat.
+From Coq Require Import Arith.
+From Coq Require Import EqNat. Import Nat.
 From Coq Require Import Lia.
-From Coq Require Import Lists.List. Import ListNotations.
+From Coq Require Import List. Import ListNotations.
 From Coq Require Import Strings.String.
 From LF Require Import Maps.
 Set Default Goal Selector "!".
